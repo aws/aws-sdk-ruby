@@ -775,6 +775,11 @@ module Aws::QuickSight
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
     # @return [Types::CreateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisResponse#arn #arn} => String
@@ -890,6 +895,11 @@ module Aws::QuickSight
     #
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create a dashboard with
+    #   definition objects. This option skips the validation step for specific
+    #   errors.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1339,6 +1349,12 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -1449,6 +1465,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -1645,14 +1667,14 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
     #
     #   resp.status #=> Integer
     #   resp.folder_member.member_id #=> String
-    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "TOPIC"
+    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "DATASOURCE", "TOPIC"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembership AWS API Documentation
@@ -2106,6 +2128,11 @@ module Aws::QuickSight
     #
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   TThe option to relax the validation needed to create a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3150,7 +3177,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
@@ -4319,6 +4346,11 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -5024,6 +5056,11 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.role_arn #=> String
@@ -5080,6 +5117,11 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -7403,6 +7445,11 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -7459,6 +7506,11 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -9607,6 +9659,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -10097,6 +10155,11 @@ module Aws::QuickSight
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
     # @return [Types::UpdateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAnalysisResponse#arn #arn} => String
@@ -10260,6 +10323,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a dashboard with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10865,6 +10933,12 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -10975,6 +11049,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -11534,6 +11614,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12538,7 +12623,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

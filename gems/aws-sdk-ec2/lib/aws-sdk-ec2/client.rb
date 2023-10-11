@@ -884,10 +884,6 @@ module Aws::EC2
     #
     #   Use [DescribeAvailabilityZones][1] to view the network border groups.
     #
-    #   You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 Classic, you receive an
-    #   `InvalidParameterCombination` error.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
@@ -2095,10 +2091,21 @@ module Aws::EC2
     # adjustment. For more information, see [Elastic IP address quotas][2]
     # in the *Amazon VPC User Guide*.
     #
+    # When you associate an EIP or secondary EIPs with a public NAT gateway,
+    # the network border group of the EIPs must match the network border
+    # group of the Availability Zone (AZ) that the public NAT gateway is in.
+    # If it's not the same, the EIP will fail to associate. You can see the
+    # network border group for the subnet's AZ by viewing the details of
+    # the subnet. Similarly, you can view the network border group of an EIP
+    # by viewing the details of the EIP address. For more information about
+    # network border groups and EIPs, see [Allocate an Elastic IP
+    # address][3] in the *Amazon VPC User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -3899,8 +3906,8 @@ module Aws::EC2
     # disk image, the command fails and returns an error.
     #
     # @option params [required, String] :export_task_id
-    #   The ID of the export task. This is the ID returned by
-    #   `CreateInstanceExportTask`.
+    #   The ID of the export task. This is the ID returned by the
+    #   `CreateInstanceExportTask` and `ExportImage` operations.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6183,7 +6190,7 @@ module Aws::EC2
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The key-value pair for tagging the EC2 Fleet request on creation. For
-    #   more information, see [Tagging your resources][1].
+    #   more information, see [Tag your resources][1].
     #
     #   If the fleet type is `instant`, specify a resource type of `fleet` to
     #   tag the fleet or `instance` to tag the instances at launch.
@@ -9191,9 +9198,20 @@ module Aws::EC2
     # For more information, see [NAT gateways][1] in the *Amazon VPC User
     # Guide*.
     #
+    # When you create a public NAT gateway and assign it an EIP or secondary
+    # EIPs, the network border group of the EIPs must match the network
+    # border group of the Availability Zone (AZ) that the public NAT gateway
+    # is in. If it's not the same, the NAT gateway will fail to launch. You
+    # can see the network border group for the subnet's AZ by viewing the
+    # details of the subnet. Similarly, you can view the network border
+    # group of an EIP by viewing the details of the EIP address. For more
+    # information about network border groups and EIPs, see [Allocate an
+    # Elastic IP address][2] in the *Amazon VPC User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [String] :allocation_id
     #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
@@ -18350,7 +18368,8 @@ module Aws::EC2
     # For example, you must terminate all instances running in the VPC,
     # delete all security groups associated with the VPC (except the default
     # one), delete all route tables associated with the VPC (except the
-    # default one), and so on.
+    # default one), and so on. When you delete the VPC, it deletes the
+    # VPC's default security group, network ACL, and route table.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -24683,8 +24702,6 @@ module Aws::EC2
     #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
     #     for example, `2021-09-29T*`, which matches an entire day.
     #
-    #   * `license-pool` -
-    #
     #   * `maintenance-options.auto-recovery` - The current automatic recovery
     #     behavior of the instance (`disabled` \| `default`).
     #
@@ -24713,25 +24730,37 @@ module Aws::EC2
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
     #
-    #   * `network-interface.addresses.primary` - Specifies whether the IPv4
-    #     address of the network interface is the primary private IPv4
-    #     address.
+    #   * `network-interface.addresses.association.allocation-id` - The
+    #     allocation ID.
     #
-    #   * `network-interface.addresses.private-ip-address` - The private IPv4
-    #     address associated with the network interface.
+    #   * `network-interface.addresses.association.association-id` - The
+    #     association ID.
+    #
+    #   * `network-interface.addresses.association.carrier-ip` - The carrier
+    #     IP address.
+    #
+    #   * `network-interface.addresses.association.customer-owned-ip` - The
+    #     customer-owned IP address.
+    #
+    #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
+    #     of the private IPv4 address associated with the network interface.
+    #
+    #   * `network-interface.addresses.association.public-dns-name` - The
+    #     public DNS name.
     #
     #   * `network-interface.addresses.association.public-ip` - The ID of the
     #     association of an Elastic IP address (IPv4) with a network
     #     interface.
     #
-    #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
-    #     of the private IPv4 address associated with the network interface.
+    #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+    #     address of the network interface is the primary private IPv4
+    #     address.
     #
-    #   * `network-interface.association.public-ip` - The address of the
-    #     Elastic IP address (IPv4) bound to the network interface.
+    #   * `network-interface.addresses.private-dns-name` - The private DNS
+    #     name.
     #
-    #   * `network-interface.association.ip-owner-id` - The owner of the
-    #     Elastic IP address (IPv4) associated with the network interface.
+    #   * `network-interface.addresses.private-ip-address` - The private IPv4
+    #     address associated with the network interface.
     #
     #   * `network-interface.association.allocation-id` - The allocation ID
     #     returned when you allocated the Elastic IP address (IPv4) for your
@@ -24741,8 +24770,32 @@ module Aws::EC2
     #     returned when the network interface was associated with an IPv4
     #     address.
     #
+    #   * `network-interface.association.carrier-ip` - The customer-owned IP
+    #     address.
+    #
+    #   * `network-interface.association.customer-owned-ip` - The
+    #     customer-owned IP address.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.public-dns-name` - The public DNS
+    #     name.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.attachment.attach-time` - The time that the
+    #     network interface was attached to an instance.
+    #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.
+    #
+    #   * `network-interface.attachment.delete-on-termination` - Specifies
+    #     whether the attachment is deleted when an instance is terminated.
+    #
+    #   * `network-interface.attachment.device-index` - The device index to
+    #     which the network interface is attached.
     #
     #   * `network-interface.attachment.instance-id` - The ID of the instance
     #     to which the network interface is attached.
@@ -24750,20 +24803,18 @@ module Aws::EC2
     #   * `network-interface.attachment.instance-owner-id` - The owner ID of
     #     the instance to which the network interface is attached.
     #
-    #   * `network-interface.attachment.device-index` - The device index to
-    #     which the network interface is attached.
+    #   * `network-interface.attachment.network-card-index` - The index of the
+    #     network card.
     #
     #   * `network-interface.attachment.status` - The status of the attachment
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
     #
-    #   * `network-interface.attachment.attach-time` - The time that the
-    #     network interface was attached to an instance.
-    #
-    #   * `network-interface.attachment.delete-on-termination` - Specifies
-    #     whether the attachment is deleted when an instance is terminated.
-    #
     #   * `network-interface.availability-zone` - The Availability Zone for
     #     the network interface.
+    #
+    #   * `network-interface.deny-all-igw-traffic` - A Boolean that indicates
+    #     whether a network interface with an IPv6 address is unreachable from
+    #     the public internet.
     #
     #   * `network-interface.description` - The description of the network
     #     interface.
@@ -24774,8 +24825,23 @@ module Aws::EC2
     #   * `network-interface.group-name` - The name of a security group
     #     associated with the network interface.
     #
+    #   * `network-interface.ipv4-prefixes.ipv4-prefix` - The IPv4 prefixes
+    #     that are assigned to the network interface.
+    #
+    #   * `network-interface.ipv6-address` - The IPv6 address associated with
+    #     the network interface.
+    #
     #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
     #     associated with the network interface.
+    #
+    #   * `network-interface.ipv6-addresses.is-primary-ipv6` - A Boolean that
+    #     indicates whether this is the primary IPv6 address.
+    #
+    #   * `network-interface.ipv6-native` - A Boolean that indicates whether
+    #     this is an IPv6 only network interface.
+    #
+    #   * `network-interface.ipv6-prefixes.ipv6-prefix` - The IPv6 prefix
+    #     assigned to the network interface.
     #
     #   * `network-interface.mac-address` - The MAC address of the network
     #     interface.
@@ -24783,11 +24849,17 @@ module Aws::EC2
     #   * `network-interface.network-interface-id` - The ID of the network
     #     interface.
     #
+    #   * `network-interface.outpost-arn` - The ARN of the Outpost.
+    #
     #   * `network-interface.owner-id` - The ID of the owner of the network
     #     interface.
     #
     #   * `network-interface.private-dns-name` - The private DNS name of the
     #     network interface.
+    #
+    #   * `network-interface.private-ip-address` - The private IPv4 address.
+    #
+    #   * `network-interface.public-dns-name` - The public DNS name.
     #
     #   * `network-interface.requester-id` - The requester ID for the network
     #     interface.
@@ -24806,6 +24878,12 @@ module Aws::EC2
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the network
     #     interface.
+    #
+    #   * `network-interface.tag-key` - The key of a tag assigned to the
+    #     network interface.
+    #
+    #   * `network-interface.tag-value` - The value of a tag assigned to the
+    #     network interface.
     #
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
     #     interface.
@@ -28822,27 +28900,32 @@ module Aws::EC2
 
     # Describes one or more of your network interfaces.
     #
+    # If you have a large number of network interfaces, the operation fails
+    # unless you use pagination or one of the following filters: `group-id`,
+    # `mac-address`, `private-dns-name`, `private-ip-address`,
+    # `private-dns-name`, `subnet-id`, or `vpc-id`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `addresses.private-ip-address` - The private IPv4 addresses
-    #     associated with the network interface.
+    #   * `association.allocation-id` - The allocation ID returned when you
+    #     allocated the Elastic IP address (IPv4) for your network interface.
     #
-    #   * `addresses.primary` - Whether the private IPv4 address is the
-    #     primary IP address associated with the network interface.
+    #   * `association.association-id` - The association ID returned when the
+    #     network interface was associated with an IPv4 address.
+    #
+    #   * `addresses.association.owner-id` - The owner ID of the addresses
+    #     associated with the network interface.
     #
     #   * `addresses.association.public-ip` - The association ID returned when
     #     the network interface was associated with the Elastic IP address
     #     (IPv4).
     #
-    #   * `addresses.association.owner-id` - The owner ID of the addresses
+    #   * `addresses.primary` - Whether the private IPv4 address is the
+    #     primary IP address associated with the network interface.
+    #
+    #   * `addresses.private-ip-address` - The private IPv4 addresses
     #     associated with the network interface.
-    #
-    #   * `association.association-id` - The association ID returned when the
-    #     network interface was associated with an IPv4 address.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network interface.
     #
     #   * `association.ip-owner-id` - The owner of the Elastic IP address
     #     (IPv4) associated with the network interface.
@@ -28853,10 +28936,10 @@ module Aws::EC2
     #   * `association.public-dns-name` - The public DNS name for the network
     #     interface (IPv4).
     #
-    #   * `attachment.attachment-id` - The ID of the interface attachment.
-    #
     #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
+    #
+    #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
     #     attachment is deleted when an instance is terminated.
@@ -28881,19 +28964,17 @@ module Aws::EC2
     #   * `group-id` - The ID of a security group associated with the network
     #     interface.
     #
-    #   * `group-name` - The name of a security group associated with the
-    #     network interface.
-    #
     #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with the
     #     network interface.
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `efa` \| `gateway_load_balancer` \|
-    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
-    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
-    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
-    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
+    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
+    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
+    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
+    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
+    #     `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -28902,11 +28983,11 @@ module Aws::EC2
     #   * `owner-id` - The Amazon Web Services account ID of the network
     #     interface owner.
     #
-    #   * `private-ip-address` - The private IPv4 address or addresses of the
-    #     network interface.
-    #
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
+    #
+    #   * `private-ip-address` - The private IPv4 address or addresses of the
+    #     network interface.
     #
     #   * `requester-id` - The alias or Amazon Web Services account ID of the
     #     principal or service that created the network interface.
@@ -43153,6 +43234,16 @@ module Aws::EC2
     # @option params [String] :boot_mode
     #   The boot mode of the virtual machine.
     #
+    #   <note markdown="1"> The `uefi-preferred` boot mode isn't supported for importing images.
+    #   For more information, see [Boot modes][1] in the *VM Import/Export
+    #   User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/prerequisites.html#vmimport-boot-modes
+    #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
@@ -51096,10 +51187,6 @@ module Aws::EC2
     #   If you provide an incorrect network border group, you receive an
     #   `InvalidAddress.NotFound` error.
     #
-    #   You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 classic, you receive an
-    #   `InvalidParameterCombination` error.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -56970,7 +57057,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.411.0'
+      context[:gem_version] = '1.412.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

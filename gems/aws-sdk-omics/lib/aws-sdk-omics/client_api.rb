@@ -102,6 +102,8 @@ module Aws::Omics
     DeleteVariantStoreResponse = Shapes::StructureShape.new(name: 'DeleteVariantStoreResponse')
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
     Description = Shapes::StringShape.new(name: 'Description')
+    ETag = Shapes::StructureShape.new(name: 'ETag')
+    ETagAlgorithm = Shapes::StringShape.new(name: 'ETagAlgorithm')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
@@ -853,6 +855,11 @@ module Aws::Omics
     DeleteWorkflowRequest.add_member(:id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location: "uri", location_name: "id"))
     DeleteWorkflowRequest.struct_class = Types::DeleteWorkflowRequest
 
+    ETag.add_member(:algorithm, Shapes::ShapeRef.new(shape: ETagAlgorithm, location_name: "algorithm"))
+    ETag.add_member(:source1, Shapes::ShapeRef.new(shape: String, location_name: "source1"))
+    ETag.add_member(:source2, Shapes::ShapeRef.new(shape: String, location_name: "source2"))
+    ETag.struct_class = Types::ETag
+
     ExportReadSet.add_member(:read_set_id, Shapes::ShapeRef.new(shape: ReadSetId, required: true, location_name: "readSetId"))
     ExportReadSet.struct_class = Types::ExportReadSet
 
@@ -1015,6 +1022,7 @@ module Aws::Omics
     GetReadSetMetadataResponse.add_member(:files, Shapes::ShapeRef.new(shape: ReadSetFiles, location_name: "files"))
     GetReadSetMetadataResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
     GetReadSetMetadataResponse.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
+    GetReadSetMetadataResponse.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
     GetReadSetMetadataResponse.struct_class = Types::GetReadSetMetadataResponse
 
     GetReadSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ReadSetId, required: true, location: "uri", location_name: "id"))
@@ -1580,6 +1588,7 @@ module Aws::Omics
     ReadSetListItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     ReadSetListItem.add_member(:status_message, Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
     ReadSetListItem.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
+    ReadSetListItem.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
     ReadSetListItem.struct_class = Types::ReadSetListItem
 
     ReadSetUploadPartList.member = Shapes::ShapeRef.new(shape: ReadSetUploadPartListItem)
@@ -2086,7 +2095,6 @@ module Aws::Omics
         o.name = "AbortMultipartReadSetUpload"
         o.http_method = "DELETE"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/upload/{uploadId}/abort"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2106,7 +2114,6 @@ module Aws::Omics
         o.name = "AcceptShare"
         o.http_method = "POST"
         o.http_request_uri = "/share/{shareId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2125,7 +2132,6 @@ module Aws::Omics
         o.name = "BatchDeleteReadSet"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/readset/batch/delete"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2143,7 +2149,6 @@ module Aws::Omics
         o.name = "CancelAnnotationImportJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/import/annotation/{jobId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2160,7 +2165,6 @@ module Aws::Omics
         o.name = "CancelRun"
         o.http_method = "POST"
         o.http_request_uri = "/run/{id}/cancel"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2180,7 +2184,6 @@ module Aws::Omics
         o.name = "CancelVariantImportJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/import/variant/{jobId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2197,7 +2200,6 @@ module Aws::Omics
         o.name = "CompleteMultipartReadSetUpload"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/upload/{uploadId}/complete"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "storage-",
         }
@@ -2217,7 +2219,6 @@ module Aws::Omics
         o.name = "CreateAnnotationStore"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2236,7 +2237,6 @@ module Aws::Omics
         o.name = "CreateAnnotationStoreVersion"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore/{name}/version"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2255,7 +2255,6 @@ module Aws::Omics
         o.name = "CreateMultipartReadSetUpload"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/upload"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2275,7 +2274,6 @@ module Aws::Omics
         o.name = "CreateReferenceStore"
         o.http_method = "POST"
         o.http_request_uri = "/referencestore"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2293,7 +2291,6 @@ module Aws::Omics
         o.name = "CreateRunGroup"
         o.http_method = "POST"
         o.http_request_uri = "/runGroup"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2313,7 +2310,6 @@ module Aws::Omics
         o.name = "CreateSequenceStore"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2331,7 +2327,6 @@ module Aws::Omics
         o.name = "CreateShare"
         o.http_method = "POST"
         o.http_request_uri = "/share"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2350,7 +2345,6 @@ module Aws::Omics
         o.name = "CreateVariantStore"
         o.http_method = "POST"
         o.http_request_uri = "/variantStore"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2369,7 +2363,6 @@ module Aws::Omics
         o.name = "CreateWorkflow"
         o.http_method = "POST"
         o.http_request_uri = "/workflow"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2389,7 +2382,6 @@ module Aws::Omics
         o.name = "DeleteAnnotationStore"
         o.http_method = "DELETE"
         o.http_request_uri = "/annotationStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2407,7 +2399,6 @@ module Aws::Omics
         o.name = "DeleteAnnotationStoreVersions"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore/{name}/versions/delete"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2425,7 +2416,6 @@ module Aws::Omics
         o.name = "DeleteReference"
         o.http_method = "DELETE"
         o.http_request_uri = "/referencestore/{referenceStoreId}/reference/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2444,7 +2434,6 @@ module Aws::Omics
         o.name = "DeleteReferenceStore"
         o.http_method = "DELETE"
         o.http_request_uri = "/referencestore/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2463,7 +2452,6 @@ module Aws::Omics
         o.name = "DeleteRun"
         o.http_method = "DELETE"
         o.http_request_uri = "/run/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2483,7 +2471,6 @@ module Aws::Omics
         o.name = "DeleteRunGroup"
         o.http_method = "DELETE"
         o.http_request_uri = "/runGroup/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2503,7 +2490,6 @@ module Aws::Omics
         o.name = "DeleteSequenceStore"
         o.http_method = "DELETE"
         o.http_request_uri = "/sequencestore/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2522,7 +2508,6 @@ module Aws::Omics
         o.name = "DeleteShare"
         o.http_method = "DELETE"
         o.http_request_uri = "/share/{shareId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2541,7 +2526,6 @@ module Aws::Omics
         o.name = "DeleteVariantStore"
         o.http_method = "DELETE"
         o.http_request_uri = "/variantStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2559,7 +2543,6 @@ module Aws::Omics
         o.name = "DeleteWorkflow"
         o.http_method = "DELETE"
         o.http_request_uri = "/workflow/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2579,7 +2562,6 @@ module Aws::Omics
         o.name = "GetAnnotationImportJob"
         o.http_method = "GET"
         o.http_request_uri = "/import/annotation/{jobId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2596,7 +2578,6 @@ module Aws::Omics
         o.name = "GetAnnotationStore"
         o.http_method = "GET"
         o.http_request_uri = "/annotationStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2613,7 +2594,6 @@ module Aws::Omics
         o.name = "GetAnnotationStoreVersion"
         o.http_method = "GET"
         o.http_request_uri = "/annotationStore/{name}/version/{versionName}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2630,7 +2610,6 @@ module Aws::Omics
         o.name = "GetReadSet"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/readset/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "storage-",
         }
@@ -2650,7 +2629,6 @@ module Aws::Omics
         o.name = "GetReadSetActivationJob"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/activationjob/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2668,7 +2646,6 @@ module Aws::Omics
         o.name = "GetReadSetExportJob"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/exportjob/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2686,7 +2663,6 @@ module Aws::Omics
         o.name = "GetReadSetImportJob"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/importjob/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2704,7 +2680,6 @@ module Aws::Omics
         o.name = "GetReadSetMetadata"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/readset/{id}/metadata"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2722,7 +2697,6 @@ module Aws::Omics
         o.name = "GetReference"
         o.http_method = "GET"
         o.http_request_uri = "/referencestore/{referenceStoreId}/reference/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "storage-",
         }
@@ -2741,7 +2715,6 @@ module Aws::Omics
         o.name = "GetReferenceImportJob"
         o.http_method = "GET"
         o.http_request_uri = "/referencestore/{referenceStoreId}/importjob/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2759,7 +2732,6 @@ module Aws::Omics
         o.name = "GetReferenceMetadata"
         o.http_method = "GET"
         o.http_request_uri = "/referencestore/{referenceStoreId}/reference/{id}/metadata"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2777,7 +2749,6 @@ module Aws::Omics
         o.name = "GetReferenceStore"
         o.http_method = "GET"
         o.http_request_uri = "/referencestore/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2795,7 +2766,6 @@ module Aws::Omics
         o.name = "GetRun"
         o.http_method = "GET"
         o.http_request_uri = "/run/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2815,7 +2785,6 @@ module Aws::Omics
         o.name = "GetRunGroup"
         o.http_method = "GET"
         o.http_request_uri = "/runGroup/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2835,7 +2804,6 @@ module Aws::Omics
         o.name = "GetRunTask"
         o.http_method = "GET"
         o.http_request_uri = "/run/{id}/task/{taskId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2855,7 +2823,6 @@ module Aws::Omics
         o.name = "GetSequenceStore"
         o.http_method = "GET"
         o.http_request_uri = "/sequencestore/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -2873,7 +2840,6 @@ module Aws::Omics
         o.name = "GetShare"
         o.http_method = "GET"
         o.http_request_uri = "/share/{shareId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2892,7 +2858,6 @@ module Aws::Omics
         o.name = "GetVariantImportJob"
         o.http_method = "GET"
         o.http_request_uri = "/import/variant/{jobId}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2909,7 +2874,6 @@ module Aws::Omics
         o.name = "GetVariantStore"
         o.http_method = "GET"
         o.http_request_uri = "/variantStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2926,7 +2890,6 @@ module Aws::Omics
         o.name = "GetWorkflow"
         o.http_method = "GET"
         o.http_request_uri = "/workflow/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -2946,7 +2909,6 @@ module Aws::Omics
         o.name = "ListAnnotationImportJobs"
         o.http_method = "POST"
         o.http_request_uri = "/import/annotations"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2969,7 +2931,6 @@ module Aws::Omics
         o.name = "ListAnnotationStoreVersions"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore/{name}/versions"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -2992,7 +2953,6 @@ module Aws::Omics
         o.name = "ListAnnotationStores"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStores"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3015,7 +2975,6 @@ module Aws::Omics
         o.name = "ListMultipartReadSetUploads"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/uploads"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3041,7 +3000,6 @@ module Aws::Omics
         o.name = "ListReadSetActivationJobs"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/activationjobs"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3065,7 +3023,6 @@ module Aws::Omics
         o.name = "ListReadSetExportJobs"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/exportjobs"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3089,7 +3046,6 @@ module Aws::Omics
         o.name = "ListReadSetImportJobs"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/importjobs"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3113,7 +3069,6 @@ module Aws::Omics
         o.name = "ListReadSetUploadParts"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/upload/{uploadId}/parts"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3139,7 +3094,6 @@ module Aws::Omics
         o.name = "ListReadSets"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/readsets"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3163,7 +3117,6 @@ module Aws::Omics
         o.name = "ListReferenceImportJobs"
         o.http_method = "POST"
         o.http_request_uri = "/referencestore/{referenceStoreId}/importjobs"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3187,7 +3140,6 @@ module Aws::Omics
         o.name = "ListReferenceStores"
         o.http_method = "POST"
         o.http_request_uri = "/referencestores"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3210,7 +3162,6 @@ module Aws::Omics
         o.name = "ListReferences"
         o.http_method = "POST"
         o.http_request_uri = "/referencestore/{referenceStoreId}/references"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3234,7 +3185,6 @@ module Aws::Omics
         o.name = "ListRunGroups"
         o.http_method = "GET"
         o.http_request_uri = "/runGroup"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3260,7 +3210,6 @@ module Aws::Omics
         o.name = "ListRunTasks"
         o.http_method = "GET"
         o.http_request_uri = "/run/{id}/task"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3286,7 +3235,6 @@ module Aws::Omics
         o.name = "ListRuns"
         o.http_method = "GET"
         o.http_request_uri = "/run"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3312,7 +3260,6 @@ module Aws::Omics
         o.name = "ListSequenceStores"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestores"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3335,7 +3282,6 @@ module Aws::Omics
         o.name = "ListShares"
         o.http_method = "POST"
         o.http_request_uri = "/shares"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3360,7 +3306,6 @@ module Aws::Omics
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags/{resourceArn}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "tags-",
         }
@@ -3380,7 +3325,6 @@ module Aws::Omics
         o.name = "ListVariantImportJobs"
         o.http_method = "POST"
         o.http_request_uri = "/import/variants"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3403,7 +3347,6 @@ module Aws::Omics
         o.name = "ListVariantStores"
         o.http_method = "POST"
         o.http_request_uri = "/variantStores"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3426,7 +3369,6 @@ module Aws::Omics
         o.name = "ListWorkflows"
         o.http_method = "GET"
         o.http_request_uri = "/workflow"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3452,7 +3394,6 @@ module Aws::Omics
         o.name = "StartAnnotationImportJob"
         o.http_method = "POST"
         o.http_request_uri = "/import/annotation"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3470,7 +3411,6 @@ module Aws::Omics
         o.name = "StartReadSetActivationJob"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/activationjob"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3489,7 +3429,6 @@ module Aws::Omics
         o.name = "StartReadSetExportJob"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/exportjob"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3508,7 +3447,6 @@ module Aws::Omics
         o.name = "StartReadSetImportJob"
         o.http_method = "POST"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/importjob"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3527,7 +3465,6 @@ module Aws::Omics
         o.name = "StartReferenceImportJob"
         o.http_method = "POST"
         o.http_request_uri = "/referencestore/{referenceStoreId}/importjob"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "control-storage-",
         }
@@ -3546,7 +3483,6 @@ module Aws::Omics
         o.name = "StartRun"
         o.http_method = "POST"
         o.http_request_uri = "/run"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3566,7 +3502,6 @@ module Aws::Omics
         o.name = "StartVariantImportJob"
         o.http_method = "POST"
         o.http_request_uri = "/import/variant"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3584,7 +3519,6 @@ module Aws::Omics
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags/{resourceArn}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "tags-",
         }
@@ -3604,7 +3538,6 @@ module Aws::Omics
         o.name = "UntagResource"
         o.http_method = "DELETE"
         o.http_request_uri = "/tags/{resourceArn}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "tags-",
         }
@@ -3624,7 +3557,6 @@ module Aws::Omics
         o.name = "UpdateAnnotationStore"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3641,7 +3573,6 @@ module Aws::Omics
         o.name = "UpdateAnnotationStoreVersion"
         o.http_method = "POST"
         o.http_request_uri = "/annotationStore/{name}/version/{versionName}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3658,7 +3589,6 @@ module Aws::Omics
         o.name = "UpdateRunGroup"
         o.http_method = "POST"
         o.http_request_uri = "/runGroup/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }
@@ -3678,7 +3608,6 @@ module Aws::Omics
         o.name = "UpdateVariantStore"
         o.http_method = "POST"
         o.http_request_uri = "/variantStore/{name}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "analytics-",
         }
@@ -3695,7 +3624,6 @@ module Aws::Omics
         o.name = "UpdateWorkflow"
         o.http_method = "POST"
         o.http_request_uri = "/workflow/{id}"
-        o['authtype'] = "v4"
         o.endpoint_pattern = {
           "hostPrefix" => "workflows-",
         }

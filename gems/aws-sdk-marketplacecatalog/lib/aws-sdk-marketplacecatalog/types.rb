@@ -68,9 +68,9 @@ module Aws::MarketplaceCatalog
     #   for the change. Each change type is unique for each `EntityType`
     #   provided in the change's scope. For more information on change
     #   types available for single-AMI products, see [Working with
-    #   single-AMI products][1]. Also, for more information on change types
-    #   available for container-based products, see [Working with container
-    #   products][2].
+    #   single-AMI products][1]. Also, for more information about change
+    #   types available for container-based products, see [Working with
+    #   container products][2].
     #
     #
     #
@@ -88,9 +88,9 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] details
     #   This object contains details specific to the change type of the
-    #   requested change. For more information on change types available for
-    #   single-AMI products, see [Working with single-AMI products][1].
-    #   Also, for more information on change types available for
+    #   requested change. For more information about change types available
+    #   for single-AMI products, see [Working with single-AMI products][1].
+    #   Also, for more information about change types available for
     #   container-based products, see [Working with container products][2].
     #
     #
@@ -98,6 +98,12 @@ module Aws::MarketplaceCatalog
     #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
     #   [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
     #   @return [String]
+    #
+    # @!attribute [rw] details_document
+    #   Alternative field that accepts a JSON value instead of a string for
+    #   `ChangeType` details. You can use either `Details` or
+    #   `DetailsDocument`, but not both.
+    #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] change_name
     #   Optional name for the change.
@@ -110,6 +116,7 @@ module Aws::MarketplaceCatalog
       :entity,
       :entity_tags,
       :details,
+      :details_document,
       :change_name)
       SENSITIVE = []
       include Aws::Structure
@@ -190,6 +197,11 @@ module Aws::MarketplaceCatalog
     #   requested change.
     #   @return [String]
     #
+    # @!attribute [rw] details_document
+    #   The JSON value of the details specific to the change type of the
+    #   requested change.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] error_detail_list
     #   An array of `ErrorDetail` objects associated with the change.
     #   @return [Array<Types::ErrorDetail>]
@@ -204,6 +216,7 @@ module Aws::MarketplaceCatalog
       :change_type,
       :entity,
       :details,
+      :details_document,
       :error_detail_list,
       :change_name)
       SENSITIVE = []
@@ -211,7 +224,7 @@ module Aws::MarketplaceCatalog
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   The Amazon Resource Name (ARN) of the entity resource that is
     #   associated with the resource policy.
     #   @return [String]
     #
@@ -350,6 +363,10 @@ module Aws::MarketplaceCatalog
     #   This stringified JSON object includes the details of the entity.
     #   @return [String]
     #
+    # @!attribute [rw] details_document
+    #   The JSON value of the details specific to the entity.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeEntityResponse AWS API Documentation
     #
     class DescribeEntityResponse < Struct.new(
@@ -357,7 +374,8 @@ module Aws::MarketplaceCatalog
       :entity_identifier,
       :entity_arn,
       :last_modified_date,
-      :details)
+      :details,
+      :details_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -496,7 +514,7 @@ module Aws::MarketplaceCatalog
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   The Amazon Resource Name (ARN) of the entity resource that is
     #   associated with the resource policy.
     #   @return [String]
     #
@@ -616,6 +634,11 @@ module Aws::MarketplaceCatalog
     #   @return [Integer]
     #
     # @!attribute [rw] ownership_type
+    #   Filters the returned set of entities based on their owner. The
+    #   default is `SELF`. To list entities shared with you through AWS
+    #   Resource Access Manager (AWS RAM), set to `SHARED`. Entities shared
+    #   through the AWS Marketplace Catalog API `PutResourcePolicy`
+    #   operation can't be discovered through the `SHARED` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntitiesRequest AWS API Documentation
@@ -683,7 +706,7 @@ module Aws::MarketplaceCatalog
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource you want to
+    #   The Amazon Resource Name (ARN) of the entity resource you want to
     #   associate with a resource policy.
     #   @return [String]
     #
@@ -762,7 +785,8 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] sort_by
     #   For `ListEntities`, supported attributes include `LastModifiedDate`
-    #   (default), `Visibility`, `EntityId`, and `Name`.
+    #   (default) and `EntityId`. In addition to `LastModifiedDate` and
+    #   `EntityId`, each `EntityType` might support additional fields.
     #
     #   For `ListChangeSets`, supported attributes include `StartTime` and
     #   `EndTime`.

@@ -574,6 +574,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -600,6 +601,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -732,6 +735,67 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def create_application(params = {}, options = {})
       req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
+    # Create Connector.
+    #
+    # @option params [required, String] :name
+    #   Create Connector request name.
+    #
+    # @option params [Types::ConnectorSsmCommandConfig] :ssm_command_config
+    #   Create Connector request SSM command config.
+    #
+    # @option params [required, String] :ssm_instance_id
+    #   Create Connector request SSM instance ID.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Create Connector request tags.
+    #
+    # @return [Types::Connector] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connector#arn #arn} => String
+    #   * {Types::Connector#connector_id #connector_id} => String
+    #   * {Types::Connector#name #name} => String
+    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
+    #   * {Types::Connector#ssm_instance_id #ssm_instance_id} => String
+    #   * {Types::Connector#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector({
+    #     name: "ConnectorName", # required
+    #     ssm_command_config: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       cloud_watch_output_enabled: false, # required
+    #       output_s3_bucket_name: "S3BucketName",
+    #       s3_output_enabled: false, # required
+    #     },
+    #     ssm_instance_id: "SsmInstanceID", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.connector_id #=> String
+    #   resp.name #=> String
+    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
+    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.ssm_instance_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateConnector AWS API Documentation
+    #
+    # @overload create_connector(params = {})
+    # @param [Hash] params ({})
+    def create_connector(params = {}, options = {})
+      req = build_request(:create_connector, params)
       req.send_request(options)
     end
 
@@ -1122,6 +1186,28 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_application(params = {}, options = {})
       req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
+    # Delete Connector.
+    #
+    # @option params [required, String] :connector_id
+    #   Delete Connector request connector ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector({
+    #     connector_id: "ConnectorID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteConnector AWS API Documentation
+    #
+    # @overload delete_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_connector(params = {}, options = {})
+      req = build_request(:delete_connector, params)
       req.send_request(options)
     end
 
@@ -1585,6 +1671,8 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].application_id #=> String
     #   resp.items[0].arn #=> String
+    #   resp.items[0].connector_action.connector_arn #=> String
+    #   resp.items[0].connector_action.credentials_secret_arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -1788,6 +1876,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1811,6 +1900,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -1906,6 +1997,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1929,6 +2021,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -2210,6 +2304,58 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def list_applications(params = {}, options = {})
       req = build_request(:list_applications, params)
+      req.send_request(options)
+    end
+
+    # List Connectors.
+    #
+    # @option params [Types::ListConnectorsRequestFilters] :filters
+    #   List Connectors Request filters.
+    #
+    # @option params [Integer] :max_results
+    #   List Connectors Request max results.
+    #
+    # @option params [String] :next_token
+    #   List Connectors Request next token.
+    #
+    # @return [Types::ListConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorsResponse#items #items} => Array&lt;Types::Connector&gt;
+    #   * {Types::ListConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connectors({
+    #     filters: {
+    #       connector_i_ds: ["ConnectorID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].connector_id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].ssm_command_config.cloud_watch_log_group_name #=> String
+    #   resp.items[0].ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.items[0].ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.items[0].ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.items[0].ssm_instance_id #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListConnectors AWS API Documentation
+    #
+    # @overload list_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_connectors(params = {}, options = {})
+      req = build_request(:list_connectors, params)
       req.send_request(options)
     end
 
@@ -2689,6 +2835,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -2712,6 +2859,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -2795,6 +2944,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -2818,6 +2968,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -3195,6 +3347,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -3218,6 +3371,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -3304,6 +3459,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -3327,6 +3483,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -3576,6 +3734,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -3599,6 +3758,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -3750,6 +3911,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -3773,6 +3935,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -4137,6 +4301,61 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def update_application(params = {}, options = {})
       req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
+    # Update Connector.
+    #
+    # @option params [required, String] :connector_id
+    #   Update Connector request connector ID.
+    #
+    # @option params [String] :name
+    #   Update Connector request name.
+    #
+    # @option params [Types::ConnectorSsmCommandConfig] :ssm_command_config
+    #   Update Connector request SSM command config.
+    #
+    # @return [Types::Connector] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connector#arn #arn} => String
+    #   * {Types::Connector#connector_id #connector_id} => String
+    #   * {Types::Connector#name #name} => String
+    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
+    #   * {Types::Connector#ssm_instance_id #ssm_instance_id} => String
+    #   * {Types::Connector#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connector({
+    #     connector_id: "ConnectorID", # required
+    #     name: "ConnectorName",
+    #     ssm_command_config: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       cloud_watch_output_enabled: false, # required
+    #       output_s3_bucket_name: "S3BucketName",
+    #       s3_output_enabled: false, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.connector_id #=> String
+    #   resp.name #=> String
+    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
+    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.ssm_instance_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateConnector AWS API Documentation
+    #
+    # @overload update_connector(params = {})
+    # @param [Hash] params ({})
+    def update_connector(params = {}, options = {})
+      req = build_request(:update_connector, params)
       req.send_request(options)
     end
 
@@ -4715,6 +4934,122 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Update Source Server.
+    #
+    # @option params [String] :account_id
+    #   Update Source Server request account ID.
+    #
+    # @option params [Types::SourceServerConnectorAction] :connector_action
+    #   Update Source Server request connector action.
+    #
+    # @option params [required, String] :source_server_id
+    #   Update Source Server request source server ID.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_source_server({
+    #     account_id: "AccountID",
+    #     connector_action: {
+    #       connector_arn: "ConnectorArn",
+    #       credentials_secret_arn: "SecretArn",
+    #     },
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServer AWS API Documentation
+    #
+    # @overload update_source_server(params = {})
+    # @param [Hash] params ({})
+    def update_source_server(params = {}, options = {})
+      req = build_request(:update_source_server, params)
+      req.send_request(options)
+    end
+
     # Allows you to change between the AGENT\_BASED replication type and the
     # SNAPSHOT\_SHIPPING replication type.
     #
@@ -4731,6 +5066,7 @@ module Aws::Mgn
     #
     #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -4755,6 +5091,8 @@ module Aws::Mgn
     #
     #   resp.application_id #=> String
     #   resp.arn #=> String
+    #   resp.connector_action.connector_arn #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
@@ -4900,7 +5238,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

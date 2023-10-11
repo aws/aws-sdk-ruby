@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-10-05)
+------------------
+
+* Feature - Add SoftwareVersion to response of DescribeGatewayInformation.
+
 1.77.0 (2023-09-27)
 ------------------
 

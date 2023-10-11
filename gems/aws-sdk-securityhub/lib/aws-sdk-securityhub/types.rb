@@ -5104,6 +5104,297 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Database Migration Service (DMS) endpoint.
+    # An endpoint provides connection, data store type, and location
+    # information about your data store.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the SSL certificate that encrypts
+    #   connections between the DMS endpoint and the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the endpoint database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_identifier
+    #   The database endpoint identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint. Valid values are source and target.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The type of engine for the endpoint, depending on the `EndpointType`
+    #   value.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   A value that can be used for cross-account validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] extra_connection_attributes
+    #   Additional attributes associated with the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An DMS key identifier that is used to encrypt the connection
+    #   parameters for the endpoint. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then DMS uses your default encryption key. KMS
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port used to access the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server where the endpoint database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the endpoint. The default is none.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The user name to be used to log in to the endpoint database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsEndpointDetails AWS API Documentation
+    #
+    class AwsDmsEndpointDetails < Struct.new(
+      :certificate_arn,
+      :database_name,
+      :endpoint_arn,
+      :endpoint_identifier,
+      :endpoint_type,
+      :engine_name,
+      :external_id,
+      :extra_connection_attributes,
+      :kms_key_id,
+      :port,
+      :server_name,
+      :ssl_mode,
+      :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Database Migration Service (DMS) replication
+    # instance. DMS uses a replication instance to connect to your source
+    # data store, read the source data, and format the data for consumption
+    # by the target data store.
+    #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gigabytes) that is allocated for the
+    #   replication instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Indicates whether minor engine upgrades are applied automatically to
+    #   the replication instance during the maintenance window.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone that the replication instance is created in.
+    #   The default value is a random, system-chosen Availability Zone in
+    #   the endpoint's Amazon Web Services Region, such as `us-east-1d`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version number of the replication instance. If an engine
+    #   version number is not specified when a replication instance is
+    #   created, the default is the latest engine version available.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the data on the
+    #   replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, DMS uses your default encryption key. KMS
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_az
+    #   Specifies whether the replication instance is deployed across
+    #   multiple Availability Zones (AZs). You can't set the
+    #   `AvailabilityZone` parameter if the `MultiAZ` parameter is set to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The maintenance window times for the replication instance. Upgrades
+    #   to the replication instance are performed during this time.
+    #   @return [String]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Specifies the accessibility options for the replication instance. A
+    #   value of `true` represents an instance with a public IP address. A
+    #   value of `false` represents an instance with a private IP address.
+    #   The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] replication_instance_class
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_identifier
+    #   The replication instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_subnet_group
+    #   The subnet group for the replication instance.
+    #   @return [Types::AwsDmsReplicationInstanceReplicationSubnetGroupDetails]
+    #
+    # @!attribute [rw] vpc_security_groups
+    #   The virtual private cloud (VPC) security group for the replication
+    #   instance.
+    #   @return [Array<Types::AwsDmsReplicationInstanceVpcSecurityGroupsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceDetails < Struct.new(
+      :allocated_storage,
+      :auto_minor_version_upgrade,
+      :availability_zone,
+      :engine_version,
+      :kms_key_id,
+      :multi_az,
+      :preferred_maintenance_window,
+      :publicly_accessible,
+      :replication_instance_class,
+      :replication_instance_identifier,
+      :replication_subnet_group,
+      :vpc_security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the replication subnet group.
+    #
+    # @!attribute [rw] replication_subnet_group_identifier
+    #   The identifier of the replication subnet group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceReplicationSubnetGroupDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceReplicationSubnetGroupDetails < Struct.new(
+      :replication_subnet_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the virtual private cloud (VPC) security group
+    # that’s associated with the replication instance.
+    #
+    # @!attribute [rw] vpc_security_group_id
+    #   The identifier of the VPC security group that’s associated with the
+    #   replication instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceVpcSecurityGroupsDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceVpcSecurityGroupsDetails < Struct.new(
+      :vpc_security_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Database Migration Service (DMS) replication
+    # task. A replication task moves a set of data from the source endpoint
+    # to the target endpoint.
+    #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. `CCdcStartPosition` or `CCdcStartTime` specifies when you
+    #   want a CDC operation to start. Only a value for one of these fields
+    #   is included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_start_time
+    #   Indicates the start time for a CDC operation. `CdcStartPosition` or
+    #   `CCdcStartTime` specifies when you want a CDC operation to start.
+    #   Only a value for one of these fields is included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a CDC operation to stop. The value can be
+    #   either server time or commit time.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_type
+    #   The migration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A display name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter. If you don't specify a
+    #   `ResourceIdentifier` value, DMS generates a default identifier value
+    #   for the end of `EndpointArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of a replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_identifier
+    #   The user-defined replication task identifier or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_settings
+    #   The settings for the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The ARN of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_mappings
+    #   The table mappings for the replication task, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_endpoint_arn
+    #   The ARN of the target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationTaskDetails AWS API Documentation
+    #
+    class AwsDmsReplicationTaskDetails < Struct.new(
+      :cdc_start_position,
+      :cdc_start_time,
+      :cdc_stop_position,
+      :migration_type,
+      :id,
+      :resource_identifier,
+      :replication_instance_arn,
+      :replication_task_identifier,
+      :replication_task_settings,
+      :source_endpoint_arn,
+      :table_mappings,
+      :target_endpoint_arn,
+      :task_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a definition of an attribute for the table.
     #
     # @!attribute [rw] attribute_name
@@ -10222,6 +10513,10 @@ module Aws::SecurityHub
     #   The data volume definitions for the task.
     #   @return [Array<Types::AwsEcsTaskDefinitionVolumesDetails>]
     #
+    # @!attribute [rw] status
+    #   The status of the task definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionDetails AWS API Documentation
     #
     class AwsEcsTaskDefinitionDetails < Struct.new(
@@ -10238,7 +10533,8 @@ module Aws::SecurityHub
       :proxy_configuration,
       :requires_compatibilities,
       :task_role_arn,
-      :volumes)
+      :volumes,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12027,6 +12323,207 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon EventBridge global endpoint. The
+    # endpoint can improve your application’s availability by making it
+    # Regional-fault tolerant.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The URL subdomain of the endpoint. For example, if `EndpointUrl` is
+    #   `https://abcde.veo.endpoints.event.amazonaws.com`, then the
+    #   `EndpointId` is `abcde.veo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses being used by the endpoint.
+    #   @return [Array<Types::AwsEventsEndpointEventBusesDetails>]
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled for this endpoint.
+    #   The default state is `ENABLED`, which means you must supply a
+    #   `RoleArn`. If you don't have a `RoleArn` or you don't want event
+    #   replication enabled, set the state to `DISABLED`.
+    #   @return [Types::AwsEventsEndpointReplicationConfigDetails]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration of the endpoint.
+    #   @return [Types::AwsEventsEndpointRoutingConfigDetails]
+    #
+    # @!attribute [rw] state
+    #   The current state of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason the endpoint is in its current state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointDetails AWS API Documentation
+    #
+    class AwsEventsEndpointDetails < Struct.new(
+      :arn,
+      :description,
+      :endpoint_id,
+      :endpoint_url,
+      :event_buses,
+      :name,
+      :replication_config,
+      :role_arn,
+      :routing_config,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the Amazon EventBridge event buses that the
+    # endpoint is associated with.
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The Amazon Resource Name (ARN) of the event bus that the endpoint is
+    #   associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointEventBusesDetails AWS API Documentation
+    #
+    class AwsEventsEndpointEventBusesDetails < Struct.new(
+      :event_bus_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether replication is enabled or disabled for the endpoint.
+    # If enabled, the endpoint can replicate all events to a secondary
+    # Amazon Web Services Region.
+    #
+    # @!attribute [rw] state
+    #   The state of event replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointReplicationConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointReplicationConfigDetails < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the routing configuration of the endpoint.
+    #
+    # @!attribute [rw] failover_config
+    #   The failover configuration for an endpoint. This includes what
+    #   triggers failover and what happens when it's triggered.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigDetails < Struct.new(
+      :failover_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failover configuration for an endpoint. This includes what
+    # triggers failover and what happens when it's triggered.
+    #
+    # @!attribute [rw] primary
+    #   The main Region of the endpoint.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails]
+    #
+    # @!attribute [rw] secondary
+    #   The Region that events are routed to when failover is triggered or
+    #   event replication is enabled.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigDetails < Struct.new(
+      :primary,
+      :secondary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the primary Amazon Web Services Region of the
+    # endpoint.
+    #
+    # @!attribute [rw] health_check
+    #   The Amazon Resource Name (ARN) of the health check used by the
+    #   endpoint to determine whether failover is triggered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails < Struct.new(
+      :health_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Region that events are routed to when failover
+    # is triggered or event replication is enabled.
+    #
+    # @!attribute [rw] route
+    #   Defines the secondary Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails < Struct.new(
+      :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about Amazon EventBridge event bus. An event bus is a
+    # router that receives events and delivers them to zero or more
+    # destinations, or targets. This can be a custom event bus which you can
+    # use to receive events from your custom applications and services, or
+    # it can be a partner event bus which can be matched to a partner event
+    # source.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account permitted to write
+    #   events to the current account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy that enables the external account to send events to your
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEventbusDetails AWS API Documentation
+    #
+    class AwsEventsEventbusDetails < Struct.new(
+      :arn,
+      :name,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains information on the status of CloudTrail as a
     # data source for the detector.
     #
@@ -13373,6 +13870,226 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about different modes of client authentication.
+    #
+    # @!attribute [rw] sasl
+    #   Provides details for client authentication using SASL.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslDetails]
+    #
+    # @!attribute [rw] unauthenticated
+    #   Provides details for allowing no client authentication.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails]
+    #
+    # @!attribute [rw] tls
+    #   Provides details for client authentication using TLS.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationTlsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationDetails < Struct.new(
+      :sasl,
+      :unauthenticated,
+      :tls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for client authentication using SASL.
+    #
+    # @!attribute [rw] iam
+    #   Provides details for SASL client authentication using IAM.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails]
+    #
+    # @!attribute [rw] scram
+    #   Details for SASL client authentication using SCRAM.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslDetails < Struct.new(
+      :iam,
+      :scram)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/IAM client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether SASL/IAM authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/SCRAM client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether SASL/SCRAM authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for client authentication using TLS.
+    #
+    # @!attribute [rw] certificate_authority_arn_list
+    #   List of Amazon Web Services Private CA Amazon Resource Names (ARNs).
+    #   Amazon Web Services Private CA enables creation of private
+    #   certificate authority (CA) hierarchies, including root and
+    #   subordinate CAs, without the investment and maintenance costs of
+    #   operating an on-premises CA.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether TLS authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationTlsDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationTlsDetails < Struct.new(
+      :certificate_authority_arn_list,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for allowing no client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether unauthenticated is allowed or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provide details about an Amazon MSK cluster.
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes encryption-related information, such as the KMS key used
+    #   for encrypting data at rest and whether you want Amazon MSK to
+    #   encrypt your data in transit.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoDetails]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_broker_nodes
+    #   The number of broker nodes in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_authentication
+    #   Provides information for different modes of client authentication.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoDetails < Struct.new(
+      :encryption_info,
+      :current_version,
+      :number_of_broker_nodes,
+      :cluster_name,
+      :client_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Includes encryption-related information, such as the KMS key used for
+    # encrypting data at rest and whether you want MSK to encrypt your data
+    # in transit.
+    #
+    # @!attribute [rw] encryption_in_transit
+    #   The settings for encrypting data in transit.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails]
+    #
+    # @!attribute [rw] encryption_at_rest
+    #   The data-volume encryption details. You can't update encryption at
+    #   rest settings for existing clusters.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoDetails < Struct.new(
+      :encryption_in_transit,
+      :encryption_at_rest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data-volume encryption details. You can't update encryption at
+    # rest settings for existing clusters.
+    #
+    # @!attribute [rw] data_volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of the KMS key for encrypting data at
+    #   rest. If you don't specify a KMS key, MSK creates one for you and
+    #   uses it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails < Struct.new(
+      :data_volume_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for encrypting data in transit.
+    #
+    # @!attribute [rw] in_cluster
+    #   When set to `true`, it indicates that data communication among the
+    #   broker nodes of the cluster is encrypted. When set to `false`, the
+    #   communication happens in plain text. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_broker
+    #   Indicates the encryption setting for data in transit between clients
+    #   and brokers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails < Struct.new(
+      :in_cluster,
+      :client_broker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Amazon Managed Streaming for Apache Kafka
+    # (Amazon MSK) cluster.
+    #
+    # @!attribute [rw] cluster_info
+    #   Provides information about a cluster.
+    #   @return [Types::AwsMskClusterClusterInfoDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterDetails AWS API Documentation
+    #
+    class AwsMskClusterDetails < Struct.new(
+      :cluster_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an Network Firewall firewall.
     #
     # @!attribute [rw] delete_protection
@@ -14208,6 +14925,11 @@ module Aws::SecurityHub
     #   Whether the mapping of IAM accounts to database accounts is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Indicates if minor version upgrades are automatically applied to the
+    #   cluster.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterDetails AWS API Documentation
     #
     class AwsRdsDbClusterDetails < Struct.new(
@@ -14247,7 +14969,8 @@ module Aws::SecurityHub
       :db_cluster_option_group_memberships,
       :db_cluster_identifier,
       :db_cluster_members,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :auto_minor_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16413,6 +17136,120 @@ module Aws::SecurityHub
     class AwsRedshiftClusterVpcSecurityGroup < Struct.new(
       :status,
       :vpc_security_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains an optional comment about your Amazon Route 53
+    # hosted zone.
+    #
+    # @!attribute [rw] comment
+    #   Any comments that you include about the hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneConfigDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneConfigDetails < Struct.new(
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a specified Amazon Route 53 hosted zone,
+    # including the four name servers assigned to the hosted zone. A hosted
+    # zone represents a collection of records that can be managed together,
+    # belonging to a single parent domain name.
+    #
+    # @!attribute [rw] hosted_zone
+    #   An object that contains information about the specified hosted zone.
+    #   @return [Types::AwsRoute53HostedZoneObjectDetails]
+    #
+    # @!attribute [rw] vpcs
+    #   An object that contains information about the Amazon Virtual Private
+    #   Clouds (Amazon VPCs) that are associated with the specified hosted
+    #   zone.
+    #   @return [Array<Types::AwsRoute53HostedZoneVpcDetails>]
+    #
+    # @!attribute [rw] name_servers
+    #   An object that contains a list of the authoritative name servers for
+    #   a hosted zone or for a reusable delegation set.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_logging_config
+    #   An array that contains one `QueryLoggingConfig` element for each DNS
+    #   query logging configuration that is associated with the current
+    #   Amazon Web Services account.
+    #   @return [Types::AwsRoute53QueryLoggingConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneDetails < Struct.new(
+      :hosted_zone,
+      :vpcs,
+      :name_servers,
+      :query_logging_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about an Amazon Route 53 hosted
+    # zone.
+    #
+    # @!attribute [rw] id
+    #   The ID that Route 53 assigns to the hosted zone when you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain. For public hosted zones, this is the name
+    #   that you have registered with your DNS registrar.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   An object that includes the `Comment` element.
+    #   @return [Types::AwsRoute53HostedZoneConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneObjectDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneObjectDetails < Struct.new(
+      :id,
+      :name,
+      :config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For private hosted zones, this is a complex type that contains
+    # information about an Amazon VPC.
+    #
+    # @!attribute [rw] id
+    #   The identifier of an Amazon VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that an Amazon VPC was created in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneVpcDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneVpcDetails < Struct.new(
+      :id,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a specified Amazon Route 53 configuration for
+    # DNS query logging.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log
+    #   group that Route 53 is publishing logs to.
+    #   @return [Types::CloudWatchLogsLogGroupArnConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53QueryLoggingConfigDetails AWS API Documentation
+    #
+    class AwsRoute53QueryLoggingConfigDetails < Struct.new(
+      :cloud_watch_logs_log_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20746,6 +21583,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The Amazon Resource Name (ARN) and other details of the Amazon
+    # CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The ARN of the CloudWatch Logs log group that Route 53 is publishing
+    #   logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that CloudWatch Logs is logging queries
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID for a DNS query logging configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CloudWatchLogsLogGroupArnConfigDetails AWS API Documentation
+    #
+    class CloudWatchLogsLogGroupArnConfigDetails < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :hosted_zone_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about where a code vulnerability is located in your
     # Lambda function.
     #
@@ -24975,6 +25839,48 @@ module Aws::SecurityHub
     #   helps you set limits on data processing and track costs.
     #   @return [Types::AwsAthenaWorkGroupDetails]
     #
+    # @!attribute [rw] aws_events_eventbus
+    #   Provides details about Amazon EventBridge event bus for an endpoint.
+    #   An event bus is a router that receives events and delivers them to
+    #   zero or more destinations, or targets.
+    #   @return [Types::AwsEventsEventbusDetails]
+    #
+    # @!attribute [rw] aws_dms_endpoint
+    #   Provides details about an Database Migration Service (DMS) endpoint.
+    #   An endpoint provides connection, data store type, and location
+    #   information about your data store.
+    #   @return [Types::AwsDmsEndpointDetails]
+    #
+    # @!attribute [rw] aws_events_endpoint
+    #   Provides details about an Amazon EventBridge global endpoint. The
+    #   endpoint can improve your application’s availability by making it
+    #   Regional-fault tolerant.
+    #   @return [Types::AwsEventsEndpointDetails]
+    #
+    # @!attribute [rw] aws_dms_replication_task
+    #   Provides details about an DMS replication task. A replication task
+    #   moves a set of data from the source endpoint to the target endpoint.
+    #   @return [Types::AwsDmsReplicationTaskDetails]
+    #
+    # @!attribute [rw] aws_dms_replication_instance
+    #   Provides details about an DMS replication instance. DMS uses a
+    #   replication instance to connect to your source data store, read the
+    #   source data, and format the data for consumption by the target data
+    #   store.
+    #   @return [Types::AwsDmsReplicationInstanceDetails]
+    #
+    # @!attribute [rw] aws_route_53_hosted_zone
+    #   Provides details about an Amazon Route 53 hosted zone, including the
+    #   four name servers assigned to the hosted zone. A hosted zone
+    #   represents a collection of records that can be managed together,
+    #   belonging to a single parent domain name.
+    #   @return [Types::AwsRoute53HostedZoneDetails]
+    #
+    # @!attribute [rw] aws_msk_cluster
+    #   Provides details about an Amazon Managed Streaming for Apache Kafka
+    #   (Amazon MSK) cluster.
+    #   @return [Types::AwsMskClusterDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -25067,7 +25973,14 @@ module Aws::SecurityHub
       :aws_event_schemas_registry,
       :aws_guard_duty_detector,
       :aws_step_function_state_machine,
-      :aws_athena_work_group)
+      :aws_athena_work_group,
+      :aws_events_eventbus,
+      :aws_dms_endpoint,
+      :aws_events_endpoint,
+      :aws_dms_replication_task,
+      :aws_dms_replication_instance,
+      :aws_route_53_hosted_zone,
+      :aws_msk_cluster)
       SENSITIVE = []
       include Aws::Structure
     end

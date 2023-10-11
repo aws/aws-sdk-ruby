@@ -28,13 +28,18 @@ module Aws::WorkSpaces
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ApplicationNotSupportedException}
+  # * {ComputeNotCompatibleException}
+  # * {IncompatibleApplicationsException}
   # * {InvalidParameterValuesException}
   # * {InvalidResourceStateException}
+  # * {OperatingSystemNotCompatibleException}
   # * {OperationInProgressException}
   # * {OperationNotSupportedException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceAssociatedException}
   # * {ResourceCreationFailedException}
+  # * {ResourceInUseException}
   # * {ResourceLimitExceededException}
   # * {ResourceNotFoundException}
   # * {ResourceUnavailableException}
@@ -60,6 +65,36 @@ module Aws::WorkSpaces
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ApplicationNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::ApplicationNotSupportedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ComputeNotCompatibleException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::ComputeNotCompatibleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IncompatibleApplicationsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::IncompatibleApplicationsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 
@@ -90,6 +125,16 @@ module Aws::WorkSpaces
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class OperatingSystemNotCompatibleException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::OperatingSystemNotCompatibleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 
@@ -170,6 +215,26 @@ module Aws::WorkSpaces
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ResourceInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::ResourceInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
       end
     end
 

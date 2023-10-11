@@ -102,6 +102,7 @@ module Aws
   autoload :DataExchange, 'aws-sdk-dataexchange'
   autoload :DataPipeline, 'aws-sdk-datapipeline'
   autoload :DataSync, 'aws-sdk-datasync'
+  autoload :DataZone, 'aws-sdk-datazone'
   autoload :DatabaseMigrationService, 'aws-sdk-databasemigrationservice'
   autoload :Detective, 'aws-sdk-detective'
   autoload :DevOpsGuru, 'aws-sdk-devopsguru'

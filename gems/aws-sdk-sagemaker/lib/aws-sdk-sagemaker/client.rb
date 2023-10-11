@@ -619,6 +619,9 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework_version #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].nearest_model_name #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types #=> Array
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -846,6 +849,11 @@ module Aws::SageMaker
     #           metric_name: "MetricName", # required
     #         },
     #       ],
+    #       additional_s3_data_source: {
+    #         s3_data_type: "S3Object", # required, accepts S3Object
+    #         s3_uri: "S3Uri", # required
+    #         compression_type: "None", # accepts None, Gzip
+    #       },
     #     },
     #     inference_specification: {
     #       containers: [ # required
@@ -864,6 +872,11 @@ module Aws::SageMaker
     #           framework: "String",
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
+    #           additional_s3_data_source: {
+    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_uri: "S3Uri", # required
+    #             compression_type: "None", # accepts None, Gzip
+    #           },
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -5685,6 +5698,11 @@ module Aws::SageMaker
     #           framework: "String",
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
+    #           additional_s3_data_source: {
+    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_uri: "S3Uri", # required
+    #             compression_type: "None", # accepts None, Gzip
+    #           },
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -5884,6 +5902,11 @@ module Aws::SageMaker
     #             framework: "String",
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
+    #             additional_s3_data_source: {
+    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_uri: "S3Uri", # required
+    #               compression_type: "None", # accepts None, Gzip
+    #             },
     #           },
     #         ],
     #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -9884,6 +9907,9 @@ module Aws::SageMaker
     #   resp.training_specification.supported_tuning_job_objective_metrics #=> Array
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].type #=> String, one of "Maximize", "Minimize"
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].metric_name #=> String
+    #   resp.training_specification.additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.training_specification.additional_s3_data_source.s3_uri #=> String
+    #   resp.training_specification.additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers #=> Array
     #   resp.inference_specification.containers[0].container_hostname #=> String
     #   resp.inference_specification.containers[0].image #=> String
@@ -9896,6 +9922,9 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
+    #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -13057,6 +13086,9 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
+    #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -13188,6 +13220,9 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].framework #=> String
     #   resp.additional_inference_specifications[0].containers[0].framework_version #=> String
     #   resp.additional_inference_specifications[0].containers[0].nearest_model_name #=> String
+    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_uri #=> String
+    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.additional_inference_specifications[0].supported_transform_instance_types #=> Array
     #   resp.additional_inference_specifications[0].supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.additional_inference_specifications[0].supported_realtime_inference_instance_types #=> Array
@@ -22984,6 +23019,11 @@ module Aws::SageMaker
     #             framework: "String",
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
+    #             additional_s3_data_source: {
+    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_uri: "S3Uri", # required
+    #               compression_type: "None", # accepts None, Gzip
+    #             },
     #           },
     #         ],
     #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -24193,7 +24233,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.214.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

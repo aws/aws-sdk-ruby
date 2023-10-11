@@ -340,6 +340,7 @@ module Aws
             'DataExchange' => 'dataexchange',
             'DataPipeline' => 'datapipeline',
             'DataSync' => 'datasync',
+            'DataZone' => 'datazone',
             'DatabaseMigrationService' => 'dms',
             'Detective' => 'api.detective',
             'DevOpsGuru' => 'devops-guru',

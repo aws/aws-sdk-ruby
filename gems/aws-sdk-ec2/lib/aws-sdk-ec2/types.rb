@@ -851,10 +851,6 @@ module Aws::EC2
     #   Use [DescribeAvailabilityZones][1] to view the network border
     #   groups.
     #
-    #   You cannot use a network border group with EC2 Classic. If you
-    #   attempt this operation on EC2 Classic, you receive an
-    #   `InvalidParameterCombination` error.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
@@ -3820,8 +3816,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] export_task_id
-    #   The ID of the export task. This is the ID returned by
-    #   `CreateInstanceExportTask`.
+    #   The ID of the export task. This is the ID returned by the
+    #   `CreateInstanceExportTask` and `ExportImage` operations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTaskRequest AWS API Documentation
@@ -7411,7 +7407,7 @@ module Aws::EC2
     #
     # @!attribute [rw] tag_specifications
     #   The key-value pair for tagging the EC2 Fleet request on creation.
-    #   For more information, see [Tagging your resources][1].
+    #   For more information, see [Tag your resources][1].
     #
     #   If the fleet type is `instant`, specify a resource type of `fleet`
     #   to tag the fleet or `instance` to tag the instances at launch.
@@ -19667,8 +19663,6 @@ module Aws::EC2
     #     for example, `2021-09-29T11:04:43.305Z`. You can use a wildcard
     #     (`*`), for example, `2021-09-29T*`, which matches an entire day.
     #
-    #   * `license-pool` -
-    #
     #   * `maintenance-options.auto-recovery` - The current automatic
     #     recovery behavior of the instance (`disabled` \| `default`).
     #
@@ -19698,26 +19692,38 @@ module Aws::EC2
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
     #
-    #   * `network-interface.addresses.primary` - Specifies whether the IPv4
-    #     address of the network interface is the primary private IPv4
-    #     address.
+    #   * `network-interface.addresses.association.allocation-id` - The
+    #     allocation ID.
     #
-    #   * `network-interface.addresses.private-ip-address` - The private
-    #     IPv4 address associated with the network interface.
+    #   * `network-interface.addresses.association.association-id` - The
+    #     association ID.
     #
-    #   * `network-interface.addresses.association.public-ip` - The ID of
-    #     the association of an Elastic IP address (IPv4) with a network
-    #     interface.
+    #   * `network-interface.addresses.association.carrier-ip` - The carrier
+    #     IP address.
+    #
+    #   * `network-interface.addresses.association.customer-owned-ip` - The
+    #     customer-owned IP address.
     #
     #   * `network-interface.addresses.association.ip-owner-id` - The owner
     #     ID of the private IPv4 address associated with the network
     #     interface.
     #
-    #   * `network-interface.association.public-ip` - The address of the
-    #     Elastic IP address (IPv4) bound to the network interface.
+    #   * `network-interface.addresses.association.public-dns-name` - The
+    #     public DNS name.
     #
-    #   * `network-interface.association.ip-owner-id` - The owner of the
-    #     Elastic IP address (IPv4) associated with the network interface.
+    #   * `network-interface.addresses.association.public-ip` - The ID of
+    #     the association of an Elastic IP address (IPv4) with a network
+    #     interface.
+    #
+    #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+    #     address of the network interface is the primary private IPv4
+    #     address.
+    #
+    #   * `network-interface.addresses.private-dns-name` - The private DNS
+    #     name.
+    #
+    #   * `network-interface.addresses.private-ip-address` - The private
+    #     IPv4 address associated with the network interface.
     #
     #   * `network-interface.association.allocation-id` - The allocation ID
     #     returned when you allocated the Elastic IP address (IPv4) for your
@@ -19727,8 +19733,32 @@ module Aws::EC2
     #     ID returned when the network interface was associated with an IPv4
     #     address.
     #
+    #   * `network-interface.association.carrier-ip` - The customer-owned IP
+    #     address.
+    #
+    #   * `network-interface.association.customer-owned-ip` - The
+    #     customer-owned IP address.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.public-dns-name` - The public DNS
+    #     name.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.attachment.attach-time` - The time that the
+    #     network interface was attached to an instance.
+    #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.
+    #
+    #   * `network-interface.attachment.delete-on-termination` - Specifies
+    #     whether the attachment is deleted when an instance is terminated.
+    #
+    #   * `network-interface.attachment.device-index` - The device index to
+    #     which the network interface is attached.
     #
     #   * `network-interface.attachment.instance-id` - The ID of the
     #     instance to which the network interface is attached.
@@ -19736,21 +19766,19 @@ module Aws::EC2
     #   * `network-interface.attachment.instance-owner-id` - The owner ID of
     #     the instance to which the network interface is attached.
     #
-    #   * `network-interface.attachment.device-index` - The device index to
-    #     which the network interface is attached.
+    #   * `network-interface.attachment.network-card-index` - The index of
+    #     the network card.
     #
     #   * `network-interface.attachment.status` - The status of the
     #     attachment (`attaching` \| `attached` \| `detaching` \|
     #     `detached`).
     #
-    #   * `network-interface.attachment.attach-time` - The time that the
-    #     network interface was attached to an instance.
-    #
-    #   * `network-interface.attachment.delete-on-termination` - Specifies
-    #     whether the attachment is deleted when an instance is terminated.
-    #
     #   * `network-interface.availability-zone` - The Availability Zone for
     #     the network interface.
+    #
+    #   * `network-interface.deny-all-igw-traffic` - A Boolean that
+    #     indicates whether a network interface with an IPv6 address is
+    #     unreachable from the public internet.
     #
     #   * `network-interface.description` - The description of the network
     #     interface.
@@ -19761,8 +19789,23 @@ module Aws::EC2
     #   * `network-interface.group-name` - The name of a security group
     #     associated with the network interface.
     #
+    #   * `network-interface.ipv4-prefixes.ipv4-prefix` - The IPv4 prefixes
+    #     that are assigned to the network interface.
+    #
+    #   * `network-interface.ipv6-address` - The IPv6 address associated
+    #     with the network interface.
+    #
     #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
     #     associated with the network interface.
+    #
+    #   * `network-interface.ipv6-addresses.is-primary-ipv6` - A Boolean
+    #     that indicates whether this is the primary IPv6 address.
+    #
+    #   * `network-interface.ipv6-native` - A Boolean that indicates whether
+    #     this is an IPv6 only network interface.
+    #
+    #   * `network-interface.ipv6-prefixes.ipv6-prefix` - The IPv6 prefix
+    #     assigned to the network interface.
     #
     #   * `network-interface.mac-address` - The MAC address of the network
     #     interface.
@@ -19770,11 +19813,17 @@ module Aws::EC2
     #   * `network-interface.network-interface-id` - The ID of the network
     #     interface.
     #
+    #   * `network-interface.outpost-arn` - The ARN of the Outpost.
+    #
     #   * `network-interface.owner-id` - The ID of the owner of the network
     #     interface.
     #
     #   * `network-interface.private-dns-name` - The private DNS name of the
     #     network interface.
+    #
+    #   * `network-interface.private-ip-address` - The private IPv4 address.
+    #
+    #   * `network-interface.public-dns-name` - The public DNS name.
     #
     #   * `network-interface.requester-id` - The requester ID for the
     #     network interface.
@@ -19792,6 +19841,12 @@ module Aws::EC2
     #     perform network address translation (NAT) in your VPC.
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the
+    #     network interface.
+    #
+    #   * `network-interface.tag-key` - The key of a tag assigned to the
+    #     network interface.
+    #
+    #   * `network-interface.tag-value` - The value of a tag assigned to the
     #     network interface.
     #
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
@@ -21882,25 +21937,25 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `addresses.private-ip-address` - The private IPv4 addresses
-    #     associated with the network interface.
+    #   * `association.allocation-id` - The allocation ID returned when you
+    #     allocated the Elastic IP address (IPv4) for your network
+    #     interface.
     #
-    #   * `addresses.primary` - Whether the private IPv4 address is the
-    #     primary IP address associated with the network interface.
+    #   * `association.association-id` - The association ID returned when
+    #     the network interface was associated with an IPv4 address.
+    #
+    #   * `addresses.association.owner-id` - The owner ID of the addresses
+    #     associated with the network interface.
     #
     #   * `addresses.association.public-ip` - The association ID returned
     #     when the network interface was associated with the Elastic IP
     #     address (IPv4).
     #
-    #   * `addresses.association.owner-id` - The owner ID of the addresses
+    #   * `addresses.primary` - Whether the private IPv4 address is the
+    #     primary IP address associated with the network interface.
+    #
+    #   * `addresses.private-ip-address` - The private IPv4 addresses
     #     associated with the network interface.
-    #
-    #   * `association.association-id` - The association ID returned when
-    #     the network interface was associated with an IPv4 address.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network
-    #     interface.
     #
     #   * `association.ip-owner-id` - The owner of the Elastic IP address
     #     (IPv4) associated with the network interface.
@@ -21911,10 +21966,10 @@ module Aws::EC2
     #   * `association.public-dns-name` - The public DNS name for the
     #     network interface (IPv4).
     #
-    #   * `attachment.attachment-id` - The ID of the interface attachment.
-    #
     #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
+    #
+    #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
     #     attachment is deleted when an instance is terminated.
@@ -21939,19 +21994,17 @@ module Aws::EC2
     #   * `group-id` - The ID of a security group associated with the
     #     network interface.
     #
-    #   * `group-name` - The name of a security group associated with the
-    #     network interface.
-    #
     #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with
     #     the network interface.
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `efa` \| `gateway_load_balancer` \|
-    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed`
-    #     \| `interface` \| `iot_rules_managed` \| `lambda` \|
-    #     `load_balancer` \| `nat_gateway` \| `network_load_balancer` \|
-    #     `quicksight` \| `transit_gateway` \| `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
+    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
+    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
+    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
+    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
+    #     `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -21960,11 +22013,11 @@ module Aws::EC2
     #   * `owner-id` - The Amazon Web Services account ID of the network
     #     interface owner.
     #
-    #   * `private-ip-address` - The private IPv4 address or addresses of
-    #     the network interface.
-    #
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
+    #
+    #   * `private-ip-address` - The private IPv4 address or addresses of
+    #     the network interface.
     #
     #   * `requester-id` - The alias or Amazon Web Services account ID of
     #     the principal or service that created the network interface.
@@ -36176,6 +36229,16 @@ module Aws::EC2
     #
     # @!attribute [rw] boot_mode
     #   The boot mode of the virtual machine.
+    #
+    #   <note markdown="1"> The `uefi-preferred` boot mode isn't supported for importing
+    #   images. For more information, see [Boot modes][1] in the *VM
+    #   Import/Export User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/prerequisites.html#vmimport-boot-modes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
@@ -43170,10 +43233,13 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag.
     #
-    #   The `Valid Values` are all the resource types that can be tagged.
-    #   However, when creating a launch template, you can specify tags for
+    #   Valid Values lists all resource types for Amazon EC2 that can be
+    #   tagged. When you create a launch template, you can specify tags for
     #   the following resource types only: `instance` \| `volume` \|
-    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`
+    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`. If
+    #   the instance does include the resource type that you specify, the
+    #   instance launch fails. For example, not all instance types include
+    #   an Elastic GPU.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #
@@ -49876,6 +49942,20 @@ module Aws::EC2
     # @!attribute [rw] max_total_price
     #   The maximum amount per hour for On-Demand Instances that you're
     #   willing to pay.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `maxTotalPrice` does not account for surplus credits, and, if you
+    #   use surplus credits, your final cost might be higher than what you
+    #   specified for `maxTotalPrice`. For more information, see [Surplus
+    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions AWS API Documentation
@@ -49941,6 +50021,20 @@ module Aws::EC2
     # @!attribute [rw] max_total_price
     #   The maximum amount per hour for On-Demand Instances that you're
     #   willing to pay.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `MaxTotalPrice` does not account for surplus credits, and, if you
+    #   use surplus credits, your final cost might be higher than what you
+    #   specified for `MaxTotalPrice`. For more information, see [Surplus
+    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest AWS API Documentation
@@ -52453,10 +52547,6 @@ module Aws::EC2
     #
     #   If you provide an incorrect network border group, you receive an
     #   `InvalidAddress.NotFound` error.
-    #
-    #   You cannot use a network border group with EC2 Classic. If you
-    #   attempt this operation on EC2 classic, you receive an
-    #   `InvalidParameterCombination` error.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -53342,7 +53432,25 @@ module Aws::EC2
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   The elastic inference accelerator for the instance.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
+    #
+    #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
     #
     # @!attribute [rw] security_group_ids
@@ -54778,7 +54886,25 @@ module Aws::EC2
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   The elastic inference accelerator for the instance.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
+    #
+    #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]
     #
     # @!attribute [rw] security_group_ids
@@ -58664,11 +58790,26 @@ module Aws::EC2
     #   maximum amount you're willing to pay. When the maximum amount
     #   you're willing to pay is reached, the fleet stops launching
     #   instances even if it hasn’t met the target capacity.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `onDemandMaxTotalPrice` does not account for surplus credits, and,
+    #   if you use surplus credits, your final cost might be higher than
+    #   what you specified for `onDemandMaxTotalPrice`. For more
+    #   information, see [Surplus credits can incur charges][1] in the *EC2
+    #   User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @!attribute [rw] spot_max_total_price
     #   The maximum amount per hour for Spot Instances that you're willing
-    #   to pay. You can use the `spotdMaxTotalPrice` parameter, the
+    #   to pay. You can use the `spotMaxTotalPrice` parameter, the
     #   `onDemandMaxTotalPrice` parameter, or both parameters to ensure that
     #   your fleet cost does not exceed your budget. If you set a maximum
     #   price per hour for the On-Demand Instances and Spot Instances in
@@ -58676,6 +58817,20 @@ module Aws::EC2
     #   maximum amount you're willing to pay. When the maximum amount
     #   you're willing to pay is reached, the fleet stops launching
     #   instances even if it hasn’t met the target capacity.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `spotMaxTotalPrice` does not account for surplus credits, and, if
+    #   you use surplus credits, your final cost might be higher than what
+    #   you specified for `spotMaxTotalPrice`. For more information, see
+    #   [Surplus credits can incur charges][1] in the *EC2 User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @!attribute [rw] terminate_instances_with_expiration
@@ -58766,7 +58921,7 @@ module Aws::EC2
     #   the tags in the [launch template][1] (valid only if you use
     #   `LaunchTemplateConfigs`) or in the ` SpotFleetTagSpecification `
     #   (valid only if you use `LaunchSpecifications`). For information
-    #   about tagging after launch, see [Tagging Your Resources][2].
+    #   about tagging after launch, see [Tag your resources][2].
     #
     #
     #
@@ -59217,6 +59372,20 @@ module Aws::EC2
     #   If you specify a maximum price, your Spot Instances will be
     #   interrupted more frequently than if you do not specify this
     #   parameter.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `maxTotalPrice` does not account for surplus credits, and, if you
+    #   use surplus credits, your final cost might be higher than what you
+    #   specified for `maxTotalPrice`. For more information, see [Surplus
+    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
@@ -59357,6 +59526,20 @@ module Aws::EC2
     #   If you specify a maximum price, your Spot Instances will be
     #   interrupted more frequently than if you do not specify this
     #   parameter.
+    #
+    #   <note markdown="1"> If your fleet includes T instances that are configured as
+    #   `unlimited`, and if their average CPU usage exceeds the baseline
+    #   utilization, you will incur a charge for surplus credits. The
+    #   `MaxTotalPrice` does not account for surplus credits, and, if you
+    #   use surplus credits, your final cost might be higher than what you
+    #   specified for `MaxTotalPrice`. For more information, see [Surplus
+    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode-concepts.html#unlimited-mode-surplus-credits
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation

@@ -471,6 +471,45 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Associates the specified application to the specified WorkSpace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the application.
+    #
+    # @return [Types::AssociateWorkspaceApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateWorkspaceApplicationResult#association #association} => Types::WorkspaceResourceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_workspace_application({
+    #     workspace_id: "WorkspaceId", # required
+    #     application_id: "WorkSpaceApplicationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.associated_resource_id #=> String
+    #   resp.association.associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.association.created #=> Time
+    #   resp.association.last_updated_time #=> Time
+    #   resp.association.state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.association.state_reason.error_message #=> String
+    #   resp.association.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateWorkspaceApplication AWS API Documentation
+    #
+    # @overload associate_workspace_application(params = {})
+    # @param [Hash] params ({})
+    def associate_workspace_application(params = {}, options = {})
+      req = build_request(:associate_workspace_application, params)
+      req.send_request(options)
+    end
+
     # Adds one or more rules to the specified IP access control group.
     #
     # This action gives users permission to access their WorkSpaces from the
@@ -1080,6 +1119,7 @@ module Aws::WorkSpaces
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #           protocols: ["PCOIP"], # accepts PCOIP, WSP
+    #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
     #         },
     #         tags: [
     #           {
@@ -1107,6 +1147,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols #=> Array
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -1133,6 +1174,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.pending_requests[0].workspace_properties.protocols #=> Array
     #   resp.pending_requests[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
+    #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
     #   resp.pending_requests[0].modification_states #=> Array
     #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -1360,6 +1402,48 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deploys associated applications to the specified WorkSpace
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @option params [Boolean] :force
+    #   Indicates whether the force flag is applied for the specified
+    #   WorkSpace. When the force flag is enabled, it allows previously failed
+    #   deployments to be retried.
+    #
+    # @return [Types::DeployWorkspaceApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeployWorkspaceApplicationsResult#deployment #deployment} => Types::WorkSpaceApplicationDeployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deploy_workspace_applications({
+    #     workspace_id: "WorkspaceId", # required
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment.associations #=> Array
+    #   resp.deployment.associations[0].associated_resource_id #=> String
+    #   resp.deployment.associations[0].associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.deployment.associations[0].created #=> Time
+    #   resp.deployment.associations[0].last_updated_time #=> Time
+    #   resp.deployment.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.deployment.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.deployment.associations[0].state_reason.error_message #=> String
+    #   resp.deployment.associations[0].workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeployWorkspaceApplications AWS API Documentation
+    #
+    # @overload deploy_workspace_applications(params = {})
+    # @param [Hash] params ({})
+    def deploy_workspace_applications(params = {}, options = {})
+      req = build_request(:deploy_workspace_applications, params)
+      req.send_request(options)
+    end
+
     # Deregisters the specified directory. This operation is asynchronous
     # and returns before the WorkSpace directory is deregistered. If any
     # WorkSpaces are registered to this directory, you must remove them
@@ -1464,6 +1548,170 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_account_modifications(params = {}, options = {})
       req = build_request(:describe_account_modifications, params)
+      req.send_request(options)
+    end
+
+    # Describes the associations between the application and the specified
+    # associated resources.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of associations to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the specified application.
+    #
+    # @option params [required, Array<String>] :associated_resource_types
+    #   The resource type of the associated resources.
+    #
+    # @return [Types::DescribeApplicationAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicationAssociationsResult#associations #associations} => Array&lt;Types::ApplicationResourceAssociation&gt;
+    #   * {Types::DescribeApplicationAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_application_associations({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     application_id: "WorkSpaceApplicationId", # required
+    #     associated_resource_types: ["WORKSPACE"], # required, accepts WORKSPACE, BUNDLE, IMAGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].application_id #=> String
+    #   resp.associations[0].associated_resource_id #=> String
+    #   resp.associations[0].associated_resource_type #=> String, one of "WORKSPACE", "BUNDLE", "IMAGE"
+    #   resp.associations[0].created #=> Time
+    #   resp.associations[0].last_updated_time #=> Time
+    #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplicationAssociations AWS API Documentation
+    #
+    # @overload describe_application_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_application_associations(params = {}, options = {})
+      req = build_request(:describe_application_associations, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified applications by filtering based on their
+    # compute types, license availability, operating systems, and owners.
+    #
+    # @option params [Array<String>] :application_ids
+    #   The identifiers of one or more applications.
+    #
+    # @option params [Array<String>] :compute_type_names
+    #   The compute types supported by the applications.
+    #
+    # @option params [String] :license_type
+    #   The license availability for the applications.
+    #
+    # @option params [Array<String>] :operating_system_names
+    #   The operating systems supported by the applications.
+    #
+    # @option params [String] :owner
+    #   The owner of the applications.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of applications to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::DescribeApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicationsResult#applications #applications} => Array&lt;Types::WorkSpaceApplication&gt;
+    #   * {Types::DescribeApplicationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_applications({
+    #     application_ids: ["WorkSpaceApplicationId"],
+    #     compute_type_names: ["VALUE"], # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #     license_type: "LICENSED", # accepts LICENSED, UNLICENSED
+    #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
+    #     owner: "WorkSpaceApplicationOwner",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applications #=> Array
+    #   resp.applications[0].application_id #=> String
+    #   resp.applications[0].created #=> Time
+    #   resp.applications[0].description #=> String
+    #   resp.applications[0].license_type #=> String, one of "LICENSED", "UNLICENSED"
+    #   resp.applications[0].name #=> String
+    #   resp.applications[0].owner #=> String
+    #   resp.applications[0].state #=> String, one of "PENDING", "ERROR", "AVAILABLE", "UNINSTALL_ONLY"
+    #   resp.applications[0].supported_compute_type_names #=> Array
+    #   resp.applications[0].supported_compute_type_names[0] #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
+    #   resp.applications[0].supported_operating_system_names #=> Array
+    #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplications AWS API Documentation
+    #
+    # @overload describe_applications(params = {})
+    # @param [Hash] params ({})
+    def describe_applications(params = {}, options = {})
+      req = build_request(:describe_applications, params)
+      req.send_request(options)
+    end
+
+    # Describes the associations between the applications and the specified
+    # bundle.
+    #
+    # @option params [required, String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @option params [required, Array<String>] :associated_resource_types
+    #   The resource types of the associated resource.
+    #
+    # @return [Types::DescribeBundleAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBundleAssociationsResult#associations #associations} => Array&lt;Types::BundleResourceAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bundle_associations({
+    #     bundle_id: "BundleId", # required
+    #     associated_resource_types: ["APPLICATION"], # required, accepts APPLICATION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].associated_resource_id #=> String
+    #   resp.associations[0].associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.associations[0].bundle_id #=> String
+    #   resp.associations[0].created #=> Time
+    #   resp.associations[0].last_updated_time #=> Time
+    #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeBundleAssociations AWS API Documentation
+    #
+    # @overload describe_bundle_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_bundle_associations(params = {}, options = {})
+      req = build_request(:describe_bundle_associations, params)
       req.send_request(options)
     end
 
@@ -1731,6 +1979,47 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Describes the associations between the applications and the specified
+    # image.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image.
+    #
+    # @option params [required, Array<String>] :associated_resource_types
+    #   The resource types of the associated resource.
+    #
+    # @return [Types::DescribeImageAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageAssociationsResult#associations #associations} => Array&lt;Types::ImageResourceAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_associations({
+    #     image_id: "WorkspaceImageId", # required
+    #     associated_resource_types: ["APPLICATION"], # required, accepts APPLICATION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].associated_resource_id #=> String
+    #   resp.associations[0].associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.associations[0].created #=> Time
+    #   resp.associations[0].last_updated_time #=> Time
+    #   resp.associations[0].image_id #=> String
+    #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeImageAssociations AWS API Documentation
+    #
+    # @overload describe_image_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_image_associations(params = {}, options = {})
+      req = build_request(:describe_image_associations, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your IP access control groups.
     #
     # @option params [Array<String>] :group_ids
@@ -1805,6 +2094,47 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
       req = build_request(:describe_tags, params)
+      req.send_request(options)
+    end
+
+    # Describes the associations betweens applications and the specified
+    # WorkSpace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @option params [required, Array<String>] :associated_resource_types
+    #   The resource types of the associated resources.
+    #
+    # @return [Types::DescribeWorkspaceAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceAssociationsResult#associations #associations} => Array&lt;Types::WorkspaceResourceAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace_associations({
+    #     workspace_id: "WorkspaceId", # required
+    #     associated_resource_types: ["APPLICATION"], # required, accepts APPLICATION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].associated_resource_id #=> String
+    #   resp.associations[0].associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.associations[0].created #=> Time
+    #   resp.associations[0].last_updated_time #=> Time
+    #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_message #=> String
+    #   resp.associations[0].workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceAssociations AWS API Documentation
+    #
+    # @overload describe_workspace_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace_associations(params = {}, options = {})
+      req = build_request(:describe_workspace_associations, params)
       req.send_request(options)
     end
 
@@ -2163,6 +2493,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.workspaces[0].workspace_properties.protocols #=> Array
     #   resp.workspaces[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
+    #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
     #   resp.workspaces[0].modification_states #=> Array
     #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -2282,6 +2613,45 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def disassociate_ip_groups(params = {}, options = {})
       req = build_request(:disassociate_ip_groups, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified application from a WorkSpace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the WorkSpace.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the application.
+    #
+    # @return [Types::DisassociateWorkspaceApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateWorkspaceApplicationResult#association #association} => Types::WorkspaceResourceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_workspace_application({
+    #     workspace_id: "WorkspaceId", # required
+    #     application_id: "WorkSpaceApplicationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.associated_resource_id #=> String
+    #   resp.association.associated_resource_type #=> String, one of "APPLICATION"
+    #   resp.association.created #=> Time
+    #   resp.association.last_updated_time #=> Time
+    #   resp.association.state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
+    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.association.state_reason.error_message #=> String
+    #   resp.association.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateWorkspaceApplication AWS API Documentation
+    #
+    # @overload disassociate_workspace_application(params = {})
+    # @param [Hash] params ({})
+    def disassociate_workspace_application(params = {}, options = {})
+      req = build_request(:disassociate_workspace_application, params)
       req.send_request(options)
     end
 
@@ -2938,6 +3308,7 @@ module Aws::WorkSpaces
     #       user_volume_size_gib: 1,
     #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
+    #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
     #     },
     #   })
     #
@@ -3595,7 +3966,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -523,6 +523,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Service                                | Aws::Connect                             | aws-sdk-connect                             | 2017-08-08  |
 | Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService                | aws-sdk-connectwisdomservice                | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                                 | aws-sdk-dlm                                 | 2018-01-12  |
+| Amazon DataZone                                       | Aws::DataZone                            | aws-sdk-datazone                            | 2018-05-10  |
 | Amazon Detective                                      | Aws::Detective                           | aws-sdk-detective                           | 2018-10-26  |
 | Amazon DevOps Guru                                    | Aws::DevOpsGuru                          | aws-sdk-devopsguru                          | 2020-12-01  |
 | Amazon DocumentDB Elastic Clusters                    | Aws::DocDBElastic                        | aws-sdk-docdbelastic                        | 2022-11-28  |

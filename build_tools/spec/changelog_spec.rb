@@ -5,7 +5,7 @@ require_relative 'spec_helper'
 module BuildTools
   describe Changelog do
 
-    let(:path) { Tempfile.new('file').path }
+    let(:path) { Tempfile.create('file').path }
     let(:expected_changelog) { <<-LOG
 Unreleased Changes
 ------------------

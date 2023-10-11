@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.172.0 (2023-10-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-datazone` gem.
+
 3.171.0 (2023-09-28)
 ------------------
 

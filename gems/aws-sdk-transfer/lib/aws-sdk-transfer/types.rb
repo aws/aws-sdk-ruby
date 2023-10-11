@@ -4865,9 +4865,9 @@ module Aws::Transfer
     #
     # @!attribute [rw] trusted_host_keys
     #   The public portion of the host key, or keys, that are used to
-    #   authenticate the user to the external server to which you are
-    #   connecting. You can use the `ssh-keyscan` command against the SFTP
-    #   server to retrieve the necessary key.
+    #   identify the external server to which you are connecting. You can
+    #   use the `ssh-keyscan` command against the SFTP server to retrieve
+    #   the necessary key.
     #
     #   The three standard SSH public key format elements are `<key type>`,
     #   `<body base64>`, and an optional `<comment>`, with spaces between
@@ -4877,11 +4877,12 @@ module Aws::Transfer
     #   For the trusted host key, Transfer Family accepts RSA and ECDSA
     #   keys.
     #
-    #   * For RSA keys, the key type is `ssh-rsa`.
+    #   * For RSA keys, the `<key type>` string is `ssh-rsa`.
     #
-    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
-    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
-    #     size of the key you generated.
+    #   * For ECDSA keys, the `<key type>` string is either
+    #     `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`, or
+    #     `ecdsa-sha2-nistp521`, depending on the size of the key you
+    #     generated.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpConnectorConfig AWS API Documentation

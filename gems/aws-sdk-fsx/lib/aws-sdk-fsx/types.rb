@@ -1382,7 +1382,7 @@ module Aws::FSx
     #
     #   * `ExportPath`
     #
-    #   * `ImportedChunkSize`
+    #   * `ImportedFileChunkSize`
     #
     #   * `ImportPath`
     #
@@ -1508,7 +1508,7 @@ module Aws::FSx
     #
     # * `ExportPath`
     #
-    # * `ImportedChunkSize`
+    # * `ImportedFileChunkSize`
     #
     # * `ImportPath`
     #
@@ -2190,7 +2190,7 @@ module Aws::FSx
     #
     #   * `ExportPath`
     #
-    #   * `ImportedChunkSize`
+    #   * `ImportedFileChunkSize`
     #
     #   * `ImportPath`
     #
@@ -7746,6 +7746,41 @@ module Aws::FSx
     class SourceBackupUnavailable < Struct.new(
       :message,
       :backup_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StartMisconfiguredStateRecoveryRequest AWS API Documentation
+    #
+    class StartMisconfiguredStateRecoveryRequest < Struct.new(
+      :client_request_token,
+      :file_system_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system
+    #   A description of a specific Amazon FSx file system.
+    #   @return [Types::FileSystem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StartMisconfiguredStateRecoveryResponse AWS API Documentation
+    #
+    class StartMisconfiguredStateRecoveryResponse < Struct.new(
+      :file_system)
       SENSITIVE = []
       include Aws::Structure
     end

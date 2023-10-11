@@ -95,7 +95,7 @@ module Aws::RDS
       data[:offering_type]
     end
 
-    # Indicates if the reservation applies to Multi-AZ deployments.
+    # Indicates whether the reservation applies to Multi-AZ deployments.
     # @return [Boolean]
     def multi_az
       data[:multi_az]

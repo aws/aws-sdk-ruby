@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-10-04)
+------------------
+
+* Feature - AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.
+
 1.38.0 (2023-09-27)
 ------------------
 

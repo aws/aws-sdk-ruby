@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-10-04)
+------------------
+
+* Feature - This release includes the following new APIs: ListConnectors, CreateConnector,  UpdateConnector, DeleteConnector and UpdateSourceServer to support the source action framework feature.
+
 1.25.0 (2023-09-27)
 ------------------
 

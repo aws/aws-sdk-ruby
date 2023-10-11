@@ -27,6 +27,8 @@ module Aws::SageMaker
     AdditionalCodeRepositoryNamesOrUrls = Shapes::ListShape.new(name: 'AdditionalCodeRepositoryNamesOrUrls')
     AdditionalInferenceSpecificationDefinition = Shapes::StructureShape.new(name: 'AdditionalInferenceSpecificationDefinition')
     AdditionalInferenceSpecifications = Shapes::ListShape.new(name: 'AdditionalInferenceSpecifications')
+    AdditionalS3DataSource = Shapes::StructureShape.new(name: 'AdditionalS3DataSource')
+    AdditionalS3DataSourceDataType = Shapes::StringShape.new(name: 'AdditionalS3DataSourceDataType')
     AgentVersion = Shapes::StructureShape.new(name: 'AgentVersion')
     AgentVersions = Shapes::ListShape.new(name: 'AgentVersions')
     AggregationTransformationValue = Shapes::StringShape.new(name: 'AggregationTransformationValue')
@@ -2147,6 +2149,11 @@ module Aws::SageMaker
     AdditionalInferenceSpecificationDefinition.struct_class = Types::AdditionalInferenceSpecificationDefinition
 
     AdditionalInferenceSpecifications.member = Shapes::ShapeRef.new(shape: AdditionalInferenceSpecificationDefinition)
+
+    AdditionalS3DataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: AdditionalS3DataSourceDataType, required: true, location_name: "S3DataType"))
+    AdditionalS3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    AdditionalS3DataSource.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
+    AdditionalS3DataSource.struct_class = Types::AdditionalS3DataSource
 
     AgentVersion.add_member(:version, Shapes::ShapeRef.new(shape: EdgeVersion, required: true, location_name: "Version"))
     AgentVersion.add_member(:agent_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AgentCount"))
@@ -7137,6 +7144,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:framework, Shapes::ShapeRef.new(shape: String, location_name: "Framework"))
     ModelPackageContainerDefinition.add_member(:framework_version, Shapes::ShapeRef.new(shape: ModelPackageFrameworkVersion, location_name: "FrameworkVersion"))
     ModelPackageContainerDefinition.add_member(:nearest_model_name, Shapes::ShapeRef.new(shape: String, location_name: "NearestModelName"))
+    ModelPackageContainerDefinition.add_member(:additional_s3_data_source, Shapes::ShapeRef.new(shape: AdditionalS3DataSource, location_name: "AdditionalS3DataSource"))
     ModelPackageContainerDefinition.struct_class = Types::ModelPackageContainerDefinition
 
     ModelPackageContainerDefinitionList.member = Shapes::ShapeRef.new(shape: ModelPackageContainerDefinition)
@@ -8639,6 +8647,7 @@ module Aws::SageMaker
     TrainingSpecification.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitionList, location_name: "MetricDefinitions"))
     TrainingSpecification.add_member(:training_channels, Shapes::ShapeRef.new(shape: ChannelSpecifications, required: true, location_name: "TrainingChannels"))
     TrainingSpecification.add_member(:supported_tuning_job_objective_metrics, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjectives, location_name: "SupportedTuningJobObjectiveMetrics"))
+    TrainingSpecification.add_member(:additional_s3_data_source, Shapes::ShapeRef.new(shape: AdditionalS3DataSource, location_name: "AdditionalS3DataSource"))
     TrainingSpecification.struct_class = Types::TrainingSpecification
 
     TransformDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: TransformS3DataSource, required: true, location_name: "S3DataSource"))

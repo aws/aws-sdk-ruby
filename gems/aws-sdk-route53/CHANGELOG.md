@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-10-05)
+------------------
+
+* Feature - Add hostedzonetype filter to ListHostedZones API.
+
 1.79.0 (2023-09-27)
 ------------------
 
