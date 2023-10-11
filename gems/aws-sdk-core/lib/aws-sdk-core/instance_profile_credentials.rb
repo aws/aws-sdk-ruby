@@ -239,6 +239,7 @@ module Aws
       @imds_v1_fallback = true
     end
 
+    # token is optional - if nil, uses v1 (insecure) flow
     def _get_credentials(conn, token)
       metadata = http_get(conn, METADATA_PATH_BASE, token)
       profile_name = metadata.lines.first.strip
