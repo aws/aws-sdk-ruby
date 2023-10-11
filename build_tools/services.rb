@@ -151,13 +151,16 @@ module BuildTools
       core_version_string = "', '>= #{min_core}"
       dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{core_version_string}"
 
-      api['metadata']['auth'].each do |auth|
+      api['metadata'].fetch('auth', []).each do |auth|
         if %w[aws.auth#sigv4 aws.auth#sigv4a].include?(auth)
           dependencies['aws-sigv4'] = '~> 1.1'
         end
       end
-      if api['metadata']['signatureVersion'] == 'v2'
-        dependencies['aws-sigv2'] = '~> 1.0'
+
+      # deprecated auth but a reasonable fallback
+      case api['metadata']['signatureVersion']
+      when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'
+      when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
       end
       dependencies
     end

@@ -17,7 +17,7 @@ module Aws
               if requires_length?(context.operation.input)
                 # if size of the IO is not available but required
                 raise Aws::Errors::MissingContentLength.new
-              elsif unsigned_payload?(context.operation)
+              elsif context.operation['authtype'] == "v4-unsigned-body"
                 context.http_request.headers['Transfer-Encoding'] = 'chunked'
               end
             end
@@ -43,10 +43,6 @@ module Aws
             payload.shape["requiresLength"]
         end
 
-        def unsigned_payload?(operation)
-          operation['unsignedPayload'] ||
-            operation['authtype'] == "v4-unsigned-body"
-        end
       end
 
       handler(Handler, step: :sign)

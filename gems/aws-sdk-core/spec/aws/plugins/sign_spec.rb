@@ -203,8 +203,8 @@ module Aws
         let(:auth_scheme) do
           {
             'name' => 'sigv4a',
-            'signingRegionSet' => ['*'],
-            'signingName' => 'svc',
+            'signingRegionSet' => ['us-west-2', 'us-east-1'],
+            'signingName' => 'svc'
           }
         end
 
