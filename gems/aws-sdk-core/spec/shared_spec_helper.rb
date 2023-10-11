@@ -10,6 +10,16 @@ require 'webmock/rspec'
 
 require_relative './sigv4_helper'
 
+module RSpec
+  module Core
+    class Example
+      def clear_exception
+        @exception = nil
+      end
+    end
+  end
+end
+
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:
 #
@@ -50,5 +60,19 @@ RSpec.configure do |config|
     example.call
 
     Thread.report_on_exception = current_value if current_value
+  end
+
+  config.around(:each, :flaky) do |example|
+    attempt = 0
+    retries = 3
+    loop do
+      attempt += 1
+      example.run
+      if example.exception && attempt < retries
+        example.example.clear_exception
+        redo
+      end
+      break
+    end
   end
 end
