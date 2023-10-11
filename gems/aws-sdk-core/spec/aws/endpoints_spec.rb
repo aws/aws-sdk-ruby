@@ -73,7 +73,7 @@ module Aws
       context 'auth scheme defaults' do
         let(:auth_schemes) { nil }
 
-        context 'auth' do
+        context 'auth trait' do
           context 'sigv4 defaults' do
             let(:auth) { ['aws.auth#sigv4'] }
 
@@ -260,8 +260,8 @@ module Aws
         context 'sigv4a region default' do
           let(:auth_schemes) { [{ 'name' => 'sigv4a' }] }
 
-          it 'defaults the signing region set' do
-            expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => [client.config.region] })
+          it 'defaults the signing region set from config' do
+            expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => client.config.sigv4a_signing_region_set })
             client.operation
           end
         end
@@ -270,12 +270,12 @@ module Aws
           let(:auth_schemes) { [{ 'name' => 'sigv4' }] }
 
           it 'defaults the signing region from config' do
-            expect_auth({ 'signingRegion' => 'us-stubbed-1' })
+            expect_auth({ 'signingRegion' => client.config.region })
             client.operation
           end
         end
 
-        context 'default precedence' do
+        context 'sigv4/sigv4a signingName default' do
           let(:auth_schemes) { [{ 'name' => 'sigv4' }] }
           let(:signing_name) { 'service-override' }
 
@@ -285,13 +285,24 @@ module Aws
           end
         end
 
-        context 'auth scheme precedence' do
+        context 'sigv4 auth scheme precedence' do
           let(:auth_schemes) do
             [{ 'name' => 'sigv4', 'signingName' => 'override', 'signingRegion' => 'override' }]
           end
 
           it 'explicit usage of auth scheme values' do
-            expect_auth({ 'signingName' => 'override', 'signingRegion' => 'override' })
+            expect_auth({ 'name' => 'sigv4', 'signingName' => 'override', 'signingRegion' => 'override' })
+            client.operation
+          end
+        end
+
+        context 'sigv4a auth scheme precedence' do
+          let(:auth_schemes) do
+            [{ 'name' => 'sigv4a', 'signingName' => 'override', 'signingRegionSet' => ['override1', 'override2'] }]
+          end
+
+          it 'explicit usage of auth scheme values' do
+            expect_auth({ 'name' => 'sigv4a', 'signingName' => 'override', 'signingRegionSet' => ['override1', 'override2'] })
             client.operation
           end
         end

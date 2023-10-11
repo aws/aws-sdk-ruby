@@ -37,7 +37,7 @@ module Aws
         if %w[sigv4 sigv4a].include?(auth_scheme['name'])
           auth_scheme['signingName'] ||= sigv4_name(config)
           if auth_scheme['name'] == 'sigv4a'
-            auth_scheme['signingRegionSet'] ||= [config.region]
+            auth_scheme['signingRegionSet'] ||= config.sigv4a_signing_region_set
           else
             auth_scheme['signingRegion'] ||= config.region
           end
