@@ -2374,6 +2374,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -3188,11 +3194,14 @@ module Aws::SageMaker
     # defined in the `FeatureStore` to describe a `Record`.
     #
     # The `FeatureGroup` defines the schema and features contained in the
-    # FeatureGroup. A `FeatureGroup` definition is composed of a list of
+    # `FeatureGroup`. A `FeatureGroup` definition is composed of a list of
     # `Features`, a `RecordIdentifierFeatureName`, an `EventTimeFeatureName`
     # and configurations for its `OnlineStore` and `OfflineStore`. Check
     # [Amazon Web Services service quotas][1] to see the `FeatureGroup`s
     # quota for your Amazon Web Services account.
+    #
+    # Note that it can take approximately 10-15 minutes to provision an
+    # `OnlineStore` `FeatureGroup` with the `InMemory` `StorageType`.
     #
     # You must include at least one of `OnlineStoreConfig` and
     # `OfflineStoreConfig` to create a `FeatureGroup`.
@@ -8229,6 +8238,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #   })
@@ -8939,6 +8954,9 @@ module Aws::SageMaker
     # Data written into the `OfflineStore` will not be deleted. The Amazon
     # Web Services Glue database and tables that are automatically created
     # for your `OfflineStore` are not deleted.
+    #
+    # Note that it can take approximately 10-15 minutes to delete an
+    # `OnlineStore` `FeatureGroup` with the `InMemory` `StorageType`.
     #
     # @option params [required, String] :feature_group_name
     #   The name of the `FeatureGroup` you want to delete. The name must be
@@ -10968,6 +10986,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
+    #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14654,6 +14674,8 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
+    #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -22207,6 +22229,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #     domain_settings_for_update: {
@@ -23976,6 +24004,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #   })
@@ -24233,7 +24267,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-10-12)
+------------------
+
+* Feature - This release adds 9 new APIs for adapter and adapter version management, 3 new APIs for tagging, and updates AnalyzeDocument and StartDocumentAnalysis API parameters for using adapters.
+
 1.52.0 (2023-09-27)
 ------------------
 

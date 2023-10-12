@@ -250,6 +250,7 @@ module Aws::Lambda
     NamespacedFunctionName = Shapes::StringShape.new(name: 'NamespacedFunctionName')
     NamespacedStatementId = Shapes::StringShape.new(name: 'NamespacedStatementId')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OnFailure = Shapes::StructureShape.new(name: 'OnFailure')
     OnSuccess = Shapes::StructureShape.new(name: 'OnSuccess')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
@@ -1479,11 +1480,13 @@ module Aws::Lambda
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    VpcConfig.add_member(:ipv_6_allowed_for_dual_stack, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
     VpcConfig.struct_class = Types::VpcConfig
 
     VpcConfigResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     VpcConfigResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     VpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    VpcConfigResponse.add_member(:ipv_6_allowed_for_dual_stack, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Ipv6AllowedForDualStack"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
 
 

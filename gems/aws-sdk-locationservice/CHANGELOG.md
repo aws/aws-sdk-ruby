@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-10-12)
+------------------
+
+* Feature - This release adds endpoint updates for all AWS Location resource operations.
+
 1.38.0 (2023-10-03)
 ------------------
 

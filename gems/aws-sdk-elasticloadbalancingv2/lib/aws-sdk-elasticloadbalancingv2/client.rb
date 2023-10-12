@@ -4247,12 +4247,13 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Enables the Availability Zones for the specified public subnets for
-    # the specified Application Load Balancer or Network Load Balancer. The
-    # specified subnets replace the previously enabled subnets.
+    # the specified Application Load Balancer, Network Load Balancer or
+    # Gateway Load Balancer. The specified subnets replace the previously
+    # enabled subnets.
     #
-    # When you specify subnets for a Network Load Balancer, you must include
-    # all subnets that were enabled previously, with their existing
-    # configurations, plus any additional subnets.
+    # When you specify subnets for a Network Load Balancer, or Gateway Load
+    # Balancer you must include all subnets that were enabled previously,
+    # with their existing configurations, plus any additional subnets.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -4271,6 +4272,9 @@ module Aws::ElasticLoadBalancingV2
     #   from one or more Local Zones.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
     #   Availability Zones.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
@@ -4295,12 +4299,19 @@ module Aws::ElasticLoadBalancingV2
     #   internet-facing load balancer, you can specify one IPv6 address per
     #   subnet.
     #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
     # @option params [String] :ip_address_type
     #   \[Network Load Balancers\] The type of IP addresses used by the
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
     #   listener.
+    #
+    #   \[Gateway Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4385,7 +4396,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

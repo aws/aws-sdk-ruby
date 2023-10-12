@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-10-12)
+------------------
+
+* Feature - Documentation updates for Price List
+
 1.50.0 (2023-09-27)
 ------------------
 

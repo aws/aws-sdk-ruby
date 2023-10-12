@@ -6595,11 +6595,17 @@ module Aws::Lambda
     #   A list of VPC security group IDs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv_6_allowed_for_dual_stack
+    #   Allows outbound IPv6 traffic on VPC functions that are connected to
+    #   dual-stack subnets.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :ipv_6_allowed_for_dual_stack)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6619,12 +6625,18 @@ module Aws::Lambda
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_allowed_for_dual_stack
+    #   Allows outbound IPv6 traffic on VPC functions that are connected to
+    #   dual-stack subnets.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :ipv_6_allowed_for_dual_stack)
       SENSITIVE = []
       include Aws::Structure
     end

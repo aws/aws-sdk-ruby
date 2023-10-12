@@ -1229,6 +1229,128 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create an Auto Scaling group
+    #
+    #   # This example creates an Auto Scaling group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     default_instance_warmup: 120, 
+    #     launch_template: {
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "$Default", 
+    #     }, 
+    #     max_instance_lifetime: 2592000, 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with an attached target group
+    #
+    #   # This example creates an Auto Scaling group and attaches the specified target group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     health_check_grace_period: 300, 
+    #     health_check_type: "ELB", 
+    #     launch_template: {
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "$Default", 
+    #     }, 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with a mixed instances policy
+    #
+    #   # This example creates an Auto Scaling group with a mixed instances policy. It specifies the c5.large, c5a.large, and
+    #   # c6g.large instance types and defines a different launch template for the c6g.large instance type.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     desired_capacity: 3, 
+    #     max_size: 5, 
+    #     min_size: 1, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         on_demand_base_capacity: 1, 
+    #         on_demand_percentage_above_base_capacity: 50, 
+    #         spot_allocation_strategy: "price-capacity-optimized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-launch-template-for-x86", 
+    #           version: "$Default", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_type: "c6g.large", 
+    #             launch_template_specification: {
+    #               launch_template_name: "my-launch-template-for-arm", 
+    #               version: "$Default", 
+    #             }, 
+    #           }, 
+    #           {
+    #             instance_type: "c5.large", 
+    #           }, 
+    #           {
+    #             instance_type: "c5a.large", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group using attribute-based instance type selection
+    #
+    #   # This example creates an Auto Scaling group using attribute-based instance type selection. It requires the instance types
+    #   # to have a minimum of four vCPUs and a maximum of eight vCPUs, a minimum of 16,384 MiB of memory, and an Intel
+    #   # manufactured CPU.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     desired_capacity: 4, 
+    #     desired_capacity_type: "units", 
+    #     max_size: 100, 
+    #     min_size: 0, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         on_demand_percentage_above_base_capacity: 50, 
+    #         spot_allocation_strategy: "price-capacity-optimized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-template-for-auto-scaling", 
+    #           version: "$Default", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_requirements: {
+    #               cpu_manufacturers: [
+    #                 "intel", 
+    #               ], 
+    #               memory_mi_b: {
+    #                 min: 16384, 
+    #               }, 
+    #               v_cpu_count: {
+    #                 max: 8, 
+    #                 min: 4, 
+    #               }, 
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_auto_scaling_group({
@@ -1338,7 +1460,7 @@ module Aws::AutoScaling
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
     #         lifecycle_transition: "LifecycleTransition", # required
-    #         notification_metadata: "XmlStringMaxLen1023",
+    #         notification_metadata: "AnyPrintableAsciiStringMaxLen4000",
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
     #         notification_target_arn: "NotificationTargetResourceName",
@@ -2651,6 +2773,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeInstanceRefreshesAnswer#instance_refreshes #instance_refreshes} => Array&lt;Types::InstanceRefresh&gt;
     #   * {Types::DescribeInstanceRefreshesAnswer#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list instance refreshes
     #
@@ -3109,6 +3233,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #load_balancer_target_groups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the target groups for an Auto Scaling group
     #
@@ -3212,6 +3338,8 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeLoadBalancersResponse#load_balancers #load_balancers} => Array&lt;Types::LoadBalancerState&gt;
     #   * {Types::DescribeLoadBalancersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the load balancers for an Auto Scaling group
@@ -5122,7 +5250,7 @@ module Aws::AutoScaling
     #     lifecycle_transition: "LifecycleTransition",
     #     role_arn: "XmlStringMaxLen255",
     #     notification_target_arn: "NotificationTargetResourceName",
-    #     notification_metadata: "XmlStringMaxLen1023",
+    #     notification_metadata: "AnyPrintableAsciiStringMaxLen4000",
     #     heartbeat_timeout: 1,
     #     default_result: "LifecycleActionResult",
     #   })
@@ -7007,7 +7135,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

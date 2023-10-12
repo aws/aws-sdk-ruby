@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-10-12)
+------------------
+
+* Feature - Amazon Rekognition introduces support for Custom Moderation. This allows the enhancement of accuracy for detect moderation labels operations by creating custom adapters tuned on customer data.
+
 1.87.0 (2023-09-27)
 ------------------
 

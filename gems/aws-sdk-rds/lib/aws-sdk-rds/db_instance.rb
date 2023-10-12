@@ -757,6 +757,13 @@ module Aws::RDS
       data[:percent_progress]
     end
 
+    # Indicates whether the DB instance has a dedicated log volume (DLV)
+    # enabled.
+    # @return [Boolean]
+    def dedicated_log_volume
+      data[:dedicated_log_volume]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -967,6 +974,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2066,6 +2074,9 @@ module Aws::RDS
     #   global area (SGA) and Oracle background processes. If you don't
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2133,6 +2144,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
+    #     dedicated_log_volume: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2684,6 +2696,9 @@ module Aws::RDS
     #
     #   * The source DB cluster must be in the same Amazon Web Services Region
     #     as the read replica. Cross-Region replication isn't supported.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2881,6 +2896,7 @@ module Aws::RDS
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -3851,6 +3867,9 @@ module Aws::RDS
     #     parameter group. To avoid reverting to the default, specify a new
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3998,6 +4017,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -4455,6 +4475,9 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    # @option options [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

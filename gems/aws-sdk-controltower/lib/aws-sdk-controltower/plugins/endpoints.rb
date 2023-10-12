@@ -62,6 +62,8 @@ module Aws::ControlTower
             Aws::ControlTower::Endpoints::EnableControl.build(context)
           when :get_control_operation
             Aws::ControlTower::Endpoints::GetControlOperation.build(context)
+          when :get_enabled_control
+            Aws::ControlTower::Endpoints::GetEnabledControl.build(context)
           when :list_enabled_controls
             Aws::ControlTower::Endpoints::ListEnabledControls.build(context)
           end

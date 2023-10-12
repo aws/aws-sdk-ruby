@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2023-10-12)
+------------------
+
+* Feature - This release enables routing policies with Availability Zone affinity for Network Load Balancers.
+
 1.92.0 (2023-09-27)
 ------------------
 

@@ -653,6 +653,7 @@ module Aws::SageMaker
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Dimension = Shapes::IntegerShape.new(name: 'Dimension')
+    DirectDeploySettings = Shapes::StructureShape.new(name: 'DirectDeploySettings')
     DirectInternetAccess = Shapes::StringShape.new(name: 'DirectInternetAccess')
     Direction = Shapes::StringShape.new(name: 'Direction')
     DirectoryPath = Shapes::StringShape.new(name: 'DirectoryPath')
@@ -1018,6 +1019,7 @@ module Aws::SageMaker
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JupyterServerAppSettings = Shapes::StructureShape.new(name: 'JupyterServerAppSettings')
     KeepAlivePeriodInSeconds = Shapes::IntegerShape.new(name: 'KeepAlivePeriodInSeconds')
+    KendraSettings = Shapes::StructureShape.new(name: 'KendraSettings')
     KernelDisplayName = Shapes::StringShape.new(name: 'KernelDisplayName')
     KernelGatewayAppSettings = Shapes::StructureShape.new(name: 'KernelGatewayAppSettings')
     KernelGatewayImageConfig = Shapes::StructureShape.new(name: 'KernelGatewayImageConfig')
@@ -2547,6 +2549,8 @@ module Aws::SageMaker
     CanvasAppSettings.add_member(:model_register_settings, Shapes::ShapeRef.new(shape: ModelRegisterSettings, location_name: "ModelRegisterSettings"))
     CanvasAppSettings.add_member(:workspace_settings, Shapes::ShapeRef.new(shape: WorkspaceSettings, location_name: "WorkspaceSettings"))
     CanvasAppSettings.add_member(:identity_provider_o_auth_settings, Shapes::ShapeRef.new(shape: IdentityProviderOAuthSettings, location_name: "IdentityProviderOAuthSettings"))
+    CanvasAppSettings.add_member(:kendra_settings, Shapes::ShapeRef.new(shape: KendraSettings, location_name: "KendraSettings"))
+    CanvasAppSettings.add_member(:direct_deploy_settings, Shapes::ShapeRef.new(shape: DirectDeploySettings, location_name: "DirectDeploySettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -4857,6 +4861,9 @@ module Aws::SageMaker
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)
 
+    DirectDeploySettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    DirectDeploySettings.struct_class = Types::DirectDeploySettings
+
     DisableSagemakerServicecatalogPortfolioInput.struct_class = Types::DisableSagemakerServicecatalogPortfolioInput
 
     DisableSagemakerServicecatalogPortfolioOutput.struct_class = Types::DisableSagemakerServicecatalogPortfolioOutput
@@ -5732,6 +5739,9 @@ module Aws::SageMaker
     JupyterServerAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     JupyterServerAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
     JupyterServerAppSettings.struct_class = Types::JupyterServerAppSettings
+
+    KendraSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    KendraSettings.struct_class = Types::KendraSettings
 
     KernelGatewayAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     KernelGatewayAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))

@@ -802,6 +802,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableFastLaunch.build(context)
           when :disable_fast_snapshot_restores
             Aws::EC2::Endpoints::DisableFastSnapshotRestores.build(context)
+          when :disable_image
+            Aws::EC2::Endpoints::DisableImage.build(context)
           when :disable_image_block_public_access
             Aws::EC2::Endpoints::DisableImageBlockPublicAccess.build(context)
           when :disable_image_deprecation
@@ -856,6 +858,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableFastLaunch.build(context)
           when :enable_fast_snapshot_restores
             Aws::EC2::Endpoints::EnableFastSnapshotRestores.build(context)
+          when :enable_image
+            Aws::EC2::Endpoints::EnableImage.build(context)
           when :enable_image_block_public_access
             Aws::EC2::Endpoints::EnableImageBlockPublicAccess.build(context)
           when :enable_image_deprecation

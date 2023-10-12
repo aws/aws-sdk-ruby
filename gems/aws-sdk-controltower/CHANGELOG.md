@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-10-12)
+------------------
+
+* Feature - Added new EnabledControl resource details to ListEnabledControls API and added new GetEnabledControl API.
+
 1.9.0 (2023-09-27)
 ------------------
 

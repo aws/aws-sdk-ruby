@@ -84,6 +84,10 @@ module Aws::Rekognition
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CustomLabel = Shapes::StructureShape.new(name: 'CustomLabel')
     CustomLabels = Shapes::ListShape.new(name: 'CustomLabels')
+    CustomizationFeature = Shapes::StringShape.new(name: 'CustomizationFeature')
+    CustomizationFeatureConfig = Shapes::StructureShape.new(name: 'CustomizationFeatureConfig')
+    CustomizationFeatureContentModerationConfig = Shapes::StructureShape.new(name: 'CustomizationFeatureContentModerationConfig')
+    CustomizationFeatures = Shapes::ListShape.new(name: 'CustomizationFeatures')
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
     DatasetChanges = Shapes::StructureShape.new(name: 'DatasetChanges')
     DatasetDescription = Shapes::StructureShape.new(name: 'DatasetDescription')
@@ -335,6 +339,7 @@ module Aws::Rekognition
     Polygon = Shapes::ListShape.new(name: 'Polygon')
     Pose = Shapes::StructureShape.new(name: 'Pose')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
+    ProjectAutoUpdate = Shapes::StringShape.new(name: 'ProjectAutoUpdate')
     ProjectDescription = Shapes::StructureShape.new(name: 'ProjectDescription')
     ProjectDescriptions = Shapes::ListShape.new(name: 'ProjectDescriptions')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
@@ -348,6 +353,7 @@ module Aws::Rekognition
     ProjectVersionArn = Shapes::StringShape.new(name: 'ProjectVersionArn')
     ProjectVersionDescription = Shapes::StructureShape.new(name: 'ProjectVersionDescription')
     ProjectVersionDescriptions = Shapes::ListShape.new(name: 'ProjectVersionDescriptions')
+    ProjectVersionId = Shapes::StringShape.new(name: 'ProjectVersionId')
     ProjectVersionStatus = Shapes::StringShape.new(name: 'ProjectVersionStatus')
     ProjectVersionsPageSize = Shapes::IntegerShape.new(name: 'ProjectVersionsPageSize')
     ProjectsPageSize = Shapes::IntegerShape.new(name: 'ProjectsPageSize')
@@ -510,6 +516,7 @@ module Aws::Rekognition
     UserMatchList = Shapes::ListShape.new(name: 'UserMatchList')
     UserStatus = Shapes::StringShape.new(name: 'UserStatus')
     ValidationData = Shapes::StructureShape.new(name: 'ValidationData')
+    VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
     Video = Shapes::StructureShape.new(name: 'Video')
@@ -712,6 +719,8 @@ module Aws::Rekognition
     CreateFaceLivenessSessionResponse.struct_class = Types::CreateFaceLivenessSessionResponse
 
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
+    CreateProjectRequest.add_member(:feature, Shapes::ShapeRef.new(shape: CustomizationFeature, location_name: "Feature"))
+    CreateProjectRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: ProjectAutoUpdate, location_name: "AutoUpdate"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
@@ -724,6 +733,8 @@ module Aws::Rekognition
     CreateProjectVersionRequest.add_member(:testing_data, Shapes::ShapeRef.new(shape: TestingData, location_name: "TestingData"))
     CreateProjectVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateProjectVersionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateProjectVersionRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
+    CreateProjectVersionRequest.add_member(:feature_config, Shapes::ShapeRef.new(shape: CustomizationFeatureConfig, location_name: "FeatureConfig"))
     CreateProjectVersionRequest.struct_class = Types::CreateProjectVersionRequest
 
     CreateProjectVersionResponse.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
@@ -757,6 +768,14 @@ module Aws::Rekognition
     CustomLabel.struct_class = Types::CustomLabel
 
     CustomLabels.member = Shapes::ShapeRef.new(shape: CustomLabel)
+
+    CustomizationFeatureConfig.add_member(:content_moderation, Shapes::ShapeRef.new(shape: CustomizationFeatureContentModerationConfig, location_name: "ContentModeration"))
+    CustomizationFeatureConfig.struct_class = Types::CustomizationFeatureConfig
+
+    CustomizationFeatureContentModerationConfig.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "ConfidenceThreshold"))
+    CustomizationFeatureContentModerationConfig.struct_class = Types::CustomizationFeatureContentModerationConfig
+
+    CustomizationFeatures.member = Shapes::ShapeRef.new(shape: CustomizationFeature)
 
     DatasetChanges.add_member(:ground_truth, Shapes::ShapeRef.new(shape: GroundTruthBlob, required: true, location_name: "GroundTruth"))
     DatasetChanges.struct_class = Types::DatasetChanges
@@ -882,6 +901,7 @@ module Aws::Rekognition
     DescribeProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
     DescribeProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProjectsPageSize, location_name: "MaxResults"))
     DescribeProjectsRequest.add_member(:project_names, Shapes::ShapeRef.new(shape: ProjectNames, location_name: "ProjectNames"))
+    DescribeProjectsRequest.add_member(:features, Shapes::ShapeRef.new(shape: CustomizationFeatures, location_name: "Features"))
     DescribeProjectsRequest.struct_class = Types::DescribeProjectsRequest
 
     DescribeProjectsResponse.add_member(:project_descriptions, Shapes::ShapeRef.new(shape: ProjectDescriptions, location_name: "ProjectDescriptions"))
@@ -968,11 +988,13 @@ module Aws::Rekognition
     DetectModerationLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     DetectModerationLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
     DetectModerationLabelsRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
+    DetectModerationLabelsRequest.add_member(:project_version, Shapes::ShapeRef.new(shape: ProjectVersionId, location_name: "ProjectVersion"))
     DetectModerationLabelsRequest.struct_class = Types::DetectModerationLabelsRequest
 
     DetectModerationLabelsResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ModerationLabels, location_name: "ModerationLabels"))
     DetectModerationLabelsResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
     DetectModerationLabelsResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
+    DetectModerationLabelsResponse.add_member(:project_version, Shapes::ShapeRef.new(shape: ProjectVersionId, location_name: "ProjectVersion"))
     DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
 
     DetectProtectiveEquipmentRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -1577,6 +1599,8 @@ module Aws::Rekognition
     ProjectDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTimestamp"))
     ProjectDescription.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
     ProjectDescription.add_member(:datasets, Shapes::ShapeRef.new(shape: DatasetMetadataList, location_name: "Datasets"))
+    ProjectDescription.add_member(:feature, Shapes::ShapeRef.new(shape: CustomizationFeature, location_name: "Feature"))
+    ProjectDescription.add_member(:auto_update, Shapes::ShapeRef.new(shape: ProjectAutoUpdate, location_name: "AutoUpdate"))
     ProjectDescription.struct_class = Types::ProjectDescription
 
     ProjectDescriptions.member = Shapes::ShapeRef.new(shape: ProjectDescription)
@@ -1608,6 +1632,10 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ProjectVersionDescription.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     ProjectVersionDescription.add_member(:source_project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "SourceProjectVersionArn"))
+    ProjectVersionDescription.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
+    ProjectVersionDescription.add_member(:feature, Shapes::ShapeRef.new(shape: CustomizationFeature, location_name: "Feature"))
+    ProjectVersionDescription.add_member(:base_model_version, Shapes::ShapeRef.new(shape: String, location_name: "BaseModelVersion"))
+    ProjectVersionDescription.add_member(:feature_config, Shapes::ShapeRef.new(shape: CustomizationFeatureConfig, location_name: "FeatureConfig"))
     ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
@@ -2539,6 +2567,8 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
         o.errors << Shapes::ShapeRef.new(shape: HumanLoopQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:detect_protective_equipment, Seahorse::Model::Operation.new.tap do |o|

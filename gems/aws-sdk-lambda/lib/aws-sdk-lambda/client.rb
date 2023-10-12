@@ -1422,6 +1422,7 @@ module Aws::Lambda
     #     vpc_config: {
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
+    #       ipv_6_allowed_for_dual_stack: false,
     #     },
     #     package_type: "Zip", # accepts Zip, Image
     #     dead_letter_config: {
@@ -1480,6 +1481,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -2353,6 +2355,7 @@ module Aws::Lambda
     #   resp.configuration.vpc_config.security_group_ids #=> Array
     #   resp.configuration.vpc_config.security_group_ids[0] #=> String
     #   resp.configuration.vpc_config.vpc_id #=> String
+    #   resp.configuration.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.configuration.dead_letter_config.target_arn #=> String
     #   resp.configuration.environment.variables #=> Hash
     #   resp.configuration.environment.variables["EnvironmentVariableName"] #=> String
@@ -2594,6 +2597,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -3934,6 +3938,7 @@ module Aws::Lambda
     #   resp.functions[0].vpc_config.security_group_ids #=> Array
     #   resp.functions[0].vpc_config.security_group_ids[0] #=> String
     #   resp.functions[0].vpc_config.vpc_id #=> String
+    #   resp.functions[0].vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.functions[0].dead_letter_config.target_arn #=> String
     #   resp.functions[0].environment.variables #=> Hash
     #   resp.functions[0].environment.variables["EnvironmentVariableName"] #=> String
@@ -4345,6 +4350,7 @@ module Aws::Lambda
     #   resp.versions[0].vpc_config.security_group_ids #=> Array
     #   resp.versions[0].vpc_config.security_group_ids[0] #=> String
     #   resp.versions[0].vpc_config.vpc_id #=> String
+    #   resp.versions[0].vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.versions[0].dead_letter_config.target_arn #=> String
     #   resp.versions[0].environment.variables #=> Hash
     #   resp.versions[0].environment.variables["EnvironmentVariableName"] #=> String
@@ -4617,6 +4623,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -5817,6 +5824,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -6088,6 +6096,7 @@ module Aws::Lambda
     #     vpc_config: {
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
+    #       ipv_6_allowed_for_dual_stack: false,
     #     },
     #     environment: {
     #       variables: {
@@ -6142,6 +6151,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -6409,7 +6419,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

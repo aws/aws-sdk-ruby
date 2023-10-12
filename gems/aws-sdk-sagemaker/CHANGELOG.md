@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2023-10-12)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings
+
 1.215.0 (2023-10-04)
 ------------------
 

@@ -4328,6 +4328,11 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4390,7 +4395,8 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :ca_certificate_identifier,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5079,6 +5085,11 @@ module Aws::RDS
     #     supported.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5129,6 +5140,7 @@ module Aws::RDS
       :enable_customer_owned_ip,
       :allocated_storage,
       :source_db_cluster_identifier,
+      :dedicated_log_volume,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -8352,6 +8364,11 @@ module Aws::RDS
     #   The progress of the storage optimization operation as a percentage.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8436,7 +8453,8 @@ module Aws::RDS
       :master_user_secret,
       :certificate_details,
       :read_replica_source_db_cluster_identifier,
-      :percent_progress)
+      :percent_progress,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8599,6 +8617,11 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -8630,7 +8653,8 @@ module Aws::RDS
       :db_instance_automated_backups_replications,
       :backup_target,
       :storage_throughput,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9658,6 +9682,11 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -9694,7 +9723,8 @@ module Aws::RDS
       :snapshot_database_time,
       :snapshot_target,
       :storage_throughput,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16912,6 +16942,11 @@ module Aws::RDS
     #     `--option-group-name`.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -16972,7 +17007,8 @@ module Aws::RDS
       :manage_master_user_password,
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
-      :engine)
+      :engine,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18279,6 +18315,11 @@ module Aws::RDS
     #   instance.
     #   @return [Float]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -18316,7 +18357,8 @@ module Aws::RDS
       :min_storage_throughput_per_db_instance,
       :max_storage_throughput_per_db_instance,
       :min_storage_throughput_per_iops,
-      :max_storage_throughput_per_iops)
+      :max_storage_throughput_per_iops,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18646,6 +18688,11 @@ module Aws::RDS
     #   The database engine of the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.&gt;
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -18668,7 +18715,8 @@ module Aws::RDS
       :automation_mode,
       :resume_full_automation_mode_time,
       :storage_throughput,
-      :engine)
+      :engine,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21663,6 +21711,11 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -21704,7 +21757,8 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :db_cluster_snapshot_identifier,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22267,6 +22321,11 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -22317,7 +22376,8 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :manage_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22898,6 +22958,11 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -22943,7 +23008,8 @@ module Aws::RDS
       :backup_target,
       :network_type,
       :storage_throughput,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24455,11 +24521,17 @@ module Aws::RDS
     #   Valid processor features for your DB instance.
     #   @return [Array<Types::AvailableProcessorFeature>]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage,
-      :valid_processor_features)
+      :valid_processor_features,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end

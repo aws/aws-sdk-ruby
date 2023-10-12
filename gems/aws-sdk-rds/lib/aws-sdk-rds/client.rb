@@ -1821,6 +1821,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -5206,6 +5207,10 @@ module Aws::RDS
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5393,6 +5398,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -5459,6 +5465,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5552,6 +5559,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6212,6 +6220,10 @@ module Aws::RDS
     #   * The source DB cluster must be in the same Amazon Web Services Region
     #     as the read replica. Cross-Region replication isn't supported.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6297,6 +6309,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
+    #     dedicated_log_volume: false,
     #     source_region: "String",
     #   })
     #
@@ -6364,6 +6377,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6457,6 +6471,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7060,6 +7075,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -8776,6 +8792,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -8869,6 +8886,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8975,6 +8993,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -9285,6 +9304,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -11924,6 +11944,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].backup_target #=> String
     #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -12108,6 +12129,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.engine #=> String
+    #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -12201,6 +12223,7 @@ module Aws::RDS
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instances[0].percent_progress #=> String
+    #   resp.db_instances[0].dedicated_log_volume #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13286,6 +13309,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].db_system_id #=> String
+    #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14958,6 +14982,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -15677,6 +15702,7 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
+    #   resp.valid_db_instance_modifications_message.supports_dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -19000,6 +19026,10 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -19124,6 +19154,7 @@ module Aws::RDS
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -19190,6 +19221,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -19283,6 +19315,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -19783,6 +19816,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -20600,6 +20634,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20693,6 +20728,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -21271,6 +21307,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21364,6 +21401,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -24472,6 +24510,10 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -24566,6 +24608,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -24632,6 +24675,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24725,6 +24769,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -25232,6 +25277,10 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -25297,6 +25346,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -25363,6 +25413,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25456,6 +25507,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -25991,6 +26043,10 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -26148,6 +26204,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -26214,6 +26271,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26307,6 +26365,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -26808,6 +26867,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26901,6 +26961,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27057,6 +27118,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -27631,6 +27693,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27724,6 +27787,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -27832,6 +27896,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28224,6 +28289,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28317,6 +28383,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -28340,7 +28407,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.197.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
