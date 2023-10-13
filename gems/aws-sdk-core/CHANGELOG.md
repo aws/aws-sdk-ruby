@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update shared smoke test steps across all gems.
+
 3.185.0 (2023-10-02)
 ------------------
 
