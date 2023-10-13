@@ -256,6 +256,10 @@ module Aws
         @default_config = @default_config.with(before_request: block) if block_given?
       end
 
+      def after_empty_receive(&block)
+        @default_config = @default_config.with(after_empty_receive: block) if block_given?
+      end
+
       # Polls the queue, yielded a message, or an array of messages.
       # Messages are automatically deleted from the queue at the
       # end of the given block. See the class documentation on
@@ -332,6 +336,7 @@ module Aws
             messages = get_messages(config, stats)
             if messages.empty?
               check_idle_timeout(config, stats)
+              config.after_empty_receive&.call(stats)
             else
               process_messages(config, stats, messages, &block)
             end
@@ -455,6 +460,7 @@ module Aws
           idle_timeout
           skip_delete
           before_request
+          after_empty_receive
         ]
 
         # @api private
@@ -475,6 +481,9 @@ module Aws
         # @return [Proc,nil]
         attr_reader :before_request
 
+        # @return [Proc,nil]
+        attr_reader :after_empty_receive
+
         # @return [Hash]
         attr_reader :request_params
 
@@ -482,6 +491,7 @@ module Aws
           @idle_timeout = nil
           @skip_delete = false
           @before_request = nil
+          @after_empty_receive = nil
           @request_params = {
             wait_time_seconds: 20,
             max_number_of_messages: 1,
