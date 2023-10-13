@@ -2,8 +2,8 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
+            "id": "ListAssessmentTemplatesSuccess",
+            "operationName": "ListAssessmentTemplates",
             "input": {},
             "expectation": {
                 "success": {}
@@ -13,10 +13,10 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "ListTagsForResourceFailure",
+            "operationName": "ListTagsForResource",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "resourceArn": "fake-arn"
             },
             "expectation": {
                 "failure": {}

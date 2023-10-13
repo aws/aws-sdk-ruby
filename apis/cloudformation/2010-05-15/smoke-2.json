@@ -2,8 +2,8 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
+            "id": "ListStacksSuccess",
+            "operationName": "ListStacks",
             "input": {},
             "expectation": {
                 "success": {}
@@ -13,10 +13,11 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "CreateStackFailure",
+            "operationName": "CreateStack",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "StackName": "fakestack",
+                "TemplateURL": "http:\/\/s3.amazonaws.com\/foo\/bar"
             },
             "expectation": {
                 "failure": {}

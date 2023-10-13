@@ -2,8 +2,8 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
+            "id": "DescribeEndpointsSuccess",
+            "operationName": "DescribeEndpoints",
             "input": {},
             "expectation": {
                 "success": {}
@@ -13,10 +13,10 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "DescribeTableStatisticsFailure",
+            "operationName": "DescribeTableStatistics",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "ReplicationTaskArn": "arn:aws:acm:region:123456789012"
             },
             "expectation": {
                 "failure": {}

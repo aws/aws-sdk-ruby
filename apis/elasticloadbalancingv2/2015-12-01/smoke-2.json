@@ -2,8 +2,8 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
+            "id": "DescribeLoadBalancersSuccess",
+            "operationName": "DescribeLoadBalancers",
             "input": {},
             "expectation": {
                 "success": {}
@@ -13,10 +13,12 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "DescribeLoadBalancersFailure",
+            "operationName": "DescribeLoadBalancers",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "LoadBalancerArns": [
+                    "fake_load_balancer"
+                ]
             },
             "expectation": {
                 "failure": {}

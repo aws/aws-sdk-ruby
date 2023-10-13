@@ -2,9 +2,11 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
-            "input": {},
+            "id": "ListIdentityPoolsSuccess",
+            "operationName": "ListIdentityPools",
+            "input": {
+                "MaxResults": 10
+            },
             "expectation": {
                 "success": {}
             },
@@ -13,10 +15,10 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "DescribeIdentityPoolFailure",
+            "operationName": "DescribeIdentityPool",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "IdentityPoolId": "us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
             },
             "expectation": {
                 "failure": {}

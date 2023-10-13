@@ -2,9 +2,11 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
-            "input": {},
+            "id": "ListUserPoolsSuccess",
+            "operationName": "ListUserPools",
+            "input": {
+                "MaxResults": 10
+            },
             "expectation": {
                 "success": {}
             },
@@ -13,10 +15,10 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "DescribeUserPoolFailure",
+            "operationName": "DescribeUserPool",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "UserPoolId": "us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
             },
             "expectation": {
                 "failure": {}

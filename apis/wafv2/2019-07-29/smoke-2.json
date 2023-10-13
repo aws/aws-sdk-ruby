@@ -1,0 +1,33 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListWebACLsSuccess",
+            "operationName": "ListWebACLs",
+            "input": {
+        "Scope": "REGIONAL",
+        "Limit": 20
+      },
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-east-1"
+            }
+        },
+        {
+            "id": "CreateRegexPatternSetFailure",
+            "operationName": "CreateRegexPatternSet",
+            "input": {
+        "Name": "fake_name",
+        "Scope": "fake_scope"
+      },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-east-1"
+            }
+        }
+    ]
+}

@@ -2,9 +2,11 @@
     "version": 2,
     "testCases": [
         {
-            "id": "ListCertificatesSuccess",
-            "operationName": "ListCertificates",
-            "input": {},
+            "id": "ListDomainsSuccess",
+            "operationName": "ListDomains",
+            "input": {
+                "registrationStatus": "REGISTERED"
+            },
             "expectation": {
                 "success": {}
             },
@@ -13,10 +15,10 @@
             }
         },
         {
-            "id": "GetCertificateFailure",
-            "operationName": "GetCertificate",
+            "id": "DescribeDomainFailure",
+            "operationName": "DescribeDomain",
             "input": {
-                "CertificateArn": "arn:aws:acm:region:123456789012:certificate\/12345678-1234-1234-1234-123456789012"
+                "name": "fake_domain"
             },
             "expectation": {
                 "failure": {}
