@@ -7,7 +7,7 @@
 
 Feature: Smoke tests for ACM
 
-  @smoke @acm 
+  @acm @smoke
   Scenario: ListCertificatesSuccess
     Given I create a 'Aws::ACM' client with config:
       """
@@ -19,7 +19,7 @@ Feature: Smoke tests for ACM
       """
     Then I expect an error was not raised
 
-  @smoke @acm 
+  @acm @smoke
   Scenario: GetCertificateFailure
     Given I create a 'Aws::ACM' client with config:
       """

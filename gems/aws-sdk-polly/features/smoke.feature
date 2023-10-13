@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for Polly
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @polly @smoke
-  Scenario: Call Aws::Polly::Client#describe_voices and expect it to succeed
-  When I call the operation 'describe_voices' with params:
-    """
+  Scenario: DescribeVoicesSuccess
+    Given I create a 'Aws::Polly' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_voices' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

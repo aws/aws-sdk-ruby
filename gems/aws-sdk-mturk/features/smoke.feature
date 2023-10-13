@@ -6,6 +6,3 @@
 # WARNING ABOUT GENERATED CODE
 
 Feature: Smoke tests for MTurk
-
-Background:
-  Given I create a client in region 'us-east-1'

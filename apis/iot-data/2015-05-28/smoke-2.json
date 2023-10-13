@@ -12,7 +12,7 @@
             },
             "config": {
                 "region": "us-west-2",
-                "uri": "https://data.iot.us-west-2.amazonaws.com"
+                "uri": "https://data-ats.iot.us-west-2.amazonaws.com"
             }
         }
     ]

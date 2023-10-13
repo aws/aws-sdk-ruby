@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for ApplicationDiscoveryService
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @applicationdiscoveryservice @smoke
-  Scenario: Call Aws::ApplicationDiscoveryService::Client#describe_agents and expect it to succeed
-  When I call the operation 'describe_agents' with params:
-    """
+  Scenario: DescribeAgentsSuccess
+    Given I create a 'Aws::ApplicationDiscoveryService' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_agents' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

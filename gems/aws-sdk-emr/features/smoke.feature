@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for EMR
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @emr @smoke
-  Scenario: Call Aws::EMR::Client#list_clusters and expect it to succeed
-  When I call the operation 'list_clusters' with params:
-    """
+  Scenario: ListClustersSuccess
+    Given I create a 'Aws::EMR' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_clusters' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @emr @smoke
-  Scenario: Call Aws::Aws::EMR::Client#describe_cluster and expect it to fail
-  When I call the operation 'describe_cluster' with params:
-    """
+  Scenario: DescribeClusterFailure
+    Given I create a 'Aws::EMR' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_cluster' with params:
+      """
 {"cluster_id":"fake_cluster"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

@@ -17,7 +17,8 @@
             "operationName": "GetFederationToken",
             "input": {
                 "Name": "temp",
-                "Policy": "{\\\"temp\\\":true},
+                "Policy": "{\\\"temp\\\":true}"
+            },
             "expectation": {
                 "failure": {}
             },

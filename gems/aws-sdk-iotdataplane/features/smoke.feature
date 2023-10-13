@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for IoTDataPlane
 
-Background:
-  Given I create a client with endpoint 'https://data.iot.us-west-2.amazonaws.com'
-
   @iotdataplane @smoke
-  Scenario: Call Aws::Aws::IoTDataPlane::Client#get_thing_shadow and expect it to fail
-  When I call the operation 'get_thing_shadow' with params:
-    """
+  Scenario: GetThingShadowFailure
+    Given I create a 'Aws::IoTDataPlane' client with config:
+      """
+{"region":"us-west-2","endpoint":"https://data-ats.iot.us-west-2.amazonaws.com"}
+      """
+    When I call the operation 'get_thing_shadow' with params:
+      """
 {"thing_name":"fake-thing"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for Glue
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @glue @smoke
-  Scenario: Call Aws::Glue::Client#get_catalog_import_status and expect it to succeed
-  When I call the operation 'get_catalog_import_status' with params:
-    """
+  Scenario: GetCatalogImportStatusSuccess
+    Given I create a 'Aws::Glue' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'get_catalog_import_status' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

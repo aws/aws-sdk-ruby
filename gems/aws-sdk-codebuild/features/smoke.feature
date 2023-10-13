@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for CodeBuild
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @codebuild @smoke
-  Scenario: Call Aws::CodeBuild::Client#list_builds and expect it to succeed
-  When I call the operation 'list_builds' with params:
-    """
+  Scenario: ListBuildsSuccess
+    Given I create a 'Aws::CodeBuild' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_builds' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

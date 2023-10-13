@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for Snowball
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @snowball @smoke
-  Scenario: Call Aws::Snowball::Client#describe_addresses and expect it to succeed
-  When I call the operation 'describe_addresses' with params:
-    """
+  Scenario: DescribeAddressesSuccess
+    Given I create a 'Aws::Snowball' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_addresses' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

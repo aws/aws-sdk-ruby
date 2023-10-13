@@ -47,17 +47,13 @@ module AwsSdkCodeGenerator
 
             tags = options.fetch(:tags) || []
             tags = tags.map { |t| "@#{t}" }.join(' ')
-            @tags = "@smoke @#{@service.identifier} #{tags}".chomp
+            @tags = "@#{@service.identifier} @smoke #{tags}".strip
           end
 
           attr_reader :id, :operation_name, :expectation, :tags
 
-          # TODO: this only assumes top level? but may be nested
           def param_hash
-            @input.each_with_object({}) do |(raw_key, value), acc|
-              key = underscore(raw_key)
-              acc[key] = value
-            end.to_json
+            deep_underscore(@input).to_json
           end
 
           def config_hash
@@ -68,6 +64,19 @@ module AwsSdkCodeGenerator
           end
 
           private
+
+          def deep_underscore(input)
+            case input
+            when Hash
+              input.each_with_object({}) do |(key, value), acc|
+                acc[underscore(key)] = deep_underscore(value)
+              end
+            when Array
+              input.map { |value| deep_underscore(value) }
+            else
+              input
+            end
+          end
 
           def config_map(raw_key, raw_value)
             case raw_key

@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for Batch
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @batch @smoke
-  Scenario: Call Aws::Batch::Client#describe_compute_environments and expect it to succeed
-  When I call the operation 'describe_compute_environments' with params:
-    """
+  Scenario: DescribeComputeEnvironmentsSuccess
+    Given I create a 'Aws::Batch' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_compute_environments' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

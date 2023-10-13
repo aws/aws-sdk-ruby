@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for ECR
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @ecr @smoke
-  Scenario: Call Aws::ECR::Client#describe_repositories and expect it to succeed
-  When I call the operation 'describe_repositories' with params:
-    """
+  Scenario: DescribeRepositoriesSuccess
+    Given I create a 'Aws::ECR' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_repositories' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @ecr @smoke
-  Scenario: Call Aws::Aws::ECR::Client#list_images and expect it to fail
-  When I call the operation 'list_images' with params:
-    """
+  Scenario: ListImagesFailure
+    Given I create a 'Aws::ECR' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_images' with params:
+      """
 {"repository_name":"not-a-real-repository"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

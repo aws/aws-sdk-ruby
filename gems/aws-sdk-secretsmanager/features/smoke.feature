@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for SecretsManager
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @secretsmanager @smoke
-  Scenario: Call Aws::SecretsManager::Client#list_secrets and expect it to succeed
-  When I call the operation 'list_secrets' with params:
-    """
+  Scenario: ListSecretsSuccess
+    Given I create a 'Aws::SecretsManager' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_secrets' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @secretsmanager @smoke
-  Scenario: Call Aws::Aws::SecretsManager::Client#describe_secret and expect it to fail
-  When I call the operation 'describe_secret' with params:
-    """
+  Scenario: DescribeSecretFailure
+    Given I create a 'Aws::SecretsManager' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_secret' with params:
+      """
 {"secret_id":"fake-secret-id"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised
