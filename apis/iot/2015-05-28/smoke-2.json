@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListPoliciesSuccess",
+            "operationName": "ListPolicies",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "DescribeThingFailure",
+            "operationName": "DescribeThing",
+            "input": {
+                "thingName": "fake-thing"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

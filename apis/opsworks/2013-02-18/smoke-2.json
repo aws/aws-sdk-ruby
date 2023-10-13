@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "DescribeStacksSuccess",
+            "operationName": "DescribeStacks",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "DescribeLayersFailure",
+            "operationName": "DescribeLayers",
+            "input": {
+                "StackId": "fake_stack"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

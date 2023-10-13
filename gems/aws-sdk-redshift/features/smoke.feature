@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for Redshift
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @redshift @smoke
-  Scenario: Call Aws::Redshift::Client#describe_cluster_versions and expect it to succeed
-  When I call the operation 'describe_cluster_versions' with params:
-    """
+  Scenario: DescribeClusterVersionsSuccess
+    Given I create a 'Aws::Redshift' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_cluster_versions' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @redshift @smoke
-  Scenario: Call Aws::Aws::Redshift::Client#describe_clusters and expect it to fail
-  When I call the operation 'describe_clusters' with params:
-    """
+  Scenario: DescribeClustersFailure
+    Given I create a 'Aws::Redshift' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_clusters' with params:
+      """
 {"cluster_identifier":"fake-cluster"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

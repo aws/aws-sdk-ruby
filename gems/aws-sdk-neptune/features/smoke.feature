@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for Neptune
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @neptune @smoke
-  Scenario: Call Aws::Neptune::Client#describe_db_engine_versions and expect it to succeed
-  When I call the operation 'describe_db_engine_versions' with params:
-    """
+  Scenario: DescribeDBEngineVersionsSuccess
+    Given I create a 'Aws::Neptune' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_db_engine_versions' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @neptune @smoke
-  Scenario: Call Aws::Aws::Neptune::Client#describe_db_instances and expect it to fail
-  When I call the operation 'describe_db_instances' with params:
-    """
+  Scenario: DescribeDBInstancesFailure
+    Given I create a 'Aws::Neptune' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_db_instances' with params:
+      """
 {"db_instance_identifier":"fake-id"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

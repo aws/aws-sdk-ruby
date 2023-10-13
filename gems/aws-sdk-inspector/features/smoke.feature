@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for Inspector
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @inspector @smoke
-  Scenario: Call Aws::Inspector::Client#list_assessment_templates and expect it to succeed
-  When I call the operation 'list_assessment_templates' with params:
-    """
+  Scenario: ListAssessmentTemplatesSuccess
+    Given I create a 'Aws::Inspector' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_assessment_templates' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @inspector @smoke
-  Scenario: Call Aws::Aws::Inspector::Client#list_tags_for_resource and expect it to fail
-  When I call the operation 'list_tags_for_resource' with params:
-    """
+  Scenario: ListTagsForResourceFailure
+    Given I create a 'Aws::Inspector' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_tags_for_resource' with params:
+      """
 {"resource_arn":"fake-arn"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

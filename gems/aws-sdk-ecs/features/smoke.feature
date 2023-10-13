@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for ECS
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @ecs @smoke
-  Scenario: Call Aws::ECS::Client#list_clusters and expect it to succeed
-  When I call the operation 'list_clusters' with params:
-    """
+  Scenario: ListClustersSuccess
+    Given I create a 'Aws::ECS' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_clusters' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @ecs @smoke
-  Scenario: Call Aws::Aws::ECS::Client#stop_task and expect it to fail
-  When I call the operation 'stop_task' with params:
-    """
+  Scenario: StopTaskFailure
+    Given I create a 'Aws::ECS' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'stop_task' with params:
+      """
 {"task":"xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

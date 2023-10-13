@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListDevicesSuccess",
+            "operationName": "ListDevices",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "GetDeviceFailure",
+            "operationName": "GetDevice",
+            "input": {
+                "arn": "arn:aws:devicefarm:us-west-2::device:000000000000000000000000fake-arn"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

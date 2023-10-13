@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for ServiceCatalog
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @servicecatalog @smoke
-  Scenario: Call Aws::ServiceCatalog::Client#list_accepted_portfolio_shares and expect it to succeed
-  When I call the operation 'list_accepted_portfolio_shares' with params:
-    """
+  Scenario: ListAcceptedPortfolioSharesSuccess
+    Given I create a 'Aws::ServiceCatalog' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_accepted_portfolio_shares' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

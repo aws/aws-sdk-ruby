@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListAssessmentTemplatesSuccess",
+            "operationName": "ListAssessmentTemplates",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "ListTagsForResourceFailure",
+            "operationName": "ListTagsForResource",
+            "input": {
+                "resourceArn": "fake-arn"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for ApplicationAutoScaling
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @applicationautoscaling @smoke
-  Scenario: Call Aws::ApplicationAutoScaling::Client#describe_scalable_targets and expect it to succeed
-  When I call the operation 'describe_scalable_targets' with params:
-    """
+  Scenario: DescribeScalableTargetsSuccess
+    Given I create a 'Aws::ApplicationAutoScaling' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_scalable_targets' with params:
+      """
 {"service_namespace":"ec2"}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "GetThingShadowFailure",
+            "operationName": "GetThingShadow",
+            "input": {
+                "thingName": "fake-thing"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2",
+                "uri": "https://data-ats.iot.us-west-2.amazonaws.com"
+            }
+        }
+    ]
+}

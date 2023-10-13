@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for S3
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @s3 @smoke
-  Scenario: Call Aws::S3::Client#list_buckets and expect it to succeed
-  When I call the operation 'list_buckets' with params:
-    """
+  Scenario: ListBucketsSuccess
+    Given I create a 'Aws::S3' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_buckets' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

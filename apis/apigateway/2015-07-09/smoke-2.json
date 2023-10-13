@@ -1,0 +1,31 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "GetDomainNamesSuccess",
+            "operationName": "GetDomainNames",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "CreateUsagePlanKeyFailure",
+            "operationName": "CreateUsagePlanKey",
+            "input": {
+                "usagePlanId": "foo",
+                "keyId": "bar",
+                "keyType": "fixx"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

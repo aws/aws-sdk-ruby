@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for CloudWatch
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @cloudwatch @smoke
-  Scenario: Call Aws::CloudWatch::Client#list_metrics and expect it to succeed
-  When I call the operation 'list_metrics' with params:
-    """
+  Scenario: ListMetricsSuccess
+    Given I create a 'Aws::CloudWatch' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_metrics' with params:
+      """
 {"namespace":"AWS/EC2"}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @cloudwatch @smoke
-  Scenario: Call Aws::Aws::CloudWatch::Client#set_alarm_state and expect it to fail
-  When I call the operation 'set_alarm_state' with params:
-    """
+  Scenario: SetAlarmStateFailure
+    Given I create a 'Aws::CloudWatch' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'set_alarm_state' with params:
+      """
 {"alarm_name":"abc","state_value":"mno","state_reason":"xyz"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

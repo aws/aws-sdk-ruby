@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListDeliveryStreamsSuccess",
+            "operationName": "ListDeliveryStreams",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "DescribeDeliveryStreamFailure",
+            "operationName": "DescribeDeliveryStream",
+            "input": {
+                "DeliveryStreamName": "bogus-stream-name"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

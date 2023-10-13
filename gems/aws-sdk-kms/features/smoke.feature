@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for KMS
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @kms @smoke
-  Scenario: Call Aws::KMS::Client#list_aliases and expect it to succeed
-  When I call the operation 'list_aliases' with params:
-    """
+  Scenario: ListAliasesSuccess
+    Given I create a 'Aws::KMS' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_aliases' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @kms @smoke
-  Scenario: Call Aws::Aws::KMS::Client#get_key_policy and expect it to fail
-  When I call the operation 'get_key_policy' with params:
-    """
+  Scenario: GetKeyPolicyFailure
+    Given I create a 'Aws::KMS' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'get_key_policy' with params:
+      """
 {"key_id":"12345678-1234-1234-1234-123456789012","policy_name":"fakePolicy"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

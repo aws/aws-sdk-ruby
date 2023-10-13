@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for CodeStar
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @codestar @smoke
-  Scenario: Call Aws::CodeStar::Client#list_projects and expect it to succeed
-  When I call the operation 'list_projects' with params:
-    """
+  Scenario: ListProjectsSuccess
+    Given I create a 'Aws::CodeStar' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_projects' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

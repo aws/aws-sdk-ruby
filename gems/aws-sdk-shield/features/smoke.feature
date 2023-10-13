@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for Shield
 
-Background:
-  Given I create a client in region 'us-east-1'
-
   @shield @smoke
-  Scenario: Call Aws::Shield::Client#list_attacks and expect it to succeed
-  When I call the operation 'list_attacks' with params:
-    """
+  Scenario: ListAttacksSuccess
+    Given I create a 'Aws::Shield' client with config:
+      """
+{"region":"us-east-1"}
+      """
+    When I call the operation 'list_attacks' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListAliasesSuccess",
+            "operationName": "ListAliases",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "GetKeyPolicyFailure",
+            "operationName": "GetKeyPolicy",
+            "input": {
+                "KeyId": "12345678-1234-1234-1234-123456789012",
+                "PolicyName": "fakePolicy"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

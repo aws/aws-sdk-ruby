@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for OpsWorks
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @opsworks @smoke
-  Scenario: Call Aws::OpsWorks::Client#describe_stacks and expect it to succeed
-  When I call the operation 'describe_stacks' with params:
-    """
+  Scenario: DescribeStacksSuccess
+    Given I create a 'Aws::OpsWorks' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_stacks' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @opsworks @smoke
-  Scenario: Call Aws::Aws::OpsWorks::Client#describe_layers and expect it to fail
-  When I call the operation 'describe_layers' with params:
-    """
+  Scenario: DescribeLayersFailure
+    Given I create a 'Aws::OpsWorks' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_layers' with params:
+      """
 {"stack_id":"fake_stack"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

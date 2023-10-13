@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for OpenSearchService
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @opensearchservice @smoke
-  Scenario: Call Aws::OpenSearchService::Client#list_domain_names and expect it to succeed
-  When I call the operation 'list_domain_names' with params:
-    """
+  Scenario: ListDomainNamesSuccess
+    Given I create a 'Aws::OpenSearchService' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_domain_names' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @opensearchservice @smoke
-  Scenario: Call Aws::Aws::OpenSearchService::Client#describe_domain and expect it to fail
-  When I call the operation 'describe_domain' with params:
-    """
+  Scenario: DescribeDomainFailure
+    Given I create a 'Aws::OpenSearchService' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_domain' with params:
+      """
 {"domain_name":"not-a-domain"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised
