@@ -88,9 +88,9 @@ module Aws
       describe 'sigv4a region set option' do
         before { ENV['AWS_REGION'] = 'region' }
 
-        it 'is [cfg.region] by default' do
+        it 'is nil by default' do
           client = client_class.new
-          expect(client.config.sigv4a_signing_region_set).to eq(['region'])
+          expect(client.config.sigv4a_signing_region_set).to be_nil
         end
 
         it 'can be configured with shared config' do
@@ -123,12 +123,21 @@ module Aws
           expect(client.config.sigv4a_signing_region_set).to eq(['region'])
         end
 
-        it 'rejects empty and nil values' do
-          expect do
-            client_class.new(sigv4a_signing_region_set: nil)
-          end.to raise_error(Errors::InvalidRegionSetError)
+        it 'rejects an empty set' do
           expect do
             client_class.new(sigv4a_signing_region_set: [])
+          end.to raise_error(Errors::InvalidRegionSetError)
+        end
+
+        it 'rejects non-array' do
+          expect do
+            client_class.new(sigv4a_signing_region_set: 'region')
+          end.to raise_error(Errors::InvalidRegionSetError)
+        end
+
+        it 'rejects empty and nil values' do
+          expect do
+            client_class.new(sigv4a_signing_region_set: [nil, ''])
           end.to raise_error(Errors::InvalidRegionSetError)
 
           client = client_class.new(

@@ -83,8 +83,12 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         raise Errors::MissingRegionError if region.nil? || region == ''
 
         region_set = client.config.sigv4a_signing_region_set
-        raise Errors::InvalidRegionSetError if region_set.nil? || region_set.empty?
+        return if region_set.nil?
+        raise Errors::InvalidRegionSetError unless region_set.is_a?(Array)
+
         region_set = region_set.compact.reject(&:empty?)
+        raise Errors::InvalidRegionSetError if region_set.empty?
+
         client.config.sigv4a_signing_region_set = region_set
       end
 
@@ -102,8 +106,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         def resolve_sigv4a_signing_region_set(cfg)
           value = ENV['AWS_SIGV4A_SIGNING_REGION_SET']
           value ||= Aws.shared_config.sigv4a_signing_region_set(profile: cfg.profile)
-          value ||= cfg.region || ''
-          value.split(',')
+          value.split(',') if value
         end
 
         def resolve_use_dualstack_endpoint(cfg)

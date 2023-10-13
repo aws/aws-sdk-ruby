@@ -14,9 +14,15 @@ require_relative 'endpoints/templater'
 require_relative 'endpoints/tree_rule'
 require_relative 'endpoints/url'
 
+require 'aws-sigv4'
+
 module Aws
   # @api private
   module Endpoints
+    supported_auth_traits = %w[aws.auth#sigv4 smithy.api#httpBearerAuth smithy.auth#noAuth]
+    supported_auth_traits += ['aws.auth#sigv4a'] if Aws::Sigv4::Signer.use_crt?
+    SUPPORTED_AUTH_TRAITS = supported_auth_traits.freeze
+
     class << self
       def resolve_auth_scheme(context, endpoint)
         if endpoint && (auth_schemes = endpoint.properties['authSchemes'])
@@ -37,7 +43,9 @@ module Aws
         if %w[sigv4 sigv4a].include?(auth_scheme['name'])
           auth_scheme['signingName'] ||= sigv4_name(config)
           if auth_scheme['name'] == 'sigv4a'
-            auth_scheme['signingRegionSet'] ||= config.sigv4a_signing_region_set
+            # config option supersedes endpoint properties
+            auth_scheme['signingRegionSet'] =
+              config.sigv4a_signing_region_set || auth_scheme['signingRegionSet'] || [config.region]
           else
             auth_scheme['signingRegion'] ||= config.region
           end
@@ -52,7 +60,7 @@ module Aws
 
       def default_auth_scheme(context)
         if (auth_list = default_api_auth(context))
-          auth = auth_list.first
+          auth = auth_list.find { |a| SUPPORTED_AUTH_TRAITS.include?(a) }
           case auth
           when 'aws.auth#sigv4', 'aws.auth#sigv4a'
             auth_scheme = { 'name' => auth.split('#').last }
@@ -67,6 +75,8 @@ module Aws
             { 'name' => 'bearer' }
           when 'smithy.auth#noAuth'
             { 'name' => 'none' }
+          else
+            raise 'No supported auth trait for this endpoint.'
           end
         else
           legacy_default_auth_scheme(context)

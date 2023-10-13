@@ -114,6 +114,13 @@ module Aws
           end
 
           context 'sigv4a defaults' do
+            before do
+              stub_const(
+                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
+                Aws::Endpoints::SUPPORTED_AUTH_TRAITS + ['aws.auth#sigv4a']
+              )
+            end
+
             let(:auth) { ['aws.auth#sigv4a'] }
 
             it 'signs with sigv4' do
@@ -170,12 +177,44 @@ module Aws
             end
           end
 
-          context 'precedence' do
+          context 'unsupported' do
+            before do
+              stub_const(
+                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
+                Aws::Endpoints::SUPPORTED_AUTH_TRAITS - ['aws.auth#sigv4a']
+              )
+            end
+
+            let(:auth) { ['aws.auth#sigv4a'] }
+
+            it 'raises if auth type is not supported' do
+              expect { client.operation }
+                .to raise_error(/No supported auth trait/)
+            end
+          end
+
+          context 'operation precedence' do
             let(:operation_auth) { ['smithy.auth#noAuth'] }
             let(:auth) { ['aws.auth#sigv4'] }
 
             it 'prefers operation auth over service auth' do
               expect_auth({ 'name' => 'none' })
+              client.operation
+            end
+          end
+
+          context 'resolution order' do
+            before do
+              stub_const(
+                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
+                Aws::Endpoints::SUPPORTED_AUTH_TRAITS - ['aws.auth#sigv4a']
+              )
+            end
+
+            let(:auth) { ['aws.auth#sigv4a', 'aws.auth#sigv4'] }
+
+            it 'prefers the first supported auth trait' do
+              expect_auth({ 'name' => 'sigv4' })
               client.operation
             end
           end
@@ -228,7 +267,7 @@ module Aws
             end
           end
 
-          context 'precedence' do
+          context 'operation precedence' do
             let(:operation_authtype) { 'none' }
             let(:signature_version) { 'v4' }
 
@@ -261,7 +300,7 @@ module Aws
           let(:auth_schemes) { [{ 'name' => 'sigv4a' }] }
 
           it 'defaults the signing region set from config' do
-            expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => client.config.sigv4a_signing_region_set })
+            expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => [client.config.region] })
             client.operation
           end
         end
@@ -303,6 +342,12 @@ module Aws
 
           it 'explicit usage of auth scheme values' do
             expect_auth({ 'name' => 'sigv4a', 'signingName' => 'override', 'signingRegionSet' => ['override1', 'override2'] })
+            client.operation
+          end
+
+          it 'allows config to override auth scheme' do
+            client.config.sigv4a_signing_region_set = ['config-override']
+            expect_auth({ 'name' => 'sigv4a', 'signingName' => 'override', 'signingRegionSet' => ['config-override'] })
             client.operation
           end
         end

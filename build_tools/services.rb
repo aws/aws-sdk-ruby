@@ -13,7 +13,7 @@ module BuildTools
     MINIMUM_CORE_VERSION = "3.186.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.181.0"
+    MINIMUM_CORE_VERSION_S3 = "3.186.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -153,14 +153,14 @@ module BuildTools
 
       api['metadata'].fetch('auth', []).each do |auth|
         if %w[aws.auth#sigv4 aws.auth#sigv4a].include?(auth)
-          dependencies['aws-sigv4'] = '~> 1.1'
+          dependencies['aws-sigv4'] = '~> 1.5'
         end
       end
 
       # deprecated auth but a reasonable fallback
       case api['metadata']['signatureVersion']
-      when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'
-      when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
+      when 'v4' then dependencies['aws-sigv4'] ||= '~> 1.1'
+      when 'v2' then dependencies['aws-sigv2'] ||= '~> 1.0'
       end
       dependencies
     end
