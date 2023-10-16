@@ -53,7 +53,7 @@ RSpec.configure do |config|
   end
 
   if defined?(JRUBY_VERSION)
-    config.around(:each, :flaky) do |example|
+    config.around(:each, :jruby_flaky) do |example|
       attempt = 0
       retries = 3
       loop do

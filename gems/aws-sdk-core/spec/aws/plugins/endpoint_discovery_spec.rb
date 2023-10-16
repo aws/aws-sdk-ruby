@@ -4,7 +4,7 @@ require_relative '../../spec_helper'
 
 module Aws
   module Plugins
-    describe EndpointDiscovery, :flaky do
+    describe EndpointDiscovery, :jruby_flaky do
 
       EndpointDiscoveryClient = ApiHelper.sample_service(
         api: {

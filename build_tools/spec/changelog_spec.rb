@@ -3,7 +3,7 @@
 require_relative 'spec_helper'
 
 module BuildTools
-  describe Changelog do
+  describe Changelog, :jruby_flaky do
 
     let(:path) { Tempfile.create('file').path }
     let(:expected_changelog) { <<-LOG
