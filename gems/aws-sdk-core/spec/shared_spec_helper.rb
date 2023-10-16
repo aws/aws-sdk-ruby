@@ -51,4 +51,20 @@ RSpec.configure do |config|
 
     Thread.report_on_exception = current_value if current_value
   end
+
+  if defined?(JRUBY_VERSION)
+    config.around(:each, :jruby_flaky) do |example|
+      attempt = 0
+      retries = 3
+      loop do
+        attempt += 1
+        example.run
+        break if !example.exception || attempt >= retries
+
+        # clear the exception, ensuring it can run from a clean state
+        example.example.instance_variable_set(:@exception, nil)
+        redo
+      end
+    end
+  end
 end

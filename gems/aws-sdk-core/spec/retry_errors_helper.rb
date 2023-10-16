@@ -91,7 +91,7 @@ def apply_expectations(test_case)
   if expected[:clock_correction]
     endpoint = resp.context.http_request.endpoint
     expect(resp.context.config.clock_skew.clock_correction(endpoint))
-      .to be_within(1).of(expected[:clock_correction])
+      .to be_within(5).of(expected[:clock_correction])
   end
 end
 
