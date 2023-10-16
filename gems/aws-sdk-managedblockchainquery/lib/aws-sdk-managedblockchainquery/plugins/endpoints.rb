@@ -58,10 +58,14 @@ module Aws::ManagedBlockchainQuery
           case context.operation_name
           when :batch_get_token_balance
             Aws::ManagedBlockchainQuery::Endpoints::BatchGetTokenBalance.build(context)
+          when :get_asset_contract
+            Aws::ManagedBlockchainQuery::Endpoints::GetAssetContract.build(context)
           when :get_token_balance
             Aws::ManagedBlockchainQuery::Endpoints::GetTokenBalance.build(context)
           when :get_transaction
             Aws::ManagedBlockchainQuery::Endpoints::GetTransaction.build(context)
+          when :list_asset_contracts
+            Aws::ManagedBlockchainQuery::Endpoints::ListAssetContracts.build(context)
           when :list_token_balances
             Aws::ManagedBlockchainQuery::Endpoints::ListTokenBalances.build(context)
           when :list_transaction_events

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-10-16)
+------------------
+
+* Feature - Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+
 1.22.0 (2023-09-27)
 ------------------
 

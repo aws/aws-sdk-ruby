@@ -142,7 +142,7 @@ module Aws::MediaPackageV2
     ChannelGroupListConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     ChannelGroupListConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     ChannelGroupListConfiguration.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    ChannelGroupListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ChannelGroupListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     ChannelGroupListConfiguration.struct_class = Types::ChannelGroupListConfiguration
 
     ChannelGroupsList.member = Shapes::ShapeRef.new(shape: ChannelGroupListConfiguration)
@@ -154,7 +154,7 @@ module Aws::MediaPackageV2
     ChannelListConfiguration.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     ChannelListConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     ChannelListConfiguration.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    ChannelListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ChannelListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     ChannelListConfiguration.struct_class = Types::ChannelListConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -172,7 +172,7 @@ module Aws::MediaPackageV2
     CreateChannelGroupResponse.add_member(:egress_domain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EgressDomain"))
     CreateChannelGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     CreateChannelGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    CreateChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateChannelGroupResponse.struct_class = Types::CreateChannelGroupResponse
 
@@ -188,7 +188,7 @@ module Aws::MediaPackageV2
     CreateChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     CreateChannelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     CreateChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    CreateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
@@ -292,7 +292,7 @@ module Aws::MediaPackageV2
     GetChannelGroupResponse.add_member(:egress_domain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EgressDomain"))
     GetChannelGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     GetChannelGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    GetChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    GetChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     GetChannelGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetChannelGroupResponse.struct_class = Types::GetChannelGroupResponse
 
@@ -302,7 +302,7 @@ module Aws::MediaPackageV2
 
     GetChannelPolicyResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     GetChannelPolicyResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelName"))
-    GetChannelPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Policy"))
+    GetChannelPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
     GetChannelPolicyResponse.struct_class = Types::GetChannelPolicyResponse
 
     GetChannelRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
@@ -314,7 +314,7 @@ module Aws::MediaPackageV2
     GetChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     GetChannelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     GetChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    GetChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    GetChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     GetChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
     GetChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetChannelResponse.struct_class = Types::GetChannelResponse
@@ -344,10 +344,10 @@ module Aws::MediaPackageV2
     GetOriginEndpointPolicyRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
     GetOriginEndpointPolicyRequest.struct_class = Types::GetOriginEndpointPolicyRequest
 
-    GetOriginEndpointPolicyResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
-    GetOriginEndpointPolicyResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelName"))
-    GetOriginEndpointPolicyResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OriginEndpointName"))
-    GetOriginEndpointPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Policy"))
+    GetOriginEndpointPolicyResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
+    GetOriginEndpointPolicyResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
+    GetOriginEndpointPolicyResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
+    GetOriginEndpointPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
     GetOriginEndpointPolicyResponse.struct_class = Types::GetOriginEndpointPolicyResponse
 
     GetOriginEndpointRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
@@ -513,7 +513,7 @@ module Aws::MediaPackageV2
     UpdateChannelGroupResponse.add_member(:egress_domain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EgressDomain"))
     UpdateChannelGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     UpdateChannelGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    UpdateChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateChannelGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateChannelGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateChannelGroupResponse.struct_class = Types::UpdateChannelGroupResponse
 
@@ -527,7 +527,7 @@ module Aws::MediaPackageV2
     UpdateChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     UpdateChannelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     UpdateChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
-    UpdateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse

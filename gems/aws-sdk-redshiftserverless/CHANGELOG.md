@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+
 1.14.0 (2023-09-27)
 ------------------
 

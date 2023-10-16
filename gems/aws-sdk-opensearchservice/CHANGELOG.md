@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-10-16)
+------------------
+
+* Feature - This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+
 1.27.0 (2023-09-27)
 ------------------
 

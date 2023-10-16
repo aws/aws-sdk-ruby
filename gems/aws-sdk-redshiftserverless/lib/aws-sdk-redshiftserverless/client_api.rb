@@ -207,6 +207,7 @@ module Aws::RedshiftServerless
     CreateEndpointAccessResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointAccess, location_name: "endpoint"))
     CreateEndpointAccessResponse.struct_class = Types::CreateEndpointAccessResponse
 
+    CreateNamespaceRequest.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     CreateNamespaceRequest.add_member(:admin_user_password, Shapes::ShapeRef.new(shape: DbPassword, location_name: "adminUserPassword"))
     CreateNamespaceRequest.add_member(:admin_username, Shapes::ShapeRef.new(shape: DbUser, location_name: "adminUsername"))
     CreateNamespaceRequest.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "dbName"))
@@ -214,6 +215,7 @@ module Aws::RedshiftServerless
     CreateNamespaceRequest.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "iamRoles"))
     CreateNamespaceRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     CreateNamespaceRequest.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
+    CreateNamespaceRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     CreateNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     CreateNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateNamespaceRequest.struct_class = Types::CreateNamespaceRequest
@@ -462,6 +464,8 @@ module Aws::RedshiftServerless
 
     LogExportList.member = Shapes::ShapeRef.new(shape: LogExport)
 
+    Namespace.add_member(:admin_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "adminPasswordSecretArn"))
+    Namespace.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     Namespace.add_member(:admin_username, Shapes::ShapeRef.new(shape: DbUser, location_name: "adminUsername"))
     Namespace.add_member(:creation_date, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationDate"))
     Namespace.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "dbName"))
@@ -519,6 +523,8 @@ module Aws::RedshiftServerless
     RestoreFromRecoveryPointResponse.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, location_name: "recoveryPointId"))
     RestoreFromRecoveryPointResponse.struct_class = Types::RestoreFromRecoveryPointResponse
 
+    RestoreFromSnapshotRequest.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
+    RestoreFromSnapshotRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     RestoreFromSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     RestoreFromSnapshotRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "ownerAccount"))
     RestoreFromSnapshotRequest.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "snapshotArn"))
@@ -554,6 +560,8 @@ module Aws::RedshiftServerless
     Snapshot.add_member(:accounts_with_provisioned_restore_access, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountsWithProvisionedRestoreAccess"))
     Snapshot.add_member(:accounts_with_restore_access, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountsWithRestoreAccess"))
     Snapshot.add_member(:actual_incremental_backup_size_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "actualIncrementalBackupSizeInMegaBytes"))
+    Snapshot.add_member(:admin_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "adminPasswordSecretArn"))
+    Snapshot.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     Snapshot.add_member(:admin_username, Shapes::ShapeRef.new(shape: String, location_name: "adminUsername"))
     Snapshot.add_member(:backup_progress_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "backupProgressInMegaBytes"))
     Snapshot.add_member(:current_backup_rate_in_mega_bytes_per_second, Shapes::ShapeRef.new(shape: Double, location_name: "currentBackupRateInMegaBytesPerSecond"))
@@ -631,12 +639,14 @@ module Aws::RedshiftServerless
     UpdateEndpointAccessResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointAccess, location_name: "endpoint"))
     UpdateEndpointAccessResponse.struct_class = Types::UpdateEndpointAccessResponse
 
+    UpdateNamespaceRequest.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     UpdateNamespaceRequest.add_member(:admin_user_password, Shapes::ShapeRef.new(shape: DbPassword, location_name: "adminUserPassword"))
     UpdateNamespaceRequest.add_member(:admin_username, Shapes::ShapeRef.new(shape: DbUser, location_name: "adminUsername"))
     UpdateNamespaceRequest.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "defaultIamRoleArn"))
     UpdateNamespaceRequest.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "iamRoles"))
     UpdateNamespaceRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     UpdateNamespaceRequest.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
+    UpdateNamespaceRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     UpdateNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     UpdateNamespaceRequest.struct_class = Types::UpdateNamespaceRequest
 

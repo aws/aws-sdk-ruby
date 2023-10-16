@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-10-16)
+------------------
+
+* Feature - This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.
+
 1.59.0 (2023-09-27)
 ------------------
 

@@ -1423,10 +1423,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Cross cluster search specific connection properties.
+    # Cross-cluster search specific connection properties.
     #
     # @!attribute [rw] skip_unavailable
-    #   Status of SkipUnavailable param for outbound connection.
+    #   The status of the `SkipUnavailable` setting for the outbound
+    #   connection. This feature allows you to specify some clusters as
+    #   optional and ensure that your cross-cluster queries return partial
+    #   results despite failures on one or more remote clusters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CrossClusterSearchConnectionProperties AWS API Documentation
@@ -1892,8 +1895,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] domain_names
     #   Array of OpenSearch Service domain names that you want information
-    #   about. If you don't specify any domains, OpenSearch Service returns
-    #   information about all domains owned by the account.
+    #   about. You must specify at least one domain name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainsRequest AWS API Documentation
@@ -4311,6 +4313,17 @@ module Aws::OpenSearchService
     #   otherwise.
     #   @return [Types::ErrorDetails]
     #
+    # @!attribute [rw] engine_version
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
+    #   version of OpenSearch.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_plugin_properties
+    #   If the package is a `ZIP-PLUGIN` package, additional information
+    #   about plugin properties.
+    #   @return [Types::PluginProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageDetails AWS API Documentation
     #
     class PackageDetails < Struct.new(
@@ -4322,7 +4335,9 @@ module Aws::OpenSearchService
       :created_at,
       :last_updated_at,
       :available_package_version,
-      :error_details)
+      :error_details,
+      :engine_version,
+      :available_plugin_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4360,12 +4375,52 @@ module Aws::OpenSearchService
     #   The date and time when the package was created.
     #   @return [Time]
     #
+    # @!attribute [rw] plugin_properties
+    #   Additional information about plugin properties if the package is a
+    #   `ZIP-PLUGIN` package.
+    #   @return [Types::PluginProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageVersionHistory AWS API Documentation
     #
     class PackageVersionHistory < Struct.new(
       :package_version,
       :commit_message,
-      :created_at)
+      :created_at,
+      :plugin_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Basic information about the plugin.
+    #
+    # @!attribute [rw] name
+    #   The name of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] class_name
+    #   The name of the class to load.
+    #   @return [String]
+    #
+    # @!attribute [rw] uncompressed_size_in_bytes
+    #   The uncompressed size of the plugin.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PluginProperties AWS API Documentation
+    #
+    class PluginProperties < Struct.new(
+      :name,
+      :description,
+      :version,
+      :class_name,
+      :uncompressed_size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end

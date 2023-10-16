@@ -413,7 +413,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #
@@ -1219,7 +1219,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #
@@ -3676,7 +3676,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #
@@ -4473,7 +4473,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #
@@ -4630,7 +4630,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

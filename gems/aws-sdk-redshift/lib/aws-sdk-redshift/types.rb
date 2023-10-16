@@ -888,6 +888,16 @@ module Aws::Redshift
     #   domain name.
     #   @return [Time]
     #
+    # @!attribute [rw] master_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the cluster's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -945,7 +955,9 @@ module Aws::Redshift
       :reserved_node_exchange_status,
       :custom_domain_name,
       :custom_domain_certificate_arn,
-      :custom_domain_certificate_expiry_date)
+      :custom_domain_certificate_expiry_date,
+      :master_password_secret_arn,
+      :master_password_secret_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1932,6 +1944,9 @@ module Aws::Redshift
     #   The password associated with the admin user account for the cluster
     #   that is being created.
     #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
+    #
     #   Constraints:
     #
     #   * Must be between 8 and 64 characters in length.
@@ -2216,6 +2231,20 @@ module Aws::Redshift
     #   is created.
     #   @return [String]
     #
+    # @!attribute [rw] manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false
+    #   or not set, Amazon Redshift uses `MasterUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2252,8 +2281,10 @@ module Aws::Redshift
       :availability_zone_relocation,
       :aqua_configuration_status,
       :default_iam_role_arn,
-      :load_sample_data)
-      SENSITIVE = []
+      :load_sample_data,
+      :manage_master_password,
+      :master_password_secret_kms_key_id)
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -7364,6 +7395,9 @@ module Aws::Redshift
     #   element exists in the `PendingModifiedValues` element of the
     #   operation response.
     #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
+    #
     #   <note markdown="1"> Operations never return the password, so this operation provides a
     #   way to regain access to the admin user account for a cluster if the
     #   password is lost.
@@ -7575,6 +7609,20 @@ module Aws::Redshift
     #   The option to change the port of an Amazon Redshift cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false
+    #   or not set, Amazon Redshift uses `MasterUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -7602,8 +7650,10 @@ module Aws::Redshift
       :kms_key_id,
       :availability_zone_relocation,
       :availability_zone,
-      :port)
-      SENSITIVE = []
+      :port,
+      :manage_master_password,
+      :master_password_secret_kms_key_id)
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -8510,7 +8560,7 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :maintenance_track_name,
       :encryption_type)
-      SENSITIVE = []
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -9467,6 +9517,19 @@ module Aws::Redshift
     #   key.
     #   @return [Boolean]
     #
+    # @!attribute [rw] manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   restored cluster's admin credentials. If `ManageMasterPassword` is
+    #   false or not set, Amazon Redshift uses the admin credentials the
+    #   cluster had at the time the snapshot was taken.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -9502,7 +9565,9 @@ module Aws::Redshift
       :default_iam_role_arn,
       :reserved_node_id,
       :target_reserved_node_offering_id,
-      :encrypted)
+      :encrypted,
+      :manage_master_password,
+      :master_password_secret_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10241,6 +10306,16 @@ module Aws::Redshift
     #   snapshot.
     #   @return [Time]
     #
+    # @!attribute [rw] master_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the cluster's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -10277,7 +10352,9 @@ module Aws::Redshift
       :maintenance_track_name,
       :manual_snapshot_retention_period,
       :manual_snapshot_remaining_days,
-      :snapshot_retention_start_time)
+      :snapshot_retention_start_time,
+      :master_password_secret_arn,
+      :master_password_secret_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

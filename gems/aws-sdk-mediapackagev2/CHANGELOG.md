@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-10-16)
+------------------
+
+* Feature - This release allows customers to manage MediaPackage v2 resource using CloudFormation.
+
 1.7.0 (2023-09-27)
 ------------------
 

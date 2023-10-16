@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-10-16)
+------------------
+
+* Feature - SDK and documentation updates for UpdateReplacePolicy
+
 1.90.0 (2023-09-27)
 ------------------
 

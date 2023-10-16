@@ -158,9 +158,17 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use
+    #   this parameter if `manageAdminPassword` is true.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #   @return [String]
     #
     # @!attribute [rw] admin_username
@@ -191,6 +199,14 @@ module Aws::RedshiftServerless
     #   are `userlog`, `connectionlog`, and `useractivitylog`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword`
+    #   if `manageAdminPassword` is true. If `manageAdminPassword` is false
+    #   or not set, Amazon Redshift uses `adminUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace.
     #   @return [String]
@@ -202,6 +218,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespaceRequest AWS API Documentation
     #
     class CreateNamespaceRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
       :admin_user_password,
       :admin_username,
       :db_name,
@@ -209,6 +226,7 @@ module Aws::RedshiftServerless
       :iam_roles,
       :kms_key_id,
       :log_exports,
+      :manage_admin_password,
       :namespace_name,
       :tags)
       SENSITIVE = [:admin_user_password, :admin_username]
@@ -1361,6 +1379,16 @@ module Aws::RedshiftServerless
 
     # A collection of database objects and users.
     #
+    # @!attribute [rw] admin_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the namespace's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_username
     #   The username of the administrator for the first database created in
     #   the namespace.
@@ -1419,6 +1447,8 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Namespace AWS API Documentation
     #
     class Namespace < Struct.new(
+      :admin_password_secret_arn,
+      :admin_password_secret_kms_key_id,
       :admin_username,
       :creation_date,
       :db_name,
@@ -1619,6 +1649,18 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   restored snapshot's admin credentials. If `MmanageAdminPassword` is
+    #   false or not set, Amazon Redshift uses the admin credentials that
+    #   the namespace or cluster had at the time the snapshot was taken.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to restore the snapshot to.
     #   @return [String]
@@ -1649,6 +1691,8 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromSnapshotRequest AWS API Documentation
     #
     class RestoreFromSnapshotRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
+      :manage_admin_password,
       :namespace_name,
       :owner_account,
       :snapshot_arn,
@@ -1784,6 +1828,16 @@ module Aws::RedshiftServerless
     #   The size of the incremental backup in megabytes.
     #   @return [Float]
     #
+    # @!attribute [rw] admin_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the namespace's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_username
     #   The username of the database within a snapshot.
     #   @return [String]
@@ -1862,6 +1916,8 @@ module Aws::RedshiftServerless
       :accounts_with_provisioned_restore_access,
       :accounts_with_restore_access,
       :actual_incremental_backup_size_in_mega_bytes,
+      :admin_password_secret_arn,
+      :admin_password_secret_kms_key_id,
       :admin_username,
       :backup_progress_in_mega_bytes,
       :current_backup_rate_in_mega_bytes_per_second,
@@ -2101,10 +2157,18 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use
+    #   this parameter if `manageAdminPassword` is true.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
     #   `adminUsername`.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #   @return [String]
     #
     # @!attribute [rw] admin_username
@@ -2134,6 +2198,14 @@ module Aws::RedshiftServerless
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword`
+    #   if `manageAdminPassword` is true. If `manageAdminPassword` is false
+    #   or not set, Amazon Redshift uses `adminUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
@@ -2142,12 +2214,14 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
     #
     class UpdateNamespaceRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
       :admin_user_password,
       :admin_username,
       :default_iam_role_arn,
       :iam_roles,
       :kms_key_id,
       :log_exports,
+      :manage_admin_password,
       :namespace_name)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure

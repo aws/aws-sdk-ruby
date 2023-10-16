@@ -820,6 +820,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -1103,6 +1105,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -1255,9 +1259,12 @@ module Aws::Redshift
     #
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
-    # @option params [required, String] :master_user_password
+    # @option params [String] :master_user_password
     #   The password associated with the admin user account for the cluster
     #   that is being created.
+    #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
     #
     #   Constraints:
     #
@@ -1510,6 +1517,18 @@ module Aws::Redshift
     #   A flag that specifies whether to load sample data once the cluster is
     #   created.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses `MasterUserPassword` for the admin user
+    #   account's password.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1522,7 +1541,7 @@ module Aws::Redshift
     #     cluster_type: "String",
     #     node_type: "String", # required
     #     master_username: "String", # required
-    #     master_user_password: "String", # required
+    #     master_user_password: "SensitiveString",
     #     cluster_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     cluster_subnet_group_name: "String",
@@ -1556,6 +1575,8 @@ module Aws::Redshift
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #     default_iam_role_arn: "String",
     #     load_sample_data: "String",
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -1681,6 +1702,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1960,6 +1983,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -3109,6 +3134,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3264,6 +3291,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -4244,6 +4273,8 @@ module Aws::Redshift
     #   resp.snapshots[0].manual_snapshot_retention_period #=> Integer
     #   resp.snapshots[0].manual_snapshot_remaining_days #=> Integer
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
+    #   resp.snapshots[0].master_password_secret_arn #=> String
+    #   resp.snapshots[0].master_password_secret_kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4702,6 +4733,8 @@ module Aws::Redshift
     #   resp.clusters[0].custom_domain_name #=> String
     #   resp.clusters[0].custom_domain_certificate_arn #=> String
     #   resp.clusters[0].custom_domain_certificate_expiry_date #=> Time
+    #   resp.clusters[0].master_password_secret_arn #=> String
+    #   resp.clusters[0].master_password_secret_kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4719,7 +4752,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Contains information for custom domain associations for a cluster.
+    # Contains information about custom domain associations for a cluster.
     #
     # @option params [String] :custom_domain_name
     #   The custom domain name for the custom domain association.
@@ -7012,6 +7045,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -7349,6 +7384,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7902,6 +7939,9 @@ module Aws::Redshift
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
     #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
+    #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
     #   to regain access to the admin user account for a cluster if the
     #   password is lost.
@@ -8091,6 +8131,18 @@ module Aws::Redshift
     # @option params [Integer] :port
     #   The option to change the port of an Amazon Redshift cluster.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses `MasterUserPassword` for the admin user
+    #   account's password.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -8104,7 +8156,7 @@ module Aws::Redshift
     #     number_of_nodes: 1,
     #     cluster_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     cluster_parameter_group_name: "String",
     #     automated_snapshot_retention_period: 1,
     #     manual_snapshot_retention_period: 1,
@@ -8123,6 +8175,8 @@ module Aws::Redshift
     #     availability_zone_relocation: false,
     #     availability_zone: "String",
     #     port: 1,
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -8248,6 +8302,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -8405,6 +8461,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -8578,6 +8636,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8751,6 +8811,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -8898,6 +8960,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot AWS API Documentation
     #
@@ -9472,6 +9536,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9728,6 +9794,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -9947,6 +10015,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -10254,6 +10324,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -10545,6 +10617,17 @@ module Aws::Redshift
     #   encrypted with Key Management Service (KMS) and a customer managed
     #   key.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
+    #   cluster's admin credentials. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses the admin credentials the cluster had at
+    #   the time the snapshot was taken.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -10585,6 +10668,8 @@ module Aws::Redshift
     #     reserved_node_id: "String",
     #     target_reserved_node_offering_id: "String",
     #     encrypted: false,
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -10710,6 +10795,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -10958,6 +11045,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -11188,6 +11277,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -11340,6 +11431,8 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -11415,7 +11508,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

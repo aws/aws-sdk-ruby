@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-10-16)
+------------------
+
+* Feature - This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.
+
 1.1.0 (2023-09-27)
 ------------------
 

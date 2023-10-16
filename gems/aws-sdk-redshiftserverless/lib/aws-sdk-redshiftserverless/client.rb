@@ -447,6 +447,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -540,9 +542,16 @@ module Aws::RedshiftServerless
 
     # Creates a namespace in Amazon Redshift Serverless.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -566,6 +575,13 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. Available export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace.
     #
@@ -579,6 +595,7 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     db_name: "String",
@@ -586,6 +603,7 @@ module Aws::RedshiftServerless
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     tags: [
     #       {
@@ -597,6 +615,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -669,6 +689,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -944,6 +966,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -1011,6 +1035,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1257,6 +1283,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -1373,6 +1401,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1626,6 +1656,8 @@ module Aws::RedshiftServerless
     # @example Response structure
     #
     #   resp.namespaces #=> Array
+    #   resp.namespaces[0].admin_password_secret_arn #=> String
+    #   resp.namespaces[0].admin_password_secret_kms_key_id #=> String
     #   resp.namespaces[0].admin_username #=> String
     #   resp.namespaces[0].creation_date #=> Time
     #   resp.namespaces[0].db_name #=> String
@@ -1768,6 +1800,8 @@ module Aws::RedshiftServerless
     #   resp.snapshots[0].accounts_with_restore_access #=> Array
     #   resp.snapshots[0].accounts_with_restore_access[0] #=> String
     #   resp.snapshots[0].actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshots[0].admin_password_secret_arn #=> String
+    #   resp.snapshots[0].admin_password_secret_kms_key_id #=> String
     #   resp.snapshots[0].admin_username #=> String
     #   resp.snapshots[0].backup_progress_in_mega_bytes #=> Float
     #   resp.snapshots[0].current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -2080,6 +2114,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2105,6 +2141,16 @@ module Aws::RedshiftServerless
     end
 
     # Restores a namespace from a snapshot.
+    #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
+    #   snapshot's admin credentials. If `MmanageAdminPassword` is false or
+    #   not set, Amazon Redshift uses the admin credentials that the namespace
+    #   or cluster had at the time the snapshot was taken.
     #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to restore the snapshot to.
@@ -2136,6 +2182,8 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_from_snapshot({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     owner_account: "String",
     #     snapshot_arn: "String",
@@ -2145,6 +2193,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2371,10 +2421,17 @@ module Aws::RedshiftServerless
     # either field, but you can't update both `kmsKeyId` and `logExports`
     # in a single request.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
     #   `adminUsername`.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -2398,6 +2455,13 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. The export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
@@ -2409,17 +2473,21 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     default_iam_role_arn: "String",
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2469,6 +2537,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -2662,7 +2732,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -749,6 +749,8 @@ module Aws::Redshift
     Cluster.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "CustomDomainName"))
     Cluster.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomDomainCertificateArn"))
     Cluster.add_member(:custom_domain_certificate_expiry_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CustomDomainCertificateExpiryDate"))
+    Cluster.add_member(:master_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretArn"))
+    Cluster.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -939,7 +941,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
     CreateClusterMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NodeType"))
     CreateClusterMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUsername"))
-    CreateClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUserPassword"))
+    CreateClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "MasterUserPassword"))
     CreateClusterMessage.add_member(:cluster_security_groups, Shapes::ShapeRef.new(shape: ClusterSecurityGroupNameList, location_name: "ClusterSecurityGroups"))
     CreateClusterMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
     CreateClusterMessage.add_member(:cluster_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterSubnetGroupName"))
@@ -968,6 +970,8 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
     CreateClusterMessage.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "DefaultIamRoleArn"))
     CreateClusterMessage.add_member(:load_sample_data, Shapes::ShapeRef.new(shape: String, location_name: "LoadSampleData"))
+    CreateClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
+    CreateClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1870,7 +1874,7 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     ModifyClusterMessage.add_member(:cluster_security_groups, Shapes::ShapeRef.new(shape: ClusterSecurityGroupNameList, location_name: "ClusterSecurityGroups"))
     ModifyClusterMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
-    ModifyClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
+    ModifyClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "MasterUserPassword"))
     ModifyClusterMessage.add_member(:cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterParameterGroupName"))
     ModifyClusterMessage.add_member(:automated_snapshot_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AutomatedSnapshotRetentionPeriod"))
     ModifyClusterMessage.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ManualSnapshotRetentionPeriod"))
@@ -1889,6 +1893,8 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
     ModifyClusterMessage.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     ModifyClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    ModifyClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
+    ModifyClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -2061,7 +2067,7 @@ module Aws::Redshift
 
     PendingActionsList.member = Shapes::ShapeRef.new(shape: String)
 
-    PendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
+    PendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "MasterUserPassword"))
     PendingModifiedValues.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     PendingModifiedValues.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     PendingModifiedValues.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
@@ -2244,6 +2250,8 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
     RestoreFromClusterSnapshotMessage.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeOfferingId"))
     RestoreFromClusterSnapshotMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
+    RestoreFromClusterSnapshotMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
+    RestoreFromClusterSnapshotMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -2398,6 +2406,8 @@ module Aws::Redshift
     Snapshot.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ManualSnapshotRetentionPeriod"))
     Snapshot.add_member(:manual_snapshot_remaining_days, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ManualSnapshotRemainingDays"))
     Snapshot.add_member(:snapshot_retention_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotRetentionStartTime"))
+    Snapshot.add_member(:master_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretArn"))
+    Snapshot.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotCopyAlreadyDisabledFault.struct_class = Types::SnapshotCopyAlreadyDisabledFault
