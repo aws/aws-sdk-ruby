@@ -42,6 +42,8 @@ module BuildTools
       # WARNING: not thread-safe
       @services ||= begin
         manifest.inject({}) do |hash, (name, config)|
+          next hash if config['deprecated']
+
           service = build_service(name, config)
           hash[service.identifier] = service
           hash

@@ -456,7 +456,7 @@
     "models": "gamelift/2015-10-01"
   },
   "GameSparks": {
-    "models": "gamesparks/2021-08-17"
+    "deprecated": true
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
