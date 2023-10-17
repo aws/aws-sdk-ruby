@@ -919,6 +919,7 @@ module Aws::GuardDuty
     DnsRequestAction.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
     DnsRequestAction.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
     DnsRequestAction.add_member(:blocked, Shapes::ShapeRef.new(shape: Boolean, location_name: "blocked"))
+    DnsRequestAction.add_member(:domain_with_suffix, Shapes::ShapeRef.new(shape: String, location_name: "domainWithSuffix"))
     DnsRequestAction.struct_class = Types::DnsRequestAction
 
     DomainDetails.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))

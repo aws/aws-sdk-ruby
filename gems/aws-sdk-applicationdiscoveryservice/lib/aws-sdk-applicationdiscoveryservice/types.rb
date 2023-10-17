@@ -227,6 +227,8 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # Conflict error.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #

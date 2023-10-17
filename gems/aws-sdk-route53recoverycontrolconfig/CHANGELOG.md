@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-10-17)
+------------------
+
+* Feature - Adds permissions for GetResourcePolicy to support returning details about AWS Resource Access Manager resource policies for shared resources.
+
 1.20.0 (2023-09-27)
 ------------------
 

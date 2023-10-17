@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-10-17)
+------------------
+
+* Feature - Adds Owner field to ListRoutingControls API.
+
 1.20.0 (2023-09-27)
 ------------------
 
