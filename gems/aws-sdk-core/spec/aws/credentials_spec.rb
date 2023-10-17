@@ -13,13 +13,22 @@ module Aws
       expect(Credentials.new('akid', 'secret').secret_access_key).to eq('secret')
     end
 
-    it 'provides access to the session tokey' do
+    it 'provides access to the session token' do
       creds = Credentials.new('akid', 'secret', 'token')
       expect(creds.session_token).to eq('token')
     end
 
     it 'defaults the session token to nil' do
       expect(Credentials.new('akid', 'secret').session_token).to be(nil)
+    end
+
+    it 'provides access to the credential scope' do
+      creds = Credentials.new('akid', 'secret', nil, 'scope')
+      expect(creds.credential_scope).to eq('scope')
+    end
+
+    it 'defaults the credential scope to nil' do
+      expect(Credentials.new('akid', 'secret').credential_scope).to be(nil)
     end
 
     describe '#set?' do

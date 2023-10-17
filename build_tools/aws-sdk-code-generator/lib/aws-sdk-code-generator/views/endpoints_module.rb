@@ -134,6 +134,8 @@ module AwsSdkCodeGenerator
           else
             'context.config.use_dualstack_endpoint'
           end
+        when 'AWS::Auth::CredentialScope'
+          'context.config.credentials.credential_scope'
         when 'AWS::STS::UseGlobalEndpoint'
           "context.config.sts_regional_endpoints == 'legacy'"
         when 'AWS::S3::UseGlobalEndpoint'
