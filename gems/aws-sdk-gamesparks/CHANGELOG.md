@@ -1,12 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Deprecated this service.
+
 1.12.0 (2023-10-17)
 ------------------
 
 * Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-* Feature - Deprecated this service.
 
 1.11.0 (2023-09-27)
 ------------------
