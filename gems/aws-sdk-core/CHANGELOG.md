@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Credential scoping using `ENV['AWS_CREDENTIAL_SCOPE']`, `aws_credential_scope` shared config, or the `credential_scope` Client configuration option.
+
 3.185.1 (2023-10-05)
 ------------------
 
