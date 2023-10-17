@@ -2229,10 +2229,15 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Resumes the pipeline execution by retrying the last failed actions in
-    # a stage. You can retry a stage immediately if any of the actions in
-    # the stage fail. When you retry, all actions that are still in progress
-    # continue working, and failed actions are triggered again.
+    # You can retry a stage that has failed without having to run a pipeline
+    # again from the beginning. You do this by either retrying the failed
+    # actions in a stage or by retrying all actions in the stage starting
+    # from the first action in the stage. When you retry the failed actions
+    # in a stage, all actions that are still in progress continue working,
+    # and failed actions are triggered again. When you retry a failed stage
+    # from the first action in the stage, the stage cannot have any actions
+    # in progress. Before a stage can be retried, it must either have all
+    # actions failed or some actions failed and some succeeded.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline that contains the failed stage.
@@ -2246,8 +2251,7 @@ module Aws::CodePipeline
     #   pipelineExecutionId of the failed stage
     #
     # @option params [required, String] :retry_mode
-    #   The scope of the retry attempt. Currently, the only supported value is
-    #   FAILED\_ACTIONS.
+    #   The scope of the retry attempt.
     #
     # @return [Types::RetryStageExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2259,7 +2263,7 @@ module Aws::CodePipeline
     #     pipeline_name: "PipelineName", # required
     #     stage_name: "StageName", # required
     #     pipeline_execution_id: "PipelineExecutionId", # required
-    #     retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
+    #     retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS, ALL_ACTIONS
     #   })
     #
     # @example Response structure
@@ -2636,7 +2640,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

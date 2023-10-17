@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-10-12)
+------------------
+
+* Feature - Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model.
+
 1.37.0 (2023-09-27)
 ------------------
 

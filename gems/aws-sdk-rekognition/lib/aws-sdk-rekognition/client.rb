@@ -776,6 +776,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Copies a version of an Amazon Rekognition Custom Labels model from a
     # source project to a destination project. The source and destination
     # projects can be in different AWS accounts but must be in the same AWS
@@ -794,7 +798,9 @@ module Aws::Rekognition
     # If you are copying a model version to a project in the same AWS
     # account, you don't need to create a project policy.
     #
-    # <note markdown="1"> To copy a model, the destination project, source project, and source
+    # <note markdown="1"> Copying project versions is supported only for Custom Labels models.
+    #
+    #  To copy a model, the destination project, source project, and source
     # model version must already exist.
     #
     #  </note>
@@ -977,6 +983,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Creates a new Amazon Rekognition Custom Labels dataset. You can create
     # a dataset by using an Amazon Sagemaker format manifest file or by
     # copying an existing Amazon Rekognition Custom Labels dataset.
@@ -1133,15 +1143,27 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Creates a new Amazon Rekognition Custom Labels project. A project is a
-    # group of resources (datasets, model versions) that you use to create
-    # and manage Amazon Rekognition Custom Labels models.
-    #
-    # This operation requires permissions to perform the
-    # `rekognition:CreateProject` action.
+    # Creates a new Amazon Rekognition project. A project is a group of
+    # resources (datasets, model versions) that you use to create and manage
+    # a Amazon Rekognition Custom Labels Model or custom adapter. You can
+    # specify a feature to create the project with, if no feature is
+    # specified then Custom Labels is used by default. For adapters, you can
+    # also choose whether or not to have the project auto update by using
+    # the AutoUpdate argument. This operation requires permissions to
+    # perform the `rekognition:CreateProject` action.
     #
     # @option params [required, String] :project_name
     #   The name of the project to create.
+    #
+    # @option params [String] :feature
+    #   Specifies feature that is being customized. If no value is provided
+    #   CUSTOM\_LABELS is used as a default.
+    #
+    # @option params [String] :auto_update
+    #   Specifies whether automatic retraining should be attempted for the
+    #   versions of the project. Automatic retraining is done as a best
+    #   effort. Required argument for Content Moderation. Applicable only to
+    #   adapters.
     #
     # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1165,6 +1187,8 @@ module Aws::Rekognition
     #
     #   resp = client.create_project({
     #     project_name: "ProjectName", # required
+    #     feature: "CONTENT_MODERATION", # accepts CONTENT_MODERATION, CUSTOM_LABELS
+    #     auto_update: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -1178,16 +1202,28 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Creates a new version of a model and begins training. Models are
-    # managed as part of an Amazon Rekognition Custom Labels project. The
-    # response from `CreateProjectVersion` is an Amazon Resource Name (ARN)
-    # for the version of the model.
+    # Creates a new version of Amazon Rekognition project (like a Custom
+    # Labels model or a custom adapter) and begins training. Models and
+    # adapters are managed as part of a Rekognition project. The response
+    # from `CreateProjectVersion` is an Amazon Resource Name (ARN) for the
+    # project version.
     #
-    # Training uses the training and test datasets associated with the
-    # project. For more information, see Creating training and test dataset
-    # in the *Amazon Rekognition Custom Labels Developer Guide*.
+    # The FeatureConfig operation argument allows you to configure specific
+    # model or adapter settings. You can provide a description to the
+    # project version by using the VersionDescription argment. Training can
+    # take a while to complete. You can get the current status by calling
+    # DescribeProjectVersions. Training completed successfully if the value
+    # of the `Status` field is `TRAINING_COMPLETED`. Once training has
+    # successfully completed, call DescribeProjectVersions to get the
+    # training results and evaluate the model.
     #
-    # <note markdown="1"> You can train a model in a project that doesn't have associated
+    # This operation requires permissions to perform the
+    # `rekognition:CreateProjectVersion` action.
+    #
+    # <note markdown="1"> *The following applies only to projects with Amazon Rekognition Custom
+    # Labels as the chosen feature:*
+    #
+    #  You can train a model in a project that doesn't have associated
     # datasets by specifying manifest files in the `TrainingData` and
     # `TestingData` fields.
     #
@@ -1202,57 +1238,42 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # Training takes a while to complete. You can get the current status by
-    # calling DescribeProjectVersions. Training completed successfully if
-    # the value of the `Status` field is `TRAINING_COMPLETED`.
-    #
-    # If training fails, see Debugging a failed model training in the
-    # *Amazon Rekognition Custom Labels* developer guide.
-    #
-    # Once training has successfully completed, call DescribeProjectVersions
-    # to get the training results and evaluate the model. For more
-    # information, see Improving a trained Amazon Rekognition Custom Labels
-    # model in the *Amazon Rekognition Custom Labels* developers guide.
-    #
-    # After evaluating the model, you start the model by calling
-    # StartProjectVersion.
-    #
-    # This operation requires permissions to perform the
-    # `rekognition:CreateProjectVersion` action.
-    #
     # @option params [required, String] :project_arn
-    #   The ARN of the Amazon Rekognition Custom Labels project that manages
-    #   the model that you want to train.
+    #   The ARN of the Amazon Rekognition project that will manage the project
+    #   version you want to train.
     #
     # @option params [required, String] :version_name
-    #   A name for the version of the model. This value must be unique.
+    #   A name for the version of the project version. This value must be
+    #   unique.
     #
     # @option params [required, Types::OutputConfig] :output_config
-    #   The Amazon S3 bucket location to store the results of training. The S3
-    #   bucket can be in any AWS account as long as the caller has
-    #   `s3:PutObject` permissions on the S3 bucket.
+    #   The Amazon S3 bucket location to store the results of training. The
+    #   bucket can be any S3 bucket in your AWS account. You need
+    #   `s3:PutObject` permission on the bucket.
     #
     # @option params [Types::TrainingData] :training_data
     #   Specifies an external manifest that the services uses to train the
-    #   model. If you specify `TrainingData` you must also specify
+    #   project version. If you specify `TrainingData` you must also specify
     #   `TestingData`. The project must not have any associated datasets.
     #
     # @option params [Types::TestingData] :testing_data
     #   Specifies an external manifest that the service uses to test the
-    #   model. If you specify `TestingData` you must also specify
+    #   project version. If you specify `TestingData` you must also specify
     #   `TrainingData`. The project must not have any associated datasets.
     #
     # @option params [Hash<String,String>] :tags
-    #   A set of tags (key-value pairs) that you want to attach to the model.
+    #   A set of tags (key-value pairs) that you want to attach to the project
+    #   version.
     #
     # @option params [String] :kms_key_id
     #   The identifier for your AWS Key Management Service key (AWS KMS key).
     #   You can supply the Amazon Resource Name (ARN) of your KMS key, the ID
     #   of your KMS key, an alias for your KMS key, or an alias ARN. The key
-    #   is used to encrypt training and test images copied into the service
-    #   for model training. Your source images are unaffected. The key is also
-    #   used to encrypt training results and manifest files written to the
-    #   output Amazon S3 bucket (`OutputConfig`).
+    #   is used to encrypt training images, test images, and manifest files
+    #   copied into the service for the project version. Your source images
+    #   are unaffected. The key is also used to encrypt training results and
+    #   manifest files written to the output Amazon S3 bucket
+    #   (`OutputConfig`).
     #
     #   If you choose to use your own KMS key, you need the following
     #   permissions on the KMS key.
@@ -1267,6 +1288,14 @@ module Aws::Rekognition
     #
     #   If you don't specify a value for `KmsKeyId`, images copied into the
     #   service are encrypted using a key that AWS owns and manages.
+    #
+    # @option params [String] :version_description
+    #   A description applied to the project version being created.
+    #
+    # @option params [Types::CustomizationFeatureConfig] :feature_config
+    #   Feature-specific configuration of the training job. If the job
+    #   configuration does not match the feature type associated with the
+    #   project, an InvalidParameterException is returned.
     #
     # @return [Types::CreateProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1331,6 +1360,12 @@ module Aws::Rekognition
     #       "TagKey" => "TagValue",
     #     },
     #     kms_key_id: "KmsKeyId",
+    #     version_description: "VersionDescription",
+    #     feature_config: {
+    #       content_moderation: {
+    #         confidence_threshold: 1.0,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1636,6 +1671,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting
     # a dataset might take while. Use DescribeDataset to check the current
     # status. The dataset is still deleting if the value of `Status` is
@@ -1741,9 +1780,9 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Deletes an Amazon Rekognition Custom Labels project. To delete a
-    # project you must first delete all models associated with the project.
-    # To delete a model, see DeleteProjectVersion.
+    # Deletes a Amazon Rekognition project. To delete a project you must
+    # first delete all models or adapters associated with the project. To
+    # delete a model or adapter, see DeleteProjectVersion.
     #
     # `DeleteProject` is an asynchronous operation. To check if the project
     # is deleted, call DescribeProjects. The project is deleted when the
@@ -1792,6 +1831,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Deletes an existing project policy.
     #
     # To get a list of project policies attached to a project, call
@@ -1843,18 +1886,20 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Deletes an Amazon Rekognition Custom Labels model.
+    # Deletes a Rekognition project model or project version, like a Amazon
+    # Rekognition Custom Labels model or a custom adapter.
     #
-    # You can't delete a model if it is running or if it is training. To
-    # check the status of a model, use the `Status` field returned from
-    # DescribeProjectVersions. To stop a running model call
-    # StopProjectVersion. If the model is training, wait until it finishes.
+    # You can't delete a project version if it is running or if it is
+    # training. To check the status of a project version, use the Status
+    # field returned from DescribeProjectVersions. To stop a project version
+    # call StopProjectVersion. If the project version is training, wait
+    # until it finishes.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProjectVersion` action.
     #
     # @option params [required, String] :project_version_arn
-    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   The Amazon Resource Name (ARN) of the project version that you want to
     #   delete.
     #
     # @return [Types::DeleteProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1883,7 +1928,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED", "DEPRECATED", "EXPIRED"
     #
     # @overload delete_project_version(params = {})
     # @param [Hash] params ({})
@@ -2007,6 +2052,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Describes an Amazon Rekognition Custom Labels dataset. You can get
     # information such as the current status of a dataset and statistics
     # about the images and labels in a dataset.
@@ -2073,32 +2122,32 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Lists and describes the versions of a model in an Amazon Rekognition
-    # Custom Labels project. You can specify up to 10 model versions in
+    # Lists and describes the versions of an Amazon Rekognition project. You
+    # can specify up to 10 model or adapter versions in
     # `ProjectVersionArns`. If you don't specify a value, descriptions for
-    # all model versions in the project are returned.
+    # all model/adapter versions in the project are returned.
     #
     # This operation requires permissions to perform the
     # `rekognition:DescribeProjectVersions` action.
     #
     # @option params [required, String] :project_arn
-    #   The Amazon Resource Name (ARN) of the project that contains the models
-    #   you want to describe.
+    #   The Amazon Resource Name (ARN) of the project that contains the
+    #   model/adapter you want to describe.
     #
     # @option params [Array<String>] :version_names
-    #   A list of model version names that you want to describe. You can add
-    #   up to 10 model version names to the list. If you don't specify a
-    #   value, all model descriptions are returned. A version name is part of
-    #   a model (ProjectVersion) ARN. For example,
-    #   `my-model.2020-01-21T09.10.15` is the version name in the following
-    #   ARN.
+    #   A list of model or project version names that you want to describe.
+    #   You can add up to 10 model or project version names to the list. If
+    #   you don't specify a value, all project version descriptions are
+    #   returned. A version name is part of a project version ARN. For
+    #   example, `my-model.2020-01-21T09.10.15` is the version name in the
+    #   following ARN.
     #   `arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123`.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more results
-    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
-    #   token in the response. You can use this pagination token to retrieve
-    #   the next set of results.
+    #   to retrieve), Amazon Rekognition returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per paginated call. The
@@ -2232,7 +2281,7 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].project_version_arn #=> String
     #   resp.project_version_descriptions[0].creation_timestamp #=> Time
     #   resp.project_version_descriptions[0].min_inference_units #=> Integer
-    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
+    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED", "DEPRECATED", "EXPIRED"
     #   resp.project_version_descriptions[0].status_message #=> String
     #   resp.project_version_descriptions[0].billable_training_time_in_seconds #=> Integer
     #   resp.project_version_descriptions[0].training_end_timestamp #=> Time
@@ -2274,6 +2323,10 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].kms_key_id #=> String
     #   resp.project_version_descriptions[0].max_inference_units #=> Integer
     #   resp.project_version_descriptions[0].source_project_version_arn #=> String
+    #   resp.project_version_descriptions[0].version_description #=> String
+    #   resp.project_version_descriptions[0].feature #=> String, one of "CONTENT_MODERATION", "CUSTOM_LABELS"
+    #   resp.project_version_descriptions[0].base_model_version #=> String
+    #   resp.project_version_descriptions[0].feature_config.content_moderation.confidence_threshold #=> Float
     #   resp.next_token #=> String
     #
     #
@@ -2289,16 +2342,15 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets information about your Amazon Rekognition Custom Labels projects.
+    # Gets information about your Rekognition projects.
     #
     # This operation requires permissions to perform the
     # `rekognition:DescribeProjects` action.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more results
-    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
-    #   token in the response. You can use this pagination token to retrieve
-    #   the next set of results.
+    #   to retrieve), Rekognition returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per paginated call. The
@@ -2307,9 +2359,13 @@ module Aws::Rekognition
     #   100.
     #
     # @option params [Array<String>] :project_names
-    #   A list of the projects that you want Amazon Rekognition Custom Labels
-    #   to describe. If you don't specify a value, the response includes
-    #   descriptions for all the projects in your AWS account.
+    #   A list of the projects that you want Rekognition to describe. If you
+    #   don't specify a value, the response includes descriptions for all the
+    #   projects in your AWS account.
+    #
+    # @option params [Array<String>] :features
+    #   Specifies the type of customization to filter projects by. If no value
+    #   is specified, CUSTOM\_LABELS is used as a default.
     #
     # @return [Types::DescribeProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2364,6 +2420,7 @@ module Aws::Rekognition
     #     next_token: "ExtendedPaginationToken",
     #     max_results: 1,
     #     project_names: ["ProjectName"],
+    #     features: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, CUSTOM_LABELS
     #   })
     #
     # @example Response structure
@@ -2379,6 +2436,8 @@ module Aws::Rekognition
     #   resp.project_descriptions[0].datasets[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETE_IN_PROGRESS"
     #   resp.project_descriptions[0].datasets[0].status_message #=> String
     #   resp.project_descriptions[0].datasets[0].status_message_code #=> String, one of "SUCCESS", "SERVICE_ERROR", "CLIENT_ERROR"
+    #   resp.project_descriptions[0].feature #=> String, one of "CONTENT_MODERATION", "CUSTOM_LABELS"
+    #   resp.project_descriptions[0].auto_update #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @overload describe_projects(params = {})
@@ -2456,6 +2515,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Detects custom labels in a supplied image by using an Amazon
     # Rekognition Custom Labels model.
     #
@@ -2502,7 +2565,10 @@ module Aws::Rekognition
     # Rekognition Custom Labels Developer Guide.
     #
     # @option params [required, String] :project_version_arn
-    #   The ARN of the model version that you want to use.
+    #   The ARN of the model version that you want to use. Only models
+    #   associated with Custom Labels projects accepted by the operation. If a
+    #   provided ARN refers to a model version associated with a project for a
+    #   different feature type, then an InvalidParameterException is returned.
     #
     # @option params [required, Types::Image] :image
     #   Provides the input image either as bytes or an S3 object.
@@ -3124,6 +3190,9 @@ module Aws::Rekognition
     # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
+    # You can specify an adapter to use when retrieving label predictions by
+    # providing a `ProjectVersionArn` to the `ProjectVersion` argument.
+    #
     # @option params [required, Types::Image] :image
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
@@ -3146,11 +3215,17 @@ module Aws::Rekognition
     #   Sets up the configuration for human evaluation, including the
     #   FlowDefinition the image will be sent to.
     #
+    # @option params [String] :project_version
+    #   Identifier for the custom adapter. Expects the ProjectVersionArn as a
+    #   value. Use the CreateProject or CreateProjectVersion APIs to create a
+    #   custom adapter.
+    #
     # @return [Types::DetectModerationLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectModerationLabelsResponse#moderation_labels #moderation_labels} => Array&lt;Types::ModerationLabel&gt;
     #   * {Types::DetectModerationLabelsResponse#moderation_model_version #moderation_model_version} => String
     #   * {Types::DetectModerationLabelsResponse#human_loop_activation_output #human_loop_activation_output} => Types::HumanLoopActivationOutput
+    #   * {Types::DetectModerationLabelsResponse#project_version #project_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3171,6 +3246,7 @@ module Aws::Rekognition
     #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
     #       },
     #     },
+    #     project_version: "ProjectVersionId",
     #   })
     #
     # @example Response structure
@@ -3184,6 +3260,7 @@ module Aws::Rekognition
     #   resp.human_loop_activation_output.human_loop_activation_reasons #=> Array
     #   resp.human_loop_activation_output.human_loop_activation_reasons[0] #=> String
     #   resp.human_loop_activation_output.human_loop_activation_conditions_evaluation_results #=> String
+    #   resp.project_version #=> String
     #
     # @overload detect_moderation_labels(params = {})
     # @param [Hash] params ({})
@@ -3513,6 +3590,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Distributes the entries (images) in a training dataset across the
     # training dataset and the test dataset for a project.
     # `DistributeDatasetEntries` moves 20% of the training dataset images to
@@ -5359,6 +5440,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Lists the entries (images) within a dataset. An entry is a JSON Line
     # that contains the information for a single image, including the image
     # location, assigned labels, and object location bounding boxes. For
@@ -5476,6 +5561,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Lists the labels in a dataset. Amazon Rekognition Custom Labels uses
     # labels to describe images. For more information, see [Labeling
     # images][1].
@@ -5692,6 +5781,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Gets a list of the project policies attached to a project.
     #
     # To attach a project policy to a project, call PutProjectPolicy. To
@@ -5916,11 +6009,16 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Attaches a project policy to a Amazon Rekognition Custom Labels
     # project in a trusting AWS account. A project policy specifies that a
     # trusted AWS account can copy a model version from a trusting AWS
     # account to a project in the trusted AWS account. To copy a model
-    # version you use the CopyProjectVersion operation.
+    # version you use the CopyProjectVersion operation. Only applies to
+    # Custom Labels projects.
     #
     # For more information about the format of a project policy document,
     # see Attaching a project policy (SDK) in the *Amazon Rekognition Custom
@@ -7313,6 +7411,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Starts the running of the version of a model. Starting a model takes a
     # while to complete. To check the current state of the model, use
     # DescribeProjectVersions.
@@ -7325,9 +7427,6 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # For more information, see *Running a trained Amazon Rekognition Custom
-    # Labels model* in the Amazon Rekognition Custom Labels Guide.
-    #
     # This operation requires permissions to perform the
     # `rekognition:StartProjectVersion` action.
     #
@@ -7338,11 +7437,6 @@ module Aws::Rekognition
     # @option params [required, Integer] :min_inference_units
     #   The minimum number of inference units to use. A single inference unit
     #   represents 1 hour of processing.
-    #
-    #   For information about the number of transactions per second (TPS) that
-    #   an inference unit can support, see *Running a trained Amazon
-    #   Rekognition Custom Labels model* in the Amazon Rekognition Custom
-    #   Labels Guide.
     #
     #   Use a higher number to increase the TPS throughput of your model. You
     #   are charged for the number of inference units that you use.
@@ -7382,7 +7476,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED", "DEPRECATED", "EXPIRED"
     #
     # @overload start_project_version(params = {})
     # @param [Hash] params ({})
@@ -7665,15 +7759,20 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Stops a running model. The operation might take a while to complete.
-    # To check the current status, call DescribeProjectVersions.
+    # To check the current status, call DescribeProjectVersions. Only
+    # applies to Custom Labels projects.
     #
     # This operation requires permissions to perform the
     # `rekognition:StopProjectVersion` action.
     #
     # @option params [required, String] :project_version_arn
     #   The Amazon Resource Name (ARN) of the model version that you want to
-    #   delete.
+    #   stop.
     #
     #   This operation requires permissions to perform the
     #   `rekognition:StopProjectVersion` action.
@@ -7704,7 +7803,7 @@ module Aws::Rekognition
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED"
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING", "COPYING_IN_PROGRESS", "COPYING_COMPLETED", "COPYING_FAILED", "DEPRECATED", "EXPIRED"
     #
     # @overload stop_project_version(params = {})
     # @param [Hash] params ({})
@@ -7799,6 +7898,10 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation applies only to Amazon Rekognition Custom Labels.
+    #
+    #  </note>
+    #
     # Adds or updates one or more entries (images) in a dataset. An entry is
     # a JSON Line which contains the information for a single image,
     # including the image location, assigned labels, and object location
@@ -7949,7 +8052,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

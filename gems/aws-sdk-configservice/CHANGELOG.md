@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2023-10-12)
+------------------
+
+* Feature - Add enums for resource types supported by Config
+
 1.98.0 (2023-09-27)
 ------------------
 

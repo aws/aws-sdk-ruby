@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-10-17)
+------------------
+
+* Feature - Add domainWithSuffix finding field to dnsRequestAction
+
 1.80.0 (2023-09-27)
 ------------------
 

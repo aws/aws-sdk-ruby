@@ -501,7 +501,7 @@ module Aws::OpenSearchService
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -1053,7 +1053,7 @@ module Aws::OpenSearchService
     #
     #   resp = client.create_package({
     #     package_name: "PackageName", # required
-    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY, ZIP-PLUGIN
     #     package_description: "PackageDescription",
     #     package_source: { # required
     #       s3_bucket_name: "S3BucketName",
@@ -1065,7 +1065,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1073,6 +1073,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreatePackage AWS API Documentation
     #
@@ -1360,7 +1366,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1368,6 +1374,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeletePackage AWS API Documentation
     #
@@ -1907,8 +1919,7 @@ module Aws::OpenSearchService
     #
     # @option params [required, Array<String>] :domain_names
     #   Array of OpenSearch Service domain names that you want information
-    #   about. If you don't specify any domains, OpenSearch Service returns
-    #   information about all domains owned by the account.
+    #   about. You must specify at least one domain name.
     #
     # @return [Types::DescribeDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2371,7 +2382,7 @@ module Aws::OpenSearchService
     #   resp = client.describe_packages({
     #     filters: [
     #       {
-    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus, PackageType, EngineVersion
     #         value: ["DescribePackagesFilterValue"],
     #       },
     #     ],
@@ -2384,7 +2395,7 @@ module Aws::OpenSearchService
     #   resp.package_details_list #=> Array
     #   resp.package_details_list[0].package_id #=> String
     #   resp.package_details_list[0].package_name #=> String
-    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details_list[0].package_description #=> String
     #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details_list[0].created_at #=> Time
@@ -2392,6 +2403,12 @@ module Aws::OpenSearchService
     #   resp.package_details_list[0].available_package_version #=> String
     #   resp.package_details_list[0].error_details.error_type #=> String
     #   resp.package_details_list[0].error_details.error_message #=> String
+    #   resp.package_details_list[0].engine_version #=> String
+    #   resp.package_details_list[0].available_plugin_properties.name #=> String
+    #   resp.package_details_list[0].available_plugin_properties.description #=> String
+    #   resp.package_details_list[0].available_plugin_properties.version #=> String
+    #   resp.package_details_list[0].available_plugin_properties.class_name #=> String
+    #   resp.package_details_list[0].available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackages AWS API Documentation
@@ -2610,7 +2627,7 @@ module Aws::OpenSearchService
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -2706,6 +2723,11 @@ module Aws::OpenSearchService
     #   resp.package_version_history_list[0].package_version #=> String
     #   resp.package_version_history_list[0].commit_message #=> String
     #   resp.package_version_history_list[0].created_at #=> Time
+    #   resp.package_version_history_list[0].plugin_properties.name #=> String
+    #   resp.package_version_history_list[0].plugin_properties.description #=> String
+    #   resp.package_version_history_list[0].plugin_properties.version #=> String
+    #   resp.package_version_history_list[0].plugin_properties.class_name #=> String
+    #   resp.package_version_history_list[0].plugin_properties.uncompressed_size_in_bytes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetPackageVersionHistory AWS API Documentation
@@ -2877,7 +2899,7 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -3008,7 +3030,7 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -3488,7 +3510,7 @@ module Aws::OpenSearchService
     end
 
     # Modifies the cluster configuration of the specified Amazon OpenSearch
-    # Service domain.sl
+    # Service domain.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you're updating.
@@ -3929,7 +3951,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -3937,6 +3959,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackage AWS API Documentation
     #
@@ -4152,7 +4180,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

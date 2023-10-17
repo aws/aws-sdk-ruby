@@ -565,6 +565,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -589,6 +594,7 @@ module Aws::Drs
     #     copy_tags: false,
     #     export_bucket_arn: "ARN",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -607,6 +613,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -1149,6 +1156,7 @@ module Aws::Drs
     #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].launch_configuration_template_id #=> String
     #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].launch_into_source_instance #=> Boolean
     #   resp.items[0].licensing.os_byol #=> Boolean
     #   resp.items[0].post_launch_enabled #=> Boolean
     #   resp.items[0].tags #=> Hash
@@ -1776,6 +1784,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -1794,6 +1803,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -2087,7 +2097,7 @@ module Aws::Drs
     # @option params [required, String] :category
     #   Launch action category.
     #
-    # @option params [String] :description
+    # @option params [required, String] :description
     #   Launch action description.
     #
     # @option params [required, String] :name
@@ -2128,7 +2138,7 @@ module Aws::Drs
     #     action_version: "LaunchActionVersion", # required
     #     active: false, # required
     #     category: "MONITORING", # required, accepts MONITORING, VALIDATION, CONFIGURATION, SECURITY, OTHER
-    #     description: "LaunchActionDescription",
+    #     description: "LaunchActionDescription", # required
     #     name: "LaunchActionName", # required
     #     optional: false, # required
     #     order: 1, # required
@@ -2992,6 +3002,9 @@ module Aws::Drs
     #   The state of the Recovery Instance in EC2 after the recovery
     #   operation.
     #
+    # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #
     # @option params [Types::Licensing] :licensing
     #   The licensing configuration to be used for this launch configuration.
     #
@@ -3016,6 +3029,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -3028,6 +3042,9 @@ module Aws::Drs
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_instance_properties: {
+    #       launch_into_ec2_instance_id: "EC2InstanceID",
+    #     },
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3043,6 +3060,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -3075,6 +3093,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -3096,6 +3119,7 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3111,6 +3135,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -3447,7 +3472,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

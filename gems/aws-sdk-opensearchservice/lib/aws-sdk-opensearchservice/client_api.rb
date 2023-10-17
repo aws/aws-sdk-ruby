@@ -180,6 +180,7 @@ module Aws::OpenSearchService
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
+    EngineVersion = Shapes::StringShape.new(name: 'EngineVersion')
     EnvironmentInfo = Shapes::StructureShape.new(name: 'EnvironmentInfo')
     EnvironmentInfoList = Shapes::ListShape.new(name: 'EnvironmentInfoList')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
@@ -290,6 +291,11 @@ module Aws::OpenSearchService
     PackageVersionHistory = Shapes::StructureShape.new(name: 'PackageVersionHistory')
     PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
     Password = Shapes::StringShape.new(name: 'Password')
+    PluginClassName = Shapes::StringShape.new(name: 'PluginClassName')
+    PluginDescription = Shapes::StringShape.new(name: 'PluginDescription')
+    PluginName = Shapes::StringShape.new(name: 'PluginName')
+    PluginProperties = Shapes::StructureShape.new(name: 'PluginProperties')
+    PluginVersion = Shapes::StringShape.new(name: 'PluginVersion')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PurchaseReservedInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingRequest')
@@ -359,6 +365,7 @@ module Aws::OpenSearchService
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
+    UncompressedPluginSizeInBytes = Shapes::IntegerShape.new(name: 'UncompressedPluginSizeInBytes')
     UpdateDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateDomainConfigRequest')
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
@@ -1225,6 +1232,8 @@ module Aws::OpenSearchService
     PackageDetails.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdatedAt"))
     PackageDetails.add_member(:available_package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "AvailablePackageVersion"))
     PackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    PackageDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    PackageDetails.add_member(:available_plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "AvailablePluginProperties"))
     PackageDetails.struct_class = Types::PackageDetails
 
     PackageDetailsList.member = Shapes::ShapeRef.new(shape: PackageDetails)
@@ -1236,9 +1245,17 @@ module Aws::OpenSearchService
     PackageVersionHistory.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
     PackageVersionHistory.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
     PackageVersionHistory.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    PackageVersionHistory.add_member(:plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "PluginProperties"))
     PackageVersionHistory.struct_class = Types::PackageVersionHistory
 
     PackageVersionHistoryList.member = Shapes::ShapeRef.new(shape: PackageVersionHistory)
+
+    PluginProperties.add_member(:name, Shapes::ShapeRef.new(shape: PluginName, location_name: "Name"))
+    PluginProperties.add_member(:description, Shapes::ShapeRef.new(shape: PluginDescription, location_name: "Description"))
+    PluginProperties.add_member(:version, Shapes::ShapeRef.new(shape: PluginVersion, location_name: "Version"))
+    PluginProperties.add_member(:class_name, Shapes::ShapeRef.new(shape: PluginClassName, location_name: "ClassName"))
+    PluginProperties.add_member(:uncompressed_size_in_bytes, Shapes::ShapeRef.new(shape: UncompressedPluginSizeInBytes, location_name: "UncompressedSizeInBytes"))
+    PluginProperties.struct_class = Types::PluginProperties
 
     PurchaseReservedInstanceOfferingRequest.add_member(:reserved_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ReservedInstanceOfferingId"))
     PurchaseReservedInstanceOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, required: true, location_name: "ReservationName"))

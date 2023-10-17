@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.413.0 (2023-10-12)
+------------------
+
+* Feature - This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it.
+
 1.412.0 (2023-10-06)
 ------------------
 

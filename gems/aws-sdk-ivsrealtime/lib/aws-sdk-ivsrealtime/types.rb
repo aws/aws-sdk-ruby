@@ -565,10 +565,30 @@ module Aws::IVSRealTime
     #   identifying, confidential, or sensitive information*.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] browser_name
+    #   The participant’s browser.
+    #   @return [String]
+    #
+    # @!attribute [rw] browser_version
+    #   The participant’s browser version.
+    #   @return [String]
+    #
     # @!attribute [rw] first_join_time
     #   ISO 8601 timestamp (returned as a string) when the participant first
     #   joined the stage session.
     #   @return [Time]
+    #
+    # @!attribute [rw] isp_name
+    #   The participant’s Internet Service Provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_name
+    #   The participant’s operating system.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The participant’s operating system version.
+    #   @return [String]
     #
     # @!attribute [rw] participant_id
     #   Unique identifier for this participant, assigned by IVS.
@@ -577,6 +597,10 @@ module Aws::IVSRealTime
     # @!attribute [rw] published
     #   Whether the participant ever published to the stage session.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] sdk_version
+    #   The participant’s SDK version.
+    #   @return [String]
     #
     # @!attribute [rw] state
     #   Whether the participant is connected to or disconnected from the
@@ -595,9 +619,15 @@ module Aws::IVSRealTime
     #
     class Participant < Struct.new(
       :attributes,
+      :browser_name,
+      :browser_version,
       :first_join_time,
+      :isp_name,
+      :os_name,
+      :os_version,
       :participant_id,
       :published,
+      :sdk_version,
       :state,
       :user_id)
       SENSITIVE = []

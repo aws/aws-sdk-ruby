@@ -1050,6 +1050,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     CreateDBInstanceMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBInstanceMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
+    CreateDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1094,6 +1095,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceReadReplicaMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBClusterIdentifier"))
+    CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1597,6 +1599,7 @@ module Aws::RDS
     DBInstance.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBInstance.add_member(:read_replica_source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaSourceDBClusterIdentifier"))
     DBInstance.add_member(:percent_progress, Shapes::ShapeRef.new(shape: String, location_name: "PercentProgress"))
+    DBInstance.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1630,6 +1633,7 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     DBInstanceAutomatedBackup.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
+    DBInstanceAutomatedBackup.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -1846,6 +1850,7 @@ module Aws::RDS
     DBSnapshot.add_member(:snapshot_target, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotTarget"))
     DBSnapshot.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBSnapshot.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
+    DBSnapshot.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
@@ -2771,6 +2776,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:rotate_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RotateMasterUserPassword"))
     ModifyDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3019,6 +3025,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:max_storage_throughput_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageThroughputPerDbInstance"))
     OrderableDBInstanceOption.add_member(:min_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinStorageThroughputPerIops"))
     OrderableDBInstanceOption.add_member(:max_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxStorageThroughputPerIops"))
+    OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")
@@ -3085,6 +3092,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
     PendingModifiedValues.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     PendingModifiedValues.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    PendingModifiedValues.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -3403,6 +3411,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterSnapshotIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3456,6 +3465,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromS3Message.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromS3Message.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3504,6 +3514,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3763,6 +3774,7 @@ module Aws::RDS
 
     ValidDBInstanceModificationsMessage.add_member(:storage, Shapes::ShapeRef.new(shape: ValidStorageOptionsList, location_name: "Storage"))
     ValidDBInstanceModificationsMessage.add_member(:valid_processor_features, Shapes::ShapeRef.new(shape: AvailableProcessorFeatureList, location_name: "ValidProcessorFeatures"))
+    ValidDBInstanceModificationsMessage.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
     ValidDBInstanceModificationsMessage.struct_class = Types::ValidDBInstanceModificationsMessage
 
     ValidStorageOptions.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))

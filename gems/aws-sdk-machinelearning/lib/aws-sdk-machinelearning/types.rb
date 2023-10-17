@@ -2988,7 +2988,7 @@ module Aws::MachineLearning
     class RDSDatabaseCredentials < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -3305,7 +3305,7 @@ module Aws::MachineLearning
     class RedshiftDatabaseCredentials < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 

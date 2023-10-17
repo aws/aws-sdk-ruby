@@ -14,6 +14,25 @@ module Aws::Textract
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Adapter = Shapes::StructureShape.new(name: 'Adapter')
+    AdapterDescription = Shapes::StringShape.new(name: 'AdapterDescription')
+    AdapterId = Shapes::StringShape.new(name: 'AdapterId')
+    AdapterList = Shapes::ListShape.new(name: 'AdapterList')
+    AdapterName = Shapes::StringShape.new(name: 'AdapterName')
+    AdapterOverview = Shapes::StructureShape.new(name: 'AdapterOverview')
+    AdapterPage = Shapes::StringShape.new(name: 'AdapterPage')
+    AdapterPages = Shapes::ListShape.new(name: 'AdapterPages')
+    AdapterVersion = Shapes::StringShape.new(name: 'AdapterVersion')
+    AdapterVersionDatasetConfig = Shapes::StructureShape.new(name: 'AdapterVersionDatasetConfig')
+    AdapterVersionEvaluationMetric = Shapes::StructureShape.new(name: 'AdapterVersionEvaluationMetric')
+    AdapterVersionEvaluationMetrics = Shapes::ListShape.new(name: 'AdapterVersionEvaluationMetrics')
+    AdapterVersionList = Shapes::ListShape.new(name: 'AdapterVersionList')
+    AdapterVersionOverview = Shapes::StructureShape.new(name: 'AdapterVersionOverview')
+    AdapterVersionStatus = Shapes::StringShape.new(name: 'AdapterVersionStatus')
+    AdapterVersionStatusMessage = Shapes::StringShape.new(name: 'AdapterVersionStatusMessage')
+    Adapters = Shapes::ListShape.new(name: 'Adapters')
+    AdaptersConfig = Shapes::StructureShape.new(name: 'AdaptersConfig')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnalyzeDocumentRequest = Shapes::StructureShape.new(name: 'AnalyzeDocumentRequest')
     AnalyzeDocumentResponse = Shapes::StructureShape.new(name: 'AnalyzeDocumentResponse')
     AnalyzeExpenseRequest = Shapes::StructureShape.new(name: 'AnalyzeExpenseRequest')
@@ -21,14 +40,25 @@ module Aws::Textract
     AnalyzeIDDetections = Shapes::StructureShape.new(name: 'AnalyzeIDDetections')
     AnalyzeIDRequest = Shapes::StructureShape.new(name: 'AnalyzeIDRequest')
     AnalyzeIDResponse = Shapes::StructureShape.new(name: 'AnalyzeIDResponse')
+    AutoUpdate = Shapes::StringShape.new(name: 'AutoUpdate')
     BadDocumentException = Shapes::StructureShape.new(name: 'BadDocumentException')
     Block = Shapes::StructureShape.new(name: 'Block')
     BlockList = Shapes::ListShape.new(name: 'BlockList')
     BlockType = Shapes::StringShape.new(name: 'BlockType')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
+    CreateAdapterRequest = Shapes::StructureShape.new(name: 'CreateAdapterRequest')
+    CreateAdapterResponse = Shapes::StructureShape.new(name: 'CreateAdapterResponse')
+    CreateAdapterVersionRequest = Shapes::StructureShape.new(name: 'CreateAdapterVersionRequest')
+    CreateAdapterVersionResponse = Shapes::StructureShape.new(name: 'CreateAdapterVersionResponse')
+    DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteAdapterRequest = Shapes::StructureShape.new(name: 'DeleteAdapterRequest')
+    DeleteAdapterResponse = Shapes::StructureShape.new(name: 'DeleteAdapterResponse')
+    DeleteAdapterVersionRequest = Shapes::StructureShape.new(name: 'DeleteAdapterVersionRequest')
+    DeleteAdapterVersionResponse = Shapes::StructureShape.new(name: 'DeleteAdapterVersionResponse')
     DetectDocumentTextRequest = Shapes::StructureShape.new(name: 'DetectDocumentTextRequest')
     DetectDocumentTextResponse = Shapes::StructureShape.new(name: 'DetectDocumentTextResponse')
     DetectedSignature = Shapes::StructureShape.new(name: 'DetectedSignature')
@@ -43,6 +73,7 @@ module Aws::Textract
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypes = Shapes::ListShape.new(name: 'EntityTypes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    EvaluationMetric = Shapes::StructureShape.new(name: 'EvaluationMetric')
     ExpenseCurrency = Shapes::StructureShape.new(name: 'ExpenseCurrency')
     ExpenseDetection = Shapes::StructureShape.new(name: 'ExpenseDetection')
     ExpenseDocument = Shapes::StructureShape.new(name: 'ExpenseDocument')
@@ -59,6 +90,10 @@ module Aws::Textract
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     Geometry = Shapes::StructureShape.new(name: 'Geometry')
+    GetAdapterRequest = Shapes::StructureShape.new(name: 'GetAdapterRequest')
+    GetAdapterResponse = Shapes::StructureShape.new(name: 'GetAdapterResponse')
+    GetAdapterVersionRequest = Shapes::StructureShape.new(name: 'GetAdapterVersionRequest')
+    GetAdapterVersionResponse = Shapes::StructureShape.new(name: 'GetAdapterVersionResponse')
     GetDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'GetDocumentAnalysisRequest')
     GetDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'GetDocumentAnalysisResponse')
     GetDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionRequest')
@@ -107,6 +142,12 @@ module Aws::Textract
     LineItemGroup = Shapes::StructureShape.new(name: 'LineItemGroup')
     LineItemGroupList = Shapes::ListShape.new(name: 'LineItemGroupList')
     LineItemList = Shapes::ListShape.new(name: 'LineItemList')
+    ListAdapterVersionsRequest = Shapes::StructureShape.new(name: 'ListAdapterVersionsRequest')
+    ListAdapterVersionsResponse = Shapes::StructureShape.new(name: 'ListAdapterVersionsResponse')
+    ListAdaptersRequest = Shapes::StructureShape.new(name: 'ListAdaptersRequest')
+    ListAdaptersResponse = Shapes::StructureShape.new(name: 'ListAdaptersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NormalizedValue = Shapes::StructureShape.new(name: 'NormalizedValue')
@@ -131,6 +172,7 @@ module Aws::Textract
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
@@ -138,6 +180,7 @@ module Aws::Textract
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     SNSTopicArn = Shapes::StringShape.new(name: 'SNSTopicArn')
     SelectionStatus = Shapes::StringShape.new(name: 'SelectionStatus')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignatureDetection = Shapes::StructureShape.new(name: 'SignatureDetection')
     SignatureDetectionList = Shapes::ListShape.new(name: 'SignatureDetectionList')
     SplitDocument = Shapes::StructureShape.new(name: 'SplitDocument')
@@ -153,6 +196,12 @@ module Aws::Textract
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TextType = Shapes::StringShape.new(name: 'TextType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
@@ -160,16 +209,62 @@ module Aws::Textract
     UndetectedSignature = Shapes::StructureShape.new(name: 'UndetectedSignature')
     UndetectedSignatureList = Shapes::ListShape.new(name: 'UndetectedSignatureList')
     UnsupportedDocumentException = Shapes::StructureShape.new(name: 'UnsupportedDocumentException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAdapterRequest = Shapes::StructureShape.new(name: 'UpdateAdapterRequest')
+    UpdateAdapterResponse = Shapes::StructureShape.new(name: 'UpdateAdapterResponse')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueType = Shapes::StringShape.new(name: 'ValueType')
     Warning = Shapes::StructureShape.new(name: 'Warning')
     Warnings = Shapes::ListShape.new(name: 'Warnings')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    Adapter.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    Adapter.add_member(:pages, Shapes::ShapeRef.new(shape: AdapterPages, location_name: "Pages"))
+    Adapter.add_member(:version, Shapes::ShapeRef.new(shape: AdapterVersion, required: true, location_name: "Version"))
+    Adapter.struct_class = Types::Adapter
+
+    AdapterList.member = Shapes::ShapeRef.new(shape: AdapterOverview)
+
+    AdapterOverview.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    AdapterOverview.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, location_name: "AdapterName"))
+    AdapterOverview.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    AdapterOverview.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, location_name: "FeatureTypes"))
+    AdapterOverview.struct_class = Types::AdapterOverview
+
+    AdapterPages.member = Shapes::ShapeRef.new(shape: AdapterPage)
+
+    AdapterVersionDatasetConfig.add_member(:manifest_s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "ManifestS3Object"))
+    AdapterVersionDatasetConfig.struct_class = Types::AdapterVersionDatasetConfig
+
+    AdapterVersionEvaluationMetric.add_member(:baseline, Shapes::ShapeRef.new(shape: EvaluationMetric, location_name: "Baseline"))
+    AdapterVersionEvaluationMetric.add_member(:adapter_version, Shapes::ShapeRef.new(shape: EvaluationMetric, location_name: "AdapterVersion"))
+    AdapterVersionEvaluationMetric.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
+    AdapterVersionEvaluationMetric.struct_class = Types::AdapterVersionEvaluationMetric
+
+    AdapterVersionEvaluationMetrics.member = Shapes::ShapeRef.new(shape: AdapterVersionEvaluationMetric)
+
+    AdapterVersionList.member = Shapes::ShapeRef.new(shape: AdapterVersionOverview)
+
+    AdapterVersionOverview.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    AdapterVersionOverview.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, location_name: "AdapterVersion"))
+    AdapterVersionOverview.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    AdapterVersionOverview.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, location_name: "FeatureTypes"))
+    AdapterVersionOverview.add_member(:status, Shapes::ShapeRef.new(shape: AdapterVersionStatus, location_name: "Status"))
+    AdapterVersionOverview.add_member(:status_message, Shapes::ShapeRef.new(shape: AdapterVersionStatusMessage, location_name: "StatusMessage"))
+    AdapterVersionOverview.struct_class = Types::AdapterVersionOverview
+
+    Adapters.member = Shapes::ShapeRef.new(shape: Adapter)
+
+    AdaptersConfig.add_member(:adapters, Shapes::ShapeRef.new(shape: Adapters, required: true, location_name: "Adapters"))
+    AdaptersConfig.struct_class = Types::AdaptersConfig
+
     AnalyzeDocumentRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     AnalyzeDocumentRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
     AnalyzeDocumentRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
     AnalyzeDocumentRequest.add_member(:queries_config, Shapes::ShapeRef.new(shape: QueriesConfig, location_name: "QueriesConfig"))
+    AnalyzeDocumentRequest.add_member(:adapters_config, Shapes::ShapeRef.new(shape: AdaptersConfig, location_name: "AdaptersConfig"))
     AnalyzeDocumentRequest.struct_class = Types::AnalyzeDocumentRequest
 
     AnalyzeDocumentResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
@@ -225,7 +320,43 @@ module Aws::Textract
     BoundingBox.add_member(:top, Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
     BoundingBox.struct_class = Types::BoundingBox
 
+    ConflictException.struct_class = Types::ConflictException
+
     ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
+
+    CreateAdapterRequest.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, required: true, location_name: "AdapterName"))
+    CreateAdapterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAdapterRequest.add_member(:description, Shapes::ShapeRef.new(shape: AdapterDescription, location_name: "Description"))
+    CreateAdapterRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
+    CreateAdapterRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
+    CreateAdapterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateAdapterRequest.struct_class = Types::CreateAdapterRequest
+
+    CreateAdapterResponse.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    CreateAdapterResponse.struct_class = Types::CreateAdapterResponse
+
+    CreateAdapterVersionRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    CreateAdapterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAdapterVersionRequest.add_member(:dataset_config, Shapes::ShapeRef.new(shape: AdapterVersionDatasetConfig, required: true, location_name: "DatasetConfig"))
+    CreateAdapterVersionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    CreateAdapterVersionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    CreateAdapterVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateAdapterVersionRequest.struct_class = Types::CreateAdapterVersionRequest
+
+    CreateAdapterVersionResponse.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    CreateAdapterVersionResponse.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, location_name: "AdapterVersion"))
+    CreateAdapterVersionResponse.struct_class = Types::CreateAdapterVersionResponse
+
+    DeleteAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    DeleteAdapterRequest.struct_class = Types::DeleteAdapterRequest
+
+    DeleteAdapterResponse.struct_class = Types::DeleteAdapterResponse
+
+    DeleteAdapterVersionRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    DeleteAdapterVersionRequest.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, required: true, location_name: "AdapterVersion"))
+    DeleteAdapterVersionRequest.struct_class = Types::DeleteAdapterVersionRequest
+
+    DeleteAdapterVersionResponse.struct_class = Types::DeleteAdapterVersionResponse
 
     DetectDocumentTextRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     DetectDocumentTextRequest.struct_class = Types::DetectDocumentTextRequest
@@ -263,6 +394,11 @@ module Aws::Textract
     DocumentTooLargeException.struct_class = Types::DocumentTooLargeException
 
     EntityTypes.member = Shapes::ShapeRef.new(shape: EntityType)
+
+    EvaluationMetric.add_member(:f1_score, Shapes::ShapeRef.new(shape: Float, location_name: "F1Score"))
+    EvaluationMetric.add_member(:precision, Shapes::ShapeRef.new(shape: Float, location_name: "Precision"))
+    EvaluationMetric.add_member(:recall, Shapes::ShapeRef.new(shape: Float, location_name: "Recall"))
+    EvaluationMetric.struct_class = Types::EvaluationMetric
 
     ExpenseCurrency.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ExpenseCurrency.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -313,6 +449,35 @@ module Aws::Textract
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
     Geometry.struct_class = Types::Geometry
+
+    GetAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    GetAdapterRequest.struct_class = Types::GetAdapterRequest
+
+    GetAdapterResponse.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    GetAdapterResponse.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, location_name: "AdapterName"))
+    GetAdapterResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    GetAdapterResponse.add_member(:description, Shapes::ShapeRef.new(shape: AdapterDescription, location_name: "Description"))
+    GetAdapterResponse.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, location_name: "FeatureTypes"))
+    GetAdapterResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
+    GetAdapterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetAdapterResponse.struct_class = Types::GetAdapterResponse
+
+    GetAdapterVersionRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    GetAdapterVersionRequest.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, required: true, location_name: "AdapterVersion"))
+    GetAdapterVersionRequest.struct_class = Types::GetAdapterVersionRequest
+
+    GetAdapterVersionResponse.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    GetAdapterVersionResponse.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, location_name: "AdapterVersion"))
+    GetAdapterVersionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    GetAdapterVersionResponse.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, location_name: "FeatureTypes"))
+    GetAdapterVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AdapterVersionStatus, location_name: "Status"))
+    GetAdapterVersionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: AdapterVersionStatusMessage, location_name: "StatusMessage"))
+    GetAdapterVersionResponse.add_member(:dataset_config, Shapes::ShapeRef.new(shape: AdapterVersionDatasetConfig, location_name: "DatasetConfig"))
+    GetAdapterVersionResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    GetAdapterVersionResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    GetAdapterVersionResponse.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: AdapterVersionEvaluationMetrics, location_name: "EvaluationMetrics"))
+    GetAdapterVersionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetAdapterVersionResponse.struct_class = Types::GetAdapterVersionResponse
 
     GetDocumentAnalysisRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetDocumentAnalysisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -471,6 +636,33 @@ module Aws::Textract
 
     LineItemList.member = Shapes::ShapeRef.new(shape: LineItemFields)
 
+    ListAdapterVersionsRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    ListAdapterVersionsRequest.add_member(:after_creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "AfterCreationTime"))
+    ListAdapterVersionsRequest.add_member(:before_creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeCreationTime"))
+    ListAdapterVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAdapterVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdapterVersionsRequest.struct_class = Types::ListAdapterVersionsRequest
+
+    ListAdapterVersionsResponse.add_member(:adapter_versions, Shapes::ShapeRef.new(shape: AdapterVersionList, location_name: "AdapterVersions"))
+    ListAdapterVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdapterVersionsResponse.struct_class = Types::ListAdapterVersionsResponse
+
+    ListAdaptersRequest.add_member(:after_creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "AfterCreationTime"))
+    ListAdaptersRequest.add_member(:before_creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeCreationTime"))
+    ListAdaptersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAdaptersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdaptersRequest.struct_class = Types::ListAdaptersRequest
+
+    ListAdaptersResponse.add_member(:adapters, Shapes::ShapeRef.new(shape: AdapterList, location_name: "Adapters"))
+    ListAdaptersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdaptersResponse.struct_class = Types::ListAdaptersResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     NormalizedValue.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     NormalizedValue.add_member(:value_type, Shapes::ShapeRef.new(shape: ValueType, location_name: "ValueType"))
     NormalizedValue.struct_class = Types::NormalizedValue
@@ -523,10 +715,14 @@ module Aws::Textract
 
     RelationshipList.member = Shapes::ShapeRef.new(shape: Relationship)
 
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
     S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "Version"))
     S3Object.struct_class = Types::S3Object
+
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SignatureDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     SignatureDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
@@ -548,6 +744,7 @@ module Aws::Textract
     StartDocumentAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
     StartDocumentAnalysisRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
     StartDocumentAnalysisRequest.add_member(:queries_config, Shapes::ShapeRef.new(shape: QueriesConfig, location_name: "QueriesConfig"))
+    StartDocumentAnalysisRequest.add_member(:adapters_config, Shapes::ShapeRef.new(shape: AdaptersConfig, location_name: "AdaptersConfig"))
     StartDocumentAnalysisRequest.struct_class = Types::StartDocumentAnalysisRequest
 
     StartDocumentAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -588,6 +785,17 @@ module Aws::Textract
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UndetectedDocumentTypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -598,6 +806,28 @@ module Aws::Textract
     UndetectedSignatureList.member = Shapes::ShapeRef.new(shape: UndetectedSignature)
 
     UnsupportedDocumentException.struct_class = Types::UnsupportedDocumentException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
+    UpdateAdapterRequest.add_member(:description, Shapes::ShapeRef.new(shape: AdapterDescription, location_name: "Description"))
+    UpdateAdapterRequest.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, location_name: "AdapterName"))
+    UpdateAdapterRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
+    UpdateAdapterRequest.struct_class = Types::UpdateAdapterRequest
+
+    UpdateAdapterResponse.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, location_name: "AdapterId"))
+    UpdateAdapterResponse.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, location_name: "AdapterName"))
+    UpdateAdapterResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    UpdateAdapterResponse.add_member(:description, Shapes::ShapeRef.new(shape: AdapterDescription, location_name: "Description"))
+    UpdateAdapterResponse.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, location_name: "FeatureTypes"))
+    UpdateAdapterResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
+    UpdateAdapterResponse.struct_class = Types::UpdateAdapterResponse
+
+    ValidationException.struct_class = Types::ValidationException
 
     Warning.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     Warning.add_member(:pages, Shapes::ShapeRef.new(shape: Pages, location_name: "Pages"))
@@ -675,6 +905,77 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_adapter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAdapter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAdapterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAdapterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_adapter_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAdapterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAdapterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAdapterVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_adapter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAdapter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAdapterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAdapterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_adapter_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAdapterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAdapterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAdapterVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:detect_document_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetectDocumentText"
         o.http_method = "POST"
@@ -690,6 +991,36 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_adapter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdapter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAdapterRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdapterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_adapter_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdapterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAdapterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdapterVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_document_analysis, Seahorse::Model::Operation.new.tap do |o|
@@ -772,6 +1103,62 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
+      api.add_operation(:list_adapter_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAdapterVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAdapterVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAdapterVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_adapters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAdapters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAdaptersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAdaptersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDocumentAnalysis"
         o.http_method = "POST"
@@ -850,6 +1237,53 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_adapter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAdapter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAdapterRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAdapterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

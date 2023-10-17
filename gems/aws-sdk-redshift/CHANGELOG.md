@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.
+
 1.98.0 (2023-09-27)
 ------------------
 

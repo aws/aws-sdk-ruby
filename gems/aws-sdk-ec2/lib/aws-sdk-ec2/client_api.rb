@@ -1128,6 +1128,8 @@ module Aws::EC2
     DisableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'DisableImageBlockPublicAccessResult')
     DisableImageDeprecationRequest = Shapes::StructureShape.new(name: 'DisableImageDeprecationRequest')
     DisableImageDeprecationResult = Shapes::StructureShape.new(name: 'DisableImageDeprecationResult')
+    DisableImageRequest = Shapes::StructureShape.new(name: 'DisableImageRequest')
+    DisableImageResult = Shapes::StructureShape.new(name: 'DisableImageResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
     DisableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountResult')
     DisableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'DisableSerialConsoleAccessRequest')
@@ -1252,6 +1254,8 @@ module Aws::EC2
     EnableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'EnableImageBlockPublicAccessResult')
     EnableImageDeprecationRequest = Shapes::StructureShape.new(name: 'EnableImageDeprecationRequest')
     EnableImageDeprecationResult = Shapes::StructureShape.new(name: 'EnableImageDeprecationResult')
+    EnableImageRequest = Shapes::StructureShape.new(name: 'EnableImageRequest')
+    EnableImageResult = Shapes::StructureShape.new(name: 'EnableImageResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
     EnableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountResult')
     EnableReachabilityAnalyzerOrganizationSharingRequest = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingRequest')
@@ -6430,6 +6434,7 @@ module Aws::EC2
     DescribeImagesRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdStringList, location_name: "ImageId"))
     DescribeImagesRequest.add_member(:owners, Shapes::ShapeRef.new(shape: OwnerStringList, location_name: "Owner"))
     DescribeImagesRequest.add_member(:include_deprecated, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeDeprecated"))
+    DescribeImagesRequest.add_member(:include_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeDisabled"))
     DescribeImagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -7732,6 +7737,13 @@ module Aws::EC2
     DisableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DisableImageDeprecationResult.struct_class = Types::DisableImageDeprecationResult
 
+    DisableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    DisableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableImageRequest.struct_class = Types::DisableImageRequest
+
+    DisableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DisableImageResult.struct_class = Types::DisableImageResult
+
     DisableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
     DisableIpamOrganizationAdminAccountRequest.struct_class = Types::DisableIpamOrganizationAdminAccountRequest
@@ -8145,6 +8157,13 @@ module Aws::EC2
 
     EnableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     EnableImageDeprecationResult.struct_class = Types::EnableImageDeprecationResult
+
+    EnableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    EnableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableImageRequest.struct_class = Types::EnableImageRequest
+
+    EnableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    EnableImageResult.struct_class = Types::EnableImageResult
 
     EnableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
@@ -9250,6 +9269,7 @@ module Aws::EC2
     Image.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "tpmSupport"))
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
     Image.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "imdsSupport"))
+    Image.add_member(:source_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceInstanceId"))
     Image.struct_class = Types::Image
 
     ImageAttribute.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -18726,6 +18746,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoresResult)
       end)
 
+      api.add_operation(:disable_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableImageResult)
+      end)
+
       api.add_operation(:disable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableImageBlockPublicAccess"
         o.http_method = "POST"
@@ -18940,6 +18968,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresResult)
+      end)
+
+      api.add_operation(:enable_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableImageResult)
       end)
 
       api.add_operation(:enable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-10-17)
+------------------
+
+* Feature - Fixed error where ListCustomRoutingEndpointGroups did not have a paginator
+
 1.51.0 (2023-09-27)
 ------------------
 

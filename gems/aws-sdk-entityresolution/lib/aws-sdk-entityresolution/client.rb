@@ -388,6 +388,107 @@ module Aws::EntityResolution
 
     # @!group API Operations
 
+    # Creates an `IdMappingWorkflow` object which stores the configuration
+    # of the data processing job to be run. Each `IdMappingWorkflow` must
+    # have a unique workflow name. To modify an existing workflow, use the
+    # `UpdateIdMappingWorkflow` API.
+    #
+    # @option params [String] :description
+    #   A description of the workflow.
+    #
+    # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
+    #   An object which defines the `idMappingType` and the
+    #   `providerProperties`.
+    #
+    # @option params [required, Array<Types::IdMappingWorkflowInputSource>] :input_source_config
+    #   A list of `InputSource` objects, which have the fields
+    #   `InputSourceARN` and `SchemaName`.
+    #
+    # @option params [required, Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
+    #   A list of `IdMappingWorkflowOutputSource` objects, each of which
+    #   contains fields `OutputS3Path` and `Output`.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow. There can't be multiple
+    #   `IdMappingWorkflows` with the same name.
+    #
+    # @return [Types::CreateIdMappingWorkflowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIdMappingWorkflowOutput#description #description} => String
+    #   * {Types::CreateIdMappingWorkflowOutput#id_mapping_techniques #id_mapping_techniques} => Types::IdMappingTechniques
+    #   * {Types::CreateIdMappingWorkflowOutput#input_source_config #input_source_config} => Array&lt;Types::IdMappingWorkflowInputSource&gt;
+    #   * {Types::CreateIdMappingWorkflowOutput#output_source_config #output_source_config} => Array&lt;Types::IdMappingWorkflowOutputSource&gt;
+    #   * {Types::CreateIdMappingWorkflowOutput#role_arn #role_arn} => String
+    #   * {Types::CreateIdMappingWorkflowOutput#workflow_arn #workflow_arn} => String
+    #   * {Types::CreateIdMappingWorkflowOutput#workflow_name #workflow_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_id_mapping_workflow({
+    #     description: "Description",
+    #     id_mapping_techniques: { # required
+    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #       provider_properties: { # required
+    #         intermediate_source_configuration: {
+    #           intermediate_s3_path: "S3Path", # required
+    #         },
+    #         provider_configuration: {
+    #         },
+    #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #     },
+    #     input_source_config: [ # required
+    #       {
+    #         input_source_arn: "IdMappingWorkflowInputSourceInputSourceARNString", # required
+    #         schema_name: "EntityName", # required
+    #       },
+    #     ],
+    #     output_source_config: [ # required
+    #       {
+    #         kms_arn: "KMSArn",
+    #         output_s3_path: "S3Path", # required
+    #       },
+    #     ],
+    #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.role_arn #=> String
+    #   resp.workflow_arn #=> String
+    #   resp.workflow_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/CreateIdMappingWorkflow AWS API Documentation
+    #
+    # @overload create_id_mapping_workflow(params = {})
+    # @param [Hash] params ({})
+    def create_id_mapping_workflow(params = {}, options = {})
+      req = build_request(:create_id_mapping_workflow, params)
+      req.send_request(options)
+    end
+
     # Creates a `MatchingWorkflow` object which stores the configuration of
     # the data processing job to be run. It is important to note that there
     # should not be a pre-existing `MatchingWorkflow` with the same name. To
@@ -421,8 +522,8 @@ module Aws::EntityResolution
     #   The tags used to organize, track, or control access for this resource.
     #
     # @option params [required, String] :workflow_name
-    #   The name of the workflow. There cannot be multiple
-    #   `DataIntegrationWorkflows` with the same name.
+    #   The name of the workflow. There can't be multiple `MatchingWorkflows`
+    #   with the same name.
     #
     # @return [Types::CreateMatchingWorkflowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -463,7 +564,15 @@ module Aws::EntityResolution
     #       },
     #     ],
     #     resolution_techniques: { # required
-    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING
+    #       provider_properties: {
+    #         intermediate_source_configuration: {
+    #           intermediate_s3_path: "S3Path", # required
+    #         },
+    #         provider_configuration: {
+    #         },
+    #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING, PROVIDER
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         rules: [ # required
@@ -496,7 +605,9 @@ module Aws::EntityResolution
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
-    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING"
+    #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
@@ -529,7 +640,7 @@ module Aws::EntityResolution
     #   additional information that Entity Resolution uses for matching.
     #
     # @option params [required, String] :schema_name
-    #   The name of the schema. There cannot be multiple `SchemaMappings` with
+    #   The name of the schema. There can't be multiple `SchemaMappings` with
     #   the same name.
     #
     # @option params [Hash<String,String>] :tags
@@ -551,7 +662,8 @@ module Aws::EntityResolution
     #         field_name: "AttributeName", # required
     #         group_name: "AttributeName",
     #         match_key: "AttributeName",
-    #         type: "NAME", # required, accepts NAME, NAME_FIRST, NAME_MIDDLE, NAME_LAST, ADDRESS, ADDRESS_STREET1, ADDRESS_STREET2, ADDRESS_STREET3, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_COUNTRY, ADDRESS_POSTALCODE, PHONE, PHONE_NUMBER, PHONE_COUNTRYCODE, EMAIL_ADDRESS, UNIQUE_ID, DATE, STRING
+    #         sub_type: "AttributeName",
+    #         type: "NAME", # required, accepts NAME, NAME_FIRST, NAME_MIDDLE, NAME_LAST, ADDRESS, ADDRESS_STREET1, ADDRESS_STREET2, ADDRESS_STREET3, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_COUNTRY, ADDRESS_POSTALCODE, PHONE, PHONE_NUMBER, PHONE_COUNTRYCODE, EMAIL_ADDRESS, UNIQUE_ID, DATE, STRING, PROVIDER_ID
     #       },
     #     ],
     #     schema_name: "EntityName", # required
@@ -567,7 +679,8 @@ module Aws::EntityResolution
     #   resp.mapped_input_fields[0].field_name #=> String
     #   resp.mapped_input_fields[0].group_name #=> String
     #   resp.mapped_input_fields[0].match_key #=> String
-    #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING"
+    #   resp.mapped_input_fields[0].sub_type #=> String
+    #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
     #   resp.schema_arn #=> String
     #   resp.schema_name #=> String
     #
@@ -577,6 +690,35 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def create_schema_mapping(params = {}, options = {})
       req = build_request(:create_schema_mapping, params)
+      req.send_request(options)
+    end
+
+    # Deletes the `IdMappingWorkflow` with a given name. This operation will
+    # succeed even if a workflow with the given name does not exist.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow to be deleted.
+    #
+    # @return [Types::DeleteIdMappingWorkflowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIdMappingWorkflowOutput#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_id_mapping_workflow({
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeleteIdMappingWorkflow AWS API Documentation
+    #
+    # @overload delete_id_mapping_workflow(params = {})
+    # @param [Hash] params ({})
+    def delete_id_mapping_workflow(params = {}, options = {})
+      req = build_request(:delete_id_mapping_workflow, params)
       req.send_request(options)
     end
 
@@ -611,9 +753,8 @@ module Aws::EntityResolution
 
     # Deletes the `SchemaMapping` with a given name. This operation will
     # succeed even if a schema with the given name does not exist. This
-    # operation will fail if there is a `DataIntegrationWorkflow` object
-    # that references the `SchemaMapping` in the workflow's
-    # `InputSourceConfig`.
+    # operation will fail if there is a `MatchingWorkflow` object that
+    # references the `SchemaMapping` in the workflow's `InputSourceConfig`.
     #
     # @option params [required, String] :schema_name
     #   The name of the schema to delete.
@@ -638,6 +779,104 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def delete_schema_mapping(params = {}, options = {})
       req = build_request(:delete_schema_mapping, params)
+      req.send_request(options)
+    end
+
+    # Gets the status, metrics, and errors (if there are any) that are
+    # associated with a job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow.
+    #
+    # @return [Types::GetIdMappingJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdMappingJobOutput#end_time #end_time} => Time
+    #   * {Types::GetIdMappingJobOutput#error_details #error_details} => Types::ErrorDetails
+    #   * {Types::GetIdMappingJobOutput#job_id #job_id} => String
+    #   * {Types::GetIdMappingJobOutput#metrics #metrics} => Types::IdMappingJobMetrics
+    #   * {Types::GetIdMappingJobOutput#start_time #start_time} => Time
+    #   * {Types::GetIdMappingJobOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_id_mapping_job({
+    #     job_id: "JobId", # required
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.end_time #=> Time
+    #   resp.error_details.error_message #=> String
+    #   resp.job_id #=> String
+    #   resp.metrics.input_records #=> Integer
+    #   resp.metrics.records_not_processed #=> Integer
+    #   resp.metrics.total_records_processed #=> Integer
+    #   resp.start_time #=> Time
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "QUEUED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetIdMappingJob AWS API Documentation
+    #
+    # @overload get_id_mapping_job(params = {})
+    # @param [Hash] params ({})
+    def get_id_mapping_job(params = {}, options = {})
+      req = build_request(:get_id_mapping_job, params)
+      req.send_request(options)
+    end
+
+    # Returns the `IdMappingWorkflow` with a given name, if it exists.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow.
+    #
+    # @return [Types::GetIdMappingWorkflowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdMappingWorkflowOutput#created_at #created_at} => Time
+    #   * {Types::GetIdMappingWorkflowOutput#description #description} => String
+    #   * {Types::GetIdMappingWorkflowOutput#id_mapping_techniques #id_mapping_techniques} => Types::IdMappingTechniques
+    #   * {Types::GetIdMappingWorkflowOutput#input_source_config #input_source_config} => Array&lt;Types::IdMappingWorkflowInputSource&gt;
+    #   * {Types::GetIdMappingWorkflowOutput#output_source_config #output_source_config} => Array&lt;Types::IdMappingWorkflowOutputSource&gt;
+    #   * {Types::GetIdMappingWorkflowOutput#role_arn #role_arn} => String
+    #   * {Types::GetIdMappingWorkflowOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetIdMappingWorkflowOutput#updated_at #updated_at} => Time
+    #   * {Types::GetIdMappingWorkflowOutput#workflow_arn #workflow_arn} => String
+    #   * {Types::GetIdMappingWorkflowOutput#workflow_name #workflow_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_id_mapping_workflow({
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.updated_at #=> Time
+    #   resp.workflow_arn #=> String
+    #   resp.workflow_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetIdMappingWorkflow AWS API Documentation
+    #
+    # @overload get_id_mapping_workflow(params = {})
+    # @param [Hash] params ({})
+    def get_id_mapping_workflow(params = {}, options = {})
+      req = build_request(:get_id_mapping_workflow, params)
       req.send_request(options)
     end
 
@@ -763,7 +1002,9 @@ module Aws::EntityResolution
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
-    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING"
+    #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
@@ -785,6 +1026,61 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Returns the `ProviderService` of a given name.
+    #
+    # @option params [required, String] :provider_name
+    #   The name of the provider. This name is typically the company name.
+    #
+    # @option params [required, String] :provider_service_name
+    #   The ARN (Amazon Resource Name) of the product that the provider
+    #   service provides.
+    #
+    # @return [Types::GetProviderServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProviderServiceOutput#anonymized_output #anonymized_output} => Boolean
+    #   * {Types::GetProviderServiceOutput#provider_configuration_definition #provider_configuration_definition} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetProviderServiceOutput#provider_endpoint_configuration #provider_endpoint_configuration} => Types::ProviderEndpointConfiguration
+    #   * {Types::GetProviderServiceOutput#provider_entity_output_definition #provider_entity_output_definition} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetProviderServiceOutput#provider_intermediate_data_access_configuration #provider_intermediate_data_access_configuration} => Types::ProviderIntermediateDataAccessConfiguration
+    #   * {Types::GetProviderServiceOutput#provider_name #provider_name} => String
+    #   * {Types::GetProviderServiceOutput#provider_service_arn #provider_service_arn} => String
+    #   * {Types::GetProviderServiceOutput#provider_service_display_name #provider_service_display_name} => String
+    #   * {Types::GetProviderServiceOutput#provider_service_name #provider_service_name} => String
+    #   * {Types::GetProviderServiceOutput#provider_service_type #provider_service_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provider_service({
+    #     provider_name: "EntityName", # required
+    #     provider_service_name: "ProviderServiceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anonymized_output #=> Boolean
+    #   resp.provider_endpoint_configuration.marketplace_configuration.asset_id #=> String
+    #   resp.provider_endpoint_configuration.marketplace_configuration.data_set_id #=> String
+    #   resp.provider_endpoint_configuration.marketplace_configuration.listing_id #=> String
+    #   resp.provider_endpoint_configuration.marketplace_configuration.revision_id #=> String
+    #   resp.provider_intermediate_data_access_configuration.aws_account_ids #=> Array
+    #   resp.provider_intermediate_data_access_configuration.aws_account_ids[0] #=> String
+    #   resp.provider_intermediate_data_access_configuration.required_bucket_actions #=> Array
+    #   resp.provider_intermediate_data_access_configuration.required_bucket_actions[0] #=> String
+    #   resp.provider_name #=> String
+    #   resp.provider_service_arn #=> String
+    #   resp.provider_service_display_name #=> String
+    #   resp.provider_service_name #=> String
+    #   resp.provider_service_type #=> String, one of "ASSIGNMENT", "ID_MAPPING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetProviderService AWS API Documentation
+    #
+    # @overload get_provider_service(params = {})
+    # @param [Hash] params ({})
+    def get_provider_service(params = {}, options = {})
+      req = build_request(:get_provider_service, params)
+      req.send_request(options)
+    end
+
     # Returns the SchemaMapping of a given name.
     #
     # @option params [required, String] :schema_name
@@ -794,6 +1090,7 @@ module Aws::EntityResolution
     #
     #   * {Types::GetSchemaMappingOutput#created_at #created_at} => Time
     #   * {Types::GetSchemaMappingOutput#description #description} => String
+    #   * {Types::GetSchemaMappingOutput#has_workflows #has_workflows} => Boolean
     #   * {Types::GetSchemaMappingOutput#mapped_input_fields #mapped_input_fields} => Array&lt;Types::SchemaInputAttribute&gt;
     #   * {Types::GetSchemaMappingOutput#schema_arn #schema_arn} => String
     #   * {Types::GetSchemaMappingOutput#schema_name #schema_name} => String
@@ -810,11 +1107,13 @@ module Aws::EntityResolution
     #
     #   resp.created_at #=> Time
     #   resp.description #=> String
+    #   resp.has_workflows #=> Boolean
     #   resp.mapped_input_fields #=> Array
     #   resp.mapped_input_fields[0].field_name #=> String
     #   resp.mapped_input_fields[0].group_name #=> String
     #   resp.mapped_input_fields[0].match_key #=> String
-    #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING"
+    #   resp.mapped_input_fields[0].sub_type #=> String
+    #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
     #   resp.schema_arn #=> String
     #   resp.schema_name #=> String
     #   resp.tags #=> Hash
@@ -830,13 +1129,98 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Lists all ID mapping jobs for a given workflow.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous API call.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow to be retrieved.
+    #
+    # @return [Types::ListIdMappingJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdMappingJobsOutput#jobs #jobs} => Array&lt;Types::JobSummary&gt;
+    #   * {Types::ListIdMappingJobsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_id_mapping_jobs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].end_time #=> Time
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].start_time #=> Time
+    #   resp.jobs[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "QUEUED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/ListIdMappingJobs AWS API Documentation
+    #
+    # @overload list_id_mapping_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_id_mapping_jobs(params = {}, options = {})
+      req = build_request(:list_id_mapping_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the `IdMappingWorkflows` that have been created
+    # for an Amazon Web Services account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous API call.
+    #
+    # @return [Types::ListIdMappingWorkflowsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdMappingWorkflowsOutput#next_token #next_token} => String
+    #   * {Types::ListIdMappingWorkflowsOutput#workflow_summaries #workflow_summaries} => Array&lt;Types::IdMappingWorkflowSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_id_mapping_workflows({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workflow_summaries #=> Array
+    #   resp.workflow_summaries[0].created_at #=> Time
+    #   resp.workflow_summaries[0].updated_at #=> Time
+    #   resp.workflow_summaries[0].workflow_arn #=> String
+    #   resp.workflow_summaries[0].workflow_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/ListIdMappingWorkflows AWS API Documentation
+    #
+    # @overload list_id_mapping_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_id_mapping_workflows(params = {}, options = {})
+      req = build_request(:list_id_mapping_workflows, params)
+      req.send_request(options)
+    end
+
     # Lists all jobs for a given workflow.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
     #
     # @option params [String] :next_token
-    #   The pagination token from the previous `ListSchemaMappings` API call.
+    #   The pagination token from the previous API call.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow to be retrieved.
@@ -881,7 +1265,7 @@ module Aws::EntityResolution
     #   The maximum number of objects returned per page.
     #
     # @option params [String] :next_token
-    #   The pagination token from the previous `ListSchemaMappings` API call.
+    #   The pagination token from the previous API call.
     #
     # @return [Types::ListMatchingWorkflowsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -902,6 +1286,7 @@ module Aws::EntityResolution
     #   resp.next_token #=> String
     #   resp.workflow_summaries #=> Array
     #   resp.workflow_summaries[0].created_at #=> Time
+    #   resp.workflow_summaries[0].resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.workflow_summaries[0].updated_at #=> Time
     #   resp.workflow_summaries[0].workflow_arn #=> String
     #   resp.workflow_summaries[0].workflow_name #=> String
@@ -915,6 +1300,52 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Returns a list of all the `ProviderServices` that are available in
+    # this Amazon Web Services Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous API call.
+    #
+    # @option params [String] :provider_name
+    #   The name of the provider. This name is typically the company name.
+    #
+    # @return [Types::ListProviderServicesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProviderServicesOutput#next_token #next_token} => String
+    #   * {Types::ListProviderServicesOutput#provider_service_summaries #provider_service_summaries} => Array&lt;Types::ProviderServiceSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provider_services({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     provider_name: "EntityName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.provider_service_summaries #=> Array
+    #   resp.provider_service_summaries[0].provider_name #=> String
+    #   resp.provider_service_summaries[0].provider_service_arn #=> String
+    #   resp.provider_service_summaries[0].provider_service_display_name #=> String
+    #   resp.provider_service_summaries[0].provider_service_name #=> String
+    #   resp.provider_service_summaries[0].provider_service_type #=> String, one of "ASSIGNMENT", "ID_MAPPING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/ListProviderServices AWS API Documentation
+    #
+    # @overload list_provider_services(params = {})
+    # @param [Hash] params ({})
+    def list_provider_services(params = {}, options = {})
+      req = build_request(:list_provider_services, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all the `SchemaMappings` that have been created for
     # an Amazon Web Services account.
     #
@@ -922,7 +1353,7 @@ module Aws::EntityResolution
     #   The maximum number of objects returned per page.
     #
     # @option params [String] :next_token
-    #   The pagination token from the previous `ListSchemaMappings` API call.
+    #   The pagination token from the previous API call.
     #
     # @return [Types::ListSchemaMappingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -943,6 +1374,7 @@ module Aws::EntityResolution
     #   resp.next_token #=> String
     #   resp.schema_list #=> Array
     #   resp.schema_list[0].created_at #=> Time
+    #   resp.schema_list[0].has_workflows #=> Boolean
     #   resp.schema_list[0].schema_arn #=> String
     #   resp.schema_list[0].schema_name #=> String
     #   resp.schema_list[0].updated_at #=> Time
@@ -984,6 +1416,35 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Starts the `IdMappingJob` of a workflow. The workflow must have
+    # previously been created using the `CreateIdMappingWorkflow` endpoint.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the ID mapping job to be retrieved.
+    #
+    # @return [Types::StartIdMappingJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartIdMappingJobOutput#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_id_mapping_job({
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/StartIdMappingJob AWS API Documentation
+    #
+    # @overload start_id_mapping_job(params = {})
+    # @param [Hash] params ({})
+    def start_id_mapping_job(params = {}, options = {})
+      req = build_request(:start_id_mapping_job, params)
       req.send_request(options)
     end
 
@@ -1083,6 +1544,99 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Updates an existing `IdMappingWorkflow`. This method is identical to
+    # `CreateIdMappingWorkflow`, except it uses an HTTP `PUT` request
+    # instead of a `POST` request, and the `IdMappingWorkflow` must already
+    # exist for the method to succeed.
+    #
+    # @option params [String] :description
+    #   A description of the workflow.
+    #
+    # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
+    #   An object which defines the `idMappingType` and the
+    #   `providerProperties`.
+    #
+    # @option params [required, Array<Types::IdMappingWorkflowInputSource>] :input_source_config
+    #   A list of `InputSource` objects, which have the fields
+    #   `InputSourceARN` and `SchemaName`.
+    #
+    # @option params [required, Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
+    #   A list of `OutputSource` objects, each of which contains fields
+    #   `OutputS3Path` and `KMSArn`.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to access resources on your behalf.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow.
+    #
+    # @return [Types::UpdateIdMappingWorkflowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdMappingWorkflowOutput#description #description} => String
+    #   * {Types::UpdateIdMappingWorkflowOutput#id_mapping_techniques #id_mapping_techniques} => Types::IdMappingTechniques
+    #   * {Types::UpdateIdMappingWorkflowOutput#input_source_config #input_source_config} => Array&lt;Types::IdMappingWorkflowInputSource&gt;
+    #   * {Types::UpdateIdMappingWorkflowOutput#output_source_config #output_source_config} => Array&lt;Types::IdMappingWorkflowOutputSource&gt;
+    #   * {Types::UpdateIdMappingWorkflowOutput#role_arn #role_arn} => String
+    #   * {Types::UpdateIdMappingWorkflowOutput#workflow_arn #workflow_arn} => String
+    #   * {Types::UpdateIdMappingWorkflowOutput#workflow_name #workflow_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_id_mapping_workflow({
+    #     description: "Description",
+    #     id_mapping_techniques: { # required
+    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #       provider_properties: { # required
+    #         intermediate_source_configuration: {
+    #           intermediate_s3_path: "S3Path", # required
+    #         },
+    #         provider_configuration: {
+    #         },
+    #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #     },
+    #     input_source_config: [ # required
+    #       {
+    #         input_source_arn: "IdMappingWorkflowInputSourceInputSourceARNString", # required
+    #         schema_name: "EntityName", # required
+    #       },
+    #     ],
+    #     output_source_config: [ # required
+    #       {
+    #         kms_arn: "KMSArn",
+    #         output_s3_path: "S3Path", # required
+    #       },
+    #     ],
+    #     role_arn: "RoleArn", # required
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.role_arn #=> String
+    #   resp.workflow_arn #=> String
+    #   resp.workflow_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/UpdateIdMappingWorkflow AWS API Documentation
+    #
+    # @overload update_id_mapping_workflow(params = {})
+    # @param [Hash] params ({})
+    def update_id_mapping_workflow(params = {}, options = {})
+      req = build_request(:update_id_mapping_workflow, params)
+      req.send_request(options)
+    end
+
     # Updates an existing `MatchingWorkflow`. This method is identical to
     # `CreateMatchingWorkflow`, except it uses an HTTP `PUT` request instead
     # of a `POST` request, and the `MatchingWorkflow` must already exist for
@@ -1153,7 +1707,15 @@ module Aws::EntityResolution
     #       },
     #     ],
     #     resolution_techniques: { # required
-    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING
+    #       provider_properties: {
+    #         intermediate_source_configuration: {
+    #           intermediate_s3_path: "S3Path", # required
+    #         },
+    #         provider_configuration: {
+    #         },
+    #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING, PROVIDER
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         rules: [ # required
@@ -1183,7 +1745,9 @@ module Aws::EntityResolution
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
-    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING"
+    #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
+    #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
@@ -1201,6 +1765,70 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Updates a schema mapping.
+    #
+    # <note markdown="1"> A schema is immutable if it is being used by a workflow. Therefore,
+    # you can't update a schema mapping if it's associated with a
+    # workflow.
+    #
+    #  </note>
+    #
+    # @option params [String] :description
+    #   A description of the schema.
+    #
+    # @option params [required, Array<Types::SchemaInputAttribute>] :mapped_input_fields
+    #   A list of `MappedInputFields`. Each `MappedInputField` corresponds to
+    #   a column the source data table, and contains column name plus
+    #   additional information that Entity Resolution uses for matching.
+    #
+    # @option params [required, String] :schema_name
+    #   The name of the schema. There can't be multiple `SchemaMappings` with
+    #   the same name.
+    #
+    # @return [Types::UpdateSchemaMappingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSchemaMappingOutput#description #description} => String
+    #   * {Types::UpdateSchemaMappingOutput#mapped_input_fields #mapped_input_fields} => Array&lt;Types::SchemaInputAttribute&gt;
+    #   * {Types::UpdateSchemaMappingOutput#schema_arn #schema_arn} => String
+    #   * {Types::UpdateSchemaMappingOutput#schema_name #schema_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_schema_mapping({
+    #     description: "Description",
+    #     mapped_input_fields: [ # required
+    #       {
+    #         field_name: "AttributeName", # required
+    #         group_name: "AttributeName",
+    #         match_key: "AttributeName",
+    #         sub_type: "AttributeName",
+    #         type: "NAME", # required, accepts NAME, NAME_FIRST, NAME_MIDDLE, NAME_LAST, ADDRESS, ADDRESS_STREET1, ADDRESS_STREET2, ADDRESS_STREET3, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_COUNTRY, ADDRESS_POSTALCODE, PHONE, PHONE_NUMBER, PHONE_COUNTRYCODE, EMAIL_ADDRESS, UNIQUE_ID, DATE, STRING, PROVIDER_ID
+    #       },
+    #     ],
+    #     schema_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.mapped_input_fields #=> Array
+    #   resp.mapped_input_fields[0].field_name #=> String
+    #   resp.mapped_input_fields[0].group_name #=> String
+    #   resp.mapped_input_fields[0].match_key #=> String
+    #   resp.mapped_input_fields[0].sub_type #=> String
+    #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
+    #   resp.schema_arn #=> String
+    #   resp.schema_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/UpdateSchemaMapping AWS API Documentation
+    #
+    # @overload update_schema_mapping(params = {})
+    # @param [Hash] params ({})
+    def update_schema_mapping(params = {}, options = {})
+      req = build_request(:update_schema_mapping, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1214,7 +1842,7 @@ module Aws::EntityResolution
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

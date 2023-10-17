@@ -273,6 +273,13 @@ module Aws::RDS
       data[:db_system_id]
     end
 
+    # Indicates whether the DB instance has a dedicated log volume (DLV)
+    # enabled.
+    # @return [Boolean]
+    def dedicated_log_volume
+      data[:dedicated_log_volume]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -690,6 +697,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -1131,6 +1139,9 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    # @option options [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

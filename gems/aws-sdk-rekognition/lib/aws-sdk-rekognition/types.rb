@@ -964,8 +964,22 @@ module Aws::Rekognition
     #   The name of the project to create.
     #   @return [String]
     #
+    # @!attribute [rw] feature
+    #   Specifies feature that is being customized. If no value is provided
+    #   CUSTOM\_LABELS is used as a default.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   Specifies whether automatic retraining should be attempted for the
+    #   versions of the project. Automatic retraining is done as a best
+    #   effort. Required argument for Content Moderation. Applicable only to
+    #   adapters.
+    #   @return [String]
+    #
     class CreateProjectRequest < Struct.new(
-      :project_name)
+      :project_name,
+      :feature,
+      :auto_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -982,45 +996,47 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] project_arn
-    #   The ARN of the Amazon Rekognition Custom Labels project that manages
-    #   the model that you want to train.
+    #   The ARN of the Amazon Rekognition project that will manage the
+    #   project version you want to train.
     #   @return [String]
     #
     # @!attribute [rw] version_name
-    #   A name for the version of the model. This value must be unique.
+    #   A name for the version of the project version. This value must be
+    #   unique.
     #   @return [String]
     #
     # @!attribute [rw] output_config
     #   The Amazon S3 bucket location to store the results of training. The
-    #   S3 bucket can be in any AWS account as long as the caller has
-    #   `s3:PutObject` permissions on the S3 bucket.
+    #   bucket can be any S3 bucket in your AWS account. You need
+    #   `s3:PutObject` permission on the bucket.
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] training_data
     #   Specifies an external manifest that the services uses to train the
-    #   model. If you specify `TrainingData` you must also specify
+    #   project version. If you specify `TrainingData` you must also specify
     #   `TestingData`. The project must not have any associated datasets.
     #   @return [Types::TrainingData]
     #
     # @!attribute [rw] testing_data
     #   Specifies an external manifest that the service uses to test the
-    #   model. If you specify `TestingData` you must also specify
+    #   project version. If you specify `TestingData` you must also specify
     #   `TrainingData`. The project must not have any associated datasets.
     #   @return [Types::TestingData]
     #
     # @!attribute [rw] tags
     #   A set of tags (key-value pairs) that you want to attach to the
-    #   model.
+    #   project version.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] kms_key_id
     #   The identifier for your AWS Key Management Service key (AWS KMS
     #   key). You can supply the Amazon Resource Name (ARN) of your KMS key,
     #   the ID of your KMS key, an alias for your KMS key, or an alias ARN.
-    #   The key is used to encrypt training and test images copied into the
-    #   service for model training. Your source images are unaffected. The
-    #   key is also used to encrypt training results and manifest files
-    #   written to the output Amazon S3 bucket (`OutputConfig`).
+    #   The key is used to encrypt training images, test images, and
+    #   manifest files copied into the service for the project version. Your
+    #   source images are unaffected. The key is also used to encrypt
+    #   training results and manifest files written to the output Amazon S3
+    #   bucket (`OutputConfig`).
     #
     #   If you choose to use your own KMS key, you need the following
     #   permissions on the KMS key.
@@ -1037,6 +1053,16 @@ module Aws::Rekognition
     #   service are encrypted using a key that AWS owns and manages.
     #   @return [String]
     #
+    # @!attribute [rw] version_description
+    #   A description applied to the project version being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_config
+    #   Feature-specific configuration of the training job. If the job
+    #   configuration does not match the feature type associated with the
+    #   project, an InvalidParameterException is returned.
+    #   @return [Types::CustomizationFeatureConfig]
+    #
     class CreateProjectVersionRequest < Struct.new(
       :project_arn,
       :version_name,
@@ -1044,13 +1070,15 @@ module Aws::Rekognition
       :training_data,
       :testing_data,
       :tags,
-      :kms_key_id)
+      :kms_key_id,
+      :version_description,
+      :feature_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] project_version_arn
-    #   The ARN of the model version that was created. Use
+    #   The ARN of the model or the project version that was created. Use
     #   `DescribeProjectVersion` to get the current status of the training
     #   operation.
     #   @return [String]
@@ -1225,6 +1253,34 @@ module Aws::Rekognition
       :name,
       :confidence,
       :geometry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Feature specific configuration for the training job. Configuration
+    # provided for the job must match the feature type parameter associated
+    # with project. If configuration and feature type do not match an
+    # InvalidParameterException is returned.
+    #
+    # @!attribute [rw] content_moderation
+    #   Configuration options for Custom Moderation training.
+    #   @return [Types::CustomizationFeatureContentModerationConfig]
+    #
+    class CustomizationFeatureConfig < Struct.new(
+      :content_moderation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for Content Moderation training.
+    #
+    # @!attribute [rw] confidence_threshold
+    #   The confidence level you plan to use to identify if unsafe content
+    #   is present during inference.
+    #   @return [Float]
+    #
+    class CustomizationFeatureContentModerationConfig < Struct.new(
+      :confidence_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1545,8 +1601,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] project_version_arn
-    #   The Amazon Resource Name (ARN) of the model version that you want to
-    #   delete.
+    #   The Amazon Resource Name (ARN) of the project version that you want
+    #   to delete.
     #   @return [String]
     #
     class DeleteProjectVersionRequest < Struct.new(
@@ -1676,24 +1732,24 @@ module Aws::Rekognition
 
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project that contains the
-    #   models you want to describe.
+    #   model/adapter you want to describe.
     #   @return [String]
     #
     # @!attribute [rw] version_names
-    #   A list of model version names that you want to describe. You can add
-    #   up to 10 model version names to the list. If you don't specify a
-    #   value, all model descriptions are returned. A version name is part
-    #   of a model (ProjectVersion) ARN. For example,
-    #   `my-model.2020-01-21T09.10.15` is the version name in the following
-    #   ARN.
+    #   A list of model or project version names that you want to describe.
+    #   You can add up to 10 model or project version names to the list. If
+    #   you don't specify a value, all project version descriptions are
+    #   returned. A version name is part of a project version ARN. For
+    #   example, `my-model.2020-01-21T09.10.15` is the version name in the
+    #   following ARN.
     #   `arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more
-    #   results to retrieve), Amazon Rekognition Custom Labels returns a
-    #   pagination token in the response. You can use this pagination token
-    #   to retrieve the next set of results.
+    #   results to retrieve), Amazon Rekognition returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1713,15 +1769,15 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] project_version_descriptions
-    #   A list of model descriptions. The list is sorted by the creation
-    #   date and time of the model versions, latest to earliest.
+    #   A list of project version descriptions. The list is sorted by the
+    #   creation date and time of the project versions, latest to earliest.
     #   @return [Array<Types::ProjectVersionDescription>]
     #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more
-    #   results to retrieve), Amazon Rekognition Custom Labels returns a
-    #   pagination token in the response. You can use this pagination token
-    #   to retrieve the next set of results.
+    #   results to retrieve), Amazon Rekognition returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of results.
     #   @return [String]
     #
     class DescribeProjectVersionsResponse < Struct.new(
@@ -1733,9 +1789,9 @@ module Aws::Rekognition
 
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more
-    #   results to retrieve), Amazon Rekognition Custom Labels returns a
-    #   pagination token in the response. You can use this pagination token
-    #   to retrieve the next set of results.
+    #   results to retrieve), Rekognition returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1746,15 +1802,21 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] project_names
-    #   A list of the projects that you want Amazon Rekognition Custom
-    #   Labels to describe. If you don't specify a value, the response
-    #   includes descriptions for all the projects in your AWS account.
+    #   A list of the projects that you want Rekognition to describe. If you
+    #   don't specify a value, the response includes descriptions for all
+    #   the projects in your AWS account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] features
+    #   Specifies the type of customization to filter projects by. If no
+    #   value is specified, CUSTOM\_LABELS is used as a default.
     #   @return [Array<String>]
     #
     class DescribeProjectsRequest < Struct.new(
       :next_token,
       :max_results,
-      :project_names)
+      :project_names,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1766,9 +1828,9 @@ module Aws::Rekognition
     #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more
-    #   results to retrieve), Amazon Rekognition Custom Labels returns a
-    #   pagination token in the response. You can use this pagination token
-    #   to retrieve the next set of results.
+    #   results to retrieve), Amazon Rekognition returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of results.
     #   @return [String]
     #
     class DescribeProjectsResponse < Struct.new(
@@ -1888,7 +1950,11 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] project_version_arn
-    #   The ARN of the model version that you want to use.
+    #   The ARN of the model version that you want to use. Only models
+    #   associated with Custom Labels projects accepted by the operation. If
+    #   a provided ARN refers to a model version associated with a project
+    #   for a different feature type, then an InvalidParameterException is
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -2287,10 +2353,17 @@ module Aws::Rekognition
     #   FlowDefinition the image will be sent to.
     #   @return [Types::HumanLoopConfig]
     #
+    # @!attribute [rw] project_version
+    #   Identifier for the custom adapter. Expects the ProjectVersionArn as
+    #   a value. Use the CreateProject or CreateProjectVersion APIs to
+    #   create a custom adapter.
+    #   @return [String]
+    #
     class DetectModerationLabelsRequest < Struct.new(
       :image,
       :min_confidence,
-      :human_loop_config)
+      :human_loop_config,
+      :project_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2301,18 +2374,26 @@ module Aws::Rekognition
     #   @return [Array<Types::ModerationLabel>]
     #
     # @!attribute [rw] moderation_model_version
-    #   Version number of the moderation detection model that was used to
-    #   detect unsafe content.
+    #   Version number of the base moderation detection model that was used
+    #   to detect unsafe content.
     #   @return [String]
     #
     # @!attribute [rw] human_loop_activation_output
     #   Shows the results of the human in the loop evaluation.
     #   @return [Types::HumanLoopActivationOutput]
     #
+    # @!attribute [rw] project_version
+    #   Identifier of the custom adapter that was used during inference. If
+    #   during inference the adapter was EXPIRED, then the parameter will
+    #   not be returned, indicating that a base moderation detection project
+    #   version was used.
+    #   @return [String]
+    #
     class DetectModerationLabelsResponse < Struct.new(
       :moderation_labels,
       :moderation_model_version,
-      :human_loop_activation_output)
+      :human_loop_activation_output,
+      :project_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4635,11 +4716,10 @@ module Aws::Rekognition
     end
 
     # An Amazon Rekognition service limit was exceeded. For example, if you
-    # start too many Amazon Rekognition Video jobs concurrently, calls to
-    # start operations (`StartLabelDetection`, for example) will raise a
-    # `LimitExceededException` exception (HTTP status code: 400) until the
-    # number of concurrently running jobs is below the Amazon Rekognition
-    # service limit.
+    # start too many jobs concurrently, subsequent calls to start operations
+    # (ex: `StartLabelDetection`) will raise a `LimitExceededException`
+    # exception (HTTP status code: 400) until the number of concurrently
+    # running jobs is below the Amazon Rekognition service limit.
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
@@ -5319,11 +5399,22 @@ module Aws::Rekognition
     #   Information about the training and test datasets in the project.
     #   @return [Array<Types::DatasetMetadata>]
     #
+    # @!attribute [rw] feature
+    #   Specifies the project that is being customized.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   Indicates whether automatic retraining will be attempted for the
+    #   versions of the project. Applies only to adapters.
+    #   @return [String]
+    #
     class ProjectDescription < Struct.new(
       :project_arn,
       :creation_timestamp,
       :status,
-      :datasets)
+      :datasets,
+      :feature,
+      :auto_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5366,11 +5457,10 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A description of a version of an Amazon Rekognition Custom Labels
-    # model.
+    # A description of a version of a Amazon Rekognition project version.
     #
     # @!attribute [rw] project_version_arn
-    #   The Amazon Resource Name (ARN) of the model version.
+    #   The Amazon Resource Name (ARN) of the project version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
@@ -5378,8 +5468,9 @@ module Aws::Rekognition
     #   @return [Time]
     #
     # @!attribute [rw] min_inference_units
-    #   The minimum number of inference units used by the model. For more
-    #   information, see StartProjectVersion.
+    #   The minimum number of inference units used by the model. Applies
+    #   only to Custom Labels projects. For more information, see
+    #   StartProjectVersion.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -5429,9 +5520,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_inference_units
-    #   The maximum number of inference units Amazon Rekognition Custom
-    #   Labels uses to auto-scale the model. For more information, see
-    #   StartProjectVersion.
+    #   The maximum number of inference units Amazon Rekognition uses to
+    #   auto-scale the model. Applies only to Custom Labels projects. For
+    #   more information, see StartProjectVersion.
     #   @return [Integer]
     #
     # @!attribute [rw] source_project_version_arn
@@ -5439,6 +5530,22 @@ module Aws::Rekognition
     #   `SourceProjectVersionArn` contains the ARN of the source model
     #   version.
     #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   A user-provided description of the project version.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature
+    #   The feature that was customized.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_version
+    #   The base detection model version used to create the project version.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_config
+    #   Feature specific configuration that was applied during training.
+    #   @return [Types::CustomizationFeatureConfig]
     #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
@@ -5455,7 +5562,11 @@ module Aws::Rekognition
       :manifest_summary,
       :kms_key_id,
       :max_inference_units,
-      :source_project_version_arn)
+      :source_project_version_arn,
+      :version_description,
+      :feature,
+      :base_model_version,
+      :feature_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6672,11 +6783,6 @@ module Aws::Rekognition
     #   The minimum number of inference units to use. A single inference
     #   unit represents 1 hour of processing.
     #
-    #   For information about the number of transactions per second (TPS)
-    #   that an inference unit can support, see *Running a trained Amazon
-    #   Rekognition Custom Labels model* in the Amazon Rekognition Custom
-    #   Labels Guide.
-    #
     #   Use a higher number to increase the TPS throughput of your model.
     #   You are charged for the number of inference units that you use.
     #   @return [Integer]
@@ -6969,7 +7075,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] project_version_arn
     #   The Amazon Resource Name (ARN) of the model version that you want to
-    #   delete.
+    #   stop.
     #
     #   This operation requires permissions to perform the
     #   `rekognition:StopProjectVersion` action.
@@ -7259,18 +7365,16 @@ module Aws::Rekognition
     end
 
     # The dataset used for testing. Optionally, if `AutoCreate` is set,
-    # Amazon Rekognition Custom Labels uses the training dataset to create a
-    # test dataset with a temporary split of the training dataset.
+    # Amazon Rekognition uses the training dataset to create a test dataset
+    # with a temporary split of the training dataset.
     #
     # @!attribute [rw] assets
     #   The assets used for testing.
     #   @return [Array<Types::Asset>]
     #
     # @!attribute [rw] auto_create
-    #   If specified, Amazon Rekognition Custom Labels temporarily splits
-    #   the training dataset (80%) to create a test dataset (20%) for the
-    #   training job. After training completes, the test dataset is not
-    #   stored and the training dataset reverts to its previous size.
+    #   If specified, Rekognition splits training dataset to create a test
+    #   dataset for the training job.
     #   @return [Boolean]
     #
     class TestingData < Struct.new(
@@ -7390,8 +7494,8 @@ module Aws::Rekognition
     # The dataset used for training.
     #
     # @!attribute [rw] assets
-    #   A Sagemaker GroundTruth manifest file that contains the training
-    #   images (assets).
+    #   A manifest file that contains references to the training images and
+    #   ground-truth annotations.
     #   @return [Array<Types::Asset>]
     #
     class TrainingData < Struct.new(
@@ -7400,21 +7504,21 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Sagemaker Groundtruth format manifest files for the input, output and
-    # validation datasets that are used and created during testing.
+    # The data validation manifest created for the training dataset during
+    # model training.
     #
     # @!attribute [rw] input
-    #   The training assets that you supplied for training.
+    #   The training data that you supplied.
     #   @return [Types::TrainingData]
     #
     # @!attribute [rw] output
-    #   The images (assets) that were actually trained by Amazon Rekognition
-    #   Custom Labels.
+    #   Reference to images (assets) that were actually used during training
+    #   with trained model predictions.
     #   @return [Types::TrainingData]
     #
     # @!attribute [rw] validation
-    #   The location of the data validation manifest. The data validation
-    #   manifest is created for the training dataset during model training.
+    #   A manifest that you supplied for training, with validation results
+    #   for each line.
     #   @return [Types::ValidationData]
     #
     class TrainingDataResult < Struct.new(

@@ -14,6 +14,8 @@ module Aws::ManagedBlockchainQuery
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AssetContract = Shapes::StructureShape.new(name: 'AssetContract')
+    AssetContractList = Shapes::ListShape.new(name: 'AssetContractList')
     BatchGetTokenBalanceErrorItem = Shapes::StructureShape.new(name: 'BatchGetTokenBalanceErrorItem')
     BatchGetTokenBalanceErrors = Shapes::ListShape.new(name: 'BatchGetTokenBalanceErrors')
     BatchGetTokenBalanceInput = Shapes::StructureShape.new(name: 'BatchGetTokenBalanceInput')
@@ -24,8 +26,13 @@ module Aws::ManagedBlockchainQuery
     BlockHash = Shapes::StringShape.new(name: 'BlockHash')
     BlockchainInstant = Shapes::StructureShape.new(name: 'BlockchainInstant')
     ChainAddress = Shapes::StringShape.new(name: 'ChainAddress')
+    ContractFilter = Shapes::StructureShape.new(name: 'ContractFilter')
+    ContractIdentifier = Shapes::StructureShape.new(name: 'ContractIdentifier')
+    ContractMetadata = Shapes::StructureShape.new(name: 'ContractMetadata')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    GetAssetContractInput = Shapes::StructureShape.new(name: 'GetAssetContractInput')
+    GetAssetContractOutput = Shapes::StructureShape.new(name: 'GetAssetContractOutput')
     GetTokenBalanceInput = Shapes::StructureShape.new(name: 'GetTokenBalanceInput')
     GetTokenBalanceInputList = Shapes::ListShape.new(name: 'GetTokenBalanceInputList')
     GetTokenBalanceOutput = Shapes::StructureShape.new(name: 'GetTokenBalanceOutput')
@@ -33,6 +40,9 @@ module Aws::ManagedBlockchainQuery
     GetTransactionOutput = Shapes::StructureShape.new(name: 'GetTransactionOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    ListAssetContractsInput = Shapes::StructureShape.new(name: 'ListAssetContractsInput')
+    ListAssetContractsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAssetContractsInputMaxResultsInteger')
+    ListAssetContractsOutput = Shapes::StructureShape.new(name: 'ListAssetContractsOutput')
     ListTokenBalancesInput = Shapes::StructureShape.new(name: 'ListTokenBalancesInput')
     ListTokenBalancesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListTokenBalancesInputMaxResultsInteger')
     ListTokenBalancesOutput = Shapes::StructureShape.new(name: 'ListTokenBalancesOutput')
@@ -50,6 +60,7 @@ module Aws::ManagedBlockchainQuery
     OwnerIdentifier = Shapes::StructureShape.new(name: 'OwnerIdentifier')
     QueryNetwork = Shapes::StringShape.new(name: 'QueryNetwork')
     QueryTokenId = Shapes::StringShape.new(name: 'QueryTokenId')
+    QueryTokenStandard = Shapes::StringShape.new(name: 'QueryTokenStandard')
     QueryTransactionEventType = Shapes::StringShape.new(name: 'QueryTransactionEventType')
     QueryTransactionHash = Shapes::StringShape.new(name: 'QueryTransactionHash')
     QueryTransactionStatus = Shapes::StringShape.new(name: 'QueryTransactionStatus')
@@ -79,6 +90,13 @@ module Aws::ManagedBlockchainQuery
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AssetContract.add_member(:contract_identifier, Shapes::ShapeRef.new(shape: ContractIdentifier, required: true, location_name: "contractIdentifier"))
+    AssetContract.add_member(:token_standard, Shapes::ShapeRef.new(shape: QueryTokenStandard, required: true, location_name: "tokenStandard"))
+    AssetContract.add_member(:deployer_address, Shapes::ShapeRef.new(shape: ChainAddress, required: true, location_name: "deployerAddress"))
+    AssetContract.struct_class = Types::AssetContract
+
+    AssetContractList.member = Shapes::ShapeRef.new(shape: AssetContract)
 
     BatchGetTokenBalanceErrorItem.add_member(:token_identifier, Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
     BatchGetTokenBalanceErrorItem.add_member(:owner_identifier, Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
@@ -114,6 +132,29 @@ module Aws::ManagedBlockchainQuery
     BlockchainInstant.add_member(:time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "time"))
     BlockchainInstant.struct_class = Types::BlockchainInstant
 
+    ContractFilter.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
+    ContractFilter.add_member(:token_standard, Shapes::ShapeRef.new(shape: QueryTokenStandard, required: true, location_name: "tokenStandard"))
+    ContractFilter.add_member(:deployer_address, Shapes::ShapeRef.new(shape: ChainAddress, required: true, location_name: "deployerAddress"))
+    ContractFilter.struct_class = Types::ContractFilter
+
+    ContractIdentifier.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
+    ContractIdentifier.add_member(:contract_address, Shapes::ShapeRef.new(shape: ChainAddress, required: true, location_name: "contractAddress"))
+    ContractIdentifier.struct_class = Types::ContractIdentifier
+
+    ContractMetadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ContractMetadata.add_member(:symbol, Shapes::ShapeRef.new(shape: String, location_name: "symbol"))
+    ContractMetadata.add_member(:decimals, Shapes::ShapeRef.new(shape: Integer, location_name: "decimals"))
+    ContractMetadata.struct_class = Types::ContractMetadata
+
+    GetAssetContractInput.add_member(:contract_identifier, Shapes::ShapeRef.new(shape: ContractIdentifier, required: true, location_name: "contractIdentifier"))
+    GetAssetContractInput.struct_class = Types::GetAssetContractInput
+
+    GetAssetContractOutput.add_member(:contract_identifier, Shapes::ShapeRef.new(shape: ContractIdentifier, required: true, location_name: "contractIdentifier"))
+    GetAssetContractOutput.add_member(:token_standard, Shapes::ShapeRef.new(shape: QueryTokenStandard, required: true, location_name: "tokenStandard"))
+    GetAssetContractOutput.add_member(:deployer_address, Shapes::ShapeRef.new(shape: ChainAddress, required: true, location_name: "deployerAddress"))
+    GetAssetContractOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: ContractMetadata, location_name: "metadata"))
+    GetAssetContractOutput.struct_class = Types::GetAssetContractOutput
+
     GetTokenBalanceInput.add_member(:token_identifier, Shapes::ShapeRef.new(shape: TokenIdentifier, required: true, location_name: "tokenIdentifier"))
     GetTokenBalanceInput.add_member(:owner_identifier, Shapes::ShapeRef.new(shape: OwnerIdentifier, required: true, location_name: "ownerIdentifier"))
     GetTokenBalanceInput.add_member(:at_blockchain_instant, Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "atBlockchainInstant"))
@@ -138,6 +179,15 @@ module Aws::ManagedBlockchainQuery
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    ListAssetContractsInput.add_member(:contract_filter, Shapes::ShapeRef.new(shape: ContractFilter, required: true, location_name: "contractFilter"))
+    ListAssetContractsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssetContractsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAssetContractsInputMaxResultsInteger, location_name: "maxResults"))
+    ListAssetContractsInput.struct_class = Types::ListAssetContractsInput
+
+    ListAssetContractsOutput.add_member(:contracts, Shapes::ShapeRef.new(shape: AssetContractList, required: true, location_name: "contracts"))
+    ListAssetContractsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAssetContractsOutput.struct_class = Types::ListAssetContractsOutput
 
     ListTokenBalancesInput.add_member(:owner_filter, Shapes::ShapeRef.new(shape: OwnerFilter, location_name: "ownerFilter"))
     ListTokenBalancesInput.add_member(:token_filter, Shapes::ShapeRef.new(shape: TokenFilter, required: true, location_name: "tokenFilter"))
@@ -305,6 +355,20 @@ module Aws::ManagedBlockchainQuery
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:get_asset_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAssetContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-asset-contract"
+        o.input = Shapes::ShapeRef.new(shape: GetAssetContractInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAssetContractOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:get_token_balance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTokenBalance"
         o.http_method = "POST"
@@ -331,6 +395,25 @@ module Aws::ManagedBlockchainQuery
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:list_asset_contracts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssetContracts"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-asset-contracts"
+        o.input = Shapes::ShapeRef.new(shape: ListAssetContractsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAssetContractsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_token_balances, Seahorse::Model::Operation.new.tap do |o|

@@ -21126,11 +21126,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner
@@ -21496,11 +21499,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner

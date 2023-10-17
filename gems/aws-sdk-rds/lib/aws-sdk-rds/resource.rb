@@ -1036,6 +1036,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2148,6 +2149,9 @@ module Aws::RDS
     #   global area (SGA) and Oracle background processes. If you don't
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do

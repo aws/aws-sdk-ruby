@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.197.0 (2023-10-12)
+------------------
+
+* Feature - This release adds support for adding a dedicated log volume to open-source RDS instances.
+
 1.196.0 (2023-10-05)
 ------------------
 

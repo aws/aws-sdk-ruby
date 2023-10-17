@@ -36,6 +36,7 @@ module Aws::AutoScaling
     AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
     AllowedInstanceTypes = Shapes::ListShape.new(name: 'AllowedInstanceTypes')
     AlreadyExistsFault = Shapes::StructureShape.new(name: 'AlreadyExistsFault')
+    AnyPrintableAsciiStringMaxLen4000 = Shapes::StringShape.new(name: 'AnyPrintableAsciiStringMaxLen4000')
     AsciiStringMaxLen255 = Shapes::StringShape.new(name: 'AsciiStringMaxLen255')
     AssociatePublicIpAddress = Shapes::BooleanShape.new(name: 'AssociatePublicIpAddress')
     AttachInstancesQuery = Shapes::StructureShape.new(name: 'AttachInstancesQuery')
@@ -1067,7 +1068,7 @@ module Aws::AutoScaling
     LifecycleHook.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, location_name: "LifecycleTransition"))
     LifecycleHook.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
     LifecycleHook.add_member(:role_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "RoleARN"))
-    LifecycleHook.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    LifecycleHook.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     LifecycleHook.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     LifecycleHook.add_member(:global_timeout, Shapes::ShapeRef.new(shape: GlobalTimeout, location_name: "GlobalTimeout"))
     LifecycleHook.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
@@ -1077,7 +1078,7 @@ module Aws::AutoScaling
 
     LifecycleHookSpecification.add_member(:lifecycle_hook_name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "LifecycleHookName"))
     LifecycleHookSpecification.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, required: true, location_name: "LifecycleTransition"))
-    LifecycleHookSpecification.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    LifecycleHookSpecification.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     LifecycleHookSpecification.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     LifecycleHookSpecification.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
     LifecycleHookSpecification.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
@@ -1256,7 +1257,7 @@ module Aws::AutoScaling
     PutLifecycleHookType.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, location_name: "LifecycleTransition"))
     PutLifecycleHookType.add_member(:role_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "RoleARN"))
     PutLifecycleHookType.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
-    PutLifecycleHookType.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    PutLifecycleHookType.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     PutLifecycleHookType.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     PutLifecycleHookType.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
     PutLifecycleHookType.struct_class = Types::PutLifecycleHookType
@@ -1828,6 +1829,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceRefreshesAnswer)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_launch_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -1872,6 +1879,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -1882,6 +1895,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_metric_collection_types, Seahorse::Model::Operation.new.tap do |o|

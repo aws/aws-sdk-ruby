@@ -3124,7 +3124,7 @@ module Aws::SageMaker
     # The SageMaker Canvas application settings.
     #
     # @!attribute [rw] time_series_forecasting_settings
-    #   Time series forecast settings for the Canvas application.
+    #   Time series forecast settings for the SageMaker Canvas application.
     #   @return [Types::TimeSeriesForecastingSettings]
     #
     # @!attribute [rw] model_register_settings
@@ -3139,13 +3139,23 @@ module Aws::SageMaker
     #   The settings for connecting to an external data source with OAuth.
     #   @return [Array<Types::IdentityProviderOAuthSetting>]
     #
+    # @!attribute [rw] kendra_settings
+    #   The settings for document querying.
+    #   @return [Types::KendraSettings]
+    #
+    # @!attribute [rw] direct_deploy_settings
+    #   The model deployment settings for the SageMaker Canvas application.
+    #   @return [Types::DirectDeploySettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
       :time_series_forecasting_settings,
       :model_register_settings,
       :workspace_settings,
-      :identity_provider_o_auth_settings)
+      :identity_provider_o_auth_settings,
+      :kendra_settings,
+      :direct_deploy_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16341,6 +16351,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The model deployment settings for the SageMaker Canvas application.
+    #
+    # <note markdown="1"> In order to enable model deployment for Canvas, the SageMaker
+    # Domain's or user profile's Amazon Web Services IAM execution role
+    # must have the `AmazonSageMakerCanvasDirectDeployAccess` policy
+    # attached. You can also turn on model deployment permissions through
+    # the SageMaker Domain's or user profile's settings in the SageMaker
+    # console.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   Describes whether model deployment permissions are enabled or
+    #   disabled in the Canvas application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DirectDeploySettings AWS API Documentation
+    #
+    class DirectDeploySettings < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DisableSagemakerServicecatalogPortfolioInput AWS API Documentation
@@ -21196,8 +21230,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon SageMaker Canvas app setting where you configure OAuth for
-    # connecting to an external data source, such as Snowflake.
+    # The Amazon SageMaker Canvas application setting where you configure
+    # OAuth for connecting to an external data source, such as Snowflake.
     #
     # @!attribute [rw] data_source_name
     #   The name of the data source that you're connecting to. Canvas
@@ -22190,6 +22224,22 @@ module Aws::SageMaker
       :default_resource_spec,
       :lifecycle_config_arns,
       :code_repositories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon SageMaker Canvas application setting where you configure
+    # document querying.
+    #
+    # @!attribute [rw] status
+    #   Describes whether the document querying feature is enabled or
+    #   disabled in the Canvas application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KendraSettings AWS API Documentation
+    #
+    class KendraSettings < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36412,6 +36462,15 @@ module Aws::SageMaker
     #   copy input collaterals needed for the selected steps to run. The
     #   execution status of the pipeline can be either `Failed` or
     #   `Success`.
+    #
+    #   This field is required if the steps you specify for `SelectedSteps`
+    #   depend on output collaterals from any non-specified pipeline steps.
+    #   For more information, see [Selective Execution for Pipeline
+    #   Steps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html
     #   @return [String]
     #
     # @!attribute [rw] selected_steps

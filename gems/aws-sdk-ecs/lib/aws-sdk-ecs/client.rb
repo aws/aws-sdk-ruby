@@ -1274,10 +1274,10 @@ module Aws::ECS
     #       ], 
     #       pending_count: 0, 
     #       running_count: 0, 
-    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service", 
     #       service_name: "ecs-simple-service", 
     #       status: "ACTIVE", 
-    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6", 
     #     }, 
     #   }
     #
@@ -1335,10 +1335,10 @@ module Aws::ECS
     #       pending_count: 0, 
     #       role_arn: "arn:aws:iam::012345678910:role/ecsServiceRole", 
     #       running_count: 0, 
-    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service-elb", 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service-elb", 
     #       service_name: "ecs-simple-service-elb", 
     #       status: "ACTIVE", 
-    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/console-sample-app-static:6", 
     #     }, 
     #   }
     #
@@ -3286,7 +3286,7 @@ module Aws::ECS
     #     container_instances: [
     #       {
     #         agent_connected: true, 
-    #         container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7", 
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/default/f2756532-8f13-4d53-87c9-aed50dc94cd7", 
     #         ec2_instance_id: "i-807f3249", 
     #         pending_tasks_count: 0, 
     #         registered_resources: [
@@ -3502,10 +3502,10 @@ module Aws::ECS
     #         ], 
     #         pending_count: 0, 
     #         running_count: 0, 
-    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service", 
     #         service_name: "ecs-simple-service", 
     #         status: "ACTIVE", 
-    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6", 
     #       }, 
     #     ], 
     #   }
@@ -4105,7 +4105,7 @@ module Aws::ECS
     #     tasks: [
     #       {
     #         cluster_arn: "arn:aws:ecs:<region>:<aws_account_id>:cluster/default", 
-    #         container_instance_arn: "arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb", 
+    #         container_instance_arn: "arn:aws:ecs:<region>:<aws_account_id>:container-instance/default/18f9eda5-27d7-4c19-b133-45adc516e8fb", 
     #         containers: [
     #           {
     #             name: "ecs-demo", 
@@ -4118,7 +4118,7 @@ module Aws::ECS
     #                 host_port: 80, 
     #               }, 
     #             ], 
-    #             task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #             task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
     #           }, 
     #         ], 
     #         desired_status: "RUNNING", 
@@ -4131,7 +4131,7 @@ module Aws::ECS
     #           ], 
     #         }, 
     #         started_by: "ecs-svc/9223370608528463088", 
-    #         task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #         task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
     #         task_definition_arn: "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1", 
     #       }, 
     #     ], 
@@ -4428,7 +4428,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -4829,8 +4829,8 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     container_instance_arns: [
-    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f", 
-    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/f6bbb147-5370-4ace-8c73-c7181ded911f", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
     #     ], 
     #   }
     #
@@ -4914,7 +4914,7 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     service_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:service/my-http-service", 
+    #       "arn:aws:ecs:us-east-1:012345678910:service/default/my-http-service", 
     #     ], 
     #   }
     #
@@ -5398,8 +5398,8 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     task_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
-    #       "arn:aws:ecs:us-east-1:012345678910:task/6b809ef6-c67e-4467-921f-ee261c15a0a1", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1", 
     #     ], 
     #   }
     #
@@ -5416,7 +5416,7 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     task_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
     #     ], 
     #   }
     #
@@ -7231,13 +7231,13 @@ module Aws::ECS
     #   {
     #     tasks: [
     #       {
-    #         container_instance_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
     #         containers: [
     #           {
     #             name: "sleep", 
-    #             container_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd", 
+    #             container_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container/default/58591c8e-be29-4ddf-95aa-ee459d4c59fd", 
     #             last_status: "PENDING", 
-    #             task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #             task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
     #           }, 
     #         ], 
     #         desired_status: "RUNNING", 
@@ -7249,7 +7249,7 @@ module Aws::ECS
     #             }, 
     #           ], 
     #         }, 
-    #         task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #         task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
     #         task_definition_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1", 
     #       }, 
     #     ], 
@@ -9616,7 +9616,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9642,7 +9642,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9666,7 +9666,7 @@ module Aws::ECS
     #     protected_tasks: [
     #       {
     #         protection_enabled: false, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9808,7 +9808,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

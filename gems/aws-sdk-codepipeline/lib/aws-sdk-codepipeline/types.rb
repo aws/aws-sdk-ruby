@@ -3419,8 +3419,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] retry_mode
-    #   The scope of the retry attempt. Currently, the only supported value
-    #   is FAILED\_ACTIONS.
+    #   The scope of the retry attempt.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecutionInput AWS API Documentation

@@ -18598,6 +18598,10 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `source-instance-id` - The ID of the instance that the AMI was
+    #     created from if the AMI was created using CreateImage. This filter
+    #     is applicable only if the AMI was created using [CreateImage][1].
+    #
     #   * `state` - The state of the image (`available` \| `pending` \|
     #     `failed`).
     #
@@ -18620,6 +18624,10 @@ module Aws::EC2
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] image_ids
@@ -18645,6 +18653,12 @@ module Aws::EC2
     #   regardless of what you specify for this parameter.
     #
     #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_disabled
+    #   Specifies whether to include disabled AMIs.
+    #
+    #   Default: No disabled AMIs are included in the response.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -18678,6 +18692,7 @@ module Aws::EC2
       :image_ids,
       :owners,
       :include_deprecated,
+      :include_disabled,
       :dry_run,
       :max_results,
       :next_token)
@@ -24287,6 +24302,12 @@ module Aws::EC2
     #
     #   * `bucket` - Returns task information for tasks that targeted a
     #     specific bucket. For the filter value, specify the bucket name.
+    #
+    #   <note markdown="1"> When you specify the `ImageIds` parameter, any filters that you
+    #   specify are ignored. To use the filters, you must remove the
+    #   `ImageIds` parameter.
+    #
+    #    </note>
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -24300,7 +24321,7 @@ module Aws::EC2
     #   next page of items, make another request with the token returned in
     #   the output. For more information, see [Pagination][1].
     #
-    #   You cannot specify this parameter and the `ImageIDs` parameter in
+    #   You cannot specify this parameter and the `ImageIds` parameter in
     #   the same call.
     #
     #
@@ -27952,6 +27973,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageRequest AWS API Documentation
+    #
+    class DisableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageResult AWS API Documentation
+    #
+    class DisableImageResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
@@ -30035,6 +30089,39 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecationResult AWS API Documentation
     #
     class EnableImageDeprecationResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageRequest AWS API Documentation
+    #
+    class EnableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageResult AWS API Documentation
+    #
+    class EnableImageResult < Struct.new(
       :return)
       SENSITIVE = []
       include Aws::Structure
@@ -35721,7 +35808,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   The hypervisor type of the image.
+    #   The hypervisor type of the image. Only `xen` is supported. `ovm` is
+    #   not supported.
     #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
@@ -35799,6 +35887,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [String]
     #
+    # @!attribute [rw] source_instance_id
+    #   The ID of the instance that the AMI was created from if the AMI was
+    #   created using [CreateImage][1]. This field only appears if the AMI
+    #   was created using CreateImage.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -35831,7 +35929,8 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :deprecation_time,
-      :imds_support)
+      :imds_support,
+      :source_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end

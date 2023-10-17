@@ -2181,6 +2181,7 @@ module Aws::EC2
     #     image_ids: ["ImageId"],
     #     owners: ["String"],
     #     include_deprecated: false,
+    #     include_disabled: false,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2275,6 +2276,10 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `source-instance-id` - The ID of the instance that the AMI was
+    #     created from if the AMI was created using CreateImage. This filter
+    #     is applicable only if the AMI was created using [CreateImage][1].
+    #
     #   * `state` - The state of the image (`available` \| `pending` \|
     #     `failed`).
     #
@@ -2297,6 +2302,10 @@ module Aws::EC2
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     # @option options [Array<String>] :image_ids
     #   The image IDs.
     #
@@ -2316,6 +2325,10 @@ module Aws::EC2
     #   regardless of what you specify for this parameter.
     #
     #    </note>
+    # @option options [Boolean] :include_disabled
+    #   Specifies whether to include disabled AMIs.
+    #
+    #   Default: No disabled AMIs are included in the response.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

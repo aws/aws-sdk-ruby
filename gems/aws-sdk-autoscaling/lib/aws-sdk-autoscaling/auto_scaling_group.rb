@@ -1576,34 +1576,27 @@ module Aws::AutoScaling
 
     # @example Request syntax with placeholder values
     #
-    #   load_balancers = auto_scaling_group.load_balancers({
-    #     next_token: "XmlString",
-    #     max_records: 1,
-    #   })
+    #   auto_scaling_group.load_balancers()
     # @param [Hash] options ({})
-    # @option options [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a previous call.)
-    # @option options [Integer] :max_records
-    #   The maximum number of items to return with this call. The default
-    #   value is `100` and the maximum value is `100`.
     # @return [LoadBalancer::Collection]
     def load_balancers(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = options.merge(auto_scaling_group_name: @name)
         resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_load_balancers(options)
         end
-        resp.data.load_balancers.each do |l|
-          batch << LoadBalancer.new(
-            group_name: @name,
-            name: l.load_balancer_name,
-            data: l,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.load_balancers.each do |l|
+            batch << LoadBalancer.new(
+              group_name: @name,
+              name: l.load_balancer_name,
+              data: l,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       LoadBalancer::Collection.new(batches)
     end

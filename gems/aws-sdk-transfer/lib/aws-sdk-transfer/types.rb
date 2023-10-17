@@ -217,7 +217,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -950,7 +950,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -1842,7 +1842,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -2697,7 +2697,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -3974,7 +3974,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -4393,7 +4393,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -5257,7 +5257,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -6017,7 +6017,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
