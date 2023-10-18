@@ -29,7 +29,7 @@ module Aws
         .to receive(:new).and_return(shared_credentials)
     end
 
-    def setup_client(service_module, client_config)
+    def setup_client(client_config)
       config_map = {
         'region' => :region,
         'credentialScope' => :credential_scope,
@@ -40,11 +40,7 @@ module Aws
       client_config.each do |k, v|
         config[config_map[k]] = v
       end
-      service_module::Client.new(**config)
-    end
-
-    let(:service_module) do
-      ApiHelper.sample_service
+      ApiHelper.sample_service::Client.new(**config)
     end
 
     test_cases.each do |test_case|
@@ -54,7 +50,7 @@ module Aws
       it "passes test case: #{test_case['documentation']}" do
         setup_env(test_case['environmentVariables'])
         setup_profile(test_case['profileVariables'])
-        client = setup_client(service_module, test_case['programmaticConfigVariables'])
+        client = setup_client(test_case['programmaticConfigVariables'])
         expect = test_case['expect']
 
         if expect.key?('resolutionError')
