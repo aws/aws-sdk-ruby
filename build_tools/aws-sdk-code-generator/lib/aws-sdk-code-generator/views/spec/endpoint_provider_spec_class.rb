@@ -154,6 +154,8 @@ module AwsSdkCodeGenerator
               Param.new('use_fips_endpoint', value)
             when 'AWS::UseDualStack'
               Param.new('use_dualstack_endpoint', value)
+            when 'AWS::Auth::CredentialScope'
+              Param.new('credential_scope', value)
             when 'AWS::STS::UseGlobalEndpoint'
               Param.new('sts_regional_endpoints', value ? 'legacy' : 'regional')
             when 'AWS::S3::UseGlobalEndpoint'
