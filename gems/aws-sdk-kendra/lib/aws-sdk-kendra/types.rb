@@ -1192,6 +1192,79 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Specifies how to group results by document attribute value, and how to
+    # display them collapsed/expanded under a designated primary document
+    # for each group.
+    #
+    # @!attribute [rw] document_attribute_key
+    #   The document attribute used to group search results. You can use any
+    #   attribute that has the `Sortable` flag set to true. You can also
+    #   sort by any of the following built-in
+    #   attributes:"\_category","\_created\_at",
+    #   "\_last\_updated\_at", "\_version", "\_view\_count".
+    #   @return [String]
+    #
+    # @!attribute [rw] sorting_configurations
+    #   A prioritized list of document attributes/fields that determine the
+    #   primary document among those in a collapsed group.
+    #   @return [Array<Types::SortingConfiguration>]
+    #
+    # @!attribute [rw] missing_attribute_key_strategy
+    #   Specifies the behavior for documents without a value for the
+    #   collapse attribute.
+    #
+    #   Amazon Kendra offers three customization options:
+    #
+    #   * Choose to `COLLAPSE` all documents with null or missing values in
+    #     one group. This is the default configuration.
+    #
+    #   * Choose to `IGNORE` documents with null or missing values. Ignored
+    #     documents will not appear in query results.
+    #
+    #   * Choose to `EXPAND` each document with a null or missing value into
+    #     a group of its own.
+    #   @return [String]
+    #
+    # @!attribute [rw] expand
+    #   Specifies whether to expand the collapsed results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expand_configuration
+    #   Provides configuration information to customize expansion options
+    #   for a collapsed group.
+    #   @return [Types::ExpandConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CollapseConfiguration AWS API Documentation
+    #
+    class CollapseConfiguration < Struct.new(
+      :document_attribute_key,
+      :sorting_configurations,
+      :missing_attribute_key_strategy,
+      :expand,
+      :expand_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a collapsed group of search results.
+    #
+    # @!attribute [rw] document_attribute
+    #   The value of the document attribute that results are collapsed on.
+    #   @return [Types::DocumentAttribute]
+    #
+    # @!attribute [rw] expanded_results
+    #   A list of results in the collapsed group.
+    #   @return [Array<Types::ExpandedResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CollapsedResultDetail AWS API Documentation
+    #
+    class CollapsedResultDetail < Struct.new(
+      :document_attribute,
+      :expanded_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about how Amazon Kendra should use the columns of
     # a database in an index.
     #
@@ -2016,9 +2089,8 @@ module Aws::Kendra
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access `Query` API, `GetQuerySuggestions` API, and other required
     #   APIs. The role also must include permission to access IAM Identity
-    #   Center (successor to Single Sign-On) that stores your user and group
-    #   information. For more information, see [IAM access roles for Amazon
-    #   Kendra][1].
+    #   Center that stores your user and group information. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
     #
     #
     #
@@ -2340,9 +2412,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Gets users and groups from IAM Identity Center (successor to Single
-    #   Sign-On) identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -3775,8 +3846,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Whether you have enabled the configuration for fetching access
-    #   levels of groups and users from an IAM Identity Center (successor to
-    #   Single Sign-On) identity source.
+    #   levels of groups and users from an IAM Identity Center identity
+    #   source.
     #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
@@ -4747,6 +4818,77 @@ module Aws::Kendra
     class EntityPersonaConfiguration < Struct.new(
       :entity_id,
       :persona)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration information needed to customize how
+    # collapsed search result groups expand.
+    #
+    # @!attribute [rw] max_result_items_to_expand
+    #   The number of collapsed search result groups to expand. If you set
+    #   this value to 10, for example, only the first 10 out of 100 result
+    #   groups will have expand functionality.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_expanded_results_per_item
+    #   The number of expanded results to show per collapsed primary
+    #   document. For instance, if you set this value to 3, then at most 3
+    #   results per collapsed group will be displayed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExpandConfiguration AWS API Documentation
+    #
+    class ExpandConfiguration < Struct.new(
+      :max_result_items_to_expand,
+      :max_expanded_results_per_item)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single expanded result in a collapsed group of search results.
+    #
+    # An expanded result item contains information about an expanded result
+    # document within a collapsed group of search results. This includes the
+    # original location of the document, a list of attributes assigned to
+    # the document, and relevant text from the document that satisfies the
+    # query.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the expanded result.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The idenitifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_title
+    #   Provides text and information about where to highlight the text.
+    #   @return [Types::TextWithHighlights]
+    #
+    # @!attribute [rw] document_excerpt
+    #   Provides text and information about where to highlight the text.
+    #   @return [Types::TextWithHighlights]
+    #
+    # @!attribute [rw] document_uri
+    #   The URI of the original location of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_attributes
+    #   An array of document attributes assigned to a document in the search
+    #   results. For example, the document author ("\_author") or the
+    #   source URI ("\_source\_uri") of the document.
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExpandedResultItem AWS API Documentation
+    #
+    class ExpandedResultItem < Struct.new(
+      :id,
+      :document_id,
+      :document_title,
+      :document_excerpt,
+      :document_uri,
+      :document_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7641,6 +7783,20 @@ module Aws::Kendra
     #   by the relevance that Amazon Kendra determines for the result.
     #   @return [Types::SortingConfiguration]
     #
+    # @!attribute [rw] sorting_configurations
+    #   Provides configuration information to determine how the results of a
+    #   query are sorted.
+    #
+    #   You can set upto 3 fields that Amazon Kendra should sort the results
+    #   on, and specify whether the results should be sorted in ascending or
+    #   descending order. The sort field quota can be increased.
+    #
+    #   If you don't provide a sorting configuration, the results are
+    #   sorted by the relevance that Amazon Kendra determines for the
+    #   result. In the case of ties in sorting the results, the results are
+    #   sorted by relevance.
+    #   @return [Array<Types::SortingConfiguration>]
+    #
     # @!attribute [rw] user_context
     #   The user context token or user and group information.
     #   @return [Types::UserContext]
@@ -7656,6 +7812,12 @@ module Aws::Kendra
     #   Enables suggested spell corrections for queries.
     #   @return [Types::SpellCorrectionConfiguration]
     #
+    # @!attribute [rw] collapse_configuration
+    #   Provides configuration to determine how to group results by document
+    #   attribute value, and how to display them (collapsed or expanded)
+    #   under a designated primary document for each group.
+    #   @return [Types::CollapseConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -7669,9 +7831,11 @@ module Aws::Kendra
       :page_number,
       :page_size,
       :sorting_configuration,
+      :sorting_configurations,
       :user_context,
       :visitor_id,
-      :spell_correction_configuration)
+      :spell_correction_configuration,
+      :collapse_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7818,6 +7982,10 @@ module Aws::Kendra
     #   An excerpt from a table within a document.
     #   @return [Types::TableExcerpt]
     #
+    # @!attribute [rw] collapsed_result_detail
+    #   Provides details about a collapsed group of search results.
+    #   @return [Types::CollapsedResultDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
     #
     class QueryResultItem < Struct.new(
@@ -7832,7 +8000,8 @@ module Aws::Kendra
       :document_attributes,
       :score_attributes,
       :feedback_token,
-      :table_excerpt)
+      :table_excerpt,
+      :collapsed_result_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10351,8 +10520,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center (successor to Single Sign-On) identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   Identity Center identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -10639,11 +10808,11 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to get users and groups from an
-    # IAM Identity Center (successor to Single Sign-On) identity source.
-    # This is useful for user context filtering, where search results are
-    # filtered based on the user or their group access to documents. You can
-    # also use the [PutPrincipalMapping][1] API to map users to their groups
-    # so that you only need to provide the user ID when you issue the query.
+    # IAM Identity Center identity source. This is useful for user context
+    # filtering, where search results are filtered based on the user or
+    # their group access to documents. You can also use the
+    # [PutPrincipalMapping][1] API to map users to their groups so that you
+    # only need to provide the user ID when you issue the query.
     #
     # To set up an IAM Identity Center identity source in the console to use
     # with Amazon Kendra, see [Getting started with an IAM Identity Center
@@ -10665,9 +10834,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_mode
     #   The identity store provider (mode) you want to use to get users and
-    #   groups. IAM Identity Center (successor to Single Sign-On) is
-    #   currently the only available mode. Your users and groups must exist
-    #   in an IAM Identity Center identity source in order to use this mode.
+    #   groups. IAM Identity Center is currently the only available mode.
+    #   Your users and groups must exist in an IAM Identity Center identity
+    #   source in order to use this mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserGroupResolutionConfiguration AWS API Documentation

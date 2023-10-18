@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-10-18)
+------------------
+
+* Feature - Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results
+
 1.73.0 (2023-09-27)
 ------------------
 

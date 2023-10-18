@@ -764,6 +764,20 @@ module Aws::RDS
       data[:dedicated_log_volume]
     end
 
+    # Indicates whether an upgrade is recommended for the storage file
+    # system configuration on the DB instance. To migrate to the preferred
+    # configuration, you can either create a blue/green deployment, or
+    # create a read replica from the DB instance. For more information, see
+    # [Upgrading the storage file system for a DB instance][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    # @return [Boolean]
+    def is_storage_config_upgrade_available
+      data[:is_storage_config_upgrade_available]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -2145,6 +2159,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
+    #     upgrade_storage_config: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2699,6 +2714,10 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
+    # @option options [Boolean] :upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

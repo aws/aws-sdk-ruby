@@ -2025,6 +2025,21 @@ module Aws::RDS
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the blue/green deployment.
     #
+    # @option params [String] :target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #
+    # @option params [Boolean] :upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the green
+    #   database. This option migrates the green DB instance from the older
+    #   32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
@@ -2165,6 +2180,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     target_db_instance_class: "TargetDBInstanceClass",
+    #     upgrade_target_storage_config: false,
     #   })
     #
     # @example Response structure
@@ -5560,6 +5577,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6224,6 +6242,11 @@ module Aws::RDS
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
     #
+    # @option params [Boolean] :upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6310,6 +6333,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
+    #     upgrade_storage_config: false,
     #     source_region: "String",
     #   })
     #
@@ -6472,6 +6496,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -8887,6 +8912,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -12224,6 +12250,7 @@ module Aws::RDS
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instances[0].percent_progress #=> String
     #   resp.db_instances[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -19316,6 +19343,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -20729,6 +20757,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -21402,6 +21431,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -24770,6 +24800,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -25508,6 +25539,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -26366,6 +26398,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -26962,6 +26995,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27788,6 +27822,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -28384,6 +28419,7 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -28407,7 +28443,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

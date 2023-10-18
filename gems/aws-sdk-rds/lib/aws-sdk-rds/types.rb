@@ -1757,6 +1757,23 @@ module Aws::RDS
     #   Tags to assign to the blue/green deployment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the
+    #   green database. This option migrates the green DB instance from the
+    #   older 32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeploymentRequest AWS API Documentation
     #
     class CreateBlueGreenDeploymentRequest < Struct.new(
@@ -1765,7 +1782,9 @@ module Aws::RDS
       :target_engine_version,
       :target_db_parameter_group_name,
       :target_db_cluster_parameter_group_name,
-      :tags)
+      :tags,
+      :target_db_instance_class,
+      :upgrade_target_storage_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5090,6 +5109,12 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5141,6 +5166,7 @@ module Aws::RDS
       :allocated_storage,
       :source_db_cluster_identifier,
       :dedicated_log_volume,
+      :upgrade_storage_config,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -8369,6 +8395,18 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_storage_config_upgrade_available
+    #   Indicates whether an upgrade is recommended for the storage file
+    #   system configuration on the DB instance. To migrate to the preferred
+    #   configuration, you can either create a blue/green deployment, or
+    #   create a read replica from the DB instance. For more information,
+    #   see [Upgrading the storage file system for a DB instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8454,7 +8492,8 @@ module Aws::RDS
       :certificate_details,
       :read_replica_source_db_cluster_identifier,
       :percent_progress,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :is_storage_config_upgrade_available)
       SENSITIVE = []
       include Aws::Structure
     end

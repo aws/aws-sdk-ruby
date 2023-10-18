@@ -1874,9 +1874,8 @@ module Aws::Kendra
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access `Query` API, `GetQuerySuggestions` API, and other required
     #   APIs. The role also must include permission to access IAM Identity
-    #   Center (successor to Single Sign-On) that stores your user and group
-    #   information. For more information, see [IAM access roles for Amazon
-    #   Kendra][1].
+    #   Center that stores your user and group information. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
     #
     #
     #
@@ -2251,9 +2250,8 @@ module Aws::Kendra
     #     accessible to the user will be searchable and displayable.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Gets users and groups from IAM Identity Center (successor to Single
-    #   Sign-On) identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -5068,6 +5066,15 @@ module Aws::Kendra
 
     # Searches an index given an input query.
     #
+    # <note markdown="1"> If you are working with large language models (LLMs) or implementing
+    # retrieval augmented generation (RAG) systems, you can use Amazon
+    # Kendra's [Retrieve][1] API, which can return longer semantically
+    # relevant passages. We recommend using the `Retrieve` API instead of
+    # filing a service limit increase to increase the `Query` API document
+    # excerpt length.
+    #
+    #  </note>
+    #
     # You can configure boosting or relevance tuning at the query level to
     # override boosting at the index level, filter based on document
     # fields/attributes and faceted search, and filter based on the user or
@@ -5090,6 +5097,10 @@ module Aws::Kendra
     # relevant results. If you filter result type to only question-answers,
     # a maximum of four results are returned. If you filter result type to
     # only answers, a maximum of three results are returned.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html
     #
     # @option params [required, String] :index_id
     #   The identifier of the index for the search.
@@ -5156,6 +5167,19 @@ module Aws::Kendra
     #   If you don't provide sorting configuration, the results are sorted by
     #   the relevance that Amazon Kendra determines for the result.
     #
+    # @option params [Array<Types::SortingConfiguration>] :sorting_configurations
+    #   Provides configuration information to determine how the results of a
+    #   query are sorted.
+    #
+    #   You can set upto 3 fields that Amazon Kendra should sort the results
+    #   on, and specify whether the results should be sorted in ascending or
+    #   descending order. The sort field quota can be increased.
+    #
+    #   If you don't provide a sorting configuration, the results are sorted
+    #   by the relevance that Amazon Kendra determines for the result. In the
+    #   case of ties in sorting the results, the results are sorted by
+    #   relevance.
+    #
     # @option params [Types::UserContext] :user_context
     #   The user context token or user and group information.
     #
@@ -5167,6 +5191,11 @@ module Aws::Kendra
     #
     # @option params [Types::SpellCorrectionConfiguration] :spell_correction_configuration
     #   Enables suggested spell corrections for queries.
+    #
+    # @option params [Types::CollapseConfiguration] :collapse_configuration
+    #   Provides configuration to determine how to group results by document
+    #   attribute value, and how to display them (collapsed or expanded) under
+    #   a designated primary document for each group.
     #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5292,6 +5321,12 @@ module Aws::Kendra
     #       document_attribute_key: "DocumentAttributeKey", # required
     #       sort_order: "DESC", # required, accepts DESC, ASC
     #     },
+    #     sorting_configurations: [
+    #       {
+    #         document_attribute_key: "DocumentAttributeKey", # required
+    #         sort_order: "DESC", # required, accepts DESC, ASC
+    #       },
+    #     ],
     #     user_context: {
     #       token: "Token",
     #       user_id: "PrincipalName",
@@ -5306,6 +5341,21 @@ module Aws::Kendra
     #     visitor_id: "VisitorId",
     #     spell_correction_configuration: {
     #       include_query_spell_check_suggestions: false, # required
+    #     },
+    #     collapse_configuration: {
+    #       document_attribute_key: "DocumentAttributeKey", # required
+    #       sorting_configurations: [
+    #         {
+    #           document_attribute_key: "DocumentAttributeKey", # required
+    #           sort_order: "DESC", # required, accepts DESC, ASC
+    #         },
+    #       ],
+    #       missing_attribute_key_strategy: "IGNORE", # accepts IGNORE, COLLAPSE, EXPAND
+    #       expand: false,
+    #       expand_configuration: {
+    #         max_result_items_to_expand: 1,
+    #         max_expanded_results_per_item: 1,
+    #       },
     #     },
     #   })
     #
@@ -5355,6 +5405,35 @@ module Aws::Kendra
     #   resp.result_items[0].table_excerpt.rows[0].cells[0].highlighted #=> Boolean
     #   resp.result_items[0].table_excerpt.rows[0].cells[0].header #=> Boolean
     #   resp.result_items[0].table_excerpt.total_number_of_rows #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.key #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_value #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_list_value #=> Array
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_list_value[0] #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.long_value #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.date_value #=> Time
+    #   resp.result_items[0].collapsed_result_detail.expanded_results #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].id #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_id #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.text #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].begin_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].end_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.text #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].begin_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].end_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_uri #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].key #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_value #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_list_value #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_list_value[0] #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.long_value #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.date_value #=> Time
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
     #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
@@ -5441,6 +5520,15 @@ module Aws::Kendra
     # * Filter based on document fields or attributes
     #
     # * Filter based on the user or their group access to documents
+    #
+    # * View the confidence score bucket for a retrieved passage result. The
+    #   confidence bucket provides a relative ranking that indicates how
+    #   confident Amazon Kendra is that the response is relevant to the
+    #   query.
+    #
+    #   <note markdown="1"> Confidence score buckets are currently available only for English.
+    #
+    #    </note>
     #
     # You can also include certain fields in the response that might provide
     # useful additional information.
@@ -6892,8 +6980,8 @@ module Aws::Kendra
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
     #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center (successor to Single Sign-On) identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   Identity Center identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -7203,7 +7291,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

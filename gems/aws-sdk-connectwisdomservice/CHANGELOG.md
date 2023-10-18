@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-10-18)
+------------------
+
+* Feature - This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.
+
 1.20.0 (2023-09-27)
 ------------------
 

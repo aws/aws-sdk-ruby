@@ -3501,10 +3501,8 @@ module Aws::DynamoDB
     #   @return [Integer]
     #
     # @!attribute [rw] export_type
-    #   Choice of whether to execute as a full export or incremental export.
-    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
-    #   `INCREMENTAL_EXPORT` is provided, the
-    #   `IncrementalExportSpecification` must also be used.
+    #   The type of export that was performed. Valid values are
+    #   `FULL_EXPORT` or `INCREMENTAL_EXPORT`.
     #   @return [String]
     #
     # @!attribute [rw] incremental_export_specification
@@ -3565,10 +3563,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] export_type
-    #   Choice of whether to execute as a full export or incremental export.
-    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
-    #   `INCREMENTAL_EXPORT` is provided, the
-    #   `IncrementalExportSpecification` must also be used.
+    #   The type of export that was performed. Valid values are
+    #   `FULL_EXPORT` or `INCREMENTAL_EXPORT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportSummary AWS API Documentation
@@ -3645,9 +3641,9 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] export_type
     #   Choice of whether to execute as a full export or incremental export.
-    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
-    #   `INCREMENTAL_EXPORT` is provided, the
-    #   `IncrementalExportSpecification` must also be used.
+    #   Valid values are FULL\_EXPORT or INCREMENTAL\_EXPORT. The default
+    #   value is FULL\_EXPORT. If INCREMENTAL\_EXPORT is provided, the
+    #   IncrementalExportSpecification must also be used.
     #   @return [String]
     #
     # @!attribute [rw] incremental_export_specification
@@ -4612,9 +4608,9 @@ module Aws::DynamoDB
     #   @return [Time]
     #
     # @!attribute [rw] export_view_type
-    #   Choice of whether to output the previous item image prior to the
-    #   start time of the incremental export. Valid values are
-    #   `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`.
+    #   The view type that was chosen for the export. Valid values are
+    #   `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`. The default value is
+    #   `NEW_AND_OLD_IMAGES`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/IncrementalExportSpecification AWS API Documentation
@@ -7743,7 +7739,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression
     #   @return [String]
     #
     # @!attribute [rw] expression_attribute_names
@@ -8871,6 +8867,11 @@ module Aws::DynamoDB
     #   error occurs because of changes made by the transaction.
     #
     # * There is a user error, such as an invalid data format.
+    #
+    # * There is an ongoing `TransactWriteItems` operation that conflicts
+    #   with a concurrent `TransactWriteItems` request. In this case the
+    #   `TransactWriteItems` operation fails with a
+    #   `TransactionCanceledException`.
     #
     # DynamoDB cancels a `TransactGetItems` request under the following
     # circumstances:
