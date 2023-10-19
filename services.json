@@ -455,9 +455,6 @@
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },
-  "GameSparks": {
-    "deprecated": true
-  },
   "Glacier": {
     "models": "glacier/2012-06-01",
     "addPlugins": [

@@ -42,8 +42,6 @@ module BuildTools
       # WARNING: not thread-safe
       @services ||= begin
         manifest.inject({}) do |hash, (name, config)|
-          next hash if config['deprecated']
-
           service = build_service(name, config)
           hash[service.identifier] = service
           hash
@@ -74,7 +72,8 @@ module BuildTools
         endpoint_tests: model_path('endpoint-tests-1.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
-        remove_plugins: config['removePlugins'] || []
+        remove_plugins: config['removePlugins'] || [],
+        deprecated: config['deprecated']
       )
     end
 
