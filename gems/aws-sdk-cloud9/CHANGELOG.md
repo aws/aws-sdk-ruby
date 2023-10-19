@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-10-18)
+------------------
+
+* Feature - Update to imageId parameter behavior and dates updated.
+
 1.59.0 (2023-09-27)
 ------------------
 

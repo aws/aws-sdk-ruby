@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-10-18)
+------------------
+
+* Feature - Updating descriptions for several APIs.
+
 1.95.0 (2023-09-27)
 ------------------
 

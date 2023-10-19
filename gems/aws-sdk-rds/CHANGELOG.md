@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2023-10-18)
+------------------
+
+* Feature - This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+
 1.197.0 (2023-10-12)
 ------------------
 
