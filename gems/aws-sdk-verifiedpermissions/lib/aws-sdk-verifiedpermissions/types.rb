@@ -77,7 +77,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#boolean
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] entity_identifier
@@ -98,7 +98,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#long
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long
     #   @return [Integer]
     #
     # @!attribute [rw] string
@@ -108,7 +108,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#string
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string
     #   @return [String]
     #
     # @!attribute [rw] set
@@ -118,7 +118,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#set
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] record
@@ -128,7 +128,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#record
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/AttributeValue AWS API Documentation
@@ -2913,7 +2913,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    # [1]: https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test
+    # [1]: https://docs.cedarpolicy.com/policies/syntax-operators.html#has-presence-of-attribute-test
     #
     # @!attribute [rw] message
     #   @return [String]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-10-19)
+------------------
+
+* Feature - Improving Amazon Verified Permissions Create experience
+
 1.10.0 (2023-09-27)
 ------------------
 

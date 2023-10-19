@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.414.0 (2023-10-19)
+------------------
+
+* Feature - Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.
+
 1.413.0 (2023-10-12)
 ------------------
 

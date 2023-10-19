@@ -780,6 +780,10 @@ module Aws::QuickSight
     #   definition objects. This skips the validation step for specific
     #   errors.
     #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the analysis, Amazon QuickSight adds the analysis to
+    #   these folders.
+    #
     # @return [Types::CreateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisResponse#arn #arn} => String
@@ -901,6 +905,10 @@ module Aws::QuickSight
     #   definition objects. This option skips the validation step for specific
     #   errors.
     #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dashboard, Amazon QuickSight adds the dashboard to
+    #   these folders.
+    #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDashboardResponse#arn #arn} => String
@@ -985,6 +993,10 @@ module Aws::QuickSight
     #
     # @option params [Array<Types::DatasetParameter>] :dataset_parameters
     #   The parameter declarations of the dataset.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dataset, Amazon QuickSight adds the dataset to
+    #   these folders.
     #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1214,6 +1226,7 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1275,6 +1288,10 @@ module Aws::QuickSight
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the data source.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the data source, Amazon QuickSight adds the data
+    #   source to these folders.
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1401,6 +1418,17 @@ module Aws::QuickSight
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
     #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -1517,6 +1545,17 @@ module Aws::QuickSight
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
     #           },
     #         ],
     #       },
@@ -1541,6 +1580,7 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1607,7 +1647,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     name: "FolderName",
-    #     folder_type: "SHARED", # accepts SHARED
+    #     folder_type: "SHARED", # accepts SHARED, RESTRICTED
     #     parent_folder_arn: "Arn",
     #     permissions: [
     #       {
@@ -4374,6 +4414,13 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.override_parameters.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.override_parameters.data_sources[0].credentials.credential_pair.username #=> String
@@ -5084,6 +5131,13 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_source.data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -5145,6 +5199,13 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -5233,7 +5294,7 @@ module Aws::QuickSight
     #   resp.folder.folder_id #=> String
     #   resp.folder.arn #=> String
     #   resp.folder.name #=> String
-    #   resp.folder.folder_type #=> String, one of "SHARED"
+    #   resp.folder.folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder.folder_path #=> Array
     #   resp.folder.folder_path[0] #=> String
     #   resp.folder.created_time #=> Time
@@ -7473,6 +7534,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -7534,6 +7602,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -7639,7 +7714,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -9296,7 +9371,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -9710,6 +9785,17 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
     #             },
     #           },
     #           vpc_connection_properties: {
@@ -10985,6 +11071,17 @@ module Aws::QuickSight
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
     #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -11100,6 +11197,17 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
     #             },
     #           },
     #         ],
@@ -12623,7 +12731,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

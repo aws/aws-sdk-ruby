@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-10-19)
+------------------
+
+* Feature - This release adds support for Ethereum Sepolia network
+
 1.2.0 (2023-10-16)
 ------------------
 

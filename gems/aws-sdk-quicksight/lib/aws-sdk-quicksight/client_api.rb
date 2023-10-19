@@ -379,6 +379,7 @@ module Aws::QuickSight
     DataPathColorList = Shapes::ListShape.new(name: 'DataPathColorList')
     DataPathLabelType = Shapes::StructureShape.new(name: 'DataPathLabelType')
     DataPathSort = Shapes::StructureShape.new(name: 'DataPathSort')
+    DataPathType = Shapes::StructureShape.new(name: 'DataPathType')
     DataPathValue = Shapes::StructureShape.new(name: 'DataPathValue')
     DataPathValueList = Shapes::ListShape.new(name: 'DataPathValueList')
     DataPointDrillUpDownOption = Shapes::StructureShape.new(name: 'DataPointDrillUpDownOption')
@@ -682,6 +683,7 @@ module Aws::QuickSight
     FilterVisualScope = Shapes::StringShape.new(name: 'FilterVisualScope')
     FilteredVisualsList = Shapes::ListShape.new(name: 'FilteredVisualsList')
     Folder = Shapes::StructureShape.new(name: 'Folder')
+    FolderArnList = Shapes::ListShape.new(name: 'FolderArnList')
     FolderColumnList = Shapes::ListShape.new(name: 'FolderColumnList')
     FolderFilterAttribute = Shapes::StringShape.new(name: 'FolderFilterAttribute')
     FolderMember = Shapes::StructureShape.new(name: 'FolderMember')
@@ -1095,6 +1097,7 @@ module Aws::QuickSight
     PivotTableConfiguration = Shapes::StructureShape.new(name: 'PivotTableConfiguration')
     PivotTableDataPathOption = Shapes::StructureShape.new(name: 'PivotTableDataPathOption')
     PivotTableDataPathOptionList = Shapes::ListShape.new(name: 'PivotTableDataPathOptionList')
+    PivotTableDataPathType = Shapes::StringShape.new(name: 'PivotTableDataPathType')
     PivotTableDimensionList = Shapes::ListShape.new(name: 'PivotTableDimensionList')
     PivotTableFieldCollapseState = Shapes::StringShape.new(name: 'PivotTableFieldCollapseState')
     PivotTableFieldCollapseStateOption = Shapes::StructureShape.new(name: 'PivotTableFieldCollapseStateOption')
@@ -1170,6 +1173,7 @@ module Aws::QuickSight
     ReferenceLineLabelVerticalPosition = Shapes::StringShape.new(name: 'ReferenceLineLabelVerticalPosition')
     ReferenceLineList = Shapes::ListShape.new(name: 'ReferenceLineList')
     ReferenceLinePatternType = Shapes::StringShape.new(name: 'ReferenceLinePatternType')
+    ReferenceLineSeriesType = Shapes::StringShape.new(name: 'ReferenceLineSeriesType')
     ReferenceLineStaticDataConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineStaticDataConfiguration')
     ReferenceLineStyleConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineStyleConfiguration')
     ReferenceLineValueLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineValueLabelConfiguration')
@@ -1339,6 +1343,7 @@ module Aws::QuickSight
     SimpleAttributeAggregationFunction = Shapes::StringShape.new(name: 'SimpleAttributeAggregationFunction')
     SimpleClusterMarker = Shapes::StructureShape.new(name: 'SimpleClusterMarker')
     SimpleNumericalAggregationFunction = Shapes::StringShape.new(name: 'SimpleNumericalAggregationFunction')
+    SimpleTotalAggregationFunction = Shapes::StringShape.new(name: 'SimpleTotalAggregationFunction')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SliderControlDisplayOptions = Shapes::StructureShape.new(name: 'SliderControlDisplayOptions')
     SmallMultiplesAxisPlacement = Shapes::StringShape.new(name: 'SmallMultiplesAxisPlacement')
@@ -1383,6 +1388,8 @@ module Aws::QuickSight
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
+    StarburstParameters = Shapes::StructureShape.new(name: 'StarburstParameters')
+    StarburstProductType = Shapes::StringShape.new(name: 'StarburstProductType')
     StartAssetBundleExportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobRequest')
     StartAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobResponse')
     StartAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobRequest')
@@ -1551,6 +1558,9 @@ module Aws::QuickSight
     TopicSummary = Shapes::StructureShape.new(name: 'TopicSummary')
     TopicTimeGranularity = Shapes::StringShape.new(name: 'TopicTimeGranularity')
     TotalAggregationComputation = Shapes::StructureShape.new(name: 'TotalAggregationComputation')
+    TotalAggregationFunction = Shapes::StructureShape.new(name: 'TotalAggregationFunction')
+    TotalAggregationOption = Shapes::StructureShape.new(name: 'TotalAggregationOption')
+    TotalAggregationOptionList = Shapes::ListShape.new(name: 'TotalAggregationOptionList')
     TotalOptions = Shapes::StructureShape.new(name: 'TotalOptions')
     TransformOperation = Shapes::StructureShape.new(name: 'TransformOperation')
     TransformOperationList = Shapes::ListShape.new(name: 'TransformOperationList')
@@ -1562,6 +1572,7 @@ module Aws::QuickSight
     TreeMapSortConfiguration = Shapes::StructureShape.new(name: 'TreeMapSortConfiguration')
     TreeMapVisual = Shapes::StructureShape.new(name: 'TreeMapVisual')
     TrendArrowOptions = Shapes::StructureShape.new(name: 'TrendArrowOptions')
+    TrinoParameters = Shapes::StructureShape.new(name: 'TrinoParameters')
     TwitterParameters = Shapes::StructureShape.new(name: 'TwitterParameters')
     TypeCastFormat = Shapes::StringShape.new(name: 'TypeCastFormat')
     TypeParameters = Shapes::MapShape.new(name: 'TypeParameters')
@@ -2565,6 +2576,7 @@ module Aws::QuickSight
     CreateAnalysisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAnalysisRequest.add_member(:definition, Shapes::ShapeRef.new(shape: AnalysisDefinition, location_name: "Definition"))
     CreateAnalysisRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
+    CreateAnalysisRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateAnalysisRequest.struct_class = Types::CreateAnalysisRequest
 
     CreateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2589,6 +2601,7 @@ module Aws::QuickSight
     CreateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateDashboardRequest.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
     CreateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
+    CreateDashboardRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2614,6 +2627,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSetRequest.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     CreateDataSetRequest.add_member(:dataset_parameters, Shapes::ShapeRef.new(shape: DatasetParameterList, location_name: "DatasetParameters"))
+    CreateDataSetRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
     CreateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2634,6 +2648,7 @@ module Aws::QuickSight
     CreateDataSourceRequest.add_member(:vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "VpcConnectionProperties"))
     CreateDataSourceRequest.add_member(:ssl_properties, Shapes::ShapeRef.new(shape: SslProperties, location_name: "SslProperties"))
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataSourceRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3089,8 +3104,12 @@ module Aws::QuickSight
     DataPathSort.add_member(:sort_paths, Shapes::ShapeRef.new(shape: DataPathValueList, required: true, location_name: "SortPaths"))
     DataPathSort.struct_class = Types::DataPathSort
 
-    DataPathValue.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
-    DataPathValue.add_member(:field_value, Shapes::ShapeRef.new(shape: FieldValue, required: true, location_name: "FieldValue"))
+    DataPathType.add_member(:pivot_table_data_path_type, Shapes::ShapeRef.new(shape: PivotTableDataPathType, location_name: "PivotTableDataPathType"))
+    DataPathType.struct_class = Types::DataPathType
+
+    DataPathValue.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "FieldId"))
+    DataPathValue.add_member(:field_value, Shapes::ShapeRef.new(shape: FieldValue, location_name: "FieldValue"))
+    DataPathValue.add_member(:data_path_type, Shapes::ShapeRef.new(shape: DataPathType, location_name: "DataPathType"))
     DataPathValue.struct_class = Types::DataPathValue
 
     DataPathValueList.member = Shapes::ShapeRef.new(shape: DataPathValue)
@@ -3223,6 +3242,8 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:amazon_open_search_parameters, Shapes::ShapeRef.new(shape: AmazonOpenSearchParameters, location_name: "AmazonOpenSearchParameters"))
     DataSourceParameters.add_member(:exasol_parameters, Shapes::ShapeRef.new(shape: ExasolParameters, location_name: "ExasolParameters"))
     DataSourceParameters.add_member(:databricks_parameters, Shapes::ShapeRef.new(shape: DatabricksParameters, location_name: "DatabricksParameters"))
+    DataSourceParameters.add_member(:starburst_parameters, Shapes::ShapeRef.new(shape: StarburstParameters, location_name: "StarburstParameters"))
+    DataSourceParameters.add_member(:trino_parameters, Shapes::ShapeRef.new(shape: TrinoParameters, location_name: "TrinoParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -4406,6 +4427,8 @@ module Aws::QuickSight
     Folder.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Folder.add_member(:sharing_model, Shapes::ShapeRef.new(shape: SharingModel, location_name: "SharingModel"))
     Folder.struct_class = Types::Folder
+
+    FolderArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     FolderColumnList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -6015,6 +6038,7 @@ module Aws::QuickSight
     PivotTotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
     PivotTotalOptions.add_member(:value_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "ValueCellStyle"))
     PivotTotalOptions.add_member(:metric_header_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "MetricHeaderCellStyle"))
+    PivotTotalOptions.add_member(:total_aggregation_options, Shapes::ShapeRef.new(shape: TotalAggregationOptionList, location_name: "TotalAggregationOptions"))
     PivotTotalOptions.struct_class = Types::PivotTotalOptions
 
     PostgreSqlParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
@@ -6152,6 +6176,7 @@ module Aws::QuickSight
     ReferenceLineDataConfiguration.add_member(:static_configuration, Shapes::ShapeRef.new(shape: ReferenceLineStaticDataConfiguration, location_name: "StaticConfiguration"))
     ReferenceLineDataConfiguration.add_member(:dynamic_configuration, Shapes::ShapeRef.new(shape: ReferenceLineDynamicDataConfiguration, location_name: "DynamicConfiguration"))
     ReferenceLineDataConfiguration.add_member(:axis_binding, Shapes::ShapeRef.new(shape: AxisBinding, location_name: "AxisBinding"))
+    ReferenceLineDataConfiguration.add_member(:series_type, Shapes::ShapeRef.new(shape: ReferenceLineSeriesType, location_name: "SeriesType"))
     ReferenceLineDataConfiguration.struct_class = Types::ReferenceLineDataConfiguration
 
     ReferenceLineDynamicDataConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -6790,6 +6815,12 @@ module Aws::QuickSight
     SslProperties.add_member(:disable_ssl, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableSsl"))
     SslProperties.struct_class = Types::SslProperties
 
+    StarburstParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    StarburstParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    StarburstParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    StarburstParameters.add_member(:product_type, Shapes::ShapeRef.new(shape: StarburstProductType, location_name: "ProductType"))
+    StarburstParameters.struct_class = Types::StarburstParameters
+
     StartAssetBundleExportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     StartAssetBundleExportJobRequest.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "AssetBundleExportJobId"))
     StartAssetBundleExportJobRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: AssetBundleResourceArns, required: true, location_name: "ResourceArns"))
@@ -7225,6 +7256,7 @@ module Aws::QuickSight
     TimeEqualityFilter.add_member(:value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Value"))
     TimeEqualityFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     TimeEqualityFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
+    TimeEqualityFilter.add_member(:rolling_date, Shapes::ShapeRef.new(shape: RollingDateConfiguration, location_name: "RollingDate"))
     TimeEqualityFilter.struct_class = Types::TimeEqualityFilter
 
     TimeRangeDrillDownFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -7427,11 +7459,21 @@ module Aws::QuickSight
     TotalAggregationComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     TotalAggregationComputation.struct_class = Types::TotalAggregationComputation
 
+    TotalAggregationFunction.add_member(:simple_total_aggregation_function, Shapes::ShapeRef.new(shape: SimpleTotalAggregationFunction, location_name: "SimpleTotalAggregationFunction"))
+    TotalAggregationFunction.struct_class = Types::TotalAggregationFunction
+
+    TotalAggregationOption.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    TotalAggregationOption.add_member(:total_aggregation_function, Shapes::ShapeRef.new(shape: TotalAggregationFunction, required: true, location_name: "TotalAggregationFunction"))
+    TotalAggregationOption.struct_class = Types::TotalAggregationOption
+
+    TotalAggregationOptionList.member = Shapes::ShapeRef.new(shape: TotalAggregationOption)
+
     TotalOptions.add_member(:totals_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TotalsVisibility"))
     TotalOptions.add_member(:placement, Shapes::ShapeRef.new(shape: TableTotalsPlacement, location_name: "Placement"))
     TotalOptions.add_member(:scroll_status, Shapes::ShapeRef.new(shape: TableTotalsScrollStatus, location_name: "ScrollStatus"))
     TotalOptions.add_member(:custom_label, Shapes::ShapeRef.new(shape: String, location_name: "CustomLabel"))
     TotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
+    TotalOptions.add_member(:total_aggregation_options, Shapes::ShapeRef.new(shape: TotalAggregationOptionList, location_name: "TotalAggregationOptions"))
     TotalOptions.struct_class = Types::TotalOptions
 
     TransformOperation.add_member(:project_operation, Shapes::ShapeRef.new(shape: ProjectOperation, location_name: "ProjectOperation"))
@@ -7483,6 +7525,11 @@ module Aws::QuickSight
 
     TrendArrowOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     TrendArrowOptions.struct_class = Types::TrendArrowOptions
+
+    TrinoParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    TrinoParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    TrinoParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    TrinoParameters.struct_class = Types::TrinoParameters
 
     TwitterParameters.add_member(:query, Shapes::ShapeRef.new(shape: Query, required: true, location_name: "Query"))
     TwitterParameters.add_member(:max_rows, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "MaxRows"))

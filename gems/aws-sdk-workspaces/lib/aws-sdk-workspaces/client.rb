@@ -1087,7 +1087,8 @@ module Aws::WorkSpaces
     #   WorkSpaces Core. Contact your account team to be allow-listed to use
     #   this value. For more information, see [Amazon WorkSpaces Core][1].
     #
-    # * PCoIP is only available for Windows bundles.
+    # * You don't need to specify the `PCOIP` protocol for Linux bundles
+    #   because `WSP` is the default protocol for those bundles.
     #
     #  </note>
     #
@@ -3968,7 +3969,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

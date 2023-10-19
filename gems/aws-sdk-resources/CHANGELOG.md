@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.173.0 (2023-10-19)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-gamesparks` gem.
+
 3.172.0 (2023-10-04)
 ------------------
 
