@@ -44,22 +44,18 @@ module Aws
     end
 
     test_cases.each do |test_case|
-      # temporary
-      next if test_case['documentation'] =~ /(Endpoint Rules)/
-
       it "passes test case: #{test_case['documentation']}" do
         setup_env(test_case['environmentVariables'])
         setup_profile(test_case['profileVariables'])
         client = setup_client(test_case['programmaticConfigVariables'])
         expect = test_case['expect']
 
-        if expect.key?('resolutionError')
-          expect { client.example_operation }
-            .to raise_error(expect['resolutionError'])
-        elsif expect.key?('credentialScope')
+        if expect.key?('credentialScope')
           expected_scope = expect['credentialScope']
           expect(client.config.credentials.credentials.credential_scope)
             .to eq(expected_scope)
+        else
+          raise 'Unhandled expectation in credential_scope_spec'
         end
       end
     end
