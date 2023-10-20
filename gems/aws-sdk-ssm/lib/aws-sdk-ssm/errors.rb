@@ -111,6 +111,7 @@ module Aws::SSM
   # * {MaxDocumentSizeExceeded}
   # * {OpsItemAccessDeniedException}
   # * {OpsItemAlreadyExistsException}
+  # * {OpsItemConflictException}
   # * {OpsItemInvalidParameterException}
   # * {OpsItemLimitExceededException}
   # * {OpsItemNotFoundException}
@@ -1379,6 +1380,21 @@ module Aws::SSM
       # @return [String]
       def ops_item_id
         @data[:ops_item_id]
+      end
+    end
+
+    class OpsItemConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::OpsItemConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

@@ -424,6 +424,42 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Deletes one or more agents or collectors as specified by ID. Deleting
+    # an agent or collector does not delete the previously discovered data.
+    # To delete the data collected, use `StartBatchDeleteConfigurationTask`.
+    #
+    # @option params [required, Array<Types::DeleteAgent>] :delete_agents
+    #   The list of agents to delete.
+    #
+    # @return [Types::BatchDeleteAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteAgentsResponse#errors #errors} => Array&lt;Types::BatchDeleteAgentError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_agents({
+    #     delete_agents: [ # required
+    #       {
+    #         agent_id: "AgentId", # required
+    #         force: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].agent_id #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR", "AGENT_IN_USE"
+    #
+    # @overload batch_delete_agents(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_agents(params = {}, options = {})
+      req = build_request(:batch_delete_agents, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more import tasks, each identified by their import ID.
     # Each import task has a number of records that can identify servers or
     # applications.
@@ -439,6 +475,10 @@ module Aws::ApplicationDiscoveryService
     # @option params [required, Array<String>] :import_task_ids
     #   The IDs for the import tasks that you want to delete.
     #
+    # @option params [Boolean] :delete_history
+    #   Set to `true` to remove the deleted import task from
+    #   DescribeImportTasks.
+    #
     # @return [Types::BatchDeleteImportDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchDeleteImportDataResponse#errors #errors} => Array&lt;Types::BatchDeleteImportDataError&gt;
@@ -447,6 +487,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.batch_delete_import_data({
     #     import_task_ids: ["ImportTaskIdentifier"], # required
+    #     delete_history: false,
     #   })
     #
     # @example Response structure
@@ -616,6 +657,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::DescribeAgentsResponse#agents_info #agents_info} => Array&lt;Types::AgentInfo&gt;
     #   * {Types::DescribeAgentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_agents({
@@ -652,6 +695,49 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def describe_agents(params = {}, options = {})
       req = build_request(:describe_agents, params)
+      req.send_request(options)
+    end
+
+    # Takes a unique deletion task identifier as input and returns metadata
+    # about a configuration deletion task.
+    #
+    # @option params [required, String] :task_id
+    #   The ID of the task to delete.
+    #
+    # @return [Types::DescribeBatchDeleteConfigurationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBatchDeleteConfigurationTaskResponse#task #task} => Types::BatchDeleteConfigurationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_batch_delete_configuration_task({
+    #     task_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task.task_id #=> String
+    #   resp.task.status #=> String, one of "INITIALIZING", "VALIDATING", "DELETING", "COMPLETED", "FAILED"
+    #   resp.task.start_time #=> Time
+    #   resp.task.end_time #=> Time
+    #   resp.task.configuration_type #=> String, one of "SERVER"
+    #   resp.task.requested_configurations #=> Array
+    #   resp.task.requested_configurations[0] #=> String
+    #   resp.task.deleted_configurations #=> Array
+    #   resp.task.deleted_configurations[0] #=> String
+    #   resp.task.failed_configurations #=> Array
+    #   resp.task.failed_configurations[0].configuration_id #=> String
+    #   resp.task.failed_configurations[0].error_status_code #=> Integer
+    #   resp.task.failed_configurations[0].error_message #=> String
+    #   resp.task.deletion_warnings #=> Array
+    #   resp.task.deletion_warnings[0].configuration_id #=> String
+    #   resp.task.deletion_warnings[0].warning_code #=> Integer
+    #   resp.task.deletion_warnings[0].warning_text #=> String
+    #
+    # @overload describe_batch_delete_configuration_task(params = {})
+    # @param [Hash] params ({})
+    def describe_batch_delete_configuration_task(params = {}, options = {})
+      req = build_request(:describe_batch_delete_configuration_task, params)
       req.send_request(options)
     end
 
@@ -781,6 +867,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::DescribeExportConfigurationsResponse#exports_info #exports_info} => Array&lt;Types::ExportInfo&gt;
     #   * {Types::DescribeExportConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_configurations({
@@ -840,6 +928,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   * {Types::DescribeExportTasksResponse#exports_info #exports_info} => Array&lt;Types::ExportInfo&gt;
     #   * {Types::DescribeExportTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -970,6 +1060,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::ConfigurationTag&gt;
     #   * {Types::DescribeTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1154,6 +1246,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::ListConfigurationsResponse#configurations #configurations} => Array&lt;Hash&lt;String,String&gt;&gt;
     #   * {Types::ListConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configurations({
@@ -1244,6 +1338,38 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def list_server_neighbors(params = {}, options = {})
       req = build_request(:list_server_neighbors, params)
+      req.send_request(options)
+    end
+
+    # Takes a list of configurationId as input and starts an asynchronous
+    # deletion task to remove the configurationItems. Returns a unique
+    # deletion task identifier.
+    #
+    # @option params [required, String] :configuration_type
+    #   The type of configuration item to delete. Supported types are: SERVER.
+    #
+    # @option params [required, Array<String>] :configuration_ids
+    #   The list of configuration IDs that will be deleted by the task.
+    #
+    # @return [Types::StartBatchDeleteConfigurationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBatchDeleteConfigurationTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_batch_delete_configuration_task({
+    #     configuration_type: "SERVER", # required, accepts SERVER
+    #     configuration_ids: ["ConfigurationId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @overload start_batch_delete_configuration_task(params = {})
+    # @param [Hash] params ({})
+    def start_batch_delete_configuration_task(params = {}, options = {})
+      req = build_request(:start_batch_delete_configuration_task, params)
       req.send_request(options)
     end
 
@@ -1625,7 +1751,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

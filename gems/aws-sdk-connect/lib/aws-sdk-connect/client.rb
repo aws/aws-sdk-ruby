@@ -1112,8 +1112,7 @@ module Aws::Connect
     #
     # @option params [required, String] :content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -1175,7 +1174,12 @@ module Aws::Connect
     #   The description of the flow module.
     #
     # @option params [required, String] :content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2295,7 +2299,7 @@ module Aws::Connect
     # Creates a traffic distribution group given an Amazon Connect instance
     # that has been replicated.
     #
-    # <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    # <note markdown="1"> The `SignInConfig` distribution is available only on a default
     # `TrafficDistributionGroup` (see the `IsDefault` parameter in the
     # [TrafficDistributionGroup][1] data type). If you call
     # `UpdateTrafficDistribution` with a modified `SignInConfig` and a
@@ -2426,13 +2430,19 @@ module Aws::Connect
 
     # Creates a user account for the specified Amazon Connect instance.
     #
+    # Certain [UserIdentityInfo][1] parameters are required in some
+    # situations. For example, `Email` is required if you are using SAML for
+    # identity management. `FirstName` and `LastName` are required if you
+    # are using Amazon Connect or SAML for identity management.
+    #
     # For information about how to create user accounts using the Amazon
-    # Connect console, see [Add Users][1] in the *Amazon Connect
+    # Connect console, see [Add Users][2] in the *Amazon Connect
     # Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UserIdentityInfo.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html
     #
     # @option params [required, String] :username
     #   The user name for the account. For instances not using SAML for
@@ -5658,7 +5668,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Retrieves a token for federation.
+    # Supports SAML sign-in for Amazon Connect. Retrieves a token for
+    # federation. The token is for the Amazon Connect user which corresponds
+    # to the IAM credentials that were used to invoke this action.
+    #
+    # For more information about how SAML sign-in works in Amazon Connect,
+    # see [Configure SAML with IAM for Amazon Connect in the *Amazon Connect
+    # Administrator Guide*.][1]
     #
     # <note markdown="1"> This API doesn't support root users. If you try to invoke
     # GetFederationToken with root credentials, an error message similar to
@@ -5668,6 +5684,10 @@ module Aws::Connect
     # federation with Amazon Connect`
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5715,9 +5735,21 @@ module Aws::Connect
     # For a description of each historical metric, see [Historical Metrics
     # Definitions][1] in the *Amazon Connect Administrator Guide*.
     #
+    # <note markdown="1"> We recommend using the [GetMetricDataV2][2] API. It provides more
+    # flexibility, features, and the ability to query longer time ranges
+    # than `GetMetricData`. Use it to retrieve historical agent and contact
+    # metrics for the last 3 months, at varying intervals. You can also use
+    # it to build custom dashboards to measure historical queue and agent
+    # performance. For example, you can track the number of incoming
+    # contacts for the last 7 days, with data split by day, to see how
+    # contact volume changed per day of the week.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -10173,6 +10205,11 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
+    #   <note markdown="1"> InstanceID is a required field. The "Required: No" below is
+    #   incorrect.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -10866,7 +10903,52 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a flow to start a new task.
+    # Initiates a flow to start a new task contact. For more information
+    # about task contacts, see [Concepts: Tasks in Amazon Connect][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    # When using `PreviousContactId` and `RelatedContactId` input
+    # parameters, note the following:
+    #
+    # * `PreviousContactId`
+    #
+    #   * Any updates to user-defined task contact attributes on any contact
+    #     linked through the same `PreviousContactId` will affect every
+    #     contact in the chain.
+    #
+    #   * There can be a maximum of 12 linked task contacts in a chain. That
+    #     is, 12 task contacts can be created that share the same
+    #     `PreviousContactId`.
+    #
+    # * `RelatedContactId`
+    #
+    #   * Copies contact attributes from the related task contact to the new
+    #     contact.
+    #
+    #   * Any update on attributes in a new task contact does not update
+    #     attributes on previous contact.
+    #
+    #   * There’s no limit on the number of task contacts that can be
+    #     created that use the same `RelatedContactId`.
+    #
+    # In addition, when calling StartTaskContact include only one of these
+    # parameters: `ContactFlowID`, `QuickConnectID`, or `TaskTemplateID`.
+    # Only one parameter is required as long as the task template has a flow
+    # configured to run it. If more than one parameter is specified, or only
+    # the `TaskTemplateID` is specified but it does not have a flow
+    # configured, the request returns an error because Amazon Connect cannot
+    # identify the unique flow to run when the task is created.
+    #
+    # A `ServiceQuotaExceededException` occurs when the number of open tasks
+    # exceeds the active tasks quota or there are already 12 tasks
+    # referencing the same `PreviousContactId`. For more information about
+    # service quotas for task contacts, see [Amazon Connect service
+    # quotas][2] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -10877,7 +10959,10 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :previous_contact_id
-    #   The identifier of the previous chat, voice, or task contact.
+    #   The identifier of the previous chat, voice, or task contact. Any
+    #   updates to user-defined attributes to task contacts linked using the
+    #   same `PreviousContactID` will affect every contact in the chain. There
+    #   can be a maximum of 12 linked task contacts in a chain.
     #
     # @option params [String] :contact_flow_id
     #   The identifier of the flow for initiating the tasks. To see the
@@ -10904,7 +10989,9 @@ module Aws::Connect
     #
     # @option params [Hash<String,Types::Reference>] :references
     #   A formatted URL that is shown to an agent in the Contact Control Panel
-    #   (CCP).
+    #   (CCP). Tasks can have the following reference types at the time of
+    #   creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \| `EMAIL`.
+    #   `ATTACHMENT` is not a supported reference type during task creation.
     #
     # @option params [String] :description
     #   A description of the task that is shown to an agent in the Contact
@@ -10929,13 +11016,32 @@ module Aws::Connect
     #   within up to 6 days in future.
     #
     # @option params [String] :task_template_id
-    #   A unique identifier for the task template.
+    #   A unique identifier for the task template. For more information about
+    #   task templates, see [Create task templates][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
     #
     # @option params [String] :quick_connect_id
-    #   The identifier for the quick connect.
+    #   The identifier for the quick connect. Tasks that are created by using
+    #   `QuickConnectId` will use the flow that is defined on agent or queue
+    #   quick connect. For more information about quick connects, see [Create
+    #   quick connects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html
     #
     # @option params [String] :related_contact_id
-    #   The contactId that is [related][1] to this contact.
+    #   The contactId that is [related][1] to this contact. Linking tasks
+    #   together by using `RelatedContactID` copies over contact attributes
+    #   from the related task contact to the new task contact. All updates to
+    #   user-defined attributes in the new task contact are limited to the
+    #   individual contact ID, unlike what happens when tasks are linked by
+    #   using `PreviousContactID`. There are no limits to the number of
+    #   contacts that can be linked by using `RelatedContactId`.
     #
     #
     #
@@ -11628,8 +11734,7 @@ module Aws::Connect
     #
     # @option params [required, String] :content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -11715,8 +11820,7 @@ module Aws::Connect
     #
     # @option params [required, String] :content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
@@ -12317,6 +12421,53 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_phone_number(params = {}, options = {})
       req = build_request(:update_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Updates a phone number’s metadata.
+    #
+    # To verify the status of a previous UpdatePhoneNumberMetadata
+    # operation, call the [DescribePhoneNumber][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    #
+    # @option params [required, String] :phone_number_id
+    #   The Amazon Resource Name (ARN) or resource ID of the phone number.
+    #
+    # @option params [String] :phone_number_description
+    #   The description of the phone number.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_phone_number_metadata({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     phone_number_description: "PhoneNumberDescription",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberMetadata AWS API Documentation
+    #
+    # @overload update_phone_number_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_phone_number_metadata(params = {}, options = {})
+      req = build_request(:update_phone_number_metadata, params)
       req.send_request(options)
     end
 
@@ -13202,7 +13353,7 @@ module Aws::Connect
     # Updates the traffic distribution for a given traffic distribution
     # group.
     #
-    # <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    # <note markdown="1"> The `SignInConfig` distribution is available only on a default
     # `TrafficDistributionGroup` (see the `IsDefault` parameter in the
     # [TrafficDistributionGroup][1] data type). If you call
     # `UpdateTrafficDistribution` with a modified `SignInConfig` and a
@@ -13230,7 +13381,8 @@ module Aws::Connect
     #   The distribution of traffic between the instance and its replica(s).
     #
     # @option params [Types::SignInConfig] :sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #
     # @option params [Types::AgentConfig] :agent_config
@@ -13678,7 +13830,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

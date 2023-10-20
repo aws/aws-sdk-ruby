@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2023-10-20)
+------------------
+
+* Feature - This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
+
 1.158.0 (2023-09-27)
 ------------------
 

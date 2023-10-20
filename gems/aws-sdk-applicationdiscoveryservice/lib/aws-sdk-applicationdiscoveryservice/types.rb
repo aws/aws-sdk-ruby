@@ -146,6 +146,112 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # An object representing the agent or data collector that failed to
+    # delete, each containing agentId, errorMessage, and errorCode.
+    #
+    # @!attribute [rw] agent_id
+    #   The ID of the agent or data collector to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The description of the error that occurred for the delete failed
+    #   agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The type of error that occurred for the delete failed agent. Valid
+    #   status are: AGENT\_IN\_USE \| NOT\_FOUND \| INTERNAL\_SERVER\_ERROR.
+    #   @return [String]
+    #
+    class BatchDeleteAgentError < Struct.new(
+      :agent_id,
+      :error_message,
+      :error_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delete_agents
+    #   The list of agents to delete.
+    #   @return [Array<Types::DeleteAgent>]
+    #
+    class BatchDeleteAgentsRequest < Struct.new(
+      :delete_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of agent IDs that failed to delete during the deletion task,
+    #   each paired with an error message.
+    #   @return [Array<Types::BatchDeleteAgentError>]
+    #
+    class BatchDeleteAgentsResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metadata object that represents the deletion task being executed.
+    #
+    # @!attribute [rw] task_id
+    #   The deletion task's unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current execution status of the deletion task. Valid status are:
+    #   INITIALIZING \| VALIDATING \| DELETING \| COMPLETED \| FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   An epoch seconds timestamp (UTC) of when the deletion task was
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   An epoch seconds timestamp (UTC) of when the deletion task was
+    #   completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_type
+    #   The type of configuration item to delete. Supported types are:
+    #   SERVER.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_configurations
+    #   The list of configuration IDs that were originally requested to be
+    #   deleted by the deletion task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deleted_configurations
+    #   The list of configuration IDs that were successfully deleted by the
+    #   deletion task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_configurations
+    #   A list of configuration IDs that failed to delete during the
+    #   deletion task, each paired with an error message.
+    #   @return [Array<Types::FailedConfiguration>]
+    #
+    # @!attribute [rw] deletion_warnings
+    #   A list of configuration IDs that produced warnings regarding their
+    #   deletion, paired with a warning message.
+    #   @return [Array<Types::DeletionWarning>]
+    #
+    class BatchDeleteConfigurationTask < Struct.new(
+      :task_id,
+      :status,
+      :start_time,
+      :end_time,
+      :configuration_type,
+      :requested_configurations,
+      :deleted_configurations,
+      :failed_configurations,
+      :deletion_warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error messages returned for each import task that you deleted as a
     # response for this command.
     #
@@ -174,8 +280,14 @@ module Aws::ApplicationDiscoveryService
     #   The IDs for the import tasks that you want to delete.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] delete_history
+    #   Set to `true` to remove the deleted import task from
+    #   DescribeImportTasks.
+    #   @return [Boolean]
+    #
     class BatchDeleteImportDataRequest < Struct.new(
-      :import_task_ids)
+      :import_task_ids,
+      :delete_history)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -610,6 +722,28 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # An object representing the agent or data collector to be deleted along
+    # with the optional configurations for error handling.
+    #
+    # @!attribute [rw] agent_id
+    #   The ID of the agent or data collector to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Optional flag used to force delete an agent or data collector. It is
+    #   needed to delete any agent in HEALTHY/UNHEALTHY/RUNNING status. Note
+    #   that deleting an agent that is actively reporting health causes it
+    #   to be re-registered with a different agent ID after data collector
+    #   re-connects with Amazon Web Services.
+    #   @return [Boolean]
+    #
+    class DeleteAgent < Struct.new(
+      :agent_id,
+      :force)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configuration_ids
     #   Configuration ID of an application to be deleted.
     #   @return [Array<String>]
@@ -642,6 +776,29 @@ module Aws::ApplicationDiscoveryService
     end
 
     class DeleteTagsResponse < Aws::EmptyStructure; end
+
+    # A configuration ID paired with a warning message.
+    #
+    # @!attribute [rw] configuration_id
+    #   The unique identifier of the configuration that produced a warning.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning_code
+    #   The integer warning code associated with the warning message.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] warning_text
+    #   A descriptive message of the warning the associated configuration ID
+    #   produced.
+    #   @return [String]
+    #
+    class DeletionWarning < Struct.new(
+      :configuration_id,
+      :warning_code,
+      :warning_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] agent_ids
     #   The agent or the collector IDs for which you want information. If
@@ -698,6 +855,27 @@ module Aws::ApplicationDiscoveryService
     class DescribeAgentsResponse < Struct.new(
       :agents_info,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The ID of the task to delete.
+    #   @return [String]
+    #
+    class DescribeBatchDeleteConfigurationTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task
+    #   The `BatchDeleteConfigurationTask` that represents the deletion task
+    #   being executed.
+    #   @return [Types::BatchDeleteConfigurationTask]
+    #
+    class DescribeBatchDeleteConfigurationTaskResponse < Struct.new(
+      :task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1134,6 +1312,29 @@ module Aws::ApplicationDiscoveryService
       class Unknown < ExportPreferences; end
     end
 
+    # A configuration ID paired with an error message.
+    #
+    # @!attribute [rw] configuration_id
+    #   The unique identifier of the configuration the failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_status_code
+    #   The integer error code associated with the error message.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   A descriptive message indicating why the associated configuration
+    #   failed to delete.
+    #   @return [String]
+    #
+    class FailedConfiguration < Struct.new(
+      :configuration_id,
+      :error_status_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter that can use conditional operators.
     #
     # For more information about filters, see [Querying Discovered
@@ -1384,6 +1585,17 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     class InvalidParameterValueException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The limit of 200 configuration IDs per request has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1641,6 +1853,33 @@ module Aws::ApplicationDiscoveryService
     #
     class ServerInternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_type
+    #   The type of configuration item to delete. Supported types are:
+    #   SERVER.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_ids
+    #   The list of configuration IDs that will be deleted by the task.
+    #   @return [Array<String>]
+    #
+    class StartBatchDeleteConfigurationTaskRequest < Struct.new(
+      :configuration_type,
+      :configuration_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The unique identifier associated with the newly started deletion
+    #   task.
+    #   @return [String]
+    #
+    class StartBatchDeleteConfigurationTaskResponse < Struct.new(
+      :task_id)
       SENSITIVE = []
       include Aws::Structure
     end

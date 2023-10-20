@@ -231,6 +231,8 @@ module Aws::SSM
     DeleteInventoryResult = Shapes::StructureShape.new(name: 'DeleteInventoryResult')
     DeleteMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowRequest')
     DeleteMaintenanceWindowResult = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowResult')
+    DeleteOpsItemRequest = Shapes::StructureShape.new(name: 'DeleteOpsItemRequest')
+    DeleteOpsItemResponse = Shapes::StructureShape.new(name: 'DeleteOpsItemResponse')
     DeleteOpsMetadataRequest = Shapes::StructureShape.new(name: 'DeleteOpsMetadataRequest')
     DeleteOpsMetadataResult = Shapes::StructureShape.new(name: 'DeleteOpsMetadataResult')
     DeleteParameterRequest = Shapes::StructureShape.new(name: 'DeleteParameterRequest')
@@ -752,6 +754,7 @@ module Aws::SSM
     OpsItemAlreadyExistsException = Shapes::StructureShape.new(name: 'OpsItemAlreadyExistsException')
     OpsItemArn = Shapes::StringShape.new(name: 'OpsItemArn')
     OpsItemCategory = Shapes::StringShape.new(name: 'OpsItemCategory')
+    OpsItemConflictException = Shapes::StructureShape.new(name: 'OpsItemConflictException')
     OpsItemDataKey = Shapes::StringShape.new(name: 'OpsItemDataKey')
     OpsItemDataType = Shapes::StringShape.new(name: 'OpsItemDataType')
     OpsItemDataValue = Shapes::StructureShape.new(name: 'OpsItemDataValue')
@@ -1887,6 +1890,11 @@ module Aws::SSM
 
     DeleteMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     DeleteMaintenanceWindowResult.struct_class = Types::DeleteMaintenanceWindowResult
+
+    DeleteOpsItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
+    DeleteOpsItemRequest.struct_class = Types::DeleteOpsItemRequest
+
+    DeleteOpsItemResponse.struct_class = Types::DeleteOpsItemResponse
 
     DeleteOpsMetadataRequest.add_member(:ops_metadata_arn, Shapes::ShapeRef.new(shape: OpsMetadataArn, required: true, location_name: "OpsMetadataArn"))
     DeleteOpsMetadataRequest.struct_class = Types::DeleteOpsMetadataRequest
@@ -3569,6 +3577,9 @@ module Aws::SSM
     OpsItemAlreadyExistsException.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: String, location_name: "OpsItemId"))
     OpsItemAlreadyExistsException.struct_class = Types::OpsItemAlreadyExistsException
 
+    OpsItemConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OpsItemConflictException.struct_class = Types::OpsItemConflictException
+
     OpsItemDataValue.add_member(:value, Shapes::ShapeRef.new(shape: OpsItemDataValueString, location_name: "Value"))
     OpsItemDataValue.add_member(:type, Shapes::ShapeRef.new(shape: OpsItemDataType, location_name: "Type"))
     OpsItemDataValue.struct_class = Types::OpsItemDataValue
@@ -4743,6 +4754,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemRelatedItemAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemConflictException)
       end)
 
       api.add_operation(:cancel_command, Seahorse::Model::Operation.new.tap do |o|
@@ -4949,6 +4961,16 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DeleteMaintenanceWindowRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteMaintenanceWindowResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_ops_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOpsItem"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOpsItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOpsItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
       end)
 
       api.add_operation(:delete_ops_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -5575,6 +5597,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemConflictException)
       end)
 
       api.add_operation(:get_automation_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -6570,6 +6593,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemConflictException)
       end)
 
       api.add_operation(:update_ops_metadata, Seahorse::Model::Operation.new.tap do |o|

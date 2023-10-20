@@ -911,6 +911,7 @@ module Aws::Connect
     UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
     UpdateParticipantRoleConfigRequest = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigRequest')
     UpdateParticipantRoleConfigResponse = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigResponse')
+    UpdatePhoneNumberMetadataRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberMetadataRequest')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResponse')
     UpdatePromptRequest = Shapes::StructureShape.new(name: 'UpdatePromptRequest')
@@ -1629,7 +1630,7 @@ module Aws::Connect
 
     DeleteEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
-    DeleteEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version"))
+    DeleteEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version", metadata: {"box"=>true}))
     DeleteEvaluationFormRequest.struct_class = Types::DeleteEvaluationFormRequest
 
     DeleteHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1751,7 +1752,7 @@ module Aws::Connect
 
     DescribeEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
-    DescribeEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version"))
+    DescribeEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version", metadata: {"box"=>true}))
     DescribeEvaluationFormRequest.struct_class = Types::DescribeEvaluationFormRequest
 
     DescribeEvaluationFormResponse.add_member(:evaluation_form, Shapes::ShapeRef.new(shape: EvaluationForm, required: true, location_name: "EvaluationForm"))
@@ -2109,7 +2110,7 @@ module Aws::Connect
     EvaluationFormSummary.add_member(:last_activated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastActivatedTime"))
     EvaluationFormSummary.add_member(:last_activated_by, Shapes::ShapeRef.new(shape: ARN, location_name: "LastActivatedBy"))
     EvaluationFormSummary.add_member(:latest_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "LatestVersion"))
-    EvaluationFormSummary.add_member(:active_version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "ActiveVersion"))
+    EvaluationFormSummary.add_member(:active_version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "ActiveVersion", metadata: {"box"=>true}))
     EvaluationFormSummary.struct_class = Types::EvaluationFormSummary
 
     EvaluationFormSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormSummary)
@@ -3875,7 +3876,7 @@ module Aws::Connect
     UpdateEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
     UpdateEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "EvaluationFormVersion"))
-    UpdateEvaluationFormRequest.add_member(:create_new_version, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CreateNewVersion"))
+    UpdateEvaluationFormRequest.add_member(:create_new_version, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CreateNewVersion", metadata: {"box"=>true}))
     UpdateEvaluationFormRequest.add_member(:title, Shapes::ShapeRef.new(shape: EvaluationFormTitle, required: true, location_name: "Title"))
     UpdateEvaluationFormRequest.add_member(:description, Shapes::ShapeRef.new(shape: EvaluationFormDescription, location_name: "Description"))
     UpdateEvaluationFormRequest.add_member(:items, Shapes::ShapeRef.new(shape: EvaluationFormItemsList, required: true, location_name: "Items"))
@@ -3919,6 +3920,11 @@ module Aws::Connect
     UpdateParticipantRoleConfigRequest.struct_class = Types::UpdateParticipantRoleConfigRequest
 
     UpdateParticipantRoleConfigResponse.struct_class = Types::UpdateParticipantRoleConfigResponse
+
+    UpdatePhoneNumberMetadataRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
+    UpdatePhoneNumberMetadataRequest.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
+    UpdatePhoneNumberMetadataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePhoneNumberMetadataRequest.struct_class = Types::UpdatePhoneNumberMetadataRequest
 
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
     UpdatePhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "TargetArn"))
@@ -7080,6 +7086,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_phone_number_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePhoneNumberMetadata"
+        o.http_method = "PUT"
+        o.http_request_uri = "/phone-number/{PhoneNumberId}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePhoneNumberMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_prompt, Seahorse::Model::Operation.new.tap do |o|

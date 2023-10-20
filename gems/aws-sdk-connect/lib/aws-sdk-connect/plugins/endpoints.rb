@@ -424,6 +424,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateParticipantRoleConfig.build(context)
           when :update_phone_number
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
+          when :update_phone_number_metadata
+            Aws::Connect::Endpoints::UpdatePhoneNumberMetadata.build(context)
           when :update_prompt
             Aws::Connect::Endpoints::UpdatePrompt.build(context)
           when :update_queue_hours_of_operation

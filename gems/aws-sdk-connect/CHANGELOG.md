@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2023-10-20)
+------------------
+
+* Feature - This release adds support for updating phone number metadata, such as phone number description.
+
 1.129.0 (2023-10-03)
 ------------------
 

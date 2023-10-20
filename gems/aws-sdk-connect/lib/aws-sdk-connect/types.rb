@@ -899,15 +899,16 @@ module Aws::Connect
     # @!attribute [rw] phone_number_status
     #   The status of the phone number.
     #
-    #   * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    #   * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation succeeded.
     #
-    #   * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #     [UpdatePhoneNumber][2] operation is still in progress and has not
-    #     yet completed. You can call [DescribePhoneNumber][3] at a later
-    #     time to verify if the previous operation has completed.
+    #   * `IN_PROGRESS` means a [ClaimPhoneNumber][1],
+    #     [UpdatePhoneNumber][2], or [UpdatePhoneNumberMetadata][3]
+    #     operation is still in progress and has not yet completed. You can
+    #     call [DescribePhoneNumber][4] at a later time to verify if the
+    #     previous operation has completed.
     #
-    #   * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    #   * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation has failed. It will include a
     #     message indicating the failure reason. A common reason for a
     #     failure may be that the `TargetArn` value you are claiming or
@@ -924,9 +925,10 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    #   [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #   @return [Types::PhoneNumberStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimedPhoneNumberSummary AWS API Documentation
@@ -1106,8 +1108,9 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -1151,10 +1154,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
-    #
-    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
@@ -1405,7 +1405,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1481,8 +1486,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -7097,7 +7101,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
@@ -10741,15 +10746,15 @@ module Aws::Connect
 
     # The status of the phone number.
     #
-    # * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    # * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation succeeded.
     #
-    # * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #   [UpdatePhoneNumber][2] operation is still in progress and has not
-    #   yet completed. You can call [DescribePhoneNumber][3] at a later time
-    #   to verify if the previous operation has completed.
+    # * `IN_PROGRESS` means a [ClaimPhoneNumber][1], [UpdatePhoneNumber][2],
+    #   or [UpdatePhoneNumberMetadata][3] operation is still in progress and
+    #   has not yet completed. You can call [DescribePhoneNumber][4] at a
+    #   later time to verify if the previous operation has completed.
     #
-    # * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    # * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation has failed. It will include a
     #   message indicating the failure reason. A common reason for a failure
     #   may be that the `TargetArn` value you are claiming or updating a
@@ -10761,9 +10766,10 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #
     # @!attribute [rw] status
     #   The status.
@@ -12720,6 +12726,11 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
+    #   <note markdown="1"> InstanceID is a required field. The "Required: No" below is
+    #   incorrect.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -13110,7 +13121,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The distribution of allowing signing in to the instance and its
+    # The distribution that determines which Amazon Web Services Regions
+    # should be used to sign in agents in to both the instance and its
     # replica(s).
     #
     # @!attribute [rw] distributions
@@ -13598,7 +13610,10 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] previous_contact_id
-    #   The identifier of the previous chat, voice, or task contact.
+    #   The identifier of the previous chat, voice, or task contact. Any
+    #   updates to user-defined attributes to task contacts linked using the
+    #   same `PreviousContactID` will affect every contact in the chain.
+    #   There can be a maximum of 12 linked task contacts in a chain.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -13629,7 +13644,10 @@ module Aws::Connect
     #
     # @!attribute [rw] references
     #   A formatted URL that is shown to an agent in the Contact Control
-    #   Panel (CCP).
+    #   Panel (CCP). Tasks can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during task
+    #   creation.
     #   @return [Hash<String,Types::Reference>]
     #
     # @!attribute [rw] description
@@ -13658,15 +13676,34 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] task_template_id
-    #   A unique identifier for the task template.
+    #   A unique identifier for the task template. For more information
+    #   about task templates, see [Create task templates][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
-    #   The identifier for the quick connect.
+    #   The identifier for the quick connect. Tasks that are created by
+    #   using `QuickConnectId` will use the flow that is defined on agent or
+    #   queue quick connect. For more information about quick connects, see
+    #   [Create quick connects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html
     #   @return [String]
     #
     # @!attribute [rw] related_contact_id
-    #   The contactId that is [related][1] to this contact.
+    #   The contactId that is [related][1] to this contact. Linking tasks
+    #   together by using `RelatedContactID` copies over contact attributes
+    #   from the related task contact to the new task contact. All updates
+    #   to user-defined attributes in the new task contact are limited to
+    #   the individual contact ID, unlike what happens when tasks are linked
+    #   by using `PreviousContactID`. There are no limits to the number of
+    #   contacts that can be linked by using `RelatedContactId`.
     #
     #
     #
@@ -14325,14 +14362,14 @@ module Aws::Connect
     #     [DeleteTrafficDistributionGroup][2] operation has failed.
     #
     #   * `UPDATE_IN_PROGRESS` means the previous
-    #     [UpdateTrafficDistributionGroup][3] operation is still in progress
-    #     and has not yet completed.
+    #     [UpdateTrafficDistribution][3] operation is still in progress and
+    #     has not yet completed.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -14348,18 +14385,13 @@ module Aws::Connect
     #   default traffic distribution group is deleted as part of the process
     #   for deleting a replica.
     #
-    #   <note markdown="1"> You can change the `SignInConfig` distribution only for a default
-    #   `TrafficDistributionGroup` (see the `IsDefault` parameter in the
-    #   [TrafficDistributionGroup][1] data type). If you call
-    #   `UpdateTrafficDistribution` with a modified `SignInConfig` and a
-    #   non-default `TrafficDistributionGroup`, an `InvalidRequestException`
-    #   is returned.
+    #   <note markdown="1"> The `SignInConfig` distribution is available only on the default
+    #   `TrafficDistributionGroup`. If you call `UpdateTrafficDistribution`
+    #   with a modified `SignInConfig` and a non-default
+    #   `TrafficDistributionGroup`, an `InvalidRequestException` is
+    #   returned.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroup AWS API Documentation
@@ -14695,8 +14727,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -14775,8 +14806,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
@@ -15195,6 +15225,38 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfigResponse AWS API Documentation
     #
     class UpdateParticipantRoleConfigResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] phone_number_id
+    #   The Amazon Resource Name (ARN) or resource ID of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberMetadataRequest AWS API Documentation
+    #
+    class UpdatePhoneNumberMetadataRequest < Struct.new(
+      :phone_number_id,
+      :phone_number_description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
@@ -15900,7 +15962,8 @@ module Aws::Connect
     #   @return [Types::TelephonyConfig]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
