@@ -158,7 +158,7 @@ module AwsSdkCodeGenerator
             when 'AWS::Auth::CredentialScope'
               Param.new(
                 'credentials',
-                "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', nil, credential_scope: '#{value}')",
+                "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', credential_scope: '#{value}')",
                 true
               )
             when 'AWS::STS::UseGlobalEndpoint'
