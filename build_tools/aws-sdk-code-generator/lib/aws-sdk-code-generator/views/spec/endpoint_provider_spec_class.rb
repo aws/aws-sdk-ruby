@@ -51,9 +51,9 @@ module AwsSdkCodeGenerator
                 operation_name: Underscore.underscore(
                   operation_inputs_test['operationName']
                 ),
-                operation_params: operation_inputs_test['operationParams'] || [],
-                built_in_params: operation_inputs_test['builtInParams'] || [],
-                client_params: operation_inputs_test['clientParams'] || []
+                operation_params: operation_inputs_test['operationParams'] || {},
+                built_in_params: operation_inputs_test['builtInParams'] || {},
+                client_params: operation_inputs_test['clientParams'] || {}
               )
             end
           end
@@ -113,13 +113,19 @@ module AwsSdkCodeGenerator
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
             end
-
             @client_params += options[:built_in_params].map do |k,v|
-              built_in_to_param(k, v)
-            end
-            # the expected default of UseGlobalEndpoint does not match the SDK's default value
-            if @service.identifier == 's3' && !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
-              @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
+              if k == 'AWS::Auth::CredentialScope'
+                Param.new(
+                  'credentials',
+                  "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', nil, '#{v}')"
+                )
+              # the expected default of UseGlobalEndpoint does not match
+              # the Ruby SDK's default value
+              elsif @service.identifier == 's3' && k == 'AWS::S3::UseGlobalEndpoint'
+                built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
+              else
+                built_in_to_param(k, v)
+              end
             end
           end
 
@@ -149,29 +155,27 @@ module AwsSdkCodeGenerator
           def built_in_to_param(built_in, value)
             case built_in
             when 'AWS::Region'
-              Param.new('region', value)
+              Param.new('region', "'#{value}'")
             when 'AWS::UseFIPS'
               Param.new('use_fips_endpoint', value)
             when 'AWS::UseDualStack'
               Param.new('use_dualstack_endpoint', value)
-            when 'AWS::Auth::CredentialScope'
-              Param.new('credential_scope', value)
             when 'AWS::STS::UseGlobalEndpoint'
-              Param.new('sts_regional_endpoints', value ? 'legacy' : 'regional')
+              val = value ? 'legacy' : 'regional'
+              Param.new('sts_regional_endpoints', "'#{val}'")
             when 'AWS::S3::UseGlobalEndpoint'
-              Param.new('s3_us_east_1_regional_endpoint', value ? 'legacy' : 'regional')
+              val = value ? 'legacy' : 'regional'
+              Param.new('s3_us_east_1_regional_endpoint', "'#{val}'")
             when 'AWS::S3::Accelerate'
               Param.new('use_accelerate_endpoint', value)
             when 'AWS::S3::ForcePathStyle'
               Param.new('force_path_style', value)
-            when 'AWS::S3::UseArnRegion'
-              Param.new('s3_use_arn_region', value)
-            when 'AWS::S3Control::UseArnRegion'
+            when 'AWS::S3::UseArnRegion', 'AWS::S3Control::UseArnRegion'
               Param.new('s3_use_arn_region', value)
             when 'AWS::S3::DisableMultiRegionAccessPoints'
               Param.new('s3_disable_multiregion_access_points', value)
             when 'SDK::Endpoint'
-              Param.new('endpoint', value)
+              Param.new('endpoint', "'#{value}'")
             else
               raise ArgumentError, "#{built_in} not supported."
             end
@@ -183,15 +187,8 @@ module AwsSdkCodeGenerator
             @param = param
             @value = value
           end
-          attr_accessor :param
 
-          def value
-            if @value.is_a? String
-              "'#{@value}'"
-            else
-              @value
-            end
-          end
+          attr_accessor :param, :value
         end
 
       end
