@@ -20,8 +20,7 @@ module Aws
         credentials: Credentials.new(
           profile['aws_access_key_id'],
           profile['aws_secret_access_key'],
-          nil,
-          profile['aws_credential_scope']
+          credential_scope: profile['aws_credential_scope']
         ),
         set?: true
       )

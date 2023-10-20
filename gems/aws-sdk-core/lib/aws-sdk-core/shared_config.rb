@@ -412,7 +412,7 @@ module Aws
         prof_config['aws_access_key_id'],
         prof_config['aws_secret_access_key'],
         prof_config['aws_session_token'],
-        prof_config['aws_credential_scope']
+        credential_scope: prof_config['aws_credential_scope']
       )
       creds if creds.set?
     end

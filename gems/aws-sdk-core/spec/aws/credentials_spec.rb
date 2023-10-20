@@ -22,8 +22,14 @@ module Aws
       expect(Credentials.new('akid', 'secret').session_token).to be(nil)
     end
 
+    it 'takes extra properties after session token' do
+      expect do
+        Credentials.new('akid', 'secret', nil, foo: 'bar')
+      end.to_not raise_error
+    end
+
     it 'provides access to the credential scope' do
-      creds = Credentials.new('akid', 'secret', nil, 'scope')
+      creds = Credentials.new('akid', 'secret', credential_scope: 'scope')
       expect(creds.credential_scope).to eq('scope')
     end
 
