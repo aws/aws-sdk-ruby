@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-10-23)
+------------------
+
+* Feature - This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+
 1.15.0 (2023-10-16)
 ------------------
 

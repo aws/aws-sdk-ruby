@@ -872,6 +872,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -882,6 +883,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroup AWS API Documentation
     #
@@ -1132,6 +1134,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1142,6 +1145,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroup AWS API Documentation
     #
@@ -1540,6 +1544,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1550,6 +1555,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroup AWS API Documentation
     #
@@ -2026,6 +2032,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
     #   resp.workgroups[0].namespace_name #=> String
+    #   resp.workgroups[0].patch_version #=> String
     #   resp.workgroups[0].port #=> Integer
     #   resp.workgroups[0].publicly_accessible #=> Boolean
     #   resp.workgroups[0].security_group_ids #=> Array
@@ -2036,6 +2043,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].workgroup_arn #=> String
     #   resp.workgroups[0].workgroup_id #=> String
     #   resp.workgroups[0].workgroup_name #=> String
+    #   resp.workgroups[0].workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroups AWS API Documentation
     #
@@ -2699,6 +2707,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -2709,6 +2718,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroup AWS API Documentation
     #
@@ -2732,7 +2742,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

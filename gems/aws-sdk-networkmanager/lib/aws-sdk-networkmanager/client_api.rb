@@ -488,6 +488,7 @@ module Aws::NetworkManager
     ConnectPeer.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     ConnectPeer.add_member(:configuration, Shapes::ShapeRef.new(shape: ConnectPeerConfiguration, location_name: "Configuration"))
     ConnectPeer.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ConnectPeer.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "SubnetArn"))
     ConnectPeer.struct_class = Types::ConnectPeer
 
     ConnectPeerAssociation.add_member(:connect_peer_id, Shapes::ShapeRef.new(shape: ConnectPeerId, location_name: "ConnectPeerId"))
@@ -523,6 +524,7 @@ module Aws::NetworkManager
     ConnectPeerSummary.add_member(:connect_peer_state, Shapes::ShapeRef.new(shape: ConnectPeerState, location_name: "ConnectPeerState"))
     ConnectPeerSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     ConnectPeerSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ConnectPeerSummary.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "SubnetArn"))
     ConnectPeerSummary.struct_class = Types::ConnectPeerSummary
 
     ConnectPeerSummaryList.member = Shapes::ShapeRef.new(shape: ConnectPeerSummary)
@@ -673,9 +675,10 @@ module Aws::NetworkManager
     CreateConnectPeerRequest.add_member(:core_network_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "CoreNetworkAddress"))
     CreateConnectPeerRequest.add_member(:peer_address, Shapes::ShapeRef.new(shape: IPAddress, required: true, location_name: "PeerAddress"))
     CreateConnectPeerRequest.add_member(:bgp_options, Shapes::ShapeRef.new(shape: BgpOptions, location_name: "BgpOptions"))
-    CreateConnectPeerRequest.add_member(:inside_cidr_blocks, Shapes::ShapeRef.new(shape: ConstrainedStringList, required: true, location_name: "InsideCidrBlocks"))
+    CreateConnectPeerRequest.add_member(:inside_cidr_blocks, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "InsideCidrBlocks"))
     CreateConnectPeerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateConnectPeerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectPeerRequest.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "SubnetArn"))
     CreateConnectPeerRequest.struct_class = Types::CreateConnectPeerRequest
 
     CreateConnectPeerResponse.add_member(:connect_peer, Shapes::ShapeRef.new(shape: ConnectPeer, location_name: "ConnectPeer"))

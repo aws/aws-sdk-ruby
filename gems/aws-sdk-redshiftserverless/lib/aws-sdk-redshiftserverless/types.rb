@@ -2533,6 +2533,16 @@ module Aws::RedshiftServerless
     #   The namespace the workgroup is associated with.
     #   @return [String]
     #
+    # @!attribute [rw] patch_version
+    #   The patch version of your Amazon Redshift Serverless workgroup. For
+    #   more information about patch versions, see [Cluster versions for
+    #   Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
@@ -2567,6 +2577,16 @@ module Aws::RedshiftServerless
     #   The name of the workgroup.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_version
+    #   The Amazon Redshift Serverless version of your workgroup. For more
+    #   information about Amazon Redshift Serverless versions, see[Cluster
+    #   versions for Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Workgroup AWS API Documentation
     #
     class Workgroup < Struct.new(
@@ -2576,6 +2596,7 @@ module Aws::RedshiftServerless
       :endpoint,
       :enhanced_vpc_routing,
       :namespace_name,
+      :patch_version,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2583,7 +2604,8 @@ module Aws::RedshiftServerless
       :subnet_ids,
       :workgroup_arn,
       :workgroup_id,
-      :workgroup_name)
+      :workgroup_name,
+      :workgroup_version)
       SENSITIVE = []
       include Aws::Structure
     end

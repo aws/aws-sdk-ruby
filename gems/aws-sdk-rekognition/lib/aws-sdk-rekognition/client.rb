@@ -4549,6 +4549,111 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Retrieves the results for a given media analysis job. Takes a `JobId`
+    # returned by StartMediaAnalysisJob.
+    #
+    # @option params [required, String] :job_id
+    #   Unique identifier for the media analysis job for which you want to
+    #   retrieve results.
+    #
+    # @return [Types::GetMediaAnalysisJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaAnalysisJobResponse#job_id #job_id} => String
+    #   * {Types::GetMediaAnalysisJobResponse#job_name #job_name} => String
+    #   * {Types::GetMediaAnalysisJobResponse#operations_config #operations_config} => Types::MediaAnalysisOperationsConfig
+    #   * {Types::GetMediaAnalysisJobResponse#status #status} => String
+    #   * {Types::GetMediaAnalysisJobResponse#failure_details #failure_details} => Types::MediaAnalysisJobFailureDetails
+    #   * {Types::GetMediaAnalysisJobResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::GetMediaAnalysisJobResponse#completion_timestamp #completion_timestamp} => Time
+    #   * {Types::GetMediaAnalysisJobResponse#input #input} => Types::MediaAnalysisInput
+    #   * {Types::GetMediaAnalysisJobResponse#output_config #output_config} => Types::MediaAnalysisOutputConfig
+    #   * {Types::GetMediaAnalysisJobResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetMediaAnalysisJobResponse#results #results} => Types::MediaAnalysisResults
+    #   * {Types::GetMediaAnalysisJobResponse#manifest_summary #manifest_summary} => Types::MediaAnalysisManifestSummary
+    #
+    #
+    # @example Example: GetMediaAnalysisJob
+    #
+    #   # Retrieves the results for a given media analysis job.
+    #
+    #   resp = client.get_media_analysis_job({
+    #     job_id: "861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     completion_timestamp: Time.parse("2023-07-28T08:05:51.958000-07:00"), 
+    #     creation_timestamp: Time.parse("2023-07-28T08:05:51.958000-06:00"), 
+    #     input: {
+    #       s3_object: {
+    #         bucket: "input-bucket", 
+    #         name: "input-manifest.json", 
+    #       }, 
+    #     }, 
+    #     job_id: "861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537", 
+    #     job_name: "job-name", 
+    #     manifest_summary: {
+    #       s3_object: {
+    #         bucket: "output-bucket", 
+    #         name: "output-location/861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537-manifest-summary.json", 
+    #       }, 
+    #     }, 
+    #     operations_config: {
+    #       detect_moderation_labels: {
+    #         min_confidence: 50, 
+    #         project_version: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #       }, 
+    #     }, 
+    #     output_config: {
+    #       s3_bucket: "output-bucket", 
+    #       s3_key_prefix: "output-location", 
+    #     }, 
+    #     results: {
+    #       s3_object: {
+    #         bucket: "output-bucket", 
+    #         name: "output-location/861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537-results.jsonl", 
+    #       }, 
+    #     }, 
+    #     status: "SUCCEEDED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_analysis_job({
+    #     job_id: "MediaAnalysisJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.operations_config.detect_moderation_labels.min_confidence #=> Float
+    #   resp.operations_config.detect_moderation_labels.project_version #=> String
+    #   resp.status #=> String, one of "CREATED", "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.failure_details.code #=> String, one of "INTERNAL_ERROR", "INVALID_S3_OBJECT", "INVALID_MANIFEST", "INVALID_OUTPUT_CONFIG", "INVALID_KMS_KEY", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "RESOURCE_NOT_READY", "THROTTLED"
+    #   resp.failure_details.message #=> String
+    #   resp.creation_timestamp #=> Time
+    #   resp.completion_timestamp #=> Time
+    #   resp.input.s3_object.bucket #=> String
+    #   resp.input.s3_object.name #=> String
+    #   resp.input.s3_object.version #=> String
+    #   resp.output_config.s3_bucket #=> String
+    #   resp.output_config.s3_key_prefix #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.results.s3_object.bucket #=> String
+    #   resp.results.s3_object.name #=> String
+    #   resp.results.s3_object.version #=> String
+    #   resp.manifest_summary.s3_object.bucket #=> String
+    #   resp.manifest_summary.s3_object.name #=> String
+    #   resp.manifest_summary.s3_object.version #=> String
+    #
+    # @overload get_media_analysis_job(params = {})
+    # @param [Hash] params ({})
+    def get_media_analysis_job(params = {}, options = {})
+      req = build_request(:get_media_analysis_job, params)
+      req.send_request(options)
+    end
+
     # Gets the path tracking results of a Amazon Rekognition Video analysis
     # started by StartPersonTracking.
     #
@@ -5778,6 +5883,115 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def list_faces(params = {}, options = {})
       req = build_request(:list_faces, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of media analysis jobs. Results are sorted by
+    # `CreationTimestamp` in descending order.
+    #
+    # @option params [String] :next_token
+    #   Pagination token, if the previous response was incomplete.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value user can specify is 100. If user specifies a value
+    #   greater than 100, an `InvalidParameterException` error occurs. The
+    #   default value is 100.
+    #
+    # @return [Types::ListMediaAnalysisJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaAnalysisJobsResponse#next_token #next_token} => String
+    #   * {Types::ListMediaAnalysisJobsResponse#media_analysis_jobs #media_analysis_jobs} => Array&lt;Types::MediaAnalysisJobDescription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListMediaAnalysisJobs
+    #
+    #   # Returns a list of media analysis jobs.
+    #
+    #   resp = client.list_media_analysis_jobs({
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     media_analysis_jobs: [
+    #       {
+    #         completion_timestamp: Time.parse("2023-07-28T08:05:51.958000-07:00"), 
+    #         creation_timestamp: Time.parse("2023-07-28T08:05:51.958000-06:00"), 
+    #         input: {
+    #           s3_object: {
+    #             bucket: "input-bucket", 
+    #             name: "input-manifest.json", 
+    #           }, 
+    #         }, 
+    #         job_id: "861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537", 
+    #         job_name: "job-name", 
+    #         manifest_summary: {
+    #           s3_object: {
+    #             bucket: "output-bucket", 
+    #             name: "output-location/861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537-manifest-summary.json", 
+    #           }, 
+    #         }, 
+    #         operations_config: {
+    #           detect_moderation_labels: {
+    #             min_confidence: 50, 
+    #             project_version: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #           }, 
+    #         }, 
+    #         output_config: {
+    #           s3_bucket: "output-bucket", 
+    #           s3_key_prefix: "output-location", 
+    #         }, 
+    #         results: {
+    #           s3_object: {
+    #             bucket: "output-bucket", 
+    #             name: "output-location/861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537-results.jsonl", 
+    #           }, 
+    #         }, 
+    #         status: "SUCCEEDED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_analysis_jobs({
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.media_analysis_jobs #=> Array
+    #   resp.media_analysis_jobs[0].job_id #=> String
+    #   resp.media_analysis_jobs[0].job_name #=> String
+    #   resp.media_analysis_jobs[0].operations_config.detect_moderation_labels.min_confidence #=> Float
+    #   resp.media_analysis_jobs[0].operations_config.detect_moderation_labels.project_version #=> String
+    #   resp.media_analysis_jobs[0].status #=> String, one of "CREATED", "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.media_analysis_jobs[0].failure_details.code #=> String, one of "INTERNAL_ERROR", "INVALID_S3_OBJECT", "INVALID_MANIFEST", "INVALID_OUTPUT_CONFIG", "INVALID_KMS_KEY", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "RESOURCE_NOT_READY", "THROTTLED"
+    #   resp.media_analysis_jobs[0].failure_details.message #=> String
+    #   resp.media_analysis_jobs[0].creation_timestamp #=> Time
+    #   resp.media_analysis_jobs[0].completion_timestamp #=> Time
+    #   resp.media_analysis_jobs[0].input.s3_object.bucket #=> String
+    #   resp.media_analysis_jobs[0].input.s3_object.name #=> String
+    #   resp.media_analysis_jobs[0].input.s3_object.version #=> String
+    #   resp.media_analysis_jobs[0].output_config.s3_bucket #=> String
+    #   resp.media_analysis_jobs[0].output_config.s3_key_prefix #=> String
+    #   resp.media_analysis_jobs[0].kms_key_id #=> String
+    #   resp.media_analysis_jobs[0].results.s3_object.bucket #=> String
+    #   resp.media_analysis_jobs[0].results.s3_object.name #=> String
+    #   resp.media_analysis_jobs[0].results.s3_object.version #=> String
+    #   resp.media_analysis_jobs[0].manifest_summary.s3_object.bucket #=> String
+    #   resp.media_analysis_jobs[0].manifest_summary.s3_object.name #=> String
+    #   resp.media_analysis_jobs[0].manifest_summary.s3_object.version #=> String
+    #
+    # @overload list_media_analysis_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_media_analysis_jobs(params = {}, options = {})
+      req = build_request(:list_media_analysis_jobs, params)
       req.send_request(options)
     end
 
@@ -7340,6 +7554,108 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Initiates a new media analysis job. Accepts a manifest file in an
+    # Amazon S3 bucket. The output is a manifest file and a summary of the
+    # manifest stored in the Amazon S3 bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotency token used to prevent the accidental creation of duplicate
+    #   versions. If you use the same token with multiple
+    #   `StartMediaAnalysisJobRequest` requests, the same response is
+    #   returned. Use `ClientRequestToken` to prevent the same request from
+    #   being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :job_name
+    #   The name of the job. Does not have to be unique.
+    #
+    # @option params [required, Types::MediaAnalysisOperationsConfig] :operations_config
+    #   Configuration options for the media analysis job to be created.
+    #
+    # @option params [required, Types::MediaAnalysisInput] :input
+    #   Input data to be analyzed by the job.
+    #
+    # @option params [required, Types::MediaAnalysisOutputConfig] :output_config
+    #   The Amazon S3 bucket location to store the results.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier of customer managed AWS KMS key (name or ARN). The key
+    #   is used to encrypt images copied into the service. The key is also
+    #   used to encrypt results and manifest files written to the output
+    #   Amazon S3 bucket.
+    #
+    # @return [Types::StartMediaAnalysisJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMediaAnalysisJobResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: StartMediaAnalysisJob
+    #
+    #   # Initiates a new media analysis job.
+    #
+    #   resp = client.start_media_analysis_job({
+    #     input: {
+    #       s3_object: {
+    #         bucket: "input-bucket", 
+    #         name: "input-manifest.json", 
+    #       }, 
+    #     }, 
+    #     job_name: "job-name", 
+    #     operations_config: {
+    #       detect_moderation_labels: {
+    #         min_confidence: 50, 
+    #         project_version: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #       }, 
+    #     }, 
+    #     output_config: {
+    #       s3_bucket: "output-bucket", 
+    #       s3_key_prefix: "output-location", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_media_analysis_job({
+    #     client_request_token: "ClientRequestToken",
+    #     job_name: "MediaAnalysisJobName",
+    #     operations_config: { # required
+    #       detect_moderation_labels: {
+    #         min_confidence: 1.0,
+    #         project_version: "ProjectVersionId",
+    #       },
+    #     },
+    #     input: { # required
+    #       s3_object: { # required
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     output_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key_prefix: "MediaAnalysisS3KeyPrefix",
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_media_analysis_job(params = {})
+    # @param [Hash] params ({})
+    def start_media_analysis_job(params = {}, options = {})
+      req = build_request(:start_media_analysis_job, params)
+      req.send_request(options)
+    end
+
     # Starts the asynchronous tracking of a person's path in a stored
     # video.
     #
@@ -8052,7 +8368,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

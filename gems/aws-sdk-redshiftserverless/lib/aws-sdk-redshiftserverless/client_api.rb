@@ -716,6 +716,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     Workgroup.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
+    Workgroup.add_member(:patch_version, Shapes::ShapeRef.new(shape: String, location_name: "patchVersion"))
     Workgroup.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     Workgroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     Workgroup.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
@@ -724,6 +725,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:workgroup_arn, Shapes::ShapeRef.new(shape: String, location_name: "workgroupArn"))
     Workgroup.add_member(:workgroup_id, Shapes::ShapeRef.new(shape: String, location_name: "workgroupId"))
     Workgroup.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    Workgroup.add_member(:workgroup_version, Shapes::ShapeRef.new(shape: String, location_name: "workgroupVersion"))
     Workgroup.struct_class = Types::Workgroup
 
     WorkgroupList.member = Shapes::ShapeRef.new(shape: Workgroup)
