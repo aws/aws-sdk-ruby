@@ -6,8 +6,12 @@ require 'securerandom'
 module Aws
   describe CredentialProviderChain do
     def random_creds
-      { access_key_id: SecureRandom.hex,
-        secret_access_key: SecureRandom.hex, session_token: SecureRandom.hex }
+      {
+        access_key_id: SecureRandom.hex,
+        secret_access_key: SecureRandom.hex,
+        session_token: SecureRandom.hex,
+        account_id: SecureRandom.hex
+      }
     end
 
     def with_shared_credentials(profile_name = SecureRandom.hex, credentials_file = nil)
@@ -19,6 +23,7 @@ module Aws
 aws_access_key_id = #{creds[:access_key_id]}
 aws_secret_access_key = #{creds[:secret_access_key]}
 aws_session_token = #{creds[:session_token]}
+aws_account_id = #{creds[:account_id]}
 CREDS
       allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:exist?).with(path).and_return(true)
@@ -29,9 +34,10 @@ CREDS
 
     def with_env_credentials
       creds = random_creds
-      env['AWS_ACCESS_KEY_ID'] = creds[:access_key_id]
-      env['AWS_SECRET_ACCESS_KEY'] = creds[:secret_access_key]
-      env['AWS_SESSION_TOKEN'] = creds[:session_token]
+      ENV['AWS_ACCESS_KEY_ID'] = creds[:access_key_id]
+      ENV['AWS_SECRET_ACCESS_KEY'] = creds[:secret_access_key]
+      ENV['AWS_SESSION_TOKEN'] = creds[:session_token]
+      ENV['AWS_ACCOUNT_ID'] = creds[:account_id]
       creds
     end
 
@@ -40,6 +46,7 @@ CREDS
       allow(config).to receive(:access_key_id).and_return(creds[:access_key_id])
       allow(config).to receive(:secret_access_key).and_return(creds[:secret_access_key])
       allow(config).to receive(:session_token).and_return(creds[:session_token])
+      allow(config).to receive(:account_id).and_return(creds[:account_id])
       creds
     end
 
@@ -49,15 +56,15 @@ CREDS
       expect(creds.access_key_id).to eq(expected_creds[:access_key_id])
       expect(creds.secret_access_key).to eq(expected_creds[:secret_access_key])
       expect(creds.session_token).to eq(expected_creds[:session_token])
+      expect(creds.account_id).to eq(expected_creds[:account_id])
     end
-
-    let(:env) { {} }
 
     let(:config) do
       double('config',
              access_key_id: nil,
              secret_access_key: nil,
              session_token: nil,
+             account_id: nil,
              profile: nil,
              region: nil,
              instance_profile_credentials_timeout: 1,
@@ -71,7 +78,6 @@ CREDS
     let(:credentials) { chain.resolve }
 
     before(:each) do
-      stub_const('ENV', env)
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
     end
 
@@ -82,31 +88,32 @@ CREDS
 
     it 'hydrates credentials from ENV with prefix AWS_' do
       expected_creds = random_creds
-      env['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
-      env['AWS_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
-      env['AWS_SESSION_TOKEN'] = expected_creds[:session_token]
+      ENV['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      ENV['AWS_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
+      ENV['AWS_SESSION_TOKEN'] = expected_creds[:session_token]
+      ENV['AWS_ACCOUNT_ID'] = expected_creds[:account_id]
       validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV with prefix AMAZON_' do
       expected_creds = random_creds
-      env['AMAZON_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
-      env['AMAZON_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
-      env['AMAZON_SESSION_TOKEN'] = expected_creds[:session_token]
+      ENV['AMAZON_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      ENV['AMAZON_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
+      ENV['AMAZON_SESSION_TOKEN'] = expected_creds[:session_token]
       validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY & AWS_SECRET_KEY' do
       expected_creds = random_creds.merge(session_token: nil)
-      env['AWS_ACCESS_KEY'] = expected_creds[:access_key_id]
-      env['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
+      ENV['AWS_ACCESS_KEY'] = expected_creds[:access_key_id]
+      ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
       expected_creds = random_creds.merge(session_token: nil)
-      env['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
-      env['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
+      ENV['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)
     end
 

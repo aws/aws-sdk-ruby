@@ -51,9 +51,9 @@ module AwsSdkCodeGenerator
                 operation_name: Underscore.underscore(
                   operation_inputs_test['operationName']
                 ),
-                operation_params: operation_inputs_test['operationParams'] || [],
-                built_in_params: operation_inputs_test['builtInParams'] || [],
-                client_params: operation_inputs_test['clientParams'] || []
+                operation_params: operation_inputs_test['operationParams'] || {},
+                built_in_params: operation_inputs_test['builtInParams'] || {},
+                client_params: operation_inputs_test['clientParams'] || {}
               )
             end
           end
@@ -113,12 +113,13 @@ module AwsSdkCodeGenerator
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
             end
-
             @client_params += options[:built_in_params].map do |k,v|
               built_in_to_param(k, v)
             end
-            # the expected default of UseGlobalEndpoint does not match the SDK's default value
-            if @service.identifier == 's3' && !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
+            # the expected default of UseGlobalEndpoint in rules
+            # does not match the Ruby SDK's default value
+            if @service.identifier == 's3' &&
+               !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
               @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
             end
           end
@@ -154,6 +155,12 @@ module AwsSdkCodeGenerator
               Param.new('use_fips_endpoint', value)
             when 'AWS::UseDualStack'
               Param.new('use_dualstack_endpoint', value)
+            when 'AWS::Auth::AccountId'
+              Param.new(
+                'credentials',
+                "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '#{value}')",
+                true
+              )
             when 'AWS::STS::UseGlobalEndpoint'
               Param.new('sts_regional_endpoints', value ? 'legacy' : 'regional')
             when 'AWS::S3::UseGlobalEndpoint'
@@ -162,9 +169,7 @@ module AwsSdkCodeGenerator
               Param.new('use_accelerate_endpoint', value)
             when 'AWS::S3::ForcePathStyle'
               Param.new('force_path_style', value)
-            when 'AWS::S3::UseArnRegion'
-              Param.new('s3_use_arn_region', value)
-            when 'AWS::S3Control::UseArnRegion'
+            when 'AWS::S3::UseArnRegion', 'AWS::S3Control::UseArnRegion'
               Param.new('s3_use_arn_region', value)
             when 'AWS::S3::DisableMultiRegionAccessPoints'
               Param.new('s3_disable_multiregion_access_points', value)
@@ -177,14 +182,16 @@ module AwsSdkCodeGenerator
         end
 
         class Param
-          def initialize(param, value)
+          def initialize(param, value, literal = false)
             @param = param
             @value = value
+            @literal = literal
           end
+
           attr_accessor :param
 
           def value
-            if @value.is_a? String
+            if @value.is_a?(String) && !@literal
               "'#{@value}'"
             else
               @value

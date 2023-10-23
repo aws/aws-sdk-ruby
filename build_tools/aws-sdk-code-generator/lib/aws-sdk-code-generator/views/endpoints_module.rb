@@ -42,10 +42,6 @@ module AwsSdkCodeGenerator
 
         # @return [Array<EndpointParameter>]
         attr_reader :parameters
-
-        def has_endpoint_built_in?
-          parameters.any? { |p| p.param_data['builtIn'] == 'SDK::Endpoint' }
-        end
       end
 
       class EndpointParameter
@@ -134,6 +130,8 @@ module AwsSdkCodeGenerator
           else
             'context.config.use_dualstack_endpoint'
           end
+        when 'AWS::Auth::AccountId'
+          "context.config.account_id_endpoint_mode == 'disabled' ? nil : context.config.credentials.credentials.account_id"
         when 'AWS::STS::UseGlobalEndpoint'
           "context.config.sts_regional_endpoints == 'legacy'"
         when 'AWS::S3::UseGlobalEndpoint'
@@ -151,7 +149,7 @@ module AwsSdkCodeGenerator
         when 'AWS::S3::DisableMultiRegionAccessPoints'
           'context.config.s3_disable_multiregion_access_points'
         when 'SDK::Endpoint'
-          'endpoint'
+          'context.config.regional_endpoint ? nil : context.config.endpoint.to_s'
         end
       end
 

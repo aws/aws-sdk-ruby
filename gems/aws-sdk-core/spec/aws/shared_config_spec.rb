@@ -146,6 +146,17 @@ module Aws
       end
     end
 
+    context 'account_id_endpoint_mode selection' do
+      it 'can resolve account_id_endpoint_mode from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'account_id_endpoint_mode'
+        )
+        expect(config.account_id_endpoint_mode).to eq('disabled')
+      end
+    end
+
     context 'ca_bundle selection' do
       it 'can resolve ca_bundle from config file' do
         config = SharedConfig.new(

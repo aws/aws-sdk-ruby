@@ -56,6 +56,20 @@ variables and the shared configuration file.
         resolve_ignore_configured_endpoint_urls(cfg)
       end
 
+      option(:account_id_endpoint_mode,
+        doc_type: String,
+        docstring: <<-DOCS) do |cfg|
+The account ID endpoint mode to use. This can be one of the following values:
+* `preferred` - The default behavior. Use the account ID endpoint if
+  available, otherwise use the standard endpoint.
+* `disabled` - Never use the account ID endpoint. Only use the standard
+  endpoint.
+* `required` - Always use the account ID endpoint. If the account ID
+  cannot be retrieved from credentials, an error is raised.
+        DOCS
+        resolve_account_id_endpoint_mode(cfg)
+      end
+
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
@@ -99,6 +113,12 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           value = ENV['AWS_IGNORE_CONFIGURED_ENDPOINT_URLS']
           value ||= Aws.shared_config.ignore_configured_endpoint_urls(profile: cfg.profile)
           Aws::Util.str_2_bool(value&.downcase) || false
+        end
+
+        def resolve_account_id_endpoint_mode(cfg)
+          value = ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE']
+          value ||= Aws.shared_config.account_id_endpoint_mode(profile: cfg.profile)
+          value || 'preferred'
         end
 
         # NOTE: with Endpoints 2.0, some of this logic is deprecated

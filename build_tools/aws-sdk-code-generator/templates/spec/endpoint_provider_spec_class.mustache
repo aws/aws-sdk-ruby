@@ -11,7 +11,7 @@ module {{module_name}}
     subject { {{module_name}}::EndpointProvider.new }
 
     {{#endpoint_tests}}
-    context '{{documentation}}' do
+    context '{{{documentation}}}' do
       let(:expected) do
         {{{expect}}}
       end
