@@ -48,12 +48,14 @@ Unreleased Changes
 3.180.3 (2023-08-09)
 ------------------
 
-* Issue - Add support for sso-session names with whitespace configured by the CLI `aws sso configure` command (#2895).
+* Issue - Add support for sso-session names with whitespace configured by the
+  CLI `aws sso configure` command (#2895).
 
 3.180.2 (2023-08-07)
 ------------------
 
-* Issue - Fix parsing of ini files with mixes of blank properties and nested configurations.
+* Issue - Fix parsing of ini files with mixes of blank properties and nested
+  configurations.
 
 3.180.1 (2023-07-31)
 ------------------
@@ -79,7 +81,9 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add support for configuring the endpoint URL in the shared configuration file or via an environment variable for a specific AWS service or all AWS services.
+* Feature - Add support for configuring the endpoint URL in the shared
+  configuration file or via an environment variable for a specific AWS service
+  or all AWS services.
 
 3.177.0 (2023-07-06)
 ------------------
@@ -95,14 +99,16 @@ Unreleased Changes
 3.176.1 (2023-06-29)
 ------------------
 
-* Issue - Fix signing for S3/S3 Control and `aws-crt` gem for certain object keys (#2849).
+* Issue - Fix signing for S3/S3 Control and `aws-crt` gem for certain object
+  keys (#2849).
 
 * Issue - Ensure `SSOCredentials` `#expiration` is a `Time` (#2874)
 
 3.176.0 (2023-06-28)
 ------------------
 
-* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh credentials when checking expiration (#2872).
+* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh
+  credentials when checking expiration (#2872).
 
 3.175.0 (2023-06-15)
 ------------------
@@ -149,7 +155,9 @@ Unreleased Changes
 3.171.0 (2023-03-22)
 ------------------
 
-* Feature - Add support for `AWS_CONTAINER_CREDENTIALS_FULL_URI` and `AWS_CONTAINER_AUTHORIZATION_TOKEN` environment variables to `ECSCredentials`.
+* Feature - Add support for `AWS_CONTAINER_CREDENTIALS_FULL_URI`
+  and `AWS_CONTAINER_AUTHORIZATION_TOKEN` environment variables
+  to `ECSCredentials`.
 
 3.170.1 (2023-03-17)
 ------------------
@@ -170,7 +178,8 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Issue - Replace runtime endpoint resolution approach with generated ruby code for STS, SSO, and SSOOIDC.
+* Issue - Replace runtime endpoint resolution approach with generated ruby code
+  for STS, SSO, and SSOOIDC.
 
 3.168.4 (2022-12-08)
 ------------------
@@ -185,12 +194,14 @@ Unreleased Changes
 3.168.2 (2022-11-29)
 ------------------
 
-* Issue - Allow region resolution in `AssumeRoleCredentials` from `CredentialProviderChain`.
+* Issue - Allow region resolution in `AssumeRoleCredentials`
+  from `CredentialProviderChain`.
 
 3.168.1 (2022-11-18)
 ------------------
 
-* Issue - Fix initialization of SSOTokenProvider when `AWS_PROFILE` is specified.
+* Issue - Fix initialization of SSOTokenProvider when `AWS_PROFILE` is
+  specified.
 
 3.168.0 (2022-11-17)
 ------------------
@@ -200,7 +211,8 @@ Unreleased Changes
 3.167.0 (2022-11-09)
 ------------------
 
-* Issue - Ensure the stream_thread is not killed before H2 connection status is updated (#2779).
+* Issue - Ensure the stream_thread is not killed before H2 connection status is
+  updated (#2779).
 
 * Feature - Add token refresh support to `SSOCredentialProvider`.
 
@@ -216,7 +228,8 @@ Unreleased Changes
 3.165.1 (2022-10-25)
 ------------------
 
-* Issue - Require the SignatureV4 plugin to fix compatability with older `aws-sdk-s3` versions (#2774).
+* Issue - Require the SignatureV4 plugin to fix compatability with
+  older `aws-sdk-s3` versions (#2774).
 
 3.165.0 (2022-10-25)
 ------------------
@@ -225,7 +238,18 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add support for service gems to dynamically determine their own endpoints via modeling. Service gems now generate a plugin called "Endpoints" that defines configuration for EndpointProvider, a new public type, and any client config related to endpoints. Endpoint providers will resolve values using another new public type, Endpoint Parameters, generated for each service. The plugin will use the endpoint provider to resolve an endpoint and then apply it to the request prior to serialization. Endpoint providers can be composed to change endpoint resolution logic, i.e. for testing. In addition to endpoints, the endpoint provider may also override the authentication scheme (auth scheme) which details how the request should be signed for the endpoint. A new "Sign" plugin in core replaces the SignatureV4 plugin that will generically sign any type of auth scheme that a service might have.
+* Feature - Add support for service gems to dynamically determine their own
+  endpoints via modeling. Service gems now generate a plugin called "Endpoints"
+  that defines configuration for EndpointProvider, a new public type, and any
+  client config related to endpoints. Endpoint providers will resolve values
+  using another new public type, Endpoint Parameters, generated for each
+  service. The plugin will use the endpoint provider to resolve an endpoint and
+  then apply it to the request prior to serialization. Endpoint providers can be
+  composed to change endpoint resolution logic, i.e. for testing. In addition to
+  endpoints, the endpoint provider may also override the authentication scheme (
+  auth scheme) which details how the request should be signed for the endpoint.
+  A new "Sign" plugin in core replaces the SignatureV4 plugin that will
+  generically sign any type of auth scheme that a service might have.
 
 3.164.0 (2022-10-21)
 ------------------
@@ -245,7 +269,8 @@ Unreleased Changes
 3.161.0 (2022-10-18)
 ------------------
 
-* Feature - Support AwsQueryCompatible trait to read error code from x-amzn-query-error header.
+* Feature - Support AwsQueryCompatible trait to read error code from
+  x-amzn-query-error header.
 
 3.160.0 (2022-10-13)
 ------------------
@@ -372,7 +397,8 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Issue - Fix errors in recursion detection when `_X_AMZN_TRACE_ID` is unset (#2748).
+* Issue - Fix errors in recursion detection when `_X_AMZN_TRACE_ID` is unset (
+  #2748).
 
 3.136.0 (2022-08-25)
 ------------------
@@ -393,7 +419,8 @@ Unreleased Changes
 
 * Feature - Add support for Bearer Token Authentication and TokenProviders.
 
-* Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid, non-control characters.
+* Issue - Validate that `_X_AMZN_TRACE_ID` ENV value contains only valid,
+  non-control characters.
 
 3.133.0 (2022-08-22)
 ------------------
@@ -408,7 +435,8 @@ Unreleased Changes
 3.131.6 (2022-08-03)
 ------------------
 
-* Issue - Fix typo in `RecursionDetection`, change amz to amzn in header and env name.
+* Issue - Fix typo in `RecursionDetection`, change amz to amzn in header and env
+  name.
 
 3.131.5 (2022-07-28)
 ------------------
@@ -424,7 +452,8 @@ Unreleased Changes
 3.131.3 (2022-07-18)
 ------------------
 
-* Issue - Add support for serializing shapes on the body with `jsonvalue` members.
+* Issue - Add support for serializing shapes on the body with `jsonvalue`
+  members.
 
 3.131.2 (2022-06-20)
 ------------------
@@ -444,12 +473,14 @@ Unreleased Changes
 3.130.2 (2022-04-22)
 ------------------
 
-* Issue - Don't pass `:before_refresh` to Client constructors in RefreshingCredential implementations (#2690).
+* Issue - Don't pass `:before_refresh` to Client constructors in
+  RefreshingCredential implementations (#2690).
 
 3.130.1 (2022-04-12)
 ------------------
 
-* Issue - Don't call `refresh!` on non-refreshable `Credentials` when retrying errors (#2685).
+* Issue - Don't call `refresh!` on non-refreshable `Credentials` when retrying
+  errors (#2685).
 
 3.130.0 (2022-03-11)
 ------------------
@@ -461,17 +492,20 @@ Unreleased Changes
 3.129.1 (2022-03-10)
 ------------------
 
-* Issue - Make stubs thread safe by creating new responses for each operation call (#2675).
+* Issue - Make stubs thread safe by creating new responses for each operation
+  call (#2675).
 
 3.129.0 (2022-03-08)
 ------------------
 
-* Feature - Add support for cases when `InstanceProfileCredentials` (IMDS) is unable to refresh credentials.
+* Feature - Add support for cases when `InstanceProfileCredentials` (IMDS) is
+  unable to refresh credentials.
 
 3.128.1 (2022-03-07)
 ------------------
 
-* Issue - Fixed `Aws::PageableResponse` invalidating Ruby's global constant cache.
+* Issue - Fixed `Aws::PageableResponse` invalidating Ruby's global constant
+  cache.
 
 3.128.0 (2022-03-04)
 ------------------
@@ -491,12 +525,14 @@ Unreleased Changes
 ------------------
 
 * Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529).
-* Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
+* Issue - Raise a `NoSuchProfileError` when config and credentials files don't
+  exist.
 
 3.126.1 (2022-02-14)
 ------------------
 
-* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens and retry failures due to using expired tokens.
+* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of
+  using expired tokens and retry failures due to using expired tokens.
 
 3.126.0 (2022-02-03)
 ------------------
@@ -520,7 +556,6 @@ Unreleased Changes
 
 * Issue - Add `InternalError` to `ErrorInspector` for S3 errors.
 
-
 3.125.3 (2022-01-12)
 ------------------
 
@@ -529,19 +564,22 @@ Unreleased Changes
 3.125.2 (2022-01-10)
 ------------------
 
-* Issue - Correctly serialize lists of strings in headers with quotes and commas.
+* Issue - Correctly serialize lists of strings in headers with quotes and
+  commas.
 
 3.125.1 (2022-01-04)
 ------------------
 
-* Issue - Parse a response with consecutive spaces correctly when ox is used as the XML parser.
+* Issue - Parse a response with consecutive spaces correctly when ox is used as
+  the XML parser.
 
 3.125.0 (2021-12-21)
 ------------------
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add `:defaults_mode` configuration - that determines how certain default configuration options are resolved in the SDK.
+* Feature - Add `:defaults_mode` configuration - that determines how certain
+  default configuration options are resolved in the SDK.
 
 3.124.0 (2021-11-30)
 ------------------
@@ -567,16 +605,26 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Issue - Fix parsing of ISO8601 timestamps with millisecond precision in headers.
+* Issue - Fix parsing of ISO8601 timestamps with millisecond precision in
+  headers.
 
-* Feature - Support modeled dualstack endpoints. It can be configured with shared configuration (`use_dualstack_endpoint`), an ENV variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor option (`:use_dualstack_endpoint`). Requests made to services without a dualstack endpoint will fail.
+* Feature - Support modeled dualstack endpoints. It can be configured with
+  shared configuration (`use_dualstack_endpoint`), an ENV
+  variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor
+  option (`:use_dualstack_endpoint`). Requests made to services without a
+  dualstack endpoint will fail.
 
-* Feature - Support modeled fips endpoints. It can be configured with shared configuration (`use_fips_endpoint`), an ENV variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor option (`:use_fips_endpoint`). Requests made to services without a fips endpoint will fail.
+* Feature - Support modeled fips endpoints. It can be configured with shared
+  configuration (`use_fips_endpoint`), an ENV
+  variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor
+  option (`:use_fips_endpoint`). Requests made to services without a fips
+  endpoint will fail.
 
 3.121.6 (2021-11-02)
 ------------------
 
-* Issue - Improve `SSOCredentials` error handling when profile file does not exist (#2605)
+* Issue - Improve `SSOCredentials` error handling when profile file does not
+  exist (#2605)
 
 3.121.5 (2021-10-29)
 ------------------
@@ -593,21 +641,25 @@ Unreleased Changes
 3.121.3 (2021-10-20)
 ------------------
 
-* Issue - Use endpointPrefix when looking up the `signing_region` from the `EndpointProvider`.
+* Issue - Use endpointPrefix when looking up the `signing_region` from
+  the `EndpointProvider`.
 
 3.121.2 (2021-10-18)
 ------------------
 
-* Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
+* Issue - Fix an issue where Rest JSON services do not have a `Content-Type`
+  header.
 
-* Issue - Remove blank `Content-Type` header from Net::HTTP handler, and prevent a default from being set.
+* Issue - Remove blank `Content-Type` header from Net::HTTP handler, and prevent
+  a default from being set.
 
 * Issue - Set `Content-Length` only for HTTP methods that take a body.
 
 3.121.1 (2021-09-24)
 ------------------
 
-* Issue - Fix error in finding union member for boolean shapes with `false` values.
+* Issue - Fix error in finding union member for boolean shapes with `false`
+  values.
 
 3.121.0 (2021-09-02)
 ------------------
@@ -617,29 +669,40 @@ Unreleased Changes
 3.120.0 (2021-09-01)
 ------------------
 
-* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0, 2.1, and 2.2.
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0,
+  2.1, and 2.2.
 
 3.119.1 (2021-08-20)
 ------------------
 
-* Issue - Refactored `Aws::Json::Engine` to remove dead code and replaced usage of `JSON.load` with `JSON.parse`.
+* Issue - Refactored `Aws::Json::Engine` to remove dead code and replaced usage
+  of `JSON.load` with `JSON.parse`.
 
 3.119.0 (2021-07-30)
 ------------------
 
-* Feature - Support Document Types. Document types are used to carry open content. A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.(#2523)
+* Feature - Support Document Types. Document types are used to carry open
+  content. A document type value is serialized using the same format as its
+  surroundings and requires no additional encoding or escaping.(#2523)
 
 3.118.0 (2021-07-28)
 ------------------
 
-* Feature - Add support for Tagged Unions using a "sealed" classes like approach where each union member has a corresponding subclass.
+* Feature - Add support for Tagged Unions using a "sealed" classes like approach
+  where each union member has a corresponding subclass.
 
 3.117.0 (2021-07-12)
 ------------------
 
-* Feature - Support IPv6 endpoints for `Aws::InstanceProfileCredentials`. It supports two shared configuration options (`ec2_metadata_service_endpoint` & `ec2_metadata_service_endpoint_mode`), two ENV variables (`AWS_EC2_METADATA_SERVICE_ENDPOINT` & `AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE`), and two constructor options (`:endpoint` & `:endpoint_mode`).
+* Feature - Support IPv6 endpoints for `Aws::InstanceProfileCredentials`. It
+  supports two shared configuration
+  options (`ec2_metadata_service_endpoint` & `ec2_metadata_service_endpoint_mode`),
+  two ENV
+  variables (`AWS_EC2_METADATA_SERVICE_ENDPOINT` & `AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE`),
+  and two constructor options (`:endpoint` & `:endpoint_mode`).
 
-* Feature - Support IPv6 endpoint for `Aws::EC2Metadata` client. It can be configured with `:endpoint` or `:endpoint_mode`.
+* Feature - Support IPv6 endpoint for `Aws::EC2Metadata` client. It can be
+  configured with `:endpoint` or `:endpoint_mode`.
 
 3.116.0 (2021-07-07)
 ------------------
@@ -650,17 +713,20 @@ Unreleased Changes
 ------------------
 
 * Feature - Add support for Assume Role Chaining in profiles. (#2531)
-* Issue - Fixed an issue with `Seahorse::Client::H2::Connection` for non-https endpoints. (#2542)
+* Issue - Fixed an issue with `Seahorse::Client::H2::Connection` for non-https
+  endpoints. (#2542)
 
 3.114.3 (2021-06-15)
 ------------------
 
-* Issue - Fixed an issue with `Aws::PageableResponse` where it was modifying original params hash, causing frozen hashes to fail.
+* Issue - Fixed an issue with `Aws::PageableResponse` where it was modifying
+  original params hash, causing frozen hashes to fail.
 
 3.114.2 (2021-06-09)
 ------------------
 
-* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil tokens were not merged into the params for the next call.
+* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil
+  tokens were not merged into the params for the next call.
 
 3.114.1 (2021-06-02)
 ------------------
@@ -692,12 +758,17 @@ Unreleased Changes
 3.112.0 (2021-02-02)
 ------------------
 
-* Feature - The `hostPrefix` trait will now be applied to any customer provided `:endpoint`. This bug fix is a minor behavioral change for clients using custom endpoints for `s3control`, `iotsitewise`, and `servicediscovery`. This behavior can be disabled by configuring `:disable_host_prefix_injection` to `true`.
+* Feature - The `hostPrefix` trait will now be applied to any customer
+  provided `:endpoint`. This bug fix is a minor behavioral change for clients
+  using custom endpoints for `s3control`, `iotsitewise`, and `servicediscovery`.
+  This behavior can be disabled by configuring `:disable_host_prefix_injection`
+  to `true`.
 
 3.111.2 (2021-01-19)
 ------------------
 
-* Issue - Fix a loading issue with SSO and STS gem aliases using `require_relative` instead of `require`.
+* Issue - Fix a loading issue with SSO and STS gem aliases
+  using `require_relative` instead of `require`.
 
 3.111.1 (2021-01-15)
 ------------------
@@ -716,7 +787,8 @@ Unreleased Changes
 
 * Issue - Support `aws-sdk-sts` alias gem.
 
-* Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library. This can occur when proxy connections are configured. (#2439)
+* Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library.
+  This can occur when proxy connections are configured. (#2439)
 
 3.109.3 (2020-11-17)
 ------------------
@@ -736,7 +808,8 @@ Unreleased Changes
 3.109.0 (2020-09-30)
 ------------------
 
-* Feature - Add `Seahorse::Util.host_label?` to check strings for valid RFC-3986 host labels.
+* Feature - Add `Seahorse::Util.host_label?` to check strings for valid RFC-3986
+  host labels.
 * Feature - Add `Aws::ARN#to_h`.
 
 3.108.0 (2020-09-25)
@@ -754,7 +827,9 @@ Unreleased Changes
 3.106.0 (2020-09-14)
 ------------------
 
-* Feature - Support `AWS_CA_BUNDLE` ENV variable and `ca_bundle` shared configuration options. The `:ssl_ca_bundle` client option will override either of these options. (#1907)
+* Feature - Support `AWS_CA_BUNDLE` ENV variable and `ca_bundle` shared
+  configuration options. The `:ssl_ca_bundle` client option will override either
+  of these options. (#1907)
 
 3.105.0 (2020-08-25)
 ------------------
@@ -763,7 +838,8 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add `SSOCredentials`.  Moved functionality from `aws-sdk-sso` into core.
+* Feature - Add `SSOCredentials`. Moved functionality from `aws-sdk-sso` into
+  core.
 
 3.104.4 (2020-08-19)
 ------------------
@@ -773,23 +849,30 @@ Unreleased Changes
 3.104.3 (2020-07-23)
 ------------------
 
-* Issue - Revert duplication of params.  Ensure code that relied on internal modification of parameters is not broken.
+* Issue - Revert duplication of params. Ensure code that relied on internal
+  modification of parameters is not broken.
 
 3.104.2 (2020-07-22)
 ------------------
 
-* Issue - Validate IO like objects support read,rewind and size unless streaming. Fixes #2364
+* Issue - Validate IO like objects support read,rewind and size unless
+  streaming. Fixes #2364
 
 3.104.1 (2020-07-20)
 ------------------
 
-* Issue - Duplicate params to ensure user provided params are not modified.  Fixes #2366
+* Issue - Duplicate params to ensure user provided params are not modified.
+  Fixes #2366
 
 3.104.0 (2020-07-15)
 ------------------
 
-* Feature - Add headers to the `ResponseTarget` callback.  A block passed as the response target on a streaming method will be called with the `chunk` and `headers`.
-* Feature - Added the `RequestCallback` plugin which allows clients and methods to set `on_chunk_sent` to a `Proc` which will be called as each chunk of the request body is sent.
+* Feature - Add headers to the `ResponseTarget` callback. A block passed as the
+  response target on a streaming method will be called with the `chunk`
+  and `headers`.
+* Feature - Added the `RequestCallback` plugin which allows clients and methods
+  to set `on_chunk_sent` to a `Proc` which will be called as each chunk of the
+  request body is sent.
 
 3.103.0 (2020-07-01)
 ------------------
@@ -799,7 +882,8 @@ Unreleased Changes
 3.102.1 (2020-06-25)
 ------------------
 
-* Issue - Set the `response_target` on the context when deleting it from the parameters.
+* Issue - Set the `response_target` on the context when deleting it from the
+  parameters.
 
 3.102.0 (2020-06-24)
 ------------------
@@ -811,8 +895,11 @@ Unreleased Changes
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
-* Feature - Added sensitive params to request and response Types instead of just on a large list.
-* Feature - Provide an option `:filter_sensitive_params` for `Aws::Log::Formatter` to allow disabling of the sensitive param filter (#2312, #2105, #2082).
+* Feature - Added sensitive params to request and response Types instead of just
+  on a large list.
+* Feature - Provide an option `:filter_sensitive_params`
+  for `Aws::Log::Formatter` to allow disabling of the sensitive param filter (
+  #2312, #2105, #2082).
 
 3.100.0 (2020-06-15)
 ------------------
@@ -837,7 +924,8 @@ Unreleased Changes
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Feature - Support `httpChecksumRequired` on operations that require Content MD5 validation.
+* Feature - Support `httpChecksumRequired` on operations that require Content
+  MD5 validation.
 * Issue - Validate `:region` as a valid DNS host label.
 
 3.98.0 (2020-06-05)
@@ -848,18 +936,23 @@ Unreleased Changes
 3.97.1 (2020-06-01)
 ------------------
 
-* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (#2319)
-* Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (
+  #2319)
+* Issue - Handle unknown and unmodeled events from event streams by ignoring
+  them and providing a new callback rather than raising an error.
 
 3.97.0 (2020-05-28)
 ------------------
-* Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
+
+* Feature - Default endpoint_discovery to `true` for services with at least one
+  operation that requires it.
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
 3.96.1 (2020-05-18)
 ------------------
 
-* Issue - Raise `ArgumentError` for XML services when required URI elements are not included.
+* Issue - Raise `ArgumentError` for XML services when required URI elements are
+  not included.
 
 3.96.0 (2020-05-15)
 ------------------
@@ -874,7 +967,8 @@ Unreleased Changes
 3.94.1 (2020-05-04)
 ------------------
 
-* Issue - When handling errors in XML responses, don't set a new error on the response if one is already set.
+* Issue - When handling errors in XML responses, don't set a new error on the
+  response if one is already set.
 
 3.94.0 (2020-04-08)
 ------------------
@@ -893,7 +987,8 @@ Unreleased Changes
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
-* Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
+* Issue - Change the default of `sts_regional_endpoints` from 'legacy' to '
+  regional'.
 
 3.91.1 (2020-03-10)
 ------------------
@@ -909,23 +1004,33 @@ Unreleased Changes
 3.90.1 (2020-02-14)
 ------------------
 
-* Issue - Perform a case-insensitive comparison when filtering sensitive parameters from logs
-* Issue - Add passthrough of region from client to STS when using `assume_role_web_identity_credentials`.
+* Issue - Perform a case-insensitive comparison when filtering sensitive
+  parameters from logs
+* Issue - Add passthrough of region from client to STS when
+  using `assume_role_web_identity_credentials`.
 
 3.90.0 (2020-02-12)
 ------------------
 
 * Issue - Updated the list of parameters to filter when logging.
-* Issue - Parse all values from shared credentials file when using `Aws.shared_config`.
-* Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present.
-* Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.
+* Issue - Parse all values from shared credentials file when
+  using `Aws.shared_config`.
+* Issue - Honor explicit profile in client config when credentials from AWS_
+  environment variables are present.
+* Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked`
+  in streaming operations because all body objects (`String`, `StringIO`) would
+  respond to `#size`.
 
 3.89.1 (2020-01-14)
 ------------------
 
-* Issue - Fix erroneously reaped sessions from `Seahorse::Client::NetHttp::ConnectionPool` due to bad `last_used` time calculation
-* Issue - Use monotonic clocks when reaping sessions in `Seahorse::Client::NetHttp::ConnectionPool`
-* Issue - Fix "Conn close because of keep_alive_timeout" when reusing  `Seahorse::Client::NetHttp::ConnectionPool` sessions
+* Issue - Fix erroneously reaped sessions
+  from `Seahorse::Client::NetHttp::ConnectionPool` due to bad `last_used` time
+  calculation
+* Issue - Use monotonic clocks when reaping sessions
+  in `Seahorse::Client::NetHttp::ConnectionPool`
+* Issue - Fix "Conn close because of keep_alive_timeout" when
+  reusing  `Seahorse::Client::NetHttp::ConnectionPool` sessions
 
 3.89.0 (2020-01-13)
 ------------------
@@ -952,14 +1057,17 @@ Unreleased Changes
 3.85.1 (2019-12-11)
 ------------------
 
-* Issue - Change default timeout to 1 and number of retries to 1 for `InstanceProfileCredentials`.
+* Issue - Change default timeout to 1 and number of retries to 1
+  for `InstanceProfileCredentials`.
 
 3.85.0 (2019-12-09)
 ------------------
 
-* Feature - Add STS Presigner module with a method to generate a presigned EKS token.
+* Feature - Add STS Presigner module with a method to generate a presigned EKS
+  token.
 
-* Issue - Fix issue for log formatters in clients where http_response_body does not respond to `rewind` when using a block.
+* Issue - Fix issue for log formatters in clients where http_response_body does
+  not respond to `rewind` when using a block.
 
 3.84.0 (2019-12-04)
 ------------------
@@ -1009,7 +1117,8 @@ Unreleased Changes
 3.75.0 (2019-11-06)
 ------------------
 
-* Feature - Remove deprecated `access_key_id`, `secret_access_key`, and `session_token` methods in credential providers.
+* Feature - Remove deprecated `access_key_id`, `secret_access_key`,
+  and `session_token` methods in credential providers.
 
 3.74.0 (2019-11-05)
 ------------------
@@ -1038,7 +1147,8 @@ Unreleased Changes
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
-* Feature - Support enable STS regional endpoints by `sts_regional_endpoints: 'regional'`
+* Feature - Support enable STS regional endpoints
+  by `sts_regional_endpoints: 'regional'`
 
 3.70.0 (2019-10-22)
 ------------------
@@ -1058,14 +1168,17 @@ Unreleased Changes
 3.68.1 (2019-10-02)
 ------------------
 
-* Issue - Add final deprecation warnings to `access_key_id`, `secret_access_key`, and `session_token` in credential providers.
+* Issue - Add final deprecation warnings
+  to `access_key_id`, `secret_access_key`, and `session_token` in credential
+  providers.
 
 * Issue - Remove misleading IO documentation from `BlobShape` error output.
 
 3.68.0 (2019-09-16)
 ------------------
 
-* Feature - Support assuming a role with `:source_profile` from a profile that can be resolved from a `ProcessCredentials` provider.
+* Feature - Support assuming a role with `:source_profile` from a profile that
+  can be resolved from a `ProcessCredentials` provider.
 
 3.67.0 (2019-09-09)
 ------------------
@@ -1075,7 +1188,8 @@ Unreleased Changes
 3.66.0 (2019-09-04)
 ------------------
 
-* Feature - Support CLI AWS_DEFAULT_PROFILE environment variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452).
+* Feature - Support CLI AWS_DEFAULT_PROFILE environment
+  variable [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1452).
 
 3.65.1 (2019-08-28)
 ------------------
@@ -1085,7 +1199,8 @@ Unreleased Changes
 3.65.0 (2019-08-27)
 ------------------
 
-* Feature - Support assuming a role `:source_profile` profile with `AssumeRoleWebIdentityCredentials`.
+* Feature - Support assuming a role `:source_profile` profile
+  with `AssumeRoleWebIdentityCredentials`.
 
 3.64.0 (2019-08-20)
 ------------------
@@ -1095,7 +1210,8 @@ Unreleased Changes
 3.63.0 (2019-08-15)
 ------------------
 
-* Feature - Support passing AssumeRole `duration_seconds` from shared credentials/config file.
+* Feature - Support passing AssumeRole `duration_seconds` from shared
+  credentials/config file.
 
 3.62.0 (2019-08-02)
 ------------------
@@ -1105,12 +1221,14 @@ Unreleased Changes
 3.61.2 (2019-07-29)
 ------------------
 
-* Issue - Add `Aws::STS::InvalidIdentityToken` and `Aws::Errors::NoSuchEndpointError` error for retry.
+* Issue - Add `Aws::STS::InvalidIdentityToken`
+  and `Aws::Errors::NoSuchEndpointError` error for retry.
 
 3.61.1 (2019-07-25)
 ------------------
 
-* Issue - Fix default STS Client credential sourcing in `Aws::AssumeRoleWebIdentityCredentialsProvider`.
+* Issue - Fix default STS Client credential sourcing
+  in `Aws::AssumeRoleWebIdentityCredentialsProvider`.
 
 3.61.0 (2019-07-24)
 ------------------
@@ -1122,7 +1240,8 @@ Unreleased Changes
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Issue - Handle `EncodingError` when using Oj gem [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1831)
+* Issue - Handle `EncodingError` when using Oj
+  gem [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1831)
 
 3.59.0 (2019-07-03)
 ------------------
@@ -1159,7 +1278,8 @@ Unreleased Changes
 3.54.1 (2019-05-30)
 ------------------
 
-* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information.
+* Issue - Improved exception messages in credential providers to exclude
+  detailed parse errors that may contain sensitive information.
 
 3.54.0 (2019-05-28)
 ------------------
@@ -1214,7 +1334,8 @@ Unreleased Changes
 3.48.6 (2019-04-26)
 ------------------
 
-* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex.
+* Issue - Call RefreshingCredentials initialize method in ProcessCredentials to
+  set mutex.
 
 3.48.5 (2019-04-24)
 ------------------
@@ -1261,7 +1382,8 @@ Unreleased Changes
 3.46.1 (2019-02-12)
 ------------------
 
-* Issue - Fix the issue that APIG SDK doesn't have regional endpoint related plugins.
+* Issue - Fix the issue that APIG SDK doesn't have regional endpoint related
+  plugins.
 
 3.46.0 (2019-01-16)
 ------------------
@@ -1271,13 +1393,16 @@ Unreleased Changes
 3.45.0 (2019-01-11)
 ------------------
 
-* Feature - Improve Query protocol handling of empty responses, to ensure response is an instance of `Aws::EmptyStructure` rather than the class `Aws::EmptyStructure` itself.
+* Feature - Improve Query protocol handling of empty responses, to ensure
+  response is an instance of `Aws::EmptyStructure` rather than the
+  class `Aws::EmptyStructure` itself.
 * Issue - Plugin updates to support client-side monitoring.
 
 3.44.2 (2019-01-04)
 ------------------
 
-* Issue - Update to code paths and plugins for future SDK instrumentation and telemetry.
+* Issue - Update to code paths and plugins for future SDK instrumentation and
+  telemetry.
 
 3.44.1 (2018-12-17)
 ------------------
@@ -1316,7 +1441,9 @@ Unreleased Changes
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Feature - Adding support for endpoint trait (host prefix) per operation, to disable this feature, set `:disable_host_prefix_injection` to `false` for the client.
+* Feature - Adding support for endpoint trait (host prefix) per operation, to
+  disable this feature, set `:disable_host_prefix_injection` to `false` for the
+  client.
 
 3.38.0 (2018-11-12)
 ------------------
@@ -1328,7 +1455,9 @@ Unreleased Changes
 3.37.0 (2018-11-08)
 ------------------
 
-* Feature - Adding support for endpoint discovery per operation, to enable this feature, set `:endpoint_discovery` to `true` for the client. Note: only available for services with endpoint discovery support.
+* Feature - Adding support for endpoint discovery per operation, to enable this
+  feature, set `:endpoint_discovery` to `true` for the client. Note: only
+  available for services with endpoint discovery support.
 
 3.36.0 (2018-10-30)
 ------------------
@@ -1352,7 +1481,8 @@ Unreleased Changes
 3.33.0 (2018-10-22)
 ------------------
 
-* Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
+* Feature - Update to code paths and plugins for future SDK instrumentation and
+  telemetry.
 
 3.32.0 (2018-10-18)
 ------------------
@@ -1367,7 +1497,8 @@ Unreleased Changes
 3.30.0 (2018-10-04)
 ------------------
 
-* Feature - Adds to code paths and plugins for future SDK instrumentation and telemetry.
+* Feature - Adds to code paths and plugins for future SDK instrumentation and
+  telemetry.
 
 3.29.0 (2018-09-28)
 ------------------
@@ -1382,26 +1513,31 @@ Unreleased Changes
 3.27.1 (2018-09-21)
 ------------------
 
-* Issue - Fixes a bug in the `:response_target` plugin error callback. Under certain circumstances a special body object can be removed before its error callback is triggered, breaking retry logic.
+* Issue - Fixes a bug in the `:response_target` plugin error callback. Under
+  certain circumstances a special body object can be removed before its error
+  callback is triggered, breaking retry logic.
 
 3.27.0 (2018-09-06)
 ------------------
 
-* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+* Feature - Adds code paths and plugins for future SDK instrumentation and
+  telemetry to aws-sdk-sts.
 
 3.26.0 (2018-09-05)
 ------------------
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
-* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+* Feature - Adds code paths and plugins for future SDK instrumentation and
+  telemetry.
 
 3.25.0 (2018-08-29)
 ------------------
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
+* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to
+  allow excluding non-sent request from presigned url (Github Issue #1866)
 
 3.24.1 (2018-08-13)
 ------------------
@@ -1411,7 +1547,11 @@ Unreleased Changes
 3.24.0 (2018-08-03)
 ------------------
 
-* Feature - Extensible Credential Providers, allows you to declare an executable to be run that outputs the credentials as a JSON payload allowing you to develop custom credential providers and easily add them to the credential resolution chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
+* Feature - Extensible Credential Providers, allows you to declare an executable
+  to be run that outputs the credentials as a JSON payload allowing you to
+  develop custom credential providers and easily add them to the credential
+  resolution
+  chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
 
 3.23.0 (2018-07-31)
 ------------------
@@ -1421,16 +1561,22 @@ Unreleased Changes
 3.22.1 (2018-06-28)
 ------------------
 
-* Issue - Performance enhancement to instance credential providers, to use a more precisely scoped Time parsing method for improved performance.
+* Issue - Performance enhancement to instance credential providers, to use a
+  more precisely scoped Time parsing method for improved performance.
 
 3.22.0 (2018-06-26)
 ------------------
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
 
-* Feature - Allows you to set custom paths to shared config and shared credential files via the `AWS_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
+* Feature - Allows you to set custom paths to shared config and shared
+  credential files via the `AWS_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE`
+  environment variables.
 
-* Feature - Flexible retry strategies. Provides the `:retry_max_delay`, `:retry_base_delay`, and `:retry_jitter` options, which modify the default backoff strategy without the need to define a full retry lambda from scratch.
+* Feature - Flexible retry strategies. Provides
+  the `:retry_max_delay`, `:retry_base_delay`, and `:retry_jitter` options,
+  which modify the default backoff strategy without the need to define a full
+  retry lambda from scratch.
 
 3.21.3 (2018-06-20)
 ------------------
@@ -1440,17 +1586,20 @@ Unreleased Changes
 3.21.2 (2018-05-22)
 ------------------
 
-* Issue - Update `EventEmitter` to `Aws::EventEmitter` [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1791)
+* Issue - Update `EventEmitter`
+  to `Aws::EventEmitter` [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1791)
 
 3.21.1 (2018-05-18)
 ------------------
 
-* Issue - Remove `raw_stream` tracking, [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1786)
+* Issue - Remove `raw_stream`
+  tracking, [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1786)
 
 3.21.0 (2018-05-17)
 ------------------
 
-* Feature - Support `vnd.amazon.event-stream` binary stream protocol over HTTP1.1
+* Feature - Support `vnd.amazon.event-stream` binary stream protocol over
+  HTTP1.1
 
 3.20.2 (2018-04-26)
 ------------------
@@ -1460,12 +1609,16 @@ Unreleased Changes
 3.20.1 (2018-04-24)
 ------------------
 
-* Issue - Fix parsing flattened XML shape from shape reference for S3 https://github.com/aws/aws-sdk-ruby/issues/1764
+* Issue - Fix parsing flattened XML shape from shape reference for
+  S3 https://github.com/aws/aws-sdk-ruby/issues/1764
 
 3.20.0 (2018-04-23)
 ------------------
 
-* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.
+* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other
+  than the default User-Agent in Ruby. Adding the
+  User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side
+  Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.
 
 3.19.0 (2018-04-04)
 ------------------
@@ -1475,7 +1628,8 @@ Unreleased Changes
 3.18.1 (2018-03-29)
 ------------------
 
-* Issue - Fix undefined method `each`/`next` for `Enumerable::Enumerator` when this class exists in the environment
+* Issue - Fix undefined method `each`/`next` for `Enumerable::Enumerator` when
+  this class exists in the environment
 
 3.18.0 (2018-03-28)
 ------------------
@@ -1497,7 +1651,10 @@ Unreleased Changes
 3.16.0 (2018-02-20)
 ------------------
 
-* Feature - Aws::InstanceProfileCredentials - When the `AWS_EC2_METADATA_DISABLED` environment variable is present with the value `true` (not case sensitive), the `Aws::InstanceProfileCredentials` credential provider will not be used.
+* Feature - Aws::InstanceProfileCredentials - When
+  the `AWS_EC2_METADATA_DISABLED` environment variable is present with the
+  value `true` (not case sensitive), the `Aws::InstanceProfileCredentials`
+  credential provider will not be used.
 
 3.15.0 (2018-02-06)
 ------------------
@@ -1522,7 +1679,8 @@ Unreleased Changes
 3.12.0 (2017-12-20)
 ------------------
 
-* Feature - Adds support for credential_source when assuming a role via shared configuration.
+* Feature - Adds support for credential_source when assuming a role via shared
+  configuration.
 
 * Issue - Update APIGateway SDK user agent pattern
 
@@ -1649,7 +1807,8 @@ Unreleased Changes
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment variable before using `default` profile.
+* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment
+  variable before using `default` profile.
 
 3.0.0.rc12 (2017-05-23)
 ------------------
