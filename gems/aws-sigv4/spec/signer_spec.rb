@@ -603,6 +603,78 @@ CHECKSUM
         end
 
       end
+
+      describe '#presign_url' do
+        let(:now) { Time.now }
+
+        let(:credentials) do
+          {
+            access_key_id: 'akid',
+            secret_access_key: 'secret',
+            session_token: nil,
+            expiration: expiration
+          }
+        end
+
+        let(:signer_options) do
+          {
+            service: 'SERVICE',
+            region: 'REGION',
+            credentials_provider: double(credentials: double(credentials), expiration: expiration),
+          }
+        end
+
+        let(:presign_options) do
+          {
+            http_method: 'GET',
+            url: 'https://example.com',
+            expires_in: expires_in,
+            time: now
+          }
+        end
+
+        let(:expires_in) { 60 }
+
+        let(:signer) { Signer.new(signer_options) }
+
+        context 'expiration is nil' do
+          let(:expiration) { nil }
+
+          it 'creates a presigned url with the provided expires_at' do
+            url = signer.presign_url(presign_options)
+            expect(url.to_s).to include('X-Amz-Expires=60')
+          end
+        end
+
+        context 'expiration is after expires_at' do
+          let(:expiration) { now + 3600 }
+
+          it 'creates a presigned url with the provided expires_at' do
+            url = signer.presign_url(presign_options)
+            expect(url.to_s).to include('X-Amz-Expires=60')
+          end
+        end
+
+        context 'expiration is before expires_at' do
+          let(:expiration) { now + 10 }
+
+          it 'creates a presigned url that expires at the credential expiration time' do
+            url = signer.presign_url(presign_options)
+            expect(url.to_s).to include('X-Amz-Expires=10')
+          end
+        end
+
+        context 'expired credentials (static stability)' do
+          let(:expiration) { now - 10 }
+
+          it 'creates a presigned url with the provided expires_at' do
+            url = signer.presign_url(presign_options)
+            expect(url.to_s).to include('X-Amz-Expires=60')
+          end
+        end
+
+
+      end
     end
   end
 end
