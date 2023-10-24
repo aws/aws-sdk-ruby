@@ -423,7 +423,7 @@ module Aws
         params['X-Amz-Algorithm'] = 'AWS4-HMAC-SHA256'
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration).to_s
+        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
         params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
@@ -722,12 +722,19 @@ module Aws
           !credentials.secret_access_key.empty?
       end
 
-      def presigned_url_expiration(options, expiration)
+      def presigned_url_expiration(options, expiration, datetime)
         expires_in = extract_expires_in(options)
         return expires_in unless expiration
 
-        expiration_seconds = (expiration - Time.now).to_i
-        [expires_in, expiration_seconds].min
+        expiration_seconds = (expiration - datetime).to_i
+        # In the static stability case, credentials may expire in the past
+        # but still be valid.  For those cases, use the user configured
+        # expires_in and ingore expiration.
+        if expiration_seconds <= 0
+          expires_in
+        else
+          [expires_in, expiration_seconds].min
+        end
       end
 
       ### CRT Code
@@ -811,7 +818,7 @@ module Aws
         headers = downcase_headers(options[:headers])
         headers['host'] ||= host(url)
 
-        datetime = headers.delete('x-amz-date')
+        datetime = Time.strptime(headers.delete('x-amz-date'), "%Y%m%dT%H%M%S%Z") if headers['x-amz-date']
         datetime ||= (options[:time] || Time.now)
 
         content_sha256 = headers.delete('x-amz-content-sha256')
@@ -832,7 +839,7 @@ module Aws
           use_double_uri_encode: @uri_escape_path,
           should_normalize_uri_path: @normalize_path,
           omit_session_token: @omit_session_token,
-          expiration_in_seconds: presigned_url_expiration(options, expiration)
+          expiration_in_seconds: presigned_url_expiration(options, expiration, datetime)
         )
         http_request = Aws::Crt::Http::Message.new(
           http_method, url.to_s, headers
