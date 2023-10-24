@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - (Static Stability) use provided `expires_in` in presigned url when credentials are expired.
+
 1.6.0 (2023-06-28)
 ------------------
 

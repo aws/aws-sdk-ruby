@@ -672,8 +672,6 @@ CHECKSUM
             expect(url.to_s).to include('X-Amz-Expires=60')
           end
         end
-
-
       end
     end
   end
