@@ -42,10 +42,6 @@ module AwsSdkCodeGenerator
 
         # @return [Array<EndpointParameter>]
         attr_reader :parameters
-
-        def has_endpoint_built_in?
-          parameters.any? { |p| p.param_data['builtIn'] == 'SDK::Endpoint' }
-        end
       end
 
       class EndpointParameter
@@ -153,7 +149,7 @@ module AwsSdkCodeGenerator
         when 'AWS::S3::DisableMultiRegionAccessPoints'
           'context.config.s3_disable_multiregion_access_points'
         when 'SDK::Endpoint'
-          'endpoint'
+          'context.config.regional_endpoint ? nil : context.config.endpoint.to_s'
         end
       end
 
