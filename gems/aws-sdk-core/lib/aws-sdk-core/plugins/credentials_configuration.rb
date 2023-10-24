@@ -60,7 +60,7 @@ locations will be searched for credentials:
 
 * `Aws.config[:credentials]`
 * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
-  `credential_scope` options.
+  `:credential_scope` options.
 * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
   ENV['AWS_SESSION_TOKEN'], and ENV['AWS_CREDENTIAL_SCOPE']
 * `~/.aws/credentials`
