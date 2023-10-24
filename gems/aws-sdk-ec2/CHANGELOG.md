@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.415.0 (2023-10-24)
+------------------
+
+* Feature - This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.
+
 1.414.0 (2023-10-19)
 ------------------
 

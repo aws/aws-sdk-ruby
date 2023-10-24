@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-10-24)
+------------------
+
+* Feature - Add the partitional endpoint for IAM in iso-f.
+
 1.87.0 (2023-09-27)
 ------------------
 

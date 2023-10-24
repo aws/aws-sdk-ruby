@@ -76,6 +76,8 @@ module Aws::MigrationHubStrategyRecommendations
             Aws::MigrationHubStrategyRecommendations::Endpoints::GetServerDetails.build(context)
           when :get_server_strategies
             Aws::MigrationHubStrategyRecommendations::Endpoints::GetServerStrategies.build(context)
+          when :list_analyzable_servers
+            Aws::MigrationHubStrategyRecommendations::Endpoints::ListAnalyzableServers.build(context)
           when :list_application_components
             Aws::MigrationHubStrategyRecommendations::Endpoints::ListApplicationComponents.build(context)
           when :list_collectors

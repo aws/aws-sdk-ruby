@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-10-24)
+------------------
+
+* Feature - Added support for Cluster Subnet and Security Group mutability.
+
 1.90.0 (2023-09-27)
 ------------------
 

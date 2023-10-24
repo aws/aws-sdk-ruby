@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-10-24)
+------------------
+
+* Feature - This release introduces multi-data-source feature in Migration Hub Strategy Recommendations. This feature now supports vCenter as a data source to fetch inventory in addition to ADS and Import from file workflow that is currently supported with MHSR collector.
+
 1.16.0 (2023-09-27)
 ------------------
 

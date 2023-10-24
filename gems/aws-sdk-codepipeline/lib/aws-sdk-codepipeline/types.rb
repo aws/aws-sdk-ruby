@@ -1989,6 +1989,82 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # A type of trigger configuration for Git-based source actions.
+    #
+    # <note markdown="1"> You can specify the Git configuration trigger type for all third-party
+    # Git-based source actions that are supported by the
+    # `CodeStarSourceConnection` action type.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] source_action_name
+    #   The name of the pipeline source action where the trigger
+    #   configuration, such as Git tags, is specified. The trigger
+    #   configuration will start the pipeline upon the specified change
+    #   only.
+    #
+    #   <note markdown="1"> You can only specify one trigger configuration per source action.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] push
+    #   The field where the repository event that will start the pipeline,
+    #   such as pushing Git tags, is specified with details.
+    #
+    #   <note markdown="1"> Git tags is the only supported event type.
+    #
+    #    </note>
+    #   @return [Array<Types::GitPushFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GitConfiguration AWS API Documentation
+    #
+    class GitConfiguration < Struct.new(
+      :source_action_name,
+      :push)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The event criteria that specify when a specified repository event will
+    # start the pipeline for the specified trigger configuration, such as
+    # the lists of Git tags to include and exclude.
+    #
+    # @!attribute [rw] tags
+    #   The field that contains the details for the Git tags trigger
+    #   configuration.
+    #   @return [Types::GitTagFilterCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GitPushFilter AWS API Documentation
+    #
+    class GitPushFilter < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Git tags specified as filter criteria for whether a Git tag
+    # repository event will start the pipeline.
+    #
+    # @!attribute [rw] includes
+    #   The list of patterns of Git tags that, when pushed, are to be
+    #   included as criteria that starts the pipeline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excludes
+    #   The list of patterns of Git tags that, when pushed, are to be
+    #   excluded from starting the pipeline.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GitTagFilterCriteria AWS API Documentation
+    #
+    class GitTagFilterCriteria < Struct.new(
+      :includes,
+      :excludes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about an artifact to be worked on, such as a
     # test or build artifact.
     #
@@ -2756,6 +2832,50 @@ module Aws::CodePipeline
     #   updated.
     #   @return [Integer]
     #
+    # @!attribute [rw] pipeline_type
+    #   CodePipeline provides the following pipeline types, which differ in
+    #   characteristics and price, so that you can tailor your pipeline
+    #   features and cost to the needs of your applications.
+    #
+    #   * V1 type pipelines have a JSON structure that contains standard
+    #     pipeline, stage, and action-level parameters.
+    #
+    #   * V2 type pipelines have the same structure as a V1 type, along with
+    #     additional parameters for release safety and trigger
+    #     configuration.
+    #
+    #   Including V2 parameters, such as triggers on Git tags, in the
+    #   pipeline JSON when creating or updating a pipeline will result in
+    #   the pipeline having the V2 type of pipeline and the associated
+    #   costs.
+    #
+    #   For information about pricing for CodePipeline, see [Pricing][1].
+    #
+    #   For information about which type of pipeline to choose, see [What
+    #   type of pipeline is right for me?][2].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/codepipeline/pricing/
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html
+    #   @return [String]
+    #
+    # @!attribute [rw] triggers
+    #   The trigger configuration specifying a type of event, such as Git
+    #   tags, that starts the pipeline.
+    #
+    #   <note markdown="1"> When a trigger configuration is specified, default change detection
+    #   for repository and branch commits is disabled.
+    #
+    #    </note>
+    #   @return [Array<Types::PipelineTriggerDeclaration>]
+    #
+    # @!attribute [rw] variables
+    #   A list that defines the pipeline variables for a pipeline resource.
+    #   Variable names can have alphanumeric and underscore characters, and
+    #   the values must match `[A-Za-z0-9@\-_]+`.
+    #   @return [Array<Types::PipelineVariableDeclaration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineDeclaration AWS API Documentation
     #
     class PipelineDeclaration < Struct.new(
@@ -2764,7 +2884,10 @@ module Aws::CodePipeline
       :artifact_store,
       :artifact_stores,
       :stages,
-      :version)
+      :version,
+      :pipeline_type,
+      :triggers,
+      :variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2825,6 +2948,14 @@ module Aws::CodePipeline
     #   execution.
     #   @return [Array<Types::ArtifactRevision>]
     #
+    # @!attribute [rw] trigger
+    #   The interaction or event that started a pipeline execution.
+    #   @return [Types::ExecutionTrigger]
+    #
+    # @!attribute [rw] variables
+    #   A list of pipeline variables used for the pipeline execution.
+    #   @return [Array<Types::ResolvedPipelineVariable>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecution AWS API Documentation
     #
     class PipelineExecution < Struct.new(
@@ -2833,7 +2964,9 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :status,
       :status_summary,
-      :artifact_revisions)
+      :artifact_revisions,
+      :trigger,
+      :variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2993,6 +3126,34 @@ module Aws::CodePipeline
     #   The version number of the pipeline.
     #   @return [Integer]
     #
+    # @!attribute [rw] pipeline_type
+    #   CodePipeline provides the following pipeline types, which differ in
+    #   characteristics and price, so that you can tailor your pipeline
+    #   features and cost to the needs of your applications.
+    #
+    #   * V1 type pipelines have a JSON structure that contains standard
+    #     pipeline, stage, and action-level parameters.
+    #
+    #   * V2 type pipelines have the same structure as a V1 type, along with
+    #     additional parameters for release safety and trigger
+    #     configuration.
+    #
+    #   Including V2 parameters, such as triggers on Git tags, in the
+    #   pipeline JSON when creating or updating a pipeline will result in
+    #   the pipeline having the V2 type of pipeline and the associated
+    #   costs.
+    #
+    #   For information about pricing for CodePipeline, see [Pricing][1].
+    #
+    #   For information about which type of pipeline to choose, see [What
+    #   type of pipeline is right for me?][2].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/codepipeline/pricing/
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html
+    #   @return [String]
+    #
     # @!attribute [rw] created
     #   The date and time the pipeline was created, in timestamp format.
     #   @return [Time]
@@ -3007,8 +3168,87 @@ module Aws::CodePipeline
     class PipelineSummary < Struct.new(
       :name,
       :version,
+      :pipeline_type,
       :created,
       :updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents information about the specified trigger configuration, such
+    # as the filter criteria and the source stage for the action that
+    # contains the trigger.
+    #
+    # <note markdown="1"> This is only supported for the `CodeStarSourceConnection` action type.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> When a trigger configuration is specified, default change detection
+    # for repository and branch commits is disabled.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] provider_type
+    #   The source provider for the event, such as connections configured
+    #   for a repository with Git tags, for the specified trigger
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] git_configuration
+    #   Provides the filter criteria and the source stage for the repository
+    #   event that starts the pipeline, such as Git tags.
+    #   @return [Types::GitConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineTriggerDeclaration AWS API Documentation
+    #
+    class PipelineTriggerDeclaration < Struct.new(
+      :provider_type,
+      :git_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A pipeline-level variable used for a pipeline execution.
+    #
+    # @!attribute [rw] name
+    #   The name of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineVariable AWS API Documentation
+    #
+    class PipelineVariable < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A variable declared at the pipeline level.
+    #
+    # @!attribute [rw] name
+    #   The name of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The value of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a pipeline-level variable. It's used to add
+    #   additional context about the variable, and not being used at time
+    #   when pipeline executes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineVariableDeclaration AWS API Documentation
+    #
+    class PipelineVariableDeclaration < Struct.new(
+      :name,
+      :default_value,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3396,6 +3636,25 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # A pipeline-level variable used for a pipeline execution.
+    #
+    # @!attribute [rw] name
+    #   The name of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_value
+    #   The resolved value of a pipeline-level variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ResolvedPipelineVariable AWS API Documentation
+    #
+    class ResolvedPipelineVariable < Struct.new(
+      :name,
+      :resolved_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource was specified in an invalid format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ResourceNotFoundException AWS API Documentation
@@ -3643,6 +3902,12 @@ module Aws::CodePipeline
     #   The name of the pipeline to start.
     #   @return [String]
     #
+    # @!attribute [rw] variables
+    #   A list that overrides pipeline variables for a pipeline execution
+    #   that's being started. Variable names must match `[A-Za-z0-9@\-_]+`,
+    #   and the values can be anything except an empty string.
+    #   @return [Array<Types::PipelineVariable>]
+    #
     # @!attribute [rw] client_request_token
     #   The system-generated unique ID used to identify a unique execution
     #   request.
@@ -3655,6 +3920,7 @@ module Aws::CodePipeline
     #
     class StartPipelineExecutionInput < Struct.new(
       :name,
+      :variables,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure

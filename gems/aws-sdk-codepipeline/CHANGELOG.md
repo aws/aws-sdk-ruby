@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-10-24)
+------------------
+
+* Feature - Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+
 1.63.0 (2023-10-17)
 ------------------
 

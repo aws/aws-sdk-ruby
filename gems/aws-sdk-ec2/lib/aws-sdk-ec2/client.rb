@@ -32498,9 +32498,9 @@ module Aws::EC2
     #     wildcards; greater than or less than comparison is not supported).
     #
     #   * `timestamp` - The time stamp of the Spot price history, in UTC
-    #     format (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). You can use
-    #     wildcards (* and ?). Greater than or less than comparison is not
-    #     supported.
+    #     format (for example, *ddd MMM dd HH*:*mm*:*ss* UTC *YYYY*). You can
+    #     use wildcards (`*` and `?`). Greater than or less than comparison is
+    #     not supported.
     #
     # @option params [String] :availability_zone
     #   Filters the results by the specified Availability Zone.
@@ -57184,7 +57184,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.414.0'
+      context[:gem_version] = '1.415.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

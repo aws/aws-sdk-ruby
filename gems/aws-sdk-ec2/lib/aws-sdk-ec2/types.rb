@@ -24137,9 +24137,9 @@ module Aws::EC2
     #     supported).
     #
     #   * `timestamp` - The time stamp of the Spot price history, in UTC
-    #     format (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). You can
-    #     use wildcards (* and ?). Greater than or less than comparison is
-    #     not supported.
+    #     format (for example, *ddd MMM dd HH*:*mm*:*ss* UTC *YYYY*). You
+    #     can use wildcards (`*` and `?`). Greater than or less than
+    #     comparison is not supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] availability_zone
@@ -35170,7 +35170,22 @@ module Aws::EC2
     # @!attribute [rw] configured
     #   Set to `true` to enable your instance for hibernation.
     #
+    #   For Spot Instances, if you set `Configured` to `true`, either omit
+    #   the `InstanceInterruptionBehavior` parameter (for [
+    #   `SpotMarketOptions` ][1]), or set it to `hibernate`. When
+    #   `Configured` is true:
+    #
+    #   * If you omit `InstanceInterruptionBehavior`, it defaults to
+    #     `hibernate`.
+    #
+    #   * If you set `InstanceInterruptionBehavior` to a value other than
+    #     `hibernate`, you'll get an error.
+    #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptionsRequest AWS API Documentation
@@ -59331,8 +59346,25 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   The behavior when a Spot Instance is interrupted.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `true`,
+    #   the `InstanceInterruptionBehavior` parameter is automatically set to
+    #   `hibernate`. If you set it to `stop` or `terminate`, you'll get an
+    #   error.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `false`
+    #   or `null`, the `InstanceInterruptionBehavior` parameter is
+    #   automatically set to `terminate`. You can also set it to `stop` or
+    #   `hibernate`.
+    #
+    #   For more information, see [Interruption behavior][2] in the *Amazon
+    #   EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interruption-behavior.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMarketOptions AWS API Documentation
