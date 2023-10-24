@@ -96,7 +96,7 @@ CREDS
     end
 
     it 'hydrates credentials from ENV with prefix AMAZON_' do
-      expected_creds = random_creds
+      expected_creds = random_creds.merge(account_id: nil)
       ENV['AMAZON_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
       ENV['AMAZON_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
       ENV['AMAZON_SESSION_TOKEN'] = expected_creds[:session_token]
@@ -104,14 +104,14 @@ CREDS
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY & AWS_SECRET_KEY' do
-      expected_creds = random_creds.merge(session_token: nil)
+      expected_creds = random_creds.merge(session_token: nil, account_id: nil)
       ENV['AWS_ACCESS_KEY'] = expected_creds[:access_key_id]
       ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
-      expected_creds = random_creds.merge(session_token: nil)
+      expected_creds = random_creds.merge(session_token: nil, account_id: nil)
       ENV['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
       ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)

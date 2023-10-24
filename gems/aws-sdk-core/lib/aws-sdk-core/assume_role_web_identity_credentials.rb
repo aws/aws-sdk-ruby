@@ -73,14 +73,15 @@ module Aws
       # read from token file everytime it refreshes
       @assume_role_web_identity_params[:web_identity_token] = _token_from_file(@token_file)
 
-      c = @client.assume_role_with_web_identity(
-        @assume_role_web_identity_params).credentials
+      c = @client.assume_role_with_web_identity(@assume_role_web_identity_params)
+      creds = c.credentials
       @credentials = Credentials.new(
-        c.access_key_id,
-        c.secret_access_key,
-        c.session_token
+        creds.access_key_id,
+        creds.secret_access_key,
+        creds.session_token,
+        account_id: ARNParser.parse(c.assumed_role_user.arn).account_id
       )
-      @expiration = c.expiration
+      @expiration = creds.expiration
     end
 
     def _token_from_file(path)

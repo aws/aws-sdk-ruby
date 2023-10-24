@@ -59,7 +59,8 @@ module Aws
       creds = Credentials.new(
         creds_json['AccessKeyId'],
         creds_json['SecretAccessKey'],
-        creds_json['SessionToken']
+        creds_json['SessionToken'],
+        account_id: creds_json['AccountId']
       )
 
       @expiration = creds_json['Expiration'] ? Time.iso8601(creds_json['Expiration']) : nil

@@ -12,7 +12,7 @@ module Aws
       )
     end
 
-    let(:time) { Time.at(Time.now.to_i) }
+    let(:time) { Time.now.round }
     let(:in_one_hour) { time + 60 * 60 }
     let(:one_hour_ago) { time - 60 * 60 }
     let(:expiration) { in_one_hour }
@@ -117,6 +117,10 @@ module Aws
           ).and_call_original
           sso_creds = SSOCredentials.new(sso_opts)
           expect(sso_creds.credentials.access_key_id).to eq('akid')
+          expect(sso_creds.credentials.secret_access_key).to eq('secret')
+          expect(sso_creds.credentials.session_token).to eq('session')
+          expect(sso_creds.credentials.account_id).to eq(sso_account_id)
+          expect(sso_creds.expiration).to eq(expiration)
         end
 
         it 'calls the TokenProvider to get a new token for each refresh' do
@@ -259,6 +263,10 @@ module Aws
           ).and_call_original
           sso_creds = SSOCredentials.new(sso_opts)
           expect(sso_creds.credentials.access_key_id).to eq('akid')
+          expect(sso_creds.credentials.secret_access_key).to eq('secret')
+          expect(sso_creds.credentials.session_token).to eq('session')
+          expect(sso_creds.credentials.account_id).to eq(sso_account_id)
+          expect(sso_creds.expiration).to eq(expiration)
         end
 
         it 'reads a new token from disc for each refresh' do

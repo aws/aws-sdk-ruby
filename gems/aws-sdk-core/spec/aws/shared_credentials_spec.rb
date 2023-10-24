@@ -25,6 +25,7 @@ module Aws
       expect(creds.access_key_id).to eq('ACCESS_KEY_0')
       expect(creds.secret_access_key).to eq('SECRET_KEY_0')
       expect(creds.session_token).to eq('TOKEN_0')
+      expect(creds.account_id).to eq('ACCOUNT_ID_0')
     end
 
     it 'supports fetching profiles from ENV' do
