@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-10-25)
+------------------
+
+* Feature - This release will allow KMS alias names to be used when creating Mission Profiles
+
 1.40.0 (2023-09-27)
 ------------------
 

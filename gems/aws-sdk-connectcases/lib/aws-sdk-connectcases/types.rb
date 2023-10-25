@@ -2151,7 +2151,7 @@ module Aws::ConnectCases
 
     # @!attribute [rw] content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #   @return [Types::LayoutContent]
     #
     # @!attribute [rw] domain_id
