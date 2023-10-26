@@ -3515,6 +3515,29 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Deletes the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a scheduled action.
     #
     # @option params [required, String] :scheduled_action_name
@@ -5691,6 +5714,73 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns a list of inbound integrations.
+    #
+    # @option params [String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the inbound integration.
+    #
+    # @option params [String] :target_arn
+    #   The Amazon Resource Name (ARN) of the target of an inbound
+    #   integration.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeInboundIntegrations request exceed the value specified in
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
+    #
+    # @return [Types::InboundIntegrationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InboundIntegrationsMessage#marker #marker} => String
+    #   * {Types::InboundIntegrationsMessage#inbound_integrations #inbound_integrations} => Array&lt;Types::InboundIntegration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_integrations({
+    #     integration_arn: "String",
+    #     target_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.inbound_integrations #=> Array
+    #   resp.inbound_integrations[0].integration_arn #=> String
+    #   resp.inbound_integrations[0].source_arn #=> String
+    #   resp.inbound_integrations[0].target_arn #=> String
+    #   resp.inbound_integrations[0].status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.inbound_integrations[0].errors #=> Array
+    #   resp.inbound_integrations[0].errors[0].error_code #=> String
+    #   resp.inbound_integrations[0].errors[0].error_message #=> String
+    #   resp.inbound_integrations[0].create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeInboundIntegrations AWS API Documentation
+    #
+    # @overload describe_inbound_integrations(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_integrations(params = {}, options = {})
+      req = build_request(:describe_inbound_integrations, params)
+      req.send_request(options)
+    end
+
     # Describes whether information, such as queries and connection
     # attempts, is being logged for the specified Amazon Redshift cluster.
     #
@@ -7771,6 +7861,36 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_reserved_node_exchange_offerings(params = {}, options = {})
       req = build_request(:get_reserved_node_exchange_offerings, params)
+      req.send_request(options)
+    end
+
+    # Get the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is fetched.
+    #
+    # @return [Types::GetResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResult#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_arn #=> String
+    #   resp.resource_policy.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -9867,6 +9987,40 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Updates the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is updated.
+    #
+    # @option params [required, String] :policy
+    #   The content of the resource policy being updated.
+    #
+    # @return [Types::PutResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResult#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "String", # required
+    #     policy: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_arn #=> String
+    #   resp.resource_policy.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Reboots a cluster. This action is taken as soon as possible. It
     # results in a momentary outage to the cluster, during which the cluster
     # status is set to `rebooting`. A cluster event is created when the
@@ -11508,7 +11662,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

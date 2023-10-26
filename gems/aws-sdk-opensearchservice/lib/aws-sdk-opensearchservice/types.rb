@@ -1121,6 +1121,10 @@ module Aws::OpenSearchService
     #   access policies for the new domain.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_options
     #   DEPRECATED. Container for the parameters required to configure
     #   automated snapshots of domain indexes.
@@ -1231,6 +1235,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -2385,6 +2390,10 @@ module Aws::OpenSearchService
     #   Specifies the access policies for the domain.
     #   @return [Types::AccessPoliciesStatus]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [Types::IPAddressTypeStatus]
+    #
     # @!attribute [rw] snapshot_options
     #   DEPRECATED. Container for parameters required to configure automated
     #   snapshots of domain indexes.
@@ -2453,6 +2462,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -2572,7 +2582,7 @@ module Aws::OpenSearchService
     # Container for the domain maintenance details.
     #
     # @!attribute [rw] maintenance_id
-    #   Id of the requested action.
+    #   The ID of the requested action.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -2584,7 +2594,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   Id of the data node.
+    #   The ID of the data node.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2592,15 +2602,15 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   The status message of the action.
+    #   The status message for the action.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Contains time at which action created.
+    #   The time at which the action was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Contains time at which action updated.
+    #   The time at which the action was updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainMaintenanceDetails AWS API Documentation
@@ -2768,6 +2778,13 @@ module Aws::OpenSearchService
     #   upload requests to the domain.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_v2
+    #   The domain endpoint to which index and search requests are
+    #   submitted. For example,
+    #   `search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com` or
+    #   `doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com`.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
     #   VPC endpoints.. Example `key, value`:
@@ -2802,6 +2819,10 @@ module Aws::OpenSearchService
     # @!attribute [rw] access_policies
     #   Identity and Access Management (IAM) policy document specifying the
     #   access policies for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
@@ -2873,6 +2894,7 @@ module Aws::OpenSearchService
       :created,
       :deleted,
       :endpoint,
+      :endpoint_v2,
       :endpoints,
       :processing,
       :upgrade_processing,
@@ -2880,6 +2902,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -3184,7 +3207,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] maintenance_id
-    #   The request id of the maintenance action.
+    #   The request ID of the maintenance action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatusRequest AWS API Documentation
@@ -3196,31 +3219,31 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `GetDomainMaintenanceStatus` request. Contains
-    # information about the requested action.
+    # The result of a `GetDomainMaintenanceStatus` request that information
+    # about the requested action.
     #
     # @!attribute [rw] status
-    #   Contains status of the maintenance action.
+    #   The status of the maintenance action.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   Contains status message of the maintenance action.
+    #   The status message of the maintenance action.
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   Contains node id of maintenance action.
+    #   The node ID of the maintenance action.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   Contains action name.
+    #   The action name.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Contains time at which action created.
+    #   The time at which the action was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Contains time at which action updated.
+    #   The time at which the action was updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatusResponse AWS API Documentation
@@ -3384,6 +3407,25 @@ module Aws::OpenSearchService
       :upgrade_step,
       :step_status,
       :upgrade_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The IP address type status for the domain.
+    #
+    # @!attribute [rw] options
+    #   The IP address options for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides the current status of an entity.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IPAddressTypeStatus AWS API Documentation
+    #
+    class IPAddressTypeStatus < Struct.new(
+      :options,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3632,7 +3674,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] next_token
     #   If your initial `ListDomainMaintenances` operation returns a
-    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `nextToken`, include the returned `nextToken` in subsequent
     #   `ListDomainMaintenances` operations, which returns results in the
     #   next page.
     #   @return [String]
@@ -3649,11 +3691,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `ListDomainMaintenances` request. Contains information
-    # about the requested actions.
+    # The result of a `ListDomainMaintenances` request that contains
+    # information about the requested actions.
     #
     # @!attribute [rw] domain_maintenances
-    #   List of the submitted maintenance actions.
+    #   A list of the submitted maintenance actions.
     #   @return [Array<Types::DomainMaintenanceDetails>]
     #
     # @!attribute [rw] next_token
@@ -5244,7 +5286,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   Id of the data node.
+    #   The ID of the data node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenanceRequest AWS API Documentation
@@ -5257,11 +5299,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `StartDomainMaintenance` request. Contains information
+    # The result of a `StartDomainMaintenance` request that information
     # about the requested action.
     #
     # @!attribute [rw] maintenance_id
-    #   Contains request id of requested action.
+    #   The request ID of requested action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenanceResponse AWS API Documentation
@@ -5489,6 +5531,10 @@ module Aws::OpenSearchService
     #   JSON-formatted string.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #   @return [Hash<String,Types::LogPublishingOption>]
@@ -5554,6 +5600,7 @@ module Aws::OpenSearchService
       :cognito_options,
       :advanced_options,
       :access_policies,
+      :ip_address_type,
       :log_publishing_options,
       :encryption_at_rest_options,
       :domain_endpoint_options,

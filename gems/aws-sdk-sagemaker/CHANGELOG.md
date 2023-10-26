@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.217.0 (2023-10-26)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot now supports Text Generation jobs.
+
 1.216.0 (2023-10-12)
 ------------------
 

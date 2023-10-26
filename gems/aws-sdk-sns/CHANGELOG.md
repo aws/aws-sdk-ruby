@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-10-26)
+------------------
+
+* Feature - Message Archiving and Replay is now supported in Amazon SNS for FIFO topics.
+
 1.67.0 (2023-09-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2023-10-26)
+------------------
+
+* Feature - Network Firewall now supports inspection of outbound SSL/TLS traffic.
+
 1.35.0 (2023-09-27)
 ------------------
 

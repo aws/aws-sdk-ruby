@@ -469,13 +469,18 @@ module Aws::AppStream
     CertificateBasedAuthProperties.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     CertificateBasedAuthProperties.struct_class = Types::CertificateBasedAuthProperties
 
-    ComputeCapacity.add_member(:desired_instances, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DesiredInstances"))
+    ComputeCapacity.add_member(:desired_instances, Shapes::ShapeRef.new(shape: Integer, location_name: "DesiredInstances"))
+    ComputeCapacity.add_member(:desired_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "DesiredSessions"))
     ComputeCapacity.struct_class = Types::ComputeCapacity
 
     ComputeCapacityStatus.add_member(:desired, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Desired"))
     ComputeCapacityStatus.add_member(:running, Shapes::ShapeRef.new(shape: Integer, location_name: "Running"))
     ComputeCapacityStatus.add_member(:in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "InUse"))
     ComputeCapacityStatus.add_member(:available, Shapes::ShapeRef.new(shape: Integer, location_name: "Available"))
+    ComputeCapacityStatus.add_member(:desired_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "DesiredUserSessions"))
+    ComputeCapacityStatus.add_member(:available_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "AvailableUserSessions"))
+    ComputeCapacityStatus.add_member(:active_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "ActiveUserSessions"))
+    ComputeCapacityStatus.add_member(:actual_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "ActualUserSessions"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -582,6 +587,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     CreateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     CreateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
+    CreateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -838,12 +844,13 @@ module Aws::AppStream
     DescribeImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeImagesResult.struct_class = Types::DescribeImagesResult
 
-    DescribeSessionsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
-    DescribeSessionsRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
+    DescribeSessionsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DescribeSessionsRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "FleetName"))
     DescribeSessionsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
     DescribeSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeSessionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit"))
     DescribeSessionsRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    DescribeSessionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
     DescribeSessionsRequest.struct_class = Types::DescribeSessionsRequest
 
     DescribeSessionsResult.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionList, location_name: "Sessions"))
@@ -1005,6 +1012,7 @@ module Aws::AppStream
     Fleet.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     Fleet.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     Fleet.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
+    Fleet.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -1187,6 +1195,7 @@ module Aws::AppStream
     Session.add_member(:max_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "MaxExpirationTime"))
     Session.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     Session.add_member(:network_access_configuration, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "NetworkAccessConfiguration"))
+    Session.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
     Session.struct_class = Types::Session
 
     SessionList.member = Shapes::ShapeRef.new(shape: Session)
@@ -1339,7 +1348,7 @@ module Aws::AppStream
 
     UpdateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
     UpdateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
-    UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
     UpdateFleetRequest.add_member(:compute_capacity, Shapes::ShapeRef.new(shape: ComputeCapacity, location_name: "ComputeCapacity"))
     UpdateFleetRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
@@ -1358,6 +1367,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     UpdateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     UpdateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
+    UpdateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))

@@ -55,6 +55,7 @@ module Aws::Redshift
   # * {ClusterSubnetGroupNotFoundFault}
   # * {ClusterSubnetGroupQuotaExceededFault}
   # * {ClusterSubnetQuotaExceededFault}
+  # * {ConflictPolicyUpdateFault}
   # * {CopyToRegionDisabledFault}
   # * {CustomCnameAssociationFault}
   # * {CustomDomainAssociationNotFoundFault}
@@ -78,6 +79,7 @@ module Aws::Redshift
   # * {IncompatibleOrderableOptions}
   # * {InsufficientClusterCapacityFault}
   # * {InsufficientS3BucketPolicyFault}
+  # * {IntegrationNotFoundFault}
   # * {InvalidAuthenticationProfileRequestFault}
   # * {InvalidAuthorizationStateFault}
   # * {InvalidClusterParameterGroupStateFault}
@@ -94,6 +96,7 @@ module Aws::Redshift
   # * {InvalidHsmClientCertificateStateFault}
   # * {InvalidHsmConfigurationStateFault}
   # * {InvalidNamespaceFault}
+  # * {InvalidPolicyFault}
   # * {InvalidReservedNodeStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidRetentionPeriodFault}
@@ -442,6 +445,16 @@ module Aws::Redshift
       end
     end
 
+    class ConflictPolicyUpdateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::ConflictPolicyUpdateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class CopyToRegionDisabledFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -672,6 +685,16 @@ module Aws::Redshift
       end
     end
 
+    class IntegrationNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::IntegrationNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidAuthenticationProfileRequestFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -827,6 +850,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::InvalidNamespaceFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidPolicyFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidPolicyFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

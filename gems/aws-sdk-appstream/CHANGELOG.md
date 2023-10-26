@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-10-26)
+------------------
+
+* Feature - This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+
 1.79.0 (2023-09-27)
 ------------------
 

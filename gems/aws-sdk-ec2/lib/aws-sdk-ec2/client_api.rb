@@ -1448,6 +1448,9 @@ module Aws::EC2
     GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
     GetReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteRequest')
     GetReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteResult')
+    GetSecurityGroupsForVpcRequest = Shapes::StructureShape.new(name: 'GetSecurityGroupsForVpcRequest')
+    GetSecurityGroupsForVpcRequestMaxResults = Shapes::IntegerShape.new(name: 'GetSecurityGroupsForVpcRequestMaxResults')
+    GetSecurityGroupsForVpcResult = Shapes::StructureShape.new(name: 'GetSecurityGroupsForVpcResult')
     GetSerialConsoleAccessStatusRequest = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusRequest')
     GetSerialConsoleAccessStatusResult = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusResult')
     GetSpotPlacementScoresRequest = Shapes::StructureShape.new(name: 'GetSpotPlacementScoresRequest')
@@ -2554,6 +2557,8 @@ module Aws::EC2
     SearchTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesRequest')
     SearchTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesResult')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
+    SecurityGroupForVpc = Shapes::StructureShape.new(name: 'SecurityGroupForVpc')
+    SecurityGroupForVpcList = Shapes::ListShape.new(name: 'SecurityGroupForVpcList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SecurityGroupIdSet = Shapes::ListShape.new(name: 'SecurityGroupIdSet')
@@ -8927,6 +8932,17 @@ module Aws::EC2
     GetReservedInstancesExchangeQuoteResult.add_member(:validation_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "validationFailureReason"))
     GetReservedInstancesExchangeQuoteResult.struct_class = Types::GetReservedInstancesExchangeQuoteResult
 
+    GetSecurityGroupsForVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    GetSecurityGroupsForVpcRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSecurityGroupsForVpcRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcRequestMaxResults, location_name: "MaxResults"))
+    GetSecurityGroupsForVpcRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetSecurityGroupsForVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetSecurityGroupsForVpcRequest.struct_class = Types::GetSecurityGroupsForVpcRequest
+
+    GetSecurityGroupsForVpcResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetSecurityGroupsForVpcResult.add_member(:security_group_for_vpcs, Shapes::ShapeRef.new(shape: SecurityGroupForVpcList, location_name: "securityGroupForVpcSet"))
+    GetSecurityGroupsForVpcResult.struct_class = Types::GetSecurityGroupsForVpcResult
+
     GetSerialConsoleAccessStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetSerialConsoleAccessStatusRequest.struct_class = Types::GetSerialConsoleAccessStatusRequest
 
@@ -13291,6 +13307,16 @@ module Aws::EC2
     SecurityGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     SecurityGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     SecurityGroup.struct_class = Types::SecurityGroup
+
+    SecurityGroupForVpc.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SecurityGroupForVpc.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    SecurityGroupForVpc.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SecurityGroupForVpc.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    SecurityGroupForVpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecurityGroupForVpc.add_member(:primary_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "primaryVpcId"))
+    SecurityGroupForVpc.struct_class = Types::SecurityGroupForVpc
+
+    SecurityGroupForVpcList.member = Shapes::ShapeRef.new(shape: SecurityGroupForVpc, location_name: "item")
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
 
@@ -19398,6 +19424,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteRequest)
         o.output = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteResult)
+      end)
+
+      api.add_operation(:get_security_groups_for_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSecurityGroupsForVpc"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_serial_console_access_status, Seahorse::Model::Operation.new.tap do |o|

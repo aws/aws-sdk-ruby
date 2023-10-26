@@ -1304,7 +1304,7 @@ module Aws::AppStream
     #   open documents before being disconnected. After this time elapses, the
     #   instance is terminated and replaced by a new instance.
     #
-    #   Specify a value between 600 and 360000.
+    #   Specify a value between 600 and 432000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The amount of time that a streaming session remains active after users
@@ -1418,6 +1418,10 @@ module Aws::AppStream
     #   The S3 location of the session scripts configuration zip file. This
     #   only applies to Elastic fleets.
     #
+    # @option params [Integer] :max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only applies
+    #   to multi-session fleets.
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -1431,7 +1435,8 @@ module Aws::AppStream
     #     instance_type: "String", # required
     #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND, ELASTIC
     #     compute_capacity: {
-    #       desired_instances: 1, # required
+    #       desired_instances: 1,
+    #       desired_sessions: 1,
     #     },
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -1459,6 +1464,7 @@ module Aws::AppStream
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key",
     #     },
+    #     max_sessions_per_instance: 1,
     #   })
     #
     # @example Response structure
@@ -1475,6 +1481,10 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
     #   resp.fleet.compute_capacity_status.available #=> Integer
+    #   resp.fleet.compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -1498,6 +1508,7 @@ module Aws::AppStream
     #   resp.fleet.usb_device_filter_strings[0] #=> String
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
+    #   resp.fleet.max_sessions_per_instance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -2965,6 +2976,10 @@ module Aws::AppStream
     #   resp.fleets[0].compute_capacity_status.running #=> Integer
     #   resp.fleets[0].compute_capacity_status.in_use #=> Integer
     #   resp.fleets[0].compute_capacity_status.available #=> Integer
+    #   resp.fleets[0].compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleets[0].max_user_duration_in_seconds #=> Integer
     #   resp.fleets[0].disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -2988,6 +3003,7 @@ module Aws::AppStream
     #   resp.fleets[0].usb_device_filter_strings[0] #=> String
     #   resp.fleets[0].session_script_s3_location.s3_bucket #=> String
     #   resp.fleets[0].session_script_s3_location.s3_key #=> String
+    #   resp.fleets[0].max_sessions_per_instance #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -3249,6 +3265,9 @@ module Aws::AppStream
     #   using a streaming URL or `SAML` for a SAML federated user. The default
     #   is to authenticate users using a streaming URL.
     #
+    # @option params [String] :instance_id
+    #   The identifier for the instance hosting the session.
+    #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSessionsResult#sessions #sessions} => Array&lt;Types::Session&gt;
@@ -3257,12 +3276,13 @@ module Aws::AppStream
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_sessions({
-    #     stack_name: "String", # required
-    #     fleet_name: "String", # required
+    #     stack_name: "Name", # required
+    #     fleet_name: "Name", # required
     #     user_id: "UserId",
     #     next_token: "String",
     #     limit: 1,
     #     authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
+    #     instance_id: "String",
     #   })
     #
     # @example Response structure
@@ -3279,6 +3299,7 @@ module Aws::AppStream
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
+    #   resp.sessions[0].instance_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -4791,6 +4812,10 @@ module Aws::AppStream
     #   The S3 location of the session scripts configuration zip file. This
     #   only applies to Elastic fleets.
     #
+    # @option params [Integer] :max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only applies
+    #   to multi-session fleets.
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -4800,10 +4825,11 @@ module Aws::AppStream
     #   resp = client.update_fleet({
     #     image_name: "String",
     #     image_arn: "Arn",
-    #     name: "String",
+    #     name: "Name",
     #     instance_type: "String",
     #     compute_capacity: {
-    #       desired_instances: 1, # required
+    #       desired_instances: 1,
+    #       desired_sessions: 1,
     #     },
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -4820,7 +4846,7 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
     #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
@@ -4830,6 +4856,7 @@ module Aws::AppStream
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key",
     #     },
+    #     max_sessions_per_instance: 1,
     #   })
     #
     # @example Response structure
@@ -4846,6 +4873,10 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
     #   resp.fleet.compute_capacity_status.available #=> Integer
+    #   resp.fleet.compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -4869,6 +4900,7 @@ module Aws::AppStream
     #   resp.fleet.usb_device_filter_strings[0] #=> String
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
+    #   resp.fleet.max_sessions_per_instance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -5061,7 +5093,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

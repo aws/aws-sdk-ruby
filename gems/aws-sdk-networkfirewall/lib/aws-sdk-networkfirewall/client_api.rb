@@ -32,6 +32,7 @@ module Aws::NetworkFirewall
     CIDRSummary = Shapes::StructureShape.new(name: 'CIDRSummary')
     CapacityUsageSummary = Shapes::StructureShape.new(name: 'CapacityUsageSummary')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
+    CheckCertificateRevocationStatusActions = Shapes::StructureShape.new(name: 'CheckCertificateRevocationStatusActions')
     CollectionMember_String = Shapes::StringShape.new(name: 'CollectionMember_String')
     ConfigurationSyncState = Shapes::StringShape.new(name: 'ConfigurationSyncState')
     CreateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'CreateFirewallPolicyRequest')
@@ -159,6 +160,7 @@ module Aws::NetworkFirewall
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwnerCheckException = Shapes::StructureShape.new(name: 'ResourceOwnerCheckException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
+    RevocationCheckAction = Shapes::StringShape.new(name: 'RevocationCheckAction')
     RuleCapacity = Shapes::IntegerShape.new(name: 'RuleCapacity')
     RuleDefinition = Shapes::StructureShape.new(name: 'RuleDefinition')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
@@ -305,6 +307,10 @@ module Aws::NetworkFirewall
     CapacityUsageSummary.struct_class = Types::CapacityUsageSummary
 
     Certificates.member = Shapes::ShapeRef.new(shape: TlsCertificateData)
+
+    CheckCertificateRevocationStatusActions.add_member(:revoked_status_action, Shapes::ShapeRef.new(shape: RevocationCheckAction, location_name: "RevokedStatusAction"))
+    CheckCertificateRevocationStatusActions.add_member(:unknown_status_action, Shapes::ShapeRef.new(shape: RevocationCheckAction, location_name: "UnknownStatusAction"))
+    CheckCertificateRevocationStatusActions.struct_class = Types::CheckCertificateRevocationStatusActions
 
     CreateFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "FirewallPolicyName"))
     CreateFirewallPolicyRequest.add_member(:firewall_policy, Shapes::ShapeRef.new(shape: FirewallPolicy, required: true, location_name: "FirewallPolicy"))
@@ -761,6 +767,8 @@ module Aws::NetworkFirewall
 
     ServerCertificateConfiguration.add_member(:server_certificates, Shapes::ShapeRef.new(shape: ServerCertificates, location_name: "ServerCertificates"))
     ServerCertificateConfiguration.add_member(:scopes, Shapes::ShapeRef.new(shape: ServerCertificateScopes, location_name: "Scopes"))
+    ServerCertificateConfiguration.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "CertificateAuthorityArn"))
+    ServerCertificateConfiguration.add_member(:check_certificate_revocation_status, Shapes::ShapeRef.new(shape: CheckCertificateRevocationStatusActions, location_name: "CheckCertificateRevocationStatus"))
     ServerCertificateConfiguration.struct_class = Types::ServerCertificateConfiguration
 
     ServerCertificateConfigurations.member = Shapes::ShapeRef.new(shape: ServerCertificateConfiguration)
@@ -865,6 +873,7 @@ module Aws::NetworkFirewall
     TLSInspectionConfigurationResponse.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     TLSInspectionConfigurationResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     TLSInspectionConfigurationResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "Certificates"))
+    TLSInspectionConfigurationResponse.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: TlsCertificateData, location_name: "CertificateAuthority"))
     TLSInspectionConfigurationResponse.struct_class = Types::TLSInspectionConfigurationResponse
 
     TLSInspectionConfigurations.member = Shapes::ShapeRef.new(shape: TLSInspectionConfigurationMetadata)

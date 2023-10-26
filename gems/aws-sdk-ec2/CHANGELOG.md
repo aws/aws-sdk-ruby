@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.416.0 (2023-10-26)
+------------------
+
+* Feature - Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC.
+
 1.415.0 (2023-10-24)
 ------------------
 

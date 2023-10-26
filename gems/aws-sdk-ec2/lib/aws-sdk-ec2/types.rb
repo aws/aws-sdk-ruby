@@ -34153,6 +34153,79 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_id
+    #   The VPC ID where the security group can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters. If using multiple filters, the results include security
+    #   groups which match all filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `description`: The security group's description.
+    #
+    #   * `group-name`: The security group name.
+    #
+    #   * `owner-id`: The security group owner ID.
+    #
+    #   * `primary-vpc-id`: The VPC ID in which the security group was
+    #     created.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcRequest AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcRequest < Struct.new(
+      :vpc_id,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_for_vpcs
+    #   The security group that can be used by interfaces in the VPC.
+    #   @return [Array<Types::SecurityGroupForVpc>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcResult AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcResult < Struct.new(
+      :next_token,
+      :security_group_for_vpcs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -57436,6 +57509,45 @@ module Aws::EC2
       :ip_permissions_egress,
       :tags,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group that can be used by interfaces in the VPC.
+    #
+    # @!attribute [rw] description
+    #   The security group's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The security group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The security group owner ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The security group tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] primary_vpc_id
+    #   The VPC ID in which the security group was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupForVpc AWS API Documentation
+    #
+    class SecurityGroupForVpc < Struct.new(
+      :description,
+      :group_name,
+      :owner_id,
+      :group_id,
+      :tags,
+      :primary_vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end

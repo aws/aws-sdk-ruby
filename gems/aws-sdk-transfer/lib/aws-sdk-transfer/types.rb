@@ -4859,8 +4859,8 @@ module Aws::Transfer
     # @!attribute [rw] user_secret_id
     #   The identifier for the secret (in Amazon Web Services Secrets
     #   Manager) that contains the SFTP user's private key, password, or
-    #   both. The identifier can be either the Amazon Resource Name (ARN) or
-    #   the name of the secret.
+    #   both. The identifier must be the Amazon Resource Name (ARN) of the
+    #   secret.
     #   @return [String]
     #
     # @!attribute [rw] trusted_host_keys

@@ -1156,7 +1156,7 @@ module Aws::Transfer
     #       sftp_authentication_methods: "PASSWORD", # accepts PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD, PUBLIC_KEY_AND_PASSWORD
     #     },
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
-    #     logging_role: "Role",
+    #     logging_role: "NullableRole",
     #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
     #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
@@ -4630,7 +4630,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

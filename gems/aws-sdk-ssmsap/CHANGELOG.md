@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-10-26)
+------------------
+
+* Feature - AWS Systems Manager for SAP added support for registration and discovery of SAP ABAP applications
+
 1.11.0 (2023-09-27)
 ------------------
 

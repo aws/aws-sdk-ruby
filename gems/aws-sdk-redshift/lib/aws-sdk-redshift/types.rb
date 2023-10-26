@@ -1724,6 +1724,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # There is a conflict while updating the resource policy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ConflictPolicyUpdateFault AWS API Documentation
+    #
+    class ConflictPolicyUpdateFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] source_snapshot_identifier
     #   The identifier for the source snapshot.
     #
@@ -3521,6 +3527,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteResourcePolicyMessage AWS API Documentation
+    #
+    class DeleteResourcePolicyMessage < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action to delete.
     #   @return [String]
@@ -4855,6 +4874,48 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the inbound integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the target of an inbound
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeInboundIntegrations request exceed the value specified in
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeInboundIntegrationsMessage AWS API Documentation
+    #
+    class DescribeInboundIntegrationsMessage < Struct.new(
+      :integration_arn,
+      :target_arn,
+      :max_records,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6579,6 +6640,31 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetResourcePolicyMessage AWS API Documentation
+    #
+    class GetResourcePolicyMessage < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   The content of the resource policy.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetResourcePolicyResult AWS API Documentation
+    #
+    class GetResourcePolicyResult < Struct.new(
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns information about an HSM client certificate. The certificate
     # is stored in a secure Hardware Storage Module (HSM), and used by the
     # Amazon Redshift cluster to encrypt data files.
@@ -6805,6 +6891,70 @@ module Aws::Redshift
     #
     class InProgressTableRestoreQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The content of an inbound integration.
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of an inbound integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the source of an inbound
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the target of an inbound
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an inbound integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The outstanding errors of an inbound integration. Each item is an
+    #   "IntegrationError". This is null if there is no error.
+    #   @return [Array<Types::IntegrationError>]
+    #
+    # @!attribute [rw] create_time
+    #   The creation time of an inbound integration.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InboundIntegration AWS API Documentation
+    #
+    class InboundIntegration < Struct.new(
+      :integration_arn,
+      :source_arn,
+      :target_arn,
+      :status,
+      :errors,
+      :create_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `Marker` parameter and retrying
+    #   the command. If the `Marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_integrations
+    #   A list of InboundIntegration instances.
+    #   @return [Array<Types::InboundIntegration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InboundIntegrationsMessage AWS API Documentation
+    #
+    class InboundIntegrationsMessage < Struct.new(
+      :marker,
+      :inbound_integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified options are incompatible.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IncompatibleOrderableOptions AWS API Documentation
@@ -6824,6 +6974,31 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InsufficientS3BucketPolicyFault AWS API Documentation
     #
     class InsufficientS3BucketPolicyFault < Aws::EmptyStructure; end
+
+    # The error of an inbound integration.
+    #
+    # @!attribute [rw] error_code
+    #   The error code of an inbound integration error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message of an inbound integration error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationError AWS API Documentation
+    #
+    class IntegrationError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The integration can't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationNotFoundFault AWS API Documentation
+    #
+    class IntegrationNotFoundFault < Aws::EmptyStructure; end
 
     # The authentication profile request is not valid. The profile name
     # can't be null or empty. The authentication profile API operation must
@@ -6928,6 +7103,12 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidNamespaceFault AWS API Documentation
     #
     class InvalidNamespaceFault < Aws::EmptyStructure; end
+
+    # The resource policy isn't valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidPolicyFault AWS API Documentation
+    #
+    class InvalidPolicyFault < Aws::EmptyStructure; end
 
     # Indicates that the Reserved Node being exchanged is not in an active
     # state.
@@ -8598,6 +8779,36 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The content of the resource policy being updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PutResourcePolicyMessage AWS API Documentation
+    #
+    class PutResourcePolicyMessage < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   The content of the updated resource policy.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PutResourcePolicyResult AWS API Documentation
+    #
+    class PutResourcePolicyResult < Struct.new(
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier.
     #   @return [String]
@@ -9220,6 +9431,25 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResourceNotFoundFault AWS API Documentation
     #
     class ResourceNotFoundFault < Aws::EmptyStructure; end
+
+    # The policy that is attached to a resource.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resources that a policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The content of a resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResourcePolicy AWS API Documentation
+    #
+    class ResourcePolicy < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster that will be created from restoring

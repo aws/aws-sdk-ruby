@@ -13,6 +13,7 @@ module Aws::SsmSap
 
     include Seahorse::Model
 
+    AllocationType = Shapes::StringShape.new(name: 'AllocationType')
     AppRegistryArn = Shapes::StringShape.new(name: 'AppRegistryArn')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationCredential = Shapes::StructureShape.new(name: 'ApplicationCredential')
@@ -39,6 +40,8 @@ module Aws::SsmSap
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CredentialType = Shapes::StringShape.new(name: 'CredentialType')
     Database = Shapes::StructureShape.new(name: 'Database')
+    DatabaseConnection = Shapes::StructureShape.new(name: 'DatabaseConnection')
+    DatabaseConnectionMethod = Shapes::StringShape.new(name: 'DatabaseConnectionMethod')
     DatabaseId = Shapes::StringShape.new(name: 'DatabaseId')
     DatabaseIdList = Shapes::ListShape.new(name: 'DatabaseIdList')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
@@ -72,6 +75,8 @@ module Aws::SsmSap
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
+    IpAddressMember = Shapes::StructureShape.new(name: 'IpAddressMember')
     ListApplicationsInput = Shapes::StructureShape.new(name: 'ListApplicationsInput')
     ListApplicationsOutput = Shapes::StructureShape.new(name: 'ListApplicationsOutput')
     ListComponentsInput = Shapes::StructureShape.new(name: 'ListComponentsInput')
@@ -116,6 +121,7 @@ module Aws::SsmSap
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationSettingsInput = Shapes::StructureShape.new(name: 'UpdateApplicationSettingsInput')
@@ -141,6 +147,7 @@ module Aws::SsmSap
     ApplicationCredentialList.member = Shapes::ShapeRef.new(shape: ApplicationCredential)
 
     ApplicationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "Id"))
+    ApplicationSummary.add_member(:discovery_status, Shapes::ShapeRef.new(shape: ApplicationDiscoveryStatus, location_name: "DiscoveryStatus"))
     ApplicationSummary.add_member(:type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "Type"))
     ApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "Arn"))
     ApplicationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -150,6 +157,7 @@ module Aws::SsmSap
 
     AssociatedHost.add_member(:hostname, Shapes::ShapeRef.new(shape: String, location_name: "Hostname"))
     AssociatedHost.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "Ec2InstanceId"))
+    AssociatedHost.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, location_name: "IpAddresses"))
     AssociatedHost.add_member(:os_version, Shapes::ShapeRef.new(shape: String, location_name: "OsVersion"))
     AssociatedHost.struct_class = Types::AssociatedHost
 
@@ -158,12 +166,15 @@ module Aws::SsmSap
     BackintConfig.struct_class = Types::BackintConfig
 
     Component.add_member(:component_id, Shapes::ShapeRef.new(shape: ComponentId, location_name: "ComponentId"))
+    Component.add_member(:sid, Shapes::ShapeRef.new(shape: SID, location_name: "Sid"))
+    Component.add_member(:system_number, Shapes::ShapeRef.new(shape: SAPInstanceNumber, location_name: "SystemNumber"))
     Component.add_member(:parent_component, Shapes::ShapeRef.new(shape: ComponentId, location_name: "ParentComponent"))
     Component.add_member(:child_components, Shapes::ShapeRef.new(shape: ComponentIdList, location_name: "ChildComponents"))
     Component.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     Component.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "ComponentType"))
     Component.add_member(:status, Shapes::ShapeRef.new(shape: ComponentStatus, location_name: "Status"))
     Component.add_member(:sap_hostname, Shapes::ShapeRef.new(shape: String, location_name: "SapHostname"))
+    Component.add_member(:sap_feature, Shapes::ShapeRef.new(shape: String, location_name: "SapFeature"))
     Component.add_member(:sap_kernel_version, Shapes::ShapeRef.new(shape: String, location_name: "SapKernelVersion"))
     Component.add_member(:hdb_version, Shapes::ShapeRef.new(shape: String, location_name: "HdbVersion"))
     Component.add_member(:resilience, Shapes::ShapeRef.new(shape: Resilience, location_name: "Resilience"))
@@ -171,6 +182,7 @@ module Aws::SsmSap
     Component.add_member(:databases, Shapes::ShapeRef.new(shape: DatabaseIdList, location_name: "Databases"))
     Component.add_member(:hosts, Shapes::ShapeRef.new(shape: HostList, deprecated: true, location_name: "Hosts", metadata: {"deprecatedMessage"=>"This shape is no longer used. Please use AssociatedHost."}))
     Component.add_member(:primary_host, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PrimaryHost", metadata: {"deprecatedMessage"=>"This shape is no longer used. Please use AssociatedHost."}))
+    Component.add_member(:database_connection, Shapes::ShapeRef.new(shape: DatabaseConnection, location_name: "DatabaseConnection"))
     Component.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
     Component.add_member(:arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "Arn"))
     Component.struct_class = Types::Component
@@ -201,6 +213,11 @@ module Aws::SsmSap
     Database.add_member(:sql_port, Shapes::ShapeRef.new(shape: Integer, location_name: "SQLPort"))
     Database.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
     Database.struct_class = Types::Database
+
+    DatabaseConnection.add_member(:database_connection_method, Shapes::ShapeRef.new(shape: DatabaseConnectionMethod, location_name: "DatabaseConnectionMethod"))
+    DatabaseConnection.add_member(:database_arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "DatabaseArn"))
+    DatabaseConnection.add_member(:connection_ip, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionIp"))
+    DatabaseConnection.struct_class = Types::DatabaseConnection
 
     DatabaseIdList.member = Shapes::ShapeRef.new(shape: DatabaseId)
 
@@ -289,8 +306,16 @@ module Aws::SsmSap
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    IpAddressList.member = Shapes::ShapeRef.new(shape: IpAddressMember)
+
+    IpAddressMember.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
+    IpAddressMember.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "Primary"))
+    IpAddressMember.add_member(:allocation_type, Shapes::ShapeRef.new(shape: AllocationType, location_name: "AllocationType"))
+    IpAddressMember.struct_class = Types::IpAddressMember
+
     ListApplicationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListApplicationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListApplicationsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListApplicationsInput.struct_class = Types::ListApplicationsInput
 
     ListApplicationsOutput.add_member(:applications, Shapes::ShapeRef.new(shape: ApplicationSummaryList, location_name: "Applications"))
@@ -366,7 +391,8 @@ module Aws::SsmSap
     RegisterApplicationInput.add_member(:sap_instance_number, Shapes::ShapeRef.new(shape: SAPInstanceNumber, location_name: "SapInstanceNumber"))
     RegisterApplicationInput.add_member(:sid, Shapes::ShapeRef.new(shape: SID, location_name: "Sid"))
     RegisterApplicationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    RegisterApplicationInput.add_member(:credentials, Shapes::ShapeRef.new(shape: ApplicationCredentialList, required: true, location_name: "Credentials"))
+    RegisterApplicationInput.add_member(:credentials, Shapes::ShapeRef.new(shape: ApplicationCredentialList, location_name: "Credentials"))
+    RegisterApplicationInput.add_member(:database_arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "DatabaseArn"))
     RegisterApplicationInput.struct_class = Types::RegisterApplicationInput
 
     RegisterApplicationOutput.add_member(:application, Shapes::ShapeRef.new(shape: Application, location_name: "Application"))
@@ -377,6 +403,7 @@ module Aws::SsmSap
     Resilience.add_member(:hsr_replication_mode, Shapes::ShapeRef.new(shape: ReplicationMode, location_name: "HsrReplicationMode"))
     Resilience.add_member(:hsr_operation_mode, Shapes::ShapeRef.new(shape: OperationMode, location_name: "HsrOperationMode"))
     Resilience.add_member(:cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "ClusterStatus"))
+    Resilience.add_member(:enqueue_replication, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnqueueReplication"))
     Resilience.struct_class = Types::Resilience
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -399,6 +426,9 @@ module Aws::SsmSap
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SsmSapArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -409,6 +439,7 @@ module Aws::SsmSap
     UpdateApplicationSettingsInput.add_member(:credentials_to_add_or_update, Shapes::ShapeRef.new(shape: ApplicationCredentialList, location_name: "CredentialsToAddOrUpdate"))
     UpdateApplicationSettingsInput.add_member(:credentials_to_remove, Shapes::ShapeRef.new(shape: ApplicationCredentialList, location_name: "CredentialsToRemove"))
     UpdateApplicationSettingsInput.add_member(:backint, Shapes::ShapeRef.new(shape: BackintConfig, location_name: "Backint"))
+    UpdateApplicationSettingsInput.add_member(:database_arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "DatabaseArn"))
     UpdateApplicationSettingsInput.struct_class = Types::UpdateApplicationSettingsInput
 
     UpdateApplicationSettingsOutput.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -454,6 +485,7 @@ module Aws::SsmSap
         o.http_request_uri = "/deregister-application"
         o.input = Shapes::ShapeRef.new(shape: DeregisterApplicationInput)
         o.output = Shapes::ShapeRef.new(shape: DeregisterApplicationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -474,6 +506,7 @@ module Aws::SsmSap
         o.http_request_uri = "/get-component"
         o.input = Shapes::ShapeRef.new(shape: GetComponentInput)
         o.output = Shapes::ShapeRef.new(shape: GetComponentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -532,6 +565,7 @@ module Aws::SsmSap
         o.http_request_uri = "/list-components"
         o.input = Shapes::ShapeRef.new(shape: ListComponentsInput)
         o.output = Shapes::ShapeRef.new(shape: ListComponentsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -604,6 +638,7 @@ module Aws::SsmSap
         o.http_request_uri = "/register-application"
         o.input = Shapes::ShapeRef.new(shape: RegisterApplicationInput)
         o.output = Shapes::ShapeRef.new(shape: RegisterApplicationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -615,6 +650,7 @@ module Aws::SsmSap
         o.http_request_uri = "/start-application-refresh"
         o.input = Shapes::ShapeRef.new(shape: StartApplicationRefreshInput)
         o.output = Shapes::ShapeRef.new(shape: StartApplicationRefreshOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -649,6 +685,7 @@ module Aws::SsmSap
         o.http_request_uri = "/update-application-settings"
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateApplicationSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

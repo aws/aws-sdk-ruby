@@ -946,6 +946,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetPasswordData.build(context)
           when :get_reserved_instances_exchange_quote
             Aws::EC2::Endpoints::GetReservedInstancesExchangeQuote.build(context)
+          when :get_security_groups_for_vpc
+            Aws::EC2::Endpoints::GetSecurityGroupsForVpc.build(context)
           when :get_serial_console_access_status
             Aws::EC2::Endpoints::GetSerialConsoleAccessStatus.build(context)
           when :get_spot_placement_scores

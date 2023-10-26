@@ -42131,6 +42131,91 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Gets security groups that can be associated by the Amazon Web Services
+    # account making the request with network interfaces in the specified
+    # VPC.
+    #
+    # @option params [required, String] :vpc_id
+    #   The VPC ID where the security group can be used.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters. If using multiple filters, the results include security
+    #   groups which match all filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `description`: The security group's description.
+    #
+    #   * `group-name`: The security group name.
+    #
+    #   * `owner-id`: The security group owner ID.
+    #
+    #   * `primary-vpc-id`: The VPC ID in which the security group was
+    #     created.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetSecurityGroupsForVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityGroupsForVpcResult#next_token #next_token} => String
+    #   * {Types::GetSecurityGroupsForVpcResult#security_group_for_vpcs #security_group_for_vpcs} => Array&lt;Types::SecurityGroupForVpc&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_groups_for_vpc({
+    #     vpc_id: "VpcId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.security_group_for_vpcs #=> Array
+    #   resp.security_group_for_vpcs[0].description #=> String
+    #   resp.security_group_for_vpcs[0].group_name #=> String
+    #   resp.security_group_for_vpcs[0].owner_id #=> String
+    #   resp.security_group_for_vpcs[0].group_id #=> String
+    #   resp.security_group_for_vpcs[0].tags #=> Array
+    #   resp.security_group_for_vpcs[0].tags[0].key #=> String
+    #   resp.security_group_for_vpcs[0].tags[0].value #=> String
+    #   resp.security_group_for_vpcs[0].primary_vpc_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpc AWS API Documentation
+    #
+    # @overload get_security_groups_for_vpc(params = {})
+    # @param [Hash] params ({})
+    def get_security_groups_for_vpc(params = {}, options = {})
+      req = build_request(:get_security_groups_for_vpc, params)
+      req.send_request(options)
+    end
+
     # Retrieves the access status of your account to the EC2 serial console
     # of all instances. By default, access to the EC2 serial console is
     # disabled for your account. For more information, see [Manage account
@@ -57184,7 +57269,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.415.0'
+      context[:gem_version] = '1.416.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
