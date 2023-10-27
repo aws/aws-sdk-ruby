@@ -4,8 +4,16 @@ module Aws
   module Rest
     module Request
       class QuerystringBuilder
-
         include Seahorse::Model::Shapes
+
+        SUPPORTED_TYPES = [
+          StringShape,
+          BooleanShape,
+          FloatShape,
+          IntegerShape,
+          StringShape,
+          TimestampShape
+        ].freeze
 
         # Provide shape references and param values:
         #
@@ -33,29 +41,12 @@ module Aws
         def build_part(shape_ref, param_value)
           case shape_ref.shape
           # supported scalar types
-          when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
-            param_name = shape_ref.location_name
-            "#{param_name}=#{escape(param_value.to_s)}"
-          when TimestampShape
-            param_name = shape_ref.location_name
-            "#{param_name}=#{escape(timestamp(shape_ref, param_value))}"
+          when *SUPPORTED_TYPES
+            generate_query(shape_ref, param_value)
           when MapShape
-            if StringShape === shape_ref.shape.value.shape
-              query_map_of_string(param_value)
-            elsif ListShape === shape_ref.shape.value.shape
-              query_map_of_string_list(param_value)
-            else
-              msg = "only map of string and string list supported"
-              raise NotImplementedError, msg
-            end
+            generate_query_map(shape_ref, param_value)
           when ListShape
-            if StringShape === shape_ref.shape.member.shape
-              list_of_strings(shape_ref.location_name, param_value)
-            else
-              msg = "Only list of strings supported, got "\
-                    "#{shape_ref.shape.member.shape.class.name}"
-              raise NotImplementedError, msg
-            end
+            generate_query_list(shape_ref, param_value)
           else
             raise NotImplementedError
           end
@@ -68,6 +59,53 @@ module Aws
           else
             # querystring defaults to iso8601
             value.utc.iso8601
+          end
+        end
+
+        def generate_query(ref, value)
+          case ref.shape
+          when TimestampShape
+            value = timestamp(ref, value)
+          when *SUPPORTED_TYPES
+            value = value.to_s
+          else
+            raise NotImplementedError
+          end
+          "#{ref.location_name}=#{escape(value)}"
+        end
+
+        def generate_query_list(ref, values)
+          case ref.shape.member.shape
+          when TimestampShape
+            list_of_timestamps(ref, values)
+          when *SUPPORTED_TYPES
+            list_of_types(ref, values)
+          else
+            raise NotImplementedError
+          end
+        end
+
+        def generate_query_map(ref, value)
+          case ref.shape.value.shape
+          when StringShape
+            query_map_of_string(value)
+          when ListShape
+            query_map_of_string_list(value)
+          else
+            msg = 'Only map of string and string list supported'
+            raise NotImplementedError, msg
+          end
+        end
+
+        def list_of_types(ref, values)
+          values.map do |value|
+            "#{ref.location_name}=#{escape(value.to_s)}"
+          end
+        end
+
+        def list_of_timestamps(ref, values)
+          values.map do |value|
+            "#{ref.location_name}=#{escape(timestamp(ref, value))}"
           end
         end
 
@@ -89,16 +127,9 @@ module Aws
           list
         end
 
-        def list_of_strings(name, values)
-          values.map do |value|
-            "#{name}=#{escape(value)}"
-          end
-        end
-
         def escape(string)
           Seahorse::Util.uri_escape(string)
         end
-
       end
     end
   end
