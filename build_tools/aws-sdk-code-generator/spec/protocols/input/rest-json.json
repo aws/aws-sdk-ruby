@@ -218,6 +218,95 @@
     ]
   },
   {
+    "description": "Querystring of most supported types",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "StringQuery": {
+            "shape": "StringType",
+            "location": "querystring",
+            "locationName": "str"
+          },
+          "ByteQuery": {
+            "shape": "ByteType",
+            "location": "querystring",
+            "locationName": "byt"
+          },
+          "IntegerQuery": {
+            "shape": "IntegerType",
+            "location": "querystring",
+            "locationName": "int"
+          },
+          "LongQuery": {
+            "shape": "LongType",
+            "location": "querystring",
+            "locationName": "lon"
+          },
+          "FloatQuery": {
+            "shape": "FloatType",
+            "location": "querystring",
+            "locationName": "flo"
+          },
+          "DoubleQuery": {
+            "shape": "DoubleType",
+            "location": "querystring",
+            "locationName": "dou"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "ByteType": {
+        "type": "byte"
+      },
+      "IntegerType": {
+        "type": "integer"
+      },
+      "LongType": {
+        "type": "long"
+      },
+      "FloatType": {
+        "type": "float"
+      },
+      "DoubleType": {
+        "type": "double"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "StringQuery": "a",
+          "ByteQuery": 1,
+          "IntegerQuery": 2,
+          "LongQuery": 3,
+          "FloatQuery": 1.0,
+          "DoubleQuery": 1.1
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?str=a&byt=1&int=2&lon=3&flo=1.0&dou=1.1",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
     "description": "Querystring list of strings",
     "metadata": {
       "protocol": "rest-json",
@@ -262,6 +351,306 @@
         "serialized": {
           "body": "",
           "uri": "/path?item=value1&item=value2",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of integers",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "IntegerList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "IntegerList": {
+        "type": "list",
+        "member": {
+          "shape": "Integer"
+        }
+      },
+      "Integer": {
+        "type": "integer"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [1, 2]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1&item=2",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of doubles",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "DoubleList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "DoubleList": {
+        "type": "list",
+        "member": {
+          "shape": "Double"
+        }
+      },
+      "Double": {
+        "type": "double"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [1.1, 2.2]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1.1&item=2.2",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of booleans",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "BooleanList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "BooleanList": {
+        "type": "list",
+        "member": {
+          "shape": "Boolean"
+        }
+      },
+      "Boolean": {
+        "type": "boolean"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [true, false]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=true&item=false",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of timestamps",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "TimestampList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "TimestampList": {
+        "type": "list",
+        "member": {
+          "shape": "Timestamp"
+        }
+      },
+      "Timestamp": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": ["1970-01-01T00:00:01Z", "1970-01-01T00:00:02Z"]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1970-01-01T00%3A00%3A01Z&item=1970-01-01T00%3A00%3A02Z",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of longs",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "LongList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "LongList": {
+        "type": "list",
+        "member": {
+          "shape": "Long"
+        }
+      },
+      "Long": {
+        "type": "long"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [1, 2]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1&item=2",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of floats",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "FloatList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "FloatList": {
+        "type": "list",
+        "member": {
+          "shape": "Float"
+        }
+      },
+      "Float": {
+        "type": "float"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [1.1, 2.2]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1.1&item=2.2",
           "headers": {}
         }
       }
