@@ -106,9 +106,10 @@ def format_data(ref, src)
       params[key] = format_data(ref.shape.value, value)
     end
   when Seahorse::Model::Shapes::TimestampShape
-    if src.is_a?(String)
+    case src
+    when String
       Time.parse(src)
-    elsif src.is_a?(Integer)
+    else
       Time.at(src)
     end
   else src
