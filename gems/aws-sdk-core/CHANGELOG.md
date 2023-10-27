@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix QuerystringBuilder to handle different types.
+
 3.185.1 (2023-10-05)
 ------------------
 
