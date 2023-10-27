@@ -111,6 +111,7 @@ module Aws::Redshift
   # * {InvalidTagFault}
   # * {InvalidUsageLimitFault}
   # * {InvalidVPCNetworkStateFault}
+  # * {Ipv6CidrBlockNotFoundFault}
   # * {LimitExceededFault}
   # * {NumberOfNodesPerClusterLimitExceededFault}
   # * {NumberOfNodesQuotaExceededFault}
@@ -1000,6 +1001,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::InvalidVPCNetworkStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class Ipv6CidrBlockNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::Ipv6CidrBlockNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

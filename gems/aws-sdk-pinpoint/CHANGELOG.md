@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-10-27)
+------------------
+
+* Feature - Updated documentation to describe the case insensitivity for EndpointIds.
+
 1.81.0 (2023-09-27)
 ------------------
 

@@ -898,6 +898,11 @@ module Aws::Redshift
     #   store the cluster's admin credentials secret.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the cluster. Possible values are `ipv4` and
+    #   `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -957,7 +962,8 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :custom_domain_certificate_expiry_date,
       :master_password_secret_arn,
-      :master_password_secret_kms_key_id)
+      :master_password_secret_kms_key_id,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1573,6 +1579,11 @@ module Aws::Redshift
     #   The list of tags for the cluster subnet group.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] supported_cluster_ip_address_types
+    #   The IP address types supported by this cluster subnet group.
+    #   Possible values are `ipv4` and `dualstack`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroup AWS API Documentation
     #
     class ClusterSubnetGroup < Struct.new(
@@ -1581,7 +1592,8 @@ module Aws::Redshift
       :vpc_id,
       :subnet_group_status,
       :subnets,
-      :tags)
+      :tags,
+      :supported_cluster_ip_address_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2251,6 +2263,11 @@ module Aws::Redshift
     #   parameter if `ManageMasterPassword` is true.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that the cluster supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2289,7 +2306,8 @@ module Aws::Redshift
       :default_iam_role_arn,
       :load_sample_data,
       :manage_master_password,
-      :master_password_secret_kms_key_id)
+      :master_password_secret_kms_key_id,
+      :ip_address_type)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -7210,6 +7228,14 @@ module Aws::Redshift
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
 
+    # There are no subnets in your VPC with associated IPv6 CIDR blocks. To
+    # use dual-stack mode, associate an IPv6 CIDR block with each subnet in
+    # your VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Ipv6CidrBlockNotFoundFault AWS API Documentation
+    #
+    class Ipv6CidrBlockNotFoundFault < Aws::EmptyStructure; end
+
     # The encryption key has exceeded its grant limit in Amazon Web Services
     # KMS.
     #
@@ -7804,6 +7830,11 @@ module Aws::Redshift
     #   parameter if `ManageMasterPassword` is true.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that the cluster supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -7833,7 +7864,8 @@ module Aws::Redshift
       :availability_zone,
       :port,
       :manage_master_password,
-      :master_password_secret_kms_key_id)
+      :master_password_secret_kms_key_id,
+      :ip_address_type)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -8309,13 +8341,18 @@ module Aws::Redshift
     #   The Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address of the network interface within the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
       :network_interface_id,
       :subnet_id,
       :private_ip_address,
-      :availability_zone)
+      :availability_zone,
+      :ipv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9760,6 +9797,11 @@ module Aws::Redshift
     #   parameter if `ManageMasterPassword` is true.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the cluster. Possible values are `ipv4` and
+    #   `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -9797,7 +9839,8 @@ module Aws::Redshift
       :target_reserved_node_offering_id,
       :encrypted,
       :manage_master_password,
-      :master_password_secret_kms_key_id)
+      :master_password_secret_kms_key_id,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-10-27)
+------------------
+
+* Feature - Update TdeCredentialPassword type to SensitiveString
+
 1.57.0 (2023-09-27)
 ------------------
 

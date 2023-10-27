@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-10-27)
+------------------
+
+* Feature - added support to create a dual stack cluster
+
 1.100.0 (2023-10-26)
 ------------------
 

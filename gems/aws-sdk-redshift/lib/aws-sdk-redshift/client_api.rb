@@ -345,6 +345,7 @@ module Aws::Redshift
     InvalidTagFault = Shapes::StructureShape.new(name: 'InvalidTagFault')
     InvalidUsageLimitFault = Shapes::StructureShape.new(name: 'InvalidUsageLimitFault')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
+    Ipv6CidrBlockNotFoundFault = Shapes::StructureShape.new(name: 'Ipv6CidrBlockNotFoundFault')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
@@ -767,6 +768,7 @@ module Aws::Redshift
     Cluster.add_member(:custom_domain_certificate_expiry_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CustomDomainCertificateExpiryDate"))
     Cluster.add_member(:master_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretArn"))
     Cluster.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    Cluster.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -902,6 +904,7 @@ module Aws::Redshift
     ClusterSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     ClusterSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ClusterSubnetGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ClusterSubnetGroup.add_member(:supported_cluster_ip_address_types, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SupportedClusterIpAddressTypes"))
     ClusterSubnetGroup.struct_class = Types::ClusterSubnetGroup
 
     ClusterSubnetGroupAlreadyExistsFault.struct_class = Types::ClusterSubnetGroupAlreadyExistsFault
@@ -990,6 +993,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:load_sample_data, Shapes::ShapeRef.new(shape: String, location_name: "LoadSampleData"))
     CreateClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     CreateClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    CreateClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1864,6 +1868,8 @@ module Aws::Redshift
 
     InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
 
+    Ipv6CidrBlockNotFoundFault.struct_class = Types::Ipv6CidrBlockNotFoundFault
+
     LimitExceededFault.struct_class = Types::LimitExceededFault
 
     LogTypeList.member = Shapes::ShapeRef.new(shape: String)
@@ -1952,6 +1958,7 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     ModifyClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     ModifyClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    ModifyClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -2040,6 +2047,7 @@ module Aws::Redshift
     NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
     NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Address"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "NetworkInterface")
@@ -2320,6 +2328,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
     RestoreFromClusterSnapshotMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     RestoreFromClusterSnapshotMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    RestoreFromClusterSnapshotMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -2878,6 +2887,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 
       api.add_operation(:create_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4031,6 +4041,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 
       api.add_operation(:modify_cluster_db_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -4324,6 +4335,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-10-27)
+------------------
+
+* Feature - Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0
+
 1.76.0 (2023-09-27)
 ------------------
 

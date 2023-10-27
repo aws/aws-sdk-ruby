@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-10-27)
+------------------
+
+* Feature - Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.
+
 1.71.0 (2023-09-28)
 ------------------
 
