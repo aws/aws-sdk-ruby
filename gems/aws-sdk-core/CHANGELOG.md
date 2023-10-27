@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix QuerystringBuilder to handle different types.
+* Issue - Fix QuerystringBuilder to support querystring lists of different types per rest-json protocol.
 
 3.185.1 (2023-10-05)
 ------------------

@@ -218,7 +218,7 @@
     ]
   },
   {
-    "description": "Querystring of most supported types",
+    "description": "Querystring of supported scalar types",
     "metadata": {
       "protocol": "rest-json",
       "apiVersion": "2014-01-01"

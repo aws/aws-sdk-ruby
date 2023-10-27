@@ -7,7 +7,6 @@ module Aws
         include Seahorse::Model::Shapes
 
         SUPPORTED_TYPES = [
-          StringShape,
           BooleanShape,
           FloatShape,
           IntegerShape,
@@ -42,7 +41,7 @@ module Aws
           case shape_ref.shape
           # supported scalar types
           when *SUPPORTED_TYPES
-            generate_query(shape_ref, param_value)
+            "#{shape_ref.location_name}=#{query_value(shape_ref, param_value)}"
           when MapShape
             generate_query_map(shape_ref, param_value)
           when ListShape
@@ -62,26 +61,22 @@ module Aws
           end
         end
 
-        def generate_query(ref, value)
+        def query_value(ref, value)
           case ref.shape
           when TimestampShape
-            value = timestamp(ref, value)
+            escape(timestamp(ref, value))
           when *SUPPORTED_TYPES
-            value = value.to_s
+            escape(value.to_s)
           else
             raise NotImplementedError
           end
-          "#{ref.location_name}=#{escape(value)}"
         end
 
         def generate_query_list(ref, values)
-          case ref.shape.member.shape
-          when TimestampShape
-            list_of_timestamps(ref, values)
-          when *SUPPORTED_TYPES
-            list_of_types(ref, values)
-          else
-            raise NotImplementedError
+          member_ref = ref.shape.member
+          values.map do |value|
+            value = query_value(member_ref, value)
+            "#{ref.location_name}=#{value}"
           end
         end
 
@@ -94,18 +89,6 @@ module Aws
           else
             msg = 'Only map of string and string list supported'
             raise NotImplementedError, msg
-          end
-        end
-
-        def list_of_types(ref, values)
-          values.map do |value|
-            "#{ref.location_name}=#{escape(value.to_s)}"
-          end
-        end
-
-        def list_of_timestamps(ref, values)
-          values.map do |value|
-            "#{ref.location_name}=#{escape(timestamp(ref, value))}"
           end
         end
 
