@@ -959,9 +959,20 @@ module Aws::Connect
     # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     # [5]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :phone_number
     #   The phone number you want to claim. Phone numbers are formatted `[+]
@@ -999,7 +1010,8 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.claim_phone_number({
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     phone_number: "PhoneNumber", # required
     #     phone_number_description: "PhoneNumberDescription",
     #     tags: {
@@ -2130,7 +2142,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of third party applications that the security profile will give
+    #   A list of third-party applications that the security profile will give
     #   access to.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4215,6 +4227,7 @@ module Aws::Connect
     #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #   resp.claimed_phone_number_summary.phone_number_description #=> String
     #   resp.claimed_phone_number_summary.target_arn #=> String
+    #   resp.claimed_phone_number_summary.instance_id #=> String
     #   resp.claimed_phone_number_summary.tags #=> Hash
     #   resp.claimed_phone_number_summary.tags["TagKey"] #=> String
     #   resp.claimed_phone_number_summary.phone_number_status.status #=> String, one of "CLAIMED", "IN_PROGRESS", "FAILED"
@@ -7945,10 +7958,23 @@ module Aws::Connect
     #
     # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to. If `TargetArn`
-    #   input is not provided, this API lists numbers claimed to all the
-    #   Amazon Connect instances belonging to your account in the same Amazon
-    #   Web Services Region as the request.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. If both `TargetArn` and `InstanceId` input are not provided,
+    #   this API lists numbers claimed to all the Amazon Connect instances
+    #   belonging to your account in the same Amazon Web Services Region as
+    #   the request.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
+    #   not provided, this API lists numbers claimed to all the Amazon Connect
+    #   instances belonging to your account in the same AWS Region as the
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -7979,6 +8005,7 @@ module Aws::Connect
     #
     #   resp = client.list_phone_numbers_v2({
     #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
@@ -7996,6 +8023,7 @@ module Aws::Connect
     #   resp.list_phone_numbers_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #   resp.list_phone_numbers_summary_list[0].target_arn #=> String
+    #   resp.list_phone_numbers_summary_list[0].instance_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2 AWS API Documentation
     #
@@ -8478,19 +8506,24 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a list of third party applications in a specific security
+    # Returns a list of third-party applications in a specific security
     # profile.
     #
     # @option params [required, String] :security_profile_id
-    #   The security profile identifier.
+    #   The identifier for the security profle.
     #
     # @option params [required, String] :instance_id
-    #   The instance identifier.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. The next set of results can be
-    #   retrieved by using the token value returned in the previous response
-    #   when making the next request.
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -9370,8 +9403,10 @@ module Aws::Connect
     end
 
     # When a contact is being recorded, and the recording has been suspended
-    # using SuspendContactRecording, this API resumes recording the call or
-    # screen.
+    # using SuspendContactRecording, this API resumes recording whatever
+    # recording is selected in the flow configuration: call, screen, or
+    # both. If only call recording or only screen recording is enabled, then
+    # it would resume.
     #
     # Voice and screen recordings are supported.
     #
@@ -9415,9 +9450,20 @@ module Aws::Connect
     # both Amazon Web Services Regions associated with the traffic
     # distribution group.
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :phone_number_country_code
     #   The ISO country code.
@@ -9447,7 +9493,8 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_available_phone_numbers({
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
     #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
     #     phone_number_prefix: "PhoneNumberPrefix",
@@ -11281,10 +11328,12 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # When a contact is being recorded, this API suspends recording the call
-    # or screen. For example, you might suspend the call or screen recording
-    # while collecting sensitive information, such as a credit card number.
-    # Then use ResumeContactRecording to restart recording.
+    # When a contact is being recorded, this API suspends recording whatever
+    # is selected in the flow configuration: call, screen, or both. If only
+    # call recording or only screen recording is enabled, then it would be
+    # suspended. For example, you might suspend the screen recording while
+    # collecting sensitive information, such as a credit card number. Then
+    # use ResumeContactRecording to restart recording the screen.
     #
     # The period of time that the recording is suspended is filled with
     # silence in the final recording.
@@ -12380,9 +12429,20 @@ module Aws::Connect
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -12406,7 +12466,8 @@ module Aws::Connect
     #
     #   resp = client.update_phone_number({
     #     phone_number_id: "PhoneNumberId", # required
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     client_token: "ClientToken",
     #   })
     #
@@ -13172,7 +13233,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -13830,7 +13891,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

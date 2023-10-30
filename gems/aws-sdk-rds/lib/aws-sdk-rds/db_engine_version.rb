@@ -288,6 +288,13 @@ module Aws::RDS
       data[:supports_local_write_forwarding]
     end
 
+    # Indicates whether the DB engine version supports Aurora zero-ETL
+    # integrations with Amazon Redshift.
+    # @return [Boolean]
+    def supports_integrations
+      data[:supports_integrations]
+    end
+
     # @!endgroup
 
     # @return [Client]

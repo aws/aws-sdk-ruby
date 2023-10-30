@@ -114,6 +114,8 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::UntagResource.build(context)
           when :update_environment
             Aws::Finspace::Endpoints::UpdateEnvironment.build(context)
+          when :update_kx_cluster_code_configuration
+            Aws::Finspace::Endpoints::UpdateKxClusterCodeConfiguration.build(context)
           when :update_kx_cluster_databases
             Aws::Finspace::Endpoints::UpdateKxClusterDatabases.build(context)
           when :update_kx_database

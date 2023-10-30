@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.199.0 (2023-10-30)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+
 1.198.0 (2023-10-18)
 ------------------
 

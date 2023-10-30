@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-10-30)
+------------------
+
+* Feature - Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
+
 1.24.0 (2023-09-27)
 ------------------
 

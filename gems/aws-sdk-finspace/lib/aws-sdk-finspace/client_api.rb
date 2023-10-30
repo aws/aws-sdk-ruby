@@ -112,6 +112,8 @@ module Aws::Finspace
     KxChangesetListEntry = Shapes::StructureShape.new(name: 'KxChangesetListEntry')
     KxChangesets = Shapes::ListShape.new(name: 'KxChangesets')
     KxCluster = Shapes::StructureShape.new(name: 'KxCluster')
+    KxClusterCodeDeploymentConfiguration = Shapes::StructureShape.new(name: 'KxClusterCodeDeploymentConfiguration')
+    KxClusterCodeDeploymentStrategy = Shapes::StringShape.new(name: 'KxClusterCodeDeploymentStrategy')
     KxClusterDescription = Shapes::StringShape.new(name: 'KxClusterDescription')
     KxClusterName = Shapes::StringShape.new(name: 'KxClusterName')
     KxClusterNodeIdString = Shapes::StringShape.new(name: 'KxClusterNodeIdString')
@@ -205,6 +207,8 @@ module Aws::Finspace
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateEnvironmentRequest = Shapes::StructureShape.new(name: 'UpdateEnvironmentRequest')
     UpdateEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateEnvironmentResponse')
+    UpdateKxClusterCodeConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateKxClusterCodeConfigurationRequest')
+    UpdateKxClusterCodeConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateKxClusterCodeConfigurationResponse')
     UpdateKxClusterDatabasesRequest = Shapes::StructureShape.new(name: 'UpdateKxClusterDatabasesRequest')
     UpdateKxClusterDatabasesResponse = Shapes::StructureShape.new(name: 'UpdateKxClusterDatabasesResponse')
     UpdateKxDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateKxDatabaseRequest')
@@ -598,6 +602,9 @@ module Aws::Finspace
     KxCluster.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     KxCluster.struct_class = Types::KxCluster
 
+    KxClusterCodeDeploymentConfiguration.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: KxClusterCodeDeploymentStrategy, required: true, location_name: "deploymentStrategy"))
+    KxClusterCodeDeploymentConfiguration.struct_class = Types::KxClusterCodeDeploymentConfiguration
+
     KxClusters.member = Shapes::ShapeRef.new(shape: KxCluster)
 
     KxCommandLineArgument.add_member(:key, Shapes::ShapeRef.new(shape: KxCommandLineArgumentKey, location_name: "key"))
@@ -809,6 +816,17 @@ module Aws::Finspace
 
     UpdateEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
     UpdateEnvironmentResponse.struct_class = Types::UpdateEnvironmentResponse
+
+    UpdateKxClusterCodeConfigurationRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:code, Shapes::ShapeRef.new(shape: CodeConfiguration, required: true, location_name: "code"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:initialization_script, Shapes::ShapeRef.new(shape: InitializationScriptFilePath, location_name: "initializationScript"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:command_line_arguments, Shapes::ShapeRef.new(shape: KxCommandLineArguments, location_name: "commandLineArguments"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: KxClusterCodeDeploymentConfiguration, location_name: "deploymentConfiguration"))
+    UpdateKxClusterCodeConfigurationRequest.struct_class = Types::UpdateKxClusterCodeConfigurationRequest
+
+    UpdateKxClusterCodeConfigurationResponse.struct_class = Types::UpdateKxClusterCodeConfigurationResponse
 
     UpdateKxClusterDatabasesRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxClusterDatabasesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
@@ -1326,6 +1344,21 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_kx_cluster_code_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKxClusterCodeConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/kx/environments/{environmentId}/clusters/{clusterName}/configuration/code"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKxClusterCodeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKxClusterCodeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_kx_cluster_databases, Seahorse::Model::Operation.new.tap do |o|

@@ -410,7 +410,22 @@ module Aws::ConnectWisdomService
     #   The name of the assistant.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   The customer managed key must have a policy that allows
+    #   `kms:CreateGrant` and ` kms:DescribeKey` permissions to the IAM
+    #   identity using the key to invoke Wisdom. To use Wisdom with chat, the
+    #   key policy must also allow `kms:Decrypt`, `kms:GenerateDataKey*`, and
+    #   `kms:DescribeKey` permissions to the `connect.amazonaws.com` service
+    #   principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -691,7 +706,19 @@ module Aws::ConnectWisdomService
     #   Information about how to render the content.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #
     # @option params [Types::SourceConfiguration] :source_configuration
     #   The source of the knowledge base content. Only set this argument for
@@ -2035,7 +2062,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

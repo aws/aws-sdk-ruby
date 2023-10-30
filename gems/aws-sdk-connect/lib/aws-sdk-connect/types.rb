@@ -302,7 +302,7 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # A third party application's metadata.
+    # A third-party application's metadata.
     #
     # @!attribute [rw] namespace
     #   Namespace of the application that you want to give access to.
@@ -793,7 +793,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number
@@ -832,6 +844,7 @@ module Aws::Connect
     #
     class ClaimPhoneNumberRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number,
       :phone_number_description,
       :tags,
@@ -887,7 +900,18 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -941,6 +965,7 @@ module Aws::Connect
       :phone_number_type,
       :phone_number_description,
       :target_arn,
+      :instance_id,
       :tags,
       :phone_number_status)
       SENSITIVE = []
@@ -2252,7 +2277,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of third party applications that the security profile will
+    #   A list of third-party applications that the security profile will
     #   give access to.
     #   @return [Array<Types::Application>]
     #
@@ -9101,7 +9126,18 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersSummary AWS API Documentation
@@ -9112,17 +9148,32 @@ module Aws::Connect
       :phone_number,
       :phone_number_country_code,
       :phone_number_type,
-      :target_arn)
+      :target_arn,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to. If
-    #   `TargetArn` input is not provided, this API lists numbers claimed to
-    #   all the Amazon Connect instances belonging to your account in the
-    #   same Amazon Web Services Region as the request.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. If both `TargetArn` and `InstanceId` input are not
+    #   provided, this API lists numbers claimed to all the Amazon Connect
+    #   instances belonging to your account in the same Amazon Web Services
+    #   Region as the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
+    #   not provided, this API lists numbers claimed to all the Amazon
+    #   Connect instances belonging to your account in the same AWS Region
+    #   as the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9152,6 +9203,7 @@ module Aws::Connect
     #
     class ListPhoneNumbersV2Request < Struct.new(
       :target_arn,
+      :instance_id,
       :max_results,
       :next_token,
       :phone_number_country_codes,
@@ -9591,17 +9643,22 @@ module Aws::Connect
     end
 
     # @!attribute [rw] security_profile_id
-    #   The security profile identifier.
+    #   The identifier for the security profle.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The instance identifier.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9623,13 +9680,12 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsResponse AWS API Documentation
@@ -12210,7 +12266,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number_country_code
@@ -12240,6 +12308,7 @@ module Aws::Connect
     #
     class SearchAvailablePhoneNumbersRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number_country_code,
       :phone_number_type,
       :phone_number_prefix,
@@ -15264,7 +15333,19 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -15286,6 +15367,7 @@ module Aws::Connect
     class UpdatePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :target_arn,
+      :instance_id,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -15794,7 +15876,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation

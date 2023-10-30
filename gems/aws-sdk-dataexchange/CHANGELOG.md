@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-10-30)
+------------------
+
+* Feature - We added a new API action: SendDataSetNotification.
+
 1.40.0 (2023-09-27)
 ------------------
 

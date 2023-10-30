@@ -16,12 +16,16 @@ module Aws::RedshiftServerless
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    Association = Shapes::StructureShape.new(name: 'Association')
+    AssociationList = Shapes::ListShape.new(name: 'AssociationList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConfigParameter = Shapes::StructureShape.new(name: 'ConfigParameter')
     ConfigParameterList = Shapes::ListShape.new(name: 'ConfigParameterList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConvertRecoveryPointToSnapshotRequest = Shapes::StructureShape.new(name: 'ConvertRecoveryPointToSnapshotRequest')
     ConvertRecoveryPointToSnapshotResponse = Shapes::StructureShape.new(name: 'ConvertRecoveryPointToSnapshotResponse')
+    CreateCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'CreateCustomDomainAssociationRequest')
+    CreateCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'CreateCustomDomainAssociationResponse')
     CreateEndpointAccessRequest = Shapes::StructureShape.new(name: 'CreateEndpointAccessRequest')
     CreateEndpointAccessResponse = Shapes::StructureShape.new(name: 'CreateEndpointAccessResponse')
     CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
@@ -32,9 +36,13 @@ module Aws::RedshiftServerless
     CreateUsageLimitResponse = Shapes::StructureShape.new(name: 'CreateUsageLimitResponse')
     CreateWorkgroupRequest = Shapes::StructureShape.new(name: 'CreateWorkgroupRequest')
     CreateWorkgroupResponse = Shapes::StructureShape.new(name: 'CreateWorkgroupResponse')
+    CustomDomainCertificateArnString = Shapes::StringShape.new(name: 'CustomDomainCertificateArnString')
+    CustomDomainName = Shapes::StringShape.new(name: 'CustomDomainName')
     DbName = Shapes::StringShape.new(name: 'DbName')
     DbPassword = Shapes::StringShape.new(name: 'DbPassword')
     DbUser = Shapes::StringShape.new(name: 'DbUser')
+    DeleteCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'DeleteCustomDomainAssociationRequest')
+    DeleteCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'DeleteCustomDomainAssociationResponse')
     DeleteEndpointAccessRequest = Shapes::StructureShape.new(name: 'DeleteEndpointAccessRequest')
     DeleteEndpointAccessResponse = Shapes::StructureShape.new(name: 'DeleteEndpointAccessResponse')
     DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
@@ -53,6 +61,8 @@ module Aws::RedshiftServerless
     EndpointAccessList = Shapes::ListShape.new(name: 'EndpointAccessList')
     GetCredentialsRequest = Shapes::StructureShape.new(name: 'GetCredentialsRequest')
     GetCredentialsResponse = Shapes::StructureShape.new(name: 'GetCredentialsResponse')
+    GetCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'GetCustomDomainAssociationRequest')
+    GetCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'GetCustomDomainAssociationResponse')
     GetEndpointAccessRequest = Shapes::StructureShape.new(name: 'GetEndpointAccessRequest')
     GetEndpointAccessResponse = Shapes::StructureShape.new(name: 'GetEndpointAccessResponse')
     GetNamespaceRequest = Shapes::StructureShape.new(name: 'GetNamespaceRequest')
@@ -76,6 +86,9 @@ module Aws::RedshiftServerless
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidPaginationException = Shapes::StructureShape.new(name: 'InvalidPaginationException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    ListCustomDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsRequest')
+    ListCustomDomainAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCustomDomainAssociationsRequestMaxResultsInteger')
+    ListCustomDomainAssociationsResponse = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsResponse')
     ListEndpointAccessRequest = Shapes::StructureShape.new(name: 'ListEndpointAccessRequest')
     ListEndpointAccessRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListEndpointAccessRequestMaxResultsInteger')
     ListEndpointAccessResponse = Shapes::StructureShape.new(name: 'ListEndpointAccessResponse')
@@ -147,6 +160,8 @@ module Aws::RedshiftServerless
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationRequest')
+    UpdateCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationResponse')
     UpdateEndpointAccessRequest = Shapes::StructureShape.new(name: 'UpdateEndpointAccessRequest')
     UpdateEndpointAccessResponse = Shapes::StructureShape.new(name: 'UpdateEndpointAccessResponse')
     UpdateNamespaceRequest = Shapes::StructureShape.new(name: 'UpdateNamespaceRequest')
@@ -180,6 +195,14 @@ module Aws::RedshiftServerless
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: String)
 
+    Association.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    Association.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    Association.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    Association.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    Association.struct_class = Types::Association
+
+    AssociationList.member = Shapes::ShapeRef.new(shape: Association)
+
     ConfigParameter.add_member(:parameter_key, Shapes::ShapeRef.new(shape: ParameterKey, location_name: "parameterKey"))
     ConfigParameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "parameterValue"))
     ConfigParameter.struct_class = Types::ConfigParameter
@@ -197,6 +220,17 @@ module Aws::RedshiftServerless
 
     ConvertRecoveryPointToSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
     ConvertRecoveryPointToSnapshotResponse.struct_class = Types::ConvertRecoveryPointToSnapshotResponse
+
+    CreateCustomDomainAssociationRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "customDomainCertificateArn"))
+    CreateCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    CreateCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    CreateCustomDomainAssociationRequest.struct_class = Types::CreateCustomDomainAssociationRequest
+
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    CreateCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    CreateCustomDomainAssociationResponse.struct_class = Types::CreateCustomDomainAssociationResponse
 
     CreateEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     CreateEndpointAccessRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
@@ -257,6 +291,12 @@ module Aws::RedshiftServerless
     CreateWorkgroupResponse.add_member(:workgroup, Shapes::ShapeRef.new(shape: Workgroup, location_name: "workgroup"))
     CreateWorkgroupResponse.struct_class = Types::CreateWorkgroupResponse
 
+    DeleteCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    DeleteCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    DeleteCustomDomainAssociationRequest.struct_class = Types::DeleteCustomDomainAssociationRequest
+
+    DeleteCustomDomainAssociationResponse.struct_class = Types::DeleteCustomDomainAssociationResponse
+
     DeleteEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     DeleteEndpointAccessRequest.struct_class = Types::DeleteEndpointAccessRequest
 
@@ -313,9 +353,10 @@ module Aws::RedshiftServerless
 
     EndpointAccessList.member = Shapes::ShapeRef.new(shape: EndpointAccess)
 
+    GetCredentialsRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     GetCredentialsRequest.add_member(:db_name, Shapes::ShapeRef.new(shape: DbName, location_name: "dbName"))
     GetCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
-    GetCredentialsRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    GetCredentialsRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
     GetCredentialsRequest.struct_class = Types::GetCredentialsRequest
 
     GetCredentialsResponse.add_member(:db_password, Shapes::ShapeRef.new(shape: DbPassword, location_name: "dbPassword"))
@@ -323,6 +364,16 @@ module Aws::RedshiftServerless
     GetCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiration"))
     GetCredentialsResponse.add_member(:next_refresh_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "nextRefreshTime"))
     GetCredentialsResponse.struct_class = Types::GetCredentialsResponse
+
+    GetCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    GetCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    GetCustomDomainAssociationRequest.struct_class = Types::GetCustomDomainAssociationRequest
+
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    GetCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    GetCustomDomainAssociationResponse.struct_class = Types::GetCustomDomainAssociationResponse
 
     GetEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     GetEndpointAccessRequest.struct_class = Types::GetEndpointAccessRequest
@@ -384,6 +435,16 @@ module Aws::RedshiftServerless
 
     InvalidPaginationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidPaginationException.struct_class = Types::InvalidPaginationException
+
+    ListCustomDomainAssociationsRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    ListCustomDomainAssociationsRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    ListCustomDomainAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListCustomDomainAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomDomainAssociationsRequest.struct_class = Types::ListCustomDomainAssociationsRequest
+
+    ListCustomDomainAssociationsResponse.add_member(:associations, Shapes::ShapeRef.new(shape: AssociationList, location_name: "associations"))
+    ListCustomDomainAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomDomainAssociationsResponse.struct_class = Types::ListCustomDomainAssociationsResponse
 
     ListEndpointAccessRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEndpointAccessRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListEndpointAccessRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -632,6 +693,17 @@ module Aws::RedshiftServerless
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateCustomDomainAssociationRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "customDomainCertificateArn"))
+    UpdateCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    UpdateCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    UpdateCustomDomainAssociationRequest.struct_class = Types::UpdateCustomDomainAssociationRequest
+
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    UpdateCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    UpdateCustomDomainAssociationResponse.struct_class = Types::UpdateCustomDomainAssociationResponse
+
     UpdateEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     UpdateEndpointAccessRequest.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
     UpdateEndpointAccessRequest.struct_class = Types::UpdateEndpointAccessRequest
@@ -713,6 +785,9 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     Workgroup.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     Workgroup.add_member(:creation_date, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationDate"))
+    Workgroup.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    Workgroup.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    Workgroup.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     Workgroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     Workgroup.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
@@ -761,6 +836,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -828,6 +917,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:delete_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -910,6 +1013,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1000,6 +1117,25 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_custom_domain_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomDomainAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1205,6 +1341,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

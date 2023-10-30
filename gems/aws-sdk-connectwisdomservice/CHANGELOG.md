@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-10-30)
+------------------
+
+* Feature - This release added necessary API documents on creating a Wisdom knowledge base to integrate with S3.
+
 1.21.0 (2023-10-18)
 ------------------
 

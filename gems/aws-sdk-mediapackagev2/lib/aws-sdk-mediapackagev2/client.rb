@@ -673,6 +673,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #     low_latency_hls_manifests: [
@@ -684,6 +690,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #     tags: {
@@ -727,6 +739,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -734,6 +750,10 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1130,6 +1150,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -1137,6 +1161,10 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1758,6 +1786,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #     low_latency_hls_manifests: [
@@ -1769,6 +1803,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #   })
@@ -1809,6 +1849,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -1816,6 +1860,10 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1841,7 +1889,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

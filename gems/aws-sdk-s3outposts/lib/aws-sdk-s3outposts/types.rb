@@ -373,6 +373,11 @@ module Aws::S3Outposts
     #   Specifies the unique Amazon Resource Name (ARN) for the outpost.
     #   @return [String]
     #
+    # @!attribute [rw] s3_outpost_arn
+    #   Specifies the unique S3 on Outposts ARN for use with Resource Access
+    #   Manager (RAM).
+    #   @return [String]
+    #
     # @!attribute [rw] outpost_id
     #   Specifies the unique identifier for the outpost.
     #   @return [String]
@@ -390,6 +395,7 @@ module Aws::S3Outposts
     #
     class Outpost < Struct.new(
       :outpost_arn,
+      :s3_outpost_arn,
       :outpost_id,
       :owner_id,
       :capacity_in_bytes)
