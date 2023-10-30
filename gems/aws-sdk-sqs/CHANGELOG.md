@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Update QueuePoller allow for the definition of a after_empty_receive callback which is triggered when a polling request returns no records.
+* Feature - Update QueuePoller allow for the definition of an after_empty_receive callback which is triggered when a polling request returns no records.
 
 1.64.0 (2023-10-02)
 ------------------
