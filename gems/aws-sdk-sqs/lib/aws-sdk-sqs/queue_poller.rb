@@ -179,6 +179,15 @@ module Aws
     #     logger.info("last-timestamp: #{stats.last_message_received_at}")
     #   end
     #   ```
+    # * Configure a {#after_empty_receive} callback.
+    #
+    #   ```
+    #   poller.after_empty_receive do |stats|
+    #     logger.info("requests: #{stats.request_count}")
+    #     logger.info("messages: #{stats.received_message_count}")
+    #     logger.info("last-timestamp: #{stats.last_message_received_at}")
+    #   end
+    #   ```
     #
     # * Accept a 2nd argument in the poll block, for example:
     #
@@ -256,6 +265,17 @@ module Aws
         @default_config = @default_config.with(before_request: block) if block_given?
       end
 
+      # Registers a callback that is invoked when the poll requests returns with no messages.
+      # This callback is invoked after the idle timeout is checked .
+      #
+      #     poller.after_empty_receive do |stats|
+      #       # Handle empty receive
+      #     end
+      #
+      # @yieldparam [PollerStats] stats An object that tracks a few
+      #   client-side statistics about the queue polling.
+      #
+      # @return [void]
       def after_empty_receive(&block)
         @default_config = @default_config.with(after_empty_receive: block) if block_given?
       end
