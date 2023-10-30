@@ -179,6 +179,7 @@ module Aws
     #     logger.info("last-timestamp: #{stats.last_message_received_at}")
     #   end
     #   ```
+    #
     # * Configure a {#after_empty_receive} callback.
     #
     #   ```
@@ -266,7 +267,7 @@ module Aws
       end
 
       # Registers a callback that is invoked when the poll requests returns with no messages.
-      # This callback is invoked after the idle timeout is checked .
+      # This callback is invoked after the idle timeout is checked.
       #
       #     poller.after_empty_receive do |stats|
       #       # Handle empty receive
