@@ -180,7 +180,7 @@ module Aws
     #   end
     #   ```
     #
-    # * Configure a {#after_empty_receive} callback.
+    # * Configure an {#after_empty_receive} callback.
     #
     #   ```
     #   poller.after_empty_receive do |stats|
