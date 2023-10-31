@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-10-31)
+------------------
+
+* Feature - Minor change to not retry CancelledByUserException
+
 1.4.0 (2023-10-19)
 ------------------
 

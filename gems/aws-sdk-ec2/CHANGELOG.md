@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.417.0 (2023-10-31)
+------------------
+
+* Feature - Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking.
+
 1.416.0 (2023-10-26)
 ------------------
 

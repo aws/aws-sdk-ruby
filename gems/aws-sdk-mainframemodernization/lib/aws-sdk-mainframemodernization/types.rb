@@ -270,6 +270,11 @@ module Aws::MainframeModernization
     #   Specifies a file associated with a specific batch job.
     #   @return [Types::FileBatchJobIdentifier]
     #
+    # @!attribute [rw] s3_batch_job_identifier
+    #   Specifies an Amazon S3 location that identifies the batch jobs that
+    #   you want to run. Use this identifier to run ad hoc batch jobs.
+    #   @return [Types::S3BatchJobIdentifier]
+    #
     # @!attribute [rw] script_batch_job_identifier
     #   A batch job identifier in which the batch job to run is identified
     #   by the script name.
@@ -279,6 +284,7 @@ module Aws::MainframeModernization
     #
     class BatchJobIdentifier < Struct.new(
       :file_batch_job_identifier,
+      :s3_batch_job_identifier,
       :script_batch_job_identifier,
       :unknown)
       SENSITIVE = []
@@ -286,6 +292,7 @@ module Aws::MainframeModernization
       include Aws::Structure::Union
 
       class FileBatchJobIdentifier < BatchJobIdentifier; end
+      class S3BatchJobIdentifier < BatchJobIdentifier; end
       class ScriptBatchJobIdentifier < BatchJobIdentifier; end
       class Unknown < BatchJobIdentifier; end
     end
@@ -552,9 +559,14 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures the maintenance window you want for the runtime
-    #   environment. If you do not provide a value, a random
-    #   system-generated value will be assigned.
+    #   Configures the maintenance window that you want for the runtime
+    #   environment. The maintenance window must have the format
+    #   `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The
+    #   following two examples are valid maintenance windows:
+    #   `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+    #
+    #   If you do not provide a value, a random system-generated value will
+    #   be assigned.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -738,6 +750,10 @@ module Aws::MainframeModernization
     #   The status of the data set import task.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   If dataset import failed, the failure reason will show here.
+    #   @return [String]
+    #
     # @!attribute [rw] summary
     #   A summary of the data set import task.
     #   @return [Types::DataSetImportSummary]
@@ -750,6 +766,7 @@ module Aws::MainframeModernization
     #
     class DataSetImportTask < Struct.new(
       :status,
+      :status_reason,
       :summary,
       :task_id)
       SENSITIVE = []
@@ -1113,6 +1130,20 @@ module Aws::MainframeModernization
       :instance_type,
       :name,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Failed to connect to server, or didn’t receive response within
+    # expected time period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ExecutionTimeoutException AWS API Documentation
+    #
+    class ExecutionTimeoutException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1566,6 +1597,10 @@ module Aws::MainframeModernization
     #   The type of data set. The only supported value is VSAM.
     #   @return [Types::DatasetDetailOrgAttributes]
     #
+    # @!attribute [rw] file_size
+    #   File size of the dataset.
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_referenced_time
     #   The last time the data set was referenced.
     #   @return [Time]
@@ -1589,6 +1624,7 @@ module Aws::MainframeModernization
       :creation_time,
       :data_set_name,
       :data_set_org,
+      :file_size,
       :last_referenced_time,
       :last_updated_time,
       :location,
@@ -1710,7 +1746,7 @@ module Aws::MainframeModernization
 
     # @!attribute [rw] actual_capacity
     #   The number of instances included in the runtime environment. A
-    #   standalone runtime environment has a maxiumum of one instance.
+    #   standalone runtime environment has a maximum of one instance.
     #   Currently, a high availability runtime environment has a maximum of
     #   two instances.
     #   @return [Integer]
@@ -1767,9 +1803,9 @@ module Aws::MainframeModernization
     #   @return [Types::PendingMaintenance]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures the maintenance window you want for the runtime
-    #   environment. If you do not provide a value, a random
-    #   system-generated value will be assigned.
+    #   The maintenance window for the runtime environment. If you don't
+    #   provide a value for the maintenance window, the service assigns a
+    #   random value.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -1880,6 +1916,35 @@ module Aws::MainframeModernization
       :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Identifies a specific batch job.
+    #
+    # @note JobIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note JobIdentifier is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobIdentifier corresponding to the set member.
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file that contains the batch job definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] script_name
+    #   The name of the script that contains the batch job definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/JobIdentifier AWS API Documentation
+    #
+    class JobIdentifier < Struct.new(
+      :file_name,
+      :script_name,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FileName < JobIdentifier; end
+      class ScriptName < JobIdentifier; end
+      class Unknown < JobIdentifier; end
     end
 
     # @!attribute [rw] application_id
@@ -2140,6 +2205,11 @@ module Aws::MainframeModernization
     #   The maximum number of objects to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] name_filter
+    #   Filter dataset name matching the specified pattern. Can use * and %
+    #   as wild cards.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   A pagination token returned from a previous call to this operation.
     #   This specifies the next item to return. To return to the beginning
@@ -2156,6 +2226,7 @@ module Aws::MainframeModernization
     class ListDataSetsRequest < Struct.new(
       :application_id,
       :max_results,
+      :name_filter,
       :next_token,
       :prefix)
       SENSITIVE = []
@@ -2552,6 +2623,35 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
+    # A batch job identifier in which the batch jobs to run are identified
+    # by an Amazon S3 location.
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket that contains the batch job definitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   Identifies the batch job definition. This identifier can also point
+    #   to any batch job definition that already exists in the application
+    #   or to one of the batch job definitions within the directory that is
+    #   specified in `keyPrefix`.
+    #   @return [Types::JobIdentifier]
+    #
+    # @!attribute [rw] key_prefix
+    #   The key prefix that specifies the path to the folder in the S3
+    #   bucket that has the batch job definitions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/S3BatchJobIdentifier AWS API Documentation
+    #
+    class S3BatchJobIdentifier < Struct.new(
+      :bucket,
+      :identifier,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A batch job definition contained in a script.
     #
     # @!attribute [rw] script_name
@@ -2613,6 +2713,19 @@ module Aws::MainframeModernization
       :resource_id,
       :resource_type,
       :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Server cannot process the request at the moment.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2753,7 +2866,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   The identifier of the throttled reuqest.
+    #   The identifier of the throttled request.
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
@@ -2861,14 +2974,32 @@ module Aws::MainframeModernization
     #   update.
     #   @return [String]
     #
+    # @!attribute [rw] force_update
+    #   Forces the updates on the environment. This option is needed if the
+    #   applications in the environment are not stopped or if there are
+    #   ongoing application-related activities in the environment.
+    #
+    #   If you use this option, be aware that it could lead to data
+    #   corruption in the applications, and that you might need to perform
+    #   repair and recovery procedures for the applications.
+    #
+    #   This option is not needed if the attribute being updated is
+    #   `preferredMaintenanceWindow`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] instance_type
     #   The instance type for the runtime environment to update.
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Configures the maintenance window you want for the runtime
-    #   environment. If you do not provide a value, a random
-    #   system-generated value will be assigned.
+    #   Configures the maintenance window that you want for the runtime
+    #   environment. The maintenance window must have the format
+    #   `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The
+    #   following two examples are valid maintenance windows:
+    #   `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+    #
+    #   If you do not provide a value, a random system-generated value will
+    #   be assigned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/UpdateEnvironmentRequest AWS API Documentation
@@ -2878,6 +3009,7 @@ module Aws::MainframeModernization
       :desired_capacity,
       :engine_version,
       :environment_id,
+      :force_update,
       :instance_type,
       :preferred_maintenance_window)
       SENSITIVE = []

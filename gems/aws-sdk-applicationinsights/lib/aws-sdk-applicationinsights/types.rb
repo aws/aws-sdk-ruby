@@ -160,6 +160,11 @@ module Aws::ApplicationInsights
     #   The method used by Application Insights to onboard your resources.
     #   @return [String]
     #
+    # @!attribute [rw] attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo AWS API Documentation
     #
     class ApplicationInfo < Struct.new(
@@ -171,7 +176,8 @@ module Aws::ApplicationInsights
       :cwe_monitor_enabled,
       :remarks,
       :auto_config_enabled,
-      :discovery_type)
+      :discovery_type,
+      :attach_missing_permission)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -287,6 +293,11 @@ module Aws::ApplicationInsights
     #   `ACCOUNT_BASED`.
     #   @return [String]
     #
+    # @!attribute [rw] attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -297,7 +308,8 @@ module Aws::ApplicationInsights
       :tags,
       :auto_config_enabled,
       :auto_create,
-      :grouping_type)
+      :grouping_type,
+      :attach_missing_permission)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -504,6 +516,10 @@ module Aws::ApplicationInsights
     #   The tier of the application component.
     #   @return [String]
     #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
     # @!attribute [rw] recommendation_type
     #   The recommended configuration type.
     #   @return [String]
@@ -514,6 +530,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :tier,
+      :workload_name,
       :recommendation_type)
       SENSITIVE = []
       include Aws::Structure
@@ -1874,6 +1891,11 @@ module Aws::ApplicationInsights
     #   Turns auto-configuration on or off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1882,7 +1904,8 @@ module Aws::ApplicationInsights
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
       :remove_sns_topic,
-      :auto_config_enabled)
+      :auto_config_enabled,
+      :attach_missing_permission)
       SENSITIVE = []
       include Aws::Structure
     end

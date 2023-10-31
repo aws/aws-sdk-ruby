@@ -4129,6 +4129,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The recommended Capacity Block that fits your search requirements.
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Block offering.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_block_duration_hours
+    #   The amount of time of the Capacity Block reservation in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The total price to be paid up front.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency of the payment for the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the Capacity Block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
+    #
+    class CapacityBlockOffering < Struct.new(
+      :capacity_block_offering_id,
+      :instance_type,
+      :availability_zone,
+      :instance_count,
+      :start_date,
+      :end_date,
+      :capacity_block_duration_hours,
+      :upfront_fee,
+      :currency_code,
+      :tenancy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Capacity Reservation.
     #
     # @!attribute [rw] capacity_reservation_id
@@ -4294,6 +4353,10 @@ module Aws::EC2
     #   Information about instance capacity usage.
     #   @return [Array<Types::CapacityAllocation>]
     #
+    # @!attribute [rw] reservation_type
+    #   The type of Capacity Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -4319,7 +4382,8 @@ module Aws::EC2
       :outpost_arn,
       :capacity_reservation_fleet_id,
       :placement_group_arn,
-      :capacity_allocations)
+      :capacity_allocations,
+      :reservation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16142,6 +16206,79 @@ module Aws::EC2
     #
     class DescribeByoipCidrsResult < Struct.new(
       :byoip_cidrs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance for which the Capacity Block offering reserves
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances for which to reserve capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date_range
+    #   The earliest start date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_range
+    #   The latest end date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_duration_hours
+    #   The number of hours for which to reserve Capacity Block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsRequest < Struct.new(
+      :dry_run,
+      :instance_type,
+      :instance_count,
+      :start_date_range,
+      :end_date_range,
+      :capacity_duration_hours,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_offerings
+    #   The recommended Capacity Block offering for the dates specified.
+    #   @return [Array<Types::CapacityBlockOffering>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsResult AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsResult < Struct.new(
+      :capacity_block_offerings,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -38786,18 +38923,21 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Attribute-based instance type selection for
-    # EC2 Fleet][3], [Attribute-based instance type selection for Spot
-    # Fleet][4], and [Spot placement score][5] in the *Amazon EC2 User
+    # For more information, see [Create a mixed instances group using
+    # attribute-based instance type selection][3] in the *Amazon EC2 Auto
+    # Scaling User Guide*, and also [Attribute-based instance type selection
+    # for EC2 Fleet][4], [Attribute-based instance type selection for Spot
+    # Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
     # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs.
@@ -51866,6 +52006,48 @@ module Aws::EC2
       :instance_family,
       :payment_option,
       :upfront_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the Capacity Block during launch.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockRequest AWS API Documentation
+    #
+    class PurchaseCapacityBlockRequest < Struct.new(
+      :dry_run,
+      :tag_specifications,
+      :capacity_block_offering_id,
+      :instance_platform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation
+    #   The Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockResult AWS API Documentation
+    #
+    class PurchaseCapacityBlockResult < Struct.new(
+      :capacity_reservation)
       SENSITIVE = []
       include Aws::Structure
     end

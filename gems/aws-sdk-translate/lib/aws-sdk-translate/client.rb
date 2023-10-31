@@ -447,8 +447,8 @@ module Aws::Translate
     #     name: "ResourceName", # required
     #     description: "Description",
     #     parallel_data_config: { # required
-    #       s3_uri: "S3Uri", # required
-    #       format: "TSV", # required, accepts TSV, CSV, TMX
+    #       s3_uri: "S3Uri",
+    #       format: "TSV", # accepts TSV, CSV, TMX
     #     },
     #     encryption_key: {
     #       type: "KMS", # required, accepts KMS
@@ -574,6 +574,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties.data_access_role_arn #=> String
     #   resp.text_translation_job_properties.settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.text_translation_job_properties.settings.profanity #=> String, one of "MASK"
+    #   resp.text_translation_job_properties.settings.brevity #=> String, one of "ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob AWS API Documentation
     #
@@ -1053,6 +1054,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties_list[0].data_access_role_arn #=> String
     #   resp.text_translation_job_properties_list[0].settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.text_translation_job_properties_list[0].settings.profanity #=> String, one of "MASK"
+    #   resp.text_translation_job_properties_list[0].settings.brevity #=> String, one of "ON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTextTranslationJobs AWS API Documentation
@@ -1181,9 +1183,15 @@ module Aws::Translate
     #   not need to pass this option.**
     #
     # @option params [Types::TranslationSettings] :settings
-    #   Settings to configure your translation output, including the option to
-    #   set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: not supported.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #
     # @return [Types::StartTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1214,6 +1222,7 @@ module Aws::Translate
     #     settings: {
     #       formality: "FORMAL", # accepts FORMAL, INFORMAL
     #       profanity: "MASK", # accepts MASK
+    #       brevity: "ON", # accepts ON
     #     },
     #   })
     #
@@ -1312,13 +1321,11 @@ module Aws::Translate
     end
 
     # Translates the input document from the source language to the target
-    # language. This synchronous operation supports plain text or HTML for
-    # the input document. `TranslateDocument` supports translations from
-    # English to any supported language, and from any supported language to
-    # English. Therefore, specify either the source language code or the
-    # target language code as “en” (English).
-    #
-    # `TranslateDocument` does not support language auto-detection.
+    # language. This synchronous operation supports text, HTML, or Word
+    # documents as the input document. `TranslateDocument` supports
+    # translations from English to any supported language, and from any
+    # supported language to English. Therefore, specify either the source
+    # language code or the target language code as “en” (English).
     #
     # If you set the `Formality` parameter, the request will fail if the
     # target language does not support formality. For a list of target
@@ -1349,14 +1356,24 @@ module Aws::Translate
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
     #
     # @option params [required, String] :source_language_code
-    #   The language code for the language of the source text. Do not use
-    #   `auto`, because `TranslateDocument` does not support language
-    #   auto-detection. For a list of supported language codes, see [Supported
-    #   languages][1].
+    #   The language code for the language of the source text. For a list of
+    #   supported language codes, see [Supported languages][1].
+    #
+    #   To have Amazon Translate determine the source language of your text,
+    #   you can specify `auto` in the `SourceLanguageCode` field. If you
+    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][2] to
+    #   determine the source language.
+    #
+    #   <note markdown="1"> If you specify `auto`, you must send the `TranslateDocument` request
+    #   in a region that supports Amazon Comprehend. Otherwise, the request
+    #   returns an error indicating that autodetect is not supported.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #
     # @option params [required, String] :target_language_code
     #   The language code requested for the translated document. For a list of
@@ -1367,9 +1384,15 @@ module Aws::Translate
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [Types::TranslationSettings] :settings
-    #   Settings to configure your translation output, including the option to
-    #   set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: not supported.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #
     # @return [Types::TranslateDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1392,6 +1415,7 @@ module Aws::Translate
     #     settings: {
     #       formality: "FORMAL", # accepts FORMAL, INFORMAL
     #       profanity: "MASK", # accepts MASK
+    #       brevity: "ON", # accepts ON
     #     },
     #   })
     #
@@ -1407,6 +1431,7 @@ module Aws::Translate
     #   resp.applied_terminologies[0].terms[0].target_text #=> String
     #   resp.applied_settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.applied_settings.profanity #=> String, one of "MASK"
+    #   resp.applied_settings.brevity #=> String, one of "ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocument AWS API Documentation
     #
@@ -1475,9 +1500,16 @@ module Aws::Translate
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [Types::TranslationSettings] :settings
-    #   Settings to configure your translation output, including the option to
-    #   set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: reduces the length of the translated output for most
+    #     translations.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #
     # @return [Types::TranslateTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1497,6 +1529,7 @@ module Aws::Translate
     #     settings: {
     #       formality: "FORMAL", # accepts FORMAL, INFORMAL
     #       profanity: "MASK", # accepts MASK
+    #       brevity: "ON", # accepts ON
     #     },
     #   })
     #
@@ -1512,6 +1545,7 @@ module Aws::Translate
     #   resp.applied_terminologies[0].terms[0].target_text #=> String
     #   resp.applied_settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.applied_settings.profanity #=> String, one of "MASK"
+    #   resp.applied_settings.brevity #=> String, one of "ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText AWS API Documentation
     #
@@ -1589,8 +1623,8 @@ module Aws::Translate
     #     name: "ResourceName", # required
     #     description: "Description",
     #     parallel_data_config: { # required
-    #       s3_uri: "S3Uri", # required
-    #       format: "TSV", # required, accepts TSV, CSV, TMX
+    #       s3_uri: "S3Uri",
+    #       format: "TSV", # accepts TSV, CSV, TMX
     #     },
     #     client_token: "ClientTokenString", # required
     #   })
@@ -1624,7 +1658,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

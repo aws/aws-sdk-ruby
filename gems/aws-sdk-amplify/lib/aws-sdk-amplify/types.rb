@@ -60,6 +60,14 @@ module Aws::Amplify
     #
     # @!attribute [rw] environment_variables
     #   The environment variables for the Amplify app.
+    #
+    #   For a list of the environment variables that are accessible to
+    #   Amplify by default, see [Amplify Environment variables][1] in the
+    #   *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] default_domain
@@ -71,7 +79,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnect a branch in the Amplify Console when you
+    #   Automatically disconnect a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -242,6 +250,20 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
+      include Aws::Structure
+    end
+
+    # Describes the backend properties associated with an Amplify `Branch`.
+    #
+    # @!attribute [rw] stack_arn
+    #   The Amazon Resource Name (ARN) for the CloudFormation stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Backend AWS API Documentation
+    #
+    class Backend < Struct.new(
+      :stack_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +446,11 @@ module Aws::Amplify
     #   part of an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] backend
+    #   Describes the backend properties associated with an Amplify
+    #   `Branch`.
+    #   @return [Types::Backend]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
     #
     class Branch < Struct.new(
@@ -453,7 +480,8 @@ module Aws::Amplify
       :pull_request_environment_name,
       :destination_branch,
       :source_branch,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -461,15 +489,15 @@ module Aws::Amplify
     # The request structure used to create apps in Amplify.
     #
     # @!attribute [rw] name
-    #   The name for an Amplify app.
+    #   The name of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for an Amplify app.
+    #   The description of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   The repository for an Amplify app.
+    #   The Git repository for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -506,7 +534,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] access_token
@@ -530,11 +558,19 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
     #   The environment variables map for an Amplify app.
+    #
+    #   For a list of the environment variables that are accessible to
+    #   Amplify by default, see [Amplify Environment variables][1] in the
+    #   *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_branch_auto_build
@@ -542,7 +578,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -750,6 +786,11 @@ module Aws::Amplify
     #   part of an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #   @return [Types::Backend]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
     #
     class CreateBranchRequest < Struct.new(
@@ -770,7 +811,8 @@ module Aws::Amplify
       :display_name,
       :enable_pull_request_preview,
       :pull_request_environment_name,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -797,7 +839,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] file_map
@@ -1059,7 +1101,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchRequest AWS API Documentation
@@ -1125,7 +1167,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1400,7 +1442,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchRequest AWS API Documentation
@@ -1466,7 +1508,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1876,7 +1918,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for a branch.
+    #   The name of the branch to use for the request.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2063,7 +2105,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2110,7 +2152,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2121,13 +2163,14 @@ module Aws::Amplify
     # @!attribute [rw] job_type
     #   Describes the type for the job. The job type `RELEASE` starts a new
     #   job with the latest change from the specified branch. This value is
-    #   available only for apps that are connected to a repository. The job
-    #   type `RETRY` retries an existing job. If the job type value is
-    #   `RETRY`, the `jobId` is also required.
+    #   available only for apps that are connected to a repository.
+    #
+    #   The job type `RETRY` retries an existing job. If the job type value
+    #   is `RETRY`, the `jobId` is also required.
     #   @return [String]
     #
     # @!attribute [rw] job_reason
-    #   A descriptive reason for starting this job.
+    #   A descriptive reason for starting the job.
     #   @return [String]
     #
     # @!attribute [rw] commit_id
@@ -2244,7 +2287,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the stop job request.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2417,7 +2460,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -2457,7 +2500,7 @@ module Aws::Amplify
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @!attribute [rw] repository
-    #   The name of the repository for an Amplify app
+    #   The name of the Git repository for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] oauth_token
@@ -2483,7 +2526,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] access_token
@@ -2507,7 +2550,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
@@ -2557,7 +2600,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2629,6 +2672,11 @@ module Aws::Amplify
     #   part of an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #   @return [Types::Backend]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
     #
     class UpdateBranchRequest < Struct.new(
@@ -2648,7 +2696,8 @@ module Aws::Amplify
       :display_name,
       :enable_pull_request_preview,
       :pull_request_environment_name,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end

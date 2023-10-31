@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-10-31)
+------------------
+
+* Feature - Automate attaching managed policies
+
 1.40.0 (2023-09-27)
 ------------------
 

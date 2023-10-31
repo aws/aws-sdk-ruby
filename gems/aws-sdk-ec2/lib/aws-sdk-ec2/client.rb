@@ -4949,7 +4949,7 @@ module Aws::EC2
     #   resp.capacity_reservation.available_instance_count #=> Integer
     #   resp.capacity_reservation.ebs_optimized #=> Boolean
     #   resp.capacity_reservation.ephemeral_storage #=> Boolean
-    #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
     #   resp.capacity_reservation.start_date #=> Time
     #   resp.capacity_reservation.end_date #=> Time
     #   resp.capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
@@ -4964,6 +4964,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_allocations #=> Array
     #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -6332,7 +6333,7 @@ module Aws::EC2
     #       total_target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
-    #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       default_target_capacity_type: "spot", # accepts spot, on-demand, capacity-block
     #       target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #     },
     #     terminate_instances_with_expiration: false,
@@ -8163,7 +8164,7 @@ module Aws::EC2
     #       security_group_ids: ["SecurityGroupId"],
     #       security_groups: ["SecurityGroupName"],
     #       instance_market_options: {
-    #         market_type: "spot", # accepts spot
+    #         market_type: "spot", # accepts spot, capacity-block
     #         spot_options: {
     #           max_price: "String",
     #           spot_instance_type: "one-time", # accepts one-time, persistent
@@ -8548,7 +8549,7 @@ module Aws::EC2
     #       security_group_ids: ["SecurityGroupId"],
     #       security_groups: ["SecurityGroupName"],
     #       instance_market_options: {
-    #         market_type: "spot", # accepts spot
+    #         market_type: "spot", # accepts spot, capacity-block
     #         spot_options: {
     #           max_price: "String",
     #           spot_instance_type: "one-time", # accepts one-time, persistent
@@ -8739,7 +8740,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_version.launch_template_data.security_groups #=> Array
     #   resp.launch_template_version.launch_template_data.security_groups[0] #=> String
-    #   resp.launch_template_version.launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_version.launch_template_data.instance_market_options.market_type #=> String, one of "spot", "capacity-block"
     #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.max_price #=> String
     #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
     #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
@@ -19845,6 +19846,86 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes Capacity Block offerings available for purchase. With
+    # Capacity Blocks, you purchase a specific instance type for a period of
+    # time.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_type
+    #   The type of instance for which the Capacity Block offering reserves
+    #   capacity.
+    #
+    # @option params [required, Integer] :instance_count
+    #   The number of instances for which to reserve capacity.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date_range
+    #   The earliest start date for the Capacity Block offering.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date_range
+    #   The latest end date for the Capacity Block offering.
+    #
+    # @option params [required, Integer] :capacity_duration_hours
+    #   The number of hours for which to reserve Capacity Block.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
+    #
+    # @return [Types::DescribeCapacityBlockOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityBlockOfferingsResult#capacity_block_offerings #capacity_block_offerings} => Array&lt;Types::CapacityBlockOffering&gt;
+    #   * {Types::DescribeCapacityBlockOfferingsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_block_offerings({
+    #     dry_run: false,
+    #     instance_type: "String", # required
+    #     instance_count: 1, # required
+    #     start_date_range: Time.now,
+    #     end_date_range: Time.now,
+    #     capacity_duration_hours: 1, # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_block_offerings #=> Array
+    #   resp.capacity_block_offerings[0].capacity_block_offering_id #=> String
+    #   resp.capacity_block_offerings[0].instance_type #=> String
+    #   resp.capacity_block_offerings[0].availability_zone #=> String
+    #   resp.capacity_block_offerings[0].instance_count #=> Integer
+    #   resp.capacity_block_offerings[0].start_date #=> Time
+    #   resp.capacity_block_offerings[0].end_date #=> Time
+    #   resp.capacity_block_offerings[0].capacity_block_duration_hours #=> Integer
+    #   resp.capacity_block_offerings[0].upfront_fee #=> String
+    #   resp.capacity_block_offerings[0].currency_code #=> String
+    #   resp.capacity_block_offerings[0].tenancy #=> String, one of "default", "dedicated"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferings AWS API Documentation
+    #
+    # @overload describe_capacity_block_offerings(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_block_offerings(params = {}, options = {})
+      req = build_request(:describe_capacity_block_offerings, params)
+      req.send_request(options)
+    end
+
     # Describes one or more Capacity Reservation Fleets.
     #
     # @option params [Array<String>] :capacity_reservation_fleet_ids
@@ -20089,7 +20170,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].available_instance_count #=> Integer
     #   resp.capacity_reservations[0].ebs_optimized #=> Boolean
     #   resp.capacity_reservations[0].ephemeral_storage #=> Boolean
-    #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
     #   resp.capacity_reservations[0].start_date #=> Time
     #   resp.capacity_reservations[0].end_date #=> Time
     #   resp.capacity_reservations[0].end_date_type #=> String, one of "unlimited", "limited"
@@ -20104,6 +20185,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].capacity_allocations #=> Array
     #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
+    #   resp.capacity_reservations[0].reservation_type #=> String, one of "default", "capacity-block"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -21877,7 +21959,7 @@ module Aws::EC2
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
-    #   resp.fleets[0].target_capacity_specification.default_target_capacity_type #=> String, one of "spot", "on-demand"
+    #   resp.fleets[0].target_capacity_specification.default_target_capacity_type #=> String, one of "spot", "on-demand", "capacity-block"
     #   resp.fleets[0].target_capacity_specification.target_capacity_unit_type #=> String, one of "vcpu", "memory-mib", "units"
     #   resp.fleets[0].terminate_instances_with_expiration #=> Boolean
     #   resp.fleets[0].type #=> String, one of "request", "maintain", "instant"
@@ -24478,7 +24560,7 @@ module Aws::EC2
     #   resp.instance_types[0].current_generation #=> Boolean
     #   resp.instance_types[0].free_tier_eligible #=> Boolean
     #   resp.instance_types[0].supported_usage_classes #=> Array
-    #   resp.instance_types[0].supported_usage_classes[0] #=> String, one of "spot", "on-demand"
+    #   resp.instance_types[0].supported_usage_classes[0] #=> String, one of "spot", "on-demand", "capacity-block"
     #   resp.instance_types[0].supported_root_device_types #=> Array
     #   resp.instance_types[0].supported_root_device_types[0] #=> String, one of "ebs", "instance-store"
     #   resp.instance_types[0].supported_virtualization_types #=> Array
@@ -25185,7 +25267,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].hypervisor #=> String, one of "ovm", "xen"
     #   resp.reservations[0].instances[0].iam_instance_profile.arn #=> String
     #   resp.reservations[0].instances[0].iam_instance_profile.id #=> String
-    #   resp.reservations[0].instances[0].instance_lifecycle #=> String, one of "spot", "scheduled"
+    #   resp.reservations[0].instances[0].instance_lifecycle #=> String, one of "spot", "scheduled", "capacity-block"
     #   resp.reservations[0].instances[0].elastic_gpu_associations #=> Array
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_id #=> String
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
@@ -26302,7 +26384,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_groups #=> Array
     #   resp.launch_template_versions[0].launch_template_data.security_groups[0] #=> String
-    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.market_type #=> String, one of "spot", "capacity-block"
     #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.max_price #=> String
     #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
     #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
@@ -39882,7 +39964,7 @@ module Aws::EC2
     #   resp.instance_type #=> String
     #   resp.total_instance_count #=> Integer
     #   resp.available_instance_count #=> Integer
-    #   resp.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
     #   resp.instance_usages #=> Array
     #   resp.instance_usages[0].account_id #=> String
     #   resp.instance_usages[0].used_instance_count #=> Integer
@@ -41301,7 +41383,7 @@ module Aws::EC2
     #   resp.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_data.security_groups #=> Array
     #   resp.launch_template_data.security_groups[0] #=> String
-    #   resp.launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_data.instance_market_options.market_type #=> String, one of "spot", "capacity-block"
     #   resp.launch_template_data.instance_market_options.spot_options.max_price #=> String
     #   resp.launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
     #   resp.launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
@@ -44855,7 +44937,7 @@ module Aws::EC2
     #       total_target_capacity: 1, # required
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
-    #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       default_target_capacity_type: "spot", # accepts spot, on-demand, capacity-block
     #       target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #     },
     #     context: "String",
@@ -50379,6 +50461,89 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Purchase the Capacity Block for use with your account. With Capacity
+    # Blocks you ensure GPU capacity is available for machine learning (ML)
+    # workloads. You must specify the ID of the Capacity Block offering you
+    # are purchasing.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Capacity Block during launch.
+    #
+    # @option params [required, String] :capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #
+    # @option params [required, String] :instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #
+    # @return [Types::PurchaseCapacityBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseCapacityBlockResult#capacity_reservation #capacity_reservation} => Types::CapacityReservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_capacity_block({
+    #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     capacity_block_offering_id: "OfferingId", # required
+    #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise, RHEL with SQL Server Standard, RHEL with SQL Server Enterprise, RHEL with SQL Server Web, RHEL with HA, RHEL with HA and SQL Server Standard, RHEL with HA and SQL Server Enterprise, Ubuntu Pro
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.capacity_reservation_id #=> String
+    #   resp.capacity_reservation.owner_id #=> String
+    #   resp.capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.capacity_reservation.availability_zone_id #=> String
+    #   resp.capacity_reservation.instance_type #=> String
+    #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.capacity_reservation.availability_zone #=> String
+    #   resp.capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservation.total_instance_count #=> Integer
+    #   resp.capacity_reservation.available_instance_count #=> Integer
+    #   resp.capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
+    #   resp.capacity_reservation.start_date #=> Time
+    #   resp.capacity_reservation.end_date #=> Time
+    #   resp.capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservation.create_date #=> Time
+    #   resp.capacity_reservation.tags #=> Array
+    #   resp.capacity_reservation.tags[0].key #=> String
+    #   resp.capacity_reservation.tags[0].value #=> String
+    #   resp.capacity_reservation.outpost_arn #=> String
+    #   resp.capacity_reservation.capacity_reservation_fleet_id #=> String
+    #   resp.capacity_reservation.placement_group_arn #=> String
+    #   resp.capacity_reservation.capacity_allocations #=> Array
+    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlock AWS API Documentation
+    #
+    # @overload purchase_capacity_block(params = {})
+    # @param [Hash] params ({})
+    def purchase_capacity_block(params = {}, options = {})
+      req = build_request(:purchase_capacity_block, params)
+      req.send_request(options)
+    end
+
     # Purchase a reservation with configurations that match those of your
     # Dedicated Host. You must have active Dedicated Hosts in your account
     # before you purchase a reservation. This action results in the
@@ -54619,7 +54784,7 @@ module Aws::EC2
     #       version: "String",
     #     },
     #     instance_market_options: {
-    #       market_type: "spot", # accepts spot
+    #       market_type: "spot", # accepts spot, capacity-block
     #       spot_options: {
     #         max_price: "String",
     #         spot_instance_type: "one-time", # accepts one-time, persistent
@@ -54723,7 +54888,7 @@ module Aws::EC2
     #   resp.instances[0].hypervisor #=> String, one of "ovm", "xen"
     #   resp.instances[0].iam_instance_profile.arn #=> String
     #   resp.instances[0].iam_instance_profile.id #=> String
-    #   resp.instances[0].instance_lifecycle #=> String, one of "spot", "scheduled"
+    #   resp.instances[0].instance_lifecycle #=> String, one of "spot", "scheduled", "capacity-block"
     #   resp.instances[0].elastic_gpu_associations #=> Array
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_id #=> String
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
@@ -57269,7 +57434,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.416.0'
+      context[:gem_version] = '1.417.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

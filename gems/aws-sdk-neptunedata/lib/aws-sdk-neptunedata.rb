@@ -52,6 +52,6 @@ require_relative 'aws-sdk-neptunedata/customizations'
 # @!group service
 module Aws::Neptunedata
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

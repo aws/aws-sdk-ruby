@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.185.2 (2023-10-31)
+------------------
+
 * Issue - Fix query string support to lists of booleans, floats, integers and timestamps per rest-json protocol.
 
 3.185.1 (2023-10-05)
