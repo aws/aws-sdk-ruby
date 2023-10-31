@@ -84,14 +84,16 @@ module Aws
 
       # @overload initialize(service:, region:, access_key_id:, secret_access_key:, session_token:nil, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
-      #   @param [String] :region The region name, e.g. 'us-east-1'.
+      #   @param [String] :region The region name, e.g. 'us-east-1'. When signing
+      #    with sigv4a, this should be a comma separated list of regions.
       #   @param [String] :access_key_id
       #   @param [String] :secret_access_key
       #   @param [String] :session_token (nil)
       #
       # @overload initialize(service:, region:, credentials:, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
-      #   @param [String] :region The region name, e.g. 'us-east-1'.
+      #   @param [String] :region The region name, e.g. 'us-east-1'. When signing
+      #    with sigv4a, this should be a comma separated list of regions.
       #   @param [Credentials] :credentials Any object that responds to the following
       #     methods:
       #
@@ -102,7 +104,8 @@ module Aws
       #
       # @overload initialize(service:, region:, credentials_provider:, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
-      #   @param [String] :region The region name, e.g. 'us-east-1'.
+      #   @param [String] :region The region name, e.g. 'us-east-1'. When signing
+      #    with sigv4a, this should be a comma separated list of regions.
       #   @param [#credentials] :credentials_provider An object that responds
       #     to `#credentials`, returning an object that responds to the following
       #     methods:

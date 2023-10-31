@@ -105,7 +105,7 @@ module Aws
       XML
 
       it 'extracts code and message for empty struct errors' do
-        stub_request(:post, 'https://cloudfront.amazonaws.com/2018-11-05/distribution').
+        stub_request(:post, 'https://cloudfront.amazonaws.com/2020-05-31/distribution').
           to_return(:status => 400, :body => empty_struct_error)
         expect {
           cloudfront.create_distribution(
@@ -119,7 +119,7 @@ module Aws
       end
 
       it 'extracts code and message for unmodeled errors' do
-        stub_request(:post, 'https://cloudfront.amazonaws.com/2018-11-05/origin-access-identity/cloudfront').
+        stub_request(:post, 'https://cloudfront.amazonaws.com/2020-05-31/origin-access-identity/cloudfront').
           to_return(:status => 400, :body => unmodeled_error)
         msg = '1 validation error detected: Value null at'\
               ' \'cloudFrontOriginAccessIdentityConfig\' failed to satisfy'\

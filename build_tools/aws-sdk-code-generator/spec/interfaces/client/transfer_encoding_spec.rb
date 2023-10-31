@@ -9,13 +9,7 @@ describe 'Client Interface:' do
     end
 
     let(:client) do
-      TransferEncoding::Client.new(
-        region: 'us-west-2',
-        access_key_id: 'akid',
-        secret_access_key: 'secret',
-        stub_responses: true,
-        endpoint: 'https://svc.us-west-2.amazonaws.com'
-      )
+      TransferEncoding::Client.new(stub_responses: true)
     end
 
     it 'adds `Transfer-Encoding` header for `v4-unsigned-body` auth types' do
@@ -69,6 +63,5 @@ describe 'Client Interface:' do
       resp = client.non_streaming(body: 'heyhey')
       expect(resp.context.http_request.headers['Content-Length']).to eq('19')
     end
-
   end
 end

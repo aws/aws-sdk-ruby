@@ -236,6 +236,15 @@ module Aws
       end
     end
 
+    # Raised when a client is constructed and the sigv4a region set is invalid.
+    # It is invalid when it is empty and/or contains empty strings.
+    class InvalidRegionSetError < ArgumentError
+      def initialize(*args)
+        msg = 'The provided sigv4a region set was empty or invalid.'
+        super(msg)
+      end
+    end
+
     # Raised when a client is contsructed and the region is not valid.
     class InvalidRegionError < ArgumentError
       def initialize(*args)
