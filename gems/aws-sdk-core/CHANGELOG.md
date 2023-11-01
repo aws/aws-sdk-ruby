@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support disabling IMDSv1 in `InstanceProfileCredentials` using `ENV['AWS_EC2_METADATA_V1_DISABLED']`, `ec2_metadata_v1_disabled` shared config, or the `disable_imds_v1` credentials option.
+
 3.185.2 (2023-10-31)
 ------------------
 
