@@ -80,8 +80,7 @@ module Aws
       @endpoint = resolve_endpoint(options, endpoint_mode)
       @port = options[:port] || 80
       @disable_imds_v1 = resolve_disable_v1(options)
-      # Flag for if v2 flow fails, skip future attempts. This is set back to
-      # true if IMDS responds with a 401.
+      # Flag for if v2 flow fails, skip future attempts
       @imds_v1_fallback = false
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
