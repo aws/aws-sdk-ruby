@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-11-01)
+------------------
+
+* Feature - Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.
+
 1.101.0 (2023-10-27)
 ------------------
 

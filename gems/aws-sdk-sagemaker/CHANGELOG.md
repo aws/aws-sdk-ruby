@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2023-11-01)
+------------------
+
+* Feature - Support for batch transform input in Model dashboard
+
 1.217.0 (2023-10-26)
 ------------------
 

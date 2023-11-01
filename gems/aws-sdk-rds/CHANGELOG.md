@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2023-11-01)
+------------------
+
+* Feature - This release adds support for customized networking resources to Amazon RDS Custom.
+
 1.199.0 (2023-10-30)
 ------------------
 

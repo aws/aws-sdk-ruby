@@ -919,6 +919,50 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieve the flow associations for the given resources.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :resource_ids
+    #   A list of resource identifiers to retrieve flow associations.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource association.
+    #
+    # @return [Types::BatchGetFlowAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetFlowAssociationResponse#flow_association_summary_list #flow_association_summary_list} => Array&lt;Types::FlowAssociationSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_flow_association({
+    #     instance_id: "InstanceId", # required
+    #     resource_ids: ["ARN"], # required
+    #     resource_type: "SMS_PHONE_NUMBER", # accepts SMS_PHONE_NUMBER, VOICE_PHONE_NUMBER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_association_summary_list #=> Array
+    #   resp.flow_association_summary_list[0].resource_id #=> String
+    #   resp.flow_association_summary_list[0].flow_id #=> String
+    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "SMS_PHONE_NUMBER", "VOICE_PHONE_NUMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociation AWS API Documentation
+    #
+    # @overload batch_get_flow_association(params = {})
+    # @param [Hash] params ({})
+    def batch_get_flow_association(params = {}, options = {})
+      req = build_request(:batch_get_flow_association, params)
+      req.send_request(options)
+    end
+
     # Claims an available phone number to your Amazon Connect instance or
     # traffic distribution group. You can call this API only in the same
     # Amazon Web Services Region where the Amazon Connect instance or
@@ -1683,7 +1727,13 @@ module Aws::Connect
     #   The description of the prompt.
     #
     # @option params [required, String] :s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can provide
+    #   S3 pre-signed URLs returned by the [GetPromptFile][1] API instead of
+    #   providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -3635,6 +3685,8 @@ module Aws::Connect
     #   resp.agent_status.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_status.tags #=> Hash
     #   resp.agent_status.tags["TagKey"] #=> String
+    #   resp.agent_status.last_modified_time #=> Time
+    #   resp.agent_status.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAgentStatus AWS API Documentation
     #
@@ -4031,6 +4083,8 @@ module Aws::Connect
     #   resp.hours_of_operation.config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operation.tags #=> Hash
     #   resp.hours_of_operation.tags["TagKey"] #=> String
+    #   resp.hours_of_operation.last_modified_time #=> Time
+    #   resp.hours_of_operation.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperation AWS API Documentation
     #
@@ -4274,6 +4328,8 @@ module Aws::Connect
     #   resp.prompt.description #=> String
     #   resp.prompt.tags #=> Hash
     #   resp.prompt.tags["TagKey"] #=> String
+    #   resp.prompt.last_modified_time #=> Time
+    #   resp.prompt.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePrompt AWS API Documentation
     #
@@ -4325,6 +4381,8 @@ module Aws::Connect
     #   resp.queue.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.queue.tags #=> Hash
     #   resp.queue.tags["TagKey"] #=> String
+    #   resp.queue.last_modified_time #=> Time
+    #   resp.queue.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQueue AWS API Documentation
     #
@@ -4373,6 +4431,8 @@ module Aws::Connect
     #   resp.quick_connect.quick_connect_config.phone_config.phone_number #=> String
     #   resp.quick_connect.tags #=> Hash
     #   resp.quick_connect.tags["TagKey"] #=> String
+    #   resp.quick_connect.last_modified_time #=> Time
+    #   resp.quick_connect.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnect AWS API Documentation
     #
@@ -4424,6 +4484,9 @@ module Aws::Connect
     #   resp.routing_profile.number_of_associated_queues #=> Integer
     #   resp.routing_profile.number_of_associated_users #=> Integer
     #   resp.routing_profile.agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
+    #   resp.routing_profile.last_modified_time #=> Time
+    #   resp.routing_profile.last_modified_region #=> String
+    #   resp.routing_profile.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -4536,6 +4599,8 @@ module Aws::Connect
     #   resp.security_profile.allowed_access_control_tags["SecurityProfilePolicyKey"] #=> String
     #   resp.security_profile.tag_restricted_resources #=> Array
     #   resp.security_profile.tag_restricted_resources[0] #=> String
+    #   resp.security_profile.last_modified_time #=> Time
+    #   resp.security_profile.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -4637,6 +4702,8 @@ module Aws::Connect
     #   resp.user.hierarchy_group_id #=> String
     #   resp.user.tags #=> Hash
     #   resp.user.tags["TagKey"] #=> String
+    #   resp.user.last_modified_time #=> Time
+    #   resp.user.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUser AWS API Documentation
     #
@@ -4680,20 +4747,32 @@ module Aws::Connect
     #   resp.hierarchy_group.hierarchy_path.level_one.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_one.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_one.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_one.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_one.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_two.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_two.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_three.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_three.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_four.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_four.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_five.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_five.last_modified_region #=> String
     #   resp.hierarchy_group.tags #=> Hash
     #   resp.hierarchy_group.tags["TagKey"] #=> String
+    #   resp.hierarchy_group.last_modified_time #=> Time
+    #   resp.hierarchy_group.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroup AWS API Documentation
     #
@@ -4730,18 +4809,28 @@ module Aws::Connect
     #   resp.hierarchy_structure.level_one.id #=> String
     #   resp.hierarchy_structure.level_one.arn #=> String
     #   resp.hierarchy_structure.level_one.name #=> String
+    #   resp.hierarchy_structure.level_one.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_one.last_modified_region #=> String
     #   resp.hierarchy_structure.level_two.id #=> String
     #   resp.hierarchy_structure.level_two.arn #=> String
     #   resp.hierarchy_structure.level_two.name #=> String
+    #   resp.hierarchy_structure.level_two.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_two.last_modified_region #=> String
     #   resp.hierarchy_structure.level_three.id #=> String
     #   resp.hierarchy_structure.level_three.arn #=> String
     #   resp.hierarchy_structure.level_three.name #=> String
+    #   resp.hierarchy_structure.level_three.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_three.last_modified_region #=> String
     #   resp.hierarchy_structure.level_four.id #=> String
     #   resp.hierarchy_structure.level_four.arn #=> String
     #   resp.hierarchy_structure.level_four.name #=> String
+    #   resp.hierarchy_structure.level_four.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_four.last_modified_region #=> String
     #   resp.hierarchy_structure.level_five.id #=> String
     #   resp.hierarchy_structure.level_five.arn #=> String
     #   resp.hierarchy_structure.level_five.name #=> String
+    #   resp.hierarchy_structure.level_five.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_five.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructure AWS API Documentation
     #
@@ -6684,6 +6773,8 @@ module Aws::Connect
     # @return [Types::GetPromptFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPromptFileResponse#prompt_presigned_url #prompt_presigned_url} => String
+    #   * {Types::GetPromptFileResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetPromptFileResponse#last_modified_region #last_modified_region} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6695,6 +6786,8 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.prompt_presigned_url #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFile AWS API Documentation
     #
@@ -6876,6 +6969,8 @@ module Aws::Connect
     #   resp.agent_status_summary_list[0].arn #=> String
     #   resp.agent_status_summary_list[0].name #=> String
     #   resp.agent_status_summary_list[0].type #=> String, one of "ROUTABLE", "CUSTOM", "OFFLINE"
+    #   resp.agent_status_summary_list[0].last_modified_time #=> Time
+    #   resp.agent_status_summary_list[0].last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAgentStatuses AWS API Documentation
     #
@@ -7483,6 +7578,8 @@ module Aws::Connect
     #   resp.hours_of_operation_summary_list[0].id #=> String
     #   resp.hours_of_operation_summary_list[0].arn #=> String
     #   resp.hours_of_operation_summary_list[0].name #=> String
+    #   resp.hours_of_operation_summary_list[0].last_modified_time #=> Time
+    #   resp.hours_of_operation_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperations AWS API Documentation
@@ -8070,6 +8167,8 @@ module Aws::Connect
     #   resp.prompt_summary_list[0].id #=> String
     #   resp.prompt_summary_list[0].arn #=> String
     #   resp.prompt_summary_list[0].name #=> String
+    #   resp.prompt_summary_list[0].last_modified_time #=> Time
+    #   resp.prompt_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPrompts AWS API Documentation
@@ -8110,6 +8209,8 @@ module Aws::Connect
     #
     #   * {Types::ListQueueQuickConnectsResponse#next_token #next_token} => String
     #   * {Types::ListQueueQuickConnectsResponse#quick_connect_summary_list #quick_connect_summary_list} => Array&lt;Types::QuickConnectSummary&gt;
+    #   * {Types::ListQueueQuickConnectsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListQueueQuickConnectsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8130,6 +8231,10 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
     #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
+    #   resp.quick_connect_summary_list[0].last_modified_region #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnects AWS API Documentation
     #
@@ -8198,6 +8303,8 @@ module Aws::Connect
     #   resp.queue_summary_list[0].arn #=> String
     #   resp.queue_summary_list[0].name #=> String
     #   resp.queue_summary_list[0].queue_type #=> String, one of "STANDARD", "AGENT"
+    #   resp.queue_summary_list[0].last_modified_time #=> Time
+    #   resp.queue_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueues AWS API Documentation
@@ -8258,6 +8365,8 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
     #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
+    #   resp.quick_connect_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnects AWS API Documentation
@@ -8295,6 +8404,8 @@ module Aws::Connect
     #
     #   * {Types::ListRoutingProfileQueuesResponse#next_token #next_token} => String
     #   * {Types::ListRoutingProfileQueuesResponse#routing_profile_queue_config_summary_list #routing_profile_queue_config_summary_list} => Array&lt;Types::RoutingProfileQueueConfigSummary&gt;
+    #   * {Types::ListRoutingProfileQueuesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListRoutingProfileQueuesResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8317,6 +8428,8 @@ module Aws::Connect
     #   resp.routing_profile_queue_config_summary_list[0].priority #=> Integer
     #   resp.routing_profile_queue_config_summary_list[0].delay #=> Integer
     #   resp.routing_profile_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueues AWS API Documentation
     #
@@ -8377,6 +8490,8 @@ module Aws::Connect
     #   resp.routing_profile_summary_list[0].id #=> String
     #   resp.routing_profile_summary_list[0].arn #=> String
     #   resp.routing_profile_summary_list[0].name #=> String
+    #   resp.routing_profile_summary_list[0].last_modified_time #=> Time
+    #   resp.routing_profile_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfiles AWS API Documentation
@@ -8532,6 +8647,8 @@ module Aws::Connect
     #
     #   * {Types::ListSecurityProfileApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
     #   * {Types::ListSecurityProfileApplicationsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileApplicationsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileApplicationsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8551,6 +8668,8 @@ module Aws::Connect
     #   resp.applications[0].application_permissions #=> Array
     #   resp.applications[0].application_permissions[0] #=> String
     #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplications AWS API Documentation
     #
@@ -8586,6 +8705,8 @@ module Aws::Connect
     #
     #   * {Types::ListSecurityProfilePermissionsResponse#permissions #permissions} => Array&lt;String&gt;
     #   * {Types::ListSecurityProfilePermissionsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfilePermissionsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfilePermissionsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8603,6 +8724,8 @@ module Aws::Connect
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String
     #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissions AWS API Documentation
     #
@@ -8661,6 +8784,8 @@ module Aws::Connect
     #   resp.security_profile_summary_list[0].id #=> String
     #   resp.security_profile_summary_list[0].arn #=> String
     #   resp.security_profile_summary_list[0].name #=> String
+    #   resp.security_profile_summary_list[0].last_modified_time #=> Time
+    #   resp.security_profile_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfiles AWS API Documentation
@@ -8986,6 +9111,8 @@ module Aws::Connect
     #   resp.user_hierarchy_group_summary_list[0].id #=> String
     #   resp.user_hierarchy_group_summary_list[0].arn #=> String
     #   resp.user_hierarchy_group_summary_list[0].name #=> String
+    #   resp.user_hierarchy_group_summary_list[0].last_modified_time #=> Time
+    #   resp.user_hierarchy_group_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroups AWS API Documentation
@@ -9038,6 +9165,8 @@ module Aws::Connect
     #   resp.user_summary_list[0].id #=> String
     #   resp.user_summary_list[0].arn #=> String
     #   resp.user_summary_list[0].username #=> String
+    #   resp.user_summary_list[0].last_modified_time #=> Time
+    #   resp.user_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsers AWS API Documentation
@@ -9334,7 +9463,8 @@ module Aws::Connect
     end
 
     # Replicates an Amazon Connect instance in the specified Amazon Web
-    # Services Region.
+    # Services Region and copies configuration information for Amazon
+    # Connect resources across Amazon Web Services Regions.
     #
     # For more information about replicating an Amazon Connect instance, see
     # [Create a replica of your existing Amazon Connect instance][1] in the
@@ -9615,6 +9745,8 @@ module Aws::Connect
     #   resp.hours_of_operations[0].config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operations[0].tags #=> Hash
     #   resp.hours_of_operations[0].tags["TagKey"] #=> String
+    #   resp.hours_of_operations[0].last_modified_time #=> Time
+    #   resp.hours_of_operations[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9716,6 +9848,8 @@ module Aws::Connect
     #   resp.prompts[0].description #=> String
     #   resp.prompts[0].tags #=> Hash
     #   resp.prompts[0].tags["TagKey"] #=> String
+    #   resp.prompts[0].last_modified_time #=> Time
+    #   resp.prompts[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9831,6 +9965,8 @@ module Aws::Connect
     #   resp.queues[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.queues[0].tags #=> Hash
     #   resp.queues[0].tags["TagKey"] #=> String
+    #   resp.queues[0].last_modified_time #=> Time
+    #   resp.queues[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9938,6 +10074,8 @@ module Aws::Connect
     #   resp.quick_connects[0].quick_connect_config.phone_config.phone_number #=> String
     #   resp.quick_connects[0].tags #=> Hash
     #   resp.quick_connects[0].tags["TagKey"] #=> String
+    #   resp.quick_connects[0].last_modified_time #=> Time
+    #   resp.quick_connects[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -10118,6 +10256,9 @@ module Aws::Connect
     #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
     #   resp.routing_profiles[0].number_of_associated_users #=> Integer
     #   resp.routing_profiles[0].agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
+    #   resp.routing_profiles[0].last_modified_time #=> Time
+    #   resp.routing_profiles[0].last_modified_region #=> String
+    #   resp.routing_profiles[0].is_default #=> Boolean
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -12552,7 +12693,13 @@ module Aws::Connect
     #   A description of the prompt.
     #
     # @option params [String] :s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can provide
+    #   S3 pre-signed URLs returned by the [GetPromptFile][1] API instead of
+    #   providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #
     # @return [Types::UpdatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13891,7 +14038,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

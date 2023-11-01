@@ -29108,6 +29108,10 @@ module Aws::SageMaker
     #   Summary of information about the last monitoring job to run.
     #   @return [Types::MonitoringExecutionSummary]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardMonitoringSchedule AWS API Documentation
     #
     class ModelDashboardMonitoringSchedule < Struct.new(
@@ -29121,7 +29125,8 @@ module Aws::SageMaker
       :monitoring_schedule_config,
       :endpoint_name,
       :monitoring_alert_summaries,
-      :last_monitoring_execution_summary)
+      :last_monitoring_execution_summary,
+      :batch_transform_input)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -926,6 +926,10 @@ module Aws::RDS
     #   instead automatically adjusts as needed.
     #   @return [Integer]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] iops
     #   The Provisioned IOPS (I/O operations per second) value. This setting
     #   is only for non-Aurora Multi-AZ DB clusters.
@@ -945,6 +949,7 @@ module Aws::RDS
       :engine_version,
       :backup_retention_period,
       :allocated_storage,
+      :rds_custom_cluster_configuration,
       :iops,
       :storage_type)
       SENSITIVE = []
@@ -2457,6 +2462,10 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters only
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
@@ -2884,6 +2893,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :engine_mode,
       :scaling_configuration,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :global_cluster_identifier,
       :enable_http_endpoint,
@@ -6315,6 +6325,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Types::ScalingConfigurationInfo]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Indicates whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
@@ -6609,6 +6623,7 @@ module Aws::RDS
       :capacity,
       :engine_mode,
       :scaling_configuration_info,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :http_endpoint_enabled,
       :activity_stream_mode,
@@ -19328,6 +19343,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Reserved for future use.
+    #
+    # @!attribute [rw] interconnect_subnet_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_multicast_domain_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RdsCustomClusterConfiguration AWS API Documentation
+    #
+    class RdsCustomClusterConfiguration < Struct.new(
+      :interconnect_subnet_id,
+      :transit_gateway_multicast_domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier. This parameter is stored as a lowercase
     #   string.
@@ -20905,6 +20939,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -20935,7 +20973,8 @@ module Aws::RDS
       :iops,
       :publicly_accessible,
       :serverless_v2_scaling_configuration,
-      :network_type)
+      :network_type,
+      :rds_custom_cluster_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21401,6 +21440,10 @@ module Aws::RDS
     #   The resource ID of the source DB cluster from which to restore.
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -21431,7 +21474,8 @@ module Aws::RDS
       :iops,
       :serverless_v2_scaling_configuration,
       :network_type,
-      :source_db_cluster_resource_id)
+      :source_db_cluster_resource_id,
+      :rds_custom_cluster_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

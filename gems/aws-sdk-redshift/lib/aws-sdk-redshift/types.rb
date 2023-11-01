@@ -903,6 +903,16 @@ module Aws::Redshift
     #   `dualstack`.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   A boolean value that, if true, indicates that the cluster is
+    #   deployed in two Availability Zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_az_secondary
+    #   The secondary compute unit of a cluster, if Multi-AZ deployment is
+    #   turned on.
+    #   @return [Types::SecondaryClusterInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -963,7 +973,9 @@ module Aws::Redshift
       :custom_domain_certificate_expiry_date,
       :master_password_secret_arn,
       :master_password_secret_kms_key_id,
-      :ip_address_type)
+      :ip_address_type,
+      :multi_az,
+      :multi_az_secondary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2268,6 +2280,11 @@ module Aws::Redshift
     #   `ipv4` and `dualstack`.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   If true, Amazon Redshift will deploy the cluster in two Availability
+    #   Zones (AZ).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2307,7 +2324,8 @@ module Aws::Redshift
       :load_sample_data,
       :manage_master_password,
       :master_password_secret_kms_key_id,
-      :ip_address_type)
+      :ip_address_type,
+      :multi_az)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -6386,6 +6404,31 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster for which the primary compute
+    #   unit will be failed over to another Availability Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryComputeInputMessage AWS API Documentation
+    #
+    class FailoverPrimaryComputeInputMessage < Struct.new(
+      :cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryComputeResult AWS API Documentation
+    #
+    class FailoverPrimaryComputeResult < Struct.new(
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request parameters to get cluster credentials.
     #
     # @!attribute [rw] db_user
@@ -7835,6 +7878,12 @@ module Aws::Redshift
     #   `ipv4` and `dualstack`.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   If true and the cluster is currently only deployed in a single
+    #   Availability Zone, the cluster will be modified to be deployed in
+    #   two Availability Zones.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -7865,7 +7914,8 @@ module Aws::Redshift
       :port,
       :manage_master_password,
       :master_password_secret_kms_key_id,
-      :ip_address_type)
+      :ip_address_type,
+      :multi_az)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -9802,6 +9852,11 @@ module Aws::Redshift
     #   `dualstack`.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   If true, the snapshot will be restored to a cluster deployed in two
+    #   Availability Zones.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -9840,7 +9895,8 @@ module Aws::Redshift
       :encrypted,
       :manage_master_password,
       :master_password_secret_kms_key_id,
-      :ip_address_type)
+      :ip_address_type,
+      :multi_az)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10390,6 +10446,27 @@ module Aws::Redshift
     class ScheduledActionsMessage < Struct.new(
       :marker,
       :scheduled_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AvailabilityZone and ClusterNodes information of the secondary
+    # compute unit.
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone in which the secondary compute
+    #   unit of the cluster is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_nodes
+    #   The nodes in the secondary compute unit.
+    #   @return [Array<Types::ClusterNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SecondaryClusterInfo AWS API Documentation
+    #
+    class SecondaryClusterInfo < Struct.new(
+      :availability_zone,
+      :cluster_nodes)
       SENSITIVE = []
       include Aws::Structure
     end

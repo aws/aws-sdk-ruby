@@ -236,6 +236,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::EnableLogging.build(context)
           when :enable_snapshot_copy
             Aws::Redshift::Endpoints::EnableSnapshotCopy.build(context)
+          when :failover_primary_compute
+            Aws::Redshift::Endpoints::FailoverPrimaryCompute.build(context)
           when :get_cluster_credentials
             Aws::Redshift::Endpoints::GetClusterCredentials.build(context)
           when :get_cluster_credentials_with_iam

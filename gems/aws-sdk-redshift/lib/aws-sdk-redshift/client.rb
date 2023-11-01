@@ -1533,6 +1533,10 @@ module Aws::Redshift
     #   The IP address types that the cluster supports. Possible values are
     #   `ipv4` and `dualstack`.
     #
+    # @option params [Boolean] :multi_az
+    #   If true, Amazon Redshift will deploy the cluster in two Availability
+    #   Zones (AZ).
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1582,6 +1586,7 @@ module Aws::Redshift
     #     manage_master_password: false,
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -1711,6 +1716,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -3148,6 +3159,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -4775,6 +4792,12 @@ module Aws::Redshift
     #   resp.clusters[0].master_password_secret_arn #=> String
     #   resp.clusters[0].master_password_secret_kms_key_id #=> String
     #   resp.clusters[0].ip_address_type #=> String
+    #   resp.clusters[0].multi_az #=> String
+    #   resp.clusters[0].multi_az_secondary.availability_zone #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes #=> Array
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7157,6 +7180,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -7498,6 +7527,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7505,6 +7540,166 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def enable_snapshot_copy(params = {}, options = {})
       req = build_request(:enable_snapshot_copy, params)
+      req.send_request(options)
+    end
+
+    # Fails over the primary compute unit of the specified Multi-AZ cluster
+    # to another Availability Zone.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster for which the primary compute
+    #   unit will be failed over to another Availability Zone.
+    #
+    # @return [Types::FailoverPrimaryComputeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverPrimaryComputeResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_primary_compute({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryCompute AWS API Documentation
+    #
+    # @overload failover_primary_compute(params = {})
+    # @param [Hash] params ({})
+    def failover_primary_compute(params = {}, options = {})
+      req = build_request(:failover_primary_compute, params)
       req.send_request(options)
     end
 
@@ -8289,6 +8484,11 @@ module Aws::Redshift
     #   The IP address types that the cluster supports. Possible values are
     #   `ipv4` and `dualstack`.
     #
+    # @option params [Boolean] :multi_az
+    #   If true and the cluster is currently only deployed in a single
+    #   Availability Zone, the cluster will be modified to be deployed in two
+    #   Availability Zones.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -8324,6 +8524,7 @@ module Aws::Redshift
     #     manage_master_password: false,
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -8453,6 +8654,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -8614,6 +8821,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -8791,6 +9004,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8968,6 +9187,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -9698,6 +9923,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9958,6 +10189,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -10215,6 +10452,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -10526,6 +10769,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -10832,6 +11081,10 @@ module Aws::Redshift
     #   The IP address type for the cluster. Possible values are `ipv4` and
     #   `dualstack`.
     #
+    # @option params [Boolean] :multi_az
+    #   If true, the snapshot will be restored to a cluster deployed in two
+    #   Availability Zones.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -10875,6 +11128,7 @@ module Aws::Redshift
     #     manage_master_password: false,
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -11004,6 +11258,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -11256,6 +11516,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -11644,6 +11910,12 @@ module Aws::Redshift
     #   resp.cluster.master_password_secret_arn #=> String
     #   resp.cluster.master_password_secret_kms_key_id #=> String
     #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -11719,7 +11991,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
