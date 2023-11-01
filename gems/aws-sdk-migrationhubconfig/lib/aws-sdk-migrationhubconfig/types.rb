@@ -61,6 +61,24 @@ module Aws::MigrationHubConfig
     end
 
     # @!attribute [rw] control_id
+    #   A unique identifier that's generated for each home region control.
+    #   It's always a string that begins with "hrc-" followed by 12
+    #   lowercase letters and numbers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/DeleteHomeRegionControlRequest AWS API Documentation
+    #
+    class DeleteHomeRegionControlRequest < Struct.new(
+      :control_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/DeleteHomeRegionControlResult AWS API Documentation
+    #
+    class DeleteHomeRegionControlResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] control_id
     #   The `ControlID` is a unique identifier string of your
     #   `HomeRegionControl` object.
     #   @return [String]

@@ -478,6 +478,8 @@ module Aws::EMR
     Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroups"))
     Cluster.add_member(:os_release_label, Shapes::ShapeRef.new(shape: String, location_name: "OSReleaseLabel"))
+    Cluster.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    Cluster.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -1324,6 +1326,8 @@ module Aws::EMR
     RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
     RunJobFlowInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
     RunJobFlowInput.add_member(:os_release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "OSReleaseLabel"))
+    RunJobFlowInput.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    RunJobFlowInput.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))

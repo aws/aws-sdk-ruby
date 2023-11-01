@@ -210,6 +210,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
     #
     class AgentStatus < Struct.new(
@@ -220,7 +229,9 @@ module Aws::Connect
       :type,
       :display_order,
       :state,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -267,13 +278,24 @@ module Aws::Connect
     #   The type of the agent status.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusSummary AWS API Documentation
     #
     class AgentStatusSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :type)
+      :type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -302,7 +324,7 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # A third party application's metadata.
+    # A third-party application's metadata.
     #
     # @!attribute [rw] namespace
     #   Namespace of the application that you want to give access to.
@@ -727,6 +749,45 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   A list of resource identifiers to retrieve flow associations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociationRequest AWS API Documentation
+    #
+    class BatchGetFlowAssociationRequest < Struct.new(
+      :instance_id,
+      :resource_ids,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flow_association_summary_list
+    #   Information about flow associations.
+    #   @return [Array<Types::FlowAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociationResponse AWS API Documentation
+    #
+    class BatchGetFlowAssociationResponse < Struct.new(
+      :flow_association_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A chat message.
     #
     # @!attribute [rw] content_type
@@ -793,7 +854,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number
@@ -832,6 +905,7 @@ module Aws::Connect
     #
     class ClaimPhoneNumberRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number,
       :phone_number_description,
       :tags,
@@ -887,7 +961,18 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -899,15 +984,16 @@ module Aws::Connect
     # @!attribute [rw] phone_number_status
     #   The status of the phone number.
     #
-    #   * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    #   * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation succeeded.
     #
-    #   * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #     [UpdatePhoneNumber][2] operation is still in progress and has not
-    #     yet completed. You can call [DescribePhoneNumber][3] at a later
-    #     time to verify if the previous operation has completed.
+    #   * `IN_PROGRESS` means a [ClaimPhoneNumber][1],
+    #     [UpdatePhoneNumber][2], or [UpdatePhoneNumberMetadata][3]
+    #     operation is still in progress and has not yet completed. You can
+    #     call [DescribePhoneNumber][4] at a later time to verify if the
+    #     previous operation has completed.
     #
-    #   * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    #   * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation has failed. It will include a
     #     message indicating the failure reason. A common reason for a
     #     failure may be that the `TargetArn` value you are claiming or
@@ -924,9 +1010,10 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    #   [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #   @return [Types::PhoneNumberStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimedPhoneNumberSummary AWS API Documentation
@@ -939,6 +1026,7 @@ module Aws::Connect
       :phone_number_type,
       :phone_number_description,
       :target_arn,
+      :instance_id,
       :tags,
       :phone_number_status)
       SENSITIVE = []
@@ -1106,8 +1194,9 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -1151,10 +1240,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
-    #
-    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
@@ -1405,7 +1491,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1481,8 +1572,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -1873,7 +1963,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can
+    #   provide S3 pre-signed URLs returned by the [GetPromptFile][1] API
+    #   instead of providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2248,7 +2344,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of third party applications that the security profile will
+    #   A list of third-party applications that the security profile will
     #   give access to.
     #   @return [Array<Types::Application>]
     #
@@ -5698,6 +5794,30 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about flow associations.
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FlowAssociationSummary AWS API Documentation
+    #
+    class FlowAssociationSummary < Struct.new(
+      :resource_id,
+      :flow_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -6949,10 +7069,21 @@ module Aws::Connect
     #   user so they can access the prompt in S3.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFileResponse AWS API Documentation
     #
     class GetPromptFileResponse < Struct.new(
-      :prompt_presigned_url)
+      :prompt_presigned_url,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7097,7 +7228,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
@@ -7145,6 +7277,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup AWS API Documentation
     #
     class HierarchyGroup < Struct.new(
@@ -7153,7 +7294,9 @@ module Aws::Connect
       :name,
       :level_id,
       :hierarchy_path,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7192,12 +7335,23 @@ module Aws::Connect
     #   The name of the hierarchy group.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupSummary AWS API Documentation
     #
     class HierarchyGroupSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7235,12 +7389,23 @@ module Aws::Connect
     #   The name of the hierarchy level.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevel AWS API Documentation
     #
     class HierarchyLevel < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7501,6 +7666,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
     #
     class HoursOfOperation < Struct.new(
@@ -7510,7 +7684,9 @@ module Aws::Connect
       :description,
       :time_zone,
       :config,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7608,12 +7784,23 @@ module Aws::Connect
     #   The name of the hours of operation.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationSummary AWS API Documentation
     #
     class HoursOfOperationSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9096,7 +9283,18 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersSummary AWS API Documentation
@@ -9107,17 +9305,32 @@ module Aws::Connect
       :phone_number,
       :phone_number_country_code,
       :phone_number_type,
-      :target_arn)
+      :target_arn,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to. If
-    #   `TargetArn` input is not provided, this API lists numbers claimed to
-    #   all the Amazon Connect instances belonging to your account in the
-    #   same Amazon Web Services Region as the request.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. If both `TargetArn` and `InstanceId` input are not
+    #   provided, this API lists numbers claimed to all the Amazon Connect
+    #   instances belonging to your account in the same Amazon Web Services
+    #   Region as the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
+    #   not provided, this API lists numbers claimed to all the Amazon
+    #   Connect instances belonging to your account in the same AWS Region
+    #   as the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9147,6 +9360,7 @@ module Aws::Connect
     #
     class ListPhoneNumbersV2Request < Struct.new(
       :target_arn,
+      :instance_id,
       :max_results,
       :next_token,
       :phone_number_country_codes,
@@ -9262,11 +9476,22 @@ module Aws::Connect
     #   Information about the quick connects.
     #   @return [Array<Types::QuickConnectSummary>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnectsResponse AWS API Documentation
     #
     class ListQueueQuickConnectsResponse < Struct.new(
       :next_token,
-      :quick_connect_summary_list)
+      :quick_connect_summary_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9424,11 +9649,22 @@ module Aws::Connect
     #   Information about the routing profiles.
     #   @return [Array<Types::RoutingProfileQueueConfigSummary>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesResponse AWS API Documentation
     #
     class ListRoutingProfileQueuesResponse < Struct.new(
       :next_token,
-      :routing_profile_queue_config_summary_list)
+      :routing_profile_queue_config_summary_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9586,17 +9822,22 @@ module Aws::Connect
     end
 
     # @!attribute [rw] security_profile_id
-    #   The security profile identifier.
+    #   The identifier for the security profle.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The instance identifier.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9618,20 +9859,30 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsResponse AWS API Documentation
     #
     class ListSecurityProfileApplicationsResponse < Struct.new(
       :applications,
-      :next_token)
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9684,11 +9935,22 @@ module Aws::Connect
     #   of results.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissionsResponse AWS API Documentation
     #
     class ListSecurityProfilePermissionsResponse < Struct.new(
       :permissions,
-      :next_token)
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10741,15 +11003,15 @@ module Aws::Connect
 
     # The status of the phone number.
     #
-    # * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    # * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation succeeded.
     #
-    # * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #   [UpdatePhoneNumber][2] operation is still in progress and has not
-    #   yet completed. You can call [DescribePhoneNumber][3] at a later time
-    #   to verify if the previous operation has completed.
+    # * `IN_PROGRESS` means a [ClaimPhoneNumber][1], [UpdatePhoneNumber][2],
+    #   or [UpdatePhoneNumberMetadata][3] operation is still in progress and
+    #   has not yet completed. You can call [DescribePhoneNumber][4] at a
+    #   later time to verify if the previous operation has completed.
     #
-    # * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    # * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation has failed. It will include a
     #   message indicating the failure reason. A common reason for a failure
     #   may be that the `TargetArn` value you are claiming or updating a
@@ -10761,9 +11023,10 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #
     # @!attribute [rw] status
     #   The status.
@@ -10855,6 +11118,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Prompt AWS API Documentation
     #
     class Prompt < Struct.new(
@@ -10862,7 +11134,9 @@ module Aws::Connect
       :prompt_id,
       :name,
       :description,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10935,12 +11209,23 @@ module Aws::Connect
     #   The name of the prompt.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSummary AWS API Documentation
     #
     class PromptSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11058,6 +11343,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
     #
     class Queue < Struct.new(
@@ -11069,7 +11363,9 @@ module Aws::Connect
       :hours_of_operation_id,
       :max_contacts,
       :status,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11217,13 +11513,24 @@ module Aws::Connect
     #   The type of queue.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueSummary AWS API Documentation
     #
     class QueueSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :queue_type)
+      :queue_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11256,6 +11563,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
     #
     class QuickConnect < Struct.new(
@@ -11264,7 +11580,9 @@ module Aws::Connect
       :name,
       :description,
       :quick_connect_config,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11379,13 +11697,24 @@ module Aws::Connect
     #   (QUEUE).
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectSummary AWS API Documentation
     #
     class QuickConnectSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :quick_connect_type)
+      :quick_connect_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11757,6 +12086,19 @@ module Aws::Connect
     #   *longest idle time*.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Whether this a default routing profile.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -11770,7 +12112,10 @@ module Aws::Connect
       :tags,
       :number_of_associated_queues,
       :number_of_associated_users,
-      :agent_availability_timer)
+      :agent_availability_timer,
+      :last_modified_time,
+      :last_modified_region,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11976,12 +12321,23 @@ module Aws::Connect
     #   The name of the routing profile.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSummary AWS API Documentation
     #
     class RoutingProfileSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12204,7 +12560,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number_country_code
@@ -12234,6 +12602,7 @@ module Aws::Connect
     #
     class SearchAvailablePhoneNumbersRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number_country_code,
       :phone_number_type,
       :phone_number_prefix,
@@ -12720,6 +13089,11 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
+    #   <note markdown="1"> InstanceID is a required field. The "Required: No" below is
+    #   incorrect.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -12916,6 +13290,15 @@ module Aws::Connect
     #   restrictions to in Amazon Connect.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
@@ -12926,7 +13309,9 @@ module Aws::Connect
       :description,
       :tags,
       :allowed_access_control_tags,
-      :tag_restricted_resources)
+      :tag_restricted_resources,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13019,12 +13404,23 @@ module Aws::Connect
     #   The name of the security profile.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSummary AWS API Documentation
     #
     class SecurityProfileSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13110,7 +13506,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The distribution of allowing signing in to the instance and its
+    # The distribution that determines which Amazon Web Services Regions
+    # should be used to sign in agents in to both the instance and its
     # replica(s).
     #
     # @!attribute [rw] distributions
@@ -13598,7 +13995,10 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] previous_contact_id
-    #   The identifier of the previous chat, voice, or task contact.
+    #   The identifier of the previous chat, voice, or task contact. Any
+    #   updates to user-defined attributes to task contacts linked using the
+    #   same `PreviousContactID` will affect every contact in the chain.
+    #   There can be a maximum of 12 linked task contacts in a chain.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -13629,7 +14029,10 @@ module Aws::Connect
     #
     # @!attribute [rw] references
     #   A formatted URL that is shown to an agent in the Contact Control
-    #   Panel (CCP).
+    #   Panel (CCP). Tasks can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during task
+    #   creation.
     #   @return [Hash<String,Types::Reference>]
     #
     # @!attribute [rw] description
@@ -13658,15 +14061,34 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] task_template_id
-    #   A unique identifier for the task template.
+    #   A unique identifier for the task template. For more information
+    #   about task templates, see [Create task templates][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
-    #   The identifier for the quick connect.
+    #   The identifier for the quick connect. Tasks that are created by
+    #   using `QuickConnectId` will use the flow that is defined on agent or
+    #   queue quick connect. For more information about quick connects, see
+    #   [Create quick connects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html
     #   @return [String]
     #
     # @!attribute [rw] related_contact_id
-    #   The contactId that is [related][1] to this contact.
+    #   The contactId that is [related][1] to this contact. Linking tasks
+    #   together by using `RelatedContactID` copies over contact attributes
+    #   from the related task contact to the new task contact. All updates
+    #   to user-defined attributes in the new task contact are limited to
+    #   the individual contact ID, unlike what happens when tasks are linked
+    #   by using `PreviousContactID`. There are no limits to the number of
+    #   contacts that can be linked by using `RelatedContactId`.
     #
     #
     #
@@ -14325,14 +14747,14 @@ module Aws::Connect
     #     [DeleteTrafficDistributionGroup][2] operation has failed.
     #
     #   * `UPDATE_IN_PROGRESS` means the previous
-    #     [UpdateTrafficDistributionGroup][3] operation is still in progress
-    #     and has not yet completed.
+    #     [UpdateTrafficDistribution][3] operation is still in progress and
+    #     has not yet completed.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -14348,7 +14770,7 @@ module Aws::Connect
     #   default traffic distribution group is deleted as part of the process
     #   for deleting a replica.
     #
-    #   <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    #   <note markdown="1"> The `SignInConfig` distribution is available only on a default
     #   `TrafficDistributionGroup` (see the `IsDefault` parameter in the
     #   [TrafficDistributionGroup][1] data type). If you call
     #   `UpdateTrafficDistribution` with a modified `SignInConfig` and a
@@ -14695,8 +15117,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -14775,8 +15196,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example contact flow in Amazon Connect Flow
-    #   language][1].
+    #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
@@ -15197,12 +15617,56 @@ module Aws::Connect
     class UpdateParticipantRoleConfigResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] phone_number_id
+    #   The Amazon Resource Name (ARN) or resource ID of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberMetadataRequest AWS API Documentation
+    #
+    class UpdatePhoneNumberMetadataRequest < Struct.new(
+      :phone_number_id,
+      :phone_number_description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -15224,6 +15688,7 @@ module Aws::Connect
     class UpdatePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :target_arn,
+      :instance_id,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -15268,7 +15733,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can
+    #   provide S3 pre-signed URLs returned by the [GetPromptFile][1] API
+    #   instead of providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePromptRequest AWS API Documentation
@@ -15732,7 +16203,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
@@ -15900,7 +16371,8 @@ module Aws::Connect
     #   @return [Types::TelephonyConfig]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
@@ -16275,6 +16747,15 @@ module Aws::Connect
     #   The tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User AWS API Documentation
     #
     class User < Struct.new(
@@ -16287,7 +16768,9 @@ module Aws::Connect
       :security_profile_ids,
       :routing_profile_id,
       :hierarchy_group_id,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16687,12 +17170,23 @@ module Aws::Connect
     #   The Amazon Connect user name of the user account.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSummary AWS API Documentation
     #
     class UserSummary < Struct.new(
       :id,
       :arn,
-      :username)
+      :username,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end

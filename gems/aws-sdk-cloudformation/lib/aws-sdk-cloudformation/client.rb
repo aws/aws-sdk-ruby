@@ -2378,9 +2378,9 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.resource_type #=> String
     #   resp.changes[0].resource_change.replacement #=> String, one of "True", "False", "Conditional"
     #   resp.changes[0].resource_change.scope #=> Array
-    #   resp.changes[0].resource_change.scope[0] #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "Tags"
+    #   resp.changes[0].resource_change.scope[0] #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details #=> Array
-    #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "Tags"
+    #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details[0].target.name #=> String
     #   resp.changes[0].resource_change.details[0].target.requires_recreation #=> String, one of "Never", "Conditionally", "Always"
     #   resp.changes[0].resource_change.details[0].evaluation #=> String, one of "Static", "Dynamic"
@@ -7160,7 +7160,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

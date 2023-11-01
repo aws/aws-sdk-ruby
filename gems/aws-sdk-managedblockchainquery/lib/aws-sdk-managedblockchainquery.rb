@@ -53,6 +53,6 @@ require_relative 'aws-sdk-managedblockchainquery/customizations'
 # @!group service
 module Aws::ManagedBlockchainQuery
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.3.0'
 
 end

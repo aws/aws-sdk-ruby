@@ -520,7 +520,7 @@ module Aws::AppIntegrationsService
     # @option params [required, String] :source_uri
     #   The URI of the data source.
     #
-    # @option params [required, Types::ScheduleConfiguration] :schedule_config
+    # @option params [Types::ScheduleConfiguration] :schedule_config
     #   The name of the data and how often it should be pulled from the
     #   source.
     #
@@ -569,7 +569,7 @@ module Aws::AppIntegrationsService
     #     description: "Description",
     #     kms_key: "NonBlankString", # required
     #     source_uri: "SourceURI", # required
-    #     schedule_config: { # required
+    #     schedule_config: {
     #       first_execution_from: "NonBlankString",
     #       object: "Object",
     #       schedule_expression: "NonBlankString", # required
@@ -1447,7 +1447,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,12 +58,18 @@ module Aws::OpenSearchServerless
           case context.operation_name
           when :batch_get_collection
             Aws::OpenSearchServerless::Endpoints::BatchGetCollection.build(context)
+          when :batch_get_effective_lifecycle_policy
+            Aws::OpenSearchServerless::Endpoints::BatchGetEffectiveLifecyclePolicy.build(context)
+          when :batch_get_lifecycle_policy
+            Aws::OpenSearchServerless::Endpoints::BatchGetLifecyclePolicy.build(context)
           when :batch_get_vpc_endpoint
             Aws::OpenSearchServerless::Endpoints::BatchGetVpcEndpoint.build(context)
           when :create_access_policy
             Aws::OpenSearchServerless::Endpoints::CreateAccessPolicy.build(context)
           when :create_collection
             Aws::OpenSearchServerless::Endpoints::CreateCollection.build(context)
+          when :create_lifecycle_policy
+            Aws::OpenSearchServerless::Endpoints::CreateLifecyclePolicy.build(context)
           when :create_security_config
             Aws::OpenSearchServerless::Endpoints::CreateSecurityConfig.build(context)
           when :create_security_policy
@@ -74,6 +80,8 @@ module Aws::OpenSearchServerless
             Aws::OpenSearchServerless::Endpoints::DeleteAccessPolicy.build(context)
           when :delete_collection
             Aws::OpenSearchServerless::Endpoints::DeleteCollection.build(context)
+          when :delete_lifecycle_policy
+            Aws::OpenSearchServerless::Endpoints::DeleteLifecyclePolicy.build(context)
           when :delete_security_config
             Aws::OpenSearchServerless::Endpoints::DeleteSecurityConfig.build(context)
           when :delete_security_policy
@@ -94,6 +102,8 @@ module Aws::OpenSearchServerless
             Aws::OpenSearchServerless::Endpoints::ListAccessPolicies.build(context)
           when :list_collections
             Aws::OpenSearchServerless::Endpoints::ListCollections.build(context)
+          when :list_lifecycle_policies
+            Aws::OpenSearchServerless::Endpoints::ListLifecyclePolicies.build(context)
           when :list_security_configs
             Aws::OpenSearchServerless::Endpoints::ListSecurityConfigs.build(context)
           when :list_security_policies
@@ -112,6 +122,8 @@ module Aws::OpenSearchServerless
             Aws::OpenSearchServerless::Endpoints::UpdateAccountSettings.build(context)
           when :update_collection
             Aws::OpenSearchServerless::Endpoints::UpdateCollection.build(context)
+          when :update_lifecycle_policy
+            Aws::OpenSearchServerless::Endpoints::UpdateLifecyclePolicy.build(context)
           when :update_security_config
             Aws::OpenSearchServerless::Endpoints::UpdateSecurityConfig.build(context)
           when :update_security_policy

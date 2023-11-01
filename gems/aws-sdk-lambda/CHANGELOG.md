@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2023-10-12)
+------------------
+
+* Feature - Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs
+
 1.105.0 (2023-09-27)
 ------------------
 

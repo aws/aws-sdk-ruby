@@ -4129,6 +4129,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The recommended Capacity Block that fits your search requirements.
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Block offering.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_block_duration_hours
+    #   The amount of time of the Capacity Block reservation in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The total price to be paid up front.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency of the payment for the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the Capacity Block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
+    #
+    class CapacityBlockOffering < Struct.new(
+      :capacity_block_offering_id,
+      :instance_type,
+      :availability_zone,
+      :instance_count,
+      :start_date,
+      :end_date,
+      :capacity_block_duration_hours,
+      :upfront_fee,
+      :currency_code,
+      :tenancy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Capacity Reservation.
     #
     # @!attribute [rw] capacity_reservation_id
@@ -4294,6 +4353,10 @@ module Aws::EC2
     #   Information about instance capacity usage.
     #   @return [Array<Types::CapacityAllocation>]
     #
+    # @!attribute [rw] reservation_type
+    #   The type of Capacity Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -4319,7 +4382,8 @@ module Aws::EC2
       :outpost_arn,
       :capacity_reservation_fleet_id,
       :placement_group_arn,
-      :capacity_allocations)
+      :capacity_allocations,
+      :reservation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16147,6 +16211,79 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance for which the Capacity Block offering reserves
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances for which to reserve capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date_range
+    #   The earliest start date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_range
+    #   The latest end date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_duration_hours
+    #   The number of hours for which to reserve Capacity Block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsRequest < Struct.new(
+      :dry_run,
+      :instance_type,
+      :instance_count,
+      :start_date_range,
+      :end_date_range,
+      :capacity_duration_hours,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_offerings
+    #   The recommended Capacity Block offering for the dates specified.
+    #   @return [Array<Types::CapacityBlockOffering>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsResult AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsResult < Struct.new(
+      :capacity_block_offerings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_fleet_ids
     #   The IDs of the Capacity Reservation Fleets to describe.
     #   @return [Array<String>]
@@ -18598,6 +18735,10 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `source-instance-id` - The ID of the instance that the AMI was
+    #     created from if the AMI was created using CreateImage. This filter
+    #     is applicable only if the AMI was created using [CreateImage][1].
+    #
     #   * `state` - The state of the image (`available` \| `pending` \|
     #     `failed`).
     #
@@ -18620,6 +18761,10 @@ module Aws::EC2
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] image_ids
@@ -18645,6 +18790,12 @@ module Aws::EC2
     #   regardless of what you specify for this parameter.
     #
     #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_disabled
+    #   Specifies whether to include disabled AMIs.
+    #
+    #   Default: No disabled AMIs are included in the response.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -18678,6 +18829,7 @@ module Aws::EC2
       :image_ids,
       :owners,
       :include_deprecated,
+      :include_disabled,
       :dry_run,
       :max_results,
       :next_token)
@@ -24122,9 +24274,9 @@ module Aws::EC2
     #     supported).
     #
     #   * `timestamp` - The time stamp of the Spot price history, in UTC
-    #     format (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). You can
-    #     use wildcards (* and ?). Greater than or less than comparison is
-    #     not supported.
+    #     format (for example, *ddd MMM dd HH*:*mm*:*ss* UTC *YYYY*). You
+    #     can use wildcards (`*` and `?`). Greater than or less than
+    #     comparison is not supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] availability_zone
@@ -24287,6 +24439,12 @@ module Aws::EC2
     #
     #   * `bucket` - Returns task information for tasks that targeted a
     #     specific bucket. For the filter value, specify the bucket name.
+    #
+    #   <note markdown="1"> When you specify the `ImageIds` parameter, any filters that you
+    #   specify are ignored. To use the filters, you must remove the
+    #   `ImageIds` parameter.
+    #
+    #    </note>
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -24300,7 +24458,7 @@ module Aws::EC2
     #   next page of items, make another request with the token returned in
     #   the output. For more information, see [Pagination][1].
     #
-    #   You cannot specify this parameter and the `ImageIDs` parameter in
+    #   You cannot specify this parameter and the `ImageIds` parameter in
     #   the same call.
     #
     #
@@ -27952,6 +28110,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageRequest AWS API Documentation
+    #
+    class DisableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageResult AWS API Documentation
+    #
+    class DisableImageResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
@@ -30035,6 +30226,39 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecationResult AWS API Documentation
     #
     class EnableImageDeprecationResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageRequest AWS API Documentation
+    #
+    class EnableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageResult AWS API Documentation
+    #
+    class EnableImageResult < Struct.new(
       :return)
       SENSITIVE = []
       include Aws::Structure
@@ -34066,6 +34290,79 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_id
+    #   The VPC ID where the security group can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters. If using multiple filters, the results include security
+    #   groups which match all filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `description`: The security group's description.
+    #
+    #   * `group-name`: The security group name.
+    #
+    #   * `owner-id`: The security group owner ID.
+    #
+    #   * `primary-vpc-id`: The VPC ID in which the security group was
+    #     created.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcRequest AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcRequest < Struct.new(
+      :vpc_id,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_for_vpcs
+    #   The security group that can be used by interfaces in the VPC.
+    #   @return [Array<Types::SecurityGroupForVpc>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcResult AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcResult < Struct.new(
+      :next_token,
+      :security_group_for_vpcs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -35083,7 +35380,22 @@ module Aws::EC2
     # @!attribute [rw] configured
     #   Set to `true` to enable your instance for hibernation.
     #
+    #   For Spot Instances, if you set `Configured` to `true`, either omit
+    #   the `InstanceInterruptionBehavior` parameter (for [
+    #   `SpotMarketOptions` ][1]), or set it to `hibernate`. When
+    #   `Configured` is true:
+    #
+    #   * If you omit `InstanceInterruptionBehavior`, it defaults to
+    #     `hibernate`.
+    #
+    #   * If you set `InstanceInterruptionBehavior` to a value other than
+    #     `hibernate`, you'll get an error.
+    #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptionsRequest AWS API Documentation
@@ -35721,7 +36033,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   The hypervisor type of the image.
+    #   The hypervisor type of the image. Only `xen` is supported. `ovm` is
+    #   not supported.
     #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
@@ -35799,6 +36112,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [String]
     #
+    # @!attribute [rw] source_instance_id
+    #   The ID of the instance that the AMI was created from if the AMI was
+    #   created using [CreateImage][1]. This field only appears if the AMI
+    #   was created using CreateImage.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -35831,7 +36154,8 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :deprecation_time,
-      :imds_support)
+      :imds_support,
+      :source_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38599,18 +38923,21 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Attribute-based instance type selection for
-    # EC2 Fleet][3], [Attribute-based instance type selection for Spot
-    # Fleet][4], and [Spot placement score][5] in the *Amazon EC2 User
+    # For more information, see [Create a mixed instances group using
+    # attribute-based instance type selection][3] in the *Amazon EC2 Auto
+    # Scaling User Guide*, and also [Attribute-based instance type selection
+    # for EC2 Fleet][4], [Attribute-based instance type selection for Spot
+    # Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
     # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs.
@@ -51683,6 +52010,48 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the Capacity Block during launch.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockRequest AWS API Documentation
+    #
+    class PurchaseCapacityBlockRequest < Struct.new(
+      :dry_run,
+      :tag_specifications,
+      :capacity_block_offering_id,
+      :instance_platform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation
+    #   The Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockResult AWS API Documentation
+    #
+    class PurchaseCapacityBlockResult < Struct.new(
+      :capacity_reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
@@ -57326,6 +57695,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # A security group that can be used by interfaces in the VPC.
+    #
+    # @!attribute [rw] description
+    #   The security group's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The security group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The security group owner ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The security group tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] primary_vpc_id
+    #   The VPC ID in which the security group was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupForVpc AWS API Documentation
+    #
+    class SecurityGroupForVpc < Struct.new(
+      :description,
+      :group_name,
+      :owner_id,
+      :group_id,
+      :tags,
+      :primary_vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a security group.
     #
     # @!attribute [rw] group_id
@@ -59232,8 +59640,25 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   The behavior when a Spot Instance is interrupted.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `true`,
+    #   the `InstanceInterruptionBehavior` parameter is automatically set to
+    #   `hibernate`. If you set it to `stop` or `terminate`, you'll get an
+    #   error.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `false`
+    #   or `null`, the `InstanceInterruptionBehavior` parameter is
+    #   automatically set to `terminate`. You can also set it to `stop` or
+    #   `hibernate`.
+    #
+    #   For more information, see [Interruption behavior][2] in the *Amazon
+    #   EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interruption-behavior.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMarketOptions AWS API Documentation

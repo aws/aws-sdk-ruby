@@ -66,6 +66,8 @@ module Aws::GlobalAccelerator
             Aws::GlobalAccelerator::Endpoints::AllowCustomRoutingTraffic.build(context)
           when :create_accelerator
             Aws::GlobalAccelerator::Endpoints::CreateAccelerator.build(context)
+          when :create_cross_account_attachment
+            Aws::GlobalAccelerator::Endpoints::CreateCrossAccountAttachment.build(context)
           when :create_custom_routing_accelerator
             Aws::GlobalAccelerator::Endpoints::CreateCustomRoutingAccelerator.build(context)
           when :create_custom_routing_endpoint_group
@@ -78,6 +80,8 @@ module Aws::GlobalAccelerator
             Aws::GlobalAccelerator::Endpoints::CreateListener.build(context)
           when :delete_accelerator
             Aws::GlobalAccelerator::Endpoints::DeleteAccelerator.build(context)
+          when :delete_cross_account_attachment
+            Aws::GlobalAccelerator::Endpoints::DeleteCrossAccountAttachment.build(context)
           when :delete_custom_routing_accelerator
             Aws::GlobalAccelerator::Endpoints::DeleteCustomRoutingAccelerator.build(context)
           when :delete_custom_routing_endpoint_group
@@ -96,6 +100,8 @@ module Aws::GlobalAccelerator
             Aws::GlobalAccelerator::Endpoints::DescribeAccelerator.build(context)
           when :describe_accelerator_attributes
             Aws::GlobalAccelerator::Endpoints::DescribeAcceleratorAttributes.build(context)
+          when :describe_cross_account_attachment
+            Aws::GlobalAccelerator::Endpoints::DescribeCrossAccountAttachment.build(context)
           when :describe_custom_routing_accelerator
             Aws::GlobalAccelerator::Endpoints::DescribeCustomRoutingAccelerator.build(context)
           when :describe_custom_routing_accelerator_attributes
@@ -112,6 +118,12 @@ module Aws::GlobalAccelerator
             Aws::GlobalAccelerator::Endpoints::ListAccelerators.build(context)
           when :list_byoip_cidrs
             Aws::GlobalAccelerator::Endpoints::ListByoipCidrs.build(context)
+          when :list_cross_account_attachments
+            Aws::GlobalAccelerator::Endpoints::ListCrossAccountAttachments.build(context)
+          when :list_cross_account_resource_accounts
+            Aws::GlobalAccelerator::Endpoints::ListCrossAccountResourceAccounts.build(context)
+          when :list_cross_account_resources
+            Aws::GlobalAccelerator::Endpoints::ListCrossAccountResources.build(context)
           when :list_custom_routing_accelerators
             Aws::GlobalAccelerator::Endpoints::ListCustomRoutingAccelerators.build(context)
           when :list_custom_routing_endpoint_groups
@@ -142,6 +154,8 @@ module Aws::GlobalAccelerator
             Aws::GlobalAccelerator::Endpoints::UpdateAccelerator.build(context)
           when :update_accelerator_attributes
             Aws::GlobalAccelerator::Endpoints::UpdateAcceleratorAttributes.build(context)
+          when :update_cross_account_attachment
+            Aws::GlobalAccelerator::Endpoints::UpdateCrossAccountAttachment.build(context)
           when :update_custom_routing_accelerator
             Aws::GlobalAccelerator::Endpoints::UpdateCustomRoutingAccelerator.build(context)
           when :update_custom_routing_accelerator_attributes

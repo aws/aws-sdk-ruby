@@ -4535,7 +4535,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK` and `CFN_STACKSET`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4686,7 +4687,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK` and `CFN_STACKSET`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4980,7 +4982,13 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The type of provisioning artifact.
     #
-    #   `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
+    #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
+    #
+    #   * `TERRAFORM_OPEN_SOURCE` - Terraform Open Source configuration file
+    #
+    #   * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
+    #
+    #   * `EXTERNAL` - External configuration file
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -5159,7 +5167,11 @@ module Aws::ServiceCatalog
     #
     #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #
-    #   * `TERRAFORM_OPEN_SOURCE` - Terraform open source configuration file
+    #   * `TERRAFORM_OPEN_SOURCE` - Terraform Open Source configuration file
+    #
+    #   * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
+    #
+    #   * `EXTERNAL` - External configuration file
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation
@@ -5421,8 +5433,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`, and
-    #   `TERRAFORM_CLOUD`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] record_type

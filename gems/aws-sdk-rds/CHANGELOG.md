@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2023-11-01)
+------------------
+
+* Feature - This release adds support for customized networking resources to Amazon RDS Custom.
+
+1.199.0 (2023-10-30)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+
+1.198.0 (2023-10-18)
+------------------
+
+* Feature - This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+
+1.197.0 (2023-10-12)
+------------------
+
+* Feature - This release adds support for adding a dedicated log volume to open-source RDS instances.
+
 1.196.0 (2023-10-05)
 ------------------
 

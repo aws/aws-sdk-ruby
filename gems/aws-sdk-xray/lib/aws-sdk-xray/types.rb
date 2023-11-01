@@ -1299,8 +1299,8 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] time_range_type
-    #   A parameter to indicate whether to query trace summaries by TraceId
-    #   or Event time.
+    #   A parameter to indicate whether to query trace summaries by TraceId,
+    #   Event (trace update time), or Service (segment end time).
     #   @return [String]
     #
     # @!attribute [rw] sampling

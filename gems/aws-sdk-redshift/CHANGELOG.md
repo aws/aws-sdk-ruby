@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-11-01)
+------------------
+
+* Feature - Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.
+
+1.101.0 (2023-10-27)
+------------------
+
+* Feature - added support to create a dual stack cluster
+
+1.100.0 (2023-10-26)
+------------------
+
+* Feature - Add Redshift APIs GetResourcePolicy, DeleteResourcePolicy, PutResourcePolicy and DescribeInboundIntegrations for the new Amazon Redshift Zero-ETL integration feature, which can be used to control data ingress into Redshift namespace, and view inbound integrations.
+
+1.99.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.
+
 1.98.0 (2023-09-27)
 ------------------
 

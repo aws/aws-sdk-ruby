@@ -118,12 +118,16 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DissociatePackage.build(context)
           when :get_compatible_versions
             Aws::OpenSearchService::Endpoints::GetCompatibleVersions.build(context)
+          when :get_domain_maintenance_status
+            Aws::OpenSearchService::Endpoints::GetDomainMaintenanceStatus.build(context)
           when :get_package_version_history
             Aws::OpenSearchService::Endpoints::GetPackageVersionHistory.build(context)
           when :get_upgrade_history
             Aws::OpenSearchService::Endpoints::GetUpgradeHistory.build(context)
           when :get_upgrade_status
             Aws::OpenSearchService::Endpoints::GetUpgradeStatus.build(context)
+          when :list_domain_maintenances
+            Aws::OpenSearchService::Endpoints::ListDomainMaintenances.build(context)
           when :list_domain_names
             Aws::OpenSearchService::Endpoints::ListDomainNames.build(context)
           when :list_domains_for_package
@@ -152,6 +156,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::RemoveTags.build(context)
           when :revoke_vpc_endpoint_access
             Aws::OpenSearchService::Endpoints::RevokeVpcEndpointAccess.build(context)
+          when :start_domain_maintenance
+            Aws::OpenSearchService::Endpoints::StartDomainMaintenance.build(context)
           when :start_service_software_update
             Aws::OpenSearchService::Endpoints::StartServiceSoftwareUpdate.build(context)
           when :update_domain_config

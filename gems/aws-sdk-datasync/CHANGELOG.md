@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-10-30)
+------------------
+
+* Feature - Platform version changes to support AL1 deprecation initiative.
+
 1.67.0 (2023-09-27)
 ------------------
 

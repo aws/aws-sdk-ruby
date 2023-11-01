@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.417.0 (2023-10-31)
+------------------
+
+* Feature - Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking.
+
+1.416.0 (2023-10-26)
+------------------
+
+* Feature - Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC.
+
+1.415.0 (2023-10-24)
+------------------
+
+* Feature - This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.
+
+1.414.0 (2023-10-19)
+------------------
+
+* Feature - Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.
+
+1.413.0 (2023-10-12)
+------------------
+
+* Feature - This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it.
+
 1.412.0 (2023-10-06)
 ------------------
 

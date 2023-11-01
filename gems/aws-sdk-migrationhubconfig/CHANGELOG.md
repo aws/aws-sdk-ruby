@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-10-24)
+------------------
+
+* Feature - This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration
+
 1.29.0 (2023-09-27)
 ------------------
 

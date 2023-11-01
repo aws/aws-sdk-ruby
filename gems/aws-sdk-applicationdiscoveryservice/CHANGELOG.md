@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-10-20)
+------------------
+
+* Feature - This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
+1.58.0 (2023-10-17)
+------------------
+
+* Feature - This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
 1.57.0 (2023-09-27)
 ------------------
 

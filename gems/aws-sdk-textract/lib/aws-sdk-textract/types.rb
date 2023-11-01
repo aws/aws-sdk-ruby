@@ -17,6 +17,182 @@ module Aws::Textract
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
+    # An adapter selected for use when analyzing documents. Contains an
+    # adapter ID and a version number. Contains information on pages
+    # selected for analysis when analyzing documents asychronously.
+    #
+    # @!attribute [rw] adapter_id
+    #   A unique identifier for the adapter resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] pages
+    #   Pages is a parameter that the user inputs to specify which pages to
+    #   apply an adapter to. The following is a list of rules for using this
+    #   parameter.
+    #
+    #   * If a page is not specified, it is set to `["1"]` by default.
+    #
+    #   * The following characters are allowed in the parameter's string:
+    #     `0 1 2 3 4 5 6 7 8 9 - *`. No whitespace is allowed.
+    #
+    #   * When using * to indicate all pages, it must be the only element
+    #     in the list.
+    #
+    #   * You can use page intervals, such as `["1-3", "1-1", "4-*"]`. Where
+    #     `*` indicates last page of document.
+    #
+    #   * Specified pages must be greater than 0 and less than or equal to
+    #     the number of pages in the document.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] version
+    #   A string that identifies the version of the adapter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Adapter AWS API Documentation
+    #
+    class Adapter < Struct.new(
+      :adapter_id,
+      :pages,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the adapter, including the adapter ID, Name,
+    # Creation time, and feature types.
+    #
+    # @!attribute [rw] adapter_id
+    #   A unique identifier for the adapter resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_name
+    #   A string naming the adapter resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the adapter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] feature_types
+    #   The feature types that the adapter is operating on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AdapterOverview AWS API Documentation
+    #
+    class AdapterOverview < Struct.new(
+      :adapter_id,
+      :adapter_name,
+      :creation_time,
+      :feature_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The dataset configuration options for a given version of an adapter.
+    # Can include an Amazon S3 bucket if specified.
+    #
+    # @!attribute [rw] manifest_s3_object
+    #   The S3 bucket name and file name that identifies the document.
+    #
+    #   The AWS Region for the S3 bucket that contains the document must
+    #   match the Region that you use for Amazon Textract operations.
+    #
+    #   For Amazon Textract to process a file in an S3 bucket, the user must
+    #   have permission to access the S3 bucket and file.
+    #   @return [Types::S3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AdapterVersionDatasetConfig AWS API Documentation
+    #
+    class AdapterVersionDatasetConfig < Struct.new(
+      :manifest_s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the metrics used to evalute the peformance of
+    # a given adapter version. Includes data for baseline model performance
+    # and individual adapter version perfromance.
+    #
+    # @!attribute [rw] baseline
+    #   The F1 score, precision, and recall metrics for the baseline model.
+    #   @return [Types::EvaluationMetric]
+    #
+    # @!attribute [rw] adapter_version
+    #   The F1 score, precision, and recall metrics for the baseline model.
+    #   @return [Types::EvaluationMetric]
+    #
+    # @!attribute [rw] feature_type
+    #   Indicates the feature type being analyzed by a given adapter
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AdapterVersionEvaluationMetric AWS API Documentation
+    #
+    class AdapterVersionEvaluationMetric < Struct.new(
+      :baseline,
+      :adapter_version,
+      :feature_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary info for an adapter version. Contains information on the
+    # AdapterId, AdapterVersion, CreationTime, FeatureTypes, and Status.
+    #
+    # @!attribute [rw] adapter_id
+    #   A unique identifier for the adapter associated with a given adapter
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_version
+    #   An identified for a given adapter version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that a given adapter version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] feature_types
+    #   The feature types that the adapter version is operating on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   Contains information on the status of a given adapter version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message explaining the status of a given adapter vesion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AdapterVersionOverview AWS API Documentation
+    #
+    class AdapterVersionOverview < Struct.new(
+      :adapter_id,
+      :adapter_version,
+      :creation_time,
+      :feature_types,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about adapters used when analyzing a document,
+    # with each adapter specified using an AdapterId and version
+    #
+    # @!attribute [rw] adapters
+    #   A list of adapters to be used when analyzing the specified document.
+    #   @return [Array<Types::Adapter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AdaptersConfig AWS API Documentation
+    #
+    class AdaptersConfig < Struct.new(
+      :adapters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
@@ -34,10 +210,7 @@ module Aws::Textract
     #   input document. Add FORMS to return detected form data. Add
     #   SIGNATURES to return the locations of detected signatures. Add
     #   LAYOUT to the list to return information about the layout of the
-    #   document. To perform both forms and table analysis, add TABLES and
-    #   FORMS to `FeatureTypes`. To detect signatures within the document
-    #   and within form data and table data, add SIGNATURES to either TABLES
-    #   or FORMS. All lines and words detected in the document are included
+    #   document. All lines and words detected in the document are included
     #   in the response (including text that isn't related to the value of
     #   `FeatureTypes`).
     #   @return [Array<String>]
@@ -52,13 +225,18 @@ module Aws::Textract
     #   the input.
     #   @return [Types::QueriesConfig]
     #
+    # @!attribute [rw] adapters_config
+    #   Specifies the adapter to be used when analyzing a document.
+    #   @return [Types::AdaptersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeDocumentRequest AWS API Documentation
     #
     class AnalyzeDocumentRequest < Struct.new(
       :document,
       :feature_types,
       :human_loop_config,
-      :queries_config)
+      :queries_config,
+      :adapters_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -297,6 +475,35 @@ module Aws::Textract
     #     of analyze document. Comes with an alias and ID for ease of
     #     locating in a response. Also contains location and confidence
     #     score.
+    #
+    #   The following BlockTypes are only returned for Amazon Textract
+    #   Layout.
+    #
+    #   * `LAYOUT_TITLE` - The main title of the document.
+    #
+    #   * `LAYOUT_HEADER` - Text located in the top margin of the document.
+    #
+    #   * `LAYOUT_FOOTER` - Text located in the bottom margin of the
+    #     document.
+    #
+    #   * `LAYOUT_SECTION_HEADER` - The titles of sections within a
+    #     document.
+    #
+    #   * `LAYOUT_PAGE_NUMBER` - The page number of the documents.
+    #
+    #   * `LAYOUT_LIST` - Any information grouped together in list form.
+    #
+    #   * `LAYOUT_FIGURE` - Indicates the location of an image in a
+    #     document.
+    #
+    #   * `LAYOUT_TABLE` - Indicates the location of a table in the
+    #     document.
+    #
+    #   * `LAYOUT_KEY_VALUE` - Indicates the location of form key-values in
+    #     a document.
+    #
+    #   * `LAYOUT_TEXT` - Text that is present typically as a part of
+    #     paragraphs in documents.
     #   @return [String]
     #
     # @!attribute [rw] confidence
@@ -479,6 +686,199 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Updating or deleting a resource can cause an inconsistent state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ConflictException AWS API Documentation
+    #
+    class ConflictException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] adapter_name
+    #   The name to be assigned to the adapter being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token is used to recognize the request. If the same token
+    #   is used with multiple CreateAdapter requests, the same session is
+    #   returned. This token is employed to avoid unintentionally creating
+    #   the same session multiple times.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description to be assigned to the adapter being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_types
+    #   The type of feature that the adapter is being trained on. Currrenly,
+    #   supported feature types are: `QUERIES`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_update
+    #   Controls whether or not the adapter should automatically update.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to the adapter.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapterRequest AWS API Documentation
+    #
+    class CreateAdapterRequest < Struct.new(
+      :adapter_name,
+      :client_request_token,
+      :description,
+      :feature_types,
+      :auto_update,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing the unique ID for the adapter that has been
+    #   created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapterResponse AWS API Documentation
+    #
+    class CreateAdapterResponse < Struct.new(
+      :adapter_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter that will receive a
+    #   new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token is used to recognize the request. If the same token
+    #   is used with multiple CreateAdapterVersion requests, the same
+    #   session is returned. This token is employed to avoid unintentionally
+    #   creating the same session multiple times.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_config
+    #   Specifies a dataset used to train a new adapter version. Takes a
+    #   ManifestS3Object as the value.
+    #   @return [Types::AdapterVersionDatasetConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). Used to encrypt your documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   Sets whether or not your output will go to a user created bucket.
+    #   Used to set the name of the bucket, and the prefix on the output
+    #   file.
+    #
+    #   `OutputConfig` is an optional parameter which lets you adjust where
+    #   your output will be placed. By default, Amazon Textract will store
+    #   the results internally and can only be accessed by the Get API
+    #   operations. With `OutputConfig` enabled, you can set the name of the
+    #   bucket the output will be sent to the file prefix of the results
+    #   where you can download your results. Additionally, you can set the
+    #   `KMSKeyID` parameter to a customer master key (CMK) to encrypt your
+    #   output. Without this parameter set Amazon Textract will encrypt
+    #   server-side using the AWS managed CMK for Amazon S3.
+    #
+    #   Decryption of Customer Content is necessary for processing of the
+    #   documents by Amazon Textract. If your account is opted out under an
+    #   AI services opt out policy then all unencrypted Customer Content is
+    #   immediately and permanently deleted after the Customer Content has
+    #   been processed by the service. No copy of of the output is retained
+    #   by Amazon Textract. For information about how to opt out, see [
+    #   Managing AI services opt-out policy. ][1]
+    #
+    #   For more information on data privacy, see the [Data Privacy FAQ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://aws.amazon.com/compliance/data-privacy-faq/
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   adapter version.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapterVersionRequest AWS API Documentation
+    #
+    class CreateAdapterVersionRequest < Struct.new(
+      :adapter_id,
+      :client_request_token,
+      :dataset_config,
+      :kms_key_id,
+      :output_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing the unique ID for the adapter that has received
+    #   a new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_version
+    #   A string describing the new version of the adapter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapterVersionResponse AWS API Documentation
+    #
+    class CreateAdapterVersionResponse < Struct.new(
+      :adapter_id,
+      :adapter_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterRequest AWS API Documentation
+    #
+    class DeleteAdapterRequest < Struct.new(
+      :adapter_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterResponse AWS API Documentation
+    #
+    class DeleteAdapterResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter version that will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_version
+    #   Specifies the adapter version to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterVersionRequest AWS API Documentation
+    #
+    class DeleteAdapterVersionRequest < Struct.new(
+      :adapter_id,
+      :adapter_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterVersionResponse AWS API Documentation
+    #
+    class DeleteAdapterVersionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
@@ -658,6 +1058,31 @@ module Aws::Textract
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentTooLargeException AWS API Documentation
     #
     class DocumentTooLargeException < Aws::EmptyStructure; end
+
+    # The evaluation metrics (F1 score, Precision, and Recall) for an
+    # adapter version.
+    #
+    # @!attribute [rw] f1_score
+    #   The F1 score for an adapter version.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precision
+    #   The Precision score for an adapter version.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recall
+    #   The Recall score for an adapter version.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/EvaluationMetric AWS API Documentation
+    #
+    class EvaluationMetric < Struct.new(
+      :f1_score,
+      :precision,
+      :recall)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns the kind of currency detected.
     #
@@ -895,6 +1320,178 @@ module Aws::Textract
     class Geometry < Struct.new(
       :bounding_box,
       :polygon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapterRequest AWS API Documentation
+    #
+    class GetAdapterRequest < Struct.new(
+      :adapter_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string identifying the adapter that information has been retrieved
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_name
+    #   The name of the requested adapter.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the requested adapter was created at.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description for the requested adapter.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_types
+    #   List of the targeted feature types for the requested adapter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_update
+    #   Binary value indicating if the adapter is being automatically
+    #   updated or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) associated with the adapter that has
+    #   been retrieved.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapterResponse AWS API Documentation
+    #
+    class GetAdapterResponse < Struct.new(
+      :adapter_id,
+      :adapter_name,
+      :creation_time,
+      :description,
+      :feature_types,
+      :auto_update,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string specifying a unique ID for the adapter version you want to
+    #   retrieve information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_version
+    #   A string specifying the adapter version you want to retrieve
+    #   information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapterVersionRequest AWS API Documentation
+    #
+    class GetAdapterVersionRequest < Struct.new(
+      :adapter_id,
+      :adapter_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter version being
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_version
+    #   A string containing the adapter version that has been retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the adapter version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] feature_types
+    #   List of the targeted feature types for the requested adapter
+    #   version.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the adapter version that has been requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that describes the status of the requested adapter
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_config
+    #   Specifies a dataset used to train a new adapter version. Takes a
+    #   ManifestS3Objec as the value.
+    #   @return [Types::AdapterVersionDatasetConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). Used to encrypt your documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   Sets whether or not your output will go to a user created bucket.
+    #   Used to set the name of the bucket, and the prefix on the output
+    #   file.
+    #
+    #   `OutputConfig` is an optional parameter which lets you adjust where
+    #   your output will be placed. By default, Amazon Textract will store
+    #   the results internally and can only be accessed by the Get API
+    #   operations. With `OutputConfig` enabled, you can set the name of the
+    #   bucket the output will be sent to the file prefix of the results
+    #   where you can download your results. Additionally, you can set the
+    #   `KMSKeyID` parameter to a customer master key (CMK) to encrypt your
+    #   output. Without this parameter set Amazon Textract will encrypt
+    #   server-side using the AWS managed CMK for Amazon S3.
+    #
+    #   Decryption of Customer Content is necessary for processing of the
+    #   documents by Amazon Textract. If your account is opted out under an
+    #   AI services opt out policy then all unencrypted Customer Content is
+    #   immediately and permanently deleted after the Customer Content has
+    #   been processed by the service. No copy of of the output is retained
+    #   by Amazon Textract. For information about how to opt out, see [
+    #   Managing AI services opt-out policy. ][1]
+    #
+    #   For more information on data privacy, see the [Data Privacy FAQ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://aws.amazon.com/compliance/data-privacy-faq/
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] evaluation_metrics
+    #   The evaluation metrics (F1 score, Precision, and Recall) for the
+    #   requested version, grouped by baseline metrics and adapter version.
+    #   @return [Array<Types::AdapterVersionEvaluationMetric>]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that are associated with the adapter
+    #   version.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapterVersionResponse AWS API Documentation
+    #
+    class GetAdapterVersionResponse < Struct.new(
+      :adapter_id,
+      :adapter_version,
+      :creation_time,
+      :feature_types,
+      :status,
+      :status_message,
+      :dataset_config,
+      :kms_key_id,
+      :output_config,
+      :evaluation_metrics,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1628,6 +2225,139 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter to match for when
+    #   listing adapter versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_creation_time
+    #   Specifies the lower bound for the ListAdapterVersions operation.
+    #   Ensures ListAdapterVersions returns only adapter versions created
+    #   after the specified creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] before_creation_time
+    #   Specifies the upper bound for the ListAdapterVersions operation.
+    #   Ensures ListAdapterVersions returns only adapter versions created
+    #   after the specified creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return when listing adapter
+    #   versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return when listing adapter
+    #   versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdapterVersionsRequest AWS API Documentation
+    #
+    class ListAdapterVersionsRequest < Struct.new(
+      :adapter_id,
+      :after_creation_time,
+      :before_creation_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_versions
+    #   Adapter versions that match the filtering criteria specified when
+    #   calling ListAdapters.
+    #   @return [Array<Types::AdapterVersionOverview>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return when listing adapter
+    #   versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdapterVersionsResponse AWS API Documentation
+    #
+    class ListAdapterVersionsResponse < Struct.new(
+      :adapter_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] after_creation_time
+    #   Specifies the lower bound for the ListAdapters operation. Ensures
+    #   ListAdapters returns only adapters created after the specified
+    #   creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] before_creation_time
+    #   Specifies the upper bound for the ListAdapters operation. Ensures
+    #   ListAdapters returns only adapters created before the specified
+    #   creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return when listing adapters.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return when listing adapters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdaptersRequest AWS API Documentation
+    #
+    class ListAdaptersRequest < Struct.new(
+      :after_creation_time,
+      :before_creation_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapters
+    #   A list of adapters that matches the filtering criteria specified
+    #   when calling ListAdapters.
+    #   @return [Array<Types::AdapterOverview>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return when listing adapters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdaptersResponse AWS API Documentation
+    #
+    class ListAdaptersResponse < Struct.new(
+      :adapters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to list
+    #   tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that are part of the requested
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information relating to dates in a document, including the
     # type of value, and the value.
     #
@@ -1899,6 +2629,12 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Returned when an operation tried to access a nonexistent resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # The S3 bucket name and file name that identifies the document.
     #
     # The AWS Region for the S3 bucket that contains the document must match
@@ -1932,6 +2668,13 @@ module Aws::Textract
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Returned when a request cannot be completed as it would exceed a
+    # maximum service quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Aws::EmptyStructure; end
 
     # Information regarding a detected signature on a page.
     #
@@ -2033,6 +2776,10 @@ module Aws::Textract
     # @!attribute [rw] queries_config
     #   @return [Types::QueriesConfig]
     #
+    # @!attribute [rw] adapters_config
+    #   Specifies the adapter to be used when analyzing a document.
+    #   @return [Types::AdaptersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysisRequest AWS API Documentation
     #
     class StartDocumentAnalysisRequest < Struct.new(
@@ -2043,7 +2790,8 @@ module Aws::Textract
       :notification_channel,
       :output_config,
       :kms_key_id,
-      :queries_config)
+      :queries_config,
+      :adapters_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2303,6 +3051,29 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to be
+    #   tagged.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to assign to the
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Amazon Textract is temporarily unable to process the request. Try your
     # call again.
     #
@@ -2331,6 +3102,104 @@ module Aws::Textract
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UnsupportedDocumentException AWS API Documentation
     #
     class UnsupportedDocumentException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to be
+    #   untagged.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Specifies the tags to be removed from the resource specified by the
+    #   ResourceARN.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter that will be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description to be applied to the adapter.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_name
+    #   The new name to be applied to the adapter.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   The new auto-update status to be applied to the adapter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateAdapterRequest AWS API Documentation
+    #
+    class UpdateAdapterRequest < Struct.new(
+      :adapter_id,
+      :description,
+      :adapter_name,
+      :auto_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adapter_id
+    #   A string containing a unique ID for the adapter that has been
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] adapter_name
+    #   A string containing the name of the adapter that has been updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   An object specifying the creation time of the the adapter that has
+    #   been updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A string containing the description of the adapter that has been
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_types
+    #   List of the targeted feature types for the updated adapter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_update
+    #   The auto-update status of the adapter that has been updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateAdapterResponse AWS API Documentation
+    #
+    class UpdateAdapterResponse < Struct.new(
+      :adapter_id,
+      :adapter_name,
+      :creation_time,
+      :description,
+      :feature_types,
+      :auto_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates that a request was not valid. Check request for proper
+    # formatting.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
     # A warning about an issue that occurred during asynchronous text
     # analysis (StartDocumentAnalysis) or asynchronous document text

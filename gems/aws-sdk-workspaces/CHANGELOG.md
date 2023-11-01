@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-10-19)
+------------------
+
+* Feature - Documentation updates for WorkSpaces
+
+1.90.0 (2023-10-12)
+------------------
+
+* Feature - Updated the CreateWorkspaces action documentation to clarify that the PCoIP protocol is only available for Windows bundles.
+
 1.89.0 (2023-10-05)
 ------------------
 

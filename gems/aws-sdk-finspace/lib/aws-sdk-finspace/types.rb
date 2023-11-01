@@ -1842,12 +1842,20 @@ module Aws::Finspace
     # The configuration for read only disk cache associated with a cluster.
     #
     # @!attribute [rw] type
-    #   The type of cache storage . The valid values are:
+    #   The type of cache storage. The valid values are:
     #
     #   * CACHE\_1000 – This type provides at least 1000 MB/s disk access
     #     throughput.
     #
-    #   ^
+    #   * CACHE\_250 – This type provides at least 250 MB/s disk access
+    #     throughput.
+    #
+    #   * CACHE\_12 – This type provides at least 12 MB/s disk access
+    #     throughput.
+    #
+    #   For cache type `CACHE_1000` and `CACHE_250` you can select cache
+    #   size as 1200 GB or increments of 2400 GB. For cache type `CACHE_12`
+    #   you can select the cache size in increments of 6000 GB.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -2032,6 +2040,29 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # The configuration that allows you to choose how you want to update
+    # code on a cluster. Depending on the option you choose, you can reduce
+    # the time it takes to update the cluster.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   The type of deployment that you want on a cluster.
+    #
+    #   * ROLLING – This options updates the cluster by stopping the exiting
+    #     q process and starting a new q process with updated configuration.
+    #
+    #   * FORCE – This option updates the cluster by immediately stopping
+    #     all the running processes before starting up new ones with the
+    #     updated configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxClusterCodeDeploymentConfiguration AWS API Documentation
+    #
+    class KxClusterCodeDeploymentConfiguration < Struct.new(
+      :deployment_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the key-value pairs to make them available inside the cluster.
     #
     # @!attribute [rw] key
@@ -2138,20 +2169,21 @@ module Aws::Finspace
 
     # The configuration that allows you to choose how you want to update the
     # databases on a cluster. Depending on the option you choose, you can
-    # reduce the time it takes to update the database changesets on to a
-    # cluster.
+    # reduce the time it takes to update the cluster.
     #
     # @!attribute [rw] deployment_strategy
     #   The type of deployment that you want on a cluster.
     #
-    #   * ROLLING – This options loads the updated database by stopping the
-    #     exiting q process and starting a new q process with updated
-    #     configuration.
+    #   * ROLLING – This options updates the cluster by stopping the exiting
+    #     q process and starting a new q process with updated configuration.
     #
-    #   * NO\_RESTART – This option loads the updated database on the
-    #     running q process without stopping it. This option is quicker as
-    #     it reduces the turn around time to update a kdb database changeset
-    #     configuration on a cluster.
+    #   * NO\_RESTART – This option updates the cluster without stopping the
+    #     running q process. It is only available for `HDB` type cluster.
+    #     This option is quicker as it reduces the turn around time to
+    #     update configuration on a cluster.
+    #
+    #     With this deployment mode, you cannot update the
+    #     `initializationScript` and `commandLineArguments` parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDeploymentConfiguration AWS API Documentation
@@ -2984,6 +3016,61 @@ module Aws::Finspace
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier of the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The structure of the customer code available within the running
+    #   cluster.
+    #   @return [Types::CodeConfiguration]
+    #
+    # @!attribute [rw] initialization_script
+    #   Specifies a Q program that will be run at launch of a cluster. It is
+    #   a relative path within *.zip* file that contains the custom code,
+    #   which will be loaded on the cluster. It must include the file name
+    #   itself. For example, `somedir/init.q`.
+    #   @return [String]
+    #
+    # @!attribute [rw] command_line_arguments
+    #   Specifies the key-value pairs to make them available inside the
+    #   cluster.
+    #   @return [Array<Types::KxCommandLineArgument>]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The configuration that allows you to choose how you want to update
+    #   the code on a cluster.
+    #   @return [Types::KxClusterCodeDeploymentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfigurationRequest AWS API Documentation
+    #
+    class UpdateKxClusterCodeConfigurationRequest < Struct.new(
+      :environment_id,
+      :cluster_name,
+      :client_token,
+      :code,
+      :initialization_script,
+      :command_line_arguments,
+      :deployment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfigurationResponse AWS API Documentation
+    #
+    class UpdateKxClusterCodeConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] environment_id
     #   The unique identifier of a kdb environment.

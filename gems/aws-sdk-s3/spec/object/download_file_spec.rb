@@ -9,7 +9,7 @@ module Aws
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:tmpdir) { Dir.tmpdir }
 
-      describe '#download_file' do
+      describe '#download_file', :jruby_flaky do
         let(:path) { Tempfile.new('destination').path }
 
         let(:small_obj) do

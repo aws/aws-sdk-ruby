@@ -488,11 +488,9 @@ module Aws::ConnectCases
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
-    # <note markdown="1"> The following fields are required when creating a case:
+    # The following fields are required when creating a case:
     #
-    #       <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul> </note>
-    #
-    #  </note>
+    #      <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1419,7 +1417,13 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # API for adding case event publishing configuration
+    # Adds case event publishing configuration. For a complete list of
+    # fields you can add to the event message, see [Create case fields][1]
+    # in the *Amazon Connect Administrator Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1848,7 +1852,7 @@ module Aws::ConnectCases
     #
     # @option params [Types::LayoutContent] :content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1981,7 +1985,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

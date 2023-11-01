@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2023-11-01)
+------------------
+
+* Feature - Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.
+
+1.131.0 (2023-10-30)
+------------------
+
+* Feature - This release adds InstanceId field for phone number APIs.
+
+1.130.0 (2023-10-20)
+------------------
+
+* Feature - This release adds support for updating phone number metadata, such as phone number description.
+
 1.129.0 (2023-10-03)
 ------------------
 

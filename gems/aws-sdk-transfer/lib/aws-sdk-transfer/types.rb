@@ -217,7 +217,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -950,7 +950,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -1842,7 +1842,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -2697,7 +2697,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -3974,7 +3974,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -4393,7 +4393,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -4859,8 +4859,8 @@ module Aws::Transfer
     # @!attribute [rw] user_secret_id
     #   The identifier for the secret (in Amazon Web Services Secrets
     #   Manager) that contains the SFTP user's private key, password, or
-    #   both. The identifier can be either the Amazon Resource Name (ARN) or
-    #   the name of the secret.
+    #   both. The identifier must be the Amazon Resource Name (ARN) of the
+    #   secret.
     #   @return [String]
     #
     # @!attribute [rw] trusted_host_keys
@@ -5257,7 +5257,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -6017,7 +6017,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]

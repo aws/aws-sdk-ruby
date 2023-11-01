@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-10-25)
+------------------
+
+* Feature - Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+
 1.13.0 (2023-09-27)
 ------------------
 

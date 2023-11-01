@@ -26,6 +26,20 @@ module Aws::ApplicationDiscoveryService
       end
     end
 
+    class BatchDeleteAgents
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ApplicationDiscoveryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchDeleteImportData
       def self.build(context)
         unless context.config.regional_endpoint
@@ -97,6 +111,20 @@ module Aws::ApplicationDiscoveryService
     end
 
     class DescribeAgents
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ApplicationDiscoveryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeBatchDeleteConfigurationTask
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -251,6 +279,20 @@ module Aws::ApplicationDiscoveryService
     end
 
     class ListServerNeighbors
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ApplicationDiscoveryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartBatchDeleteConfigurationTask
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

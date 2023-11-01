@@ -1083,9 +1083,12 @@ module Aws::WorkSpaces
     # This operation is asynchronous and returns before the WorkSpaces are
     # created.
     #
-    # <note markdown="1"> The `MANUAL` running mode value is only supported by Amazon WorkSpaces
-    # Core. Contact your account team to be allow-listed to use this value.
-    # For more information, see [Amazon WorkSpaces Core][1].
+    # <note markdown="1"> * The `MANUAL` running mode value is only supported by Amazon
+    #   WorkSpaces Core. Contact your account team to be allow-listed to use
+    #   this value. For more information, see [Amazon WorkSpaces Core][1].
+    #
+    # * You don't need to specify the `PCOIP` protocol for Linux bundles
+    #   because `WSP` is the default protocol for those bundles.
     #
     #  </note>
     #
@@ -3966,7 +3969,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

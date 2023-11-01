@@ -52,6 +52,7 @@ module Aws::IVSRealTime
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Participant = Shapes::StructureShape.new(name: 'Participant')
     ParticipantAttributes = Shapes::MapShape.new(name: 'ParticipantAttributes')
+    ParticipantClientAttribute = Shapes::StringShape.new(name: 'ParticipantClientAttribute')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantList = Shapes::ListShape.new(name: 'ParticipantList')
     ParticipantState = Shapes::StringShape.new(name: 'ParticipantState')
@@ -216,9 +217,15 @@ module Aws::IVSRealTime
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     Participant.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
+    Participant.add_member(:browser_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserName"))
+    Participant.add_member(:browser_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserVersion"))
     Participant.add_member(:first_join_time, Shapes::ShapeRef.new(shape: Time, location_name: "firstJoinTime"))
+    Participant.add_member(:isp_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "ispName"))
+    Participant.add_member(:os_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "osName"))
+    Participant.add_member(:os_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "osVersion"))
     Participant.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
     Participant.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
+    Participant.add_member(:sdk_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "sdkVersion"))
     Participant.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
     Participant.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
     Participant.struct_class = Types::Participant

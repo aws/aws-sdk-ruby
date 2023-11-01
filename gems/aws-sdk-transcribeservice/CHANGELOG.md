@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-10-12)
+------------------
+
+* Feature - This release is to enable m4a format to customers
+
 1.89.0 (2023-09-27)
 ------------------
 

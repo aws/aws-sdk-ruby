@@ -610,9 +610,15 @@ module Aws::IVSRealTime
     #
     #   resp.participant.attributes #=> Hash
     #   resp.participant.attributes["String"] #=> String
+    #   resp.participant.browser_name #=> String
+    #   resp.participant.browser_version #=> String
     #   resp.participant.first_join_time #=> Time
+    #   resp.participant.isp_name #=> String
+    #   resp.participant.os_name #=> String
+    #   resp.participant.os_version #=> String
     #   resp.participant.participant_id #=> String
     #   resp.participant.published #=> Boolean
+    #   resp.participant.sdk_version #=> String
     #   resp.participant.state #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.participant.user_id #=> String
     #
@@ -1052,7 +1058,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

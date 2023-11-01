@@ -1221,8 +1221,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # time-series forecasting, and non-tabular problem types such as image
-    # or text classification.
+    # time-series forecasting, non-tabular problem types such as image or
+    # text classification, and text generation (LLMs fine-tuning).
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1401,8 +1401,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # time-series forecasting, and non-tabular problem types such as image
-    # or text classification.
+    # time-series forecasting, non-tabular problem types such as image or
+    # text classification, and text generation (LLMs fine-tuning).
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1444,6 +1444,8 @@ module Aws::SageMaker
     #
     #   * For time-series forecasting: `S3Prefix`.
     #
+    #   * For text generation (LLMs fine-tuning): `S3Prefix`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
@@ -1479,16 +1481,27 @@ module Aws::SageMaker
     #   type. For the list of default values per problem type, see
     #   [AutoMLJobObjective][1].
     #
-    #   <note markdown="1"> For tabular problem types, you must either provide both the
-    #   `AutoMLJobObjective` and indicate the type of supervised learning
-    #   problem in `AutoMLProblemTypeConfig` (`TabularJobConfig.ProblemType`),
-    #   or none at all.
+    #   <note markdown="1"> * For tabular problem types: You must either provide both the
+    #     `AutoMLJobObjective` and indicate the type of supervised learning
+    #     problem in `AutoMLProblemTypeConfig`
+    #     (`TabularJobConfig.ProblemType`), or none at all.
+    #
+    #   * For text generation problem types (LLMs fine-tuning): Fine-tuning
+    #     language models in Autopilot does not require setting the
+    #     `AutoMLJobObjective` field. Autopilot fine-tunes LLMs without
+    #     requiring multiple candidates to be trained and evaluated. Instead,
+    #     using your dataset, Autopilot directly fine-tunes your target model
+    #     to enhance a default objective metric, the cross-entropy loss. After
+    #     fine-tuning a language model, you can evaluate the quality of its
+    #     generated text using different metrics. For a list of the available
+    #     metrics, see [Metrics for fine-tuning LLMs in Autopilot][2].
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html
     #
     # @option params [Types::ModelDeployConfig] :model_deploy_config
     #   Specifies how to generate the endpoint name for an automatic one-click
@@ -1601,6 +1614,14 @@ module Aws::SageMaker
     #             country_code: "CountryCode",
     #           },
     #         ],
+    #       },
+    #       text_generation_job_config: {
+    #         completion_criteria: {
+    #           max_candidates: 1,
+    #           max_runtime_per_training_job_in_seconds: 1,
+    #           max_auto_ml_job_runtime_in_seconds: 1,
+    #         },
+    #         base_model_name: "BaseModelName",
     #       },
     #     },
     #     role_arn: "RoleArn", # required
@@ -2374,6 +2395,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -3188,11 +3215,14 @@ module Aws::SageMaker
     # defined in the `FeatureStore` to describe a `Record`.
     #
     # The `FeatureGroup` defines the schema and features contained in the
-    # FeatureGroup. A `FeatureGroup` definition is composed of a list of
+    # `FeatureGroup`. A `FeatureGroup` definition is composed of a list of
     # `Features`, a `RecordIdentifierFeatureName`, an `EventTimeFeatureName`
     # and configurations for its `OnlineStore` and `OfflineStore`. Check
     # [Amazon Web Services service quotas][1] to see the `FeatureGroup`s
     # quota for your Amazon Web Services account.
+    #
+    # Note that it can take approximately 10-15 minutes to provision an
+    # `OnlineStore` `FeatureGroup` with the `InMemory` `StorageType`.
     #
     # You must include at least one of `OnlineStoreConfig` and
     # `OfflineStoreConfig` to create a `FeatureGroup`.
@@ -8229,6 +8259,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #   })
@@ -8939,6 +8975,9 @@ module Aws::SageMaker
     # Data written into the `OfflineStore` will not be deleted. The Amazon
     # Web Services Glue database and tables that are automatically created
     # for your `OfflineStore` are not deleted.
+    #
+    # Note that it can take approximately 10-15 minutes to delete an
+    # `OnlineStore` `FeatureGroup` with the `InMemory` `StorageType`.
     #
     # @option params [required, String] :feature_group_name
     #   The name of the `FeatureGroup` you want to delete. The name must be
@@ -10296,7 +10335,7 @@ module Aws::SageMaker
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss", "Rouge1", "Rouge2", "RougeL", "RougeLSum", "Perplexity", "ValidationLoss", "TrainingLoss"
     #   resp.best_candidate.inference_container_definitions #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -10422,6 +10461,10 @@ module Aws::SageMaker
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names[0] #=> String
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config #=> Array
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config[0].country_code #=> String
+    #   resp.auto_ml_problem_type_config.text_generation_job_config.completion_criteria.max_candidates #=> Integer
+    #   resp.auto_ml_problem_type_config.text_generation_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.text_generation_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.text_generation_job_config.base_model_name #=> String
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -10455,7 +10498,7 @@ module Aws::SageMaker
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss", "Rouge1", "Rouge2", "RougeL", "RougeLSum", "Perplexity", "ValidationLoss", "TrainingLoss"
     #   resp.best_candidate.inference_container_definitions #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -10481,7 +10524,8 @@ module Aws::SageMaker
     #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
     #   resp.resolved_attributes.auto_ml_problem_type_resolved_attributes.tabular_resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
-    #   resp.auto_ml_problem_type_config_name #=> String, one of "ImageClassification", "TextClassification", "Tabular", "TimeSeriesForecasting"
+    #   resp.resolved_attributes.auto_ml_problem_type_resolved_attributes.text_generation_resolved_attributes.base_model_name #=> String
+    #   resp.auto_ml_problem_type_config_name #=> String, one of "ImageClassification", "TextClassification", "Tabular", "TimeSeriesForecasting", "TextGeneration"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2 AWS API Documentation
     #
@@ -10968,6 +11012,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
+    #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14654,6 +14700,8 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
+    #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -15866,7 +15914,7 @@ module Aws::SageMaker
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.candidates[0].candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss", "Rouge1", "Rouge2", "RougeL", "RougeLSum", "Perplexity", "ValidationLoss", "TrainingLoss"
     #   resp.candidates[0].inference_container_definitions #=> Hash
     #   resp.candidates[0].inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.candidates[0].inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -22207,6 +22255,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #     domain_settings_for_update: {
@@ -23976,6 +24030,12 @@ module Aws::SageMaker
     #             secret_arn: "SecretArn",
     #           },
     #         ],
+    #         kendra_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         direct_deploy_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #     },
     #   })
@@ -24233,7 +24293,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.218.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

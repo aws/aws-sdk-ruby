@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2023-10-26)
+------------------
+
+* Feature - No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
+1.82.0 (2023-10-16)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family
+
 1.81.0 (2023-10-06)
 ------------------
 

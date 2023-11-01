@@ -524,7 +524,7 @@ module Aws::Pricing
     #
     # This returns the URL that you can retrieve your Price List file from.
     # This URL is based on the `PriceListArn` and `FileFormat` that you
-    # retrieve from the [ `ListPriceLists` ][1] response.
+    # retrieve from the [ListPriceLists][1] response.
     #
     #
     #
@@ -532,8 +532,8 @@ module Aws::Pricing
     #
     # @option params [required, String] :price_list_arn
     #   The unique identifier that maps to where your Price List files are
-    #   located. `PriceListArn` can be obtained from the [ `ListPriceLists`
-    #   ][1] response.
+    #   located. `PriceListArn` can be obtained from the [ListPriceLists][1]
+    #   response.
     #
     #
     #
@@ -541,8 +541,7 @@ module Aws::Pricing
     #
     # @option params [required, String] :file_format
     #   The format that you want to retrieve your Price List files in. The
-    #   `FileFormat` can be obtained from the [ `ListPriceLists` ][1]
-    #   response.
+    #   `FileFormat` can be obtained from the [ListPriceLists][1] response.
     #
     #
     #
@@ -646,7 +645,7 @@ module Aws::Pricing
     # `RegionCode` filter to get the Price List reference that's specific
     # to a specific Amazon Web Services Region. You can use the
     # `PriceListArn` from the response to get your preferred Price List
-    # files through the [ `GetPriceListFileUrl` ][1] API.
+    # files through the [GetPriceListFileUrl][1] API.
     #
     #
     #
@@ -657,11 +656,13 @@ module Aws::Pricing
     #   that you want to retrieve. For example, to get the list of applicable
     #   Amazon EC2 price lists, use `AmazonEC2`. For a full list of service
     #   codes containing On-Demand and Reserved Instance (RI) pricing, use the
-    #   [ `DescribeServices` ][1] API.
+    #   [DescribeServices][1] API.
     #
-    #   To retrieve the Compute Savings Plan price lists, use
-    #   `ComputeSavingsPlans`. To retrieve Machine Learning Savings Plans
-    #   price lists, use `MachineLearningSavingsPlans`.
+    #   To retrieve the Reserved Instance and Compute Savings Plan price
+    #   lists, use `ComputeSavingsPlans`.
+    #
+    #   To retrieve Machine Learning Savings Plans price lists, use
+    #   `MachineLearningSavingsPlans`.
     #
     #
     #
@@ -675,8 +676,7 @@ module Aws::Pricing
     #   For example, to get the price list only for the `US East (N.
     #   Virginia)` Region, use `us-east-1`. If nothing is specified, you
     #   retrieve price lists for all applicable Regions. The available
-    #   `RegionCode` list can be retrieved from [ `GetAttributeValues` ][1]
-    #   API.
+    #   `RegionCode` list can be retrieved from [GetAttributeValues][1] API.
     #
     #
     #
@@ -743,7 +743,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

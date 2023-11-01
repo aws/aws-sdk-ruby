@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-10-19)
+------------------
+
+* Feature - Introduce support for EXTERNAL product and provisioning artifact type in CreateProduct and CreateProvisioningArtifact APIs.
+
 1.87.0 (2023-09-27)
 ------------------
 

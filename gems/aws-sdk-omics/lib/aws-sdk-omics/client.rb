@@ -2220,6 +2220,8 @@ module Aws::Omics
     #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#accelerators #accelerators} => String
     #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
+    #   * {Types::GetRunResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetRunResponse#log_location #log_location} => Types::RunLogLocation
     #
     # @example Request syntax with placeholder values
     #
@@ -2256,6 +2258,9 @@ module Aws::Omics
     #   resp.tags["TagKey"] #=> String
     #   resp.accelerators #=> String, one of "GPU"
     #   resp.retention_mode #=> String, one of "RETAIN", "REMOVE"
+    #   resp.failure_reason #=> String
+    #   resp.log_location.engine_log_stream #=> String
+    #   resp.log_location.run_log_stream #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2320,7 +2325,7 @@ module Aws::Omics
     # Gets information about a workflow run task.
     #
     # @option params [required, String] :id
-    #   The task's ID.
+    #   The workflow run ID.
     #
     # @option params [required, String] :task_id
     #   The task's ID.
@@ -2339,6 +2344,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
     #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
     #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
+    #   * {Types::GetRunTaskResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2361,6 +2367,7 @@ module Aws::Omics
     #   resp.log_stream #=> String
     #   resp.gpus #=> Integer
     #   resp.instance_type #=> String
+    #   resp.failure_reason #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4615,7 +4622,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

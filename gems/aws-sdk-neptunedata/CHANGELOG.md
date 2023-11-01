@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-10-31)
+------------------
+
+* Feature - Minor change to not retry CancelledByUserException
+
+1.4.0 (2023-10-19)
+------------------
+
+* Feature - Doc changes to add IAM action mappings for the data actions.
+
 1.3.0 (2023-09-27)
 ------------------
 

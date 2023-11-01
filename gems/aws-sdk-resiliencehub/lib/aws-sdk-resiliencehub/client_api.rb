@@ -146,6 +146,7 @@ module Aws::ResilienceHub
     ImportResourcesToDraftAppVersionRequest = Shapes::StructureShape.new(name: 'ImportResourcesToDraftAppVersionRequest')
     ImportResourcesToDraftAppVersionResponse = Shapes::StructureShape.new(name: 'ImportResourcesToDraftAppVersionResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListAlarmRecommendationsRequest = Shapes::StructureShape.new(name: 'ListAlarmRecommendationsRequest')
     ListAlarmRecommendationsResponse = Shapes::StructureShape.new(name: 'ListAlarmRecommendationsResponse')
@@ -329,6 +330,8 @@ module Aws::ResilienceHub
     App.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModel, location_name: "permissionModel"))
     App.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "policyArn"))
     App.add_member(:resiliency_score, Shapes::ShapeRef.new(shape: Double, location_name: "resiliencyScore"))
+    App.add_member(:rpo_in_secs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "rpoInSecs"))
+    App.add_member(:rto_in_secs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "rtoInSecs"))
     App.add_member(:status, Shapes::ShapeRef.new(shape: AppStatusType, location_name: "status"))
     App.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     App.struct_class = Types::App
@@ -405,8 +408,11 @@ module Aws::ResilienceHub
     AppSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
     AppSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     AppSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: AppDriftStatusType, location_name: "driftStatus"))
+    AppSummary.add_member(:last_app_compliance_evaluation_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "lastAppComplianceEvaluationTime"))
     AppSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     AppSummary.add_member(:resiliency_score, Shapes::ShapeRef.new(shape: Double, location_name: "resiliencyScore"))
+    AppSummary.add_member(:rpo_in_secs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "rpoInSecs"))
+    AppSummary.add_member(:rto_in_secs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "rtoInSecs"))
     AppSummary.add_member(:status, Shapes::ShapeRef.new(shape: AppStatusType, location_name: "status"))
     AppSummary.struct_class = Types::AppSummary
 
@@ -883,9 +889,12 @@ module Aws::ResilienceHub
     ListAppVersionsResponse.struct_class = Types::ListAppVersionsResponse
 
     ListAppsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "appArn"))
+    ListAppsRequest.add_member(:from_last_assessment_time, Shapes::ShapeRef.new(shape: TimeStamp, location: "querystring", location_name: "fromLastAssessmentTime"))
     ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAppsRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location: "querystring", location_name: "name"))
     ListAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAppsRequest.add_member(:reverse_order, Shapes::ShapeRef.new(shape: BooleanOptional, location: "querystring", location_name: "reverseOrder"))
+    ListAppsRequest.add_member(:to_last_assessment_time, Shapes::ShapeRef.new(shape: TimeStamp, location: "querystring", location_name: "toLastAssessmentTime"))
     ListAppsRequest.struct_class = Types::ListAppsRequest
 
     ListAppsResponse.add_member(:app_summaries, Shapes::ShapeRef.new(shape: AppSummaryList, required: true, location_name: "appSummaries"))

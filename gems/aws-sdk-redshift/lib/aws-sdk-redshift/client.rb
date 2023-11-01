@@ -820,6 +820,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -1103,6 +1105,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -1255,9 +1259,12 @@ module Aws::Redshift
     #
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
-    # @option params [required, String] :master_user_password
+    # @option params [String] :master_user_password
     #   The password associated with the admin user account for the cluster
     #   that is being created.
+    #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
     #
     #   Constraints:
     #
@@ -1510,6 +1517,26 @@ module Aws::Redshift
     #   A flag that specifies whether to load sample data once the cluster is
     #   created.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses `MasterUserPassword` for the admin user
+    #   account's password.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
+    # @option params [String] :ip_address_type
+    #   The IP address types that the cluster supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #
+    # @option params [Boolean] :multi_az
+    #   If true, Amazon Redshift will deploy the cluster in two Availability
+    #   Zones (AZ).
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1522,7 +1549,7 @@ module Aws::Redshift
     #     cluster_type: "String",
     #     node_type: "String", # required
     #     master_username: "String", # required
-    #     master_user_password: "String", # required
+    #     master_user_password: "SensitiveString",
     #     cluster_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     cluster_subnet_group_name: "String",
@@ -1556,6 +1583,10 @@ module Aws::Redshift
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #     default_iam_role_arn: "String",
     #     load_sample_data: "String",
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
+    #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -1577,6 +1608,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -1681,6 +1713,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -1960,6 +2001,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -2039,6 +2082,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
     #   resp.cluster_subnet_group.tags[0].value #=> String
+    #   resp.cluster_subnet_group.supported_cluster_ip_address_types #=> Array
+    #   resp.cluster_subnet_group.supported_cluster_ip_address_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup AWS API Documentation
     #
@@ -2162,6 +2207,7 @@ module Aws::Redshift
     #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
     #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].ipv_6_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEndpointAccess AWS API Documentation
     #
@@ -3005,6 +3051,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -3109,6 +3156,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3264,6 +3320,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -3364,6 +3422,7 @@ module Aws::Redshift
     #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
     #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].ipv_6_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEndpointAccess AWS API Documentation
     #
@@ -3483,6 +3542,29 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_partner(params = {}, options = {})
       req = build_request(:delete_partner, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4244,6 +4326,8 @@ module Aws::Redshift
     #   resp.snapshots[0].manual_snapshot_retention_period #=> Integer
     #   resp.snapshots[0].manual_snapshot_remaining_days #=> Integer
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
+    #   resp.snapshots[0].master_password_secret_arn #=> String
+    #   resp.snapshots[0].master_password_secret_kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4350,6 +4434,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_groups[0].tags #=> Array
     #   resp.cluster_subnet_groups[0].tags[0].key #=> String
     #   resp.cluster_subnet_groups[0].tags[0].value #=> String
+    #   resp.cluster_subnet_groups[0].supported_cluster_ip_address_types #=> Array
+    #   resp.cluster_subnet_groups[0].supported_cluster_ip_address_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups AWS API Documentation
     #
@@ -4598,6 +4684,7 @@ module Aws::Redshift
     #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.clusters[0].cluster_create_time #=> Time
     #   resp.clusters[0].automated_snapshot_retention_period #=> Integer
     #   resp.clusters[0].manual_snapshot_retention_period #=> Integer
@@ -4702,6 +4789,15 @@ module Aws::Redshift
     #   resp.clusters[0].custom_domain_name #=> String
     #   resp.clusters[0].custom_domain_certificate_arn #=> String
     #   resp.clusters[0].custom_domain_certificate_expiry_date #=> Time
+    #   resp.clusters[0].master_password_secret_arn #=> String
+    #   resp.clusters[0].master_password_secret_kms_key_id #=> String
+    #   resp.clusters[0].ip_address_type #=> String
+    #   resp.clusters[0].multi_az #=> String
+    #   resp.clusters[0].multi_az_secondary.availability_zone #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes #=> Array
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4719,7 +4815,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Contains information for custom domain associations for a cluster.
+    # Contains information about custom domain associations for a cluster.
     #
     # @option params [String] :custom_domain_name
     #   The custom domain name for the custom domain association.
@@ -5103,6 +5199,7 @@ module Aws::Redshift
     #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].subnet_id #=> String
     #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].ipv_6_address #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAccess AWS API Documentation
@@ -5655,6 +5752,73 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_hsm_configurations(params = {}, options = {})
       req = build_request(:describe_hsm_configurations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of inbound integrations.
+    #
+    # @option params [String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the inbound integration.
+    #
+    # @option params [String] :target_arn
+    #   The Amazon Resource Name (ARN) of the target of an inbound
+    #   integration.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeInboundIntegrations request exceed the value specified in
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
+    #
+    # @return [Types::InboundIntegrationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InboundIntegrationsMessage#marker #marker} => String
+    #   * {Types::InboundIntegrationsMessage#inbound_integrations #inbound_integrations} => Array&lt;Types::InboundIntegration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_integrations({
+    #     integration_arn: "String",
+    #     target_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.inbound_integrations #=> Array
+    #   resp.inbound_integrations[0].integration_arn #=> String
+    #   resp.inbound_integrations[0].source_arn #=> String
+    #   resp.inbound_integrations[0].target_arn #=> String
+    #   resp.inbound_integrations[0].status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.inbound_integrations[0].errors #=> Array
+    #   resp.inbound_integrations[0].errors[0].error_code #=> String
+    #   resp.inbound_integrations[0].errors[0].error_message #=> String
+    #   resp.inbound_integrations[0].create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeInboundIntegrations AWS API Documentation
+    #
+    # @overload describe_inbound_integrations(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_integrations(params = {}, options = {})
+      req = build_request(:describe_inbound_integrations, params)
       req.send_request(options)
     end
 
@@ -6908,6 +7072,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7012,6 +7177,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -7245,6 +7419,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7349,6 +7524,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7356,6 +7540,166 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def enable_snapshot_copy(params = {}, options = {})
       req = build_request(:enable_snapshot_copy, params)
+      req.send_request(options)
+    end
+
+    # Fails over the primary compute unit of the specified Multi-AZ cluster
+    # to another Availability Zone.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster for which the primary compute
+    #   unit will be failed over to another Availability Zone.
+    #
+    # @return [Types::FailoverPrimaryComputeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverPrimaryComputeResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_primary_compute({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.endpoint.vpc_endpoints #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.availability_zone_relocation_status #=> String
+    #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryCompute AWS API Documentation
+    #
+    # @overload failover_primary_compute(params = {})
+    # @param [Hash] params ({})
+    def failover_primary_compute(params = {}, options = {})
+      req = build_request(:failover_primary_compute, params)
       req.send_request(options)
     end
 
@@ -7737,6 +8081,36 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Get the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is fetched.
+    #
+    # @return [Types::GetResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResult#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_arn #=> String
+    #   resp.resource_policy.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # This operation is retired. Calling this operation does not change AQUA
     # configuration. Amazon Redshift automatically determines whether to use
     # AQUA (Advanced Query Accelerator).
@@ -7901,6 +8275,9 @@ module Aws::Redshift
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
+    #
+    #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
+    #   `true`.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
     #   to regain access to the admin user account for a cluster if the
@@ -8091,6 +8468,27 @@ module Aws::Redshift
     # @option params [Integer] :port
     #   The option to change the port of an Amazon Redshift cluster.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage this
+    #   cluster's admin credentials. You can't use `MasterUserPassword` if
+    #   `ManageMasterPassword` is true. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses `MasterUserPassword` for the admin user
+    #   account's password.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
+    # @option params [String] :ip_address_type
+    #   The IP address types that the cluster supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #
+    # @option params [Boolean] :multi_az
+    #   If true and the cluster is currently only deployed in a single
+    #   Availability Zone, the cluster will be modified to be deployed in two
+    #   Availability Zones.
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -8104,7 +8502,7 @@ module Aws::Redshift
     #     number_of_nodes: 1,
     #     cluster_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     cluster_parameter_group_name: "String",
     #     automated_snapshot_retention_period: 1,
     #     manual_snapshot_retention_period: 1,
@@ -8123,6 +8521,10 @@ module Aws::Redshift
     #     availability_zone_relocation: false,
     #     availability_zone: "String",
     #     port: 1,
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
+    #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -8144,6 +8546,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8248,6 +8651,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -8301,6 +8713,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8405,6 +8818,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -8474,6 +8896,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8578,6 +9001,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8647,6 +9079,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8751,6 +9184,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -8898,6 +9340,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot AWS API Documentation
     #
@@ -8982,6 +9426,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
     #   resp.cluster_subnet_group.tags[0].value #=> String
+    #   resp.cluster_subnet_group.supported_cluster_ip_address_types #=> Array
+    #   resp.cluster_subnet_group.supported_cluster_ip_address_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup AWS API Documentation
     #
@@ -9085,6 +9531,7 @@ module Aws::Redshift
     #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
     #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].ipv_6_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEndpointAccess AWS API Documentation
     #
@@ -9368,6 +9815,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -9472,6 +9920,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9624,6 +10081,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -9728,6 +10186,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -9799,6 +10266,40 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Updates the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource of which its resource
+    #   policy is updated.
+    #
+    # @option params [required, String] :policy
+    #   The content of the resource policy being updated.
+    #
+    # @return [Types::PutResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResult#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "String", # required
+    #     policy: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_arn #=> String
+    #   resp.resource_policy.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Reboots a cluster. This action is taken as soon as possible. It
     # results in a momentary outage to the cluster, during which the cluster
     # status is set to `rebooting`. A cluster event is created when the
@@ -9843,6 +10344,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -9947,6 +10449,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -10150,6 +10661,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -10254,6 +10766,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -10545,6 +11066,25 @@ module Aws::Redshift
     #   encrypted with Key Management Service (KMS) and a customer managed
     #   key.
     #
+    # @option params [Boolean] :manage_master_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
+    #   cluster's admin credentials. If `ManageMasterPassword` is false or
+    #   not set, Amazon Redshift uses the admin credentials the cluster had at
+    #   the time the snapshot was taken.
+    #
+    # @option params [String] :master_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the cluster's admin credentials secret. You can only use this
+    #   parameter if `ManageMasterPassword` is true.
+    #
+    # @option params [String] :ip_address_type
+    #   The IP address type for the cluster. Possible values are `ipv4` and
+    #   `dualstack`.
+    #
+    # @option params [Boolean] :multi_az
+    #   If true, the snapshot will be restored to a cluster deployed in two
+    #   Availability Zones.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -10585,6 +11125,10 @@ module Aws::Redshift
     #     reserved_node_id: "String",
     #     target_reserved_node_offering_id: "String",
     #     encrypted: false,
+    #     manage_master_password: false,
+    #     master_password_secret_kms_key_id: "String",
+    #     ip_address_type: "String",
+    #     multi_az: false,
     #   })
     #
     # @example Response structure
@@ -10606,6 +11150,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -10710,6 +11255,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -10854,6 +11408,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -10958,6 +11513,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -11188,6 +11752,8 @@ module Aws::Redshift
     #   resp.snapshot.manual_snapshot_retention_period #=> Integer
     #   resp.snapshot.manual_snapshot_remaining_days #=> Integer
     #   resp.snapshot.snapshot_retention_start_time #=> Time
+    #   resp.snapshot.master_password_secret_arn #=> String
+    #   resp.snapshot.master_password_secret_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -11236,6 +11802,7 @@ module Aws::Redshift
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].ipv_6_address #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -11340,6 +11907,15 @@ module Aws::Redshift
     #   resp.cluster.custom_domain_name #=> String
     #   resp.cluster.custom_domain_certificate_arn #=> String
     #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
+    #   resp.cluster.master_password_secret_arn #=> String
+    #   resp.cluster.master_password_secret_kms_key_id #=> String
+    #   resp.cluster.ip_address_type #=> String
+    #   resp.cluster.multi_az #=> String
+    #   resp.cluster.multi_az_secondary.availability_zone #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes #=> Array
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -11415,7 +11991,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

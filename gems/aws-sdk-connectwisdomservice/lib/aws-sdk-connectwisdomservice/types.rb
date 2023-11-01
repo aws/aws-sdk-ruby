@@ -45,9 +45,19 @@ module Aws::ConnectWisdomService
     #     including at least `id`, `title`, `updated_at`, and `draft` as
     #     source fields.
     #
-    #   * For [ SharePoint][4], your AppIntegrations DataIntegration must
+    #   * For [SharePoint][4], your AppIntegrations DataIntegration must
     #     have a FileConfiguration, including only file extensions that are
     #     among `docx`, `pdf`, `html`, `htm`, and `txt`.
+    #
+    #   * For [Amazon S3][5], the ObjectConfiguration and FileConfiguration
+    #     of your AppIntegrations DataIntegration must be null. The
+    #     `SourceURI` of your DataIntegration must use the following format:
+    #     `s3://your_s3_bucket_name`.
+    #
+    #     The bucket policy of the corresponding S3 bucket must allow the
+    #     Amazon Web Services principal `app-integrations.amazonaws.com` to
+    #     perform `s3:ListBucket`, `s3:GetObject`, and
+    #     `s3:GetBucketLocation` against the bucket.
     #
     #
     #
@@ -55,6 +65,7 @@ module Aws::ConnectWisdomService
     #   [2]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
     #   [3]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
     #   [4]: https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index
+    #   [5]: https://aws.amazon.com/s3/
     #   @return [String]
     #
     # @!attribute [rw] object_fields
@@ -249,7 +260,21 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom. To use Wisdom with chat, the key policy must also
+    #   allow `kms:Decrypt`, `kms:GenerateDataKey*`, and `kms:DescribeKey`
+    #   permissions to the `connect.amazonaws.com` service principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -319,7 +344,21 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom. To use Wisdom with chat, the key policy must also
+    #   allow `kms:Decrypt`, `kms:GenerateDataKey*`, and `kms:DescribeKey`
+    #   permissions to the `connect.amazonaws.com` service principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -626,7 +665,22 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   The customer managed key must have a policy that allows
+    #   `kms:CreateGrant` and ` kms:DescribeKey` permissions to the IAM
+    #   identity using the key to invoke Wisdom. To use Wisdom with chat,
+    #   the key policy must also allow `kms:Decrypt`,
+    #   `kms:GenerateDataKey*`, and `kms:DescribeKey` permissions to the
+    #   `connect.amazonaws.com` service principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] tags
@@ -786,7 +840,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -1326,7 +1392,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -1387,7 +1465,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant` and
+    #   `kms:DescribeKey` permissions to the IAM identity using the key to
+    #   invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -2039,15 +2129,19 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # The KMS key used for encryption.
+    # The configuration information for the customer managed key used for
+    # encryption.
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key. For information about valid ID values, see [Key
-    #   identifiers (KeyId)][1].
+    #   The customer managed key used for encryption. For more information
+    #   about setting up a customer managed key for Wisdom, see [Enable
+    #   Amazon Connect Wisdom for your instance][1]. For information about
+    #   valid ID values, see [Key identifiers (KeyId)][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ServerSideEncryptionConfiguration AWS API Documentation

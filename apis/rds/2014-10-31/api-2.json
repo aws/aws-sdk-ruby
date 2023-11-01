@@ -69,7 +69,8 @@
         {"shape":"DBSnapshotNotFoundFault"},
         {"shape":"DBProxyNotFoundFault"},
         {"shape":"DBProxyTargetGroupNotFoundFault"},
-        {"shape":"BlueGreenDeploymentNotFoundFault"}
+        {"shape":"BlueGreenDeploymentNotFoundFault"},
+        {"shape":"IntegrationNotFoundFault"}
       ]
     },
     "ApplyPendingMaintenanceAction":{
@@ -577,6 +578,26 @@
         {"shape":"DBClusterNotFoundFault"}
       ]
     },
+    "CreateIntegration":{
+      "name":"CreateIntegration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateIntegrationMessage"},
+      "output":{
+        "shape":"Integration",
+        "resultWrapper":"CreateIntegrationResult"
+      },
+      "errors":[
+        {"shape":"DBClusterNotFoundFault"},
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"IntegrationAlreadyExistsFault"},
+        {"shape":"IntegrationQuotaExceededFault"},
+        {"shape":"KMSKeyNotAccessibleFault"},
+        {"shape":"IntegrationConflictOperationFault"}
+      ]
+    },
     "CreateOptionGroup":{
       "name":"CreateOptionGroup",
       "http":{
@@ -857,6 +878,23 @@
       "errors":[
         {"shape":"GlobalClusterNotFoundFault"},
         {"shape":"InvalidGlobalClusterStateFault"}
+      ]
+    },
+    "DeleteIntegration":{
+      "name":"DeleteIntegration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteIntegrationMessage"},
+      "output":{
+        "shape":"Integration",
+        "resultWrapper":"DeleteIntegrationResult"
+      },
+      "errors":[
+        {"shape":"IntegrationNotFoundFault"},
+        {"shape":"IntegrationConflictOperationFault"},
+        {"shape":"InvalidIntegrationStateFault"}
       ]
     },
     "DeleteOptionGroup":{
@@ -1358,6 +1396,21 @@
         {"shape":"GlobalClusterNotFoundFault"}
       ]
     },
+    "DescribeIntegrations":{
+      "name":"DescribeIntegrations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeIntegrationsMessage"},
+      "output":{
+        "shape":"DescribeIntegrationsResponse",
+        "resultWrapper":"DescribeIntegrationsResult"
+      },
+      "errors":[
+        {"shape":"IntegrationNotFoundFault"}
+      ]
+    },
     "DescribeOptionGroupOptions":{
       "name":"DescribeOptionGroupOptions",
       "http":{
@@ -1538,7 +1591,8 @@
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"DBProxyNotFoundFault"},
         {"shape":"DBProxyTargetGroupNotFoundFault"},
-        {"shape":"BlueGreenDeploymentNotFoundFault"}
+        {"shape":"BlueGreenDeploymentNotFoundFault"},
+        {"shape":"IntegrationNotFoundFault"}
       ]
     },
     "ModifyActivityStream":{
@@ -2070,7 +2124,8 @@
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"DBProxyNotFoundFault"},
         {"shape":"DBProxyTargetGroupNotFoundFault"},
-        {"shape":"BlueGreenDeploymentNotFoundFault"}
+        {"shape":"BlueGreenDeploymentNotFoundFault"},
+        {"shape":"IntegrationNotFoundFault"}
       ]
     },
     "ResetDBClusterParameterGroup":{
@@ -2682,6 +2737,11 @@
         "ResourcePendingMaintenanceActions":{"shape":"ResourcePendingMaintenanceActions"}
       }
     },
+    "Arn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
     "AttributeValueList":{
       "type":"list",
       "member":{
@@ -2993,6 +3053,7 @@
         "EngineVersion":{"shape":"String"},
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "AllocatedStorage":{"shape":"IntegerOptional"},
+        "RdsCustomClusterConfiguration":{"shape":"RdsCustomClusterConfiguration"},
         "Iops":{"shape":"IntegerOptional"},
         "StorageType":{"shape":"String"}
       }
@@ -3134,7 +3195,9 @@
         "TargetEngineVersion":{"shape":"TargetEngineVersion"},
         "TargetDBParameterGroupName":{"shape":"TargetDBParameterGroupName"},
         "TargetDBClusterParameterGroupName":{"shape":"TargetDBClusterParameterGroupName"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "TargetDBInstanceClass":{"shape":"TargetDBInstanceClass"},
+        "UpgradeTargetStorageConfig":{"shape":"BooleanOptional"}
       }
     },
     "CreateBlueGreenDeploymentResponse":{
@@ -3223,6 +3286,7 @@
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "EngineMode":{"shape":"String"},
         "ScalingConfiguration":{"shape":"ScalingConfiguration"},
+        "RdsCustomClusterConfiguration":{"shape":"RdsCustomClusterConfiguration"},
         "DeletionProtection":{"shape":"BooleanOptional"},
         "GlobalClusterIdentifier":{"shape":"String"},
         "EnableHttpEndpoint":{"shape":"BooleanOptional"},
@@ -3360,7 +3424,8 @@
         "ManageMasterUserPassword":{"shape":"BooleanOptional"},
         "MasterUserSecretKmsKeyId":{"shape":"String"},
         "CACertificateIdentifier":{"shape":"String"},
-        "DBSystemId":{"shape":"String"}
+        "DBSystemId":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -3408,7 +3473,9 @@
         "StorageThroughput":{"shape":"IntegerOptional"},
         "EnableCustomerOwnedIp":{"shape":"BooleanOptional"},
         "AllocatedStorage":{"shape":"IntegerOptional"},
-        "SourceDBClusterIdentifier":{"shape":"String"}
+        "SourceDBClusterIdentifier":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"},
+        "UpgradeStorageConfig":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -3589,6 +3656,22 @@
         "GlobalCluster":{"shape":"GlobalCluster"}
       }
     },
+    "CreateIntegrationMessage":{
+      "type":"structure",
+      "required":[
+        "SourceArn",
+        "TargetArn",
+        "IntegrationName"
+      ],
+      "members":{
+        "SourceArn":{"shape":"SourceArn"},
+        "TargetArn":{"shape":"Arn"},
+        "IntegrationName":{"shape":"IntegrationName"},
+        "KMSKeyId":{"shape":"String"},
+        "AdditionalEncryptionContext":{"shape":"EncryptionContextMap"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "CreateOptionGroupMessage":{
       "type":"structure",
       "required":[
@@ -3735,6 +3818,7 @@
         "Capacity":{"shape":"IntegerOptional"},
         "EngineMode":{"shape":"String"},
         "ScalingConfigurationInfo":{"shape":"ScalingConfigurationInfo"},
+        "RdsCustomClusterConfiguration":{"shape":"RdsCustomClusterConfiguration"},
         "DeletionProtection":{"shape":"BooleanOptional"},
         "HttpEndpointEnabled":{"shape":"BooleanOptional"},
         "ActivityStreamMode":{"shape":"ActivityStreamMode"},
@@ -4245,7 +4329,8 @@
         "CustomDBEngineVersionManifest":{"shape":"CustomDBEngineVersionManifest"},
         "SupportsCertificateRotationWithoutRestart":{"shape":"BooleanOptional"},
         "SupportedCACertificateIdentifiers":{"shape":"CACertificateIdentifiersList"},
-        "SupportsLocalWriteForwarding":{"shape":"BooleanOptional"}
+        "SupportsLocalWriteForwarding":{"shape":"BooleanOptional"},
+        "SupportsIntegrations":{"shape":"Boolean"}
       }
     },
     "DBEngineVersionList":{
@@ -4346,7 +4431,9 @@
         "MasterUserSecret":{"shape":"MasterUserSecret"},
         "CertificateDetails":{"shape":"CertificateDetails"},
         "ReadReplicaSourceDBClusterIdentifier":{"shape":"String"},
-        "PercentProgress":{"shape":"String"}
+        "PercentProgress":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"Boolean"},
+        "IsStorageConfigUpgradeAvailable":{"shape":"BooleanOptional"}
       },
       "wrapper":true
     },
@@ -4392,7 +4479,8 @@
         "DBInstanceAutomatedBackupsReplications":{"shape":"DBInstanceAutomatedBackupsReplicationList"},
         "BackupTarget":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
-        "AwsBackupRecoveryPointArn":{"shape":"String"}
+        "AwsBackupRecoveryPointArn":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       },
       "wrapper":true
     },
@@ -4970,7 +5058,8 @@
         "SnapshotDatabaseTime":{"shape":"TStamp"},
         "SnapshotTarget":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
-        "DBSystemId":{"shape":"String"}
+        "DBSystemId":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -5337,6 +5426,13 @@
       "type":"structure",
       "members":{
         "GlobalCluster":{"shape":"GlobalCluster"}
+      }
+    },
+    "DeleteIntegrationMessage":{
+      "type":"structure",
+      "required":["IntegrationIdentifier"],
+      "members":{
+        "IntegrationIdentifier":{"shape":"IntegrationIdentifier"}
       }
     },
     "DeleteOptionGroupMessage":{
@@ -5765,6 +5861,22 @@
         "Marker":{"shape":"String"}
       }
     },
+    "DescribeIntegrationsMessage":{
+      "type":"structure",
+      "members":{
+        "IntegrationIdentifier":{"shape":"IntegrationIdentifier"},
+        "Filters":{"shape":"FilterList"},
+        "MaxRecords":{"shape":"IntegerOptional"},
+        "Marker":{"shape":"Marker"}
+      }
+    },
+    "DescribeIntegrationsResponse":{
+      "type":"structure",
+      "members":{
+        "Marker":{"shape":"Marker"},
+        "Integrations":{"shape":"IntegrationList"}
+      }
+    },
     "DescribeOptionGroupOptionsMessage":{
       "type":"structure",
       "required":["EngineName"],
@@ -5962,6 +6074,11 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "EncryptionContextMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
     },
     "Endpoint":{
       "type":"structure",
@@ -6426,6 +6543,117 @@
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
+    "Integration":{
+      "type":"structure",
+      "members":{
+        "SourceArn":{"shape":"SourceArn"},
+        "TargetArn":{"shape":"Arn"},
+        "IntegrationName":{"shape":"IntegrationName"},
+        "IntegrationArn":{"shape":"IntegrationArn"},
+        "KMSKeyId":{"shape":"String"},
+        "AdditionalEncryptionContext":{"shape":"EncryptionContextMap"},
+        "Status":{"shape":"IntegrationStatus"},
+        "Tags":{"shape":"TagList"},
+        "CreateTime":{"shape":"TStamp"},
+        "Errors":{"shape":"IntegrationErrorList"}
+      }
+    },
+    "IntegrationAlreadyExistsFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"IntegrationAlreadyExistsFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "IntegrationArn":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:integration:[a-z][a-z0-9]*(-[a-zA-Z0-9]+)*\\/[a-zA-Z0-9_:\\-\\/]+"
+    },
+    "IntegrationConflictOperationFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"IntegrationConflictOperationFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "IntegrationError":{
+      "type":"structure",
+      "required":["ErrorCode"],
+      "members":{
+        "ErrorCode":{"shape":"String"},
+        "ErrorMessage":{"shape":"String"}
+      }
+    },
+    "IntegrationErrorList":{
+      "type":"list",
+      "member":{
+        "shape":"IntegrationError",
+        "locationName":"IntegrationError"
+      }
+    },
+    "IntegrationIdentifier":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_:\\-\\/]+"
+    },
+    "IntegrationList":{
+      "type":"list",
+      "member":{
+        "shape":"Integration",
+        "locationName":"Integration"
+      }
+    },
+    "IntegrationName":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
+    },
+    "IntegrationNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"IntegrationNotFoundFault",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "IntegrationQuotaExceededFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"IntegrationQuotaExceededFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "IntegrationStatus":{
+      "type":"string",
+      "enum":[
+        "creating",
+        "active",
+        "modifying",
+        "failed",
+        "deleting",
+        "syncing",
+        "needs_attention"
+      ]
+    },
     "InvalidBlueGreenDeploymentStateFault":{
       "type":"structure",
       "members":{
@@ -6668,6 +6896,17 @@
       },
       "exception":true
     },
+    "InvalidIntegrationStateFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidIntegrationStateFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidOptionGroupStateFault":{
       "type":"structure",
       "members":{
@@ -6768,6 +7007,11 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "Marker":{
+      "type":"string",
+      "max":340,
+      "min":1
+    },
     "MasterUserSecret":{
       "type":"structure",
       "members":{
@@ -7005,7 +7249,8 @@
         "ManageMasterUserPassword":{"shape":"BooleanOptional"},
         "RotateMasterUserPassword":{"shape":"BooleanOptional"},
         "MasterUserSecretKmsKeyId":{"shape":"String"},
-        "Engine":{"shape":"String"}
+        "Engine":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -7462,7 +7707,8 @@
         "MinStorageThroughputPerDbInstance":{"shape":"IntegerOptional"},
         "MaxStorageThroughputPerDbInstance":{"shape":"IntegerOptional"},
         "MinStorageThroughputPerIops":{"shape":"DoubleOptional"},
-        "MaxStorageThroughputPerIops":{"shape":"DoubleOptional"}
+        "MaxStorageThroughputPerIops":{"shape":"DoubleOptional"},
+        "SupportsDedicatedLogVolume":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -7570,7 +7816,8 @@
         "AutomationMode":{"shape":"AutomationMode"},
         "ResumeFullAutomationModeTime":{"shape":"TStamp"},
         "StorageThroughput":{"shape":"IntegerOptional"},
-        "Engine":{"shape":"String"}
+        "Engine":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "PointInTimeRestoreNotEnabledFault":{
@@ -7666,6 +7913,13 @@
       "member":{
         "shape":"Range",
         "locationName":"Range"
+      }
+    },
+    "RdsCustomClusterConfiguration":{
+      "type":"structure",
+      "members":{
+        "InterconnectSubnetId":{"shape":"String"},
+        "TransitGatewayMulticastDomainId":{"shape":"String"}
       }
     },
     "ReadReplicaDBClusterIdentifierList":{
@@ -8062,7 +8316,8 @@
         "Iops":{"shape":"IntegerOptional"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
         "ServerlessV2ScalingConfiguration":{"shape":"ServerlessV2ScalingConfiguration"},
-        "NetworkType":{"shape":"String"}
+        "NetworkType":{"shape":"String"},
+        "RdsCustomClusterConfiguration":{"shape":"RdsCustomClusterConfiguration"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{
@@ -8102,7 +8357,8 @@
         "Iops":{"shape":"IntegerOptional"},
         "ServerlessV2ScalingConfiguration":{"shape":"ServerlessV2ScalingConfiguration"},
         "NetworkType":{"shape":"String"},
-        "SourceDbClusterResourceId":{"shape":"String"}
+        "SourceDbClusterResourceId":{"shape":"String"},
+        "RdsCustomClusterConfiguration":{"shape":"RdsCustomClusterConfiguration"}
       }
     },
     "RestoreDBClusterToPointInTimeResult":{
@@ -8153,7 +8409,8 @@
         "NetworkType":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
         "DBClusterSnapshotIdentifier":{"shape":"String"},
-        "AllocatedStorage":{"shape":"IntegerOptional"}
+        "AllocatedStorage":{"shape":"IntegerOptional"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceFromDBSnapshotResult":{
@@ -8221,7 +8478,8 @@
         "NetworkType":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
         "ManageMasterUserPassword":{"shape":"BooleanOptional"},
-        "MasterUserSecretKmsKeyId":{"shape":"String"}
+        "MasterUserSecretKmsKeyId":{"shape":"String"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceFromS3Result":{
@@ -8276,7 +8534,8 @@
         "BackupTarget":{"shape":"String"},
         "NetworkType":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
-        "AllocatedStorage":{"shape":"IntegerOptional"}
+        "AllocatedStorage":{"shape":"IntegerOptional"},
+        "DedicatedLogVolume":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBInstanceToPointInTimeResult":{
@@ -8399,6 +8658,12 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "SourceArn":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:(cluster|db):[a-z][a-z0-9]*(-[a-z0-9]+)*"
     },
     "SourceClusterNotSupportedFault":{
       "type":"structure",
@@ -8833,6 +9098,12 @@
       "min":1,
       "pattern":"[A-Za-z](?!.*--)[0-9A-Za-z-]*[^-]|^default(?!.*--)(?!.*\\.\\.)[0-9A-Za-z-.]*[^-]"
     },
+    "TargetDBInstanceClass":{
+      "type":"string",
+      "max":20,
+      "min":5,
+      "pattern":"db\\.[0-9a-z]{2,6}\\.[0-9a-z]{4,9}"
+    },
     "TargetDBParameterGroupName":{
       "type":"string",
       "max":255,
@@ -8913,7 +9184,8 @@
         "SupportsParallelQuery":{"shape":"BooleanOptional"},
         "SupportsGlobalDatabases":{"shape":"BooleanOptional"},
         "SupportsBabelfish":{"shape":"BooleanOptional"},
-        "SupportsLocalWriteForwarding":{"shape":"BooleanOptional"}
+        "SupportsLocalWriteForwarding":{"shape":"BooleanOptional"},
+        "SupportsIntegrations":{"shape":"BooleanOptional"}
       }
     },
     "UserAuthConfig":{
@@ -8950,7 +9222,8 @@
       "type":"structure",
       "members":{
         "Storage":{"shape":"ValidStorageOptionsList"},
-        "ValidProcessorFeatures":{"shape":"AvailableProcessorFeatureList"}
+        "ValidProcessorFeatures":{"shape":"AvailableProcessorFeatureList"},
+        "SupportsDedicatedLogVolume":{"shape":"Boolean"}
       },
       "wrapper":true
     },

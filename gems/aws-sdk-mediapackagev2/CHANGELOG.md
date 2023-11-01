@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-10-30)
+------------------
+
+* Feature - This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default.
+
+1.8.0 (2023-10-16)
+------------------
+
+* Feature - This release allows customers to manage MediaPackage v2 resource using CloudFormation.
+
 1.7.0 (2023-09-27)
 ------------------
 

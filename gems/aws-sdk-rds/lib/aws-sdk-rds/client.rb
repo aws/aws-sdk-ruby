@@ -1821,6 +1821,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2024,6 +2025,21 @@ module Aws::RDS
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the blue/green deployment.
     #
+    # @option params [String] :target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #
+    # @option params [Boolean] :upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the green
+    #   database. This option migrates the green DB instance from the older
+    #   32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
@@ -2164,6 +2180,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     target_db_instance_class: "TargetDBInstanceClass",
+    #     upgrade_target_storage_config: false,
     #   })
     #
     # @example Response structure
@@ -2337,6 +2355,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2389,6 +2408,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2417,6 +2437,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -2886,6 +2907,9 @@ module Aws::RDS
     #   of the DB cluster.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled. The
@@ -3431,6 +3455,10 @@ module Aws::RDS
     #       timeout_action: "String",
     #       seconds_before_timeout: 1,
     #     },
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
@@ -3527,6 +3555,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -3559,6 +3589,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -5206,6 +5238,10 @@ module Aws::RDS
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5393,6 +5429,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -5459,6 +5496,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5552,6 +5590,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6212,6 +6252,15 @@ module Aws::RDS
     #   * The source DB cluster must be in the same Amazon Web Services Region
     #     as the read replica. Cross-Region replication isn't supported.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
+    # @option params [Boolean] :upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6297,6 +6346,8 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
+    #     dedicated_log_volume: false,
+    #     upgrade_storage_config: false,
     #     source_region: "String",
     #   })
     #
@@ -6364,6 +6415,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6457,6 +6509,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7060,6 +7114,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7544,6 +7599,110 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates a zero-ETL integration with Amazon Redshift. For more
+    # information, see [Working with Amazon Aurora zero-ETL integrations
+    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    #
+    # @option params [required, String] :source_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the
+    #   source for replication.
+    #
+    # @option params [required, String] :target_arn
+    #   The ARN of the Redshift data warehouse to use as the target for
+    #   replication.
+    #
+    # @option params [required, String] :integration_name
+    #   The name of the integration.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key to use to encrypt the integration. If
+    #   you don't specify an encryption key, Aurora uses a default Amazon Web
+    #   Services owned key.
+    #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains additional
+    #   contextual information about the data. For more information, see
+    #   [Encryption context][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_integration({
+    #     source_arn: "SourceArn", # required
+    #     target_arn: "Arn", # required
+    #     integration_name: "IntegrationName", # required
+    #     kms_key_id: "String",
+    #     additional_encryption_context: {
+    #       "String" => "String",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegration AWS API Documentation
+    #
+    # @overload create_integration(params = {})
+    # @param [Hash] params ({})
+    def create_integration(params = {}, options = {})
+      req = build_request(:create_integration, params)
+      req.send_request(options)
+    end
+
     # Creates a new option group. You can create up to 20 option groups.
     #
     # This command doesn't apply to RDS Custom.
@@ -7969,6 +8128,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -8007,6 +8167,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -8035,6 +8196,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -8220,6 +8382,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -8252,6 +8416,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -8776,6 +8942,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -8869,6 +9036,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8975,6 +9144,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -9285,6 +9455,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -9484,6 +9655,63 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_global_cluster(params = {}, options = {})
       req = build_request(:delete_global_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes a zero-ETL integration with Amazon Redshift. For more
+    # information, see [Deleting Amazon Aurora zero-ETL integrations with
+    # Amazon Redshift][1] in the *Amazon Aurora User Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html
+    #
+    # @option params [required, String] :integration_identifier
+    #   The unique identifier of the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration({
+    #     integration_identifier: "IntegrationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegration AWS API Documentation
+    #
+    # @overload delete_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_integration(params = {}, options = {})
+      req = build_request(:delete_integration, params)
       req.send_request(options)
     end
 
@@ -11425,6 +11653,8 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
     #   resp.db_clusters[0].scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_clusters[0].rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_clusters[0].rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
@@ -11457,6 +11687,8 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
     #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
@@ -11725,6 +11957,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -11753,6 +11986,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
     #   resp.db_engine_versions[0].supports_local_write_forwarding #=> Boolean
+    #   resp.db_engine_versions[0].supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -11924,6 +12158,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].backup_target #=> String
     #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -12108,6 +12343,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.engine #=> String
+    #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -12201,6 +12437,8 @@ module Aws::RDS
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instances[0].percent_progress #=> String
+    #   resp.db_instances[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13286,6 +13524,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].db_system_id #=> String
+    #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14430,6 +14669,87 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describe one or more zero-ETL integration with Amazon Redshift. For
+    # more information, see [Viewing and monitoring Amazon Aurora zero-ETL
+    # integrations with Amazon Redshift][1] in the *Amazon Aurora User
+    # Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html
+    #
+    # @option params [String] :integration_identifier
+    #   The unique identifier of the integration.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more resources to return.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIntegrationsResponse#marker #marker} => String
+    #   * {Types::DescribeIntegrationsResponse#integrations #integrations} => Array&lt;Types::Integration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_integrations({
+    #     integration_identifier: "IntegrationIdentifier",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "Marker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.integrations #=> Array
+    #   resp.integrations[0].source_arn #=> String
+    #   resp.integrations[0].target_arn #=> String
+    #   resp.integrations[0].integration_name #=> String
+    #   resp.integrations[0].integration_arn #=> String
+    #   resp.integrations[0].kms_key_id #=> String
+    #   resp.integrations[0].additional_encryption_context #=> Hash
+    #   resp.integrations[0].additional_encryption_context["String"] #=> String
+    #   resp.integrations[0].status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.integrations[0].tags #=> Array
+    #   resp.integrations[0].tags[0].key #=> String
+    #   resp.integrations[0].tags[0].value #=> String
+    #   resp.integrations[0].create_time #=> Time
+    #   resp.integrations[0].errors #=> Array
+    #   resp.integrations[0].errors[0].error_code #=> String
+    #   resp.integrations[0].errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrations AWS API Documentation
+    #
+    # @overload describe_integrations(params = {})
+    # @param [Hash] params ({})
+    def describe_integrations(params = {}, options = {})
+      req = build_request(:describe_integrations, params)
+      req.send_request(options)
+    end
+
     # Describes all available options.
     #
     # @option params [required, String] :engine_name
@@ -14958,6 +15278,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -15677,6 +15998,7 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
+    #   resp.valid_db_instance_modifications_message.supports_dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -15926,6 +16248,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -15958,6 +16282,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -16580,6 +16906,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -16620,6 +16947,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -16648,6 +16976,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -17548,6 +17877,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -17580,6 +17911,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -19000,6 +19333,10 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -19124,6 +19461,7 @@ module Aws::RDS
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -19190,6 +19528,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -19283,6 +19622,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -19783,6 +20124,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -20600,6 +20942,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20693,6 +21036,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -20793,6 +21138,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -20825,6 +21172,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21070,6 +21419,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -21102,6 +21453,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21271,6 +21624,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21364,6 +21718,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -22528,6 +22884,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -22560,6 +22918,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -23037,6 +23397,9 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -23153,6 +23516,10 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -23221,6 +23588,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -23253,6 +23622,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -23706,6 +24077,9 @@ module Aws::RDS
     # @option params [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
     #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -23821,6 +24195,10 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -23889,6 +24267,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -23921,6 +24301,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -24472,6 +24854,10 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -24566,6 +24952,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -24632,6 +25019,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24725,6 +25113,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -25232,6 +25622,10 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -25297,6 +25691,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -25363,6 +25758,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25456,6 +25852,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -25991,6 +26389,10 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -26148,6 +26550,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -26214,6 +26617,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26307,6 +26711,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -26635,6 +27041,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -26667,6 +27075,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -26808,6 +27218,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26901,6 +27312,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27057,6 +27470,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -27451,6 +27865,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -27483,6 +27899,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -27631,6 +28049,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27724,6 +28143,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -27832,6 +28253,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28224,6 +28646,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28317,6 +28740,8 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -28340,7 +28765,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.200.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

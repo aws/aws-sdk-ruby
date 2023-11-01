@@ -2073,6 +2073,76 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Allows you to update code configuration on a running cluster. By using
+    # this API you can update the code, the initialization script path, and
+    # the command line arguments for a specific cluster. The configuration
+    # that you want to update will override any existing configurations on
+    # the cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier of the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::CodeConfiguration] :code
+    #   The structure of the customer code available within the running
+    #   cluster.
+    #
+    # @option params [String] :initialization_script
+    #   Specifies a Q program that will be run at launch of a cluster. It is a
+    #   relative path within *.zip* file that contains the custom code, which
+    #   will be loaded on the cluster. It must include the file name itself.
+    #   For example, `somedir/init.q`.
+    #
+    # @option params [Array<Types::KxCommandLineArgument>] :command_line_arguments
+    #   Specifies the key-value pairs to make them available inside the
+    #   cluster.
+    #
+    # @option params [Types::KxClusterCodeDeploymentConfiguration] :deployment_configuration
+    #   The configuration that allows you to choose how you want to update the
+    #   code on a cluster.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_cluster_code_configuration({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     client_token: "ClientTokenString",
+    #     code: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key: "S3Key",
+    #       s3_object_version: "S3ObjectVersion",
+    #     },
+    #     initialization_script: "InitializationScriptFilePath",
+    #     command_line_arguments: [
+    #       {
+    #         key: "KxCommandLineArgumentKey",
+    #         value: "KxCommandLineArgumentValue",
+    #       },
+    #     ],
+    #     deployment_configuration: {
+    #       deployment_strategy: "ROLLING", # required, accepts ROLLING, FORCE
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfiguration AWS API Documentation
+    #
+    # @overload update_kx_cluster_code_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_kx_cluster_code_configuration(params = {}, options = {})
+      req = build_request(:update_kx_cluster_code_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the databases mounted on a kdb cluster, which includes the
     # `changesetId` and all the dbPaths to be cached. This API does not
     # allow you to change a database name or add a database if you created a
@@ -2442,7 +2512,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

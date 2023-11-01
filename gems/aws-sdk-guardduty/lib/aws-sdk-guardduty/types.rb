@@ -2273,12 +2273,18 @@ module Aws::GuardDuty
     #   Indicates whether the targeted port is blocked.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain_with_suffix
+    #   The second and top level domain involved in the activity that
+    #   prompted GuardDuty to generate this finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
     #
     class DnsRequestAction < Struct.new(
       :domain,
       :protocol,
-      :blocked)
+      :blocked,
+      :domain_with_suffix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4170,6 +4176,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.serviceName
     #
     #   * service.action.dnsRequestAction.domain
+    #
+    #   * service.action.dnsRequestAction.domainWithSuffix
     #
     #   * service.action.networkConnectionAction.blocked
     #

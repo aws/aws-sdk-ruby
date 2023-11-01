@@ -33,6 +33,7 @@ module Aws::Amplify
     AutoSubDomainCreationPattern = Shapes::StringShape.new(name: 'AutoSubDomainCreationPattern')
     AutoSubDomainCreationPatterns = Shapes::ListShape.new(name: 'AutoSubDomainCreationPatterns')
     AutoSubDomainIAMRole = Shapes::StringShape.new(name: 'AutoSubDomainIAMRole')
+    Backend = Shapes::StructureShape.new(name: 'Backend')
     BackendEnvironment = Shapes::StructureShape.new(name: 'BackendEnvironment')
     BackendEnvironmentArn = Shapes::StringShape.new(name: 'BackendEnvironmentArn')
     BackendEnvironments = Shapes::ListShape.new(name: 'BackendEnvironments')
@@ -172,6 +173,7 @@ module Aws::Amplify
     ServiceRoleArn = Shapes::StringShape.new(name: 'ServiceRoleArn')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceUrl = Shapes::StringShape.new(name: 'SourceUrl')
+    StackArn = Shapes::StringShape.new(name: 'StackArn')
     StackName = Shapes::StringShape.new(name: 'StackName')
     Stage = Shapes::StringShape.new(name: 'Stage')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
@@ -275,6 +277,9 @@ module Aws::Amplify
 
     AutoSubDomainCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoSubDomainCreationPattern)
 
+    Backend.add_member(:stack_arn, Shapes::ShapeRef.new(shape: StackArn, location_name: "stackArn"))
+    Backend.struct_class = Types::Backend
+
     BackendEnvironment.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, required: true, location_name: "backendEnvironmentArn"))
     BackendEnvironment.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "environmentName"))
     BackendEnvironment.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "stackName"))
@@ -315,6 +320,7 @@ module Aws::Amplify
     Branch.add_member(:destination_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "destinationBranch"))
     Branch.add_member(:source_branch, Shapes::ShapeRef.new(shape: BranchName, location_name: "sourceBranch"))
     Branch.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
+    Branch.add_member(:backend, Shapes::ShapeRef.new(shape: Backend, location_name: "backend"))
     Branch.struct_class = Types::Branch
 
     Branches.member = Shapes::ShapeRef.new(shape: Branch)
@@ -370,6 +376,7 @@ module Aws::Amplify
     CreateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
     CreateBranchRequest.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
     CreateBranchRequest.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
+    CreateBranchRequest.add_member(:backend, Shapes::ShapeRef.new(shape: Backend, location_name: "backend"))
     CreateBranchRequest.struct_class = Types::CreateBranchRequest
 
     CreateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))
@@ -767,6 +774,7 @@ module Aws::Amplify
     UpdateBranchRequest.add_member(:enable_pull_request_preview, Shapes::ShapeRef.new(shape: EnablePullRequestPreview, location_name: "enablePullRequestPreview"))
     UpdateBranchRequest.add_member(:pull_request_environment_name, Shapes::ShapeRef.new(shape: PullRequestEnvironmentName, location_name: "pullRequestEnvironmentName"))
     UpdateBranchRequest.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, location_name: "backendEnvironmentArn"))
+    UpdateBranchRequest.add_member(:backend, Shapes::ShapeRef.new(shape: Backend, location_name: "backend"))
     UpdateBranchRequest.struct_class = Types::UpdateBranchRequest
 
     UpdateBranchResult.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, required: true, location_name: "branch"))
@@ -1087,6 +1095,12 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_artifacts, Seahorse::Model::Operation.new.tap do |o|
@@ -1121,6 +1135,12 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_domain_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -1132,6 +1152,12 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1144,6 +1170,12 @@ module Aws::Amplify
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

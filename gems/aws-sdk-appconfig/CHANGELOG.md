@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-10-20)
+------------------
+
+* Feature - Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.
+
 1.39.0 (2023-10-04)
 ------------------
 

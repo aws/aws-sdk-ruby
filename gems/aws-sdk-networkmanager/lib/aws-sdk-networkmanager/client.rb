@@ -683,7 +683,7 @@ module Aws::NetworkManager
     #     edge_location: "ExternalRegionCode", # required
     #     transport_attachment_id: "AttachmentId", # required
     #     options: { # required
-    #       protocol: "GRE", # accepts GRE
+    #       protocol: "GRE", # accepts GRE, NO_ENCAP
     #     },
     #     tags: [
     #       {
@@ -717,7 +717,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.transport_attachment_id #=> String
-    #   resp.connect_attachment.options.protocol #=> String, one of "GRE"
+    #   resp.connect_attachment.options.protocol #=> String, one of "GRE", "NO_ENCAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectAttachment AWS API Documentation
     #
@@ -745,7 +745,7 @@ module Aws::NetworkManager
     # @option params [Types::BgpOptions] :bgp_options
     #   The Connect peer BGP options.
     #
-    # @option params [required, Array<String>] :inside_cidr_blocks
+    # @option params [Array<String>] :inside_cidr_blocks
     #   The inside IP addresses used for BGP peering.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -756,6 +756,9 @@ module Aws::NetworkManager
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :subnet_arn
+    #   The subnet ARN for the Connect peer.
     #
     # @return [Types::CreateConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,7 +773,7 @@ module Aws::NetworkManager
     #     bgp_options: {
     #       peer_asn: 1,
     #     },
-    #     inside_cidr_blocks: ["ConstrainedString"], # required
+    #     inside_cidr_blocks: ["ConstrainedString"],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -778,6 +781,7 @@ module Aws::NetworkManager
     #       },
     #     ],
     #     client_token: "ClientToken",
+    #     subnet_arn: "SubnetArn",
     #   })
     #
     # @example Response structure
@@ -792,7 +796,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.configuration.peer_address #=> String
     #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
     #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
-    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE", "NO_ENCAP"
     #   resp.connect_peer.configuration.bgp_configurations #=> Array
     #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
     #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
@@ -801,6 +805,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags #=> Array
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
+    #   resp.connect_peer.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeer AWS API Documentation
     #
@@ -1617,7 +1622,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.configuration.peer_address #=> String
     #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
     #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
-    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE", "NO_ENCAP"
     #   resp.connect_peer.configuration.bgp_configurations #=> Array
     #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
     #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
@@ -1626,6 +1631,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags #=> Array
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
+    #   resp.connect_peer.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectPeer AWS API Documentation
     #
@@ -2313,7 +2319,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.transport_attachment_id #=> String
-    #   resp.connect_attachment.options.protocol #=> String, one of "GRE"
+    #   resp.connect_attachment.options.protocol #=> String, one of "GRE", "NO_ENCAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectAttachment AWS API Documentation
     #
@@ -2351,7 +2357,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.configuration.peer_address #=> String
     #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
     #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
-    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE", "NO_ENCAP"
     #   resp.connect_peer.configuration.bgp_configurations #=> Array
     #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
     #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
@@ -2360,6 +2366,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags #=> Array
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
+    #   resp.connect_peer.subnet_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeer AWS API Documentation
     #
@@ -4016,6 +4023,7 @@ module Aws::NetworkManager
     #   resp.connect_peers[0].tags #=> Array
     #   resp.connect_peers[0].tags[0].key #=> String
     #   resp.connect_peers[0].tags[0].value #=> String
+    #   resp.connect_peers[0].subnet_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListConnectPeers AWS API Documentation
@@ -5175,7 +5183,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

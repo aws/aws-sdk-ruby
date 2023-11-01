@@ -168,7 +168,7 @@ module Aws::EMR
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
-    # With Amazon EMR release version 4.0 and later, the only accepted
+    # With Amazon EMR release version 4.0 and higher, the only accepted
     # parameter is the application name. To pass arguments to applications,
     # you use configuration classifications specified using configuration
     # JSON objects. For more information, see [Configuring Applications][1].
@@ -432,7 +432,7 @@ module Aws::EMR
     end
 
     # Specification of the status of a CancelSteps request. Available only
-    # in Amazon EMR version 4.8.0 and later, excluding version 5.0.0.
+    # in Amazon EMR version 4.8.0 and higher, excluding version 5.0.0.
     #
     # @!attribute [rw] step_id
     #   The encrypted StepId of a step.
@@ -587,7 +587,7 @@ module Aws::EMR
     #
     # @!attribute [rw] instance_collection_type
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    #   releases 4.8.0 and later, excluding 5.0.x versions.
+    #   releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #    </note>
     #
@@ -604,7 +604,7 @@ module Aws::EMR
     #
     # @!attribute [rw] log_encryption_kms_key_id
     #   The KMS key used for encrypting log files. This attribute is only
-    #   available with Amazon EMR 5.30.0 and later, excluding Amazon EMR
+    #   available with Amazon EMR 5.30.0 and higher, excluding Amazon EMR
     #   6.0.0.
     #   @return [String]
     #
@@ -625,7 +625,7 @@ module Aws::EMR
     #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
     #   release label applies only to Amazon EMR releases version 4.0 and
-    #   later. Earlier versions use `AmiVersion`.
+    #   higher. Earlier versions use `AmiVersion`.
     #
     #
     #
@@ -693,7 +693,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] configurations
-    #   Applies only to Amazon EMR releases 4.x and later. The list of
+    #   Applies only to Amazon EMR releases 4.x and higher. The list of
     #   configurations that are supplied to the Amazon EMR cluster.
     #   @return [Array<Types::Configuration>]
     #
@@ -714,26 +714,26 @@ module Aws::EMR
     #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
     #   nodes at the instance-hour boundary, regardless of when the request
     #   to terminate the instance was submitted. This option is only
-    #   available with Amazon EMR 5.1.0 and later and is the default for
+    #   available with Amazon EMR 5.1.0 and higher and is the default for
     #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
     #   indicates that Amazon EMR adds nodes to a deny list and drains tasks
     #   from nodes before terminating the Amazon EC2 instances, regardless
     #   of the instance-hour boundary. With either behavior, Amazon EMR
     #   removes the least active nodes first and blocks instance termination
     #   if it could lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION`
-    #   is available only in Amazon EMR releases 4.1.0 and later, and is the
-    #   default for versions of Amazon EMR earlier than 5.1.0.
+    #   is available only in Amazon EMR releases 4.1.0 and higher, and is
+    #   the default for versions of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
     # @!attribute [rw] custom_ami_id
-    #   Available only in Amazon EMR releases 5.7.0 and later. The ID of a
+    #   Available only in Amazon EMR releases 5.7.0 and higher. The ID of a
     #   custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
-    #   The size, in GiB, of the Amazon EBS root device volume of the Linux
-    #   AMI that is used for each Amazon EC2 instance. Available in Amazon
-    #   EMR releases 4.x and later.
+    #   The size, in GiB, of the Amazon EBS root device volume for the Linux
+    #   AMI that each Amazon EC2 instance uses. Available in Amazon EMR
+    #   releases 4.x and higher.
     #   @return [Integer]
     #
     # @!attribute [rw] repo_upgrade_on_boot
@@ -776,6 +776,18 @@ module Aws::EMR
     #   Amazon Linux release is shown in the response.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_root_volume_iops
+    #   The IOPS, of the Amazon EBS root device volume for the Linux AMI
+    #   that each Amazon EC2 instance uses. Available in Amazon EMR releases
+    #   6.15.0 and higher.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume for
+    #   the Linux AMI that each Amazon EC2 instance uses. Available in
+    #   Amazon EMR releases 6.15.0 and higher.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -809,7 +821,9 @@ module Aws::EMR
       :outpost_arn,
       :step_concurrency_level,
       :placement_groups,
-      :os_release_label)
+      :os_release_label,
+      :ebs_root_volume_iops,
+      :ebs_root_volume_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1012,7 +1026,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EMR releases 4.x or later.
+    # <note markdown="1"> Amazon EMR releases 4.x or higher.
     #
     #  </note>
     #
@@ -1926,8 +1940,8 @@ module Aws::EMR
     #   specified as an exception using
     #   `PermittedPublicSecurityGroupRuleRanges` in the
     #   `BlockPublicAccessConfiguration`. By default, Port 22 (SSH) is an
-    #   exception, and public access is allowed on this port. You can change
-    #   this by updating the block public access configuration to remove the
+    #   exception, and public access is allowed on this port. To change
+    #   this, update the block public access configuration to remove the
     #   exception.
     #
     #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
@@ -2228,7 +2242,7 @@ module Aws::EMR
     # defined target capacity.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2348,7 +2362,7 @@ module Aws::EMR
     # The configuration that defines an instance fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2439,7 +2453,7 @@ module Aws::EMR
     # Configuration parameters for an instance fleet modification request.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2477,9 +2491,9 @@ module Aws::EMR
     # allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot
-    # instance allocation strategies are available in Amazon EMR releases
-    # 5.12.1 and later.
+    # releases 4.8.0 and higher, excluding 5.0.x versions. On-Demand and
+    # Spot instance allocation strategies are available in Amazon EMR
+    # releases 5.12.1 and higher.
     #
     #  </note>
     #
@@ -2494,9 +2508,9 @@ module Aws::EMR
     #   fleet, which determines the allocation strategy.
     #
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    #   releases 4.8.0 and later, excluding 5.0.x versions. On-Demand
+    #   releases 4.8.0 and higher, excluding 5.0.x versions. On-Demand
     #   Instances allocation strategy is available in Amazon EMR releases
-    #   5.12.1 and later.
+    #   5.12.1 and higher.
     #
     #    </note>
     #   @return [Types::OnDemandProvisioningSpecification]
@@ -2535,7 +2549,7 @@ module Aws::EMR
     # Provides status change reason details for the instance fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2559,7 +2573,7 @@ module Aws::EMR
     # The status of the instance fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2615,7 +2629,7 @@ module Aws::EMR
     # of termination.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2688,7 +2702,7 @@ module Aws::EMR
     #   @return [Types::InstanceGroupStatus]
     #
     # @!attribute [rw] configurations
-    #   <note markdown="1"> Amazon EMR releases 4.x or later.
+    #   <note markdown="1"> Amazon EMR releases 4.x or higher.
     #
     #    </note>
     #
@@ -2795,7 +2809,7 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] configurations
-    #   <note markdown="1"> Amazon EMR releases 4.x or later.
+    #   <note markdown="1"> Amazon EMR releases 4.x or higher.
     #
     #    </note>
     #
@@ -3143,7 +3157,7 @@ module Aws::EMR
     # configurations for a fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -3211,7 +3225,7 @@ module Aws::EMR
     # fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions.
+    # releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -3330,12 +3344,12 @@ module Aws::EMR
     #
     # @!attribute [rw] log_encryption_kms_key_id
     #   The KMS key used for encrypting log files. This attribute is only
-    #   available with Amazon EMR 5.30.0 and later, excluding 6.0.0.
+    #   available with Amazon EMR 5.30.0 and higher, excluding 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] ami_version
     #   Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
-    #   releases 4.0 and later, `ReleaseLabel` is used. To specify a custom
+    #   releases 4.0 and higher, `ReleaseLabel` is used. To specify a custom
     #   AMI, use `CustomAmiID`.
     #   @return [String]
     #
@@ -3404,14 +3418,14 @@ module Aws::EMR
     #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
     #   nodes at the instance-hour boundary, regardless of when the request
     #   to terminate the instance was submitted. This option is only
-    #   available with Amazon EMR 5.1.0 and later and is the default for
+    #   available with Amazon EMR 5.1.0 and higher and is the default for
     #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
     #   indicates that Amazon EMR adds nodes to a deny list and drains tasks
     #   from nodes before terminating the Amazon EC2 instances, regardless
     #   of the instance-hour boundary. With either behavior, Amazon EMR
     #   removes the least active nodes first and blocks instance termination
     #   if it could lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION`
-    #   available only in Amazon EMR releases 4.1.0 and later, and is the
+    #   available only in Amazon EMR releases 4.1.0 and higher, and is the
     #   default for releases of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
@@ -3502,7 +3516,7 @@ module Aws::EMR
     #
     # @!attribute [rw] instance_fleets
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    #   releases 4.8.0 and later, excluding 5.0.x versions.
+    #   releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #    </note>
     #
@@ -3561,7 +3575,7 @@ module Aws::EMR
     #   them and launches instances in the optimal subnet.
     #
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    #   releases 4.8.0 and later, excluding 5.0.x versions.
+    #   releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #    </note>
     #   @return [Array<String>]
@@ -4806,9 +4820,9 @@ module Aws::EMR
     # fleet, which determines the allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions. On-Demand
+    # releases 4.8.0 and higher, excluding 5.0.x versions. On-Demand
     # Instances allocation strategy is available in Amazon EMR releases
-    # 5.12.1 and later.
+    # 5.12.1 and higher.
     #
     #  </note>
     #
@@ -4940,7 +4954,7 @@ module Aws::EMR
     #   `AvailabilityZone` (singular) is used for uniform instance groups.
     #
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    #   releases 4.8.0 and later, excluding 5.0.x versions.
+    #   releases 4.8.0 and higher, excluding 5.0.x versions.
     #
     #    </note>
     #   @return [Array<String>]
@@ -5226,7 +5240,7 @@ module Aws::EMR
     # @!attribute [rw] log_encryption_kms_key_id
     #   The KMS key used for encrypting log files. If a value is not
     #   provided, the logs remain encrypted by AES-256. This attribute is
-    #   only available with Amazon EMR releases 5.30.0 and later, excluding
+    #   only available with Amazon EMR releases 5.30.0 and higher, excluding
     #   Amazon EMR 6.0.0.
     #   @return [String]
     #
@@ -5236,7 +5250,7 @@ module Aws::EMR
     #
     # @!attribute [rw] ami_version
     #   Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
-    #   releases 4.0 and later, `ReleaseLabel` is used. To specify a custom
+    #   releases 4.0 and higher, `ReleaseLabel` is used. To specify a custom
     #   AMI, use `CustomAmiID`.
     #   @return [String]
     #
@@ -5249,7 +5263,7 @@ module Aws::EMR
     #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
     #   release label applies only to Amazon EMR releases version 4.0 and
-    #   later. Earlier versions use `AmiVersion`.
+    #   higher. Earlier versions use `AmiVersion`.
     #
     #
     #
@@ -5271,7 +5285,7 @@ module Aws::EMR
     #
     # @!attribute [rw] supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   later, use Applications.
+    #   higher, use Applications.
     #
     #    </note>
     #
@@ -5290,7 +5304,7 @@ module Aws::EMR
     #
     # @!attribute [rw] new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   later, use Applications.
+    #   higher, use Applications.
     #
     #    </note>
     #
@@ -5327,7 +5341,7 @@ module Aws::EMR
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
-    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive
+    #   Applies to Amazon EMR releases 4.0 and higher. A case-insensitive
     #   list of applications for Amazon EMR to install and configure when
     #   launching the cluster. For a list of applications available for each
     #   Amazon EMR release version, see the [Amazon EMRRelease Guide][1].
@@ -5338,7 +5352,7 @@ module Aws::EMR
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] configurations
-    #   For Amazon EMR releases 4.0 and later. The list of configurations
+    #   For Amazon EMR releases 4.0 and higher. The list of configurations
     #   supplied for the Amazon EMR cluster that you are creating.
     #   @return [Array<Types::Configuration>]
     #
@@ -5402,7 +5416,7 @@ module Aws::EMR
     #   resized. `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR
     #   terminates nodes at the instance-hour boundary, regardless of when
     #   the request to terminate the instance was submitted. This option is
-    #   only available with Amazon EMR 5.1.0 and later and is the default
+    #   only available with Amazon EMR 5.1.0 and higher and is the default
     #   for clusters created using that version.
     #   `TERMINATE_AT_TASK_COMPLETION` indicates that Amazon EMR adds nodes
     #   to a deny list and drains tasks from nodes before terminating the
@@ -5410,12 +5424,12 @@ module Aws::EMR
     #   either behavior, Amazon EMR removes the least active nodes first and
     #   blocks instance termination if it could lead to HDFS corruption.
     #   `TERMINATE_AT_TASK_COMPLETION` available only in Amazon EMR releases
-    #   4.1.0 and later, and is the default for releases of Amazon EMR
+    #   4.1.0 and higher, and is the default for releases of Amazon EMR
     #   earlier than 5.1.0.
     #   @return [String]
     #
     # @!attribute [rw] custom_ami_id
-    #   Available only in Amazon EMR releases 5.7.0 and later. The ID of a
+    #   Available only in Amazon EMR releases 5.7.0 and higher. The ID of a
     #   custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses
     #   this AMI when it launches cluster Amazon EC2 instances. For more
     #   information about custom AMIs in Amazon EMR, see [Using a Custom
@@ -5436,9 +5450,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
-    #   The size, in GiB, of the Amazon EBS root device volume of the Linux
-    #   AMI that is used for each Amazon EC2 instance. Available in Amazon
-    #   EMR releases 4.x and later.
+    #   The size, in GiB, of the Amazon EBS root device volume for the Linux
+    #   AMI that each Amazon EC2 instance uses. Available in Amazon EMR
+    #   releases 4.x and higher.
     #   @return [Integer]
     #
     # @!attribute [rw] repo_upgrade_on_boot
@@ -5493,6 +5507,18 @@ module Aws::EMR
     #   cluster launch.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_root_volume_iops
+    #   The IOPS for the Amazon EBS root device volume for the Linux AMI
+    #   that each Amazon EC2 instance uses. Available in Amazon EMR releases
+    #   6.15.0 and higher.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume for
+    #   the Linux AMI that each Amazon EC2 instance uses. Available in
+    #   Amazon EMR releases 6.15.0 and higher.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -5524,7 +5550,9 @@ module Aws::EMR
       :managed_scaling_policy,
       :placement_group_configs,
       :auto_termination_policy,
-      :os_release_label)
+      :os_release_label,
+      :ebs_root_volume_iops,
+      :ebs_root_volume_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5934,9 +5962,9 @@ module Aws::EMR
     # and allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and later, excluding 5.0.x versions. Spot Instance
+    # releases 4.8.0 and higher, excluding 5.0.x versions. Spot Instance
     # allocation strategy is available in Amazon EMR releases 5.12.1 and
-    # later.
+    # higher.
     #
     #  </note>
     #
@@ -5986,10 +6014,21 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies the strategy to use in launching Spot Instance fleets.
-    #   Currently, the only option is capacity-optimized (the default),
-    #   which launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching.
+    #   Specifies one of the following strategies to launch Spot Instance
+    #   fleets: `price-capacity-optimized`, `capacity-optimized`,
+    #   `lowest-price`, or `diversified`. For more information on the
+    #   provisioning strategies, see [Allocation strategies for Spot
+    #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> When you launch a Spot Instance fleet with the old console, it
+    #   automatically launches with the `capacity-optimized` strategy. You
+    #   can't change the allocation strategy from the old console.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation

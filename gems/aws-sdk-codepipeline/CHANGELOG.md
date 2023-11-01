@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-10-24)
+------------------
+
+* Feature - Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+
+1.63.0 (2023-10-17)
+------------------
+
+* Feature - Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
+
 1.62.0 (2023-09-27)
 ------------------
 

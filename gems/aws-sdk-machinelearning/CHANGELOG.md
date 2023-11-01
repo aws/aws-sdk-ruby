@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-10-12)
+------------------
+
+* Feature - This release marks Password field as sensitive
+
 1.46.0 (2023-09-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-10-12)
+------------------
+
+* Feature - Add MacOs ec2 platform support
+
 1.21.0 (2023-09-27)
 ------------------
 

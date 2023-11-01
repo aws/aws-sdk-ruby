@@ -42,6 +42,7 @@ module Aws
           expect(poller.default_config.idle_timeout).to be(nil)
           expect(poller.default_config.skip_delete).to be(false)
           expect(poller.default_config.before_request).to be(nil)
+          expect(poller.default_config.after_empty_receive).to be(nil)
           expect(poller.default_config.request_params)
             .to eq(
               wait_time_seconds: 20,
@@ -62,6 +63,7 @@ module Aws
               idle_timeout: 60,
               skip_delete: true,
               before_request: callback,
+              after_empty_receive: callback,
               wait_time_seconds: 10,
               max_number_of_messages: 10,
               visibility_timeout: 10,
@@ -73,6 +75,7 @@ module Aws
           expect(poller.default_config.idle_timeout).to eq(60)
           expect(poller.default_config.skip_delete).to be(true)
           expect(poller.default_config.before_request).to be(callback)
+          expect(poller.default_config.after_empty_receive).to be(callback)
           expect(poller.default_config.request_params)
             .to eq(
               wait_time_seconds: 10,
@@ -282,6 +285,24 @@ module Aws
             poller.poll(idle_timeout: 0, max_number_of_messages: 10, skip_delete: true) do |messages|
               poller.delete_messages(messages)
             end
+          end
+        end
+
+        describe 'after_empty_receive callback' do
+          it 'calls the callback when an empty message set is received' do
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
+            resp = nil
+            callback = proc {|stats| }
+            expect(callback).to receive(:call).once { throw :stop_polling }
+
+            poller.after_empty_receive(&callback)
+
+            poller.poll{ |msg| }
           end
         end
 

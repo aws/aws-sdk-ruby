@@ -1834,6 +1834,96 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # The type of event associated with the data set.
+    #
+    # @option params [Types::ScopeDetails] :scope
+    #   Affected scope of this notification such as the underlying resources
+    #   affected by the notification event.
+    #
+    # @option params [String] :client_token
+    #   Idempotency key for the notification, this key allows us to
+    #   deduplicate notifications that are sent in quick succession
+    #   erroneously.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :comment
+    #   Free-form text field for providers to add information about their
+    #   notifications.
+    #
+    # @option params [required, String] :data_set_id
+    #   Affected data set of the notification.
+    #
+    # @option params [Types::NotificationDetails] :details
+    #   Extra details specific to this notification type.
+    #
+    # @option params [required, String] :type
+    #   The type of the notification. Describing the kind of event the
+    #   notification is alerting you to.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_data_set_notification({
+    #     scope: {
+    #       lake_formation_tag_policies: [
+    #         {
+    #           database: "__string",
+    #           table: "__string",
+    #         },
+    #       ],
+    #       redshift_data_shares: [
+    #         {
+    #           arn: "__string", # required
+    #           database: "__string", # required
+    #           function: "__string",
+    #           table: "__string",
+    #           schema: "__string",
+    #           view: "__string",
+    #         },
+    #       ],
+    #       s3_data_accesses: [
+    #         {
+    #           key_prefixes: ["__string"],
+    #           keys: ["__string"],
+    #         },
+    #       ],
+    #     },
+    #     client_token: "ClientToken",
+    #     comment: "__stringMin0Max16384",
+    #     data_set_id: "__string", # required
+    #     details: {
+    #       data_update: {
+    #         data_updated_at: Time.now,
+    #       },
+    #       deprecation: {
+    #         deprecation_at: Time.now, # required
+    #       },
+    #       schema_change: {
+    #         changes: [
+    #           {
+    #             name: "__string", # required
+    #             type: "ADD", # required, accepts ADD, REMOVE, MODIFY
+    #             description: "__string",
+    #           },
+    #         ],
+    #         schema_change_at: Time.now, # required
+    #       },
+    #     },
+    #     type: "DATA_DELAY", # required, accepts DATA_DELAY, DATA_UPDATE, DEPRECATION, SCHEMA_CHANGE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendDataSetNotification AWS API Documentation
+    #
+    # @overload send_data_set_notification(params = {})
+    # @param [Hash] params ({})
+    def send_data_set_notification(params = {}, options = {})
+      req = build_request(:send_data_set_notification, params)
+      req.send_request(options)
+    end
+
     # This operation starts a job.
     #
     # @option params [required, String] :job_id
@@ -2195,7 +2285,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

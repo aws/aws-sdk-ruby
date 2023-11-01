@@ -926,6 +926,10 @@ module Aws::RDS
     #   instead automatically adjusts as needed.
     #   @return [Integer]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] iops
     #   The Provisioned IOPS (I/O operations per second) value. This setting
     #   is only for non-Aurora Multi-AZ DB clusters.
@@ -945,6 +949,7 @@ module Aws::RDS
       :engine_version,
       :backup_retention_period,
       :allocated_storage,
+      :rds_custom_cluster_configuration,
       :iops,
       :storage_type)
       SENSITIVE = []
@@ -1757,6 +1762,23 @@ module Aws::RDS
     #   Tags to assign to the blue/green deployment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the
+    #   green database. This option migrates the green DB instance from the
+    #   older 32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeploymentRequest AWS API Documentation
     #
     class CreateBlueGreenDeploymentRequest < Struct.new(
@@ -1765,7 +1787,9 @@ module Aws::RDS
       :target_engine_version,
       :target_db_parameter_group_name,
       :target_db_cluster_parameter_group_name,
-      :tags)
+      :tags,
+      :target_db_instance_class,
+      :upgrade_target_storage_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2438,6 +2462,10 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters only
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
@@ -2865,6 +2893,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :engine_mode,
       :scaling_configuration,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :global_cluster_identifier,
       :enable_http_endpoint,
@@ -4328,6 +4357,11 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4390,7 +4424,8 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :ca_certificate_identifier,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5079,6 +5114,17 @@ module Aws::RDS
     #     supported.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5129,6 +5175,8 @@ module Aws::RDS
       :enable_customer_owned_ip,
       :allocated_storage,
       :source_db_cluster_identifier,
+      :dedicated_log_volume,
+      :upgrade_storage_config,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -5817,6 +5865,63 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as
+    #   the source for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the Redshift data warehouse to use as the target for
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key to use to encrypt the integration.
+    #   If you don't specify an encryption key, Aurora uses a default
+    #   Amazon Web Services owned key.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains
+    #   additional contextual information about the data. For more
+    #   information, see [Encryption context][1] in the *Amazon Web Services
+    #   Key Management Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegrationMessage AWS API Documentation
+    #
+    class CreateIntegrationMessage < Struct.new(
+      :source_arn,
+      :target_arn,
+      :integration_name,
+      :kms_key_id,
+      :additional_encryption_context,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] option_group_name
     #   Specifies the name of the option group to be created.
     #
@@ -6220,6 +6325,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Types::ScalingConfigurationInfo]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Indicates whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
@@ -6514,6 +6623,7 @@ module Aws::RDS
       :capacity,
       :engine_mode,
       :scaling_configuration_info,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :http_endpoint_enabled,
       :activity_stream_mode,
@@ -7711,6 +7821,11 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_integrations
+    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   integrations with Amazon Redshift.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7745,7 +7860,8 @@ module Aws::RDS
       :custom_db_engine_version_manifest,
       :supports_certificate_rotation_without_restart,
       :supported_ca_certificate_identifiers,
-      :supports_local_write_forwarding)
+      :supports_local_write_forwarding,
+      :supports_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8352,6 +8468,23 @@ module Aws::RDS
     #   The progress of the storage optimization operation as a percentage.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_storage_config_upgrade_available
+    #   Indicates whether an upgrade is recommended for the storage file
+    #   system configuration on the DB instance. To migrate to the preferred
+    #   configuration, you can either create a blue/green deployment, or
+    #   create a read replica from the DB instance. For more information,
+    #   see [Upgrading the storage file system for a DB instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8436,7 +8569,9 @@ module Aws::RDS
       :master_user_secret,
       :certificate_details,
       :read_replica_source_db_cluster_identifier,
-      :percent_progress)
+      :percent_progress,
+      :dedicated_log_volume,
+      :is_storage_config_upgrade_available)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8599,6 +8734,11 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -8630,7 +8770,8 @@ module Aws::RDS
       :db_instance_automated_backups_replications,
       :backup_target,
       :storage_throughput,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9658,6 +9799,11 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -9694,7 +9840,8 @@ module Aws::RDS
       :snapshot_database_time,
       :snapshot_target,
       :storage_throughput,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10512,6 +10659,18 @@ module Aws::RDS
     #
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegrationMessage AWS API Documentation
+    #
+    class DeleteIntegrationMessage < Struct.new(
+      :integration_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12727,6 +12886,61 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more resources to return.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrationsMessage AWS API Documentation
+    #
+    class DescribeIntegrationsMessage < Struct.new(
+      :integration_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later
+    #   `DescribeIntegrations` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrations
+    #   A list of integrations.
+    #   @return [Array<Types::Integration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrationsResponse AWS API Documentation
+    #
+    class DescribeIntegrationsResponse < Struct.new(
+      :marker,
+      :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] engine_name
     #   A required parameter. Options available for the given engine name
     #   are described.
@@ -14364,6 +14578,133 @@ module Aws::RDS
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
 
+    # An Aurora zero-ETL integration with Amazon Redshift. For more
+    # information, see [Working with Amazon Aurora zero-ETL integrations
+    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster used as the
+    #   source for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the Redshift data warehouse used as the target for
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The ARN of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key used to to encrypt the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   The encryption context for the integration. For more information,
+    #   see [Encryption context][1] in the *Amazon Web Services Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] create_time
+    #   The time when the integration was created, in Universal Coordinated
+    #   Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] errors
+    #   Any errors associated with the integration.
+    #   @return [Array<Types::IntegrationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Integration AWS API Documentation
+    #
+    class Integration < Struct.new(
+      :source_arn,
+      :target_arn,
+      :integration_name,
+      :integration_arn,
+      :kms_key_id,
+      :additional_encryption_context,
+      :status,
+      :tags,
+      :create_time,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The integration you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationAlreadyExistsFault AWS API Documentation
+    #
+    class IntegrationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A conflicting conditional operation is currently in progress against
+    # this resource. Typically occurs when there are multiple requests being
+    # made to the same resource at the same time, and these requests
+    # conflict with each other.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationConflictOperationFault AWS API Documentation
+    #
+    class IntegrationConflictOperationFault < Aws::EmptyStructure; end
+
+    # An error associated with a zero-ETL integration with Amazon Redshift.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message explaining the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationError AWS API Documentation
+    #
+    class IntegrationError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified integration could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationNotFoundFault AWS API Documentation
+    #
+    class IntegrationNotFoundFault < Aws::EmptyStructure; end
+
+    # You can't crate any more zero-ETL integrations because the quota has
+    # been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationQuotaExceededFault AWS API Documentation
+    #
+    class IntegrationQuotaExceededFault < Aws::EmptyStructure; end
+
     # The blue/green deployment can't be switched over or deleted because
     # there is an invalid configuration in the green environment.
     #
@@ -14509,6 +14850,13 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
     #
     class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
+
+    # The integration is in an invalid state and can't perform the
+    # requested operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidIntegrationStateFault AWS API Documentation
+    #
+    class InvalidIntegrationStateFault < Aws::EmptyStructure; end
 
     # The option group isn't in the *available* state.
     #
@@ -16912,6 +17260,11 @@ module Aws::RDS
     #     `--option-group-name`.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -16972,7 +17325,8 @@ module Aws::RDS
       :manage_master_user_password,
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
-      :engine)
+      :engine,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18279,6 +18633,11 @@ module Aws::RDS
     #   instance.
     #   @return [Float]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -18316,7 +18675,8 @@ module Aws::RDS
       :min_storage_throughput_per_db_instance,
       :max_storage_throughput_per_db_instance,
       :min_storage_throughput_per_iops,
-      :max_storage_throughput_per_iops)
+      :max_storage_throughput_per_iops,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18646,6 +19006,11 @@ module Aws::RDS
     #   The database engine of the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.&gt;
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -18668,7 +19033,8 @@ module Aws::RDS
       :automation_mode,
       :resume_full_automation_mode_time,
       :storage_throughput,
-      :engine)
+      :engine,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18973,6 +19339,25 @@ module Aws::RDS
       :from,
       :to,
       :step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] interconnect_subnet_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_multicast_domain_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RdsCustomClusterConfiguration AWS API Documentation
+    #
+    class RdsCustomClusterConfiguration < Struct.new(
+      :interconnect_subnet_id,
+      :transit_gateway_multicast_domain_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20554,6 +20939,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -20584,7 +20973,8 @@ module Aws::RDS
       :iops,
       :publicly_accessible,
       :serverless_v2_scaling_configuration,
-      :network_type)
+      :network_type,
+      :rds_custom_cluster_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21050,6 +21440,10 @@ module Aws::RDS
     #   The resource ID of the source DB cluster from which to restore.
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -21080,7 +21474,8 @@ module Aws::RDS
       :iops,
       :serverless_v2_scaling_configuration,
       :network_type,
-      :source_db_cluster_resource_id)
+      :source_db_cluster_resource_id,
+      :rds_custom_cluster_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21663,6 +22058,11 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -21704,7 +22104,8 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :db_cluster_snapshot_identifier,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22267,6 +22668,11 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -22317,7 +22723,8 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :manage_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22898,6 +23305,11 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -22943,7 +23355,8 @@ module Aws::RDS
       :backup_target,
       :network_type,
       :storage_throughput,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24329,6 +24742,11 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_integrations
+    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   integrations with Amazon Redshift.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
     #
     class UpgradeTarget < Struct.new(
@@ -24341,7 +24759,8 @@ module Aws::RDS
       :supports_parallel_query,
       :supports_global_databases,
       :supports_babelfish,
-      :supports_local_write_forwarding)
+      :supports_local_write_forwarding,
+      :supports_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24455,11 +24874,17 @@ module Aws::RDS
     #   Valid processor features for your DB instance.
     #   @return [Array<Types::AvailableProcessorFeature>]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage,
-      :valid_processor_features)
+      :valid_processor_features,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end

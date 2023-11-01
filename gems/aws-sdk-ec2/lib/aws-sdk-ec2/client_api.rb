@@ -263,6 +263,8 @@ module Aws::EC2
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
     CapacityAllocation = Shapes::StructureShape.new(name: 'CapacityAllocation')
     CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
+    CapacityBlockOffering = Shapes::StructureShape.new(name: 'CapacityBlockOffering')
+    CapacityBlockOfferingSet = Shapes::ListShape.new(name: 'CapacityBlockOfferingSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
     CapacityReservationFleet = Shapes::StructureShape.new(name: 'CapacityReservationFleet')
     CapacityReservationFleetCancellationState = Shapes::StructureShape.new(name: 'CapacityReservationFleetCancellationState')
@@ -286,6 +288,7 @@ module Aws::EC2
     CapacityReservationTarget = Shapes::StructureShape.new(name: 'CapacityReservationTarget')
     CapacityReservationTargetResponse = Shapes::StructureShape.new(name: 'CapacityReservationTargetResponse')
     CapacityReservationTenancy = Shapes::StringShape.new(name: 'CapacityReservationTenancy')
+    CapacityReservationType = Shapes::StringShape.new(name: 'CapacityReservationType')
     CarrierGateway = Shapes::StructureShape.new(name: 'CarrierGateway')
     CarrierGatewayId = Shapes::StringShape.new(name: 'CarrierGatewayId')
     CarrierGatewayIdSet = Shapes::ListShape.new(name: 'CarrierGatewayIdSet')
@@ -757,6 +760,9 @@ module Aws::EC2
     DescribeByoipCidrsMaxResults = Shapes::IntegerShape.new(name: 'DescribeByoipCidrsMaxResults')
     DescribeByoipCidrsRequest = Shapes::StructureShape.new(name: 'DescribeByoipCidrsRequest')
     DescribeByoipCidrsResult = Shapes::StructureShape.new(name: 'DescribeByoipCidrsResult')
+    DescribeCapacityBlockOfferingsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityBlockOfferingsMaxResults')
+    DescribeCapacityBlockOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityBlockOfferingsRequest')
+    DescribeCapacityBlockOfferingsResult = Shapes::StructureShape.new(name: 'DescribeCapacityBlockOfferingsResult')
     DescribeCapacityReservationFleetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationFleetsMaxResults')
     DescribeCapacityReservationFleetsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsRequest')
     DescribeCapacityReservationFleetsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsResult')
@@ -1128,6 +1134,8 @@ module Aws::EC2
     DisableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'DisableImageBlockPublicAccessResult')
     DisableImageDeprecationRequest = Shapes::StructureShape.new(name: 'DisableImageDeprecationRequest')
     DisableImageDeprecationResult = Shapes::StructureShape.new(name: 'DisableImageDeprecationResult')
+    DisableImageRequest = Shapes::StructureShape.new(name: 'DisableImageRequest')
+    DisableImageResult = Shapes::StructureShape.new(name: 'DisableImageResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
     DisableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountResult')
     DisableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'DisableSerialConsoleAccessRequest')
@@ -1252,6 +1260,8 @@ module Aws::EC2
     EnableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'EnableImageBlockPublicAccessResult')
     EnableImageDeprecationRequest = Shapes::StructureShape.new(name: 'EnableImageDeprecationRequest')
     EnableImageDeprecationResult = Shapes::StructureShape.new(name: 'EnableImageDeprecationResult')
+    EnableImageRequest = Shapes::StructureShape.new(name: 'EnableImageRequest')
+    EnableImageResult = Shapes::StructureShape.new(name: 'EnableImageResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
     EnableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountResult')
     EnableReachabilityAnalyzerOrganizationSharingRequest = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingRequest')
@@ -1444,6 +1454,9 @@ module Aws::EC2
     GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
     GetReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteRequest')
     GetReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteResult')
+    GetSecurityGroupsForVpcRequest = Shapes::StructureShape.new(name: 'GetSecurityGroupsForVpcRequest')
+    GetSecurityGroupsForVpcRequestMaxResults = Shapes::IntegerShape.new(name: 'GetSecurityGroupsForVpcRequestMaxResults')
+    GetSecurityGroupsForVpcResult = Shapes::StructureShape.new(name: 'GetSecurityGroupsForVpcResult')
     GetSerialConsoleAccessStatusRequest = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusRequest')
     GetSerialConsoleAccessStatusResult = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusResult')
     GetSpotPlacementScoresRequest = Shapes::StructureShape.new(name: 'GetSpotPlacementScoresRequest')
@@ -2329,6 +2342,8 @@ module Aws::EC2
     PublicIpv4PoolRangeSet = Shapes::ListShape.new(name: 'PublicIpv4PoolRangeSet')
     PublicIpv4PoolSet = Shapes::ListShape.new(name: 'PublicIpv4PoolSet')
     Purchase = Shapes::StructureShape.new(name: 'Purchase')
+    PurchaseCapacityBlockRequest = Shapes::StructureShape.new(name: 'PurchaseCapacityBlockRequest')
+    PurchaseCapacityBlockResult = Shapes::StructureShape.new(name: 'PurchaseCapacityBlockResult')
     PurchaseHostReservationRequest = Shapes::StructureShape.new(name: 'PurchaseHostReservationRequest')
     PurchaseHostReservationResult = Shapes::StructureShape.new(name: 'PurchaseHostReservationResult')
     PurchaseRequest = Shapes::StructureShape.new(name: 'PurchaseRequest')
@@ -2550,6 +2565,8 @@ module Aws::EC2
     SearchTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesRequest')
     SearchTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesResult')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
+    SecurityGroupForVpc = Shapes::StructureShape.new(name: 'SecurityGroupForVpc')
+    SecurityGroupForVpcList = Shapes::ListShape.new(name: 'SecurityGroupForVpcList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SecurityGroupIdSet = Shapes::ListShape.new(name: 'SecurityGroupIdSet')
@@ -3909,6 +3926,20 @@ module Aws::EC2
 
     CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
 
+    CapacityBlockOffering.add_member(:capacity_block_offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "capacityBlockOfferingId"))
+    CapacityBlockOffering.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityBlockOffering.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CapacityBlockOffering.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    CapacityBlockOffering.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
+    CapacityBlockOffering.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    CapacityBlockOffering.add_member(:capacity_block_duration_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationHours"))
+    CapacityBlockOffering.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
+    CapacityBlockOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+    CapacityBlockOffering.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "tenancy"))
+    CapacityBlockOffering.struct_class = Types::CapacityBlockOffering
+
+    CapacityBlockOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockOffering, location_name: "item")
+
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     CapacityReservation.add_member(:capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationArn"))
@@ -3932,6 +3963,7 @@ module Aws::EC2
     CapacityReservation.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetId"))
     CapacityReservation.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "placementGroupArn"))
     CapacityReservation.add_member(:capacity_allocations, Shapes::ShapeRef.new(shape: CapacityAllocations, location_name: "capacityAllocationSet"))
+    CapacityReservation.add_member(:reservation_type, Shapes::ShapeRef.new(shape: CapacityReservationType, location_name: "reservationType"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
@@ -6050,6 +6082,20 @@ module Aws::EC2
     DescribeByoipCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeByoipCidrsResult.struct_class = Types::DescribeByoipCidrsResult
 
+    DescribeCapacityBlockOfferingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:start_date_range, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "StartDateRange"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:end_date_range, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDateRange"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:capacity_duration_hours, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "CapacityDurationHours"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsMaxResults, location_name: "MaxResults"))
+    DescribeCapacityBlockOfferingsRequest.struct_class = Types::DescribeCapacityBlockOfferingsRequest
+
+    DescribeCapacityBlockOfferingsResult.add_member(:capacity_block_offerings, Shapes::ShapeRef.new(shape: CapacityBlockOfferingSet, location_name: "capacityBlockOfferingSet"))
+    DescribeCapacityBlockOfferingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityBlockOfferingsResult.struct_class = Types::DescribeCapacityBlockOfferingsResult
+
     DescribeCapacityReservationFleetsRequest.add_member(:capacity_reservation_fleet_ids, Shapes::ShapeRef.new(shape: CapacityReservationFleetIdSet, location_name: "CapacityReservationFleetId"))
     DescribeCapacityReservationFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeCapacityReservationFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityReservationFleetsMaxResults, location_name: "MaxResults"))
@@ -6430,6 +6476,7 @@ module Aws::EC2
     DescribeImagesRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdStringList, location_name: "ImageId"))
     DescribeImagesRequest.add_member(:owners, Shapes::ShapeRef.new(shape: OwnerStringList, location_name: "Owner"))
     DescribeImagesRequest.add_member(:include_deprecated, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeDeprecated"))
+    DescribeImagesRequest.add_member(:include_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeDisabled"))
     DescribeImagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -7732,6 +7779,13 @@ module Aws::EC2
     DisableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DisableImageDeprecationResult.struct_class = Types::DisableImageDeprecationResult
 
+    DisableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    DisableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableImageRequest.struct_class = Types::DisableImageRequest
+
+    DisableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DisableImageResult.struct_class = Types::DisableImageResult
+
     DisableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
     DisableIpamOrganizationAdminAccountRequest.struct_class = Types::DisableIpamOrganizationAdminAccountRequest
@@ -8145,6 +8199,13 @@ module Aws::EC2
 
     EnableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     EnableImageDeprecationResult.struct_class = Types::EnableImageDeprecationResult
+
+    EnableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    EnableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableImageRequest.struct_class = Types::EnableImageRequest
+
+    EnableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    EnableImageResult.struct_class = Types::EnableImageResult
 
     EnableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
@@ -8908,6 +8969,17 @@ module Aws::EC2
     GetReservedInstancesExchangeQuoteResult.add_member(:validation_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "validationFailureReason"))
     GetReservedInstancesExchangeQuoteResult.struct_class = Types::GetReservedInstancesExchangeQuoteResult
 
+    GetSecurityGroupsForVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    GetSecurityGroupsForVpcRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSecurityGroupsForVpcRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcRequestMaxResults, location_name: "MaxResults"))
+    GetSecurityGroupsForVpcRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetSecurityGroupsForVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetSecurityGroupsForVpcRequest.struct_class = Types::GetSecurityGroupsForVpcRequest
+
+    GetSecurityGroupsForVpcResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetSecurityGroupsForVpcResult.add_member(:security_group_for_vpcs, Shapes::ShapeRef.new(shape: SecurityGroupForVpcList, location_name: "securityGroupForVpcSet"))
+    GetSecurityGroupsForVpcResult.struct_class = Types::GetSecurityGroupsForVpcResult
+
     GetSerialConsoleAccessStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetSerialConsoleAccessStatusRequest.struct_class = Types::GetSerialConsoleAccessStatusRequest
 
@@ -9250,6 +9322,7 @@ module Aws::EC2
     Image.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "tpmSupport"))
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
     Image.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "imdsSupport"))
+    Image.add_member(:source_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceInstanceId"))
     Image.struct_class = Types::Image
 
     ImageAttribute.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -12260,6 +12333,15 @@ module Aws::EC2
     Purchase.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
     Purchase.struct_class = Types::Purchase
 
+    PurchaseCapacityBlockRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    PurchaseCapacityBlockRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    PurchaseCapacityBlockRequest.add_member(:capacity_block_offering_id, Shapes::ShapeRef.new(shape: OfferingId, required: true, location_name: "CapacityBlockOfferingId"))
+    PurchaseCapacityBlockRequest.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, required: true, location_name: "InstancePlatform"))
+    PurchaseCapacityBlockRequest.struct_class = Types::PurchaseCapacityBlockRequest
+
+    PurchaseCapacityBlockResult.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "capacityReservation"))
+    PurchaseCapacityBlockResult.struct_class = Types::PurchaseCapacityBlockResult
+
     PurchaseHostReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     PurchaseHostReservationRequest.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "CurrencyCode"))
     PurchaseHostReservationRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
@@ -13271,6 +13353,16 @@ module Aws::EC2
     SecurityGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     SecurityGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     SecurityGroup.struct_class = Types::SecurityGroup
+
+    SecurityGroupForVpc.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SecurityGroupForVpc.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    SecurityGroupForVpc.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SecurityGroupForVpc.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    SecurityGroupForVpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecurityGroupForVpc.add_member(:primary_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "primaryVpcId"))
+    SecurityGroupForVpc.struct_class = Types::SecurityGroupForVpc
+
+    SecurityGroupForVpcList.member = Shapes::ShapeRef.new(shape: SecurityGroupForVpc, location_name: "item")
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
 
@@ -16909,6 +17001,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_capacity_block_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityBlockOfferings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_capacity_reservation_fleets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCapacityReservationFleets"
         o.http_method = "POST"
@@ -18726,6 +18832,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoresResult)
       end)
 
+      api.add_operation(:disable_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableImageResult)
+      end)
+
       api.add_operation(:disable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableImageBlockPublicAccess"
         o.http_method = "POST"
@@ -18940,6 +19054,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresResult)
+      end)
+
+      api.add_operation(:enable_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableImageResult)
       end)
 
       api.add_operation(:enable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|
@@ -19362,6 +19484,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteRequest)
         o.output = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteResult)
+      end)
+
+      api.add_operation(:get_security_groups_for_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSecurityGroupsForVpc"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSecurityGroupsForVpcResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_serial_console_access_status, Seahorse::Model::Operation.new.tap do |o|
@@ -20166,6 +20302,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ProvisionPublicIpv4PoolCidrRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvisionPublicIpv4PoolCidrResult)
+      end)
+
+      api.add_operation(:purchase_capacity_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseCapacityBlock"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseCapacityBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseCapacityBlockResult)
       end)
 
       api.add_operation(:purchase_host_reservation, Seahorse::Model::Operation.new.tap do |o|

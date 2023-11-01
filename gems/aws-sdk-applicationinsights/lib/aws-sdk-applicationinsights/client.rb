@@ -481,6 +481,10 @@ module Aws::ApplicationInsights
     #   or on an account. To create an account-based application using all of
     #   the resources in the account, set this parameter to `ACCOUNT_BASED`.
     #
+    # @option params [Boolean] :attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -501,6 +505,7 @@ module Aws::ApplicationInsights
     #     auto_config_enabled: false,
     #     auto_create: false,
     #     grouping_type: "ACCOUNT_BASED", # accepts ACCOUNT_BASED
+    #     attach_missing_permission: false,
     #   })
     #
     # @example Response structure
@@ -514,6 +519,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplication AWS API Documentation
     #
@@ -726,6 +732,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication AWS API Documentation
     #
@@ -835,6 +842,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :tier
     #   The tier of the application component.
     #
+    # @option params [String] :workload_name
+    #   The name of the workload.
+    #
     # @option params [String] :recommendation_type
     #   The recommended configuration type.
     #
@@ -848,6 +858,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #     workload_name: "WorkloadName",
     #     recommendation_type: "INFRA_ONLY", # accepts INFRA_ONLY, WORKLOAD_ONLY, ALL
     #   })
     #
@@ -1198,6 +1209,7 @@ module Aws::ApplicationInsights
     #   resp.application_info_list[0].remarks #=> String
     #   resp.application_info_list[0].auto_config_enabled #=> Boolean
     #   resp.application_info_list[0].discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info_list[0].attach_missing_permission #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListApplications AWS API Documentation
@@ -1771,6 +1783,10 @@ module Aws::ApplicationInsights
     # @option params [Boolean] :auto_config_enabled
     #   Turns auto-configuration on or off.
     #
+    # @option params [Boolean] :attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -1784,6 +1800,7 @@ module Aws::ApplicationInsights
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     remove_sns_topic: false,
     #     auto_config_enabled: false,
+    #     attach_missing_permission: false,
     #   })
     #
     # @example Response structure
@@ -1797,6 +1814,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplication AWS API Documentation
     #
@@ -2056,7 +2074,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

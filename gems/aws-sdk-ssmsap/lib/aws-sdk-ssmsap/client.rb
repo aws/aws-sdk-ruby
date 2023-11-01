@@ -476,7 +476,7 @@ module Aws::SsmSap
     # @example Response structure
     #
     #   resp.application.id #=> String
-    #   resp.application.type #=> String, one of "HANA"
+    #   resp.application.type #=> String, one of "HANA", "SAP_ABAP"
     #   resp.application.arn #=> String
     #   resp.application.app_registry_arn #=> String
     #   resp.application.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "FAILED", "REGISTERING", "DELETING", "UNKNOWN"
@@ -521,21 +521,29 @@ module Aws::SsmSap
     # @example Response structure
     #
     #   resp.component.component_id #=> String
+    #   resp.component.sid #=> String
+    #   resp.component.system_number #=> String
     #   resp.component.parent_component #=> String
     #   resp.component.child_components #=> Array
     #   resp.component.child_components[0] #=> String
     #   resp.component.application_id #=> String
-    #   resp.component.component_type #=> String, one of "HANA", "HANA_NODE"
+    #   resp.component.component_type #=> String, one of "HANA", "HANA_NODE", "ABAP", "ASCS", "DIALOG", "WEBDISP", "WD", "ERS"
     #   resp.component.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "RUNNING", "RUNNING_WITH_ERROR", "UNDEFINED"
     #   resp.component.sap_hostname #=> String
+    #   resp.component.sap_feature #=> String
     #   resp.component.sap_kernel_version #=> String
     #   resp.component.hdb_version #=> String
     #   resp.component.resilience.hsr_tier #=> String
     #   resp.component.resilience.hsr_replication_mode #=> String, one of "PRIMARY", "NONE", "SYNC", "SYNCMEM", "ASYNC"
     #   resp.component.resilience.hsr_operation_mode #=> String, one of "PRIMARY", "LOGREPLAY", "DELTA_DATASHIPPING", "LOGREPLAY_READACCESS", "NONE"
     #   resp.component.resilience.cluster_status #=> String, one of "ONLINE", "STANDBY", "MAINTENANCE", "OFFLINE", "NONE"
+    #   resp.component.resilience.enqueue_replication #=> Boolean
     #   resp.component.associated_host.hostname #=> String
     #   resp.component.associated_host.ec2_instance_id #=> String
+    #   resp.component.associated_host.ip_addresses #=> Array
+    #   resp.component.associated_host.ip_addresses[0].ip_address #=> String
+    #   resp.component.associated_host.ip_addresses[0].primary #=> Boolean
+    #   resp.component.associated_host.ip_addresses[0].allocation_type #=> String, one of "VPC_SUBNET", "ELASTIC_IP", "OVERLAY", "UNKNOWN"
     #   resp.component.associated_host.os_version #=> String
     #   resp.component.databases #=> Array
     #   resp.component.databases[0] #=> String
@@ -547,6 +555,9 @@ module Aws::SsmSap
     #   resp.component.hosts[0].host_role #=> String, one of "LEADER", "WORKER", "STANDBY", "UNKNOWN"
     #   resp.component.hosts[0].os_version #=> String
     #   resp.component.primary_host #=> String
+    #   resp.component.database_connection.database_connection_method #=> String, one of "DIRECT", "OVERLAY"
+    #   resp.component.database_connection.database_arn #=> String
+    #   resp.component.database_connection.connection_ip #=> String
     #   resp.component.last_updated #=> Time
     #   resp.component.arn #=> String
     #   resp.tags #=> Hash
@@ -699,6 +710,9 @@ module Aws::SsmSap
     #   retrieve the remaining results, make another call with the returned
     #   nextToken value.
     #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filter of name, value, and operator.
+    #
     # @return [Types::ListApplicationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListApplicationsOutput#applications #applications} => Array&lt;Types::ApplicationSummary&gt;
@@ -711,13 +725,21 @@ module Aws::SsmSap
     #   resp = client.list_applications({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         value: "FilterValue", # required
+    #         operator: "Equals", # required, accepts Equals, GreaterThanOrEquals, LessThanOrEquals
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.applications #=> Array
     #   resp.applications[0].id #=> String
-    #   resp.applications[0].type #=> String, one of "HANA"
+    #   resp.applications[0].discovery_status #=> String, one of "SUCCESS", "REGISTRATION_FAILED", "REFRESH_FAILED", "REGISTERING", "DELETING"
+    #   resp.applications[0].type #=> String, one of "HANA", "SAP_ABAP"
     #   resp.applications[0].arn #=> String
     #   resp.applications[0].tags #=> Hash
     #   resp.applications[0].tags["TagKey"] #=> String
@@ -768,7 +790,7 @@ module Aws::SsmSap
     #   resp.components #=> Array
     #   resp.components[0].application_id #=> String
     #   resp.components[0].component_id #=> String
-    #   resp.components[0].component_type #=> String, one of "HANA", "HANA_NODE"
+    #   resp.components[0].component_type #=> String, one of "HANA", "HANA_NODE", "ABAP", "ASCS", "DIALOG", "WEBDISP", "WD", "ERS"
     #   resp.components[0].tags #=> Hash
     #   resp.components[0].tags["TagKey"] #=> String
     #   resp.components[0].arn #=> String
@@ -996,8 +1018,11 @@ module Aws::SsmSap
     # @option params [Hash<String,String>] :tags
     #   The tags to be attached to the SAP application.
     #
-    # @option params [required, Array<Types::ApplicationCredential>] :credentials
+    # @option params [Array<Types::ApplicationCredential>] :credentials
     #   The credentials of the SAP application.
+    #
+    # @option params [String] :database_arn
+    #   The Amazon Resource Name of the SAP HANA database.
     #
     # @return [Types::RegisterApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1008,26 +1033,27 @@ module Aws::SsmSap
     #
     #   resp = client.register_application({
     #     application_id: "ApplicationId", # required
-    #     application_type: "HANA", # required, accepts HANA
+    #     application_type: "HANA", # required, accepts HANA, SAP_ABAP
     #     instances: ["InstanceId"], # required
     #     sap_instance_number: "SAPInstanceNumber",
     #     sid: "SID",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     credentials: [ # required
+    #     credentials: [
     #       {
     #         database_name: "DatabaseName", # required
     #         credential_type: "ADMIN", # required, accepts ADMIN
     #         secret_id: "SecretId", # required
     #       },
     #     ],
+    #     database_arn: "SsmSapArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.application.id #=> String
-    #   resp.application.type #=> String, one of "HANA"
+    #   resp.application.type #=> String, one of "HANA", "SAP_ABAP"
     #   resp.application.arn #=> String
     #   resp.application.app_registry_arn #=> String
     #   resp.application.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "FAILED", "REGISTERING", "DELETING", "UNKNOWN"
@@ -1145,6 +1171,10 @@ module Aws::SsmSap
     # @option params [Types::BackintConfig] :backint
     #   Installation of AWS Backint Agent for SAP HANA.
     #
+    # @option params [String] :database_arn
+    #   The Amazon Resource Name of the SAP HANA database that replaces the
+    #   current SAP HANA connection with the SAP\_ABAP application.
+    #
     # @return [Types::UpdateApplicationSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationSettingsOutput#message #message} => String
@@ -1172,6 +1202,7 @@ module Aws::SsmSap
     #       backint_mode: "AWSBackup", # required, accepts AWSBackup
     #       ensure_no_backup_in_process: false, # required
     #     },
+    #     database_arn: "SsmSapArn",
     #   })
     #
     # @example Response structure
@@ -1202,7 +1233,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

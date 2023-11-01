@@ -1691,7 +1691,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #   * `/aws/insights`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -2398,6 +2398,55 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_maintenance_window(params = {}, options = {})
       req = build_request(:delete_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Delete an OpsItem. You must have permission in Identity and Access
+    # Management (IAM) to delete an OpsItem.
+    #
+    # Note the following important information about this operation.
+    #
+    #  * Deleting an OpsItem is irreversible. You can't restore a deleted
+    #   OpsItem.
+    #
+    # * This operation uses an *eventual consistency model*, which means the
+    #   system can take a few minutes to complete this operation. If you
+    #   delete an OpsItem and immediately call, for example, GetOpsItem, the
+    #   deleted OpsItem might still appear in the response.
+    #
+    # * This operation is idempotent. The system doesn't throw an exception
+    #   if you repeatedly call this operation for the same OpsItem. If the
+    #   first call is successful, all additional calls return the same
+    #   successful response as the first call.
+    #
+    # * This operation doesn't support cross-account calls. A delegated
+    #   administrator or management account can't delete OpsItems in other
+    #   accounts, even if OpsCenter has been set up for cross-account
+    #   administration. For more information about cross-account
+    #   administration, see [Setting up OpsCenter to centrally manage
+    #   OpsItems across accounts][1] in the *Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setting-up-cross-account.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ops_item({
+    #     ops_item_id: "OpsItemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItem AWS API Documentation
+    #
+    # @overload delete_ops_item(params = {})
+    # @param [Hash] params ({})
+    def delete_ops_item(params = {}, options = {})
+      req = build_request(:delete_ops_item, params)
       req.send_request(options)
     end
 
@@ -12184,7 +12233,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

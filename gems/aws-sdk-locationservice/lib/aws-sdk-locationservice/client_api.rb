@@ -1351,7 +1351,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}/consumers"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: AssociateTrackerConsumerRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTrackerConsumerResponse)
@@ -1497,7 +1497,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/geofencing/v0/collections"
         o.endpoint_pattern = {
-          "hostPrefix" => "geofencing.",
+          "hostPrefix" => "cp.geofencing.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateGeofenceCollectionResponse)
@@ -1514,7 +1514,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/metadata/v0/keys"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateKeyResponse)
@@ -1531,7 +1531,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/maps/v0/maps"
         o.endpoint_pattern = {
-          "hostPrefix" => "maps.",
+          "hostPrefix" => "cp.maps.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateMapRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMapResponse)
@@ -1548,7 +1548,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/places/v0/indexes"
         o.endpoint_pattern = {
-          "hostPrefix" => "places.",
+          "hostPrefix" => "cp.places.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreatePlaceIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePlaceIndexResponse)
@@ -1565,7 +1565,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/routes/v0/calculators"
         o.endpoint_pattern = {
-          "hostPrefix" => "routes.",
+          "hostPrefix" => "cp.routes.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateRouteCalculatorRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRouteCalculatorResponse)
@@ -1582,7 +1582,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/tracking/v0/trackers"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: CreateTrackerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTrackerResponse)
@@ -1599,7 +1599,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/geofencing/v0/collections/{CollectionName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "geofencing.",
+          "hostPrefix" => "cp.geofencing.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGeofenceCollectionResponse)
@@ -1615,7 +1615,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/metadata/v0/keys/{KeyName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteKeyResponse)
@@ -1631,7 +1631,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/maps/v0/maps/{MapName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "maps.",
+          "hostPrefix" => "cp.maps.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteMapRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteMapResponse)
@@ -1647,7 +1647,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/places/v0/indexes/{IndexName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "places.",
+          "hostPrefix" => "cp.places.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeletePlaceIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePlaceIndexResponse)
@@ -1663,7 +1663,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/routes/v0/calculators/{CalculatorName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "routes.",
+          "hostPrefix" => "cp.routes.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteRouteCalculatorRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRouteCalculatorResponse)
@@ -1679,7 +1679,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteTrackerRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTrackerResponse)
@@ -1695,7 +1695,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/geofencing/v0/collections/{CollectionName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "geofencing.",
+          "hostPrefix" => "cp.geofencing.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeGeofenceCollectionResponse)
@@ -1711,7 +1711,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/metadata/v0/keys/{KeyName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeKeyResponse)
@@ -1727,7 +1727,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/maps/v0/maps/{MapName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "maps.",
+          "hostPrefix" => "cp.maps.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeMapRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMapResponse)
@@ -1743,7 +1743,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/places/v0/indexes/{IndexName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "places.",
+          "hostPrefix" => "cp.places.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribePlaceIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePlaceIndexResponse)
@@ -1759,7 +1759,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/routes/v0/calculators/{CalculatorName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "routes.",
+          "hostPrefix" => "cp.routes.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeRouteCalculatorRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRouteCalculatorResponse)
@@ -1775,7 +1775,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeTrackerRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrackerResponse)
@@ -1791,7 +1791,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: DisassociateTrackerConsumerRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateTrackerConsumerResponse)
@@ -1962,7 +1962,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/geofencing/v0/list-collections"
         o.endpoint_pattern = {
-          "hostPrefix" => "geofencing.",
+          "hostPrefix" => "cp.geofencing.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListGeofenceCollectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGeofenceCollectionsResponse)
@@ -2005,7 +2005,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/metadata/v0/list-keys"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListKeysResponse)
@@ -2026,7 +2026,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/maps/v0/list-maps"
         o.endpoint_pattern = {
-          "hostPrefix" => "maps.",
+          "hostPrefix" => "cp.maps.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListMapsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMapsResponse)
@@ -2047,7 +2047,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/places/v0/list-indexes"
         o.endpoint_pattern = {
-          "hostPrefix" => "places.",
+          "hostPrefix" => "cp.places.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListPlaceIndexesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaceIndexesResponse)
@@ -2068,7 +2068,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/routes/v0/list-calculators"
         o.endpoint_pattern = {
-          "hostPrefix" => "routes.",
+          "hostPrefix" => "cp.routes.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListRouteCalculatorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRouteCalculatorsResponse)
@@ -2089,7 +2089,7 @@ module Aws::LocationService
         o.http_method = "GET"
         o.http_request_uri = "/tags/{ResourceArn}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
@@ -2105,7 +2105,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}/list-consumers"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListTrackerConsumersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTrackerConsumersResponse)
@@ -2127,7 +2127,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/tracking/v0/list-trackers"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: ListTrackersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTrackersResponse)
@@ -2213,7 +2213,7 @@ module Aws::LocationService
         o.http_method = "POST"
         o.http_request_uri = "/tags/{ResourceArn}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
@@ -2229,7 +2229,7 @@ module Aws::LocationService
         o.http_method = "DELETE"
         o.http_request_uri = "/tags/{ResourceArn}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
@@ -2245,7 +2245,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/geofencing/v0/collections/{CollectionName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "geofencing.",
+          "hostPrefix" => "cp.geofencing.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGeofenceCollectionResponse)
@@ -2261,7 +2261,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/metadata/v0/keys/{KeyName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "metadata.",
+          "hostPrefix" => "cp.metadata.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateKeyResponse)
@@ -2277,7 +2277,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/maps/v0/maps/{MapName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "maps.",
+          "hostPrefix" => "cp.maps.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateMapRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateMapResponse)
@@ -2293,7 +2293,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/places/v0/indexes/{IndexName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "places.",
+          "hostPrefix" => "cp.places.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdatePlaceIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePlaceIndexResponse)
@@ -2309,7 +2309,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/routes/v0/calculators/{CalculatorName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "routes.",
+          "hostPrefix" => "cp.routes.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateRouteCalculatorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateRouteCalculatorResponse)
@@ -2325,7 +2325,7 @@ module Aws::LocationService
         o.http_method = "PATCH"
         o.http_request_uri = "/tracking/v0/trackers/{TrackerName}"
         o.endpoint_pattern = {
-          "hostPrefix" => "tracking.",
+          "hostPrefix" => "cp.tracking.",
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateTrackerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTrackerResponse)

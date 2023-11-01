@@ -3535,7 +3535,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #   * `/aws/insights`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -4127,6 +4127,22 @@ module Aws::SSM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItemRequest AWS API Documentation
+    #
+    class DeleteOpsItemRequest < Struct.new(
+      :ops_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItemResponse AWS API Documentation
+    #
+    class DeleteOpsItemResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] ops_metadata_arn
     #   The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
@@ -12708,7 +12724,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #   * `/aws/insights`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -12902,6 +12918,19 @@ module Aws::SSM
     class OpsItemAlreadyExistsException < Struct.new(
       :message,
       :ops_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified OpsItem is in the process of being deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemConflictException AWS API Documentation
+    #
+    class OpsItemConflictException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13299,7 +13328,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #   * `/aws/insights`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.

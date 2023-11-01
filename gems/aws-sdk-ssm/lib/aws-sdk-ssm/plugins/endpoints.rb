@@ -92,6 +92,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::DeleteInventory.build(context)
           when :delete_maintenance_window
             Aws::SSM::Endpoints::DeleteMaintenanceWindow.build(context)
+          when :delete_ops_item
+            Aws::SSM::Endpoints::DeleteOpsItem.build(context)
           when :delete_ops_metadata
             Aws::SSM::Endpoints::DeleteOpsMetadata.build(context)
           when :delete_parameter

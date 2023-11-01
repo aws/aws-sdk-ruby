@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-10-25)
+------------------
+
+* Feature - Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
+
+1.88.0 (2023-10-24)
+------------------
+
+* Feature - Add the partitional endpoint for IAM in iso-f.
+
 1.87.0 (2023-09-27)
 ------------------
 

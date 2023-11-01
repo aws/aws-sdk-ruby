@@ -438,6 +438,7 @@ module Aws::GlobalAccelerator
     #     endpoint_configurations: [ # required
     #       {
     #         endpoint_id: "GenericString",
+    #         attachment_arn: "GenericString",
     #       },
     #     ],
     #     endpoint_group_arn: "GenericString", # required
@@ -504,6 +505,7 @@ module Aws::GlobalAccelerator
     #         endpoint_id: "GenericString",
     #         weight: 1,
     #         client_ip_preservation_enabled: false,
+    #         attachment_arn: "GenericString",
     #       },
     #     ],
     #     endpoint_group_arn: "GenericString", # required
@@ -766,6 +768,96 @@ module Aws::GlobalAccelerator
     # @param [Hash] params ({})
     def create_accelerator(params = {}, options = {})
       req = build_request(:create_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Create a cross-account attachment in Global Accelerator. You create a
+    # cross-account attachment to specify the *principals* who have
+    # permission to add to accelerators in their own account the resources
+    # in your account that you also list in the attachment.
+    #
+    # A principal can be an Amazon Web Services account number or the Amazon
+    # Resource Name (ARN) for an accelerator. For account numbers that are
+    # listed as principals, to add a resource listed in the attachment to an
+    # accelerator, you must sign in to an account specified as a principal.
+    # Then you can add the resources that are listed to any of your
+    # accelerators. If an accelerator ARN is listed in the cross-account
+    # attachment as a principal, anyone with permission to make updates to
+    # the accelerator can add as endpoints resources that are listed in the
+    # attachment.
+    #
+    # @option params [required, String] :name
+    #   The name of the cross-account attachment.
+    #
+    # @option params [Array<String>] :principals
+    #   The principals to list in the cross-account attachment. A principal
+    #   can be an Amazon Web Services account number or the Amazon Resource
+    #   Name (ARN) for an accelerator.
+    #
+    # @option params [Array<Types::Resource>] :resources
+    #   The Amazon Resource Names (ARNs) for the resources to list in the
+    #   cross-account attachment. A resource can be any supported Amazon Web
+    #   Services resource type for Global Accelerator.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Create tags for cross-account attachment.
+    #
+    #   For more information, see [Tagging in Global Accelerator][1] in the
+    #   *Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
+    # @return [Types::CreateCrossAccountAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCrossAccountAttachmentResponse#cross_account_attachment #cross_account_attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cross_account_attachment({
+    #     name: "AttachmentName", # required
+    #     principals: ["Principal"],
+    #     resources: [
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         region: "GenericString",
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_account_attachment.attachment_arn #=> String
+    #   resp.cross_account_attachment.name #=> String
+    #   resp.cross_account_attachment.principals #=> Array
+    #   resp.cross_account_attachment.principals[0] #=> String
+    #   resp.cross_account_attachment.resources #=> Array
+    #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].region #=> String
+    #   resp.cross_account_attachment.last_modified_time #=> Time
+    #   resp.cross_account_attachment.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCrossAccountAttachment AWS API Documentation
+    #
+    # @overload create_cross_account_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_cross_account_attachment(params = {}, options = {})
+      req = build_request(:create_cross_account_attachment, params)
       req.send_request(options)
     end
 
@@ -1112,6 +1204,7 @@ module Aws::GlobalAccelerator
     #         endpoint_id: "GenericString",
     #         weight: 1,
     #         client_ip_preservation_enabled: false,
+    #         attachment_arn: "GenericString",
     #       },
     #     ],
     #     traffic_dial_percentage: 1.0,
@@ -1282,6 +1375,48 @@ module Aws::GlobalAccelerator
     # @param [Hash] params ({})
     def delete_accelerator(params = {}, options = {})
       req = build_request(:delete_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Delete a cross-account attachment. When you delete an attachment,
+    # Global Accelerator revokes the permission to use the resources in the
+    # attachment from all principals in the list of principals. Global
+    # Accelerator revokes the permission for specific resources by doing the
+    # following:
+    #
+    # * If the principal is an account ID, Global Accelerator reviews every
+    #   accelerator in the account and removes cross-account endpoints from
+    #   all accelerators.
+    #
+    # * If the principal is an accelerator, Global Accelerator reviews just
+    #   that accelerator and removes cross-account endpoints from it.
+    #
+    # If there are overlapping permissions provided by multiple
+    # cross-account attachments, Global Accelerator only removes endpoints
+    # if there are no current cross-account attachments that provide access
+    # permission. For example, if you delete a cross-account attachment that
+    # lists an accelerator as a principal, but another cross-account
+    # attachment includes the account ID that owns that accelerator,
+    # endpoints will not be removed from the accelerator.
+    #
+    # @option params [required, String] :attachment_arn
+    #   The Amazon Resource Name (ARN) for the cross-account attachment to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cross_account_attachment({
+    #     attachment_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCrossAccountAttachment AWS API Documentation
+    #
+    # @overload delete_cross_account_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_cross_account_attachment(params = {}, options = {})
+      req = build_request(:delete_cross_account_attachment, params)
       req.send_request(options)
     end
 
@@ -1606,6 +1741,43 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Gets configuration information about a cross-account attachment.
+    #
+    # @option params [required, String] :attachment_arn
+    #   The Amazon Resource Name (ARN) for the cross-account attachment to
+    #   describe.
+    #
+    # @return [Types::DescribeCrossAccountAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCrossAccountAttachmentResponse#cross_account_attachment #cross_account_attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cross_account_attachment({
+    #     attachment_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_account_attachment.attachment_arn #=> String
+    #   resp.cross_account_attachment.name #=> String
+    #   resp.cross_account_attachment.principals #=> Array
+    #   resp.cross_account_attachment.principals[0] #=> String
+    #   resp.cross_account_attachment.resources #=> Array
+    #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].region #=> String
+    #   resp.cross_account_attachment.last_modified_time #=> Time
+    #   resp.cross_account_attachment.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCrossAccountAttachment AWS API Documentation
+    #
+    # @overload describe_cross_account_attachment(params = {})
+    # @param [Hash] params ({})
+    def describe_cross_account_attachment(params = {}, options = {})
+      req = build_request(:describe_cross_account_attachment, params)
+      req.send_request(options)
+    end
+
     # Describe a custom routing accelerator.
     #
     # @option params [required, String] :accelerator_arn
@@ -1922,6 +2094,123 @@ module Aws::GlobalAccelerator
     # @param [Hash] params ({})
     def list_byoip_cidrs(params = {}, options = {})
       req = build_request(:list_byoip_cidrs, params)
+      req.send_request(options)
+    end
+
+    # List the cross-account attachments that have been created in Global
+    # Accelerator.
+    #
+    # @option params [Integer] :max_results
+    #   The number of cross-account attachment objects that you want to return
+    #   with this call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCrossAccountAttachmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrossAccountAttachmentsResponse#cross_account_attachments #cross_account_attachments} => Array&lt;Types::Attachment&gt;
+    #   * {Types::ListCrossAccountAttachmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cross_account_attachments({
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_account_attachments #=> Array
+    #   resp.cross_account_attachments[0].attachment_arn #=> String
+    #   resp.cross_account_attachments[0].name #=> String
+    #   resp.cross_account_attachments[0].principals #=> Array
+    #   resp.cross_account_attachments[0].principals[0] #=> String
+    #   resp.cross_account_attachments[0].resources #=> Array
+    #   resp.cross_account_attachments[0].resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachments[0].resources[0].region #=> String
+    #   resp.cross_account_attachments[0].last_modified_time #=> Time
+    #   resp.cross_account_attachments[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountAttachments AWS API Documentation
+    #
+    # @overload list_cross_account_attachments(params = {})
+    # @param [Hash] params ({})
+    def list_cross_account_attachments(params = {}, options = {})
+      req = build_request(:list_cross_account_attachments, params)
+      req.send_request(options)
+    end
+
+    # List the accounts that have cross-account endpoints.
+    #
+    # @return [Types::ListCrossAccountResourceAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrossAccountResourceAccountsResponse#resource_owner_aws_account_ids #resource_owner_aws_account_ids} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.resource_owner_aws_account_ids #=> Array
+    #   resp.resource_owner_aws_account_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResourceAccounts AWS API Documentation
+    #
+    # @overload list_cross_account_resource_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_cross_account_resource_accounts(params = {}, options = {})
+      req = build_request(:list_cross_account_resource_accounts, params)
+      req.send_request(options)
+    end
+
+    # List the cross-account endpoints available to add to an accelerator.
+    #
+    # @option params [String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of an accelerator in a cross-account
+    #   attachment.
+    #
+    # @option params [required, String] :resource_owner_aws_account_id
+    #   The account ID of a resource owner in a cross-account attachment.
+    #
+    # @option params [Integer] :max_results
+    #   The number of cross-account endpoints objects that you want to return
+    #   with this call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCrossAccountResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrossAccountResourcesResponse#cross_account_resources #cross_account_resources} => Array&lt;Types::CrossAccountResource&gt;
+    #   * {Types::ListCrossAccountResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cross_account_resources({
+    #     accelerator_arn: "GenericString",
+    #     resource_owner_aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_account_resources #=> Array
+    #   resp.cross_account_resources[0].endpoint_id #=> String
+    #   resp.cross_account_resources[0].attachment_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResources AWS API Documentation
+    #
+    # @overload list_cross_account_resources(params = {})
+    # @param [Hash] params ({})
+    def list_cross_account_resources(params = {}, options = {})
+      req = build_request(:list_cross_account_resources, params)
       req.send_request(options)
     end
 
@@ -2715,6 +3004,112 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Update a cross-account attachment to add or remove principals or
+    # resources. When you update an attachment to remove a principal
+    # (account ID or accelerator) or a resource, Global Accelerator revokes
+    # the permission for specific resources by doing the following:
+    #
+    # * If the principal is an account ID, Global Accelerator reviews every
+    #   accelerator in the account and removes cross-account endpoints from
+    #   all accelerators.
+    #
+    # * If the principal is an accelerator, Global Accelerator reviews just
+    #   that accelerator and removes cross-account endpoints from it.
+    #
+    # If there are overlapping permissions provided by multiple
+    # cross-account attachments, Global Accelerator only removes endpoints
+    # if there are no current cross-account attachments that provide access
+    # permission. For example, if you delete a cross-account attachment that
+    # lists an accelerator as a principal, but another cross-account
+    # attachment includes the account ID that owns that accelerator,
+    # endpoints will not be removed from the accelerator.
+    #
+    # @option params [required, String] :attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment to
+    #   update.
+    #
+    # @option params [String] :name
+    #   The name of the cross-account attachment.
+    #
+    # @option params [Array<String>] :add_principals
+    #   The principals to add to the cross-account attachment. A principal is
+    #   an account or the Amazon Resource Name (ARN) of an accelerator that
+    #   the attachment gives permission to add the resources from another
+    #   account, listed in the attachment.
+    #
+    #   To add more than one principal, separate the account numbers or
+    #   accelerator ARNs, or both, with commas.
+    #
+    # @option params [Array<String>] :remove_principals
+    #   The principals to remove from the cross-account attachment. A
+    #   principal is an account or the Amazon Resource Name (ARN) of an
+    #   accelerator that is given permission to add the resources from another
+    #   account, listed in the cross-account attachment.
+    #
+    #   To remove more than one principal, separate the account numbers or
+    #   accelerator ARNs, or both, with commas.
+    #
+    # @option params [Array<Types::Resource>] :add_resources
+    #   The resources to add to the cross-account attachment. A resource
+    #   listed in a cross-account attachment can be added to an accelerator by
+    #   the principals that are listed in the attachment.
+    #
+    #   To add more than one resource, separate the resource ARNs with commas.
+    #
+    # @option params [Array<Types::Resource>] :remove_resources
+    #   The resources to remove from the cross-account attachment. A resource
+    #   listed in a cross-account attachment can be added to an accelerator fy
+    #   principals that are listed in the cross-account attachment.
+    #
+    #   To remove more than one resource, separate the resource ARNs with
+    #   commas.
+    #
+    # @return [Types::UpdateCrossAccountAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCrossAccountAttachmentResponse#cross_account_attachment #cross_account_attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cross_account_attachment({
+    #     attachment_arn: "GenericString", # required
+    #     name: "AttachmentName",
+    #     add_principals: ["Principal"],
+    #     remove_principals: ["Principal"],
+    #     add_resources: [
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         region: "GenericString",
+    #       },
+    #     ],
+    #     remove_resources: [
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         region: "GenericString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_account_attachment.attachment_arn #=> String
+    #   resp.cross_account_attachment.name #=> String
+    #   resp.cross_account_attachment.principals #=> Array
+    #   resp.cross_account_attachment.principals[0] #=> String
+    #   resp.cross_account_attachment.resources #=> Array
+    #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].region #=> String
+    #   resp.cross_account_attachment.last_modified_time #=> Time
+    #   resp.cross_account_attachment.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCrossAccountAttachment AWS API Documentation
+    #
+    # @overload update_cross_account_attachment(params = {})
+    # @param [Hash] params ({})
+    def update_cross_account_attachment(params = {}, options = {})
+      req = build_request(:update_cross_account_attachment, params)
+      req.send_request(options)
+    end
+
     # Update a custom routing accelerator.
     #
     # @option params [required, String] :accelerator_arn
@@ -2960,6 +3355,7 @@ module Aws::GlobalAccelerator
     #         endpoint_id: "GenericString",
     #         weight: 1,
     #         client_ip_preservation_enabled: false,
+    #         attachment_arn: "GenericString",
     #       },
     #     ],
     #     traffic_dial_percentage: 1.0,
@@ -3135,7 +3531,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

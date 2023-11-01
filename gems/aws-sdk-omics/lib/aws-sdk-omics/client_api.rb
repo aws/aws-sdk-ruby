@@ -106,6 +106,7 @@ module Aws::Omics
     ETagAlgorithm = Shapes::StringShape.new(name: 'ETagAlgorithm')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EngineLogStream = Shapes::StringShape.new(name: 'EngineLogStream')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
     EscapeQuotes = Shapes::BooleanShape.new(name: 'EscapeQuotes')
     ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
@@ -341,6 +342,7 @@ module Aws::Omics
     RunArn = Shapes::StringShape.new(name: 'RunArn')
     RunExport = Shapes::StringShape.new(name: 'RunExport')
     RunExportList = Shapes::ListShape.new(name: 'RunExportList')
+    RunFailureReason = Shapes::StringShape.new(name: 'RunFailureReason')
     RunGroupArn = Shapes::StringShape.new(name: 'RunGroupArn')
     RunGroupId = Shapes::StringShape.new(name: 'RunGroupId')
     RunGroupList = Shapes::ListShape.new(name: 'RunGroupList')
@@ -361,6 +363,8 @@ module Aws::Omics
     RunListItemStorageCapacityInteger = Shapes::IntegerShape.new(name: 'RunListItemStorageCapacityInteger')
     RunListToken = Shapes::StringShape.new(name: 'RunListToken')
     RunLogLevel = Shapes::StringShape.new(name: 'RunLogLevel')
+    RunLogLocation = Shapes::StructureShape.new(name: 'RunLogLocation')
+    RunLogStream = Shapes::StringShape.new(name: 'RunLogStream')
     RunName = Shapes::StringShape.new(name: 'RunName')
     RunOutputUri = Shapes::StringShape.new(name: 'RunOutputUri')
     RunParameters = Shapes::DocumentShape.new(name: 'RunParameters', document: true)
@@ -437,6 +441,7 @@ module Aws::Omics
     TagResourceRequestTagsMap = Shapes::MapShape.new(name: 'TagResourceRequestTagsMap')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaskFailureReason = Shapes::StringShape.new(name: 'TaskFailureReason')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskInstanceType = Shapes::StringShape.new(name: 'TaskInstanceType')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
@@ -1132,6 +1137,8 @@ module Aws::Omics
     GetRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetRunResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
+    GetRunResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RunFailureReason, location_name: "failureReason"))
+    GetRunResponse.add_member(:log_location, Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1150,6 +1157,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:log_stream, Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
     GetRunTaskResponse.add_member(:gpus, Shapes::ShapeRef.new(shape: GetRunTaskResponseGpusInteger, location_name: "gpus"))
     GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
+    GetRunTaskResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: TaskFailureReason, location_name: "failureReason"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1682,6 +1690,10 @@ module Aws::Omics
     RunListItem.add_member(:start_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "startTime"))
     RunListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
     RunListItem.struct_class = Types::RunListItem
+
+    RunLogLocation.add_member(:engine_log_stream, Shapes::ShapeRef.new(shape: EngineLogStream, location_name: "engineLogStream"))
+    RunLogLocation.add_member(:run_log_stream, Shapes::ShapeRef.new(shape: RunLogStream, location_name: "runLogStream"))
+    RunLogLocation.struct_class = Types::RunLogLocation
 
     RunResourceDigests.key = Shapes::ShapeRef.new(shape: RunResourceDigestKey)
     RunResourceDigests.value = Shapes::ShapeRef.new(shape: RunResourceDigest)

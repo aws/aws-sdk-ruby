@@ -4581,7 +4581,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the endpoint in the context of the batch.
+    #   The case insensitive unique identifier for the endpoint in the
+    #   context of the batch. The identifier can't contain `$`, `\{` or
+    #   `\}`.
     #   @return [String]
     #
     # @!attribute [rw] location

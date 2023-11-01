@@ -430,7 +430,7 @@ module Aws::CustomerProfiles
     CreateCalculatedAttributeDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, required: true, location: "uri", location_name: "CalculatedAttributeName"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    CreateCalculatedAttributeDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    CreateCalculatedAttributeDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:attribute_details, Shapes::ShapeRef.new(shape: AttributeDetails, required: true, location_name: "AttributeDetails"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, required: true, location_name: "Statistic"))
@@ -439,7 +439,7 @@ module Aws::CustomerProfiles
 
     CreateCalculatedAttributeDefinitionResponse.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, location_name: "CalculatedAttributeName"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    CreateCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    CreateCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:attribute_details, Shapes::ShapeRef.new(shape: AttributeDetails, location_name: "AttributeDetails"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
@@ -678,7 +678,7 @@ module Aws::CustomerProfiles
 
     GetCalculatedAttributeDefinitionResponse.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, location_name: "CalculatedAttributeName"))
     GetCalculatedAttributeDefinitionResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    GetCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    GetCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     GetCalculatedAttributeDefinitionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     GetCalculatedAttributeDefinitionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     GetCalculatedAttributeDefinitionResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
@@ -888,7 +888,7 @@ module Aws::CustomerProfiles
 
     ListCalculatedAttributeDefinitionItem.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, location_name: "CalculatedAttributeName"))
     ListCalculatedAttributeDefinitionItem.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    ListCalculatedAttributeDefinitionItem.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    ListCalculatedAttributeDefinitionItem.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     ListCalculatedAttributeDefinitionItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     ListCalculatedAttributeDefinitionItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     ListCalculatedAttributeDefinitionItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1357,13 +1357,13 @@ module Aws::CustomerProfiles
     UpdateCalculatedAttributeDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     UpdateCalculatedAttributeDefinitionRequest.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, required: true, location: "uri", location_name: "CalculatedAttributeName"))
     UpdateCalculatedAttributeDefinitionRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    UpdateCalculatedAttributeDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    UpdateCalculatedAttributeDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     UpdateCalculatedAttributeDefinitionRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     UpdateCalculatedAttributeDefinitionRequest.struct_class = Types::UpdateCalculatedAttributeDefinitionRequest
 
     UpdateCalculatedAttributeDefinitionResponse.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, location_name: "CalculatedAttributeName"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
-    UpdateCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: text, location_name: "Description"))
+    UpdateCalculatedAttributeDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))

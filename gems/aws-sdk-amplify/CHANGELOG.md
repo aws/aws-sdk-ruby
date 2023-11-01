@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-10-31)
+------------------
+
+* Feature - Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
+
 1.51.0 (2023-09-27)
 ------------------
 

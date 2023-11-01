@@ -131,6 +131,7 @@ module Aws::GroundStation
     IpV4Address = Shapes::StringShape.new(name: 'IpV4Address')
     JsonString = Shapes::StringShape.new(name: 'JsonString')
     KeyAliasArn = Shapes::StringShape.new(name: 'KeyAliasArn')
+    KeyAliasName = Shapes::StringShape.new(name: 'KeyAliasName')
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
     KmsKey = Shapes::UnionShape.new(name: 'KmsKey')
     ListConfigsRequest = Shapes::StructureShape.new(name: 'ListConfigsRequest')
@@ -628,9 +629,11 @@ module Aws::GroundStation
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
 
     KmsKey.add_member(:kms_alias_arn, Shapes::ShapeRef.new(shape: KeyAliasArn, location_name: "kmsAliasArn"))
+    KmsKey.add_member(:kms_alias_name, Shapes::ShapeRef.new(shape: KeyAliasName, location_name: "kmsAliasName"))
     KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
     KmsKey.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     KmsKey.add_member_subclass(:kms_alias_arn, Types::KmsKey::KmsAliasArn)
+    KmsKey.add_member_subclass(:kms_alias_name, Types::KmsKey::KmsAliasName)
     KmsKey.add_member_subclass(:kms_key_arn, Types::KmsKey::KmsKeyArn)
     KmsKey.add_member_subclass(:unknown, Types::KmsKey::Unknown)
     KmsKey.struct_class = Types::KmsKey

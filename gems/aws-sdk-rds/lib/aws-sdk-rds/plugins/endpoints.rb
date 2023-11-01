@@ -114,6 +114,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::CreateEventSubscription.build(context)
           when :create_global_cluster
             Aws::RDS::Endpoints::CreateGlobalCluster.build(context)
+          when :create_integration
+            Aws::RDS::Endpoints::CreateIntegration.build(context)
           when :create_option_group
             Aws::RDS::Endpoints::CreateOptionGroup.build(context)
           when :delete_blue_green_deployment
@@ -150,6 +152,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DeleteEventSubscription.build(context)
           when :delete_global_cluster
             Aws::RDS::Endpoints::DeleteGlobalCluster.build(context)
+          when :delete_integration
+            Aws::RDS::Endpoints::DeleteIntegration.build(context)
           when :delete_option_group
             Aws::RDS::Endpoints::DeleteOptionGroup.build(context)
           when :deregister_db_proxy_targets
@@ -218,6 +222,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeExportTasks.build(context)
           when :describe_global_clusters
             Aws::RDS::Endpoints::DescribeGlobalClusters.build(context)
+          when :describe_integrations
+            Aws::RDS::Endpoints::DescribeIntegrations.build(context)
           when :describe_option_group_options
             Aws::RDS::Endpoints::DescribeOptionGroupOptions.build(context)
           when :describe_option_groups

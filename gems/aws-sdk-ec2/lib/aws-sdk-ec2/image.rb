@@ -157,7 +157,8 @@ module Aws::EC2
       data[:ena_support]
     end
 
-    # The hypervisor type of the image.
+    # The hypervisor type of the image. Only `xen` is supported. `ovm` is
+    # not supported.
     # @return [String]
     def hypervisor
       data[:hypervisor]
@@ -258,6 +259,18 @@ module Aws::EC2
     # @return [String]
     def imds_support
       data[:imds_support]
+    end
+
+    # The ID of the instance that the AMI was created from if the AMI was
+    # created using [CreateImage][1]. This field only appears if the AMI was
+    # created using CreateImage.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    # @return [String]
+    def source_instance_id
+      data[:source_instance_id]
     end
 
     # @!endgroup

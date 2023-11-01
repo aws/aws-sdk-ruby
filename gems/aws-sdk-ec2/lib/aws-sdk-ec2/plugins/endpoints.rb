@@ -508,6 +508,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeBundleTasks.build(context)
           when :describe_byoip_cidrs
             Aws::EC2::Endpoints::DescribeByoipCidrs.build(context)
+          when :describe_capacity_block_offerings
+            Aws::EC2::Endpoints::DescribeCapacityBlockOfferings.build(context)
           when :describe_capacity_reservation_fleets
             Aws::EC2::Endpoints::DescribeCapacityReservationFleets.build(context)
           when :describe_capacity_reservations
@@ -802,6 +804,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableFastLaunch.build(context)
           when :disable_fast_snapshot_restores
             Aws::EC2::Endpoints::DisableFastSnapshotRestores.build(context)
+          when :disable_image
+            Aws::EC2::Endpoints::DisableImage.build(context)
           when :disable_image_block_public_access
             Aws::EC2::Endpoints::DisableImageBlockPublicAccess.build(context)
           when :disable_image_deprecation
@@ -856,6 +860,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableFastLaunch.build(context)
           when :enable_fast_snapshot_restores
             Aws::EC2::Endpoints::EnableFastSnapshotRestores.build(context)
+          when :enable_image
+            Aws::EC2::Endpoints::EnableImage.build(context)
           when :enable_image_block_public_access
             Aws::EC2::Endpoints::EnableImageBlockPublicAccess.build(context)
           when :enable_image_deprecation
@@ -942,6 +948,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetPasswordData.build(context)
           when :get_reserved_instances_exchange_quote
             Aws::EC2::Endpoints::GetReservedInstancesExchangeQuote.build(context)
+          when :get_security_groups_for_vpc
+            Aws::EC2::Endpoints::GetSecurityGroupsForVpc.build(context)
           when :get_serial_console_access_status
             Aws::EC2::Endpoints::GetSerialConsoleAccessStatus.build(context)
           when :get_spot_placement_scores
@@ -1128,6 +1136,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ProvisionIpamPoolCidr.build(context)
           when :provision_public_ipv_4_pool_cidr
             Aws::EC2::Endpoints::ProvisionPublicIpv4PoolCidr.build(context)
+          when :purchase_capacity_block
+            Aws::EC2::Endpoints::PurchaseCapacityBlock.build(context)
           when :purchase_host_reservation
             Aws::EC2::Endpoints::PurchaseHostReservation.build(context)
           when :purchase_reserved_instances_offering
