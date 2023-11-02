@@ -74,6 +74,70 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The analysis result for Network Firewall's stateless rule group
+    # analyzer. Every time you call CreateRuleGroup, UpdateRuleGroup, or
+    # DescribeRuleGroup on a stateless rule group, Network Firewall analyzes
+    # the stateless rule groups in your account and identifies the rules
+    # that might adversely effect your firewall's functionality. For
+    # example, if Network Firewall detects a rule that's routing traffic
+    # asymmetrically, which impacts the service's ability to properly
+    # process traffic, the service includes the rule in a list of analysis
+    # results.
+    #
+    # @!attribute [rw] identified_rule_ids
+    #   The priority number of the stateless rules identified in the
+    #   analysis.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] identified_type
+    #   The types of rule configurations that Network Firewall analyzes your
+    #   rule groups for. Network Firewall analyzes stateless rule groups for
+    #   the following types of rule configurations:
+    #
+    #   * `STATELESS_RULE_FORWARDING_ASYMMETRICALLY`
+    #
+    #     Cause: One or more stateless rules with the action `pass` or
+    #     `forward` are forwarding traffic asymmetrically. Specifically, the
+    #     rule's set of source IP addresses or their associated port
+    #     numbers, don't match the set of destination IP addresses or their
+    #     associated port numbers.
+    #
+    #     To mitigate: Make sure that there's an existing return path. For
+    #     example, if the rule allows traffic from source 10.1.0.0/24 to
+    #     destination 20.1.0.0/24, you should allow return traffic from
+    #     source 20.1.0.0/24 to destination 10.1.0.0/24.
+    #
+    #   * `STATELESS_RULE_CONTAINS_TCP_FLAGS`
+    #
+    #     Cause: At least one stateless rule with the action `pass`
+    #     or`forward` contains TCP flags that are inconsistent in the
+    #     forward and return directions.
+    #
+    #     To mitigate: Prevent asymmetric routing issues caused by TCP flags
+    #     by following these actions:
+    #
+    #     * Remove unnecessary TCP flag inspections from the rules.
+    #
+    #     * If you need to inspect TCP flags, check that the rules correctly
+    #       account for changes in TCP flags throughout the TCP connection
+    #       cycle, for example `SYN` and `ACK` flags used in a 3-way TCP
+    #       handshake.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_detail
+    #   Provides analysis details for the identified rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AnalysisResult AWS API Documentation
+    #
+    class AnalysisResult < Struct.new(
+      :identified_rule_ids,
+      :identified_type,
+      :analysis_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -367,13 +431,13 @@ module Aws::NetworkFirewall
     #   * **PASS** - Allow the connection to continue, and pass subsequent
     #     packets to the stateful engine for inspection.
     #
-    #   * **DROP** - Network Firewall fails closed and drops all subsequent
-    #     traffic.
+    #   * **DROP** - Network Firewall closes the connection and drops
+    #     subsequent packets for that connection.
     #
     #   * **REJECT** - Network Firewall sends a TCP reject packet back to
-    #     your client so that the client can immediately establish a new
-    #     session. Network Firewall then fails closed and drops all
-    #     subsequent traffic. `REJECT` is available only for TCP traffic.
+    #     your client. The service closes the connection and drops
+    #     subsequent packets for that connection. `REJECT` is available only
+    #     for TCP traffic.
     #   @return [String]
     #
     # @!attribute [rw] unknown_status_action
@@ -386,13 +450,13 @@ module Aws::NetworkFirewall
     #   * **PASS** - Allow the connection to continue, and pass subsequent
     #     packets to the stateful engine for inspection.
     #
-    #   * **DROP** - Network Firewall fails closed and drops all subsequent
-    #     traffic.
+    #   * **DROP** - Network Firewall closes the connection and drops
+    #     subsequent packets for that connection.
     #
     #   * **REJECT** - Network Firewall sends a TCP reject packet back to
-    #     your client so that the client can immediately establish a new
-    #     session. Network Firewall then fails closed and drops all
-    #     subsequent traffic. `REJECT` is available only for TCP traffic.
+    #     your client. The service closes the connection and drops
+    #     subsequent packets for that connection. `REJECT` is available only
+    #     for TCP traffic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CheckCertificateRevocationStatusActions AWS API Documentation
@@ -704,6 +768,14 @@ module Aws::NetworkFirewall
     #   track of updates made to the originating rule group.
     #   @return [Types::SourceMetadata]
     #
+    # @!attribute [rw] analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric
+    #   routing. If set to `TRUE`, Network Firewall runs the analysis and
+    #   then creates the rule group for you. To run the stateless rule group
+    #   analyzer without creating the rule group, set `DryRun` to `TRUE`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
@@ -716,7 +788,8 @@ module Aws::NetworkFirewall
       :tags,
       :dry_run,
       :encryption_configuration,
-      :source_metadata)
+      :source_metadata,
+      :analyze_rule_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1382,12 +1455,19 @@ module Aws::NetworkFirewall
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric
+    #   routing. If set to `TRUE`, Network Firewall runs the analysis.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupRequest AWS API Documentation
     #
     class DescribeRuleGroupRequest < Struct.new(
       :rule_group_name,
       :rule_group_arn,
-      :type)
+      :type,
+      :analyze_rule_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3033,7 +3113,12 @@ module Aws::NetworkFirewall
     #   Additional options governing how Network Firewall handles stateful
     #   rules. The policies where you use your stateful rule group must have
     #   stateful rule options settings that are compatible with these
-    #   settings.
+    #   settings. Some limitations apply; for more information, see [Strict
+    #   evaluation order][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html
     #   @return [Types::StatefulRuleOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroup AWS API Documentation
@@ -3159,6 +3244,17 @@ module Aws::NetworkFirewall
     #   The last time that the rule group was changed.
     #   @return [Time]
     #
+    # @!attribute [rw] analysis_results
+    #   The list of analysis results for `AnalyzeRuleGroup`. If you set
+    #   `AnalyzeRuleGroup` to `TRUE` in CreateRuleGroup, UpdateRuleGroup, or
+    #   DescribeRuleGroup, Network Firewall analyzes the rule group and
+    #   identifies the rules that might adversely effect your firewall's
+    #   functionality. For example, if Network Firewall detects a rule
+    #   that's routing traffic asymmetrically, which impacts the service's
+    #   ability to properly process traffic, the service includes the rule
+    #   in the list of analysis results.
+    #   @return [Array<Types::AnalysisResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroupResponse AWS API Documentation
     #
     class RuleGroupResponse < Struct.new(
@@ -3175,7 +3271,8 @@ module Aws::NetworkFirewall
       :encryption_configuration,
       :source_metadata,
       :sns_topic,
-      :last_modified_time)
+      :last_modified_time,
+      :analysis_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3239,14 +3336,18 @@ module Aws::NetworkFirewall
     # instance of this for either stateless rules or stateful rules.
     #
     # @!attribute [rw] rules_string
-    #   Stateful inspection criteria, provided in Suricata compatible
-    #   intrusion prevention system (IPS) rules. Suricata is an open-source
-    #   network IPS that includes a standard rule-based language for network
-    #   traffic inspection.
+    #   Stateful inspection criteria, provided in Suricata compatible rules.
+    #   Suricata is an open-source threat detection framework that includes
+    #   a standard rule-based language for network traffic inspection.
     #
     #   These rules contain the inspection criteria and the action to take
     #   for traffic that matches the criteria, so this type of rule group
     #   doesn't have a separate action setting.
+    #
+    #   <note markdown="1"> You can't use the `priority` keyword if the `RuleOrder` option in
+    #   StatefulRuleOptions is set to `STRICT_ORDER`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] rules_source_list
@@ -3365,9 +3466,9 @@ module Aws::NetworkFirewall
     # TLSInspectionConfiguration. You can configure `ServerCertificates` for
     # inbound SSL/TLS inspection, a `CertificateAuthorityArn` for outbound
     # SSL/TLS inspection, or both. For information about working with
-    # certificates for TLS inspection, see [ Requirements for using SSL/TLS
-    # server certficiates with TLS inspection configurations][1] in the
-    # *Network Firewall Developer Guide*.
+    # certificates for TLS inspection, see [ Using SSL/TLS server
+    # certficiates with TLS inspection configurations][1] in the *Network
+    # Firewall Developer Guide*.
     #
     # <note markdown="1"> If a server certificate that's associated with your
     # TLSInspectionConfiguration is revoked, deleted, or expired it can
@@ -3380,8 +3481,8 @@ module Aws::NetworkFirewall
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
     #
     # @!attribute [rw] server_certificates
-    #   The list of a server certificate configuration's Certificate
-    #   Manager certificates, used for inbound SSL/TLS inspection.
+    #   The list of server certificates to use for inbound SSL/TLS
+    #   inspection.
     #   @return [Array<Types::ServerCertificate>]
     #
     # @!attribute [rw] scopes
@@ -3390,7 +3491,7 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the imported certificate authority
-    #   (CA) certificate configured in Certificate Manager (ACM) to use for
+    #   (CA) certificate within Certificate Manager (ACM) to use for
     #   outbound SSL/TLS inspection.
     #
     #   The following limitations apply:
@@ -3401,8 +3502,8 @@ module Aws::NetworkFirewall
     #   * You can't use certificates issued by Private Certificate
     #     Authority.
     #
-    #   For more information about the certificate requirements for outbound
-    #   inspection, see [Requirements for using SSL/TLS certificates with
+    #   For more information about configuring certificates for outbound
+    #   inspection, see [Using SSL/TLS certificates with certificates with
     #   TLS inspection configurations][1] in the *Network Firewall Developer
     #   Guide*.
     #
@@ -3420,8 +3521,9 @@ module Aws::NetworkFirewall
     #   presented by the server in the SSL/TLS connection has a revoked or
     #   unkown status. If the certificate has an unknown or revoked status,
     #   you must specify the actions that Network Firewall takes on outbound
-    #   traffic. To use this option, you must specify a
-    #   `CertificateAuthorityArn` in ServerCertificateConfiguration.
+    #   traffic. To check the certificate revocation status, you must also
+    #   specify a `CertificateAuthorityArn` in
+    #   ServerCertificateConfiguration.
     #   @return [Types::CheckCertificateRevocationStatusActions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ServerCertificateConfiguration AWS API Documentation
@@ -3525,11 +3627,17 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of stateful rule evaluation for
-    #   the policy. `DEFAULT_ACTION_ORDER` is the default behavior. Stateful
-    #   rules are provided to the rule engine as Suricata compatible
-    #   strings, and Suricata evaluates them based on certain settings. For
-    #   more information, see [Evaluation order for stateful rules][1] in
-    #   the *Network Firewall Developer Guide*.
+    #   the policy. `STRICT_ORDER` is the default and recommended option.
+    #   With `STRICT_ORDER`, provide your rules in the order that you want
+    #   them to be evaluated. You can then choose one or more default
+    #   actions for packets that don't match any rules. Choose
+    #   `STRICT_ORDER` to have the stateful rules engine determine the
+    #   evaluation order of your rules. The default action for this rule
+    #   order is `PASS`, followed by `DROP`, `REJECT`, and `ALERT` actions.
+    #   Stateful rules are provided to the rule engine as Suricata
+    #   compatible strings, and Suricata evaluates them based on your
+    #   settings. For more information, see [Evaluation order for stateful
+    #   rules][1] in the *Network Firewall Developer Guide*.
     #
     #
     #
@@ -3596,9 +3704,8 @@ module Aws::NetworkFirewall
     #     destination and sends an alert log message, if alert logging is
     #     configured in the Firewall LoggingConfiguration.
     #
-    #   * **ALERT** - Permits the packets to go to the intended destination
-    #     and sends an alert log message, if alert logging is configured in
-    #     the Firewall LoggingConfiguration.
+    #   * **ALERT** - Sends an alert log message, if alert logging is
+    #     configured in the Firewall LoggingConfiguration.
     #
     #     You can use this action to test a rule that you intend to use to
     #     drop traffic. You can enable the rule with `ALERT` action, verify
@@ -4803,6 +4910,14 @@ module Aws::NetworkFirewall
     #   track of updates made to the originating rule group.
     #   @return [Types::SourceMetadata]
     #
+    # @!attribute [rw] analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric
+    #   routing. If set to `TRUE`, Network Firewall runs the analysis and
+    #   then updates the rule group for you. To run the stateless rule group
+    #   analyzer without updating the rule group, set `DryRun` to `TRUE`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroupRequest AWS API Documentation
     #
     class UpdateRuleGroupRequest < Struct.new(
@@ -4815,7 +4930,8 @@ module Aws::NetworkFirewall
       :description,
       :dry_run,
       :encryption_configuration,
-      :source_metadata)
+      :source_metadata,
+      :analyze_rule_group)
       SENSITIVE = []
       include Aws::Structure
     end

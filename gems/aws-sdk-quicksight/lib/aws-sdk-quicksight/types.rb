@@ -355,6 +355,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Analysis AWS API Documentation
     #
     class Analysis < Struct.new(
@@ -367,7 +371,8 @@ module Aws::QuickSight
       :theme_arn,
       :created_time,
       :last_updated_time,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -439,6 +444,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for an analysis.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisDefinition AWS API Documentation
     #
     class AnalysisDefinition < Struct.new(
@@ -448,7 +457,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1553,6 +1563,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An array of analysis level configurations.
+    #
+    # @!attribute [rw] timezone
+    #   Determines the timezone for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] week_start
+    #   Determines the week start day for an analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetOptions AWS API Documentation
+    #
+    class AssetOptions < Struct.new(
+      :timezone,
+      :week_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters for Amazon Athena.
     #
     # @!attribute [rw] work_group
@@ -2640,6 +2669,11 @@ module Aws::QuickSight
     #   New column data type.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the new column. Sub types are only available
+    #   for decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   When casting a column from string to datetime type, you can supply a
     #   string in a format supported by Amazon QuickSight to denote the
@@ -2651,6 +2685,7 @@ module Aws::QuickSight
     class CastColumnTypeOperation < Struct.new(
       :column_name,
       :new_column_type,
+      :sub_type,
       :format)
       SENSITIVE = []
       include Aws::Structure
@@ -6422,6 +6457,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersion AWS API Documentation
     #
     class DashboardVersion < Struct.new(
@@ -6434,7 +6473,8 @@ module Aws::QuickSight
       :data_set_arns,
       :description,
       :theme_arn,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6489,6 +6529,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a dashboard.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersionDefinition AWS API Documentation
     #
     class DashboardVersionDefinition < Struct.new(
@@ -6498,7 +6542,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15782,11 +15827,17 @@ module Aws::QuickSight
     #   The data type of the column.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column. Sub types are only available for
+    #   decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InputColumn AWS API Documentation
     #
     class InputColumn < Struct.new(
       :name,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19728,7 +19779,7 @@ module Aws::QuickSight
     # Output column.
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   The display name of the column..
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -19736,7 +19787,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type.
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OutputColumn AWS API Documentation
@@ -19744,7 +19799,8 @@ module Aws::QuickSight
     class OutputColumn < Struct.new(
       :name,
       :description,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26569,6 +26625,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersion AWS API Documentation
     #
     class TemplateVersion < Struct.new(
@@ -26580,7 +26640,8 @@ module Aws::QuickSight
       :description,
       :source_entity_arn,
       :theme_arn,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26635,6 +26696,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a template.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersionDefinition AWS API Documentation
     #
     class TemplateVersionDefinition < Struct.new(
@@ -26644,7 +26709,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end

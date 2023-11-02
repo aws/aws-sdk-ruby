@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2023-11-02)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include new metrics PERCENT_NON_TALK_TIME, PERCENT_TALK_TIME, PERCENT_TALK_TIME_AGENT, PERCENT_TALK_TIME_CUSTOMER
+
 1.132.0 (2023-11-01)
 ------------------
 

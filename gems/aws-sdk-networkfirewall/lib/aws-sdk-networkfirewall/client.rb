@@ -955,6 +955,13 @@ module Aws::NetworkFirewall
     #   own rule group is copied from. You can use the metadata to keep track
     #   of updates made to the originating rule group.
     #
+    # @option params [Boolean] :analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric routing.
+    #   If set to `TRUE`, Network Firewall runs the analysis and then creates
+    #   the rule group for you. To run the stateless rule group analyzer
+    #   without creating the rule group, set `DryRun` to `TRUE`.
+    #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleGroupResponse#update_token #update_token} => String
@@ -1089,6 +1096,7 @@ module Aws::NetworkFirewall
     #       source_arn: "ResourceArn",
     #       source_update_token: "UpdateToken",
     #     },
+    #     analyze_rule_group: false,
     #   })
     #
     # @example Response structure
@@ -1112,6 +1120,11 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.source_metadata.source_update_token #=> String
     #   resp.rule_group_response.sns_topic #=> String
     #   resp.rule_group_response.last_modified_time #=> Time
+    #   resp.rule_group_response.analysis_results #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
+    #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+    #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroup AWS API Documentation
     #
@@ -1123,9 +1136,10 @@ module Aws::NetworkFirewall
     end
 
     # Creates an Network Firewall TLS inspection configuration. A TLS
-    # inspection configuration contains the Certificate Manager certificate
-    # associations that Network Firewall uses to decrypt and re-encrypt
-    # traffic traveling through your firewall.
+    # inspection configuration contains Certificate Manager certificate
+    # associations between and the scope configurations that Network
+    # Firewall uses to decrypt and re-encrypt traffic traveling through your
+    # firewall.
     #
     # After you create a TLS inspection configuration, you can associate it
     # with a new firewall policy.
@@ -1508,6 +1522,11 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.source_metadata.source_update_token #=> String
     #   resp.rule_group_response.sns_topic #=> String
     #   resp.rule_group_response.last_modified_time #=> Time
+    #   resp.rule_group_response.analysis_results #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
+    #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+    #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteRuleGroup AWS API Documentation
     #
@@ -1817,6 +1836,11 @@ module Aws::NetworkFirewall
     #
     #    </note>
     #
+    # @option params [Boolean] :analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric routing.
+    #   If set to `TRUE`, Network Firewall runs the analysis.
+    #
     # @return [Types::DescribeRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRuleGroupResponse#update_token #update_token} => String
@@ -1829,6 +1853,7 @@ module Aws::NetworkFirewall
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
     #     type: "STATELESS", # accepts STATELESS, STATEFUL
+    #     analyze_rule_group: false,
     #   })
     #
     # @example Response structure
@@ -1904,6 +1929,11 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.source_metadata.source_update_token #=> String
     #   resp.rule_group_response.sns_topic #=> String
     #   resp.rule_group_response.last_modified_time #=> Time
+    #   resp.rule_group_response.analysis_results #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
+    #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+    #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroup AWS API Documentation
     #
@@ -3169,6 +3199,13 @@ module Aws::NetworkFirewall
     #   own rule group is copied from. You can use the metadata to keep track
     #   of updates made to the originating rule group.
     #
+    # @option params [Boolean] :analyze_rule_group
+    #   Indicates whether you want Network Firewall to analyze the stateless
+    #   rules in the rule group for rule behavior such as asymmetric routing.
+    #   If set to `TRUE`, Network Firewall runs the analysis and then updates
+    #   the rule group for you. To run the stateless rule group analyzer
+    #   without updating the rule group, set `DryRun` to `TRUE`.
+    #
     # @return [Types::UpdateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRuleGroupResponse#update_token #update_token} => String
@@ -3298,6 +3335,7 @@ module Aws::NetworkFirewall
     #       source_arn: "ResourceArn",
     #       source_update_token: "UpdateToken",
     #     },
+    #     analyze_rule_group: false,
     #   })
     #
     # @example Response structure
@@ -3321,6 +3359,11 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.source_metadata.source_update_token #=> String
     #   resp.rule_group_response.sns_topic #=> String
     #   resp.rule_group_response.last_modified_time #=> Time
+    #   resp.rule_group_response.analysis_results #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids #=> Array
+    #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
+    #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+    #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroup AWS API Documentation
     #
@@ -3572,7 +3615,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

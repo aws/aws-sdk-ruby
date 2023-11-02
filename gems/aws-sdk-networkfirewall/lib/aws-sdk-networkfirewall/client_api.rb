@@ -18,6 +18,8 @@ module Aws::NetworkFirewall
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressDefinition = Shapes::StringShape.new(name: 'AddressDefinition')
     Addresses = Shapes::ListShape.new(name: 'Addresses')
+    AnalysisResult = Shapes::StructureShape.new(name: 'AnalysisResult')
+    AnalysisResultList = Shapes::ListShape.new(name: 'AnalysisResultList')
     AssociateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'AssociateFirewallPolicyRequest')
     AssociateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'AssociateFirewallPolicyResponse')
     AssociateSubnetsRequest = Shapes::StructureShape.new(name: 'AssociateSubnetsRequest')
@@ -103,6 +105,7 @@ module Aws::NetworkFirewall
     IPSetReferenceMap = Shapes::MapShape.new(name: 'IPSetReferenceMap')
     IPSetReferenceName = Shapes::StringShape.new(name: 'IPSetReferenceName')
     IPSets = Shapes::MapShape.new(name: 'IPSets')
+    IdentifiedType = Shapes::StringShape.new(name: 'IdentifiedType')
     InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -168,6 +171,7 @@ module Aws::NetworkFirewall
     RuleGroupResponse = Shapes::StructureShape.new(name: 'RuleGroupResponse')
     RuleGroupType = Shapes::StringShape.new(name: 'RuleGroupType')
     RuleGroups = Shapes::ListShape.new(name: 'RuleGroups')
+    RuleIdList = Shapes::ListShape.new(name: 'RuleIdList')
     RuleOption = Shapes::StructureShape.new(name: 'RuleOption')
     RuleOptions = Shapes::ListShape.new(name: 'RuleOptions')
     RuleOrder = Shapes::StringShape.new(name: 'RuleOrder')
@@ -266,6 +270,13 @@ module Aws::NetworkFirewall
 
     Addresses.member = Shapes::ShapeRef.new(shape: Address)
 
+    AnalysisResult.add_member(:identified_rule_ids, Shapes::ShapeRef.new(shape: RuleIdList, location_name: "IdentifiedRuleIds"))
+    AnalysisResult.add_member(:identified_type, Shapes::ShapeRef.new(shape: IdentifiedType, location_name: "IdentifiedType"))
+    AnalysisResult.add_member(:analysis_detail, Shapes::ShapeRef.new(shape: CollectionMember_String, location_name: "AnalysisDetail"))
+    AnalysisResult.struct_class = Types::AnalysisResult
+
+    AnalysisResultList.member = Shapes::ShapeRef.new(shape: AnalysisResult)
+
     AssociateFirewallPolicyRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     AssociateFirewallPolicyRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     AssociateFirewallPolicyRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
@@ -350,6 +361,7 @@ module Aws::NetworkFirewall
     CreateRuleGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateRuleGroupRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateRuleGroupRequest.add_member(:source_metadata, Shapes::ShapeRef.new(shape: SourceMetadata, location_name: "SourceMetadata"))
+    CreateRuleGroupRequest.add_member(:analyze_rule_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnalyzeRuleGroup"))
     CreateRuleGroupRequest.struct_class = Types::CreateRuleGroupRequest
 
     CreateRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
@@ -457,6 +469,7 @@ module Aws::NetworkFirewall
     DescribeRuleGroupRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RuleGroupName"))
     DescribeRuleGroupRequest.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleGroupArn"))
     DescribeRuleGroupRequest.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
+    DescribeRuleGroupRequest.add_member(:analyze_rule_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnalyzeRuleGroup"))
     DescribeRuleGroupRequest.struct_class = Types::DescribeRuleGroupRequest
 
     DescribeRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
@@ -735,9 +748,12 @@ module Aws::NetworkFirewall
     RuleGroupResponse.add_member(:source_metadata, Shapes::ShapeRef.new(shape: SourceMetadata, location_name: "SourceMetadata"))
     RuleGroupResponse.add_member(:sns_topic, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "SnsTopic"))
     RuleGroupResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "LastModifiedTime"))
+    RuleGroupResponse.add_member(:analysis_results, Shapes::ShapeRef.new(shape: AnalysisResultList, location_name: "AnalysisResults"))
     RuleGroupResponse.struct_class = Types::RuleGroupResponse
 
     RuleGroups.member = Shapes::ShapeRef.new(shape: RuleGroupMetadata)
+
+    RuleIdList.member = Shapes::ShapeRef.new(shape: CollectionMember_String)
 
     RuleOption.add_member(:keyword, Shapes::ShapeRef.new(shape: Keyword, required: true, location_name: "Keyword"))
     RuleOption.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
@@ -993,6 +1009,7 @@ module Aws::NetworkFirewall
     UpdateRuleGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateRuleGroupRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateRuleGroupRequest.add_member(:source_metadata, Shapes::ShapeRef.new(shape: SourceMetadata, location_name: "SourceMetadata"))
+    UpdateRuleGroupRequest.add_member(:analyze_rule_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnalyzeRuleGroup"))
     UpdateRuleGroupRequest.struct_class = Types::UpdateRuleGroupRequest
 
     UpdateRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))

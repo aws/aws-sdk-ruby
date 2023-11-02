@@ -1906,6 +1906,20 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -7854,6 +7868,20 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8937,6 +8965,20 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -16312,7 +16354,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.157.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

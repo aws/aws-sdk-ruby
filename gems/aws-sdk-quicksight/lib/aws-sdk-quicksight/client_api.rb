@@ -125,6 +125,7 @@ module Aws::QuickSight
     AssetBundleImportSource = Shapes::StructureShape.new(name: 'AssetBundleImportSource')
     AssetBundleImportSourceDescription = Shapes::StructureShape.new(name: 'AssetBundleImportSourceDescription')
     AssetBundleResourceArns = Shapes::ListShape.new(name: 'AssetBundleResourceArns')
+    AssetOptions = Shapes::StructureShape.new(name: 'AssetOptions')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
     AttributeAggregationFunction = Shapes::StructureShape.new(name: 'AttributeAggregationFunction')
@@ -220,6 +221,7 @@ module Aws::QuickSight
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnConfigurationList = Shapes::ListShape.new(name: 'ColumnConfigurationList')
     ColumnDataRole = Shapes::StringShape.new(name: 'ColumnDataRole')
+    ColumnDataSubType = Shapes::StringShape.new(name: 'ColumnDataSubType')
     ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
     ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
     ColumnDescriptiveText = Shapes::StringShape.new(name: 'ColumnDescriptiveText')
@@ -448,6 +450,7 @@ module Aws::QuickSight
     DateTimePickerControlDisplayOptions = Shapes::StructureShape.new(name: 'DateTimePickerControlDisplayOptions')
     DateTimeValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'DateTimeValueWhenUnsetConfiguration')
     DayOfMonth = Shapes::StringShape.new(name: 'DayOfMonth')
+    DayOfTheWeek = Shapes::StringShape.new(name: 'DayOfTheWeek')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DbUsername = Shapes::StringShape.new(name: 'DbUsername')
     DecimalDatasetParameter = Shapes::StructureShape.new(name: 'DecimalDatasetParameter')
@@ -1785,6 +1788,7 @@ module Aws::QuickSight
     Analysis.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Analysis.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Analysis.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    Analysis.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     Analysis.struct_class = Types::Analysis
 
     AnalysisDefaults.add_member(:default_new_sheet_configuration, Shapes::ShapeRef.new(shape: DefaultNewSheetConfiguration, required: true, location_name: "DefaultNewSheetConfiguration"))
@@ -1797,6 +1801,7 @@ module Aws::QuickSight
     AnalysisDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     AnalysisDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     AnalysisDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    AnalysisDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     AnalysisDefinition.struct_class = Types::AnalysisDefinition
 
     AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
@@ -2054,6 +2059,10 @@ module Aws::QuickSight
 
     AssetBundleResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
 
+    AssetOptions.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
+    AssetOptions.add_member(:week_start, Shapes::ShapeRef.new(shape: DayOfTheWeek, location_name: "WeekStart"))
+    AssetOptions.struct_class = Types::AssetOptions
+
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     AthenaParameters.struct_class = Types::AthenaParameters
@@ -2276,6 +2285,7 @@ module Aws::QuickSight
 
     CastColumnTypeOperation.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
     CastColumnTypeOperation.add_member(:new_column_type, Shapes::ShapeRef.new(shape: ColumnDataType, required: true, location_name: "NewColumnType"))
+    CastColumnTypeOperation.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     CastColumnTypeOperation.add_member(:format, Shapes::ShapeRef.new(shape: TypeCastFormat, location_name: "Format"))
     CastColumnTypeOperation.struct_class = Types::CastColumnTypeOperation
 
@@ -3014,6 +3024,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     DashboardVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    DashboardVersion.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
     DashboardVersionDefinition.add_member(:data_set_identifier_declarations, Shapes::ShapeRef.new(shape: DataSetIdentifierDeclarationList, required: true, location_name: "DataSetIdentifierDeclarations"))
@@ -3023,6 +3034,7 @@ module Aws::QuickSight
     DashboardVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     DashboardVersionDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     DashboardVersionDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    DashboardVersionDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     DashboardVersionDefinition.struct_class = Types::DashboardVersionDefinition
 
     DashboardVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -4921,6 +4933,7 @@ module Aws::QuickSight
 
     InputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "Name"))
     InputColumn.add_member(:type, Shapes::ShapeRef.new(shape: InputColumnDataType, required: true, location_name: "Type"))
+    InputColumn.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     InputColumn.struct_class = Types::InputColumn
 
     InputColumnList.member = Shapes::ShapeRef.new(shape: InputColumn)
@@ -5730,6 +5743,7 @@ module Aws::QuickSight
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
     OutputColumn.add_member(:description, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Description"))
     OutputColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
+    OutputColumn.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     OutputColumn.struct_class = Types::OutputColumn
 
     OutputColumnList.member = Shapes::ShapeRef.new(shape: OutputColumn)
@@ -7128,6 +7142,7 @@ module Aws::QuickSight
     TemplateVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
     TemplateVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     TemplateVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    TemplateVersion.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     TemplateVersion.struct_class = Types::TemplateVersion
 
     TemplateVersionDefinition.add_member(:data_set_configurations, Shapes::ShapeRef.new(shape: DataSetConfigurationList, required: true, location_name: "DataSetConfigurations"))
@@ -7137,6 +7152,7 @@ module Aws::QuickSight
     TemplateVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     TemplateVersionDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     TemplateVersionDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    TemplateVersionDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     TemplateVersionDefinition.struct_class = Types::TemplateVersionDefinition
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))

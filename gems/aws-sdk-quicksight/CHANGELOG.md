@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-11-02)
+------------------
+
+* Feature - Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+
 1.94.0 (2023-10-19)
 ------------------
 

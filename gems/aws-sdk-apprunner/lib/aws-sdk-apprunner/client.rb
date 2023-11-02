@@ -880,6 +880,7 @@ module Aws::AppRunner
     #       ingress_configuration: {
     #         is_publicly_accessible: false,
     #       },
+    #       ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -941,6 +942,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -1301,6 +1303,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -1628,6 +1631,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #
@@ -2384,6 +2388,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2473,6 +2478,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2764,6 +2770,7 @@ module Aws::AppRunner
     #       ingress_configuration: {
     #         is_publicly_accessible: false,
     #       },
+    #       ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -2825,6 +2832,7 @@ module Aws::AppRunner
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2906,7 +2914,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

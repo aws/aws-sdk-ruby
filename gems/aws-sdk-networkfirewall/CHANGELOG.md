@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
+
 1.36.0 (2023-10-26)
 ------------------
 

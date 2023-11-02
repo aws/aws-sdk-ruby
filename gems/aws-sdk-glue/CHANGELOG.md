@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+
 1.157.0 (2023-10-12)
 ------------------
 

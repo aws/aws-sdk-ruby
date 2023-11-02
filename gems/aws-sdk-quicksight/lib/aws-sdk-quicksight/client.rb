@@ -1024,6 +1024,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1035,6 +1036,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1051,6 +1053,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1083,6 +1086,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -4078,6 +4082,8 @@ module Aws::QuickSight
     #   resp.analysis.sheets #=> Array
     #   resp.analysis.sheets[0].sheet_id #=> String
     #   resp.analysis.sheets[0].name #=> String
+    #   resp.analysis.options.timezone #=> String
+    #   resp.analysis.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -4504,6 +4510,8 @@ module Aws::QuickSight
     #   resp.dashboard.version.sheets #=> Array
     #   resp.dashboard.version.sheets[0].sheet_id #=> String
     #   resp.dashboard.version.sheets[0].name #=> String
+    #   resp.dashboard.version.options.timezone #=> String
+    #   resp.dashboard.version.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
     #   resp.dashboard.last_updated_time #=> Time
@@ -4830,12 +4838,14 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.sql_query #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.format #=> String, one of "CSV", "TSV", "CLF", "ELF", "XLSX", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.start_from_row #=> Integer
@@ -4845,6 +4855,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map #=> Hash
     #   resp.data_set.logical_table_map["LogicalTableId"].alias #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms #=> Array
@@ -4859,6 +4870,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].rename_column_operation.new_column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.new_column_type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.format #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
@@ -4889,6 +4901,7 @@ module Aws::QuickSight
     #   resp.data_set.output_columns[0].name #=> String
     #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.output_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
     #   resp.data_set.consumed_spice_capacity_in_bytes #=> Integer
     #   resp.data_set.column_groups #=> Array
@@ -5823,6 +5836,8 @@ module Aws::QuickSight
     #   resp.template.version.sheets #=> Array
     #   resp.template.version.sheets[0].sheet_id #=> String
     #   resp.template.version.sheets[0].name #=> String
+    #   resp.template.version.options.timezone #=> String
+    #   resp.template.version.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.template.template_id #=> String
     #   resp.template.last_updated_time #=> Time
     #   resp.template.created_time #=> Time
@@ -10647,6 +10662,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10658,6 +10674,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10674,6 +10691,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10706,6 +10724,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -12731,7 +12750,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
