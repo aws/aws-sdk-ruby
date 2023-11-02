@@ -80,3 +80,12 @@ task 'build:aws-sdk-ssooidc' do
     spec_writer.write_files(generator.spec_files)
   end
 end
+
+task 'gem-name', [:service_id] do |_, args|
+  service = BuildTools::Services.for_service_id(args[:service_id])
+  unless service
+    raise ArgumentError,
+      "Unable to find service for serviceId: #{args[:service_id]}"
+  end
+  puts service.gem_name
+end
