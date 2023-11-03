@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.845.0 (2023-11-03)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LaunchWizard`.
+
 1.844.0 (2023-11-02)
 ------------------
 

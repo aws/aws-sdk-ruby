@@ -148,6 +148,8 @@ module Aws::Connect
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
     CreateParticipantRequest = Shapes::StructureShape.new(name: 'CreateParticipantRequest')
     CreateParticipantResponse = Shapes::StructureShape.new(name: 'CreateParticipantResponse')
+    CreatePersistentContactAssociationRequest = Shapes::StructureShape.new(name: 'CreatePersistentContactAssociationRequest')
+    CreatePersistentContactAssociationResponse = Shapes::StructureShape.new(name: 'CreatePersistentContactAssociationResponse')
     CreatePromptRequest = Shapes::StructureShape.new(name: 'CreatePromptRequest')
     CreatePromptResponse = Shapes::StructureShape.new(name: 'CreatePromptResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
@@ -1404,6 +1406,16 @@ module Aws::Connect
     CreateParticipantResponse.add_member(:participant_credentials, Shapes::ShapeRef.new(shape: ParticipantTokenCredentials, location_name: "ParticipantCredentials"))
     CreateParticipantResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     CreateParticipantResponse.struct_class = Types::CreateParticipantResponse
+
+    CreatePersistentContactAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreatePersistentContactAssociationRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "InitialContactId"))
+    CreatePersistentContactAssociationRequest.add_member(:rehydration_type, Shapes::ShapeRef.new(shape: RehydrationType, required: true, location_name: "RehydrationType"))
+    CreatePersistentContactAssociationRequest.add_member(:source_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "SourceContactId"))
+    CreatePersistentContactAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    CreatePersistentContactAssociationRequest.struct_class = Types::CreatePersistentContactAssociationRequest
+
+    CreatePersistentContactAssociationResponse.add_member(:continued_from_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContinuedFromContactId"))
+    CreatePersistentContactAssociationResponse.struct_class = Types::CreatePersistentContactAssociationResponse
 
     CreatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreatePromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
@@ -4705,6 +4717,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_persistent_contact_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePersistentContactAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/persistent-contact-association/{InstanceId}/{InitialContactId}"
+        o.input = Shapes::ShapeRef.new(shape: CreatePersistentContactAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePersistentContactAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:create_prompt, Seahorse::Model::Operation.new.tap do |o|

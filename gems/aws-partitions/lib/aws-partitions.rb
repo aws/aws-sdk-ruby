@@ -436,6 +436,7 @@ module Aws
             'LakeFormation' => 'lakeformation',
             'Lambda' => 'lambda',
             'LambdaPreview' => 'lambda',
+            'LaunchWizard' => 'launchwizard',
             'Lex' => 'runtime.lex',
             'LexModelBuildingService' => 'models.lex',
             'LexModelsV2' => 'models-v2-lex',

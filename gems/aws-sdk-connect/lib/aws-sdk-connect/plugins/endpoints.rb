@@ -100,6 +100,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateIntegrationAssociation.build(context)
           when :create_participant
             Aws::Connect::Endpoints::CreateParticipant.build(context)
+          when :create_persistent_contact_association
+            Aws::Connect::Endpoints::CreatePersistentContactAssociation.build(context)
           when :create_prompt
             Aws::Connect::Endpoints::CreatePrompt.build(context)
           when :create_queue

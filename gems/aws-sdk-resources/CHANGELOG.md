@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.174.0 (2023-11-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-launchwizard` gem.
+
 3.173.0 (2023-10-19)
 ------------------
 

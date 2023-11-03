@@ -209,6 +209,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-lakeformation', '~> 1')
   spec.add_dependency('aws-sdk-lambda', '~> 1')
   spec.add_dependency('aws-sdk-lambdapreview', '~> 1')
+  spec.add_dependency('aws-sdk-launchwizard', '~> 1')
   spec.add_dependency('aws-sdk-lex', '~> 1')
   spec.add_dependency('aws-sdk-lexmodelbuildingservice', '~> 1')
   spec.add_dependency('aws-sdk-lexmodelsv2', '~> 1')

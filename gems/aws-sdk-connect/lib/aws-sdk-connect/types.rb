@@ -1954,6 +1954,129 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] initial_contact_id
+    #   This is the contactId of the current contact that the
+    #   `CreatePersistentContactAssociation` API is being called from.
+    #   @return [String]
+    #
+    # @!attribute [rw] rehydration_type
+    #   The contactId chosen for rehydration depends on the type chosen.
+    #
+    #   * `ENTIRE_PAST_SESSION`: Rehydrates a chat from the most recently
+    #     terminated past chat contact of the specified past ended chat
+    #     session. To use this type, provide the `initialContactId` of the
+    #     past ended chat session in the `sourceContactId` field. In this
+    #     type, Amazon Connect determines what the most recent chat contact
+    #     on the past ended chat session and uses it to start a persistent
+    #     chat.
+    #
+    #   * `FROM_SEGMENT`: Rehydrates a chat from the specified past chat
+    #     contact provided in the `sourceContactId` field.
+    #
+    #   The actual contactId used for rehydration is provided in the
+    #   response of this API.
+    #
+    #   To illustrate how to use rehydration type, consider the following
+    #   example: A customer starts a chat session. Agent a1 accepts the chat
+    #   and a conversation starts between the customer and Agent a1. This
+    #   first contact creates a contact ID **C1**. Agent a1 then transfers
+    #   the chat to Agent a2. This creates another contact ID **C2**. At
+    #   this point Agent a2 ends the chat. The customer is forwarded to the
+    #   disconnect flow for a post chat survey that creates another contact
+    #   ID **C3**. After the chat survey, the chat session ends. Later, the
+    #   customer returns and wants to resume their past chat session. At
+    #   this point, the customer can have following use cases:
+    #
+    #   * **Use Case 1**: The customer wants to continue the past chat
+    #     session but they want to hide the post chat survey. For this they
+    #     will use the following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C2"
+    #
+    #       * RehydrationType = "FROM\_SEGMENT"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the specified past
+    #         ended contact (C2). Transcripts of past chat sessions C2 and
+    #         C1 are accessible in the current persistent chat session. Note
+    #         that chat segment C3 is dropped from the persistent chat
+    #         session.
+    #
+    #       ^
+    #
+    #   * **Use Case 2**: The customer wants to continue the past chat
+    #     session and see the transcript of the entire past engagement,
+    #     including the post chat survey. For this they will use the
+    #     following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C1"
+    #
+    #       * RehydrationType = "ENTIRE\_PAST\_SESSION"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the most recently
+    #         ended chat contact (C3). Transcripts of past chat sessions C3,
+    #         C2 and C1 are accessible in the current persistent chat
+    #         session.
+    #
+    #       ^
+    #   @return [String]
+    #
+    # @!attribute [rw] source_contact_id
+    #   The contactId from which a persistent chat session must be started.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociationRequest AWS API Documentation
+    #
+    class CreatePersistentContactAssociationRequest < Struct.new(
+      :instance_id,
+      :initial_contact_id,
+      :rehydration_type,
+      :source_contact_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continued_from_contact_id
+    #   The contactId from which a persistent chat session is started. This
+    #   field is populated only for persistent chat.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociationResponse AWS API Documentation
+    #
+    class CreatePersistentContactAssociationResponse < Struct.new(
+      :continued_from_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the prompt.
     #   @return [String]

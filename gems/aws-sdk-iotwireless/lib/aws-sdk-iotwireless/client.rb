@@ -909,7 +909,8 @@ module Aws::IoTWireless
     #   Name of the network analyzer configuration.
     #
     # @option params [Types::TraceContent] :trace_content
-    #   Trace content for your wireless gateway and wireless device resources.
+    #   Trace content for your wireless devices, gateways, and multicast
+    #   groups.
     #
     # @option params [Array<String>] :wireless_devices
     #   Wireless device resources to add to the network analyzer
@@ -1103,6 +1104,7 @@ module Aws::IoTWireless
     #       otaa_v1_0_x: {
     #         app_key: "AppKey",
     #         app_eui: "AppEui",
+    #         join_eui: "JoinEui",
     #         gen_app_key: "GenAppKey",
     #       },
     #       abp_v1_1: {
@@ -2669,6 +2671,7 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.otaa_v1_1.join_eui #=> String
     #   resp.lo_ra_wan.otaa_v1_0_x.app_key #=> String
     #   resp.lo_ra_wan.otaa_v1_0_x.app_eui #=> String
+    #   resp.lo_ra_wan.otaa_v1_0_x.join_eui #=> String
     #   resp.lo_ra_wan.otaa_v1_0_x.gen_app_key #=> String
     #   resp.lo_ra_wan.abp_v1_1.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_1.session_keys.f_nwk_s_int_key #=> String
@@ -4620,7 +4623,8 @@ module Aws::IoTWireless
     #   Name of the network analyzer configuration.
     #
     # @option params [Types::TraceContent] :trace_content
-    #   Trace content for your wireless gateway and wireless device resources.
+    #   Trace content for your wireless devices, gateways, and multicast
+    #   groups.
     #
     # @option params [Array<String>] :wireless_devices_to_add
     #   Wireless device resources to add to the network analyzer
@@ -4652,7 +4656,7 @@ module Aws::IoTWireless
     #
     # @option params [Array<String>] :multicast_groups_to_remove
     #   Multicast group resources to remove from the network analyzer
-    #   configuration. Provide the `MulticastGroupId` of the resource to
+    #   configuration. Provide the `MulticastGroupId` of the resources to
     #   remove in the input array.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5013,7 +5017,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

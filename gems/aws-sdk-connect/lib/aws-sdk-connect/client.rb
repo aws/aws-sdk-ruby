@@ -1704,6 +1704,131 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Enables rehydration of chats for the lifespan of a contact. For more
+    # information about chat rehydration, see [Enable persistent chat][1] in
+    # the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :initial_contact_id
+    #   This is the contactId of the current contact that the
+    #   `CreatePersistentContactAssociation` API is being called from.
+    #
+    # @option params [required, String] :rehydration_type
+    #   The contactId chosen for rehydration depends on the type chosen.
+    #
+    #   * `ENTIRE_PAST_SESSION`: Rehydrates a chat from the most recently
+    #     terminated past chat contact of the specified past ended chat
+    #     session. To use this type, provide the `initialContactId` of the
+    #     past ended chat session in the `sourceContactId` field. In this
+    #     type, Amazon Connect determines what the most recent chat contact on
+    #     the past ended chat session and uses it to start a persistent chat.
+    #
+    #   * `FROM_SEGMENT`: Rehydrates a chat from the specified past chat
+    #     contact provided in the `sourceContactId` field.
+    #
+    #   The actual contactId used for rehydration is provided in the response
+    #   of this API.
+    #
+    #   To illustrate how to use rehydration type, consider the following
+    #   example: A customer starts a chat session. Agent a1 accepts the chat
+    #   and a conversation starts between the customer and Agent a1. This
+    #   first contact creates a contact ID **C1**. Agent a1 then transfers the
+    #   chat to Agent a2. This creates another contact ID **C2**. At this
+    #   point Agent a2 ends the chat. The customer is forwarded to the
+    #   disconnect flow for a post chat survey that creates another contact ID
+    #   **C3**. After the chat survey, the chat session ends. Later, the
+    #   customer returns and wants to resume their past chat session. At this
+    #   point, the customer can have following use cases:
+    #
+    #   * **Use Case 1**: The customer wants to continue the past chat session
+    #     but they want to hide the post chat survey. For this they will use
+    #     the following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C2"
+    #
+    #       * RehydrationType = "FROM\_SEGMENT"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the specified past
+    #         ended contact (C2). Transcripts of past chat sessions C2 and C1
+    #         are accessible in the current persistent chat session. Note that
+    #         chat segment C3 is dropped from the persistent chat session.
+    #
+    #       ^
+    #
+    #   * **Use Case 2**: The customer wants to continue the past chat session
+    #     and see the transcript of the entire past engagement, including the
+    #     post chat survey. For this they will use the following
+    #     configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C1"
+    #
+    #       * RehydrationType = "ENTIRE\_PAST\_SESSION"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the most recently
+    #         ended chat contact (C3). Transcripts of past chat sessions C3,
+    #         C2 and C1 are accessible in the current persistent chat session.
+    #
+    #       ^
+    #
+    # @option params [required, String] :source_contact_id
+    #   The contactId from which a persistent chat session must be started.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::CreatePersistentContactAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePersistentContactAssociationResponse#continued_from_contact_id #continued_from_contact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_persistent_contact_association({
+    #     instance_id: "InstanceId", # required
+    #     initial_contact_id: "ContactId", # required
+    #     rehydration_type: "ENTIRE_PAST_SESSION", # required, accepts ENTIRE_PAST_SESSION, FROM_SEGMENT
+    #     source_contact_id: "ContactId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continued_from_contact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociation AWS API Documentation
+    #
+    # @overload create_persistent_contact_association(params = {})
+    # @param [Hash] params ({})
+    def create_persistent_contact_association(params = {}, options = {})
+      req = build_request(:create_persistent_contact_association, params)
+      req.send_request(options)
+    end
+
     # Creates a prompt. For more information about prompts, such as
     # supported file types and maximum length, see [Create prompts][1] in
     # the *Amazon Connect Administrator's Guide*.
@@ -14078,7 +14203,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -199,6 +199,7 @@ module Aws
   autoload :LakeFormation, 'aws-sdk-lakeformation'
   autoload :Lambda, 'aws-sdk-lambda'
   autoload :LambdaPreview, 'aws-sdk-lambdapreview'
+  autoload :LaunchWizard, 'aws-sdk-launchwizard'
   autoload :Lex, 'aws-sdk-lex'
   autoload :LexModelBuildingService, 'aws-sdk-lexmodelbuildingservice'
   autoload :LexModelsV2, 'aws-sdk-lexmodelsv2'

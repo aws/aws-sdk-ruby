@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-11-03)
+------------------
+
+* Feature - Added LoRaWAN version 1.0.4 support
+
 1.39.0 (2023-09-27)
 ------------------
 
