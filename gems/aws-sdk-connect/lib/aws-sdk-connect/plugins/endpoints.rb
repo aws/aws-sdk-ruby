@@ -82,6 +82,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::AssociateTrafficDistributionGroupUser.build(context)
           when :batch_get_flow_association
             Aws::Connect::Endpoints::BatchGetFlowAssociation.build(context)
+          when :batch_put_contact
+            Aws::Connect::Endpoints::BatchPutContact.build(context)
           when :claim_phone_number
             Aws::Connect::Endpoints::ClaimPhoneNumber.build(context)
           when :create_agent_status

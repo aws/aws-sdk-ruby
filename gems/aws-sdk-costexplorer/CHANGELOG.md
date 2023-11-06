@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2023-11-06)
+------------------
+
+* Feature - This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.
+
 1.91.0 (2023-09-27)
 ------------------
 

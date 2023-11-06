@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-11-06)
+------------------
+
+* Feature - Update the input of CreateDBInstance and ModifyDBInstance to support setting CA Certificates. Update the output of DescribeDBInstance and DescribeDBEngineVersions to show current and supported CA certificates.
+
 1.54.0 (2023-09-27)
 ------------------
 

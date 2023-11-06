@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-11-06)
+------------------
+
+* Feature - Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.
+
 1.76.0 (2023-09-27)
 ------------------
 

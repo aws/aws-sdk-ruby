@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-11-06)
+------------------
+
+* Feature - Add partitional endpoints for iso-e and iso-f.
+
 1.80.0 (2023-10-05)
 ------------------
 

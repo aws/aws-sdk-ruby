@@ -79,11 +79,14 @@ module Aws::Connect
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     BatchGetFlowAssociationRequest = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationRequest')
     BatchGetFlowAssociationResponse = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationResponse')
+    BatchPutContactRequest = Shapes::StructureShape.new(name: 'BatchPutContactRequest')
+    BatchPutContactResponse = Shapes::StructureShape.new(name: 'BatchPutContactResponse')
     BehaviorType = Shapes::StringShape.new(name: 'BehaviorType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotName = Shapes::StringShape.new(name: 'BotName')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
@@ -103,6 +106,8 @@ module Aws::Connect
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
     Contact = Shapes::StructureShape.new(name: 'Contact')
+    ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
+    ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
     ContactFilter = Shapes::StructureShape.new(name: 'ContactFilter')
     ContactFlow = Shapes::StructureShape.new(name: 'ContactFlow')
     ContactFlowContent = Shapes::StringShape.new(name: 'ContactFlowContent')
@@ -292,6 +297,8 @@ module Aws::Connect
     DisassociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityKeyRequest')
     DisassociateTrafficDistributionGroupUserRequest = Shapes::StructureShape.new(name: 'DisassociateTrafficDistributionGroupUserRequest')
     DisassociateTrafficDistributionGroupUserResponse = Shapes::StructureShape.new(name: 'DisassociateTrafficDistributionGroupUserResponse')
+    DisconnectReason = Shapes::StructureShape.new(name: 'DisconnectReason')
+    DisconnectReasonCode = Shapes::StringShape.new(name: 'DisconnectReasonCode')
     DismissUserContactRequest = Shapes::StructureShape.new(name: 'DismissUserContactRequest')
     DismissUserContactResponse = Shapes::StructureShape.new(name: 'DismissUserContactResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -302,6 +309,9 @@ module Aws::Connect
     EmailReference = Shapes::StructureShape.new(name: 'EmailReference')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     EvaluationAnswerData = Shapes::UnionShape.new(name: 'EvaluationAnswerData')
     EvaluationAnswerDataNumericValue = Shapes::FloatShape.new(name: 'EvaluationAnswerDataNumericValue')
@@ -359,6 +369,9 @@ module Aws::Connect
     EventBridgeActionDefinition = Shapes::StructureShape.new(name: 'EventBridgeActionDefinition')
     EventBridgeActionName = Shapes::StringShape.new(name: 'EventBridgeActionName')
     EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
+    FailedRequest = Shapes::StructureShape.new(name: 'FailedRequest')
+    FailedRequestList = Shapes::ListShape.new(name: 'FailedRequestList')
+    FailureReasonCode = Shapes::StringShape.new(name: 'FailureReasonCode')
     FilterV2 = Shapes::StructureShape.new(name: 'FilterV2')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     Filters = Shapes::StructureShape.new(name: 'Filters')
@@ -701,6 +714,7 @@ module Aws::Connect
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
+    RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
     RequiredFieldInfo = Shapes::StructureShape.new(name: 'RequiredFieldInfo')
     RequiredTaskTemplateFields = Shapes::ListShape.new(name: 'RequiredTaskTemplateFields')
     ResourceArnOrId = Shapes::StringShape.new(name: 'ResourceArnOrId')
@@ -824,6 +838,8 @@ module Aws::Connect
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubmitContactEvaluationRequest = Shapes::StructureShape.new(name: 'SubmitContactEvaluationRequest')
     SubmitContactEvaluationResponse = Shapes::StructureShape.new(name: 'SubmitContactEvaluationResponse')
+    SuccessfulRequest = Shapes::StructureShape.new(name: 'SuccessfulRequest')
+    SuccessfulRequestList = Shapes::ListShape.new(name: 'SuccessfulRequestList')
     SupportedMessagingContentType = Shapes::StringShape.new(name: 'SupportedMessagingContentType')
     SupportedMessagingContentTypes = Shapes::ListShape.new(name: 'SupportedMessagingContentTypes')
     SuspendContactRecordingRequest = Shapes::StructureShape.new(name: 'SuspendContactRecordingRequest')
@@ -1197,6 +1213,18 @@ module Aws::Connect
     BatchGetFlowAssociationResponse.add_member(:flow_association_summary_list, Shapes::ShapeRef.new(shape: FlowAssociationSummaryList, location_name: "FlowAssociationSummaryList"))
     BatchGetFlowAssociationResponse.struct_class = Types::BatchGetFlowAssociationResponse
 
+    BatchPutContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    BatchPutContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchPutContactRequest.add_member(:contact_data_request_list, Shapes::ShapeRef.new(shape: ContactDataRequestList, required: true, location_name: "ContactDataRequestList"))
+    BatchPutContactRequest.struct_class = Types::BatchPutContactRequest
+
+    BatchPutContactResponse.add_member(:successful_request_list, Shapes::ShapeRef.new(shape: SuccessfulRequestList, location_name: "SuccessfulRequestList"))
+    BatchPutContactResponse.add_member(:failed_request_list, Shapes::ShapeRef.new(shape: FailedRequestList, location_name: "FailedRequestList"))
+    BatchPutContactResponse.struct_class = Types::BatchPutContactResponse
+
+    Campaign.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
+    Campaign.struct_class = Types::Campaign
+
     ChannelToCountMap.key = Shapes::ShapeRef.new(shape: Channel)
     ChannelToCountMap.value = Shapes::ShapeRef.new(shape: IntegerCount)
 
@@ -1253,6 +1281,16 @@ module Aws::Connect
     Contact.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     Contact.add_member(:wisdom_info, Shapes::ShapeRef.new(shape: WisdomInfo, location_name: "WisdomInfo"))
     Contact.struct_class = Types::Contact
+
+    ContactDataRequest.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "SystemEndpoint"))
+    ContactDataRequest.add_member(:customer_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "CustomerEndpoint"))
+    ContactDataRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    ContactDataRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
+    ContactDataRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    ContactDataRequest.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "Campaign"))
+    ContactDataRequest.struct_class = Types::ContactDataRequest
+
+    ContactDataRequestList.member = Shapes::ShapeRef.new(shape: ContactDataRequest)
 
     ContactFilter.add_member(:contact_states, Shapes::ShapeRef.new(shape: ContactStates, location_name: "ContactStates"))
     ContactFilter.struct_class = Types::ContactFilter
@@ -1966,6 +2004,9 @@ module Aws::Connect
 
     DisassociateTrafficDistributionGroupUserResponse.struct_class = Types::DisassociateTrafficDistributionGroupUserResponse
 
+    DisconnectReason.add_member(:code, Shapes::ShapeRef.new(shape: DisconnectReasonCode, location_name: "Code"))
+    DisconnectReason.struct_class = Types::DisconnectReason
+
     DismissUserContactRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     DismissUserContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DismissUserContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -1989,6 +2030,10 @@ module Aws::Connect
     EncryptionConfig.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "EncryptionType"))
     EncryptionConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
+
+    Endpoint.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "Type"))
+    Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: EndpointAddress, location_name: "Address"))
+    Endpoint.struct_class = Types::Endpoint
 
     Evaluation.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationId"))
     Evaluation.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
@@ -2196,6 +2241,13 @@ module Aws::Connect
 
     EventBridgeActionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: EventBridgeActionName, required: true, location_name: "Name"))
     EventBridgeActionDefinition.struct_class = Types::EventBridgeActionDefinition
+
+    FailedRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    FailedRequest.add_member(:failure_reason_code, Shapes::ShapeRef.new(shape: FailureReasonCode, location_name: "FailureReasonCode"))
+    FailedRequest.add_member(:failure_reason_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureReasonMessage"))
+    FailedRequest.struct_class = Types::FailedRequest
+
+    FailedRequestList.member = Shapes::ShapeRef.new(shape: FailedRequest)
 
     FilterV2.add_member(:filter_key, Shapes::ShapeRef.new(shape: ResourceArnOrId, location_name: "FilterKey"))
     FilterV2.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValueList, location_name: "FilterValues"))
@@ -3703,6 +3755,7 @@ module Aws::Connect
 
     StopContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     StopContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StopContactRequest.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: DisconnectReason, location_name: "DisconnectReason"))
     StopContactRequest.struct_class = Types::StopContactRequest
 
     StopContactResponse.struct_class = Types::StopContactResponse
@@ -3732,6 +3785,12 @@ module Aws::Connect
     SubmitContactEvaluationResponse.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationId"))
     SubmitContactEvaluationResponse.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
     SubmitContactEvaluationResponse.struct_class = Types::SubmitContactEvaluationResponse
+
+    SuccessfulRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    SuccessfulRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    SuccessfulRequest.struct_class = Types::SuccessfulRequest
+
+    SuccessfulRequestList.member = Shapes::ShapeRef.new(shape: SuccessfulRequest)
 
     SupportedMessagingContentTypes.member = Shapes::ShapeRef.new(shape: SupportedMessagingContentType)
 
@@ -4586,6 +4645,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_put_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchPutContact"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/batch/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: BatchPutContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchPutContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
       end)
 
       api.add_operation(:claim_phone_number, Seahorse::Model::Operation.new.tap do |o|

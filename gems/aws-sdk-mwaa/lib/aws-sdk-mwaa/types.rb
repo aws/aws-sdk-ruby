@@ -80,10 +80,12 @@ module Aws::MWAA
     #
     # @!attribute [rw] airflow_version
     #   The Apache Airflow version for your environment. If no value is
-    #   specified, it defaults to the latest version. Valid values:
-    #   `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`. For more
-    #   information, see [Apache Airflow versions on Amazon Managed
-    #   Workflows for Apache Airflow (MWAA)][1].
+    #   specified, it defaults to the latest version. For more information,
+    #   see [Apache Airflow versions on Amazon Managed Workflows for Apache
+    #   Airflow (MWAA)][1].
+    #
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
+    #   `2.6.3`, `2.7.2`.
     #
     #
     #
@@ -424,8 +426,10 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Apache Airflow version on your environment. Valid values:
-    #   `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`.
+    #   The Apache Airflow version on your environment.
+    #
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
+    #   `2.6.3`, `2.7.2`.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1234,7 +1238,8 @@ module Aws::MWAA
     #   about updating your resources, see [Upgrading an Amazon MWAA
     #   environment][1].
     #
-    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`.
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
+    #   `2.6.3`, `2.7.2`.
     #
     #
     #

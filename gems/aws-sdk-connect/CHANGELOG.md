@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2023-11-06)
+------------------
+
+* Feature - Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+
 1.134.0 (2023-11-03)
 ------------------
 

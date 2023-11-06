@@ -788,6 +788,74 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_data_request_list
+    #   List of individual contact requests.
+    #   @return [Array<Types::ContactDataRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContactRequest AWS API Documentation
+    #
+    class BatchPutContactRequest < Struct.new(
+      :client_token,
+      :instance_id,
+      :contact_data_request_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_request_list
+    #   List of requests for which contact was successfully created.
+    #   @return [Array<Types::SuccessfulRequest>]
+    #
+    # @!attribute [rw] failed_request_list
+    #   List of requests for which contact creation failed.
+    #   @return [Array<Types::FailedRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContactResponse AWS API Documentation
+    #
+    class BatchPutContactResponse < Struct.new(
+      :successful_request_list,
+      :failed_request_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information associated with a campaign.
+    #
+    # @!attribute [rw] campaign_id
+    #   A unique identifier for a campaign.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Campaign AWS API Documentation
+    #
+    class Campaign < Struct.new(
+      :campaign_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A chat message.
     #
     # @!attribute [rw] content_type
@@ -1134,6 +1202,47 @@ module Aws::Connect
       :scheduled_timestamp,
       :related_contact_id,
       :wisdom_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request object with information to create a contact.
+    #
+    # @!attribute [rw] system_endpoint
+    #   Endpoint associated with the Amazon Connect instance from which
+    #   outbound contact will be initiated for the campaign.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] customer_endpoint
+    #   Endpoint of the customer for which contact will be initiated.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] request_identifier
+    #   Identifier to uniquely identify individual requests in the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue associated with the Amazon Connect
+    #   instance in which contacts that are created will be queued.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   List of attributes to be stored in a contact.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] campaign
+    #   Structure to store information associated with a campaign.
+    #   @return [Types::Campaign]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactDataRequest AWS API Documentation
+    #
+    class ContactDataRequest < Struct.new(
+      :system_endpoint,
+      :customer_endpoint,
+      :request_identifier,
+      :queue_id,
+      :attributes,
+      :campaign)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4874,6 +4983,21 @@ module Aws::Connect
     #
     class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
+    # Contains details about why a contact was disconnected. Only Amazon
+    # Connect outbound campaigns can provide this field.
+    #
+    # @!attribute [rw] code
+    #   A code that indicates how the contact was terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisconnectReason AWS API Documentation
+    #
+    class DisconnectReason < Struct.new(
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_id
     #   The identifier of the user account.
     #   @return [String]
@@ -4981,6 +5105,25 @@ module Aws::Connect
     class EncryptionConfig < Struct.new(
       :encryption_type,
       :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the endpoint.
+    #
+    # @!attribute [rw] type
+    #   Type of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   Address of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Endpoint AWS API Documentation
+    #
+    class Endpoint < Struct.new(
+      :type,
+      :address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5856,6 +5999,31 @@ module Aws::Connect
     #
     class EventBridgeActionDefinition < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request for which contact failed to be generated.
+    #
+    # @!attribute [rw] request_identifier
+    #   Request identifier provided in the API call in the
+    #   ContactDataRequest to create a contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason_code
+    #   Reason code for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason_message
+    #   Why the request to create a contact failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FailedRequest AWS API Documentation
+    #
+    class FailedRequest < Struct.new(
+      :request_identifier,
+      :failure_reason_code,
+      :failure_reason_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14334,11 +14502,17 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_reason
+    #   The reason a contact can be disconnected. Only Amazon Connect
+    #   outbound campaigns can provide this field.
+    #   @return [Types::DisconnectReason]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest AWS API Documentation
     #
     class StopContactRequest < Struct.new(
       :contact_id,
-      :instance_id)
+      :instance_id,
+      :disconnect_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14470,6 +14644,26 @@ module Aws::Connect
     class SubmitContactEvaluationResponse < Struct.new(
       :evaluation_id,
       :evaluation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request for which contact was successfully created.
+    #
+    # @!attribute [rw] request_identifier
+    #   Request identifier provided in the API call in the
+    #   ContactDataRequest to create a contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The contactId of the contact that was created successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SuccessfulRequest AWS API Documentation
+    #
+    class SuccessfulRequest < Struct.new(
+      :request_identifier,
+      :contact_id)
       SENSITIVE = []
       include Aws::Structure
     end

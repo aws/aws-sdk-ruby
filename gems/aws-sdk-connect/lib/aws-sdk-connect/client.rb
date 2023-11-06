@@ -963,6 +963,98 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # <note markdown="1"> Only the Amazon Connect outbound campaigns service principal is
+    # allowed to assume a role in your account and call this API.
+    #
+    #  </note>
+    #
+    # Allows you to create a batch of contacts in Amazon Connect. The
+    # outbound campaigns capability ingests dial requests via the
+    # [PutDialRequestBatch][1] API. It then uses BatchPutContact to create
+    # contacts corresponding to those dial requests. If agents are
+    # available, the dial requests are dialed out, which results in a voice
+    # call. The resulting voice call uses the same contactId that was
+    # created by BatchPutContact.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<Types::ContactDataRequest>] :contact_data_request_list
+    #   List of individual contact requests.
+    #
+    # @return [Types::BatchPutContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutContactResponse#successful_request_list #successful_request_list} => Array&lt;Types::SuccessfulRequest&gt;
+    #   * {Types::BatchPutContactResponse#failed_request_list #failed_request_list} => Array&lt;Types::FailedRequest&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_contact({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     contact_data_request_list: [ # required
+    #       {
+    #         system_endpoint: {
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           address: "EndpointAddress",
+    #         },
+    #         customer_endpoint: {
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           address: "EndpointAddress",
+    #         },
+    #         request_identifier: "RequestIdentifier",
+    #         queue_id: "QueueId",
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         campaign: {
+    #           campaign_id: "CampaignId",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_request_list #=> Array
+    #   resp.successful_request_list[0].request_identifier #=> String
+    #   resp.successful_request_list[0].contact_id #=> String
+    #   resp.failed_request_list #=> Array
+    #   resp.failed_request_list[0].request_identifier #=> String
+    #   resp.failed_request_list[0].failure_reason_code #=> String, one of "INVALID_ATTRIBUTE_KEY", "INVALID_CUSTOMER_ENDPOINT", "INVALID_SYSTEM_ENDPOINT", "INVALID_QUEUE", "MISSING_CAMPAIGN", "MISSING_CUSTOMER_ENDPOINT", "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT", "REQUEST_THROTTLED", "IDEMPOTENCY_EXCEPTION", "INTERNAL_ERROR"
+    #   resp.failed_request_list[0].failure_reason_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContact AWS API Documentation
+    #
+    # @overload batch_put_contact(params = {})
+    # @param [Hash] params ({})
+    def batch_put_contact(params = {}, options = {})
+      req = build_request(:batch_put_contact, params)
+      req.send_request(options)
+    end
+
     # Claims an available phone number to your Amazon Connect instance or
     # traffic distribution group. You can call this API only in the same
     # Amazon Web Services Region where the Amazon Connect instance or
@@ -11464,6 +11556,10 @@ module Aws::Connect
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
+    # @option params [Types::DisconnectReason] :disconnect_reason
+    #   The reason a contact can be disconnected. Only Amazon Connect outbound
+    #   campaigns can provide this field.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11471,6 +11567,9 @@ module Aws::Connect
     #   resp = client.stop_contact({
     #     contact_id: "ContactId", # required
     #     instance_id: "InstanceId", # required
+    #     disconnect_reason: {
+    #       code: "DisconnectReasonCode",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContact AWS API Documentation
@@ -14203,7 +14302,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

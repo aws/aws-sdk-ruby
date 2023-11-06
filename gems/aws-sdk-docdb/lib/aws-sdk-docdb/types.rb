@@ -199,6 +199,35 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # Returns the details of the DB instance’s server certificate.
+    #
+    # For more information, see [Updating Your Amazon DocumentDB TLS
+    # Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    # DocumentDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    # [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #
+    # @!attribute [rw] ca_identifier
+    #   The CA identifier of the CA certificate used for the DB instance's
+    #   server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_till
+    #   The expiration date of the DB instance’s server certificate.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CertificateDetails AWS API Documentation
+    #
+    class CertificateDetails < Struct.new(
+      :ca_identifier,
+      :valid_till)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] certificates
     #   A list of certificates for this Amazon Web Services account.
     #   @return [Array<Types::Certificate>]
@@ -898,6 +927,20 @@ module Aws::DocDB
     #   region.
     #   @return [String]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   For more information, see [Updating Your Amazon DocumentDB TLS
+    #   Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    #   DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -912,7 +955,8 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :ca_certificate_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +1817,24 @@ module Aws::DocDB
     #   the log types specified by `ExportableLogTypes` to CloudWatch Logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supported_ca_certificate_identifiers
+    #   A list of the supported CA certificate identifiers.
+    #
+    #   For more information, see [Updating Your Amazon DocumentDB TLS
+    #   Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    #   DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supports_certificate_rotation_without_restart
+    #   Indicates whether the engine version supports rotating the server
+    #   certificate without rebooting the DB instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -1783,7 +1845,9 @@ module Aws::DocDB
       :db_engine_version_description,
       :valid_upgrade_target,
       :exportable_log_types,
-      :supports_log_exports_to_cloudwatch_logs)
+      :supports_log_exports_to_cloudwatch_logs,
+      :supported_ca_certificate_identifiers,
+      :supports_certificate_rotation_without_restart)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1945,6 +2009,10 @@ module Aws::DocDB
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] certificate_details
+    #   The details of the DB instance's server certificate.
+    #   @return [Types::CertificateDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -1974,7 +2042,8 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :db_instance_arn,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4253,6 +4322,28 @@ module Aws::DocDB
     #   region.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_rotation_restart
+    #   Specifies whether the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate. The certificate is not updated until the DB
+    #   instance is restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, see
+    #   [Updating Your Amazon DocumentDB TLS Certificates][1] and [
+    #   Encrypting Data in Transit][2] in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -4266,7 +4357,8 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :certificate_rotation_restart)
       SENSITIVE = []
       include Aws::Structure
     end
