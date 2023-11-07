@@ -32,6 +32,12 @@ module BuildTools
     end
     alias service []
 
+    def for_service_id(service_id)
+      services.values.find do |service|
+        service.service_id == service_id
+      end
+    end
+
     def each(&block)
       services.values.each(&block)
     end

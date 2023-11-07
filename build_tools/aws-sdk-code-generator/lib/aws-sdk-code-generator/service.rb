@@ -148,6 +148,20 @@ module AwsSdkCodeGenerator
     # @return [Boolean] true if any operation requires endpoint_discovery
     attr_reader :require_endpoint_discovery
 
+    # @return [String] the service_id
+    def service_id
+      metadata = @api['metadata']
+      return metadata['serviceId'] if metadata['serviceId']
+
+      name = metadata['serviceAbbreviation'] || metadata['serviceFullName']
+      name = name.gsub(/AWS/, '').gsub(/Amazon/, '')
+      name = name.gsub(/[^a-zA-Z0-9 ]+/, '')
+      name = name.gsub(/^[0-9]+/, '')
+      name = name.strip
+
+      name
+    end
+
     # @return [Boolean] true if the service is deprecated
     def deprecated?
       @deprecated
