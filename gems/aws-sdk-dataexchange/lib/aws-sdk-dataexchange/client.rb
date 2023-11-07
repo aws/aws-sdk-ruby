@@ -1892,7 +1892,7 @@ module Aws::DataExchange
     #       ],
     #     },
     #     client_token: "ClientToken",
-    #     comment: "__stringMin0Max16384",
+    #     comment: "__stringMin0Max4096",
     #     data_set_id: "__string", # required
     #     details: {
     #       data_update: {
@@ -2285,7 +2285,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

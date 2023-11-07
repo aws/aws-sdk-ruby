@@ -72,10 +72,10 @@ module Aws::RDS
       data[:master_username]
     end
 
-    # Contains the initial database name that you provided (if required)
-    # when you created the DB instance. This name is returned for the life
-    # of your DB instance. For an RDS for Oracle CDB instance, the name
-    # identifies the PDB rather than the CDB.
+    # The initial database name that you provided (if required) when you
+    # created the DB instance. This name is returned for the life of your DB
+    # instance. For an RDS for Oracle CDB instance, the name identifies the
+    # PDB rather than the CDB.
     # @return [String]
     def db_name
       data[:db_name]
@@ -778,6 +778,13 @@ module Aws::RDS
       data[:is_storage_config_upgrade_available]
     end
 
+    # Specifies whether the DB instance is in the multi-tenant configuration
+    # (TRUE) or the single-tenant configuration (FALSE).
+    # @return [Boolean]
+    def multi_tenant
+      data[:multi_tenant]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -989,6 +996,7 @@ module Aws::RDS
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2091,6 +2099,21 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
+    # @option options [Boolean] :multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies to
+    #   RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support it,
+    #     the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2916,6 +2939,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
     #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2952,8 +2976,8 @@ module Aws::RDS
     #     version at the same time, the currently running engine version must
     #     be supported on the specified DB instance class. Otherwise, the
     #     operation returns an error. In this case, first run the operation to
-    #     modify the DB instance class, and then run it again to upgrade the
-    #     engine version.
+    #     upgrade the engine version, and then run it again to modify the DB
+    #     instance class.
     #
     #   ^
     #
@@ -3220,8 +3244,8 @@ module Aws::RDS
     #     instance class at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it again
-    #     to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     # @option options [Boolean] :allow_major_version_upgrade
@@ -3889,6 +3913,22 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
+    # @option options [Boolean] :multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and national
+    #   character set metadata with this database. The tags associated with
+    #   the instance also propagate to the initial tenant database. You can
+    #   add more tenant databases to your DB instance by using the
+    #   `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also specify
+    #   `ApplyImmediately`.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

@@ -49,6 +49,9 @@ module Aws::DLM
     EventTypeValues = Shapes::StringShape.new(name: 'EventTypeValues')
     ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
     ExcludeDataVolumeTagList = Shapes::ListShape.new(name: 'ExcludeDataVolumeTagList')
+    ExecuteOperationOnScriptFailure = Shapes::BooleanShape.new(name: 'ExecuteOperationOnScriptFailure')
+    ExecutionHandler = Shapes::StringShape.new(name: 'ExecutionHandler')
+    ExecutionHandlerServiceValues = Shapes::StringShape.new(name: 'ExecutionHandlerServiceValues')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     FastRestoreRule = Shapes::StructureShape.new(name: 'FastRestoreRule')
     GetLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesRequest')
@@ -88,11 +91,17 @@ module Aws::DLM
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleList = Shapes::ListShape.new(name: 'ScheduleList')
     ScheduleName = Shapes::StringShape.new(name: 'ScheduleName')
+    Script = Shapes::StructureShape.new(name: 'Script')
+    ScriptExecutionTimeout = Shapes::IntegerShape.new(name: 'ScriptExecutionTimeout')
+    ScriptMaximumRetryCount = Shapes::IntegerShape.new(name: 'ScriptMaximumRetryCount')
+    ScriptsList = Shapes::ListShape.new(name: 'ScriptsList')
     SettablePolicyStateValues = Shapes::StringShape.new(name: 'SettablePolicyStateValues')
     ShareRule = Shapes::StructureShape.new(name: 'ShareRule')
     ShareRules = Shapes::ListShape.new(name: 'ShareRules')
     ShareTargetAccountList = Shapes::ListShape.new(name: 'ShareTargetAccountList')
     SnapshotOwnerList = Shapes::ListShape.new(name: 'SnapshotOwnerList')
+    StageValues = Shapes::StringShape.new(name: 'StageValues')
+    StagesList = Shapes::ListShape.new(name: 'StagesList')
     StandardTierRetainRuleCount = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleCount')
     StandardTierRetainRuleInterval = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleInterval')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
@@ -149,6 +158,7 @@ module Aws::DLM
     CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, location_name: "IntervalUnit"))
     CreateRule.add_member(:times, Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
     CreateRule.add_member(:cron_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "CronExpression"))
+    CreateRule.add_member(:scripts, Shapes::ShapeRef.new(shape: ScriptsList, location_name: "Scripts"))
     CreateRule.struct_class = Types::CreateRule
 
     CrossRegionCopyAction.add_member(:target, Shapes::ShapeRef.new(shape: Target, required: true, location_name: "Target"))
@@ -320,6 +330,16 @@ module Aws::DLM
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)
 
+    Script.add_member(:stages, Shapes::ShapeRef.new(shape: StagesList, location_name: "Stages"))
+    Script.add_member(:execution_handler_service, Shapes::ShapeRef.new(shape: ExecutionHandlerServiceValues, location_name: "ExecutionHandlerService"))
+    Script.add_member(:execution_handler, Shapes::ShapeRef.new(shape: ExecutionHandler, required: true, location_name: "ExecutionHandler"))
+    Script.add_member(:execute_operation_on_script_failure, Shapes::ShapeRef.new(shape: ExecuteOperationOnScriptFailure, location_name: "ExecuteOperationOnScriptFailure"))
+    Script.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: ScriptExecutionTimeout, location_name: "ExecutionTimeout"))
+    Script.add_member(:maximum_retry_count, Shapes::ShapeRef.new(shape: ScriptMaximumRetryCount, location_name: "MaximumRetryCount"))
+    Script.struct_class = Types::Script
+
+    ScriptsList.member = Shapes::ShapeRef.new(shape: Script)
+
     ShareRule.add_member(:target_accounts, Shapes::ShapeRef.new(shape: ShareTargetAccountList, required: true, location_name: "TargetAccounts"))
     ShareRule.add_member(:unshare_interval, Shapes::ShapeRef.new(shape: Interval, location_name: "UnshareInterval"))
     ShareRule.add_member(:unshare_interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "UnshareIntervalUnit"))
@@ -330,6 +350,8 @@ module Aws::DLM
     ShareTargetAccountList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     SnapshotOwnerList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
+    StagesList.member = Shapes::ShapeRef.new(shape: StageValues)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))

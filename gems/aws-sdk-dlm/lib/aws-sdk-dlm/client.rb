@@ -450,6 +450,16 @@ module Aws::DLM
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
     #             cron_expression: "CronExpression",
+    #             scripts: [
+    #               {
+    #                 stages: ["PRE"], # accepts PRE, POST
+    #                 execution_handler_service: "AWS_SYSTEMS_MANAGER", # accepts AWS_SYSTEMS_MANAGER
+    #                 execution_handler: "ExecutionHandler", # required
+    #                 execute_operation_on_script_failure: false,
+    #                 execution_timeout: 1,
+    #                 maximum_retry_count: 1,
+    #               },
+    #             ],
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -590,7 +600,12 @@ module Aws::DLM
     # Gets summary information about all or the specified data lifecycle
     # policies.
     #
-    # To get complete information about a policy, use GetLifecyclePolicy.
+    # To get complete information about a policy, use
+    # [GetLifecyclePolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html
     #
     # @option params [Array<String>] :policy_ids
     #   The identifiers of the data lifecycle policies.
@@ -694,6 +709,14 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
     #   resp.policy.policy_details.schedules[0].create_rule.times[0] #=> String
     #   resp.policy.policy_details.schedules[0].create_rule.cron_expression #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts #=> Array
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].stages #=> Array
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].stages[0] #=> String, one of "PRE", "POST"
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_handler_service #=> String, one of "AWS_SYSTEMS_MANAGER"
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_handler #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execute_operation_on_script_failure #=> Boolean
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_timeout #=> Integer
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].maximum_retry_count #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.count #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
@@ -904,6 +927,16 @@ module Aws::DLM
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
     #             cron_expression: "CronExpression",
+    #             scripts: [
+    #               {
+    #                 stages: ["PRE"], # accepts PRE, POST
+    #                 execution_handler_service: "AWS_SYSTEMS_MANAGER", # accepts AWS_SYSTEMS_MANAGER
+    #                 execution_handler: "ExecutionHandler", # required
+    #                 execute_operation_on_script_failure: false,
+    #                 execution_timeout: 1,
+    #                 maximum_retry_count: 1,
+    #               },
+    #             ],
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -1017,7 +1050,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

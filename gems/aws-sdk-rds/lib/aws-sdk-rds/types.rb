@@ -4362,6 +4362,23 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies
+    #   to RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support
+    #     it, the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4425,7 +4442,8 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :ca_certificate_identifier,
       :db_system_id,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5997,6 +6015,88 @@ module Aws::RDS
     #
     class CreateOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied DB instance identifier. RDS creates your tenant
+    #   database in this DB instance. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   create in your DB instance. This parameter has the same constraints
+    #   as `DBName` in `CreateDBInstance`.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The name for the master user account in your tenant database. RDS
+    #   creates this user account in the tenant database and grants
+    #   privileges to the master user. This parameter is case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters, numbers, or underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The password for the master user in your tenant database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 8 to 30 characters.
+    #
+    #   * Can include any printable ASCII character except forward slash
+    #     (`/`), double quote (`"`), at symbol (`@`), ampersand (`&`), or
+    #     single quote (`'`).
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The character set for your tenant database. If you don't specify a
+    #   value, the character set name defaults to `AL32UTF8`.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` value for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabaseMessage AWS API Documentation
+    #
+    class CreateTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :master_username,
+      :master_user_password,
+      :character_set_name,
+      :nchar_character_set_name,
+      :tags)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabaseResult AWS API Documentation
+    #
+    class CreateTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7931,10 +8031,10 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_name
-    #   Contains the initial database name that you provided (if required)
-    #   when you created the DB instance. This name is returned for the life
-    #   of your DB instance. For an RDS for Oracle CDB instance, the name
-    #   identifies the PDB rather than the CDB.
+    #   The initial database name that you provided (if required) when you
+    #   created the DB instance. This name is returned for the life of your
+    #   DB instance. For an RDS for Oracle CDB instance, the name identifies
+    #   the PDB rather than the CDB.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
@@ -8485,6 +8585,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the DB instance is in the multi-tenant
+    #   configuration (TRUE) or the single-tenant configuration (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8571,7 +8676,8 @@ module Aws::RDS
       :read_replica_source_db_cluster_identifier,
       :percent_progress,
       :dedicated_log_volume,
-      :is_storage_config_upgrade_available)
+      :is_storage_config_upgrade_available,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8739,6 +8845,12 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the automatic backup is for a DB instance in the
+    #   multi-tenant configuration (TRUE) or the single-tenant configuration
+    #   (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -8771,7 +8883,8 @@ module Aws::RDS
       :backup_target,
       :storage_throughput,
       :aws_backup_recovery_point_arn,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8926,8 +9039,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] normal
-    #   A Boolean value that is true if the instance is operating normally,
-    #   or false if the instance is in an error state.
+    #   Indicates whether the instance is operating normally (TRUE) or is in
+    #   an error state (FALSE).
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -9804,6 +9917,12 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Indicates whether the snapshot is of a DB instance using the
+    #   multi-tenant configuration (TRUE) or the single-tenant configuration
+    #   (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -9841,7 +9960,8 @@ module Aws::RDS
       :snapshot_target,
       :storage_throughput,
       :db_system_id,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9938,6 +10058,114 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
     #
     class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # Contains the details of a tenant database in a snapshot of a DB
+    # instance.
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   The identifier for the snapshot of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The ID for the DB instance that contains the tenant databases.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The resource identifier of the source CDB instance. This identifier
+    #   can't be changed and is unique to an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of DB snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_create_time
+    #   The time the DB snapshot was taken, specified in Coordinated
+    #   Universal Time (UTC). If you copy the snapshot, the creation time
+    #   changes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The master username of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_resource_id
+    #   The resource ID of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The name of the character set of a tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_tenant_database_arn
+    #   The Amazon Resource Name (ARN) for the snapshot tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` character set name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabase AWS API Documentation
+    #
+    class DBSnapshotTenantDatabase < Struct.new(
+      :db_snapshot_identifier,
+      :db_instance_identifier,
+      :dbi_resource_id,
+      :engine_name,
+      :snapshot_type,
+      :tenant_database_create_time,
+      :tenant_db_name,
+      :master_username,
+      :tenant_database_resource_id,
+      :character_set_name,
+      :db_snapshot_tenant_database_arn,
+      :nchar_character_set_name,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified snapshot tenant database wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabaseNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotTenantDatabaseNotFoundFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_tenant_databases
+    #   A list of DB snapshot tenant databases.
+    #   @return [Array<Types::DBSnapshotTenantDatabase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabasesMessage AWS API Documentation
+    #
+    class DBSnapshotTenantDatabasesMessage < Struct.new(
+      :marker,
+      :db_snapshot_tenant_databases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the details of an Amazon RDS DB subnet group.
     #
@@ -10687,6 +10915,61 @@ module Aws::RDS
     #
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied identifier for the DB instance that contains the
+    #   tenant database that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   remove from your DB instance. Amazon RDS deletes the tenant database
+    #   with this name. This parameter isn’t case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] skip_final_snapshot
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   removing the tenant database from your DB instance. If you enable
+    #   this parameter, RDS doesn't create a DB snapshot. If you don't
+    #   enable this parameter, RDS creates a DB snapshot before it deletes
+    #   the tenant database. By default, RDS doesn't skip the final
+    #   snapshot. If you don't enable this parameter, you must specify the
+    #   `FinalDBSnapshotIdentifier` parameter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] final_db_snapshot_identifier
+    #   The `DBSnapshotIdentifier` of the new `DBSnapshot` created when the
+    #   `SkipFinalSnapshot` parameter is disabled.
+    #
+    #   <note markdown="1"> If you enable this parameter and also enable `SkipFinalShapshot`,
+    #   the command results in an error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabaseMessage AWS API Documentation
+    #
+    class DeleteTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :skip_final_snapshot,
+      :final_db_snapshot_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabaseResult AWS API Documentation
+    #
+    class DeleteTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12218,6 +12501,108 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_instance_identifier
+    #   The ID of the DB instance used to create the DB snapshots. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the identifier of an existing
+    #     `DBInstance`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   The ID of a DB snapshot that contains the tenant databases to
+    #   describe. This value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * If you specify this parameter, the value must match the ID of an
+    #     existing DB snapshot.
+    #
+    #   * If you specify an automatic snapshot, you must also specify
+    #     `SnapshotType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of DB snapshots to be returned. You can specify one of the
+    #   following values:
+    #
+    #   * `automated` – All DB snapshots that have been automatically taken
+    #     by Amazon RDS for my Amazon Web Services account.
+    #
+    #   * `manual` – All DB snapshots that have been taken by my Amazon Web
+    #     Services account.
+    #
+    #   * `shared` – All manual DB snapshots that have been shared to my
+    #     Amazon Web Services account.
+    #
+    #   * `public` – All DB snapshots that have been marked as public.
+    #
+    #   * `awsbackup` – All DB snapshots managed by the Amazon Web Services
+    #     Backup service.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more tenant databases to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers. The results list only includes information about the
+    #     tenant databases contained within the DB snapshots.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about snapshots containing tenant
+    #     databases contained within the DB instances identified by these
+    #     resource identifiers.
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBSnapshotTenantDatabases` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   A specific DB resource identifier to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotTenantDatabasesMessage AWS API Documentation
+    #
+    class DescribeDBSnapshotTenantDatabasesMessage < Struct.new(
+      :db_instance_identifier,
+      :db_snapshot_identifier,
+      :snapshot_type,
+      :filters,
+      :max_records,
+      :marker,
+      :dbi_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
     #   This parameter isn't case-sensitive.
     #
@@ -13456,6 +13841,62 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_instance_identifier
+    #   The user-supplied DB instance identifier, which must match the
+    #   identifier of an existing instance owned by the Amazon Web Services
+    #   account. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied tenant database name, which must match the name of
+    #   an existing tenant database on the specified DB instance owned by
+    #   your Amazon Web Services account. This parameter isn’t
+    #   case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more database tenants to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about the tenants contained within
+    #     the DB instances identified by these resource identifiers.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeTenantDatabasesMessage AWS API Documentation
+    #
+    class DescribeTenantDatabasesMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
     #   The customer identifier or the ARN of your DB instance.
     #   @return [String]
     #
@@ -13883,8 +14324,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value indicating if the subscription is enabled. True
-    #   indicates the subscription is enabled.
+    #   Specifies whether the subscription is enabled. True indicates the
+    #   subscription is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] event_subscription_arn
@@ -14272,15 +14713,19 @@ module Aws::RDS
     #     and the specified secondary DB cluster are being verified before
     #     the operation starts.
     #
-    #   * failing-over – This status covers the range of Aurora internal
-    #     operations that take place during the switchover or failover
-    #     process, such as demoting the primary Aurora DB cluster, promoting
-    #     the secondary Aurora DB cluster, and synchronizing replicas.
+    #   * failing-over – Aurora is promoting the chosen secondary Aurora DB
+    #     cluster to become the new primary DB cluster to fail over the
+    #     global cluster.
     #
     #   * cancelling – The request to switch over or fail over the global
     #     cluster was cancelled and the primary Aurora DB cluster and the
     #     selected secondary Aurora DB cluster are returning to their
     #     previous states.
+    #
+    #   * switching-over – This status covers the range of Aurora internal
+    #     operations that take place during the switchover process, such as
+    #     demoting the primary Aurora DB cluster, promoting the secondary
+    #     Aurora DB cluster, and synchronizing replicas.
     #   @return [String]
     #
     # @!attribute [rw] from_db_cluster_arn
@@ -16201,8 +16646,8 @@ module Aws::RDS
     #     engine version at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it
-    #     again to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     #
@@ -16495,8 +16940,8 @@ module Aws::RDS
     #     instance class at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it
-    #     again to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     #   @return [String]
@@ -17265,6 +17710,24 @@ module Aws::RDS
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and
+    #   national character set metadata with this database. The tags
+    #   associated with the instance also propagate to the initial tenant
+    #   database. You can add more tenant databases to your DB instance by
+    #   using the `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also
+    #   specify `ApplyImmediately`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -17326,7 +17789,8 @@ module Aws::RDS
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
       :engine,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17948,6 +18412,88 @@ module Aws::RDS
     #
     class ModifyOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The identifier of the DB instance that contains the tenant database
+    #   that you are modifying. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB instance.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   modify. This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing tenant database.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The new password for the master user of the specified tenant
+    #   database in your DB instance.
+    #
+    #   <note markdown="1"> Amazon RDS operations never return the password, so this action
+    #   provides a way to regain access to a tenant database user if the
+    #   password is lost. This includes restoring privileges that might have
+    #   been accidentally revoked.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Can include any printable ASCII character except `/`, `"` (double
+    #     quote), `@`, `&` (ampersand), and `'` (single quote).
+    #
+    #   ^
+    #
+    #   Length constraints:
+    #
+    #   * Must contain between 8 and 30 characters.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] new_tenant_db_name
+    #   The new name of the tenant database when renaming a tenant database.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the string null or any other reserved word.
+    #
+    #   * Can't be longer than 8 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabaseMessage AWS API Documentation
+    #
+    class ModifyTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :master_user_password,
+      :new_tenant_db_name)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabaseResult AWS API Documentation
+    #
+    class ModifyTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19011,6 +19557,11 @@ module Aws::RDS
     #   enabled.&gt;
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_tenant
+    #   Indicates whether the DB instance will change to the multi-tenant
+    #   configuration (TRUE) or the single-tenant configuration (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -19034,7 +19585,8 @@ module Aws::RDS
       :resume_full_automation_mode_time,
       :storage_throughput,
       :engine,
-      :dedicated_log_volume)
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24667,6 +25219,152 @@ module Aws::RDS
       :state,
       :reason,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tenant database in the DB instance. This data type is an element in
+    # the response to the `DescribeTenantDatabases` action.
+    #
+    # @!attribute [rw] tenant_database_create_time
+    #   The creation time of the tenant database.
+    #   @return [Time]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The ID of the DB instance that contains the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The database name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The master username of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_arn
+    #   The Amazon Resource Name (ARN) for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The character set of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` character set name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether deletion protection is enabled for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pending_modified_values
+    #   Information about pending changes for a tenant database.
+    #   @return [Types::TenantDatabasePendingModifiedValues]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabase AWS API Documentation
+    #
+    class TenantDatabase < Struct.new(
+      :tenant_database_create_time,
+      :db_instance_identifier,
+      :tenant_db_name,
+      :status,
+      :master_username,
+      :dbi_resource_id,
+      :tenant_database_resource_id,
+      :tenant_database_arn,
+      :character_set_name,
+      :nchar_character_set_name,
+      :deletion_protection,
+      :pending_modified_values,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You attempted to either create a tenant database that already exists
+    # or modify a tenant database to use the name of an existing tenant
+    # database.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseAlreadyExistsFault AWS API Documentation
+    #
+    class TenantDatabaseAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified tenant database wasn't found in the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseNotFoundFault AWS API Documentation
+    #
+    class TenantDatabaseNotFoundFault < Aws::EmptyStructure; end
+
+    # A response element in the `ModifyTenantDatabase` operation that
+    # describes changes that will be applied. Specific changes are
+    # identified by subelements.
+    #
+    # @!attribute [rw] master_user_password
+    #   The master password for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The name of the tenant database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabasePendingModifiedValues AWS API Documentation
+    #
+    class TenantDatabasePendingModifiedValues < Struct.new(
+      :master_user_password,
+      :tenant_db_name)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # You attempted to create more tenant databases than are permitted in
+    # your Amazon Web Services account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseQuotaExceededFault AWS API Documentation
+    #
+    class TenantDatabaseQuotaExceededFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_databases
+    #   An array of the tenant databases requested by the
+    #   `DescribeTenantDatabases` operation.
+    #   @return [Array<Types::TenantDatabase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabasesMessage AWS API Documentation
+    #
+    class TenantDatabasesMessage < Struct.new(
+      :marker,
+      :tenant_databases)
       SENSITIVE = []
       include Aws::Structure
     end

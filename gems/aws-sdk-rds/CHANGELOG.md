@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2023-11-07)
+------------------
+
+* Feature - This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).
+
 1.200.0 (2023-11-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-11-07)
+------------------
+
+* Feature - Updated SendDataSetNotificationRequest Comment to be maximum length 4096.
+
 1.41.0 (2023-10-30)
 ------------------
 

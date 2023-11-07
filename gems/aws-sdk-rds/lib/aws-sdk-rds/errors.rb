@@ -80,6 +80,7 @@ module Aws::RDS
   # * {DBSecurityGroupQuotaExceededFault}
   # * {DBSnapshotAlreadyExistsFault}
   # * {DBSnapshotNotFoundFault}
+  # * {DBSnapshotTenantDatabaseNotFoundFault}
   # * {DBSubnetGroupAlreadyExistsFault}
   # * {DBSubnetGroupDoesNotCoverEnoughAZs}
   # * {DBSubnetGroupNotAllowedFault}
@@ -161,6 +162,9 @@ module Aws::RDS
   # * {SubscriptionAlreadyExistFault}
   # * {SubscriptionCategoryNotFoundFault}
   # * {SubscriptionNotFoundFault}
+  # * {TenantDatabaseAlreadyExistsFault}
+  # * {TenantDatabaseNotFoundFault}
+  # * {TenantDatabaseQuotaExceededFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -693,6 +697,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::DBSnapshotNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBSnapshotTenantDatabaseNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBSnapshotTenantDatabaseNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1503,6 +1517,36 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::SubscriptionNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

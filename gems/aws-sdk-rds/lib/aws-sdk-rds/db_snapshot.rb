@@ -280,6 +280,14 @@ module Aws::RDS
       data[:dedicated_log_volume]
     end
 
+    # Indicates whether the snapshot is of a DB instance using the
+    # multi-tenant configuration (TRUE) or the single-tenant configuration
+    # (FALSE).
+    # @return [Boolean]
+    def multi_tenant
+      data[:multi_tenant]
+    end
+
     # @!endgroup
 
     # @return [Client]

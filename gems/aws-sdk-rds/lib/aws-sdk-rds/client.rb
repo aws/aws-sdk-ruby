@@ -1822,6 +1822,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -5242,6 +5243,22 @@ module Aws::RDS
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
     #
+    # @option params [Boolean] :multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies to
+    #   RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support it,
+    #     the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5430,6 +5447,7 @@ module Aws::RDS
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     #
     # @example Response structure
@@ -5497,6 +5515,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5592,6 +5611,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6416,6 +6436,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6511,6 +6532,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7115,6 +7137,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7845,6 +7868,107 @@ module Aws::RDS
     # @param [Hash] params ({})
     def create_option_group(params = {}, options = {})
       req = build_request(:create_option_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a tenant database in a DB instance that uses the multi-tenant
+    # configuration. Only RDS for Oracle container database (CDB) instances
+    # are supported.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The user-supplied DB instance identifier. RDS creates your tenant
+    #   database in this DB instance. This parameter isn't case-sensitive.
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to create
+    #   in your DB instance. This parameter has the same constraints as
+    #   `DBName` in `CreateDBInstance`.
+    #
+    # @option params [required, String] :master_username
+    #   The name for the master user account in your tenant database. RDS
+    #   creates this user account in the tenant database and grants privileges
+    #   to the master user. This parameter is case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters, numbers, or underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #
+    # @option params [required, String] :master_user_password
+    #   The password for the master user in your tenant database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 8 to 30 characters.
+    #
+    #   * Can include any printable ASCII character except forward slash
+    #     (`/`), double quote (`"`), at symbol (`@`), ampersand (`&`), or
+    #     single quote (`'`).
+    #
+    # @option params [String] :character_set_name
+    #   The character set for your tenant database. If you don't specify a
+    #   value, the character set name defaults to `AL32UTF8`.
+    #
+    # @option params [String] :nchar_character_set_name
+    #   The `NCHAR` value for the tenant database.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @return [Types::CreateTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     master_username: "String", # required
+    #     master_user_password: "SensitiveString", # required
+    #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabase AWS API Documentation
+    #
+    # @overload create_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def create_tenant_database(params = {}, options = {})
+      req = build_request(:create_tenant_database, params)
       req.send_request(options)
     end
 
@@ -8943,6 +9067,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -9038,6 +9163,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -9145,6 +9271,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -9456,6 +9583,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -9747,6 +9875,80 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_option_group(params = {}, options = {})
       req = build_request(:delete_option_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a tenant database from your DB instance. This command only
+    # applies to RDS for Oracle container database (CDB) instances.
+    #
+    # You can't delete a tenant database when it is the only tenant in the
+    # DB instance.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The user-supplied identifier for the DB instance that contains the
+    #   tenant database that you want to delete.
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to remove
+    #   from your DB instance. Amazon RDS deletes the tenant database with
+    #   this name. This parameter isn’t case-sensitive.
+    #
+    # @option params [Boolean] :skip_final_snapshot
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   removing the tenant database from your DB instance. If you enable this
+    #   parameter, RDS doesn't create a DB snapshot. If you don't enable
+    #   this parameter, RDS creates a DB snapshot before it deletes the tenant
+    #   database. By default, RDS doesn't skip the final snapshot. If you
+    #   don't enable this parameter, you must specify the
+    #   `FinalDBSnapshotIdentifier` parameter.
+    #
+    # @option params [String] :final_db_snapshot_identifier
+    #   The `DBSnapshotIdentifier` of the new `DBSnapshot` created when the
+    #   `SkipFinalSnapshot` parameter is disabled.
+    #
+    #   <note markdown="1"> If you enable this parameter and also enable `SkipFinalShapshot`, the
+    #   command results in an error.
+    #
+    #    </note>
+    #
+    # @return [Types::DeleteTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     skip_final_snapshot: false,
+    #     final_db_snapshot_identifier: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabase AWS API Documentation
+    #
+    # @overload delete_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def delete_tenant_database(params = {}, options = {})
+      req = build_request(:delete_tenant_database, params)
       req.send_request(options)
     end
 
@@ -12159,6 +12361,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backups[0].multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -12344,6 +12547,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.engine #=> String
     #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -12439,6 +12643,7 @@ module Aws::RDS
     #   resp.db_instances[0].percent_progress #=> String
     #   resp.db_instances[0].dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instances[0].multi_tenant #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13295,6 +13500,149 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the tenant databases that exist in a DB snapshot. This
+    # command only applies to RDS for Oracle DB instances in the
+    # multi-tenant configuration.
+    #
+    # You can use this command to inspect the tenant databases within a
+    # snapshot before restoring it. You can't directly interact with the
+    # tenant databases in a DB snapshot. If you restore a snapshot that was
+    # taken from DB instance using the multi-tenant configuration, you
+    # restore all its tenant databases.
+    #
+    # @option params [String] :db_instance_identifier
+    #   The ID of the DB instance used to create the DB snapshots. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the identifier of an existing `DBInstance`.
+    #
+    #   ^
+    #
+    # @option params [String] :db_snapshot_identifier
+    #   The ID of a DB snapshot that contains the tenant databases to
+    #   describe. This value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * If you specify this parameter, the value must match the ID of an
+    #     existing DB snapshot.
+    #
+    #   * If you specify an automatic snapshot, you must also specify
+    #     `SnapshotType`.
+    #
+    # @option params [String] :snapshot_type
+    #   The type of DB snapshots to be returned. You can specify one of the
+    #   following values:
+    #
+    #   * `automated` – All DB snapshots that have been automatically taken by
+    #     Amazon RDS for my Amazon Web Services account.
+    #
+    #   * `manual` – All DB snapshots that have been taken by my Amazon Web
+    #     Services account.
+    #
+    #   * `shared` – All manual DB snapshots that have been shared to my
+    #     Amazon Web Services account.
+    #
+    #   * `public` – All DB snapshots that have been marked as public.
+    #
+    #   * `awsbackup` – All DB snapshots managed by the Amazon Web Services
+    #     Backup service.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more tenant databases to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers. The results list only includes information about the
+    #     tenant databases contained within the DB snapshots.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about snapshots containing tenant
+    #     databases contained within the DB instances identified by these
+    #     resource identifiers.
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBSnapshotTenantDatabases` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @option params [String] :dbi_resource_id
+    #   A specific DB resource identifier to describe.
+    #
+    # @return [Types::DBSnapshotTenantDatabasesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBSnapshotTenantDatabasesMessage#marker #marker} => String
+    #   * {Types::DBSnapshotTenantDatabasesMessage#db_snapshot_tenant_databases #db_snapshot_tenant_databases} => Array&lt;Types::DBSnapshotTenantDatabase&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_snapshot_tenant_databases({
+    #     db_instance_identifier: "String",
+    #     db_snapshot_identifier: "String",
+    #     snapshot_type: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #     dbi_resource_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_snapshot_tenant_databases #=> Array
+    #   resp.db_snapshot_tenant_databases[0].db_snapshot_identifier #=> String
+    #   resp.db_snapshot_tenant_databases[0].db_instance_identifier #=> String
+    #   resp.db_snapshot_tenant_databases[0].dbi_resource_id #=> String
+    #   resp.db_snapshot_tenant_databases[0].engine_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].snapshot_type #=> String
+    #   resp.db_snapshot_tenant_databases[0].tenant_database_create_time #=> Time
+    #   resp.db_snapshot_tenant_databases[0].tenant_db_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].master_username #=> String
+    #   resp.db_snapshot_tenant_databases[0].tenant_database_resource_id #=> String
+    #   resp.db_snapshot_tenant_databases[0].character_set_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].db_snapshot_tenant_database_arn #=> String
+    #   resp.db_snapshot_tenant_databases[0].nchar_character_set_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].tag_list #=> Array
+    #   resp.db_snapshot_tenant_databases[0].tag_list[0].key #=> String
+    #   resp.db_snapshot_tenant_databases[0].tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotTenantDatabases AWS API Documentation
+    #
+    # @overload describe_db_snapshot_tenant_databases(params = {})
+    # @param [Hash] params ({})
+    def describe_db_snapshot_tenant_databases(params = {}, options = {})
+      req = build_request(:describe_db_snapshot_tenant_databases, params)
+      req.send_request(options)
+    end
+
     # Returns information about DB snapshots. This API action supports
     # pagination.
     #
@@ -13525,6 +13873,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].db_system_id #=> String
     #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
+    #   resp.db_snapshots[0].multi_tenant #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15917,6 +16266,106 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_source_regions(params = {}, options = {})
       req = build_request(:describe_source_regions, params)
+      req.send_request(options)
+    end
+
+    # Describes the tenant databases in a DB instance that uses the
+    # multi-tenant configuration. Only RDS for Oracle CDB instances are
+    # supported.
+    #
+    # @option params [String] :db_instance_identifier
+    #   The user-supplied DB instance identifier, which must match the
+    #   identifier of an existing instance owned by the Amazon Web Services
+    #   account. This parameter isn't case-sensitive.
+    #
+    # @option params [String] :tenant_db_name
+    #   The user-supplied tenant database name, which must match the name of
+    #   an existing tenant database on the specified DB instance owned by your
+    #   Amazon Web Services account. This parameter isn’t case-sensitive.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more database tenants to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about the tenants contained within
+    #     the DB instances identified by these resource identifiers.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @return [Types::TenantDatabasesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TenantDatabasesMessage#marker #marker} => String
+    #   * {Types::TenantDatabasesMessage#tenant_databases #tenant_databases} => Array&lt;Types::TenantDatabase&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tenant_databases({
+    #     db_instance_identifier: "String",
+    #     tenant_db_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.tenant_databases #=> Array
+    #   resp.tenant_databases[0].tenant_database_create_time #=> Time
+    #   resp.tenant_databases[0].db_instance_identifier #=> String
+    #   resp.tenant_databases[0].tenant_db_name #=> String
+    #   resp.tenant_databases[0].status #=> String
+    #   resp.tenant_databases[0].master_username #=> String
+    #   resp.tenant_databases[0].dbi_resource_id #=> String
+    #   resp.tenant_databases[0].tenant_database_resource_id #=> String
+    #   resp.tenant_databases[0].tenant_database_arn #=> String
+    #   resp.tenant_databases[0].character_set_name #=> String
+    #   resp.tenant_databases[0].nchar_character_set_name #=> String
+    #   resp.tenant_databases[0].deletion_protection #=> Boolean
+    #   resp.tenant_databases[0].pending_modified_values.master_user_password #=> String
+    #   resp.tenant_databases[0].pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_databases[0].tag_list #=> Array
+    #   resp.tenant_databases[0].tag_list[0].key #=> String
+    #   resp.tenant_databases[0].tag_list[0].value #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * tenant_database_available
+    #   * tenant_database_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeTenantDatabases AWS API Documentation
+    #
+    # @overload describe_tenant_databases(params = {})
+    # @param [Hash] params ({})
+    def describe_tenant_databases(params = {}, options = {})
+      req = build_request(:describe_tenant_databases, params)
       req.send_request(options)
     end
 
@@ -18343,8 +18792,8 @@ module Aws::RDS
     #     version at the same time, the currently running engine version must
     #     be supported on the specified DB instance class. Otherwise, the
     #     operation returns an error. In this case, first run the operation to
-    #     modify the DB instance class, and then run it again to upgrade the
-    #     engine version.
+    #     upgrade the engine version, and then run it again to modify the DB
+    #     instance class.
     #
     #   ^
     #
@@ -18622,8 +19071,8 @@ module Aws::RDS
     #     instance class at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it again
-    #     to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     #
@@ -19337,6 +19786,23 @@ module Aws::RDS
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
     #
+    # @option params [Boolean] :multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and national
+    #   character set metadata with this database. The tags associated with
+    #   the instance also propagate to the initial tenant database. You can
+    #   add more tenant databases to your DB instance by using the
+    #   `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also specify
+    #   `ApplyImmediately`.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -19462,6 +19928,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
     #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     #
     # @example Response structure
@@ -19529,6 +19996,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -19624,6 +20092,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -20125,6 +20594,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -20782,6 +21252,106 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Modifies an existing tenant database in a DB instance. You can change
+    # the tenant database name or the master user password. This operation
+    # is supported only for RDS for Oracle CDB instances using the
+    # multi-tenant configuration.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The identifier of the DB instance that contains the tenant database
+    #   that you are modifying. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB instance.
+    #
+    #   ^
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to modify.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing tenant database.
+    #
+    #   ^
+    #
+    # @option params [String] :master_user_password
+    #   The new password for the master user of the specified tenant database
+    #   in your DB instance.
+    #
+    #   <note markdown="1"> Amazon RDS operations never return the password, so this action
+    #   provides a way to regain access to a tenant database user if the
+    #   password is lost. This includes restoring privileges that might have
+    #   been accidentally revoked.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Can include any printable ASCII character except `/`, `"` (double
+    #     quote), `@`, `&` (ampersand), and `'` (single quote).
+    #
+    #   ^
+    #
+    #   Length constraints:
+    #
+    #   * Must contain between 8 and 30 characters.
+    #
+    #   ^
+    #
+    # @option params [String] :new_tenant_db_name
+    #   The new name of the tenant database when renaming a tenant database.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the string null or any other reserved word.
+    #
+    #   * Can't be longer than 8 characters.
+    #
+    # @return [Types::ModifyTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     master_user_password: "SensitiveString",
+    #     new_tenant_db_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabase AWS API Documentation
+    #
+    # @overload modify_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def modify_tenant_database(params = {}, options = {})
+      req = build_request(:modify_tenant_database, params)
+      req.send_request(options)
+    end
+
     # Promotes a read replica DB instance to a standalone DB instance.
     #
     # <note markdown="1"> * Backup duration is a function of the amount of changes to the
@@ -20943,6 +21513,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21038,6 +21609,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -21625,6 +22197,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21720,6 +22293,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -25020,6 +25594,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25115,6 +25690,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -25759,6 +26335,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25854,6 +26431,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -26618,6 +27196,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26713,6 +27292,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -27219,6 +27799,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27314,6 +27895,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27471,6 +28053,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28050,6 +28633,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28145,6 +28729,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -28254,6 +28839,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28647,6 +29233,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28742,6 +29329,7 @@ module Aws::RDS
     #   resp.db_instance.percent_progress #=> String
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -28765,7 +29353,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.200.0'
+      context[:gem_version] = '1.201.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -28841,6 +29429,8 @@ module Aws::RDS
     # | db_instance_deleted           | {Client#describe_db_instances}         | 30       | 60            |
     # | db_snapshot_available         | {Client#describe_db_snapshots}         | 30       | 60            |
     # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
+    # | tenant_database_available     | {Client#describe_tenant_databases}     | 30       | 60            |
+    # | tenant_database_deleted       | {Client#describe_tenant_databases}     | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -28898,7 +29488,9 @@ module Aws::RDS
         db_instance_available: Waiters::DBInstanceAvailable,
         db_instance_deleted: Waiters::DBInstanceDeleted,
         db_snapshot_available: Waiters::DBSnapshotAvailable,
-        db_snapshot_deleted: Waiters::DBSnapshotDeleted
+        db_snapshot_deleted: Waiters::DBSnapshotDeleted,
+        tenant_database_available: Waiters::TenantDatabaseAvailable,
+        tenant_database_deleted: Waiters::TenantDatabaseDeleted
       }
     end
 

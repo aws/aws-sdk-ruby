@@ -1043,6 +1043,7 @@ module Aws::RDS
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2158,6 +2159,21 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
+    # @option options [Boolean] :multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies to
+    #   RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support it,
+    #     the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do

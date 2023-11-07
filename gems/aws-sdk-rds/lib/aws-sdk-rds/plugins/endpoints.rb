@@ -118,6 +118,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::CreateIntegration.build(context)
           when :create_option_group
             Aws::RDS::Endpoints::CreateOptionGroup.build(context)
+          when :create_tenant_database
+            Aws::RDS::Endpoints::CreateTenantDatabase.build(context)
           when :delete_blue_green_deployment
             Aws::RDS::Endpoints::DeleteBlueGreenDeployment.build(context)
           when :delete_custom_db_engine_version
@@ -156,6 +158,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DeleteIntegration.build(context)
           when :delete_option_group
             Aws::RDS::Endpoints::DeleteOptionGroup.build(context)
+          when :delete_tenant_database
+            Aws::RDS::Endpoints::DeleteTenantDatabase.build(context)
           when :deregister_db_proxy_targets
             Aws::RDS::Endpoints::DeregisterDBProxyTargets.build(context)
           when :describe_account_attributes
@@ -204,6 +208,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeDBSecurityGroups.build(context)
           when :describe_db_snapshot_attributes
             Aws::RDS::Endpoints::DescribeDBSnapshotAttributes.build(context)
+          when :describe_db_snapshot_tenant_databases
+            Aws::RDS::Endpoints::DescribeDBSnapshotTenantDatabases.build(context)
           when :describe_db_snapshots
             Aws::RDS::Endpoints::DescribeDBSnapshots.build(context)
           when :describe_db_subnet_groups
@@ -238,6 +244,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeReservedDBInstancesOfferings.build(context)
           when :describe_source_regions
             Aws::RDS::Endpoints::DescribeSourceRegions.build(context)
+          when :describe_tenant_databases
+            Aws::RDS::Endpoints::DescribeTenantDatabases.build(context)
           when :describe_valid_db_instance_modifications
             Aws::RDS::Endpoints::DescribeValidDBInstanceModifications.build(context)
           when :download_db_log_file_portion
@@ -286,6 +294,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::ModifyGlobalCluster.build(context)
           when :modify_option_group
             Aws::RDS::Endpoints::ModifyOptionGroup.build(context)
+          when :modify_tenant_database
+            Aws::RDS::Endpoints::ModifyTenantDatabase.build(context)
           when :promote_read_replica
             Aws::RDS::Endpoints::PromoteReadReplica.build(context)
           when :promote_read_replica_db_cluster

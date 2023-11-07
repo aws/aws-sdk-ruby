@@ -197,6 +197,7 @@ module Aws::DataExchange
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMin0Max16384 = Shapes::StringShape.new(name: '__stringMin0Max16384')
+    __stringMin0Max4096 = Shapes::StringShape.new(name: '__stringMin0Max4096')
     __stringMin10Max512 = Shapes::StringShape.new(name: '__stringMin10Max512')
     __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = Shapes::StringShape.new(name: '__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093')
 
@@ -873,7 +874,7 @@ module Aws::DataExchange
 
     SendDataSetNotificationRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ScopeDetails, location_name: "Scope"))
     SendDataSetNotificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    SendDataSetNotificationRequest.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max16384, location_name: "Comment"))
+    SendDataSetNotificationRequest.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max4096, location_name: "Comment"))
     SendDataSetNotificationRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     SendDataSetNotificationRequest.add_member(:details, Shapes::ShapeRef.new(shape: NotificationDetails, location_name: "Details"))
     SendDataSetNotificationRequest.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "Type"))
