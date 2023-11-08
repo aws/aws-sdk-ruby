@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-11-08)
+------------------
+
+* Feature - This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
 1.14.0 (2023-10-25)
 ------------------
 

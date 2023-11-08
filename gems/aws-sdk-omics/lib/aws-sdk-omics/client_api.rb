@@ -378,6 +378,7 @@ module Aws::Omics
     RunStatus = Shapes::StringShape.new(name: 'RunStatus')
     RunStatusMessage = Shapes::StringShape.new(name: 'RunStatusMessage')
     RunTimestamp = Shapes::TimestampShape.new(name: 'RunTimestamp', timestampFormat: "iso8601")
+    RunUuid = Shapes::StringShape.new(name: 'RunUuid')
     S3Destination = Shapes::StringShape.new(name: 'S3Destination')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
@@ -1139,6 +1140,8 @@ module Aws::Omics
     GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     GetRunResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RunFailureReason, location_name: "failureReason"))
     GetRunResponse.add_member(:log_location, Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
+    GetRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    GetRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1858,6 +1861,8 @@ module Aws::Omics
     StartRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
     StartRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
     StartRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    StartRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
     StartRunResponse.struct_class = Types::StartRunResponse
 
     StartVariantImportRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "destinationName"))

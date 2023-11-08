@@ -732,13 +732,23 @@ module Aws::ConnectCases
     # Creates a related item (comments, tasks, and contacts) and associates
     # it with a case.
     #
-    # <note markdown="1"> A Related Item is a resource that is associated with a case. It may or
-    # may not have an external identifier linking it to an external resource
-    # (for example, a `contactArn`). All Related Items have their own
-    # internal identifier, the `relatedItemArn`. Examples of related items
-    # include `comments` and `contacts`.
+    # <note markdown="1"> * A Related Item is a resource that is associated with a case. It may
+    #   or may not have an external identifier linking it to an external
+    #   resource (for example, a `contactArn`). All Related Items have their
+    #   own internal identifier, the `relatedItemArn`. Examples of related
+    #   items include `comments` and `contacts`.
+    #
+    # * If you provide a value for `performedBy.userArn` you must also have
+    #   [DescribeUser][1] permission on the ARN of the user that you
+    #   provide.
+    #
+    #       </note>
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     #
     # @option params [required, String] :case_id
     #   A unique identifier of the case.
@@ -748,6 +758,9 @@ module Aws::ConnectCases
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the creator of the related item.
     #
     # @option params [required, String] :type
     #   The type of a related item.
@@ -771,6 +784,9 @@ module Aws::ConnectCases
     #       },
     #     },
     #     domain_id: "DomainId", # required
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #     },
     #     type: "Contact", # required, accepts Contact, Comment
     #   })
     #
@@ -1687,6 +1703,7 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.contact.channel #=> String
     #   resp.related_items[0].content.contact.connected_to_system_time #=> Time
     #   resp.related_items[0].content.contact.contact_arn #=> String
+    #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
     #   resp.related_items[0].tags["String"] #=> String
@@ -1985,7 +2002,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

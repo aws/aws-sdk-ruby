@@ -230,6 +230,20 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::RdsLoginAttemptAction]
     #
+    # @!attribute [rw] kubernetes_permission_checked_details
+    #   Information whether the user has the permission to use a specific
+    #   Kubernetes API.
+    #   @return [Types::KubernetesPermissionCheckedDetails]
+    #
+    # @!attribute [rw] kubernetes_role_binding_details
+    #   Information about the role binding that grants the permission
+    #   defined in a Kubernetes role.
+    #   @return [Types::KubernetesRoleBindingDetails]
+    #
+    # @!attribute [rw] kubernetes_role_details
+    #   Information about the Kubernetes role name and role type.
+    #   @return [Types::KubernetesRoleDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -239,7 +253,10 @@ module Aws::GuardDuty
       :network_connection_action,
       :port_probe_action,
       :kubernetes_api_call_action,
-      :rds_login_attempt_action)
+      :rds_login_attempt_action,
+      :kubernetes_permission_checked_details,
+      :kubernetes_role_binding_details,
+      :kubernetes_role_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -311,6 +328,65 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the anomalies.
+    #
+    # @!attribute [rw] profiles
+    #   Information about the types of profiles.
+    #   @return [Hash<String,Hash<String,Array<Types::AnomalyObject>>>]
+    #
+    # @!attribute [rw] unusual
+    #   Information about the behavior of the anomalies.
+    #   @return [Types::AnomalyUnusual]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Anomaly AWS API Documentation
+    #
+    class Anomaly < Struct.new(
+      :profiles,
+      :unusual)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the unusual anomalies.
+    #
+    # @!attribute [rw] profile_type
+    #   The type of behavior of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_subtype
+    #   The frequency of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] observations
+    #   The recorded value.
+    #   @return [Types::Observations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AnomalyObject AWS API Documentation
+    #
+    class AnomalyObject < Struct.new(
+      :profile_type,
+      :profile_subtype,
+      :observations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the behavior of the anomaly that is new to
+    # GuardDuty.
+    #
+    # @!attribute [rw] behavior
+    #   The behavior of the anomalous activity that caused GuardDuty to
+    #   generate the finding.
+    #   @return [Hash<String,Hash<String,Types::AnomalyObject>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AnomalyUnusual AWS API Documentation
+    #
+    class AnomalyUnusual < Struct.new(
+      :behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1116,6 +1192,8 @@ module Aws::GuardDuty
     #
     #   * service.action.dnsRequestAction.domain
     #
+    #   * service.action.dnsRequestAction.domainWithSuffix
+    #
     #   * service.action.networkConnectionAction.blocked
     #
     #   * service.action.networkConnectionAction.connectionDirection
@@ -1140,7 +1218,13 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.namespace
+    #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
+    #
     #   * service.action.kubernetesApiCallAction.requestUri
+    #
+    #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
@@ -2072,6 +2156,21 @@ module Aws::GuardDuty
     class DestinationProperties < Struct.new(
       :destination_arn,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the detected behavior.
+    #
+    # @!attribute [rw] anomaly
+    #   The details about the anomalous activity that caused GuardDuty to
+    #   generate the finding.
+    #   @return [Types::Anomaly]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Detection AWS API Documentation
+    #
+    class Detection < Struct.new(
+      :anomaly)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3460,6 +3559,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the impersonated user.
+    #
+    # @!attribute [rw] username
+    #   Information about the `username` that was being impersonated.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The `group` to which the user name belongs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ImpersonatedUser AWS API Documentation
+    #
+    class ImpersonatedUser < Struct.new(
+      :username,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the details of an instance.
     #
     # @!attribute [rw] availability_zone
@@ -3662,6 +3780,23 @@ module Aws::GuardDuty
     #   Parameters related to the Kubernetes API call action.
     #   @return [String]
     #
+    # @!attribute [rw] resource
+    #   The resource component in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] subresource
+    #   The name of the sub-resource in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The name of the namespace where the Kubernetes API call action takes
+    #   place.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource in the Kubernetes API call action.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesApiCallAction AWS API Documentation
     #
     class KubernetesApiCallAction < Struct.new(
@@ -3671,7 +3806,11 @@ module Aws::GuardDuty
       :user_agent,
       :remote_ip_details,
       :status_code,
-      :parameters)
+      :parameters,
+      :resource,
+      :subresource,
+      :namespace,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3772,6 +3911,102 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the Kubernetes API for which you check if you have
+    # permission to call.
+    #
+    # @!attribute [rw] verb
+    #   The verb component of the Kubernetes API call. For example, when you
+    #   check whether or not you have the permission to call the `CreatePod`
+    #   API, the verb component will be `Create`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The Kubernetes resource with which your Kubernetes API call will
+    #   interact.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace where the Kubernetes API action will take place.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed
+    #   Information whether the user has the permission to call the
+    #   Kubernetes API.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesPermissionCheckedDetails AWS API Documentation
+    #
+    class KubernetesPermissionCheckedDetails < Struct.new(
+      :verb,
+      :resource,
+      :namespace,
+      :allowed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the role binding that grants the permission
+    # defined in a Kubernetes role.
+    #
+    # @!attribute [rw] kind
+    #   The kind of the role. For role binding, this value will be
+    #   `RoleBinding`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `RoleBinding`.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier of the role binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_ref_name
+    #   The name of the role being referenced. This must match the name of
+    #   the `Role` or `ClusterRole` that you want to bind to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_ref_kind
+    #   The type of the role being referenced. This could be either `Role`
+    #   or `ClusterRole`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesRoleBindingDetails AWS API Documentation
+    #
+    class KubernetesRoleBindingDetails < Struct.new(
+      :kind,
+      :name,
+      :uid,
+      :role_ref_name,
+      :role_ref_kind)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Kubernetes role name and role type.
+    #
+    # @!attribute [rw] kind
+    #   The kind of role. For this API, the value of `kind` will be `Role`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Kubernetes role.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier of the Kubernetes role name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesRoleDetails AWS API Documentation
+    #
+    class KubernetesRoleDetails < Struct.new(
+      :kind,
+      :name,
+      :uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the Kubernetes user involved in a Kubernetes finding.
     #
     # @!attribute [rw] username
@@ -3791,13 +4026,18 @@ module Aws::GuardDuty
     #   are assigned to that role.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] impersonated_user
+    #   Information about the impersonated user.
+    #   @return [Types::ImpersonatedUser]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesUserDetails AWS API Documentation
     #
     class KubernetesUserDetails < Struct.new(
       :username,
       :uid,
       :groups,
-      :session_name)
+      :session_name,
+      :impersonated_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3834,6 +4074,19 @@ module Aws::GuardDuty
     #   Volumes used by the Kubernetes workload.
     #   @return [Array<Types::Volume>]
     #
+    # @!attribute [rw] service_account_name
+    #   The service account name that is associated with a Kubernetes
+    #   workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_ipc
+    #   Whether the host IPC flag is enabled for the pods in the workload.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] host_pid
+    #   Whether the host PID flag is enabled for the pods in the workload.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesWorkloadDetails AWS API Documentation
     #
     class KubernetesWorkloadDetails < Struct.new(
@@ -3843,7 +4096,10 @@ module Aws::GuardDuty
       :namespace,
       :host_network,
       :containers,
-      :volumes)
+      :volumes,
+      :service_account_name,
+      :host_ipc,
+      :host_pid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4395,6 +4651,11 @@ module Aws::GuardDuty
 
     # @!attribute [rw] members
     #   A list of members.
+    #
+    #   <note markdown="1"> The values for `email` and `invitedAt` are available only if the
+    #   member accounts are added by invitation.
+    #
+    #    </note>
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
@@ -4995,6 +5256,20 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the observed behavior.
+    #
+    # @!attribute [rw] text
+    #   The text that was unusual.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Observations AWS API Documentation
+    #
+    class Observations < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6448,10 +6723,16 @@ module Aws::GuardDuty
     #   Whether the container is privileged.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_privilege_escalation
+    #   Whether or not a container or a Kubernetes pod is allowed to gain
+    #   more privileges than its parent process.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityContext AWS API Documentation
     #
     class SecurityContext < Struct.new(
-      :privileged)
+      :privileged,
+      :allow_privilege_escalation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6538,6 +6819,10 @@ module Aws::GuardDuty
     #   specific finding
     #   @return [Types::RuntimeDetails]
     #
+    # @!attribute [rw] detection
+    #   Contains information about the detected unusual behavior.
+    #   @return [Types::Detection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -6554,7 +6839,8 @@ module Aws::GuardDuty
       :additional_info,
       :feature_name,
       :ebs_volume_scan_details,
-      :runtime_details)
+      :runtime_details,
+      :detection)
       SENSITIVE = []
       include Aws::Structure
     end

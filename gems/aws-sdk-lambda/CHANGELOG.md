@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2023-11-08)
+------------------
+
+* Feature - Add Node 20 (nodejs20.x) support to AWS Lambda.
+
 1.106.0 (2023-10-12)
 ------------------
 

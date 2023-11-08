@@ -10646,7 +10646,7 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @option params [String] :instance_id
+    # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -10691,7 +10691,7 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_users({
-    #     instance_id: "InstanceId",
+    #     instance_id: "InstanceId", # required
     #     next_token: "NextToken2500",
     #     max_results: 1,
     #     search_filter: {
@@ -14302,7 +14302,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

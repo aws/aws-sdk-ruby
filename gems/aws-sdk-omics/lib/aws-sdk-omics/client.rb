@@ -2222,6 +2222,8 @@ module Aws::Omics
     #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
     #   * {Types::GetRunResponse#failure_reason #failure_reason} => String
     #   * {Types::GetRunResponse#log_location #log_location} => Types::RunLogLocation
+    #   * {Types::GetRunResponse#uuid #uuid} => String
+    #   * {Types::GetRunResponse#run_output_uri #run_output_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2261,6 +2263,8 @@ module Aws::Omics
     #   resp.failure_reason #=> String
     #   resp.log_location.engine_log_stream #=> String
     #   resp.log_location.run_log_stream #=> String
+    #   resp.uuid #=> String
+    #   resp.run_output_uri #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4200,6 +4204,8 @@ module Aws::Omics
     #   * {Types::StartRunResponse#id #id} => String
     #   * {Types::StartRunResponse#status #status} => String
     #   * {Types::StartRunResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::StartRunResponse#uuid #uuid} => String
+    #   * {Types::StartRunResponse#run_output_uri #run_output_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4230,6 +4236,8 @@ module Aws::Omics
     #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.uuid #=> String
+    #   resp.run_output_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRun AWS API Documentation
     #
@@ -4622,7 +4630,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

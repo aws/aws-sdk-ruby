@@ -195,6 +195,8 @@ module Aws::ConnectCases
     UpdateLayoutResponse = Shapes::StructureShape.new(name: 'UpdateLayoutResponse')
     UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
     UpdateTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTemplateResponse')
+    UserArn = Shapes::StringShape.new(name: 'UserArn')
+    UserUnion = Shapes::UnionShape.new(name: 'UserUnion')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     ValuesList = Shapes::ListShape.new(name: 'ValuesList')
@@ -322,6 +324,7 @@ module Aws::ConnectCases
     CreateRelatedItemRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
     CreateRelatedItemRequest.add_member(:content, Shapes::ShapeRef.new(shape: RelatedItemInputContent, required: true, location_name: "content"))
     CreateRelatedItemRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    CreateRelatedItemRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
     CreateRelatedItemRequest.add_member(:type, Shapes::ShapeRef.new(shape: RelatedItemType, required: true, location_name: "type"))
     CreateRelatedItemRequest.struct_class = Types::CreateRelatedItemRequest
 
@@ -675,6 +678,7 @@ module Aws::ConnectCases
 
     SearchRelatedItemsResponseItem.add_member(:association_time, Shapes::ShapeRef.new(shape: AssociationTime, required: true, location_name: "associationTime"))
     SearchRelatedItemsResponseItem.add_member(:content, Shapes::ShapeRef.new(shape: RelatedItemContent, required: true, location_name: "content"))
+    SearchRelatedItemsResponseItem.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
     SearchRelatedItemsResponseItem.add_member(:related_item_id, Shapes::ShapeRef.new(shape: RelatedItemId, required: true, location_name: "relatedItemId"))
     SearchRelatedItemsResponseItem.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     SearchRelatedItemsResponseItem.add_member(:type, Shapes::ShapeRef.new(shape: RelatedItemType, required: true, location_name: "type"))
@@ -756,6 +760,12 @@ module Aws::ConnectCases
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
 
     UpdateTemplateResponse.struct_class = Types::UpdateTemplateResponse
+
+    UserUnion.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn"))
+    UserUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UserUnion.add_member_subclass(:user_arn, Types::UserUnion::UserArn)
+    UserUnion.add_member_subclass(:unknown, Types::UserUnion::Unknown)
+    UserUnion.struct_class = Types::UserUnion
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException

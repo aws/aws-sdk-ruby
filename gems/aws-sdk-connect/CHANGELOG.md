@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2023-11-08)
+------------------
+
+* Feature - This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+
 1.135.0 (2023-11-06)
 ------------------
 

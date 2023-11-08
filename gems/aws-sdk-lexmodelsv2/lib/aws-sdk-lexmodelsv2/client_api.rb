@@ -1026,6 +1026,7 @@ module Aws::LexModelsV2
 
     AudioLogSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     AudioLogSetting.add_member(:destination, Shapes::ShapeRef.new(shape: AudioLogDestination, required: true, location_name: "destination"))
+    AudioLogSetting.add_member(:selective_logging_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "selectiveLoggingEnabled"))
     AudioLogSetting.struct_class = Types::AudioLogSetting
 
     AudioLogSettingsList.member = Shapes::ShapeRef.new(shape: AudioLogSetting)
@@ -3181,6 +3182,7 @@ module Aws::LexModelsV2
 
     TextLogSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     TextLogSetting.add_member(:destination, Shapes::ShapeRef.new(shape: TextLogDestination, required: true, location_name: "destination"))
+    TextLogSetting.add_member(:selective_logging_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "selectiveLoggingEnabled"))
     TextLogSetting.struct_class = Types::TextLogSetting
 
     TextLogSettingsList.member = Shapes::ShapeRef.new(shape: TextLogSetting)

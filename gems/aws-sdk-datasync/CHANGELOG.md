@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-11-08)
+------------------
+
+* Feature - This change allows for 0 length access keys and secret keys for object storage locations. Users can now pass in empty string credentials.
+
 1.68.0 (2023-10-30)
 ------------------
 

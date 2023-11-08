@@ -32,7 +32,7 @@ require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
 require 'aws-sdk-sqs/plugins/md5s.rb'
 
@@ -84,7 +84,7 @@ module Aws::SQS
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
-    add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::SQS::Plugins::QueueUrls)
     add_plugin(Aws::SQS::Plugins::Md5s)
     add_plugin(Aws::SQS::Plugins::Endpoints)
@@ -302,6 +302,16 @@ module Aws::SQS
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -1570,7 +1580,7 @@ module Aws::SQS
     #
     #   resp.results #=> Array
     #   resp.results[0].task_handle #=> String
-    #   resp.results[0].status #=> String
+    #   resp.results[0].status #=> String, one of "RUNNING", "FAILED", "CANCELLING", "CANCELLED", "COMPLETED"
     #   resp.results[0].source_arn #=> String
     #   resp.results[0].destination_arn #=> String
     #   resp.results[0].max_number_of_messages_per_second #=> Integer
@@ -2786,7 +2796,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

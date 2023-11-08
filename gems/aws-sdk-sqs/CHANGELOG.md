@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-11-08)
+------------------
+
+* Feature - This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
 1.65.0 (2023-10-31)
 ------------------
 

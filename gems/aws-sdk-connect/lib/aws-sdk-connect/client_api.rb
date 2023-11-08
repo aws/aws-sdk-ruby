@@ -3569,7 +3569,7 @@ module Aws::Connect
     SearchSecurityProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
 
-    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchUsersRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: UserSearchFilter, location_name: "SearchFilter"))
