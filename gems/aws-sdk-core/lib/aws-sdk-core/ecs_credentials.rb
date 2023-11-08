@@ -6,7 +6,7 @@ require 'resolv'
 
 module Aws
   # An auto-refreshing credential provider that loads credentials from
-  # instances running in ECS.
+  # instances running in containers.
   #
   #     ecs_credentials = Aws::ECSCredentials.new(retries: 3)
   #     ec2 = Aws::EC2::Client.new(credentials: ecs_credentials)
@@ -47,7 +47,7 @@ module Aws
     #   is set and `credential_path` is not set.
     # @option options [String] :credential_path By default, the value of the
     #   AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variable.
-    # @option options [String] :endpoint The ECS credential endpoint.
+    # @option options [String] :endpoint The container credential endpoint.
     #   By default, this is the value of the AWS_CONTAINER_CREDENTIALS_FULL_URI
     #   environment variable. This value is ignored if `credential_path` or
     #   ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] is set.
@@ -134,7 +134,7 @@ module Aws
       end
 
       raise ArgumentError,
-            'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a loopback '\
+            'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a local loopback '\
             'or an ECS or EKS link-local address when using the http scheme.'
     end
 

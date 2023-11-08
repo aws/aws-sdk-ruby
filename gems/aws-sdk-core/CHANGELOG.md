@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and allow for ECS and EKS link-local http addresses.
+* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and also allow for ECS and EKS link-local http addresses.
 
 3.181.0 (2023-08-22)
 ------------------
