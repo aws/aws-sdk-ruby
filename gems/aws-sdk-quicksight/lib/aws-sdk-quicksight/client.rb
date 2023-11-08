@@ -775,6 +775,15 @@ module Aws::QuickSight
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the analysis, Amazon QuickSight adds the analysis to
+    #   these folders.
+    #
     # @return [Types::CreateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisResponse#arn #arn} => String
@@ -891,6 +900,15 @@ module Aws::QuickSight
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create a dashboard with
+    #   definition objects. This option skips the validation step for specific
+    #   errors.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dashboard, Amazon QuickSight adds the dashboard to
+    #   these folders.
+    #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDashboardResponse#arn #arn} => String
@@ -976,6 +994,10 @@ module Aws::QuickSight
     # @option params [Array<Types::DatasetParameter>] :dataset_parameters
     #   The parameter declarations of the dataset.
     #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dataset, Amazon QuickSight adds the dataset to
+    #   these folders.
+    #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSetResponse#arn #arn} => String
@@ -1002,6 +1024,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1013,6 +1036,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1029,6 +1053,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1061,6 +1086,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -1204,6 +1230,7 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1265,6 +1292,10 @@ module Aws::QuickSight
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the data source.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the data source, Amazon QuickSight adds the data
+    #   source to these folders.
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1339,6 +1370,12 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -1384,6 +1421,17 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
     #       },
     #     },
     #     credentials: {
@@ -1449,6 +1497,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -1495,6 +1549,17 @@ module Aws::QuickSight
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
     #           },
     #         ],
     #       },
@@ -1519,6 +1584,7 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1585,7 +1651,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     name: "FolderName",
-    #     folder_type: "SHARED", # accepts SHARED
+    #     folder_type: "SHARED", # accepts SHARED, RESTRICTED
     #     parent_folder_arn: "Arn",
     #     permissions: [
     #       {
@@ -1645,14 +1711,14 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
     #
     #   resp.status #=> Integer
     #   resp.folder_member.member_id #=> String
-    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET"
+    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "DATASOURCE", "TOPIC"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembership AWS API Documentation
@@ -2106,6 +2172,11 @@ module Aws::QuickSight
     #
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   TThe option to relax the validation needed to create a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3150,7 +3221,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
@@ -4011,6 +4082,8 @@ module Aws::QuickSight
     #   resp.analysis.sheets #=> Array
     #   resp.analysis.sheets[0].sheet_id #=> String
     #   resp.analysis.sheets[0].name #=> String
+    #   resp.analysis.options.timezone #=> String
+    #   resp.analysis.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -4319,6 +4392,11 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -4342,6 +4420,13 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.override_parameters.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.override_parameters.data_sources[0].credentials.credential_pair.username #=> String
@@ -4425,6 +4510,8 @@ module Aws::QuickSight
     #   resp.dashboard.version.sheets #=> Array
     #   resp.dashboard.version.sheets[0].sheet_id #=> String
     #   resp.dashboard.version.sheets[0].name #=> String
+    #   resp.dashboard.version.options.timezone #=> String
+    #   resp.dashboard.version.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
     #   resp.dashboard.last_updated_time #=> Time
@@ -4751,12 +4838,14 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.sql_query #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.format #=> String, one of "CSV", "TSV", "CLF", "ELF", "XLSX", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.start_from_row #=> Integer
@@ -4766,6 +4855,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map #=> Hash
     #   resp.data_set.logical_table_map["LogicalTableId"].alias #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms #=> Array
@@ -4780,6 +4870,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].rename_column_operation.new_column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.new_column_type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.format #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
@@ -4810,6 +4901,7 @@ module Aws::QuickSight
     #   resp.data_set.output_columns[0].name #=> String
     #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.output_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
     #   resp.data_set.consumed_spice_capacity_in_bytes #=> Integer
     #   resp.data_set.column_groups #=> Array
@@ -5024,6 +5116,11 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.role_arn #=> String
@@ -5047,6 +5144,13 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_source.data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -5080,6 +5184,11 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -5103,6 +5212,13 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -5191,7 +5307,7 @@ module Aws::QuickSight
     #   resp.folder.folder_id #=> String
     #   resp.folder.arn #=> String
     #   resp.folder.name #=> String
-    #   resp.folder.folder_type #=> String, one of "SHARED"
+    #   resp.folder.folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder.folder_path #=> Array
     #   resp.folder.folder_path[0] #=> String
     #   resp.folder.created_time #=> Time
@@ -5720,6 +5836,8 @@ module Aws::QuickSight
     #   resp.template.version.sheets #=> Array
     #   resp.template.version.sheets[0].sheet_id #=> String
     #   resp.template.version.sheets[0].name #=> String
+    #   resp.template.version.options.timezone #=> String
+    #   resp.template.version.options.week_start #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
     #   resp.template.template_id #=> String
     #   resp.template.last_updated_time #=> Time
     #   resp.template.created_time #=> Time
@@ -7403,6 +7521,11 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -7426,6 +7549,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -7459,6 +7589,11 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -7482,6 +7617,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -7587,7 +7729,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -8831,6 +8973,9 @@ module Aws::QuickSight
     # @option params [String] :external_login_id
     #   The identity ID for a user in the external login provider.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the user.
+    #
     # @return [Types::RegisterUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterUserResponse#user #user} => Types::User
@@ -8853,6 +8998,12 @@ module Aws::QuickSight
     #     external_login_federation_provider_type: "String",
     #     custom_federation_provider_url: "String",
     #     external_login_id: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9235,7 +9386,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -9598,6 +9749,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -9643,6 +9800,17 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
     #             },
     #           },
     #           vpc_connection_properties: {
@@ -9852,15 +10020,15 @@ module Aws::QuickSight
     #
     # You can associate as many as 50 tags with a resource. Amazon
     # QuickSight supports tagging on data set, data source, dashboard,
-    # template, and topic.
+    # template, topic, and user.
     #
     # Tagging for Amazon QuickSight works in a similar way to tagging for
     # other Amazon Web Services services, except for the following:
     #
-    # * You can't use tags to track costs for Amazon QuickSight. This
-    #   isn't possible because you can't tag the resources that Amazon
-    #   QuickSight costs are based on, for example Amazon QuickSight storage
-    #   capacity (SPICE), number of users, type of users, and usage metrics.
+    # * Tags are used to track costs for users in Amazon QuickSight. You
+    #   can't tag other resources that Amazon QuickSight costs are based
+    #   on, such as storage capacoty (SPICE), session usage, alert
+    #   consumption, or reporting units.
     #
     # * Amazon QuickSight doesn't currently support the tag editor for
     #   Resource Groups.
@@ -10088,6 +10256,11 @@ module Aws::QuickSight
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
     # @return [Types::UpdateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAnalysisResponse#arn #arn} => String
@@ -10251,6 +10424,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a dashboard with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10484,6 +10662,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10495,6 +10674,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10511,6 +10691,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10543,6 +10724,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -10856,6 +11038,12 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -10901,6 +11089,17 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
     #       },
     #     },
     #     credentials: {
@@ -10966,6 +11165,12 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -11011,6 +11216,17 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
     #             },
     #           },
     #         ],
@@ -11525,6 +11741,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12529,7 +12750,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

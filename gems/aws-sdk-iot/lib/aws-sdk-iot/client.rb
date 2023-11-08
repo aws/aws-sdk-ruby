@@ -1225,9 +1225,9 @@ module Aws::IoT
     # action.
     #
     # <note markdown="1"> The CSR must include a public key that is either an RSA key with a
-    # length of at least 2048 bits or an ECC key from NIST P-256 or NIST
-    # P-384 curves. For supported certificates, consult [ Certificate
-    # signing algorithms supported by IoT][2].
+    # length of at least 2048 bits or an ECC key from NIST P-256, NIST
+    # P-384, or NIST P-521 curves. For supported certificates, consult [
+    # Certificate signing algorithms supported by IoT][2].
     #
     #  </note>
     #
@@ -1936,20 +1936,18 @@ module Aws::IoT
     #   The ARN of the job to use as the basis for the job template.
     #
     # @option params [String] :document_source
-    #   An S3 link to the job document to use in the template. Required if you
-    #   don't specify a value for `document`.
+    #   An S3 link, or S3 object URL, to the job document. The link is an
+    #   Amazon S3 object URL and is required if you don't specify a value for
+    #   `document`.
     #
-    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
-    #   placeholder link when specifying the document.
+    #   For example, `--document-source
+    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`
     #
-    #    The placeholder link is of the following form:
+    #   For more information, see [Methods for accessing a bucket][1].
     #
-    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
     #
-    #    where *bucket* is your bucket name and *key* is the object in the
-    #   bucket to which you are linking.
     #
-    #    </note>
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html
     #
     # @option params [String] :document
     #   The job document. Required if you don't specify a value for
@@ -2248,7 +2246,8 @@ module Aws::IoT
     #   create an OTA update job.
     #
     # @option params [Hash<String,String>] :additional_parameters
-    #   A list of additional OTA update parameters which are name-value pairs.
+    #   A list of additional OTA update parameters, which are name-value
+    #   pairs. They won't be sent to devices as a part of the Job document.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage updates.
@@ -2382,7 +2381,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the new package.
+    #   The name of the new software package.
     #
     # @option params [String] :description
     #   A summary of the package being created. This can be used to outline
@@ -2439,7 +2438,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the associated package.
+    #   The name of the associated software package.
     #
     # @option params [required, String] :version_name
     #   The name of the new package version.
@@ -3558,6 +3557,12 @@ module Aws::IoT
     #             client_properties: { # required
     #               "String" => "String",
     #             },
+    #             headers: [
+    #               {
+    #                 key: "KafkaHeaderKey", # required
+    #                 value: "KafkaHeaderValue", # required
+    #               },
+    #             ],
     #           },
     #           open_search: {
     #             role_arn: "AwsArn", # required
@@ -3761,6 +3766,12 @@ module Aws::IoT
     #           client_properties: { # required
     #             "String" => "String",
     #           },
+    #           headers: [
+    #             {
+    #               key: "KafkaHeaderKey", # required
+    #               value: "KafkaHeaderValue", # required
+    #             },
+    #           ],
     #         },
     #         open_search: {
     #           role_arn: "AwsArn", # required
@@ -4436,7 +4447,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -4465,11 +4476,11 @@ module Aws::IoT
     # Deletes a specific version from a software package.
     #
     # **Note:** If a package version is designated as default, you must
-    # remove the designation from the package using the UpdatePackage
-    # action.
+    # remove the designation from the software package using the
+    # UpdatePackage action.
     #
     # @option params [required, String] :package_name
-    #   The name of the associated package.
+    #   The name of the associated software package.
     #
     # @option params [required, String] :version_name
     #   The name of the target package version.
@@ -4930,7 +4941,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_v2_logging_level({
-    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
+    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
     #     target_name: "LogTargetName", # required
     #   })
     #
@@ -5727,7 +5738,8 @@ module Aws::IoT
     #
     #   We strongly recommend that customers use the newer `iot:Data-ATS`
     #   endpoint type to avoid issues related to the widespread distrust of
-    #   Symantec certificate authorities.
+    #   Symantec certificate authorities. ATS Signed Certificates are more
+    #   secure and are trusted by most popular browsers.
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7271,7 +7283,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #
     # @return [Types::GetPackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7754,6 +7766,9 @@ module Aws::IoT
     #   resp.rule.actions[0].kafka.partition #=> String
     #   resp.rule.actions[0].kafka.client_properties #=> Hash
     #   resp.rule.actions[0].kafka.client_properties["String"] #=> String
+    #   resp.rule.actions[0].kafka.headers #=> Array
+    #   resp.rule.actions[0].kafka.headers[0].key #=> String
+    #   resp.rule.actions[0].kafka.headers[0].value #=> String
     #   resp.rule.actions[0].open_search.role_arn #=> String
     #   resp.rule.actions[0].open_search.endpoint #=> String
     #   resp.rule.actions[0].open_search.index #=> String
@@ -7876,6 +7891,9 @@ module Aws::IoT
     #   resp.rule.error_action.kafka.partition #=> String
     #   resp.rule.error_action.kafka.client_properties #=> Hash
     #   resp.rule.error_action.kafka.client_properties["String"] #=> String
+    #   resp.rule.error_action.kafka.headers #=> Array
+    #   resp.rule.error_action.kafka.headers[0].key #=> String
+    #   resp.rule.error_action.kafka.headers[0].value #=> String
     #   resp.rule.error_action.open_search.role_arn #=> String
     #   resp.rule.error_action.open_search.endpoint #=> String
     #   resp.rule.error_action.open_search.index #=> String
@@ -9733,7 +9751,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #
     # @option params [String] :status
     #   The status of the package version. For more information, see [Package
@@ -11268,7 +11286,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_v2_logging_levels({
-    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
+    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -11276,7 +11294,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.log_target_configurations #=> Array
-    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID"
+    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID", "EVENT_TYPE", "DEVICE_DEFENDER"
     #   resp.log_target_configurations[0].log_target.target_name #=> String
     #   resp.log_target_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.next_token #=> String
@@ -12013,6 +12031,12 @@ module Aws::IoT
     #             client_properties: { # required
     #               "String" => "String",
     #             },
+    #             headers: [
+    #               {
+    #                 key: "KafkaHeaderKey", # required
+    #                 value: "KafkaHeaderValue", # required
+    #               },
+    #             ],
     #           },
     #           open_search: {
     #             role_arn: "AwsArn", # required
@@ -12216,6 +12240,12 @@ module Aws::IoT
     #           client_properties: { # required
     #             "String" => "String",
     #           },
+    #           headers: [
+    #             {
+    #               key: "KafkaHeaderKey", # required
+    #               value: "KafkaHeaderValue", # required
+    #             },
+    #           ],
     #         },
     #         open_search: {
     #           role_arn: "AwsArn", # required
@@ -12443,7 +12473,7 @@ module Aws::IoT
     #
     #   resp = client.set_v2_logging_level({
     #     log_target: { # required
-    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
+    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
     #       target_name: "LogTargetName",
     #     },
     #     log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
@@ -13886,7 +13916,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Updates the supported fields for a specific package.
+    # Updates the supported fields for a specific software package.
     #
     # Requires permission to access the [UpdatePackage][1] and
     # [GetIndexingConfiguration][1] actions.
@@ -13896,7 +13926,7 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #
     # @option params [String] :description
     #   The package description.
@@ -13942,7 +13972,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Updates the package configuration.
+    # Updates the software package configuration.
     #
     # Requires permission to access the [UpdatePackageConfiguration][1] and
     # [iam:PassRole][2] actions.
@@ -14003,8 +14033,8 @@ module Aws::IoT
     #
     # @option params [Hash<String,String>] :attributes
     #   Metadata that can be used to define a package version’s configuration.
-    #   For example, the S3 file location, configuration options that are
-    #   being sent to the device or fleet.
+    #   For example, the Amazon S3 file location, configuration options that
+    #   are being sent to the device or fleet.
     #
     #   **Note:** Attributes can be updated only when the package version is
     #   in a draft state.
@@ -14745,7 +14775,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

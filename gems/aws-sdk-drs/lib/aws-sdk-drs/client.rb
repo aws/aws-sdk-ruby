@@ -420,6 +420,24 @@ module Aws::Drs
     #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.job.participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
@@ -547,8 +565,16 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
+    #
+    # @option params [Boolean] :post_launch_enabled
+    #   Whether we want to activate post-launch actions.
     #
     # @option params [Hash<String,String>] :tags
     #   Request to associate tags during creation of a Launch Configuration
@@ -568,9 +594,11 @@ module Aws::Drs
     #     copy_tags: false,
     #     export_bucket_arn: "ARN",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
+    #     post_launch_enabled: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -585,7 +613,9 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
+    #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
     #   resp.launch_configuration_template.tags["TagKey"] #=> String
     #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
@@ -804,6 +834,32 @@ module Aws::Drs
     # @param [Hash] params ({})
     def delete_job(params = {}, options = {})
       req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource launch action.
+    #
+    # @option params [required, String] :action_id
+    #   Launch action Id.
+    #
+    # @option params [required, String] :resource_id
+    #   Launch configuration template Id or Source Server Id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_action({
+    #     action_id: "LaunchActionId", # required
+    #     resource_id: "LaunchActionResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchAction AWS API Documentation
+    #
+    # @overload delete_launch_action(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_action(params = {}, options = {})
+      req = build_request(:delete_launch_action, params)
       req.send_request(options)
     end
 
@@ -1026,6 +1082,24 @@ module Aws::Drs
     #   resp.items[0].participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.items[0].participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.items[0].participating_servers #=> Array
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.items[0].participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.items[0].participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.items[0].participating_servers[0].recovery_instance_id #=> String
     #   resp.items[0].participating_servers[0].source_server_id #=> String
@@ -1082,7 +1156,9 @@ module Aws::Drs
     #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].launch_configuration_template_id #=> String
     #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].launch_into_source_instance #=> Boolean
     #   resp.items[0].licensing.os_byol #=> Boolean
+    #   resp.items[0].post_launch_enabled #=> Boolean
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
@@ -1708,8 +1784,10 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
@@ -1725,8 +1803,10 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_enabled #=> Boolean
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
@@ -1873,6 +1953,66 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Lists resource launch actions.
+    #
+    # @option params [Types::LaunchActionsRequestFilters] :filters
+    #   Filters to apply when listing resource launch actions.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum amount of items to return when listing resource launch
+    #   actions.
+    #
+    # @option params [String] :next_token
+    #   Next token to use when listing resource launch actions.
+    #
+    # @option params [required, String] :resource_id
+    #   Launch configuration template Id or Source Server Id
+    #
+    # @return [Types::ListLaunchActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLaunchActionsResponse#items #items} => Array&lt;Types::LaunchAction&gt;
+    #   * {Types::ListLaunchActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_launch_actions({
+    #     filters: {
+    #       action_ids: ["LaunchActionId"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     resource_id: "LaunchActionResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].action_code #=> String
+    #   resp.items[0].action_id #=> String
+    #   resp.items[0].action_version #=> String
+    #   resp.items[0].active #=> Boolean
+    #   resp.items[0].category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.items[0].description #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].optional #=> Boolean
+    #   resp.items[0].order #=> Integer
+    #   resp.items[0].parameters #=> Hash
+    #   resp.items[0].parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.items[0].parameters["LaunchActionParameterName"].value #=> String
+    #   resp.items[0].type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListLaunchActions AWS API Documentation
+    #
+    # @overload list_launch_actions(params = {})
+    # @param [Hash] params ({})
+    def list_launch_actions(params = {}, options = {})
+      req = build_request(:list_launch_actions, params)
+      req.send_request(options)
+    end
+
     # Returns an array of staging accounts for existing extended source
     # servers.
     #
@@ -1937,6 +2077,103 @@ module Aws::Drs
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Puts a resource launch action.
+    #
+    # @option params [required, String] :action_code
+    #   Launch action code.
+    #
+    # @option params [required, String] :action_id
+    #   Launch action Id.
+    #
+    # @option params [required, String] :action_version
+    #   Launch action version.
+    #
+    # @option params [required, Boolean] :active
+    #   Whether the launch action is active.
+    #
+    # @option params [required, String] :category
+    #   Launch action category.
+    #
+    # @option params [required, String] :description
+    #   Launch action description.
+    #
+    # @option params [required, String] :name
+    #   Launch action name.
+    #
+    # @option params [required, Boolean] :optional
+    #   Whether the launch will not be marked as failed if this action fails.
+    #
+    # @option params [required, Integer] :order
+    #   Launch action order.
+    #
+    # @option params [Hash<String,Types::LaunchActionParameter>] :parameters
+    #   Launch action parameters.
+    #
+    # @option params [required, String] :resource_id
+    #   Launch configuration template Id or Source Server Id
+    #
+    # @return [Types::PutLaunchActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutLaunchActionResponse#action_code #action_code} => String
+    #   * {Types::PutLaunchActionResponse#action_id #action_id} => String
+    #   * {Types::PutLaunchActionResponse#action_version #action_version} => String
+    #   * {Types::PutLaunchActionResponse#active #active} => Boolean
+    #   * {Types::PutLaunchActionResponse#category #category} => String
+    #   * {Types::PutLaunchActionResponse#description #description} => String
+    #   * {Types::PutLaunchActionResponse#name #name} => String
+    #   * {Types::PutLaunchActionResponse#optional #optional} => Boolean
+    #   * {Types::PutLaunchActionResponse#order #order} => Integer
+    #   * {Types::PutLaunchActionResponse#parameters #parameters} => Hash&lt;String,Types::LaunchActionParameter&gt;
+    #   * {Types::PutLaunchActionResponse#resource_id #resource_id} => String
+    #   * {Types::PutLaunchActionResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_launch_action({
+    #     action_code: "SsmDocumentName", # required
+    #     action_id: "LaunchActionId", # required
+    #     action_version: "LaunchActionVersion", # required
+    #     active: false, # required
+    #     category: "MONITORING", # required, accepts MONITORING, VALIDATION, CONFIGURATION, SECURITY, OTHER
+    #     description: "LaunchActionDescription", # required
+    #     name: "LaunchActionName", # required
+    #     optional: false, # required
+    #     order: 1, # required
+    #     parameters: {
+    #       "LaunchActionParameterName" => {
+    #         type: "SSM_STORE", # accepts SSM_STORE, DYNAMIC
+    #         value: "LaunchActionParameterValue",
+    #       },
+    #     },
+    #     resource_id: "LaunchActionResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_code #=> String
+    #   resp.action_id #=> String
+    #   resp.action_version #=> String
+    #   resp.active #=> Boolean
+    #   resp.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.description #=> String
+    #   resp.name #=> String
+    #   resp.optional #=> Boolean
+    #   resp.order #=> Integer
+    #   resp.parameters #=> Hash
+    #   resp.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.resource_id #=> String
+    #   resp.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PutLaunchAction AWS API Documentation
+    #
+    # @overload put_launch_action(params = {})
+    # @param [Hash] params ({})
+    def put_launch_action(params = {}, options = {})
+      req = build_request(:put_launch_action, params)
       req.send_request(options)
     end
 
@@ -2113,6 +2350,24 @@ module Aws::Drs
     #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.job.participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
@@ -2173,6 +2428,24 @@ module Aws::Drs
     #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.job.participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
@@ -2323,6 +2596,24 @@ module Aws::Drs
     #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.job.participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
@@ -2598,6 +2889,24 @@ module Aws::Drs
     #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs #=> Array
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_code #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.action_version #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.active #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.category #=> String, one of "MONITORING", "VALIDATION", "CONFIGURATION", "SECURITY", "OTHER"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.description #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.name #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.optional #=> Boolean
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.order #=> Integer
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters #=> Hash
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].type #=> String, one of "SSM_STORE", "DYNAMIC"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.parameters["LaunchActionParameterName"].value #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].action.type #=> String, one of "SSM_AUTOMATION", "SSM_COMMAND"
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].failure_reason #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].run_id #=> String
+    #   resp.job.participating_servers[0].launch_actions_status.runs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.job.participating_servers[0].launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
     #   resp.job.participating_servers[0].source_server_id #=> String
@@ -2693,11 +3002,17 @@ module Aws::Drs
     #   The state of the Recovery Instance in EC2 after the recovery
     #   operation.
     #
+    # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #
     # @option params [Types::Licensing] :licensing
     #   The licensing configuration to be used for this launch configuration.
     #
     # @option params [String] :name
     #   The name of the launch configuration.
+    #
+    # @option params [Boolean] :post_launch_enabled
+    #   Whether we want to enable post-launch actions for the Source Server.
     #
     # @option params [required, String] :source_server_id
     #   The ID of the Source Server that we want to retrieve a Launch
@@ -2714,8 +3029,10 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
     #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
@@ -2725,10 +3042,14 @@ module Aws::Drs
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_instance_properties: {
+    #       launch_into_ec2_instance_id: "EC2InstanceID",
+    #     },
     #     licensing: {
     #       os_byol: false,
     #     },
     #     name: "SmallBoundedString",
+    #     post_launch_enabled: false,
     #     source_server_id: "SourceServerID", # required
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC, IN_AWS
     #   })
@@ -2739,8 +3060,10 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
+    #   resp.post_launch_enabled #=> Boolean
     #   resp.source_server_id #=> String
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
@@ -2770,8 +3093,16 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
+    #
+    # @option params [Boolean] :post_launch_enabled
+    #   Whether we want to activate post-launch actions.
     #
     # @option params [String] :target_instance_type_right_sizing_method
     #   Target instance type right-sizing method.
@@ -2788,9 +3119,11 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
+    #     post_launch_enabled: false,
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC, IN_AWS
     #   })
     #
@@ -2802,7 +3135,9 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
+    #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
     #   resp.launch_configuration_template.tags["TagKey"] #=> String
     #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
@@ -3137,7 +3472,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

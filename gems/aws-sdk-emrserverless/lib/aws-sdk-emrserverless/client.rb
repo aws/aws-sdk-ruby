@@ -480,6 +480,19 @@ module Aws::EMRServerless
     #   image details in this parameter for each worker type, or in
     #   `imageConfiguration` for all worker types.
     #
+    # @option params [Array<Types::Configuration>] :runtime_configuration
+    #   The [Configuration][1] specifications to use when creating an
+    #   application. Each configuration consists of a classification and
+    #   properties. This configuration is applied to all the job runs
+    #   submitted under the application.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+    #
+    # @option params [Types::MonitoringConfiguration] :monitoring_configuration
+    #   The configuration setting for monitoring.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -530,6 +543,36 @@ module Aws::EMRServerless
     #       "WorkerTypeString" => {
     #         image_configuration: {
     #           image_uri: "ImageUri",
+    #         },
+    #       },
+    #     },
+    #     runtime_configuration: [
+    #       {
+    #         classification: "String1024", # required
+    #         properties: {
+    #           "String1024" => "String1024",
+    #         },
+    #         configurations: {
+    #           # recursive ConfigurationList
+    #         },
+    #       },
+    #     ],
+    #     monitoring_configuration: {
+    #       s3_monitoring_configuration: {
+    #         log_uri: "UriString",
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #       },
+    #       managed_persistence_monitoring_configuration: {
+    #         enabled: false,
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #       },
+    #       cloud_watch_logging_configuration: {
+    #         enabled: false, # required
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name_prefix: "LogStreamNamePrefix",
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #         log_types: {
+    #           "WorkerTypeString" => ["LogTypeString"],
     #         },
     #       },
     #     },
@@ -622,6 +665,22 @@ module Aws::EMRServerless
     #   resp.application.worker_type_specifications #=> Hash
     #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.image_uri #=> String
     #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.resolved_image_digest #=> String
+    #   resp.application.runtime_configuration #=> Array
+    #   resp.application.runtime_configuration[0].classification #=> String
+    #   resp.application.runtime_configuration[0].properties #=> Hash
+    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
+    #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.managed_persistence_monitoring_configuration.enabled #=> Boolean
+    #   resp.application.monitoring_configuration.managed_persistence_monitoring_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.enabled #=> Boolean
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_group_name #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_stream_name_prefix #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1178,6 +1237,19 @@ module Aws::EMRServerless
     #   The Amazon EMR release label for the application. You can change the
     #   release label to use a different release of Amazon EMR.
     #
+    # @option params [Array<Types::Configuration>] :runtime_configuration
+    #   The [Configuration][1] specifications to use when updating an
+    #   application. Each configuration consists of a classification and
+    #   properties. This configuration is applied across all the job runs
+    #   submitted under the application.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+    #
+    # @option params [Types::MonitoringConfiguration] :monitoring_configuration
+    #   The configuration setting for monitoring.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1225,6 +1297,36 @@ module Aws::EMRServerless
     #       },
     #     },
     #     release_label: "ReleaseLabel",
+    #     runtime_configuration: [
+    #       {
+    #         classification: "String1024", # required
+    #         properties: {
+    #           "String1024" => "String1024",
+    #         },
+    #         configurations: {
+    #           # recursive ConfigurationList
+    #         },
+    #       },
+    #     ],
+    #     monitoring_configuration: {
+    #       s3_monitoring_configuration: {
+    #         log_uri: "UriString",
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #       },
+    #       managed_persistence_monitoring_configuration: {
+    #         enabled: false,
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #       },
+    #       cloud_watch_logging_configuration: {
+    #         enabled: false, # required
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name_prefix: "LogStreamNamePrefix",
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #         log_types: {
+    #           "WorkerTypeString" => ["LogTypeString"],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1261,6 +1363,22 @@ module Aws::EMRServerless
     #   resp.application.worker_type_specifications #=> Hash
     #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.image_uri #=> String
     #   resp.application.worker_type_specifications["WorkerTypeString"].image_configuration.resolved_image_digest #=> String
+    #   resp.application.runtime_configuration #=> Array
+    #   resp.application.runtime_configuration[0].classification #=> String
+    #   resp.application.runtime_configuration[0].properties #=> Hash
+    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
+    #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.managed_persistence_monitoring_configuration.enabled #=> Boolean
+    #   resp.application.monitoring_configuration.managed_persistence_monitoring_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.enabled #=> Boolean
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_group_name #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_stream_name_prefix #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.encryption_key_arn #=> String
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
+    #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1284,7 +1402,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

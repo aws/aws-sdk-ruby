@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2023-09-06)
+------------------
+
+* Feature - Adding OAuth2.0 support for servicenow connector.
+
 1.49.0 (2023-08-30)
 ------------------
 

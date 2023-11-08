@@ -205,6 +205,7 @@ module Aws
       :use_fips_endpoint,
       :ec2_metadata_service_endpoint,
       :ec2_metadata_service_endpoint_mode,
+      :ec2_metadata_v1_disabled,
       :max_attempts,
       :retry_mode,
       :adaptive_retry_wait_to_fill,

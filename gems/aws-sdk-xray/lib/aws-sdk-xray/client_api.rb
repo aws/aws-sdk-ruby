@@ -921,6 +921,7 @@ module Aws::XRay
     TraceSegmentDocumentList.member = Shapes::ShapeRef.new(shape: TraceSegmentDocument)
 
     TraceSummary.add_member(:id, Shapes::ShapeRef.new(shape: TraceId, location_name: "Id"))
+    TraceSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     TraceSummary.add_member(:duration, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Duration"))
     TraceSummary.add_member(:response_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "ResponseTime"))
     TraceSummary.add_member(:has_fault, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "HasFault"))

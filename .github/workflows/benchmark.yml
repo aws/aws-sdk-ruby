@@ -16,6 +16,10 @@ permissions:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
+    env:
+      GH_REF: ${{github.head_ref}}
+      GH_REPO: ${{github.repository}}
+      GH_EVENT: ${{github.event_name}}
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +31,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install gems
         run: |
@@ -42,16 +46,14 @@ jobs:
         run: EXECUTION_ENV=github-action bundle exec rake benchmark
 
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::469596866844:role/aws-sdk-ruby-performance-reporter
           role-session-name: benchmark-report
           aws-region: us-west-2
 
       - name: Archive benchmark report
-        run: |
-          GH_REPO=${{github.repository}} GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:archive
+        run: bundle exec rake benchmark:archive
 
       - name: Upload benchmark metrics
-        run: |
-          GH_REPO=${{github.repository}} GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:put-metrics
+        run: bundle exec rake benchmark:put-metrics

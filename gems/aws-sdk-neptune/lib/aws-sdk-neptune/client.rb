@@ -404,7 +404,7 @@ module Aws::Neptune
     # @option params [String] :feature_name
     #   The name of the feature for the Neptune DB cluster that the IAM role
     #   is to be associated with. For the list of supported feature names, see
-    #   [DBEngineVersion](neptune/latest/userguide/api-other-apis.html#DBEngineVersion).
+    #   DBEngineVersion.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -970,8 +970,8 @@ module Aws::Neptune
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Region. To see the time blocks
-    #   available, see [ Adjusting the Preferred Maintenance Window][1] in the
-    #   *Amazon Neptune User Guide.*
+    #   available, see [Neptune Maintenance Window][1] in the *Amazon Neptune
+    #   User Guide.*
     #
     #   Constraints:
     #
@@ -985,7 +985,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -995,8 +995,8 @@ module Aws::Neptune
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Region, occurring on a random day of the
-    #   week. To see the time blocks available, see [ Adjusting the Preferred
-    #   Maintenance Window][1] in the *Amazon Neptune User Guide.*
+    #   week. To see the time blocks available, see [Neptune Maintenance
+    #   Window][1] in the *Amazon Neptune User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1004,7 +1004,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window
     #
     # @option params [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
@@ -1775,7 +1775,7 @@ module Aws::Neptune
     #     db_cluster_identifier: "String", # required
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     domain: "String",
@@ -5034,12 +5034,11 @@ module Aws::Neptune
     #   `ApplyImmediately` parameter is set to true.
     #
     #   For a list of valid engine versions, see [Engine Releases for Amazon
-    #   Neptune][1], or call [DescribeDBEngineVersions][2].
+    #   Neptune][1], or call DescribeDBEngineVersions.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html
-    #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   A value that indicates whether upgrades between different major
@@ -5740,7 +5739,7 @@ module Aws::Neptune
     #     new_db_instance_identifier: "String",
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     ca_certificate_identifier: "String",
     #     domain: "String",
     #     copy_tags_to_snapshot: false,
@@ -6471,11 +6470,7 @@ module Aws::Neptune
     # @option params [String] :feature_name
     #   The name of the feature for the DB cluster that the IAM role is to be
     #   disassociated from. For the list of supported feature names, see
-    #   [DescribeDBEngineVersions][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
+    #   DescribeDBEngineVersions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7451,7 +7446,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

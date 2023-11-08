@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+3.174.0 (2023-11-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-launchwizard` gem.
+
+3.173.0 (2023-10-19)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-gamesparks` gem.
+
+3.172.0 (2023-10-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-datazone` gem.
+
+3.171.0 (2023-09-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrock` gem.
+
 3.170.0 (2023-08-30)
 ------------------
 

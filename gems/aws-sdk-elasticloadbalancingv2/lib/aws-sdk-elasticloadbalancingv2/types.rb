@@ -1910,6 +1910,18 @@ module Aws::ElasticLoadBalancingV2
     #     load balancer to route requests to targets if it is unable to
     #     forward the request to Amazon Web Services WAF. The possible
     #     values are `true` and `false`. The default is `false`.
+    #
+    #   The following attributes are supported by only Network Load
+    #   Balancers:
+    #
+    #   * `dns_record.client_routing_policy` - Indicates how traffic is
+    #     distributed among the load balancer Availability Zones. The
+    #     possible values are `availability_zone_affinity` with 100 percent
+    #     zonal affinity, `partial_availability_zone_affinity` with 85
+    #     percent zonal affinity, and `any_availability_zone` with 0 percent
+    #     zonal affinity.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2792,6 +2804,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -2816,6 +2831,9 @@ module Aws::ElasticLoadBalancingV2
     #   IP address per subnet from the IPv4 range of the subnet. For
     #   internet-facing load balancer, you can specify one IPv6 address per
     #   subnet.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] ip_address_type
@@ -2824,6 +2842,10 @@ module Aws::ElasticLoadBalancingV2
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
     #   listener.
+    #
+    #   \[Gateway Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -2843,6 +2865,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ip_address_type
     #   \[Network Load Balancers\] The IP address type.
+    #
+    #   \[Gateway Load Balancers\] The IP address type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsOutput AWS API Documentation
@@ -3274,7 +3298,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `deregistration_delay.connection_termination.enabled` - Indicates
     #     whether the load balancer terminates connections at the end of the
-    #     deregistration timeout. The value is `true` or `false`. The
+    #     deregistration timeout. The value is `true` or `false`. For new
+    #     UDP/TCP\_UDP target groups the default is `true`. Otherwise, the
     #     default is `false`.
     #
     #   * `preserve_client_ip.enabled` - Indicates whether client IP
@@ -3287,6 +3312,11 @@ module Aws::ElasticLoadBalancingV2
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default
     #     is `false`.
+    #
+    #   * `target_health_state.unhealthy.connection_termination.enabled` -
+    #     Indicates whether the load balancer terminates connections to
+    #     unhealthy targets. The value is `true` or `false`. The default is
+    #     `true`.
     #
     #   The following attributes are supported only by Gateway Load
     #   Balancers:

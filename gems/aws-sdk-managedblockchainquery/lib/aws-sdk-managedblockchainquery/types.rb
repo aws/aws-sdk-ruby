@@ -24,6 +24,31 @@ module Aws::ManagedBlockchainQuery
       include Aws::Structure
     end
 
+    # This container contains information about an contract.
+    #
+    # @!attribute [rw] contract_identifier
+    #   The container for the contract identifier containing its blockchain
+    #   network and address.
+    #   @return [Types::ContractIdentifier]
+    #
+    # @!attribute [rw] token_standard
+    #   The token standard of the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployer_address
+    #   The address of the contract deployer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/AssetContract AWS API Documentation
+    #
+    class AssetContract < Struct.new(
+      :contract_identifier,
+      :token_standard,
+      :deployer_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error generated from a failed `BatchGetTokenBalance` request.
     #
     # @!attribute [rw] token_identifier
@@ -70,8 +95,8 @@ module Aws::ManagedBlockchainQuery
     end
 
     # @!attribute [rw] get_token_balance_inputs
-    #   An array of `GetTokenBalanceInput` objects whose balance is being
-    #   requested.
+    #   An array of `BatchGetTokenBalanceInputItem` objects whose balance is
+    #   being requested.
     #   @return [Array<Types::BatchGetTokenBalanceInputItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/BatchGetTokenBalanceInput AWS API Documentation
@@ -185,6 +210,115 @@ module Aws::ManagedBlockchainQuery
     #
     class BlockchainInstant < Struct.new(
       :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contract or wallet address by which to filter the request.
+    #
+    # @!attribute [rw] network
+    #   The blockchain network of the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_standard
+    #   The container for the token standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployer_address
+    #   The network address of the deployer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ContractFilter AWS API Documentation
+    #
+    class ContractFilter < Struct.new(
+      :network,
+      :token_standard,
+      :deployer_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the blockchain address and network information about a
+    # contract.
+    #
+    # @!attribute [rw] network
+    #   The blockchain network of the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_address
+    #   Container for the blockchain address about a contract.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ContractIdentifier AWS API Documentation
+    #
+    class ContractIdentifier < Struct.new(
+      :network,
+      :contract_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the contract.
+    #
+    # @!attribute [rw] name
+    #   The name of the token contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] symbol
+    #   The symbol of the token contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] decimals
+    #   The decimals used by the token contract.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ContractMetadata AWS API Documentation
+    #
+    class ContractMetadata < Struct.new(
+      :name,
+      :symbol,
+      :decimals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_identifier
+    #   Contains the blockchain address and network information about the
+    #   contract.
+    #   @return [Types::ContractIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/GetAssetContractInput AWS API Documentation
+    #
+    class GetAssetContractInput < Struct.new(
+      :contract_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_identifier
+    #   Contains the blockchain address and network information about the
+    #   contract.
+    #   @return [Types::ContractIdentifier]
+    #
+    # @!attribute [rw] token_standard
+    #   The token standard of the contract requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployer_address
+    #   The address of the deployer of contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the contract.
+    #   @return [Types::ContractMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/GetAssetContractOutput AWS API Documentation
+    #
+    class GetAssetContractOutput < Struct.new(
+      :contract_identifier,
+      :token_standard,
+      :deployer_address,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -305,6 +439,48 @@ module Aws::ManagedBlockchainQuery
       include Aws::Structure
     end
 
+    # @!attribute [rw] contract_filter
+    #   Contains the filter parameter for the request.
+    #   @return [Types::ContractFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of contracts to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListAssetContractsInput AWS API Documentation
+    #
+    class ListAssetContractsInput < Struct.new(
+      :contract_filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contracts
+    #   An array of contract objects that contain the properties for each
+    #   contract.
+    #   @return [Array<Types::AssetContract>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListAssetContractsOutput AWS API Documentation
+    #
+    class ListAssetContractsOutput < Struct.new(
+      :contracts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] owner_filter
     #   The contract or wallet address on the blockchain network by which to
     #   filter the request. You must specify the `address` property of the
@@ -313,8 +489,9 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] token_filter
     #   The contract address or a token identifier on the blockchain network
-    #   by which to filter the request. You must specify the contractAddress
-    #   property of this container when listing tokens minted by a contract.
+    #   by which to filter the request. You must specify the
+    #   `contractAddress` property of this container when listing tokens
+    #   minted by a contract.
     #
     #   <note markdown="1"> You must always specify the network property of this container when
     #   using this operation.
@@ -657,7 +834,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::BlockchainInstant]
     #
     # @!attribute [rw] last_updated_time
-    #   The `timestamp` of the last transaction at which the balance for the
+    #   The `Timestamp` of the last transaction at which the balance for the
     #   token in the wallet was updated.
     #   @return [Types::BlockchainInstant]
     #
@@ -722,6 +899,13 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] token_id
     #   The unique identifier of the token.
+    #
+    #   <note markdown="1"> You must specify this container with `btc` for the native BTC token,
+    #   and `eth` for the native ETH token. For all other token types you
+    #   must specify the `tokenId` in the 64 character hexadecimal `tokenid`
+    #   format.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/TokenIdentifier AWS API Documentation
@@ -746,7 +930,7 @@ module Aws::ManagedBlockchainQuery
     #   state-changing action occurs within a transaction.
     #
     # @!attribute [rw] network
-    #   The blockchain network where the transaction occured.
+    #   The blockchain network where the transaction occurred.
     #   @return [String]
     #
     # @!attribute [rw] block_hash

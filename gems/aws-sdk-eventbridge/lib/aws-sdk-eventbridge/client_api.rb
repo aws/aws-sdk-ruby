@@ -34,6 +34,7 @@ module Aws::EventBridge
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
     AuthHeaderParameters = Shapes::StringShape.new(name: 'AuthHeaderParameters')
+    AuthHeaderParametersSensitive = Shapes::StringShape.new(name: 'AuthHeaderParametersSensitive')
     AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     BatchArrayProperties = Shapes::StructureShape.new(name: 'BatchArrayProperties')
     BatchParameters = Shapes::StructureShape.new(name: 'BatchParameters')
@@ -156,6 +157,7 @@ module Aws::EventBridge
     HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    HeaderValueSensitive = Shapes::StringShape.new(name: 'HeaderValueSensitive')
     HealthCheck = Shapes::StringShape.new(name: 'HealthCheck')
     HomeRegion = Shapes::StringShape.new(name: 'HomeRegion')
     HttpParameters = Shapes::StructureShape.new(name: 'HttpParameters')
@@ -252,6 +254,7 @@ module Aws::EventBridge
     QueryStringKey = Shapes::StringShape.new(name: 'QueryStringKey')
     QueryStringParametersMap = Shapes::MapShape.new(name: 'QueryStringParametersMap')
     QueryStringValue = Shapes::StringShape.new(name: 'QueryStringValue')
+    QueryStringValueSensitive = Shapes::StringShape.new(name: 'QueryStringValueSensitive')
     RedshiftDataParameters = Shapes::StructureShape.new(name: 'RedshiftDataParameters')
     RedshiftSecretManagerArn = Shapes::StringShape.new(name: 'RedshiftSecretManagerArn')
     ReferenceId = Shapes::StringShape.new(name: 'ReferenceId')
@@ -300,6 +303,7 @@ module Aws::EventBridge
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     Secondary = Shapes::StructureShape.new(name: 'Secondary')
     SecretsManagerSecretArn = Shapes::StringShape.new(name: 'SecretsManagerSecretArn')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     Sql = Shapes::StringShape.new(name: 'Sql')
     Sqls = Shapes::ListShape.new(name: 'Sqls')
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
@@ -436,14 +440,14 @@ module Aws::EventBridge
     ConnectionBasicAuthResponseParameters.struct_class = Types::ConnectionBasicAuthResponseParameters
 
     ConnectionBodyParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
-    ConnectionBodyParameter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    ConnectionBodyParameter.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Value"))
     ConnectionBodyParameter.add_member(:is_value_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsValueSecret"))
     ConnectionBodyParameter.struct_class = Types::ConnectionBodyParameter
 
     ConnectionBodyParametersList.member = Shapes::ShapeRef.new(shape: ConnectionBodyParameter)
 
     ConnectionHeaderParameter.add_member(:key, Shapes::ShapeRef.new(shape: HeaderKey, location_name: "Key"))
-    ConnectionHeaderParameter.add_member(:value, Shapes::ShapeRef.new(shape: HeaderValue, location_name: "Value"))
+    ConnectionHeaderParameter.add_member(:value, Shapes::ShapeRef.new(shape: HeaderValueSensitive, location_name: "Value"))
     ConnectionHeaderParameter.add_member(:is_value_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsValueSecret"))
     ConnectionHeaderParameter.struct_class = Types::ConnectionHeaderParameter
 
@@ -464,7 +468,7 @@ module Aws::EventBridge
     ConnectionOAuthResponseParameters.struct_class = Types::ConnectionOAuthResponseParameters
 
     ConnectionQueryStringParameter.add_member(:key, Shapes::ShapeRef.new(shape: QueryStringKey, location_name: "Key"))
-    ConnectionQueryStringParameter.add_member(:value, Shapes::ShapeRef.new(shape: QueryStringValue, location_name: "Value"))
+    ConnectionQueryStringParameter.add_member(:value, Shapes::ShapeRef.new(shape: QueryStringValueSensitive, location_name: "Value"))
     ConnectionQueryStringParameter.add_member(:is_value_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsValueSecret"))
     ConnectionQueryStringParameter.struct_class = Types::ConnectionQueryStringParameter
 
@@ -500,7 +504,7 @@ module Aws::EventBridge
     CreateArchiveResponse.struct_class = Types::CreateArchiveResponse
 
     CreateConnectionApiKeyAuthRequestParameters.add_member(:api_key_name, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "ApiKeyName"))
-    CreateConnectionApiKeyAuthRequestParameters.add_member(:api_key_value, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "ApiKeyValue"))
+    CreateConnectionApiKeyAuthRequestParameters.add_member(:api_key_value, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, required: true, location_name: "ApiKeyValue"))
     CreateConnectionApiKeyAuthRequestParameters.struct_class = Types::CreateConnectionApiKeyAuthRequestParameters
 
     CreateConnectionAuthRequestParameters.add_member(:basic_auth_parameters, Shapes::ShapeRef.new(shape: CreateConnectionBasicAuthRequestParameters, location_name: "BasicAuthParameters"))
@@ -510,11 +514,11 @@ module Aws::EventBridge
     CreateConnectionAuthRequestParameters.struct_class = Types::CreateConnectionAuthRequestParameters
 
     CreateConnectionBasicAuthRequestParameters.add_member(:username, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "Username"))
-    CreateConnectionBasicAuthRequestParameters.add_member(:password, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "Password"))
+    CreateConnectionBasicAuthRequestParameters.add_member(:password, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, required: true, location_name: "Password"))
     CreateConnectionBasicAuthRequestParameters.struct_class = Types::CreateConnectionBasicAuthRequestParameters
 
     CreateConnectionOAuthClientRequestParameters.add_member(:client_id, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "ClientID"))
-    CreateConnectionOAuthClientRequestParameters.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthHeaderParameters, required: true, location_name: "ClientSecret"))
+    CreateConnectionOAuthClientRequestParameters.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, required: true, location_name: "ClientSecret"))
     CreateConnectionOAuthClientRequestParameters.struct_class = Types::CreateConnectionOAuthClientRequestParameters
 
     CreateConnectionOAuthRequestParameters.add_member(:client_parameters, Shapes::ShapeRef.new(shape: CreateConnectionOAuthClientRequestParameters, required: true, location_name: "ClientParameters"))
@@ -1294,7 +1298,7 @@ module Aws::EventBridge
     UpdateArchiveResponse.struct_class = Types::UpdateArchiveResponse
 
     UpdateConnectionApiKeyAuthRequestParameters.add_member(:api_key_name, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "ApiKeyName"))
-    UpdateConnectionApiKeyAuthRequestParameters.add_member(:api_key_value, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "ApiKeyValue"))
+    UpdateConnectionApiKeyAuthRequestParameters.add_member(:api_key_value, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, location_name: "ApiKeyValue"))
     UpdateConnectionApiKeyAuthRequestParameters.struct_class = Types::UpdateConnectionApiKeyAuthRequestParameters
 
     UpdateConnectionAuthRequestParameters.add_member(:basic_auth_parameters, Shapes::ShapeRef.new(shape: UpdateConnectionBasicAuthRequestParameters, location_name: "BasicAuthParameters"))
@@ -1304,11 +1308,11 @@ module Aws::EventBridge
     UpdateConnectionAuthRequestParameters.struct_class = Types::UpdateConnectionAuthRequestParameters
 
     UpdateConnectionBasicAuthRequestParameters.add_member(:username, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "Username"))
-    UpdateConnectionBasicAuthRequestParameters.add_member(:password, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "Password"))
+    UpdateConnectionBasicAuthRequestParameters.add_member(:password, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, location_name: "Password"))
     UpdateConnectionBasicAuthRequestParameters.struct_class = Types::UpdateConnectionBasicAuthRequestParameters
 
     UpdateConnectionOAuthClientRequestParameters.add_member(:client_id, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "ClientID"))
-    UpdateConnectionOAuthClientRequestParameters.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthHeaderParameters, location_name: "ClientSecret"))
+    UpdateConnectionOAuthClientRequestParameters.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthHeaderParametersSensitive, location_name: "ClientSecret"))
     UpdateConnectionOAuthClientRequestParameters.struct_class = Types::UpdateConnectionOAuthClientRequestParameters
 
     UpdateConnectionOAuthRequestParameters.add_member(:client_parameters, Shapes::ShapeRef.new(shape: UpdateConnectionOAuthClientRequestParameters, location_name: "ClientParameters"))

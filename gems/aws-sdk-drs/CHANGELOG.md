@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-10-16)
+------------------
+
+* Feature - Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+
+1.22.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2023-09-13)
+------------------
+
+* Feature - Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.
+
 1.20.0 (2023-07-31)
 ------------------
 

@@ -58,6 +58,8 @@ module Aws::MigrationHubConfig
           case context.operation_name
           when :create_home_region_control
             Aws::MigrationHubConfig::Endpoints::CreateHomeRegionControl.build(context)
+          when :delete_home_region_control
+            Aws::MigrationHubConfig::Endpoints::DeleteHomeRegionControl.build(context)
           when :describe_home_region_controls
             Aws::MigrationHubConfig::Endpoints::DescribeHomeRegionControls.build(context)
           when :get_home_region

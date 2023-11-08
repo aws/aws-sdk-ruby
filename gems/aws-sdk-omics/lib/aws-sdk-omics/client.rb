@@ -1939,6 +1939,7 @@ module Aws::Omics
     #   * {Types::GetReadSetMetadataResponse#files #files} => Types::ReadSetFiles
     #   * {Types::GetReadSetMetadataResponse#status_message #status_message} => String
     #   * {Types::GetReadSetMetadataResponse#creation_type #creation_type} => String
+    #   * {Types::GetReadSetMetadataResponse#etag #etag} => Types::ETag
     #
     # @example Request syntax with placeholder values
     #
@@ -1975,6 +1976,9 @@ module Aws::Omics
     #   resp.files.index.content_length #=> Integer
     #   resp.status_message #=> String
     #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
+    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.etag.source1 #=> String
+    #   resp.etag.source2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadata AWS API Documentation
     #
@@ -2216,6 +2220,8 @@ module Aws::Omics
     #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#accelerators #accelerators} => String
     #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
+    #   * {Types::GetRunResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetRunResponse#log_location #log_location} => Types::RunLogLocation
     #
     # @example Request syntax with placeholder values
     #
@@ -2252,6 +2258,9 @@ module Aws::Omics
     #   resp.tags["TagKey"] #=> String
     #   resp.accelerators #=> String, one of "GPU"
     #   resp.retention_mode #=> String, one of "RETAIN", "REMOVE"
+    #   resp.failure_reason #=> String
+    #   resp.log_location.engine_log_stream #=> String
+    #   resp.log_location.run_log_stream #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2316,7 +2325,7 @@ module Aws::Omics
     # Gets information about a workflow run task.
     #
     # @option params [required, String] :id
-    #   The task's ID.
+    #   The workflow run ID.
     #
     # @option params [required, String] :task_id
     #   The task's ID.
@@ -2335,6 +2344,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
     #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
     #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
+    #   * {Types::GetRunTaskResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2357,6 +2367,7 @@ module Aws::Omics
     #   resp.log_stream #=> String
     #   resp.gpus #=> Integer
     #   resp.instance_type #=> String
+    #   resp.failure_reason #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3166,6 +3177,9 @@ module Aws::Omics
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
     #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
+    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.read_sets[0].etag.source1 #=> String
+    #   resp.read_sets[0].etag.source2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSets AWS API Documentation
     #
@@ -4608,7 +4622,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

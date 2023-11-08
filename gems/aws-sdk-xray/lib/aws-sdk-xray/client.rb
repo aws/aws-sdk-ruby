@@ -1543,8 +1543,8 @@ module Aws::XRay
     #   The end of the time frame for which to retrieve traces.
     #
     # @option params [String] :time_range_type
-    #   A parameter to indicate whether to query trace summaries by TraceId or
-    #   Event time.
+    #   A parameter to indicate whether to query trace summaries by TraceId,
+    #   Event (trace update time), or Service (segment end time).
     #
     # @option params [Boolean] :sampling
     #   Set to `true` to get summaries for only a subset of available traces.
@@ -1575,7 +1575,7 @@ module Aws::XRay
     #   resp = client.get_trace_summaries({
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
-    #     time_range_type: "TraceId", # accepts TraceId, Event
+    #     time_range_type: "TraceId", # accepts TraceId, Event, Service
     #     sampling: false,
     #     sampling_strategy: {
     #       name: "PartialScan", # accepts PartialScan, FixedRate
@@ -1589,6 +1589,7 @@ module Aws::XRay
     #
     #   resp.trace_summaries #=> Array
     #   resp.trace_summaries[0].id #=> String
+    #   resp.trace_summaries[0].start_time #=> Time
     #   resp.trace_summaries[0].duration #=> Float
     #   resp.trace_summaries[0].response_time #=> Float
     #   resp.trace_summaries[0].has_fault #=> Boolean
@@ -2227,7 +2228,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

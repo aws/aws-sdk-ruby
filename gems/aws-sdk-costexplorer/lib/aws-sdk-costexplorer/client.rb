@@ -2805,6 +2805,11 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.region #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.size_flex_eligible #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].recommended_number_of_instances_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].recommended_normalized_units_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].minimum_number_of_instances_used_per_hour #=> String
@@ -5152,7 +5157,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

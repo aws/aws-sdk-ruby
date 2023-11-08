@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2023-09-26)
+------------------
+
+* Feature - This release adds a new field COMPLETED to the ReplicationStatus Enum. You can now use this field to validate the replication status of S3 objects using the AWS SDK.
+
+1.135.0 (2023-09-20)
+------------------
+
+* Feature - Fix an issue where the SDK can fail to unmarshall response due to NumberFormatException
+
 1.134.0 (2023-08-24)
 ------------------
 

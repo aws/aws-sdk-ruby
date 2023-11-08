@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-10-12)
+------------------
+
+* Feature - Update GetParticipant to return additional metadata.
+
+1.10.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2023-09-13)
+------------------
+
+* Feature - Doc only update that changes description for ParticipantToken.
+
 1.8.0 (2023-08-07)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-10-06)
+------------------
+
+* Feature - This release adds support for Document type as an alternative for stringified JSON for StartChangeSet, DescribeChangeSet and DescribeEntity APIs
+
+1.33.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.32.0 (2023-07-11)
 ------------------
 

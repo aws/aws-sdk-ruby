@@ -405,6 +405,10 @@ module Aws::ECR
     #   specified on its own (such as `nginx-web-app`) or it can be
     #   prepended with a namespace to group the repository into a category
     #   (such as `project-a/nginx-web-app`).
+    #
+    #   The repository name must start with a letter and can only contain
+    #   lowercase letters, numbers, hyphens, underscores, and forward
+    #   slashes.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2986,8 +2990,9 @@ module Aws::ECR
     #   The frequency that scans are performed at for a private registry.
     #   When the `ENHANCED` scan type is specified, the supported scan
     #   frequencies are `CONTINUOUS_SCAN` and `SCAN_ON_PUSH`. When the
-    #   `BASIC` scan type is specified, the `SCAN_ON_PUSH` and `MANUAL` scan
-    #   frequencies are supported.
+    #   `BASIC` scan type is specified, the `SCAN_ON_PUSH` scan frequency is
+    #   supported. If scan on push is not specified, then the `MANUAL` scan
+    #   frequency is set by default.
     #   @return [String]
     #
     # @!attribute [rw] repository_filters
@@ -3087,7 +3092,7 @@ module Aws::ECR
     #   ARN contains the `arn:aws:ecr` namespace, followed by the region of
     #   the repository, Amazon Web Services account ID of the repository
     #   owner, repository namespace, and repository name. For example,
-    #   `arn:aws:ecr:region:012345678910:repository/test`.
+    #   `arn:aws:ecr:region:012345678910:repository-namespace/repository-name`.
     #   @return [String]
     #
     # @!attribute [rw] registry_id
@@ -3154,7 +3159,7 @@ module Aws::ECR
     # The filter settings used with image replication. Specifying a
     # repository filter to a replication rule provides a method for
     # controlling which repositories in a private registry are replicated.
-    # If no repository filter is specified, all images in the repository are
+    # If no filters are added, the contents of all repositories are
     # replicated.
     #
     # @!attribute [rw] filter

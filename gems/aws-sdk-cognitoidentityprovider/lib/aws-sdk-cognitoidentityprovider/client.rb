@@ -652,9 +652,23 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool where the user will be created.
     #
     # @option params [required, String] :username
-    #   The username for the user. Must be unique within the user pool. Must
-    #   be a UTF-8 string between 1 and 128 characters. After the user is
-    #   created, the username can't be changed.
+    #   The value that you want to set as the username sign-in attribute. The
+    #   following conditions apply to the username parameter.
+    #
+    #   * The username can't be a duplicate of another username in the same
+    #     user pool.
+    #
+    #   * You can't change the value of a username after you create it.
+    #
+    #   * You can only provide a value if usernames are a valid sign-in
+    #     attribute for your user pool. If your user pool only supports phone
+    #     numbers or email addresses as sign-in attributes, Amazon Cognito
+    #     automatically generates a username value. For more information, see
+    #     [Customizing sign-in attributes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases
     #
     # @option params [Array<Types::AttributeType>] :user_attributes
     #   An array of name-value pairs that contain user attributes and
@@ -7484,80 +7498,6 @@ module Aws::CognitoIdentityProvider
     #     ], 
     #   }
     #
-    # @example Example: A ListUsers request for the next 3 users whose email address starts with "testuser."
-    #
-    #   # This request submits a value for all possible parameters for ListUsers. By iterating the PaginationToken, you can page
-    #   # through and collect all users in a user pool.
-    #
-    #   resp = client.list_users({
-    #     attributes_to_get: [
-    #       "email", 
-    #       "sub", 
-    #     ], 
-    #     filter: "\"email\"^=\"testuser\"", 
-    #     limit: 3, 
-    #     pagination_token: "abcd1234EXAMPLE", 
-    #     user_pool_id: "us-east-1_EXAMPLE", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     pagination_token: "efgh5678EXAMPLE", 
-    #     users: [
-    #       {
-    #         attributes: [
-    #           {
-    #             name: "sub", 
-    #             value: "eaad0219-2117-439f-8d46-4db20e59268f", 
-    #           }, 
-    #           {
-    #             name: "email", 
-    #             value: "testuser@example.com", 
-    #           }, 
-    #         ], 
-    #         enabled: true, 
-    #         user_create_date: Time.parse(1682955829.578), 
-    #         user_last_modified_date: Time.parse(1689030181.63), 
-    #         user_status: "CONFIRMED", 
-    #         username: "testuser", 
-    #       }, 
-    #       {
-    #         attributes: [
-    #           {
-    #             name: "sub", 
-    #             value: "3b994cfd-0b07-4581-be46-3c82f9a70c90", 
-    #           }, 
-    #           {
-    #             name: "email", 
-    #             value: "testuser2@example.com", 
-    #           }, 
-    #         ], 
-    #         enabled: true, 
-    #         user_create_date: Time.parse(1684427979.201), 
-    #         user_last_modified_date: Time.parse(1684427979.201), 
-    #         user_status: "UNCONFIRMED", 
-    #         username: "testuser2", 
-    #       }, 
-    #       {
-    #         attributes: [
-    #           {
-    #             name: "sub", 
-    #             value: "5929e0d1-4c34-42d1-9b79-a5ecacfe66f7", 
-    #           }, 
-    #           {
-    #             name: "email", 
-    #             value: "testuser3@example.com", 
-    #           }, 
-    #         ], 
-    #         enabled: true, 
-    #         user_create_date: Time.parse(1684427823.641), 
-    #         user_last_modified_date: Time.parse(1684427823.641), 
-    #         user_status: "UNCONFIRMED", 
-    #         username: "testuser3@example.com", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_users({
@@ -10193,7 +10133,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

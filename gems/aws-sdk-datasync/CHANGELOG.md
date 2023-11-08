@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-10-30)
+------------------
+
+* Feature - Platform version changes to support AL1 deprecation initiative.
+
+1.67.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2023-09-15)
+------------------
+
+* Feature - Documentation-only updates for AWS DataSync.
+
 1.65.0 (2023-08-30)
 ------------------
 

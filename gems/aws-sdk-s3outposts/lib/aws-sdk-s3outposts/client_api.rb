@@ -51,6 +51,7 @@ module Aws::S3Outposts
     OutpostOfflineException = Shapes::StructureShape.new(name: 'OutpostOfflineException')
     Outposts = Shapes::ListShape.new(name: 'Outposts')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    S3OutpostArn = Shapes::StringShape.new(name: 'S3OutpostArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -131,6 +132,7 @@ module Aws::S3Outposts
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
 
     Outpost.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn"))
+    Outpost.add_member(:s3_outpost_arn, Shapes::ShapeRef.new(shape: S3OutpostArn, location_name: "S3OutpostArn"))
     Outpost.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
     Outpost.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
     Outpost.add_member(:capacity_in_bytes, Shapes::ShapeRef.new(shape: CapacityInBytes, location_name: "CapacityInBytes"))

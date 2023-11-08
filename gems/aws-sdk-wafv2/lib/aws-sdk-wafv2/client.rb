@@ -410,23 +410,41 @@ module Aws::WAFV2
     # Resource Name (ARN) of the web ACL. For information, see
     # [UpdateDistribution][1] in the *Amazon CloudFront Developer Guide*.
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for AssociateWebACL][2]
+    # in the *WAF Developer Guide*.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-AssociateWebACL
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL that you want to
@@ -580,6 +598,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -640,6 +661,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -702,6 +726,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -761,6 +788,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -907,6 +937,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1025,6 +1058,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -1224,6 +1258,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1435,25 +1472,25 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses. All addresses must be specified using
-    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
-    #   and IPv6 CIDR ranges except for `/0`.
+    #   or blocks of IP addresses that you want WAF to inspect for in incoming
+    #   requests. All addresses must be specified using Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44, specify
+    #     `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-    #     `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * For requests that originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
+    #   * For requests that originated from IP addresses
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
@@ -1640,9 +1677,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -1739,6 +1776,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1799,6 +1839,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1861,6 +1904,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1920,6 +1966,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -2066,6 +2115,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2184,6 +2236,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -2383,6 +2436,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2522,16 +2578,17 @@ module Aws::WAFV2
     # Creates a WebACL per the specifications provided.
     #
     # A web ACL defines a collection of rules to use to inspect and control
-    # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
-    # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
-    # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
-    # Amazon Web Services Verified Access instance.
+    # web requests. Each rule has a statement that defines what to look for
+    # in web requests and an action that WAF applies to requests that match
+    # the statement. In the web ACL, you assign a default action to take
+    # (allow, block) for any request that does not match any of the rules.
+    # The rules in a web ACL can be a combination of the types Rule,
+    # RuleGroup, and managed rule group. You can associate a web ACL with
+    # one or more Amazon Web Services resources to protect. The resources
+    # can be an Amazon CloudFront distribution, an Amazon API Gateway REST
+    # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    # Cognito user pool, an App Runner service, or an Amazon Web Services
+    # Verified Access instance.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -2561,9 +2618,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -2623,7 +2680,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 kilobytes).
+    #   default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -2727,6 +2784,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2787,6 +2847,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2849,6 +2912,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2908,6 +2974,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -3054,6 +3123,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -3172,6 +3244,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -3371,6 +3444,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4080,9 +4156,16 @@ module Aws::WAFV2
     # `UpdateDistribution`. For information, see [UpdateDistribution][1] in
     # the *Amazon CloudFront API Reference*.
     #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # DisassociateWebACL][2] in the *WAF Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to disassociate from
@@ -4334,6 +4417,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -4733,6 +4817,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4758,6 +4843,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4783,6 +4869,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4807,6 +4894,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
@@ -4864,6 +4952,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4909,6 +4998,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.enable_machine_learning #=> Boolean
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
@@ -5004,6 +5094,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5218,6 +5309,27 @@ module Aws::WAFV2
     end
 
     # Retrieves the WebACL for the specified resource.
+    #
+    # This call uses `GetWebACL`, to verify that your account has permission
+    # to access the retrieved web ACL. If you get an error that indicates
+    # that your account isn't authorized to perform `wafv2:GetWebACL` on
+    # the resource, that error won't be included in your CloudTrail event
+    # history.
+    #
+    # For Amazon CloudFront, don't use this call. Instead, call the
+    # CloudFront action `GetDistributionConfig`. For information, see
+    # [GetDistributionConfig][1] in the *Amazon CloudFront API Reference*.
+    #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # GetWebACLForResource][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-GetWebACLForResource
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose web ACL you want
@@ -5612,6 +5724,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configurations[0].redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configurations[0].redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.logging_configurations[0].logging_filter.filters #=> Array
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -5827,9 +5940,23 @@ module Aws::WAFV2
     end
 
     # Retrieves an array of the Amazon Resource Names (ARNs) for the
-    # regional resources that are associated with the specified web ACL. If
-    # you want the list of Amazon CloudFront resources, use the CloudFront
-    # call `ListDistributionsByWebACLId`.
+    # regional resources that are associated with the specified web ACL.
+    #
+    # For Amazon CloudFront, don't use this call. Instead, use the
+    # CloudFront call `ListDistributionsByWebACLId`. For information, see
+    # [ListDistributionsByWebACLId][1] in the *Amazon CloudFront API
+    # Reference*.
+    #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # ListResourcesForWebACL][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL.
@@ -6174,6 +6301,9 @@ module Aws::WAFV2
     #           header_order: {
     #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
+    #           ja3_fingerprint: {
+    #             fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #           },
     #         },
     #       ],
     #       managed_by_firewall_manager: false,
@@ -6226,6 +6356,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -6499,19 +6630,30 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the IP set. You cannot change the name of an `IPSet` after
@@ -6542,25 +6684,25 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses. All addresses must be specified using
-    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
-    #   and IPv6 CIDR ranges except for `/0`.
+    #   or blocks of IP addresses that you want WAF to inspect for in incoming
+    #   requests. All addresses must be specified using Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44, specify
+    #     `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-    #     `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * For requests that originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
+    #   * For requests that originated from IP addresses
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
@@ -6732,19 +6874,30 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the set. You cannot change the name after you create the
@@ -6833,25 +6986,36 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
-    #
     # A rule group defines a collection of rules to inspect and control web
     # requests that you can use in a WebACL. When you create a rule group,
     # you define an immutable capacity limit. If you update a rule group,
     # you must stay within the capacity. This allows others to reuse the
     # rule group with confidence in its capacity requirements.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the rule group. You cannot change the name of a rule group
@@ -6882,9 +7046,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -6988,6 +7152,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7048,6 +7215,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7110,6 +7280,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7169,6 +7342,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7315,6 +7491,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7433,6 +7612,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -7632,6 +7812,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7777,31 +7960,43 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
-    #
     # A web ACL defines a collection of rules to use to inspect and control
-    # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
-    # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
-    # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
-    # Amazon Web Services Verified Access instance.
+    # web requests. Each rule has a statement that defines what to look for
+    # in web requests and an action that WAF applies to requests that match
+    # the statement. In the web ACL, you assign a default action to take
+    # (allow, block) for any request that does not match any of the rules.
+    # The rules in a web ACL can be a combination of the types Rule,
+    # RuleGroup, and managed rule group. You can associate a web ACL with
+    # one or more Amazon Web Services resources to protect. The resources
+    # can be an Amazon CloudFront distribution, an Amazon API Gateway REST
+    # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    # Cognito user pool, an App Runner service, or an Amazon Web Services
+    # Verified Access instance.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -7836,9 +8031,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -7905,7 +8100,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 kilobytes).
+    #   default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -8010,6 +8205,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8070,6 +8268,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8132,6 +8333,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8191,6 +8395,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8337,6 +8544,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8455,6 +8665,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -8654,6 +8865,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8812,7 +9026,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

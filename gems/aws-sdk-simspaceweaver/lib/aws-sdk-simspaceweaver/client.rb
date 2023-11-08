@@ -438,7 +438,7 @@ module Aws::SimSpaceWeaver
     #
     #   resp = client.create_snapshot({
     #     destination: { # required
-    #       bucket_name: "BucketName",
+    #       bucket_name: "BucketName", # required
     #       object_key_prefix: "ObjectKeyPrefix",
     #     },
     #     simulation: "SimSpaceWeaverResourceName", # required
@@ -955,12 +955,12 @@ module Aws::SimSpaceWeaver
     #     name: "SimSpaceWeaverResourceName", # required
     #     role_arn: "RoleArn", # required
     #     schema_s3_location: {
-    #       bucket_name: "BucketName",
-    #       object_key: "ObjectKey",
+    #       bucket_name: "BucketName", # required
+    #       object_key: "ObjectKey", # required
     #     },
     #     snapshot_s3_location: {
-    #       bucket_name: "BucketName",
-    #       object_key: "ObjectKey",
+    #       bucket_name: "BucketName", # required
+    #       object_key: "ObjectKey", # required
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1152,7 +1152,7 @@ module Aws::SimSpaceWeaver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-simspaceweaver'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

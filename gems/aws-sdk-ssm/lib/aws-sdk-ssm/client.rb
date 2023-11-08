@@ -1669,7 +1669,13 @@ module Aws::SSM
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :description
-    #   Information about the OpsItem.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
+    #
+    #   <note markdown="1"> Provide enough information so that users viewing this OpsItem for the
+    #   first time understand the issue.
+    #
+    #    </note>
     #
     # @option params [String] :ops_item_type
     #   The type of OpsItem to create. Systems Manager supports the following
@@ -2392,6 +2398,55 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_maintenance_window(params = {}, options = {})
       req = build_request(:delete_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Delete an OpsItem. You must have permission in Identity and Access
+    # Management (IAM) to delete an OpsItem.
+    #
+    # Note the following important information about this operation.
+    #
+    #  * Deleting an OpsItem is irreversible. You can't restore a deleted
+    #   OpsItem.
+    #
+    # * This operation uses an *eventual consistency model*, which means the
+    #   system can take a few minutes to complete this operation. If you
+    #   delete an OpsItem and immediately call, for example, GetOpsItem, the
+    #   deleted OpsItem might still appear in the response.
+    #
+    # * This operation is idempotent. The system doesn't throw an exception
+    #   if you repeatedly call this operation for the same OpsItem. If the
+    #   first call is successful, all additional calls return the same
+    #   successful response as the first call.
+    #
+    # * This operation doesn't support cross-account calls. A delegated
+    #   administrator or management account can't delete OpsItems in other
+    #   accounts, even if OpsCenter has been set up for cross-account
+    #   administration. For more information about cross-account
+    #   administration, see [Setting up OpsCenter to centrally manage
+    #   OpsItems across accounts][1] in the *Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setting-up-cross-account.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ops_item({
+    #     ops_item_id: "OpsItemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItem AWS API Documentation
+    #
+    # @overload delete_ops_item(params = {})
+    # @param [Hash] params ({})
+    def delete_ops_item(params = {}, options = {})
+      req = build_request(:delete_ops_item, params)
       req.send_request(options)
     end
 
@@ -3808,7 +3863,7 @@ module Aws::SSM
     #   resp.instance_information_list[0].activation_id #=> String
     #   resp.instance_information_list[0].iam_role #=> String
     #   resp.instance_information_list[0].registration_date #=> Time
-    #   resp.instance_information_list[0].resource_type #=> String, one of "ManagedInstance", "Document", "EC2Instance"
+    #   resp.instance_information_list[0].resource_type #=> String, one of "ManagedInstance", "EC2Instance"
     #   resp.instance_information_list[0].name #=> String
     #   resp.instance_information_list[0].ip_address #=> String
     #   resp.instance_information_list[0].computer_name #=> String
@@ -5622,7 +5677,7 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.target #=> String
-    #   resp.status #=> String, one of "Connected", "NotConnected"
+    #   resp.status #=> String, one of "connected", "notconnected"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatus AWS API Documentation
     #
@@ -11650,9 +11705,8 @@ module Aws::SSM
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [String] :description
-    #   Update the information about the OpsItem. Provide enough information
-    #   so that users reading this OpsItem for the first time understand the
-    #   issue.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
     #
     # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
     #   Add new keys or edit existing key-value pairs of the OperationalData
@@ -12179,7 +12233,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

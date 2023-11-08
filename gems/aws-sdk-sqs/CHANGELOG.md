@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-10-31)
+------------------
+
+* Feature - Update `QueuePoller` to allow for the definition of an `after_empty_receive` callback which is triggered when a polling request returns no records.
+
+1.64.0 (2023-10-02)
+------------------
+
+* Feature - Update QueuePoller to handle duplicate messages before yielding. Fixes bug in (#2913).
+
+1.63.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.62.0 (2023-07-28)
 ------------------
 

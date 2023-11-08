@@ -391,15 +391,30 @@ module Aws::ControlTower
     # This API call turns off a control. It starts an asynchronous operation
     # that deletes AWS resources on the specified organizational unit and
     # the accounts it contains. The resources will vary according to the
-    # control that you specify.
+    # control that you specify. For usage examples, see [ *the AWS Control
+    # Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
     #   controls are permitted, with the exception of the **Region deny**
-    #   guardrail.
+    #   control. For information on how to find the `controlIdentifier`, see
+    #   [the overview page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @option params [required, String] :target_identifier
-    #   The ARN of the organizational unit.
+    #   The ARN of the organizational unit. For information on how to find the
+    #   `targetIdentifier`, see [the overview page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @return [Types::DisableControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -428,15 +443,30 @@ module Aws::ControlTower
     # This API call activates a control. It starts an asynchronous operation
     # that creates AWS resources on the specified organizational unit and
     # the accounts it contains. The resources created will vary according to
-    # the control that you specify.
+    # the control that you specify. For usage examples, see [ *the AWS
+    # Control Tower User Guide* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
     #   controls are permitted, with the exception of the **Region deny**
-    #   guardrail.
+    #   control. For information on how to find the `controlIdentifier`, see
+    #   [the overview page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @option params [required, String] :target_identifier
-    #   The ARN of the organizational unit.
+    #   The ARN of the organizational unit. For information on how to find the
+    #   `targetIdentifier`, see [the overview page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @return [Types::EnableControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -464,7 +494,12 @@ module Aws::ControlTower
 
     # Returns the status of a particular `EnableControl` or `DisableControl`
     # operation. Displays a message in case of error. Details for an
-    # operation are available for 90 days.
+    # operation are available for 90 days. For usage examples, see [ *the
+    # AWS Control Tower User Guide* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
     # @option params [required, String] :operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
@@ -497,8 +532,62 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Provides details about the enabled control. For usage examples, see [
+    # *the AWS Control Tower User Guide* ][1].
+    #
+    # **Returned values**
+    #
+    # * TargetRegions: Shows target AWS Regions where the enabled control is
+    #   available to be deployed.
+    #
+    # * StatusSummary: Provides a detailed summary of the deployment status.
+    #
+    # * DriftSummary: Provides a detailed summary of the drifted status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    #
+    # @option params [required, String] :enabled_control_identifier
+    #   The ARN of the enabled control.
+    #
+    # @return [Types::GetEnabledControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnabledControlOutput#enabled_control_details #enabled_control_details} => Types::EnabledControlDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_enabled_control({
+    #     enabled_control_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enabled_control_details.arn #=> String
+    #   resp.enabled_control_details.control_identifier #=> String
+    #   resp.enabled_control_details.drift_status_summary.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"
+    #   resp.enabled_control_details.status_summary.last_operation_identifier #=> String
+    #   resp.enabled_control_details.status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
+    #   resp.enabled_control_details.target_identifier #=> String
+    #   resp.enabled_control_details.target_regions #=> Array
+    #   resp.enabled_control_details.target_regions[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetEnabledControl AWS API Documentation
+    #
+    # @overload get_enabled_control(params = {})
+    # @param [Hash] params ({})
+    def get_enabled_control(params = {}, options = {})
+      req = build_request(:get_enabled_control, params)
+      req.send_request(options)
+    end
+
     # Lists the controls enabled by AWS Control Tower on the specified
-    # organizational unit and the accounts it contains.
+    # organizational unit and the accounts it contains. For usage examples,
+    # see [ *the AWS Control Tower User Guide* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
     # @option params [Integer] :max_results
     #   How many results to return per API call.
@@ -508,7 +597,12 @@ module Aws::ControlTower
     #   parameters.
     #
     # @option params [required, String] :target_identifier
-    #   The ARN of the organizational unit.
+    #   The ARN of the organizational unit. For information on how to find the
+    #   `targetIdentifier`, see [the overview page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @return [Types::ListEnabledControlsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -528,7 +622,12 @@ module Aws::ControlTower
     # @example Response structure
     #
     #   resp.enabled_controls #=> Array
+    #   resp.enabled_controls[0].arn #=> String
     #   resp.enabled_controls[0].control_identifier #=> String
+    #   resp.enabled_controls[0].drift_status_summary.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"
+    #   resp.enabled_controls[0].status_summary.last_operation_identifier #=> String
+    #   resp.enabled_controls[0].status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
+    #   resp.enabled_controls[0].target_identifier #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControls AWS API Documentation
@@ -553,7 +652,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

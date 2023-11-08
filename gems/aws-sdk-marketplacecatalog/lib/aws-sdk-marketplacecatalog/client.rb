@@ -427,11 +427,11 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # Deletes a resource-based policy on an Entity that is identified by its
+    # Deletes a resource-based policy on an entity that is identified by its
     # resource ARN.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   The Amazon Resource Name (ARN) of the entity resource that is
     #   associated with the resource policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -525,6 +525,7 @@ module Aws::MarketplaceCatalog
     #   * {Types::DescribeEntityResponse#entity_arn #entity_arn} => String
     #   * {Types::DescribeEntityResponse#last_modified_date #last_modified_date} => String
     #   * {Types::DescribeEntityResponse#details #details} => String
+    #   * {Types::DescribeEntityResponse#details_document #details_document} => Hash,Array,String,Numeric,Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -550,11 +551,11 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # Gets a resource-based policy of an Entity that is identified by its
+    # Gets a resource-based policy of an entity that is identified by its
     # resource ARN.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   The Amazon Resource Name (ARN) of the entity resource that is
     #   associated with the resource policy.
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -679,6 +680,11 @@ module Aws::MarketplaceCatalog
     #   isn't provided, the default value is 20.
     #
     # @option params [String] :ownership_type
+    #   Filters the returned set of entities based on their owner. The default
+    #   is `SELF`. To list entities shared with you through AWS Resource
+    #   Access Manager (AWS RAM), set to `SHARED`. Entities shared through the
+    #   AWS Marketplace Catalog API `PutResourcePolicy` operation can't be
+    #   discovered through the `SHARED` parameter.
     #
     # @return [Types::ListEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,11 +772,11 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # Attaches a resource-based policy to an Entity. Examples of an entity
+    # Attaches a resource-based policy to an entity. Examples of an entity
     # include: `AmiProduct` and `ContainerProduct`.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Entity resource you want to
+    #   The Amazon Resource Name (ARN) of the entity resource you want to
     #   associate with a resource policy.
     #
     # @option params [required, String] :policy
@@ -809,10 +815,10 @@ module Aws::MarketplaceCatalog
     # (`entity-id@1`).
     #
     # For more information about working with change sets, see [ Working
-    # with change sets][2]. For information on change types for single-AMI
-    # products, see [Working with single-AMI products][3]. Als, for more
-    # information on change types available for container-based products,
-    # see [Working with container products][4].
+    # with change sets][2]. For information about change types for
+    # single-AMI products, see [Working with single-AMI products][3]. Also,
+    # for more information about change types available for container-based
+    # products, see [Working with container products][4].
     #
     #
     #
@@ -863,7 +869,9 @@ module Aws::MarketplaceCatalog
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         details: "Json", # required
+    #         details: "Json",
+    #         details_document: {
+    #         },
     #         change_name: "ChangeName",
     #       },
     #     ],
@@ -976,7 +984,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

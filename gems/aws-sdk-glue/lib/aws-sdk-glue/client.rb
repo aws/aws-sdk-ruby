@@ -1906,8 +1906,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
     #   resp.jobs[0].source_control_details.owner #=> String
     #   resp.jobs[0].source_control_details.branch #=> String
@@ -7854,8 +7868,22 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
     #   resp.job.source_control_details.owner #=> String
     #   resp.job.source_control_details.branch #=> String
@@ -8937,8 +8965,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
     #   resp.jobs[0].source_control_details.owner #=> String
     #   resp.jobs[0].source_control_details.branch #=> String
@@ -15521,10 +15563,13 @@ module Aws::Glue
     #   repository.
     #
     # @option params [String] :provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #
     # @option params [String] :repository_name
-    #   The name of the remote repository that contains the job artifacts.
+    #   The name of the remote repository that contains the job artifacts. For
+    #   BitBucket providers, `RepositoryName` should include `WorkspaceName`.
+    #   Use the format `<WorkspaceName>/<RepositoryName>`.
     #
     # @option params [String] :repository_owner
     #   The owner of the remote repository that contains the job artifacts.
@@ -15554,7 +15599,7 @@ module Aws::Glue
     #
     #   resp = client.update_job_from_source_control({
     #     job_name: "NameString",
-    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, AWS_CODE_COMMIT
     #     repository_name: "NameString",
     #     repository_owner: "NameString",
     #     branch_name: "NameString",
@@ -15924,10 +15969,13 @@ module Aws::Glue
     #   repository.
     #
     # @option params [String] :provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #
     # @option params [String] :repository_name
-    #   The name of the remote repository that contains the job artifacts.
+    #   The name of the remote repository that contains the job artifacts. For
+    #   BitBucket providers, `RepositoryName` should include `WorkspaceName`.
+    #   Use the format `<WorkspaceName>/<RepositoryName>`.
     #
     # @option params [String] :repository_owner
     #   The owner of the remote repository that contains the job artifacts.
@@ -15957,7 +16005,7 @@ module Aws::Glue
     #
     #   resp = client.update_source_control_from_job({
     #     job_name: "NameString",
-    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, AWS_CODE_COMMIT
     #     repository_name: "NameString",
     #     repository_owner: "NameString",
     #     branch_name: "NameString",
@@ -16306,7 +16354,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

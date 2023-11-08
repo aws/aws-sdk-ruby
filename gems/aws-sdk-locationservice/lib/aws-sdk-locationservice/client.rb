@@ -1888,6 +1888,30 @@ module Aws::LocationService
     #
     #    </note>
     #
+    # @option params [Boolean] :kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #   <note markdown="1"> If you wish to encrypt your data using your own KMS customer managed
+    #   key, then the Bounding Polygon Queries feature will be disabled by
+    #   default. This is because by using this feature, a representation of
+    #   your device positions will not be encrypted using the your KMS managed
+    #   key. The exact device position, however; is still encrypted using your
+    #   managed key.
+    #
+    #    You can choose to opt-in to the Bounding Polygon Quseries feature.
+    #   This is done by setting the `KmsKeyEnableGeospatialQueries` parameter
+    #   to true when creating or updating a Tracker.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #
     # @option params [String] :kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
@@ -1979,6 +2003,7 @@ module Aws::LocationService
     #   resp = client.create_tracker({
     #     description: "ResourceDescription",
     #     event_bridge_enabled: false,
+    #     kms_key_enable_geospatial_queries: false,
     #     kms_key_id: "KmsKeyId",
     #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
@@ -2174,6 +2199,7 @@ module Aws::LocationService
     #   * {Types::DescribeGeofenceCollectionResponse#collection_name #collection_name} => String
     #   * {Types::DescribeGeofenceCollectionResponse#create_time #create_time} => Time
     #   * {Types::DescribeGeofenceCollectionResponse#description #description} => String
+    #   * {Types::DescribeGeofenceCollectionResponse#geofence_count #geofence_count} => Integer
     #   * {Types::DescribeGeofenceCollectionResponse#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeGeofenceCollectionResponse#pricing_plan #pricing_plan} => String
     #   * {Types::DescribeGeofenceCollectionResponse#pricing_plan_data_source #pricing_plan_data_source} => String
@@ -2192,6 +2218,7 @@ module Aws::LocationService
     #   resp.collection_name #=> String
     #   resp.create_time #=> Time
     #   resp.description #=> String
+    #   resp.geofence_count #=> Integer
     #   resp.kms_key_id #=> String
     #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.pricing_plan_data_source #=> String
@@ -2402,6 +2429,7 @@ module Aws::LocationService
     #   * {Types::DescribeTrackerResponse#create_time #create_time} => Time
     #   * {Types::DescribeTrackerResponse#description #description} => String
     #   * {Types::DescribeTrackerResponse#event_bridge_enabled #event_bridge_enabled} => Boolean
+    #   * {Types::DescribeTrackerResponse#kms_key_enable_geospatial_queries #kms_key_enable_geospatial_queries} => Boolean
     #   * {Types::DescribeTrackerResponse#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeTrackerResponse#position_filtering #position_filtering} => String
     #   * {Types::DescribeTrackerResponse#pricing_plan #pricing_plan} => String
@@ -2422,6 +2450,7 @@ module Aws::LocationService
     #   resp.create_time #=> Time
     #   resp.description #=> String
     #   resp.event_bridge_enabled #=> Boolean
+    #   resp.kms_key_enable_geospatial_queries #=> Boolean
     #   resp.kms_key_id #=> String
     #   resp.position_filtering #=> String, one of "TimeBased", "DistanceBased", "AccuracyBased"
     #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
@@ -2683,7 +2712,7 @@ module Aws::LocationService
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
     #
-    #   Valid fonts stacks for [Esri][1] styles:
+    #   Valid font stacks for [Esri][1] styles:
     #
     #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu Medium`
     #     \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
@@ -3056,6 +3085,9 @@ module Aws::LocationService
 
     # A batch request to retrieve all device positions.
     #
+    # @option params [Types::TrackingFilterGeometry] :filter_geometry
+    #   The geomerty used to filter device positions.
+    #
     # @option params [Integer] :max_results
     #   An optional limit for the number of entries returned in a single call.
     #
@@ -3080,6 +3112,13 @@ module Aws::LocationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_device_positions({
+    #     filter_geometry: {
+    #       polygon: [
+    #         [
+    #           [1.0],
+    #         ],
+    #       ],
+    #     },
     #     max_results: 1,
     #     next_token: "Token",
     #     tracker_name: "ResourceName", # required
@@ -4456,6 +4495,17 @@ module Aws::LocationService
     #
     #    </note>
     #
+    # @option params [Boolean] :kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #
     # @option params [String] :position_filtering
     #   Updates the position filtering for the tracker resource.
     #
@@ -4505,6 +4555,7 @@ module Aws::LocationService
     #   resp = client.update_tracker({
     #     description: "ResourceDescription",
     #     event_bridge_enabled: false,
+    #     kms_key_enable_geospatial_queries: false,
     #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
@@ -4539,7 +4590,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -813,6 +813,9 @@ module Aws::ECR
     #   with a namespace to group the repository into a category (such as
     #   `project-a/nginx-web-app`).
     #
+    #   The repository name must start with a letter and can only contain
+    #   lowercase letters, numbers, hyphens, underscores, and forward slashes.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the repository to help you categorize
     #   and organize them. Each tag consists of a key and an optional value,
@@ -866,8 +869,8 @@ module Aws::ECR
     #     repository_name: "RepositoryName", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
@@ -1662,8 +1665,8 @@ module Aws::ECR
     #   {
     #     authorization_data: [
     #       {
-    #         authorization_token: "QVdTOkN...", 
-    #         expires_at: Time.parse("1470951892432"), 
+    #         authorization_token: "QVdTOkNEXAMPLE", 
+    #         expires_at: Time.parse("2022-05-17T06:56:13.652000+00:00"), 
     #         proxy_endpoint: "https://012345678901.dkr.ecr.us-west-2.amazonaws.com", 
     #       }, 
     #     ], 
@@ -2746,8 +2749,8 @@ module Aws::ECR
     #     resource_arn: "Arn", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -2872,7 +2875,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

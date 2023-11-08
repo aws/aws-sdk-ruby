@@ -241,8 +241,8 @@ module Aws::MedicalImaging
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) assigned to the AWS Key Management
-    #   Service (AWS KMS) key for accessing encrypted data.
+    #   The Amazon Resource Name (ARN) assigned to the Key Management
+    #   Service (KMS) key for accessing encrypted data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CreateDatastoreRequest AWS API Documentation
@@ -509,8 +509,8 @@ module Aws::MedicalImaging
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) assigned to the AWS Key Management
-    #   Service (AWS KMS) key for accessing encrypted data.
+    #   The Amazon Resource Name (ARN) assigned to the Key Management
+    #   Service (KMS) key for accessing encrypted data.
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
@@ -944,12 +944,12 @@ module Aws::MedicalImaging
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
-    #   The time an image set is created in AWS HealthImaging. Sample
-    #   creation date is provided in `1985-04-12T23:20:50.52Z` format.
+    #   The time an image set is created. Sample creation date is provided
+    #   in `1985-04-12T23:20:50.52Z` format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The time when an image was last updated in AWS HealthImaging.
+    #   The time an image set was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] dicom_tags
@@ -1524,8 +1524,7 @@ module Aws::MedicalImaging
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints set by the service.
     #
     # @!attribute [rw] message
     #   @return [String]

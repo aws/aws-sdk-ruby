@@ -176,6 +176,7 @@ module Aws::WAFV2
     IPString = Shapes::StringShape.new(name: 'IPString')
     ImmunityTimeProperty = Shapes::StructureShape.new(name: 'ImmunityTimeProperty')
     InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
+    JA3Fingerprint = Shapes::StructureShape.new(name: 'JA3Fingerprint')
     JsonBody = Shapes::StructureShape.new(name: 'JsonBody')
     JsonMatchPattern = Shapes::StructureShape.new(name: 'JsonMatchPattern')
     JsonMatchScope = Shapes::StringShape.new(name: 'JsonMatchScope')
@@ -439,6 +440,7 @@ module Aws::WAFV2
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
+    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMachineLearning"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
 
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))
@@ -716,6 +718,7 @@ module Aws::WAFV2
     FieldToMatch.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
     FieldToMatch.add_member(:cookies, Shapes::ShapeRef.new(shape: Cookies, location_name: "Cookies"))
     FieldToMatch.add_member(:header_order, Shapes::ShapeRef.new(shape: HeaderOrder, location_name: "HeaderOrder"))
+    FieldToMatch.add_member(:ja3_fingerprint, Shapes::ShapeRef.new(shape: JA3Fingerprint, location_name: "JA3Fingerprint"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     Filter.add_member(:behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "Behavior"))
@@ -915,6 +918,9 @@ module Aws::WAFV2
 
     ImmunityTimeProperty.add_member(:immunity_time, Shapes::ShapeRef.new(shape: TimeWindowSecond, required: true, location_name: "ImmunityTime"))
     ImmunityTimeProperty.struct_class = Types::ImmunityTimeProperty
+
+    JA3Fingerprint.add_member(:fallback_behavior, Shapes::ShapeRef.new(shape: FallbackBehavior, required: true, location_name: "FallbackBehavior"))
+    JA3Fingerprint.struct_class = Types::JA3Fingerprint
 
     JsonBody.add_member(:match_pattern, Shapes::ShapeRef.new(shape: JsonMatchPattern, required: true, location_name: "MatchPattern"))
     JsonBody.add_member(:match_scope, Shapes::ShapeRef.new(shape: JsonMatchScope, required: true, location_name: "MatchScope"))

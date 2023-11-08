@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-11-06)
+------------------
+
+* Feature - Add partitional endpoint for iso-e.
+
+1.89.0 (2023-10-25)
+------------------
+
+* Feature - Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
+
+1.88.0 (2023-10-24)
+------------------
+
+* Feature - Add the partitional endpoint for IAM in iso-f.
+
+1.87.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.86.0 (2023-07-13)
 ------------------
 

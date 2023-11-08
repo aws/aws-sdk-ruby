@@ -89,8 +89,8 @@ module Aws::RDS
       data[:event_categories_list]
     end
 
-    # A Boolean value indicating if the subscription is enabled. True
-    # indicates the subscription is enabled.
+    # Specifies whether the subscription is enabled. True indicates the
+    # subscription is enabled.
     # @return [Boolean]
     def enabled
       data[:enabled]
@@ -310,7 +310,7 @@ module Aws::RDS
     #   parameter to `db-instance`. For RDS Proxy events, specify `db-proxy`.
     #   If this value isn't specified, all events are returned.
     #
-    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
+    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
     #   `db-proxy`
     # @option options [Array<String>] :event_categories
@@ -357,8 +357,8 @@ module Aws::RDS
     #   * If the source type is an RDS Proxy, a `DBProxyName` value must be
     #     supplied.
     # @option options [Boolean] :enabled
-    #   A value that indicates whether to activate the subscription. If the
-    #   event notification subscription isn't activated, the subscription is
+    #   Specifies whether to activate the subscription. If the event
+    #   notification subscription isn't activated, the subscription is
     #   created but not active.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -416,7 +416,7 @@ module Aws::RDS
     #   set this parameter to db-instance. For RDS Proxy events, specify
     #   `db-proxy`. If this value isn't specified, all events are returned.
     #
-    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
+    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
     #   `db-proxy`
     # @option options [Array<String>] :event_categories
@@ -429,7 +429,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     # @option options [Boolean] :enabled
-    #   A value that indicates whether to activate the subscription.
+    #   Specifies whether to activate the subscription.
     # @return [EventSubscription]
     def modify(options = {})
       options = options.merge(subscription_name: @name)

@@ -1350,16 +1350,11 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #
     # @option params [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #
     # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,10 +1692,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
-    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
-    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pairs to associate with this stack set and the stacks
@@ -1725,7 +1720,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #
     # @option params [String] :execution_role_name
     #   The name of the IAM execution role to use to create the stack set. If
@@ -2383,9 +2378,9 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.resource_type #=> String
     #   resp.changes[0].resource_change.replacement #=> String, one of "True", "False", "Conditional"
     #   resp.changes[0].resource_change.scope #=> Array
-    #   resp.changes[0].resource_change.scope[0] #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "Tags"
+    #   resp.changes[0].resource_change.scope[0] #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details #=> Array
-    #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "Tags"
+    #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details[0].target.name #=> String
     #   resp.changes[0].resource_change.details[0].target.requires_recreation #=> String, one of "Never", "Conditionally", "Always"
     #   resp.changes[0].resource_change.details[0].evaluation #=> String, one of "Static", "Dynamic"
@@ -3235,8 +3230,12 @@ module Aws::CloudFormation
     #
     # @option params [String] :stack_name
     #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
-    #   response that describes all resources in the account. This requires
-    #   `ListStacks` and `DescribeStacks` permissions.
+    #   response that describes all resources in the account, which can impact
+    #   performance. This requires `ListStacks` and `DescribeStacks`
+    #   permissions.
+    #
+    #    Consider using the ListStacks API if you're not passing a parameter
+    #   to `StackName`.
     #
     #    The IAM policy below can be added to IAM policies when you want to
     #   limit resource-level permissions and avoid returning a response when
@@ -3886,16 +3885,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html
     #
     # @option params [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5707,16 +5701,11 @@ module Aws::CloudFormation
     #   A unique identifier for this `RollbackStack` request.
     #
     # @option params [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #
     # @return [Types::RollbackStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6404,16 +6393,11 @@ module Aws::CloudFormation
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #
     # @option params [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #
     # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6782,10 +6766,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
-    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
-    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pairs to associate with this stack set and the stacks
@@ -6838,7 +6822,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #
     # @option params [String] :execution_role_name
     #   The name of the IAM execution role to use to update the stack set. If
@@ -7176,7 +7160,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

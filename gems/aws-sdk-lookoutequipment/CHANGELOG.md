@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-09-14)
+------------------
+
+* Feature - This release adds APIs for the new scheduled retraining feature.
+
 1.22.0 (2023-07-31)
 ------------------
 

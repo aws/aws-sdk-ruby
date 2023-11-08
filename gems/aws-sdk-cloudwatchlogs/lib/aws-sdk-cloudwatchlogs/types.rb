@@ -2493,13 +2493,22 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   Used as an idempotency token, to avoid returning an exception if the
+    #   service receives the same request twice because of a network error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionRequest AWS API Documentation
     #
     class PutQueryDefinitionRequest < Struct.new(
       :name,
       :query_definition_id,
       :log_group_names,
-      :query_string)
+      :query_string,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

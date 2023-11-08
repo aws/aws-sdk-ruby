@@ -52,6 +52,6 @@ require_relative 'aws-sdk-timestreamquery/customizations'
 # @!group service
 module Aws::TimestreamQuery
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.25.0'
 
 end

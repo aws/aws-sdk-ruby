@@ -1205,6 +1205,10 @@ module Aws::Route53
     #   * If you send a `CreateHealthCheck` request with a unique
     #     `CallerReference` but settings identical to an existing health
     #     check, Route 53 creates the health check.
+    #
+    #   Route 53 does not store the `CallerReference` for a deleted health
+    #   check indefinitely. The `CallerReference` for a deleted health check
+    #   will be deleted after a number of days.
     #   @return [String]
     #
     # @!attribute [rw] health_check_config
@@ -2325,6 +2329,8 @@ module Aws::Route53
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
     #
+    #   Route 53 also supports the contry code **UA** forr Ukraine.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -2574,6 +2580,8 @@ module Aws::Route53
     # @!attribute [rw] country_code
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
+    #
+    #   Route 53 also supports the contry code **UA** forr Ukraine.
     #
     #
     #
@@ -4633,8 +4641,9 @@ module Aws::Route53
     # @!attribute [rw] max_items
     #   The maximum number of health checks that you want `ListHealthChecks`
     #   to return in response to the current request. Amazon Route 53
-    #   returns a maximum of 100 items. If you set `MaxItems` to a value
-    #   greater than 100, Route 53 returns only the first 100 health checks.
+    #   returns a maximum of 1000 items. If you set `MaxItems` to a value
+    #   greater than 1000, Route 53 returns only the first 1000 health
+    #   checks.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksRequest AWS API Documentation
@@ -4906,12 +4915,17 @@ module Aws::Route53
     #   set, specify the ID of that reusable delegation set.
     #   @return [String]
     #
+    # @!attribute [rw] hosted_zone_type
+    #   (Optional) Specifies if the hosted zone is private.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesRequest AWS API Documentation
     #
     class ListHostedZonesRequest < Struct.new(
       :marker,
       :max_items,
-      :delegation_set_id)
+      :delegation_set_id,
+      :hosted_zone_type)
       SENSITIVE = []
       include Aws::Structure
     end

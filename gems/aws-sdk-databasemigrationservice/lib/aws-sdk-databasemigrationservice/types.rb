@@ -471,25 +471,25 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] max_capacity_units
     #   Specifies the maximum value of the DMS capacity units (DCUs) for
     #   which a given DMS Serverless replication can be provisioned. A
-    #   single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed.
-    #   The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192,
-    #   256, and 384. So, the maximum value that you can specify for DMS
-    #   Serverless is 384. The `MaxCapacityUnits` parameter is the only DCU
-    #   parameter you are required to specify.
+    #   single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed.
+    #   The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128,
+    #   192, 256, and 384. So, the maximum value that you can specify for
+    #   DMS Serverless is 384. The `MaxCapacityUnits` parameter is the only
+    #   DCU parameter you are required to specify.
     #   @return [Integer]
     #
     # @!attribute [rw] min_capacity_units
     #   Specifies the minimum value of the DMS capacity units (DCUs) for
     #   which a given DMS Serverless replication can be provisioned. A
-    #   single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed.
-    #   The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192,
-    #   256, and 384. So, the minimum DCU value that you can specify for DMS
-    #   Serverless is 2. You don't have to specify a value for the
+    #   single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed.
+    #   The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128,
+    #   192, 256, and 384. So, the minimum DCU value that you can specify
+    #   for DMS Serverless is 1. You don't have to specify a value for the
     #   `MinCapacityUnits` parameter. If you don't set this value, DMS
     #   scans the current activity of available source tables to identify an
     #   optimum setting for this parameter. If there is no current source
     #   activity or DMS can't otherwise identify a more appropriate value,
-    #   it sets this parameter to the minimum DCU value allowed, 2.
+    #   it sets this parameter to the minimum DCU value allowed, 1.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
@@ -1496,15 +1496,6 @@ module Aws::DatabaseMigrationService
     #   window. This parameter defaults to `true`.
     #
     #   Default: `true`
-    #
-    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
-    #   default engine version when you create a replication instance. For
-    #   example, if you set `EngineVersion` to a lower version number than
-    #   the current default version, DMS uses the default version.
-    #
-    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you create a
-    #   replication instance, DMS uses the engine version specified by the
-    #   `EngineVersion` parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1735,8 +1726,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1909,6 +1900,10 @@ module Aws::DatabaseMigrationService
     #
     # @note DataProviderSettings is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataProviderSettings corresponding to the set member.
     #
+    # @!attribute [rw] redshift_settings
+    #   Provides information that defines an Amazon Redshift data provider.
+    #   @return [Types::RedshiftDataProviderSettings]
+    #
     # @!attribute [rw] postgre_sql_settings
     #   Provides information that defines a PostgreSQL data provider.
     #   @return [Types::PostgreSqlDataProviderSettings]
@@ -1926,22 +1921,42 @@ module Aws::DatabaseMigrationService
     #   provider.
     #   @return [Types::MicrosoftSqlServerDataProviderSettings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB data provider.
+    #   @return [Types::DocDbDataProviderSettings]
+    #
+    # @!attribute [rw] maria_db_settings
+    #   Provides information that defines a MariaDB data provider.
+    #   @return [Types::MariaDbDataProviderSettings]
+    #
+    # @!attribute [rw] mongo_db_settings
+    #   Provides information that defines a MongoDB data provider.
+    #   @return [Types::MongoDbDataProviderSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DataProviderSettings AWS API Documentation
     #
     class DataProviderSettings < Struct.new(
+      :redshift_settings,
       :postgre_sql_settings,
       :my_sql_settings,
       :oracle_settings,
       :microsoft_sql_server_settings,
+      :doc_db_settings,
+      :maria_db_settings,
+      :mongo_db_settings,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class RedshiftSettings < DataProviderSettings; end
       class PostgreSqlSettings < DataProviderSettings; end
       class MySqlSettings < DataProviderSettings; end
       class OracleSettings < DataProviderSettings; end
       class MicrosoftSqlServerSettings < DataProviderSettings; end
+      class DocDbSettings < DataProviderSettings; end
+      class MariaDbSettings < DataProviderSettings; end
+      class MongoDbSettings < DataProviderSettings; end
       class Unknown < DataProviderSettings; end
     end
 
@@ -4775,6 +4790,42 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a DocumentDB data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the source DocumentDB server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the DocumentDB data provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the DocumentDB data provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the DocumentDB data provider. The
+    #   default value is `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate used for SSL
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DocDbDataProviderSettings AWS API Documentation
+    #
+    class DocDbDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :database_name,
+      :ssl_mode,
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines a DocumentDB endpoint.
     #
     # @!attribute [rw] username
@@ -6517,6 +6568,37 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a MariaDB data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the MariaDB server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the MariaDB data provider
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the MariaDB data provider. The
+    #   default value is `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate used for SSL
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MariaDbDataProviderSettings AWS API Documentation
+    #
+    class MariaDbDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :ssl_mode,
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines a Microsoft SQL Server endpoint.
     #
     # @!attribute [rw] port
@@ -6639,8 +6721,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] trim_space_in_char
-    #   Use the `TrimSpaceInChar` source endpoint setting to trim data on
-    #   CHAR and NCHAR data types during migration. The default value is
+    #   Use the `TrimSpaceInChar` source endpoint setting to right-trim data
+    #   on CHAR and NCHAR data types during migration. Setting
+    #   `TrimSpaceInChar` does not left-trim data. The default value is
     #   `true`.
     #   @return [Boolean]
     #
@@ -7583,15 +7666,6 @@ module Aws::DatabaseMigrationService
     #   * A newer minor version is available.
     #
     #   * DMS has enabled automatic patching for the given engine version.
-    #
-    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
-    #   default engine version when you modify a replication instance. For
-    #   example, if you set `EngineVersion` to a lower version number than
-    #   the current default version, DMS uses the default version.
-    #
-    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you modify a
-    #   replication instance, DMS uses the engine version specified by the
-    #   `EngineVersion` parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] replication_instance_identifier
@@ -7748,8 +7822,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] task_data
@@ -7791,6 +7865,62 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a MongoDB data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the MongoDB server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the MongoDB data provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the MongoDB data provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the MongoDB data provider. The
+    #   default value is `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate used for SSL
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type for the database connection. Valid values
+    #   are PASSWORD or NO.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_source
+    #   The MongoDB database name. This setting isn't used when `AuthType`
+    #   is set to `"no"`.
+    #
+    #   The default is `"admin"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_mechanism
+    #   The authentication method for connecting to the data provider. Valid
+    #   values are DEFAULT, MONGODB\_CR, or SCRAM\_SHA\_1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbDataProviderSettings AWS API Documentation
+    #
+    class MongoDbDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :database_name,
+      :ssl_mode,
+      :certificate_arn,
+      :auth_type,
+      :auth_source,
+      :auth_mechanism)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines a MongoDB endpoint.
     #
     # @!attribute [rw] username
@@ -7803,7 +7933,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] server_name
-    #   The name of the server on the MongoDB source endpoint.
+    #   The name of the server on the MongoDB source endpoint. For MongoDB
+    #   Atlas, provide the server name for any of the servers in the
+    #   replication set.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -8683,8 +8815,8 @@ module Aws::DatabaseMigrationService
     #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
     #   can specify the values for this setting and
     #   `SecretsManagerOracleAsmSecretId`. Or you can specify clear-text
-    #   values for `AsmUserName`, `AsmPassword`, and `AsmServerName`. You
-    #   can't specify both. For more information on creating this
+    #   values for `AsmUser`, `AsmPassword`, and `AsmServerName`. You can't
+    #   specify both. For more information on creating this
     #   `SecretsManagerOracleAsmSecret` and the
     #   `SecretsManagerOracleAsmAccessRoleArn` and
     #   `SecretsManagerOracleAsmSecretId` required to access it, see [Using
@@ -9077,7 +9209,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] map_boolean_as_boolean
     #   When true, lets PostgreSQL migrate the boolean type as boolean. By
-    #   default, PostgreSQL migrates booleans as `varchar(5)`.
+    #   default, PostgreSQL migrates booleans as `varchar(5)`. You must set
+    #   this setting on both the source and target endpoints for it to take
+    #   effect.
     #   @return [Boolean]
     #
     # @!attribute [rw] map_jsonb_as_clob
@@ -9551,6 +9685,30 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines an Amazon Redshift data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the Amazon Redshift server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the Amazon Redshift data provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the Amazon Redshift data provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftDataProviderSettings AWS API Documentation
+    #
+    class RedshiftDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :database_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines an Amazon Redshift endpoint.
     #
     # @!attribute [rw] accept_any_date
@@ -9799,7 +9957,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] map_boolean_as_boolean
     #   When true, lets Redshift migrate the boolean type as boolean. By
-    #   default, Redshift migrates booleans as `varchar(1)`.
+    #   default, Redshift migrates booleans as `varchar(1)`. You must set
+    #   this setting on both the source and target endpoints for it to take
+    #   effect.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
@@ -10827,8 +10987,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #   @return [String]
     #
     # @!attribute [rw] recovery_checkpoint
@@ -11817,7 +11977,7 @@ module Aws::DatabaseMigrationService
     #   An optional parameter that specifies how DMS treats null values.
     #   While handling the null value, you can use this parameter to pass a
     #   user-defined string as null when writing to the target. For example,
-    #   when target columns are not nullable, you can use this option to
+    #   when target columns are nullable, you can use this option to
     #   differentiate between the empty string value and the null value. So,
     #   if you set this parameter value to the empty string ("" or ''),
     #   DMS treats the empty string as the null value instead of `NULL`.
@@ -12643,8 +12803,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskMessage AWS API Documentation
@@ -13209,7 +13369,7 @@ module Aws::DatabaseMigrationService
     #   When set to true, this operation migrates DMS subscriptions for
     #   Amazon SNS notifications no matter what your replication instance
     #   version is. If not set or set to false, this operation runs only
-    #   when all your replication instances are from DMS version 3.4.6 or
+    #   when all your replication instances are from DMS version 3.4.5 or
     #   higher.
     #   @return [Boolean]
     #

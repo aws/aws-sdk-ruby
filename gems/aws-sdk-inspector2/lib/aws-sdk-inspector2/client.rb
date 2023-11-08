@@ -761,7 +761,9 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
-    # Creates a filter resource using specified filter criteria.
+    # Creates a filter resource using specified filter criteria. When the
+    # filter action is set to `SUPPRESS` this action creates a suppression
+    # rule.
     #
     # @option params [required, String] :action
     #   Defines the action that is to be applied to the findings that match
@@ -2148,14 +2150,18 @@ module Aws::Inspector2
     # Lists the permissions an account has to configure Amazon Inspector.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the NextToken value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @option params [String] :service
     #   The service scan type to check permissions for.
@@ -2198,14 +2204,18 @@ module Aws::Inspector2
     #   coverage data for your environment.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @return [Types::ListCoverageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2310,7 +2320,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].last_scanned_at #=> Time
     #   resp.covered_resources[0].resource_id #=> String
     #   resp.covered_resources[0].resource_metadata.ec2.ami_id #=> String
-    #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN"
+    #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN", "MACOS"
     #   resp.covered_resources[0].resource_metadata.ec2.tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.ec2.tags["MapKey"] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags #=> Array
@@ -2472,14 +2482,18 @@ module Aws::Inspector2
     # of your organization.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @return [Types::ListDelegatedAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2520,14 +2534,18 @@ module Aws::Inspector2
     #   The Amazon resource number (ARN) of the filter.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @return [Types::ListFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2723,14 +2741,18 @@ module Aws::Inspector2
     #   The type of the aggregation request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @return [Types::ListFindingAggregationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3059,14 +3081,18 @@ module Aws::Inspector2
     #   Details on the filters to apply to your finding results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @option params [Types::SortCriteria] :sort_criteria
     #   Details on the sort criteria to apply to your finding results.
@@ -3504,14 +3530,18 @@ module Aws::Inspector2
     # administrator for your organization.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @option params [Boolean] :only_associated
     #   Specifies whether to list only currently associated members if `True`
@@ -3585,14 +3615,18 @@ module Aws::Inspector2
     #   The Amazon Web Services account IDs to retrieve usage totals for.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the response.
+    #   The maximum number of results the response can return. If your request
+    #   would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
-    #   request to a list action. For subsequent calls, use the `NextToken`
-    #   value returned from the previous request to continue listing results
-    #   after the first page.
+    #   request to a list action. If your response returns more than the
+    #   `maxResults` maximum value it will also return a `nextToken` value.
+    #   For subsequent calls, use the `nextToken` value returned from the
+    #   previous request to continue listing results after the first page.
     #
     # @return [Types::ListUsageTotalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4297,7 +4331,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

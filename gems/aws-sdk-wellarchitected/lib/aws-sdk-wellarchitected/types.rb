@@ -117,6 +117,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -685,9 +688,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -930,9 +933,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -976,6 +979,127 @@ module Aws::WellArchitected
     class CreateProfileShareOutput < Struct.new(
       :share_id,
       :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_name
+    #   Name of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The review template description.
+    #   @return [String]
+    #
+    # @!attribute [rw] lenses
+    #   Lenses applied to the review template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the review template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateReviewTemplateInput AWS API Documentation
+    #
+    class CreateReviewTemplateInput < Struct.new(
+      :template_name,
+      :description,
+      :lenses,
+      :notes,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateReviewTemplateOutput AWS API Documentation
+    #
+    class CreateReviewTemplateOutput < Struct.new(
+      :template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateTemplateShareInput AWS API Documentation
+    #
+    class CreateTemplateShareInput < Struct.new(
+      :template_arn,
+      :shared_with,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateTemplateShareOutput AWS API Documentation
+    #
+    class CreateTemplateShareOutput < Struct.new(
+      :template_arn,
+      :share_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1096,10 +1220,17 @@ module Aws::WellArchitected
     # @!attribute [rw] lenses
     #   The list of lenses associated with the workload. Each lens is
     #   identified by its LensSummary$LensAlias.
+    #
+    #   If a review template that specifies lenses is applied to the
+    #   workload, those lenses are applied to the workload in addition to
+    #   these lenses.
     #   @return [Array<String>]
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1137,6 +1268,10 @@ module Aws::WellArchitected
     #   The list of profile ARNs associated with the workload.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] review_template_arns
+    #   The list of review template ARNs to associate with the workload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadInput AWS API Documentation
     #
     class CreateWorkloadInput < Struct.new(
@@ -1157,7 +1292,8 @@ module Aws::WellArchitected
       :tags,
       :discovery_config,
       :applications,
-      :profile_arns)
+      :profile_arns,
+      :review_template_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1190,9 +1326,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -1404,6 +1540,73 @@ module Aws::WellArchitected
     class DeleteProfileShareInput < Struct.new(
       :share_id,
       :profile_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteReviewTemplateInput AWS API Documentation
+    #
+    class DeleteReviewTemplateInput < Struct.new(
+      :template_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteTemplateShareInput AWS API Documentation
+    #
+    class DeleteTemplateShareInput < Struct.new(
+      :share_id,
+      :template_arn,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2053,6 +2256,141 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateAnswerInput AWS API Documentation
+    #
+    class GetReviewTemplateAnswerInput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :question_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer
+    #   An answer of the question.
+    #   @return [Types::ReviewTemplateAnswer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateAnswerOutput AWS API Documentation
+    #
+    class GetReviewTemplateAnswerOutput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :answer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateInput AWS API Documentation
+    #
+    class GetReviewTemplateInput < Struct.new(
+      :template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateLensReviewInput AWS API Documentation
+    #
+    class GetReviewTemplateLensReviewInput < Struct.new(
+      :template_arn,
+      :lens_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_review
+    #   A lens review of a question.
+    #   @return [Types::ReviewTemplateLensReview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateLensReviewOutput AWS API Documentation
+    #
+    class GetReviewTemplateLensReviewOutput < Struct.new(
+      :template_arn,
+      :lens_review)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] review_template
+    #   The review template.
+    #   @return [Types::ReviewTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetReviewTemplateOutput AWS API Documentation
+    #
+    class GetReviewTemplateOutput < Struct.new(
+      :review_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input to get a workload.
     #
     # @!attribute [rw] workload_id
@@ -2323,6 +2661,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] risk_counts
@@ -2476,9 +2817,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2612,6 +2953,18 @@ module Aws::WellArchitected
     #   The latest version of the lens.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   `ResourceArn` of the lens being upgraded
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the workload.
+    #
+    #   The name must be unique within an account within an Amazon Web
+    #   Services Region. Spaces and capitalization are ignored when checking
+    #   for uniqueness.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensUpgradeSummary AWS API Documentation
     #
     class LensUpgradeSummary < Struct.new(
@@ -2620,7 +2973,9 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_arn,
       :current_lens_version,
-      :latest_lens_version)
+      :latest_lens_version,
+      :resource_arn,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3057,7 +3412,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with_prefix
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   The Amazon Web Services account ID, organization ID, or
     #   organizational unit (OU) ID with which the lens is shared.
     #   @return [String]
     #
@@ -3218,12 +3573,21 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN for the related resource for the notification.
+    #
+    #   <note markdown="1"> Only one of `WorkloadID` or `ResourceARN` should be specified.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListNotificationsInput AWS API Documentation
     #
     class ListNotificationsInput < Struct.new(
       :workload_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3290,7 +3654,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with_prefix
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   The Amazon Web Services account ID, organization ID, or
     #   organizational unit (OU) ID with which the profile is shared.
     #   @return [String]
     #
@@ -3336,7 +3700,8 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] profile_name_prefix
-    #   Prefix for profile name.
+    #   An optional string added to the beginning of each profile name
+    #   returned in the results.
     #   @return [String]
     #
     # @!attribute [rw] profile_owner_type
@@ -3379,6 +3744,123 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] template_arn
+    #   The ARN of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListReviewTemplateAnswersInput AWS API Documentation
+    #
+    class ListReviewTemplateAnswersInput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :pillar_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The ARN of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_summaries
+    #   List of answer summaries of a lens review in a review template.
+    #   @return [Array<Types::ReviewTemplateAnswerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListReviewTemplateAnswersOutput AWS API Documentation
+    #
+    class ListReviewTemplateAnswersOutput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :answer_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListReviewTemplatesInput AWS API Documentation
+    #
+    class ListReviewTemplatesInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] review_templates
+    #   List of review templates.
+    #   @return [Array<Types::ReviewTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListReviewTemplatesOutput AWS API Documentation
+    #
+    class ListReviewTemplatesOutput < Struct.new(
+      :review_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for List Share Invitations
     #
     # @!attribute [rw] workload_name_prefix
@@ -3404,7 +3886,13 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] profile_name_prefix
-    #   Profile name prefix.
+    #   An optional string added to the beginning of each profile name
+    #   returned in the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name_prefix
+    #   An optional string added to the beginning of each review template
+    #   name returned in the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListShareInvitationsInput AWS API Documentation
@@ -3415,7 +3903,8 @@ module Aws::WellArchitected
       :share_resource_type,
       :next_token,
       :max_results,
-      :profile_name_prefix)
+      :profile_name_prefix,
+      :template_name_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3463,6 +3952,61 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with_prefix
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the profile is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the share request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTemplateSharesInput AWS API Documentation
+    #
+    class ListTemplateSharesInput < Struct.new(
+      :template_arn,
+      :shared_with_prefix,
+      :next_token,
+      :max_results,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_share_summaries
+    #   A review template share summary return object.
+    #   @return [Array<Types::TemplateShareSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTemplateSharesOutput AWS API Documentation
+    #
+    class ListTemplateSharesOutput < Struct.new(
+      :template_arn,
+      :template_share_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for List Workload Share
     #
     # @!attribute [rw] workload_id
@@ -3471,7 +4015,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with_prefix
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   The Amazon Web Services account ID, organization ID, or
     #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
@@ -3725,6 +4269,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] risk_counts
@@ -3951,9 +4498,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4184,6 +4731,394 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A review template.
+    #
+    # @!attribute [rw] description
+    #   The review template description.
+    #   @return [String]
+    #
+    # @!attribute [rw] lenses
+    #   The lenses applied to the review template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_counts
+    #   A count of how many total questions are answered and unanswered in
+    #   the review template.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] owner
+    #   An Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the review template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] update_status
+    #   The latest status of a review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_invitation_id
+    #   The ID assigned to the template share invitation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplate AWS API Documentation
+    #
+    class ReviewTemplate < Struct.new(
+      :description,
+      :lenses,
+      :notes,
+      :question_counts,
+      :owner,
+      :updated_at,
+      :template_arn,
+      :template_name,
+      :tags,
+      :update_status,
+      :share_invitation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An answer of the question.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_title
+    #   The title of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_description
+    #   The description of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] improvement_plan_url
+    #   The improvement plan URL for a question in an Amazon Web Services
+    #   official lenses.
+    #
+    #   This value is only available if the question has been answered.
+    #
+    #   This value does not apply to custom lenses.
+    #   @return [String]
+    #
+    # @!attribute [rw] helpful_resource_url
+    #   The helpful resource URL.
+    #
+    #   For Amazon Web Services official lenses, this is the helpful
+    #   resource URL for a question or choice.
+    #
+    #   For custom lenses, this is the helpful resource URL for a question
+    #   and is only provided if `HelpfulResourceDisplayText` was specified
+    #   for the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] helpful_resource_display_text
+    #   The helpful resource text to be displayed for a custom lens.
+    #
+    #   <note markdown="1"> This field does not apply to Amazon Web Services official lenses.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] choices
+    #   List of choices available for a question.
+    #   @return [Array<Types::Choice>]
+    #
+    # @!attribute [rw] selected_choices
+    #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] choice_answers
+    #   A list of selected choices to a question in your review template.
+    #   @return [Array<Types::ChoiceAnswer>]
+    #
+    # @!attribute [rw] is_applicable
+    #   Defines whether this question is applicable to a lens review.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] answer_status
+    #   The status of whether or not this question has been answered.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why the question is not applicable to your review
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplateAnswer AWS API Documentation
+    #
+    class ReviewTemplateAnswer < Struct.new(
+      :question_id,
+      :pillar_id,
+      :question_title,
+      :question_description,
+      :improvement_plan_url,
+      :helpful_resource_url,
+      :helpful_resource_display_text,
+      :choices,
+      :selected_choices,
+      :choice_answers,
+      :is_applicable,
+      :answer_status,
+      :notes,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of review template answers.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_title
+    #   The title of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] choices
+    #   List of choices available for a question.
+    #   @return [Array<Types::Choice>]
+    #
+    # @!attribute [rw] selected_choices
+    #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] choice_answer_summaries
+    #   A list of selected choices to a question in the review template.
+    #   @return [Array<Types::ChoiceAnswerSummary>]
+    #
+    # @!attribute [rw] is_applicable
+    #   Defines whether this question is applicable to a lens review.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] answer_status
+    #   The status of whether or not this question has been answered.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why a choice is not-applicable to a question in the
+    #   review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_type
+    #   The type of question.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplateAnswerSummary AWS API Documentation
+    #
+    class ReviewTemplateAnswerSummary < Struct.new(
+      :question_id,
+      :pillar_id,
+      :question_title,
+      :choices,
+      :selected_choices,
+      :choice_answer_summaries,
+      :is_applicable,
+      :answer_status,
+      :reason,
+      :question_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lens review of a review template.
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_arn
+    #   The lens ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_version
+    #   The version of the lens.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_name
+    #   The full name of the lens.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_status
+    #   The status of the lens.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_review_summaries
+    #   Pillar review summaries of a lens review.
+    #   @return [Array<Types::ReviewTemplatePillarReviewSummary>]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_counts
+    #   A count of how many questions are answered and unanswered in the
+    #   lens review.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplateLensReview AWS API Documentation
+    #
+    class ReviewTemplateLensReview < Struct.new(
+      :lens_alias,
+      :lens_arn,
+      :lens_version,
+      :lens_name,
+      :lens_status,
+      :pillar_review_summaries,
+      :updated_at,
+      :notes,
+      :question_counts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a review template.
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_name
+    #   The name of the pillar.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_counts
+    #   A count of how many questions are answered and unanswered in the
+    #   requested pillar of the lens review.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplatePillarReviewSummary AWS API Documentation
+    #
+    class ReviewTemplatePillarReviewSummary < Struct.new(
+      :pillar_id,
+      :pillar_name,
+      :notes,
+      :question_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a review template.
+    #
+    # @!attribute [rw] description
+    #   Description of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] lenses
+    #   Lenses associated with the review template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owner
+    #   An Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   The latest status of a review template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ReviewTemplateSummary AWS API Documentation
+    #
+    class ReviewTemplateSummary < Struct.new(
+      :description,
+      :lenses,
+      :owner,
+      :updated_at,
+      :template_arn,
+      :template_name,
+      :update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The user has reached their resource quota.
     #
     # @!attribute [rw] message
@@ -4256,6 +5191,10 @@ module Aws::WellArchitected
     #   The profile ARN.
     #   @return [String]
     #
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ShareInvitation AWS API Documentation
     #
     class ShareInvitation < Struct.new(
@@ -4264,7 +5203,8 @@ module Aws::WellArchitected
       :workload_id,
       :lens_alias,
       :lens_arn,
-      :profile_arn)
+      :profile_arn,
+      :template_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4280,9 +5220,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -4322,6 +5262,14 @@ module Aws::WellArchitected
     #   The profile ARN.
     #   @return [String]
     #
+    # @!attribute [rw] template_name
+    #   The name of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ShareInvitationSummary AWS API Documentation
     #
     class ShareInvitationSummary < Struct.new(
@@ -4335,7 +5283,9 @@ module Aws::WellArchitected
       :lens_name,
       :lens_arn,
       :profile_name,
-      :profile_arn)
+      :profile_arn,
+      :template_name,
+      :template_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4360,6 +5310,37 @@ module Aws::WellArchitected
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # Summary of a review template share.
+    #
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Review template share invitation status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TemplateShareSummary AWS API Documentation
+    #
+    class TemplateShareSummary < Struct.new(
+      :share_id,
+      :shared_with,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Request was denied due to request throttling.
     #
@@ -4446,6 +5427,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] is_applicable
@@ -4553,10 +5537,16 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] lens_notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] pillar_notes
     #   List of pillar notes of a lens review in a workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateLensReviewInput AWS API Documentation
@@ -4620,6 +5610,216 @@ module Aws::WellArchitected
     #
     class UpdateProfileOutput < Struct.new(
       :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_choices
+    #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] choice_updates
+    #   A list of choices to be updated.
+    #   @return [Hash<String,Types::ChoiceUpdate>]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_applicable
+    #   Defines whether this question is applicable to a lens review.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reason
+    #   The update reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateAnswerInput AWS API Documentation
+    #
+    class UpdateReviewTemplateAnswerInput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :question_id,
+      :selected_choices,
+      :choice_updates,
+      :notes,
+      :is_applicable,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer
+    #   An answer of the question.
+    #   @return [Types::ReviewTemplateAnswer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateAnswerOutput AWS API Documentation
+    #
+    class UpdateReviewTemplateAnswerOutput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :answer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The review template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The review template description.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] lenses_to_associate
+    #   A list of lens aliases or ARNs to apply to the review template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] lenses_to_disassociate
+    #   A list of lens aliases or ARNs to unapply to the review template.
+    #   The `wellarchitected` lens cannot be unapplied.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateInput AWS API Documentation
+    #
+    class UpdateReviewTemplateInput < Struct.new(
+      :template_arn,
+      :template_name,
+      :description,
+      :notes,
+      :lenses_to_associate,
+      :lenses_to_disassociate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_notes
+    #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_notes
+    #   List of pillar notes of a lens review in a workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateLensReviewInput AWS API Documentation
+    #
+    class UpdateReviewTemplateLensReviewInput < Struct.new(
+      :template_arn,
+      :lens_alias,
+      :lens_notes,
+      :pillar_notes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The review template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_review
+    #   A lens review of a question.
+    #   @return [Types::ReviewTemplateLensReview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateLensReviewOutput AWS API Documentation
+    #
+    class UpdateReviewTemplateLensReviewOutput < Struct.new(
+      :template_arn,
+      :lens_review)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] review_template
+    #   A review template.
+    #   @return [Types::ReviewTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateReviewTemplateOutput AWS API Documentation
+    #
+    class UpdateReviewTemplateOutput < Struct.new(
+      :review_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4784,6 +5984,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] improvement_status
@@ -4973,6 +6176,50 @@ module Aws::WellArchitected
       :workload_id,
       :profile_arn,
       :milestone_name,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The ARN of the review template.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_alias
+    #   The alias of the lens.
+    #
+    #   For Amazon Web Services official lenses, this is either the lens
+    #   alias, such as `serverless`, or the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
+    #
+    #   For custom lenses, this is the lens ARN, such as
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpgradeReviewTemplateLensReviewInput AWS API Documentation
+    #
+    class UpgradeReviewTemplateLensReviewInput < Struct.new(
+      :template_arn,
+      :lens_alias,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5171,6 +6418,9 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] notes
     #   The notes associated with the workload.
+    #
+    #   For a review template, these are the notes that will be associated
+    #   with the workload when the template is applied.
     #   @return [String]
     #
     # @!attribute [rw] improvement_status
@@ -5191,6 +6441,10 @@ module Aws::WellArchitected
     # @!attribute [rw] lenses
     #   The list of lenses associated with the workload. Each lens is
     #   identified by its LensSummary$LensAlias.
+    #
+    #   If a review template that specifies lenses is applied to the
+    #   workload, those lenses are applied to the workload in addition to
+    #   these lenses.
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner
@@ -5309,9 +6563,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -5356,9 +6610,9 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload, lens, or
-    #   profile is shared.
+    #   The Amazon Web Services account ID, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, profile,
+    #   or review template is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -5415,6 +6669,10 @@ module Aws::WellArchitected
     # @!attribute [rw] lenses
     #   The list of lenses associated with the workload. Each lens is
     #   identified by its LensSummary$LensAlias.
+    #
+    #   If a review template that specifies lenses is applied to the
+    #   workload, those lenses are applied to the workload in addition to
+    #   these lenses.
     #   @return [Array<String>]
     #
     # @!attribute [rw] risk_counts

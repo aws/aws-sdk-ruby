@@ -498,7 +498,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     attribute_details: { # required
     #       attributes: [ # required
     #         {
@@ -3514,7 +3514,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     conditions: {
     #       range: {
     #         value: 1, # required
@@ -3944,7 +3944,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

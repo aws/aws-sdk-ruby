@@ -341,79 +341,122 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides filtering the query results based on document attributes or
-    # metadata fields.
+    # Filters the search results based on document attributes or fields.
     #
-    # When you use the `AndAllFilters` or `OrAllFilters`, filters you can
-    # use 2 layers under the first attribute filter. For example, you can
-    # use:
+    # You can filter results using attributes for your particular documents.
+    # The attributes must exist in your index. For example, if your
+    # documents include the custom attribute "Department", you can filter
+    # documents that belong to the "HR" department. You would use the
+    # `EqualsTo` operation to filter results or documents with
+    # "Department" equals to "HR".
     #
-    # `<AndAllFilters>`
+    # You can use `AndAllFilters` and `AndOrFilters` in combination with
+    # each other or with other operations such as `EqualsTo`. For example:
     #
-    # 1.  ` <OrAllFilters>`
+    # `AndAllFilters`
     #
-    # 2.  ` <EqualsTo>`
+    # * `EqualsTo`: "Department", "HR"
     #
-    # If you use more than 2 layers, you receive a `ValidationException`
-    # exception with the message "`AttributeFilter` cannot have a depth of
-    # more than 2."
+    # * `AndOrFilters`
     #
-    # If you use more than 10 attribute filters in a given list for
-    # `AndAllFilters` or `OrAllFilters`, you receive a `ValidationException`
-    # with the message "`AttributeFilter` cannot have a length of more than
-    # 10".
+    #   * `ContainsAny`: "Project Name", \["new hires", "new hiring"\]
+    #
+    #   ^
+    #
+    # This example filters results or documents that belong to the HR
+    # department *and* belong to projects that contain "new hires" *or*
+    # "new hiring" in the project name (must use `ContainAny` with
+    # `StringListValue`). This example is filtering with a depth of 2.
+    #
+    # You cannot filter more than a depth of 2, otherwise you receive a
+    # `ValidationException` exception with the message "AttributeFilter
+    # cannot have a depth of more than 2." Also, if you use more than 10
+    # attribute filters in a given list for `AndAllFilters` or
+    # `OrAllFilters`, you receive a `ValidationException` with the message
+    # "AttributeFilter cannot have a length of more than 10".
+    #
+    # For examples of using `AttributeFilter`, see [Using document
+    # attributes to filter search results][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering
     #
     # @!attribute [rw] and_all_filters
-    #   Performs a logical `AND` operation on all supplied filters.
+    #   Performs a logical `AND` operation on all filters that you specify.
     #   @return [Array<Types::AttributeFilter>]
     #
     # @!attribute [rw] or_all_filters
-    #   Performs a logical `OR` operation on all supplied filters.
+    #   Performs a logical `OR` operation on all filters that you specify.
     #   @return [Array<Types::AttributeFilter>]
     #
     # @!attribute [rw] not_filter
-    #   Performs a logical `NOT` operation on all supplied filters.
+    #   Performs a logical `NOT` operation on all filters that you specify.
     #   @return [Types::AttributeFilter]
     #
     # @!attribute [rw] equals_to
-    #   Performs an equals operation on two document attributes or metadata
-    #   fields.
+    #   Performs an equals operation on document attributes/fields and their
+    #   values.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_all
     #   Returns true when a document contains all of the specified document
-    #   attributes or metadata fields. This filter is only applicable to
-    #   `StringListValue` metadata.
+    #   attributes/fields. This filter is only applicable to
+    #   [StringListValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_any
     #   Returns true when a document contains any of the specified document
-    #   attributes or metadata fields. This filter is only applicable to
-    #   `StringListValue` metadata.
+    #   attributes/fields. This filter is only applicable to
+    #   [StringListValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than
-    #   Performs a greater than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
+    #   Performs a greater than operation on document attributes/fields and
+    #   their values. Use with the [document attribute type][1] `Date` or
     #   `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
-    #   Performs a greater or equals than operation on two document
-    #   attributes or metadata fields. Use with a document attribute of type
-    #   `Date` or `Long`.
+    #   Performs a greater or equals than operation on document
+    #   attributes/fields and their values. Use with the [document attribute
+    #   type][1] `Date` or `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than
-    #   Performs a less than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
+    #   Performs a less than operation on document attributes/fields and
+    #   their values. Use with the [document attribute type][1] `Date` or
     #   `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than_or_equals
-    #   Performs a less than or equals operation on two document attributes
-    #   or metadata fields. Use with a document attribute of type `Date` or
-    #   `Long`.
+    #   Performs a less than or equals operation on document
+    #   attributes/fields and their values. Use with the [document attribute
+    #   type][1] `Date` or `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeFilter AWS API Documentation
@@ -877,7 +920,7 @@ module Aws::Kendra
     #   If there was an error adding a document to an index the error is
     #   reported in your Amazon Web Services CloudWatch log. For more
     #   information, see [Monitoring Amazon Kendra with Amazon CloudWatch
-    #   Logs][1]
+    #   logs][1].
     #
     #
     #
@@ -1145,6 +1188,79 @@ module Aws::Kendra
     class ClickFeedback < Struct.new(
       :result_id,
       :click_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how to group results by document attribute value, and how to
+    # display them collapsed/expanded under a designated primary document
+    # for each group.
+    #
+    # @!attribute [rw] document_attribute_key
+    #   The document attribute used to group search results. You can use any
+    #   attribute that has the `Sortable` flag set to true. You can also
+    #   sort by any of the following built-in
+    #   attributes:"\_category","\_created\_at",
+    #   "\_last\_updated\_at", "\_version", "\_view\_count".
+    #   @return [String]
+    #
+    # @!attribute [rw] sorting_configurations
+    #   A prioritized list of document attributes/fields that determine the
+    #   primary document among those in a collapsed group.
+    #   @return [Array<Types::SortingConfiguration>]
+    #
+    # @!attribute [rw] missing_attribute_key_strategy
+    #   Specifies the behavior for documents without a value for the
+    #   collapse attribute.
+    #
+    #   Amazon Kendra offers three customization options:
+    #
+    #   * Choose to `COLLAPSE` all documents with null or missing values in
+    #     one group. This is the default configuration.
+    #
+    #   * Choose to `IGNORE` documents with null or missing values. Ignored
+    #     documents will not appear in query results.
+    #
+    #   * Choose to `EXPAND` each document with a null or missing value into
+    #     a group of its own.
+    #   @return [String]
+    #
+    # @!attribute [rw] expand
+    #   Specifies whether to expand the collapsed results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expand_configuration
+    #   Provides configuration information to customize expansion options
+    #   for a collapsed group.
+    #   @return [Types::ExpandConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CollapseConfiguration AWS API Documentation
+    #
+    class CollapseConfiguration < Struct.new(
+      :document_attribute_key,
+      :sorting_configurations,
+      :missing_attribute_key_strategy,
+      :expand,
+      :expand_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a collapsed group of search results.
+    #
+    # @!attribute [rw] document_attribute
+    #   The value of the document attribute that results are collapsed on.
+    #   @return [Types::DocumentAttribute]
+    #
+    # @!attribute [rw] expanded_results
+    #   A list of results in the collapsed group.
+    #   @return [Array<Types::ExpandedResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CollapsedResultDetail AWS API Documentation
+    #
+    class CollapsedResultDetail < Struct.new(
+      :document_attribute,
+      :expanded_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1973,9 +2089,8 @@ module Aws::Kendra
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access `Query` API, `GetQuerySuggestions` API, and other required
     #   APIs. The role also must include permission to access IAM Identity
-    #   Center (successor to Single Sign-On) that stores your user and group
-    #   information. For more information, see [IAM access roles for Amazon
-    #   Kendra][1].
+    #   Center that stores your user and group information. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
     #
     #
     #
@@ -2297,9 +2412,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Gets users and groups from IAM Identity Center (successor to Single
-    #   Sign-On) identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -2879,19 +2993,35 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Maps a column or attribute in the data source to an index field. You
-    # must first create the fields in the index using the `UpdateIndex` API.
+    # Maps attributes or field names of the documents synced from the data
+    # source to Amazon Kendra index field names. You can set up field
+    # mappings for each data source when calling [CreateDataSource][1] or
+    # [UpdateDataSource][2] API. To create custom fields, use the
+    # `UpdateIndex` API to first create an index field and then map to the
+    # data source field. For more information, see [Mapping data source
+    # fields][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_CreateDataSource.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_UpdateDataSource.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @!attribute [rw] data_source_field_name
-    #   The name of the column or attribute in the data source.
+    #   The name of the field in the data source. You must first create the
+    #   index field using the `UpdateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] date_field_format
-    #   The type of data stored in the column or attribute.
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field, you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
     #   @return [String]
     #
     # @!attribute [rw] index_field_name
-    #   The name of the field in the index.
+    #   The name of the index field to map to the data source field. The
+    #   index field type must match the data source field type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceToIndexFieldMapping AWS API Documentation
@@ -2927,7 +3057,12 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information to connect to a index.
+    # Provides the configuration information to an [Amazon Kendra supported
+    # database][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html
     #
     # @!attribute [rw] database_engine_type
     #   The type of database engine that runs the database.
@@ -3711,8 +3846,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Whether you have enabled the configuration for fetching access
-    #   levels of groups and users from an IAM Identity Center (successor to
-    #   Single Sign-On) identity source.
+    #   levels of groups and users from an IAM Identity Center identity
+    #   source.
     #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
@@ -4453,22 +4588,22 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the count of documents that match a particular attribute when
-    # doing a faceted search.
+    # Provides the count of documents that match a particular document
+    # attribute or field when doing a faceted search.
     #
     # @!attribute [rw] document_attribute_value
-    #   The value of the attribute. For example, "HR".
+    #   The value of the attribute/field. For example, "HR".
     #   @return [Types::DocumentAttributeValue]
     #
     # @!attribute [rw] count
-    #   The number of documents in the response that have the attribute
-    #   value for the key.
+    #   The number of documents in the response that have the
+    #   attribute/field value for the key.
     #   @return [Integer]
     #
     # @!attribute [rw] facet_results
-    #   Contains the results of a document attribute that is a nested facet.
-    #   A `FacetResult` contains the counts for each facet nested within a
-    #   facet.
+    #   Contains the results of a document attribute/field that is a nested
+    #   facet. A `FacetResult` contains the counts for each facet nested
+    #   within a facet.
     #
     #   For example, the document attribute or facet "Department" includes
     #   a value called "Engineering". In addition, the document attribute
@@ -4687,6 +4822,77 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Specifies the configuration information needed to customize how
+    # collapsed search result groups expand.
+    #
+    # @!attribute [rw] max_result_items_to_expand
+    #   The number of collapsed search result groups to expand. If you set
+    #   this value to 10, for example, only the first 10 out of 100 result
+    #   groups will have expand functionality.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_expanded_results_per_item
+    #   The number of expanded results to show per collapsed primary
+    #   document. For instance, if you set this value to 3, then at most 3
+    #   results per collapsed group will be displayed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExpandConfiguration AWS API Documentation
+    #
+    class ExpandConfiguration < Struct.new(
+      :max_result_items_to_expand,
+      :max_expanded_results_per_item)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single expanded result in a collapsed group of search results.
+    #
+    # An expanded result item contains information about an expanded result
+    # document within a collapsed group of search results. This includes the
+    # original location of the document, a list of attributes assigned to
+    # the document, and relevant text from the document that satisfies the
+    # query.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the expanded result.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The idenitifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_title
+    #   Provides text and information about where to highlight the text.
+    #   @return [Types::TextWithHighlights]
+    #
+    # @!attribute [rw] document_excerpt
+    #   Provides text and information about where to highlight the text.
+    #   @return [Types::TextWithHighlights]
+    #
+    # @!attribute [rw] document_uri
+    #   The URI of the original location of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_attributes
+    #   An array of document attributes assigned to a document in the search
+    #   results. For example, the document author ("\_author") or the
+    #   source URI ("\_source\_uri") of the document.
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExpandedResultItem AWS API Documentation
+    #
+    class ExpandedResultItem < Struct.new(
+      :id,
+      :document_id,
+      :document_title,
+      :document_excerpt,
+      :document_uri,
+      :document_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the configuration information for your Amazon Kendra
     # experience. This includes the data source IDs and/or FAQ IDs, and user
     # or group information to grant access to your Amazon Kendra experience.
@@ -4809,7 +5015,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information about a document attribute. You can use document
+    # Information about a document attribute or field. You can use document
     # attributes as facets.
     #
     # For example, the document attribute or facet "Department" includes
@@ -7577,6 +7783,20 @@ module Aws::Kendra
     #   by the relevance that Amazon Kendra determines for the result.
     #   @return [Types::SortingConfiguration]
     #
+    # @!attribute [rw] sorting_configurations
+    #   Provides configuration information to determine how the results of a
+    #   query are sorted.
+    #
+    #   You can set upto 3 fields that Amazon Kendra should sort the results
+    #   on, and specify whether the results should be sorted in ascending or
+    #   descending order. The sort field quota can be increased.
+    #
+    #   If you don't provide a sorting configuration, the results are
+    #   sorted by the relevance that Amazon Kendra determines for the
+    #   result. In the case of ties in sorting the results, the results are
+    #   sorted by relevance.
+    #   @return [Array<Types::SortingConfiguration>]
+    #
     # @!attribute [rw] user_context
     #   The user context token or user and group information.
     #   @return [Types::UserContext]
@@ -7592,6 +7812,12 @@ module Aws::Kendra
     #   Enables suggested spell corrections for queries.
     #   @return [Types::SpellCorrectionConfiguration]
     #
+    # @!attribute [rw] collapse_configuration
+    #   Provides configuration to determine how to group results by document
+    #   attribute value, and how to display them (collapsed or expanded)
+    #   under a designated primary document for each group.
+    #   @return [Types::CollapseConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -7605,9 +7831,11 @@ module Aws::Kendra
       :page_number,
       :page_size,
       :sorting_configuration,
+      :sorting_configurations,
       :user_context,
       :visitor_id,
-      :spell_correction_configuration)
+      :spell_correction_configuration,
+      :collapse_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7754,6 +7982,10 @@ module Aws::Kendra
     #   An excerpt from a table within a document.
     #   @return [Types::TableExcerpt]
     #
+    # @!attribute [rw] collapsed_result_detail
+    #   Provides details about a collapsed group of search results.
+    #   @return [Types::CollapsedResultDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
     #
     class QueryResultItem < Struct.new(
@@ -7768,7 +8000,8 @@ module Aws::Kendra
       :document_attributes,
       :score_attributes,
       :feedback_token,
-      :table_excerpt)
+      :table_excerpt,
+      :collapsed_result_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8228,6 +8461,13 @@ module Aws::Kendra
     #   source URI (`_source_uri`) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
+    # @!attribute [rw] score_attributes
+    #   The confidence score bucket for a retrieved passage result. The
+    #   confidence bucket provides a relative ranking that indicates how
+    #   confident Amazon Kendra is that the response is relevant to the
+    #   query.
+    #   @return [Types::ScoreAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/RetrieveResultItem AWS API Documentation
     #
     class RetrieveResultItem < Struct.new(
@@ -8236,7 +8476,8 @@ module Aws::Kendra
       :document_title,
       :content,
       :document_uri,
-      :document_attributes)
+      :document_attributes,
+      :score_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10279,8 +10520,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center (successor to Single Sign-On) identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   Identity Center identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -10567,11 +10808,11 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to get users and groups from an
-    # IAM Identity Center (successor to Single Sign-On) identity source.
-    # This is useful for user context filtering, where search results are
-    # filtered based on the user or their group access to documents. You can
-    # also use the [PutPrincipalMapping][1] API to map users to their groups
-    # so that you only need to provide the user ID when you issue the query.
+    # IAM Identity Center identity source. This is useful for user context
+    # filtering, where search results are filtered based on the user or
+    # their group access to documents. You can also use the
+    # [PutPrincipalMapping][1] API to map users to their groups so that you
+    # only need to provide the user ID when you issue the query.
     #
     # To set up an IAM Identity Center identity source in the console to use
     # with Amazon Kendra, see [Getting started with an IAM Identity Center
@@ -10593,9 +10834,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_mode
     #   The identity store provider (mode) you want to use to get users and
-    #   groups. IAM Identity Center (successor to Single Sign-On) is
-    #   currently the only available mode. Your users and groups must exist
-    #   in an IAM Identity Center identity source in order to use this mode.
+    #   groups. IAM Identity Center is currently the only available mode.
+    #   Your users and groups must exist in an IAM Identity Center identity
+    #   source in order to use this mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserGroupResolutionConfiguration AWS API Documentation

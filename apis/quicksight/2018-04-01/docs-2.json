@@ -132,7 +132,7 @@
     "StartAssetBundleExportJob": "<p>Starts an Asset Bundle export job.</p> <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 5 export jobs concurrently.</p> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>",
     "StartAssetBundleImportJob": "<p>Starts an Asset Bundle import job.</p> <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 5 import jobs concurrently.</p> <p>The API caller must have the necessary <code>\"create\"</code>, <code>\"describe\"</code>, and <code>\"update\"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>",
     "StartDashboardSnapshotJob": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.</p> <ul> <li> <p>1 paginated PDF</p> </li> <li> <p>1 Excel workbook</p> </li> <li> <p>5 CSVs</p> </li> </ul> <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
-    "TagResource": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic. </p> <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:</p> <ul> <li> <p>You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.</p> </li> <li> <p>Amazon QuickSight doesn't currently support the tag editor for Resource Groups.</p> </li> </ul>",
+    "TagResource": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, topic, and user. </p> <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:</p> <ul> <li> <p>Tags are used to track costs for users in Amazon QuickSight. You can't tag other resources that Amazon QuickSight costs are based on, such as storage capacoty (SPICE), session usage, alert consumption, or reporting units.</p> </li> <li> <p>Amazon QuickSight doesn't currently support the tag editor for Resource Groups.</p> </li> </ul>",
     "UntagResource": "<p>Removes a tag or tags from a resource.</p>",
     "UpdateAccountCustomization": "<p>Updates Amazon QuickSight customizations for the current Amazon Web Services Region. Currently, the only customization that you can use is a theme.</p> <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation. </p>",
     "UpdateAccountSettings": "<p>Updates the Amazon QuickSight settings in your Amazon Web Services account.</p>",
@@ -579,6 +579,7 @@
         "DescribeTopicRefreshScheduleResponse$DatasetArn": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
         "DescribeTopicResponse$Arn": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
         "Folder$Arn": "<p>The Amazon Resource Name (ARN) for the folder.</p>",
+        "FolderArnList$member": null,
         "FolderSummary$Arn": "<p>The Amazon Resource Name (ARN) of the folder.</p>",
         "GenerateEmbedUrlForAnonymousUserResponse$AnonymousUserArn": "<p>The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.</p>",
         "GenerateEmbedUrlForRegisteredUserRequest$UserArn": "<p>The Amazon Resource Name for the registered user.</p>",
@@ -1057,6 +1058,17 @@
         "StartAssetBundleExportJobRequest$ResourceArns": "<p>An array of resource ARNs to export. The following resources are supported.</p> <ul> <li> <p> <code>Analysis</code> </p> </li> <li> <p> <code>Dashboard</code> </p> </li> <li> <p> <code>DataSet</code> </p> </li> <li> <p> <code>DataSource</code> </p> </li> <li> <p> <code>RefreshSchedule</code> </p> </li> <li> <p> <code>Theme</code> </p> </li> <li> <p> <code>VPCConnection</code> </p> </li> </ul> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>"
       }
     },
+    "AssetOptions": {
+      "base": "<p>An array of analysis level configurations.</p>",
+      "refs": {
+        "Analysis$Options": null,
+        "AnalysisDefinition$Options": "<p>An array of option definitions for an analysis.</p>",
+        "DashboardVersion$Options": null,
+        "DashboardVersionDefinition$Options": "<p>An array of option definitions for a dashboard.</p>",
+        "TemplateVersion$Options": null,
+        "TemplateVersionDefinition$Options": "<p>An array of option definitions for a template.</p>"
+      }
+    },
     "AssignmentStatus": {
       "base": null,
       "refs": {
@@ -1303,7 +1315,7 @@
         "DataFieldSeriesItem$AxisBinding": "<p>The axis that you are binding the field to.</p>",
         "FieldSeriesItem$AxisBinding": "<p>The axis that you are binding the field to.</p>",
         "LineChartDefaultSeriesSettings$AxisBinding": "<p>The axis to which you are binding all line series to.</p>",
-        "ReferenceLineDataConfiguration$AxisBinding": "<p>The axis binding type of the reference line. Choose one of the following options:</p> <ul> <li> <p>PrimaryY</p> </li> <li> <p>SecondaryY</p> </li> </ul>"
+        "ReferenceLineDataConfiguration$AxisBinding": "<p>The axis binding type of the reference line. Choose one of the following options:</p> <ul> <li> <p> <code>PrimaryY</code> </p> </li> <li> <p> <code>SecondaryY</code> </p> </li> </ul>"
       }
     },
     "AxisDataOptions": {
@@ -1522,6 +1534,7 @@
         "MarginStyle$Show": "<p>This Boolean value controls whether to display sheet margins.</p>",
         "NumericRangeFilter$IncludeMinimum": "<p>Determines whether the minimum value in the filter value range should be included in the filtered results.</p>",
         "NumericRangeFilter$IncludeMaximum": "<p>Determines whether the maximum value in the filter value range should be included in the filtered results.</p>",
+        "RedshiftIAMParameters$AutoCreateDatabaseUser": "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
         "SignupResponse$IAMUser": "<p>A Boolean that is <code>TRUE</code> if the Amazon QuickSight uses IAM as an authentication method.</p>",
         "SslProperties$DisableSsl": "<p>A Boolean option to control whether SSL should be disabled.</p>",
         "StartAssetBundleExportJobRequest$IncludeAllDependencies": "<p>A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to <code>TRUE</code>, any theme, dataset, and data source resource that is a dependency of the dashboard is also exported.</p>",
@@ -1699,7 +1712,9 @@
     "Catalog": {
       "base": null,
       "refs": {
-        "PrestoParameters$Catalog": "<p>Catalog.</p>"
+        "PrestoParameters$Catalog": "<p>Catalog.</p>",
+        "StarburstParameters$Catalog": "<p>The catalog name for the Starburst data source.</p>",
+        "TrinoParameters$Catalog": "<p>The catalog name for the Trino data source.</p>"
       }
     },
     "CategoricalAggregationFunction": {
@@ -1906,11 +1921,19 @@
         "TopicColumn$ColumnDataRole": "<p>The role of the column in the data. Valid values are <code>DIMENSION</code> and <code>MEASURE</code>.</p>"
       }
     },
+    "ColumnDataSubType": {
+      "base": null,
+      "refs": {
+        "CastColumnTypeOperation$SubType": "<p>The sub data type of the new column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>",
+        "InputColumn$SubType": "<p>The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>",
+        "OutputColumn$SubType": "<p>The sub data type of the column.</p>"
+      }
+    },
     "ColumnDataType": {
       "base": null,
       "refs": {
         "CastColumnTypeOperation$NewColumnType": "<p>New column data type.</p>",
-        "OutputColumn$Type": "<p>The type.</p>"
+        "OutputColumn$Type": "<p>The data type of the column.</p>"
       }
     },
     "ColumnDescription": {
@@ -2069,7 +2092,7 @@
         "ColumnIdentifier$ColumnName": "<p>The name of the column.</p>",
         "ColumnList$member": null,
         "InputColumn$Name": "<p>The name of this column in the underlying data source.</p>",
-        "OutputColumn$Name": "<p>A display name for the dataset.</p>",
+        "OutputColumn$Name": "<p>The display name of the column..</p>",
         "RenameColumnOperation$ColumnName": "<p>The name of the column to be renamed.</p>",
         "RenameColumnOperation$NewColumnName": "<p>The new name for the column.</p>",
         "TagColumnOperation$ColumnName": "<p>The column that this operation acts on.</p>",
@@ -2221,6 +2244,8 @@
       "refs": {
         "GaugeChartArcConditionalFormatting$ForegroundColor": "<p>The conditional formatting of the arc foreground color.</p>",
         "GaugeChartPrimaryValueConditionalFormatting$TextColor": "<p>The conditional formatting of the primary value text color.</p>",
+        "KPIActualValueConditionalFormatting$TextColor": "<p>The conditional formatting of the actual value's text color.</p>",
+        "KPIComparisonValueConditionalFormatting$TextColor": "<p>The conditional formatting of the comparison value's text color.</p>",
         "KPIPrimaryValueConditionalFormatting$TextColor": "<p>The conditional formatting of the primary value's text color.</p>",
         "KPIProgressBarConditionalFormatting$ForegroundColor": "<p>The conditional formatting of the progress bar's foreground color.</p>",
         "ShapeConditionalFormat$BackgroundColor": "<p>The conditional formatting for the shape background color of a filled map visual.</p>",
@@ -2252,6 +2277,8 @@
       "base": "<p>The formatting configuration for the icon.</p>",
       "refs": {
         "GaugeChartPrimaryValueConditionalFormatting$Icon": "<p>The conditional formatting of the primary value icon.</p>",
+        "KPIActualValueConditionalFormatting$Icon": "<p>The conditional formatting of the actual value's icon.</p>",
+        "KPIComparisonValueConditionalFormatting$Icon": "<p>The conditional formatting of the comparison value's icon.</p>",
         "KPIPrimaryValueConditionalFormatting$Icon": "<p>The conditional formatting of the primary value's icon.</p>",
         "TextConditionalFormat$Icon": "<p>The conditional formatting for the icon.</p>"
       }
@@ -2930,6 +2957,12 @@
         "PivotTableSortBy$DataPath": "<p>The data path sort (data path value, direction) for the pivot table sort by options.</p>"
       }
     },
+    "DataPathType": {
+      "base": "<p>The type of the data path value.</p>",
+      "refs": {
+        "DataPathValue$DataPathType": "<p>The type configuration of the field.</p>"
+      }
+    },
     "DataPathValue": {
       "base": "<p>The data path that needs to be sorted.</p>",
       "refs": {
@@ -3199,10 +3232,28 @@
         "TeradataParameters$Database": "<p>Database.</p>"
       }
     },
-    "DatabricksParameters": {
-      "base": "<p>The required parameters that are needed to connect to a Databricks data source.</p>",
+    "DatabaseGroup": {
+      "base": null,
       "refs": {
-        "DataSourceParameters$DatabricksParameters": "<p>The required parameters that are needed to connect to a Databricks data source.</p>"
+        "DatabaseGroupList$member": null
+      }
+    },
+    "DatabaseGroupList": {
+      "base": null,
+      "refs": {
+        "RedshiftIAMParameters$DatabaseGroups": "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>"
+      }
+    },
+    "DatabaseUser": {
+      "base": null,
+      "refs": {
+        "RedshiftIAMParameters$DatabaseUser": "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>"
+      }
+    },
+    "DatabricksParameters": {
+      "base": "<p>The parameters that are required to connect to a Databricks data source.</p>",
+      "refs": {
+        "DataSourceParameters$DatabricksParameters": "<p>The parameters that are required to connect to a Databricks data source.</p>"
       }
     },
     "DatasetMetadata": {
@@ -3380,6 +3431,12 @@
       "base": null,
       "refs": {
         "ScheduleRefreshOnEntity$DayOfMonth": "<p>The day of the month that you want to schedule refresh on.</p>"
+      }
+    },
+    "DayOfTheWeek": {
+      "base": null,
+      "refs": {
+        "AssetOptions$WeekStart": "<p>Determines the week start day for an analysis.</p>"
       }
     },
     "DayOfWeek": {
@@ -4522,6 +4579,7 @@
         "TableCellConditionalFormatting$FieldId": "<p>The field ID of the cell for conditional formatting.</p>",
         "TableFieldOption$FieldId": "<p>The field ID for a table field.</p>",
         "TableFieldOrderList$member": null,
+        "TotalAggregationOption$FieldId": "<p>The field id that's associated with the total aggregation option.</p>",
         "UnaggregatedField$FieldId": "<p>The custom field ID.</p>"
       }
     },
@@ -4742,6 +4800,7 @@
       "refs": {
         "CustomFilterConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "CustomFilterListConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
+        "FilterListConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "NumericEqualityFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "NumericRangeFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "RelativeDatesFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
@@ -4829,6 +4888,15 @@
       "base": "<p>A folder in Amazon QuickSight.</p>",
       "refs": {
         "DescribeFolderResponse$Folder": "<p>Information about the folder.</p>"
+      }
+    },
+    "FolderArnList": {
+      "base": null,
+      "refs": {
+        "CreateAnalysisRequest$FolderArns": "<p>When you create the analysis, Amazon QuickSight adds the analysis to these folders.</p>",
+        "CreateDashboardRequest$FolderArns": "<p>When you create the dashboard, Amazon QuickSight adds the dashboard to these folders.</p>",
+        "CreateDataSetRequest$FolderArns": "<p>When you create the dataset, Amazon QuickSight adds the dataset to these folders.</p>",
+        "CreateDataSourceRequest$FolderArns": "<p>When you create the data source, Amazon QuickSight adds the data source to these folders.</p>"
       }
     },
     "FolderColumnList": {
@@ -5560,6 +5628,7 @@
         "FunnelChartDataLabelOptions$LabelColor": "<p>The color of the data label text.</p>",
         "GeospatialHeatmapDataColor$Color": "<p>The hex color to be used in the heatmap point style.</p>",
         "GradientStop$Color": "<p>Determines the color.</p>",
+        "KPISparklineOptions$Color": "<p>The color of the sparkline.</p>",
         "LineChartMarkerStyleSettings$MarkerColor": "<p>Color of marker in the series.</p>",
         "RadarChartConfiguration$AlternateBandEvenColor": "<p>The color of the even-numbered alternate bands of a radar chart.</p>",
         "RadarChartConfiguration$AlternateBandOddColor": "<p>The color of the odd-numbered alternate bands of a radar chart.</p>",
@@ -5673,7 +5742,9 @@
         "SnowflakeParameters$Host": "<p>Host.</p>",
         "SparkParameters$Host": "<p>Host.</p>",
         "SqlServerParameters$Host": "<p>Host.</p>",
-        "TeradataParameters$Host": "<p>Host.</p>"
+        "StarburstParameters$Host": "<p>The host name of the Starburst data source.</p>",
+        "TeradataParameters$Host": "<p>Host.</p>",
+        "TrinoParameters$Host": "<p>The host name of the Trino data source.</p>"
       }
     },
     "IAMPolicyAssignment": {
@@ -6025,6 +6096,18 @@
         "JoinInstruction$Type": "<p>The type of join that it is.</p>"
       }
     },
+    "KPIActualValueConditionalFormatting": {
+      "base": "<p>The conditional formatting for the actual value of a KPI visual.</p>",
+      "refs": {
+        "KPIConditionalFormattingOption$ActualValue": "<p>The conditional formatting for the actual value of a KPI visual.</p>"
+      }
+    },
+    "KPIComparisonValueConditionalFormatting": {
+      "base": "<p>The conditional formatting for the comparison value of a KPI visual.</p>",
+      "refs": {
+        "KPIConditionalFormattingOption$ComparisonValue": "<p>The conditional formatting for the comparison value of a KPI visual.</p>"
+      }
+    },
     "KPIConditionalFormatting": {
       "base": "<p>The conditional formatting of a KPI visual.</p>",
       "refs": {
@@ -6079,10 +6162,40 @@
         "KPIConfiguration$SortConfiguration": "<p>The sort configuration of a KPI visual.</p>"
       }
     },
+    "KPISparklineOptions": {
+      "base": "<p>The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.</p>",
+      "refs": {
+        "KPIOptions$Sparkline": "<p>The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.</p>"
+      }
+    },
+    "KPISparklineType": {
+      "base": null,
+      "refs": {
+        "KPISparklineOptions$Type": "<p>The type of the sparkline.</p>"
+      }
+    },
     "KPIVisual": {
       "base": "<p>A key performance indicator (KPI).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/kpi.html\">Using KPIs</a> in the <i>Amazon QuickSight User Guide</i>.</p>",
       "refs": {
         "Visual$KPIVisual": "<p>A key performance indicator (KPI).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/kpi.html\">Using KPIs</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+      }
+    },
+    "KPIVisualLayoutOptions": {
+      "base": "<p>The options that determine the layout a KPI visual.</p>",
+      "refs": {
+        "KPIOptions$VisualLayoutOptions": "<p>The options that determine the layout a KPI visual.</p>"
+      }
+    },
+    "KPIVisualStandardLayout": {
+      "base": "<p>The standard layout of the KPI visual.</p>",
+      "refs": {
+        "KPIVisualLayoutOptions$StandardLayout": "<p>The standard layout of the KPI visual.</p>"
+      }
+    },
+    "KPIVisualStandardLayoutType": {
+      "base": null,
+      "refs": {
+        "KPIVisualStandardLayout$Type": "<p>The standard layout type.</p>"
       }
     },
     "LabelOptions": {
@@ -7390,7 +7503,7 @@
         "RelativeDatesFilter$ParameterName": "<p>The parameter whose value should be used for the filter value.</p>",
         "SetParameterValueConfiguration$DestinationParameterName": "<p>The destination parameter name of the <code>SetParameterValueConfiguration</code>.</p>",
         "StringParameterDeclaration$Name": "<p>The name of the parameter that is being declared.</p>",
-        "TimeEqualityFilter$ParameterName": "<p>The parameter whose value should be used for the filter value.</p> <p>This field is mutually exclusive to <code>Value</code>.</p>",
+        "TimeEqualityFilter$ParameterName": "<p>The parameter whose value should be used for the filter value.</p> <p>This field is mutually exclusive to <code>Value</code> and <code>RollingDate</code>.</p>",
         "TimeRangeFilterValue$Parameter": "<p>The parameter type input value.</p>",
         "TopBottomFilter$ParameterName": "<p>The parameter whose value should be used for the filter value.</p>"
       }
@@ -7652,6 +7765,12 @@
         "PivotTableFieldOptions$DataPathOptions": "<p>The data path options for the pivot table field options.</p>"
       }
     },
+    "PivotTableDataPathType": {
+      "base": null,
+      "refs": {
+        "DataPathType$PivotTableDataPathType": "<p>The type of data path value utilized in a pivot table. Choose one of the following options:</p> <ul> <li> <p> <code>HIERARCHY_ROWS_LAYOUT_COLUMN</code> - The type of data path for the rows layout column, when <code>RowsLayout</code> is set to <code>HIERARCHY</code>.</p> </li> <li> <p> <code>MULTIPLE_ROW_METRICS_COLUMN</code> - The type of data path for the metric column when the row is set to Metric Placement.</p> </li> <li> <p> <code>EMPTY_COLUMN_HEADER</code> - The type of data path for the column with empty column header, when there is no field in <code>ColumnsFieldWell</code> and the row is set to Metric Placement.</p> </li> <li> <p> <code>COUNT_METRIC_COLUMN</code> - The type of data path for the column with <code>COUNT</code> as the metric, when there is no field in the <code>ValuesFieldWell</code>.</p> </li> </ul>"
+      }
+    },
     "PivotTableDimensionList": {
       "base": null,
       "refs": {
@@ -7827,7 +7946,9 @@
         "PrestoParameters$Port": "<p>Port.</p>",
         "SparkParameters$Port": "<p>Port.</p>",
         "SqlServerParameters$Port": "<p>Port.</p>",
-        "TeradataParameters$Port": "<p>Port.</p>"
+        "StarburstParameters$Port": "<p>The port for the Starburst data source.</p>",
+        "TeradataParameters$Port": "<p>Port.</p>",
+        "TrinoParameters$Port": "<p>The port for the Trino data source.</p>"
       }
     },
     "PositiveInteger": {
@@ -8065,6 +8186,12 @@
         "DeleteAnalysisRequest$RecoveryWindowInDays": "<p>A value that specifies the number of days that Amazon QuickSight waits before it deletes the analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code> option in the same API call. The default value is 30.</p>"
       }
     },
+    "RedshiftIAMParameters": {
+      "base": "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"> <code>GetClusterCredentials</code> </a>.</p>",
+      "refs": {
+        "RedshiftParameters$IAMParameters": "<p>An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html\">DataSourceCredentials</a>.</p>"
+      }
+    },
     "RedshiftParameters": {
       "base": "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
       "refs": {
@@ -8126,6 +8253,12 @@
       "base": null,
       "refs": {
         "ReferenceLineStyleConfiguration$Pattern": "<p>The pattern type of the line style. Choose one of the following options:</p> <ul> <li> <p> <code>SOLID</code> </p> </li> <li> <p> <code>DASHED</code> </p> </li> <li> <p> <code>DOTTED</code> </p> </li> </ul>"
+      }
+    },
+    "ReferenceLineSeriesType": {
+      "base": null,
+      "refs": {
+        "ReferenceLineDataConfiguration$SeriesType": "<p>The series type of the reference line data configuration. Choose one of the following options:</p> <ul> <li> <p> <code>BAR</code> </p> </li> <li> <p> <code>LINE</code> </p> </li> </ul>"
       }
     },
     "ReferenceLineStaticDataConfiguration": {
@@ -8500,6 +8633,7 @@
         "AssetBundleImportJobVPCConnectionOverrideParameters$RoleArn": "<p>An optional override of the role ARN to be used by the VPC connection.</p>",
         "AthenaParameters$RoleArn": "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
         "CreateVPCConnectionRequest$RoleArn": "<p>The IAM role to associate with the VPC connection.</p>",
+        "RedshiftIAMParameters$RoleArn": "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
         "S3Parameters$RoleArn": "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
         "UpdateVPCConnectionRequest$RoleArn": "<p>An IAM role associated with the VPC connection.</p>"
       }
@@ -8522,6 +8656,7 @@
       "base": "<p>The rolling date configuration of a date time filter.</p>",
       "refs": {
         "DateTimeDefaultValues$RollingDate": "<p>The rolling date of the <code>DataTimeDefaultValues</code>. The date is determined from the dataset based on input expression.</p>",
+        "TimeEqualityFilter$RollingDate": "<p>The rolling date input for the <code>TimeEquality</code> filter.</p> <p>This field is mutually exclusive to <code>Value</code> and <code>ParameterName</code>.</p>",
         "TimeRangeFilterValue$RollingDate": "<p>The rolling date input value.</p>"
       }
     },
@@ -9513,6 +9648,12 @@
         "NumericalAggregationFunction$SimpleNumericalAggregation": "<p>Built-in aggregation functions for numerical values.</p> <ul> <li> <p> <code>SUM</code>: The sum of a dimension or measure. </p> </li> <li> <p> <code>AVERAGE</code>: The average of a dimension or measure.</p> </li> <li> <p> <code>MIN</code>: The minimum value of a dimension or measure.</p> </li> <li> <p> <code>MAX</code>: The maximum value of a dimension or measure.</p> </li> <li> <p> <code>COUNT</code>: The count of a dimension or measure.</p> </li> <li> <p> <code>DISTINCT_COUNT</code>: The count of distinct values in a dimension or measure.</p> </li> <li> <p> <code>VAR</code>: The variance of a dimension or measure.</p> </li> <li> <p> <code>VARP</code>: The partitioned variance of a dimension or measure.</p> </li> <li> <p> <code>STDEV</code>: The standard deviation of a dimension or measure.</p> </li> <li> <p> <code>STDEVP</code>: The partitioned standard deviation of a dimension or measure.</p> </li> <li> <p> <code>MEDIAN</code>: The median value of a dimension or measure.</p> </li> </ul>"
       }
     },
+    "SimpleTotalAggregationFunction": {
+      "base": null,
+      "refs": {
+        "TotalAggregationFunction$SimpleTotalAggregationFunction": "<p>A built in aggregation function for total values.</p>"
+      }
+    },
     "SiteBaseUrl": {
       "base": null,
       "refs": {
@@ -9795,6 +9936,18 @@
         "UpdateDataSourceRequest$SslProperties": "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying source.</p>"
       }
     },
+    "StarburstParameters": {
+      "base": "<p>The parameters that are required to connect to a Starburst data source.</p>",
+      "refs": {
+        "DataSourceParameters$StarburstParameters": "<p>The parameters that are required to connect to a Starburst data source.</p>"
+      }
+    },
+    "StarburstProductType": {
+      "base": null,
+      "refs": {
+        "StarburstParameters$ProductType": "<p>The product type for the Starburst data source.</p>"
+      }
+    },
     "StartAssetBundleExportJobRequest": {
       "base": null,
       "refs": {
@@ -10022,6 +10175,7 @@
         "AssetBundleImportJobRefreshScheduleOverrideParameters$ScheduleId": "<p>A partial identifier for the specific <code>RefreshSchedule</code> resource being overridden. This structure is used together with the <code>DataSetId</code> structure.</p>",
         "AssetBundleImportJobResourceIdOverrideConfiguration$PrefixForAllResources": "<p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>",
         "AssetBundleImportSourceDescription$Body": "<p>An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>",
+        "AssetOptions$Timezone": "<p>Determines the timezone for the analysis.</p>",
         "AttributeAggregationFunction$ValueForMultipleValues": "<p>Used by the <code>UNIQUE_VALUE</code> aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to '*'.</p>",
         "AxisLabelOptions$CustomLabel": "<p>The text for the axis label.</p>",
         "CancelIngestionRequest$DataSetId": "<p>The ID of the dataset used in the ingestion.</p>",
@@ -10816,6 +10970,7 @@
         "CreateTopicRequest$Tags": "<p>Contains a map of the key-value pairs for the resource tag or tags that are assigned to the dataset.</p>",
         "CreateVPCConnectionRequest$Tags": "<p>A map of the key-value pairs for the resource tag or tags assigned to the VPC connection.</p>",
         "ListTagsForResourceResponse$Tags": "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>",
+        "RegisterUserRequest$Tags": "<p>The tags to associate with the user.</p>",
         "TagResourceRequest$Tags": "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>"
       }
     },
@@ -11222,7 +11377,7 @@
         "ThemeSummary$LastUpdatedTime": "<p>The last date and time that this theme was updated.</p>",
         "ThemeVersion$CreatedTime": "<p>The date and time that this theme version was created.</p>",
         "ThemeVersionSummary$CreatedTime": "<p>The date and time that this theme version was created.</p>",
-        "TimeEqualityFilter$Value": "<p>The value of a <code>TimeEquality</code> filter.</p> <p>This field is mutually exclusive to <code>ParameterName</code>.</p>",
+        "TimeEqualityFilter$Value": "<p>The value of a <code>TimeEquality</code> filter.</p> <p>This field is mutually exclusive to <code>RollingDate</code> and <code>ParameterName</code>.</p>",
         "TimeRangeDrillDownFilter$RangeMinimum": "<p>The minimum value for the filter value range.</p>",
         "TimeRangeDrillDownFilter$RangeMaximum": "<p>The maximum value for the filter value range.</p>",
         "TimeRangeFilterValue$StaticValue": "<p>The static input value.</p>",
@@ -11528,6 +11683,25 @@
         "Computation$TotalAggregation": "<p>The total aggregation computation configuration.</p>"
       }
     },
+    "TotalAggregationFunction": {
+      "base": "<p>An aggregation function that aggregates the total values of a measure.</p>",
+      "refs": {
+        "TotalAggregationOption$TotalAggregationFunction": "<p>The total aggregation function that you want to set for a specified field id.</p>"
+      }
+    },
+    "TotalAggregationOption": {
+      "base": "<p>The total aggregation settings map of a field id.</p>",
+      "refs": {
+        "TotalAggregationOptionList$member": null
+      }
+    },
+    "TotalAggregationOptionList": {
+      "base": null,
+      "refs": {
+        "PivotTotalOptions$TotalAggregationOptions": "<p>The total aggregation options for each value field.</p>",
+        "TotalOptions$TotalAggregationOptions": "<p>The total aggregation settings for each value field.</p>"
+      }
+    },
     "TotalOptions": {
       "base": "<p>The total options for a table visual.</p>",
       "refs": {
@@ -11593,6 +11767,12 @@
       "base": "<p>The options that determine the presentation of trend arrows in a KPI visual.</p>",
       "refs": {
         "KPIOptions$TrendArrows": "<p>The options that determine the presentation of trend arrows in a KPI visual.</p>"
+      }
+    },
+    "TrinoParameters": {
+      "base": "<p>The parameters that are required to connect to a Trino data source.</p>",
+      "refs": {
+        "DataSourceParameters$TrinoParameters": "<p>The parameters that are required to connect to a Trino data source.</p>"
       }
     },
     "TwitterParameters": {
@@ -12113,6 +12293,23 @@
         "ListVPCConnectionsResponse$VPCConnectionSummaries": "<p>A <code>VPCConnectionSummaries</code> object that returns a summary of VPC connection objects.</p>"
       }
     },
+    "ValidationStrategy": {
+      "base": "<p>The option to relax the validation that is required to create and update analyses, dashboards, and templates with definition objects. When you set this value to <code>LENIENT</code>, validation is skipped for specific errors.</p>",
+      "refs": {
+        "CreateAnalysisRequest$ValidationStrategy": "<p>The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.</p>",
+        "CreateDashboardRequest$ValidationStrategy": "<p>The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.</p>",
+        "CreateTemplateRequest$ValidationStrategy": "<p>TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.</p>",
+        "UpdateAnalysisRequest$ValidationStrategy": "<p>The option to relax the validation needed to update an analysis with definition objects. This skips the validation step for specific errors.</p>",
+        "UpdateDashboardRequest$ValidationStrategy": "<p>The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.</p>",
+        "UpdateTemplateRequest$ValidationStrategy": "<p>The option to relax the validation needed to update a template with definition objects. This skips the validation step for specific errors.</p>"
+      }
+    },
+    "ValidationStrategyMode": {
+      "base": null,
+      "refs": {
+        "ValidationStrategy$Mode": "<p>The mode of validation for the asset to be creaed or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>"
+      }
+    },
     "ValueWhenUnsetOption": {
       "base": null,
       "refs": {
@@ -12200,6 +12397,8 @@
         "FunnelChartDataLabelOptions$Visibility": "<p>The visibility option that determines if data labels are displayed.</p>",
         "FunnelChartDataLabelOptions$CategoryLabelVisibility": "<p>The visibility of the category labels within the data labels.</p>",
         "FunnelChartDataLabelOptions$MeasureLabelVisibility": "<p>The visibility of the measure labels within the data labels.</p>",
+        "KPISparklineOptions$Visibility": "<p>The visibility of the sparkline.</p>",
+        "KPISparklineOptions$TooltipVisibility": "<p>The tooltip visibility of the sparkline.</p>",
         "LabelOptions$Visibility": "<p>Determines whether or not the label is visible.</p>",
         "LegendOptions$Visibility": "<p>Determines whether or not the legend is visible.</p>",
         "LineChartLineStyleSettings$LineVisibility": "<p>Configuration option that determines whether to show the line for the series.</p>",

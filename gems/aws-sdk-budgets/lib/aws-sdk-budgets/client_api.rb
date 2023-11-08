@@ -101,6 +101,7 @@ module Aws::Budgets
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsBudgetNotifications = Shapes::IntegerShape.new(name: 'MaxResultsBudgetNotifications')
+    MaxResultsDescribeBudgets = Shapes::IntegerShape.new(name: 'MaxResultsDescribeBudgets')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     NotificationState = Shapes::StringShape.new(name: 'NotificationState')
@@ -386,7 +387,7 @@ module Aws::Budgets
     DescribeBudgetResponse.struct_class = Types::DescribeBudgetResponse
 
     DescribeBudgetsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
-    DescribeBudgetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeBudgetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsDescribeBudgets, location_name: "MaxResults"))
     DescribeBudgetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     DescribeBudgetsRequest.struct_class = Types::DescribeBudgetsRequest
 

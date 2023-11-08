@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-11-01)
+------------------
+
+* Feature - Global Accelerator now support accelerators with cross account endpoints.
+
+1.52.0 (2023-10-17)
+------------------
+
+* Feature - Fixed error where ListCustomRoutingEndpointGroups did not have a paginator
+
+1.51.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2023-08-22)
 ------------------
 

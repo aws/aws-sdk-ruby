@@ -215,16 +215,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -935,16 +948,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -1814,6 +1840,11 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -1836,11 +1867,19 @@ module Aws::Transfer
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -2656,6 +2695,11 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -2678,11 +2722,19 @@ module Aws::Transfer
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -3308,8 +3360,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # This exception is thrown when an error occurs in the Amazon Web
-    # ServicesTransfer Family service.
+    # This exception is thrown when an error occurs in the Transfer Family
+    # service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3826,9 +3878,9 @@ module Aws::Transfer
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   When you can get additional results from the `ListUsers` call, a
+    #   If there are additional results from the `ListUsers` call, a
     #   `NextToken` parameter is returned in the output. You can then pass
-    #   in a subsequent command to the `NextToken` parameter to continue
+    #   the `NextToken` to a subsequent `ListUsers` command, to continue
     #   listing additional users.
     #   @return [String]
     #
@@ -3920,16 +3972,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -4326,16 +4391,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -4580,7 +4658,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The requested resource does not exist.
+    # The requested resource does not exist, or exists in a region other
+    # than the one specified for the command.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4780,28 +4859,30 @@ module Aws::Transfer
     # @!attribute [rw] user_secret_id
     #   The identifier for the secret (in Amazon Web Services Secrets
     #   Manager) that contains the SFTP user's private key, password, or
-    #   both. The identifier can be either the Amazon Resource Name (ARN) or
-    #   the name of the secret.
+    #   both. The identifier must be the Amazon Resource Name (ARN) of the
+    #   secret.
     #   @return [String]
     #
     # @!attribute [rw] trusted_host_keys
     #   The public portion of the host key, or keys, that are used to
-    #   authenticate the user to the external server to which you are
-    #   connecting. You can use the `ssh-keyscan` command against the SFTP
-    #   server to retrieve the necessary key.
+    #   identify the external server to which you are connecting. You can
+    #   use the `ssh-keyscan` command against the SFTP server to retrieve
+    #   the necessary key.
     #
     #   The three standard SSH public key format elements are `<key type>`,
     #   `<body base64>`, and an optional `<comment>`, with spaces between
-    #   each element.
+    #   each element. Specify only the `<key type>` and `<body base64>`: do
+    #   not enter the `<comment>` portion of the key.
     #
     #   For the trusted host key, Transfer Family accepts RSA and ECDSA
     #   keys.
     #
-    #   * For RSA keys, the key type is `ssh-rsa`.
+    #   * For RSA keys, the `<key type>` string is `ssh-rsa`.
     #
-    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
-    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
-    #     size of the key you generated.
+    #   * For ECDSA keys, the `<key type>` string is either
+    #     `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`, or
+    #     `ecdsa-sha2-nistp521`, depending on the size of the key you
+    #     generated.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpConnectorConfig AWS API Documentation
@@ -5032,21 +5113,20 @@ module Aws::Transfer
     # @!attribute [rw] status_message
     #   Returns `Connection succeeded` if the test is successful. Or,
     #   returns a descriptive error message if the test fails. The following
-    #   list provides the details for some error messages and
-    #   troubleshooting steps for each.
+    #   list provides troubleshooting details, depending on the error
+    #   message that you receive.
     #
-    #   * **Unable to access secrets manager**: Verify that your secret name
-    #     aligns with the one in Transfer Role permissions.
+    #   * Verify that your secret name aligns with the one in Transfer Role
+    #     permissions.
     #
-    #   * **Unknown Host/Connection failed**: Verify the server URL in the
-    #     connector configuration , and verify that the login credentials
-    #     work successfully outside of the connector.
+    #   * Verify the server URL in the connector configuration , and verify
+    #     that the login credentials work successfully outside of the
+    #     connector.
     #
-    #   * **Private key not found**: Verify that the secret exists and is
-    #     formatted correctly.
+    #   * Verify that the secret exists and is formatted correctly.
     #
-    #   * **Invalid trusted host keys**: Verify that the trusted host key in
-    #     the connector configuration matches the `ssh-keyscan` output.
+    #   * Verify that the trusted host key in the connector configuration
+    #     matches the `ssh-keyscan` output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestConnectionResponse AWS API Documentation
@@ -5175,16 +5255,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -5922,16 +6015,29 @@ module Aws::Transfer
     #   server using the client.
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `PATH`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) that you want your users'
     #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket or EFS
-    #   paths as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you need to provide mappings in the
+    #   to `PATH`, the user will see the absolute Amazon S3 bucket or Amazon
+    #   EFS path as is in their file transfer protocol clients. If you set
+    #   it to `LOGICAL`, you need to provide mappings in the
     #   `HomeDirectoryMappings` for how you want to make Amazon S3 or Amazon
     #   EFS paths visible to your users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings,
+    #   using the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using
+    #   the `HomeDirectory` parameter. You cannot have both `HomeDirectory`
+    #   and `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2023-09-11)
+------------------
+
+* Feature - AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.
+
+1.107.0 (2023-09-06)
+------------------
+
+* Feature - Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time
+
 1.106.0 (2023-08-24)
 ------------------
 

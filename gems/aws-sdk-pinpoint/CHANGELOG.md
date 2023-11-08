@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-10-27)
+------------------
+
+* Feature - Updated documentation to describe the case insensitivity for EndpointIds.
+
+1.81.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2023-09-26)
+------------------
+
+* Feature - Update documentation for RemoveAttributes to more accurately reflect its behavior when attributes are deleted.
+
 1.79.0 (2023-07-28)
 ------------------
 

@@ -403,8 +403,6 @@ module Aws::ManagedBlockchain
     #   * `n-ethereum-mainnet`
     #
     #   * `n-ethereum-goerli`
-    #
-    #   * `n-ethereum-rinkeby`
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -582,8 +580,6 @@ module Aws::ManagedBlockchain
     #   * `n-ethereum-mainnet`
     #
     #   * `n-ethereum-goerli`
-    #
-    #   * `n-ethereum-rinkeby`
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -1770,8 +1766,6 @@ module Aws::ManagedBlockchain
     #   * mainnet = `1`
     #
     #   * goerli = `5`
-    #
-    #   * rinkeby = `4`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkEthereumAttributes AWS API Documentation

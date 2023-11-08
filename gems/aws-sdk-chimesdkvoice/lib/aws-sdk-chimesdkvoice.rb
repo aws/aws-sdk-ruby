@@ -52,6 +52,6 @@ require_relative 'aws-sdk-chimesdkvoice/customizations'
 # @!group service
 module Aws::ChimeSDKVoice
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.14.0'
 
 end

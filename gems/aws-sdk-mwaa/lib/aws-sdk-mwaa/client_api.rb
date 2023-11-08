@@ -156,7 +156,7 @@ module Aws::MWAA
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
 
-    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension, deprecated: true)
 
     Environment.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
     Environment.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
@@ -233,11 +233,11 @@ module Aws::MWAA
     LoggingConfigurationInput.add_member(:worker_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WorkerLogs"))
     LoggingConfigurationInput.struct_class = Types::LoggingConfigurationInput
 
-    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum)
+    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum, deprecated: true)
 
-    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions"))
     MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MetricName"))
-    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, deprecated: true, location_name: "StatisticValues"))
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
@@ -257,7 +257,7 @@ module Aws::MWAA
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     PublishMetricsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "EnvironmentName"))
-    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, location_name: "MetricData"))
+    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, deprecated: true, location_name: "MetricData"))
     PublishMetricsInput.struct_class = Types::PublishMetricsInput
 
     PublishMetricsOutput.struct_class = Types::PublishMetricsOutput
@@ -450,6 +450,7 @@ module Aws::MWAA
         o.name = "PublishMetrics"
         o.http_method = "POST"
         o.http_request_uri = "/metrics/environments/{EnvironmentName}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "ops.",
         }

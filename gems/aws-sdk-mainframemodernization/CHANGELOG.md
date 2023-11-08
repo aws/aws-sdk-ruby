@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-10-31)
+------------------
+
+* Feature - Added name filter ability for ListDataSets API, added ForceUpdate for Updating environment and BatchJob submission using S3BatchJobIdentifier
+
+1.11.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2023-07-18)
 ------------------
 

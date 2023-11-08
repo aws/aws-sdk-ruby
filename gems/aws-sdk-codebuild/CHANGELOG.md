@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2023-11-06)
+------------------
+
+* Feature - AWS CodeBuild now supports AWS Lambda compute.
+
+1.97.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2023-09-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.95.0 (2023-07-11)
 ------------------
 

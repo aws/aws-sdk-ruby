@@ -1453,6 +1453,31 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The entity tag (ETag) is a hash of the object representing its
+    # semantic content.
+    #
+    # @!attribute [rw] algorithm
+    #   The algorithm used to calculate the read set’s ETag(s).
+    #   @return [String]
+    #
+    # @!attribute [rw] source1
+    #   The ETag hash calculated on Source1 of the read set.
+    #   @return [String]
+    #
+    # @!attribute [rw] source2
+    #   The ETag hash calculated on Source2 of the read set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ETag AWS API Documentation
+    #
+    class ETag < Struct.new(
+      :algorithm,
+      :source1,
+      :source2)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A read set.
     #
     # @!attribute [rw] read_set_id
@@ -2163,6 +2188,11 @@ module Aws::Omics
     #   The creation type of the read set.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The entity tag (ETag) is a hash of the object meant to represent its
+    #   semantic content.
+    #   @return [Types::ETag]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadataResponse AWS API Documentation
     #
     class GetReadSetMetadataResponse < Struct.new(
@@ -2180,7 +2210,8 @@ module Aws::Omics
       :reference_arn,
       :files,
       :status_message,
-      :creation_type)
+      :creation_type,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2636,6 +2667,14 @@ module Aws::Omics
     #   The run's retention mode.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a run has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_location
+    #   The location of the run log.
+    #   @return [Types::RunLogLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -2663,13 +2702,15 @@ module Aws::Omics
       :status_message,
       :tags,
       :accelerators,
-      :retention_mode)
+      :retention_mode,
+      :failure_reason,
+      :log_location)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] id
-    #   The task's ID.
+    #   The workflow run ID.
     #   @return [String]
     #
     # @!attribute [rw] task_id
@@ -2733,6 +2774,10 @@ module Aws::Omics
     #   The instance type for a task.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a task has failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -2747,7 +2792,8 @@ module Aws::Omics
       :status_message,
       :log_stream,
       :gpus,
-      :instance_type)
+      :instance_type,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4661,6 +4707,11 @@ module Aws::Omics
     #   The creation type of the read set.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The entity tag (ETag) is a hash of the object representing its
+    #   semantic content.
+    #   @return [Types::ETag]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ReadSetListItem AWS API Documentation
     #
     class ReadSetListItem < Struct.new(
@@ -4677,7 +4728,8 @@ module Aws::Omics
       :sequence_information,
       :creation_time,
       :status_message,
-      :creation_type)
+      :creation_type,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5061,6 +5113,25 @@ module Aws::Omics
       :creation_time,
       :start_time,
       :stop_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The URI for the run log.
+    #
+    # @!attribute [rw] engine_log_stream
+    #   The log stream ARN for the engine log.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_log_stream
+    #   The log stream ARN for the run log.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RunLogLocation AWS API Documentation
+    #
+    class RunLogLocation < Struct.new(
+      :engine_log_stream,
+      :run_log_stream)
       SENSITIVE = []
       include Aws::Structure
     end

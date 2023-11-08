@@ -1047,6 +1047,90 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
+    # @!attribute [rw] stream_configuration
+    #   The configuration settings for the video stream.
+    #   @return [Types::KinesisVideoStreamConfiguration]
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the video stream pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The token assigned to the client making the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the video stream pool.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
+    #
+    class CreateMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      :stream_configuration,
+      :pool_name,
+      :client_request_token,
+      :tags)
+      SENSITIVE = [:client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kinesis_video_stream_pool_configuration
+    #   The configuration for the Kinesis video stream pool.
+    #   @return [Types::KinesisVideoStreamPoolConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaPipelineKinesisVideoStreamPoolResponse AWS API Documentation
+    #
+    class CreateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      :kinesis_video_stream_pool_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sources
+    #   The data sources for the media pipeline.
+    #   @return [Array<Types::MediaStreamSource>]
+    #
+    # @!attribute [rw] sinks
+    #   The data sink for the media pipeline.
+    #   @return [Array<Types::MediaStreamSink>]
+    #
+    # @!attribute [rw] client_request_token
+    #   The token assigned to the client making the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the media pipeline.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaStreamPipelineRequest AWS API Documentation
+    #
+    class CreateMediaStreamPipelineRequest < Struct.new(
+      :sources,
+      :sinks,
+      :client_request_token,
+      :tags)
+      SENSITIVE = [:client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_stream_pipeline
+    #   The requested media pipeline.
+    #   @return [Types::MediaStreamPipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaStreamPipelineResponse AWS API Documentation
+    #
+    class CreateMediaStreamPipelineResponse < Struct.new(
+      :media_stream_pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The content configuration object's data channel.
     #
     # @!attribute [rw] state
@@ -1082,6 +1166,18 @@ module Aws::ChimeSDKMediaPipelines
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaInsightsPipelineConfigurationRequest AWS API Documentation
     #
     class DeleteMediaInsightsPipelineConfigurationRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID of the pool being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
+    #
+    class DeleteMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
       :identifier)
       SENSITIVE = []
       include Aws::Structure
@@ -1215,6 +1311,30 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The ID of the video stream pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
+    #
+    class GetMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kinesis_video_stream_pool_configuration
+    #   The video stream pool configuration object.
+    #   @return [Types::KinesisVideoStreamPoolConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipelineKinesisVideoStreamPoolResponse AWS API Documentation
+    #
+    class GetMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      :kinesis_video_stream_pool_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] media_pipeline_id
     #   The ID of the pipeline that you want to get.
     #   @return [String]
@@ -1275,7 +1395,7 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [String]
     #
     # @!attribute [rw] voice_tone_analysis_task_id
-    #   The ID of the voice tone anlysis task.
+    #   The ID of the voice tone analysis task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetVoiceToneAnalysisTaskRequest AWS API Documentation
@@ -1359,7 +1479,7 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [Integer]
     #
     # @!attribute [rw] tile_aspect_ratio
-    #   Sets the aspect ratio of the video tiles, such as 16:9.
+    #   Specifies the aspect ratio of all video tiles.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/HorizontalLayoutConfiguration AWS API Documentation
@@ -1426,6 +1546,112 @@ module Aws::ChimeSDKMediaPipelines
     class KinesisDataStreamSinkConfiguration < Struct.new(
       :insights_target)
       SENSITIVE = [:insights_target]
+      include Aws::Structure
+    end
+
+    # The configuration of an Kinesis video stream.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the video stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_retention_in_hours
+    #   The amount of time that data is retained.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisVideoStreamConfiguration AWS API Documentation
+    #
+    class KinesisVideoStreamConfiguration < Struct.new(
+      :region,
+      :data_retention_in_hours)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The updated Kinesis video stream configuration object.
+    #
+    # @!attribute [rw] data_retention_in_hours
+    #   The updated time that data is retained.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisVideoStreamConfigurationUpdate AWS API Documentation
+    #
+    class KinesisVideoStreamConfigurationUpdate < Struct.new(
+      :data_retention_in_hours)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The video stream pool configuration object.
+    #
+    # @!attribute [rw] pool_arn
+    #   The ARN of the video stream pool configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the video stream pool configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the video stream pool in the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_status
+    #   The status of the video stream pool in the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_size
+    #   The size of the video stream pool in the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_configuration
+    #   The Kinesis video stream pool configuration object.
+    #   @return [Types::KinesisVideoStreamConfiguration]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which the configuration was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisVideoStreamPoolConfiguration AWS API Documentation
+    #
+    class KinesisVideoStreamPoolConfiguration < Struct.new(
+      :pool_arn,
+      :pool_name,
+      :pool_id,
+      :pool_status,
+      :pool_size,
+      :stream_configuration,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = [:pool_arn]
+      include Aws::Structure
+    end
+
+    # A summary of the Kinesis video stream pool.
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the video stream pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the video stream pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_arn
+    #   The ARN of the video stream pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisVideoStreamPoolSummary AWS API Documentation
+    #
+    class KinesisVideoStreamPoolSummary < Struct.new(
+      :pool_name,
+      :pool_id,
+      :pool_arn)
+      SENSITIVE = [:pool_arn]
       include Aws::Structure
     end
 
@@ -1593,6 +1819,40 @@ module Aws::ChimeSDKMediaPipelines
     #
     class ListMediaInsightsPipelineConfigurationsResponse < Struct.new(
       :media_insights_pipeline_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token used to return the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ListMediaPipelineKinesisVideoStreamPoolsRequest AWS API Documentation
+    #
+    class ListMediaPipelineKinesisVideoStreamPoolsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kinesis_video_stream_pools
+    #   The list of video stream pools.
+    #   @return [Array<Types::KinesisVideoStreamPoolSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ListMediaPipelineKinesisVideoStreamPoolsResponse AWS API Documentation
+    #
+    class ListMediaPipelineKinesisVideoStreamPoolsResponse < Struct.new(
+      :kinesis_video_stream_pools,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2157,13 +2417,18 @@ module Aws::ChimeSDKMediaPipelines
     #   The media insights pipeline of a media pipeline.
     #   @return [Types::MediaInsightsPipeline]
     #
+    # @!attribute [rw] media_stream_pipeline
+    #   Designates a media pipeline as a media stream pipeline.
+    #   @return [Types::MediaStreamPipeline]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaPipeline AWS API Documentation
     #
     class MediaPipeline < Struct.new(
       :media_capture_pipeline,
       :media_live_connector_pipeline,
       :media_concatenation_pipeline,
-      :media_insights_pipeline)
+      :media_insights_pipeline,
+      :media_stream_pipeline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2184,6 +2449,98 @@ module Aws::ChimeSDKMediaPipelines
       :media_pipeline_id,
       :media_pipeline_arn)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure that contains the settings for a media stream pipeline.
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of the media stream pipeline
+    #   @return [String]
+    #
+    # @!attribute [rw] media_pipeline_arn
+    #   The ARN of the media stream pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the media stream pipeline was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which the media stream pipeline was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the media stream pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The media stream pipeline's data sources.
+    #   @return [Array<Types::MediaStreamSource>]
+    #
+    # @!attribute [rw] sinks
+    #   The media stream pipeline's data sinks.
+    #   @return [Array<Types::MediaStreamSink>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaStreamPipeline AWS API Documentation
+    #
+    class MediaStreamPipeline < Struct.new(
+      :media_pipeline_id,
+      :media_pipeline_arn,
+      :created_timestamp,
+      :updated_timestamp,
+      :status,
+      :sources,
+      :sinks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure that contains the settings for a media stream sink.
+    #
+    # @!attribute [rw] sink_arn
+    #   The ARN of the media stream sink.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_type
+    #   The media stream sink's type.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_stream_capacity
+    #   Specifies the number of streams that the sink can accept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_type
+    #   The media stream sink's media stream type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaStreamSink AWS API Documentation
+    #
+    class MediaStreamSink < Struct.new(
+      :sink_arn,
+      :sink_type,
+      :reserved_stream_capacity,
+      :media_stream_type)
+      SENSITIVE = [:sink_arn]
+      include Aws::Structure
+    end
+
+    # Structure that contains the settings for media stream sources.
+    #
+    # @!attribute [rw] source_type
+    #   The type of media stream source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the media stream source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaStreamSource AWS API Documentation
+    #
+    class MediaStreamSource < Struct.new(
+      :source_type,
+      :source_arn)
+      SENSITIVE = [:source_arn]
       include Aws::Structure
     end
 
@@ -2970,6 +3327,35 @@ module Aws::ChimeSDKMediaPipelines
     class UpdateMediaInsightsPipelineStatusRequest < Struct.new(
       :identifier,
       :update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID of the video stream pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_configuration
+    #   The configuration settings for the video stream.
+    #   @return [Types::KinesisVideoStreamConfigurationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/UpdateMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
+    #
+    class UpdateMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
+      :identifier,
+      :stream_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kinesis_video_stream_pool_configuration
+    #   The video stream pool configuration object.
+    #   @return [Types::KinesisVideoStreamPoolConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/UpdateMediaPipelineKinesisVideoStreamPoolResponse AWS API Documentation
+    #
+    class UpdateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
+      :kinesis_video_stream_pool_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

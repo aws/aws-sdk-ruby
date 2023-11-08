@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2023-10-12)
+------------------
+
+* Feature - This release enables routing policies with Availability Zone affinity for Network Load Balancers.
+
+1.92.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-09-06)
+------------------
+
+* Feature - This release enables default UDP connection termination and disabling unhealthy target connection termination for Network Load Balancers.
+
 1.90.0 (2023-08-10)
 ------------------
 

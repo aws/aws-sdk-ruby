@@ -377,7 +377,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name (for example,
+    #   * If a user started the build, the user's name (for example,
     #     `MyUserName`).
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
@@ -720,7 +720,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name.
+    #   * If a user started the build, the user's name.
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
     #     `CodeBuild-Jenkins-Plugin`.
@@ -2044,27 +2044,33 @@ module Aws::CodeBuild
     #
     #   We strongly discourage the use of `PLAINTEXT` environment variables
     #   to store sensitive values, especially Amazon Web Services secret key
-    #   IDs and secret access keys. `PLAINTEXT` environment variables can be
-    #   displayed in plain text using the CodeBuild console and the CLI. For
-    #   sensitive values, we recommend you use an environment variable of
-    #   type `PARAMETER_STORE` or `SECRETS_MANAGER`.
+    #   IDs. `PLAINTEXT` environment variables can be displayed in plain
+    #   text using the CodeBuild console and the CLI. For sensitive values,
+    #   we recommend you use an environment variable of type
+    #   `PARAMETER_STORE` or `SECRETS_MANAGER`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of environment variable. Valid values include:
     #
     #   * `PARAMETER_STORE`: An environment variable stored in Systems
-    #     Manager Parameter Store. To learn how to specify a parameter store
-    #     environment variable, see [env/parameter-store][1] in the
-    #     *CodeBuild User Guide*.
+    #     Manager Parameter Store. For environment variables of this type,
+    #     specify the name of the parameter as the `value` of the
+    #     EnvironmentVariable. The parameter value will be substituted for
+    #     the name at runtime. You can also define Parameter Store
+    #     environment variables in the buildspec. To learn how to do so, see
+    #     [env/parameter-store][1] in the *CodeBuild User Guide*.
     #
     #   * `PLAINTEXT`: An environment variable in plain text format. This is
     #     the default value.
     #
     #   * `SECRETS_MANAGER`: An environment variable stored in Secrets
-    #     Manager. To learn how to specify a secrets manager environment
-    #     variable, see [env/secrets-manager][2] in the *CodeBuild User
-    #     Guide*.
+    #     Manager. For environment variables of this type, specify the name
+    #     of the secret as the `value` of the EnvironmentVariable. The
+    #     secret value will be substituted for the name at runtime. You can
+    #     also define Secrets Manager environment variables in the
+    #     buildspec. To learn how to do so, see [env/secrets-manager][2] in
+    #     the *CodeBuild User Guide*.
     #
     #
     #
@@ -3027,7 +3033,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] deep_link
-    #   The URL to an individual build log in CloudWatch Logs.
+    #   The URL to an individual build log in CloudWatch Logs. The log
+    #   stream is created during the PROVISIONING phase of a build and the
+    #   `deeplink` will not be valid until it is created.
     #   @return [String]
     #
     # @!attribute [rw] s3_deep_link
@@ -3035,9 +3043,12 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_arn
-    #   The ARN of CloudWatch Logs for a build project. Its format is
+    #   The ARN of the CloudWatch Logs stream for a build execution. Its
+    #   format is
     #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
-    #   For more information, see [Resources Defined by CloudWatch Logs][1].
+    #   The CloudWatch Logs stream is created during the PROVISIONING phase
+    #   of a build and the ARN will not be valid until it is created. For
+    #   more information, see [Resources Defined by CloudWatch Logs][1].
     #
     #
     #
@@ -3732,6 +3743,16 @@ module Aws::CodeBuild
     #     Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).
     #   ^
     #
+    #   * The environment types `ARM_LAMBDA_CONTAINER` and
+    #     `LINUX_LAMBDA_CONTAINER` are available only in regions US East (N.
+    #     Virginia), US East (Ohio), US West (Oregon), Asia Pacific
+    #     (Mumbai), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America
+    #     (São Paulo).
+    #
+    #   ^
+    #   ^
+    #
     #   * The environment types `WINDOWS_CONTAINER` and
     #     `WINDOWS_SERVER_2019_CONTAINER` are available only in regions US
     #     East (N. Virginia), US East (Ohio), US West (Oregon), and EU
@@ -3785,6 +3806,37 @@ module Aws::CodeBuild
     #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
+    #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #

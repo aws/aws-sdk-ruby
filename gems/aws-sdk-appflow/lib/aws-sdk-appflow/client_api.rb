@@ -1338,8 +1338,9 @@ module Aws::Appflow
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)
 
-    ServiceNowConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
-    ServiceNowConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
+    ServiceNowConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "username"))
+    ServiceNowConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "password"))
+    ServiceNowConnectorProfileCredentials.add_member(:o_auth_2_credentials, Shapes::ShapeRef.new(shape: OAuth2Credentials, location_name: "oAuth2Credentials"))
     ServiceNowConnectorProfileCredentials.struct_class = Types::ServiceNowConnectorProfileCredentials
 
     ServiceNowConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))

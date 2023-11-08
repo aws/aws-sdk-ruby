@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-11-07)
+------------------
+
+* Feature - Updated SendDataSetNotificationRequest Comment to be maximum length 4096.
+
+1.41.0 (2023-10-30)
+------------------
+
+* Feature - We added a new API action: SendDataSetNotification.
+
+1.40.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2023-09-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2023-07-11)
 ------------------
 

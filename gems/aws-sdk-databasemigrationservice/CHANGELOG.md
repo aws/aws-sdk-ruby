@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.87.0 (2023-09-22)
+------------------
+
+* Feature - new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift
+
 1.86.0 (2023-08-03)
 ------------------
 

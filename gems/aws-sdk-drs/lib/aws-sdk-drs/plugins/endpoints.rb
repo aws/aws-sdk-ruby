@@ -68,6 +68,8 @@ module Aws::Drs
             Aws::Drs::Endpoints::CreateSourceNetwork.build(context)
           when :delete_job
             Aws::Drs::Endpoints::DeleteJob.build(context)
+          when :delete_launch_action
+            Aws::Drs::Endpoints::DeleteLaunchAction.build(context)
           when :delete_launch_configuration_template
             Aws::Drs::Endpoints::DeleteLaunchConfigurationTemplate.build(context)
           when :delete_recovery_instance
@@ -110,10 +112,14 @@ module Aws::Drs
             Aws::Drs::Endpoints::InitializeService.build(context)
           when :list_extensible_source_servers
             Aws::Drs::Endpoints::ListExtensibleSourceServers.build(context)
+          when :list_launch_actions
+            Aws::Drs::Endpoints::ListLaunchActions.build(context)
           when :list_staging_accounts
             Aws::Drs::Endpoints::ListStagingAccounts.build(context)
           when :list_tags_for_resource
             Aws::Drs::Endpoints::ListTagsForResource.build(context)
+          when :put_launch_action
+            Aws::Drs::Endpoints::PutLaunchAction.build(context)
           when :retry_data_replication
             Aws::Drs::Endpoints::RetryDataReplication.build(context)
           when :reverse_replication

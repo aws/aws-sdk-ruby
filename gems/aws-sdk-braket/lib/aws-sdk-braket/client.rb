@@ -678,6 +678,7 @@ module Aws::Braket
     #   * {Types::GetDeviceResponse#device_arn #device_arn} => String
     #   * {Types::GetDeviceResponse#device_capabilities #device_capabilities} => String
     #   * {Types::GetDeviceResponse#device_name #device_name} => String
+    #   * {Types::GetDeviceResponse#device_queue_info #device_queue_info} => Array&lt;Types::DeviceQueueInfo&gt;
     #   * {Types::GetDeviceResponse#device_status #device_status} => String
     #   * {Types::GetDeviceResponse#device_type #device_type} => String
     #   * {Types::GetDeviceResponse#provider_name #provider_name} => String
@@ -693,6 +694,10 @@ module Aws::Braket
     #   resp.device_arn #=> String
     #   resp.device_capabilities #=> String
     #   resp.device_name #=> String
+    #   resp.device_queue_info #=> Array
+    #   resp.device_queue_info[0].queue #=> String, one of "QUANTUM_TASKS_QUEUE", "JOBS_QUEUE"
+    #   resp.device_queue_info[0].queue_priority #=> String, one of "Normal", "Priority"
+    #   resp.device_queue_info[0].queue_size #=> String
     #   resp.device_status #=> String, one of "ONLINE", "OFFLINE", "RETIRED"
     #   resp.device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.provider_name #=> String
@@ -707,6 +712,9 @@ module Aws::Braket
     end
 
     # Retrieves the specified Amazon Braket job.
+    #
+    # @option params [Array<String>] :additional_attribute_names
+    #   A list of attributes to return information for.
     #
     # @option params [required, String] :job_arn
     #   The ARN of the job to retrieve.
@@ -727,6 +735,7 @@ module Aws::Braket
     #   * {Types::GetJobResponse#job_arn #job_arn} => String
     #   * {Types::GetJobResponse#job_name #job_name} => String
     #   * {Types::GetJobResponse#output_data_config #output_data_config} => Types::JobOutputDataConfig
+    #   * {Types::GetJobResponse#queue_info #queue_info} => Types::HybridJobQueueInfo
     #   * {Types::GetJobResponse#role_arn #role_arn} => String
     #   * {Types::GetJobResponse#started_at #started_at} => Time
     #   * {Types::GetJobResponse#status #status} => String
@@ -736,6 +745,7 @@ module Aws::Braket
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job({
+    #     additional_attribute_names: ["QueueInfo"], # accepts QueueInfo
     #     job_arn: "JobArn", # required
     #   })
     #
@@ -769,6 +779,9 @@ module Aws::Braket
     #   resp.job_name #=> String
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_path #=> String
+    #   resp.queue_info.message #=> String
+    #   resp.queue_info.position #=> String
+    #   resp.queue_info.queue #=> String, one of "QUANTUM_TASKS_QUEUE", "JOBS_QUEUE"
     #   resp.role_arn #=> String
     #   resp.started_at #=> Time
     #   resp.status #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
@@ -787,6 +800,9 @@ module Aws::Braket
 
     # Retrieves the specified quantum task.
     #
+    # @option params [Array<String>] :additional_attribute_names
+    #   A list of attributes to return information for.
+    #
     # @option params [required, String] :quantum_task_arn
     #   the ARN of the task to retrieve.
     #
@@ -801,6 +817,7 @@ module Aws::Braket
     #   * {Types::GetQuantumTaskResponse#output_s3_bucket #output_s3_bucket} => String
     #   * {Types::GetQuantumTaskResponse#output_s3_directory #output_s3_directory} => String
     #   * {Types::GetQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
+    #   * {Types::GetQuantumTaskResponse#queue_info #queue_info} => Types::QuantumTaskQueueInfo
     #   * {Types::GetQuantumTaskResponse#shots #shots} => Integer
     #   * {Types::GetQuantumTaskResponse#status #status} => String
     #   * {Types::GetQuantumTaskResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -808,6 +825,7 @@ module Aws::Braket
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_quantum_task({
+    #     additional_attribute_names: ["QueueInfo"], # accepts QueueInfo
     #     quantum_task_arn: "QuantumTaskArn", # required
     #   })
     #
@@ -822,6 +840,10 @@ module Aws::Braket
     #   resp.output_s3_bucket #=> String
     #   resp.output_s3_directory #=> String
     #   resp.quantum_task_arn #=> String
+    #   resp.queue_info.message #=> String
+    #   resp.queue_info.position #=> String
+    #   resp.queue_info.queue #=> String, one of "QUANTUM_TASKS_QUEUE", "JOBS_QUEUE"
+    #   resp.queue_info.queue_priority #=> String, one of "Normal", "Priority"
     #   resp.shots #=> Integer
     #   resp.status #=> String, one of "CREATED", "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.tags #=> Hash
@@ -1102,7 +1124,7 @@ module Aws::Braket
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-10-16)
+------------------
+
+* Feature - SDK and documentation updates for UpdateReplacePolicy
+
+1.90.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2023-09-14)
+------------------
+
+* Feature - Documentation updates for AWS CloudFormation
+
 1.88.0 (2023-07-28)
 ------------------
 

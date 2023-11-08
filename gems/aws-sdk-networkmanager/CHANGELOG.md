@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-10-23)
+------------------
+
+* Feature - This release adds API support for Tunnel-less Connect (NoEncap Protocol) for AWS Cloud WAN
+
+1.37.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2023-09-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2023-07-11)
 ------------------
 

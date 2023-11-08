@@ -4,7 +4,6 @@ require 'set'
 
 module Aws
   module SQS
-
     # A utility class for long polling messages in a loop. **Messages are
     # automatically deleted from the queue at the end of the given block.**
     #
@@ -181,6 +180,16 @@ module Aws
     #   end
     #   ```
     #
+    # * Configure an {#after_empty_receive} callback.
+    #
+    #   ```
+    #   poller.after_empty_receive do |stats|
+    #     logger.info("requests: #{stats.request_count}")
+    #     logger.info("messages: #{stats.received_message_count}")
+    #     logger.info("last-timestamp: #{stats.last_message_received_at}")
+    #   end
+    #   ```
+    #
     # * Accept a 2nd argument in the poll block, for example:
     #
     #   ```
@@ -203,7 +212,6 @@ module Aws
     #   ```
     #
     class QueuePoller
-
       # @param [String] queue_url
       # @option options [Client] :client
       # @option (see #poll)
@@ -256,6 +264,21 @@ module Aws
       # @return [void]
       def before_request(&block)
         @default_config = @default_config.with(before_request: block) if block_given?
+      end
+
+      # Registers a callback that is invoked when the poll requests returns with no messages.
+      # This callback is invoked after the idle timeout is checked.
+      #
+      #     poller.after_empty_receive do |stats|
+      #       # Handle empty receive
+      #     end
+      #
+      # @yieldparam [PollerStats] stats An object that tracks a few
+      #   client-side statistics about the queue polling.
+      #
+      # @return [void]
+      def after_empty_receive(&block)
+        @default_config = @default_config.with(after_empty_receive: block) if block_given?
       end
 
       # Polls the queue, yielded a message, or an array of messages.
@@ -333,7 +356,8 @@ module Aws
           loop do
             messages = get_messages(config, stats)
             if messages.empty?
-              check_idle_timeout(config, stats, messages)
+              check_idle_timeout(config, stats)
+              config.after_empty_receive&.call(stats)
             else
               process_messages(config, stats, messages, &block)
             end
@@ -348,21 +372,21 @@ module Aws
       #   `#receipt_handle`.
       # @param [Integer] seconds
       def change_message_visibility_timeout(message, seconds)
-        @client.change_message_visibility({
+        @client.change_message_visibility(
           queue_url: @queue_url,
           receipt_handle: message.receipt_handle,
-          visibility_timeout: seconds,
-        })
+          visibility_timeout: seconds
+        )
       end
 
       # @note This method should be called from inside a {#poll} block.
       # @param [#receipt_handle] message An object that responds to
       #   `#receipt_handle`.
       def delete_message(message)
-        @client.delete_message({
+        @client.delete_message(
           queue_url: @queue_url,
-          receipt_handle: message.receipt_handle,
-        })
+          receipt_handle: message.receipt_handle
+        )
       end
 
       # @note This method should be called from inside a {#poll} block.
@@ -372,16 +396,16 @@ module Aws
       def delete_messages(messages)
         @client.delete_message_batch(
           queue_url: @queue_url,
-          entries: messages.map { |msg|
+          entries: messages.map do |msg|
             { id: msg.message_id, receipt_handle: msg.receipt_handle }
-          }
+          end
         )
       end
 
       private
 
       def get_messages(config, stats)
-        config.before_request.call(stats) if config.before_request
+        config.before_request&.call(stats)
         messages = send_request(config).messages
         stats.request_count += 1
         messages
@@ -392,17 +416,22 @@ module Aws
         @client.receive_message(params)
       end
 
-      def check_idle_timeout(config, stats, messages)
-        if config.idle_timeout
-          since = stats.last_message_received_at || stats.polling_started_at
-          idle_time = Time.now - since
-          throw :stop_polling if idle_time > config.idle_timeout
-        end
+      def check_idle_timeout(config, stats)
+        return unless config.idle_timeout
+
+        since = stats.last_message_received_at || stats.polling_started_at
+        idle_time = Time.now - since
+        throw :stop_polling if idle_time > config.idle_timeout
       end
 
       def process_messages(config, stats, messages, &block)
         stats.received_message_count += messages.count
         stats.last_message_received_at = Time.now
+
+        # duplicated messages will have a different receipt handle
+        # so we need to provide the most recent receipt to
+        # delete a batch - thus, filtering below by message_id
+        messages = messages.reverse.uniq(&:message_id).reverse!
         catch(:skip_delete) do
           yield_messages(config, messages, stats, &block)
           delete_messages(messages) unless config.skip_delete
@@ -421,7 +450,6 @@ module Aws
 
       # Statistics tracked client-side by the {QueuePoller}.
       class PollerStats
-
         def initialize
           @request_count = 0
           @received_message_count = 0
@@ -444,27 +472,26 @@ module Aws
 
         # @return [Time,nil]
         attr_accessor :polling_stopped_at
-
       end
 
       # A read-only set of configuration used by the QueuePoller.
       class PollerConfig
+        # @api private
+        CONFIG_OPTIONS = Set.new %i[
+          idle_timeout
+          skip_delete
+          before_request
+          after_empty_receive
+        ]
 
         # @api private
-        CONFIG_OPTIONS = Set.new([
-          :idle_timeout,
-          :skip_delete,
-          :before_request,
-        ])
-
-        # @api private
-        PARAM_OPTIONS = Set.new([
-          :wait_time_seconds,
-          :max_number_of_messages,
-          :visibility_timeout,
-          :attribute_names,
-          :message_attribute_names,
-        ])
+        PARAM_OPTIONS = Set.new %i[
+          wait_time_seconds
+          max_number_of_messages
+          visibility_timeout
+          attribute_names
+          message_attribute_names
+        ]
 
         # @return [Integer,nil]
         attr_reader :idle_timeout
@@ -475,6 +502,9 @@ module Aws
         # @return [Proc,nil]
         attr_reader :before_request
 
+        # @return [Proc,nil]
+        attr_reader :after_empty_receive
+
         # @return [Hash]
         attr_reader :request_params
 
@@ -482,12 +512,13 @@ module Aws
           @idle_timeout = nil
           @skip_delete = false
           @before_request = nil
+          @after_empty_receive = nil
           @request_params = {
             wait_time_seconds: 20,
             max_number_of_messages: 1,
             visibility_timeout: nil,
             attribute_names: ['All'],
-            message_attribute_names: ['All'],
+            message_attribute_names: ['All']
           }
           options.each do |opt_name, value|
             if CONFIG_OPTIONS.include?(opt_name)
@@ -522,7 +553,6 @@ module Aws
           PARAM_OPTIONS.each { |key| hash[key] = @request_params[key] }
           hash
         end
-
       end
     end
   end

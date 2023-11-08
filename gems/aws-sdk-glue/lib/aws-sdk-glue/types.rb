@@ -2231,6 +2231,14 @@ module Aws::Glue
     #   Specifies a target that writes to a Snowflake data source.
     #   @return [Types::SnowflakeTarget]
     #
+    # @!attribute [rw] connector_data_source
+    #   Specifies a source generated with standard connection options.
+    #   @return [Types::ConnectorDataSource]
+    #
+    # @!attribute [rw] connector_data_target
+    #   Specifies a target generated with standard connection options.
+    #   @return [Types::ConnectorDataTarget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2302,7 +2310,9 @@ module Aws::Glue
       :evaluate_data_quality_multi_frame,
       :recipe,
       :snowflake_source,
-      :snowflake_target)
+      :snowflake_target,
+      :connector_data_source,
+      :connector_data_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3107,6 +3117,86 @@ module Aws::Glue
     #
     class ConnectionsList < Struct.new(
       :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a source generated with standard connection options.
+    #
+    # @!attribute [rw] name
+    #   The name of this source node.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The `connectionType`, as provided to the underlying Glue library.
+    #   This node type supports the following connection types:
+    #
+    #   * `bigquery`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   A map specifying connection options for the node. You can find
+    #   standard connection options for the corresponding connection type in
+    #   the [ Connection parameters][1] section of the Glue documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for this source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorDataSource AWS API Documentation
+    #
+    class ConnectorDataSource < Struct.new(
+      :name,
+      :connection_type,
+      :data,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target generated with standard connection options.
+    #
+    # @!attribute [rw] name
+    #   The name of this target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The `connectionType`, as provided to the underlying Glue library.
+    #   This node type supports the following connection types:
+    #
+    #   * `bigquery`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   A map specifying connection options for the node. You can find
+    #   standard connection options for the corresponding connection type in
+    #   the [ Connection parameters][1] section of the Glue documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorDataTarget AWS API Documentation
+    #
+    class ConnectorDataTarget < Struct.new(
+      :name,
+      :connection_type,
+      :data,
+      :inputs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21126,11 +21216,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner
@@ -21496,11 +21589,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner

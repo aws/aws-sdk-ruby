@@ -412,6 +412,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Lake Formation                                    | Aws::LakeFormation                       | aws-sdk-lakeformation                       | 2017-03-31  |
 | AWS Lambda                                            | Aws::Lambda                              | aws-sdk-lambda                              | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                       | aws-sdk-lambdapreview                       | 2014-11-11  |
+| AWS Launch Wizard                                     | Aws::LaunchWizard                        | aws-sdk-launchwizard                        | 2018-05-10  |
 | AWS License Manager                                   | Aws::LicenseManager                      | aws-sdk-licensemanager                      | 2018-08-01  |
 | AWS License Manager Linux Subscriptions               | Aws::LicenseManagerLinuxSubscriptions    | aws-sdk-licensemanagerlinuxsubscriptions    | 2018-05-10  |
 | AWS License Manager User Subscriptions                | Aws::LicenseManagerUserSubscriptions     | aws-sdk-licensemanagerusersubscriptions     | 2018-05-10  |
@@ -489,6 +490,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon Appflow                                        | Aws::Appflow                             | aws-sdk-appflow                             | 2020-08-23  |
 | Amazon Athena                                         | Aws::Athena                              | aws-sdk-athena                              | 2017-05-18  |
 | Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime                  | aws-sdk-augmentedairuntime                  | 2019-11-07  |
+| Amazon Bedrock                                        | Aws::Bedrock                             | aws-sdk-bedrock                             | 2023-04-20  |
+| Amazon Bedrock Runtime                                | Aws::BedrockRuntime                      | aws-sdk-bedrockruntime                      | 2023-09-30  |
 | Amazon Chime                                          | Aws::Chime                               | aws-sdk-chime                               | 2018-05-01  |
 | Amazon Chime SDK Identity                             | Aws::ChimeSDKIdentity                    | aws-sdk-chimesdkidentity                    | 2021-04-20  |
 | Amazon Chime SDK Media Pipelines                      | Aws::ChimeSDKMediaPipelines              | aws-sdk-chimesdkmediapipelines              | 2021-07-15  |
@@ -521,6 +524,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Service                                | Aws::Connect                             | aws-sdk-connect                             | 2017-08-08  |
 | Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService                | aws-sdk-connectwisdomservice                | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                                 | aws-sdk-dlm                                 | 2018-01-12  |
+| Amazon DataZone                                       | Aws::DataZone                            | aws-sdk-datazone                            | 2018-05-10  |
 | Amazon Detective                                      | Aws::Detective                           | aws-sdk-detective                           | 2018-10-26  |
 | Amazon DevOps Guru                                    | Aws::DevOpsGuru                          | aws-sdk-devopsguru                          | 2020-12-01  |
 | Amazon DocumentDB Elastic Clusters                    | Aws::DocDBElastic                        | aws-sdk-docdbelastic                        | 2022-11-28  |
@@ -664,7 +668,6 @@ RubyGems.org page under "LINKS" section.
 | FinSpace Public API                                   | Aws::FinSpaceData                        | aws-sdk-finspacedata                        | 2020-07-13  |
 | FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
-| GameSparks                                            | Aws::GameSparks                          | aws-sdk-gamesparks                          | 2021-08-17  |
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |

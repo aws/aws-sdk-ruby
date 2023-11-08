@@ -122,6 +122,8 @@ module Aws::FSx
             Aws::FSx::Endpoints::ReleaseFileSystemNfsV3Locks.build(context)
           when :restore_volume_from_snapshot
             Aws::FSx::Endpoints::RestoreVolumeFromSnapshot.build(context)
+          when :start_misconfigured_state_recovery
+            Aws::FSx::Endpoints::StartMisconfiguredStateRecovery.build(context)
           when :tag_resource
             Aws::FSx::Endpoints::TagResource.build(context)
           when :untag_resource

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-recyclebin/customizations'
 # @!group service
 module Aws::RecycleBin
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.15.0'
 
 end

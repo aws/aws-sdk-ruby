@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-10-26)
+------------------
+
+* Feature - You can specify ipv4 or dualstack IPAddressType for cluster endpoints. If you specify IPAddressType as dualstack, the new endpoint will be visible under the 'EndpointV2' parameter and will support IPv4 and IPv6 requests. Whereas, the 'Endpoint' will continue to serve IPv4 requests.
+
+1.29.0 (2023-10-19)
+------------------
+
+* Feature - Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains
+
+1.28.0 (2023-10-16)
+------------------
+
+* Feature - This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+
+1.27.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.26.0 (2023-07-11)
 ------------------
 

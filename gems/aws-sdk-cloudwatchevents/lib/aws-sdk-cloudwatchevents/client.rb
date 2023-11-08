@@ -601,12 +601,12 @@ module Aws::CloudWatchEvents
     #     auth_parameters: { # required
     #       basic_auth_parameters: {
     #         username: "AuthHeaderParameters", # required
-    #         password: "AuthHeaderParameters", # required
+    #         password: "AuthHeaderParametersSensitive", # required
     #       },
     #       o_auth_parameters: {
     #         client_parameters: { # required
     #           client_id: "AuthHeaderParameters", # required
-    #           client_secret: "AuthHeaderParameters", # required
+    #           client_secret: "AuthHeaderParametersSensitive", # required
     #         },
     #         authorization_endpoint: "HttpsEndpoint", # required
     #         http_method: "GET", # required, accepts GET, POST, PUT
@@ -614,21 +614,21 @@ module Aws::CloudWatchEvents
     #           header_parameters: [
     #             {
     #               key: "HeaderKey",
-    #               value: "HeaderValue",
+    #               value: "HeaderValueSensitive",
     #               is_value_secret: false,
     #             },
     #           ],
     #           query_string_parameters: [
     #             {
     #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
+    #               value: "QueryStringValueSensitive",
     #               is_value_secret: false,
     #             },
     #           ],
     #           body_parameters: [
     #             {
     #               key: "String",
-    #               value: "String",
+    #               value: "SensitiveString",
     #               is_value_secret: false,
     #             },
     #           ],
@@ -636,27 +636,27 @@ module Aws::CloudWatchEvents
     #       },
     #       api_key_auth_parameters: {
     #         api_key_name: "AuthHeaderParameters", # required
-    #         api_key_value: "AuthHeaderParameters", # required
+    #         api_key_value: "AuthHeaderParametersSensitive", # required
     #       },
     #       invocation_http_parameters: {
     #         header_parameters: [
     #           {
     #             key: "HeaderKey",
-    #             value: "HeaderValue",
+    #             value: "HeaderValueSensitive",
     #             is_value_secret: false,
     #           },
     #         ],
     #         query_string_parameters: [
     #           {
     #             key: "QueryStringKey",
-    #             value: "QueryStringValue",
+    #             value: "QueryStringValueSensitive",
     #             is_value_secret: false,
     #           },
     #         ],
     #         body_parameters: [
     #           {
     #             key: "String",
-    #             value: "String",
+    #             value: "SensitiveString",
     #             is_value_secret: false,
     #           },
     #         ],
@@ -3281,12 +3281,12 @@ module Aws::CloudWatchEvents
     #     auth_parameters: {
     #       basic_auth_parameters: {
     #         username: "AuthHeaderParameters",
-    #         password: "AuthHeaderParameters",
+    #         password: "AuthHeaderParametersSensitive",
     #       },
     #       o_auth_parameters: {
     #         client_parameters: {
     #           client_id: "AuthHeaderParameters",
-    #           client_secret: "AuthHeaderParameters",
+    #           client_secret: "AuthHeaderParametersSensitive",
     #         },
     #         authorization_endpoint: "HttpsEndpoint",
     #         http_method: "GET", # accepts GET, POST, PUT
@@ -3294,21 +3294,21 @@ module Aws::CloudWatchEvents
     #           header_parameters: [
     #             {
     #               key: "HeaderKey",
-    #               value: "HeaderValue",
+    #               value: "HeaderValueSensitive",
     #               is_value_secret: false,
     #             },
     #           ],
     #           query_string_parameters: [
     #             {
     #               key: "QueryStringKey",
-    #               value: "QueryStringValue",
+    #               value: "QueryStringValueSensitive",
     #               is_value_secret: false,
     #             },
     #           ],
     #           body_parameters: [
     #             {
     #               key: "String",
-    #               value: "String",
+    #               value: "SensitiveString",
     #               is_value_secret: false,
     #             },
     #           ],
@@ -3316,27 +3316,27 @@ module Aws::CloudWatchEvents
     #       },
     #       api_key_auth_parameters: {
     #         api_key_name: "AuthHeaderParameters",
-    #         api_key_value: "AuthHeaderParameters",
+    #         api_key_value: "AuthHeaderParametersSensitive",
     #       },
     #       invocation_http_parameters: {
     #         header_parameters: [
     #           {
     #             key: "HeaderKey",
-    #             value: "HeaderValue",
+    #             value: "HeaderValueSensitive",
     #             is_value_secret: false,
     #           },
     #         ],
     #         query_string_parameters: [
     #           {
     #             key: "QueryStringKey",
-    #             value: "QueryStringValue",
+    #             value: "QueryStringValueSensitive",
     #             is_value_secret: false,
     #           },
     #         ],
     #         body_parameters: [
     #           {
     #             key: "String",
-    #             value: "String",
+    #             value: "SensitiveString",
     #             is_value_secret: false,
     #           },
     #         ],
@@ -3374,7 +3374,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-10-12)
+------------------
+
+* Feature - Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model.
+
+1.37.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2023-08-31)
 ------------------
 

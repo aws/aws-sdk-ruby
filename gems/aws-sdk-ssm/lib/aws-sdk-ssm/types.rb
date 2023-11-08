@@ -3512,7 +3512,13 @@ module Aws::SSM
     end
 
     # @!attribute [rw] description
-    #   Information about the OpsItem.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
+    #
+    #   <note markdown="1"> Provide enough information so that users viewing this OpsItem for
+    #   the first time understand the issue.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
@@ -4121,6 +4127,22 @@ module Aws::SSM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItemRequest AWS API Documentation
+    #
+    class DeleteOpsItemRequest < Struct.new(
+      :ops_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItemResponse AWS API Documentation
+    #
+    class DeleteOpsItemResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] ops_metadata_arn
     #   The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
@@ -12900,6 +12922,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified OpsItem is in the process of being deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemConflictException AWS API Documentation
+    #
+    class OpsItemConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that defines the value of the key and its type in the
     # OperationalData map.
     #
@@ -18809,9 +18844,8 @@ module Aws::SSM
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] description
-    #   Update the information about the OpsItem. Provide enough information
-    #   so that users reading this OpsItem for the first time understand the
-    #   issue.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
     #   @return [String]
     #
     # @!attribute [rw] operational_data

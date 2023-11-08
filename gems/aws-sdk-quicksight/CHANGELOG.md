@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard.
+
+1.94.0 (2023-10-19)
+------------------
+
+* Feature - This release adds the following: 1) Trino and Starburst Database Connectors 2) Custom total for tables and pivot tables 3) Enable restricted folders 4) Add rolling dates for time equality filters 5) Refine DataPathValue and introduce DataPathType 6) Add SeriesType to ReferenceLineDataConfiguration
+
+1.93.0 (2023-10-06)
+------------------
+
+* Feature - NullOption in FilterListConfiguration; Dataset schema/table max length increased; Support total placement for pivot table visual; Lenient mode relaxes the validation to create resources with definition; Data sources can be added to folders; Redshift data sources support IAM Role-based authentication
+
+1.92.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-09-25)
+------------------
+
+* Feature - Added ability to tag users upon creation.
+
+1.90.0 (2023-09-11)
+------------------
+
+* Feature - This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.
+
 1.89.0 (2023-08-24)
 ------------------
 

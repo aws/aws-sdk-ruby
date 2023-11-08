@@ -218,11 +218,17 @@ module Aws::Outposts
     #     asset can be replaced.
     #   @return [String]
     #
+    # @!attribute [rw] instance_families
+    #   A list of the names of instance families that are currently
+    #   associated with a given asset.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ComputeAttributes AWS API Documentation
     #
     class ComputeAttributes < Struct.new(
       :host_id,
-      :state)
+      :state,
+      :instance_families)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -775,7 +781,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] previous_order_id
-    #   The ID of the previous order item.
+    #   The ID of the previous order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
@@ -1155,7 +1161,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] order_type
-    #   Type of order.
+    #   The type of order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Order AWS API Documentation

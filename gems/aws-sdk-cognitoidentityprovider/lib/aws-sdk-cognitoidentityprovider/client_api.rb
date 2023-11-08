@@ -1947,7 +1947,7 @@ module Aws::CognitoIdentityProvider
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
     UserPoolDescriptionType.add_member(:name, Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "Name"))
     UserPoolDescriptionType.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    UserPoolDescriptionType.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "Status"))
+    UserPoolDescriptionType.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, deprecated: true, location_name: "Status", metadata: {"deprecatedMessage"=>"This property is no longer available."}))
     UserPoolDescriptionType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     UserPoolDescriptionType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UserPoolDescriptionType.struct_class = Types::UserPoolDescriptionType
@@ -1970,7 +1970,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:policies, Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
     UserPoolType.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtectionType, location_name: "DeletionProtection"))
     UserPoolType.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
-    UserPoolType.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "Status"))
+    UserPoolType.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, deprecated: true, location_name: "Status", metadata: {"deprecatedMessage"=>"This property is no longer available."}))
     UserPoolType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     UserPoolType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UserPoolType.add_member(:schema_attributes, Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "SchemaAttributes"))

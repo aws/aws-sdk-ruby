@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-09-28)
+------------------
+
+* Feature - Feature Store supports read/write of records with collection type features.
+
+1.24.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2023-07-20)
 ------------------
 

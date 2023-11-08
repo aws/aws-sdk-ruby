@@ -72,6 +72,8 @@ module Aws::ServiceDiscovery
             Aws::ServiceDiscovery::Endpoints::DeregisterInstance.build(context)
           when :discover_instances
             Aws::ServiceDiscovery::Endpoints::DiscoverInstances.build(context)
+          when :discover_instances_revision
+            Aws::ServiceDiscovery::Endpoints::DiscoverInstancesRevision.build(context)
           when :get_instance
             Aws::ServiceDiscovery::Endpoints::GetInstance.build(context)
           when :get_instances_health_status

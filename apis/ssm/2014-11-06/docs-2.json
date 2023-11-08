@@ -20,6 +20,7 @@
     "DeleteDocument": "<p>Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document.</p> <p>Before you delete the document, we recommend that you use <a>DeleteAssociation</a> to disassociate all managed nodes that are associated with the document.</p>",
     "DeleteInventory": "<p>Delete a custom inventory type or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.</p>",
     "DeleteMaintenanceWindow": "<p>Deletes a maintenance window.</p>",
+    "DeleteOpsItem": "<p>Delete an OpsItem. You must have permission in Identity and Access Management (IAM) to delete an OpsItem. </p> <important> <p>Note the following important information about this operation.</p> <ul> <li> <p>Deleting an OpsItem is irreversible. You can't restore a deleted OpsItem.</p> </li> <li> <p>This operation uses an <i>eventual consistency model</i>, which means the system can take a few minutes to complete this operation. If you delete an OpsItem and immediately call, for example, <a>GetOpsItem</a>, the deleted OpsItem might still appear in the response. </p> </li> <li> <p>This operation is idempotent. The system doesn't throw an exception if you repeatedly call this operation for the same OpsItem. If the first call is successful, all additional calls return the same successful response as the first call.</p> </li> <li> <p>This operation doesn't support cross-account calls. A delegated administrator or management account can't delete OpsItems in other accounts, even if OpsCenter has been set up for cross-account administration. For more information about cross-account administration, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setting-up-cross-account.html\">Setting up OpsCenter to centrally manage OpsItems across accounts</a> in the <i>Systems Manager User Guide</i>.</p> </li> </ul> </important>",
     "DeleteOpsMetadata": "<p>Delete OpsMetadata related to an application.</p>",
     "DeleteParameter": "<p>Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.</p>",
     "DeleteParameters": "<p>Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.</p>",
@@ -1721,6 +1722,16 @@
       }
     },
     "DeleteMaintenanceWindowResult": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteOpsItemRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteOpsItemResponse": {
       "base": null,
       "refs": {
       }
@@ -5174,6 +5185,11 @@
         "UpdateOpsItemRequest$Category": "<p>Specify a new category for an OpsItem.</p>"
       }
     },
+    "OpsItemConflictException": {
+      "base": "<p>The specified OpsItem is in the process of being deleted.</p>",
+      "refs": {
+      }
+    },
     "OpsItemDataKey": {
       "base": null,
       "refs": {
@@ -5201,9 +5217,9 @@
     "OpsItemDescription": {
       "base": null,
       "refs": {
-        "CreateOpsItemRequest$Description": "<p>Information about the OpsItem. </p>",
+        "CreateOpsItemRequest$Description": "<p>User-defined text that contains information about the OpsItem, in Markdown format. </p> <note> <p>Provide enough information so that users viewing this OpsItem for the first time understand the issue. </p> </note>",
         "OpsItem$Description": "<p>The OpsItem description.</p>",
-        "UpdateOpsItemRequest$Description": "<p>Update the information about the OpsItem. Provide enough information so that users reading this OpsItem for the first time understand the issue. </p>"
+        "UpdateOpsItemRequest$Description": "<p>User-defined text that contains information about the OpsItem, in Markdown format. </p>"
       }
     },
     "OpsItemEventFilter": {
@@ -5300,6 +5316,7 @@
       "base": null,
       "refs": {
         "AssociateOpsItemRelatedItemRequest$OpsItemId": "<p>The ID of the OpsItem to which you want to associate a resource as a related item.</p>",
+        "DeleteOpsItemRequest$OpsItemId": "<p>The ID of the OpsItem that you want to delete.</p>",
         "DisassociateOpsItemRelatedItemRequest$OpsItemId": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a related item.</p>",
         "GetOpsItemRequest$OpsItemId": "<p>The ID of the OpsItem that you want to get.</p>",
         "ListOpsItemRelatedItemsRequest$OpsItemId": "<p>The ID of the OpsItem for which you want to list all related-item resources.</p>",
@@ -7731,6 +7748,7 @@
         "OpsItemAccessDeniedException$Message": null,
         "OpsItemAlreadyExistsException$Message": null,
         "OpsItemAlreadyExistsException$OpsItemId": null,
+        "OpsItemConflictException$Message": null,
         "OpsItemEventSummary$OpsItemId": "<p>The ID of the OpsItem.</p>",
         "OpsItemEventSummary$EventId": "<p>The ID of the OpsItem event.</p>",
         "OpsItemEventSummary$Source": "<p>The source of the OpsItem event.</p>",

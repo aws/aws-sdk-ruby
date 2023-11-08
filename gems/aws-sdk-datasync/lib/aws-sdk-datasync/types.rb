@@ -104,20 +104,33 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of an agent. For more information, see [DataSync agent
-    #   statuses][1].
+    #   The status of an agent.
+    #
+    #   * If the status is `ONLINE`, the agent is configured properly and
+    #     ready to use.
+    #
+    #   * If the status is `OFFLINE`, the agent has been out of contact with
+    #     DataSync for five minutes or longer. This can happen for a few
+    #     reasons. For more information, see [What do I do if my agent is
+    #     offline?][1]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline
     #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform-related details about the agent, such as the version
+    #   number.
+    #   @return [Types::Platform]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AgentListEntry AWS API Documentation
     #
     class AgentListEntry < Struct.new(
       :agent_arn,
       :name,
-      :status)
+      :status,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -664,8 +677,9 @@ module Aws::DataSync
     #   Specifies the user who has the permissions to access files, folders,
     #   and metadata in your file system.
     #
-    #   For information about choosing a user with sufficient permissions,
-    #   see [Required permissions][1].
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [required permissions][1] for FSx for Windows
+    #   File Server locations.
     #
     #
     #
@@ -675,11 +689,29 @@ module Aws::DataSync
     # @!attribute [rw] domain
     #   Specifies the name of the Windows domain that the FSx for Windows
     #   File Server belongs to.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file
+    #   server.
+    #
+    #   For more information, see [required permissions][1] for FSx for
+    #   Windows File Server locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
     #   @return [String]
     #
     # @!attribute [rw] password
     #   Specifies the password of the user who has the permissions to access
     #   files and folders in the file system.
+    #
+    #   For more information, see [required permissions][1] for FSx for
+    #   Windows File Server locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
@@ -1143,6 +1175,10 @@ module Aws::DataSync
     #   Specifies the Windows domain name that your SMB file server belongs
     #   to.
     #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file
+    #   server.
+    #
     #   For more information, see [required permissions][1] for SMB
     #   locations.
     #
@@ -1409,8 +1445,8 @@ module Aws::DataSync
     # DescribeAgent
     #
     # @!attribute [rw] agent_arn
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent to
-    #   describe.
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentRequest AWS API Documentation
@@ -1432,33 +1468,55 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the agent. If the status is ONLINE, then the agent is
-    #   configured properly and is available to use. The Running status is
-    #   the normal running status for an agent. If the status is OFFLINE,
-    #   the agent's VM is turned off or the agent is in an unhealthy state.
-    #   When the issue that caused the unhealthy state is resolved, the
-    #   agent returns to ONLINE status.
+    #   The status of the agent.
+    #
+    #   * If the status is `ONLINE`, the agent is configured properly and
+    #     ready to use.
+    #
+    #   * If the status is `OFFLINE`, the agent has been out of contact with
+    #     DataSync for five minutes or longer. This can happen for a few
+    #     reasons. For more information, see [What do I do if my agent is
+    #     offline?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline
     #   @return [String]
     #
     # @!attribute [rw] last_connection_time
-    #   The time that the agent last connected to DataSync.
+    #   The last time that the agent was communicating with the DataSync
+    #   service.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
-    #   The time that the agent was activated (that is, created in your
-    #   account).
+    #   The time that the agent was [activated][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
     #   @return [Time]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of endpoint that your agent is connected to. If the
-    #   endpoint is a VPC endpoint, the agent is not accessible over the
-    #   public internet.
+    #   The type of [service endpoint][1] that your agent is connected to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html
     #   @return [String]
     #
     # @!attribute [rw] private_link_config
-    #   The subnet and the security group that DataSync used to access a VPC
-    #   endpoint.
+    #   The network configuration that the agent uses when connecting to a
+    #   [VPC service endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
     #   @return [Types::PrivateLinkConfig]
+    #
+    # @!attribute [rw] platform
+    #   The platform-related details about the agent, such as the version
+    #   number.
+    #   @return [Types::Platform]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentResponse AWS API Documentation
     #
@@ -1469,7 +1527,8 @@ module Aws::DataSync
       :last_connection_time,
       :creation_time,
       :endpoint_type,
-      :private_link_config)
+      :private_link_config,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2587,6 +2646,16 @@ module Aws::DataSync
     # @!attribute [rw] files_verified
     #   The number of files, objects, and directories that DataSync verified
     #   during your transfer.
+    #
+    #   <note markdown="1"> When you configure your task to [verify only the data that's
+    #   transferred][1], DataSync doesn't verify directories in some
+    #   situations or files that fail to transfer.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
     #   @return [Integer]
     #
     # @!attribute [rw] report_result
@@ -2595,7 +2664,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [Types::ReportResult]
     #
     # @!attribute [rw] estimated_files_to_delete
@@ -2768,7 +2837,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [Types::TaskReportConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
@@ -4322,9 +4391,39 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # The platform-related details about the DataSync agent, such as the
+    # version number.
+    #
+    # @!attribute [rw] version
+    #   The version of the DataSync agent.
+    #
+    #   Beginning December 7, 2023, we will discontinue version 1 DataSync
+    #   agents. Check the DataSync console to see if you have affected
+    #   agents. If you do, [replace][1] those agents before then to avoid
+    #   data transfer or storage discovery disruptions. If you need more
+    #   help, contact [Amazon Web Services Support][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html
+    #   [2]: https://aws.amazon.com/contact-us/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Platform AWS API Documentation
+    #
+    class Platform < Struct.new(
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how your DataSync agent connects to Amazon Web Services
-    # using a virtual private cloud (VPC) service endpoint. An agent that
-    # uses a VPC endpoint isn't accessible over the public internet.
+    # using a [virtual private cloud (VPC) service endpoint][1]. An agent
+    # that uses a VPC endpoint isn't accessible over the public internet.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
     #
     # @!attribute [rw] vpc_endpoint_id
     #   Specifies the ID of the VPC endpoint that your agent connects to.
@@ -4444,7 +4543,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] s3
     #   Specifies the Amazon S3 bucket where DataSync uploads your task
@@ -4464,7 +4563,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] subdirectory
     #   Specifies a bucket prefix for your report.
@@ -4483,7 +4582,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ReportDestinationS3 AWS API Documentation
@@ -4501,7 +4600,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] report_level
     #   Specifies whether your task report includes errors only or successes
@@ -4532,7 +4631,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] transferred
     #   Specifies the level of reporting for the files, objects, and
@@ -4542,13 +4641,7 @@ module Aws::DataSync
     # @!attribute [rw] verified
     #   Specifies the level of reporting for the files, objects, and
     #   directories that DataSync attempted to verify at the end of your
-    #   transfer. This only applies if you [configure your task][1] to
-    #   verify data during and after the transfer (which DataSync does by
-    #   default).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
+    #   transfer.
     #   @return [Types::ReportOverride]
     #
     # @!attribute [rw] deleted
@@ -4583,7 +4676,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] status
     #   Indicates whether DataSync is still working on your report, created
@@ -5117,7 +5210,7 @@ module Aws::DataSync
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #
     # @!attribute [rw] destination
     #   Specifies the Amazon S3 bucket where DataSync uploads your task
@@ -5125,7 +5218,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html#task-report-access
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html#task-report-access
     #   @return [Types::ReportDestination]
     #
     # @!attribute [rw] output_type
@@ -5584,54 +5677,71 @@ module Aws::DataSync
     class UpdateLocationObjectStorageResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the SMB location to update.
+    #   Specifies the ARN of the SMB location that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] subdirectory
-    #   The subdirectory in the SMB file system that is used to read data
-    #   from the SMB source location or write data to the SMB destination.
-    #   The SMB path should be a path that's exported by the SMB server, or
-    #   a subdirectory of that path. The path should be such that it can be
-    #   mounted by other SMB clients in your network.
+    #   Specifies the name of the share exported by your SMB file server
+    #   where DataSync will read or write data. You can include a
+    #   subdirectory in the share path (for example,
+    #   `/path/to/subdirectory`). Make sure that other SMB clients in your
+    #   network can also mount this path.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
-    #   `/path/to/folder`.
+    #   To copy all data in the specified subdirectory, DataSync must be
+    #   able to mount the SMB share and access all of its data. For more
+    #   information, see [required permissions][1] for SMB locations.
     #
-    #    </note>
     #
-    #   To transfer all the data in the folder that you specified, DataSync
-    #   must have permissions to mount the SMB share and to access all the
-    #   data in that share. To ensure this, do either of the following:
     #
-    #   * Ensure that the user/password specified belongs to the user who
-    #     can mount the share and who has the appropriate permissions for
-    #     all of the files and directories that you want DataSync to access.
-    #
-    #   * Use credentials of a member of the Backup Operators group to mount
-    #     the share.
-    #
-    #   Doing either of these options enables the agent to access the data.
-    #   For the agent to access directories, you must also enable all
-    #   execute access.
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The user who can mount the share has the permissions to access files
-    #   and folders in the SMB share.
+    #   Specifies the user name that can mount your SMB file server and has
+    #   permission to access the files and folders involved in your
+    #   transfer.
+    #
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [required permissions][1] for SMB locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the SMB server belongs to.
+    #   Specifies the Windows domain name that your SMB file server belongs
+    #   to.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file
+    #   server.
+    #
+    #   For more information, see [required permissions][1] for SMB
+    #   locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password of the user who can mount the share has the permissions
-    #   to access files and folders in the SMB share.
+    #   Specifies the password of the user who can mount your SMB file
+    #   server and has permission to access the files and folders involved
+    #   in your transfer.
+    #
+    #   For more information, see [required permissions][1] for SMB
+    #   locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Names (ARNs) of agents to use for a Simple
-    #   Message Block (SMB) location.
+    #   Specifies the DataSync agent (or agents) which you want to connect
+    #   to your SMB file server. You specify an agent by using its Amazon
+    #   Resource Name (ARN).
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options

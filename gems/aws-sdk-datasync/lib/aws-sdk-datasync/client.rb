@@ -857,12 +857,14 @@ module Aws::DataSync
     end
 
     # Creates an endpoint for an Amazon FSx for NetApp ONTAP file system
-    # that DataSync can access for a transfer. For more information, see
-    # [Creating a location for FSx for ONTAP][1].
+    # that DataSync can use for a data transfer.
+    #
+    # Before you begin, make sure that you understand how DataSync [accesses
+    # an FSx for ONTAP file system][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
     #
     # @option params [required, Types::FsxProtocol] :protocol
     #   Specifies the data transfer protocol that DataSync uses to access your
@@ -1037,7 +1039,14 @@ module Aws::DataSync
     end
 
     # Creates an endpoint for an Amazon FSx for Windows File Server file
-    # system.
+    # system that DataSync can use for a data transfer.
+    #
+    # Before you begin, make sure that you understand how DataSync [accesses
+    # an FSx for Windows File Server][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-location-access
     #
     # @option params [String] :subdirectory
     #   Specifies a mount path for your file system using forward slashes.
@@ -1072,8 +1081,9 @@ module Aws::DataSync
     #   Specifies the user who has the permissions to access files, folders,
     #   and metadata in your file system.
     #
-    #   For information about choosing a user with sufficient permissions, see
-    #   [Required permissions][1].
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [required permissions][1] for FSx for Windows
+    #   File Server locations.
     #
     #
     #
@@ -1083,9 +1093,26 @@ module Aws::DataSync
     #   Specifies the name of the Windows domain that the FSx for Windows File
     #   Server belongs to.
     #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file server.
+    #
+    #   For more information, see [required permissions][1] for FSx for
+    #   Windows File Server locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
+    #
     # @option params [required, String] :password
     #   Specifies the password of the user who has the permissions to access
     #   files and folders in the file system.
+    #
+    #   For more information, see [required permissions][1] for FSx for
+    #   Windows File Server locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
     #
     # @return [Types::CreateLocationFsxWindowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1597,6 +1624,9 @@ module Aws::DataSync
     #   Specifies the Windows domain name that your SMB file server belongs
     #   to.
     #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file server.
+    #
     #   For more information, see [required permissions][1] for SMB locations.
     #
     #
@@ -1836,11 +1866,18 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Deletes an agent. To specify which agent to delete, use the Amazon
-    # Resource Name (ARN) of the agent in your request. The operation
-    # disassociates the agent from your Amazon Web Services account.
-    # However, it doesn't delete the agent virtual machine (VM) from your
-    # on-premises environment.
+    # Removes an DataSync agent resource from your Amazon Web Services
+    # account.
+    #
+    # Keep in mind that this operation (which can't be undone) doesn't
+    # remove the agent's virtual machine (VM) or Amazon EC2 instance from
+    # your storage environment. For next steps, you can delete the VM or
+    # instance from your storage environment or reuse it to [activate a new
+    # agent][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
     #
     # @option params [required, String] :agent_arn
     #   The Amazon Resource Name (ARN) of the agent to delete. Use the
@@ -1909,12 +1946,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata about an DataSync agent, such as its name, endpoint
-    # type, and status.
+    # Returns information about an DataSync agent, such as its name, service
+    # endpoint type, and status.
     #
     # @option params [required, String] :agent_arn
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent to
-    #   describe.
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   you want information about.
     #
     # @return [Types::DescribeAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1925,6 +1962,7 @@ module Aws::DataSync
     #   * {Types::DescribeAgentResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeAgentResponse#endpoint_type #endpoint_type} => String
     #   * {Types::DescribeAgentResponse#private_link_config #private_link_config} => Types::PrivateLinkConfig
+    #   * {Types::DescribeAgentResponse#platform #platform} => Types::Platform
     #
     # @example Request syntax with placeholder values
     #
@@ -1946,6 +1984,7 @@ module Aws::DataSync
     #   resp.private_link_config.subnet_arns[0] #=> String
     #   resp.private_link_config.security_group_arns #=> Array
     #   resp.private_link_config.security_group_arns[0] #=> String
+    #   resp.platform.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgent AWS API Documentation
     #
@@ -2968,17 +3007,10 @@ module Aws::DataSync
     # Once generated, you can view your recommendations by using the
     # [DescribeStorageSystemResources][2] operation.
     #
-    # <note markdown="1"> If your [discovery job completes successfully][3], you don't need to
-    # use this operation. DataSync Discovery generates the recommendations
-    # for you automatically.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
     # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html
-    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
     #
     # @option params [required, String] :discovery_job_arn
     #   Specifies the Amazon Resource Name (ARN) of the discovery job that
@@ -3061,6 +3093,7 @@ module Aws::DataSync
     #   resp.agents[0].agent_arn #=> String
     #   resp.agents[0].name #=> String
     #   resp.agents[0].status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.agents[0].platform.version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgents AWS API Documentation
@@ -3680,7 +3713,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates the name of an agent.
+    # Updates the name of an DataSync agent.
     #
     # @option params [required, String] :agent_arn
     #   The Amazon Resource Name (ARN) of the agent to update.
@@ -4038,58 +4071,65 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates some of the parameters of a previously created location for
-    # Server Message Block (SMB) file system access. For information about
-    # creating an SMB location, see [Creating a location for SMB][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html
+    # Updates some of the parameters of a Server Message Block (SMB) file
+    # server location that you can use for DataSync transfers.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the SMB location to update.
+    #   Specifies the ARN of the SMB location that you want to update.
     #
     # @option params [String] :subdirectory
-    #   The subdirectory in the SMB file system that is used to read data from
-    #   the SMB source location or write data to the SMB destination. The SMB
-    #   path should be a path that's exported by the SMB server, or a
-    #   subdirectory of that path. The path should be such that it can be
-    #   mounted by other SMB clients in your network.
+    #   Specifies the name of the share exported by your SMB file server where
+    #   DataSync will read or write data. You can include a subdirectory in
+    #   the share path (for example, `/path/to/subdirectory`). Make sure that
+    #   other SMB clients in your network can also mount this path.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
-    #   `/path/to/folder`.
+    #   To copy all data in the specified subdirectory, DataSync must be able
+    #   to mount the SMB share and access all of its data. For more
+    #   information, see [required permissions][1] for SMB locations.
     #
-    #    </note>
     #
-    #   To transfer all the data in the folder that you specified, DataSync
-    #   must have permissions to mount the SMB share and to access all the
-    #   data in that share. To ensure this, do either of the following:
     #
-    #   * Ensure that the user/password specified belongs to the user who can
-    #     mount the share and who has the appropriate permissions for all of
-    #     the files and directories that you want DataSync to access.
-    #
-    #   * Use credentials of a member of the Backup Operators group to mount
-    #     the share.
-    #
-    #   Doing either of these options enables the agent to access the data.
-    #   For the agent to access directories, you must also enable all execute
-    #   access.
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [String] :user
-    #   The user who can mount the share has the permissions to access files
-    #   and folders in the SMB share.
+    #   Specifies the user name that can mount your SMB file server and has
+    #   permission to access the files and folders involved in your transfer.
+    #
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [required permissions][1] for SMB locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [String] :domain
-    #   The name of the Windows domain that the SMB server belongs to.
+    #   Specifies the Windows domain name that your SMB file server belongs
+    #   to.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file server.
+    #
+    #   For more information, see [required permissions][1] for SMB locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [String] :password
-    #   The password of the user who can mount the share has the permissions
-    #   to access files and folders in the SMB share.
+    #   Specifies the password of the user who can mount your SMB file server
+    #   and has permission to access the files and folders involved in your
+    #   transfer.
+    #
+    #   For more information, see [required permissions][1] for SMB locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [Array<String>] :agent_arns
-    #   The Amazon Resource Names (ARNs) of agents to use for a Simple Message
-    #   Block (SMB) location.
+    #   Specifies the DataSync agent (or agents) which you want to connect to
+    #   your SMB file server. You specify an agent by using its Amazon
+    #   Resource Name (ARN).
     #
     # @option params [Types::SmbMountOptions] :mount_options
     #   Specifies the version of the Server Message Block (SMB) protocol that
@@ -4376,7 +4416,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

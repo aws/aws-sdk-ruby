@@ -118,8 +118,8 @@ module Aws::RDS
       data[:exportable_log_types]
     end
 
-    # A value that indicates whether the engine version supports exporting
-    # the log types specified by ExportableLogTypes to CloudWatch Logs.
+    # Indicates whether the engine version supports exporting the log types
+    # specified by ExportableLogTypes to CloudWatch Logs.
     # @return [Boolean]
     def supports_log_exports_to_cloudwatch_logs
       data[:supports_log_exports_to_cloudwatch_logs]
@@ -167,15 +167,15 @@ module Aws::RDS
       data[:status]
     end
 
-    # A value that indicates whether you can use Aurora parallel query with
-    # a specific DB engine version.
+    # Indicates whether you can use Aurora parallel query with a specific DB
+    # engine version.
     # @return [Boolean]
     def supports_parallel_query
       data[:supports_parallel_query]
     end
 
-    # A value that indicates whether you can use Aurora global databases
-    # with a specific DB engine version.
+    # Indicates whether you can use Aurora global databases with a specific
+    # DB engine version.
     # @return [Boolean]
     def supports_global_databases
       data[:supports_global_databases]
@@ -231,8 +231,8 @@ module Aws::RDS
       data[:tag_list]
     end
 
-    # A value that indicates whether the engine version supports Babelfish
-    # for Aurora PostgreSQL.
+    # Indicates whether the engine version supports Babelfish for Aurora
+    # PostgreSQL.
     # @return [Boolean]
     def supports_babelfish
       data[:supports_babelfish]
@@ -254,8 +254,8 @@ module Aws::RDS
       data[:custom_db_engine_version_manifest]
     end
 
-    # A value that indicates whether the engine version supports rotating
-    # the server certificate without rebooting the DB instance.
+    # Indicates whether the engine version supports rotating the server
+    # certificate without rebooting the DB instance.
     # @return [Boolean]
     def supports_certificate_rotation_without_restart
       data[:supports_certificate_rotation_without_restart]
@@ -277,15 +277,22 @@ module Aws::RDS
       data[:supported_ca_certificate_identifiers]
     end
 
-    # A value that indicates whether the DB engine version supports
-    # forwarding write operations from reader DB instances to the writer DB
-    # instance in the DB cluster. By default, write operations aren't
-    # allowed on reader DB instances.
+    # Indicates whether the DB engine version supports forwarding write
+    # operations from reader DB instances to the writer DB instance in the
+    # DB cluster. By default, write operations aren't allowed on reader DB
+    # instances.
     #
     # Valid for: Aurora DB clusters only
     # @return [Boolean]
     def supports_local_write_forwarding
       data[:supports_local_write_forwarding]
+    end
+
+    # Indicates whether the DB engine version supports Aurora zero-ETL
+    # integrations with Amazon Redshift.
+    # @return [Boolean]
+    def supports_integrations
+      data[:supports_integrations]
     end
 
     # @!endgroup

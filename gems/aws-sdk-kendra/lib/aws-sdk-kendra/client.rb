@@ -513,8 +513,14 @@ module Aws::Kendra
     #
     # The documents are deleted asynchronously. You can see the progress of
     # the deletion by using Amazon Web Services CloudWatch. Any error
-    # messages related to the processing of the batch are sent to you
-    # CloudWatch log.
+    # messages related to the processing of the batch are sent to your
+    # Amazon Web Services CloudWatch log. You can also use the
+    # `BatchGetDocumentStatus` API to monitor the progress of deleting your
+    # documents.
+    #
+    # Deleting documents from an index using `BatchDeleteDocument` could
+    # take up to an hour or more, depending on the number of documents you
+    # want to delete.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index that contains the documents to delete.
@@ -683,7 +689,8 @@ module Aws::Kendra
     # The documents are indexed asynchronously. You can see the progress of
     # the batch using Amazon Web Services CloudWatch. Any error messages
     # related to processing the batch are sent to your Amazon Web Services
-    # CloudWatch log.
+    # CloudWatch log. You can also use the `BatchGetDocumentStatus` API to
+    # monitor the progress of indexing your documents.
     #
     # For an example of ingesting inline documents using Python and Java
     # SDKs, see [Adding files directly to an index][1].
@@ -1867,9 +1874,8 @@ module Aws::Kendra
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access `Query` API, `GetQuerySuggestions` API, and other required
     #   APIs. The role also must include permission to access IAM Identity
-    #   Center (successor to Single Sign-On) that stores your user and group
-    #   information. For more information, see [IAM access roles for Amazon
-    #   Kendra][1].
+    #   Center that stores your user and group information. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
     #
     #
     #
@@ -2159,18 +2165,20 @@ module Aws::Kendra
     # returned from a call to `DescribeIndex`. The `Status` field is set to
     # `ACTIVE` when the index is ready to use.
     #
-    # Once the index is active you can index your documents using the
-    # `BatchPutDocument` API or using one of the supported data sources.
+    # Once the index is active, you can index your documents using the
+    # `BatchPutDocument` API or using one of the supported [data
+    # sources][1].
     #
     # For an example of creating an index and data source using the Python
-    # SDK, see [Getting started with Python SDK][1]. For an example of
+    # SDK, see [Getting started with Python SDK][2]. For an example of
     # creating an index and data source using the Java SDK, see [Getting
-    # started with Java SDK][2].
+    # started with Java SDK][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
-    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-sources.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
     #   A name for the index.
@@ -2242,9 +2250,8 @@ module Aws::Kendra
     #     accessible to the user will be searchable and displayable.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Gets users and groups from IAM Identity Center (successor to Single
-    #   Sign-On) identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -2534,6 +2541,10 @@ module Aws::Kendra
     # source is being deleted, the `Status` field returned by a call to the
     # `DescribeDataSource` API is set to `DELETING`. For more information,
     # see [Deleting Data Sources][1].
+    #
+    # Deleting an entire data source or re-syncing your index after deleting
+    # specific documents from a data source could take up to an hour or
+    # more, depending on the number of documents you want to delete.
     #
     #
     #
@@ -5055,6 +5066,15 @@ module Aws::Kendra
 
     # Searches an index given an input query.
     #
+    # <note markdown="1"> If you are working with large language models (LLMs) or implementing
+    # retrieval augmented generation (RAG) systems, you can use Amazon
+    # Kendra's [Retrieve][1] API, which can return longer semantically
+    # relevant passages. We recommend using the `Retrieve` API instead of
+    # filing a service limit increase to increase the `Query` API document
+    # excerpt length.
+    #
+    #  </note>
+    #
     # You can configure boosting or relevance tuning at the query level to
     # override boosting at the index level, filter based on document
     # fields/attributes and faceted search, and filter based on the user or
@@ -5077,6 +5097,10 @@ module Aws::Kendra
     # relevant results. If you filter result type to only question-answers,
     # a maximum of four results are returned. If you filter result type to
     # only answers, a maximum of three results are returned.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html
     #
     # @option params [required, String] :index_id
     #   The identifier of the index for the search.
@@ -5143,6 +5167,19 @@ module Aws::Kendra
     #   If you don't provide sorting configuration, the results are sorted by
     #   the relevance that Amazon Kendra determines for the result.
     #
+    # @option params [Array<Types::SortingConfiguration>] :sorting_configurations
+    #   Provides configuration information to determine how the results of a
+    #   query are sorted.
+    #
+    #   You can set upto 3 fields that Amazon Kendra should sort the results
+    #   on, and specify whether the results should be sorted in ascending or
+    #   descending order. The sort field quota can be increased.
+    #
+    #   If you don't provide a sorting configuration, the results are sorted
+    #   by the relevance that Amazon Kendra determines for the result. In the
+    #   case of ties in sorting the results, the results are sorted by
+    #   relevance.
+    #
     # @option params [Types::UserContext] :user_context
     #   The user context token or user and group information.
     #
@@ -5154,6 +5191,11 @@ module Aws::Kendra
     #
     # @option params [Types::SpellCorrectionConfiguration] :spell_correction_configuration
     #   Enables suggested spell corrections for queries.
+    #
+    # @option params [Types::CollapseConfiguration] :collapse_configuration
+    #   Provides configuration to determine how to group results by document
+    #   attribute value, and how to display them (collapsed or expanded) under
+    #   a designated primary document for each group.
     #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5279,6 +5321,12 @@ module Aws::Kendra
     #       document_attribute_key: "DocumentAttributeKey", # required
     #       sort_order: "DESC", # required, accepts DESC, ASC
     #     },
+    #     sorting_configurations: [
+    #       {
+    #         document_attribute_key: "DocumentAttributeKey", # required
+    #         sort_order: "DESC", # required, accepts DESC, ASC
+    #       },
+    #     ],
     #     user_context: {
     #       token: "Token",
     #       user_id: "PrincipalName",
@@ -5293,6 +5341,21 @@ module Aws::Kendra
     #     visitor_id: "VisitorId",
     #     spell_correction_configuration: {
     #       include_query_spell_check_suggestions: false, # required
+    #     },
+    #     collapse_configuration: {
+    #       document_attribute_key: "DocumentAttributeKey", # required
+    #       sorting_configurations: [
+    #         {
+    #           document_attribute_key: "DocumentAttributeKey", # required
+    #           sort_order: "DESC", # required, accepts DESC, ASC
+    #         },
+    #       ],
+    #       missing_attribute_key_strategy: "IGNORE", # accepts IGNORE, COLLAPSE, EXPAND
+    #       expand: false,
+    #       expand_configuration: {
+    #         max_result_items_to_expand: 1,
+    #         max_expanded_results_per_item: 1,
+    #       },
     #     },
     #   })
     #
@@ -5342,6 +5405,35 @@ module Aws::Kendra
     #   resp.result_items[0].table_excerpt.rows[0].cells[0].highlighted #=> Boolean
     #   resp.result_items[0].table_excerpt.rows[0].cells[0].header #=> Boolean
     #   resp.result_items[0].table_excerpt.total_number_of_rows #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.key #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_value #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_list_value #=> Array
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.string_list_value[0] #=> String
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.long_value #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.document_attribute.value.date_value #=> Time
+    #   resp.result_items[0].collapsed_result_detail.expanded_results #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].id #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_id #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.text #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].begin_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].end_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_title.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.text #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].begin_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].end_offset #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_excerpt.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_uri #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].key #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_value #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_list_value #=> Array
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.string_list_value[0] #=> String
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.long_value #=> Integer
+    #   resp.result_items[0].collapsed_result_detail.expanded_results[0].document_attributes[0].value.date_value #=> Time
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
     #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
@@ -5417,9 +5509,9 @@ module Aws::Kendra
     # doesn't include question-answer or FAQ type responses from your
     # index. The passages are text excerpts that can be semantically
     # extracted from multiple documents and multiple parts of the same
-    # document. If in extreme cases your documents produce no relevant
-    # passages using the `Retrieve` API, you can alternatively use the
-    # `Query` API.
+    # document. If in extreme cases your documents produce zero passages
+    # using the `Retrieve` API, you can alternatively use the `Query` API
+    # and its types of responses.
     #
     # You can also do the following:
     #
@@ -5429,12 +5521,28 @@ module Aws::Kendra
     #
     # * Filter based on the user or their group access to documents
     #
+    # * View the confidence score bucket for a retrieved passage result. The
+    #   confidence bucket provides a relative ranking that indicates how
+    #   confident Amazon Kendra is that the response is relevant to the
+    #   query.
+    #
+    #   <note markdown="1"> Confidence score buckets are currently available only for English.
+    #
+    #    </note>
+    #
     # You can also include certain fields in the response that might provide
     # useful additional information.
+    #
+    # The `Retrieve` API shares the number of [query capacity units][2] that
+    # you set for your index. For more information on what's included in a
+    # single capacity unit and the default base capacity for an index, see
+    # [Adjusting capacity][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
     #
     # @option params [required, String] :index_id
     #   The identifier of the index to retrieve relevant passages for the
@@ -5622,6 +5730,7 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW", "NOT_AVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Retrieve AWS API Documentation
     #
@@ -5635,6 +5744,10 @@ module Aws::Kendra
     # Starts a synchronization job for a data source connector. If a
     # synchronization job is already in progress, Amazon Kendra returns a
     # `ResourceInUseException` exception.
+    #
+    # Re-syncing your data source with your index after modifying, adding,
+    # or deleting documents from your data source respository could take up
+    # to an hour or more, depending on the number of documents to sync.
     #
     # @option params [required, String] :id
     #   The identifier of the data source connector to synchronize.
@@ -6867,8 +6980,8 @@ module Aws::Kendra
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
     #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center (successor to Single Sign-On) identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   Identity Center identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -7178,7 +7291,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

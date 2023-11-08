@@ -23,8 +23,7 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature for the Neptune DB cluster that the IAM role
     #   is to be associated with. For the list of supported feature names,
-    #   see
-    #   [DBEngineVersion](neptune/latest/userguide/api-other-apis.html#DBEngineVersion).
+    #   see DBEngineVersion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AddRoleToDBClusterMessage AWS API Documentation
@@ -764,8 +763,8 @@ module Aws::Neptune
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Region. To see the time blocks
-    #   available, see [ Adjusting the Preferred Maintenance Window][1] in
-    #   the *Amazon Neptune User Guide.*
+    #   available, see [Neptune Maintenance Window][1] in the *Amazon
+    #   Neptune User Guide.*
     #
     #   Constraints:
     #
@@ -779,7 +778,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -790,8 +789,8 @@ module Aws::Neptune
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Region, occurring on a random day of
-    #   the week. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon Neptune User Guide.*
+    #   the week. To see the time blocks available, see [Neptune Maintenance
+    #   Window][1] in the *Amazon Neptune User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -799,7 +798,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window
     #   @return [String]
     #
     # @!attribute [rw] replication_source_identifier
@@ -986,7 +985,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterResult AWS API Documentation
@@ -1421,7 +1420,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
-      SENSITIVE = []
+      SENSITIVE = [:tde_credential_password]
       include Aws::Structure
     end
 
@@ -1696,8 +1695,8 @@ module Aws::Neptune
 
     # Contains the details of an Amazon Neptune DB cluster.
     #
-    # This data type is used as a response element in the DescribeDBClusters
-    # action.
+    # This data type is used as a response element in the
+    # DescribeDBClusters.
     #
     # @!attribute [rw] allocated_storage
     #   `AllocatedStorage` always returns 1, because Neptune DB cluster
@@ -2320,11 +2319,7 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature associated with the Amazon Identity and
     #   Access Management (IAM) role. For the list of supported feature
-    #   names, see [DescribeDBEngineVersions][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
+    #   names, see DescribeDBEngineVersions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRole AWS API Documentation
@@ -3519,7 +3514,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBClusterResult AWS API Documentation
@@ -5125,7 +5120,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBClusterResult AWS API Documentation
@@ -5727,12 +5722,11 @@ module Aws::Neptune
     #   `ApplyImmediately` parameter is set to true.
     #
     #   For a list of valid engine versions, see [Engine Releases for Amazon
-    #   Neptune][1], or call [DescribeDBEngineVersions][2].
+    #   Neptune][1], or call DescribeDBEngineVersions.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html
-    #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #   @return [String]
     #
     # @!attribute [rw] allow_major_version_upgrade
@@ -5836,7 +5830,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterResult AWS API Documentation
@@ -6285,7 +6279,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :cloudwatch_logs_export_configuration,
       :deletion_protection)
-      SENSITIVE = []
+      SENSITIVE = [:tde_credential_password]
       include Aws::Structure
     end
 
@@ -6946,7 +6940,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBClusterResult AWS API Documentation
@@ -7082,11 +7076,7 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature for the DB cluster that the IAM role is to
     #   be disassociated from. For the list of supported feature names, see
-    #   [DescribeDBEngineVersions][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
+    #   DescribeDBEngineVersions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveRoleFromDBClusterMessage AWS API Documentation
@@ -7425,7 +7415,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotResult AWS API Documentation
@@ -7629,7 +7619,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
@@ -7755,7 +7745,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBClusterResult AWS API Documentation
@@ -7783,7 +7773,7 @@ module Aws::Neptune
     #   Contains the details of an Amazon Neptune DB cluster.
     #
     #   This data type is used as a response element in the
-    #   DescribeDBClusters action.
+    #   DescribeDBClusters.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBClusterResult AWS API Documentation

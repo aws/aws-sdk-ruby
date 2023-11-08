@@ -108,6 +108,12 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "Bedrock": {
+    "models": "bedrock/2023-04-20"
+  },
+  "BedrockRuntime": {
+    "models": "bedrock-runtime/2023-09-30"
+  },
   "BillingConductor": {
     "models": "billingconductor/2021-07-30"
   },
@@ -299,6 +305,9 @@
   "DataSync": {
     "models": "datasync/2018-11-09"
   },
+  "DataZone": {
+    "models": "datazone/2018-05-10"
+  },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
   },
@@ -445,9 +454,6 @@
   },
   "GameLift": {
     "models": "gamelift/2015-10-01"
-  },
-  "GameSparks": {
-    "models": "gamesparks/2021-08-17"
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
@@ -619,6 +625,9 @@
   },
   "LambdaPreview": {
     "models": "lambda/2014-11-11"
+  },
+  "LaunchWizard": {
+    "models": "launch-wizard/2018-05-10"
   },
   "Lex": {
     "models": "runtime.lex/2016-11-28"

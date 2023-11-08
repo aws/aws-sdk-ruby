@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-10-27)
+------------------
+
+* Feature - Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.
+
+1.71.0 (2023-09-28)
+------------------
+
+* Feature - Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.
+
+1.70.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-09-25)
+------------------
+
+* Feature - You can now perform an exact match against the web request's JA3 fingerprint.
+
+1.68.0 (2023-09-06)
+------------------
+
+* Feature - The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.
+
 1.67.0 (2023-07-19)
 ------------------
 

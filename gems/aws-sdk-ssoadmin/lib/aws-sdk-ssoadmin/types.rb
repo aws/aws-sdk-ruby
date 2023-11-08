@@ -12,11 +12,11 @@ module Aws::SSOAdmin
 
     # These are IAM Identity Center identity store attributes that you can
     # configure for use in attributes-based access control (ABAC). You can
-    # create permissions policies that determine who can access your AWS
-    # resources based upon the configured attribute values. When you enable
-    # ABAC and specify `AccessControlAttributes`, IAM Identity Center passes
-    # the attribute values of the authenticated user into IAM for use in
-    # policy evaluation.
+    # create permissions policies that determine who can access your Amazon
+    # Web Services resources based upon the configured attribute values.
+    # When you enable ABAC and specify `AccessControlAttributes`, IAM
+    # Identity Center passes the attribute values of the authenticated user
+    # into IAM for use in policy evaluation.
     #
     # @!attribute [rw] key
     #   The name of the attribute associated with your identities in your
@@ -73,7 +73,7 @@ module Aws::SSOAdmin
     end
 
     # The assignment that indicates a principal's limited access to a
-    # specified AWS account with a specified permission set.
+    # specified Amazon Web Services account with a specified permission set.
     #
     # <note markdown="1"> The term *principal* here refers to a user or group that is defined in
     # IAM Identity Center.
@@ -81,18 +81,14 @@ module Aws::SSOAdmin
     #  </note>
     #
     # @!attribute [rw] account_id
-    #   The identifier of the AWS account.
+    #   The identifier of the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] principal_type
-    #   The entity type for which the assignment will be created.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -102,6 +98,10 @@ module Aws::SSOAdmin
     #   PrincipalIds in IAM Identity Center, see the [IAM Identity Center
     #   Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The entity type for which the assignment will be created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignment AWS API Documentation
@@ -109,8 +109,8 @@ module Aws::SSOAdmin
     class AccountAssignment < Struct.new(
       :account_id,
       :permission_set_arn,
-      :principal_type,
-      :principal_id)
+      :principal_id,
+      :principal_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -118,38 +118,20 @@ module Aws::SSOAdmin
     # The status of the creation or deletion operation of an assignment that
     # a principal needs to access an account.
     #
-    # @!attribute [rw] status
-    #   The status of the permission set provisioning process.
-    #   @return [String]
-    #
-    # @!attribute [rw] request_id
-    #   The identifier for tracking the request operation that is generated
-    #   by the universally unique identifier (UUID) workflow.
-    #   @return [String]
+    # @!attribute [rw] created_date
+    #   The date that the permission set was created.
+    #   @return [Time]
     #
     # @!attribute [rw] failure_reason
     #   The message that contains an error or exception in case of an
     #   operation failure.
     #   @return [String]
     #
-    # @!attribute [rw] target_id
-    #   TargetID is an AWS account identifier, typically a 10-12 digit
-    #   string (For example, 123456789012).
-    #   @return [String]
-    #
-    # @!attribute [rw] target_type
-    #   The entity type for which the assignment will be created.
-    #   @return [String]
-    #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] principal_type
-    #   The entity type for which the assignment will be created.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -161,30 +143,8 @@ module Aws::SSOAdmin
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
-    # @!attribute [rw] created_date
-    #   The date that the permission set was created.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignmentOperationStatus AWS API Documentation
-    #
-    class AccountAssignmentOperationStatus < Struct.new(
-      :status,
-      :request_id,
-      :failure_reason,
-      :target_id,
-      :target_type,
-      :permission_set_arn,
-      :principal_type,
-      :principal_id,
-      :created_date)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Provides information about the AccountAssignment creation request.
-    #
-    # @!attribute [rw] status
-    #   The status of the permission set provisioning process.
+    # @!attribute [rw] principal_type
+    #   The entity type for which the assignment will be created.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -192,20 +152,66 @@ module Aws::SSOAdmin
     #   by the universally unique identifier (UUID) workflow.
     #   @return [String]
     #
-    # @!attribute [rw] created_date
-    #   The date that the permission set was created.
-    #   @return [Time]
+    # @!attribute [rw] status
+    #   The status of the permission set provisioning process.
+    #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignmentOperationStatusMetadata AWS API Documentation
+    # @!attribute [rw] target_id
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
+    #   @return [String]
     #
-    class AccountAssignmentOperationStatusMetadata < Struct.new(
-      :status,
+    # @!attribute [rw] target_type
+    #   The entity type for which the assignment will be created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignmentOperationStatus AWS API Documentation
+    #
+    class AccountAssignmentOperationStatus < Struct.new(
+      :created_date,
+      :failure_reason,
+      :permission_set_arn,
+      :principal_id,
+      :principal_type,
       :request_id,
-      :created_date)
+      :status,
+      :target_id,
+      :target_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Provides information about the AccountAssignment creation request.
+    #
+    # @!attribute [rw] created_date
+    #   The date that the permission set was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier for tracking the request operation that is generated
+    #   by the universally unique identifier (UUID) workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the permission set provisioning process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignmentOperationStatusMetadata AWS API Documentation
+    #
+    class AccountAssignmentOperationStatusMetadata < Struct.new(
+      :created_date,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] customer_managed_policy_reference
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
+    #   @return [Types::CustomerManagedPolicyReference]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -215,18 +221,12 @@ module Aws::SSOAdmin
     #   The ARN of the `PermissionSet`.
     #   @return [String]
     #
-    # @!attribute [rw] customer_managed_policy_reference
-    #   Specifies the name and path of a customer managed policy. You must
-    #   have an IAM policy that matches the name and path in each AWS
-    #   account where you want to deploy your permission set.
-    #   @return [Types::CustomerManagedPolicyReference]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSetRequest AWS API Documentation
     #
     class AttachCustomerManagedPolicyReferenceToPermissionSetRequest < Struct.new(
+      :customer_managed_policy_reference,
       :instance_arn,
-      :permission_set_arn,
-      :customer_managed_policy_reference)
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -238,9 +238,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_policy_arn
+    #   The Amazon Web Services managed policy ARN to be attached to a
+    #   permission set.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -248,16 +253,12 @@ module Aws::SSOAdmin
     #   attached to.
     #   @return [String]
     #
-    # @!attribute [rw] managed_policy_arn
-    #   The AWS managed policy ARN to be attached to a permission set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachManagedPolicyToPermissionSetRequest AWS API Documentation
     #
     class AttachManagedPolicyToPermissionSetRequest < Struct.new(
       :instance_arn,
-      :permission_set_arn,
-      :managed_policy_arn)
+      :managed_policy_arn,
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -266,24 +267,26 @@ module Aws::SSOAdmin
     #
     class AttachManagedPolicyToPermissionSetResponse < Aws::EmptyStructure; end
 
-    # A structure that stores the details of the AWS managed policy.
-    #
-    # @!attribute [rw] name
-    #   The name of the AWS managed policy.
-    #   @return [String]
+    # A structure that stores the details of the Amazon Web Services managed
+    # policy.
     #
     # @!attribute [rw] arn
-    #   The ARN of the AWS managed policy. For more information about ARNs,
-    #   see [Amazon Resource Names (ARNs) and AWS Service
+    #   The ARN of the Amazon Web Services managed policy. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
+    #   Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Web Services managed policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachedManagedPolicy AWS API Documentation
     #
     class AttachedManagedPolicy < Struct.new(
-      :name,
-      :arn)
+      :arn,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -308,27 +311,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] target_id
-    #   TargetID is an AWS account identifier, typically a 10-12 digit
-    #   string (For example, 123456789012).
-    #   @return [String]
-    #
-    # @!attribute [rw] target_type
-    #   The entity type for which the assignment will be created.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set that the admin wants to grant the
     #   principal access to.
-    #   @return [String]
-    #
-    # @!attribute [rw] principal_type
-    #   The entity type for which the assignment will be created.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -340,15 +330,28 @@ module Aws::SSOAdmin
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
+    # @!attribute [rw] principal_type
+    #   The entity type for which the assignment will be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The entity type for which the assignment will be created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateAccountAssignmentRequest AWS API Documentation
     #
     class CreateAccountAssignmentRequest < Struct.new(
       :instance_arn,
-      :target_id,
-      :target_type,
       :permission_set_arn,
+      :principal_id,
       :principal_type,
-      :principal_id)
+      :target_id,
+      :target_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,11 +368,6 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # @!attribute [rw] instance_arn
-    #   The ARN of the IAM Identity Center instance under which the
-    #   operation will be executed.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_access_control_attribute_configuration
     #   Specifies the IAM Identity Center identity store attributes to add
     #   to your ABAC configuration. When using an external identity provider
@@ -381,11 +379,16 @@ module Aws::SSOAdmin
     #   Center identity store.
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance under which the
+    #   operation will be executed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
     #
     class CreateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
-      :instance_arn,
-      :instance_access_control_attribute_configuration)
+      :instance_access_control_attribute_configuration,
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -394,10 +397,6 @@ module Aws::SSOAdmin
     #
     class CreateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] name
-    #   The name of the PermissionSet.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   The description of the PermissionSet.
     #   @return [String]
@@ -405,19 +404,23 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
-    # @!attribute [rw] session_duration
-    #   The length of time that the application user sessions are valid in
-    #   the ISO-8601 standard.
+    # @!attribute [rw] name
+    #   The name of the PermissionSet.
     #   @return [String]
     #
     # @!attribute [rw] relay_state
     #   Used to redirect users within the application during the federation
     #   authentication process.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_duration
+    #   The length of time that the application user sessions are valid in
+    #   the ISO-8601 standard.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -427,18 +430,18 @@ module Aws::SSOAdmin
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreatePermissionSetRequest AWS API Documentation
     #
     class CreatePermissionSetRequest < Struct.new(
-      :name,
       :description,
       :instance_arn,
-      :session_duration,
+      :name,
       :relay_state,
+      :session_duration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] permission_set
-    #   Defines the level of access on an AWS account.
+    #   Defines the level of access on an Amazon Web Services account.
     #   @return [Types::PermissionSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreatePermissionSetResponse AWS API Documentation
@@ -450,8 +453,8 @@ module Aws::SSOAdmin
     end
 
     # Specifies the name and path of a customer managed policy. You must
-    # have an IAM policy that matches the name and path in each AWS account
-    # where you want to deploy your permission set.
+    # have an IAM policy that matches the name and path in each Amazon Web
+    # Services account where you want to deploy your permission set.
     #
     # @!attribute [rw] name
     #   The name of the IAM policy that you have configured in each account
@@ -481,26 +484,13 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] target_id
-    #   TargetID is an AWS account identifier, typically a 10-12 digit
-    #   string (For example, 123456789012).
-    #   @return [String]
-    #
-    # @!attribute [rw] target_type
-    #   The entity type for which the assignment will be deleted.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set that will be used to remove access.
-    #   @return [String]
-    #
-    # @!attribute [rw] principal_type
-    #   The entity type for which the assignment will be deleted.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -512,15 +502,28 @@ module Aws::SSOAdmin
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
+    # @!attribute [rw] principal_type
+    #   The entity type for which the assignment will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The entity type for which the assignment will be deleted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteAccountAssignmentRequest AWS API Documentation
     #
     class DeleteAccountAssignmentRequest < Struct.new(
       :instance_arn,
-      :target_id,
-      :target_type,
       :permission_set_arn,
+      :principal_id,
       :principal_type,
-      :principal_id)
+      :target_id,
+      :target_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -540,9 +543,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -582,9 +585,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -626,23 +629,23 @@ module Aws::SSOAdmin
     #
     class DeletePermissionsBoundaryFromPermissionSetResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_assignment_creation_request_id
+    #   The identifier that is used to track the request operation progress.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] account_assignment_creation_request_id
-    #   The identifier that is used to track the request operation progress.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentCreationStatusRequest AWS API Documentation
     #
     class DescribeAccountAssignmentCreationStatusRequest < Struct.new(
-      :instance_arn,
-      :account_assignment_creation_request_id)
+      :account_assignment_creation_request_id,
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -659,23 +662,23 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_assignment_deletion_request_id
+    #   The identifier that is used to track the request operation progress.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] account_assignment_deletion_request_id
-    #   The identifier that is used to track the request operation progress.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentDeletionStatusRequest AWS API Documentation
     #
     class DescribeAccountAssignmentDeletionStatusRequest < Struct.new(
-      :instance_arn,
-      :account_assignment_deletion_request_id)
+      :account_assignment_deletion_request_id,
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -705,6 +708,11 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_access_control_attribute_configuration
+    #   Gets the list of IAM Identity Center identity store attributes that
+    #   have been added to your ABAC configuration.
+    #   @return [Types::InstanceAccessControlAttributeConfiguration]
+    #
     # @!attribute [rw] status
     #   The status of the attribute configuration process.
     #   @return [String]
@@ -714,17 +722,12 @@ module Aws::SSOAdmin
     #   attribute.
     #   @return [String]
     #
-    # @!attribute [rw] instance_access_control_attribute_configuration
-    #   Gets the list of IAM Identity Center identity store attributes that
-    #   have been added to your ABAC configuration.
-    #   @return [Types::InstanceAccessControlAttributeConfiguration]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
     #
     class DescribeInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      :instance_access_control_attribute_configuration,
       :status,
-      :status_reason,
-      :instance_access_control_attribute_configuration)
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -732,9 +735,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] provision_permission_set_request_id
@@ -766,9 +769,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -785,7 +788,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] permission_set
-    #   Describes the level of access on an AWS account.
+    #   Describes the level of access on an Amazon Web Services account.
     #   @return [Types::PermissionSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSetResponse AWS API Documentation
@@ -796,6 +799,12 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] customer_managed_policy_reference
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
+    #   @return [Types::CustomerManagedPolicyReference]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
@@ -805,18 +814,12 @@ module Aws::SSOAdmin
     #   The ARN of the `PermissionSet`.
     #   @return [String]
     #
-    # @!attribute [rw] customer_managed_policy_reference
-    #   Specifies the name and path of a customer managed policy. You must
-    #   have an IAM policy that matches the name and path in each AWS
-    #   account where you want to deploy your permission set.
-    #   @return [Types::CustomerManagedPolicyReference]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSetRequest AWS API Documentation
     #
     class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest < Struct.new(
+      :customer_managed_policy_reference,
       :instance_arn,
-      :permission_set_arn,
-      :customer_managed_policy_reference)
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -828,9 +831,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_policy_arn
+    #   The Amazon Web Services managed policy ARN to be detached from a
+    #   permission set.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -838,16 +846,12 @@ module Aws::SSOAdmin
     #   detached.
     #   @return [String]
     #
-    # @!attribute [rw] managed_policy_arn
-    #   The AWS managed policy ARN to be detached from a permission set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachManagedPolicyFromPermissionSetRequest AWS API Documentation
     #
     class DetachManagedPolicyFromPermissionSetRequest < Struct.new(
       :instance_arn,
-      :permission_set_arn,
-      :managed_policy_arn)
+      :managed_policy_arn,
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -859,9 +863,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -879,6 +883,12 @@ module Aws::SSOAdmin
 
     # @!attribute [rw] inline_policy
     #   The inline policy that is attached to the permission set.
+    #
+    #   <note markdown="1"> For `Length Constraints`, if a valid ARN is provided for a
+    #   permission set, it is possible for an empty inline policy to be
+    #   returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetInlinePolicyForPermissionSetResponse AWS API Documentation
@@ -937,24 +947,24 @@ module Aws::SSOAdmin
 
     # Provides information about the IAM Identity Center instance.
     #
-    # @!attribute [rw] instance_arn
-    #   The ARN of the IAM Identity Center instance under which the
-    #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
     # @!attribute [rw] identity_store_id
     #   The identifier of the identity store that is connected to the IAM
     #   Identity Center instance.
     #   @return [String]
     #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceMetadata AWS API Documentation
     #
     class InstanceMetadata < Struct.new(
-      :instance_arn,
-      :identity_store_id)
+      :identity_store_id,
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -973,12 +983,16 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   Filters results based on the passed attribute value.
+    #   @return [Types::OperationStatusFilter]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -990,17 +1004,13 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
-    # @!attribute [rw] filter
-    #   Filters results based on the passed attribute value.
-    #   @return [Types::OperationStatusFilter]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentCreationStatusRequest AWS API Documentation
     #
     class ListAccountAssignmentCreationStatusRequest < Struct.new(
+      :filter,
       :instance_arn,
       :max_results,
-      :next_token,
-      :filter)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1023,12 +1033,16 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   Filters results based on the passed attribute value.
+    #   @return [Types::OperationStatusFilter]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1040,17 +1054,13 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
-    # @!attribute [rw] filter
-    #   Filters results based on the passed attribute value.
-    #   @return [Types::OperationStatusFilter]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentDeletionStatusRequest AWS API Documentation
     #
     class ListAccountAssignmentDeletionStatusRequest < Struct.new(
+      :filter,
       :instance_arn,
       :max_results,
-      :next_token,
-      :filter)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1073,21 +1083,17 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The identifier of the Amazon Web Services account from which to list
+    #   the assignments.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] account_id
-    #   The identifier of the AWS account from which to list the
-    #   assignments.
-    #   @return [String]
-    #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the permission set from which to list assignments.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1099,21 +1105,25 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the permission set from which to list assignments.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentsRequest AWS API Documentation
     #
     class ListAccountAssignmentsRequest < Struct.new(
-      :instance_arn,
       :account_id,
-      :permission_set_arn,
+      :instance_arn,
       :max_results,
-      :next_token)
+      :next_token,
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_assignments
-    #   The list of assignments that match the input AWS account and
-    #   permission set.
+    #   The list of assignments that match the input Amazon Web Services
+    #   account and permission set.
     #   @return [Array<Types::AccountAssignment>]
     #
     # @!attribute [rw] next_token
@@ -1133,18 +1143,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the PermissionSet from which the associated AWS accounts
-    #   will be listed.
-    #   @return [String]
-    #
-    # @!attribute [rw] provisioning_status
-    #   The permission set provisioning status for an AWS account.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1156,20 +1157,30 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the PermissionSet from which the associated Amazon Web
+    #   Services accounts will be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_status
+    #   The permission set provisioning status for an Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountsForProvisionedPermissionSetRequest AWS API Documentation
     #
     class ListAccountsForProvisionedPermissionSetRequest < Struct.new(
       :instance_arn,
-      :permission_set_arn,
-      :provisioning_status,
       :max_results,
-      :next_token)
+      :next_token,
+      :permission_set_arn,
+      :provisioning_status)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_ids
-    #   The list of AWS `AccountIds`.
+    #   The list of Amazon Web Services `AccountIds`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1191,10 +1202,6 @@ module Aws::SSOAdmin
     #   operation will be executed.
     #   @return [String]
     #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the `PermissionSet`.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to display for the list call.
     #   @return [Integer]
@@ -1204,13 +1211,17 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListCustomerManagedPolicyReferencesInPermissionSetRequest AWS API Documentation
     #
     class ListCustomerManagedPolicyReferencesInPermissionSetRequest < Struct.new(
       :instance_arn,
-      :permission_set_arn,
       :max_results,
-      :next_token)
+      :next_token,
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1274,13 +1285,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the PermissionSet whose managed policies will be listed.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1292,13 +1299,17 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the PermissionSet whose managed policies will be listed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListManagedPoliciesInPermissionSetRequest AWS API Documentation
     #
     class ListManagedPoliciesInPermissionSetRequest < Struct.new(
       :instance_arn,
-      :permission_set_arn,
       :max_results,
-      :next_token)
+      :next_token,
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1321,12 +1332,16 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   Filters results based on the passed attribute value.
+    #   @return [Types::OperationStatusFilter]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1338,73 +1353,69 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
-    # @!attribute [rw] filter
-    #   Filters results based on the passed attribute value.
-    #   @return [Types::OperationStatusFilter]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatusRequest AWS API Documentation
     #
     class ListPermissionSetProvisioningStatusRequest < Struct.new(
+      :filter,
       :instance_arn,
       :max_results,
-      :next_token,
-      :filter)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] permission_sets_provisioning_status
-    #   The status object for the permission set provisioning operation.
-    #   @return [Array<Types::PermissionSetProvisioningStatusMetadata>]
-    #
-    # @!attribute [rw] next_token
-    #   The pagination token for the list API. Initially the value is null.
-    #   Use the output of previous API calls to make subsequent calls.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatusResponse AWS API Documentation
-    #
-    class ListPermissionSetProvisioningStatusResponse < Struct.new(
-      :permission_sets_provisioning_status,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_sets_provisioning_status
+    #   The status object for the permission set provisioning operation.
+    #   @return [Array<Types::PermissionSetProvisioningStatusMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatusResponse AWS API Documentation
+    #
+    class ListPermissionSetProvisioningStatusResponse < Struct.new(
+      :next_token,
+      :permission_sets_provisioning_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The identifier of the Amazon Web Services account from which to list
+    #   the assignments.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
-    # @!attribute [rw] account_id
-    #   The identifier of the AWS account from which to list the
-    #   assignments.
+    # @!attribute [rw] max_results
+    #   The maximum number of results to display for the assignment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_status
     #   The status object for the permission set provisioning operation.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to display for the assignment.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The pagination token for the list API. Initially the value is null.
-    #   Use the output of previous API calls to make subsequent calls.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsProvisionedToAccountRequest AWS API Documentation
     #
     class ListPermissionSetsProvisionedToAccountRequest < Struct.new(
-      :instance_arn,
       :account_id,
-      :provisioning_status,
+      :instance_arn,
       :max_results,
-      :next_token)
+      :next_token,
+      :provisioning_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1415,7 +1426,7 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] permission_sets
-    #   Defines the level of access that an AWS account has.
+    #   Defines the level of access that an Amazon Web Services account has.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsProvisionedToAccountResponse AWS API Documentation
@@ -1430,44 +1441,44 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The pagination token for the list API. Initially the value is null.
-    #   Use the output of previous API calls to make subsequent calls.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to display for the assignment.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsRequest AWS API Documentation
-    #
-    class ListPermissionSetsRequest < Struct.new(
-      :instance_arn,
-      :next_token,
-      :max_results)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] permission_sets
-    #   Defines the level of access on an AWS account.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsRequest AWS API Documentation
+    #
+    class ListPermissionSetsRequest < Struct.new(
+      :instance_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_sets
+    #   Defines the level of access on an Amazon Web Services account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsResponse AWS API Documentation
     #
     class ListPermissionSetsResponse < Struct.new(
-      :permission_sets,
-      :next_token)
+      :next_token,
+      :permission_sets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1475,44 +1486,44 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource with the tags to be listed.
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   The pagination token for the list API. Initially the value is null.
-    #   Use the output of previous API calls to make subsequent calls.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :instance_arn,
-      :resource_arn,
-      :next_token)
+      :next_token,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] tags
-    #   A set of key-value pairs that are used to manage the resource.
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of key-value pairs that are used to manage the resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
-      :tags,
-      :next_token)
+      :next_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1533,28 +1544,23 @@ module Aws::SSOAdmin
 
     # An entity that contains IAM policies.
     #
+    # @!attribute [rw] created_date
+    #   The date that the permission set was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the PermissionSet.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the permission set.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the PermissionSet.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_date
-    #   The date that the permission set was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] session_duration
-    #   The length of time that the application user sessions are valid for
-    #   in the ISO-8601 standard.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] relay_state
@@ -1562,15 +1568,20 @@ module Aws::SSOAdmin
     #   authentication process.
     #   @return [String]
     #
+    # @!attribute [rw] session_duration
+    #   The length of time that the application user sessions are valid for
+    #   in the ISO-8601 standard.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionSet AWS API Documentation
     #
     class PermissionSet < Struct.new(
+      :created_date,
+      :description,
       :name,
       :permission_set_arn,
-      :description,
-      :created_date,
-      :session_duration,
-      :relay_state)
+      :relay_state,
+      :session_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1578,53 +1589,26 @@ module Aws::SSOAdmin
     # A structure that is used to provide the status of the provisioning
     # operation for a specified permission set.
     #
-    # @!attribute [rw] status
-    #   The status of the permission set provisioning process.
-    #   @return [String]
-    #
-    # @!attribute [rw] request_id
-    #   The identifier for tracking the request operation that is generated
-    #   by the universally unique identifier (UUID) workflow.
-    #   @return [String]
-    #
     # @!attribute [rw] account_id
-    #   The identifier of the AWS account from which to list the
-    #   assignments.
+    #   The identifier of the Amazon Web Services account from which to list
+    #   the assignments.
     #   @return [String]
     #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the permission set that is being provisioned. For more
-    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces](/general/latest/gr/aws-arns-and-namespaces.html)
-    #   in the *AWS General Reference*.
-    #   @return [String]
+    # @!attribute [rw] created_date
+    #   The date that the permission set was created.
+    #   @return [Time]
     #
     # @!attribute [rw] failure_reason
     #   The message that contains an error or exception in case of an
     #   operation failure.
     #   @return [String]
     #
-    # @!attribute [rw] created_date
-    #   The date that the permission set was created.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionSetProvisioningStatus AWS API Documentation
-    #
-    class PermissionSetProvisioningStatus < Struct.new(
-      :status,
-      :request_id,
-      :account_id,
-      :permission_set_arn,
-      :failure_reason,
-      :created_date)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Provides information about the permission set provisioning status.
-    #
-    # @!attribute [rw] status
-    #   The status of the permission set provisioning process.
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the permission set that is being provisioned. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
+    #   Web Services Service
+    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -1632,28 +1616,56 @@ module Aws::SSOAdmin
     #   by the universally unique identifier (UUID) workflow.
     #   @return [String]
     #
-    # @!attribute [rw] created_date
-    #   The date that the permission set was created.
-    #   @return [Time]
+    # @!attribute [rw] status
+    #   The status of the permission set provisioning process.
+    #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionSetProvisioningStatusMetadata AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionSetProvisioningStatus AWS API Documentation
     #
-    class PermissionSetProvisioningStatusMetadata < Struct.new(
-      :status,
+    class PermissionSetProvisioningStatus < Struct.new(
+      :account_id,
+      :created_date,
+      :failure_reason,
+      :permission_set_arn,
       :request_id,
-      :created_date)
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies the configuration of the AWS managed or customer managed
-    # policy that you want to set as a permissions boundary. Specify either
-    # `CustomerManagedPolicyReference` to use the name and path of a
-    # customer managed policy, or `ManagedPolicyArn` to use the ARN of an
-    # AWS managed policy. A permissions boundary represents the maximum
-    # permissions that any policy can grant your role. For more information,
-    # see [Permissions boundaries for IAM entities][1] in the *IAM User
-    # Guide*.
+    # Provides information about the permission set provisioning status.
+    #
+    # @!attribute [rw] created_date
+    #   The date that the permission set was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier for tracking the request operation that is generated
+    #   by the universally unique identifier (UUID) workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the permission set provisioning process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionSetProvisioningStatusMetadata AWS API Documentation
+    #
+    class PermissionSetProvisioningStatusMetadata < Struct.new(
+      :created_date,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration of the Amazon Web Services managed or
+    # customer managed policy that you want to set as a permissions
+    # boundary. Specify either `CustomerManagedPolicyReference` to use the
+    # name and path of a customer managed policy, or `ManagedPolicyArn` to
+    # use the ARN of an Amazon Web Services managed policy. A permissions
+    # boundary represents the maximum permissions that any policy can grant
+    # your role. For more information, see [Permissions boundaries for IAM
+    # entities][1] in the *IAM User Guide*.
     #
     # Policies used as permissions boundaries don't provide permissions.
     # You must also attach an IAM policy to the role. To learn how the
@@ -1667,13 +1679,13 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] customer_managed_policy_reference
     #   Specifies the name and path of a customer managed policy. You must
-    #   have an IAM policy that matches the name and path in each AWS
-    #   account where you want to deploy your permission set.
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
     #   @return [Types::CustomerManagedPolicyReference]
     #
     # @!attribute [rw] managed_policy_arn
-    #   The AWS managed policy ARN that you want to attach to a permission
-    #   set as a permissions boundary.
+    #   The Amazon Web Services managed policy ARN that you want to attach
+    #   to a permission set as a permissions boundary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PermissionsBoundary AWS API Documentation
@@ -1688,9 +1700,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1698,8 +1710,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   TargetID is an AWS account identifier, typically a 10-12 digit
-    #   string (For example, 123456789012).
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -1729,28 +1741,28 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] inline_policy
+    #   The inline policy to attach to a PermissionSet.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set.
     #   @return [String]
     #
-    # @!attribute [rw] inline_policy
-    #   The inline policy to attach to a PermissionSet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutInlinePolicyToPermissionSetRequest AWS API Documentation
     #
     class PutInlinePolicyToPermissionSetRequest < Struct.new(
+      :inline_policy,
       :instance_arn,
-      :permission_set_arn,
-      :inline_policy)
+      :permission_set_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1816,7 +1828,8 @@ module Aws::SSOAdmin
 
     # A set of key-value pairs that are used to manage the resource. Tags
     # can only be applied to permission sets and cannot be applied to
-    # corresponding roles that IAM Identity Center creates in AWS accounts.
+    # corresponding roles that IAM Identity Center creates in Amazon Web
+    # Services accounts.
     #
     # @!attribute [rw] key
     #   The key for the tag.
@@ -1838,9 +1851,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1882,9 +1895,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
+    #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1909,20 +1922,20 @@ module Aws::SSOAdmin
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] instance_access_control_attribute_configuration
+    #   Updates the attributes for your ABAC configuration.
+    #   @return [Types::InstanceAccessControlAttributeConfiguration]
+    #
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed.
     #   @return [String]
     #
-    # @!attribute [rw] instance_access_control_attribute_configuration
-    #   Updates the attributes for your ABAC configuration.
-    #   @return [Types::InstanceAccessControlAttributeConfiguration]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
     #
     class UpdateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
-      :instance_arn,
-      :instance_access_control_attribute_configuration)
+      :instance_access_control_attribute_configuration,
+      :instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1931,25 +1944,20 @@ module Aws::SSOAdmin
     #
     class UpdateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] instance_arn
-    #   The ARN of the IAM Identity Center instance under which the
-    #   operation will be executed. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *AWS General Reference*.
-    #   @return [String]
-    #
-    # @!attribute [rw] permission_set_arn
-    #   The ARN of the permission set.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   The description of the PermissionSet.
     #   @return [String]
     #
-    # @!attribute [rw] session_duration
-    #   The length of time that the application user sessions are valid for
-    #   in the ISO-8601 standard.
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance under which the
+    #   operation will be executed. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   *Amazon Web Services General Reference*.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_set_arn
+    #   The ARN of the permission set.
     #   @return [String]
     #
     # @!attribute [rw] relay_state
@@ -1957,14 +1965,19 @@ module Aws::SSOAdmin
     #   authentication process.
     #   @return [String]
     #
+    # @!attribute [rw] session_duration
+    #   The length of time that the application user sessions are valid for
+    #   in the ISO-8601 standard.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdatePermissionSetRequest AWS API Documentation
     #
     class UpdatePermissionSetRequest < Struct.new(
+      :description,
       :instance_arn,
       :permission_set_arn,
-      :description,
-      :session_duration,
-      :relay_state)
+      :relay_state,
+      :session_duration)
       SENSITIVE = []
       include Aws::Structure
     end

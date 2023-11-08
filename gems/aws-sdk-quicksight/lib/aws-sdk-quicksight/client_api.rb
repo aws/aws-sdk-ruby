@@ -125,6 +125,7 @@ module Aws::QuickSight
     AssetBundleImportSource = Shapes::StructureShape.new(name: 'AssetBundleImportSource')
     AssetBundleImportSourceDescription = Shapes::StructureShape.new(name: 'AssetBundleImportSourceDescription')
     AssetBundleResourceArns = Shapes::ListShape.new(name: 'AssetBundleResourceArns')
+    AssetOptions = Shapes::StructureShape.new(name: 'AssetOptions')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
     AttributeAggregationFunction = Shapes::StructureShape.new(name: 'AttributeAggregationFunction')
@@ -220,6 +221,7 @@ module Aws::QuickSight
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnConfigurationList = Shapes::ListShape.new(name: 'ColumnConfigurationList')
     ColumnDataRole = Shapes::StringShape.new(name: 'ColumnDataRole')
+    ColumnDataSubType = Shapes::StringShape.new(name: 'ColumnDataSubType')
     ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
     ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
     ColumnDescriptiveText = Shapes::StringShape.new(name: 'ColumnDescriptiveText')
@@ -379,6 +381,7 @@ module Aws::QuickSight
     DataPathColorList = Shapes::ListShape.new(name: 'DataPathColorList')
     DataPathLabelType = Shapes::StructureShape.new(name: 'DataPathLabelType')
     DataPathSort = Shapes::StructureShape.new(name: 'DataPathSort')
+    DataPathType = Shapes::StructureShape.new(name: 'DataPathType')
     DataPathValue = Shapes::StructureShape.new(name: 'DataPathValue')
     DataPathValueList = Shapes::ListShape.new(name: 'DataPathValueList')
     DataPointDrillUpDownOption = Shapes::StructureShape.new(name: 'DataPointDrillUpDownOption')
@@ -417,6 +420,9 @@ module Aws::QuickSight
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Database = Shapes::StringShape.new(name: 'Database')
+    DatabaseGroup = Shapes::StringShape.new(name: 'DatabaseGroup')
+    DatabaseGroupList = Shapes::ListShape.new(name: 'DatabaseGroupList')
+    DatabaseUser = Shapes::StringShape.new(name: 'DatabaseUser')
     DatabricksParameters = Shapes::StructureShape.new(name: 'DatabricksParameters')
     DatasetMetadata = Shapes::StructureShape.new(name: 'DatasetMetadata')
     DatasetParameter = Shapes::StructureShape.new(name: 'DatasetParameter')
@@ -444,6 +450,7 @@ module Aws::QuickSight
     DateTimePickerControlDisplayOptions = Shapes::StructureShape.new(name: 'DateTimePickerControlDisplayOptions')
     DateTimeValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'DateTimeValueWhenUnsetConfiguration')
     DayOfMonth = Shapes::StringShape.new(name: 'DayOfMonth')
+    DayOfTheWeek = Shapes::StringShape.new(name: 'DayOfTheWeek')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DbUsername = Shapes::StringShape.new(name: 'DbUsername')
     DecimalDatasetParameter = Shapes::StructureShape.new(name: 'DecimalDatasetParameter')
@@ -679,6 +686,7 @@ module Aws::QuickSight
     FilterVisualScope = Shapes::StringShape.new(name: 'FilterVisualScope')
     FilteredVisualsList = Shapes::ListShape.new(name: 'FilteredVisualsList')
     Folder = Shapes::StructureShape.new(name: 'Folder')
+    FolderArnList = Shapes::ListShape.new(name: 'FolderArnList')
     FolderColumnList = Shapes::ListShape.new(name: 'FolderColumnList')
     FolderFilterAttribute = Shapes::StringShape.new(name: 'FolderFilterAttribute')
     FolderMember = Shapes::StructureShape.new(name: 'FolderMember')
@@ -853,6 +861,8 @@ module Aws::QuickSight
     JoinInstruction = Shapes::StructureShape.new(name: 'JoinInstruction')
     JoinKeyProperties = Shapes::StructureShape.new(name: 'JoinKeyProperties')
     JoinType = Shapes::StringShape.new(name: 'JoinType')
+    KPIActualValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIActualValueConditionalFormatting')
+    KPIComparisonValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIComparisonValueConditionalFormatting')
     KPIConditionalFormatting = Shapes::StructureShape.new(name: 'KPIConditionalFormatting')
     KPIConditionalFormattingOption = Shapes::StructureShape.new(name: 'KPIConditionalFormattingOption')
     KPIConditionalFormattingOptionList = Shapes::ListShape.new(name: 'KPIConditionalFormattingOptionList')
@@ -862,7 +872,12 @@ module Aws::QuickSight
     KPIPrimaryValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIPrimaryValueConditionalFormatting')
     KPIProgressBarConditionalFormatting = Shapes::StructureShape.new(name: 'KPIProgressBarConditionalFormatting')
     KPISortConfiguration = Shapes::StructureShape.new(name: 'KPISortConfiguration')
+    KPISparklineOptions = Shapes::StructureShape.new(name: 'KPISparklineOptions')
+    KPISparklineType = Shapes::StringShape.new(name: 'KPISparklineType')
     KPIVisual = Shapes::StructureShape.new(name: 'KPIVisual')
+    KPIVisualLayoutOptions = Shapes::StructureShape.new(name: 'KPIVisualLayoutOptions')
+    KPIVisualStandardLayout = Shapes::StructureShape.new(name: 'KPIVisualStandardLayout')
+    KPIVisualStandardLayoutType = Shapes::StringShape.new(name: 'KPIVisualStandardLayoutType')
     LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     Latitude = Shapes::FloatShape.new(name: 'Latitude')
     Layout = Shapes::StructureShape.new(name: 'Layout')
@@ -1085,6 +1100,7 @@ module Aws::QuickSight
     PivotTableConfiguration = Shapes::StructureShape.new(name: 'PivotTableConfiguration')
     PivotTableDataPathOption = Shapes::StructureShape.new(name: 'PivotTableDataPathOption')
     PivotTableDataPathOptionList = Shapes::ListShape.new(name: 'PivotTableDataPathOptionList')
+    PivotTableDataPathType = Shapes::StringShape.new(name: 'PivotTableDataPathType')
     PivotTableDimensionList = Shapes::ListShape.new(name: 'PivotTableDimensionList')
     PivotTableFieldCollapseState = Shapes::StringShape.new(name: 'PivotTableFieldCollapseState')
     PivotTableFieldCollapseStateOption = Shapes::StructureShape.new(name: 'PivotTableFieldCollapseStateOption')
@@ -1149,6 +1165,7 @@ module Aws::QuickSight
     RangeEndsLabelType = Shapes::StructureShape.new(name: 'RangeEndsLabelType')
     RdsParameters = Shapes::StructureShape.new(name: 'RdsParameters')
     RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
+    RedshiftIAMParameters = Shapes::StructureShape.new(name: 'RedshiftIAMParameters')
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
     ReferenceLine = Shapes::StructureShape.new(name: 'ReferenceLine')
     ReferenceLineCustomLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineCustomLabelConfiguration')
@@ -1159,6 +1176,7 @@ module Aws::QuickSight
     ReferenceLineLabelVerticalPosition = Shapes::StringShape.new(name: 'ReferenceLineLabelVerticalPosition')
     ReferenceLineList = Shapes::ListShape.new(name: 'ReferenceLineList')
     ReferenceLinePatternType = Shapes::StringShape.new(name: 'ReferenceLinePatternType')
+    ReferenceLineSeriesType = Shapes::StringShape.new(name: 'ReferenceLineSeriesType')
     ReferenceLineStaticDataConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineStaticDataConfiguration')
     ReferenceLineStyleConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineStyleConfiguration')
     ReferenceLineValueLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineValueLabelConfiguration')
@@ -1328,6 +1346,7 @@ module Aws::QuickSight
     SimpleAttributeAggregationFunction = Shapes::StringShape.new(name: 'SimpleAttributeAggregationFunction')
     SimpleClusterMarker = Shapes::StructureShape.new(name: 'SimpleClusterMarker')
     SimpleNumericalAggregationFunction = Shapes::StringShape.new(name: 'SimpleNumericalAggregationFunction')
+    SimpleTotalAggregationFunction = Shapes::StringShape.new(name: 'SimpleTotalAggregationFunction')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SliderControlDisplayOptions = Shapes::StructureShape.new(name: 'SliderControlDisplayOptions')
     SmallMultiplesAxisPlacement = Shapes::StringShape.new(name: 'SmallMultiplesAxisPlacement')
@@ -1372,6 +1391,8 @@ module Aws::QuickSight
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
+    StarburstParameters = Shapes::StructureShape.new(name: 'StarburstParameters')
+    StarburstProductType = Shapes::StringShape.new(name: 'StarburstProductType')
     StartAssetBundleExportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobRequest')
     StartAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobResponse')
     StartAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobRequest')
@@ -1540,6 +1561,9 @@ module Aws::QuickSight
     TopicSummary = Shapes::StructureShape.new(name: 'TopicSummary')
     TopicTimeGranularity = Shapes::StringShape.new(name: 'TopicTimeGranularity')
     TotalAggregationComputation = Shapes::StructureShape.new(name: 'TotalAggregationComputation')
+    TotalAggregationFunction = Shapes::StructureShape.new(name: 'TotalAggregationFunction')
+    TotalAggregationOption = Shapes::StructureShape.new(name: 'TotalAggregationOption')
+    TotalAggregationOptionList = Shapes::ListShape.new(name: 'TotalAggregationOptionList')
     TotalOptions = Shapes::StructureShape.new(name: 'TotalOptions')
     TransformOperation = Shapes::StructureShape.new(name: 'TransformOperation')
     TransformOperationList = Shapes::ListShape.new(name: 'TransformOperationList')
@@ -1551,6 +1575,7 @@ module Aws::QuickSight
     TreeMapSortConfiguration = Shapes::StructureShape.new(name: 'TreeMapSortConfiguration')
     TreeMapVisual = Shapes::StructureShape.new(name: 'TreeMapVisual')
     TrendArrowOptions = Shapes::StructureShape.new(name: 'TrendArrowOptions')
+    TrinoParameters = Shapes::StructureShape.new(name: 'TrinoParameters')
     TwitterParameters = Shapes::StructureShape.new(name: 'TwitterParameters')
     TypeCastFormat = Shapes::StringShape.new(name: 'TypeCastFormat')
     TypeParameters = Shapes::MapShape.new(name: 'TypeParameters')
@@ -1641,6 +1666,8 @@ module Aws::QuickSight
     VPCConnectionResourceStatus = Shapes::StringShape.new(name: 'VPCConnectionResourceStatus')
     VPCConnectionSummary = Shapes::StructureShape.new(name: 'VPCConnectionSummary')
     VPCConnectionSummaryList = Shapes::ListShape.new(name: 'VPCConnectionSummaryList')
+    ValidationStrategy = Shapes::StructureShape.new(name: 'ValidationStrategy')
+    ValidationStrategyMode = Shapes::StringShape.new(name: 'ValidationStrategyMode')
     ValueWhenUnsetOption = Shapes::StringShape.new(name: 'ValueWhenUnsetOption')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
@@ -1761,6 +1788,7 @@ module Aws::QuickSight
     Analysis.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Analysis.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Analysis.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    Analysis.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     Analysis.struct_class = Types::Analysis
 
     AnalysisDefaults.add_member(:default_new_sheet_configuration, Shapes::ShapeRef.new(shape: DefaultNewSheetConfiguration, required: true, location_name: "DefaultNewSheetConfiguration"))
@@ -1773,6 +1801,7 @@ module Aws::QuickSight
     AnalysisDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     AnalysisDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     AnalysisDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    AnalysisDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     AnalysisDefinition.struct_class = Types::AnalysisDefinition
 
     AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
@@ -2030,6 +2059,10 @@ module Aws::QuickSight
 
     AssetBundleResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
 
+    AssetOptions.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
+    AssetOptions.add_member(:week_start, Shapes::ShapeRef.new(shape: DayOfTheWeek, location_name: "WeekStart"))
+    AssetOptions.struct_class = Types::AssetOptions
+
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     AthenaParameters.struct_class = Types::AthenaParameters
@@ -2252,6 +2285,7 @@ module Aws::QuickSight
 
     CastColumnTypeOperation.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
     CastColumnTypeOperation.add_member(:new_column_type, Shapes::ShapeRef.new(shape: ColumnDataType, required: true, location_name: "NewColumnType"))
+    CastColumnTypeOperation.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     CastColumnTypeOperation.add_member(:format, Shapes::ShapeRef.new(shape: TypeCastFormat, location_name: "Format"))
     CastColumnTypeOperation.struct_class = Types::CastColumnTypeOperation
 
@@ -2551,6 +2585,8 @@ module Aws::QuickSight
     CreateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateAnalysisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAnalysisRequest.add_member(:definition, Shapes::ShapeRef.new(shape: AnalysisDefinition, location_name: "Definition"))
+    CreateAnalysisRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
+    CreateAnalysisRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateAnalysisRequest.struct_class = Types::CreateAnalysisRequest
 
     CreateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2574,6 +2610,8 @@ module Aws::QuickSight
     CreateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
     CreateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateDashboardRequest.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
+    CreateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
+    CreateDashboardRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2599,6 +2637,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSetRequest.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     CreateDataSetRequest.add_member(:dataset_parameters, Shapes::ShapeRef.new(shape: DatasetParameterList, location_name: "DatasetParameters"))
+    CreateDataSetRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
     CreateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2619,6 +2658,7 @@ module Aws::QuickSight
     CreateDataSourceRequest.add_member(:vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "VpcConnectionProperties"))
     CreateDataSourceRequest.add_member(:ssl_properties, Shapes::ShapeRef.new(shape: SslProperties, location_name: "SslProperties"))
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataSourceRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2752,6 +2792,7 @@ module Aws::QuickSight
     CreateTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateTemplateRequest.add_member(:definition, Shapes::ShapeRef.new(shape: TemplateVersionDefinition, location_name: "Definition"))
+    CreateTemplateRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
     CreateTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2983,6 +3024,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     DashboardVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    DashboardVersion.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
     DashboardVersionDefinition.add_member(:data_set_identifier_declarations, Shapes::ShapeRef.new(shape: DataSetIdentifierDeclarationList, required: true, location_name: "DataSetIdentifierDeclarations"))
@@ -2992,6 +3034,7 @@ module Aws::QuickSight
     DashboardVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     DashboardVersionDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     DashboardVersionDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    DashboardVersionDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     DashboardVersionDefinition.struct_class = Types::DashboardVersionDefinition
 
     DashboardVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3073,8 +3116,12 @@ module Aws::QuickSight
     DataPathSort.add_member(:sort_paths, Shapes::ShapeRef.new(shape: DataPathValueList, required: true, location_name: "SortPaths"))
     DataPathSort.struct_class = Types::DataPathSort
 
-    DataPathValue.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
-    DataPathValue.add_member(:field_value, Shapes::ShapeRef.new(shape: FieldValue, required: true, location_name: "FieldValue"))
+    DataPathType.add_member(:pivot_table_data_path_type, Shapes::ShapeRef.new(shape: PivotTableDataPathType, location_name: "PivotTableDataPathType"))
+    DataPathType.struct_class = Types::DataPathType
+
+    DataPathValue.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "FieldId"))
+    DataPathValue.add_member(:field_value, Shapes::ShapeRef.new(shape: FieldValue, location_name: "FieldValue"))
+    DataPathValue.add_member(:data_path_type, Shapes::ShapeRef.new(shape: DataPathType, location_name: "DataPathType"))
     DataPathValue.struct_class = Types::DataPathValue
 
     DataPathValueList.member = Shapes::ShapeRef.new(shape: DataPathValue)
@@ -3207,6 +3254,8 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:amazon_open_search_parameters, Shapes::ShapeRef.new(shape: AmazonOpenSearchParameters, location_name: "AmazonOpenSearchParameters"))
     DataSourceParameters.add_member(:exasol_parameters, Shapes::ShapeRef.new(shape: ExasolParameters, location_name: "ExasolParameters"))
     DataSourceParameters.add_member(:databricks_parameters, Shapes::ShapeRef.new(shape: DatabricksParameters, location_name: "DatabricksParameters"))
+    DataSourceParameters.add_member(:starburst_parameters, Shapes::ShapeRef.new(shape: StarburstParameters, location_name: "StarburstParameters"))
+    DataSourceParameters.add_member(:trino_parameters, Shapes::ShapeRef.new(shape: TrinoParameters, location_name: "TrinoParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -3227,6 +3276,8 @@ module Aws::QuickSight
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
     DataSourceSummaryList.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
+
+    DatabaseGroupList.member = Shapes::ShapeRef.new(shape: DatabaseGroup)
 
     DatabricksParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     DatabricksParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
@@ -4318,6 +4369,7 @@ module Aws::QuickSight
     FilterListConfiguration.add_member(:match_operator, Shapes::ShapeRef.new(shape: CategoryFilterMatchOperator, required: true, location_name: "MatchOperator"))
     FilterListConfiguration.add_member(:category_values, Shapes::ShapeRef.new(shape: CategoryValueList, location_name: "CategoryValues"))
     FilterListConfiguration.add_member(:select_all_options, Shapes::ShapeRef.new(shape: CategoryFilterSelectAllOptions, location_name: "SelectAllOptions"))
+    FilterListConfiguration.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, location_name: "NullOption"))
     FilterListConfiguration.struct_class = Types::FilterListConfiguration
 
     FilterListControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
@@ -4387,6 +4439,8 @@ module Aws::QuickSight
     Folder.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Folder.add_member(:sharing_model, Shapes::ShapeRef.new(shape: SharingModel, location_name: "SharingModel"))
     Folder.struct_class = Types::Folder
+
+    FolderArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     FolderColumnList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -4879,6 +4933,7 @@ module Aws::QuickSight
 
     InputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "Name"))
     InputColumn.add_member(:type, Shapes::ShapeRef.new(shape: InputColumnDataType, required: true, location_name: "Type"))
+    InputColumn.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     InputColumn.struct_class = Types::InputColumn
 
     InputColumnList.member = Shapes::ShapeRef.new(shape: InputColumn)
@@ -4966,11 +5021,21 @@ module Aws::QuickSight
     JoinKeyProperties.add_member(:unique_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UniqueKey", metadata: {"box"=>true}))
     JoinKeyProperties.struct_class = Types::JoinKeyProperties
 
+    KPIActualValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
+    KPIActualValueConditionalFormatting.add_member(:icon, Shapes::ShapeRef.new(shape: ConditionalFormattingIcon, location_name: "Icon"))
+    KPIActualValueConditionalFormatting.struct_class = Types::KPIActualValueConditionalFormatting
+
+    KPIComparisonValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
+    KPIComparisonValueConditionalFormatting.add_member(:icon, Shapes::ShapeRef.new(shape: ConditionalFormattingIcon, location_name: "Icon"))
+    KPIComparisonValueConditionalFormatting.struct_class = Types::KPIComparisonValueConditionalFormatting
+
     KPIConditionalFormatting.add_member(:conditional_formatting_options, Shapes::ShapeRef.new(shape: KPIConditionalFormattingOptionList, location_name: "ConditionalFormattingOptions"))
     KPIConditionalFormatting.struct_class = Types::KPIConditionalFormatting
 
     KPIConditionalFormattingOption.add_member(:primary_value, Shapes::ShapeRef.new(shape: KPIPrimaryValueConditionalFormatting, location_name: "PrimaryValue"))
     KPIConditionalFormattingOption.add_member(:progress_bar, Shapes::ShapeRef.new(shape: KPIProgressBarConditionalFormatting, location_name: "ProgressBar"))
+    KPIConditionalFormattingOption.add_member(:actual_value, Shapes::ShapeRef.new(shape: KPIActualValueConditionalFormatting, location_name: "ActualValue"))
+    KPIConditionalFormattingOption.add_member(:comparison_value, Shapes::ShapeRef.new(shape: KPIComparisonValueConditionalFormatting, location_name: "ComparisonValue"))
     KPIConditionalFormattingOption.struct_class = Types::KPIConditionalFormattingOption
 
     KPIConditionalFormattingOptionList.member = Shapes::ShapeRef.new(shape: KPIConditionalFormattingOption)
@@ -4992,6 +5057,8 @@ module Aws::QuickSight
     KPIOptions.add_member(:primary_value_display_type, Shapes::ShapeRef.new(shape: PrimaryValueDisplayType, location_name: "PrimaryValueDisplayType"))
     KPIOptions.add_member(:primary_value_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "PrimaryValueFontConfiguration"))
     KPIOptions.add_member(:secondary_value_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "SecondaryValueFontConfiguration"))
+    KPIOptions.add_member(:sparkline, Shapes::ShapeRef.new(shape: KPISparklineOptions, location_name: "Sparkline"))
+    KPIOptions.add_member(:visual_layout_options, Shapes::ShapeRef.new(shape: KPIVisualLayoutOptions, location_name: "VisualLayoutOptions"))
     KPIOptions.struct_class = Types::KPIOptions
 
     KPIPrimaryValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
@@ -5004,6 +5071,12 @@ module Aws::QuickSight
     KPISortConfiguration.add_member(:trend_group_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "TrendGroupSort"))
     KPISortConfiguration.struct_class = Types::KPISortConfiguration
 
+    KPISparklineOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    KPISparklineOptions.add_member(:type, Shapes::ShapeRef.new(shape: KPISparklineType, required: true, location_name: "Type"))
+    KPISparklineOptions.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
+    KPISparklineOptions.add_member(:tooltip_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TooltipVisibility"))
+    KPISparklineOptions.struct_class = Types::KPISparklineOptions
+
     KPIVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
     KPIVisual.add_member(:title, Shapes::ShapeRef.new(shape: VisualTitleLabelOptions, location_name: "Title"))
     KPIVisual.add_member(:subtitle, Shapes::ShapeRef.new(shape: VisualSubtitleLabelOptions, location_name: "Subtitle"))
@@ -5012,6 +5085,12 @@ module Aws::QuickSight
     KPIVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     KPIVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     KPIVisual.struct_class = Types::KPIVisual
+
+    KPIVisualLayoutOptions.add_member(:standard_layout, Shapes::ShapeRef.new(shape: KPIVisualStandardLayout, location_name: "StandardLayout"))
+    KPIVisualLayoutOptions.struct_class = Types::KPIVisualLayoutOptions
+
+    KPIVisualStandardLayout.add_member(:type, Shapes::ShapeRef.new(shape: KPIVisualStandardLayoutType, required: true, location_name: "Type"))
+    KPIVisualStandardLayout.struct_class = Types::KPIVisualStandardLayout
 
     LabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     LabelOptions.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))
@@ -5664,6 +5743,7 @@ module Aws::QuickSight
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
     OutputColumn.add_member(:description, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Description"))
     OutputColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
+    OutputColumn.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
     OutputColumn.struct_class = Types::OutputColumn
 
     OutputColumnList.member = Shapes::ShapeRef.new(shape: OutputColumn)
@@ -5972,6 +6052,7 @@ module Aws::QuickSight
     PivotTotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
     PivotTotalOptions.add_member(:value_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "ValueCellStyle"))
     PivotTotalOptions.add_member(:metric_header_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "MetricHeaderCellStyle"))
+    PivotTotalOptions.add_member(:total_aggregation_options, Shapes::ShapeRef.new(shape: TotalAggregationOptionList, location_name: "TotalAggregationOptions"))
     PivotTotalOptions.struct_class = Types::PivotTotalOptions
 
     PostgreSqlParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
@@ -6084,10 +6165,17 @@ module Aws::QuickSight
     RdsParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RdsParameters.struct_class = Types::RdsParameters
 
+    RedshiftIAMParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, required: true, location_name: "DatabaseUser"))
+    RedshiftIAMParameters.add_member(:database_groups, Shapes::ShapeRef.new(shape: DatabaseGroupList, location_name: "DatabaseGroups"))
+    RedshiftIAMParameters.add_member(:auto_create_database_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoCreateDatabaseUser"))
+    RedshiftIAMParameters.struct_class = Types::RedshiftIAMParameters
+
     RedshiftParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     RedshiftParameters.add_member(:port, Shapes::ShapeRef.new(shape: OptionalPort, location_name: "Port"))
     RedshiftParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RedshiftParameters.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+    RedshiftParameters.add_member(:iam_parameters, Shapes::ShapeRef.new(shape: RedshiftIAMParameters, location_name: "IAMParameters"))
     RedshiftParameters.struct_class = Types::RedshiftParameters
 
     ReferenceLine.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
@@ -6102,6 +6190,7 @@ module Aws::QuickSight
     ReferenceLineDataConfiguration.add_member(:static_configuration, Shapes::ShapeRef.new(shape: ReferenceLineStaticDataConfiguration, location_name: "StaticConfiguration"))
     ReferenceLineDataConfiguration.add_member(:dynamic_configuration, Shapes::ShapeRef.new(shape: ReferenceLineDynamicDataConfiguration, location_name: "DynamicConfiguration"))
     ReferenceLineDataConfiguration.add_member(:axis_binding, Shapes::ShapeRef.new(shape: AxisBinding, location_name: "AxisBinding"))
+    ReferenceLineDataConfiguration.add_member(:series_type, Shapes::ShapeRef.new(shape: ReferenceLineSeriesType, location_name: "SeriesType"))
     ReferenceLineDataConfiguration.struct_class = Types::ReferenceLineDataConfiguration
 
     ReferenceLineDynamicDataConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -6160,6 +6249,7 @@ module Aws::QuickSight
     RegisterUserRequest.add_member(:external_login_federation_provider_type, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderType"))
     RegisterUserRequest.add_member(:custom_federation_provider_url, Shapes::ShapeRef.new(shape: String, location_name: "CustomFederationProviderUrl"))
     RegisterUserRequest.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
+    RegisterUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RegisterUserRequest.struct_class = Types::RegisterUserRequest
 
     RegisterUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -6739,6 +6829,12 @@ module Aws::QuickSight
     SslProperties.add_member(:disable_ssl, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableSsl"))
     SslProperties.struct_class = Types::SslProperties
 
+    StarburstParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    StarburstParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    StarburstParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    StarburstParameters.add_member(:product_type, Shapes::ShapeRef.new(shape: StarburstProductType, location_name: "ProductType"))
+    StarburstParameters.struct_class = Types::StarburstParameters
+
     StartAssetBundleExportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     StartAssetBundleExportJobRequest.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "AssetBundleExportJobId"))
     StartAssetBundleExportJobRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: AssetBundleResourceArns, required: true, location_name: "ResourceArns"))
@@ -7046,6 +7142,7 @@ module Aws::QuickSight
     TemplateVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
     TemplateVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     TemplateVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
+    TemplateVersion.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     TemplateVersion.struct_class = Types::TemplateVersion
 
     TemplateVersionDefinition.add_member(:data_set_configurations, Shapes::ShapeRef.new(shape: DataSetConfigurationList, required: true, location_name: "DataSetConfigurations"))
@@ -7055,6 +7152,7 @@ module Aws::QuickSight
     TemplateVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
     TemplateVersionDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     TemplateVersionDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
+    TemplateVersionDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
     TemplateVersionDefinition.struct_class = Types::TemplateVersionDefinition
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -7174,6 +7272,7 @@ module Aws::QuickSight
     TimeEqualityFilter.add_member(:value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Value"))
     TimeEqualityFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     TimeEqualityFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
+    TimeEqualityFilter.add_member(:rolling_date, Shapes::ShapeRef.new(shape: RollingDateConfiguration, location_name: "RollingDate"))
     TimeEqualityFilter.struct_class = Types::TimeEqualityFilter
 
     TimeRangeDrillDownFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -7376,11 +7475,21 @@ module Aws::QuickSight
     TotalAggregationComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     TotalAggregationComputation.struct_class = Types::TotalAggregationComputation
 
+    TotalAggregationFunction.add_member(:simple_total_aggregation_function, Shapes::ShapeRef.new(shape: SimpleTotalAggregationFunction, location_name: "SimpleTotalAggregationFunction"))
+    TotalAggregationFunction.struct_class = Types::TotalAggregationFunction
+
+    TotalAggregationOption.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    TotalAggregationOption.add_member(:total_aggregation_function, Shapes::ShapeRef.new(shape: TotalAggregationFunction, required: true, location_name: "TotalAggregationFunction"))
+    TotalAggregationOption.struct_class = Types::TotalAggregationOption
+
+    TotalAggregationOptionList.member = Shapes::ShapeRef.new(shape: TotalAggregationOption)
+
     TotalOptions.add_member(:totals_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TotalsVisibility"))
     TotalOptions.add_member(:placement, Shapes::ShapeRef.new(shape: TableTotalsPlacement, location_name: "Placement"))
     TotalOptions.add_member(:scroll_status, Shapes::ShapeRef.new(shape: TableTotalsScrollStatus, location_name: "ScrollStatus"))
     TotalOptions.add_member(:custom_label, Shapes::ShapeRef.new(shape: String, location_name: "CustomLabel"))
     TotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
+    TotalOptions.add_member(:total_aggregation_options, Shapes::ShapeRef.new(shape: TotalAggregationOptionList, location_name: "TotalAggregationOptions"))
     TotalOptions.struct_class = Types::TotalOptions
 
     TransformOperation.add_member(:project_operation, Shapes::ShapeRef.new(shape: ProjectOperation, location_name: "ProjectOperation"))
@@ -7432,6 +7541,11 @@ module Aws::QuickSight
 
     TrendArrowOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     TrendArrowOptions.struct_class = Types::TrendArrowOptions
+
+    TrinoParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    TrinoParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    TrinoParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    TrinoParameters.struct_class = Types::TrinoParameters
 
     TwitterParameters.add_member(:query, Shapes::ShapeRef.new(shape: Query, required: true, location_name: "Query"))
     TwitterParameters.add_member(:max_rows, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "MaxRows"))
@@ -7536,6 +7650,7 @@ module Aws::QuickSight
     UpdateAnalysisRequest.add_member(:source_entity, Shapes::ShapeRef.new(shape: AnalysisSourceEntity, location_name: "SourceEntity"))
     UpdateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     UpdateAnalysisRequest.add_member(:definition, Shapes::ShapeRef.new(shape: AnalysisDefinition, location_name: "Definition"))
+    UpdateAnalysisRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateAnalysisRequest.struct_class = Types::UpdateAnalysisRequest
 
     UpdateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -7581,6 +7696,7 @@ module Aws::QuickSight
     UpdateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
     UpdateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     UpdateDashboardRequest.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
+    UpdateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateDashboardRequest.struct_class = Types::UpdateDashboardRequest
 
     UpdateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -7769,6 +7885,7 @@ module Aws::QuickSight
     UpdateTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     UpdateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "Name"))
     UpdateTemplateRequest.add_member(:definition, Shapes::ShapeRef.new(shape: TemplateVersionDefinition, location_name: "Definition"))
+    UpdateTemplateRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
 
     UpdateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "TemplateId"))
@@ -7942,6 +8059,9 @@ module Aws::QuickSight
     VPCConnectionSummary.struct_class = Types::VPCConnectionSummary
 
     VPCConnectionSummaryList.member = Shapes::ShapeRef.new(shape: VPCConnectionSummary)
+
+    ValidationStrategy.add_member(:mode, Shapes::ShapeRef.new(shape: ValidationStrategyMode, required: true, location_name: "Mode"))
+    ValidationStrategy.struct_class = Types::ValidationStrategy
 
     VisibleRangeOptions.add_member(:percent_range, Shapes::ShapeRef.new(shape: PercentVisibleRange, location_name: "PercentRange"))
     VisibleRangeOptions.struct_class = Types::VisibleRangeOptions

@@ -567,13 +567,13 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
     #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes it as the value for this parameter in the request. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for the new version and include the
-    #   value in the request.
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
+    #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include it
+    #   in the request.
     #
     #   This value helps ensure idempotency. Secrets Manager uses this value
     #   to prevent the accidental creation of duplicate versions if there are
@@ -676,32 +676,15 @@ module Aws::SecretsManager
     #   parameter, you should use single quotes to avoid confusion with the
     #   double quotes required in the JSON text.
     #
-    #   The following restrictions apply to tags:
-    #
-    #   * Maximum number of tags per secret: 50
-    #
-    #   * Maximum key length: 127 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 255 Unicode characters in UTF-8
-    #
-    #   * Tag keys and values are case sensitive.
-    #
-    #   * Do not use the `aws:` prefix in your tag names or values because
-    #     Amazon Web Services reserves it for Amazon Web Services use. You
-    #     can't edit or delete tag names or values with this prefix. Tags
-    #     with this prefix do not count against your tags per secret limit.
-    #
-    #   * If you use your tagging schema across multiple services and
-    #     resources, other services might have restrictions on allowed
-    #     characters. Generally allowed characters: letters, spaces, and
-    #     numbers representable in UTF-8, plus the following special
-    #     characters: + - = . \_ : / @.
+    #   For tag quotas and naming restrictions, see [Service quotas for
+    #   Tagging][4] in the *Amazon Web Services General Reference guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac
     #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#auth-and-access_tags2
     #   [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/arg.html#taged-reference-quotas
     #
     # @option params [Array<Types::ReplicaRegionType>] :add_replica_regions
     #   A list of Regions and KMS keys to replicate secrets.
@@ -1860,19 +1843,20 @@ module Aws::SecretsManager
     #
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
-    #   parameter empty because they generate a random UUID for you. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for new versions and include that value
-    #   in the request.
+    #   parameter empty. The CLI or SDK generates a random UUID for you and
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
     #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include it
+    #   in the request.
+    #
     #   This value helps ensure idempotency. Secrets Manager uses this value
     #   to prevent the accidental creation of duplicate versions if there are
-    #   failures and retries during the Lambda rotation function processing.
-    #   We recommend that you generate a [UUID-type][1] value to ensure
-    #   uniqueness within the specified secret.
+    #   failures and retries during a rotation. We recommend that you generate
+    #   a [UUID-type][1] value to ensure uniqueness of your versions within
+    #   the specified secret.
     #
     #   * If the `ClientRequestToken` value isn't already associated with a
     #     version of the secret then a new version of the secret is created.
@@ -2253,24 +2237,27 @@ module Aws::SecretsManager
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [String] :client_request_token
-    #   A unique identifier for the new version of the secret that helps
-    #   ensure idempotency. Secrets Manager uses this value to prevent the
-    #   accidental creation of duplicate versions if there are failures and
-    #   retries during rotation. This value becomes the `VersionId` of the new
-    #   version.
+    #   A unique identifier for the new version of the secret. You only need
+    #   to specify this value if you implement your own retry logic and you
+    #   want to ensure that Secrets Manager doesn't attempt to create a
+    #   secret version twice.
     #
-    #   If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this parameter
-    #   empty. The CLI or SDK generates a random UUID for you and includes
-    #   that in the request for this parameter. If you don't use the SDK and
-    #   instead generate a raw HTTP request to the Secrets Manager service
-    #   endpoint, then you must generate a `ClientRequestToken` yourself for
-    #   new versions and include that value in the request.
+    #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
+    #   Services SDKs to call this operation, then you can leave this
+    #   parameter empty. The CLI or SDK generates a random UUID for you and
+    #   includes it as the value for this parameter in the request.
     #
-    #   You only need to specify this value if you implement your own retry
-    #   logic and you want to ensure that Secrets Manager doesn't attempt to
-    #   create a secret version twice. We recommend that you generate a
-    #   [UUID-type][1] value to ensure uniqueness within the specified secret.
+    #    </note>
+    #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include it
+    #   in the request.
+    #
+    #   This value helps ensure idempotency. Secrets Manager uses this value
+    #   to prevent the accidental creation of duplicate versions if there are
+    #   failures and retries during a rotation. We recommend that you generate
+    #   a [UUID-type][1] value to ensure uniqueness of your versions within
+    #   the specified secret.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2438,26 +2425,8 @@ module Aws::SecretsManager
     # specific versions of the secret. This operation appends tags to the
     # existing list of tags.
     #
-    # The following restrictions apply to tags:
-    #
-    # * Maximum number of tags per secret: 50
-    #
-    # * Maximum key length: 127 Unicode characters in UTF-8
-    #
-    # * Maximum value length: 255 Unicode characters in UTF-8
-    #
-    # * Tag keys and values are case sensitive.
-    #
-    # * Do not use the `aws:` prefix in your tag names or values because
-    #   Amazon Web Services reserves it for Amazon Web Services use. You
-    #   can't edit or delete tag names or values with this prefix. Tags
-    #   with this prefix do not count against your tags per secret limit.
-    #
-    # * If you use your tagging schema across multiple services and
-    #   resources, other services might have restrictions on allowed
-    #   characters. Generally allowed characters: letters, spaces, and
-    #   numbers representable in UTF-8, plus the following special
-    #   characters: + - = . \_ : / @.
+    # For tag quotas and naming restrictions, see [Service quotas for
+    # Tagging][1] in the *Amazon Web Services General Reference guide*.
     #
     # If you use tags as part of your security strategy, then adding or
     # removing a tag can change permissions. If successfully completing this
@@ -2467,17 +2436,18 @@ module Aws::SecretsManager
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
     # because it might be logged. For more information, see [Logging Secrets
-    # Manager events with CloudTrail][1].
+    # Manager events with CloudTrail][2].
     #
     # <b>Required permissions: </b> `secretsmanager:TagResource`. For more
-    # information, see [ IAM policy actions for Secrets Manager][2] and
-    # [Authentication and access control in Secrets Manager][3].
+    # information, see [ IAM policy actions for Secrets Manager][3] and
+    # [Authentication and access control in Secrets Manager][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/arg.html#taged-reference-quotas
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The identifier for the secret to attach tags to. You can specify
@@ -2701,18 +2671,26 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
     #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes it as the value for this parameter in the request. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for the new version and include the
-    #   value in the request.
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
     #
-    #   This value becomes the `VersionId` of the new version.
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include it
+    #   in the request.
+    #
+    #   This value helps ensure idempotency. Secrets Manager uses this value
+    #   to prevent the accidental creation of duplicate versions if there are
+    #   failures and retries during a rotation. We recommend that you generate
+    #   a [UUID-type][1] value to ensure uniqueness of your versions within
+    #   the specified secret.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :description
     #   The description of the secret.
@@ -3108,7 +3086,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

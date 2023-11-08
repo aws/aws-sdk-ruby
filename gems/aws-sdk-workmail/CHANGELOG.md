@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2023-09-18)
+------------------
+
+* Feature - This release includes four new APIs UpdateUser, UpdateGroup, ListGroupsForEntity and DescribeEntity, along with RemoteUsers and some enhancements to existing APIs.
+
 1.58.0 (2023-07-11)
 ------------------
 

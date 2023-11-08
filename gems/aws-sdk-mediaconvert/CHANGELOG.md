@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2023-10-03)
+------------------
+
+* Feature - This release adds the ability to replace video frames without modifying the audio essence.
+
+1.118.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.117.0 (2023-09-22)
+------------------
+
+* Feature - This release supports the creation of of audio-only tracks in CMAF output groups.
+
 1.116.0 (2023-08-24)
 ------------------
 

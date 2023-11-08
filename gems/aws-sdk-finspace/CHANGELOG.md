@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-10-30)
+------------------
+
+* Feature - Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.
+
+1.21.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2023-08-21)
 ------------------
 

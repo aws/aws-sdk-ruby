@@ -664,14 +664,14 @@ module Aws::RDS
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`,
+    #   Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
     #   `ca-certificate-rotation`
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
     #   request. An opt-in request of type `immediate` can't be undone.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `immediate` - Apply the maintenance action immediately.
     #
@@ -904,16 +904,16 @@ module Aws::RDS
     #   [1]: http://en.wikipedia.org/wiki/ISO_8601
     #
     # @option params [Boolean] :force
-    #   A value that indicates whether to force the DB cluster to backtrack
-    #   when binary logging is enabled. Otherwise, an error occurs when binary
-    #   logging is enabled.
+    #   Specifies whether to force the DB cluster to backtrack when binary
+    #   logging is enabled. Otherwise, an error occurs when binary logging is
+    #   enabled.
     #
     # @option params [Boolean] :use_earliest_time_on_point_in_time_unavailable
-    #   A value that indicates whether to backtrack the DB cluster to the
-    #   earliest possible backtrack time when *BacktrackTo* is set to a
-    #   timestamp earlier than the earliest backtrack time. When this
-    #   parameter is disabled and *BacktrackTo* is set to a timestamp earlier
-    #   than the earliest backtrack time, an error occurs.
+    #   Specifies whether to backtrack the DB cluster to the earliest possible
+    #   backtrack time when *BacktrackTo* is set to a timestamp earlier than
+    #   the earliest backtrack time. When this parameter is disabled and
+    #   *BacktrackTo* is set to a timestamp earlier than the earliest
+    #   backtrack time, an error occurs.
     #
     # @return [Types::DBClusterBacktrack] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1304,9 +1304,8 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [Boolean] :copy_tags
-    #   A value that indicates whether to copy all tags from the source DB
-    #   cluster snapshot to the target DB cluster snapshot. By default, tags
-    #   are not copied.
+    #   Specifies whether to copy all tags from the source DB cluster snapshot
+    #   to the target DB cluster snapshot. By default, tags are not copied.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -1614,8 +1613,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :copy_tags
-    #   A value that indicates whether to copy all tags from the source DB
-    #   snapshot to the target DB snapshot. By default, tags aren't copied.
+    #   Specifies whether to copy all tags from the source DB snapshot to the
+    #   target DB snapshot. By default, tags aren't copied.
     #
     # @option params [String] :pre_signed_url
     #   When you are copying a snapshot from one Amazon Web Services GovCloud
@@ -1707,10 +1706,10 @@ module Aws::RDS
     #   Example: `rds-caz-aiqhTgQv`.
     #
     # @option params [Boolean] :copy_option_group
-    #   A value that indicates whether to copy the DB option group associated
-    #   with the source DB snapshot to the target Amazon Web Services account
-    #   and associate with the target DB snapshot. The associated option group
-    #   can be copied only with cross-account snapshot copy calls.
+    #   Specifies whether to copy the DB option group associated with the
+    #   source DB snapshot to the target Amazon Web Services account and
+    #   associate with the target DB snapshot. The associated option group can
+    #   be copied only with cross-account snapshot copy calls.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1822,6 +1821,8 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2025,6 +2026,21 @@ module Aws::RDS
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the blue/green deployment.
     #
+    # @option params [String] :target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #
+    # @option params [Boolean] :upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the green
+    #   database. This option migrates the green DB instance from the older
+    #   32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
@@ -2165,6 +2181,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     target_db_instance_class: "TargetDBInstanceClass",
+    #     upgrade_target_storage_config: false,
     #   })
     #
     # @example Response structure
@@ -2338,6 +2356,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2390,6 +2409,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2418,6 +2438,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -2887,6 +2908,9 @@ module Aws::RDS
     #   of the DB cluster.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled. The
@@ -3432,6 +3456,10 @@ module Aws::RDS
     #       timeout_action: "String",
     #       seconds_before_timeout: 1,
     #     },
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
@@ -3528,6 +3556,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -3560,6 +3590,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -4351,7 +4383,8 @@ module Aws::RDS
     #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   * Can include any printable ASCII character except "/", """, or
-    #     "@".
+    #     "@". For RDS for Oracle, can't include the "&amp;" (ampersand)
+    #     or the "'" (single quotes) character.
     #
     #   Length Constraints:
     #
@@ -5206,6 +5239,26 @@ module Aws::RDS
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
+    # @option params [Boolean] :multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies to
+    #   RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support it,
+    #     the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5393,6 +5446,8 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     #
     # @example Response structure
@@ -5459,6 +5514,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5552,6 +5609,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5570,9 +5630,8 @@ module Aws::RDS
     # read replicas][1] and [Migrating from a Multi-AZ DB cluster to a DB
     # instance using a read replica][2] in the *Amazon RDS User Guide*.
     #
-    # Amazon Aurora doesn't support this operation. Call the
-    # `CreateDBInstance` operation to create a DB instance for an Aurora DB
-    # cluster.
+    # Amazon Aurora doesn't support this operation. To create a DB instance
+    # for an Aurora DB cluster, use the `CreateDBInstance` operation.
     #
     # All read replica DB instances are created with backups disabled. All
     # other attributes (including DB security groups and DB parameter
@@ -5636,7 +5695,7 @@ module Aws::RDS
     #   of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
-    #   Default: Inherits from the source DB instance.
+    #   Default: Inherits the value from the source DB instance.
     #
     #
     #
@@ -5653,13 +5712,12 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number that the DB instance uses for connections.
     #
-    #   Default: Inherits from the source DB instance
-    #
     #   Valid Values: `1150-65535`
     #
+    #   Default: Inherits the value from the source DB instance.
+    #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the read replica is in a Multi-AZ
-    #   deployment.
+    #   Specifies whether the read replica is in a Multi-AZ deployment.
     #
     #   You can create a read replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
@@ -5667,52 +5725,55 @@ module Aws::RDS
     #   instance is independent of whether the source is a Multi-AZ DB
     #   instance or a Multi-AZ DB cluster.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the read replica during the maintenance window.
+    #   Specifies whether to automatically apply minor engine upgrades to the
+    #   read replica during the maintenance window.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
-    #   Default: Inherits from the source DB instance
+    #   Default: Inherits the value from the source DB instance.
     #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
-    #   be initially allocated for the DB instance.
+    #   initially allocate for the DB instance.
     #
     # @option params [String] :option_group_name
-    #   The option group the DB instance is associated with. If omitted, the
-    #   option group associated with the source instance or cluster is used.
+    #   The option group to associate the DB instance with. If not specified,
+    #   RDS uses the option group associated with the source DB instance or
+    #   cluster.
     #
     #   <note markdown="1"> For SQL Server, you must use the option group associated with the
     #   source.
     #
     #    </note>
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #
-    #   If you do not specify a value for `DBParameterGroupName`, then Amazon
-    #   RDS uses the `DBParameterGroup` of source DB instance for a same
+    #   If you don't specify a value for `DBParameterGroupName`, then Amazon
+    #   RDS uses the `DBParameterGroup` of the source DB instance for a same
     #   Region read replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross-Region read replica.
     #
     #   Specifying a parameter group for this operation is only supported for
-    #   MySQL and Oracle DB instances. It isn't supported for RDS Custom.
+    #   MySQL DB instances for cross-Region read replicas and for Oracle DB
+    #   instances. It isn't supported for MySQL DB instances for same Region
+    #   read replicas or for RDS Custom.
     #
     #   Constraints:
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -5736,20 +5797,19 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :db_subnet_group_name
-    #   Specifies a DB subnet group for the DB instance. The new DB instance
-    #   is created in the VPC associated with the DB subnet group. If no DB
-    #   subnet group is specified, then the new DB instance isn't created in
-    #   a VPC.
+    #   A DB subnet group for the DB instance. The new DB instance is created
+    #   in the VPC associated with the DB subnet group. If no DB subnet group
+    #   is specified, then the new DB instance isn't created in a VPC.
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBSubnetGroup.
+    #   * If supplied, must match the name of an existing DB subnet group.
     #
     #   * The specified DB subnet group must be in the same Amazon Web
     #     Services Region in which the operation is running.
     #
     #   * All read replicas in one Amazon Web Services Region that are created
-    #     from the same source DB instance must either:&gt;
+    #     from the same source DB instance must either:
     #
     #     * Specify DB subnet groups from the same VPC. All these read
     #       replicas are created in the same VPC.
@@ -5763,36 +5823,38 @@ module Aws::RDS
     #   A list of Amazon EC2 VPC security groups to associate with the read
     #   replica.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the read replica.
-    #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   The storage type to associate with the read replica.
     #
     #   If you specify `io1` or `gp3`, you must also include a value for the
     #   `Iops` parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #
+    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the read replica
-    #   to snapshots of the read replica. By default, tags are not copied.
+    #   Specifies whether to copy all tags from the read replica to snapshots
+    #   of the read replica. By default, tags aren't copied.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
-    #   metrics are collected for the read replica. To disable collecting
-    #   Enhanced Monitoring metrics, specify 0. The default is 0.
+    #   metrics are collected for the read replica. To disable collection of
+    #   Enhanced Monitoring metrics, specify `0`. The default is `0`.
     #
-    #   If `MonitoringRoleArn` is specified, then you must also set
-    #   `MonitoringInterval` to a value other than 0.
+    #   If `MonitoringRoleArn` is specified, then you must set
+    #   `MonitoringInterval` to a value other than `0`.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Valid Values: `0, 1, 5, 10, 15, 30, 60`
+    #
+    #   Default: `0`
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
@@ -5804,7 +5866,7 @@ module Aws::RDS
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -5908,7 +5970,7 @@ module Aws::RDS
     #
     #    </note>
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -5916,28 +5978,27 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #
     # @option params [Boolean] :enable_performance_insights
-    #   A value that indicates whether to enable Performance Insights for the
-    #   read replica.
+    #   Specifies whether to enable Performance Insights for the read replica.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -5955,32 +6016,27 @@ module Aws::RDS
     #   your Amazon Web Services account. Your Amazon Web Services account has
     #   a different default KMS key for each Amazon Web Services Region.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Integer] :performance_insights_retention_period
-    #   The number of days to retain Performance Insights data. The default is
-    #   7 days. The following values are valid:
+    #   The number of days to retain Performance Insights data.
     #
-    #   * 7
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
-    #   * *month* * 31, where *month* is a number of months from 1-23
+    #   Valid Values:
     #
-    #   * 731
+    #   * `7`
     #
-    #   For example, the following values are valid:
+    #   * *month* * 31, where *month* is a number of months from 1-23.
+    #     Examples: `93` (3 months * 31), `341` (11 months * 31), `589` (19
+    #     months * 31)
     #
-    #   * 93 (3 months * 31)
+    #   * `731`
     #
-    #   * 341 (11 months * 31)
+    #   Default: `7` days
     #
-    #   * 589 (19 months * 31)
-    #
-    #   * 731
-    #
-    #   If you specify a retention period such as 94, which isn't a valid
-    #   value, RDS issues an error.
-    #
-    #   This setting doesn't apply to RDS Custom.
+    #   If you specify a retention period that isn't valid, such as `94`,
+    #   Amazon RDS returns an error.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
@@ -5988,7 +6044,7 @@ module Aws::RDS
     #   more information, see [Publishing Database Logs to Amazon CloudWatch
     #   Logs ][1] in the *Amazon RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -5998,19 +6054,19 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether to enable deletion protection for the DB instance.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
@@ -6024,17 +6080,17 @@ module Aws::RDS
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #
     # @option params [String] :domain_iam_role_name
-    #   The name of the IAM role to be used when making API calls to the
-    #   Directory Service.
+    #   The name of the IAM role to use when making API calls to the Directory
+    #   Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [String] :domain_fqdn
     #   The fully qualified domain name (FQDN) of an Active Directory domain.
@@ -6135,7 +6191,7 @@ module Aws::RDS
     #   For the list of permissions required for the IAM role, see [ Configure
     #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
-    #   This setting is required for RDS Custom.
+    #   This setting is required for RDS Custom DB instances.
     #
     #
     #
@@ -6144,7 +6200,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -6164,11 +6220,12 @@ module Aws::RDS
     # @option params [Integer] :storage_throughput
     #   Specifies the storage throughput value for the read replica.
     #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora DB
+    #   instances.
     #
     # @option params [Boolean] :enable_customer_owned_ip
-    #   A value that indicates whether to enable a customer-owned IP address
-    #   (CoIP) for an RDS on Outposts read replica.
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts read replica.
     #
     #   A *CoIP* provides local or external connectivity to resources in your
     #   Outpost subnets through your on-premises network. For some use cases,
@@ -6214,6 +6271,15 @@ module Aws::RDS
     #
     #   * The source DB cluster must be in the same Amazon Web Services Region
     #     as the read replica. Cross-Region replication isn't supported.
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
+    # @option params [Boolean] :upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -6300,6 +6366,8 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
+    #     dedicated_log_volume: false,
+    #     upgrade_storage_config: false,
     #     source_region: "String",
     #   })
     #
@@ -6367,6 +6435,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6460,6 +6530,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -6657,9 +6730,9 @@ module Aws::RDS
     #   One or more VPC security group IDs to associate with the new proxy.
     #
     # @option params [Boolean] :require_tls
-    #   A Boolean parameter that specifies whether Transport Layer Security
-    #   (TLS) encryption is required for connections to the proxy. By enabling
-    #   this setting, you can enforce encrypted TLS connections to the proxy.
+    #   Specifies whether Transport Layer Security (TLS) encryption is
+    #   required for connections to the proxy. By enabling this setting, you
+    #   can enforce encrypted TLS connections to the proxy.
     #
     # @option params [Integer] :idle_client_timeout
     #   The number of seconds that a connection to the proxy can be inactive
@@ -6667,13 +6740,13 @@ module Aws::RDS
     #   lower than the connection timeout limit for the associated database.
     #
     # @option params [Boolean] :debug_logging
-    #   Whether the proxy includes detailed information about SQL statements
-    #   in its logs. This information helps you to debug issues involving SQL
-    #   behavior or the performance and scalability of the proxy connections.
-    #   The debug information includes the text of SQL statements that you
-    #   submit through the proxy. Thus, only enable this setting when needed
-    #   for debugging, and only when you have security measures in place to
-    #   safeguard any sensitive information that appears in the logs.
+    #   Specifies whether the proxy includes detailed information about SQL
+    #   statements in its logs. This information helps you to debug issues
+    #   involving SQL behavior or the performance and scalability of the proxy
+    #   connections. The debug information includes the text of SQL statements
+    #   that you submit through the proxy. Thus, only enable this setting when
+    #   needed for debugging, and only when you have security measures in
+    #   place to safeguard any sensitive information that appears in the logs.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An optional set of key-value pairs to associate arbitrary data of your
@@ -6771,10 +6844,10 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :target_role
-    #   A value that indicates whether the DB proxy endpoint can be used for
-    #   read/write or read-only operations. The default is `READ_WRITE`. The
-    #   only role that proxies for RDS for Microsoft SQL Server support is
-    #   `READ_WRITE`.
+    #   The role of the DB proxy endpoint. The role determines whether the
+    #   endpoint can be used for read/write or only read operations. The
+    #   default is `READ_WRITE`. The only role that proxies for RDS for
+    #   Microsoft SQL Server support is `READ_WRITE`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -7063,6 +7136,8 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7243,7 +7318,7 @@ module Aws::RDS
     #   parameter to `db-instance`. For RDS Proxy events, specify `db-proxy`.
     #   If this value isn't specified, all events are returned.
     #
-    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
+    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
     #   `db-proxy`
     #
@@ -7293,8 +7368,8 @@ module Aws::RDS
     #     supplied.
     #
     # @option params [Boolean] :enabled
-    #   A value that indicates whether to activate the subscription. If the
-    #   event notification subscription isn't activated, the subscription is
+    #   Specifies whether to activate the subscription. If the event
+    #   notification subscription isn't activated, the subscription is
     #   created but not active.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -7547,6 +7622,110 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates a zero-ETL integration with Amazon Redshift. For more
+    # information, see [Working with Amazon Aurora zero-ETL integrations
+    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    #
+    # @option params [required, String] :source_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the
+    #   source for replication.
+    #
+    # @option params [required, String] :target_arn
+    #   The ARN of the Redshift data warehouse to use as the target for
+    #   replication.
+    #
+    # @option params [required, String] :integration_name
+    #   The name of the integration.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key to use to encrypt the integration. If
+    #   you don't specify an encryption key, Aurora uses a default Amazon Web
+    #   Services owned key.
+    #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains additional
+    #   contextual information about the data. For more information, see
+    #   [Encryption context][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_integration({
+    #     source_arn: "SourceArn", # required
+    #     target_arn: "Arn", # required
+    #     integration_name: "IntegrationName", # required
+    #     kms_key_id: "String",
+    #     additional_encryption_context: {
+    #       "String" => "String",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegration AWS API Documentation
+    #
+    # @overload create_integration(params = {})
+    # @param [Hash] params ({})
+    def create_integration(params = {}, options = {})
+      req = build_request(:create_integration, params)
+      req.send_request(options)
+    end
+
     # Creates a new option group. You can create up to 20 option groups.
     #
     # This command doesn't apply to RDS Custom.
@@ -7689,6 +7868,107 @@ module Aws::RDS
     # @param [Hash] params ({})
     def create_option_group(params = {}, options = {})
       req = build_request(:create_option_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a tenant database in a DB instance that uses the multi-tenant
+    # configuration. Only RDS for Oracle container database (CDB) instances
+    # are supported.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The user-supplied DB instance identifier. RDS creates your tenant
+    #   database in this DB instance. This parameter isn't case-sensitive.
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to create
+    #   in your DB instance. This parameter has the same constraints as
+    #   `DBName` in `CreateDBInstance`.
+    #
+    # @option params [required, String] :master_username
+    #   The name for the master user account in your tenant database. RDS
+    #   creates this user account in the tenant database and grants privileges
+    #   to the master user. This parameter is case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters, numbers, or underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #
+    # @option params [required, String] :master_user_password
+    #   The password for the master user in your tenant database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 8 to 30 characters.
+    #
+    #   * Can include any printable ASCII character except forward slash
+    #     (`/`), double quote (`"`), at symbol (`@`), ampersand (`&`), or
+    #     single quote (`'`).
+    #
+    # @option params [String] :character_set_name
+    #   The character set for your tenant database. If you don't specify a
+    #   value, the character set name defaults to `AL32UTF8`.
+    #
+    # @option params [String] :nchar_character_set_name
+    #   The `NCHAR` value for the tenant database.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @return [Types::CreateTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     master_username: "String", # required
+    #     master_user_password: "SensitiveString", # required
+    #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabase AWS API Documentation
+    #
+    # @overload create_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def create_tenant_database(params = {}, options = {})
+      req = build_request(:create_tenant_database, params)
       req.send_request(options)
     end
 
@@ -7972,6 +8252,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -8010,6 +8291,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -8038,6 +8320,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -8079,12 +8362,12 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :skip_final_snapshot
-    #   A value that indicates whether to skip the creation of a final DB
-    #   cluster snapshot before the DB cluster is deleted. If skip is
-    #   specified, no DB cluster snapshot is created. If skip isn't
-    #   specified, a DB cluster snapshot is created before the DB cluster is
-    #   deleted. By default, skip isn't specified, and the DB cluster
-    #   snapshot is created. By default, this parameter is disabled.
+    #   Specifies whether to skip the creation of a final DB cluster snapshot
+    #   before the DB cluster is deleted. If skip is specified, no DB cluster
+    #   snapshot is created. If skip isn't specified, a DB cluster snapshot
+    #   is created before the DB cluster is deleted. By default, skip isn't
+    #   specified, and the DB cluster snapshot is created. By default, this
+    #   parameter is disabled.
     #
     #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
     #   `SkipFinalSnapshot` is disabled.
@@ -8110,10 +8393,10 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     # @option params [Boolean] :delete_automated_backups
-    #   A value that indicates whether to remove automated backups immediately
-    #   after the DB cluster is deleted. This parameter isn't case-sensitive.
-    #   The default is to remove automated backups immediately after the DB
-    #   cluster is deleted.
+    #   Specifies whether to remove automated backups immediately after the DB
+    #   cluster is deleted. This parameter isn't case-sensitive. The default
+    #   is to remove automated backups immediately after the DB cluster is
+    #   deleted.
     #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8223,6 +8506,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -8255,6 +8540,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -8588,16 +8875,15 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # The DeleteDBInstance action deletes a previously provisioned DB
-    # instance. When you delete a DB instance, all automated backups for
-    # that instance are deleted and can't be recovered. Manual DB snapshots
-    # of the DB instance to be deleted by `DeleteDBInstance` are not
-    # deleted.
+    # Deletes a previously provisioned DB instance. When you delete a DB
+    # instance, all automated backups for that instance are deleted and
+    # can't be recovered. However, manual DB snapshots of the DB instance
+    # aren't deleted.
     #
-    # If you request a final DB snapshot the status of the Amazon RDS DB
-    # instance is `deleting` until the DB snapshot is created. The API
-    # action `DescribeDBInstance` is used to monitor the status of this
-    # operation. The action can't be canceled or reverted once submitted.
+    # If you request a final DB snapshot, the status of the Amazon RDS DB
+    # instance is `deleting` until the DB snapshot is created. This
+    # operation can't be canceled or reverted after it begins. To monitor
+    # the status of this operation, use `DescribeDBInstance`.
     #
     # When a DB instance is in a failure state and has a status of `failed`,
     # `incompatible-restore`, or `incompatible-network`, you can only delete
@@ -8613,11 +8899,17 @@ module Aws::RDS
     #
     # * The DB instance is the only instance in the DB cluster.
     #
-    # To delete a DB instance in this case, first call the
-    # `PromoteReadReplicaDBCluster` API action to promote the DB cluster so
-    # it's no longer a read replica. After the promotion completes, then
-    # call the `DeleteDBInstance` API action to delete the final instance in
+    # To delete a DB instance in this case, first use the
+    # `PromoteReadReplicaDBCluster` operation to promote the DB cluster so
+    # that it's no longer a read replica. After the promotion completes,
+    # use the `DeleteDBInstance` operation to delete the final instance in
     # the DB cluster.
+    #
+    # For RDS Custom DB instances, deleting the DB instance permanently
+    # deletes the EC2 instance and the associated EBS volumes. Make sure
+    # that you don't terminate or delete these resources before you delete
+    # the DB instance. Otherwise, deleting the DB instance and creation of
+    # the final snapshot might fail.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
@@ -8630,12 +8922,11 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :skip_final_snapshot
-    #   A value that indicates whether to skip the creation of a final DB
-    #   snapshot before deleting the instance. If you enable this parameter,
-    #   RDS doesn't create a DB snapshot. If you don't enable this
-    #   parameter, RDS creates a DB snapshot before the DB instance is
-    #   deleted. By default, skip isn't enabled, and the DB snapshot is
-    #   created.
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   deleting the instance. If you enable this parameter, RDS doesn't
+    #   create a DB snapshot. If you don't enable this parameter, RDS creates
+    #   a DB snapshot before the DB instance is deleted. By default, skip
+    #   isn't enabled, and the DB snapshot is created.
     #
     #   <note markdown="1"> If you don't enable this parameter, you must specify the
     #   `FinalDBSnapshotIdentifier` parameter.
@@ -8673,10 +8964,10 @@ module Aws::RDS
     #   * Can't be specified when deleting a read replica.
     #
     # @option params [Boolean] :delete_automated_backups
-    #   A value that indicates whether to remove automated backups immediately
-    #   after the DB instance is deleted. This parameter isn't
-    #   case-sensitive. The default is to remove automated backups immediately
-    #   after the DB instance is deleted.
+    #   Specifies whether to remove automated backups immediately after the DB
+    #   instance is deleted. This parameter isn't case-sensitive. The default
+    #   is to remove automated backups immediately after the DB instance is
+    #   deleted.
     #
     # @return [Types::DeleteDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8775,6 +9066,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -8868,6 +9161,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8974,6 +9270,8 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -9284,6 +9582,8 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -9486,6 +9786,63 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Deletes a zero-ETL integration with Amazon Redshift. For more
+    # information, see [Deleting Amazon Aurora zero-ETL integrations with
+    # Amazon Redshift][1] in the *Amazon Aurora User Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html
+    #
+    # @option params [required, String] :integration_identifier
+    #   The unique identifier of the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration({
+    #     integration_identifier: "IntegrationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegration AWS API Documentation
+    #
+    # @overload delete_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_integration(params = {}, options = {})
+      req = build_request(:delete_integration, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -9518,6 +9875,80 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_option_group(params = {}, options = {})
       req = build_request(:delete_option_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a tenant database from your DB instance. This command only
+    # applies to RDS for Oracle container database (CDB) instances.
+    #
+    # You can't delete a tenant database when it is the only tenant in the
+    # DB instance.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The user-supplied identifier for the DB instance that contains the
+    #   tenant database that you want to delete.
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to remove
+    #   from your DB instance. Amazon RDS deletes the tenant database with
+    #   this name. This parameter isn’t case-sensitive.
+    #
+    # @option params [Boolean] :skip_final_snapshot
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   removing the tenant database from your DB instance. If you enable this
+    #   parameter, RDS doesn't create a DB snapshot. If you don't enable
+    #   this parameter, RDS creates a DB snapshot before it deletes the tenant
+    #   database. By default, RDS doesn't skip the final snapshot. If you
+    #   don't enable this parameter, you must specify the
+    #   `FinalDBSnapshotIdentifier` parameter.
+    #
+    # @option params [String] :final_db_snapshot_identifier
+    #   The `DBSnapshotIdentifier` of the new `DBSnapshot` created when the
+    #   `SkipFinalSnapshot` parameter is disabled.
+    #
+    #   <note markdown="1"> If you enable this parameter and also enable `SkipFinalShapshot`, the
+    #   command results in an error.
+    #
+    #    </note>
+    #
+    # @return [Types::DeleteTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     skip_final_snapshot: false,
+    #     final_db_snapshot_identifier: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabase AWS API Documentation
+    #
+    # @overload delete_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def delete_tenant_database(params = {}, options = {})
+      req = build_request(:delete_tenant_database, params)
       req.send_request(options)
     end
 
@@ -10000,8 +10431,8 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Lists the set of CA certificates provided by Amazon RDS for this
-    # Amazon Web Services account.
+    # Lists the set of certificate authority (CA) certificates provided by
+    # Amazon RDS for this Amazon Web Services account.
     #
     # For more information, see [Using SSL/TLS to encrypt a connection to a
     # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
@@ -10045,6 +10476,7 @@ module Aws::RDS
     #
     # @return [Types::CertificateMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CertificateMessage#default_certificate_for_new_launches #default_certificate_for_new_launches} => String
     #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::CertificateMessage#marker #marker} => String
     #
@@ -10117,6 +10549,7 @@ module Aws::RDS
     #
     # @example Response structure
     #
+    #   resp.default_certificate_for_new_launches #=> String
     #   resp.certificates #=> Array
     #   resp.certificates[0].certificate_identifier #=> String
     #   resp.certificates[0].certificate_type #=> String
@@ -10713,8 +11146,15 @@ module Aws::RDS
     #   ^
     #
     # @option params [String] :source
-    #   A value that indicates to return only parameters for a specific
-    #   source. Parameter sources can be `engine`, `service`, or `customer`.
+    #   A specific source to return parameters for.
+    #
+    #   Valid Values:
+    #
+    #   * `customer`
+    #
+    #   * `engine`
+    #
+    #   * `service`
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
@@ -10995,19 +11435,19 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other Amazon Web Services accounts that this Amazon Web
-    #   Services account has been given permission to copy or restore. By
-    #   default, these snapshots are not included.
+    #   Specifies whether to include shared manual DB cluster snapshots from
+    #   other Amazon Web Services accounts that this Amazon Web Services
+    #   account has been given permission to copy or restore. By default,
+    #   these snapshots are not included.
     #
     #   You can give an Amazon Web Services account permission to restore a
     #   manual DB cluster snapshot from another Amazon Web Services account by
     #   the `ModifyDBClusterSnapshotAttribute` API action.
     #
     # @option params [Boolean] :include_public
-    #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any Amazon Web
-    #   Services account. By default, the public snapshots are not included.
+    #   Specifies whether to include manual DB cluster snapshots that are
+    #   public and can be copied or restored by any Amazon Web Services
+    #   account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
@@ -11415,6 +11855,8 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
     #   resp.db_clusters[0].scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_clusters[0].rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_clusters[0].rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
@@ -11447,6 +11889,8 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
     #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
@@ -11485,10 +11929,10 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Returns a list of the available DB engines.
+    # Describes the properties of specific versions of DB engines.
     #
     # @option params [String] :engine
-    #   The database engine to return.
+    #   The database engine to return version details for.
     #
     #   Valid Values:
     #
@@ -11521,7 +11965,7 @@ module Aws::RDS
     #   * `sqlserver-web`
     #
     # @option params [String] :engine_version
-    #   The database engine version to return.
+    #   A specific database engine version to return details for.
     #
     #   Example: `5.1.49`
     #
@@ -11531,7 +11975,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match an existing DBParameterGroupFamily.
+    #   * If supplied, must match an existing DB parameter group family.
     #
     #   ^
     #
@@ -11589,37 +12033,34 @@ module Aws::RDS
     #   marker, up to the value specified by `MaxRecords`.
     #
     # @option params [Boolean] :default_only
-    #   A value that indicates whether only the default version of the
-    #   specified engine or engine and major version combination is returned.
+    #   Specifies whether to return only the default version of the specified
+    #   engine or the engine and major version combination.
     #
     # @option params [Boolean] :list_supported_character_sets
-    #   A value that indicates whether to list the supported character sets
-    #   for each engine version.
+    #   Specifies whether to list the supported character sets for each engine
+    #   version.
     #
     #   If this parameter is enabled and the requested engine supports the
     #   `CharacterSetName` parameter for `CreateDBInstance`, the response
     #   includes a list of supported character sets for each engine version.
     #
     #   For RDS Custom, the default is not to list supported character sets.
-    #   If you set `ListSupportedCharacterSets` to `true`, RDS Custom returns
-    #   no results.
+    #   If you enable this parameter, RDS Custom returns no results.
     #
     # @option params [Boolean] :list_supported_timezones
-    #   A value that indicates whether to list the supported time zones for
-    #   each engine version.
+    #   Specifies whether to list the supported time zones for each engine
+    #   version.
     #
     #   If this parameter is enabled and the requested engine supports the
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
     #
     #   For RDS Custom, the default is not to list supported time zones. If
-    #   you set `ListSupportedTimezones` to `true`, RDS Custom returns no
-    #   results.
+    #   you enable this parameter, RDS Custom returns no results.
     #
     # @option params [Boolean] :include_all
-    #   A value that indicates whether to include engine versions that aren't
-    #   available in the list. The default is to list only available engine
-    #   versions.
+    #   Specifies whether to also list the engine versions that aren't
+    #   available. The default is to list only available engine versions.
     #
     # @return [Types::DBEngineVersionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11718,6 +12159,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -11746,6 +12188,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
     #   resp.db_engine_versions[0].supports_local_write_forwarding #=> Boolean
+    #   resp.db_engine_versions[0].supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -11917,6 +12360,8 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].backup_target #=> String
     #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backups[0].multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -12101,6 +12546,8 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.engine #=> String
+    #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -12194,6 +12641,9 @@ module Aws::RDS
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instances[0].percent_progress #=> String
+    #   resp.db_instances[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instances[0].multi_tenant #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13050,6 +13500,149 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the tenant databases that exist in a DB snapshot. This
+    # command only applies to RDS for Oracle DB instances in the
+    # multi-tenant configuration.
+    #
+    # You can use this command to inspect the tenant databases within a
+    # snapshot before restoring it. You can't directly interact with the
+    # tenant databases in a DB snapshot. If you restore a snapshot that was
+    # taken from DB instance using the multi-tenant configuration, you
+    # restore all its tenant databases.
+    #
+    # @option params [String] :db_instance_identifier
+    #   The ID of the DB instance used to create the DB snapshots. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the identifier of an existing `DBInstance`.
+    #
+    #   ^
+    #
+    # @option params [String] :db_snapshot_identifier
+    #   The ID of a DB snapshot that contains the tenant databases to
+    #   describe. This value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * If you specify this parameter, the value must match the ID of an
+    #     existing DB snapshot.
+    #
+    #   * If you specify an automatic snapshot, you must also specify
+    #     `SnapshotType`.
+    #
+    # @option params [String] :snapshot_type
+    #   The type of DB snapshots to be returned. You can specify one of the
+    #   following values:
+    #
+    #   * `automated` – All DB snapshots that have been automatically taken by
+    #     Amazon RDS for my Amazon Web Services account.
+    #
+    #   * `manual` – All DB snapshots that have been taken by my Amazon Web
+    #     Services account.
+    #
+    #   * `shared` – All manual DB snapshots that have been shared to my
+    #     Amazon Web Services account.
+    #
+    #   * `public` – All DB snapshots that have been marked as public.
+    #
+    #   * `awsbackup` – All DB snapshots managed by the Amazon Web Services
+    #     Backup service.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more tenant databases to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers. The results list only includes information about the
+    #     tenant databases contained within the DB snapshots.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about snapshots containing tenant
+    #     databases contained within the DB instances identified by these
+    #     resource identifiers.
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBSnapshotTenantDatabases` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @option params [String] :dbi_resource_id
+    #   A specific DB resource identifier to describe.
+    #
+    # @return [Types::DBSnapshotTenantDatabasesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBSnapshotTenantDatabasesMessage#marker #marker} => String
+    #   * {Types::DBSnapshotTenantDatabasesMessage#db_snapshot_tenant_databases #db_snapshot_tenant_databases} => Array&lt;Types::DBSnapshotTenantDatabase&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_snapshot_tenant_databases({
+    #     db_instance_identifier: "String",
+    #     db_snapshot_identifier: "String",
+    #     snapshot_type: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #     dbi_resource_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_snapshot_tenant_databases #=> Array
+    #   resp.db_snapshot_tenant_databases[0].db_snapshot_identifier #=> String
+    #   resp.db_snapshot_tenant_databases[0].db_instance_identifier #=> String
+    #   resp.db_snapshot_tenant_databases[0].dbi_resource_id #=> String
+    #   resp.db_snapshot_tenant_databases[0].engine_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].snapshot_type #=> String
+    #   resp.db_snapshot_tenant_databases[0].tenant_database_create_time #=> Time
+    #   resp.db_snapshot_tenant_databases[0].tenant_db_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].master_username #=> String
+    #   resp.db_snapshot_tenant_databases[0].tenant_database_resource_id #=> String
+    #   resp.db_snapshot_tenant_databases[0].character_set_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].db_snapshot_tenant_database_arn #=> String
+    #   resp.db_snapshot_tenant_databases[0].nchar_character_set_name #=> String
+    #   resp.db_snapshot_tenant_databases[0].tag_list #=> Array
+    #   resp.db_snapshot_tenant_databases[0].tag_list[0].key #=> String
+    #   resp.db_snapshot_tenant_databases[0].tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotTenantDatabases AWS API Documentation
+    #
+    # @overload describe_db_snapshot_tenant_databases(params = {})
+    # @param [Hash] params ({})
+    def describe_db_snapshot_tenant_databases(params = {}, options = {})
+      req = build_request(:describe_db_snapshot_tenant_databases, params)
+      req.send_request(options)
+    end
+
     # Returns information about DB snapshots. This API action supports
     # pagination.
     #
@@ -13147,10 +13740,10 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other Amazon Web Services accounts that this Amazon Web
-    #   Services account has been given permission to copy or restore. By
-    #   default, these snapshots are not included.
+    #   Specifies whether to include shared manual DB cluster snapshots from
+    #   other Amazon Web Services accounts that this Amazon Web Services
+    #   account has been given permission to copy or restore. By default,
+    #   these snapshots are not included.
     #
     #   You can give an Amazon Web Services account permission to restore a
     #   manual DB snapshot from another Amazon Web Services account by using
@@ -13159,9 +13752,9 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :include_public
-    #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any Amazon Web
-    #   Services account. By default, the public snapshots are not included.
+    #   Specifies whether to include manual DB cluster snapshots that are
+    #   public and can be copied or restored by any Amazon Web Services
+    #   account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.
@@ -13279,6 +13872,8 @@ module Aws::RDS
     #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].db_system_id #=> String
+    #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
+    #   resp.db_snapshots[0].multi_tenant #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13740,7 +14335,7 @@ module Aws::RDS
     #   The type of source that is generating the events. For RDS Proxy
     #   events, specify `db-proxy`.
     #
-    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
+    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
     #   `db-proxy`
     #
@@ -14423,6 +15018,87 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describe one or more zero-ETL integration with Amazon Redshift. For
+    # more information, see [Viewing and monitoring Amazon Aurora zero-ETL
+    # integrations with Amazon Redshift][1] in the *Amazon Aurora User
+    # Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html
+    #
+    # @option params [String] :integration_identifier
+    #   The unique identifier of the integration.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more resources to return.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIntegrationsResponse#marker #marker} => String
+    #   * {Types::DescribeIntegrationsResponse#integrations #integrations} => Array&lt;Types::Integration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_integrations({
+    #     integration_identifier: "IntegrationIdentifier",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "Marker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.integrations #=> Array
+    #   resp.integrations[0].source_arn #=> String
+    #   resp.integrations[0].target_arn #=> String
+    #   resp.integrations[0].integration_name #=> String
+    #   resp.integrations[0].integration_arn #=> String
+    #   resp.integrations[0].kms_key_id #=> String
+    #   resp.integrations[0].additional_encryption_context #=> Hash
+    #   resp.integrations[0].additional_encryption_context["String"] #=> String
+    #   resp.integrations[0].status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.integrations[0].tags #=> Array
+    #   resp.integrations[0].tags[0].key #=> String
+    #   resp.integrations[0].tags[0].value #=> String
+    #   resp.integrations[0].create_time #=> Time
+    #   resp.integrations[0].errors #=> Array
+    #   resp.integrations[0].errors[0].error_code #=> String
+    #   resp.integrations[0].errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrations AWS API Documentation
+    #
+    # @overload describe_integrations(params = {})
+    # @param [Hash] params ({})
+    def describe_integrations(params = {}, options = {})
+      req = build_request(:describe_integrations, params)
+      req.send_request(options)
+    end
+
     # Describes all available options.
     #
     # @option params [required, String] :engine_name
@@ -14809,8 +15485,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :vpc
-    #   A value that indicates whether to show only VPC or non-VPC offerings.
-    #   RDS Custom supports only VPC offerings.
+    #   Specifies whether to show only VPC or non-VPC offerings. RDS Custom
+    #   supports only VPC offerings.
     #
     #   RDS Custom supports only VPC offerings. If you describe non-VPC
     #   offerings for RDS Custom, the output shows VPC offerings.
@@ -14951,6 +15627,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
     #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -15098,8 +15775,8 @@ module Aws::RDS
     #   Valid Values: `"Partial Upfront" | "All Upfront" | "No Upfront" `
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether to show only those reservations that
-    #   support Multi-AZ.
+    #   Specifies whether to show only those reservations that support
+    #   Multi-AZ.
     #
     # @option params [String] :lease_id
     #   The lease identifier filter value. Specify this parameter to show only
@@ -15260,8 +15937,8 @@ module Aws::RDS
     #   Valid Values: `"Partial Upfront" | "All Upfront" | "No Upfront" `
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether to show only those reservations that
-    #   support Multi-AZ.
+    #   Specifies whether to show only those reservations that support
+    #   Multi-AZ.
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
@@ -15592,6 +16269,106 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the tenant databases in a DB instance that uses the
+    # multi-tenant configuration. Only RDS for Oracle CDB instances are
+    # supported.
+    #
+    # @option params [String] :db_instance_identifier
+    #   The user-supplied DB instance identifier, which must match the
+    #   identifier of an existing instance owned by the Amazon Web Services
+    #   account. This parameter isn't case-sensitive.
+    #
+    # @option params [String] :tenant_db_name
+    #   The user-supplied tenant database name, which must match the name of
+    #   an existing tenant database on the specified DB instance owned by your
+    #   Amazon Web Services account. This parameter isn’t case-sensitive.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more database tenants to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about the tenants contained within
+    #     the DB instances identified by these resource identifiers.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @return [Types::TenantDatabasesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TenantDatabasesMessage#marker #marker} => String
+    #   * {Types::TenantDatabasesMessage#tenant_databases #tenant_databases} => Array&lt;Types::TenantDatabase&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tenant_databases({
+    #     db_instance_identifier: "String",
+    #     tenant_db_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.tenant_databases #=> Array
+    #   resp.tenant_databases[0].tenant_database_create_time #=> Time
+    #   resp.tenant_databases[0].db_instance_identifier #=> String
+    #   resp.tenant_databases[0].tenant_db_name #=> String
+    #   resp.tenant_databases[0].status #=> String
+    #   resp.tenant_databases[0].master_username #=> String
+    #   resp.tenant_databases[0].dbi_resource_id #=> String
+    #   resp.tenant_databases[0].tenant_database_resource_id #=> String
+    #   resp.tenant_databases[0].tenant_database_arn #=> String
+    #   resp.tenant_databases[0].character_set_name #=> String
+    #   resp.tenant_databases[0].nchar_character_set_name #=> String
+    #   resp.tenant_databases[0].deletion_protection #=> Boolean
+    #   resp.tenant_databases[0].pending_modified_values.master_user_password #=> String
+    #   resp.tenant_databases[0].pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_databases[0].tag_list #=> Array
+    #   resp.tenant_databases[0].tag_list[0].key #=> String
+    #   resp.tenant_databases[0].tag_list[0].value #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * tenant_database_available
+    #   * tenant_database_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeTenantDatabases AWS API Documentation
+    #
+    # @overload describe_tenant_databases(params = {})
+    # @param [Hash] params ({})
+    def describe_tenant_databases(params = {}, options = {})
+      req = build_request(:describe_tenant_databases, params)
+      req.send_request(options)
+    end
+
     # You can call `DescribeValidDBInstanceModifications` to learn what
     # modifications you can make to your DB instance. You can use this
     # information when you call `ModifyDBInstance`.
@@ -15670,6 +16447,7 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
+    #   resp.valid_db_instance_modifications_message.supports_dedicated_log_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -15808,12 +16586,12 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
     # @option params [required, String] :db_cluster_identifier
-    #   A DB cluster identifier to force a failover for. This parameter isn't
-    #   case-sensitive.
+    #   The identifier of the DB cluster to force a failover for. This
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBCluster.
+    #   * Must match the identifier of an existing DB cluster.
     #
     #   ^
     #
@@ -15919,6 +16697,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -15951,6 +16731,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -16301,9 +17083,9 @@ module Aws::RDS
     #   command or the `DescribeCertificates` API operation.
     #
     # @option params [Boolean] :remove_customer_override
-    #   A value that indicates whether to remove the override for the default
-    #   certificate. If the override is removed, the default certificate is
-    #   the system default.
+    #   Specifies whether to remove the override for the default certificate.
+    #   If the override is removed, the default certificate is the system
+    #   default.
     #
     # @return [Types::ModifyCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16573,6 +17355,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
+    #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -16613,6 +17396,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -16641,6 +17425,7 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
+    #   resp.supports_integrations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -16912,7 +17697,7 @@ module Aws::RDS
     # @option params [Boolean] :allow_major_version_upgrade
     #   Specifies whether major version upgrades are allowed.
     #
-    #   Valid for Cluster Type: Aurora DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #   Constraints:
     #
@@ -17541,6 +18326,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -17573,6 +18360,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -17997,6 +18786,17 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     #
+    #   Constraints:
+    #
+    #   * If you are modifying the DB instance class and upgrading the engine
+    #     version at the same time, the currently running engine version must
+    #     be supported on the specified DB instance class. Otherwise, the
+    #     operation returns an error. In this case, first run the operation to
+    #     upgrade the engine version, and then run it again to modify the DB
+    #     instance class.
+    #
+    #   ^
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
@@ -18264,6 +19064,17 @@ module Aws::RDS
     #
     #   In RDS Custom for Oracle, this parameter is supported for read
     #   replicas only if they are in the `PATCH_DB_FAILURE` lifecycle.
+    #
+    #   Constraints:
+    #
+    #   * If you are upgrading the engine version and modifying the DB
+    #     instance class at the same time, the currently running engine
+    #     version must be supported on the specified DB instance class.
+    #     Otherwise, the operation returns an error. In this case, first run
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
+    #
+    #   ^
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Specifies whether major version upgrades are allowed. Changing this
@@ -18971,6 +19782,27 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
+    # @option params [Boolean] :multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and national
+    #   character set metadata with this database. The tags associated with
+    #   the instance also propagate to the initial tenant database. You can
+    #   add more tenant databases to your DB instance by using the
+    #   `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also specify
+    #   `ApplyImmediately`.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -19095,6 +19927,8 @@ module Aws::RDS
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
+    #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     #
     # @example Response structure
@@ -19161,6 +19995,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -19254,6 +20090,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -19754,6 +20593,8 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
+    #   resp.db_snapshot.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -20058,7 +20899,7 @@ module Aws::RDS
     #   set this parameter to db-instance. For RDS Proxy events, specify
     #   `db-proxy`. If this value isn't specified, all events are returned.
     #
-    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
+    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
     #   `db-proxy`
     #
@@ -20073,7 +20914,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     #
     # @option params [Boolean] :enabled
-    #   A value that indicates whether to activate the subscription.
+    #   Specifies whether to activate the subscription.
     #
     # @return [Types::ModifyEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20305,9 +21146,8 @@ module Aws::RDS
     #   Options in this list are removed from the option group.
     #
     # @option params [Boolean] :apply_immediately
-    #   A value that indicates whether to apply the change immediately or
-    #   during the next maintenance window for each instance associated with
-    #   the option group.
+    #   Specifies whether to apply the change immediately or during the next
+    #   maintenance window for each instance associated with the option group.
     #
     # @return [Types::ModifyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20409,6 +21249,106 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_option_group(params = {}, options = {})
       req = build_request(:modify_option_group, params)
+      req.send_request(options)
+    end
+
+    # Modifies an existing tenant database in a DB instance. You can change
+    # the tenant database name or the master user password. This operation
+    # is supported only for RDS for Oracle CDB instances using the
+    # multi-tenant configuration.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The identifier of the DB instance that contains the tenant database
+    #   that you are modifying. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB instance.
+    #
+    #   ^
+    #
+    # @option params [required, String] :tenant_db_name
+    #   The user-supplied name of the tenant database that you want to modify.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing tenant database.
+    #
+    #   ^
+    #
+    # @option params [String] :master_user_password
+    #   The new password for the master user of the specified tenant database
+    #   in your DB instance.
+    #
+    #   <note markdown="1"> Amazon RDS operations never return the password, so this action
+    #   provides a way to regain access to a tenant database user if the
+    #   password is lost. This includes restoring privileges that might have
+    #   been accidentally revoked.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Can include any printable ASCII character except `/`, `"` (double
+    #     quote), `@`, `&` (ampersand), and `'` (single quote).
+    #
+    #   ^
+    #
+    #   Length constraints:
+    #
+    #   * Must contain between 8 and 30 characters.
+    #
+    #   ^
+    #
+    # @option params [String] :new_tenant_db_name
+    #   The new name of the tenant database when renaming a tenant database.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the string null or any other reserved word.
+    #
+    #   * Can't be longer than 8 characters.
+    #
+    # @return [Types::ModifyTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTenantDatabaseResult#tenant_database #tenant_database} => Types::TenantDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_tenant_database({
+    #     db_instance_identifier: "String", # required
+    #     tenant_db_name: "String", # required
+    #     master_user_password: "SensitiveString",
+    #     new_tenant_db_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_database.tenant_database_create_time #=> Time
+    #   resp.tenant_database.db_instance_identifier #=> String
+    #   resp.tenant_database.tenant_db_name #=> String
+    #   resp.tenant_database.status #=> String
+    #   resp.tenant_database.master_username #=> String
+    #   resp.tenant_database.dbi_resource_id #=> String
+    #   resp.tenant_database.tenant_database_resource_id #=> String
+    #   resp.tenant_database.tenant_database_arn #=> String
+    #   resp.tenant_database.character_set_name #=> String
+    #   resp.tenant_database.nchar_character_set_name #=> String
+    #   resp.tenant_database.deletion_protection #=> Boolean
+    #   resp.tenant_database.pending_modified_values.master_user_password #=> String
+    #   resp.tenant_database.pending_modified_values.tenant_db_name #=> String
+    #   resp.tenant_database.tag_list #=> Array
+    #   resp.tenant_database.tag_list[0].key #=> String
+    #   resp.tenant_database.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabase AWS API Documentation
+    #
+    # @overload modify_tenant_database(params = {})
+    # @param [Hash] params ({})
+    def modify_tenant_database(params = {}, options = {})
+      req = build_request(:modify_tenant_database, params)
       req.send_request(options)
     end
 
@@ -20572,6 +21512,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20665,6 +21607,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -20765,6 +21710,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -20797,6 +21744,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21042,6 +21991,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -21074,6 +22025,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21138,8 +22091,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :force_failover
-    #   A value that indicates whether the reboot is conducted through a
-    #   Multi-AZ failover.
+    #   Specifies whether the reboot is conducted through a Multi-AZ failover.
     #
     #   Constraint: You can't enable force failover if the instance isn't
     #   configured for Multi-AZ.
@@ -21244,6 +22196,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21337,6 +22291,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -21749,10 +22706,9 @@ module Aws::RDS
     #   The name of the DB cluster parameter group to reset.
     #
     # @option params [Boolean] :reset_all_parameters
-    #   A value that indicates whether to reset all parameters in the DB
-    #   cluster parameter group to their default values. You can't use this
-    #   parameter if there is a list of parameter names specified for the
-    #   `Parameters` parameter.
+    #   Specifies whether to reset all parameters in the DB cluster parameter
+    #   group to their default values. You can't use this parameter if there
+    #   is a list of parameter names specified for the `Parameters` parameter.
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of parameter names in the DB cluster parameter group to reset
@@ -21833,9 +22789,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :reset_all_parameters
-    #   A value that indicates whether to reset all parameters in the DB
-    #   parameter group to default values. By default, all parameters in the
-    #   DB parameter group are reset to default values.
+    #   Specifies whether to reset all parameters in the DB parameter group to
+    #   default values. By default, all parameters in the DB parameter group
+    #   are reset to default values.
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   To reset the entire DB parameter group, specify the `DBParameterGroup`
@@ -22113,7 +23069,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :storage_encrypted
-    #   A value that indicates whether the restored DB cluster is encrypted.
+    #   Specifies whether the restored DB cluster is encrypted.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted DB
@@ -22131,9 +23087,9 @@ module Aws::RDS
     #   default KMS key for each Amazon Web Services Region.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide*.
@@ -22146,7 +23102,7 @@ module Aws::RDS
     #   The identifier for the database engine that was backed up to create
     #   the files stored in the Amazon S3 bucket.
     #
-    #   Valid values: `mysql`
+    #   Valid Values: `mysql`
     #
     # @option params [required, String] :source_engine_version
     #   The version of the database that the backup files were created from.
@@ -22205,14 +23161,13 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB cluster has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled.
+    #   Specifies whether to enable deletion protection for the DB cluster.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   cluster to snapshots of the restored DB cluster. The default is not to
-    #   copy them.
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     # @option params [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
@@ -22245,7 +23200,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB cluster.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -22263,8 +23218,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @option params [Boolean] :manage_master_user_password
-    #   A value that indicates whether to manage the master user password with
-    #   Amazon Web Services Secrets Manager.
+    #   Specifies whether to manage the master user password with Amazon Web
+    #   Services Secrets Manager.
     #
     #   For more information, see [Password management with Amazon Web
     #   Services Secrets Manager][1] in the *Amazon RDS User Guide* and
@@ -22309,7 +23264,7 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `aurora`, `aurora-iopt1`
+    #   Valid Values: `aurora`, `aurora-iopt1`
     #
     #   Default: `aurora`
     #
@@ -22503,6 +23458,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -22535,6 +23492,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -22759,9 +23718,9 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide*.
@@ -22864,24 +23823,23 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB cluster has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled.
+    #   Specifies whether to enable deletion protection for the DB cluster.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   cluster to snapshots of the restored DB cluster. The default is not to
-    #   copy them.
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB cluster
-    #   in. The domain must be created prior to this operation. Currently,
-    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances
-    #   can be created in an Active Directory Domain.
+    #   The Active Directory directory ID to restore the DB cluster in. The
+    #   domain must be created prior to this operation. Currently, only MySQL,
+    #   Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be
+    #   created in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
@@ -22893,8 +23851,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #
     # @option params [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to be used when making API calls to the
+    #   Directory Service.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -22919,7 +23877,7 @@ module Aws::RDS
     #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
     #   parameter is required.
     #
-    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   Valid Values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
     #   (Multi-AZ DB clusters)
     #
     #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
@@ -22944,7 +23902,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB cluster is publicly accessible.
+    #   Specifies whether the DB cluster is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -22994,7 +23952,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB cluster.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -23012,6 +23970,9 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23129,6 +24090,10 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -23197,6 +24162,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -23229,6 +24196,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -23352,9 +24321,9 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :use_latest_restorable_time
-    #   A value that indicates whether to restore the DB cluster to the latest
-    #   restorable backup time. By default, the DB cluster isn't restored to
-    #   the latest restorable backup time.
+    #   Specifies whether to restore the DB cluster to the latest restorable
+    #   backup time. By default, the DB cluster isn't restored to the latest
+    #   restorable backup time.
     #
     #   Constraints: Can't be specified if `RestoreToTime` parameter is
     #   provided.
@@ -23429,9 +24398,9 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide*.
@@ -23494,9 +24463,11 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, the default DB cluster parameter
-    #   group for the specified engine is used.
+    #   The name of the custom DB cluster parameter group to associate with
+    #   this DB cluster.
+    #
+    #   If the `DBClusterParameterGroupName` parameter is omitted, the default
+    #   DB cluster parameter group for the specified engine is used.
     #
     #   Constraints:
     #
@@ -23512,22 +24483,21 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB cluster has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled.
+    #   Specifies whether to enable deletion protection for the DB cluster.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   cluster to snapshots of the restored DB cluster. The default is not to
-    #   copy them.
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB cluster
-    #   in. The domain must be created prior to this operation.
+    #   The Active Directory directory ID to restore the DB cluster in. The
+    #   domain must be created prior to this operation.
     #
     #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
     #   Authentication to authenticate users that connect to the DB cluster.
@@ -23541,8 +24511,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     #
     # @option params [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to be used when making API calls to the
+    #   Directory Service.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -23570,7 +24540,7 @@ module Aws::RDS
     #   database engines.
     #
     #   For the full list of DB instance classes, and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -23584,7 +24554,7 @@ module Aws::RDS
     #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
     #   parameter is required.
     #
-    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   Valid Values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
     #   (Multi-AZ DB clusters)
     #
     #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
@@ -23592,7 +24562,7 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB cluster is publicly accessible.
+    #   Specifies whether the DB cluster is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -23659,7 +24629,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB cluster.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -23680,6 +24650,9 @@ module Aws::RDS
     #
     # @option params [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
+    #
+    # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23796,6 +24769,10 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -23864,6 +24841,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -23896,6 +24875,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -24023,8 +25004,7 @@ module Aws::RDS
     #   Example: `mydbsubnetgroup`
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the DB instance is a Multi-AZ
-    #   deployment.
+    #   Specifies whether the DB instance is a Multi-AZ deployment.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -24032,7 +25012,7 @@ module Aws::RDS
     #   DB instance is a Multi-AZ deployment.
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -24048,8 +25028,8 @@ module Aws::RDS
     #   For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor version upgrades are applied
-    #   automatically to the DB instance during the maintenance window.
+    #   Specifies whether to automatically apply minor version upgrades to the
+    #   DB instance during the maintenance window.
     #
     #   If you restore an RDS Custom DB instance, you must disable this
     #   parameter.
@@ -24061,7 +25041,7 @@ module Aws::RDS
     #
     #   Default: Same as source.
     #
-    #   Valid values: `license-included` \| `bring-your-own-license` \|
+    #   Valid Values: `license-included` \| `bring-your-own-license` \|
     #   `general-public-license`
     #
     # @option params [String] :db_name
@@ -24144,7 +25124,7 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
     #
     #   If you specify `io1` or `gp3`, you must also include a value for the
     #   `Iops` parameter.
@@ -24213,6 +25193,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
+    #   * Can't be longer than 64 characters.
+    #
+    #   ^
+    #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
     #
@@ -24231,8 +25215,8 @@ module Aws::RDS
     #   Example: `123.124.125.126,234.235.236.237`
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance.
+    #   Specifies whether to copy all tags from the restored DB instance to
+    #   snapshots of the DB instance.
     #
     #   In most cases, tags aren't copied by default. However, when you
     #   restore a DB instance from a DB snapshot, RDS checks whether you
@@ -24255,9 +25239,9 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -24288,8 +25272,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -24312,18 +25296,18 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether to enable deletion protection for the DB instance.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
     # @option params [Boolean] :enable_customer_owned_ip
-    #   A value that indicates whether to enable a customer-owned IP address
-    #   (CoIP) for an RDS on Outposts DB instance.
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts DB instance.
     #
     #   A *CoIP* provides local or external connectivity to resources in your
     #   Outpost subnets through your on-premises network. For some use cases,
@@ -24383,7 +25367,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -24443,6 +25427,10 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -24538,6 +25526,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -24604,6 +25593,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24697,6 +25688,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -24902,9 +25896,9 @@ module Aws::RDS
     #   Default: `3306`
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the DB instance is a Multi-AZ
-    #   deployment. If the DB instance is a Multi-AZ deployment, you can't
-    #   set the `AvailabilityZone` parameter.
+    #   Specifies whether the DB instance is a Multi-AZ deployment. If the DB
+    #   instance is a Multi-AZ deployment, you can't set the
+    #   `AvailabilityZone` parameter.
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use. Choose the latest
@@ -24912,9 +25906,9 @@ module Aws::RDS
     #   versions, see `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the DB instance during the maintenance window. By
-    #   default, minor engine upgrades are not applied automatically.
+    #   Specifies whether to automatically apply minor engine upgrades to the
+    #   DB instance during the maintenance window. By default, minor engine
+    #   upgrades are not applied automatically.
     #
     # @option params [String] :license_model
     #   The license model for this DB instance. Use `general-public-license`.
@@ -24935,7 +25929,7 @@ module Aws::RDS
     #   engine is used.
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -24962,7 +25956,7 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
     #
     #   If you specify `io1` or `gp3`, you must also include a value for the
     #   `Iops` parameter.
@@ -24970,8 +25964,7 @@ module Aws::RDS
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #
     # @option params [Boolean] :storage_encrypted
-    #   A value that indicates whether the new DB instance is encrypted or
-    #   not.
+    #   Specifies whether the new DB instance is encrypted or not.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted DB
@@ -24989,8 +25982,8 @@ module Aws::RDS
     #   default KMS key for each Amazon Web Services Region.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the DB instance
-    #   to snapshots of the DB instance. By default, tags are not copied.
+    #   Specifies whether to copy all tags from the DB instance to snapshots
+    #   of the DB instance. By default, tags are not copied.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
@@ -25019,9 +26012,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -25055,8 +26048,7 @@ module Aws::RDS
     #   allow Amazon RDS to access your Amazon S3 bucket.
     #
     # @option params [Boolean] :enable_performance_insights
-    #   A value that indicates whether to enable Performance Insights for the
-    #   DB instance.
+    #   Specifies whether to enable Performance Insights for the DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
@@ -25115,14 +26107,14 @@ module Aws::RDS
     #   instance class of the DB instance.
     #
     # @option params [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether to enable deletion protection for the DB instance.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
@@ -25143,7 +26135,7 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -25166,8 +26158,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
     # @option params [Boolean] :manage_master_user_password
-    #   A value that indicates whether to manage the master user password with
-    #   Amazon Web Services Secrets Manager.
+    #   Specifies whether to manage the master user password with Amazon Web
+    #   Services Secrets Manager.
     #
     #   For more information, see [Password management with Amazon Web
     #   Services Secrets Manager][1] in the *Amazon RDS User Guide.*
@@ -25205,6 +26197,10 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -25271,6 +26267,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -25337,6 +26334,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25430,6 +26429,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -25442,8 +26444,8 @@ module Aws::RDS
 
     # Restores a DB instance to an arbitrary point in time. You can restore
     # to any point in time before the time identified by the
-    # LatestRestorableTime property. You can restore to a point up to the
-    # number of days specified by the BackupRetentionPeriod property.
+    # `LatestRestorableTime` property. You can restore to a point up to the
+    # number of days specified by the `BackupRetentionPeriod` property.
     #
     # The target database is created with most of the original
     # configuration, but in a system-selected Availability Zone, with the
@@ -25469,38 +26471,40 @@ module Aws::RDS
     #   ^
     #
     # @option params [required, String] :target_db_instance_identifier
-    #   The name of the new DB instance to be created.
+    #   The name of the new DB instance to create.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Time,DateTime,Date,Integer,String] :restore_time
     #   The date and time to restore from.
     #
-    #   Valid Values: Value must be a time in Universal Coordinated Time (UTC)
-    #   format
-    #
     #   Constraints:
     #
-    #   * Must be before the latest restorable time for the DB instance
+    #   * Must be a time in Universal Coordinated Time (UTC) format.
+    #
+    #   * Must be before the latest restorable time for the DB instance.
     #
     #   * Can't be specified if the `UseLatestRestorableTime` parameter is
-    #     enabled
+    #     enabled.
     #
     #   Example: `2009-09-07T23:45:00Z`
     #
     # @option params [Boolean] :use_latest_restorable_time
-    #   A value that indicates whether the DB instance is restored from the
-    #   latest backup time. By default, the DB instance isn't restored from
-    #   the latest backup time.
+    #   Specifies whether the DB instance is restored from the latest backup
+    #   time. By default, the DB instance isn't restored from the latest
+    #   backup time.
     #
-    #   Constraints: Can't be specified if the `RestoreTime` parameter is
-    #   provided.
+    #   Constraints:
+    #
+    #   * Can't be specified if the `RestoreTime` parameter is provided.
+    #
+    #   ^
     #
     # @option params [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
@@ -25509,7 +26513,7 @@ module Aws::RDS
     #   list of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
-    #   Default: The same DBInstanceClass as the original DB instance.
+    #   Default: The same DB instance class as the original DB instance.
     #
     #
     #
@@ -25518,39 +26522,53 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
-    #
     #   Default: The same port as the original DB instance.
+    #
+    #   Constraints:
+    #
+    #   * The value must be `1150-65535`.
+    #
+    #   ^
     #
     # @option params [String] :availability_zone
     #   The Availability Zone (AZ) where the DB instance will be created.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
-    #   DB instance is a Multi-AZ deployment.
+    #   Constraints:
+    #
+    #   * You can't specify the `AvailabilityZone` parameter if the DB
+    #     instance is a Multi-AZ deployment.
+    #
+    #   ^
     #
     #   Example: `us-east-1a`
     #
     # @option params [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB subnet group.
+    #
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the DB instance is a Multi-AZ
-    #   deployment.
+    #   Secifies whether the DB instance is a Multi-AZ deployment.
     #
     #   This setting doesn't apply to RDS Custom.
     #
-    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
-    #   DB instance is a Multi-AZ deployment.
+    #   Constraints:
+    #
+    #   * You can't specify the `AvailabilityZone` parameter if the DB
+    #     instance is a Multi-AZ deployment.
+    #
+    #   ^
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -25566,20 +26584,20 @@ module Aws::RDS
     #   For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor version upgrades are applied
-    #   automatically to the DB instance during the maintenance window.
+    #   Specifies whether minor version upgrades are applied automatically to
+    #   the DB instance during the maintenance window.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [String] :license_model
-    #   License model information for the restored DB instance.
+    #   The license model information for the restored DB instance.
     #
     #   This setting doesn't apply to RDS Custom.
     #
-    #   Default: Same as source.
-    #
-    #   Valid values: `license-included` \| `bring-your-own-license` \|
+    #   Valid Values: `license-included` \| `bring-your-own-license` \|
     #   `general-public-license`
+    #
+    #   Default: Same as the source.
     #
     # @option params [String] :db_name
     #   The database name for the restored DB instance.
@@ -25593,10 +26611,6 @@ module Aws::RDS
     #   The database engine to use for the new instance.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   Default: The same as source
-    #
-    #   Constraint: Must be compatible with the engine of the source
     #
     #   Valid Values:
     #
@@ -25622,19 +26636,28 @@ module Aws::RDS
     #
     #   * `sqlserver-web`
     #
+    #   Default: The same as source
+    #
+    #   Constraints:
+    #
+    #   * Must be compatible with the engine of the source.
+    #
+    #   ^
+    #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
-    #   be initially allocated for the DB instance.
+    #   initially allocate for the DB instance.
     #
-    #   Constraints: Must be an integer greater than 1000.
+    #   This setting doesn't apply to SQL Server.
     #
-    #   **SQL Server**
+    #   Constraints:
     #
-    #   Setting the IOPS value for the SQL Server database engine isn't
-    #   supported.
+    #   * Must be an integer greater than 1000.
+    #
+    #   ^
     #
     # @option params [String] :option_group_name
-    #   The name of the option group to be used for the restored DB instance.
+    #   The name of the option group to use for the restored DB instance.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group, and that option group
@@ -25644,9 +26667,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   Specifies whether to copy all tags from the restored DB instance to
+    #   snapshots of the DB instance. By default, tags are not copied.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -25657,14 +26679,19 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   The storage type to associate with the DB instance.
     #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
+    #   `gp2`.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Constraints:
+    #
+    #   * If you specify `io1` or `gp3`, you must also include a value for the
+    #     `Iops` parameter.
+    #
+    #   ^
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -25685,8 +26712,8 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB instance
-    #   in. Create the domain before running this command. Currently, you can
+    #   The Active Directory directory ID to restore the DB instance in.
+    #   Create the domain before running this command. Currently, you can
     #   create only the MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
     #   instances in an Active Directory Domain.
     #
@@ -25756,9 +26783,9 @@ module Aws::RDS
     #   Example: `123.124.125.126,234.235.236.237`
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -25789,8 +26816,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -25804,7 +26831,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #   * If supplied, must match the name of an existing DB parameter group.
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
@@ -25813,10 +26840,10 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether the DB instance has deletion protection enabled. The
+    #   database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
@@ -25842,13 +26869,13 @@ module Aws::RDS
     # @option params [String] :source_db_instance_automated_backups_arn
     #   The Amazon Resource Name (ARN) of the replicated automated backups
     #   from which to restore, for example,
-    #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :enable_customer_owned_ip
-    #   A value that indicates whether to enable a customer-owned IP address
-    #   (CoIP) for an RDS on Outposts DB instance.
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts DB instance.
     #
     #   A *CoIP* provides local or external connectivity to resources in your
     #   Outpost subnets through your on-premises network. For some use cases,
@@ -25908,12 +26935,6 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
-    #
-    #   * `IPV4`
-    #
-    #   * `DUAL`
-    #
     #   The network type is determined by the `DBSubnetGroup` specified for
     #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
     #   or the IPv4 and the IPv6 protocols (`DUAL`).
@@ -25921,12 +26942,18 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon RDS User Guide.*
     #
+    #   Valid Values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @option params [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the DB instance.
+    #   The storage throughput value for the DB instance.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
@@ -25939,6 +26966,10 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26097,6 +27128,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     #
     # @example Response structure
@@ -26163,6 +27195,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26256,6 +27290,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -26584,6 +27621,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -26616,6 +27655,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -26757,6 +27798,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26850,6 +27893,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27006,6 +28052,8 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -27107,8 +28155,9 @@ module Aws::RDS
     #
     # @option params [Array<String>] :export_only
     #   The data to be exported from the snapshot or cluster. If this
-    #   parameter is not provided, all of the data is exported. Valid values
-    #   are the following:
+    #   parameter isn't provided, all of the data is exported.
+    #
+    #   Valid Values:
     #
     #   * `database` - Export all the data from a specified database.
     #
@@ -27399,6 +28448,8 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
+    #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -27431,6 +28482,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -27579,6 +28632,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27672,6 +28727,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -27780,6 +28838,8 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28172,6 +29232,8 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28265,6 +29327,9 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
+    #   resp.db_instance.multi_tenant #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -28288,7 +29353,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.193.0'
+      context[:gem_version] = '1.201.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -28364,6 +29429,8 @@ module Aws::RDS
     # | db_instance_deleted           | {Client#describe_db_instances}         | 30       | 60            |
     # | db_snapshot_available         | {Client#describe_db_snapshots}         | 30       | 60            |
     # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
+    # | tenant_database_available     | {Client#describe_tenant_databases}     | 30       | 60            |
+    # | tenant_database_deleted       | {Client#describe_tenant_databases}     | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -28421,7 +29488,9 @@ module Aws::RDS
         db_instance_available: Waiters::DBInstanceAvailable,
         db_instance_deleted: Waiters::DBInstanceDeleted,
         db_snapshot_available: Waiters::DBSnapshotAvailable,
-        db_snapshot_deleted: Waiters::DBSnapshotDeleted
+        db_snapshot_deleted: Waiters::DBSnapshotDeleted,
+        tenant_database_available: Waiters::TenantDatabaseAvailable,
+        tenant_database_deleted: Waiters::TenantDatabaseDeleted
       }
     end
 

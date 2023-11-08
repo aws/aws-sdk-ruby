@@ -68,6 +68,8 @@ module Aws::Kendra
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
     ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
+    CollapseConfiguration = Shapes::StructureShape.new(name: 'CollapseConfiguration')
+    CollapsedResultDetail = Shapes::StructureShape.new(name: 'CollapsedResultDetail')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
@@ -229,6 +231,9 @@ module Aws::Kendra
     ExcludeMimeTypesList = Shapes::ListShape.new(name: 'ExcludeMimeTypesList')
     ExcludeSharedDrivesList = Shapes::ListShape.new(name: 'ExcludeSharedDrivesList')
     ExcludeUserAccountsList = Shapes::ListShape.new(name: 'ExcludeUserAccountsList')
+    ExpandConfiguration = Shapes::StructureShape.new(name: 'ExpandConfiguration')
+    ExpandedResultItem = Shapes::StructureShape.new(name: 'ExpandedResultItem')
+    ExpandedResultList = Shapes::ListShape.new(name: 'ExpandedResultList')
     ExperienceConfiguration = Shapes::StructureShape.new(name: 'ExperienceConfiguration')
     ExperienceEndpoint = Shapes::StructureShape.new(name: 'ExperienceEndpoint')
     ExperienceEndpoints = Shapes::ListShape.new(name: 'ExperienceEndpoints')
@@ -382,6 +387,7 @@ module Aws::Kendra
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     MinimumNumberOfQueryingUsers = Shapes::IntegerShape.new(name: 'MinimumNumberOfQueryingUsers')
     MinimumQueryCount = Shapes::IntegerShape.new(name: 'MinimumQueryCount')
+    MissingAttributeKeyStrategy = Shapes::StringShape.new(name: 'MissingAttributeKeyStrategy')
     Mode = Shapes::StringShape.new(name: 'Mode')
     NameType = Shapes::StringShape.new(name: 'NameType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -502,6 +508,7 @@ module Aws::Kendra
     SnapshotsDataRecords = Shapes::ListShape.new(name: 'SnapshotsDataRecords')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
+    SortingConfigurationList = Shapes::ListShape.new(name: 'SortingConfigurationList')
     SourceDocument = Shapes::StructureShape.new(name: 'SourceDocument')
     SourceDocuments = Shapes::ListShape.new(name: 'SourceDocuments')
     SpellCorrectedQuery = Shapes::StructureShape.new(name: 'SpellCorrectedQuery')
@@ -784,6 +791,17 @@ module Aws::Kendra
     ClickFeedback.struct_class = Types::ClickFeedback
 
     ClickFeedbackList.member = Shapes::ShapeRef.new(shape: ClickFeedback)
+
+    CollapseConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
+    CollapseConfiguration.add_member(:sorting_configurations, Shapes::ShapeRef.new(shape: SortingConfigurationList, location_name: "SortingConfigurations"))
+    CollapseConfiguration.add_member(:missing_attribute_key_strategy, Shapes::ShapeRef.new(shape: MissingAttributeKeyStrategy, location_name: "MissingAttributeKeyStrategy"))
+    CollapseConfiguration.add_member(:expand, Shapes::ShapeRef.new(shape: Boolean, location_name: "Expand"))
+    CollapseConfiguration.add_member(:expand_configuration, Shapes::ShapeRef.new(shape: ExpandConfiguration, location_name: "ExpandConfiguration"))
+    CollapseConfiguration.struct_class = Types::CollapseConfiguration
+
+    CollapsedResultDetail.add_member(:document_attribute, Shapes::ShapeRef.new(shape: DocumentAttribute, required: true, location_name: "DocumentAttribute"))
+    CollapsedResultDetail.add_member(:expanded_results, Shapes::ShapeRef.new(shape: ExpandedResultList, location_name: "ExpandedResults"))
+    CollapsedResultDetail.struct_class = Types::CollapsedResultDetail
 
     ColumnConfiguration.add_member(:document_id_column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "DocumentIdColumnName"))
     ColumnConfiguration.add_member(:document_data_column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "DocumentDataColumnName"))
@@ -1398,6 +1416,20 @@ module Aws::Kendra
 
     ExcludeUserAccountsList.member = Shapes::ShapeRef.new(shape: UserAccount)
 
+    ExpandConfiguration.add_member(:max_result_items_to_expand, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResultItemsToExpand"))
+    ExpandConfiguration.add_member(:max_expanded_results_per_item, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxExpandedResultsPerItem"))
+    ExpandConfiguration.struct_class = Types::ExpandConfiguration
+
+    ExpandedResultItem.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
+    ExpandedResultItem.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
+    ExpandedResultItem.add_member(:document_title, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "DocumentTitle"))
+    ExpandedResultItem.add_member(:document_excerpt, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "DocumentExcerpt"))
+    ExpandedResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
+    ExpandedResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
+    ExpandedResultItem.struct_class = Types::ExpandedResultItem
+
+    ExpandedResultList.member = Shapes::ShapeRef.new(shape: ExpandedResultItem)
+
     ExperienceConfiguration.add_member(:content_source_configuration, Shapes::ShapeRef.new(shape: ContentSourceConfiguration, location_name: "ContentSourceConfiguration"))
     ExperienceConfiguration.add_member(:user_identity_configuration, Shapes::ShapeRef.new(shape: UserIdentityConfiguration, location_name: "UserIdentityConfiguration"))
     ExperienceConfiguration.struct_class = Types::ExperienceConfiguration
@@ -1890,9 +1922,11 @@ module Aws::Kendra
     QueryRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
+    QueryRequest.add_member(:sorting_configurations, Shapes::ShapeRef.new(shape: SortingConfigurationList, location_name: "SortingConfigurations"))
     QueryRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
     QueryRequest.add_member(:visitor_id, Shapes::ShapeRef.new(shape: VisitorId, location_name: "VisitorId"))
     QueryRequest.add_member(:spell_correction_configuration, Shapes::ShapeRef.new(shape: SpellCorrectionConfiguration, location_name: "SpellCorrectionConfiguration"))
+    QueryRequest.add_member(:collapse_configuration, Shapes::ShapeRef.new(shape: CollapseConfiguration, location_name: "CollapseConfiguration"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -1916,6 +1950,7 @@ module Aws::Kendra
     QueryResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
     QueryResultItem.add_member(:feedback_token, Shapes::ShapeRef.new(shape: FeedbackToken, location_name: "FeedbackToken"))
     QueryResultItem.add_member(:table_excerpt, Shapes::ShapeRef.new(shape: TableExcerpt, location_name: "TableExcerpt"))
+    QueryResultItem.add_member(:collapsed_result_detail, Shapes::ShapeRef.new(shape: CollapsedResultDetail, location_name: "CollapsedResultDetail"))
     QueryResultItem.struct_class = Types::QueryResultItem
 
     QueryResultItemList.member = Shapes::ShapeRef.new(shape: QueryResultItem)
@@ -1993,6 +2028,7 @@ module Aws::Kendra
     RetrieveResultItem.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
     RetrieveResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
     RetrieveResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
+    RetrieveResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
     RetrieveResultItem.struct_class = Types::RetrieveResultItem
 
     RetrieveResultItemList.member = Shapes::ShapeRef.new(shape: RetrieveResultItem)
@@ -2162,6 +2198,8 @@ module Aws::Kendra
     SortingConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
     SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     SortingConfiguration.struct_class = Types::SortingConfiguration
+
+    SortingConfigurationList.member = Shapes::ShapeRef.new(shape: SortingConfiguration)
 
     SourceDocument.add_member(:document_id, Shapes::ShapeRef.new(shape: String, location_name: "DocumentId"))
     SourceDocument.add_member(:suggestion_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "SuggestionAttributes"))

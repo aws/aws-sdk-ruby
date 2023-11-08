@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2023-09-25)
+------------------
+
+* Feature - Support for generating code that is compatible with future versions of amplify project dependencies.
+
 1.18.0 (2023-07-31)
 ------------------
 

@@ -181,8 +181,9 @@ module Aws::Route53RecoveryCluster
     end
 
     # A routing control, which is a simple on/off switch that you can use to
-    # route traffic to cells. When a routing control state is On, traffic
-    # flows to a cell. When the state is Off, traffic does not flow.
+    # route traffic to cells. When a routing control state is set to ON,
+    # traffic flows to a cell. When the state is set to OFF, traffic does
+    # not flow.
     #
     # @!attribute [rw] control_panel_arn
     #   The Amazon Resource Name (ARN) of the control panel where the
@@ -191,6 +192,7 @@ module Aws::Route53RecoveryCluster
     #
     # @!attribute [rw] control_panel_name
     #   The name of the control panel where the routing control is located.
+    #   Only ASCII characters are supported for control panel names.
     #   @return [String]
     #
     # @!attribute [rw] routing_control_arn
@@ -203,8 +205,12 @@ module Aws::Route53RecoveryCluster
     #
     # @!attribute [rw] routing_control_state
     #   The current state of the routing control. When a routing control
-    #   state is On, traffic flows to a cell. When the state is Off, traffic
-    #   does not flow.
+    #   state is set to ON, traffic flows to a cell. When the state is set
+    #   to OFF, traffic does not flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the routing control owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/RoutingControl AWS API Documentation
@@ -214,7 +220,8 @@ module Aws::Route53RecoveryCluster
       :control_panel_name,
       :routing_control_arn,
       :routing_control_name,
-      :routing_control_state)
+      :routing_control_state,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -296,8 +303,8 @@ module Aws::Route53RecoveryCluster
     #   @return [String]
     #
     # @!attribute [rw] routing_control_state
-    #   The state of the routing control. You can set the value to be On or
-    #   Off.
+    #   The state of the routing control. You can set the value to ON or
+    #   OFF.
     #   @return [String]
     #
     # @!attribute [rw] safety_rules_to_override

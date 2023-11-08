@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-10-31)
+------------------
+
+* Feature - Automate attaching managed policies
+
+1.40.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.39.0 (2023-07-28)
 ------------------
 

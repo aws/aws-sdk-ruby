@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+
+1.157.0 (2023-10-12)
+------------------
+
+* Feature - Extending version control support to GitLab and Bitbucket from AWSGlue
+
+1.156.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.155.0 (2023-08-24)
 ------------------
 

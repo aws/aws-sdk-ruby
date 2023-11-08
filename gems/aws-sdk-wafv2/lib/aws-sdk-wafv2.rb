@@ -52,6 +52,6 @@ require_relative 'aws-sdk-wafv2/customizations'
 # @!group service
 module Aws::WAFV2
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.72.0'
 
 end

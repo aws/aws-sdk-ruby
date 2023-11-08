@@ -1089,6 +1089,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -2186,6 +2188,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -3156,6 +3160,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -3747,6 +3753,8 @@ module Aws::MediaLive
     #   * {Types::DescribeInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #   * {Types::DescribeInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputDeviceResponse#availability_zone #availability_zone} => String
+    #   * {Types::DescribeInputDeviceResponse#medialive_input_arns #medialive_input_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeInputDeviceResponse#output_type #output_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3789,9 +3797,17 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
     #   resp.uhd_device_settings.latency_ms #=> Integer
+    #   resp.uhd_device_settings.codec #=> String, one of "HEVC", "AVC"
+    #   resp.uhd_device_settings.mediaconnect_settings.flow_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.role_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.secret_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.source_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.availability_zone #=> String
+    #   resp.medialive_input_arns #=> Array
+    #   resp.medialive_input_arns[0] #=> String
+    #   resp.output_type #=> String, one of "NONE", "MEDIALIVE_INPUT", "MEDIACONNECT_FLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
     #
@@ -4516,9 +4532,17 @@ module Aws::MediaLive
     #   resp.input_devices[0].uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.input_devices[0].uhd_device_settings.width #=> Integer
     #   resp.input_devices[0].uhd_device_settings.latency_ms #=> Integer
+    #   resp.input_devices[0].uhd_device_settings.codec #=> String, one of "HEVC", "AVC"
+    #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.flow_arn #=> String
+    #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.role_arn #=> String
+    #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.secret_arn #=> String
+    #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.source_name #=> String
     #   resp.input_devices[0].tags #=> Hash
     #   resp.input_devices[0].tags["__string"] #=> String
     #   resp.input_devices[0].availability_zone #=> String
+    #   resp.input_devices[0].medialive_input_arns #=> Array
+    #   resp.input_devices[0].medialive_input_arns[0] #=> String
+    #   resp.input_devices[0].output_type #=> String, one of "NONE", "MEDIALIVE_INPUT", "MEDIACONNECT_FLOW"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
@@ -5287,6 +5311,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -5772,6 +5798,29 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Start an input device that is attached to a MediaConnect flow. (There
+    # is no need to start a device that is attached to a MediaLive input;
+    # MediaLive starts the device when the channel starts.)
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_input_device({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDevice AWS API Documentation
+    #
+    # @overload start_input_device(params = {})
+    # @param [Hash] params ({})
+    def start_input_device(params = {}, options = {})
+      req = build_request(:start_input_device, params)
+      req.send_request(options)
+    end
+
     # Start a maintenance window for the specified input device. Starting a
     # maintenance window will give the device up to two hours to install
     # software. If the device was streaming prior to the maintenance, it
@@ -6065,6 +6114,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -6550,6 +6601,29 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Stop an input device that is attached to a MediaConnect flow. (There
+    # is no need to stop a device that is attached to a MediaLive input;
+    # MediaLive automatically stops the device when the channel stops.)
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_input_device({
+    #     input_device_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopInputDevice AWS API Documentation
+    #
+    # @overload stop_input_device(params = {})
+    # @param [Hash] params ({})
+    def stop_input_device(params = {}, options = {})
+      req = build_request(:stop_input_device, params)
+      req.send_request(options)
+    end
+
     # Stops a running multiplex. If the multiplex isn't running, this
     # action has no effect.
     #
@@ -6842,6 +6916,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -7551,6 +7627,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -8161,6 +8239,8 @@ module Aws::MediaLive
     #   * {Types::UpdateInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #   * {Types::UpdateInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateInputDeviceResponse#availability_zone #availability_zone} => String
+    #   * {Types::UpdateInputDeviceResponse#medialive_input_arns #medialive_input_arns} => Array&lt;String&gt;
+    #   * {Types::UpdateInputDeviceResponse#output_type #output_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8169,6 +8249,13 @@ module Aws::MediaLive
     #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
     #       max_bitrate: 1,
     #       latency_ms: 1,
+    #       codec: "HEVC", # accepts HEVC, AVC
+    #       mediaconnect_settings: {
+    #         flow_arn: "__string",
+    #         role_arn: "__string",
+    #         secret_arn: "__string",
+    #         source_name: "__string",
+    #       },
     #     },
     #     input_device_id: "__string", # required
     #     name: "__string",
@@ -8176,6 +8263,13 @@ module Aws::MediaLive
     #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
     #       max_bitrate: 1,
     #       latency_ms: 1,
+    #       codec: "HEVC", # accepts HEVC, AVC
+    #       mediaconnect_settings: {
+    #         flow_arn: "__string",
+    #         role_arn: "__string",
+    #         secret_arn: "__string",
+    #         source_name: "__string",
+    #       },
     #     },
     #     availability_zone: "__string",
     #   })
@@ -8215,9 +8309,17 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
     #   resp.uhd_device_settings.latency_ms #=> Integer
+    #   resp.uhd_device_settings.codec #=> String, one of "HEVC", "AVC"
+    #   resp.uhd_device_settings.mediaconnect_settings.flow_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.role_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.secret_arn #=> String
+    #   resp.uhd_device_settings.mediaconnect_settings.source_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.availability_zone #=> String
+    #   resp.medialive_input_arns #=> Array
+    #   resp.medialive_input_arns[0] #=> String
+    #   resp.output_type #=> String, one of "NONE", "MEDIALIVE_INPUT", "MEDIACONNECT_FLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
@@ -8484,7 +8586,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

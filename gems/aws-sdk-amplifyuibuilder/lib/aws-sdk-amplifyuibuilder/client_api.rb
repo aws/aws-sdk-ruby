@@ -18,6 +18,8 @@ module Aws::AmplifyUIBuilder
     AppId = Shapes::StringShape.new(name: 'AppId')
     AssociatedFieldsList = Shapes::ListShape.new(name: 'AssociatedFieldsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CodegenDependencies = Shapes::ListShape.new(name: 'CodegenDependencies')
+    CodegenDependency = Shapes::StructureShape.new(name: 'CodegenDependency')
     CodegenFeatureFlags = Shapes::StructureShape.new(name: 'CodegenFeatureFlags')
     CodegenGenericDataEnum = Shapes::StructureShape.new(name: 'CodegenGenericDataEnum')
     CodegenGenericDataEnumValuesList = Shapes::ListShape.new(name: 'CodegenGenericDataEnumValuesList')
@@ -157,6 +159,7 @@ module Aws::AmplifyUIBuilder
     PredicateList = Shapes::ListShape.new(name: 'PredicateList')
     PutMetadataFlagBody = Shapes::StructureShape.new(name: 'PutMetadataFlagBody')
     PutMetadataFlagRequest = Shapes::StructureShape.new(name: 'PutMetadataFlagRequest')
+    ReactCodegenDependencies = Shapes::MapShape.new(name: 'ReactCodegenDependencies')
     ReactStartCodegenJobData = Shapes::StructureShape.new(name: 'ReactStartCodegenJobData')
     RefreshTokenRequest = Shapes::StructureShape.new(name: 'RefreshTokenRequest')
     RefreshTokenRequestBody = Shapes::StructureShape.new(name: 'RefreshTokenRequestBody')
@@ -230,6 +233,14 @@ module Aws::AmplifyUIBuilder
 
     AssociatedFieldsList.member = Shapes::ShapeRef.new(shape: String)
 
+    CodegenDependencies.member = Shapes::ShapeRef.new(shape: CodegenDependency)
+
+    CodegenDependency.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CodegenDependency.add_member(:supported_version, Shapes::ShapeRef.new(shape: String, location_name: "supportedVersion"))
+    CodegenDependency.add_member(:is_sem_ver, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSemVer"))
+    CodegenDependency.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    CodegenDependency.struct_class = Types::CodegenDependency
+
     CodegenFeatureFlags.add_member(:is_relationship_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRelationshipSupported"))
     CodegenFeatureFlags.add_member(:is_non_model_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "isNonModelSupported"))
     CodegenFeatureFlags.struct_class = Types::CodegenFeatureFlags
@@ -294,6 +305,7 @@ module Aws::AmplifyUIBuilder
     CodegenJob.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CodegenJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CodegenJob.add_member(:modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "modifiedAt"))
+    CodegenJob.add_member(:dependencies, Shapes::ShapeRef.new(shape: CodegenDependencies, location_name: "dependencies"))
     CodegenJob.struct_class = Types::CodegenJob
 
     CodegenJobAsset.add_member(:download_url, Shapes::ShapeRef.new(shape: String, location_name: "downloadUrl"))
@@ -848,12 +860,16 @@ module Aws::AmplifyUIBuilder
     PutMetadataFlagRequest[:payload] = :body
     PutMetadataFlagRequest[:payload_member] = PutMetadataFlagRequest.member(:body)
 
+    ReactCodegenDependencies.key = Shapes::ShapeRef.new(shape: String)
+    ReactCodegenDependencies.value = Shapes::ShapeRef.new(shape: String)
+
     ReactStartCodegenJobData.add_member(:module, Shapes::ShapeRef.new(shape: JSModule, location_name: "module"))
     ReactStartCodegenJobData.add_member(:target, Shapes::ShapeRef.new(shape: JSTarget, location_name: "target"))
     ReactStartCodegenJobData.add_member(:script, Shapes::ShapeRef.new(shape: JSScript, location_name: "script"))
     ReactStartCodegenJobData.add_member(:render_type_declarations, Shapes::ShapeRef.new(shape: Boolean, location_name: "renderTypeDeclarations"))
     ReactStartCodegenJobData.add_member(:inline_source_map, Shapes::ShapeRef.new(shape: Boolean, location_name: "inlineSourceMap"))
     ReactStartCodegenJobData.add_member(:api_configuration, Shapes::ShapeRef.new(shape: ApiConfiguration, location_name: "apiConfiguration"))
+    ReactStartCodegenJobData.add_member(:dependencies, Shapes::ShapeRef.new(shape: ReactCodegenDependencies, location_name: "dependencies"))
     ReactStartCodegenJobData.struct_class = Types::ReactStartCodegenJobData
 
     RefreshTokenRequest.add_member(:provider, Shapes::ShapeRef.new(shape: TokenProviders, required: true, location: "uri", location_name: "provider"))

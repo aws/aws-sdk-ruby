@@ -3,6 +3,55 @@ Unreleased Changes
 
 * Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and also allow for ECS and EKS link-local http addresses.
 
+3.186.0 (2023-11-02)
+------------------
+
+* Feature - Support disabling IMDSv1 in `InstanceProfileCredentials` using `ENV['AWS_EC2_METADATA_V1_DISABLED']`, `ec2_metadata_v1_disabled` shared config, or the `disable_imds_v1` credentials option.
+
+3.185.2 (2023-10-31)
+------------------
+
+* Issue - Fix query string support to lists of booleans, floats, integers and timestamps per rest-json protocol.
+
+3.185.1 (2023-10-05)
+------------------
+
+* Issue - Ignore `__type` when deserializing Unions.
+
+3.185.0 (2023-10-02)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.184.0 (2023-09-27)
+------------------
+
+* Feature - Change the `ServiceError` data member from read only to read/write.
+
+3.183.1 (2023-09-25)
+------------------
+
+* Issue - Remove value inspection from param validation errors.
+
+3.183.0 (2023-09-20)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+3.182.0 (2023-09-19)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.181.1 (2023-09-14)
+------------------
+
+* Issue - Fix host label validation in endpoint matchers.
+
 3.181.0 (2023-08-22)
 ------------------
 

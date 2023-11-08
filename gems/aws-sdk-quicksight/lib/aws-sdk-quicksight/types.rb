@@ -355,6 +355,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Analysis AWS API Documentation
     #
     class Analysis < Struct.new(
@@ -367,7 +371,8 @@ module Aws::QuickSight
       :theme_arn,
       :created_time,
       :last_updated_time,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -439,6 +444,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for an analysis.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisDefinition AWS API Documentation
     #
     class AnalysisDefinition < Struct.new(
@@ -448,7 +457,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1553,6 +1563,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An array of analysis level configurations.
+    #
+    # @!attribute [rw] timezone
+    #   Determines the timezone for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] week_start
+    #   Determines the week start day for an analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetOptions AWS API Documentation
+    #
+    class AssetOptions < Struct.new(
+      :timezone,
+      :week_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters for Amazon Athena.
     #
     # @!attribute [rw] work_group
@@ -2640,6 +2669,11 @@ module Aws::QuickSight
     #   New column data type.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the new column. Sub types are only available
+    #   for decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   When casting a column from string to datetime type, you can supply a
     #   string in a format supported by Amazon QuickSight to denote the
@@ -2651,6 +2685,7 @@ module Aws::QuickSight
     class CastColumnTypeOperation < Struct.new(
       :column_name,
       :new_column_type,
+      :sub_type,
       :format)
       SENSITIVE = []
       include Aws::Structure
@@ -4090,6 +4125,17 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::AnalysisDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to create an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
+    # @!attribute [rw] folder_arns
+    #   When you create the analysis, Amazon QuickSight adds the analysis to
+    #   these folders.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisRequest AWS API Documentation
     #
     class CreateAnalysisRequest < Struct.new(
@@ -4101,7 +4147,9 @@ module Aws::QuickSight
       :source_entity,
       :theme_arn,
       :tags,
-      :definition)
+      :definition,
+      :validation_strategy,
+      :folder_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,6 +4292,17 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::DashboardVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to create a dashboard with
+    #   definition objects. This option skips the validation step for
+    #   specific errors.
+    #   @return [Types::ValidationStrategy]
+    #
+    # @!attribute [rw] folder_arns
+    #   When you create the dashboard, Amazon QuickSight adds the dashboard
+    #   to these folders.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
     #
     class CreateDashboardRequest < Struct.new(
@@ -4257,7 +4316,9 @@ module Aws::QuickSight
       :version_description,
       :dashboard_publish_options,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy,
+      :folder_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4370,6 +4431,11 @@ module Aws::QuickSight
     #   The parameter declarations of the dataset.
     #   @return [Array<Types::DatasetParameter>]
     #
+    # @!attribute [rw] folder_arns
+    #   When you create the dataset, Amazon QuickSight adds the dataset to
+    #   these folders.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSetRequest AWS API Documentation
     #
     class CreateDataSetRequest < Struct.new(
@@ -4387,7 +4453,8 @@ module Aws::QuickSight
       :column_level_permission_rules,
       :tags,
       :data_set_usage_configuration,
-      :dataset_parameters)
+      :dataset_parameters,
+      :folder_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4482,6 +4549,11 @@ module Aws::QuickSight
     #   assigned to the data source.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] folder_arns
+    #   When you create the data source, Amazon QuickSight adds the data
+    #   source to these folders.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -4494,7 +4566,8 @@ module Aws::QuickSight
       :permissions,
       :vpc_connection_properties,
       :ssl_properties,
-      :tags)
+      :tags,
+      :folder_arns)
       SENSITIVE = [:credentials]
       include Aws::Structure
     end
@@ -5174,6 +5247,12 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::TemplateVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   TThe option to relax the validation needed to create a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateRequest AWS API Documentation
     #
     class CreateTemplateRequest < Struct.new(
@@ -5184,7 +5263,8 @@ module Aws::QuickSight
       :source_entity,
       :tags,
       :version_description,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6377,6 +6457,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersion AWS API Documentation
     #
     class DashboardVersion < Struct.new(
@@ -6389,7 +6473,8 @@ module Aws::QuickSight
       :data_set_arns,
       :description,
       :theme_arn,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6444,6 +6529,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a dashboard.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersionDefinition AWS API Documentation
     #
     class DashboardVersionDefinition < Struct.new(
@@ -6453,7 +6542,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6848,6 +6938,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The type of the data path value.
+    #
+    # @!attribute [rw] pivot_table_data_path_type
+    #   The type of data path value utilized in a pivot table. Choose one of
+    #   the following options:
+    #
+    #   * `HIERARCHY_ROWS_LAYOUT_COLUMN` - The type of data path for the
+    #     rows layout column, when `RowsLayout` is set to `HIERARCHY`.
+    #
+    #   * `MULTIPLE_ROW_METRICS_COLUMN` - The type of data path for the
+    #     metric column when the row is set to Metric Placement.
+    #
+    #   * `EMPTY_COLUMN_HEADER` - The type of data path for the column with
+    #     empty column header, when there is no field in `ColumnsFieldWell`
+    #     and the row is set to Metric Placement.
+    #
+    #   * `COUNT_METRIC_COLUMN` - The type of data path for the column with
+    #     `COUNT` as the metric, when there is no field in the
+    #     `ValuesFieldWell`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPathType AWS API Documentation
+    #
+    class DataPathType < Struct.new(
+      :pivot_table_data_path_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The data path that needs to be sorted.
     #
     # @!attribute [rw] field_id
@@ -6858,11 +6977,16 @@ module Aws::QuickSight
     #   The actual value of the field that needs to be sorted.
     #   @return [String]
     #
+    # @!attribute [rw] data_path_type
+    #   The type configuration of the field.
+    #   @return [Types::DataPathType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPathValue AWS API Documentation
     #
     class DataPathValue < Struct.new(
       :field_id,
-      :field_value)
+      :field_value,
+      :data_path_type)
       SENSITIVE = [:field_value]
       include Aws::Structure
     end
@@ -7485,9 +7609,18 @@ module Aws::QuickSight
     #   @return [Types::ExasolParameters]
     #
     # @!attribute [rw] databricks_parameters
-    #   The required parameters that are needed to connect to a Databricks
-    #   data source.
+    #   The parameters that are required to connect to a Databricks data
+    #   source.
     #   @return [Types::DatabricksParameters]
+    #
+    # @!attribute [rw] starburst_parameters
+    #   The parameters that are required to connect to a Starburst data
+    #   source.
+    #   @return [Types::StarburstParameters]
+    #
+    # @!attribute [rw] trino_parameters
+    #   The parameters that are required to connect to a Trino data source.
+    #   @return [Types::TrinoParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
@@ -7514,7 +7647,9 @@ module Aws::QuickSight
       :twitter_parameters,
       :amazon_open_search_parameters,
       :exasol_parameters,
-      :databricks_parameters)
+      :databricks_parameters,
+      :starburst_parameters,
+      :trino_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7622,8 +7757,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The required parameters that are needed to connect to a Databricks
-    # data source.
+    # The parameters that are required to connect to a Databricks data
+    # source.
     #
     # @!attribute [rw] host
     #   The host name of the Databricks data source.
@@ -12920,12 +13055,24 @@ module Aws::QuickSight
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] null_option
+    #   This option determines how null values should be treated when
+    #   filtering data.
+    #
+    #   * `ALL_VALUES`: Include null values in filtered results.
+    #
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
+    #
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterListConfiguration AWS API Documentation
     #
     class FilterListConfiguration < Struct.new(
       :match_operator,
       :category_values,
-      :select_all_options)
+      :select_all_options,
+      :null_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15680,11 +15827,17 @@ module Aws::QuickSight
     #   The data type of the column.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column. Sub types are only available for
+    #   decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InputColumn AWS API Documentation
     #
     class InputColumn < Struct.new(
       :name,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16074,6 +16227,44 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The conditional formatting for the actual value of a KPI visual.
+    #
+    # @!attribute [rw] text_color
+    #   The conditional formatting of the actual value's text color.
+    #   @return [Types::ConditionalFormattingColor]
+    #
+    # @!attribute [rw] icon
+    #   The conditional formatting of the actual value's icon.
+    #   @return [Types::ConditionalFormattingIcon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIActualValueConditionalFormatting AWS API Documentation
+    #
+    class KPIActualValueConditionalFormatting < Struct.new(
+      :text_color,
+      :icon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conditional formatting for the comparison value of a KPI visual.
+    #
+    # @!attribute [rw] text_color
+    #   The conditional formatting of the comparison value's text color.
+    #   @return [Types::ConditionalFormattingColor]
+    #
+    # @!attribute [rw] icon
+    #   The conditional formatting of the comparison value's icon.
+    #   @return [Types::ConditionalFormattingIcon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIComparisonValueConditionalFormatting AWS API Documentation
+    #
+    class KPIComparisonValueConditionalFormatting < Struct.new(
+      :text_color,
+      :icon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The conditional formatting of a KPI visual.
     #
     # @!attribute [rw] conditional_formatting_options
@@ -16098,11 +16289,21 @@ module Aws::QuickSight
     #   The conditional formatting for the progress bar of a KPI visual.
     #   @return [Types::KPIProgressBarConditionalFormatting]
     #
+    # @!attribute [rw] actual_value
+    #   The conditional formatting for the actual value of a KPI visual.
+    #   @return [Types::KPIActualValueConditionalFormatting]
+    #
+    # @!attribute [rw] comparison_value
+    #   The conditional formatting for the comparison value of a KPI visual.
+    #   @return [Types::KPIComparisonValueConditionalFormatting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIConditionalFormattingOption AWS API Documentation
     #
     class KPIConditionalFormattingOption < Struct.new(
       :primary_value,
-      :progress_bar)
+      :progress_bar,
+      :actual_value,
+      :comparison_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16188,6 +16389,15 @@ module Aws::QuickSight
     #   The options that determine the secondary value font configuration.
     #   @return [Types::FontConfiguration]
     #
+    # @!attribute [rw] sparkline
+    #   The options that determine the visibility, color, type, and tooltip
+    #   visibility of the sparkline of a KPI visual.
+    #   @return [Types::KPISparklineOptions]
+    #
+    # @!attribute [rw] visual_layout_options
+    #   The options that determine the layout a KPI visual.
+    #   @return [Types::KPIVisualLayoutOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIOptions AWS API Documentation
     #
     class KPIOptions < Struct.new(
@@ -16197,7 +16407,9 @@ module Aws::QuickSight
       :comparison,
       :primary_value_display_type,
       :primary_value_font_configuration,
-      :secondary_value_font_configuration)
+      :secondary_value_font_configuration,
+      :sparkline,
+      :visual_layout_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16245,6 +16457,36 @@ module Aws::QuickSight
     #
     class KPISortConfiguration < Struct.new(
       :trend_group_sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the visibility, color, type, and tooltip
+    # visibility of the sparkline of a KPI visual.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] tooltip_visibility
+    #   The tooltip visibility of the sparkline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPISparklineOptions AWS API Documentation
+    #
+    class KPISparklineOptions < Struct.new(
+      :visibility,
+      :type,
+      :color,
+      :tooltip_visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16299,6 +16541,34 @@ module Aws::QuickSight
       :conditional_formatting,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the layout a KPI visual.
+    #
+    # @!attribute [rw] standard_layout
+    #   The standard layout of the KPI visual.
+    #   @return [Types::KPIVisualStandardLayout]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIVisualLayoutOptions AWS API Documentation
+    #
+    class KPIVisualLayoutOptions < Struct.new(
+      :standard_layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The standard layout of the KPI visual.
+    #
+    # @!attribute [rw] type
+    #   The standard layout type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIVisualStandardLayout AWS API Documentation
+    #
+    class KPIVisualStandardLayout < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19509,7 +19779,7 @@ module Aws::QuickSight
     # Output column.
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   The display name of the column..
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -19517,7 +19787,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type.
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OutputColumn AWS API Documentation
@@ -19525,7 +19799,8 @@ module Aws::QuickSight
     class OutputColumn < Struct.new(
       :name,
       :description,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20974,6 +21249,10 @@ module Aws::QuickSight
     #   The cell styling options for the total of header cells.
     #   @return [Types::TableCellStyle]
     #
+    # @!attribute [rw] total_aggregation_options
+    #   The total aggregation options for each value field.
+    #   @return [Array<Types::TotalAggregationOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTotalOptions AWS API Documentation
     #
     class PivotTotalOptions < Struct.new(
@@ -20983,7 +21262,8 @@ module Aws::QuickSight
       :custom_label,
       :total_cell_style,
       :value_cell_style,
-      :metric_header_cell_style)
+      :metric_header_cell_style,
+      :total_aggregation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21466,6 +21746,59 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that grants Amazon QuickSight access to your cluster and
+    # make a call to the `redshift:GetClusterCredentials` API. For more
+    # information on the `redshift:GetClusterCredentials` API, see [
+    # `GetClusterCredentials` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html
+    #
+    # @!attribute [rw] role_arn
+    #   Use the `RoleArn` structure to allow Amazon QuickSight to call
+    #   `redshift:GetClusterCredentials` on your cluster. The calling
+    #   principal must have `iam:PassRole` access to pass the role to Amazon
+    #   QuickSight. The role's trust policy must allow the Amazon
+    #   QuickSight service principal to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_user
+    #   The user whose permissions and group memberships will be used by
+    #   Amazon QuickSight to access the cluster. If this user already exists
+    #   in your database, Amazon QuickSight is granted the same permissions
+    #   that the user has. If the user doesn't exist, set the value of
+    #   `AutoCreateDatabaseUser` to `True` to create a new user with PUBLIC
+    #   permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_groups
+    #   A list of groups whose permissions will be granted to Amazon
+    #   QuickSight to access the cluster. These permissions are combined
+    #   with the permissions granted to Amazon QuickSight by the
+    #   `DatabaseUser`. If you choose to include this parameter, the
+    #   `RoleArn` must grant access to `redshift:JoinGroup`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_create_database_user
+    #   Automatically creates a database user. If your database doesn't
+    #   have a `DatabaseUser`, set this parameter to `True`. If there is no
+    #   `DatabaseUser`, Amazon QuickSight can't connect to your cluster.
+    #   The `RoleArn` that you use for this operation must grant access to
+    #   `redshift:CreateClusterUser` to successfully create the user.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftIAMParameters AWS API Documentation
+    #
+    class RedshiftIAMParameters < Struct.new(
+      :role_arn,
+      :database_user,
+      :database_groups,
+      :auto_create_database_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for Amazon Redshift. The `ClusterId` field can be blank
     # if `Host` and `Port` are both set. The `Host` and `Port` fields can be
     # blank if the `ClusterId` field is set.
@@ -21487,13 +21820,24 @@ module Aws::QuickSight
     #   provided.
     #   @return [String]
     #
+    # @!attribute [rw] iam_parameters
+    #   An optional parameter that uses IAM authentication to grant Amazon
+    #   QuickSight access to your cluster. This parameter can be used
+    #   instead of [DataSourceCredentials][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html
+    #   @return [Types::RedshiftIAMParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftParameters AWS API Documentation
     #
     class RedshiftParameters < Struct.new(
       :host,
       :port,
       :database,
-      :cluster_id)
+      :cluster_id,
+      :iam_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21561,9 +21905,18 @@ module Aws::QuickSight
     #   The axis binding type of the reference line. Choose one of the
     #   following options:
     #
-    #   * PrimaryY
+    #   * `PrimaryY`
     #
-    #   * SecondaryY
+    #   * `SecondaryY`
+    #   @return [String]
+    #
+    # @!attribute [rw] series_type
+    #   The series type of the reference line data configuration. Choose one
+    #   of the following options:
+    #
+    #   * `BAR`
+    #
+    #   * `LINE`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ReferenceLineDataConfiguration AWS API Documentation
@@ -21571,7 +21924,8 @@ module Aws::QuickSight
     class ReferenceLineDataConfiguration < Struct.new(
       :static_configuration,
       :dynamic_configuration,
-      :axis_binding)
+      :axis_binding,
+      :series_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21956,6 +22310,10 @@ module Aws::QuickSight
     #   The identity ID for a user in the external login provider.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to associate with the user.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisterUserRequest AWS API Documentation
     #
     class RegisterUserRequest < Struct.new(
@@ -21970,7 +22328,8 @@ module Aws::QuickSight
       :custom_permissions_name,
       :external_login_federation_provider_type,
       :custom_federation_provider_url,
-      :external_login_id)
+      :external_login_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24809,6 +25168,36 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The parameters that are required to connect to a Starburst data
+    # source.
+    #
+    # @!attribute [rw] host
+    #   The host name of the Starburst data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port for the Starburst data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog name for the Starburst data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_type
+    #   The product type for the Starburst data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StarburstParameters AWS API Documentation
+    #
+    class StarburstParameters < Struct.new(
+      :host,
+      :port,
+      :catalog,
+      :product_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account to export assets from.
     #   @return [String]
@@ -26236,6 +26625,10 @@ module Aws::QuickSight
     #   of each sheet.
     #   @return [Array<Types::Sheet>]
     #
+    # @!attribute [rw] options
+    #   An array of analysis level configurations.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersion AWS API Documentation
     #
     class TemplateVersion < Struct.new(
@@ -26247,7 +26640,8 @@ module Aws::QuickSight
       :description,
       :source_entity_arn,
       :theme_arn,
-      :sheets)
+      :sheets,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26302,6 +26696,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a template.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersionDefinition AWS API Documentation
     #
     class TemplateVersionDefinition < Struct.new(
@@ -26311,7 +26709,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26835,19 +27234,26 @@ module Aws::QuickSight
     # @!attribute [rw] value
     #   The value of a `TimeEquality` filter.
     #
-    #   This field is mutually exclusive to `ParameterName`.
+    #   This field is mutually exclusive to `RollingDate` and
+    #   `ParameterName`.
     #   @return [Time]
     #
     # @!attribute [rw] parameter_name
     #   The parameter whose value should be used for the filter value.
     #
-    #   This field is mutually exclusive to `Value`.
+    #   This field is mutually exclusive to `Value` and `RollingDate`.
     #   @return [String]
     #
     # @!attribute [rw] time_granularity
     #   The level of time precision that is used to aggregate `DateTime`
     #   values.
     #   @return [String]
+    #
+    # @!attribute [rw] rolling_date
+    #   The rolling date input for the `TimeEquality` filter.
+    #
+    #   This field is mutually exclusive to `Value` and `ParameterName`.
+    #   @return [Types::RollingDateConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TimeEqualityFilter AWS API Documentation
     #
@@ -26856,7 +27262,8 @@ module Aws::QuickSight
       :column,
       :value,
       :parameter_name,
-      :time_granularity)
+      :time_granularity,
+      :rolling_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27868,6 +28275,40 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An aggregation function that aggregates the total values of a measure.
+    #
+    # @!attribute [rw] simple_total_aggregation_function
+    #   A built in aggregation function for total values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TotalAggregationFunction AWS API Documentation
+    #
+    class TotalAggregationFunction < Struct.new(
+      :simple_total_aggregation_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The total aggregation settings map of a field id.
+    #
+    # @!attribute [rw] field_id
+    #   The field id that's associated with the total aggregation option.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_aggregation_function
+    #   The total aggregation function that you want to set for a specified
+    #   field id.
+    #   @return [Types::TotalAggregationFunction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TotalAggregationOption AWS API Documentation
+    #
+    class TotalAggregationOption < Struct.new(
+      :field_id,
+      :total_aggregation_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The total options for a table visual.
     #
     # @!attribute [rw] totals_visibility
@@ -27890,6 +28331,10 @@ module Aws::QuickSight
     #   Cell styling options for the total cells.
     #   @return [Types::TableCellStyle]
     #
+    # @!attribute [rw] total_aggregation_options
+    #   The total aggregation settings for each value field.
+    #   @return [Array<Types::TotalAggregationOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TotalOptions AWS API Documentation
     #
     class TotalOptions < Struct.new(
@@ -27897,7 +28342,8 @@ module Aws::QuickSight
       :placement,
       :scroll_status,
       :custom_label,
-      :total_cell_style)
+      :total_cell_style,
+      :total_aggregation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28137,6 +28583,30 @@ module Aws::QuickSight
     #
     class TrendArrowOptions < Struct.new(
       :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that are required to connect to a Trino data source.
+    #
+    # @!attribute [rw] host
+    #   The host name of the Trino data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port for the Trino data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog name for the Trino data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TrinoParameters AWS API Documentation
+    #
+    class TrinoParameters < Struct.new(
+      :host,
+      :port,
+      :catalog)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28661,6 +29131,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::AnalysisDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisRequest AWS API Documentation
     #
     class UpdateAnalysisRequest < Struct.new(
@@ -28670,7 +29146,8 @@ module Aws::QuickSight
       :parameters,
       :source_entity,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28906,6 +29383,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::DashboardVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update a dashboard with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardRequest AWS API Documentation
     #
     class UpdateDashboardRequest < Struct.new(
@@ -28917,7 +29400,8 @@ module Aws::QuickSight
       :version_description,
       :dashboard_publish_options,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29830,6 +30314,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::TemplateVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTemplateRequest AWS API Documentation
     #
     class UpdateTemplateRequest < Struct.new(
@@ -29838,7 +30328,8 @@ module Aws::QuickSight
       :source_entity,
       :version_description,
       :name,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30746,6 +31237,26 @@ module Aws::QuickSight
       :role_arn,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The option to relax the validation that is required to create and
+    # update analyses, dashboards, and templates with definition objects.
+    # When you set this value to `LENIENT`, validation is skipped for
+    # specific errors.
+    #
+    # @!attribute [rw] mode
+    #   The mode of validation for the asset to be creaed or updated. When
+    #   you set this value to `STRICT`, strict validation for every error is
+    #   enforced. When you set this value to `LENIENT`, validation is
+    #   skipped for specific UI errors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ValidationStrategy AWS API Documentation
+    #
+    class ValidationStrategy < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end

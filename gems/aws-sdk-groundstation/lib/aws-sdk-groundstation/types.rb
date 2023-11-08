@@ -1809,6 +1809,10 @@ module Aws::GroundStation
     #   KMS Alias Arn.
     #   @return [String]
     #
+    # @!attribute [rw] kms_alias_name
+    #   KMS Alias Name.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_arn
     #   KMS Key Arn.
     #   @return [String]
@@ -1817,6 +1821,7 @@ module Aws::GroundStation
     #
     class KmsKey < Struct.new(
       :kms_alias_arn,
+      :kms_alias_name,
       :kms_key_arn,
       :unknown)
       SENSITIVE = []
@@ -1824,6 +1829,7 @@ module Aws::GroundStation
       include Aws::Structure::Union
 
       class KmsAliasArn < KmsKey; end
+      class KmsAliasName < KmsKey; end
       class KmsKeyArn < KmsKey; end
       class Unknown < KmsKey; end
     end

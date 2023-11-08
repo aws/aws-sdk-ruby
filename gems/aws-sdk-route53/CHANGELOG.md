@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-11-06)
+------------------
+
+* Feature - Add partitional endpoints for iso-e and iso-f.
+
+1.80.0 (2023-10-05)
+------------------
+
+* Feature - Add hostedzonetype filter to ListHostedZones API.
+
+1.79.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.78.0 (2023-07-31)
 ------------------
 

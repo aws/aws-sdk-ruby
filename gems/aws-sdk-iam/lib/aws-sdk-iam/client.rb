@@ -4098,6 +4098,9 @@ module Aws::IAM
     # four hours. IAM reports activity for at least the last 400 days, or
     # less if your Region began supporting this feature within the last
     # year. For more information, see [Regions where data is tracked][1].
+    # For more information about services and actions for which action last
+    # accessed information is displayed, see [IAM action last accessed
+    # information services and actions][2].
     #
     # The service last accessed data includes all attempts to access an
     # Amazon Web Services API, not just the successful ones. This includes
@@ -4108,7 +4111,7 @@ module Aws::IAM
     # because the request might have been denied. Refer to your CloudTrail
     # logs as the authoritative source for information about all API calls
     # and whether they were successful or denied access. For more
-    # information, see [Logging IAM events with CloudTrail][2] in the *IAM
+    # information, see [Logging IAM events with CloudTrail][3] in the *IAM
     # User Guide*.
     #
     # The `GenerateServiceLastAccessedDetails` operation returns a `JobId`.
@@ -4143,21 +4146,22 @@ module Aws::IAM
     # policy types include resource-based policies, access control lists,
     # Organizations policies, IAM permissions boundaries, and STS assume
     # role policies. It only applies permissions policy logic. For more
-    # about the evaluation of policy types, see [Evaluating policies][3] in
+    # about the evaluation of policy types, see [Evaluating policies][4] in
     # the *IAM User Guide*.
     #
     #  </note>
     #
     # For more information about service and action last accessed data, see
-    # [Reducing permissions using service last accessed data][4] in the *IAM
+    # [Reducing permissions using service last accessed data][5] in the *IAM
     # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-action-last-accessed.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
     #
     # @option params [required, String] :arn
     #   The ARN of the IAM resource (user, group, role, or managed policy)
@@ -6323,10 +6327,12 @@ module Aws::IAM
     # implicitly based on the Amazon Web Services access key ID used to sign
     # the request. If a temporary access key is used, then `UserName` is
     # required. If a long-term key is assigned to the user, then `UserName`
-    # is not required. This operation works for access keys under the Amazon
-    # Web Services account. Consequently, you can use this operation to
-    # manage Amazon Web Services account root user credentials even if the
-    # Amazon Web Services account has no associated users.
+    # is not required.
+    #
+    # This operation works for access keys under the Amazon Web Services
+    # account. If the Amazon Web Services account has no associated users,
+    # the root user returns it's own access key IDs by running this
+    # command.
     #
     # <note markdown="1"> To ensure the security of your Amazon Web Services account, the secret
     # access key is accessible only during key and user creation.
@@ -13461,7 +13467,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

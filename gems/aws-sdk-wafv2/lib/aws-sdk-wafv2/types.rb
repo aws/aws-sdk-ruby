@@ -60,8 +60,13 @@ module Aws::WAFV2
     #   is the page on your website that accepts the completed registration
     #   form for a new user. This page must accept `POST` requests.
     #
-    #   For example, for the URL `https://example.com/web/signup`, you would
-    #   provide the path `/web/signup`.
+    #   For example, for the URL `https://example.com/web/newaccount`, you
+    #   would provide the path `/web/newaccount`. Account creation page
+    #   paths that start with the path that you provide are considered a
+    #   match. For example `/web/newaccount` matches the account creation
+    #   paths `/web/newaccount`, `/web/newaccount/`, `/web/newaccountPage`,
+    #   and `/web/newaccount/thisPage`, but doesn't match the path
+    #   `/home/web/newaccount` or `/website/newaccount`.
     #   @return [String]
     #
     # @!attribute [rw] registration_page_path
@@ -73,8 +78,13 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   For example, for the URL `https://example.com/web/register`, you
-    #   would provide the path `/web/register`.
+    #   For example, for the URL `https://example.com/web/registration`, you
+    #   would provide the path `/web/registration`. Registration page paths
+    #   that start with the path that you provide are considered a match.
+    #   For example `/web/registration` matches the registration paths
+    #   `/web/registration`, `/web/registration/`, `/web/registrationPage`,
+    #   and `/web/registration/thisPage`, but doesn't match the path
+    #   `/home/web/registration` or `/website/registration`.
     #   @return [String]
     #
     # @!attribute [rw] request_inspection
@@ -124,7 +134,11 @@ module Aws::WAFV2
     # @!attribute [rw] login_path
     #   The path of the login endpoint for your application. For example,
     #   for the URL `https://example.com/web/login`, you would provide the
-    #   path `/web/login`.
+    #   path `/web/login`. Login paths that start with the path that you
+    #   provide are considered a match. For example `/web/login` matches the
+    #   login paths `/web/login`, `/web/login/`, `/web/loginPage`, and
+    #   `/web/login/thisPage`, but doesn't match the login path
+    #   `/home/web/login` or `/website/login`.
     #
     #   The rule group inspects only HTTP `POST` requests to your specified
     #   login endpoint.
@@ -183,10 +197,31 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_machine_learning
+    #   Applies only to the targeted inspection level.
+    #
+    #   Determines whether to use machine learning (ML) to analyze your web
+    #   traffic for bot-related activity. Machine learning is required for
+    #   the Bot Control rules `TGT_ML_CoordinatedActivityLow` and
+    #   `TGT_ML_CoordinatedActivityMedium`, which inspect for anomalous
+    #   behavior that might indicate distributed, coordinated bot activity.
+    #
+    #   For more information about this choice, see the listing for these
+    #   rules in the table at [Bot Control rules listing][1] in the *WAF
+    #   Developer Guide*.
+    #
+    #   Default: `TRUE`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html#aws-managed-rule-groups-bot-rules
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesBotControlRuleSet AWS API Documentation
     #
     class AWSManagedRulesBotControlRuleSet < Struct.new(
-      :inspection_level)
+      :inspection_level,
+      :enable_machine_learning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -379,7 +414,7 @@ module Aws::WAFV2
     #
     # Use this to customize the maximum size of the request body that your
     # protected CloudFront distributions forward to WAF for inspection. The
-    # default is 16 KB (16,384 kilobytes).
+    # default is 16 KB (16,384 bytes).
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -394,7 +429,7 @@ module Aws::WAFV2
     # @!attribute [rw] request_body
     #   Customizes the maximum size of the request body that your protected
     #   CloudFront distributions forward to WAF for inspection. The default
-    #   size is 16 KB (16,384 kilobytes).
+    #   size is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -455,9 +490,9 @@ module Aws::WAFV2
     #   forwards the contents that are below the limit to WAF for
     #   inspection.
     #
-    #   The default limit is 8 KB (8,192 kilobytes) for regional resources
-    #   and 16 KB (16,384 kilobytes) for CloudFront distributions. For
-    #   CloudFront distributions, you can increase the limit in the web ACL
+    #   The default limit is 8 KB (8,192 bytes) for regional resources and
+    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
+    #   distributions, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
@@ -507,10 +542,21 @@ module Aws::WAFV2
     #   * `UriPath`: The value that you want WAF to search for in the URI
     #     path, for example, `/images/daily-ad.jpg`.
     #
-    #   * `HeaderOrder`: The comma-separated list of header names to match
-    #     for. WAF creates a string that contains the ordered list of header
-    #     names, from the headers in the web request, and then matches
-    #     against that string.
+    #   * `JA3Fingerprint`: Match against the request's JA3 fingerprint.
+    #     The JA3 fingerprint is a 32-character hash derived from the TLS
+    #     Client Hello of an incoming request. This fingerprint serves as a
+    #     unique identifier for the client's TLS configuration. You can use
+    #     this choice only with a string match `ByteMatchStatement` with the
+    #     `PositionalConstraint` set to `EXACTLY`.
+    #
+    #     You can obtain the JA3 fingerprint for client requests from the
+    #     web ACL logs. If WAF is able to calculate the fingerprint, it
+    #     includes it in the logs. For information about the logging fields,
+    #     see [Log fields][1] in the *WAF Developer Guide*.
+    #
+    #   * `HeaderOrder`: The list of header names to match for. WAF creates
+    #     a string that contains the ordered list of header names, from the
+    #     headers in the web request, and then matches against that string.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
@@ -530,6 +576,10 @@ module Aws::WAFV2
     #
     #   The value that you want WAF to search for. The SDK automatically
     #   base64 encodes the value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
@@ -545,7 +595,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
@@ -927,7 +977,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the cookies to inspect with the rule inspection
-    #   criteria. If you specify `All`, WAF inspects both keys and values.
+    #   criteria. If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -1064,27 +1121,24 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses. All addresses must be specified
-    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
-    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
+    #   addresses or blocks of IP addresses that you want WAF to inspect for
+    #   in incoming requests. All addresses must be specified using
+    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all
+    #   IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address 192.0.2.44, specify
-    #     `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44,
+    #     specify `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
-    #     specify `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address
+    #   * For requests that originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses
+    #   * For requests that originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
@@ -1251,9 +1305,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -1348,9 +1402,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -1417,7 +1471,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -1560,8 +1614,9 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] response_headers
-    #   The HTTP headers to use in the response. Duplicate header names are
-    #   not allowed.
+    #   The HTTP headers to use in the response. You can specify any header
+    #   name except for `content-type`. Duplicate header names are not
+    #   allowed.
     #
     #   For information about the limits on count and size for custom
     #   request and response settings, see [WAF quotas][1] in the *WAF
@@ -2293,10 +2348,10 @@ module Aws::WAFV2
     #
     #   A limited amount of the request body is forwarded to WAF for
     #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 kilobytes) and for CloudFront
-    #   distributions, the limit is 16 KB (16,384 kilobytes). For CloudFront
-    #   distributions, you can increase the limit in the web ACL's
-    #   `AssociationConfig`, for additional processing fees.
+    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
+    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
+    #   can increase the limit in the web ACL's `AssociationConfig`, for
+    #   additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `Body` object configuration.
@@ -2315,10 +2370,10 @@ module Aws::WAFV2
     #
     #   A limited amount of the request body is forwarded to WAF for
     #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 kilobytes) and for CloudFront
-    #   distributions, the limit is 16 KB (16,384 kilobytes). For CloudFront
-    #   distributions, you can increase the limit in the web ACL's
-    #   `AssociationConfig`, for additional processing fees.
+    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
+    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
+    #   can increase the limit in the web ACL's `AssociationConfig`, for
+    #   additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `JsonBody` object configuration.
@@ -2359,6 +2414,35 @@ module Aws::WAFV2
     #   `host:user-agent:accept:authorization:referer`.
     #   @return [Types::HeaderOrder]
     #
+    # @!attribute [rw] ja3_fingerprint
+    #   Match against the request's JA3 fingerprint. The JA3 fingerprint is
+    #   a 32-character hash derived from the TLS Client Hello of an incoming
+    #   request. This fingerprint serves as a unique identifier for the
+    #   client's TLS configuration. WAF calculates and logs this
+    #   fingerprint for each request that has enough TLS Client Hello
+    #   information for the calculation. Almost all web requests include
+    #   this information.
+    #
+    #   <note markdown="1"> You can use this choice only with a string match
+    #   `ByteMatchStatement` with the `PositionalConstraint` set to
+    #   `EXACTLY`.
+    #
+    #    </note>
+    #
+    #   You can obtain the JA3 fingerprint for client requests from the web
+    #   ACL logs. If WAF is able to calculate the fingerprint, it includes
+    #   it in the logs. For information about the logging fields, see [Log
+    #   fields][1] in the *WAF Developer Guide*.
+    #
+    #   Provide the JA3 fingerprint string from the logs in your string
+    #   match statement specification, to match with any future requests
+    #   that have the same TLS configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+    #   @return [Types::JA3Fingerprint]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
     class FieldToMatch < Struct.new(
@@ -2372,7 +2456,8 @@ module Aws::WAFV2
       :json_body,
       :headers,
       :cookies,
-      :header_order)
+      :header_order,
+      :ja3_fingerprint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3482,7 +3567,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the headers to match with the rule inspection criteria.
-    #   If you specify `All`, WAF inspects both keys and values.
+    #   If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -3552,27 +3644,24 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses. All addresses must be specified
-    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
-    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
+    #   addresses or blocks of IP addresses that you want WAF to inspect for
+    #   in incoming requests. All addresses must be specified using
+    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all
+    #   IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address 192.0.2.44, specify
-    #     `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44,
+    #     specify `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
-    #     specify `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address
+    #   * For requests that originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses
+    #   * For requests that originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
@@ -3785,6 +3874,52 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Match against the request's JA3 fingerprint. The JA3 fingerprint is a
+    # 32-character hash derived from the TLS Client Hello of an incoming
+    # request. This fingerprint serves as a unique identifier for the
+    # client's TLS configuration. WAF calculates and logs this fingerprint
+    # for each request that has enough TLS Client Hello information for the
+    # calculation. Almost all web requests include this information.
+    #
+    # <note markdown="1"> You can use this choice only with a string match `ByteMatchStatement`
+    # with the `PositionalConstraint` set to `EXACTLY`.
+    #
+    #  </note>
+    #
+    # You can obtain the JA3 fingerprint for client requests from the web
+    # ACL logs. If WAF is able to calculate the fingerprint, it includes it
+    # in the logs. For information about the logging fields, see [Log
+    # fields][1] in the *WAF Developer Guide*.
+    #
+    # Provide the JA3 fingerprint string from the logs in your string match
+    # statement specification, to match with any future requests that have
+    # the same TLS configuration.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+    #
+    # @!attribute [rw] fallback_behavior
+    #   The match status to assign to the web request if the request
+    #   doesn't have a JA3 fingerprint.
+    #
+    #   You can specify the following fallback behaviors:
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JA3Fingerprint AWS API Documentation
+    #
+    class JA3Fingerprint < Struct.new(
+      :fallback_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inspect the body of the web request as JSON. The body immediately
     # follows the request headers.
     #
@@ -3806,7 +3941,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the JSON to match against using the `MatchPattern`. If
-    #   you specify `All`, WAF matches against keys and values.
+    #   you specify `ALL`, WAF matches against keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
@@ -3849,9 +3991,9 @@ module Aws::WAFV2
     #   forwards the contents that are below the limit to WAF for
     #   inspection.
     #
-    #   The default limit is 8 KB (8,192 kilobytes) for regional resources
-    #   and 16 KB (16,384 kilobytes) for CloudFront distributions. For
-    #   CloudFront distributions, you can increase the limit in the web ACL
+    #   The default limit is 8 KB (8,192 bytes) for regional resources and
+    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
+    #   distributions, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
@@ -5086,8 +5228,10 @@ module Aws::WAFV2
     # calling ListAvailableManagedRuleGroups.
     #
     # You cannot nest a `ManagedRuleGroupStatement`, for example for use
-    # inside a `NotStatement` or `OrStatement`. It can only be referenced as
-    # a top-level statement within a rule.
+    # inside a `NotStatement` or `OrStatement`. You cannot use a managed
+    # rule group inside another rule group. You can only reference a managed
+    # rule group as a top-level statement within a rule that you define in a
+    # web ACL.
     #
     # <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
     # managed rule group `AWSManagedRulesBotControlRuleSet`, the WAF Fraud
@@ -6232,7 +6376,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitCookie AWS API Documentation
@@ -6302,7 +6446,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitHeader AWS API Documentation
@@ -6379,7 +6523,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryArgument AWS API Documentation
@@ -6405,7 +6549,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryString AWS API Documentation
@@ -6430,7 +6574,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitUriPath AWS API Documentation
@@ -6475,7 +6619,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
@@ -6559,7 +6703,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexPatternSetReferenceStatement AWS API Documentation
@@ -6642,7 +6786,7 @@ module Aws::WAFV2
 
     # Customizes the maximum size of the request body that your protected
     # CloudFront distributions forward to WAF for inspection. The default
-    # size is 16 KB (16,384 kilobytes).
+    # size is 16 KB (16,384 bytes).
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -6662,7 +6806,7 @@ module Aws::WAFV2
     #   inspection. This applies to statements in the web ACL that inspect
     #   the body or JSON body.
     #
-    #   Default: `16 KB (16,384 kilobytes)`
+    #   Default: `16 KB (16,384 bytes)`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RequestBodyAssociatedResourceTypeConfig AWS API Documentation
@@ -7150,13 +7294,17 @@ module Aws::WAFV2
     end
 
     # A single rule, which you can use in a WebACL or RuleGroup to identify
-    # web requests that you want to allow, block, or count. Each rule
-    # includes one top-level Statement that WAF uses to identify matching
-    # web requests, and parameters that govern how WAF handles them.
+    # web requests that you want to manage in some way. Each rule includes
+    # one top-level Statement that WAF uses to identify matching web
+    # requests, and parameters that govern how WAF handles them.
     #
     # @!attribute [rw] name
-    #   The name of the rule. You can't change the name of a `Rule` after
-    #   you create it.
+    #   The name of the rule.
+    #
+    #   If you change the name of a `Rule` after you create it and you want
+    #   the rule's metric name to reflect the change, update the metric
+    #   name in the rule's `VisibilityConfig` settings. WAF doesn't
+    #   automatically update the metric name when you update the rule name.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -7239,6 +7387,10 @@ module Aws::WAFV2
     # @!attribute [rw] visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
+    #
+    #   If you change the name of a `Rule` after you create it and you want
+    #   the rule's metric name to reflect the change, update the metric
+    #   name as well. WAF doesn't automatically update the metric name.
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] captcha_config
@@ -7384,9 +7536,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -7467,8 +7619,10 @@ module Aws::WAFV2
     # provide the ARN of the rule group in this statement.
     #
     # You cannot nest a `RuleGroupReferenceStatement`, for example for use
-    # inside a `NotStatement` or `OrStatement`. You can only use a rule
-    # group reference statement at the top level inside a web ACL.
+    # inside a `NotStatement` or `OrStatement`. You cannot use a rule group
+    # reference statement inside another rule group. You can only reference
+    # a rule group as a top-level statement within a rule that you define in
+    # a web ACL.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the entity.
@@ -7716,9 +7870,9 @@ module Aws::WAFV2
     #
     # If you configure WAF to inspect the request body, WAF inspects only
     # the number of bytes of the body up to the limit for the web ACL. By
-    # default, for regional web ACLs, this limit is 8 KB (8,192 kilobytes)
-    # and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
-    # For CloudFront web ACLs, you can increase the limit in the web ACL
+    # default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
+    # for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
+    # CloudFront web ACLs, you can increase the limit in the web ACL
     # `AssociationConfig`, for additional fees. If you know that the request
     # body for your web requests should never exceed the inspection limit,
     # you could use a size constraint statement to block requests that have
@@ -7750,7 +7904,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SizeConstraintStatement AWS API Documentation
@@ -7781,7 +7935,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] sensitivity_level
@@ -7851,9 +8005,9 @@ module Aws::WAFV2
     #
     #   If you configure WAF to inspect the request body, WAF inspects only
     #   the number of bytes of the body up to the limit for the web ACL. By
-    #   default, for regional web ACLs, this limit is 8 KB (8,192 kilobytes)
-    #   and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
-    #   For CloudFront web ACLs, you can increase the limit in the web ACL
+    #   default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
+    #   for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
+    #   CloudFront web ACLs, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional fees. If you know that the
     #   request body for your web requests should never exceed the
     #   inspection limit, you could use a size constraint statement to block
@@ -7908,8 +8062,10 @@ module Aws::WAFV2
     #   provide the ARN of the rule group in this statement.
     #
     #   You cannot nest a `RuleGroupReferenceStatement`, for example for use
-    #   inside a `NotStatement` or `OrStatement`. You can only use a rule
-    #   group reference statement at the top level inside a web ACL.
+    #   inside a `NotStatement` or `OrStatement`. You cannot use a rule
+    #   group reference statement inside another rule group. You can only
+    #   reference a rule group as a top-level statement within a rule that
+    #   you define in a web ACL.
     #   @return [Types::RuleGroupReferenceStatement]
     #
     # @!attribute [rw] ip_set_reference_statement
@@ -8062,8 +8218,10 @@ module Aws::WAFV2
     #   calling ListAvailableManagedRuleGroups.
     #
     #   You cannot nest a `ManagedRuleGroupStatement`, for example for use
-    #   inside a `NotStatement` or `OrStatement`. It can only be referenced
-    #   as a top-level statement within a rule.
+    #   inside a `NotStatement` or `OrStatement`. You cannot use a managed
+    #   rule group inside another rule group. You can only reference a
+    #   managed rule group as a top-level statement within a rule that you
+    #   define in a web ACL.
     #
     #   <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
     #   managed rule group `AWSManagedRulesBotControlRuleSet`, the WAF Fraud
@@ -8219,126 +8377,12 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] type
-    #   You can specify the following transformation types:
+    #   For detailed descriptions of each of the transformation types, see
+    #   [Text transformations][1] in the *WAF Developer Guide*.
     #
-    #   **BASE64\_DECODE** - Decode a `Base64`-encoded string.
     #
-    #   **BASE64\_DECODE\_EXT** - Decode a `Base64`-encoded string, but use
-    #   a forgiving implementation that ignores characters that aren't
-    #   valid.
     #
-    #   **CMD\_LINE** - Command-line transformations. These are helpful in
-    #   reducing effectiveness of attackers who inject an operating system
-    #   command-line command and use unusual formatting to disguise some or
-    #   all of the command.
-    #
-    #   * Delete the following characters: `\ " ' ^`
-    #
-    #   * Delete spaces before the following characters: `/ (`
-    #
-    #   * Replace the following characters with a space: `, ;`
-    #
-    #   * Replace multiple spaces with one space
-    #
-    #   * Convert uppercase letters (A-Z) to lowercase (a-z)
-    #
-    #   **COMPRESS\_WHITE\_SPACE** - Replace these characters with a space
-    #   character (decimal 32):
-    #
-    #   * `\f`, formfeed, decimal 12
-    #
-    #   * `\t`, tab, decimal 9
-    #
-    #   * `\n`, newline, decimal 10
-    #
-    #   * `\r`, carriage return, decimal 13
-    #
-    #   * `\v`, vertical tab, decimal 11
-    #
-    #   * Non-breaking space, decimal 160
-    #
-    #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
-    #
-    #   **CSS\_DECODE** - Decode characters that were encoded using CSS 2.x
-    #   escape rules `syndata.html#characters`. This function uses up to two
-    #   bytes in the decoding process, so it can help to uncover ASCII
-    #   characters that were encoded using CSS encoding that wouldn’t
-    #   typically be encoded. It's also useful in countering evasion, which
-    #   is a combination of a backslash and non-hexadecimal characters. For
-    #   example, `ja\vascript` for javascript.
-    #
-    #   **ESCAPE\_SEQ\_DECODE** - Decode the following ANSI C escape
-    #   sequences: `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\`, `\?`,
-    #   `'`, `"`, `\xHH` (hexadecimal), `\0OOO` (octal). Encodings that
-    #   aren't valid remain in the output.
-    #
-    #   **HEX\_DECODE** - Decode a string of hexadecimal characters into a
-    #   binary.
-    #
-    #   **HTML\_ENTITY\_DECODE** - Replace HTML-encoded characters with
-    #   unencoded characters. `HTML_ENTITY_DECODE` performs these
-    #   operations:
-    #
-    #   * Replaces `(ampersand)quot;` with `"`
-    #
-    #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
-    #
-    #   * Replaces `(ampersand)lt;` with a "less than" symbol
-    #
-    #   * Replaces `(ampersand)gt;` with `>`
-    #
-    #   * Replaces characters that are represented in hexadecimal format,
-    #     `(ampersand)#xhhhh;`, with the corresponding characters
-    #
-    #   * Replaces characters that are represented in decimal format,
-    #     `(ampersand)#nnnn;`, with the corresponding characters
-    #
-    #   **JS\_DECODE** - Decode JavaScript escape sequences. If a `` `u`
-    #   `HHHH` code is in the full-width ASCII code range of `FF01-FF5E`,
-    #   then the higher byte is used to detect and adjust the lower byte. If
-    #   not, only the lower byte is used and the higher byte is zeroed,
-    #   causing a possible loss of information.
-    #
-    #   **LOWERCASE** - Convert uppercase letters (A-Z) to lowercase (a-z).
-    #
-    #   **MD5** - Calculate an MD5 hash from the data in the input. The
-    #   computed hash is in a raw binary form.
-    #
-    #   **NONE** - Specify `NONE` if you don't want any text
-    #   transformations.
-    #
-    #   **NORMALIZE\_PATH** - Remove multiple slashes, directory
-    #   self-references, and directory back-references that are not at the
-    #   beginning of the input from an input string.
-    #
-    #   **NORMALIZE\_PATH\_WIN** - This is the same as `NORMALIZE_PATH`, but
-    #   first converts backslash characters to forward slashes.
-    #
-    #   **REMOVE\_NULLS** - Remove all `NULL` bytes from the input.
-    #
-    #   **REPLACE\_COMMENTS** - Replace each occurrence of a C-style comment
-    #   (`/* ... */`) with a single space. Multiple consecutive occurrences
-    #   are not compressed. Unterminated comments are also replaced with a
-    #   space (ASCII 0x20). However, a standalone termination of a comment
-    #   (`*/`) is not acted upon.
-    #
-    #   **REPLACE\_NULLS** - Replace NULL bytes in the input with space
-    #   characters (ASCII `0x20`).
-    #
-    #   **SQL\_HEX\_DECODE** - Decode SQL hex data. Example (`0x414243`)
-    #   will be decoded to (`ABC`).
-    #
-    #   **URL\_DECODE** - Decode a URL-encoded value.
-    #
-    #   **URL\_DECODE\_UNI** - Like `URL_DECODE`, but with support for
-    #   Microsoft-specific `%u` encoding. If the code is in the full-width
-    #   ASCII code range of `FF01-FF5E`, the higher byte is used to detect
-    #   and adjust the lower byte. Otherwise, only the lower byte is used
-    #   and the higher byte is zeroed.
-    #
-    #   **UTF8\_TO\_UNICODE** - Convert all UTF-8 character sequences to
-    #   Unicode. This helps input normalization, and minimizing
-    #   false-positives and false-negatives for non-English languages.
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-transformation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/TextTransformation AWS API Documentation
@@ -8450,27 +8494,24 @@ module Aws::WAFV2
     #
     # @!attribute [rw] addresses
     #   Contains an array of strings that specifies zero or more IP
-    #   addresses or blocks of IP addresses. All addresses must be specified
-    #   using Classless Inter-Domain Routing (CIDR) notation. WAF supports
-    #   all IPv4 and IPv6 CIDR ranges except for `/0`.
+    #   addresses or blocks of IP addresses that you want WAF to inspect for
+    #   in incoming requests. All addresses must be specified using
+    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all
+    #   IPv4 and IPv6 CIDR ranges except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address 192.0.2.44, specify
-    #     `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44,
+    #     specify `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
-    #     specify `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from the IP address
+    #   * For requests that originated from the IP address
     #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that
-    #     originated from IP addresses
+    #   * For requests that originated from IP addresses
     #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
@@ -8741,9 +8782,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -8850,9 +8891,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -8927,7 +8968,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -9458,16 +9499,17 @@ module Aws::WAFV2
     end
 
     # A web ACL defines a collection of rules to use to inspect and control
-    # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
-    # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
-    # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
-    # Amazon Web Services Verified Access instance.
+    # web requests. Each rule has a statement that defines what to look for
+    # in web requests and an action that WAF applies to requests that match
+    # the statement. In the web ACL, you assign a default action to take
+    # (allow, block) for any request that does not match any of the rules.
+    # The rules in a web ACL can be a combination of the types Rule,
+    # RuleGroup, and managed rule group. You can associate a web ACL with
+    # one or more Amazon Web Services resources to protect. The resources
+    # can be an Amazon CloudFront distribution, an Amazon API Gateway REST
+    # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    # Cognito user pool, an App Runner service, or an Amazon Web Services
+    # Verified Access instance.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL
@@ -9496,9 +9538,9 @@ module Aws::WAFV2
     #
     # @!attribute [rw] rules
     #   The Rule statements used to identify the web requests that you want
-    #   to allow, block, or count. Each rule includes one top-level
-    #   statement that WAF uses to identify matching web requests, and
-    #   parameters that govern how WAF handles them.
+    #   to manage. Each rule includes one top-level statement that WAF uses
+    #   to identify matching web requests, and parameters that govern how
+    #   WAF handles them.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] visibility_config
@@ -9623,7 +9665,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -9726,7 +9768,7 @@ module Aws::WAFV2
     #   before using them as custom aggregation keys. If you specify one or
     #   more transformations to apply, WAF performs all transformations on
     #   the specified content, starting from the lowest priority setting,
-    #   and then uses the component contents.
+    #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/XssMatchStatement AWS API Documentation

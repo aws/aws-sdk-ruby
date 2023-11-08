@@ -482,7 +482,7 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -508,7 +508,7 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -608,7 +608,7 @@ module Aws::EventBridge
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -756,7 +756,7 @@ module Aws::EventBridge
     class CreateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value)
-      SENSITIVE = []
+      SENSITIVE = [:api_key_value]
       include Aws::Structure
     end
 
@@ -812,7 +812,7 @@ module Aws::EventBridge
     class CreateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -832,7 +832,7 @@ module Aws::EventBridge
     class CreateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -4683,7 +4683,7 @@ module Aws::EventBridge
     class UpdateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value)
-      SENSITIVE = []
+      SENSITIVE = [:api_key_value]
       include Aws::Structure
     end
 
@@ -4736,7 +4736,7 @@ module Aws::EventBridge
     class UpdateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4756,7 +4756,7 @@ module Aws::EventBridge
     class UpdateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 

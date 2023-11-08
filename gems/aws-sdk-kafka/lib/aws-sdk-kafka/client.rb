@@ -803,6 +803,92 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Creates a new Kafka Replicator.
+    #
+    # @option params [String] :description
+    #   A summary description of the replicator.
+    #
+    # @option params [required, Array<Types::KafkaCluster>] :kafka_clusters
+    #   Kafka Clusters to use in setting up sources / targets for replication.
+    #
+    # @option params [required, Array<Types::ReplicationInfo>] :replication_info_list
+    #   A list of replication configurations, where each configuration targets
+    #   a given source cluster to target cluster replication flow.
+    #
+    # @option params [required, String] :replicator_name
+    #   The name of the replicator. Alpha-numeric characters with '-' are
+    #   allowed.
+    #
+    # @option params [required, String] :service_execution_role_arn
+    #   The ARN of the IAM role used by the replicator to access resources in
+    #   the customer's account (e.g source and target clusters)
+    #
+    # @option params [Hash<String,String>] :tags
+    #   List of tags to attach to created Replicator.
+    #
+    # @return [Types::CreateReplicatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReplicatorResponse#replicator_arn #replicator_arn} => String
+    #   * {Types::CreateReplicatorResponse#replicator_name #replicator_name} => String
+    #   * {Types::CreateReplicatorResponse#replicator_state #replicator_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_replicator({
+    #     description: "__stringMax1024",
+    #     kafka_clusters: [ # required
+    #       {
+    #         amazon_msk_cluster: { # required
+    #           msk_cluster_arn: "__string", # required
+    #         },
+    #         vpc_config: { # required
+    #           security_group_ids: ["__string"],
+    #           subnet_ids: ["__string"], # required
+    #         },
+    #       },
+    #     ],
+    #     replication_info_list: [ # required
+    #       {
+    #         consumer_group_replication: { # required
+    #           consumer_groups_to_exclude: ["__stringMax256"],
+    #           consumer_groups_to_replicate: ["__stringMax256"], # required
+    #           detect_and_copy_new_consumer_groups: false,
+    #           synchronise_consumer_group_offsets: false,
+    #         },
+    #         source_kafka_cluster_arn: "__string", # required
+    #         target_compression_type: "NONE", # required, accepts NONE, GZIP, SNAPPY, LZ4, ZSTD
+    #         target_kafka_cluster_arn: "__string", # required
+    #         topic_replication: { # required
+    #           copy_access_control_lists_for_topics: false,
+    #           copy_topic_configurations: false,
+    #           detect_and_copy_new_topics: false,
+    #           topics_to_exclude: ["__stringMax249"],
+    #           topics_to_replicate: ["__stringMax249"], # required
+    #         },
+    #       },
+    #     ],
+    #     replicator_name: "__stringMin1Max128Pattern09AZaZ09AZaZ0", # required
+    #     service_execution_role_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replicator_arn #=> String
+    #   resp.replicator_name #=> String
+    #   resp.replicator_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateReplicator AWS API Documentation
+    #
+    # @overload create_replicator(params = {})
+    # @param [Hash] params ({})
+    def create_replicator(params = {}, options = {})
+      req = build_request(:create_replicator, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon MSK VPC connection.
     #
     # @option params [required, String] :target_cluster_arn
@@ -930,6 +1016,38 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def delete_configuration(params = {}, options = {})
       req = build_request(:delete_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a replicator.
+    #
+    # @option params [String] :current_version
+    #
+    # @option params [required, String] :replicator_arn
+    #
+    # @return [Types::DeleteReplicatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteReplicatorResponse#replicator_arn #replicator_arn} => String
+    #   * {Types::DeleteReplicatorResponse#replicator_state #replicator_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_replicator({
+    #     current_version: "__string",
+    #     replicator_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replicator_arn #=> String
+    #   resp.replicator_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteReplicator AWS API Documentation
+    #
+    # @overload delete_replicator(params = {})
+    # @param [Hash] params ({})
+    def delete_replicator(params = {}, options = {})
+      req = build_request(:delete_replicator, params)
       req.send_request(options)
     end
 
@@ -1429,6 +1547,82 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def describe_configuration_revision(params = {}, options = {})
       req = build_request(:describe_configuration_revision, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of the Kafka Replicator whose Amazon Resource
+    # Name (ARN) is specified in the request.
+    #
+    # @option params [required, String] :replicator_arn
+    #
+    # @return [Types::DescribeReplicatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicatorResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeReplicatorResponse#current_version #current_version} => String
+    #   * {Types::DescribeReplicatorResponse#is_replicator_reference #is_replicator_reference} => Boolean
+    #   * {Types::DescribeReplicatorResponse#kafka_clusters #kafka_clusters} => Array&lt;Types::KafkaClusterDescription&gt;
+    #   * {Types::DescribeReplicatorResponse#replication_info_list #replication_info_list} => Array&lt;Types::ReplicationInfoDescription&gt;
+    #   * {Types::DescribeReplicatorResponse#replicator_arn #replicator_arn} => String
+    #   * {Types::DescribeReplicatorResponse#replicator_description #replicator_description} => String
+    #   * {Types::DescribeReplicatorResponse#replicator_name #replicator_name} => String
+    #   * {Types::DescribeReplicatorResponse#replicator_resource_arn #replicator_resource_arn} => String
+    #   * {Types::DescribeReplicatorResponse#replicator_state #replicator_state} => String
+    #   * {Types::DescribeReplicatorResponse#service_execution_role_arn #service_execution_role_arn} => String
+    #   * {Types::DescribeReplicatorResponse#state_info #state_info} => Types::ReplicationStateInfo
+    #   * {Types::DescribeReplicatorResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replicator({
+    #     replicator_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.current_version #=> String
+    #   resp.is_replicator_reference #=> Boolean
+    #   resp.kafka_clusters #=> Array
+    #   resp.kafka_clusters[0].amazon_msk_cluster.msk_cluster_arn #=> String
+    #   resp.kafka_clusters[0].kafka_cluster_alias #=> String
+    #   resp.kafka_clusters[0].vpc_config.security_group_ids #=> Array
+    #   resp.kafka_clusters[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.kafka_clusters[0].vpc_config.subnet_ids #=> Array
+    #   resp.kafka_clusters[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.replication_info_list #=> Array
+    #   resp.replication_info_list[0].consumer_group_replication.consumer_groups_to_exclude #=> Array
+    #   resp.replication_info_list[0].consumer_group_replication.consumer_groups_to_exclude[0] #=> String
+    #   resp.replication_info_list[0].consumer_group_replication.consumer_groups_to_replicate #=> Array
+    #   resp.replication_info_list[0].consumer_group_replication.consumer_groups_to_replicate[0] #=> String
+    #   resp.replication_info_list[0].consumer_group_replication.detect_and_copy_new_consumer_groups #=> Boolean
+    #   resp.replication_info_list[0].consumer_group_replication.synchronise_consumer_group_offsets #=> Boolean
+    #   resp.replication_info_list[0].source_kafka_cluster_alias #=> String
+    #   resp.replication_info_list[0].target_compression_type #=> String, one of "NONE", "GZIP", "SNAPPY", "LZ4", "ZSTD"
+    #   resp.replication_info_list[0].target_kafka_cluster_alias #=> String
+    #   resp.replication_info_list[0].topic_replication.copy_access_control_lists_for_topics #=> Boolean
+    #   resp.replication_info_list[0].topic_replication.copy_topic_configurations #=> Boolean
+    #   resp.replication_info_list[0].topic_replication.detect_and_copy_new_topics #=> Boolean
+    #   resp.replication_info_list[0].topic_replication.topics_to_exclude #=> Array
+    #   resp.replication_info_list[0].topic_replication.topics_to_exclude[0] #=> String
+    #   resp.replication_info_list[0].topic_replication.topics_to_replicate #=> Array
+    #   resp.replication_info_list[0].topic_replication.topics_to_replicate[0] #=> String
+    #   resp.replicator_arn #=> String
+    #   resp.replicator_description #=> String
+    #   resp.replicator_name #=> String
+    #   resp.replicator_resource_arn #=> String
+    #   resp.replicator_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.service_execution_role_arn #=> String
+    #   resp.state_info.code #=> String
+    #   resp.state_info.message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeReplicator AWS API Documentation
+    #
+    # @overload describe_replicator(params = {})
+    # @param [Hash] params ({})
+    def describe_replicator(params = {}, options = {})
+      req = build_request(:describe_replicator, params)
       req.send_request(options)
     end
 
@@ -2125,6 +2319,56 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_nodes(params = {}, options = {})
       req = build_request(:list_nodes, params)
+      req.send_request(options)
+    end
+
+    # Lists the replicators.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :replicator_name_filter
+    #
+    # @return [Types::ListReplicatorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplicatorsResponse#next_token #next_token} => String
+    #   * {Types::ListReplicatorsResponse#replicators #replicators} => Array&lt;Types::ReplicatorSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replicators({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     replicator_name_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.replicators #=> Array
+    #   resp.replicators[0].creation_time #=> Time
+    #   resp.replicators[0].current_version #=> String
+    #   resp.replicators[0].is_replicator_reference #=> Boolean
+    #   resp.replicators[0].kafka_clusters_summary #=> Array
+    #   resp.replicators[0].kafka_clusters_summary[0].amazon_msk_cluster.msk_cluster_arn #=> String
+    #   resp.replicators[0].kafka_clusters_summary[0].kafka_cluster_alias #=> String
+    #   resp.replicators[0].replication_info_summary_list #=> Array
+    #   resp.replicators[0].replication_info_summary_list[0].source_kafka_cluster_alias #=> String
+    #   resp.replicators[0].replication_info_summary_list[0].target_kafka_cluster_alias #=> String
+    #   resp.replicators[0].replicator_arn #=> String
+    #   resp.replicators[0].replicator_name #=> String
+    #   resp.replicators[0].replicator_resource_arn #=> String
+    #   resp.replicators[0].replicator_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListReplicators AWS API Documentation
+    #
+    # @overload list_replicators(params = {})
+    # @param [Hash] params ({})
+    def list_replicators(params = {}, options = {})
+      req = build_request(:list_replicators, params)
       req.send_request(options)
     end
 
@@ -2857,6 +3101,66 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates replication info of a replicator.
+    #
+    # @option params [Types::ConsumerGroupReplicationUpdate] :consumer_group_replication
+    #   Updated consumer group replication information.
+    #
+    # @option params [required, String] :current_version
+    #   Current replicator version.
+    #
+    # @option params [required, String] :replicator_arn
+    #
+    # @option params [required, String] :source_kafka_cluster_arn
+    #   The ARN of the source Kafka cluster.
+    #
+    # @option params [required, String] :target_kafka_cluster_arn
+    #   The ARN of the target Kafka cluster.
+    #
+    # @option params [Types::TopicReplicationUpdate] :topic_replication
+    #   Updated topic replication information.
+    #
+    # @return [Types::UpdateReplicationInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateReplicationInfoResponse#replicator_arn #replicator_arn} => String
+    #   * {Types::UpdateReplicationInfoResponse#replicator_state #replicator_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_replication_info({
+    #     consumer_group_replication: {
+    #       consumer_groups_to_exclude: ["__stringMax256"], # required
+    #       consumer_groups_to_replicate: ["__stringMax256"], # required
+    #       detect_and_copy_new_consumer_groups: false, # required
+    #       synchronise_consumer_group_offsets: false, # required
+    #     },
+    #     current_version: "__string", # required
+    #     replicator_arn: "__string", # required
+    #     source_kafka_cluster_arn: "__string", # required
+    #     target_kafka_cluster_arn: "__string", # required
+    #     topic_replication: {
+    #       copy_access_control_lists_for_topics: false, # required
+    #       copy_topic_configurations: false, # required
+    #       detect_and_copy_new_topics: false, # required
+    #       topics_to_exclude: ["__stringMax249"], # required
+    #       topics_to_replicate: ["__stringMax249"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replicator_arn #=> String
+    #   resp.replicator_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateReplicationInfo AWS API Documentation
+    #
+    # @overload update_replication_info(params = {})
+    # @param [Hash] params ({})
+    def update_replication_info(params = {}, options = {})
+      req = build_request(:update_replication_info, params)
+      req.send_request(options)
+    end
+
     # You can use this operation to update the encrypting and authentication
     # settings for an existing cluster.
     #
@@ -2988,7 +3292,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-10-18)
+------------------
+
+* Feature - Update to imageId parameter behavior and dates updated.
+
+1.59.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2023-09-13)
+------------------
+
+* Feature - Update to include information on Ubuntu 18 deprecation.
+
 1.57.0 (2023-09-05)
 ------------------
 

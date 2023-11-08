@@ -22,6 +22,7 @@ module Aws::AppRunner
     AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
     AutoScalingConfiguration = Shapes::StructureShape.new(name: 'AutoScalingConfiguration')
     AutoScalingConfigurationName = Shapes::StringShape.new(name: 'AutoScalingConfigurationName')
+    AutoScalingConfigurationRevision = Shapes::IntegerShape.new(name: 'AutoScalingConfigurationRevision')
     AutoScalingConfigurationStatus = Shapes::StringShape.new(name: 'AutoScalingConfigurationStatus')
     AutoScalingConfigurationSummary = Shapes::StructureShape.new(name: 'AutoScalingConfigurationSummary')
     AutoScalingConfigurationSummaryList = Shapes::ListShape.new(name: 'AutoScalingConfigurationSummaryList')
@@ -88,6 +89,7 @@ module Aws::AppRunner
     EgressType = Shapes::StringShape.new(name: 'EgressType')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    HasAssociatedService = Shapes::BooleanShape.new(name: 'HasAssociatedService')
     HealthCheckConfiguration = Shapes::StructureShape.new(name: 'HealthCheckConfiguration')
     HealthCheckHealthyThreshold = Shapes::IntegerShape.new(name: 'HealthCheckHealthyThreshold')
     HealthCheckInterval = Shapes::IntegerShape.new(name: 'HealthCheckInterval')
@@ -106,7 +108,10 @@ module Aws::AppRunner
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    Latest = Shapes::BooleanShape.new(name: 'Latest')
     ListAutoScalingConfigurationsRequest = Shapes::StructureShape.new(name: 'ListAutoScalingConfigurationsRequest')
     ListAutoScalingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAutoScalingConfigurationsResponse')
     ListConnectionsRequest = Shapes::StructureShape.new(name: 'ListConnectionsRequest')
@@ -116,6 +121,8 @@ module Aws::AppRunner
     ListOperationsMaxResults = Shapes::IntegerShape.new(name: 'ListOperationsMaxResults')
     ListOperationsRequest = Shapes::StructureShape.new(name: 'ListOperationsRequest')
     ListOperationsResponse = Shapes::StructureShape.new(name: 'ListOperationsResponse')
+    ListServicesForAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'ListServicesForAutoScalingConfigurationRequest')
+    ListServicesForAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'ListServicesForAutoScalingConfigurationResponse')
     ListServicesRequest = Shapes::StructureShape.new(name: 'ListServicesRequest')
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -125,8 +132,11 @@ module Aws::AppRunner
     ListVpcIngressConnectionsFilter = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsFilter')
     ListVpcIngressConnectionsRequest = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsRequest')
     ListVpcIngressConnectionsResponse = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsResponse')
+    MaxConcurrency = Shapes::IntegerShape.new(name: 'MaxConcurrency')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
     Memory = Shapes::StringShape.new(name: 'Memory')
+    MinSize = Shapes::IntegerShape.new(name: 'MinSize')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -154,6 +164,7 @@ module Aws::AppRunner
     RuntimeEnvironmentVariablesKey = Shapes::StringShape.new(name: 'RuntimeEnvironmentVariablesKey')
     RuntimeEnvironmentVariablesValue = Shapes::StringShape.new(name: 'RuntimeEnvironmentVariablesValue')
     Service = Shapes::StructureShape.new(name: 'Service')
+    ServiceArnList = Shapes::ListShape.new(name: 'ServiceArnList')
     ServiceId = Shapes::StringShape.new(name: 'ServiceId')
     ServiceMaxResults = Shapes::IntegerShape.new(name: 'ServiceMaxResults')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
@@ -165,6 +176,7 @@ module Aws::AppRunner
     SourceCodeVersion = Shapes::StructureShape.new(name: 'SourceCodeVersion')
     SourceCodeVersionType = Shapes::StringShape.new(name: 'SourceCodeVersionType')
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+    SourceDirectory = Shapes::StringShape.new(name: 'SourceDirectory')
     StartCommand = Shapes::StringShape.new(name: 'StartCommand')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StartDeploymentResponse = Shapes::StructureShape.new(name: 'StartDeploymentResponse')
@@ -183,6 +195,8 @@ module Aws::AppRunner
     UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateDefaultAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateDefaultAutoScalingConfigurationRequest')
+    UpdateDefaultAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateDefaultAutoScalingConfigurationResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
     UpdateVpcIngressConnectionRequest = Shapes::StructureShape.new(name: 'UpdateVpcIngressConnectionRequest')
@@ -216,19 +230,25 @@ module Aws::AppRunner
 
     AutoScalingConfiguration.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
     AutoScalingConfiguration.add_member(:auto_scaling_configuration_name, Shapes::ShapeRef.new(shape: AutoScalingConfigurationName, location_name: "AutoScalingConfigurationName"))
-    AutoScalingConfiguration.add_member(:auto_scaling_configuration_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "AutoScalingConfigurationRevision"))
-    AutoScalingConfiguration.add_member(:latest, Shapes::ShapeRef.new(shape: Boolean, location_name: "Latest"))
+    AutoScalingConfiguration.add_member(:auto_scaling_configuration_revision, Shapes::ShapeRef.new(shape: AutoScalingConfigurationRevision, location_name: "AutoScalingConfigurationRevision"))
+    AutoScalingConfiguration.add_member(:latest, Shapes::ShapeRef.new(shape: Latest, location_name: "Latest"))
     AutoScalingConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: AutoScalingConfigurationStatus, location_name: "Status"))
-    AutoScalingConfiguration.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrency"))
-    AutoScalingConfiguration.add_member(:min_size, Shapes::ShapeRef.new(shape: Integer, location_name: "MinSize"))
-    AutoScalingConfiguration.add_member(:max_size, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSize"))
+    AutoScalingConfiguration.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    AutoScalingConfiguration.add_member(:min_size, Shapes::ShapeRef.new(shape: MinSize, location_name: "MinSize"))
+    AutoScalingConfiguration.add_member(:max_size, Shapes::ShapeRef.new(shape: MaxSize, location_name: "MaxSize"))
     AutoScalingConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     AutoScalingConfiguration.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
+    AutoScalingConfiguration.add_member(:has_associated_service, Shapes::ShapeRef.new(shape: HasAssociatedService, location_name: "HasAssociatedService"))
+    AutoScalingConfiguration.add_member(:is_default, Shapes::ShapeRef.new(shape: IsDefault, location_name: "IsDefault"))
     AutoScalingConfiguration.struct_class = Types::AutoScalingConfiguration
 
     AutoScalingConfigurationSummary.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
     AutoScalingConfigurationSummary.add_member(:auto_scaling_configuration_name, Shapes::ShapeRef.new(shape: AutoScalingConfigurationName, location_name: "AutoScalingConfigurationName"))
     AutoScalingConfigurationSummary.add_member(:auto_scaling_configuration_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "AutoScalingConfigurationRevision"))
+    AutoScalingConfigurationSummary.add_member(:status, Shapes::ShapeRef.new(shape: AutoScalingConfigurationStatus, location_name: "Status"))
+    AutoScalingConfigurationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AutoScalingConfigurationSummary.add_member(:has_associated_service, Shapes::ShapeRef.new(shape: HasAssociatedService, location_name: "HasAssociatedService"))
+    AutoScalingConfigurationSummary.add_member(:is_default, Shapes::ShapeRef.new(shape: IsDefault, location_name: "IsDefault"))
     AutoScalingConfigurationSummary.struct_class = Types::AutoScalingConfigurationSummary
 
     AutoScalingConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: AutoScalingConfigurationSummary)
@@ -256,6 +276,7 @@ module Aws::AppRunner
     CodeRepository.add_member(:repository_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryUrl"))
     CodeRepository.add_member(:source_code_version, Shapes::ShapeRef.new(shape: SourceCodeVersion, required: true, location_name: "SourceCodeVersion"))
     CodeRepository.add_member(:code_configuration, Shapes::ShapeRef.new(shape: CodeConfiguration, location_name: "CodeConfiguration"))
+    CodeRepository.add_member(:source_directory, Shapes::ShapeRef.new(shape: SourceDirectory, location_name: "SourceDirectory"))
     CodeRepository.struct_class = Types::CodeRepository
 
     Connection.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
@@ -342,6 +363,7 @@ module Aws::AppRunner
     CustomDomainList.member = Shapes::ShapeRef.new(shape: CustomDomain)
 
     DeleteAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
+    DeleteAutoScalingConfigurationRequest.add_member(:delete_all_revisions, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteAllRevisions"))
     DeleteAutoScalingConfigurationRequest.struct_class = Types::DeleteAutoScalingConfigurationRequest
 
     DeleteAutoScalingConfigurationResponse.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, required: true, location_name: "AutoScalingConfiguration"))
@@ -515,6 +537,15 @@ module Aws::AppRunner
     ListOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOperationsResponse.struct_class = Types::ListOperationsResponse
 
+    ListServicesForAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
+    ListServicesForAutoScalingConfigurationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListServicesForAutoScalingConfigurationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServicesForAutoScalingConfigurationRequest.struct_class = Types::ListServicesForAutoScalingConfigurationRequest
+
+    ListServicesForAutoScalingConfigurationResponse.add_member(:service_arn_list, Shapes::ShapeRef.new(shape: ServiceArnList, required: true, location_name: "ServiceArnList"))
+    ListServicesForAutoScalingConfigurationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServicesForAutoScalingConfigurationResponse.struct_class = Types::ListServicesForAutoScalingConfigurationResponse
+
     ListServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ServiceMaxResults, location_name: "MaxResults"))
     ListServicesRequest.struct_class = Types::ListServicesRequest
@@ -552,6 +583,7 @@ module Aws::AppRunner
 
     NetworkConfiguration.add_member(:egress_configuration, Shapes::ShapeRef.new(shape: EgressConfiguration, location_name: "EgressConfiguration"))
     NetworkConfiguration.add_member(:ingress_configuration, Shapes::ShapeRef.new(shape: IngressConfiguration, location_name: "IngressConfiguration"))
+    NetworkConfiguration.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     ObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
@@ -622,6 +654,8 @@ module Aws::AppRunner
     Service.add_member(:observability_configuration, Shapes::ShapeRef.new(shape: ServiceObservabilityConfiguration, location_name: "ObservabilityConfiguration"))
     Service.struct_class = Types::Service
 
+    ServiceArnList.member = Shapes::ShapeRef.new(shape: AppRunnerResourceArn)
+
     ServiceObservabilityConfiguration.add_member(:observability_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ObservabilityEnabled"))
     ServiceObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
     ServiceObservabilityConfiguration.struct_class = Types::ServiceObservabilityConfiguration
@@ -680,6 +714,12 @@ module Aws::AppRunner
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateDefaultAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
+    UpdateDefaultAutoScalingConfigurationRequest.struct_class = Types::UpdateDefaultAutoScalingConfigurationRequest
+
+    UpdateDefaultAutoScalingConfigurationResponse.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, required: true, location_name: "AutoScalingConfiguration"))
+    UpdateDefaultAutoScalingConfigurationResponse.struct_class = Types::UpdateDefaultAutoScalingConfigurationResponse
 
     UpdateServiceRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     UpdateServiceRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "SourceConfiguration"))
@@ -1067,6 +1107,23 @@ module Aws::AppRunner
         )
       end)
 
+      api.add_operation(:list_services_for_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServicesForAutoScalingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServicesForAutoScalingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServicesForAutoScalingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -1168,6 +1225,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
+      api.add_operation(:update_default_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDefaultAutoScalingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDefaultAutoScalingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDefaultAutoScalingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_service, Seahorse::Model::Operation.new.tap do |o|

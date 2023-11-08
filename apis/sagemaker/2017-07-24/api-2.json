@@ -3513,6 +3513,22 @@
       "max":15,
       "min":1
     },
+    "AdditionalS3DataSource":{
+      "type":"structure",
+      "required":[
+        "S3DataType",
+        "S3Uri"
+      ],
+      "members":{
+        "S3DataType":{"shape":"AdditionalS3DataSourceDataType"},
+        "S3Uri":{"shape":"S3Uri"},
+        "CompressionType":{"shape":"CompressionType"}
+      }
+    },
+    "AdditionalS3DataSourceDataType":{
+      "type":"string",
+      "enum":["S3Object"]
+    },
     "AgentVersion":{
       "type":"structure",
       "required":[
@@ -3567,7 +3583,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:algorithm/.*"
+      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
     },
     "AlgorithmImage":{
       "type":"string",
@@ -4432,7 +4448,14 @@
         "MAPE",
         "MASE",
         "WAPE",
-        "AverageWeightedQuantileLoss"
+        "AverageWeightedQuantileLoss",
+        "Rouge1",
+        "Rouge2",
+        "RougeL",
+        "RougeLSum",
+        "Perplexity",
+        "ValidationLoss",
+        "TrainingLoss"
       ]
     },
     "AutoMLMode":{
@@ -4474,7 +4497,8 @@
         "ImageClassificationJobConfig":{"shape":"ImageClassificationJobConfig"},
         "TextClassificationJobConfig":{"shape":"TextClassificationJobConfig"},
         "TabularJobConfig":{"shape":"TabularJobConfig"},
-        "TimeSeriesForecastingJobConfig":{"shape":"TimeSeriesForecastingJobConfig"}
+        "TimeSeriesForecastingJobConfig":{"shape":"TimeSeriesForecastingJobConfig"},
+        "TextGenerationJobConfig":{"shape":"TextGenerationJobConfig"}
       },
       "union":true
     },
@@ -4484,13 +4508,15 @@
         "ImageClassification",
         "TextClassification",
         "Tabular",
-        "TimeSeriesForecasting"
+        "TimeSeriesForecasting",
+        "TextGeneration"
       ]
     },
     "AutoMLProblemTypeResolvedAttributes":{
       "type":"structure",
       "members":{
-        "TabularResolvedAttributes":{"shape":"TabularResolvedAttributes"}
+        "TabularResolvedAttributes":{"shape":"TabularResolvedAttributes"},
+        "TextGenerationResolvedAttributes":{"shape":"TextGenerationResolvedAttributes"}
       },
       "union":true
     },
@@ -4596,6 +4622,12 @@
       "type":"string",
       "min":1
     },
+    "BaseModelName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
     "BatchDataCaptureConfig":{
       "type":"structure",
       "required":["DestinationS3Uri"],
@@ -4680,7 +4712,8 @@
         "ProbabilityAttribute":{"shape":"String"},
         "ProbabilityThresholdAttribute":{"shape":"ProbabilityThresholdAttribute"},
         "StartTimeOffset":{"shape":"MonitoringTimeOffsetString"},
-        "EndTimeOffset":{"shape":"MonitoringTimeOffsetString"}
+        "EndTimeOffset":{"shape":"MonitoringTimeOffsetString"},
+        "ExcludeFeaturesAttribute":{"shape":"ExcludeFeaturesAttribute"}
       }
     },
     "BestObjectiveNotImproving":{
@@ -4832,7 +4865,9 @@
         "TimeSeriesForecastingSettings":{"shape":"TimeSeriesForecastingSettings"},
         "ModelRegisterSettings":{"shape":"ModelRegisterSettings"},
         "WorkspaceSettings":{"shape":"WorkspaceSettings"},
-        "IdentityProviderOAuthSettings":{"shape":"IdentityProviderOAuthSettings"}
+        "IdentityProviderOAuthSettings":{"shape":"IdentityProviderOAuthSettings"},
+        "KendraSettings":{"shape":"KendraSettings"},
+        "DirectDeploySettings":{"shape":"DirectDeploySettings"}
       }
     },
     "CapacitySize":{
@@ -5284,7 +5319,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:code-repository/.*"
+      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
     },
     "CodeRepositoryContains":{
       "type":"string",
@@ -5373,6 +5408,13 @@
       "min":1,
       "pattern":"[\\w-]+_[0-9a-zA-Z]+"
     },
+    "CollectionConfig":{
+      "type":"structure",
+      "members":{
+        "VectorConfig":{"shape":"VectorConfig"}
+      },
+      "union":true
+    },
     "CollectionConfiguration":{
       "type":"structure",
       "members":{
@@ -5398,6 +5440,14 @@
       "value":{"shape":"ConfigValue"},
       "max":20,
       "min":0
+    },
+    "CollectionType":{
+      "type":"string",
+      "enum":[
+        "List",
+        "Set",
+        "Vector"
+      ]
     },
     "CompilationJobArn":{
       "type":"string",
@@ -5651,6 +5701,12 @@
       "members":{
         "CompleteOnConvergence":{"shape":"CompleteOnConvergence"}
       }
+    },
+    "CountryCode":{
+      "type":"string",
+      "max":2,
+      "min":2,
+      "pattern":"[A-Z]{2}"
     },
     "CreateActionRequest":{
       "type":"structure",
@@ -6495,7 +6551,8 @@
         "Domain":{"shape":"String"},
         "Task":{"shape":"String"},
         "SamplePayloadUrl":{"shape":"S3Uri"},
-        "AdditionalInferenceSpecifications":{"shape":"AdditionalInferenceSpecifications"}
+        "AdditionalInferenceSpecifications":{"shape":"AdditionalInferenceSpecifications"},
+        "SkipModelValidation":{"shape":"SkipModelValidation"}
       }
     },
     "CreateModelPackageOutput":{
@@ -8981,7 +9038,8 @@
         "Domain":{"shape":"String"},
         "Task":{"shape":"String"},
         "SamplePayloadUrl":{"shape":"String"},
-        "AdditionalInferenceSpecifications":{"shape":"AdditionalInferenceSpecifications"}
+        "AdditionalInferenceSpecifications":{"shape":"AdditionalInferenceSpecifications"},
+        "SkipModelValidation":{"shape":"SkipModelValidation"}
       }
     },
     "DescribeModelQualityJobDefinitionRequest":{
@@ -9698,6 +9756,17 @@
       "type":"list",
       "member":{"shape":"Device"}
     },
+    "Dimension":{
+      "type":"integer",
+      "max":8192,
+      "min":1
+    },
+    "DirectDeploySettings":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"FeatureStatus"}
+      }
+    },
     "DirectInternetAccess":{
       "type":"string",
       "enum":[
@@ -10213,7 +10282,8 @@
         "ProbabilityAttribute":{"shape":"String"},
         "ProbabilityThresholdAttribute":{"shape":"ProbabilityThresholdAttribute"},
         "StartTimeOffset":{"shape":"MonitoringTimeOffsetString"},
-        "EndTimeOffset":{"shape":"MonitoringTimeOffsetString"}
+        "EndTimeOffset":{"shape":"MonitoringTimeOffsetString"},
+        "ExcludeFeaturesAttribute":{"shape":"ExcludeFeaturesAttribute"}
       }
     },
     "EndpointInputConfiguration":{
@@ -10381,6 +10451,10 @@
       "max":1024,
       "pattern":"[\\S\\s]*"
     },
+    "ExcludeFeaturesAttribute":{
+      "type":"string",
+      "max":100
+    },
     "ExecutionRoleIdentityConfig":{
       "type":"string",
       "enum":[
@@ -10527,7 +10601,9 @@
       "type":"structure",
       "members":{
         "FeatureName":{"shape":"FeatureName"},
-        "FeatureType":{"shape":"FeatureType"}
+        "FeatureType":{"shape":"FeatureType"},
+        "CollectionType":{"shape":"CollectionType"},
+        "CollectionConfig":{"shape":"CollectionConfig"}
       }
     },
     "FeatureDefinitions":{
@@ -11101,7 +11177,9 @@
     },
     "GitConfigUrl":{
       "type":"string",
-      "pattern":"^https://([^/]+)/?(.*)$"
+      "max":1024,
+      "min":11,
+      "pattern":"^https://([^/]+)/?.{3,1016}$"
     },
     "Group":{
       "type":"string",
@@ -11125,6 +11203,18 @@
       "member":{"shape":"Group"},
       "max":10,
       "min":1
+    },
+    "HolidayConfig":{
+      "type":"list",
+      "member":{"shape":"HolidayConfigAttributes"},
+      "max":1,
+      "min":1
+    },
+    "HolidayConfigAttributes":{
+      "type":"structure",
+      "members":{
+        "CountryCode":{"shape":"CountryCode"}
+      }
     },
     "HookParameters":{
       "type":"map",
@@ -12518,6 +12608,12 @@
       "type":"integer",
       "max":3600,
       "min":0
+    },
+    "KendraSettings":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"FeatureStatus"}
+      }
     },
     "KernelDisplayName":{
       "type":"string",
@@ -15014,7 +15110,8 @@
         "MonitoringScheduleConfig":{"shape":"MonitoringScheduleConfig"},
         "EndpointName":{"shape":"EndpointName"},
         "MonitoringAlertSummaries":{"shape":"MonitoringAlertSummaryList"},
-        "LastMonitoringExecutionSummary":{"shape":"MonitoringExecutionSummary"}
+        "LastMonitoringExecutionSummary":{"shape":"MonitoringExecutionSummary"},
+        "BatchTransformInput":{"shape":"BatchTransformInput"}
       }
     },
     "ModelDashboardMonitoringSchedules":{
@@ -15219,14 +15316,15 @@
         "AdditionalInferenceSpecifications":{"shape":"AdditionalInferenceSpecifications"},
         "Tags":{"shape":"TagList"},
         "CustomerMetadataProperties":{"shape":"CustomerMetadataMap"},
-        "DriftCheckBaselines":{"shape":"DriftCheckBaselines"}
+        "DriftCheckBaselines":{"shape":"DriftCheckBaselines"},
+        "SkipModelValidation":{"shape":"SkipModelValidation"}
       }
     },
     "ModelPackageArn":{
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/.*"
+      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
     },
     "ModelPackageArnList":{
       "type":"list",
@@ -15247,7 +15345,8 @@
         "ModelInput":{"shape":"ModelInput"},
         "Framework":{"shape":"String"},
         "FrameworkVersion":{"shape":"ModelPackageFrameworkVersion"},
-        "NearestModelName":{"shape":"String"}
+        "NearestModelName":{"shape":"String"},
+        "AdditionalS3DataSource":{"shape":"AdditionalS3DataSource"}
       }
     },
     "ModelPackageContainerDefinitionList":{
@@ -15278,7 +15377,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package-group/.*"
+      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
     },
     "ModelPackageGroupSortBy":{
       "type":"string",
@@ -16359,7 +16458,8 @@
       "members":{
         "SecurityConfig":{"shape":"OnlineStoreSecurityConfig"},
         "EnableOnlineStore":{"shape":"Boolean"},
-        "TtlDuration":{"shape":"TtlDuration"}
+        "TtlDuration":{"shape":"TtlDuration"},
+        "StorageType":{"shape":"StorageType"}
       }
     },
     "OnlineStoreConfigUpdate":{
@@ -17336,7 +17436,8 @@
         "ml.inf2.xlarge",
         "ml.inf2.8xlarge",
         "ml.inf2.24xlarge",
-        "ml.inf2.48xlarge"
+        "ml.inf2.48xlarge",
+        "ml.p5.48xlarge"
       ]
     },
     "ProductionVariantList":{
@@ -17508,7 +17609,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project:.*"
+      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
     },
     "ProjectEntityName":{
       "type":"string",
@@ -18570,7 +18671,9 @@
       "type":"structure",
       "required":["ScheduleExpression"],
       "members":{
-        "ScheduleExpression":{"shape":"ScheduleExpression"}
+        "ScheduleExpression":{"shape":"ScheduleExpression"},
+        "DataAnalysisStartTime":{"shape":"String"},
+        "DataAnalysisEndTime":{"shape":"String"}
       }
     },
     "ScheduleExpression":{
@@ -18726,10 +18829,7 @@
     },
     "SelectiveExecutionConfig":{
       "type":"structure",
-      "required":[
-        "SourcePipelineExecutionArn",
-        "SelectedSteps"
-      ],
+      "required":["SelectedSteps"],
       "members":{
         "SourcePipelineExecutionArn":{"shape":"PipelineExecutionArn"},
         "SelectedSteps":{"shape":"SelectedStepList"}
@@ -18873,6 +18973,13 @@
     "SingleSignOnUserIdentifier":{
       "type":"string",
       "pattern":"UserName"
+    },
+    "SkipModelValidation":{
+      "type":"string",
+      "enum":[
+        "All",
+        "None"
+      ]
     },
     "SnsTopicArn":{
       "type":"string",
@@ -19337,6 +19444,13 @@
         "MaxWaitTimeInSeconds":{"shape":"MaxWaitTimeInSeconds"}
       }
     },
+    "StorageType":{
+      "type":"string",
+      "enum":[
+        "Standard",
+        "InMemory"
+      ]
+    },
     "String":{"type":"string"},
     "String1024":{
       "type":"string",
@@ -19715,6 +19829,19 @@
         "TargetLabelColumn":{"shape":"TargetLabelColumn"}
       }
     },
+    "TextGenerationJobConfig":{
+      "type":"structure",
+      "members":{
+        "CompletionCriteria":{"shape":"AutoMLJobCompletionCriteria"},
+        "BaseModelName":{"shape":"BaseModelName"}
+      }
+    },
+    "TextGenerationResolvedAttributes":{
+      "type":"structure",
+      "members":{
+        "BaseModelName":{"shape":"BaseModelName"}
+      }
+    },
     "ThingName":{
       "type":"string",
       "max":128,
@@ -19748,7 +19875,8 @@
         "ForecastHorizon":{"shape":"ForecastHorizon"},
         "ForecastQuantiles":{"shape":"ForecastQuantiles"},
         "Transformations":{"shape":"TimeSeriesTransformations"},
-        "TimeSeriesConfig":{"shape":"TimeSeriesConfig"}
+        "TimeSeriesConfig":{"shape":"TimeSeriesConfig"},
+        "HolidayConfig":{"shape":"HolidayConfig"}
       }
     },
     "TimeSeriesForecastingSettings":{
@@ -19825,7 +19953,7 @@
     "TrainingContainerEntrypoint":{
       "type":"list",
       "member":{"shape":"TrainingContainerEntrypointString"},
-      "max":10,
+      "max":100,
       "min":1
     },
     "TrainingContainerEntrypointString":{
@@ -19842,7 +19970,7 @@
       "type":"map",
       "key":{"shape":"TrainingEnvironmentKey"},
       "value":{"shape":"TrainingEnvironmentValue"},
-      "max":48
+      "max":100
     },
     "TrainingEnvironmentValue":{
       "type":"string",
@@ -20104,7 +20232,8 @@
         "SupportsDistributedTraining":{"shape":"Boolean"},
         "MetricDefinitions":{"shape":"MetricDefinitionList"},
         "TrainingChannels":{"shape":"ChannelSpecifications"},
-        "SupportedTuningJobObjectiveMetrics":{"shape":"HyperParameterTuningJobObjectives"}
+        "SupportedTuningJobObjectiveMetrics":{"shape":"HyperParameterTuningJobObjectives"},
+        "AdditionalS3DataSource":{"shape":"AdditionalS3DataSource"}
       }
     },
     "TrainingTimeInSeconds":{
@@ -21314,6 +21443,13 @@
     "VariantWeight":{
       "type":"float",
       "min":0
+    },
+    "VectorConfig":{
+      "type":"structure",
+      "required":["Dimension"],
+      "members":{
+        "Dimension":{"shape":"Dimension"}
+      }
     },
     "VendorGuidance":{
       "type":"string",

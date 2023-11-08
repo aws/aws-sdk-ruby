@@ -66,18 +66,26 @@ module Aws::ChimeSDKMediaPipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::CreateMediaInsightsPipelineConfiguration.build(context)
           when :create_media_live_connector_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::CreateMediaLiveConnectorPipeline.build(context)
+          when :create_media_pipeline_kinesis_video_stream_pool
+            Aws::ChimeSDKMediaPipelines::Endpoints::CreateMediaPipelineKinesisVideoStreamPool.build(context)
+          when :create_media_stream_pipeline
+            Aws::ChimeSDKMediaPipelines::Endpoints::CreateMediaStreamPipeline.build(context)
           when :delete_media_capture_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::DeleteMediaCapturePipeline.build(context)
           when :delete_media_insights_pipeline_configuration
             Aws::ChimeSDKMediaPipelines::Endpoints::DeleteMediaInsightsPipelineConfiguration.build(context)
           when :delete_media_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::DeleteMediaPipeline.build(context)
+          when :delete_media_pipeline_kinesis_video_stream_pool
+            Aws::ChimeSDKMediaPipelines::Endpoints::DeleteMediaPipelineKinesisVideoStreamPool.build(context)
           when :get_media_capture_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaCapturePipeline.build(context)
           when :get_media_insights_pipeline_configuration
             Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaInsightsPipelineConfiguration.build(context)
           when :get_media_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaPipeline.build(context)
+          when :get_media_pipeline_kinesis_video_stream_pool
+            Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaPipelineKinesisVideoStreamPool.build(context)
           when :get_speaker_search_task
             Aws::ChimeSDKMediaPipelines::Endpoints::GetSpeakerSearchTask.build(context)
           when :get_voice_tone_analysis_task
@@ -86,6 +94,8 @@ module Aws::ChimeSDKMediaPipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaCapturePipelines.build(context)
           when :list_media_insights_pipeline_configurations
             Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaInsightsPipelineConfigurations.build(context)
+          when :list_media_pipeline_kinesis_video_stream_pools
+            Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaPipelineKinesisVideoStreamPools.build(context)
           when :list_media_pipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaPipelines.build(context)
           when :list_tags_for_resource
@@ -106,6 +116,8 @@ module Aws::ChimeSDKMediaPipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::UpdateMediaInsightsPipelineConfiguration.build(context)
           when :update_media_insights_pipeline_status
             Aws::ChimeSDKMediaPipelines::Endpoints::UpdateMediaInsightsPipelineStatus.build(context)
+          when :update_media_pipeline_kinesis_video_stream_pool
+            Aws::ChimeSDKMediaPipelines::Endpoints::UpdateMediaPipelineKinesisVideoStreamPool.build(context)
           end
         end
       end

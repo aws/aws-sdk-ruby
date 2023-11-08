@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-10-16)
+------------------
+
+* Feature - This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.
+
+1.59.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2023-09-13)
+------------------
+
+* Feature - Add StartTime field in GetTraceSummaries API response for each TraceSummary.
+
 1.57.0 (2023-07-11)
 ------------------
 

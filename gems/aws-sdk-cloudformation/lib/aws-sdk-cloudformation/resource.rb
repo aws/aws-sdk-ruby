@@ -317,16 +317,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @option options [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     # @return [Stack]
     def create_stack(options = {})
       Aws::Plugins::UserAgent.feature('resource') do
@@ -366,8 +361,12 @@ module Aws::CloudFormation
     # @param [Hash] options ({})
     # @option options [String] :stack_name
     #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
-    #   response that describes all resources in the account. This requires
-    #   `ListStacks` and `DescribeStacks` permissions.
+    #   response that describes all resources in the account, which can impact
+    #   performance. This requires `ListStacks` and `DescribeStacks`
+    #   permissions.
+    #
+    #    Consider using the ListStacks API if you're not passing a parameter
+    #   to `StackName`.
     #
     #    The IAM policy below can be added to IAM policies when you want to
     #   limit resource-level permissions and avoid returning a response when

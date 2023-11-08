@@ -20,6 +20,7 @@ module AwsSdkCodeGenerator
     # @option options [Hash<gem,version>] :gem_dependencies ({})
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
+    # @option options [Boolean] :deprecated (false)
     def initialize(options)
       @name = options.fetch(:name)
       @identifier = name.downcase
@@ -57,6 +58,7 @@ module AwsSdkCodeGenerator
       @require_endpoint_discovery = api.fetch('operations', []).any? do |_, o|
         o['endpointdiscovery'] && o['endpointdiscovery']['required']
       end
+      @deprecated = options[:deprecated] || false
     end
 
     # @return [String] The service name, e.g. "S3"
@@ -145,6 +147,25 @@ module AwsSdkCodeGenerator
 
     # @return [Boolean] true if any operation requires endpoint_discovery
     attr_reader :require_endpoint_discovery
+
+    # @return [String] the service_id
+    def service_id
+      metadata = @api['metadata']
+      return metadata['serviceId'] if metadata['serviceId']
+
+      name = metadata['serviceAbbreviation'] || metadata['serviceFullName']
+      name = name.gsub(/AWS/, '').gsub(/Amazon/, '')
+      name = name.gsub(/[^a-zA-Z0-9 ]+/, '')
+      name = name.gsub(/^[0-9]+/, '')
+      name = name.strip
+
+      name
+    end
+
+    # @return [Boolean] true if the service is deprecated
+    def deprecated?
+      @deprecated
+    end
 
     # @api private
     def inspect

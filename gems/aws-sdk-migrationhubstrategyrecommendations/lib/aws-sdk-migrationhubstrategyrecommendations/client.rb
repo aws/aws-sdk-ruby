@@ -856,6 +856,57 @@ module Aws::MigrationHubStrategyRecommendations
       req.send_request(options)
     end
 
+    # Retrieves a list of all the servers fetched from customer vCenter
+    # using Strategy Recommendation Collector.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to include in the response. The maximum
+    #   value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token from a previous call that you use to retrieve the next set
+    #   of results. For example, if a previous call to this action returned
+    #   100 items, but you set maxResults to 10. You'll receive a set of 10
+    #   results along with a token. You then use the returned token to
+    #   retrieve the next set of 10.
+    #
+    # @option params [String] :sort
+    #   Specifies whether to sort by ascending (ASC) or descending (DESC)
+    #   order.
+    #
+    # @return [Types::ListAnalyzableServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnalyzableServersResponse#analyzable_servers #analyzable_servers} => Array&lt;Types::AnalyzableServerSummary&gt;
+    #   * {Types::ListAnalyzableServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_analyzable_servers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analyzable_servers #=> Array
+    #   resp.analyzable_servers[0].hostname #=> String
+    #   resp.analyzable_servers[0].ip_address #=> String
+    #   resp.analyzable_servers[0].source #=> String
+    #   resp.analyzable_servers[0].vm_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ListAnalyzableServers AWS API Documentation
+    #
+    # @overload list_analyzable_servers(params = {})
+    # @param [Hash] params ({})
+    def list_analyzable_servers(params = {}, options = {})
+      req = build_request(:list_analyzable_servers, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all the application components (processes).
     #
     # @option params [String] :application_component_criteria
@@ -1246,6 +1297,9 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Starts the assessment of an on-premises environment.
     #
+    # @option params [String] :assessment_data_source_type
+    #   The data source type of an assessment to be started.
+    #
     # @option params [Array<Types::AssessmentTarget>] :assessment_targets
     #   List of criteria for assessment.
     #
@@ -1264,6 +1318,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_assessment({
+    #     assessment_data_source_type: "StrategyRecommendationsApplicationDataCollector", # accepts StrategyRecommendationsApplicationDataCollector, ManualImport, ApplicationDiscoveryService
     #     assessment_targets: [
     #       {
     #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -1322,7 +1377,7 @@ module Aws::MigrationHubStrategyRecommendations
     #
     #   resp = client.start_import_file_task({
     #     s3_bucket: "importS3Bucket", # required
-    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA, Import
+    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA, Import, StrategyRecommendationsApplicationDataCollector
     #     group_id: [
     #       {
     #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
@@ -1517,7 +1572,7 @@ module Aws::MigrationHubStrategyRecommendations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubstrategyrecommendations'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

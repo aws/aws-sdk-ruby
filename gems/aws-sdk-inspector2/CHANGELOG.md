@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-10-12)
+------------------
+
+* Feature - Add MacOs ec2 platform support
+
+1.21.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2023-07-31)
 ------------------
 

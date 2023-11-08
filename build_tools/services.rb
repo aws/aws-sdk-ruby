@@ -10,7 +10,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.177.0"
+    MINIMUM_CORE_VERSION = "3.184.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
     MINIMUM_CORE_VERSION_S3 = "3.181.0"
@@ -31,6 +31,12 @@ module BuildTools
       end
     end
     alias service []
+
+    def for_service_id(service_id)
+      services.values.find do |service|
+        service.service_id == service_id
+      end
+    end
 
     def each(&block)
       services.values.each(&block)
@@ -72,7 +78,8 @@ module BuildTools
         endpoint_tests: model_path('endpoint-tests-1.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
-        remove_plugins: config['removePlugins'] || []
+        remove_plugins: config['removePlugins'] || [],
+        deprecated: config['deprecated']
       )
     end
 

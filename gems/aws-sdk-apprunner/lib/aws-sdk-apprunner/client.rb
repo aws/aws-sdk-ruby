@@ -498,16 +498,32 @@ module Aws::AppRunner
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
     #
-    #   <note markdown="1"> The name `DefaultConfiguration` is reserved (it's the configuration
-    #   that App Runner uses if you don't provide a custome one). You can't
-    #   use it to create a new auto scaling configuration, and you can't
-    #   create a revision of it.
+    #   <note markdown="1"> Prior to the release of [Auto scale configuration enhancements][1],
+    #   the name `DefaultConfiguration` was reserved.
     #
-    #    When you want to use your own auto scaling configuration for your App
-    #   Runner service, *create a configuration with a different name*, and
-    #   then provide it when you create or update your service.
+    #    This restriction is no longer in place. You can now manage
+    #   `DefaultConfiguration` the same way you manage your custom auto
+    #   scaling configurations. This means you can do the following with the
+    #   `DefaultConfiguration` that App Runner provides:
+    #
+    #    * Create new revisions of the `DefaultConfiguration`.
+    #
+    #   * Delete the revisions of the `DefaultConfiguration`.
+    #
+    #   * Delete the auto scaling configuration for which the App Runner
+    #     `DefaultConfiguration` was created.
+    #
+    #   * If you delete the auto scaling configuration you can create another
+    #     custom auto scaling configuration with the same
+    #     `DefaultConfiguration` name. The original `DefaultConfiguration`
+    #     resource provided by App Runner remains in your account unless you
+    #     make changes to it.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-2023-09-22-auto-scale-config.html
     #
     # @option params [Integer] :max_concurrency
     #   The maximum number of concurrent requests that you want an instance to
@@ -572,6 +588,8 @@ module Aws::AppRunner
     #   resp.auto_scaling_configuration.max_size #=> Integer
     #   resp.auto_scaling_configuration.created_at #=> Time
     #   resp.auto_scaling_configuration.deleted_at #=> Time
+    #   resp.auto_scaling_configuration.has_associated_service #=> Boolean
+    #   resp.auto_scaling_configuration.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateAutoScalingConfiguration AWS API Documentation
     #
@@ -809,6 +827,7 @@ module Aws::AppRunner
     #             },
     #           },
     #         },
+    #         source_directory: "SourceDirectory",
     #       },
     #       image_repository: {
     #         image_identifier: "ImageIdentifier", # required
@@ -861,6 +880,7 @@ module Aws::AppRunner
     #       ingress_configuration: {
     #         is_publicly_accessible: false,
     #       },
+    #       ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -890,6 +910,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -914,9 +935,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -1063,9 +1089,10 @@ module Aws::AppRunner
     end
 
     # Delete an App Runner automatic scaling configuration resource. You can
-    # delete a specific revision or the latest active revision. You can't
-    # delete a configuration that's used by one or more App Runner
-    # services.
+    # delete a top level auto scaling configuration, a specific revision of
+    # one, or all revisions associated with the top level configuration. You
+    # can't delete the default auto scaling configuration or a
+    # configuration that's used by one or more App Runner services.
     #
     # @option params [required, String] :auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of the App Runner auto scaling
@@ -1075,6 +1102,14 @@ module Aws::AppRunner
     #   ending with either `.../name ` or `.../name/revision `. If a revision
     #   isn't specified, the latest active revision is deleted.
     #
+    # @option params [Boolean] :delete_all_revisions
+    #   Set to `true` to delete all of the revisions associated with the
+    #   `AutoScalingConfigurationArn` parameter value.
+    #
+    #   When `DeleteAllRevisions` is set to `true`, the only valid value for
+    #   the Amazon Resource Name (ARN) is a partial ARN ending with:
+    #   `.../name`.
+    #
     # @return [Types::DeleteAutoScalingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAutoScalingConfigurationResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
@@ -1083,6 +1118,7 @@ module Aws::AppRunner
     #
     #   resp = client.delete_auto_scaling_configuration({
     #     auto_scaling_configuration_arn: "AppRunnerResourceArn", # required
+    #     delete_all_revisions: false,
     #   })
     #
     # @example Response structure
@@ -1097,6 +1133,8 @@ module Aws::AppRunner
     #   resp.auto_scaling_configuration.max_size #=> Integer
     #   resp.auto_scaling_configuration.created_at #=> Time
     #   resp.auto_scaling_configuration.deleted_at #=> Time
+    #   resp.auto_scaling_configuration.has_associated_service #=> Boolean
+    #   resp.auto_scaling_configuration.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteAutoScalingConfiguration AWS API Documentation
     #
@@ -1233,6 +1271,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -1257,9 +1296,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -1395,6 +1439,8 @@ module Aws::AppRunner
     #   resp.auto_scaling_configuration.max_size #=> Integer
     #   resp.auto_scaling_configuration.created_at #=> Time
     #   resp.auto_scaling_configuration.deleted_at #=> Time
+    #   resp.auto_scaling_configuration.has_associated_service #=> Boolean
+    #   resp.auto_scaling_configuration.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeAutoScalingConfiguration AWS API Documentation
     #
@@ -1553,6 +1599,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -1577,9 +1624,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #
@@ -1794,6 +1846,10 @@ module Aws::AppRunner
     #   resp.auto_scaling_configuration_summary_list[0].auto_scaling_configuration_arn #=> String
     #   resp.auto_scaling_configuration_summary_list[0].auto_scaling_configuration_name #=> String
     #   resp.auto_scaling_configuration_summary_list[0].auto_scaling_configuration_revision #=> Integer
+    #   resp.auto_scaling_configuration_summary_list[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.auto_scaling_configuration_summary_list[0].created_at #=> Time
+    #   resp.auto_scaling_configuration_summary_list[0].has_associated_service #=> Boolean
+    #   resp.auto_scaling_configuration_summary_list[0].is_default #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListAutoScalingConfigurations AWS API Documentation
@@ -2050,6 +2106,63 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Returns a list of the associated App Runner services using an auto
+    # scaling configuration.
+    #
+    # @option params [required, String] :auto_scaling_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner auto scaling
+    #   configuration that you want to list the services for.
+    #
+    #   The ARN can be a full auto scaling configuration ARN, or a partial ARN
+    #   ending with either `.../name ` or `.../name/revision `. If a revision
+    #   isn't specified, the latest active revision is used.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #
+    # @option params [String] :next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones specified in the
+    #   initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #
+    # @return [Types::ListServicesForAutoScalingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServicesForAutoScalingConfigurationResponse#service_arn_list #service_arn_list} => Array&lt;String&gt;
+    #   * {Types::ListServicesForAutoScalingConfigurationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_services_for_auto_scaling_configuration({
+    #     auto_scaling_configuration_arn: "AppRunnerResourceArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_arn_list #=> Array
+    #   resp.service_arn_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListServicesForAutoScalingConfiguration AWS API Documentation
+    #
+    # @overload list_services_for_auto_scaling_configuration(params = {})
+    # @param [Hash] params ({})
+    def list_services_for_auto_scaling_configuration(params = {}, options = {})
+      req = build_request(:list_services_for_auto_scaling_configuration, params)
+      req.send_request(options)
+    end
+
     # List tags that are associated with for an App Runner resource. The
     # response contains a list of tag key-value pairs.
     #
@@ -2243,6 +2356,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2267,9 +2381,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2327,6 +2446,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2351,9 +2471,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2474,6 +2599,52 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
+    # Update an auto scaling configuration to be the default. The existing
+    # default auto scaling configuration will be set to non-default
+    # automatically.
+    #
+    # @option params [required, String] :auto_scaling_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner auto scaling
+    #   configuration that you want to set as the default.
+    #
+    #   The ARN can be a full auto scaling configuration ARN, or a partial ARN
+    #   ending with either `.../name ` or `.../name/revision `. If a revision
+    #   isn't specified, the latest active revision is set as the default.
+    #
+    # @return [Types::UpdateDefaultAutoScalingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDefaultAutoScalingConfigurationResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_default_auto_scaling_configuration({
+    #     auto_scaling_configuration_arn: "AppRunnerResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auto_scaling_configuration.auto_scaling_configuration_arn #=> String
+    #   resp.auto_scaling_configuration.auto_scaling_configuration_name #=> String
+    #   resp.auto_scaling_configuration.auto_scaling_configuration_revision #=> Integer
+    #   resp.auto_scaling_configuration.latest #=> Boolean
+    #   resp.auto_scaling_configuration.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.auto_scaling_configuration.max_concurrency #=> Integer
+    #   resp.auto_scaling_configuration.min_size #=> Integer
+    #   resp.auto_scaling_configuration.max_size #=> Integer
+    #   resp.auto_scaling_configuration.created_at #=> Time
+    #   resp.auto_scaling_configuration.deleted_at #=> Time
+    #   resp.auto_scaling_configuration.has_associated_service #=> Boolean
+    #   resp.auto_scaling_configuration.is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateDefaultAutoScalingConfiguration AWS API Documentation
+    #
+    # @overload update_default_auto_scaling_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_default_auto_scaling_configuration(params = {}, options = {})
+      req = build_request(:update_default_auto_scaling_configuration, params)
+      req.send_request(options)
+    end
+
     # Update an App Runner service. You can update the source configuration
     # and instance configuration of the service. You can also update the ARN
     # of the auto scaling configuration resource that's associated with the
@@ -2555,6 +2726,7 @@ module Aws::AppRunner
     #             },
     #           },
     #         },
+    #         source_directory: "SourceDirectory",
     #       },
     #       image_repository: {
     #         image_identifier: "ImageIdentifier", # required
@@ -2598,6 +2770,7 @@ module Aws::AppRunner
     #       ingress_configuration: {
     #         is_publicly_accessible: false,
     #       },
+    #       ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     },
     #     observability_configuration: {
     #       observability_enabled: false, # required
@@ -2627,6 +2800,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2651,9 +2825,14 @@ module Aws::AppRunner
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_arn #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_name #=> String
     #   resp.service.auto_scaling_configuration_summary.auto_scaling_configuration_revision #=> Integer
+    #   resp.service.auto_scaling_configuration_summary.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.service.auto_scaling_configuration_summary.created_at #=> Time
+    #   resp.service.auto_scaling_configuration_summary.has_associated_service #=> Boolean
+    #   resp.service.auto_scaling_configuration_summary.is_default #=> Boolean
     #   resp.service.network_configuration.egress_configuration.egress_type #=> String, one of "DEFAULT", "VPC"
     #   resp.service.network_configuration.egress_configuration.vpc_connector_arn #=> String
     #   resp.service.network_configuration.ingress_configuration.is_publicly_accessible #=> Boolean
+    #   resp.service.network_configuration.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.service.observability_configuration.observability_enabled #=> Boolean
     #   resp.service.observability_configuration.observability_configuration_arn #=> String
     #   resp.operation_id #=> String
@@ -2735,7 +2914,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

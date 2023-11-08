@@ -1382,7 +1382,7 @@ module Aws::FSx
     #
     #   * `ExportPath`
     #
-    #   * `ImportedChunkSize`
+    #   * `ImportedFileChunkSize`
     #
     #   * `ImportPath`
     #
@@ -1508,7 +1508,7 @@ module Aws::FSx
     #
     # * `ExportPath`
     #
-    # * `ImportedChunkSize`
+    # * `ImportedFileChunkSize`
     #
     # * `ImportPath`
     #
@@ -2190,7 +2190,7 @@ module Aws::FSx
     #
     #   * `ExportPath`
     #
-    #   * `ImportedChunkSize`
+    #   * `ImportedFileChunkSize`
     #
     #   * `ImportPath`
     #
@@ -2205,7 +2205,7 @@ module Aws::FSx
     # @!attribute [rw] file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
     #   for the file system that you're creating. Valid values are `2.10`,
-    #   `2.12`m and `2.15`:
+    #   `2.12`, and `2.15`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre
     #     deployment types.
@@ -3465,9 +3465,9 @@ module Aws::FSx
     #   transfer operations between an Amazon FSx for Lustre file system and
     #   a linked data repository.
     #
-    # * You use release data repository tasks to release have been exported
-    #   to a linked S3 bucketed files from your Amazon FSx for Lustre file
-    #   system.
+    # * You use release data repository tasks to release files that have
+    #   been exported to a linked S3 bucket from your Amazon FSx for Lustre
+    #   file system.
     #
     # * An Amazon File Cache resource uses a task to automatically release
     #   files from the cache.
@@ -5589,7 +5589,7 @@ module Aws::FSx
     #
     # @!attribute [rw] file_system_type_version
     #   The Lustre version of the Amazon FSx for Lustre file system, which
-    #   is `2.10`, `2.12`, or `2.15`.
+    #   can be `2.10`, `2.12`, or `2.15`.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration
@@ -7746,6 +7746,41 @@ module Aws::FSx
     class SourceBackupUnavailable < Struct.new(
       :message,
       :backup_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StartMisconfiguredStateRecoveryRequest AWS API Documentation
+    #
+    class StartMisconfiguredStateRecoveryRequest < Struct.new(
+      :client_request_token,
+      :file_system_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system
+    #   A description of a specific Amazon FSx file system.
+    #   @return [Types::FileSystem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StartMisconfiguredStateRecoveryResponse AWS API Documentation
+    #
+    class StartMisconfiguredStateRecoveryResponse < Struct.new(
+      :file_system)
       SENSITIVE = []
       include Aws::Structure
     end

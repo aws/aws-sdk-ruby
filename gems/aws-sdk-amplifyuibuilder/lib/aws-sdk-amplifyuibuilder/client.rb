@@ -2348,7 +2348,11 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Exchanges an access code for a token.
+    # <note markdown="1"> This is for internal use.
+    #
+    #  </note>
+    #
+    # Amplify uses this action to exchange an access code for a token.
     #
     # @option params [required, String] :provider
     #   The third-party provider for the token. The only valid value is
@@ -3199,6 +3203,8 @@ module Aws::AmplifyUIBuilder
     #   resp.job.render_config.react.api_configuration.graph_ql_config.mutations_file_path #=> String
     #   resp.job.render_config.react.api_configuration.graph_ql_config.subscriptions_file_path #=> String
     #   resp.job.render_config.react.api_configuration.graph_ql_config.fragments_file_path #=> String
+    #   resp.job.render_config.react.dependencies #=> Hash
+    #   resp.job.render_config.react.dependencies["String"] #=> String
     #   resp.job.generic_data_schema.data_source_type #=> String, one of "DataStore"
     #   resp.job.generic_data_schema.models #=> Hash
     #   resp.job.generic_data_schema.models["String"].fields #=> Hash
@@ -3252,6 +3258,11 @@ module Aws::AmplifyUIBuilder
     #   resp.job.tags["TagKey"] #=> String
     #   resp.job.created_at #=> Time
     #   resp.job.modified_at #=> Time
+    #   resp.job.dependencies #=> Array
+    #   resp.job.dependencies[0].name #=> String
+    #   resp.job.dependencies[0].supported_version #=> String
+    #   resp.job.dependencies[0].is_sem_ver #=> Boolean
+    #   resp.job.dependencies[0].reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetCodegenJob AWS API Documentation
     #
@@ -4284,7 +4295,12 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Refreshes a previously issued access token that might have expired.
+    # <note markdown="1"> This is for internal use.
+    #
+    #  </note>
+    #
+    # Amplify uses this action to refresh a previously issued access token
+    # that might have expired.
     #
     # @option params [required, String] :provider
     #   The third-party provider for the token. The only valid value is
@@ -4372,6 +4388,9 @@ module Aws::AmplifyUIBuilder
     #             no_api_config: {
     #             },
     #           },
+    #           dependencies: {
+    #             "String" => "String",
+    #           },
     #         },
     #       },
     #       generic_data_schema: {
@@ -4458,6 +4477,8 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.render_config.react.api_configuration.graph_ql_config.mutations_file_path #=> String
     #   resp.entity.render_config.react.api_configuration.graph_ql_config.subscriptions_file_path #=> String
     #   resp.entity.render_config.react.api_configuration.graph_ql_config.fragments_file_path #=> String
+    #   resp.entity.render_config.react.dependencies #=> Hash
+    #   resp.entity.render_config.react.dependencies["String"] #=> String
     #   resp.entity.generic_data_schema.data_source_type #=> String, one of "DataStore"
     #   resp.entity.generic_data_schema.models #=> Hash
     #   resp.entity.generic_data_schema.models["String"].fields #=> Hash
@@ -4511,6 +4532,11 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.tags["TagKey"] #=> String
     #   resp.entity.created_at #=> Time
     #   resp.entity.modified_at #=> Time
+    #   resp.entity.dependencies #=> Array
+    #   resp.entity.dependencies[0].name #=> String
+    #   resp.entity.dependencies[0].supported_version #=> String
+    #   resp.entity.dependencies[0].is_sem_ver #=> Boolean
+    #   resp.entity.dependencies[0].reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/StartCodegenJob AWS API Documentation
     #
@@ -6408,7 +6434,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

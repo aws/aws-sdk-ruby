@@ -454,7 +454,7 @@ module Aws::GameLift
     #
     #   resp = client.accept_match({
     #     ticket_id: "MatchmakingIdStringModel", # required
-    #     player_ids: ["NonZeroAndMaxString"], # required
+    #     player_ids: ["PlayerId"], # required
     #     acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
     #   })
     #
@@ -860,7 +860,16 @@ module Aws::GameLift
     #
     # If successful, this operation creates a new Fleet resource and places
     # it in `NEW` status, which prompts Amazon GameLift to initiate the
-    # [fleet creation workflow][1].
+    # [fleet creation workflow][1]. You can track fleet creation by checking
+    # fleet status using DescribeFleetAttributes and
+    # DescribeFleetLocationAttributes/, or by monitoring fleet creation
+    # events using DescribeFleetEvents.
+    #
+    # When the fleet status changes to `ACTIVE`, you can enable automatic
+    # scaling with PutScalingPolicy and set capacity for the home Region
+    # with UpdateFleetCapacity. When the status of each remote location
+    # reaches `ACTIVE`, you can set capacity by location using
+    # UpdateFleetCapacity.
     #
     # **Learn more**
     #
@@ -887,13 +896,14 @@ module Aws::GameLift
     #   The unique identifier for a custom game server build to be deployed on
     #   fleet instances. You can use either the build ID or ARN. The build
     #   must be uploaded to Amazon GameLift and in `READY` status. This fleet
-    #   property cannot be changed later.
+    #   property can't be changed after the fleet is created.
     #
     # @option params [String] :script_id
     #   The unique identifier for a Realtime configuration script to be
     #   deployed on fleet instances. You can use either the script ID or ARN.
     #   Scripts must be uploaded to Amazon GameLift prior to creating the
-    #   fleet. This fleet property cannot be changed later.
+    #   fleet. This fleet property can't be changed after the fleet is
+    #   created.
     #
     # @option params [String] :server_launch_path
     #   **This parameter is no longer used.** Specify a server launch path
@@ -996,28 +1006,27 @@ module Aws::GameLift
     # @option params [String] :fleet_type
     #   Indicates whether to use On-Demand or Spot instances for this fleet.
     #   By default, this property is set to `ON_DEMAND`. Learn more about when
-    #   to use [ On-Demand versus Spot Instances][1]. This property cannot be
-    #   changed after the fleet is created.
+    #   to use [ On-Demand versus Spot Instances][1]. This fleet property
+    #   can't be changed after the fleet is created.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot
     #
     # @option params [String] :instance_role_arn
-    #   A unique identifier for an IAM role that manages access to your Amazon
-    #   Web Services services. With an instance role ARN set, any application
-    #   that runs on an instance in this fleet can assume the role, including
-    #   install scripts, server processes, and daemons (background processes).
-    #   Create a role or look up a role's ARN by using the [IAM dashboard][1]
-    #   in the Amazon Web Services Management Console. Learn more about using
-    #   on-box credentials for your game servers at [ Access external
-    #   resources from a game server][2]. This property cannot be changed
-    #   after the fleet is created.
+    #   A unique identifier for an IAM role with access permissions to other
+    #   Amazon Web Services services. Any application that runs on an instance
+    #   in the fleet--including install scripts, server processes, and other
+    #   processes--can use these permissions to interact with Amazon Web
+    #   Services resources that you own or have access to. For more
+    #   information about using the role with your game server builds, see [
+    #   Communicate with other Amazon Web Services resources from your
+    #   fleets][1]. This fleet property can't be changed after the fleet is
+    #   created.
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #
     # @option params [Types::CertificateConfiguration] :certificate_configuration
     #   Prompts Amazon GameLift to generate a TLS/SSL certificate for the
@@ -1076,6 +1085,20 @@ module Aws::GameLift
     # @option params [Types::AnywhereConfiguration] :anywhere_configuration
     #   Amazon GameLift Anywhere configuration options.
     #
+    # @option params [String] :instance_role_credentials_provider
+    #   Prompts Amazon GameLift to generate a shared credentials file for the
+    #   IAM role defined in `InstanceRoleArn`. The shared credentials file is
+    #   stored on each fleet instance and refreshed as needed. Use shared
+    #   credentials for applications that are deployed along with the game
+    #   server executable, if the game server is integrated with server SDK
+    #   version 5.x. For more information about using shared credentials, see
+    #   [ Communicate with other Amazon Web Services resources from your
+    #   fleets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -1096,7 +1119,7 @@ module Aws::GameLift
     #       {
     #         from_port: 1, # required
     #         to_port: 1, # required
-    #         ip_range: "NonBlankString", # required
+    #         ip_range: "IpRange", # required
     #         protocol: "TCP", # required, accepts TCP, UDP
     #       },
     #     ],
@@ -1139,6 +1162,7 @@ module Aws::GameLift
     #     anywhere_configuration: {
     #       cost: "NonNegativeLimitedLengthDouble", # required
     #     },
+    #     instance_role_credentials_provider: "SHARED_CREDENTIAL_FILE", # accepts SHARED_CREDENTIAL_FILE
     #   })
     #
     # @example Response structure
@@ -1172,6 +1196,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #   resp.fleet_attributes.compute_type #=> String, one of "EC2", "ANYWHERE"
     #   resp.fleet_attributes.anywhere_configuration.cost #=> String
+    #   resp.fleet_attributes.instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
     #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
@@ -2288,7 +2313,7 @@ module Aws::GameLift
     #
     #   resp = client.create_player_session({
     #     game_session_id: "ArnStringModel", # required
-    #     player_id: "NonZeroAndMaxString", # required
+    #     player_id: "PlayerId", # required
     #     player_data: "PlayerData",
     #   })
     #
@@ -2366,7 +2391,7 @@ module Aws::GameLift
     #
     #   resp = client.create_player_sessions({
     #     game_session_id: "ArnStringModel", # required
-    #     player_ids: ["NonZeroAndMaxString"], # required
+    #     player_ids: ["PlayerId"], # required
     #     player_data_map: {
     #       "NonZeroAndMaxString" => "PlayerData",
     #     },
@@ -3015,7 +3040,7 @@ module Aws::GameLift
     #
     # Before deleting a custom location, review any fleets currently using
     # the custom location and deregister the location if it is in use. For
-    # more information see, [DeregisterCompute][1].
+    # more information, see [DeregisterCompute][1].
     #
     #
     #
@@ -3699,6 +3724,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
     #   resp.fleet_attributes[0].compute_type #=> String, one of "EC2", "ANYWHERE"
     #   resp.fleet_attributes[0].anywhere_configuration.cost #=> String
+    #   resp.fleet_attributes[0].instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -5299,7 +5325,7 @@ module Aws::GameLift
     #
     #   resp = client.describe_player_sessions({
     #     game_session_id: "ArnStringModel",
-    #     player_id: "NonZeroAndMaxString",
+    #     player_id: "PlayerId",
     #     player_session_id: "PlayerSessionId",
     #     player_session_status_filter: "NonZeroAndMaxString",
     #     limit: 1,
@@ -7488,14 +7514,14 @@ module Aws::GameLift
     #     game_session_name: "NonZeroAndMaxString",
     #     player_latencies: [
     #       {
-    #         player_id: "NonZeroAndMaxString",
+    #         player_id: "PlayerId",
     #         region_identifier: "NonZeroAndMaxString",
     #         latency_in_milliseconds: 1.0,
     #       },
     #     ],
     #     desired_player_sessions: [
     #       {
-    #         player_id: "NonZeroAndMaxString",
+    #         player_id: "PlayerId",
     #         player_data: "PlayerData",
     #       },
     #     ],
@@ -7641,7 +7667,7 @@ module Aws::GameLift
     #     game_session_arn: "ArnStringModel",
     #     players: [ # required
     #       {
-    #         player_id: "NonZeroAndMaxString",
+    #         player_id: "PlayerId",
     #         player_attributes: {
     #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         },
@@ -7755,7 +7781,7 @@ module Aws::GameLift
     #     configuration_name: "MatchmakingConfigurationName", # required
     #     players: [ # required
     #       {
-    #         player_id: "NonZeroAndMaxString",
+    #         player_id: "PlayerId",
     #         player_attributes: {
     #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         },
@@ -8549,7 +8575,7 @@ module Aws::GameLift
     #       {
     #         from_port: 1, # required
     #         to_port: 1, # required
-    #         ip_range: "NonBlankString", # required
+    #         ip_range: "IpRange", # required
     #         protocol: "TCP", # required, accepts TCP, UDP
     #       },
     #     ],
@@ -8557,7 +8583,7 @@ module Aws::GameLift
     #       {
     #         from_port: 1, # required
     #         to_port: 1, # required
-    #         ip_range: "NonBlankString", # required
+    #         ip_range: "IpRange", # required
     #         protocol: "TCP", # required, accepts TCP, UDP
     #       },
     #     ],
@@ -9441,7 +9467,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

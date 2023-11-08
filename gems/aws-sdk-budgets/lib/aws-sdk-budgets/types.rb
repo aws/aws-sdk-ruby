@@ -1041,8 +1041,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An integer that shows how many budget name entries a paginated
-    #   response contains.
+    #   An integer that represents how many budgets a paginated response
+    #   contains. The default is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1159,13 +1159,13 @@ module Aws::Budgets
     # Request of DescribeBudgets
     #
     # @!attribute [rw] account_id
-    #   The `accountId` that is associated with the budgets that you want
-    #   descriptions of.
+    #   The `accountId` that is associated with the budgets that you want to
+    #   describe.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   An integer that represents how many budgets a paginated response
+    #   contains. The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1212,7 +1212,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] max_results
     #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   response contains.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1264,7 +1264,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] max_results
     #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   response contains.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1611,12 +1611,19 @@ module Aws::Budgets
 
     # The amount of cost or usage that's measured for a budget.
     #
-    # For example, a `Spend` for `3 GB` of S3 usage has the following
+    # *Cost example:* A `Spend` for `3 USD` of costs has the following
     # parameters:
     #
     # * An `Amount` of `3`
     #
-    # * A `unit` of `GB`
+    # * A `Unit` of `USD`
+    #
+    # *Usage example:* A `Spend` for `3 GB` of S3 usage has the following
+    # parameters:
+    #
+    # * An `Amount` of `3`
+    #
+    # * A `Unit` of `GB`
     #
     # @!attribute [rw] amount
     #   The cost or usage amount that's associated with a budget forecast,
@@ -1625,7 +1632,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] unit
     #   The unit of measurement that's used for the budget forecast, actual
-    #   spend, or budget threshold, such as USD or GBP.
+    #   spend, or budget threshold.
     #   @return [String]
     #
     class Spend < Struct.new(

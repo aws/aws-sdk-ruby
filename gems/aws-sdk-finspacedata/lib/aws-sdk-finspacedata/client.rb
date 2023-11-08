@@ -390,8 +390,8 @@ module Aws::FinSpaceData
 
     # @!group API Operations
 
-    # Adds a user account to a permission group to grant permissions for
-    # actions a user can perform in FinSpace.
+    # Adds a user to a permission group to grant permissions for actions a
+    # user can perform in FinSpace.
     #
     # @option params [required, String] :permission_group_id
     #   The unique identifier for the permission group.
@@ -909,7 +909,7 @@ module Aws::FinSpaceData
     # specified user.
     #
     # @option params [required, String] :user_id
-    #   The unique identifier for the user account that you want to disable.
+    #   The unique identifier for the user that you want to deactivate.
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -941,7 +941,7 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # Removes a user account from a permission group.
+    # Removes a user from a permission group.
     #
     # @option params [required, String] :permission_group_id
     #   The unique identifier for the permission group.
@@ -984,7 +984,7 @@ module Aws::FinSpaceData
     # API.
     #
     # @option params [required, String] :user_id
-    #   The unique identifier for the user account that you want to enable.
+    #   The unique identifier for the user that you want to activate.
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -1266,7 +1266,13 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # Request programmatic credentials to use with FinSpace SDK.
+    # Request programmatic credentials to use with FinSpace SDK. For more
+    # information, see [Step 2. Access credentials programmatically using
+    # IAM access key id and secret access key][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#accessing-credentials
     #
     # @option params [Integer] :duration_in_minutes
     #   The time duration in which the credentials remain valid.
@@ -1609,7 +1615,7 @@ module Aws::FinSpaceData
     end
 
     # Lists all the permission groups that are associated with a specific
-    # user account.
+    # user.
     #
     # @option params [required, String] :user_id
     #   The unique identifier for the user.
@@ -1650,7 +1656,7 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # Lists all available user accounts in FinSpace.
+    # Lists all available users in FinSpace.
     #
     # @option params [String] :next_token
     #   A token that indicates where a results page should begin.
@@ -2033,11 +2039,11 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # Modifies the details of the specified user account. You cannot update
-    # the `userId` for a user.
+    # Modifies the details of the specified user. You cannot update the
+    # `userId` for a user.
     #
     # @option params [required, String] :user_id
-    #   The unique identifier for the user account to update.
+    #   The unique identifier for the user that you want to update.
     #
     # @option params [String] :type
     #   The option to indicate the type of user.
@@ -2117,7 +2123,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

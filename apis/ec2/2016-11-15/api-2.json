@@ -2019,6 +2019,15 @@
       "input":{"shape":"DescribeByoipCidrsRequest"},
       "output":{"shape":"DescribeByoipCidrsResult"}
     },
+    "DescribeCapacityBlockOfferings":{
+      "name":"DescribeCapacityBlockOfferings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCapacityBlockOfferingsRequest"},
+      "output":{"shape":"DescribeCapacityBlockOfferingsResult"}
+    },
     "DescribeCapacityReservationFleets":{
       "name":"DescribeCapacityReservationFleets",
       "http":{
@@ -3339,6 +3348,24 @@
       "input":{"shape":"DisableFastSnapshotRestoresRequest"},
       "output":{"shape":"DisableFastSnapshotRestoresResult"}
     },
+    "DisableImage":{
+      "name":"DisableImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableImageRequest"},
+      "output":{"shape":"DisableImageResult"}
+    },
+    "DisableImageBlockPublicAccess":{
+      "name":"DisableImageBlockPublicAccess",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableImageBlockPublicAccessRequest"},
+      "output":{"shape":"DisableImageBlockPublicAccessResult"}
+    },
     "DisableImageDeprecation":{
       "name":"DisableImageDeprecation",
       "http":{
@@ -3569,6 +3596,24 @@
       },
       "input":{"shape":"EnableFastSnapshotRestoresRequest"},
       "output":{"shape":"EnableFastSnapshotRestoresResult"}
+    },
+    "EnableImage":{
+      "name":"EnableImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableImageRequest"},
+      "output":{"shape":"EnableImageResult"}
+    },
+    "EnableImageBlockPublicAccess":{
+      "name":"EnableImageBlockPublicAccess",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableImageBlockPublicAccessRequest"},
+      "output":{"shape":"EnableImageBlockPublicAccessResult"}
     },
     "EnableImageDeprecation":{
       "name":"EnableImageDeprecation",
@@ -3802,6 +3847,15 @@
       "input":{"shape":"GetHostReservationPurchasePreviewRequest"},
       "output":{"shape":"GetHostReservationPurchasePreviewResult"}
     },
+    "GetImageBlockPublicAccessState":{
+      "name":"GetImageBlockPublicAccessState",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetImageBlockPublicAccessStateRequest"},
+      "output":{"shape":"GetImageBlockPublicAccessStateResult"}
+    },
     "GetInstanceTypesFromInstanceRequirements":{
       "name":"GetInstanceTypesFromInstanceRequirements",
       "http":{
@@ -3936,6 +3990,15 @@
       },
       "input":{"shape":"GetReservedInstancesExchangeQuoteRequest"},
       "output":{"shape":"GetReservedInstancesExchangeQuoteResult"}
+    },
+    "GetSecurityGroupsForVpc":{
+      "name":"GetSecurityGroupsForVpc",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetSecurityGroupsForVpcRequest"},
+      "output":{"shape":"GetSecurityGroupsForVpcResult"}
     },
     "GetSerialConsoleAccessStatus":{
       "name":"GetSerialConsoleAccessStatus",
@@ -4764,6 +4827,15 @@
       },
       "input":{"shape":"ProvisionPublicIpv4PoolCidrRequest"},
       "output":{"shape":"ProvisionPublicIpv4PoolCidrResult"}
+    },
+    "PurchaseCapacityBlock":{
+      "name":"PurchaseCapacityBlock",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PurchaseCapacityBlockRequest"},
+      "output":{"shape":"PurchaseCapacityBlockResult"}
     },
     "PurchaseHostReservation":{
       "name":"PurchaseHostReservation",
@@ -8285,6 +8357,58 @@
         "locationName":"item"
       }
     },
+    "CapacityBlockOffering":{
+      "type":"structure",
+      "members":{
+        "CapacityBlockOfferingId":{
+          "shape":"OfferingId",
+          "locationName":"capacityBlockOfferingId"
+        },
+        "InstanceType":{
+          "shape":"String",
+          "locationName":"instanceType"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
+        "InstanceCount":{
+          "shape":"Integer",
+          "locationName":"instanceCount"
+        },
+        "StartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"startDate"
+        },
+        "EndDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"endDate"
+        },
+        "CapacityBlockDurationHours":{
+          "shape":"Integer",
+          "locationName":"capacityBlockDurationHours"
+        },
+        "UpfrontFee":{
+          "shape":"String",
+          "locationName":"upfrontFee"
+        },
+        "CurrencyCode":{
+          "shape":"String",
+          "locationName":"currencyCode"
+        },
+        "Tenancy":{
+          "shape":"CapacityReservationTenancy",
+          "locationName":"tenancy"
+        }
+      }
+    },
+    "CapacityBlockOfferingSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityBlockOffering",
+        "locationName":"item"
+      }
+    },
     "CapacityReservation":{
       "type":"structure",
       "members":{
@@ -8379,6 +8503,10 @@
         "CapacityAllocations":{
           "shape":"CapacityAllocations",
           "locationName":"capacityAllocationSet"
+        },
+        "ReservationType":{
+          "shape":"CapacityReservationType",
+          "locationName":"reservationType"
         }
       }
     },
@@ -8535,7 +8663,8 @@
         "RHEL with SQL Server Web",
         "RHEL with HA",
         "RHEL with HA and SQL Server Standard",
-        "RHEL with HA and SQL Server Enterprise"
+        "RHEL with HA and SQL Server Enterprise",
+        "Ubuntu Pro"
       ]
     },
     "CapacityReservationOptions":{
@@ -8594,7 +8723,10 @@
         "expired",
         "cancelled",
         "pending",
-        "failed"
+        "failed",
+        "scheduled",
+        "payment-pending",
+        "payment-failed"
       ]
     },
     "CapacityReservationTarget":{
@@ -8622,6 +8754,13 @@
       "enum":[
         "default",
         "dedicated"
+      ]
+    },
+    "CapacityReservationType":{
+      "type":"string",
+      "enum":[
+        "default",
+        "capacity-block"
       ]
     },
     "CarrierGateway":{
@@ -10005,7 +10144,7 @@
       "type":"structure",
       "required":["AvailabilityZone"],
       "members":{
-        "AvailabilityZone":{"shape":"String"},
+        "AvailabilityZone":{"shape":"AvailabilityZoneName"},
         "DryRun":{"shape":"Boolean"},
         "Ipv6Native":{"shape":"Boolean"}
       }
@@ -11967,7 +12106,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "CreateVerifiedAccessEndpointResult":{
@@ -12001,7 +12141,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "CreateVerifiedAccessGroupResult":{
@@ -12025,7 +12166,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "FIPSEnabled":{"shape":"Boolean"}
       }
     },
     "CreateVerifiedAccessInstanceResult":{
@@ -12077,7 +12219,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "CreateVerifiedAccessTrustProviderResult":{
@@ -12583,7 +12726,8 @@
       "type":"string",
       "enum":[
         "spot",
-        "on-demand"
+        "on-demand",
+        "capacity-block"
       ]
     },
     "DefaultingDhcpOptionsId":{"type":"string"},
@@ -14393,6 +14537,42 @@
         }
       }
     },
+    "DescribeCapacityBlockOfferingsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "DescribeCapacityBlockOfferingsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceType",
+        "InstanceCount",
+        "CapacityDurationHours"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "InstanceType":{"shape":"String"},
+        "InstanceCount":{"shape":"Integer"},
+        "StartDateRange":{"shape":"MillisecondDateTime"},
+        "EndDateRange":{"shape":"MillisecondDateTime"},
+        "CapacityDurationHours":{"shape":"Integer"},
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeCapacityBlockOfferingsMaxResults"}
+      }
+    },
+    "DescribeCapacityBlockOfferingsResult":{
+      "type":"structure",
+      "members":{
+        "CapacityBlockOfferings":{
+          "shape":"CapacityBlockOfferingSet",
+          "locationName":"capacityBlockOfferingSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeCapacityReservationFleetsMaxResults":{
       "type":"integer",
       "max":100,
@@ -15549,6 +15729,7 @@
           "locationName":"Owner"
         },
         "IncludeDeprecated":{"shape":"Boolean"},
+        "IncludeDisabled":{"shape":"Boolean"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -19319,6 +19500,21 @@
         }
       }
     },
+    "DisableImageBlockPublicAccessRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisableImageBlockPublicAccessResult":{
+      "type":"structure",
+      "members":{
+        "ImageBlockPublicAccessState":{
+          "shape":"ImageBlockPublicAccessDisabledState",
+          "locationName":"imageBlockPublicAccessState"
+        }
+      }
+    },
     "DisableImageDeprecationRequest":{
       "type":"structure",
       "required":["ImageId"],
@@ -19328,6 +19524,23 @@
       }
     },
     "DisableImageDeprecationResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
+    "DisableImageRequest":{
+      "type":"structure",
+      "required":["ImageId"],
+      "members":{
+        "ImageId":{"shape":"ImageId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisableImageResult":{
       "type":"structure",
       "members":{
         "Return":{
@@ -20661,6 +20874,23 @@
         }
       }
     },
+    "EnableImageBlockPublicAccessRequest":{
+      "type":"structure",
+      "required":["ImageBlockPublicAccessState"],
+      "members":{
+        "ImageBlockPublicAccessState":{"shape":"ImageBlockPublicAccessEnabledState"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "EnableImageBlockPublicAccessResult":{
+      "type":"structure",
+      "members":{
+        "ImageBlockPublicAccessState":{
+          "shape":"ImageBlockPublicAccessEnabledState",
+          "locationName":"imageBlockPublicAccessState"
+        }
+      }
+    },
     "EnableImageDeprecationRequest":{
       "type":"structure",
       "required":[
@@ -20674,6 +20904,23 @@
       }
     },
     "EnableImageDeprecationResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
+    "EnableImageRequest":{
+      "type":"structure",
+      "required":["ImageId"],
+      "members":{
+        "ImageId":{"shape":"ImageId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "EnableImageResult":{
       "type":"structure",
       "members":{
         "Return":{
@@ -22745,6 +22992,21 @@
         }
       }
     },
+    "GetImageBlockPublicAccessStateRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetImageBlockPublicAccessStateResult":{
+      "type":"structure",
+      "members":{
+        "ImageBlockPublicAccessState":{
+          "shape":"String",
+          "locationName":"imageBlockPublicAccessState"
+        }
+      }
+    },
     "GetInstanceTypesFromInstanceRequirementsRequest":{
       "type":"structure",
       "required":[
@@ -23183,6 +23445,38 @@
         "ValidationFailureReason":{
           "shape":"String",
           "locationName":"validationFailureReason"
+        }
+      }
+    },
+    "GetSecurityGroupsForVpcRequest":{
+      "type":"structure",
+      "required":["VpcId"],
+      "members":{
+        "VpcId":{"shape":"VpcId"},
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"GetSecurityGroupsForVpcRequestMaxResults"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetSecurityGroupsForVpcRequestMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
+    "GetSecurityGroupsForVpcResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        },
+        "SecurityGroupForVpcs":{
+          "shape":"SecurityGroupForVpcList",
+          "locationName":"securityGroupForVpcSet"
         }
       }
     },
@@ -24315,6 +24609,10 @@
         "ImdsSupport":{
           "shape":"ImdsSupportValues",
           "locationName":"imdsSupport"
+        },
+        "SourceInstanceId":{
+          "shape":"String",
+          "locationName":"sourceInstanceId"
         }
       }
     },
@@ -24391,6 +24689,14 @@
         "lastLaunchedTime",
         "imdsSupport"
       ]
+    },
+    "ImageBlockPublicAccessDisabledState":{
+      "type":"string",
+      "enum":["unblocked"]
+    },
+    "ImageBlockPublicAccessEnabledState":{
+      "type":"string",
+      "enum":["block-new-sharing"]
     },
     "ImageDiskContainer":{
       "type":"structure",
@@ -24473,7 +24779,8 @@
         "deregistered",
         "transient",
         "failed",
-        "error"
+        "error",
+        "disabled"
       ]
     },
     "ImageTypeValues":{
@@ -25915,7 +26222,8 @@
       "type":"string",
       "enum":[
         "spot",
-        "scheduled"
+        "scheduled",
+        "capacity-block"
       ]
     },
     "InstanceList":{
@@ -27394,7 +27702,58 @@
         "r7gd.4xlarge",
         "r7gd.8xlarge",
         "r7gd.12xlarge",
-        "r7gd.16xlarge"
+        "r7gd.16xlarge",
+        "r7a.medium",
+        "r7a.large",
+        "r7a.xlarge",
+        "r7a.2xlarge",
+        "r7a.4xlarge",
+        "r7a.8xlarge",
+        "r7a.12xlarge",
+        "r7a.16xlarge",
+        "r7a.24xlarge",
+        "r7a.32xlarge",
+        "r7a.48xlarge",
+        "c7i.large",
+        "c7i.xlarge",
+        "c7i.2xlarge",
+        "c7i.4xlarge",
+        "c7i.8xlarge",
+        "c7i.12xlarge",
+        "c7i.16xlarge",
+        "c7i.24xlarge",
+        "c7i.48xlarge",
+        "mac2-m2pro.metal",
+        "r7iz.large",
+        "r7iz.xlarge",
+        "r7iz.2xlarge",
+        "r7iz.4xlarge",
+        "r7iz.8xlarge",
+        "r7iz.12xlarge",
+        "r7iz.16xlarge",
+        "r7iz.32xlarge",
+        "c7a.medium",
+        "c7a.large",
+        "c7a.xlarge",
+        "c7a.2xlarge",
+        "c7a.4xlarge",
+        "c7a.8xlarge",
+        "c7a.12xlarge",
+        "c7a.16xlarge",
+        "c7a.24xlarge",
+        "c7a.32xlarge",
+        "c7a.48xlarge",
+        "c7a.metal-48xl",
+        "r7a.metal-48xl",
+        "r7i.large",
+        "r7i.xlarge",
+        "r7i.2xlarge",
+        "r7i.4xlarge",
+        "r7i.8xlarge",
+        "r7i.12xlarge",
+        "r7i.16xlarge",
+        "r7i.24xlarge",
+        "r7i.48xlarge"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -28991,6 +29350,7 @@
         "ed25519"
       ]
     },
+    "KmsKeyArn":{"type":"string"},
     "KmsKeyId":{"type":"string"},
     "LastError":{
       "type":"structure",
@@ -30553,7 +30913,8 @@
       "enum":[
         "region",
         "availability-zone",
-        "availability-zone-id"
+        "availability-zone-id",
+        "outpost"
       ]
     },
     "LogDestinationType":{
@@ -30636,7 +30997,10 @@
     },
     "MarketType":{
       "type":"string",
-      "enum":["spot"]
+      "enum":[
+        "spot",
+        "capacity-block"
+      ]
     },
     "MaxIpv4AddrPerInterface":{"type":"integer"},
     "MaxIpv6AddrPerInterface":{"type":"integer"},
@@ -31893,10 +32257,7 @@
     },
     "ModifyVerifiedAccessEndpointPolicyRequest":{
       "type":"structure",
-      "required":[
-        "VerifiedAccessEndpointId",
-        "PolicyEnabled"
-      ],
+      "required":["VerifiedAccessEndpointId"],
       "members":{
         "VerifiedAccessEndpointId":{"shape":"VerifiedAccessEndpointId"},
         "PolicyEnabled":{"shape":"Boolean"},
@@ -31905,7 +32266,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "ModifyVerifiedAccessEndpointPolicyResult":{
@@ -31918,6 +32280,10 @@
         "PolicyDocument":{
           "shape":"String",
           "locationName":"policyDocument"
+        },
+        "SseSpecification":{
+          "shape":"VerifiedAccessSseSpecificationResponse",
+          "locationName":"sseSpecification"
         }
       }
     },
@@ -31955,10 +32321,7 @@
     },
     "ModifyVerifiedAccessGroupPolicyRequest":{
       "type":"structure",
-      "required":[
-        "VerifiedAccessGroupId",
-        "PolicyEnabled"
-      ],
+      "required":["VerifiedAccessGroupId"],
       "members":{
         "VerifiedAccessGroupId":{"shape":"VerifiedAccessGroupId"},
         "PolicyEnabled":{"shape":"Boolean"},
@@ -31967,7 +32330,8 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "ModifyVerifiedAccessGroupPolicyResult":{
@@ -31980,6 +32344,10 @@
         "PolicyDocument":{
           "shape":"String",
           "locationName":"policyDocument"
+        },
+        "SseSpecification":{
+          "shape":"VerifiedAccessSseSpecificationResponse",
+          "locationName":"sseSpecification"
         }
       }
     },
@@ -32076,7 +32444,8 @@
         "ClientToken":{
           "shape":"String",
           "idempotencyToken":true
-        }
+        },
+        "SseSpecification":{"shape":"VerifiedAccessSseSpecificationRequest"}
       }
     },
     "ModifyVerifiedAccessTrustProviderResult":{
@@ -35216,6 +35585,31 @@
         "UpfrontPrice":{
           "shape":"String",
           "locationName":"upfrontPrice"
+        }
+      }
+    },
+    "PurchaseCapacityBlockRequest":{
+      "type":"structure",
+      "required":[
+        "CapacityBlockOfferingId",
+        "InstancePlatform"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "CapacityBlockOfferingId":{"shape":"OfferingId"},
+        "InstancePlatform":{"shape":"CapacityReservationInstancePlatform"}
+      }
+    },
+    "PurchaseCapacityBlockResult":{
+      "type":"structure",
+      "members":{
+        "CapacityReservation":{
+          "shape":"CapacityReservation",
+          "locationName":"capacityReservation"
         }
       }
     },
@@ -38504,6 +38898,42 @@
           "shape":"String",
           "locationName":"vpcId"
         }
+      }
+    },
+    "SecurityGroupForVpc":{
+      "type":"structure",
+      "members":{
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "GroupName":{
+          "shape":"String",
+          "locationName":"groupName"
+        },
+        "OwnerId":{
+          "shape":"String",
+          "locationName":"ownerId"
+        },
+        "GroupId":{
+          "shape":"String",
+          "locationName":"groupId"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        },
+        "PrimaryVpcId":{
+          "shape":"String",
+          "locationName":"primaryVpcId"
+        }
+      }
+    },
+    "SecurityGroupForVpcList":{
+      "type":"list",
+      "member":{
+        "shape":"SecurityGroupForVpc",
+        "locationName":"item"
       }
     },
     "SecurityGroupId":{"type":"string"},
@@ -43125,7 +43555,8 @@
       "type":"string",
       "enum":[
         "spot",
-        "on-demand"
+        "on-demand",
+        "capacity-block"
       ]
     },
     "UsageClassTypeList":{
@@ -43383,6 +43814,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "SseSpecification":{
+          "shape":"VerifiedAccessSseSpecificationResponse",
+          "locationName":"sseSpecification"
         }
       }
     },
@@ -43530,6 +43965,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "SseSpecification":{
+          "shape":"VerifiedAccessSseSpecificationResponse",
+          "locationName":"sseSpecification"
         }
       }
     },
@@ -43574,6 +44013,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "FipsEnabled":{
+          "shape":"Boolean",
+          "locationName":"fipsEnabled"
         }
       }
     },
@@ -43752,6 +44195,26 @@
         }
       }
     },
+    "VerifiedAccessSseSpecificationRequest":{
+      "type":"structure",
+      "members":{
+        "CustomerManagedKeyEnabled":{"shape":"Boolean"},
+        "KmsKeyArn":{"shape":"KmsKeyArn"}
+      }
+    },
+    "VerifiedAccessSseSpecificationResponse":{
+      "type":"structure",
+      "members":{
+        "CustomerManagedKeyEnabled":{
+          "shape":"Boolean",
+          "locationName":"customerManagedKeyEnabled"
+        },
+        "KmsKeyArn":{
+          "shape":"KmsKeyArn",
+          "locationName":"kmsKeyArn"
+        }
+      }
+    },
     "VerifiedAccessTrustProvider":{
       "type":"structure",
       "members":{
@@ -43798,6 +44261,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "SseSpecification":{
+          "shape":"VerifiedAccessSseSpecificationResponse",
+          "locationName":"sseSpecification"
         }
       }
     },

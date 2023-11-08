@@ -447,6 +447,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -471,6 +473,48 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def convert_recovery_point_to_snapshot(params = {}, options = {})
       req = build_request(:convert_recovery_point_to_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a custom domain association for Amazon Redshift Serverless.
+    #
+    # @option params [required, String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::CreateCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::CreateCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_domain_association({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociation AWS API Documentation
+    #
+    # @overload create_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def create_custom_domain_association(params = {}, options = {})
+      req = build_request(:create_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -540,9 +584,16 @@ module Aws::RedshiftServerless
 
     # Creates a namespace in Amazon Redshift Serverless.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -566,6 +617,13 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. Available export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace.
     #
@@ -579,6 +637,7 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     db_name: "String",
@@ -586,6 +645,7 @@ module Aws::RedshiftServerless
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     tags: [
     #       {
@@ -597,6 +657,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -669,6 +731,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -838,6 +902,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -850,6 +917,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -860,6 +928,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroup AWS API Documentation
     #
@@ -867,6 +936,32 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def create_workgroup(params = {}, options = {})
       req = build_request(:create_workgroup, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom domain association for Amazon Redshift Serverless.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_domain_association({
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociation AWS API Documentation
+    #
+    # @overload delete_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_domain_association(params = {}, options = {})
+      req = build_request(:delete_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -944,6 +1039,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -1011,6 +1108,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1094,6 +1193,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -1106,6 +1208,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1116,6 +1219,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroup AWS API Documentation
     #
@@ -1134,6 +1238,10 @@ module Aws::RedshiftServerless
     # 3600 seconds (60 minutes).
     #
     #      <p>The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name associated with the workgroup. The custom
+    #   domain name or the workgroup name must be included in the request.
     #
     # @option params [String] :db_name
     #   The name of the database to get temporary authorization to log on to.
@@ -1160,7 +1268,7 @@ module Aws::RedshiftServerless
     #   The number of seconds until the returned temporary password expires.
     #   The minimum is 900 seconds, and the maximum is 3600 seconds.
     #
-    # @option params [required, String] :workgroup_name
+    # @option params [String] :workgroup_name
     #   The name of the workgroup associated with the database.
     #
     # @return [Types::GetCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1173,9 +1281,10 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_credentials({
+    #     custom_domain_name: "CustomDomainName",
     #     db_name: "DbName",
     #     duration_seconds: 1,
-    #     workgroup_name: "WorkgroupName", # required
+    #     workgroup_name: "WorkgroupName",
     #   })
     #
     # @example Response structure
@@ -1191,6 +1300,44 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def get_credentials(params = {}, options = {})
       req = build_request(:get_credentials, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific custom domain association.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::GetCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::GetCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_domain_association({
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociation AWS API Documentation
+    #
+    # @overload get_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def get_custom_domain_association(params = {}, options = {})
+      req = build_request(:get_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -1257,6 +1404,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -1373,6 +1522,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1498,6 +1649,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -1510,6 +1664,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1520,6 +1675,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroup AWS API Documentation
     #
@@ -1527,6 +1683,57 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def get_workgroup(params = {}, options = {})
       req = build_request(:get_workgroup, params)
+      req.send_request(options)
+    end
+
+    # Lists custom domain associations for Amazon Redshift Serverless.
+    #
+    # @option params [String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to display the next page of results.
+    #
+    # @option params [String] :next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #
+    # @return [Types::ListCustomDomainAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomDomainAssociationsResponse#associations #associations} => Array&lt;Types::Association&gt;
+    #   * {Types::ListCustomDomainAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_domain_associations({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     custom_domain_name: "CustomDomainName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].custom_domain_certificate_arn #=> String
+    #   resp.associations[0].custom_domain_certificate_expiry_time #=> Time
+    #   resp.associations[0].custom_domain_name #=> String
+    #   resp.associations[0].workgroup_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociations AWS API Documentation
+    #
+    # @overload list_custom_domain_associations(params = {})
+    # @param [Hash] params ({})
+    def list_custom_domain_associations(params = {}, options = {})
+      req = build_request(:list_custom_domain_associations, params)
       req.send_request(options)
     end
 
@@ -1626,6 +1833,8 @@ module Aws::RedshiftServerless
     # @example Response structure
     #
     #   resp.namespaces #=> Array
+    #   resp.namespaces[0].admin_password_secret_arn #=> String
+    #   resp.namespaces[0].admin_password_secret_kms_key_id #=> String
     #   resp.namespaces[0].admin_username #=> String
     #   resp.namespaces[0].creation_date #=> Time
     #   resp.namespaces[0].db_name #=> String
@@ -1768,6 +1977,8 @@ module Aws::RedshiftServerless
     #   resp.snapshots[0].accounts_with_restore_access #=> Array
     #   resp.snapshots[0].accounts_with_restore_access[0] #=> String
     #   resp.snapshots[0].actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshots[0].admin_password_secret_arn #=> String
+    #   resp.snapshots[0].admin_password_secret_kms_key_id #=> String
     #   resp.snapshots[0].admin_username #=> String
     #   resp.snapshots[0].backup_progress_in_mega_bytes #=> Float
     #   resp.snapshots[0].current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1980,6 +2191,9 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].config_parameters[0].parameter_key #=> String
     #   resp.workgroups[0].config_parameters[0].parameter_value #=> String
     #   resp.workgroups[0].creation_date #=> Time
+    #   resp.workgroups[0].custom_domain_certificate_arn #=> String
+    #   resp.workgroups[0].custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroups[0].custom_domain_name #=> String
     #   resp.workgroups[0].endpoint.address #=> String
     #   resp.workgroups[0].endpoint.port #=> Integer
     #   resp.workgroups[0].endpoint.vpc_endpoints #=> Array
@@ -1992,6 +2206,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
     #   resp.workgroups[0].namespace_name #=> String
+    #   resp.workgroups[0].patch_version #=> String
     #   resp.workgroups[0].port #=> Integer
     #   resp.workgroups[0].publicly_accessible #=> Boolean
     #   resp.workgroups[0].security_group_ids #=> Array
@@ -2002,6 +2217,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].workgroup_arn #=> String
     #   resp.workgroups[0].workgroup_id #=> String
     #   resp.workgroups[0].workgroup_name #=> String
+    #   resp.workgroups[0].workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroups AWS API Documentation
     #
@@ -2080,6 +2296,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2105,6 +2323,16 @@ module Aws::RedshiftServerless
     end
 
     # Restores a namespace from a snapshot.
+    #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
+    #   snapshot's admin credentials. If `MmanageAdminPassword` is false or
+    #   not set, Amazon Redshift uses the admin credentials that the namespace
+    #   or cluster had at the time the snapshot was taken.
     #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to restore the snapshot to.
@@ -2136,6 +2364,8 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_from_snapshot({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     owner_account: "String",
     #     snapshot_arn: "String",
@@ -2145,6 +2375,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2314,6 +2546,50 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Updates an Amazon Redshift Serverless certificate associated with a
+    # custom domain.
+    #
+    # @option params [required, String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN). This
+    #   is optional.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::UpdateCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::UpdateCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_domain_association({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociation AWS API Documentation
+    #
+    # @overload update_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def update_custom_domain_association(params = {}, options = {})
+      req = build_request(:update_custom_domain_association, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon Redshift Serverless managed endpoint.
     #
     # @option params [required, String] :endpoint_name
@@ -2371,10 +2647,17 @@ module Aws::RedshiftServerless
     # either field, but you can't update both `kmsKeyId` and `logExports`
     # in a single request.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
     #   `adminUsername`.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -2398,6 +2681,13 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. The export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
@@ -2409,17 +2699,21 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     default_iam_role_arn: "String",
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2469,6 +2763,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -2617,6 +2913,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -2629,6 +2928,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -2639,6 +2939,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroup AWS API Documentation
     #
@@ -2662,7 +2963,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1299,8 +1299,8 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] time_range_type
-    #   A parameter to indicate whether to query trace summaries by TraceId
-    #   or Event time.
+    #   A parameter to indicate whether to query trace summaries by TraceId,
+    #   Event (trace update time), or Service (segment end time).
     #   @return [String]
     #
     # @!attribute [rw] sampling
@@ -3058,6 +3058,11 @@ module Aws::XRay
     #   segments and subsegments.
     #   @return [String]
     #
+    # @!attribute [rw] start_time
+    #   The start time of a trace, based on the earliest trace segment start
+    #   time.
+    #   @return [Time]
+    #
     # @!attribute [rw] duration
     #   The length of time in seconds between the start time of the root
     #   segment and the end time of the last segment that completed.
@@ -3149,6 +3154,7 @@ module Aws::XRay
     #
     class TraceSummary < Struct.new(
       :id,
+      :start_time,
       :duration,
       :response_time,
       :has_fault,

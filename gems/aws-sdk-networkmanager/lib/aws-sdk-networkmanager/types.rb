@@ -447,6 +447,10 @@ module Aws::NetworkManager
     #   The list of key-value tags associated with the Connect peer.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeer AWS API Documentation
     #
     class ConnectPeer < Struct.new(
@@ -457,7 +461,8 @@ module Aws::NetworkManager
       :state,
       :created_at,
       :configuration,
-      :tags)
+      :tags,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -589,6 +594,10 @@ module Aws::NetworkManager
     #   The list of key-value tags associated with the Connect peer summary.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerSummary AWS API Documentation
     #
     class ConnectPeerSummary < Struct.new(
@@ -598,7 +607,8 @@ module Aws::NetworkManager
       :edge_location,
       :connect_peer_state,
       :created_at,
-      :tags)
+      :tags,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1235,6 +1245,10 @@ module Aws::NetworkManager
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeerRequest AWS API Documentation
     #
     class CreateConnectPeerRequest < Struct.new(
@@ -1244,7 +1258,8 @@ module Aws::NetworkManager
       :bgp_options,
       :inside_cidr_blocks,
       :tags,
-      :client_token)
+      :client_token,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4901,7 +4916,9 @@ module Aws::NetworkManager
     # Describes a route table.
     #
     # @!attribute [rw] transit_gateway_route_table_arn
-    #   The ARN of the transit gateway route table.
+    #   The ARN of the transit gateway route table for the attachment
+    #   request. For example, `"TransitGatewayRouteTableArn":
+    #   "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"`.
     #   @return [String]
     #
     # @!attribute [rw] core_network_segment_edge

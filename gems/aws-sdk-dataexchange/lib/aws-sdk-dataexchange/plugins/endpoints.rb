@@ -100,6 +100,8 @@ module Aws::DataExchange
             Aws::DataExchange::Endpoints::RevokeRevision.build(context)
           when :send_api_asset
             Aws::DataExchange::Endpoints::SendApiAsset.build(context)
+          when :send_data_set_notification
+            Aws::DataExchange::Endpoints::SendDataSetNotification.build(context)
           when :start_job
             Aws::DataExchange::Endpoints::StartJob.build(context)
           when :tag_resource

@@ -208,16 +208,11 @@ module Aws::CloudFormation
       data[:drift_information]
     end
 
-    # This deletion policy deletes newly created resources, but retains
-    # existing resources, when a stack operation is rolled back. This
-    # ensures new, empty, and unused resources are deleted, while critical
-    # resources and their data are retained. `RetainExceptOnCreate` can be
-    # specified for any resource that supports the [ DeletionPolicy][1]
-    # attribute.
+    # When set to `true`, newly created resources are deleted when the
+    # operation rolls back. This includes newly created resources marked
+    # with a deletion policy of `Retain`.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    # Default: `false`
     # @return [Boolean]
     def retain_except_on_create
       data[:retain_except_on_create]
@@ -687,16 +682,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @option options [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)
@@ -1038,16 +1028,11 @@ module Aws::CloudFormation
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     # @option options [Boolean] :retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     # @return [Types::UpdateStackOutput]
     def update(options = {})
       options = options.merge(stack_name: @name)

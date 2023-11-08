@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-11-07)
+------------------
+
+* Feature - Added support for pre and post scripts in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+
+1.62.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2023-07-11)
 ------------------
 

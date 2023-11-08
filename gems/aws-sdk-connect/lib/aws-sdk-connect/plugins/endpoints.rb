@@ -80,6 +80,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::AssociateSecurityKey.build(context)
           when :associate_traffic_distribution_group_user
             Aws::Connect::Endpoints::AssociateTrafficDistributionGroupUser.build(context)
+          when :batch_get_flow_association
+            Aws::Connect::Endpoints::BatchGetFlowAssociation.build(context)
+          when :batch_put_contact
+            Aws::Connect::Endpoints::BatchPutContact.build(context)
           when :claim_phone_number
             Aws::Connect::Endpoints::ClaimPhoneNumber.build(context)
           when :create_agent_status
@@ -98,6 +102,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateIntegrationAssociation.build(context)
           when :create_participant
             Aws::Connect::Endpoints::CreateParticipant.build(context)
+          when :create_persistent_contact_association
+            Aws::Connect::Endpoints::CreatePersistentContactAssociation.build(context)
           when :create_prompt
             Aws::Connect::Endpoints::CreatePrompt.build(context)
           when :create_queue
@@ -310,6 +316,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListRules.build(context)
           when :list_security_keys
             Aws::Connect::Endpoints::ListSecurityKeys.build(context)
+          when :list_security_profile_applications
+            Aws::Connect::Endpoints::ListSecurityProfileApplications.build(context)
           when :list_security_profile_permissions
             Aws::Connect::Endpoints::ListSecurityProfilePermissions.build(context)
           when :list_security_profiles
@@ -422,6 +430,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateParticipantRoleConfig.build(context)
           when :update_phone_number
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
+          when :update_phone_number_metadata
+            Aws::Connect::Endpoints::UpdatePhoneNumberMetadata.build(context)
           when :update_prompt
             Aws::Connect::Endpoints::UpdatePrompt.build(context)
           when :update_queue_hours_of_operation

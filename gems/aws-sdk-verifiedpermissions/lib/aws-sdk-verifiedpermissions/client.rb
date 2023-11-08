@@ -657,7 +657,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    # [1]: https://docs.cedarpolicy.com/schema.html#namespace
+    # [1]: https://docs.cedarpolicy.com/schema/schema.html#namespace
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -1988,8 +1988,9 @@ module Aws::VerifiedPermissions
     # description and the some elements of the [policyBody][1].
     #
     # Changes you make to the policy template content are immediately
-    # reflected in authorization decisions that involve all template-linked
-    # policies instantiated from this template.
+    # (within the constraints of eventual consistency) reflected in
+    # authorization decisions that involve all template-linked policies
+    # instantiated from this template.
     #
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
@@ -2076,7 +2077,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

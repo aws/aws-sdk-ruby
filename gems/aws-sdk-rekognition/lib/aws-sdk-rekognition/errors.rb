@@ -34,6 +34,7 @@ module Aws::Rekognition
   # * {ImageTooLargeException}
   # * {InternalServerError}
   # * {InvalidImageFormatException}
+  # * {InvalidManifestException}
   # * {InvalidPaginationTokenException}
   # * {InvalidParameterException}
   # * {InvalidPolicyRevisionIdException}
@@ -136,6 +137,16 @@ module Aws::Rekognition
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Rekognition::Types::InvalidImageFormatException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidManifestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Rekognition::Types::InvalidManifestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

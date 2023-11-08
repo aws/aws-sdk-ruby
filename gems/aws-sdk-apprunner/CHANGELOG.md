@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-11-02)
+------------------
+
+* Feature - AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.
+
+1.31.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-09-26)
+------------------
+
+* Feature - This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories
+
+1.29.0 (2023-09-20)
+------------------
+
+* Feature - This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.
+
 1.28.0 (2023-08-30)
 ------------------
 

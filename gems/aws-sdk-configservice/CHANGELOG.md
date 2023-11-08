@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-11-03)
+------------------
+
+* Feature - Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+
+1.99.0 (2023-10-12)
+------------------
+
+* Feature - Add enums for resource types supported by Config
+
+1.98.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.97.0 (2023-08-11)
 ------------------
 

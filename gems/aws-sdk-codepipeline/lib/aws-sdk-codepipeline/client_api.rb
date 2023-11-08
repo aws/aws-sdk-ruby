@@ -142,6 +142,12 @@ module Aws::CodePipeline
     GetPipelineStateOutput = Shapes::StructureShape.new(name: 'GetPipelineStateOutput')
     GetThirdPartyJobDetailsInput = Shapes::StructureShape.new(name: 'GetThirdPartyJobDetailsInput')
     GetThirdPartyJobDetailsOutput = Shapes::StructureShape.new(name: 'GetThirdPartyJobDetailsOutput')
+    GitConfiguration = Shapes::StructureShape.new(name: 'GitConfiguration')
+    GitPushFilter = Shapes::StructureShape.new(name: 'GitPushFilter')
+    GitPushFilterList = Shapes::ListShape.new(name: 'GitPushFilterList')
+    GitTagFilterCriteria = Shapes::StructureShape.new(name: 'GitTagFilterCriteria')
+    GitTagNamePattern = Shapes::StringShape.new(name: 'GitTagNamePattern')
+    GitTagPatternList = Shapes::ListShape.new(name: 'GitTagPatternList')
     InputArtifact = Shapes::StructureShape.new(name: 'InputArtifact')
     InputArtifactList = Shapes::ListShape.new(name: 'InputArtifactList')
     InvalidActionDeclarationException = Shapes::StructureShape.new(name: 'InvalidActionDeclarationException')
@@ -224,6 +230,17 @@ module Aws::CodePipeline
     PipelineNotFoundException = Shapes::StructureShape.new(name: 'PipelineNotFoundException')
     PipelineStageDeclarationList = Shapes::ListShape.new(name: 'PipelineStageDeclarationList')
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
+    PipelineTriggerDeclaration = Shapes::StructureShape.new(name: 'PipelineTriggerDeclaration')
+    PipelineTriggerDeclarationList = Shapes::ListShape.new(name: 'PipelineTriggerDeclarationList')
+    PipelineTriggerProviderType = Shapes::StringShape.new(name: 'PipelineTriggerProviderType')
+    PipelineType = Shapes::StringShape.new(name: 'PipelineType')
+    PipelineVariable = Shapes::StructureShape.new(name: 'PipelineVariable')
+    PipelineVariableDeclaration = Shapes::StructureShape.new(name: 'PipelineVariableDeclaration')
+    PipelineVariableDeclarationList = Shapes::ListShape.new(name: 'PipelineVariableDeclarationList')
+    PipelineVariableDescription = Shapes::StringShape.new(name: 'PipelineVariableDescription')
+    PipelineVariableList = Shapes::ListShape.new(name: 'PipelineVariableList')
+    PipelineVariableName = Shapes::StringShape.new(name: 'PipelineVariableName')
+    PipelineVariableValue = Shapes::StringShape.new(name: 'PipelineVariableValue')
     PipelineVersion = Shapes::IntegerShape.new(name: 'PipelineVersion')
     PipelineVersionNotFoundException = Shapes::StructureShape.new(name: 'PipelineVersionNotFoundException')
     PolicyStatementsTemplate = Shapes::StringShape.new(name: 'PolicyStatementsTemplate')
@@ -249,6 +266,8 @@ module Aws::CodePipeline
     RegisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyOutput')
     RequestFailedException = Shapes::StructureShape.new(name: 'RequestFailedException')
     ResolvedActionConfigurationMap = Shapes::MapShape.new(name: 'ResolvedActionConfigurationMap')
+    ResolvedPipelineVariable = Shapes::StructureShape.new(name: 'ResolvedPipelineVariable')
+    ResolvedPipelineVariableList = Shapes::ListShape.new(name: 'ResolvedPipelineVariableList')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
@@ -707,6 +726,21 @@ module Aws::CodePipeline
     GetThirdPartyJobDetailsOutput.add_member(:job_details, Shapes::ShapeRef.new(shape: ThirdPartyJobDetails, location_name: "jobDetails"))
     GetThirdPartyJobDetailsOutput.struct_class = Types::GetThirdPartyJobDetailsOutput
 
+    GitConfiguration.add_member(:source_action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "sourceActionName"))
+    GitConfiguration.add_member(:push, Shapes::ShapeRef.new(shape: GitPushFilterList, location_name: "push"))
+    GitConfiguration.struct_class = Types::GitConfiguration
+
+    GitPushFilter.add_member(:tags, Shapes::ShapeRef.new(shape: GitTagFilterCriteria, location_name: "tags"))
+    GitPushFilter.struct_class = Types::GitPushFilter
+
+    GitPushFilterList.member = Shapes::ShapeRef.new(shape: GitPushFilter)
+
+    GitTagFilterCriteria.add_member(:includes, Shapes::ShapeRef.new(shape: GitTagPatternList, location_name: "includes"))
+    GitTagFilterCriteria.add_member(:excludes, Shapes::ShapeRef.new(shape: GitTagPatternList, location_name: "excludes"))
+    GitTagFilterCriteria.struct_class = Types::GitTagFilterCriteria
+
+    GitTagPatternList.member = Shapes::ShapeRef.new(shape: GitTagNamePattern)
+
     InputArtifact.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, required: true, location_name: "name"))
     InputArtifact.struct_class = Types::InputArtifact
 
@@ -864,6 +898,9 @@ module Aws::CodePipeline
     PipelineDeclaration.add_member(:artifact_stores, Shapes::ShapeRef.new(shape: ArtifactStoreMap, location_name: "artifactStores"))
     PipelineDeclaration.add_member(:stages, Shapes::ShapeRef.new(shape: PipelineStageDeclarationList, required: true, location_name: "stages"))
     PipelineDeclaration.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
+    PipelineDeclaration.add_member(:pipeline_type, Shapes::ShapeRef.new(shape: PipelineType, location_name: "pipelineType"))
+    PipelineDeclaration.add_member(:triggers, Shapes::ShapeRef.new(shape: PipelineTriggerDeclarationList, location_name: "triggers"))
+    PipelineDeclaration.add_member(:variables, Shapes::ShapeRef.new(shape: PipelineVariableDeclarationList, location_name: "variables"))
     PipelineDeclaration.struct_class = Types::PipelineDeclaration
 
     PipelineExecution.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
@@ -872,6 +909,8 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
     PipelineExecution.add_member(:status_summary, Shapes::ShapeRef.new(shape: PipelineExecutionStatusSummary, location_name: "statusSummary"))
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
+    PipelineExecution.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
+    PipelineExecution.add_member(:variables, Shapes::ShapeRef.new(shape: ResolvedPipelineVariableList, location_name: "variables"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
     PipelineExecutionNotFoundException.struct_class = Types::PipelineExecutionNotFoundException
@@ -906,9 +945,29 @@ module Aws::CodePipeline
 
     PipelineSummary.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "name"))
     PipelineSummary.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
+    PipelineSummary.add_member(:pipeline_type, Shapes::ShapeRef.new(shape: PipelineType, location_name: "pipelineType"))
     PipelineSummary.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     PipelineSummary.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
     PipelineSummary.struct_class = Types::PipelineSummary
+
+    PipelineTriggerDeclaration.add_member(:provider_type, Shapes::ShapeRef.new(shape: PipelineTriggerProviderType, required: true, location_name: "providerType"))
+    PipelineTriggerDeclaration.add_member(:git_configuration, Shapes::ShapeRef.new(shape: GitConfiguration, required: true, location_name: "gitConfiguration"))
+    PipelineTriggerDeclaration.struct_class = Types::PipelineTriggerDeclaration
+
+    PipelineTriggerDeclarationList.member = Shapes::ShapeRef.new(shape: PipelineTriggerDeclaration)
+
+    PipelineVariable.add_member(:name, Shapes::ShapeRef.new(shape: PipelineVariableName, required: true, location_name: "name"))
+    PipelineVariable.add_member(:value, Shapes::ShapeRef.new(shape: PipelineVariableValue, required: true, location_name: "value"))
+    PipelineVariable.struct_class = Types::PipelineVariable
+
+    PipelineVariableDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: PipelineVariableName, required: true, location_name: "name"))
+    PipelineVariableDeclaration.add_member(:default_value, Shapes::ShapeRef.new(shape: PipelineVariableValue, location_name: "defaultValue"))
+    PipelineVariableDeclaration.add_member(:description, Shapes::ShapeRef.new(shape: PipelineVariableDescription, location_name: "description"))
+    PipelineVariableDeclaration.struct_class = Types::PipelineVariableDeclaration
+
+    PipelineVariableDeclarationList.member = Shapes::ShapeRef.new(shape: PipelineVariableDeclaration)
+
+    PipelineVariableList.member = Shapes::ShapeRef.new(shape: PipelineVariable)
 
     PipelineVersionNotFoundException.struct_class = Types::PipelineVersionNotFoundException
 
@@ -995,6 +1054,12 @@ module Aws::CodePipeline
     ResolvedActionConfigurationMap.key = Shapes::ShapeRef.new(shape: String)
     ResolvedActionConfigurationMap.value = Shapes::ShapeRef.new(shape: String)
 
+    ResolvedPipelineVariable.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ResolvedPipelineVariable.add_member(:resolved_value, Shapes::ShapeRef.new(shape: String, location_name: "resolvedValue"))
+    ResolvedPipelineVariable.struct_class = Types::ResolvedPipelineVariable
+
+    ResolvedPipelineVariableList.member = Shapes::ShapeRef.new(shape: ResolvedPipelineVariable)
+
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
@@ -1052,6 +1117,7 @@ module Aws::CodePipeline
     StageStateList.member = Shapes::ShapeRef.new(shape: StageState)
 
     StartPipelineExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
+    StartPipelineExecutionInput.add_member(:variables, Shapes::ShapeRef.new(shape: PipelineVariableList, location_name: "variables"))
     StartPipelineExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartPipelineExecutionInput.struct_class = Types::StartPipelineExecutionInput
 

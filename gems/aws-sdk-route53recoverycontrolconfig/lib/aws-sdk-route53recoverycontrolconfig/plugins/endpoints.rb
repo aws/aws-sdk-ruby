@@ -80,6 +80,8 @@ module Aws::Route53RecoveryControlConfig
             Aws::Route53RecoveryControlConfig::Endpoints::DescribeRoutingControl.build(context)
           when :describe_safety_rule
             Aws::Route53RecoveryControlConfig::Endpoints::DescribeSafetyRule.build(context)
+          when :get_resource_policy
+            Aws::Route53RecoveryControlConfig::Endpoints::GetResourcePolicy.build(context)
           when :list_associated_route_53_health_checks
             Aws::Route53RecoveryControlConfig::Endpoints::ListAssociatedRoute53HealthChecks.build(context)
           when :list_clusters

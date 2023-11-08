@@ -644,6 +644,49 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::CreateDataProviderResponse#data_provider #data_provider} => Types::DataProvider
     #
+    #
+    # @example Example: Create Data Provider
+    #
+    #   # Creates the data provider with the specified parameters.
+    #
+    #   resp = client.create_data_provider({
+    #     data_provider_name: "sqlServer-dev", 
+    #     description: "description", 
+    #     engine: "sqlserver", 
+    #     settings: {
+    #       microsoft_sql_server_settings: {
+    #         database_name: "DatabaseName", 
+    #         port: 11112, 
+    #         server_name: "ServerName2", 
+    #         ssl_mode: "none", 
+    #       }, 
+    #     }, 
+    #     tags: [
+    #       {
+    #         key: "access", 
+    #         value: "authorizedusers", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_provider: {
+    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-dataprovider", 
+    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"), 
+    #       data_provider_name: "my-target-dataprovider", 
+    #       engine: "postgres", 
+    #       settings: {
+    #         postgre_sql_settings: {
+    #           database_name: "target", 
+    #           port: 5432, 
+    #           server_name: "postrgesql.a1b2c3d4e5f6.us-east-1.rds.amazonaws.com", 
+    #           ssl_mode: "none", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_provider({
@@ -651,6 +694,11 @@ module Aws::DatabaseMigrationService
     #     description: "String",
     #     engine: "String", # required
     #     settings: { # required
+    #       redshift_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #       },
     #       postgre_sql_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -683,6 +731,29 @@ module Aws::DatabaseMigrationService
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
     #       },
+    #       doc_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       maria_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       mongo_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #         auth_type: "no", # accepts no, password
+    #         auth_source: "String",
+    #         auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
+    #       },
     #     },
     #     tags: [
     #       {
@@ -700,6 +771,9 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.redshift_settings.server_name #=> String
+    #   resp.data_provider.settings.redshift_settings.port #=> Integer
+    #   resp.data_provider.settings.redshift_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
@@ -724,6 +798,23 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.doc_db_settings.server_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.port #=> Integer
+    #   resp.data_provider.settings.doc_db_settings.database_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.doc_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.server_name #=> String
+    #   resp.data_provider.settings.maria_db_settings.port #=> Integer
+    #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
+    #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.mongo_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.data_provider.settings.mongo_db_settings.auth_source #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateDataProvider AWS API Documentation
     #
@@ -2025,6 +2116,73 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::CreateMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
     #
+    #
+    # @example Example: Create Migration Project
+    #
+    #   # Creates the migration project with the specified parameters.
+    #
+    #   resp = client.create_migration_project({
+    #     description: "description", 
+    #     instance_profile_identifier: "ip-au-17", 
+    #     migration_project_name: "my-migration-project", 
+    #     schema_conversion_application_attributes: {
+    #       s3_bucket_path: "arn:aws:s3:::mylogin-bucket", 
+    #       s3_bucket_role_arn: "arn:aws:iam::012345678901:role/Admin", 
+    #     }, 
+    #     source_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access", 
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/ALL.SOURCE.ORACLE_12-A1B2C3", 
+    #       }, 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "access", 
+    #         value: "authorizedusers", 
+    #       }, 
+    #     ], 
+    #     target_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access", 
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/TARGET.postgresql-A1B2C3", 
+    #       }, 
+    #     ], 
+    #     transformation_rules: "{\"key0\":\"value0\",\"key1\":\"value1\",\"key2\":\"value2\"}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     migration_project: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       instance_profile_name: "my-instance-profile", 
+    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"), 
+    #       migration_project_name: "my-migration-project", 
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "my-s3-bucket/my_folder", 
+    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role", 
+    #       }, 
+    #       source_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "source-oracle-12", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456", 
+    #         }, 
+    #       ], 
+    #       target_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "target-dataprovider-3", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/dmytbon-admin-access", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_migration_project({
@@ -2250,10 +2408,17 @@ module Aws::DatabaseMigrationService
     # With the CLI and DMS API][1]. For information on the required
     # permissions, see [IAM Permissions Needed to Use DMS][2].
     #
+    # <note markdown="1"> If you don't specify a version when creating a replication instance,
+    # DMS will create the instance using the default engine version. For
+    # information about the default engine version, see [Release Notes][3].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole
     # [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions
+    # [3]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReleaseNotes.html
     #
     # @option params [required, String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -2334,15 +2499,6 @@ module Aws::DatabaseMigrationService
     #   window. This parameter defaults to `true`.
     #
     #   Default: `true`
-    #
-    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
-    #   default engine version when you create a replication instance. For
-    #   example, if you set `EngineVersion` to a lower version number than the
-    #   current default version, DMS uses the default version.
-    #
-    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you create a
-    #   replication instance, DMS uses the engine version specified by the
-    #   `EngineVersion` parameter.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication instance.
@@ -2748,8 +2904,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication task.
@@ -3003,6 +3159,33 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DeleteDataProviderResponse#data_provider #data_provider} => Types::DataProvider
     #
+    #
+    # @example Example: Delete Data Provider
+    #
+    #   # Deletes the specified data provider.
+    #
+    #   resp = client.delete_data_provider({
+    #     data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_provider: {
+    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider", 
+    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"), 
+    #       data_provider_name: "my-target-data-provider", 
+    #       engine: "postgres", 
+    #       settings: {
+    #         postgre_sql_settings: {
+    #           database_name: "target", 
+    #           port: 5432, 
+    #           server_name: "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com", 
+    #           ssl_mode: "none", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_data_provider({
@@ -3016,6 +3199,9 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.redshift_settings.server_name #=> String
+    #   resp.data_provider.settings.redshift_settings.port #=> Integer
+    #   resp.data_provider.settings.redshift_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
@@ -3040,6 +3226,23 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.doc_db_settings.server_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.port #=> Integer
+    #   resp.data_provider.settings.doc_db_settings.database_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.doc_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.server_name #=> String
+    #   resp.data_provider.settings.maria_db_settings.port #=> Integer
+    #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
+    #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.mongo_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.data_provider.settings.mongo_db_settings.auth_source #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteDataProvider AWS API Documentation
     #
@@ -3558,6 +3761,46 @@ module Aws::DatabaseMigrationService
     # @return [Types::DeleteMigrationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
+    #
+    #
+    # @example Example: Delete Migration Project
+    #
+    #   # Deletes the specified migration project.
+    #
+    #   resp = client.delete_migration_project({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     migration_project: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       instance_profile_name: "my-instance-profile", 
+    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"), 
+    #       migration_project_name: "my-migration-project", 
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "my-s3-bucket/my_folder", 
+    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role", 
+    #       }, 
+    #       source_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "all-source-oracle-12", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456", 
+    #         }, 
+    #       ], 
+    #       target_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "sde-obilyns-dataprovider-3", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::437223687239:role/dmytbon-admin-access", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4304,6 +4547,21 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeConversionConfigurationResponse#migration_project_identifier #migration_project_identifier} => String
     #   * {Types::DescribeConversionConfigurationResponse#conversion_configuration #conversion_configuration} => String
     #
+    #
+    # @example Example: Describe Conversion Configuration
+    #
+    #   # Returns configuration parameters for a schema conversion project.
+    #
+    #   resp = client.describe_conversion_configuration({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     conversion_configuration: "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}", 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conversion_configuration({
@@ -4355,6 +4613,43 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Data Providers
+    #
+    #   resp = client.describe_data_providers({
+    #     filters: [
+    #       {
+    #         name: "data-provider-identifier", 
+    #         values: [
+    #           "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_providers: [
+    #       {
+    #         data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider", 
+    #         data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"), 
+    #         data_provider_name: "my-target-data-provider", 
+    #         engine: "postgres", 
+    #         settings: {
+    #           postgre_sql_settings: {
+    #             database_name: "target", 
+    #             port: 5432, 
+    #             server_name: "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com", 
+    #             ssl_mode: "none", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_data_providers({
@@ -4377,6 +4672,9 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].data_provider_creation_time #=> Time
     #   resp.data_providers[0].description #=> String
     #   resp.data_providers[0].engine #=> String
+    #   resp.data_providers[0].settings.redshift_settings.server_name #=> String
+    #   resp.data_providers[0].settings.redshift_settings.port #=> Integer
+    #   resp.data_providers[0].settings.redshift_settings.database_name #=> String
     #   resp.data_providers[0].settings.postgre_sql_settings.server_name #=> String
     #   resp.data_providers[0].settings.postgre_sql_settings.port #=> Integer
     #   resp.data_providers[0].settings.postgre_sql_settings.database_name #=> String
@@ -4401,6 +4699,23 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.doc_db_settings.server_name #=> String
+    #   resp.data_providers[0].settings.doc_db_settings.port #=> Integer
+    #   resp.data_providers[0].settings.doc_db_settings.database_name #=> String
+    #   resp.data_providers[0].settings.doc_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.doc_db_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.maria_db_settings.server_name #=> String
+    #   resp.data_providers[0].settings.maria_db_settings.port #=> Integer
+    #   resp.data_providers[0].settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.mongo_db_settings.server_name #=> String
+    #   resp.data_providers[0].settings.mongo_db_settings.port #=> Integer
+    #   resp.data_providers[0].settings.mongo_db_settings.database_name #=> String
+    #   resp.data_providers[0].settings.mongo_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.mongo_db_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.data_providers[0].settings.mongo_db_settings.auth_source #=> String
+    #   resp.data_providers[0].settings.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeDataProviders AWS API Documentation
     #
@@ -5255,6 +5570,37 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Extension Pack Associations
+    #
+    #   # Returns a paginated list of extension pack associations for the specified migration project.
+    #
+    #   resp = client.describe_extension_pack_associations({
+    #     filters: [
+    #       {
+    #         name: "instance-profile-identifier", 
+    #         values: [
+    #           "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_extension_pack_associations({
@@ -5745,6 +6091,37 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Metadata Model Assessments
+    #
+    #   # Returns a paginated list of metadata model assessments for your account in the current region.
+    #
+    #   resp = client.describe_metadata_model_assessments({
+    #     filters: [
+    #       {
+    #         name: "my-migration-project", 
+    #         values: [
+    #           "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #     migration_project_identifier: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "ASDLKJASDJKHDFHGDNBGDASKJHGFK", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_assessments({
@@ -5813,6 +6190,37 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Metadata Model Conversions
+    #
+    #   # Returns a paginated list of metadata model conversions for a migration project.
+    #
+    #   resp = client.describe_metadata_model_conversions({
+    #     filters: [
+    #       {
+    #         name: "request-id", 
+    #         values: [
+    #           "01234567-89ab-cdef-0123-456789abcdef", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456", 
+    #     max_records: 123, 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_conversions({
@@ -5879,6 +6287,37 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeMetadataModelExportsAsScriptResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Describe Metadata Model Exports As Script
+    #
+    #   # Returns a paginated list of metadata model exports.
+    #
+    #   resp = client.describe_metadata_model_exports_as_script({
+    #     filters: [
+    #       {
+    #         name: "request-id", 
+    #         values: [
+    #           "01234567-89ab-cdef-0123-456789abcdef", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5947,6 +6386,37 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Metadata Model Exports To Target
+    #
+    #   # Returns a paginated list of metadata model exports.
+    #
+    #   resp = client.describe_metadata_model_exports_to_target({
+    #     filters: [
+    #       {
+    #         name: "request-id", 
+    #         values: [
+    #           "01234567-89ab-cdef-0123-456789abcdef", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_exports_to_target({
@@ -6010,6 +6480,37 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeMetadataModelImportsResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Describe Metadata Model Imports
+    #
+    #   # Returns a paginated list of metadata model imports.
+    #
+    #   resp = client.describe_metadata_model_imports({
+    #     filters: [
+    #       {
+    #         name: "request-id", 
+    #         values: [
+    #           "01234567-89ab-cdef-0123-456789abcdef", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     requests: [
+    #       {
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #         status: "SUCCESS", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6075,6 +6576,58 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeMigrationProjectsResponse#migration_projects #migration_projects} => Array&lt;Types::MigrationProject&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Describe Migration Projects
+    #
+    #   # Returns a paginated list of migration projects for your account in the current region.
+    #
+    #   resp = client.describe_migration_projects({
+    #     filters: [
+    #       {
+    #         name: "migration-project-identifier", 
+    #         values: [
+    #           "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456", 
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     migration_projects: [
+    #       {
+    #         instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         instance_profile_name: "my-instance-profile", 
+    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #         migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"), 
+    #         migration_project_name: "my-migration-project", 
+    #         schema_conversion_application_attributes: {
+    #           s3_bucket_path: "my-s3-bucket/my_folder", 
+    #           s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role", 
+    #         }, 
+    #         source_data_provider_descriptors: [
+    #           {
+    #             data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #             data_provider_name: "all-source-oracle-12", 
+    #             secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role", 
+    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-012345", 
+    #           }, 
+    #         ], 
+    #         target_data_provider_descriptors: [
+    #           {
+    #             data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #             data_provider_name: "my-data-provider", 
+    #             secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/dmytbon-admin-access", 
+    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-012345", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7511,6 +8064,33 @@ module Aws::DatabaseMigrationService
     #   * {Types::ExportMetadataModelAssessmentResponse#pdf_report #pdf_report} => Types::ExportMetadataModelAssessmentResultEntry
     #   * {Types::ExportMetadataModelAssessmentResponse#csv_report #csv_report} => Types::ExportMetadataModelAssessmentResultEntry
     #
+    #
+    # @example Example: Export Metadata Model Assessment
+    #
+    #   # Saves a copy of a database migration assessment report to your S3 bucket. DMS can save your assessment report as a
+    #   # comma-separated value (CSV) or a PDF file.
+    #
+    #   resp = client.export_metadata_model_assessment({
+    #     assessment_report_types: [
+    #       "pdf", 
+    #     ], 
+    #     file_name: "file", 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     csv_report: {
+    #       object_url: "url", 
+    #       s3_object_key: "object-name", 
+    #     }, 
+    #     pdf_report: {
+    #       object_url: "url", 
+    #       s3_object_key: "object-name", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.export_metadata_model_assessment({
@@ -7689,6 +8269,21 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::ModifyConversionConfigurationResponse#migration_project_identifier #migration_project_identifier} => String
     #
+    #
+    # @example Example: Modify Conversion Configuration
+    #
+    #   # Modifies the specified schema conversion configuration using the provided parameters.
+    #
+    #   resp = client.modify_conversion_configuration({
+    #     conversion_configuration: "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}", 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_conversion_configuration({
@@ -7752,6 +8347,44 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::ModifyDataProviderResponse#data_provider #data_provider} => Types::DataProvider
     #
+    #
+    # @example Example: Modify Data Provider
+    #
+    #   # Modifies the specified data provider using the provided settings.
+    #
+    #   resp = client.modify_data_provider({
+    #     data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #     data_provider_name: "new-name", 
+    #     description: "description", 
+    #     engine: "sqlserver", 
+    #     settings: {
+    #       microsoft_sql_server_settings: {
+    #         database_name: "DatabaseName", 
+    #         port: 11112, 
+    #         server_name: "ServerName2", 
+    #         ssl_mode: "none", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_provider: {
+    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider", 
+    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"), 
+    #       data_provider_name: "my-target-data-provider", 
+    #       engine: "postgres", 
+    #       settings: {
+    #         postgre_sql_settings: {
+    #           database_name: "target", 
+    #           port: 5432, 
+    #           server_name: "postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com", 
+    #           ssl_mode: "none", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_data_provider({
@@ -7761,6 +8394,11 @@ module Aws::DatabaseMigrationService
     #     engine: "String",
     #     exact_settings: false,
     #     settings: {
+    #       redshift_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #       },
     #       postgre_sql_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -7793,6 +8431,29 @@ module Aws::DatabaseMigrationService
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
     #       },
+    #       doc_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       maria_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       mongo_db_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #         auth_type: "no", # accepts no, password
+    #         auth_source: "String",
+    #         auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
+    #       },
     #     },
     #   })
     #
@@ -7803,6 +8464,9 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.redshift_settings.server_name #=> String
+    #   resp.data_provider.settings.redshift_settings.port #=> Integer
+    #   resp.data_provider.settings.redshift_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
@@ -7827,6 +8491,23 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.doc_db_settings.server_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.port #=> Integer
+    #   resp.data_provider.settings.doc_db_settings.database_name #=> String
+    #   resp.data_provider.settings.doc_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.doc_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.server_name #=> String
+    #   resp.data_provider.settings.maria_db_settings.port #=> Integer
+    #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
+    #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
+    #   resp.data_provider.settings.mongo_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.mongo_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.data_provider.settings.mongo_db_settings.auth_source #=> String
+    #   resp.data_provider.settings.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyDataProvider AWS API Documentation
     #
@@ -9000,6 +9681,67 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::ModifyMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
     #
+    #
+    # @example Example: Modify Migration Project
+    #
+    #   # Modifies the specified migration project using the provided parameters.
+    #
+    #   resp = client.modify_migration_project({
+    #     description: "description", 
+    #     instance_profile_identifier: "my-instance-profile", 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #     migration_project_name: "new-name", 
+    #     schema_conversion_application_attributes: {
+    #       s3_bucket_path: "arn:aws:s3:::myuser-bucket", 
+    #       s3_bucket_role_arn: "arn:aws:iam::012345678901:role/Admin", 
+    #     }, 
+    #     source_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access", 
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/ALL.SOURCE.ORACLE_12-A1B2C3", 
+    #       }, 
+    #     ], 
+    #     target_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access", 
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/TARGET.postgresql-A1B2C3", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     migration_project: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       instance_profile_name: "my-instance-profile", 
+    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"), 
+    #       migration_project_name: "my-migration-project", 
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "my-s3-bucket/my_folder", 
+    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role", 
+    #       }, 
+    #       source_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "all-source-oracle-12", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-TP5rA9", 
+    #         }, 
+    #       ], 
+    #       target_data_provider_descriptors: [
+    #         {
+    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #           data_provider_name: "my-dataprovider", 
+    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role", 
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-mysecret", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_migration_project({
@@ -9248,15 +9990,6 @@ module Aws::DatabaseMigrationService
     #   * A newer minor version is available.
     #
     #   * DMS has enabled automatic patching for the given engine version.
-    #
-    #   When `AutoMinorVersionUpgrade` is enabled, DMS uses the current
-    #   default engine version when you modify a replication instance. For
-    #   example, if you set `EngineVersion` to a lower version number than the
-    #   current default version, DMS uses the default version.
-    #
-    #   If `AutoMinorVersionUpgrade` *isn’t* enabled when you modify a
-    #   replication instance, DMS uses the engine version specified by the
-    #   `EngineVersion` parameter.
     #
     # @option params [String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -9563,8 +10296,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #
     # @option params [String] :task_data
     #   Supplemental information that the task requires to migrate the data
@@ -10026,6 +10759,20 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::StartExtensionPackAssociationResponse#request_identifier #request_identifier} => String
     #
+    #
+    # @example Example: Start Extension Pack Association
+    #
+    #   # Applies the extension pack to your target database.
+    #
+    #   resp = client.start_extension_pack_association({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_extension_pack_association({
@@ -10061,6 +10808,22 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::StartMetadataModelAssessmentResponse#request_identifier #request_identifier} => String
     #
+    #
+    # @example Example: Start Metadata Model Assessment
+    #
+    #   # Creates a database migration assessment report by assessing the migration complexity for 
+    #   # your source database.
+    #
+    #   resp = client.start_metadata_model_assessment({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_assessment({
@@ -10093,6 +10856,21 @@ module Aws::DatabaseMigrationService
     # @return [Types::StartMetadataModelConversionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMetadataModelConversionResponse#request_identifier #request_identifier} => String
+    #
+    #
+    # @example Example: Start Metadata Model Conversion
+    #
+    #   # Converts your source database objects to a format compatible with the target database. 
+    #
+    #   resp = client.start_metadata_model_conversion({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10133,6 +10911,23 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::StartMetadataModelExportAsScriptResponse#request_identifier #request_identifier} => String
     #
+    #
+    # @example Example: Start Metadata Model Export As Script
+    #
+    #   # Saves your converted code to a file as a SQL script, and stores this file on your S3 bucket.
+    #
+    #   resp = client.start_metadata_model_export_as_script({
+    #     file_name: "FILE", 
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #     origin: "SOURCE", 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_export_as_script({
@@ -10172,6 +10967,22 @@ module Aws::DatabaseMigrationService
     # @return [Types::StartMetadataModelExportToTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMetadataModelExportToTargetResponse#request_identifier #request_identifier} => String
+    #
+    #
+    # @example Example: Start Metadata Model Export To Target
+    #
+    #   # Applies converted database objects to your target database.
+    #
+    #   resp = client.start_metadata_model_export_to_target({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #     overwrite_extension_pack: true, 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10216,6 +11027,23 @@ module Aws::DatabaseMigrationService
     # @return [Types::StartMetadataModelImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMetadataModelImportResponse#request_identifier #request_identifier} => String
+    #
+    #
+    # @example Example: Start Metadata Model Import
+    #
+    #   # Loads the metadata for all the dependent database objects of the parent object.
+    #
+    #   resp = client.start_metadata_model_import({
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012", 
+    #     origin: "SOURCE", 
+    #     refresh: false, 
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10450,8 +11278,8 @@ module Aws::DatabaseMigrationService
     #   Server time example: --cdc-stop-position
     #   “server\_time:2018-02-09T12:12:12”
     #
-    #   Commit time example: --cdc-stop-position “commit\_time:
-    #   2018-02-09T12:12:12“
+    #   Commit time example: --cdc-stop-position
+    #   “commit\_time:2018-02-09T12:12:12“
     #
     # @return [Types::StartReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10932,12 +11760,12 @@ module Aws::DatabaseMigrationService
     # Migrates 10 active and enabled Amazon SNS subscriptions at a time and
     # converts them to corresponding Amazon EventBridge rules. By default,
     # this operation migrates subscriptions only when all your replication
-    # instance versions are 3.4.6 or higher. If any replication instances
-    # are from versions earlier than 3.4.6, the operation raises an error
-    # and tells you to upgrade these instances to version 3.4.6 or higher.
+    # instance versions are 3.4.5 or higher. If any replication instances
+    # are from versions earlier than 3.4.5, the operation raises an error
+    # and tells you to upgrade these instances to version 3.4.5 or higher.
     # To enable migration regardless of version, set the `Force` option to
     # true. However, if you don't upgrade instances earlier than version
-    # 3.4.6, some types of events might not be available when you use Amazon
+    # 3.4.5, some types of events might not be available when you use Amazon
     # EventBridge.
     #
     # To call this operation, make sure that you have certain permissions
@@ -10953,7 +11781,7 @@ module Aws::DatabaseMigrationService
     #   When set to true, this operation migrates DMS subscriptions for Amazon
     #   SNS notifications no matter what your replication instance version is.
     #   If not set or set to false, this operation runs only when all your
-    #   replication instances are from DMS version 3.4.6 or higher.
+    #   replication instances are from DMS version 3.4.5 or higher.
     #
     # @return [Types::UpdateSubscriptionsToEventBridgeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10991,7 +11819,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

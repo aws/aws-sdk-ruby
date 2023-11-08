@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-10-17)
+------------------
+
+* Feature - Add domainWithSuffix finding field to dnsRequestAction
+
+1.80.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2023-09-22)
+------------------
+
+* Feature - Add `EKS_CLUSTER_NAME` to filter and sort key.
+
+1.78.0 (2023-09-13)
+------------------
+
+* Feature - Add `managementType` field to ListCoverage API response.
+
 1.77.0 (2023-08-09)
 ------------------
 

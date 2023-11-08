@@ -1571,6 +1571,10 @@
         "AddonDetails":{
           "shape":"AddonDetails",
           "locationName":"addonDetails"
+        },
+        "ManagementType":{
+          "shape":"ManagementType",
+          "locationName":"managementType"
         }
       }
     },
@@ -1616,7 +1620,9 @@
         "CLUSTER_NAME",
         "RESOURCE_TYPE",
         "COVERAGE_STATUS",
-        "ADDON_VERSION"
+        "ADDON_VERSION",
+        "MANAGEMENT_TYPE",
+        "EKS_CLUSTER_NAME"
       ]
     },
     "CoverageFilterCriterionList":{
@@ -1696,7 +1702,8 @@
         "COVERAGE_STATUS",
         "ISSUE",
         "ADDON_VERSION",
-        "UPDATED_AT"
+        "UPDATED_AT",
+        "EKS_CLUSTER_NAME"
       ]
     },
     "CoverageStatistics":{
@@ -2768,6 +2775,10 @@
         "Blocked":{
           "shape":"Boolean",
           "locationName":"blocked"
+        },
+        "DomainWithSuffix":{
+          "shape":"String",
+          "locationName":"domainWithSuffix"
         }
       }
     },
@@ -4737,6 +4748,13 @@
           "locationName":"scanEc2InstanceWithFindings"
         }
       }
+    },
+    "ManagementType":{
+      "type":"string",
+      "enum":[
+        "AUTO_MANAGED",
+        "MANUAL"
+      ]
     },
     "MapEquals":{
       "type":"list",

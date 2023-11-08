@@ -3121,6 +3121,13 @@ module Aws::MediaLive
     # @!attribute [rw] availability_zone
     #   @return [String]
     #
+    # @!attribute [rw] medialive_input_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_type
+    #   The output attachment type of the input device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceResponse AWS API Documentation
     #
     class DescribeInputDeviceResponse < Struct.new(
@@ -3137,7 +3144,9 @@ module Aws::MediaLive
       :type,
       :uhd_device_settings,
       :tags,
-      :availability_zone)
+      :availability_zone,
+      :medialive_input_arns,
+      :output_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4242,6 +4251,34 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Epoch Locking Settings
+    #
+    # @!attribute [rw] custom_epoch
+    #   Optional. Enter a value here to use a custom epoch, instead of the
+    #   standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify
+    #   the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC.
+    #   The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS
+    #   portion to 00:00.
+    #   @return [String]
+    #
+    # @!attribute [rw] jam_sync_time
+    #   Optional. Enter a time for the jam sync. The default is midnight
+    #   UTC. When epoch locking is enabled, MediaLive performs a daily jam
+    #   sync on every output encode to ensure timecodes don’t diverge from
+    #   the wall clock. The jam sync applies only to encodes with frame rate
+    #   of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC.
+    #   Always set the MM:SS portion to 00:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EpochLockingSettings AWS API Documentation
+    #
+    class EpochLockingSettings < Struct.new(
+      :custom_epoch,
+      :jam_sync_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Esam
     #
     # @!attribute [rw] acquisition_point_id
@@ -4693,6 +4730,10 @@ module Aws::MediaLive
     #   less than one video frame per second.
     #   @return [String]
     #
+    # @!attribute [rw] output_locking_settings
+    #   Advanced output locking settings
+    #   @return [Types::OutputLockingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GlobalConfiguration AWS API Documentation
     #
     class GlobalConfiguration < Struct.new(
@@ -4701,7 +4742,8 @@ module Aws::MediaLive
       :input_loss_behavior,
       :output_locking_mode,
       :output_timing_source,
-      :support_low_framerate_inputs)
+      :support_low_framerate_inputs,
+      :output_locking_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6393,6 +6435,18 @@ module Aws::MediaLive
     #   The Availability Zone associated with this input device.
     #   @return [String]
     #
+    # @!attribute [rw] medialive_input_arns
+    #   An array of the ARNs for the MediaLive inputs attached to the
+    #   device. Returned only if the outputType is MEDIALIVE\_INPUT.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_type
+    #   The output attachment type of the input device. Specifies
+    #   MEDIACONNECT\_FLOW if this device is the source for a MediaConnect
+    #   flow. Specifies MEDIALIVE\_INPUT if this device is the source for a
+    #   MediaLive input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDevice AWS API Documentation
     #
     class InputDevice < Struct.new(
@@ -6409,7 +6463,9 @@ module Aws::MediaLive
       :type,
       :uhd_device_settings,
       :tags,
-      :availability_zone)
+      :availability_zone,
+      :medialive_input_arns,
+      :output_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6433,12 +6489,26 @@ module Aws::MediaLive
     #   The Link device's buffer size (latency) in milliseconds (ms).
     #   @return [Integer]
     #
+    # @!attribute [rw] codec
+    #   Choose the codec for the video that the device produces. Only UHD
+    #   devices can specify this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] mediaconnect_settings
+    #   To attach this device to a MediaConnect flow, specify these
+    #   parameters. To detach an existing flow, enter \\\{\\} for the value
+    #   of mediaconnectSettings. Only UHD devices can specify this
+    #   parameter.
+    #   @return [Types::InputDeviceMediaConnectConfigurableSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
     #
     class InputDeviceConfigurableSettings < Struct.new(
       :configured_input,
       :max_bitrate,
-      :latency_ms)
+      :latency_ms,
+      :codec,
+      :mediaconnect_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6515,6 +6585,68 @@ module Aws::MediaLive
       :scan_type,
       :width,
       :latency_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters required to attach a MediaConnect flow to the device.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the MediaConnect flow to attach this device to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN for the role that MediaLive assumes to access the attached
+    #   flow and secret. For more information about how to create this role,
+    #   see the MediaLive user guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN for the secret that holds the encryption key to encrypt the
+    #   content output by the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The name of the MediaConnect Flow source to stream to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceMediaConnectConfigurableSettings AWS API Documentation
+    #
+    class InputDeviceMediaConnectConfigurableSettings < Struct.new(
+      :flow_arn,
+      :role_arn,
+      :secret_arn,
+      :source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the MediaConnect flow attached to the device.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the MediaConnect flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN for the role that MediaLive assumes to access the attached
+    #   flow and secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the secret used to encrypt the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The name of the MediaConnect flow source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceMediaConnectSettings AWS API Documentation
+    #
+    class InputDeviceMediaConnectSettings < Struct.new(
+      :flow_arn,
+      :role_arn,
+      :secret_arn,
+      :source_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6646,6 +6778,18 @@ module Aws::MediaLive
     #   The Availability Zone associated with this input device.
     #   @return [String]
     #
+    # @!attribute [rw] medialive_input_arns
+    #   An array of the ARNs for the MediaLive inputs attached to the
+    #   device. Returned only if the outputType is MEDIALIVE\_INPUT.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_type
+    #   The output attachment type of the input device. Specifies
+    #   MEDIACONNECT\_FLOW if this device is the source for a MediaConnect
+    #   flow. Specifies MEDIALIVE\_INPUT if this device is the source for a
+    #   MediaLive input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSummary AWS API Documentation
     #
     class InputDeviceSummary < Struct.new(
@@ -6662,7 +6806,9 @@ module Aws::MediaLive
       :type,
       :uhd_device_settings,
       :tags,
-      :availability_zone)
+      :availability_zone,
+      :medialive_input_arns,
+      :output_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6710,6 +6856,15 @@ module Aws::MediaLive
     #   can specify this value.
     #   @return [Integer]
     #
+    # @!attribute [rw] codec
+    #   The codec for the video that the device produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] mediaconnect_settings
+    #   Information about the MediaConnect flow attached to the device.
+    #   Returned only if the outputType is MEDIACONNECT\_FLOW.
+    #   @return [Types::InputDeviceMediaConnectSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
     #
     class InputDeviceUhdSettings < Struct.new(
@@ -6721,7 +6876,9 @@ module Aws::MediaLive
       :max_bitrate,
       :scan_type,
       :width,
-      :latency_ms)
+      :latency_ms,
+      :codec,
+      :mediaconnect_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9647,6 +9804,25 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Output Locking Settings
+    #
+    # @!attribute [rw] epoch_locking_settings
+    #   Epoch Locking Settings
+    #   @return [Types::EpochLockingSettings]
+    #
+    # @!attribute [rw] pipeline_locking_settings
+    #   Pipeline Locking Settings
+    #   @return [Types::PipelineLockingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputLockingSettings AWS API Documentation
+    #
+    class OutputLockingSettings < Struct.new(
+      :epoch_locking_settings,
+      :pipeline_locking_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output Settings
     #
     # @!attribute [rw] archive_output_settings
@@ -9756,6 +9932,14 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Pipeline Locking Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineLockingSettings AWS API Documentation
+    #
+    class PipelineLockingSettings < Aws::EmptyStructure; end
 
     # Settings for pausing a pipeline.
     #
@@ -10982,6 +11166,21 @@ module Aws::MediaLive
     #
     class StartInputDeviceMaintenanceWindowResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceRequest AWS API Documentation
+    #
+    class StartInputDeviceRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartInputDeviceResponse AWS API Documentation
+    #
+    class StartInputDeviceResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] multiplex_id
     #   @return [String]
     #
@@ -11275,6 +11474,21 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopInputDeviceRequest AWS API Documentation
+    #
+    class StopInputDeviceRequest < Struct.new(
+      :input_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopInputDeviceResponse AWS API Documentation
+    #
+    class StopInputDeviceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] multiplex_id
     #   @return [String]
@@ -12103,6 +12317,13 @@ module Aws::MediaLive
     # @!attribute [rw] availability_zone
     #   @return [String]
     #
+    # @!attribute [rw] medialive_input_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_type
+    #   The output attachment type of the input device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceResponse AWS API Documentation
     #
     class UpdateInputDeviceResponse < Struct.new(
@@ -12119,7 +12340,9 @@ module Aws::MediaLive
       :type,
       :uhd_device_settings,
       :tags,
-      :availability_zone)
+      :availability_zone,
+      :medialive_input_arns,
+      :output_type)
       SENSITIVE = []
       include Aws::Structure
     end

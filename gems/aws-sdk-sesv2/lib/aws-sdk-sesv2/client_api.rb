@@ -17,6 +17,7 @@ module Aws::SESV2
     AccountSuspendedException = Shapes::StructureShape.new(name: 'AccountSuspendedException')
     AdditionalContactEmailAddress = Shapes::StringShape.new(name: 'AdditionalContactEmailAddress')
     AdditionalContactEmailAddresses = Shapes::ListShape.new(name: 'AdditionalContactEmailAddresses')
+    AdminEmail = Shapes::StringShape.new(name: 'AdminEmail')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributesData = Shapes::StringShape.new(name: 'AttributesData')
@@ -349,6 +350,7 @@ module Aws::SESV2
     PolicyMap = Shapes::MapShape.new(name: 'PolicyMap')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PoolName = Shapes::StringShape.new(name: 'PoolName')
+    PrimaryNameServer = Shapes::StringShape.new(name: 'PrimaryNameServer')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     ProcessedRecordsCount = Shapes::IntegerShape.new(name: 'ProcessedRecordsCount')
     PutAccountDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesRequest')
@@ -414,6 +416,7 @@ module Aws::SESV2
     ReviewDetails = Shapes::StructureShape.new(name: 'ReviewDetails')
     ReviewStatus = Shapes::StringShape.new(name: 'ReviewStatus')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
+    SOARecord = Shapes::StructureShape.new(name: 'SOARecord')
     ScalingMode = Shapes::StringShape.new(name: 'ScalingMode')
     Selector = Shapes::StringShape.new(name: 'Selector')
     SendBulkEmailRequest = Shapes::StructureShape.new(name: 'SendBulkEmailRequest')
@@ -427,6 +430,7 @@ module Aws::SESV2
     SendingPausedException = Shapes::StructureShape.new(name: 'SendingPausedException')
     SendingPoolName = Shapes::StringShape.new(name: 'SendingPoolName')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
+    SerialNumber = Shapes::IntegerShape.new(name: 'SerialNumber')
     SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
@@ -482,6 +486,8 @@ module Aws::SESV2
     UseDefaultIfPreferenceUnavailable = Shapes::BooleanShape.new(name: 'UseDefaultIfPreferenceUnavailable')
     VdmAttributes = Shapes::StructureShape.new(name: 'VdmAttributes')
     VdmOptions = Shapes::StructureShape.new(name: 'VdmOptions')
+    VerificationError = Shapes::StringShape.new(name: 'VerificationError')
+    VerificationInfo = Shapes::StructureShape.new(name: 'VerificationInfo')
     VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
     Volume = Shapes::IntegerShape.new(name: 'Volume')
     VolumeStatistics = Shapes::StructureShape.new(name: 'VolumeStatistics')
@@ -1101,6 +1107,7 @@ module Aws::SESV2
     GetEmailIdentityResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetEmailIdentityResponse.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     GetEmailIdentityResponse.add_member(:verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "VerificationStatus"))
+    GetEmailIdentityResponse.add_member(:verification_info, Shapes::ShapeRef.new(shape: VerificationInfo, location_name: "VerificationInfo"))
     GetEmailIdentityResponse.struct_class = Types::GetEmailIdentityResponse
 
     GetEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location: "uri", location_name: "TemplateName"))
@@ -1598,6 +1605,11 @@ module Aws::SESV2
     ReviewDetails.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "CaseId"))
     ReviewDetails.struct_class = Types::ReviewDetails
 
+    SOARecord.add_member(:primary_name_server, Shapes::ShapeRef.new(shape: PrimaryNameServer, location_name: "PrimaryNameServer"))
+    SOARecord.add_member(:admin_email, Shapes::ShapeRef.new(shape: AdminEmail, location_name: "AdminEmail"))
+    SOARecord.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
+    SOARecord.struct_class = Types::SOARecord
+
     SendBulkEmailRequest.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
     SendBulkEmailRequest.add_member(:from_email_address_identity_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "FromEmailAddressIdentityArn"))
     SendBulkEmailRequest.add_member(:reply_to_addresses, Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "ReplyToAddresses"))
@@ -1787,6 +1799,12 @@ module Aws::SESV2
     VdmOptions.add_member(:dashboard_options, Shapes::ShapeRef.new(shape: DashboardOptions, location_name: "DashboardOptions"))
     VdmOptions.add_member(:guardian_options, Shapes::ShapeRef.new(shape: GuardianOptions, location_name: "GuardianOptions"))
     VdmOptions.struct_class = Types::VdmOptions
+
+    VerificationInfo.add_member(:last_checked_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckedTimestamp"))
+    VerificationInfo.add_member(:last_success_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSuccessTimestamp"))
+    VerificationInfo.add_member(:error_type, Shapes::ShapeRef.new(shape: VerificationError, location_name: "ErrorType"))
+    VerificationInfo.add_member(:soa_record, Shapes::ShapeRef.new(shape: SOARecord, location_name: "SOARecord"))
+    VerificationInfo.struct_class = Types::VerificationInfo
 
     VolumeStatistics.add_member(:inbox_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "InboxRawCount"))
     VolumeStatistics.add_member(:spam_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "SpamRawCount"))

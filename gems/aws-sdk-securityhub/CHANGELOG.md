@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-10-05)
+------------------
+
+* Feature - Added new resource detail objects to ASFF, including resources for AwsEventsEventbus, AwsEventsEndpoint, AwsDmsEndpoint, AwsDmsReplicationTask, AwsDmsReplicationInstance, AwsRoute53HostedZone, and AwsMskCluster
+
+1.93.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2023-09-07)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
 1.91.0 (2023-08-18)
 ------------------
 

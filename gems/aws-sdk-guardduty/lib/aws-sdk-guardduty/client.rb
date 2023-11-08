@@ -1617,8 +1617,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disables an Amazon Web Services account within the Organization as the
-    # GuardDuty delegated administrator.
+    # Removes the existing GuardDuty delegated administrator of the
+    # organization. Only the organization's management account can run this
+    # API operation.
     #
     # @option params [required, String] :admin_account_id
     #   The Amazon Web Services Account ID for the organizations account to be
@@ -1735,8 +1736,8 @@ module Aws::GuardDuty
     #
     # With `autoEnableOrganizationMembers` configuration for your
     # organization set to `ALL`, you'll receive an error if you attempt to
-    # disassociate a member account before removing them from your Amazon
-    # Web Services organization.
+    # disassociate a member account before removing them from your
+    # organization.
     #
     #
     #
@@ -1778,11 +1779,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Enables an Amazon Web Services account within the organization as the
-    # GuardDuty delegated administrator.
+    # Designates an Amazon Web Services account within the organization as
+    # your GuardDuty delegated administrator. Only the organization's
+    # management account can run this API operation.
     #
     # @option params [required, String] :admin_account_id
-    #   The Amazon Web Services Account ID for the organization account to be
+    #   The Amazon Web Services account ID for the organization account to be
     #   enabled as a GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1802,8 +1804,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Provides the details for the GuardDuty administrator account
-    # associated with the current GuardDuty member account.
+    # Provides the details of the GuardDuty administrator account associated
+    # with the current GuardDuty member account.
+    #
+    # <note markdown="1"> If the organization's management account or a delegated administrator
+    # runs this API, it will return success (`HTTP 200`) but no content.
+    #
+    #  </note>
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -1861,7 +1868,7 @@ module Aws::GuardDuty
     #     filter_criteria: {
     #       filter_criterion: [
     #         {
-    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE, EKS_CLUSTER_NAME
     #           filter_condition: {
     #             equals: ["String"],
     #             not_equals: ["String"],
@@ -2256,6 +2263,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.dns_request_action.domain #=> String
     #   resp.findings[0].service.action.dns_request_action.protocol #=> String
     #   resp.findings[0].service.action.dns_request_action.blocked #=> Boolean
+    #   resp.findings[0].service.action.dns_request_action.domain_with_suffix #=> String
     #   resp.findings[0].service.action.network_connection_action.blocked #=> Boolean
     #   resp.findings[0].service.action.network_connection_action.connection_direction #=> String
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port #=> Integer
@@ -2953,9 +2961,8 @@ module Aws::GuardDuty
     # Invites Amazon Web Services accounts to become members of an
     # organization administered by the Amazon Web Services account that
     # invokes this API. If you are using Amazon Web Services Organizations
-    # to manager your GuardDuty environment, this step is not needed. For
-    # more information, see [Managing accounts with Amazon Web Services
-    # Organizations][1].
+    # to manage your GuardDuty environment, this step is not needed. For
+    # more information, see [Managing accounts with organizations][1].
     #
     # To invite Amazon Web Services accounts, the first step is to ensure
     # that GuardDuty has been enabled in the potential member accounts. You
@@ -3071,7 +3078,7 @@ module Aws::GuardDuty
     #     filter_criteria: {
     #       filter_criterion: [
     #         {
-    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE, EKS_CLUSTER_NAME
     #           filter_condition: {
     #             equals: ["String"],
     #             not_equals: ["String"],
@@ -3080,7 +3087,7 @@ module Aws::GuardDuty
     #       ],
     #     },
     #     sort_criteria: {
-    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, COVERAGE_STATUS, ISSUE, ADDON_VERSION, UPDATED_AT
+    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, COVERAGE_STATUS, ISSUE, ADDON_VERSION, UPDATED_AT, EKS_CLUSTER_NAME
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
     #   })
@@ -3096,6 +3103,7 @@ module Aws::GuardDuty
     #   resp.resources[0].resource_details.eks_cluster_details.compatible_nodes #=> Integer
     #   resp.resources[0].resource_details.eks_cluster_details.addon_details.addon_version #=> String
     #   resp.resources[0].resource_details.eks_cluster_details.addon_details.addon_status #=> String
+    #   resp.resources[0].resource_details.eks_cluster_details.management_type #=> String, one of "AUTO_MANAGED", "MANUAL"
     #   resp.resources[0].resource_details.resource_type #=> String, one of "EKS"
     #   resp.resources[0].coverage_status #=> String, one of "HEALTHY", "UNHEALTHY"
     #   resp.resources[0].issue #=> String
@@ -3277,6 +3285,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.serviceName
     #
     #   * service.action.dnsRequestAction.domain
+    #
+    #   * service.action.dnsRequestAction.domainWithSuffix
     #
     #   * service.action.networkConnectionAction.blocked
     #
@@ -3545,7 +3555,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists the accounts configured as GuardDuty delegated administrators.
+    # Lists the accounts designated as GuardDuty delegated administrators.
+    # Only the organization's management account can run this API
+    # operation.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -3637,8 +3649,8 @@ module Aws::GuardDuty
 
     # Lists tags for a resource. Tagging is currently supported for
     # detectors, finding filters, IP sets, threat intel sets, and publishing
-    # destination, with a limit of 50 tags per each resource. When invoked,
-    # this operation returns all assigned tags for a given resource.
+    # destination, with a limit of 50 tags per resource. When invoked, this
+    # operation returns all assigned tags for a given resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
@@ -4287,8 +4299,8 @@ module Aws::GuardDuty
     end
 
     # Configures the delegated administrator account with the provided
-    # values. You must provide the value for either
-    # `autoEnableOrganizationMembers` or `autoEnable`.
+    # values. You must provide a value for either
+    # `autoEnableOrganizationMembers` or `autoEnable`, but not both.
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
@@ -4303,11 +4315,13 @@ module Aws::GuardDuty
     #   The ID of the detector that configures the delegated administrator.
     #
     # @option params [Boolean] :auto_enable
-    #   Indicates whether to automatically enable member accounts in the
-    #   organization.
+    #   Represents whether or not to automatically enable member accounts in
+    #   the organization.
     #
     #   Even though this is still supported, we recommend using
-    #   `AutoEnableOrganizationMembers` to achieve the similar results.
+    #   `AutoEnableOrganizationMembers` to achieve the similar results. You
+    #   must provide a value for either `autoEnableOrganizationMembers` or
+    #   `autoEnable`.
     #
     # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
     #   Describes which data sources will be updated.
@@ -4317,19 +4331,26 @@ module Aws::GuardDuty
     #
     # @option params [String] :auto_enable_organization_members
     #   Indicates the auto-enablement configuration of GuardDuty for the
-    #   member accounts in the organization.
+    #   member accounts in the organization. You must provide a value for
+    #   either `autoEnableOrganizationMembers` or `autoEnable`.
+    #
+    #   Use one of the following configuration values for
+    #   `autoEnableOrganizationMembers`:
     #
     #   * `NEW`: Indicates that when a new account joins the organization,
     #     they will have GuardDuty enabled automatically.
     #
-    #   * `ALL`: Indicates that all accounts in the Amazon Web Services
-    #     Organization have GuardDuty enabled automatically. This includes
-    #     `NEW` accounts that join the organization and accounts that may have
-    #     been suspended or removed from the organization in GuardDuty.
+    #   * `ALL`: Indicates that all accounts in the organization have
+    #     GuardDuty enabled automatically. This includes `NEW` accounts that
+    #     join the organization and accounts that may have been suspended or
+    #     removed from the organization in GuardDuty.
+    #
+    #     It may take up to 24 hours to update the configuration for all the
+    #     member accounts.
     #
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
-    #     for any accounts in the organization. GuardDuty must be managed for
-    #     each account individually by the administrator.
+    #     for any account in the organization. The administrator must manage
+    #     GuardDuty for each account in the organization individually.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4470,7 +4491,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-10-20)
+------------------
+
+* Feature - This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
+1.58.0 (2023-10-17)
+------------------
+
+* Feature - This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
+1.57.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2023-09-18)
+------------------
+
+* Feature - Add sensitive protection for customer information
+
 1.55.0 (2023-07-11)
 ------------------
 

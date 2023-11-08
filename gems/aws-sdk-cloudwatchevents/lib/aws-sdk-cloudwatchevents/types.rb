@@ -478,7 +478,7 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -504,7 +504,7 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -604,7 +604,7 @@ module Aws::CloudWatchEvents
       :key,
       :value,
       :is_value_secret)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -752,7 +752,7 @@ module Aws::CloudWatchEvents
     class CreateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value)
-      SENSITIVE = []
+      SENSITIVE = [:api_key_value]
       include Aws::Structure
     end
 
@@ -808,7 +808,7 @@ module Aws::CloudWatchEvents
     class CreateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -828,7 +828,7 @@ module Aws::CloudWatchEvents
     class CreateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -4198,7 +4198,7 @@ module Aws::CloudWatchEvents
     class UpdateConnectionApiKeyAuthRequestParameters < Struct.new(
       :api_key_name,
       :api_key_value)
-      SENSITIVE = []
+      SENSITIVE = [:api_key_value]
       include Aws::Structure
     end
 
@@ -4251,7 +4251,7 @@ module Aws::CloudWatchEvents
     class UpdateConnectionBasicAuthRequestParameters < Struct.new(
       :username,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4271,7 +4271,7 @@ module Aws::CloudWatchEvents
     class UpdateConnectionOAuthClientRequestParameters < Struct.new(
       :client_id,
       :client_secret)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 

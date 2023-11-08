@@ -1747,8 +1747,31 @@ module Aws::ElasticLoadBalancingV2
     # After the targets are deregistered, they no longer receive traffic
     # from the load balancer.
     #
+    # The load balancer stops sending requests to targets that are
+    # deregistering, but uses connection draining to ensure that in-flight
+    # traffic completes on the existing connections. This deregistration
+    # delay is configured by default but can be updated for each target
+    # group.
+    #
+    # For more information, see the following:
+    #
+    # * [ Deregistration delay][1] in the *Application Load Balancers User
+    #   Guide*
+    #
+    # * [ Deregistration delay][2] in the *Network Load Balancers User
+    #   Guide*
+    #
+    # * [ Deregistration delay][3] in the *Gateway Load Balancers User
+    #   Guide*
+    #
     # Note: If the specified target does not exist, the action returns
     # successfully.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#deregistration-delay
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#deregistration-delay
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -4224,12 +4247,13 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Enables the Availability Zones for the specified public subnets for
-    # the specified Application Load Balancer or Network Load Balancer. The
-    # specified subnets replace the previously enabled subnets.
+    # the specified Application Load Balancer, Network Load Balancer or
+    # Gateway Load Balancer. The specified subnets replace the previously
+    # enabled subnets.
     #
-    # When you specify subnets for a Network Load Balancer, you must include
-    # all subnets that were enabled previously, with their existing
-    # configurations, plus any additional subnets.
+    # When you specify subnets for a Network Load Balancer, or Gateway Load
+    # Balancer you must include all subnets that were enabled previously,
+    # with their existing configurations, plus any additional subnets.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -4248,6 +4272,9 @@ module Aws::ElasticLoadBalancingV2
     #   from one or more Local Zones.
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
     #   Availability Zones.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
@@ -4272,12 +4299,19 @@ module Aws::ElasticLoadBalancingV2
     #   internet-facing load balancer, you can specify one IPv6 address per
     #   subnet.
     #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
     # @option params [String] :ip_address_type
     #   \[Network Load Balancers\] The type of IP addresses used by the
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
     #   listener.
+    #
+    #   \[Gateway Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4362,7 +4396,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

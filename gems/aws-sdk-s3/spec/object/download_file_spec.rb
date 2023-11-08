@@ -9,7 +9,7 @@ module Aws
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:tmpdir) { Dir.tmpdir }
 
-      describe '#download_file' do
+      describe '#download_file', :jruby_flaky do
         let(:path) { Tempfile.new('destination').path }
 
         let(:small_obj) do
@@ -170,11 +170,14 @@ module Aws
           end
 
           n_calls = 0
+          mutex = Mutex.new
           callback = proc do |bytes, part_sizes, total|
-            expect(bytes.size).to eq(4)
-            expect(part_sizes.size).to eq(4)
-            expect(total).to eq(20*one_meg)
-            n_calls += 1
+            mutex.synchronize do
+              expect(bytes.size).to eq(4)
+              expect(part_sizes.size).to eq(4)
+              expect(total).to eq(20*one_meg)
+              n_calls += 1
+            end
           end
 
           large_obj.download_file(path, progress_callback: callback)
@@ -218,10 +221,11 @@ module Aws
         end
 
         it 'raises an error when checksum validation fails on multipart' do
-          thread = double(value: nil)
           client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+
+          thread = double(value: nil)
+          allow(thread).to receive(:abort_on_exception=)
           expect(Thread).to receive(:new).and_yield.and_return(thread)
-          allow(thread).to receive(:abort_on_exception)
 
           expect do
             large_obj.download_file(path)
@@ -230,12 +234,15 @@ module Aws
 
         it 'calls on_checksum_validated on single part' do
           callback_data = {called: 0}
+          mutex = Mutex.new
           client.stub_responses(
             :get_object,
             {body: 'body', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='}
           )
           callback = proc do |_alg, _resp|
-            callback_data[:called] += 1
+            mutex.synchronize do
+              callback_data[:called] += 1
+            end
           end
 
           small_obj.download_file(path, on_checksum_validated: callback)
@@ -252,8 +259,11 @@ module Aws
               checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='
             }
           )
+          mutex = Mutex.new
           callback = proc do |_alg, _resp|
-            callback_data[:called] += 1
+            mutex.synchronize do
+              callback_data[:called] += 1
+            end
           end
 
           large_obj.download_file(path, on_checksum_validated: callback)

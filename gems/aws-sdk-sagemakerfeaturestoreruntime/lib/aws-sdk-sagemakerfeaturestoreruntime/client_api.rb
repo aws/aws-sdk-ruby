@@ -47,6 +47,7 @@ module Aws::SageMakerFeatureStoreRuntime
     UnprocessedIdentifiers = Shapes::ListShape.new(name: 'UnprocessedIdentifiers')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValueAsString = Shapes::StringShape.new(name: 'ValueAsString')
+    ValueAsStringList = Shapes::ListShape.new(name: 'ValueAsStringList')
 
     AccessForbidden.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AccessForbidden.struct_class = Types::AccessForbidden
@@ -93,7 +94,8 @@ module Aws::SageMakerFeatureStoreRuntime
     FeatureNames.member = Shapes::ShapeRef.new(shape: FeatureName)
 
     FeatureValue.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
-    FeatureValue.add_member(:value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "ValueAsString"))
+    FeatureValue.add_member(:value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, location_name: "ValueAsString"))
+    FeatureValue.add_member(:value_as_string_list, Shapes::ShapeRef.new(shape: ValueAsStringList, location_name: "ValueAsStringList"))
     FeatureValue.struct_class = Types::FeatureValue
 
     GetRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
@@ -135,6 +137,8 @@ module Aws::SageMakerFeatureStoreRuntime
 
     ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ValidationError.struct_class = Types::ValidationError
+
+    ValueAsStringList.member = Shapes::ShapeRef.new(shape: ValueAsString)
 
 
     # @api private

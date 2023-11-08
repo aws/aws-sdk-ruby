@@ -52,6 +52,6 @@ require_relative 'aws-sdk-workspacesweb/customizations'
 # @!group service
 module Aws::WorkSpacesWeb
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end

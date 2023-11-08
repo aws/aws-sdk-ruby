@@ -15,6 +15,8 @@ module Aws::LookoutEquipment
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceArn = Shapes::StringShape.new(name: 'AmazonResourceArn')
+    AutoPromotionResult = Shapes::StringShape.new(name: 'AutoPromotionResult')
+    AutoPromotionResultReason = Shapes::StringShape.new(name: 'AutoPromotionResultReason')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
     CategoricalValues = Shapes::StructureShape.new(name: 'CategoricalValues')
@@ -33,6 +35,8 @@ module Aws::LookoutEquipment
     CreateLabelResponse = Shapes::StructureShape.new(name: 'CreateLabelResponse')
     CreateModelRequest = Shapes::StructureShape.new(name: 'CreateModelRequest')
     CreateModelResponse = Shapes::StructureShape.new(name: 'CreateModelResponse')
+    CreateRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'CreateRetrainingSchedulerRequest')
+    CreateRetrainingSchedulerResponse = Shapes::StructureShape.new(name: 'CreateRetrainingSchedulerResponse')
     DataDelayOffsetInMinutes = Shapes::IntegerShape.new(name: 'DataDelayOffsetInMinutes')
     DataIngestionJobSummaries = Shapes::ListShape.new(name: 'DataIngestionJobSummaries')
     DataIngestionJobSummary = Shapes::StructureShape.new(name: 'DataIngestionJobSummary')
@@ -53,6 +57,7 @@ module Aws::LookoutEquipment
     DeleteLabelRequest = Shapes::StructureShape.new(name: 'DeleteLabelRequest')
     DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'DeleteRetrainingSchedulerRequest')
     DescribeDataIngestionJobRequest = Shapes::StructureShape.new(name: 'DescribeDataIngestionJobRequest')
     DescribeDataIngestionJobResponse = Shapes::StructureShape.new(name: 'DescribeDataIngestionJobResponse')
     DescribeDatasetRequest = Shapes::StructureShape.new(name: 'DescribeDatasetRequest')
@@ -69,6 +74,8 @@ module Aws::LookoutEquipment
     DescribeModelVersionResponse = Shapes::StructureShape.new(name: 'DescribeModelVersionResponse')
     DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
+    DescribeRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'DescribeRetrainingSchedulerRequest')
+    DescribeRetrainingSchedulerResponse = Shapes::StructureShape.new(name: 'DescribeRetrainingSchedulerResponse')
     DuplicateTimestamps = Shapes::StructureShape.new(name: 'DuplicateTimestamps')
     Equipment = Shapes::StringShape.new(name: 'Equipment')
     EventDurationInSeconds = Shapes::IntegerShape.new(name: 'EventDurationInSeconds')
@@ -82,6 +89,7 @@ module Aws::LookoutEquipment
     ImportDatasetResponse = Shapes::StructureShape.new(name: 'ImportDatasetResponse')
     ImportModelVersionRequest = Shapes::StructureShape.new(name: 'ImportModelVersionRequest')
     ImportModelVersionResponse = Shapes::StructureShape.new(name: 'ImportModelVersionResponse')
+    InferenceDataImportStrategy = Shapes::StringShape.new(name: 'InferenceDataImportStrategy')
     InferenceEventSummaries = Shapes::ListShape.new(name: 'InferenceEventSummaries')
     InferenceEventSummary = Shapes::StructureShape.new(name: 'InferenceEventSummary')
     InferenceExecutionStatus = Shapes::StringShape.new(name: 'InferenceExecutionStatus')
@@ -141,16 +149,20 @@ module Aws::LookoutEquipment
     ListModelsRequest = Shapes::StructureShape.new(name: 'ListModelsRequest')
     ListModelsResponse = Shapes::StructureShape.new(name: 'ListModelsResponse')
     ListOfDiscardedFiles = Shapes::ListShape.new(name: 'ListOfDiscardedFiles')
+    ListRetrainingSchedulersRequest = Shapes::StructureShape.new(name: 'ListRetrainingSchedulersRequest')
+    ListRetrainingSchedulersResponse = Shapes::StructureShape.new(name: 'ListRetrainingSchedulersResponse')
     ListSensorStatisticsRequest = Shapes::StructureShape.new(name: 'ListSensorStatisticsRequest')
     ListSensorStatisticsResponse = Shapes::StructureShape.new(name: 'ListSensorStatisticsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LookbackWindow = Shapes::StringShape.new(name: 'LookbackWindow')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MissingCompleteSensorData = Shapes::StructureShape.new(name: 'MissingCompleteSensorData')
     MissingSensorData = Shapes::StructureShape.new(name: 'MissingSensorData')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelMetrics = Shapes::StringShape.new(name: 'ModelMetrics')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
+    ModelPromoteMode = Shapes::StringShape.new(name: 'ModelPromoteMode')
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     ModelSummaries = Shapes::ListShape.new(name: 'ModelSummaries')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
@@ -172,6 +184,10 @@ module Aws::LookoutEquipment
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetrainingFrequency = Shapes::StringShape.new(name: 'RetrainingFrequency')
+    RetrainingSchedulerStatus = Shapes::StringShape.new(name: 'RetrainingSchedulerStatus')
+    RetrainingSchedulerSummaries = Shapes::ListShape.new(name: 'RetrainingSchedulerSummaries')
+    RetrainingSchedulerSummary = Shapes::StructureShape.new(name: 'RetrainingSchedulerSummary')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
@@ -185,9 +201,13 @@ module Aws::LookoutEquipment
     StartDataIngestionJobResponse = Shapes::StructureShape.new(name: 'StartDataIngestionJobResponse')
     StartInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'StartInferenceSchedulerRequest')
     StartInferenceSchedulerResponse = Shapes::StructureShape.new(name: 'StartInferenceSchedulerResponse')
+    StartRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'StartRetrainingSchedulerRequest')
+    StartRetrainingSchedulerResponse = Shapes::StructureShape.new(name: 'StartRetrainingSchedulerResponse')
     StatisticalIssueStatus = Shapes::StringShape.new(name: 'StatisticalIssueStatus')
     StopInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'StopInferenceSchedulerRequest')
     StopInferenceSchedulerResponse = Shapes::StructureShape.new(name: 'StopInferenceSchedulerResponse')
+    StopRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'StopRetrainingSchedulerRequest')
+    StopRetrainingSchedulerResponse = Shapes::StructureShape.new(name: 'StopRetrainingSchedulerResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -206,6 +226,8 @@ module Aws::LookoutEquipment
     UpdateActiveModelVersionResponse = Shapes::StructureShape.new(name: 'UpdateActiveModelVersionResponse')
     UpdateInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'UpdateInferenceSchedulerRequest')
     UpdateLabelGroupRequest = Shapes::StructureShape.new(name: 'UpdateLabelGroupRequest')
+    UpdateModelRequest = Shapes::StructureShape.new(name: 'UpdateModelRequest')
+    UpdateRetrainingSchedulerRequest = Shapes::StructureShape.new(name: 'UpdateRetrainingSchedulerRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
@@ -294,6 +316,19 @@ module Aws::LookoutEquipment
     CreateModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
     CreateModelResponse.struct_class = Types::CreateModelResponse
 
+    CreateRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    CreateRetrainingSchedulerRequest.add_member(:retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetrainingStartDate"))
+    CreateRetrainingSchedulerRequest.add_member(:retraining_frequency, Shapes::ShapeRef.new(shape: RetrainingFrequency, required: true, location_name: "RetrainingFrequency"))
+    CreateRetrainingSchedulerRequest.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, required: true, location_name: "LookbackWindow"))
+    CreateRetrainingSchedulerRequest.add_member(:promote_mode, Shapes::ShapeRef.new(shape: ModelPromoteMode, location_name: "PromoteMode"))
+    CreateRetrainingSchedulerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRetrainingSchedulerRequest.struct_class = Types::CreateRetrainingSchedulerRequest
+
+    CreateRetrainingSchedulerResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    CreateRetrainingSchedulerResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    CreateRetrainingSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    CreateRetrainingSchedulerResponse.struct_class = Types::CreateRetrainingSchedulerResponse
+
     DataIngestionJobSummaries.member = Shapes::ShapeRef.new(shape: DataIngestionJobSummary)
 
     DataIngestionJobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "JobId"))
@@ -342,6 +377,9 @@ module Aws::LookoutEquipment
 
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DeleteRetrainingSchedulerRequest.struct_class = Types::DeleteRetrainingSchedulerRequest
 
     DescribeDataIngestionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: IngestionJobId, required: true, location_name: "JobId"))
     DescribeDataIngestionJobRequest.struct_class = Types::DescribeDataIngestionJobRequest
@@ -459,6 +497,16 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:previous_active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "PreviousActiveModelVersion"))
     DescribeModelResponse.add_member(:previous_active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "PreviousActiveModelVersionArn"))
     DescribeModelResponse.add_member(:previous_model_version_activated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PreviousModelVersionActivatedAt"))
+    DescribeModelResponse.add_member(:prior_model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "PriorModelMetrics", metadata: {"jsonvalue"=>true}))
+    DescribeModelResponse.add_member(:latest_scheduled_retraining_failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "LatestScheduledRetrainingFailedReason"))
+    DescribeModelResponse.add_member(:latest_scheduled_retraining_status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "LatestScheduledRetrainingStatus"))
+    DescribeModelResponse.add_member(:latest_scheduled_retraining_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "LatestScheduledRetrainingModelVersion"))
+    DescribeModelResponse.add_member(:latest_scheduled_retraining_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestScheduledRetrainingStartTime"))
+    DescribeModelResponse.add_member(:latest_scheduled_retraining_available_data_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "LatestScheduledRetrainingAvailableDataInDays"))
+    DescribeModelResponse.add_member(:next_scheduled_retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "NextScheduledRetrainingStartDate"))
+    DescribeModelResponse.add_member(:accumulated_inference_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AccumulatedInferenceDataStartTime"))
+    DescribeModelResponse.add_member(:accumulated_inference_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AccumulatedInferenceDataEndTime"))
+    DescribeModelResponse.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
 
     DescribeModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
@@ -493,6 +541,10 @@ module Aws::LookoutEquipment
     DescribeModelVersionResponse.add_member(:import_job_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobStartTime"))
     DescribeModelVersionResponse.add_member(:import_job_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobEndTime"))
     DescribeModelVersionResponse.add_member(:imported_data_size_in_bytes, Shapes::ShapeRef.new(shape: DataSizeInBytes, location_name: "ImportedDataSizeInBytes"))
+    DescribeModelVersionResponse.add_member(:prior_model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "PriorModelMetrics"))
+    DescribeModelVersionResponse.add_member(:retraining_available_data_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "RetrainingAvailableDataInDays"))
+    DescribeModelVersionResponse.add_member(:auto_promotion_result, Shapes::ShapeRef.new(shape: AutoPromotionResult, location_name: "AutoPromotionResult"))
+    DescribeModelVersionResponse.add_member(:auto_promotion_result_reason, Shapes::ShapeRef.new(shape: AutoPromotionResultReason, location_name: "AutoPromotionResultReason"))
     DescribeModelVersionResponse.struct_class = Types::DescribeModelVersionResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -503,6 +555,20 @@ module Aws::LookoutEquipment
     DescribeResourcePolicyResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeResourcePolicyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
+
+    DescribeRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DescribeRetrainingSchedulerRequest.struct_class = Types::DescribeRetrainingSchedulerRequest
+
+    DescribeRetrainingSchedulerResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    DescribeRetrainingSchedulerResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    DescribeRetrainingSchedulerResponse.add_member(:retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetrainingStartDate"))
+    DescribeRetrainingSchedulerResponse.add_member(:retraining_frequency, Shapes::ShapeRef.new(shape: RetrainingFrequency, location_name: "RetrainingFrequency"))
+    DescribeRetrainingSchedulerResponse.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, location_name: "LookbackWindow"))
+    DescribeRetrainingSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    DescribeRetrainingSchedulerResponse.add_member(:promote_mode, Shapes::ShapeRef.new(shape: ModelPromoteMode, location_name: "PromoteMode"))
+    DescribeRetrainingSchedulerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeRetrainingSchedulerResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DescribeRetrainingSchedulerResponse.struct_class = Types::DescribeRetrainingSchedulerResponse
 
     DuplicateTimestamps.add_member(:total_number_of_duplicate_timestamps, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfDuplicateTimestamps"))
     DuplicateTimestamps.struct_class = Types::DuplicateTimestamps
@@ -530,6 +596,7 @@ module Aws::LookoutEquipment
     ImportModelVersionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     ImportModelVersionRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     ImportModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportModelVersionRequest.add_member(:inference_data_import_strategy, Shapes::ShapeRef.new(shape: InferenceDataImportStrategy, location_name: "InferenceDataImportStrategy"))
     ImportModelVersionRequest.struct_class = Types::ImportModelVersionRequest
 
     ImportModelVersionResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
@@ -563,6 +630,8 @@ module Aws::LookoutEquipment
     InferenceExecutionSummary.add_member(:customer_result_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "CustomerResultObject"))
     InferenceExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: InferenceExecutionStatus, location_name: "Status"))
     InferenceExecutionSummary.add_member(:failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "FailedReason"))
+    InferenceExecutionSummary.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ModelVersion"))
+    InferenceExecutionSummary.add_member(:model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ModelVersionArn"))
     InferenceExecutionSummary.struct_class = Types::InferenceExecutionSummary
 
     InferenceInputConfiguration.add_member(:s3_input_configuration, Shapes::ShapeRef.new(shape: InferenceS3InputConfiguration, location_name: "S3InputConfiguration"))
@@ -759,6 +828,16 @@ module Aws::LookoutEquipment
 
     ListOfDiscardedFiles.member = Shapes::ShapeRef.new(shape: S3Object)
 
+    ListRetrainingSchedulersRequest.add_member(:model_name_begins_with, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelNameBeginsWith"))
+    ListRetrainingSchedulersRequest.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    ListRetrainingSchedulersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRetrainingSchedulersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRetrainingSchedulersRequest.struct_class = Types::ListRetrainingSchedulersRequest
+
+    ListRetrainingSchedulersResponse.add_member(:retraining_scheduler_summaries, Shapes::ShapeRef.new(shape: RetrainingSchedulerSummaries, location_name: "RetrainingSchedulerSummaries"))
+    ListRetrainingSchedulersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRetrainingSchedulersResponse.struct_class = Types::ListRetrainingSchedulersResponse
+
     ListSensorStatisticsRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "DatasetName"))
     ListSensorStatisticsRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "IngestionJobId"))
     ListSensorStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -792,6 +871,11 @@ module Aws::LookoutEquipment
     ModelSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     ModelSummary.add_member(:active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ActiveModelVersion"))
     ModelSummary.add_member(:active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ActiveModelVersionArn"))
+    ModelSummary.add_member(:latest_scheduled_retraining_status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "LatestScheduledRetrainingStatus"))
+    ModelSummary.add_member(:latest_scheduled_retraining_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "LatestScheduledRetrainingModelVersion"))
+    ModelSummary.add_member(:latest_scheduled_retraining_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestScheduledRetrainingStartTime"))
+    ModelSummary.add_member(:next_scheduled_retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "NextScheduledRetrainingStartDate"))
+    ModelSummary.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
     ModelSummary.struct_class = Types::ModelSummary
 
     ModelVersionSummaries.member = Shapes::ShapeRef.new(shape: ModelVersionSummary)
@@ -824,6 +908,16 @@ module Aws::LookoutEquipment
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetrainingSchedulerSummaries.member = Shapes::ShapeRef.new(shape: RetrainingSchedulerSummary)
+
+    RetrainingSchedulerSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    RetrainingSchedulerSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    RetrainingSchedulerSummary.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    RetrainingSchedulerSummary.add_member(:retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetrainingStartDate"))
+    RetrainingSchedulerSummary.add_member(:retraining_frequency, Shapes::ShapeRef.new(shape: RetrainingFrequency, location_name: "RetrainingFrequency"))
+    RetrainingSchedulerSummary.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, location_name: "LookbackWindow"))
+    RetrainingSchedulerSummary.struct_class = Types::RetrainingSchedulerSummary
 
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     S3Object.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "Key"))
@@ -872,6 +966,14 @@ module Aws::LookoutEquipment
     StartInferenceSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceSchedulerStatus, location_name: "Status"))
     StartInferenceSchedulerResponse.struct_class = Types::StartInferenceSchedulerResponse
 
+    StartRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    StartRetrainingSchedulerRequest.struct_class = Types::StartRetrainingSchedulerRequest
+
+    StartRetrainingSchedulerResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    StartRetrainingSchedulerResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    StartRetrainingSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    StartRetrainingSchedulerResponse.struct_class = Types::StartRetrainingSchedulerResponse
+
     StopInferenceSchedulerRequest.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, required: true, location_name: "InferenceSchedulerName"))
     StopInferenceSchedulerRequest.struct_class = Types::StopInferenceSchedulerRequest
 
@@ -881,6 +983,14 @@ module Aws::LookoutEquipment
     StopInferenceSchedulerResponse.add_member(:inference_scheduler_arn, Shapes::ShapeRef.new(shape: InferenceSchedulerArn, location_name: "InferenceSchedulerArn"))
     StopInferenceSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceSchedulerStatus, location_name: "Status"))
     StopInferenceSchedulerResponse.struct_class = Types::StopInferenceSchedulerResponse
+
+    StopRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    StopRetrainingSchedulerRequest.struct_class = Types::StopRetrainingSchedulerRequest
+
+    StopRetrainingSchedulerResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    StopRetrainingSchedulerResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    StopRetrainingSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "Status"))
+    StopRetrainingSchedulerResponse.struct_class = Types::StopRetrainingSchedulerResponse
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -931,6 +1041,18 @@ module Aws::LookoutEquipment
     UpdateLabelGroupRequest.add_member(:label_group_name, Shapes::ShapeRef.new(shape: LabelGroupName, required: true, location_name: "LabelGroupName"))
     UpdateLabelGroupRequest.add_member(:fault_codes, Shapes::ShapeRef.new(shape: FaultCodes, location_name: "FaultCodes"))
     UpdateLabelGroupRequest.struct_class = Types::UpdateLabelGroupRequest
+
+    UpdateModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    UpdateModelRequest.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
+    UpdateModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    UpdateModelRequest.struct_class = Types::UpdateModelRequest
+
+    UpdateRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    UpdateRetrainingSchedulerRequest.add_member(:retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetrainingStartDate"))
+    UpdateRetrainingSchedulerRequest.add_member(:retraining_frequency, Shapes::ShapeRef.new(shape: RetrainingFrequency, location_name: "RetrainingFrequency"))
+    UpdateRetrainingSchedulerRequest.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, location_name: "LookbackWindow"))
+    UpdateRetrainingSchedulerRequest.add_member(:promote_mode, Shapes::ShapeRef.new(shape: ModelPromoteMode, location_name: "PromoteMode"))
+    UpdateRetrainingSchedulerRequest.struct_class = Types::UpdateRetrainingSchedulerRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1027,6 +1149,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRetrainingSchedulerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataset"
         o.http_method = "POST"
@@ -1109,6 +1245,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:describe_data_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1208,6 +1358,19 @@ module Aws::LookoutEquipment
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRetrainingSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1410,6 +1573,24 @@ module Aws::LookoutEquipment
         )
       end)
 
+      api.add_operation(:list_retraining_schedulers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRetrainingSchedulers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRetrainingSchedulersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRetrainingSchedulersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_sensor_statistics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSensorStatistics"
         o.http_method = "POST"
@@ -1486,6 +1667,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRetrainingSchedulerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_inference_scheduler, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopInferenceScheduler"
         o.http_method = "POST"
@@ -1495,6 +1690,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRetrainingSchedulerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1564,6 +1773,34 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_retraining_scheduler, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRetrainingScheduler"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRetrainingSchedulerRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

@@ -438,10 +438,12 @@ module Aws::MWAA
     #
     # @option params [String] :airflow_version
     #   The Apache Airflow version for your environment. If no value is
-    #   specified, it defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`. For more information, see
-    #   [Apache Airflow versions on Amazon Managed Workflows for Apache
+    #   specified, it defaults to the latest version. For more information,
+    #   see [Apache Airflow versions on Amazon Managed Workflows for Apache
     #   Airflow (MWAA)][1].
+    #
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
+    #   `2.7.2`.
     #
     #
     #
@@ -1058,7 +1060,8 @@ module Aws::MWAA
     #   updating your resources, see [Upgrading an Amazon MWAA
     #   environment][1].
     #
-    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`.
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
+    #   `2.7.2`.
     #
     #
     #
@@ -1303,7 +1306,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

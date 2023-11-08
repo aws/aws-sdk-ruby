@@ -639,7 +639,7 @@ module Aws::CustomerProfiles
       :conditions,
       :statistic,
       :tags)
-      SENSITIVE = [:attribute_details, :conditions, :statistic]
+      SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -696,7 +696,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = [:attribute_details, :conditions, :statistic]
+      SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -1838,7 +1838,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = [:statistic, :conditions, :attribute_details]
+      SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 
@@ -2886,7 +2886,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2928,7 +2928,7 @@ module Aws::CustomerProfiles
     class ListCalculatedAttributeDefinitionsResponse < Struct.new(
       :items,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:items]
       include Aws::Structure
     end
 
@@ -5138,7 +5138,7 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :conditions)
-      SENSITIVE = [:conditions]
+      SENSITIVE = [:description, :conditions]
       include Aws::Structure
     end
 
@@ -5195,7 +5195,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = [:statistic, :conditions, :attribute_details]
+      SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 

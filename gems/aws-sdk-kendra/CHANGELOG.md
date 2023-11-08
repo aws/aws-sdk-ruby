@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-10-18)
+------------------
+
+* Feature - Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results
+
+1.73.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-09-12)
+------------------
+
+* Feature - Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.
+
 1.71.0 (2023-07-11)
 ------------------
 

@@ -8,7 +8,7 @@ module Aws
     describe Object do
       let(:client) { S3::Client.new(stub_responses: true) }
 
-      describe '#upload_stream' do
+      describe '#upload_stream', :jruby_flaky do
         let(:object) do
           S3::Object.new(
             bucket_name: 'bucket',
@@ -173,11 +173,14 @@ module Aws
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           result = []
+          mutex = Mutex.new
           allow(client).to receive(:upload_part) do |part|
-            result << [
-              part[:part_number],
-              part[:body].read.size
-            ]
+            mutex.synchronize do
+              result << [
+                part[:part_number],
+                part[:body].read.size
+              ]
+            end
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream(part_size: 7 * 1024 * 1024) do |write_stream|
             17.times { write_stream << one_mb }
@@ -195,11 +198,14 @@ module Aws
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           result = []
+          mutex = Mutex.new
           allow(client).to receive(:upload_part) do |part|
-            result << [
-              part[:part_number],
-              part[:body].read.size
-            ]
+            mutex.synchronize do
+              result << [
+                part[:part_number],
+                part[:body].read.size
+              ]
+            end
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
@@ -375,11 +381,14 @@ module Aws
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             result = []
+            mutex = Mutex.new
             allow(client).to receive(:upload_part) do |part|
-              result << [
-                part[:part_number],
-                part[:body].read.size
-              ]
+              mutex.synchronize do
+                result << [
+                  part[:part_number],
+                  part[:body].read.size
+                ]
+              end
             end.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }

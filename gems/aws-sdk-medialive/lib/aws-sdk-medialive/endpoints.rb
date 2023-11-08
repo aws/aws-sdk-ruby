@@ -698,6 +698,20 @@ module Aws::MediaLive
       end
     end
 
+    class StartInputDevice
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::MediaLive::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartInputDeviceMaintenanceWindow
       def self.build(context)
         unless context.config.regional_endpoint
@@ -727,6 +741,20 @@ module Aws::MediaLive
     end
 
     class StopChannel
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::MediaLive::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopInputDevice
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

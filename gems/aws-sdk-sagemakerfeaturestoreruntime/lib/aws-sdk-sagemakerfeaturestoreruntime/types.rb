@@ -208,16 +208,25 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     #
     # @!attribute [rw] value_as_string
-    #   The value associated with a feature, in string format. Note that
-    #   features types can be String, Integral, or Fractional. This value
-    #   represents all three types as a string.
+    #   The value in string format associated with a feature. Used when your
+    #   `CollectionType` is `None`. Note that features types can be
+    #   `String`, `Integral`, or `Fractional`. This value represents all
+    #   three types as a string.
     #   @return [String]
+    #
+    # @!attribute [rw] value_as_string_list
+    #   The list of values in string format associated with a feature. Used
+    #   when your `CollectionType` is a `List`, `Set`, or `Vector`. Note
+    #   that features types can be `String`, `Integral`, or `Fractional`.
+    #   These values represents all three types as a string.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/FeatureValue AWS API Documentation
     #
     class FeatureValue < Struct.new(
       :feature_name,
-      :value_as_string)
+      :value_as_string,
+      :value_as_string_list)
       SENSITIVE = []
       include Aws::Structure
     end

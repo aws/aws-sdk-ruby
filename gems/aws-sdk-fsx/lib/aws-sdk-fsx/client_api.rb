@@ -343,6 +343,8 @@ module Aws::FSx
     Snapshots = Shapes::ListShape.new(name: 'Snapshots')
     SourceBackupId = Shapes::StringShape.new(name: 'SourceBackupId')
     SourceBackupUnavailable = Shapes::StructureShape.new(name: 'SourceBackupUnavailable')
+    StartMisconfiguredStateRecoveryRequest = Shapes::StructureShape.new(name: 'StartMisconfiguredStateRecoveryRequest')
+    StartMisconfiguredStateRecoveryResponse = Shapes::StructureShape.new(name: 'StartMisconfiguredStateRecoveryResponse')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     Status = Shapes::StringShape.new(name: 'Status')
     StorageCapacity = Shapes::IntegerShape.new(name: 'StorageCapacity')
@@ -1505,6 +1507,13 @@ module Aws::FSx
     SourceBackupUnavailable.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
     SourceBackupUnavailable.struct_class = Types::SourceBackupUnavailable
 
+    StartMisconfiguredStateRecoveryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartMisconfiguredStateRecoveryRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    StartMisconfiguredStateRecoveryRequest.struct_class = Types::StartMisconfiguredStateRecoveryRequest
+
+    StartMisconfiguredStateRecoveryResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    StartMisconfiguredStateRecoveryResponse.struct_class = Types::StartMisconfiguredStateRecoveryResponse
+
     StorageVirtualMachine.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: SvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
     StorageVirtualMachine.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     StorageVirtualMachine.add_member(:endpoints, Shapes::ShapeRef.new(shape: SvmEndpoints, location_name: "Endpoints"))
@@ -2283,6 +2292,17 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+      end)
+
+      api.add_operation(:start_misconfigured_state_recovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMisconfiguredStateRecovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMisconfiguredStateRecoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMisconfiguredStateRecoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

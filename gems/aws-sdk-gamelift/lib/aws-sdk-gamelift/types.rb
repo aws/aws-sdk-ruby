@@ -30,7 +30,7 @@ module Aws::GameLift
       :ticket_id,
       :player_ids,
       :acceptance_type)
-      SENSITIVE = []
+      SENSITIVE = [:player_ids]
       include Aws::Structure
     end
 
@@ -477,7 +477,7 @@ module Aws::GameLift
       :operating_system,
       :type,
       :game_lift_service_sdk_endpoint)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -675,14 +675,15 @@ module Aws::GameLift
     #   The unique identifier for a custom game server build to be deployed
     #   on fleet instances. You can use either the build ID or ARN. The
     #   build must be uploaded to Amazon GameLift and in `READY` status.
-    #   This fleet property cannot be changed later.
+    #   This fleet property can't be changed after the fleet is created.
     #   @return [String]
     #
     # @!attribute [rw] script_id
     #   The unique identifier for a Realtime configuration script to be
     #   deployed on fleet instances. You can use either the script ID or
     #   ARN. Scripts must be uploaded to Amazon GameLift prior to creating
-    #   the fleet. This fleet property cannot be changed later.
+    #   the fleet. This fleet property can't be changed after the fleet is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] server_launch_path
@@ -797,8 +798,8 @@ module Aws::GameLift
     # @!attribute [rw] fleet_type
     #   Indicates whether to use On-Demand or Spot instances for this fleet.
     #   By default, this property is set to `ON_DEMAND`. Learn more about
-    #   when to use [ On-Demand versus Spot Instances][1]. This property
-    #   cannot be changed after the fleet is created.
+    #   when to use [ On-Demand versus Spot Instances][1]. This fleet
+    #   property can't be changed after the fleet is created.
     #
     #
     #
@@ -806,20 +807,19 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_role_arn
-    #   A unique identifier for an IAM role that manages access to your
-    #   Amazon Web Services services. With an instance role ARN set, any
-    #   application that runs on an instance in this fleet can assume the
-    #   role, including install scripts, server processes, and daemons
-    #   (background processes). Create a role or look up a role's ARN by
-    #   using the [IAM dashboard][1] in the Amazon Web Services Management
-    #   Console. Learn more about using on-box credentials for your game
-    #   servers at [ Access external resources from a game server][2]. This
-    #   property cannot be changed after the fleet is created.
+    #   A unique identifier for an IAM role with access permissions to other
+    #   Amazon Web Services services. Any application that runs on an
+    #   instance in the fleet--including install scripts, server processes,
+    #   and other processes--can use these permissions to interact with
+    #   Amazon Web Services resources that you own or have access to. For
+    #   more information about using the role with your game server builds,
+    #   see [ Communicate with other Amazon Web Services resources from your
+    #   fleets][1]. This fleet property can't be changed after the fleet is
+    #   created.
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
@@ -885,6 +885,21 @@ module Aws::GameLift
     #   Amazon GameLift Anywhere configuration options.
     #   @return [Types::AnywhereConfiguration]
     #
+    # @!attribute [rw] instance_role_credentials_provider
+    #   Prompts Amazon GameLift to generate a shared credentials file for
+    #   the IAM role defined in `InstanceRoleArn`. The shared credentials
+    #   file is stored on each fleet instance and refreshed as needed. Use
+    #   shared credentials for applications that are deployed along with the
+    #   game server executable, if the game server is integrated with server
+    #   SDK version 5.x. For more information about using shared
+    #   credentials, see [ Communicate with other Amazon Web Services
+    #   resources from your fleets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -909,7 +924,8 @@ module Aws::GameLift
       :locations,
       :tags,
       :compute_type,
-      :anywhere_configuration)
+      :anywhere_configuration,
+      :instance_role_credentials_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1679,7 +1695,7 @@ module Aws::GameLift
       :game_session_id,
       :player_id,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -1717,7 +1733,7 @@ module Aws::GameLift
       :game_session_id,
       :player_ids,
       :player_data_map)
-      SENSITIVE = []
+      SENSITIVE = [:player_ids]
       include Aws::Structure
     end
 
@@ -3357,7 +3373,7 @@ module Aws::GameLift
       :player_session_status_filter,
       :limit,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -3572,7 +3588,7 @@ module Aws::GameLift
     class DesiredPlayerSession < Struct.new(
       :player_id,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -3938,8 +3954,8 @@ module Aws::GameLift
     # @!attribute [rw] fleet_type
     #   Indicates whether to use On-Demand or Spot instances for this fleet.
     #   By default, this property is set to `ON_DEMAND`. Learn more about
-    #   when to use [ On-Demand versus Spot Instances][1]. This property
-    #   cannot be changed after the fleet is created.
+    #   when to use [ On-Demand versus Spot Instances][1]. This fleet
+    #   property can't be changed after the fleet is created.
     #
     #
     #
@@ -4102,19 +4118,18 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_role_arn
-    #   A unique identifier for an IAM role that manages access to your
-    #   Amazon Web Services services. With an instance role ARN set, any
-    #   application that runs on an instance in this fleet can assume the
-    #   role, including install scripts, server processes, and daemons
-    #   (background processes). Create a role or look up a role's ARN by
-    #   using the [IAM dashboard][1] in the Amazon Web Services Management
-    #   Console. Learn more about using on-box credentials for your game
-    #   servers at [ Access external resources from a game server][2].
+    #   A unique identifier for an IAM role with access permissions to other
+    #   Amazon Web Services services. Any application that runs on an
+    #   instance in the fleet--including install scripts, server processes,
+    #   and other processes--can use these permissions to interact with
+    #   Amazon Web Services resources that you own or have access to. For
+    #   more information about using the role with your game server builds,
+    #   see [ Communicate with other Amazon Web Services resources from your
+    #   fleets][1].
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
@@ -4139,6 +4154,21 @@ module Aws::GameLift
     #   Amazon GameLift Anywhere configuration options for your Anywhere
     #   fleets.
     #   @return [Types::AnywhereConfiguration]
+    #
+    # @!attribute [rw] instance_role_credentials_provider
+    #   Indicates that fleet instances maintain a shared credentials file
+    #   for the IAM role defined in `InstanceRoleArn`. Shared credentials
+    #   allow applications that are deployed with the game server executable
+    #   to communicate with other Amazon Web Services resources. This
+    #   property is used only when the game server is integrated with the
+    #   server SDK version 5.x. For more information about using shared
+    #   credentials, see [ Communicate with other Amazon Web Services
+    #   resources from your fleets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
@@ -4167,7 +4197,8 @@ module Aws::GameLift
       :instance_role_arn,
       :certificate_configuration,
       :compute_type,
-      :anywhere_configuration)
+      :anywhere_configuration,
+      :instance_role_credentials_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4850,7 +4881,7 @@ module Aws::GameLift
       :game_session_data,
       :matchmaker_data,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
 
@@ -4908,7 +4939,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :matched_player_sessions)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -5138,7 +5169,7 @@ module Aws::GameLift
       :placed_player_sessions,
       :game_session_data,
       :matchmaker_data)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
 
@@ -5571,7 +5602,7 @@ module Aws::GameLift
       :status,
       :creation_time,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -5608,7 +5639,7 @@ module Aws::GameLift
       :ip_address,
       :operating_system,
       :credentials)
-      SENSITIVE = [:credentials]
+      SENSITIVE = [:ip_address, :credentials]
       include Aws::Structure
     end
 
@@ -5778,7 +5809,7 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol)
-      SENSITIVE = []
+      SENSITIVE = [:from_port, :to_port, :ip_range]
       include Aws::Structure
     end
 
@@ -6402,7 +6433,7 @@ module Aws::GameLift
     class MatchedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6846,7 +6877,7 @@ module Aws::GameLift
     class PlacedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6893,7 +6924,7 @@ module Aws::GameLift
       :player_attributes,
       :team,
       :latency_in_ms)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6923,7 +6954,7 @@ module Aws::GameLift
       :player_id,
       :region_identifier,
       :latency_in_milliseconds)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -7081,7 +7112,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id, :ip_address, :port]
       include Aws::Structure
     end
 
@@ -7317,7 +7348,7 @@ module Aws::GameLift
       :dns_name,
       :ip_address,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 

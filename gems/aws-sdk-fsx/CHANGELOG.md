@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-10-06)
+------------------
+
+* Feature - After performing steps to repair the Active Directory configuration of a file system, use this action to initiate the process of attempting to recover to the file system.
+
+1.77.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2023-09-08)
+------------------
+
+* Feature - Amazon FSx documentation fixes
+
 1.75.0 (2023-08-29)
 ------------------
 

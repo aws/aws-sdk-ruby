@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-10-30)
+------------------
+
+* Feature - Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
+1.16.0 (2023-10-23)
+------------------
+
+* Feature - This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+
+1.15.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+
+1.14.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-09-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2023-07-11)
 ------------------
 

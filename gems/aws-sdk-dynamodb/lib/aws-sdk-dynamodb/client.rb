@@ -2446,6 +2446,10 @@ module Aws::DynamoDB
     #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
     #   resp.export_description.billed_size_bytes #=> Integer
     #   resp.export_description.item_count #=> Integer
+    #   resp.export_description.export_type #=> String, one of "FULL_EXPORT", "INCREMENTAL_EXPORT"
+    #   resp.export_description.incremental_export_specification.export_from_time #=> Time
+    #   resp.export_description.incremental_export_specification.export_to_time #=> Time
+    #   resp.export_description.incremental_export_specification.export_view_type #=> String, one of "NEW_IMAGE", "NEW_AND_OLD_IMAGES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExport AWS API Documentation
     #
@@ -3461,6 +3465,16 @@ module Aws::DynamoDB
     #   The format for the exported data. Valid values for `ExportFormat` are
     #   `DYNAMODB_JSON` or `ION`.
     #
+    # @option params [String] :export_type
+    #   Choice of whether to execute as a full export or incremental export.
+    #   Valid values are FULL\_EXPORT or INCREMENTAL\_EXPORT. The default
+    #   value is FULL\_EXPORT. If INCREMENTAL\_EXPORT is provided, the
+    #   IncrementalExportSpecification must also be used.
+    #
+    # @option params [Types::IncrementalExportSpecification] :incremental_export_specification
+    #   Optional object containing the parameters specific to an incremental
+    #   export.
+    #
     # @return [Types::ExportTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExportTableToPointInTimeOutput#export_description #export_description} => Types::ExportDescription
@@ -3477,6 +3491,12 @@ module Aws::DynamoDB
     #     s3_sse_algorithm: "AES256", # accepts AES256, KMS
     #     s3_sse_kms_key_id: "S3SseKmsKeyId",
     #     export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
+    #     export_type: "FULL_EXPORT", # accepts FULL_EXPORT, INCREMENTAL_EXPORT
+    #     incremental_export_specification: {
+    #       export_from_time: Time.now,
+    #       export_to_time: Time.now,
+    #       export_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, NEW_AND_OLD_IMAGES
+    #     },
     #   })
     #
     # @example Response structure
@@ -3500,6 +3520,10 @@ module Aws::DynamoDB
     #   resp.export_description.export_format #=> String, one of "DYNAMODB_JSON", "ION"
     #   resp.export_description.billed_size_bytes #=> Integer
     #   resp.export_description.item_count #=> Integer
+    #   resp.export_description.export_type #=> String, one of "FULL_EXPORT", "INCREMENTAL_EXPORT"
+    #   resp.export_description.incremental_export_specification.export_from_time #=> Time
+    #   resp.export_description.incremental_export_specification.export_to_time #=> Time
+    #   resp.export_description.incremental_export_specification.export_view_type #=> String, one of "NEW_IMAGE", "NEW_AND_OLD_IMAGES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTime AWS API Documentation
     #
@@ -3865,17 +3889,25 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # List backups associated with an Amazon Web Services account. To list
-    # backups for a given table, specify `TableName`. `ListBackups` returns
-    # a paginated list of results with at most 1 MB worth of items in a
-    # page. You can also specify a maximum number of entries to be returned
-    # in a page.
+    # List DynamoDB backups that are associated with an Amazon Web Services
+    # account and weren't made with Amazon Web Services Backup. To list
+    # these backups for a given table, specify `TableName`. `ListBackups`
+    # returns a paginated list of results with at most 1 MB worth of items
+    # in a page. You can also specify a maximum number of entries to be
+    # returned in a page.
     #
     # In the request, start time is inclusive, but end time is exclusive.
     # Note that these boundaries are for the time at which the original
     # backup was requested.
     #
     # You can call `ListBackups` a maximum of five times per second.
+    #
+    # If you want to retrieve the complete list of backups made with Amazon
+    # Web Services Backup, use the [Amazon Web Services Backup list API.][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html
     #
     # @option params [String] :table_name
     #   The backups from the table specified by `TableName` are listed.
@@ -4027,6 +4059,7 @@ module Aws::DynamoDB
     #   resp.export_summaries #=> Array
     #   resp.export_summaries[0].export_arn #=> String
     #   resp.export_summaries[0].export_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_summaries[0].export_type #=> String, one of "FULL_EXPORT", "INCREMENTAL_EXPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExports AWS API Documentation
@@ -5806,7 +5839,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -7828,7 +7861,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.93.1'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

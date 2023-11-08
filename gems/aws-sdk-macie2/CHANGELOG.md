@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2023-09-18)
+------------------
+
+* Feature - This release changes the default managedDataIdentifierSelector setting for new classification jobs to RECOMMENDED. By default, new classification jobs now use the recommended set of managed data identifiers.
+
 1.59.0 (2023-07-11)
 ------------------
 

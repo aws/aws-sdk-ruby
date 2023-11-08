@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-10-30)
+------------------
+
+* Feature - Introduced the ability to filter applications by their last assessment date and time and have included metrics for the application's estimated workload Recovery Time Objective (RTO) and estimated workload Recovery Point Objective (RPO).
+
+1.20.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.19.0 (2023-08-02)
 ------------------
 

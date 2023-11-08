@@ -84,9 +84,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -942,9 +944,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1416,11 +1420,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
-    #   created objects. The STANDARD storage class provides high durability
-    #   and high availability. Depending on performance needs, you can
-    #   specify a different Storage Class. Amazon S3 on Outposts only uses
-    #   the OUTPOSTS Storage Class. For more information, see [Storage
+    #   If the `x-amz-storage-class` header is not used, the copied object
+    #   will be stored in the STANDARD Storage Class by default. The
+    #   STANDARD storage class provides high durability and high
+    #   availability. Depending on performance needs, you can specify a
+    #   different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage
     #   Classes][1] in the *Amazon S3 User Guide*.
     #
     #
@@ -1457,12 +1462,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by KMS will fail if they're
-    #   not made via SSL or using SigV4. For information about configuring
-    #   any of the officially supported Amazon Web Services SDKs and Amazon
-    #   Web Services CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   Specifies the KMS ID (Key ID, Key ARN, or Key Alias) to use for
+    #   object encryption. All GET and PUT requests for an object protected
+    #   by KMS will fail if they're not made via SSL or using SigV4. For
+    #   information about configuring any of the officially supported Amazon
+    #   Web Services SDKs and Amazon Web Services CLI, see [Specifying the
+    #   Signature Version in Request Authentication][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -1506,9 +1512,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2114,13 +2122,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the ID of the symmetric encryption customer managed key to
-    #   use for object encryption. All GET and PUT requests for an object
-    #   protected by KMS will fail if they're not made via SSL or using
-    #   SigV4. For information about configuring any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 User Guide*.
+    #   Specifies the ID (Key ID, Key ARN, or Key Alias) of the symmetric
+    #   encryption customer managed key to use for object encryption. All
+    #   GET and PUT requests for an object protected by KMS will fail if
+    #   they're not made via SSL or using SigV4. For information about
+    #   configuring any of the officially supported Amazon Web Services SDKs
+    #   and Amazon Web Services CLI, see [Specifying the Signature Version
+    #   in Request Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2147,9 +2155,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2628,8 +2638,10 @@ module Aws::S3
     end
 
     # @!attribute [rw] delete_marker
-    #   Specifies whether the versioned object that was permanently deleted
-    #   was (true) or was not (false) a delete marker.
+    #   Indicates whether the specified object version that was permanently
+    #   deleted was (true) or was not (false) a delete marker before
+    #   deletion. In a simple DELETE, this header indicates whether (true)
+    #   or not (false) the current version of the object is a delete marker.
     #   @return [Boolean]
     #
     # @!attribute [rw] version_id
@@ -2697,9 +2709,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2864,9 +2878,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2950,10 +2966,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] delete_marker
-    #   Specifies whether the versioned object that was permanently deleted
-    #   was (true) or was not (false) a delete marker. In a simple DELETE,
-    #   this header indicates whether (true) or not (false) a delete marker
-    #   was created.
+    #   Indicates whether the specified object version that was permanently
+    #   deleted was (true) or was not (false) a delete marker before
+    #   deletion. In a simple DELETE, this header indicates whether (true)
+    #   or not (false) the current version of the object is a delete marker.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_marker_version_id
@@ -4070,9 +4086,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4891,9 +4909,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5093,9 +5113,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5174,9 +5196,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5624,9 +5648,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5721,9 +5747,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5812,9 +5840,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5863,9 +5893,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6482,9 +6514,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7645,9 +7679,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7830,9 +7866,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8447,9 +8485,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10729,9 +10769,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10812,9 +10854,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10897,9 +10941,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11381,9 +11427,9 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
-    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
-    #   Service (KMS) symmetric encryption customer managed key that was
-    #   used for the object. If you specify
+    #   `aws:kms:dsse`, this header specifies the ID (Key ID, Key ARN, or
+    #   Key Alias) of the Key Management Service (KMS) symmetric encryption
+    #   customer managed key that was used for the object. If you specify
     #   `x-amz-server-side-encryption:aws:kms` or
     #   `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
@@ -11414,9 +11460,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11539,9 +11587,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11690,9 +11740,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12327,9 +12379,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12901,19 +12955,23 @@ module Aws::S3
     #   parameter is allowed if and only if `SSEAlgorithm` is set to
     #   `aws:kms`.
     #
-    #   You can specify the key ID or the Amazon Resource Name (ARN) of the
-    #   KMS key. If you use a key ID, you can run into a LogDestination
-    #   undeliverable error when creating a VPC flow log.
-    #
-    #   If you are using encryption with cross-account or Amazon Web
-    #   Services service operations you must use a fully qualified KMS key
-    #   ARN. For more information, see [Using encryption for cross-account
-    #   operations][1].
+    #   You can specify the key ID, key alias, or the Amazon Resource Name
+    #   (ARN) of the KMS key.
     #
     #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key Alias: `alias/alias-name`
+    #
+    #   If you use a key ID, you can run into a LogDestination undeliverable
+    #   error when creating a VPC flow log.
+    #
+    #   If you are using encryption with cross-account or Amazon Web
+    #   Services service operations you must use a fully qualified KMS key
+    #   ARN. For more information, see [Using encryption for cross-account
+    #   operations][1].
     #
     #   Amazon S3 only supports symmetric encryption KMS keys. For more
     #   information, see [Asymmetric keys in Amazon Web Services KMS][2] in
@@ -13542,9 +13600,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13845,9 +13905,11 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading
+    #   objects from Requester Pays buckets, see [Downloading Objects in
+    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -14212,9 +14274,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for stored in Amazon S3 object.
+    #   If present, specifies the ID (Key ID, Key ARN, or Key Alias) of the
+    #   Amazon Web Services Key Management Service (Amazon Web Services KMS)
+    #   symmetric encryption customer managed key that was used for stored
+    #   in Amazon S3 object.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5

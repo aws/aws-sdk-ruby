@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-11-06)
+------------------
+
+* Feature - Update the input of CreateDBInstance and ModifyDBInstance to support setting CA Certificates. Update the output of DescribeDBInstance and DescribeDBEngineVersions to show current and supported CA certificates.
+
+1.54.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2023-07-17)
 ------------------
 

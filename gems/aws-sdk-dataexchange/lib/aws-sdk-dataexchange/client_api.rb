@@ -28,6 +28,7 @@ module Aws::DataExchange
     AutoExportRevisionToS3RequestDetails = Shapes::StructureShape.new(name: 'AutoExportRevisionToS3RequestDetails')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateDataSetRequest = Shapes::StructureShape.new(name: 'CreateDataSetRequest')
@@ -41,6 +42,7 @@ module Aws::DataExchange
     CreateS3DataAccessFromS3BucketRequestDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketRequestDetails')
     CreateS3DataAccessFromS3BucketResponseDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketResponseDetails')
     DataSetEntry = Shapes::StructureShape.new(name: 'DataSetEntry')
+    DataUpdateRequestDetails = Shapes::StructureShape.new(name: 'DataUpdateRequestDetails')
     DatabaseLFTagPolicy = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicy')
     DatabaseLFTagPolicyAndPermissions = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicyAndPermissions')
     DatabaseLFTagPolicyPermission = Shapes::StringShape.new(name: 'DatabaseLFTagPolicyPermission')
@@ -48,6 +50,7 @@ module Aws::DataExchange
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
     DeleteEventActionRequest = Shapes::StructureShape.new(name: 'DeleteEventActionRequest')
     DeleteRevisionRequest = Shapes::StructureShape.new(name: 'DeleteRevisionRequest')
+    DeprecationRequestDetails = Shapes::StructureShape.new(name: 'DeprecationRequestDetails')
     Description = Shapes::StringShape.new(name: 'Description')
     Details = Shapes::StructureShape.new(name: 'Details')
     Event = Shapes::StructureShape.new(name: 'Event')
@@ -97,6 +100,7 @@ module Aws::DataExchange
     LakeFormationDataPermissionAsset = Shapes::StructureShape.new(name: 'LakeFormationDataPermissionAsset')
     LakeFormationDataPermissionDetails = Shapes::StructureShape.new(name: 'LakeFormationDataPermissionDetails')
     LakeFormationDataPermissionType = Shapes::StringShape.new(name: 'LakeFormationDataPermissionType')
+    LakeFormationTagPolicyDetails = Shapes::StructureShape.new(name: 'LakeFormationTagPolicyDetails')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
     ListDataSetRevisionsRequest = Shapes::StructureShape.new(name: 'ListDataSetRevisionsRequest')
     ListDataSetRevisionsResponse = Shapes::StructureShape.new(name: 'ListDataSetRevisionsResponse')
@@ -118,9 +122,13 @@ module Aws::DataExchange
     ListOfLFPermissions = Shapes::ListShape.new(name: 'ListOfLFPermissions')
     ListOfLFTagValues = Shapes::ListShape.new(name: 'ListOfLFTagValues')
     ListOfLFTags = Shapes::ListShape.new(name: 'ListOfLFTags')
+    ListOfLakeFormationTagPolicies = Shapes::ListShape.new(name: 'ListOfLakeFormationTagPolicies')
     ListOfRedshiftDataShareAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfRedshiftDataShareAssetSourceEntry')
+    ListOfRedshiftDataShares = Shapes::ListShape.new(name: 'ListOfRedshiftDataShares')
     ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
     ListOfRevisionEntry = Shapes::ListShape.new(name: 'ListOfRevisionEntry')
+    ListOfS3DataAccesses = Shapes::ListShape.new(name: 'ListOfS3DataAccesses')
+    ListOfSchemaChangeDetails = Shapes::ListShape.new(name: 'ListOfSchemaChangeDetails')
     ListOfTableTagPolicyLFPermissions = Shapes::ListShape.new(name: 'ListOfTableTagPolicyLFPermissions')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListRevisionAssetsRequest = Shapes::StructureShape.new(name: 'ListRevisionAssetsRequest')
@@ -131,11 +139,14 @@ module Aws::DataExchange
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotificationDetails = Shapes::StructureShape.new(name: 'NotificationDetails')
+    NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginDetails = Shapes::StructureShape.new(name: 'OriginDetails')
     ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
     RedshiftDataShareAsset = Shapes::StructureShape.new(name: 'RedshiftDataShareAsset')
     RedshiftDataShareAssetSourceEntry = Shapes::StructureShape.new(name: 'RedshiftDataShareAssetSourceEntry')
+    RedshiftDataShareDetails = Shapes::StructureShape.new(name: 'RedshiftDataShareDetails')
     RequestDetails = Shapes::StructureShape.new(name: 'RequestDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -148,9 +159,16 @@ module Aws::DataExchange
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3DataAccessAsset = Shapes::StructureShape.new(name: 'S3DataAccessAsset')
     S3DataAccessAssetSourceEntry = Shapes::StructureShape.new(name: 'S3DataAccessAssetSourceEntry')
+    S3DataAccessDetails = Shapes::StructureShape.new(name: 'S3DataAccessDetails')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
+    SchemaChangeDetails = Shapes::StructureShape.new(name: 'SchemaChangeDetails')
+    SchemaChangeRequestDetails = Shapes::StructureShape.new(name: 'SchemaChangeRequestDetails')
+    SchemaChangeType = Shapes::StringShape.new(name: 'SchemaChangeType')
+    ScopeDetails = Shapes::StructureShape.new(name: 'ScopeDetails')
     SendApiAssetRequest = Shapes::StructureShape.new(name: 'SendApiAssetRequest')
     SendApiAssetResponse = Shapes::StructureShape.new(name: 'SendApiAssetResponse')
+    SendDataSetNotificationRequest = Shapes::StructureShape.new(name: 'SendDataSetNotificationRequest')
+    SendDataSetNotificationResponse = Shapes::StructureShape.new(name: 'SendDataSetNotificationResponse')
     ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
     ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
     StartJobRequest = Shapes::StructureShape.new(name: 'StartJobRequest')
@@ -179,6 +197,7 @@ module Aws::DataExchange
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMin0Max16384 = Shapes::StringShape.new(name: '__stringMin0Max16384')
+    __stringMin0Max4096 = Shapes::StringShape.new(name: '__stringMin0Max4096')
     __stringMin10Max512 = Shapes::StringShape.new(name: '__stringMin10Max512')
     __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = Shapes::StringShape.new(name: '__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093')
 
@@ -329,6 +348,9 @@ module Aws::DataExchange
     DataSetEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
     DataSetEntry.struct_class = Types::DataSetEntry
 
+    DataUpdateRequestDetails.add_member(:data_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataUpdatedAt"))
+    DataUpdateRequestDetails.struct_class = Types::DataUpdateRequestDetails
+
     DatabaseLFTagPolicy.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
     DatabaseLFTagPolicy.struct_class = Types::DatabaseLFTagPolicy
 
@@ -350,6 +372,9 @@ module Aws::DataExchange
     DeleteRevisionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     DeleteRevisionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RevisionId"))
     DeleteRevisionRequest.struct_class = Types::DeleteRevisionRequest
+
+    DeprecationRequestDetails.add_member(:deprecation_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "DeprecationAt"))
+    DeprecationRequestDetails.struct_class = Types::DeprecationRequestDetails
 
     Details.add_member(:import_asset_from_signed_url_job_error_details, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlJobErrorDetails, location_name: "ImportAssetFromSignedUrlJobErrorDetails"))
     Details.add_member(:import_assets_from_s3_job_error_details, Shapes::ShapeRef.new(shape: ListOfAssetSourceEntry, location_name: "ImportAssetsFromS3JobErrorDetails"))
@@ -604,6 +629,10 @@ module Aws::DataExchange
     LakeFormationDataPermissionDetails.add_member(:lf_tag_policy, Shapes::ShapeRef.new(shape: LFTagPolicyDetails, location_name: "LFTagPolicy"))
     LakeFormationDataPermissionDetails.struct_class = Types::LakeFormationDataPermissionDetails
 
+    LakeFormationTagPolicyDetails.add_member(:database, Shapes::ShapeRef.new(shape: __string, location_name: "Database"))
+    LakeFormationTagPolicyDetails.add_member(:table, Shapes::ShapeRef.new(shape: __string, location_name: "Table"))
+    LakeFormationTagPolicyDetails.struct_class = Types::LakeFormationTagPolicyDetails
+
     ListDataSetRevisionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     ListDataSetRevisionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDataSetRevisionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -665,11 +694,19 @@ module Aws::DataExchange
 
     ListOfLFTags.member = Shapes::ShapeRef.new(shape: LFTag)
 
+    ListOfLakeFormationTagPolicies.member = Shapes::ShapeRef.new(shape: LakeFormationTagPolicyDetails)
+
     ListOfRedshiftDataShareAssetSourceEntry.member = Shapes::ShapeRef.new(shape: RedshiftDataShareAssetSourceEntry)
+
+    ListOfRedshiftDataShares.member = Shapes::ShapeRef.new(shape: RedshiftDataShareDetails)
 
     ListOfRevisionDestinationEntry.member = Shapes::ShapeRef.new(shape: RevisionDestinationEntry)
 
     ListOfRevisionEntry.member = Shapes::ShapeRef.new(shape: RevisionEntry)
+
+    ListOfS3DataAccesses.member = Shapes::ShapeRef.new(shape: S3DataAccessDetails)
+
+    ListOfSchemaChangeDetails.member = Shapes::ShapeRef.new(shape: SchemaChangeDetails)
 
     ListOfTableTagPolicyLFPermissions.member = Shapes::ShapeRef.new(shape: TableTagPolicyLFPermission)
 
@@ -694,6 +731,11 @@ module Aws::DataExchange
     MapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     MapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
+    NotificationDetails.add_member(:data_update, Shapes::ShapeRef.new(shape: DataUpdateRequestDetails, location_name: "DataUpdate"))
+    NotificationDetails.add_member(:deprecation, Shapes::ShapeRef.new(shape: DeprecationRequestDetails, location_name: "Deprecation"))
+    NotificationDetails.add_member(:schema_change, Shapes::ShapeRef.new(shape: SchemaChangeRequestDetails, location_name: "SchemaChange"))
+    NotificationDetails.struct_class = Types::NotificationDetails
+
     OriginDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProductId"))
     OriginDetails.struct_class = Types::OriginDetails
 
@@ -702,6 +744,14 @@ module Aws::DataExchange
 
     RedshiftDataShareAssetSourceEntry.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DataShareArn"))
     RedshiftDataShareAssetSourceEntry.struct_class = Types::RedshiftDataShareAssetSourceEntry
+
+    RedshiftDataShareDetails.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    RedshiftDataShareDetails.add_member(:database, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Database"))
+    RedshiftDataShareDetails.add_member(:function, Shapes::ShapeRef.new(shape: __string, location_name: "Function"))
+    RedshiftDataShareDetails.add_member(:table, Shapes::ShapeRef.new(shape: __string, location_name: "Table"))
+    RedshiftDataShareDetails.add_member(:schema, Shapes::ShapeRef.new(shape: __string, location_name: "Schema"))
+    RedshiftDataShareDetails.add_member(:view, Shapes::ShapeRef.new(shape: __string, location_name: "View"))
+    RedshiftDataShareDetails.struct_class = Types::RedshiftDataShareDetails
 
     RequestDetails.add_member(:export_asset_to_signed_url, Shapes::ShapeRef.new(shape: ExportAssetToSignedUrlRequestDetails, location_name: "ExportAssetToSignedUrl"))
     RequestDetails.add_member(:export_assets_to_s3, Shapes::ShapeRef.new(shape: ExportAssetsToS3RequestDetails, location_name: "ExportAssetsToS3"))
@@ -783,8 +833,26 @@ module Aws::DataExchange
     S3DataAccessAssetSourceEntry.add_member(:kms_keys_to_grant, Shapes::ShapeRef.new(shape: ListOfKmsKeysToGrant, location_name: "KmsKeysToGrant"))
     S3DataAccessAssetSourceEntry.struct_class = Types::S3DataAccessAssetSourceEntry
 
+    S3DataAccessDetails.add_member(:key_prefixes, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "KeyPrefixes"))
+    S3DataAccessDetails.add_member(:keys, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Keys"))
+    S3DataAccessDetails.struct_class = Types::S3DataAccessDetails
+
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
     S3SnapshotAsset.struct_class = Types::S3SnapshotAsset
+
+    SchemaChangeDetails.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Name"))
+    SchemaChangeDetails.add_member(:type, Shapes::ShapeRef.new(shape: SchemaChangeType, required: true, location_name: "Type"))
+    SchemaChangeDetails.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    SchemaChangeDetails.struct_class = Types::SchemaChangeDetails
+
+    SchemaChangeRequestDetails.add_member(:changes, Shapes::ShapeRef.new(shape: ListOfSchemaChangeDetails, location_name: "Changes"))
+    SchemaChangeRequestDetails.add_member(:schema_change_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SchemaChangeAt"))
+    SchemaChangeRequestDetails.struct_class = Types::SchemaChangeRequestDetails
+
+    ScopeDetails.add_member(:lake_formation_tag_policies, Shapes::ShapeRef.new(shape: ListOfLakeFormationTagPolicies, location_name: "LakeFormationTagPolicies"))
+    ScopeDetails.add_member(:redshift_data_shares, Shapes::ShapeRef.new(shape: ListOfRedshiftDataShares, location_name: "RedshiftDataShares"))
+    ScopeDetails.add_member(:s3_data_accesses, Shapes::ShapeRef.new(shape: ListOfS3DataAccesses, location_name: "S3DataAccesses"))
+    ScopeDetails.struct_class = Types::ScopeDetails
 
     SendApiAssetRequest.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SendApiAssetRequest.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: MapOf__string, location: "querystring", location_name: "QueryStringParameters"))
@@ -803,6 +871,16 @@ module Aws::DataExchange
     SendApiAssetResponse.struct_class = Types::SendApiAssetResponse
     SendApiAssetResponse[:payload] = :body
     SendApiAssetResponse[:payload_member] = SendApiAssetResponse.member(:body)
+
+    SendDataSetNotificationRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ScopeDetails, location_name: "Scope"))
+    SendDataSetNotificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    SendDataSetNotificationRequest.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max4096, location_name: "Comment"))
+    SendDataSetNotificationRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
+    SendDataSetNotificationRequest.add_member(:details, Shapes::ShapeRef.new(shape: NotificationDetails, location_name: "Details"))
+    SendDataSetNotificationRequest.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "Type"))
+    SendDataSetNotificationRequest.struct_class = Types::SendDataSetNotificationRequest
+
+    SendDataSetNotificationResponse.struct_class = Types::SendDataSetNotificationResponse
 
     ServiceLimitExceededException.add_member(:limit_name, Shapes::ShapeRef.new(shape: LimitName, location_name: "LimitName"))
     ServiceLimitExceededException.add_member(:limit_value, Shapes::ShapeRef.new(shape: __double, location_name: "LimitValue"))
@@ -1224,6 +1302,20 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:send_data_set_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendDataSetNotification"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/data-sets/{DataSetId}/notification"
+        o.input = Shapes::ShapeRef.new(shape: SendDataSetNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendDataSetNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

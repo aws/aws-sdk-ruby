@@ -75,6 +75,10 @@ module Aws::WellArchitected
     CreateProfileOutput = Shapes::StructureShape.new(name: 'CreateProfileOutput')
     CreateProfileShareInput = Shapes::StructureShape.new(name: 'CreateProfileShareInput')
     CreateProfileShareOutput = Shapes::StructureShape.new(name: 'CreateProfileShareOutput')
+    CreateReviewTemplateInput = Shapes::StructureShape.new(name: 'CreateReviewTemplateInput')
+    CreateReviewTemplateOutput = Shapes::StructureShape.new(name: 'CreateReviewTemplateOutput')
+    CreateTemplateShareInput = Shapes::StructureShape.new(name: 'CreateTemplateShareInput')
+    CreateTemplateShareOutput = Shapes::StructureShape.new(name: 'CreateTemplateShareOutput')
     CreateWorkloadInput = Shapes::StructureShape.new(name: 'CreateWorkloadInput')
     CreateWorkloadOutput = Shapes::StructureShape.new(name: 'CreateWorkloadOutput')
     CreateWorkloadShareInput = Shapes::StructureShape.new(name: 'CreateWorkloadShareInput')
@@ -84,6 +88,8 @@ module Aws::WellArchitected
     DeleteLensShareInput = Shapes::StructureShape.new(name: 'DeleteLensShareInput')
     DeleteProfileInput = Shapes::StructureShape.new(name: 'DeleteProfileInput')
     DeleteProfileShareInput = Shapes::StructureShape.new(name: 'DeleteProfileShareInput')
+    DeleteReviewTemplateInput = Shapes::StructureShape.new(name: 'DeleteReviewTemplateInput')
+    DeleteTemplateShareInput = Shapes::StructureShape.new(name: 'DeleteTemplateShareInput')
     DeleteWorkloadInput = Shapes::StructureShape.new(name: 'DeleteWorkloadInput')
     DeleteWorkloadShareInput = Shapes::StructureShape.new(name: 'DeleteWorkloadShareInput')
     DifferenceStatus = Shapes::StringShape.new(name: 'DifferenceStatus')
@@ -116,6 +122,12 @@ module Aws::WellArchitected
     GetProfileOutput = Shapes::StructureShape.new(name: 'GetProfileOutput')
     GetProfileTemplateInput = Shapes::StructureShape.new(name: 'GetProfileTemplateInput')
     GetProfileTemplateOutput = Shapes::StructureShape.new(name: 'GetProfileTemplateOutput')
+    GetReviewTemplateAnswerInput = Shapes::StructureShape.new(name: 'GetReviewTemplateAnswerInput')
+    GetReviewTemplateAnswerOutput = Shapes::StructureShape.new(name: 'GetReviewTemplateAnswerOutput')
+    GetReviewTemplateInput = Shapes::StructureShape.new(name: 'GetReviewTemplateInput')
+    GetReviewTemplateLensReviewInput = Shapes::StructureShape.new(name: 'GetReviewTemplateLensReviewInput')
+    GetReviewTemplateLensReviewOutput = Shapes::StructureShape.new(name: 'GetReviewTemplateLensReviewOutput')
+    GetReviewTemplateOutput = Shapes::StructureShape.new(name: 'GetReviewTemplateOutput')
     GetWorkloadInput = Shapes::StructureShape.new(name: 'GetWorkloadInput')
     GetWorkloadOutput = Shapes::StructureShape.new(name: 'GetWorkloadOutput')
     HelpfulResourceUrl = Shapes::StringShape.new(name: 'HelpfulResourceUrl')
@@ -183,11 +195,19 @@ module Aws::WellArchitected
     ListProfileSharesOutput = Shapes::StructureShape.new(name: 'ListProfileSharesOutput')
     ListProfilesInput = Shapes::StructureShape.new(name: 'ListProfilesInput')
     ListProfilesOutput = Shapes::StructureShape.new(name: 'ListProfilesOutput')
+    ListReviewTemplateAnswersInput = Shapes::StructureShape.new(name: 'ListReviewTemplateAnswersInput')
+    ListReviewTemplateAnswersMaxResults = Shapes::IntegerShape.new(name: 'ListReviewTemplateAnswersMaxResults')
+    ListReviewTemplateAnswersOutput = Shapes::StructureShape.new(name: 'ListReviewTemplateAnswersOutput')
+    ListReviewTemplatesInput = Shapes::StructureShape.new(name: 'ListReviewTemplatesInput')
+    ListReviewTemplatesOutput = Shapes::StructureShape.new(name: 'ListReviewTemplatesOutput')
     ListShareInvitationsInput = Shapes::StructureShape.new(name: 'ListShareInvitationsInput')
     ListShareInvitationsMaxResults = Shapes::IntegerShape.new(name: 'ListShareInvitationsMaxResults')
     ListShareInvitationsOutput = Shapes::StructureShape.new(name: 'ListShareInvitationsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    ListTemplateSharesInput = Shapes::StructureShape.new(name: 'ListTemplateSharesInput')
+    ListTemplateSharesMaxResults = Shapes::IntegerShape.new(name: 'ListTemplateSharesMaxResults')
+    ListTemplateSharesOutput = Shapes::StructureShape.new(name: 'ListTemplateSharesOutput')
     ListWorkloadSharesInput = Shapes::StructureShape.new(name: 'ListWorkloadSharesInput')
     ListWorkloadSharesMaxResults = Shapes::IntegerShape.new(name: 'ListWorkloadSharesMaxResults')
     ListWorkloadSharesOutput = Shapes::StructureShape.new(name: 'ListWorkloadSharesOutput')
@@ -244,6 +264,8 @@ module Aws::WellArchitected
     ProfileTemplateQuestion = Shapes::StructureShape.new(name: 'ProfileTemplateQuestion')
     ProfileTemplateQuestionChoices = Shapes::ListShape.new(name: 'ProfileTemplateQuestionChoices')
     ProfileVersion = Shapes::StringShape.new(name: 'ProfileVersion')
+    Question = Shapes::StringShape.new(name: 'Question')
+    QuestionCounts = Shapes::MapShape.new(name: 'QuestionCounts')
     QuestionDescription = Shapes::StringShape.new(name: 'QuestionDescription')
     QuestionDifference = Shapes::StructureShape.new(name: 'QuestionDifference')
     QuestionDifferences = Shapes::ListShape.new(name: 'QuestionDifferences')
@@ -255,7 +277,22 @@ module Aws::WellArchitected
     QuestionType = Shapes::StringShape.new(name: 'QuestionType')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ReviewTemplate = Shapes::StructureShape.new(name: 'ReviewTemplate')
+    ReviewTemplateAnswer = Shapes::StructureShape.new(name: 'ReviewTemplateAnswer')
+    ReviewTemplateAnswerStatus = Shapes::StringShape.new(name: 'ReviewTemplateAnswerStatus')
+    ReviewTemplateAnswerSummaries = Shapes::ListShape.new(name: 'ReviewTemplateAnswerSummaries')
+    ReviewTemplateAnswerSummary = Shapes::StructureShape.new(name: 'ReviewTemplateAnswerSummary')
+    ReviewTemplateArns = Shapes::ListShape.new(name: 'ReviewTemplateArns')
+    ReviewTemplateLensAliases = Shapes::ListShape.new(name: 'ReviewTemplateLensAliases')
+    ReviewTemplateLensReview = Shapes::StructureShape.new(name: 'ReviewTemplateLensReview')
+    ReviewTemplateLenses = Shapes::ListShape.new(name: 'ReviewTemplateLenses')
+    ReviewTemplatePillarReviewSummaries = Shapes::ListShape.new(name: 'ReviewTemplatePillarReviewSummaries')
+    ReviewTemplatePillarReviewSummary = Shapes::StructureShape.new(name: 'ReviewTemplatePillarReviewSummary')
+    ReviewTemplateSummary = Shapes::StructureShape.new(name: 'ReviewTemplateSummary')
+    ReviewTemplateUpdateStatus = Shapes::StringShape.new(name: 'ReviewTemplateUpdateStatus')
+    ReviewTemplates = Shapes::ListShape.new(name: 'ReviewTemplates')
     Risk = Shapes::StringShape.new(name: 'Risk')
     RiskCounts = Shapes::MapShape.new(name: 'RiskCounts')
     SelectedChoiceIds = Shapes::ListShape.new(name: 'SelectedChoiceIds')
@@ -280,7 +317,13 @@ module Aws::WellArchitected
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TemplateArn = Shapes::StringShape.new(name: 'TemplateArn')
+    TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
+    TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateNamePrefix = Shapes::StringShape.new(name: 'TemplateNamePrefix')
     TemplateQuestions = Shapes::ListShape.new(name: 'TemplateQuestions')
+    TemplateShareSummaries = Shapes::ListShape.new(name: 'TemplateShareSummaries')
+    TemplateShareSummary = Shapes::StructureShape.new(name: 'TemplateShareSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrustedAdvisorIntegrationStatus = Shapes::StringShape.new(name: 'TrustedAdvisorIntegrationStatus')
@@ -293,6 +336,12 @@ module Aws::WellArchitected
     UpdateLensReviewOutput = Shapes::StructureShape.new(name: 'UpdateLensReviewOutput')
     UpdateProfileInput = Shapes::StructureShape.new(name: 'UpdateProfileInput')
     UpdateProfileOutput = Shapes::StructureShape.new(name: 'UpdateProfileOutput')
+    UpdateReviewTemplateAnswerInput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateAnswerInput')
+    UpdateReviewTemplateAnswerOutput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateAnswerOutput')
+    UpdateReviewTemplateInput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateInput')
+    UpdateReviewTemplateLensReviewInput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateLensReviewInput')
+    UpdateReviewTemplateLensReviewOutput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateLensReviewOutput')
+    UpdateReviewTemplateOutput = Shapes::StructureShape.new(name: 'UpdateReviewTemplateOutput')
     UpdateShareInvitationInput = Shapes::StructureShape.new(name: 'UpdateShareInvitationInput')
     UpdateShareInvitationOutput = Shapes::StructureShape.new(name: 'UpdateShareInvitationOutput')
     UpdateWorkloadInput = Shapes::StructureShape.new(name: 'UpdateWorkloadInput')
@@ -301,6 +350,7 @@ module Aws::WellArchitected
     UpdateWorkloadShareOutput = Shapes::StructureShape.new(name: 'UpdateWorkloadShareOutput')
     UpgradeLensReviewInput = Shapes::StructureShape.new(name: 'UpgradeLensReviewInput')
     UpgradeProfileVersionInput = Shapes::StructureShape.new(name: 'UpgradeProfileVersionInput')
+    UpgradeReviewTemplateLensReviewInput = Shapes::StructureShape.new(name: 'UpgradeReviewTemplateLensReviewInput')
     Urls = Shapes::ListShape.new(name: 'Urls')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
@@ -534,6 +584,26 @@ module Aws::WellArchitected
     CreateProfileShareOutput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "ProfileArn"))
     CreateProfileShareOutput.struct_class = Types::CreateProfileShareOutput
 
+    CreateReviewTemplateInput.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    CreateReviewTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: TemplateDescription, required: true, location_name: "Description"))
+    CreateReviewTemplateInput.add_member(:lenses, Shapes::ShapeRef.new(shape: ReviewTemplateLenses, required: true, location_name: "Lenses"))
+    CreateReviewTemplateInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    CreateReviewTemplateInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateReviewTemplateInput.struct_class = Types::CreateReviewTemplateInput
+
+    CreateReviewTemplateOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    CreateReviewTemplateOutput.struct_class = Types::CreateReviewTemplateOutput
+
+    CreateTemplateShareInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    CreateTemplateShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
+    CreateTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateShareInput.struct_class = Types::CreateTemplateShareInput
+
+    CreateTemplateShareOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    CreateTemplateShareOutput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
+    CreateTemplateShareOutput.struct_class = Types::CreateTemplateShareOutput
+
     CreateWorkloadInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "WorkloadName"))
     CreateWorkloadInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkloadDescription, required: true, location_name: "Description"))
     CreateWorkloadInput.add_member(:environment, Shapes::ShapeRef.new(shape: WorkloadEnvironment, required: true, location_name: "Environment"))
@@ -552,6 +622,7 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
     CreateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     CreateWorkloadInput.add_member(:profile_arns, Shapes::ShapeRef.new(shape: WorkloadProfileArns, location_name: "ProfileArns"))
+    CreateWorkloadInput.add_member(:review_template_arns, Shapes::ShapeRef.new(shape: ReviewTemplateArns, location_name: "ReviewTemplateArns"))
     CreateWorkloadInput.struct_class = Types::CreateWorkloadInput
 
     CreateWorkloadOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -586,6 +657,15 @@ module Aws::WellArchitected
     DeleteProfileShareInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, required: true, location: "uri", location_name: "ProfileArn"))
     DeleteProfileShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteProfileShareInput.struct_class = Types::DeleteProfileShareInput
+
+    DeleteReviewTemplateInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    DeleteReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteReviewTemplateInput.struct_class = Types::DeleteReviewTemplateInput
+
+    DeleteTemplateShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
+    DeleteTemplateShareInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    DeleteTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteTemplateShareInput.struct_class = Types::DeleteTemplateShareInput
 
     DeleteWorkloadInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     DeleteWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -695,6 +775,30 @@ module Aws::WellArchitected
     GetProfileTemplateOutput.add_member(:profile_template, Shapes::ShapeRef.new(shape: ProfileTemplate, location_name: "ProfileTemplate"))
     GetProfileTemplateOutput.struct_class = Types::GetProfileTemplateOutput
 
+    GetReviewTemplateAnswerInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    GetReviewTemplateAnswerInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    GetReviewTemplateAnswerInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location: "uri", location_name: "QuestionId"))
+    GetReviewTemplateAnswerInput.struct_class = Types::GetReviewTemplateAnswerInput
+
+    GetReviewTemplateAnswerOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    GetReviewTemplateAnswerOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    GetReviewTemplateAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: ReviewTemplateAnswer, location_name: "Answer"))
+    GetReviewTemplateAnswerOutput.struct_class = Types::GetReviewTemplateAnswerOutput
+
+    GetReviewTemplateInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    GetReviewTemplateInput.struct_class = Types::GetReviewTemplateInput
+
+    GetReviewTemplateLensReviewInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    GetReviewTemplateLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    GetReviewTemplateLensReviewInput.struct_class = Types::GetReviewTemplateLensReviewInput
+
+    GetReviewTemplateLensReviewOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    GetReviewTemplateLensReviewOutput.add_member(:lens_review, Shapes::ShapeRef.new(shape: ReviewTemplateLensReview, location_name: "LensReview"))
+    GetReviewTemplateLensReviewOutput.struct_class = Types::GetReviewTemplateLensReviewOutput
+
+    GetReviewTemplateOutput.add_member(:review_template, Shapes::ShapeRef.new(shape: ReviewTemplate, location_name: "ReviewTemplate"))
+    GetReviewTemplateOutput.struct_class = Types::GetReviewTemplateOutput
+
     GetWorkloadInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     GetWorkloadInput.struct_class = Types::GetWorkloadInput
 
@@ -802,6 +906,8 @@ module Aws::WellArchitected
     LensUpgradeSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensUpgradeSummary.add_member(:current_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "CurrentLensVersion"))
     LensUpgradeSummary.add_member(:latest_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LatestLensVersion"))
+    LensUpgradeSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    LensUpgradeSummary.add_member(:resource_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "ResourceName"))
     LensUpgradeSummary.struct_class = Types::LensUpgradeSummary
 
     ListAnswersInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
@@ -911,6 +1017,7 @@ module Aws::WellArchitected
     ListNotificationsInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     ListNotificationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListNotificationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNotificationsMaxResults, location_name: "MaxResults"))
+    ListNotificationsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     ListNotificationsInput.struct_class = Types::ListNotificationsInput
 
     ListNotificationsOutput.add_member(:notification_summaries, Shapes::ShapeRef.new(shape: NotificationSummaries, location_name: "NotificationSummaries"))
@@ -947,12 +1054,34 @@ module Aws::WellArchitected
     ListProfilesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfilesOutput.struct_class = Types::ListProfilesOutput
 
+    ListReviewTemplateAnswersInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    ListReviewTemplateAnswersInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    ListReviewTemplateAnswersInput.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location: "querystring", location_name: "PillarId"))
+    ListReviewTemplateAnswersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListReviewTemplateAnswersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListReviewTemplateAnswersMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListReviewTemplateAnswersInput.struct_class = Types::ListReviewTemplateAnswersInput
+
+    ListReviewTemplateAnswersOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    ListReviewTemplateAnswersOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ListReviewTemplateAnswersOutput.add_member(:answer_summaries, Shapes::ShapeRef.new(shape: ReviewTemplateAnswerSummaries, location_name: "AnswerSummaries"))
+    ListReviewTemplateAnswersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReviewTemplateAnswersOutput.struct_class = Types::ListReviewTemplateAnswersOutput
+
+    ListReviewTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListReviewTemplatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListReviewTemplatesInput.struct_class = Types::ListReviewTemplatesInput
+
+    ListReviewTemplatesOutput.add_member(:review_templates, Shapes::ShapeRef.new(shape: ReviewTemplates, location_name: "ReviewTemplates"))
+    ListReviewTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReviewTemplatesOutput.struct_class = Types::ListReviewTemplatesOutput
+
     ListShareInvitationsInput.add_member(:workload_name_prefix, Shapes::ShapeRef.new(shape: WorkloadNamePrefix, location: "querystring", location_name: "WorkloadNamePrefix"))
     ListShareInvitationsInput.add_member(:lens_name_prefix, Shapes::ShapeRef.new(shape: LensNamePrefix, location: "querystring", location_name: "LensNamePrefix"))
     ListShareInvitationsInput.add_member(:share_resource_type, Shapes::ShapeRef.new(shape: ShareResourceType, location: "querystring", location_name: "ShareResourceType"))
     ListShareInvitationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListShareInvitationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListShareInvitationsMaxResults, location: "querystring", location_name: "MaxResults"))
     ListShareInvitationsInput.add_member(:profile_name_prefix, Shapes::ShapeRef.new(shape: ProfileNamePrefix, location: "querystring", location_name: "ProfileNamePrefix"))
+    ListShareInvitationsInput.add_member(:template_name_prefix, Shapes::ShapeRef.new(shape: TemplateNamePrefix, location: "querystring", location_name: "TemplateNamePrefix"))
     ListShareInvitationsInput.struct_class = Types::ListShareInvitationsInput
 
     ListShareInvitationsOutput.add_member(:share_invitation_summaries, Shapes::ShapeRef.new(shape: ShareInvitationSummaries, location_name: "ShareInvitationSummaries"))
@@ -964,6 +1093,18 @@ module Aws::WellArchitected
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    ListTemplateSharesInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    ListTemplateSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
+    ListTemplateSharesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListTemplateSharesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTemplateSharesMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListTemplateSharesInput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location: "querystring", location_name: "Status"))
+    ListTemplateSharesInput.struct_class = Types::ListTemplateSharesInput
+
+    ListTemplateSharesOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    ListTemplateSharesOutput.add_member(:template_share_summaries, Shapes::ShapeRef.new(shape: TemplateShareSummaries, location_name: "TemplateShareSummaries"))
+    ListTemplateSharesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTemplateSharesOutput.struct_class = Types::ListTemplateSharesOutput
 
     ListWorkloadSharesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     ListWorkloadSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
@@ -1122,6 +1263,9 @@ module Aws::WellArchitected
 
     ProfileTemplateQuestionChoices.member = Shapes::ShapeRef.new(shape: ProfileTemplateChoice)
 
+    QuestionCounts.key = Shapes::ShapeRef.new(shape: Question)
+    QuestionCounts.value = Shapes::ShapeRef.new(shape: Count)
+
     QuestionDifference.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
     QuestionDifference.add_member(:question_title, Shapes::ShapeRef.new(shape: QuestionTitle, location_name: "QuestionTitle"))
     QuestionDifference.add_member(:difference_status, Shapes::ShapeRef.new(shape: DifferenceStatus, location_name: "DifferenceStatus"))
@@ -1140,6 +1284,86 @@ module Aws::WellArchitected
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, required: true, location_name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ReviewTemplate.add_member(:description, Shapes::ShapeRef.new(shape: TemplateDescription, location_name: "Description"))
+    ReviewTemplate.add_member(:lenses, Shapes::ShapeRef.new(shape: ReviewTemplateLenses, location_name: "Lenses"))
+    ReviewTemplate.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    ReviewTemplate.add_member(:question_counts, Shapes::ShapeRef.new(shape: QuestionCounts, location_name: "QuestionCounts"))
+    ReviewTemplate.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "Owner"))
+    ReviewTemplate.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ReviewTemplate.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    ReviewTemplate.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    ReviewTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ReviewTemplate.add_member(:update_status, Shapes::ShapeRef.new(shape: ReviewTemplateUpdateStatus, location_name: "UpdateStatus"))
+    ReviewTemplate.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
+    ReviewTemplate.struct_class = Types::ReviewTemplate
+
+    ReviewTemplateAnswer.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
+    ReviewTemplateAnswer.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    ReviewTemplateAnswer.add_member(:question_title, Shapes::ShapeRef.new(shape: QuestionTitle, location_name: "QuestionTitle"))
+    ReviewTemplateAnswer.add_member(:question_description, Shapes::ShapeRef.new(shape: QuestionDescription, location_name: "QuestionDescription"))
+    ReviewTemplateAnswer.add_member(:improvement_plan_url, Shapes::ShapeRef.new(shape: ImprovementPlanUrl, location_name: "ImprovementPlanUrl"))
+    ReviewTemplateAnswer.add_member(:helpful_resource_url, Shapes::ShapeRef.new(shape: HelpfulResourceUrl, location_name: "HelpfulResourceUrl"))
+    ReviewTemplateAnswer.add_member(:helpful_resource_display_text, Shapes::ShapeRef.new(shape: DisplayText, location_name: "HelpfulResourceDisplayText"))
+    ReviewTemplateAnswer.add_member(:choices, Shapes::ShapeRef.new(shape: Choices, location_name: "Choices"))
+    ReviewTemplateAnswer.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
+    ReviewTemplateAnswer.add_member(:choice_answers, Shapes::ShapeRef.new(shape: ChoiceAnswers, location_name: "ChoiceAnswers"))
+    ReviewTemplateAnswer.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
+    ReviewTemplateAnswer.add_member(:answer_status, Shapes::ShapeRef.new(shape: ReviewTemplateAnswerStatus, location_name: "AnswerStatus"))
+    ReviewTemplateAnswer.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    ReviewTemplateAnswer.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
+    ReviewTemplateAnswer.struct_class = Types::ReviewTemplateAnswer
+
+    ReviewTemplateAnswerSummaries.member = Shapes::ShapeRef.new(shape: ReviewTemplateAnswerSummary)
+
+    ReviewTemplateAnswerSummary.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
+    ReviewTemplateAnswerSummary.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    ReviewTemplateAnswerSummary.add_member(:question_title, Shapes::ShapeRef.new(shape: QuestionTitle, location_name: "QuestionTitle"))
+    ReviewTemplateAnswerSummary.add_member(:choices, Shapes::ShapeRef.new(shape: Choices, location_name: "Choices"))
+    ReviewTemplateAnswerSummary.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
+    ReviewTemplateAnswerSummary.add_member(:choice_answer_summaries, Shapes::ShapeRef.new(shape: ChoiceAnswerSummaries, location_name: "ChoiceAnswerSummaries"))
+    ReviewTemplateAnswerSummary.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
+    ReviewTemplateAnswerSummary.add_member(:answer_status, Shapes::ShapeRef.new(shape: ReviewTemplateAnswerStatus, location_name: "AnswerStatus"))
+    ReviewTemplateAnswerSummary.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
+    ReviewTemplateAnswerSummary.add_member(:question_type, Shapes::ShapeRef.new(shape: QuestionType, location_name: "QuestionType"))
+    ReviewTemplateAnswerSummary.struct_class = Types::ReviewTemplateAnswerSummary
+
+    ReviewTemplateArns.member = Shapes::ShapeRef.new(shape: TemplateArn)
+
+    ReviewTemplateLensAliases.member = Shapes::ShapeRef.new(shape: LensAlias)
+
+    ReviewTemplateLensReview.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ReviewTemplateLensReview.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    ReviewTemplateLensReview.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
+    ReviewTemplateLensReview.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
+    ReviewTemplateLensReview.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatus, location_name: "LensStatus"))
+    ReviewTemplateLensReview.add_member(:pillar_review_summaries, Shapes::ShapeRef.new(shape: ReviewTemplatePillarReviewSummaries, location_name: "PillarReviewSummaries"))
+    ReviewTemplateLensReview.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ReviewTemplateLensReview.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    ReviewTemplateLensReview.add_member(:question_counts, Shapes::ShapeRef.new(shape: QuestionCounts, location_name: "QuestionCounts"))
+    ReviewTemplateLensReview.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ReviewTemplateLensReview.struct_class = Types::ReviewTemplateLensReview
+
+    ReviewTemplateLenses.member = Shapes::ShapeRef.new(shape: LensAlias)
+
+    ReviewTemplatePillarReviewSummaries.member = Shapes::ShapeRef.new(shape: ReviewTemplatePillarReviewSummary)
+
+    ReviewTemplatePillarReviewSummary.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    ReviewTemplatePillarReviewSummary.add_member(:pillar_name, Shapes::ShapeRef.new(shape: PillarName, location_name: "PillarName"))
+    ReviewTemplatePillarReviewSummary.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    ReviewTemplatePillarReviewSummary.add_member(:question_counts, Shapes::ShapeRef.new(shape: QuestionCounts, location_name: "QuestionCounts"))
+    ReviewTemplatePillarReviewSummary.struct_class = Types::ReviewTemplatePillarReviewSummary
+
+    ReviewTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: TemplateDescription, location_name: "Description"))
+    ReviewTemplateSummary.add_member(:lenses, Shapes::ShapeRef.new(shape: ReviewTemplateLenses, location_name: "Lenses"))
+    ReviewTemplateSummary.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "Owner"))
+    ReviewTemplateSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ReviewTemplateSummary.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    ReviewTemplateSummary.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    ReviewTemplateSummary.add_member(:update_status, Shapes::ShapeRef.new(shape: ReviewTemplateUpdateStatus, location_name: "UpdateStatus"))
+    ReviewTemplateSummary.struct_class = Types::ReviewTemplateSummary
+
+    ReviewTemplates.member = Shapes::ShapeRef.new(shape: ReviewTemplateSummary)
 
     RiskCounts.key = Shapes::ShapeRef.new(shape: Risk)
     RiskCounts.value = Shapes::ShapeRef.new(shape: Count)
@@ -1163,6 +1387,7 @@ module Aws::WellArchitected
     ShareInvitation.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
     ShareInvitation.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ShareInvitation.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "ProfileArn"))
+    ShareInvitation.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
     ShareInvitation.struct_class = Types::ShareInvitation
 
     ShareInvitationSummaries.member = Shapes::ShapeRef.new(shape: ShareInvitationSummary)
@@ -1178,6 +1403,8 @@ module Aws::WellArchitected
     ShareInvitationSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ShareInvitationSummary.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
     ShareInvitationSummary.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "ProfileArn"))
+    ShareInvitationSummary.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    ShareInvitationSummary.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
     ShareInvitationSummary.struct_class = Types::ShareInvitationSummary
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -1192,6 +1419,14 @@ module Aws::WellArchitected
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
     TemplateQuestions.member = Shapes::ShapeRef.new(shape: ProfileTemplateQuestion)
+
+    TemplateShareSummaries.member = Shapes::ShapeRef.new(shape: TemplateShareSummary)
+
+    TemplateShareSummary.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
+    TemplateShareSummary.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, location_name: "SharedWith"))
+    TemplateShareSummary.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
+    TemplateShareSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    TemplateShareSummary.struct_class = Types::TemplateShareSummary
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
@@ -1242,6 +1477,42 @@ module Aws::WellArchitected
     UpdateProfileOutput.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "Profile"))
     UpdateProfileOutput.struct_class = Types::UpdateProfileOutput
 
+    UpdateReviewTemplateAnswerInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    UpdateReviewTemplateAnswerInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    UpdateReviewTemplateAnswerInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location: "uri", location_name: "QuestionId"))
+    UpdateReviewTemplateAnswerInput.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
+    UpdateReviewTemplateAnswerInput.add_member(:choice_updates, Shapes::ShapeRef.new(shape: ChoiceUpdates, location_name: "ChoiceUpdates"))
+    UpdateReviewTemplateAnswerInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    UpdateReviewTemplateAnswerInput.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
+    UpdateReviewTemplateAnswerInput.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
+    UpdateReviewTemplateAnswerInput.struct_class = Types::UpdateReviewTemplateAnswerInput
+
+    UpdateReviewTemplateAnswerOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    UpdateReviewTemplateAnswerOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    UpdateReviewTemplateAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: ReviewTemplateAnswer, location_name: "Answer"))
+    UpdateReviewTemplateAnswerOutput.struct_class = Types::UpdateReviewTemplateAnswerOutput
+
+    UpdateReviewTemplateInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    UpdateReviewTemplateInput.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    UpdateReviewTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: TemplateDescription, location_name: "Description"))
+    UpdateReviewTemplateInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
+    UpdateReviewTemplateInput.add_member(:lenses_to_associate, Shapes::ShapeRef.new(shape: ReviewTemplateLensAliases, location_name: "LensesToAssociate"))
+    UpdateReviewTemplateInput.add_member(:lenses_to_disassociate, Shapes::ShapeRef.new(shape: ReviewTemplateLensAliases, location_name: "LensesToDisassociate"))
+    UpdateReviewTemplateInput.struct_class = Types::UpdateReviewTemplateInput
+
+    UpdateReviewTemplateLensReviewInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    UpdateReviewTemplateLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    UpdateReviewTemplateLensReviewInput.add_member(:lens_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "LensNotes"))
+    UpdateReviewTemplateLensReviewInput.add_member(:pillar_notes, Shapes::ShapeRef.new(shape: PillarNotes, location_name: "PillarNotes"))
+    UpdateReviewTemplateLensReviewInput.struct_class = Types::UpdateReviewTemplateLensReviewInput
+
+    UpdateReviewTemplateLensReviewOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
+    UpdateReviewTemplateLensReviewOutput.add_member(:lens_review, Shapes::ShapeRef.new(shape: ReviewTemplateLensReview, location_name: "LensReview"))
+    UpdateReviewTemplateLensReviewOutput.struct_class = Types::UpdateReviewTemplateLensReviewOutput
+
+    UpdateReviewTemplateOutput.add_member(:review_template, Shapes::ShapeRef.new(shape: ReviewTemplate, location_name: "ReviewTemplate"))
+    UpdateReviewTemplateOutput.struct_class = Types::UpdateReviewTemplateOutput
+
     UpdateShareInvitationInput.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, required: true, location: "uri", location_name: "ShareInvitationId"))
     UpdateShareInvitationInput.add_member(:share_invitation_action, Shapes::ShapeRef.new(shape: ShareInvitationAction, required: true, location_name: "ShareInvitationAction"))
     UpdateShareInvitationInput.struct_class = Types::UpdateShareInvitationInput
@@ -1291,6 +1562,11 @@ module Aws::WellArchitected
     UpgradeProfileVersionInput.add_member(:milestone_name, Shapes::ShapeRef.new(shape: MilestoneName, location_name: "MilestoneName"))
     UpgradeProfileVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpgradeProfileVersionInput.struct_class = Types::UpgradeProfileVersionInput
+
+    UpgradeReviewTemplateLensReviewInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
+    UpgradeReviewTemplateLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    UpgradeReviewTemplateLensReviewInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    UpgradeReviewTemplateLensReviewInput.struct_class = Types::UpgradeReviewTemplateLensReviewInput
 
     Urls.member = Shapes::ShapeRef.new(shape: ChoiceContent)
 
@@ -1516,6 +1792,36 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_review_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateReviewTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/reviewTemplates"
+        o.input = Shapes::ShapeRef.new(shape: CreateReviewTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateReviewTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_template_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTemplateShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/templates/shares/{TemplateArn}"
+        o.input = Shapes::ShapeRef.new(shape: CreateTemplateShareInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateTemplateShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_workload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkload"
         o.http_method = "POST"
@@ -1593,6 +1899,34 @@ module Aws::WellArchitected
         o.http_method = "DELETE"
         o.http_request_uri = "/profiles/{ProfileArn}/shares/{ShareId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteProfileShareInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_review_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReviewTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReviewTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_template_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTemplateShare"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/templates/shares/{TemplateArn}/{ShareId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTemplateShareInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1787,6 +2121,45 @@ module Aws::WellArchitected
         o.http_request_uri = "/profileTemplate"
         o.input = Shapes::ShapeRef.new(shape: GetProfileTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: GetProfileTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_review_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReviewTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetReviewTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: GetReviewTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_review_template_answer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReviewTemplateAnswer"
+        o.http_method = "GET"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers/{QuestionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetReviewTemplateAnswerInput)
+        o.output = Shapes::ShapeRef.new(shape: GetReviewTemplateAnswerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_review_template_lens_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReviewTemplateLensReview"
+        o.http_method = "GET"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}"
+        o.input = Shapes::ShapeRef.new(shape: GetReviewTemplateLensReviewInput)
+        o.output = Shapes::ShapeRef.new(shape: GetReviewTemplateLensReviewOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -2046,6 +2419,43 @@ module Aws::WellArchitected
         )
       end)
 
+      api.add_operation(:list_review_template_answers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReviewTemplateAnswers"
+        o.http_method = "GET"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers"
+        o.input = Shapes::ShapeRef.new(shape: ListReviewTemplateAnswersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReviewTemplateAnswersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_review_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReviewTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/reviewTemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListReviewTemplatesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReviewTemplatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_share_invitations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListShareInvitations"
         o.http_method = "GET"
@@ -2072,6 +2482,25 @@ module Aws::WellArchitected
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_template_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTemplateShares"
+        o.http_method = "GET"
+        o.http_request_uri = "/templates/shares/{TemplateArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTemplateSharesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTemplateSharesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_workload_shares, Seahorse::Model::Operation.new.tap do |o|
@@ -2186,6 +2615,48 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_review_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReviewTemplate"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReviewTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReviewTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_review_template_answer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReviewTemplateAnswer"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/answers/{QuestionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReviewTemplateAnswerInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReviewTemplateAnswerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_review_template_lens_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReviewTemplateLensReview"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReviewTemplateLensReviewInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReviewTemplateLensReviewOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_share_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateShareInvitation"
         o.http_method = "PATCH"
@@ -2247,6 +2718,20 @@ module Aws::WellArchitected
         o.http_method = "PUT"
         o.http_request_uri = "/workloads/{WorkloadId}/profiles/{ProfileArn}/upgrade"
         o.input = Shapes::ShapeRef.new(shape: UpgradeProfileVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:upgrade_review_template_lens_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpgradeReviewTemplateLensReview"
+        o.http_method = "PUT"
+        o.http_request_uri = "/reviewTemplates/{TemplateArn}/lensReviews/{LensAlias}/upgrade"
+        o.input = Shapes::ShapeRef.new(shape: UpgradeReviewTemplateLensReviewInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
