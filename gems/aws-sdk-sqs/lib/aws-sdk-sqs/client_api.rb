@@ -122,7 +122,6 @@ module Aws::SQS
     TagMap = Shapes::MapShape.new(name: 'TagMap', flattened: true)
     TagQueueRequest = Shapes::StructureShape.new(name: 'TagQueueRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
-    TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyEntriesInBatchRequest = Shapes::StructureShape.new(name: 'TooManyEntriesInBatchRequest')
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
@@ -296,7 +295,7 @@ module Aws::SQS
     ListMessageMoveTasksResult.struct_class = Types::ListMessageMoveTasksResult
 
     ListMessageMoveTasksResultEntry.add_member(:task_handle, Shapes::ShapeRef.new(shape: String, location_name: "TaskHandle"))
-    ListMessageMoveTasksResultEntry.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "Status"))
+    ListMessageMoveTasksResultEntry.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ListMessageMoveTasksResultEntry.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
     ListMessageMoveTasksResultEntry.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationArn"))
     ListMessageMoveTasksResultEntry.add_member(:max_number_of_messages_per_second, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxNumberOfMessagesPerSecond"))

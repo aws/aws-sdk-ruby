@@ -1580,7 +1580,7 @@ module Aws::SQS
     #
     #   resp.results #=> Array
     #   resp.results[0].task_handle #=> String
-    #   resp.results[0].status #=> String, one of "RUNNING", "FAILED", "CANCELLING", "CANCELLED", "COMPLETED"
+    #   resp.results[0].status #=> String
     #   resp.results[0].source_arn #=> String
     #   resp.results[0].destination_arn #=> String
     #   resp.results[0].max_number_of_messages_per_second #=> Integer
@@ -2796,7 +2796,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
