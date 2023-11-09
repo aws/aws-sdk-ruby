@@ -69,6 +69,7 @@ module Aws::CloudFormation
     Changes = Shapes::ListShape.new(name: 'Changes')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConcurrencyMode = Shapes::StringShape.new(name: 'ConcurrencyMode')
     ConfigurationSchema = Shapes::StringShape.new(name: 'ConfigurationSchema')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     ContinueUpdateRollbackInput = Shapes::StructureShape.new(name: 'ContinueUpdateRollbackInput')
@@ -1632,6 +1633,7 @@ module Aws::CloudFormation
     StackSetOperationPreferences.add_member(:failure_tolerance_percentage, Shapes::ShapeRef.new(shape: FailureTolerancePercentage, location_name: "FailureTolerancePercentage"))
     StackSetOperationPreferences.add_member(:max_concurrent_count, Shapes::ShapeRef.new(shape: MaxConcurrentCount, location_name: "MaxConcurrentCount"))
     StackSetOperationPreferences.add_member(:max_concurrent_percentage, Shapes::ShapeRef.new(shape: MaxConcurrentPercentage, location_name: "MaxConcurrentPercentage"))
+    StackSetOperationPreferences.add_member(:concurrency_mode, Shapes::ShapeRef.new(shape: ConcurrencyMode, location_name: "ConcurrencyMode"))
     StackSetOperationPreferences.struct_class = Types::StackSetOperationPreferences
 
     StackSetOperationResultSummaries.member = Shapes::ShapeRef.new(shape: StackSetOperationResultSummary)

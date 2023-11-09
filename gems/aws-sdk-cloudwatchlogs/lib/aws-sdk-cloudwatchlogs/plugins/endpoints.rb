@@ -60,6 +60,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::AssociateKmsKey.build(context)
           when :cancel_export_task
             Aws::CloudWatchLogs::Endpoints::CancelExportTask.build(context)
+          when :create_delivery
+            Aws::CloudWatchLogs::Endpoints::CreateDelivery.build(context)
           when :create_export_task
             Aws::CloudWatchLogs::Endpoints::CreateExportTask.build(context)
           when :create_log_group
@@ -70,6 +72,14 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteAccountPolicy.build(context)
           when :delete_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::DeleteDataProtectionPolicy.build(context)
+          when :delete_delivery
+            Aws::CloudWatchLogs::Endpoints::DeleteDelivery.build(context)
+          when :delete_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliveryDestination.build(context)
+          when :delete_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliveryDestinationPolicy.build(context)
+          when :delete_delivery_source
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliverySource.build(context)
           when :delete_destination
             Aws::CloudWatchLogs::Endpoints::DeleteDestination.build(context)
           when :delete_log_group
@@ -88,6 +98,12 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteSubscriptionFilter.build(context)
           when :describe_account_policies
             Aws::CloudWatchLogs::Endpoints::DescribeAccountPolicies.build(context)
+          when :describe_deliveries
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliveries.build(context)
+          when :describe_delivery_destinations
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliveryDestinations.build(context)
+          when :describe_delivery_sources
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliverySources.build(context)
           when :describe_destinations
             Aws::CloudWatchLogs::Endpoints::DescribeDestinations.build(context)
           when :describe_export_tasks
@@ -112,6 +128,14 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::FilterLogEvents.build(context)
           when :get_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::GetDataProtectionPolicy.build(context)
+          when :get_delivery
+            Aws::CloudWatchLogs::Endpoints::GetDelivery.build(context)
+          when :get_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::GetDeliveryDestination.build(context)
+          when :get_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::GetDeliveryDestinationPolicy.build(context)
+          when :get_delivery_source
+            Aws::CloudWatchLogs::Endpoints::GetDeliverySource.build(context)
           when :get_log_events
             Aws::CloudWatchLogs::Endpoints::GetLogEvents.build(context)
           when :get_log_group_fields
@@ -128,6 +152,12 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::PutAccountPolicy.build(context)
           when :put_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::PutDataProtectionPolicy.build(context)
+          when :put_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::PutDeliveryDestination.build(context)
+          when :put_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::PutDeliveryDestinationPolicy.build(context)
+          when :put_delivery_source
+            Aws::CloudWatchLogs::Endpoints::PutDeliverySource.build(context)
           when :put_destination
             Aws::CloudWatchLogs::Endpoints::PutDestination.build(context)
           when :put_destination_policy

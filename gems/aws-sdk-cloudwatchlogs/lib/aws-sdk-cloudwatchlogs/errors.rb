@@ -27,6 +27,8 @@ module Aws::CloudWatchLogs
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
   # * {DataAlreadyAcceptedException}
   # * {InvalidOperationException}
   # * {InvalidParameterException}
@@ -36,15 +38,38 @@ module Aws::CloudWatchLogs
   # * {OperationAbortedException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
+  # * {ThrottlingException}
   # * {TooManyTagsException}
   # * {UnrecognizedClientException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class DataAlreadyAcceptedException < ServiceError
 
@@ -151,11 +176,31 @@ module Aws::CloudWatchLogs
       end
     end
 
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudWatchLogs::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -186,6 +231,16 @@ module Aws::CloudWatchLogs
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudWatchLogs::Types::UnrecognizedClientException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

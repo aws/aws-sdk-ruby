@@ -5318,6 +5318,20 @@ module Aws::EC2
       end
     end
 
+    class DisableSnapshotBlockPublicAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DisableTransitGatewayRouteTablePropagation
       def self.build(context)
         unless context.config.regional_endpoint
@@ -5711,6 +5725,20 @@ module Aws::EC2
     end
 
     class EnableSerialConsoleAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class EnableSnapshotBlockPublicAccess
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -6271,6 +6299,20 @@ module Aws::EC2
     end
 
     class GetSerialConsoleAccessStatus
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetSnapshotBlockPublicAccessState
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

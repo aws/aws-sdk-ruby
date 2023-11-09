@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-11-09)
+------------------
+
+* Feature - Update to support new APIs for delivery of logs from AWS services.
+
 1.71.0 (2023-09-27)
 ------------------
 

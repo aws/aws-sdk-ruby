@@ -9394,13 +9394,18 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsRequest AWS API Documentation
     #
     class ListIntegrationAssociationsRequest < Struct.new(
       :instance_id,
       :integration_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end

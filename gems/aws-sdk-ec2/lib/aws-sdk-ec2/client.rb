@@ -37762,6 +37762,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables the *block public access for snapshots* setting at the
+    # account level for the specified Amazon Web Services Region. After you
+    # disable block public access for snapshots in a Region, users can
+    # publicly share snapshots in that Region.
+    #
+    # If block public access is enabled in `block-all-sharing` mode, and you
+    # disable block public access, all snapshots that were previously
+    # publicly shared are no longer treated as private and they become
+    # publicly accessible again.
+    #
+    # For more information, see [ Block public access for snapshots][1] in
+    # the *Amazon Elastic Compute Cloud User Guide* .
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableSnapshotBlockPublicAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableSnapshotBlockPublicAccessResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_snapshot_block_public_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "block-all-sharing", "block-new-sharing", "unblocked"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSnapshotBlockPublicAccess AWS API Documentation
+    #
+    # @overload disable_snapshot_block_public_access(params = {})
+    # @param [Hash] params ({})
+    def disable_snapshot_block_public_access(params = {}, options = {})
+      req = build_request(:disable_snapshot_block_public_access, params)
+      req.send_request(options)
+    end
+
     # Disables the specified resource attachment from propagating routes to
     # the specified propagation route table.
     #
@@ -39244,6 +39292,80 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_serial_console_access(params = {}, options = {})
       req = build_request(:enable_serial_console_access, params)
+      req.send_request(options)
+    end
+
+    # Enables or modifies the *block public access for snapshots* setting at
+    # the account level for the specified Amazon Web Services Region. After
+    # you enable block public access for snapshots in a Region, users can no
+    # longer request public sharing for snapshots in that Region. Snapshots
+    # that are already publicly shared are either treated as private or they
+    # remain publicly shared, depending on the **State** that you specify.
+    #
+    # If block public access is enabled in `block-all-sharing` mode, and you
+    # change the mode to `block-new-sharing`, all snapshots that were
+    # previously publicly shared are no longer treated as private and they
+    # become publicly accessible again.
+    #
+    # For more information, see [ Block public access for snapshots][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    #
+    # @option params [required, String] :state
+    #   The mode in which to enable block public access for snapshots for the
+    #   Region. Specify one of the following values:
+    #
+    #   * `block-all-sharing` - Prevents all public sharing of snapshots in
+    #     the Region. Users in the account will no longer be able to request
+    #     new public sharing. Additionally, snapshots that are already
+    #     publicly shared are treated as private and they are no longer
+    #     publicly available.
+    #
+    #     <note markdown="1"> If you enable block public access for snapshots in
+    #     `block-all-sharing` mode, it does not change the permissions for
+    #     snapshots that are already publicly shared. Instead, it prevents
+    #     these snapshots from be publicly visible and publicly accessible.
+    #     Therefore, the attributes for these snapshots still indicate that
+    #     they are publicly shared, even though they are not publicly
+    #     available.
+    #
+    #      </note>
+    #
+    #   * `block-new-sharing` - Prevents only new public sharing of snapshots
+    #     in the Region. Users in the account will no longer be able to
+    #     request new public sharing. However, snapshots that are already
+    #     publicly shared, remain publicly available.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableSnapshotBlockPublicAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableSnapshotBlockPublicAccessResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_snapshot_block_public_access({
+    #     state: "block-all-sharing", # required, accepts block-all-sharing, block-new-sharing, unblocked
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "block-all-sharing", "block-new-sharing", "unblocked"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSnapshotBlockPublicAccess AWS API Documentation
+    #
+    # @overload enable_snapshot_block_public_access(params = {})
+    # @param [Hash] params ({})
+    def enable_snapshot_block_public_access(params = {}, options = {})
+      req = build_request(:enable_snapshot_block_public_access, params)
       req.send_request(options)
     end
 
@@ -42333,6 +42455,45 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_serial_console_access_status(params = {}, options = {})
       req = build_request(:get_serial_console_access_status, params)
+      req.send_request(options)
+    end
+
+    # Gets the current state of *block public access for snapshots* setting
+    # for the account and Region.
+    #
+    # For more information, see [ Block public access for snapshots][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetSnapshotBlockPublicAccessStateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSnapshotBlockPublicAccessStateResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_snapshot_block_public_access_state({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "block-all-sharing", "block-new-sharing", "unblocked"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSnapshotBlockPublicAccessState AWS API Documentation
+    #
+    # @overload get_snapshot_block_public_access_state(params = {})
+    # @param [Hash] params ({})
+    def get_snapshot_block_public_access_state(params = {}, options = {})
+      req = build_request(:get_snapshot_block_public_access_state, params)
       req.send_request(options)
     end
 
@@ -57434,7 +57595,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.417.0'
+      context[:gem_version] = '1.418.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

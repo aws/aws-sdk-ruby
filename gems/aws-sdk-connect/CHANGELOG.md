@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2023-11-09)
+------------------
+
+* Feature - This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.
+
 1.136.0 (2023-11-08)
 ------------------
 

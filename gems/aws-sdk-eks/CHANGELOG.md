@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2023-11-09)
+------------------
+
+* Feature - Adding EKS Anywhere subscription related operations.
+
 1.91.0 (2023-10-24)
 ------------------
 

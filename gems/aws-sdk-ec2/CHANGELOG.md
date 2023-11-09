@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.418.0 (2023-11-09)
+------------------
+
+* Feature - AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.
+
 1.417.0 (2023-10-31)
 ------------------
 

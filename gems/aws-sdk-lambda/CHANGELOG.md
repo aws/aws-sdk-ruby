@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2023-11-09)
+------------------
+
+* Feature - Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.
+
 1.107.0 (2023-11-08)
 ------------------
 

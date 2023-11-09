@@ -64,6 +64,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::CreateAddon.build(context)
           when :create_cluster
             Aws::EKS::Endpoints::CreateCluster.build(context)
+          when :create_eks_anywhere_subscription
+            Aws::EKS::Endpoints::CreateEksAnywhereSubscription.build(context)
           when :create_fargate_profile
             Aws::EKS::Endpoints::CreateFargateProfile.build(context)
           when :create_nodegroup
@@ -72,6 +74,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DeleteAddon.build(context)
           when :delete_cluster
             Aws::EKS::Endpoints::DeleteCluster.build(context)
+          when :delete_eks_anywhere_subscription
+            Aws::EKS::Endpoints::DeleteEksAnywhereSubscription.build(context)
           when :delete_fargate_profile
             Aws::EKS::Endpoints::DeleteFargateProfile.build(context)
           when :delete_nodegroup
@@ -86,6 +90,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DescribeAddonVersions.build(context)
           when :describe_cluster
             Aws::EKS::Endpoints::DescribeCluster.build(context)
+          when :describe_eks_anywhere_subscription
+            Aws::EKS::Endpoints::DescribeEksAnywhereSubscription.build(context)
           when :describe_fargate_profile
             Aws::EKS::Endpoints::DescribeFargateProfile.build(context)
           when :describe_identity_provider_config
@@ -100,6 +106,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::ListAddons.build(context)
           when :list_clusters
             Aws::EKS::Endpoints::ListClusters.build(context)
+          when :list_eks_anywhere_subscriptions
+            Aws::EKS::Endpoints::ListEksAnywhereSubscriptions.build(context)
           when :list_fargate_profiles
             Aws::EKS::Endpoints::ListFargateProfiles.build(context)
           when :list_identity_provider_configs
@@ -122,6 +130,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::UpdateClusterConfig.build(context)
           when :update_cluster_version
             Aws::EKS::Endpoints::UpdateClusterVersion.build(context)
+          when :update_eks_anywhere_subscription
+            Aws::EKS::Endpoints::UpdateEksAnywhereSubscription.build(context)
           when :update_nodegroup_config
             Aws::EKS::Endpoints::UpdateNodegroupConfig.build(context)
           when :update_nodegroup_version

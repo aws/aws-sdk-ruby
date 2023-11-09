@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2023-11-09)
+------------------
+
+* Feature - Added new ConcurrencyMode feature for AWS CloudFormation StackSets for faster deployments to target accounts.
+
 1.91.0 (2023-10-16)
 ------------------
 

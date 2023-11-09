@@ -780,7 +780,7 @@ module Aws::Omics
     # @option params [String] :generated_from
     #   Where the source originated.
     #
-    # @option params [required, String] :reference_arn
+    # @option params [String] :reference_arn
     #   The ARN of the reference.
     #
     # @option params [required, String] :name
@@ -811,11 +811,11 @@ module Aws::Omics
     #   resp = client.create_multipart_read_set_upload({
     #     sequence_store_id: "SequenceStoreId", # required
     #     client_token: "ClientToken",
-    #     source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
+    #     source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM, UBAM
     #     subject_id: "SubjectId", # required
     #     sample_id: "SampleId", # required
     #     generated_from: "GeneratedFrom",
-    #     reference_arn: "ReferenceArn", # required
+    #     reference_arn: "ReferenceArn",
     #     name: "ReadSetName", # required
     #     description: "ReadSetDescription",
     #     tags: {
@@ -827,7 +827,7 @@ module Aws::Omics
     #
     #   resp.sequence_store_id #=> String
     #   resp.upload_id #=> String
-    #   resp.source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.subject_id #=> String
     #   resp.sample_id #=> String
     #   resp.generated_from #=> String
@@ -1888,7 +1888,7 @@ module Aws::Omics
     #   resp.sources #=> Array
     #   resp.sources[0].source_files.source1 #=> String
     #   resp.sources[0].source_files.source2 #=> String
-    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.sources[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.sources[0].status_message #=> String
     #   resp.sources[0].subject_id #=> String
@@ -1958,7 +1958,7 @@ module Aws::Omics
     #   resp.status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "PROCESSING_UPLOAD", "UPLOAD_FAILED"
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.creation_time #=> Time
     #   resp.sequence_information.total_read_count #=> Integer
     #   resp.sequence_information.total_base_count #=> Integer
@@ -2869,7 +2869,7 @@ module Aws::Omics
     #   resp.uploads #=> Array
     #   resp.uploads[0].sequence_store_id #=> String
     #   resp.uploads[0].upload_id #=> String
-    #   resp.uploads[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.uploads[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.uploads[0].subject_id #=> String
     #   resp.uploads[0].sample_id #=> String
     #   resp.uploads[0].generated_from #=> String
@@ -3150,7 +3150,7 @@ module Aws::Omics
     #     filter: {
     #       name: "ReadSetName",
     #       status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED, PROCESSING_UPLOAD, UPLOAD_FAILED
-    #       reference_arn: "ReferenceArn",
+    #       reference_arn: "ReferenceArnFilter",
     #       created_after: Time.now,
     #       created_before: Time.now,
     #       sample_id: "SampleId",
@@ -3173,7 +3173,7 @@ module Aws::Omics
     #   resp.read_sets[0].name #=> String
     #   resp.read_sets[0].description #=> String
     #   resp.read_sets[0].reference_arn #=> String
-    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.read_sets[0].sequence_information.total_read_count #=> Integer
     #   resp.read_sets[0].sequence_information.total_base_count #=> Integer
     #   resp.read_sets[0].sequence_information.generated_from #=> String
@@ -4050,11 +4050,11 @@ module Aws::Omics
     #           source1: "S3Uri", # required
     #           source2: "S3Uri",
     #         },
-    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
+    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM, UBAM
     #         subject_id: "SubjectId", # required
     #         sample_id: "SampleId", # required
     #         generated_from: "GeneratedFrom",
-    #         reference_arn: "ReferenceArn", # required
+    #         reference_arn: "ReferenceArn",
     #         name: "ReadSetName",
     #         description: "ReadSetDescription",
     #         tags: {
@@ -4630,7 +4630,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

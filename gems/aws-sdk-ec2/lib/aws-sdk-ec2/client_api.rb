@@ -1140,6 +1140,8 @@ module Aws::EC2
     DisableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountResult')
     DisableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'DisableSerialConsoleAccessRequest')
     DisableSerialConsoleAccessResult = Shapes::StructureShape.new(name: 'DisableSerialConsoleAccessResult')
+    DisableSnapshotBlockPublicAccessRequest = Shapes::StructureShape.new(name: 'DisableSnapshotBlockPublicAccessRequest')
+    DisableSnapshotBlockPublicAccessResult = Shapes::StructureShape.new(name: 'DisableSnapshotBlockPublicAccessResult')
     DisableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationRequest')
     DisableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationResult')
     DisableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'DisableVgwRoutePropagationRequest')
@@ -1268,6 +1270,8 @@ module Aws::EC2
     EnableReachabilityAnalyzerOrganizationSharingResult = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingResult')
     EnableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'EnableSerialConsoleAccessRequest')
     EnableSerialConsoleAccessResult = Shapes::StructureShape.new(name: 'EnableSerialConsoleAccessResult')
+    EnableSnapshotBlockPublicAccessRequest = Shapes::StructureShape.new(name: 'EnableSnapshotBlockPublicAccessRequest')
+    EnableSnapshotBlockPublicAccessResult = Shapes::StructureShape.new(name: 'EnableSnapshotBlockPublicAccessResult')
     EnableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationRequest')
     EnableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationResult')
     EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
@@ -1459,6 +1463,8 @@ module Aws::EC2
     GetSecurityGroupsForVpcResult = Shapes::StructureShape.new(name: 'GetSecurityGroupsForVpcResult')
     GetSerialConsoleAccessStatusRequest = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusRequest')
     GetSerialConsoleAccessStatusResult = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusResult')
+    GetSnapshotBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetSnapshotBlockPublicAccessStateRequest')
+    GetSnapshotBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetSnapshotBlockPublicAccessStateResult')
     GetSpotPlacementScoresRequest = Shapes::StructureShape.new(name: 'GetSpotPlacementScoresRequest')
     GetSpotPlacementScoresResult = Shapes::StructureShape.new(name: 'GetSpotPlacementScoresResult')
     GetSubnetCidrReservationsMaxResults = Shapes::IntegerShape.new(name: 'GetSubnetCidrReservationsMaxResults')
@@ -2605,6 +2611,7 @@ module Aws::EC2
     SlotStartTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotStartTimeRangeRequest')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotAttributeName = Shapes::StringShape.new(name: 'SnapshotAttributeName')
+    SnapshotBlockPublicAccessState = Shapes::StringShape.new(name: 'SnapshotBlockPublicAccessState')
     SnapshotDetail = Shapes::StructureShape.new(name: 'SnapshotDetail')
     SnapshotDetailList = Shapes::ListShape.new(name: 'SnapshotDetailList')
     SnapshotDiskContainer = Shapes::StructureShape.new(name: 'SnapshotDiskContainer')
@@ -7799,6 +7806,12 @@ module Aws::EC2
     DisableSerialConsoleAccessResult.add_member(:serial_console_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serialConsoleAccessEnabled"))
     DisableSerialConsoleAccessResult.struct_class = Types::DisableSerialConsoleAccessResult
 
+    DisableSnapshotBlockPublicAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableSnapshotBlockPublicAccessRequest.struct_class = Types::DisableSnapshotBlockPublicAccessRequest
+
+    DisableSnapshotBlockPublicAccessResult.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotBlockPublicAccessState, location_name: "state"))
+    DisableSnapshotBlockPublicAccessResult.struct_class = Types::DisableSnapshotBlockPublicAccessResult
+
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -8225,6 +8238,13 @@ module Aws::EC2
 
     EnableSerialConsoleAccessResult.add_member(:serial_console_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serialConsoleAccessEnabled"))
     EnableSerialConsoleAccessResult.struct_class = Types::EnableSerialConsoleAccessResult
+
+    EnableSnapshotBlockPublicAccessRequest.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotBlockPublicAccessState, required: true, location_name: "State"))
+    EnableSnapshotBlockPublicAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableSnapshotBlockPublicAccessRequest.struct_class = Types::EnableSnapshotBlockPublicAccessRequest
+
+    EnableSnapshotBlockPublicAccessResult.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotBlockPublicAccessState, location_name: "state"))
+    EnableSnapshotBlockPublicAccessResult.struct_class = Types::EnableSnapshotBlockPublicAccessResult
 
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
@@ -8985,6 +9005,12 @@ module Aws::EC2
 
     GetSerialConsoleAccessStatusResult.add_member(:serial_console_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serialConsoleAccessEnabled"))
     GetSerialConsoleAccessStatusResult.struct_class = Types::GetSerialConsoleAccessStatusResult
+
+    GetSnapshotBlockPublicAccessStateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetSnapshotBlockPublicAccessStateRequest.struct_class = Types::GetSnapshotBlockPublicAccessStateRequest
+
+    GetSnapshotBlockPublicAccessStateResult.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotBlockPublicAccessState, location_name: "state"))
+    GetSnapshotBlockPublicAccessStateResult.struct_class = Types::GetSnapshotBlockPublicAccessStateResult
 
     GetSpotPlacementScoresRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypes, location_name: "InstanceType"))
     GetSpotPlacementScoresRequest.add_member(:target_capacity, Shapes::ShapeRef.new(shape: SpotPlacementScoresTargetCapacity, required: true, location_name: "TargetCapacity"))
@@ -18872,6 +18898,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableSerialConsoleAccessResult)
       end)
 
+      api.add_operation(:disable_snapshot_block_public_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableSnapshotBlockPublicAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableSnapshotBlockPublicAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableSnapshotBlockPublicAccessResult)
+      end)
+
       api.add_operation(:disable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableTransitGatewayRouteTablePropagation"
         o.http_method = "POST"
@@ -19102,6 +19136,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableSerialConsoleAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableSerialConsoleAccessResult)
+      end)
+
+      api.add_operation(:enable_snapshot_block_public_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableSnapshotBlockPublicAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableSnapshotBlockPublicAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableSnapshotBlockPublicAccessResult)
       end)
 
       api.add_operation(:enable_transit_gateway_route_table_propagation, Seahorse::Model::Operation.new.tap do |o|
@@ -19506,6 +19548,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetSerialConsoleAccessStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSerialConsoleAccessStatusResult)
+      end)
+
+      api.add_operation(:get_snapshot_block_public_access_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSnapshotBlockPublicAccessState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSnapshotBlockPublicAccessStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSnapshotBlockPublicAccessStateResult)
       end)
 
       api.add_operation(:get_spot_placement_scores, Seahorse::Model::Operation.new.tap do |o|

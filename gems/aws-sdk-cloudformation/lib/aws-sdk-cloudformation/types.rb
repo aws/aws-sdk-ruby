@@ -811,6 +811,11 @@ module Aws::CloudFormation
     #     For more information about macros, see [Using CloudFormation
     #     macros to perform custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -838,6 +843,11 @@ module Aws::CloudFormation
     #   policies for CloudFormation. For more information, see [Controlling
     #   access with Identity and Access Management][1] in the CloudFormation
     #   User Guide.
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -1153,6 +1163,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -1186,6 +1201,11 @@ module Aws::CloudFormation
     #   CloudFormation-specific condition keys in IAM policies. For more
     #   information, see [Controlling Access with Identity and Access
     #   Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -5779,7 +5799,7 @@ module Aws::CloudFormation
     #
     #   For CloudFormation to assume the specified execution role, the role
     #   must contain a trust relationship with the CloudFormation service
-    #   principle (`resources.cloudformation.amazonaws.com`). For more
+    #   principal (`resources.cloudformation.amazonaws.com`). For more
     #   information about adding trust relationships, see [Modifying a role
     #   trust policy][1] in the *Identity and Access Management User Guide*.
     #
@@ -8177,9 +8197,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] max_concurrent_count
     #   The maximum number of accounts in which to perform this operation at
-    #   one time. This is dependent on the value of
-    #   `FailureToleranceCount`.`MaxConcurrentCount` is at most one more
-    #   than the `FailureToleranceCount`.
+    #   one time. This can depend on the value of `FailureToleranceCount`
+    #   depending on your `ConcurrencyMode`. `MaxConcurrentCount` is at most
+    #   one more than the `FailureToleranceCount` if you're using
+    #   `STRICT_FAILURE_TOLERANCE`.
     #
     #   Note that this setting lets you specify the *maximum* for
     #   operations. For large deployments, under certain circumstances the
@@ -8212,6 +8233,25 @@ module Aws::CloudFormation
     #   By default, `1` is specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] concurrency_mode
+    #   Specifies how the concurrency level behaves during the operation
+    #   execution.
+    #
+    #   * `STRICT_FAILURE_TOLERANCE`: Dynamically lowers the concurrency
+    #     level to ensure the number of failed accounts never exceeds the
+    #     `FailureToleranceCount` +1. StackSets will set the actual
+    #     concurrency of your deployment as the minimum value between the
+    #     `MaxConcurrentCount` and the `FailureToleranceCount` +1. This is
+    #     the default behavior.
+    #
+    #     If failure tolerance or Maximum concurrent accounts are set to
+    #     percentages, the behavior is similar.
+    #
+    #   * `SOFT_FAILURE_TOLERANCE`: Always run at the concurrency level set
+    #     by the user in the `MaxConcurrentCount` or
+    #     `MaxConcurrentPercentage`, regardless of the number of failures.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences AWS API Documentation
     #
     class StackSetOperationPreferences < Struct.new(
@@ -8220,7 +8260,8 @@ module Aws::CloudFormation
       :failure_tolerance_count,
       :failure_tolerance_percentage,
       :max_concurrent_count,
-      :max_concurrent_percentage)
+      :max_concurrent_percentage,
+      :concurrency_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9363,6 +9404,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -9389,6 +9435,11 @@ module Aws::CloudFormation
     #   Management (IAM) uses this parameter for CloudFormation-specific
     #   condition keys in IAM policies. For more information, see
     #   [Controlling Access with Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #

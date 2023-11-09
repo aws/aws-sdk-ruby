@@ -10,6 +10,12 @@
 module Aws::CloudWatchLogs
   module Types
 
+    # You don't have sufficient permissions to perform this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # A structure that contains information about one CloudWatch Logs
     # account policy.
     #
@@ -118,6 +124,54 @@ module Aws::CloudWatchLogs
     #
     class CancelExportTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This operation attempted to create a resource that already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ConflictException AWS API Documentation
+    #
+    class ConflictException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] delivery_source_name
+    #   The name of the delivery source to use for this delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_arn
+    #   The ARN of the delivery destination to use for this delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateDeliveryRequest AWS API Documentation
+    #
+    class CreateDeliveryRequest < Struct.new(
+      :delivery_source_name,
+      :delivery_destination_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery
+    #   A structure that contains information about the delivery that you
+    #   just created.
+    #   @return [Types::Delivery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateDeliveryResponse AWS API Documentation
+    #
+    class CreateDeliveryResponse < Struct.new(
+      :delivery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -292,6 +346,66 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] delivery_destination_name
+    #   The name of the delivery destination that you want to delete the
+    #   policy for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliveryDestinationPolicyRequest AWS API Documentation
+    #
+    class DeleteDeliveryDestinationPolicyRequest < Struct.new(
+      :delivery_destination_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the delivery destination that you want to delete. You
+    #   can find a list of delivery destionation names by using the
+    #   [DescribeDeliveryDestinations][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliveryDestinationRequest AWS API Documentation
+    #
+    class DeleteDeliveryDestinationRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique ID of the delivery to delete. You can find the ID of a
+    #   delivery with the [DescribeDeliveries][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliveryRequest AWS API Documentation
+    #
+    class DeleteDeliveryRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the delivery source that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliverySourceRequest AWS API Documentation
+    #
+    class DeleteDeliverySourceRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] destination_name
     #   The name of the destination.
     #   @return [String]
@@ -422,6 +536,238 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This structure contains information about one *delivery* in your
+    # account.
+    #
+    # A delivery is a connection between a logical *delivery source* and a
+    # logical *delivery destination*.
+    #
+    # For more information, see [CreateDelivery][1].
+    #
+    # You can't update an existing delivery. You can only create and delete
+    # deliveries.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @!attribute [rw] id
+    #   The unique ID that identifies this delivery in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies this
+    #   delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_source_name
+    #   The name of the delivery source that is associated with this
+    #   delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_arn
+    #   The ARN of the delivery destination that is associated with this
+    #   delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_type
+    #   Displays whether the delivery destination associated with this
+    #   delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that have been assigned to this delivery.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Delivery AWS API Documentation
+    #
+    class Delivery < Struct.new(
+      :id,
+      :arn,
+      :delivery_source_name,
+      :delivery_destination_arn,
+      :delivery_destination_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one *delivery destination*
+    # in your account. A delivery destination is an Amazon Web Services
+    # resource that represents an shared id="AWS"/&gt; service that logs
+    # can be sent to. CloudWatch Logs, Amazon S3, are supported as Kinesis
+    # Data Firehose delivery destinations.
+    #
+    # To configure logs delivery between a supported Amazon Web Services
+    # service and a destination, you must do the following:
+    #
+    # * Create a delivery source, which is a logical object that represents
+    #   the resource that is actually sending the logs. For more
+    #   information, see [PutDeliverySource][1].
+    #
+    # * Create a *delivery destination*, which is a logical object that
+    #   represents the actual delivery destination.
+    #
+    # * If you are delivering logs cross-account, you must use
+    #   [PutDeliveryDestinationPolicy][2] in the destination account to
+    #   assign an IAM policy to the destination. This policy allows delivery
+    #   to that destination.
+    #
+    # * Create a *delivery* by pairing exactly one delivery source and one
+    #   delivery destination. For more information, see [CreateDelivery][3].
+    #
+    # You can configure a single delivery source to send logs to multiple
+    # destinations by creating multiple deliveries. You can also create
+    # multiple deliveries to configure multiple delivery sources to send
+    # logs to the same delivery destination.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @!attribute [rw] name
+    #   The name of this delivery destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies this
+    #   delivery destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_type
+    #   Displays whether this delivery destination is CloudWatch Logs,
+    #   Amazon S3, or Kinesis Data Firehose.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format of the logs that are sent to this delivery destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_configuration
+    #   A structure that contains the ARN of the Amazon Web Services
+    #   resource that will receive the logs.
+    #   @return [Types::DeliveryDestinationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags that have been assigned to this delivery destination.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliveryDestination AWS API Documentation
+    #
+    class DeliveryDestination < Struct.new(
+      :name,
+      :arn,
+      :delivery_destination_type,
+      :output_format,
+      :delivery_destination_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about one logs delivery
+    # destination.
+    #
+    # @!attribute [rw] destination_resource_arn
+    #   The ARN of the Amazon Web Services destination that this delivery
+    #   destination represents. That Amazon Web Services destination can be
+    #   a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery
+    #   stream in Kinesis Data Firehose.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliveryDestinationConfiguration AWS API Documentation
+    #
+    class DeliveryDestinationConfiguration < Struct.new(
+      :destination_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one *delivery source* in
+    # your account. A delivery source is an Amazon Web Services resource
+    # that sends logs to an Amazon Web Services destination. The destination
+    # can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+    #
+    # Only some Amazon Web Services services support being configured as a
+    # delivery source. These services are listed as **Supported \[V2
+    # Permissions\]** in the table at [Enabling logging from Amazon Web
+    # Services services.][1]
+    #
+    # To configure logs delivery between a supported Amazon Web Services
+    # service and a destination, you must do the following:
+    #
+    # * Create a delivery source, which is a logical object that represents
+    #   the resource that is actually sending the logs. For more
+    #   information, see [PutDeliverySource][2].
+    #
+    # * Create a *delivery destination*, which is a logical object that
+    #   represents the actual delivery destination. For more information,
+    #   see [PutDeliveryDestination][3].
+    #
+    # * If you are delivering logs cross-account, you must use
+    #   [PutDeliveryDestinationPolicy][4] in the destination account to
+    #   assign an IAM policy to the destination. This policy allows delivery
+    #   to that destination.
+    #
+    # * Create a *delivery* by pairing exactly one delivery source and one
+    #   delivery destination. For more information, see [CreateDelivery][5].
+    #
+    # You can configure a single delivery source to send logs to multiple
+    # destinations by creating multiple deliveries. You can also create
+    # multiple deliveries to configure multiple delivery sources to send
+    # logs to the same delivery destination.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @!attribute [rw] name
+    #   The unique name of the delivery source.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies this
+    #   delivery source.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arns
+    #   This array contains the ARN of the Amazon Web Services resource that
+    #   sends logs and is represented by this delivery source. Currently,
+    #   only one ARN can be in the array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service that is sending logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_type
+    #   The type of log that the source is sending. For valid values for
+    #   this parameter, see the documentation for the source service.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that have been assigned to this delivery source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliverySource AWS API Documentation
+    #
+    class DeliverySource < Struct.new(
+      :name,
+      :arn,
+      :resource_arns,
+      :service,
+      :log_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy_type
     #   Use this parameter to limit the returned policies to only the
     #   policies that match the policy type that you specify. Currently, the
@@ -463,6 +809,120 @@ module Aws::CloudWatchLogs
     #
     class DescribeAccountPoliciesResponse < Struct.new(
       :account_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Optionally specify the maximum number of deliveries to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveriesRequest AWS API Documentation
+    #
+    class DescribeDeliveriesRequest < Struct.new(
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deliveries
+    #   An array of structures. Each structure contains information about
+    #   one delivery in the account.
+    #   @return [Array<Types::Delivery>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveriesResponse AWS API Documentation
+    #
+    class DescribeDeliveriesResponse < Struct.new(
+      :deliveries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Optionally specify the maximum number of delivery destinations to
+    #   return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveryDestinationsRequest AWS API Documentation
+    #
+    class DescribeDeliveryDestinationsRequest < Struct.new(
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_destinations
+    #   An array of structures. Each structure contains information about
+    #   one delivery destination in the account.
+    #   @return [Array<Types::DeliveryDestination>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveryDestinationsResponse AWS API Documentation
+    #
+    class DescribeDeliveryDestinationsResponse < Struct.new(
+      :delivery_destinations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Optionally specify the maximum number of delivery sources to return
+    #   in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliverySourcesRequest AWS API Documentation
+    #
+    class DescribeDeliverySourcesRequest < Struct.new(
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_sources
+    #   An array of structures. Each structure contains information about
+    #   one delivery source in the account.
+    #   @return [Array<Types::DeliverySource>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliverySourcesResponse AWS API Documentation
+    #
+    class DescribeDeliverySourcesResponse < Struct.new(
+      :delivery_sources,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1372,6 +1832,103 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] delivery_destination_name
+    #   The name of the delivery destination that you want to retrieve the
+    #   policy of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestinationPolicyRequest AWS API Documentation
+    #
+    class GetDeliveryDestinationPolicyRequest < Struct.new(
+      :delivery_destination_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The IAM policy for this delivery destination.
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestinationPolicyResponse AWS API Documentation
+    #
+    class GetDeliveryDestinationPolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the delivery destination that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestinationRequest AWS API Documentation
+    #
+    class GetDeliveryDestinationRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_destination
+    #   A structure containing information about the delivery destination.
+    #   @return [Types::DeliveryDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestinationResponse AWS API Documentation
+    #
+    class GetDeliveryDestinationResponse < Struct.new(
+      :delivery_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the delivery that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryRequest AWS API Documentation
+    #
+    class GetDeliveryRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery
+    #   A structure that contains information about the delivery.
+    #   @return [Types::Delivery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryResponse AWS API Documentation
+    #
+    class GetDeliveryResponse < Struct.new(
+      :delivery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the delivery source that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliverySourceRequest AWS API Documentation
+    #
+    class GetDeliverySourceRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_source
+    #   A structure containing information about the delivery source.
+    #   @return [Types::DeliverySource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliverySourceResponse AWS API Documentation
+    #
+    class GetDeliverySourceResponse < Struct.new(
+      :delivery_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
@@ -2106,6 +2663,21 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A structure that contains information about one delivery destination
+    # policy.
+    #
+    # @!attribute [rw] delivery_destination_policy
+    #   The contents of the delivery destination policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :delivery_destination_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy_name
     #   A name for the policy. This must be unique within the account.
     #   @return [String]
@@ -2269,6 +2841,135 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :policy_document,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_destination_name
+    #   The name of the delivery destination to assign this policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_policy
+    #   The contents of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestinationPolicyRequest AWS API Documentation
+    #
+    class PutDeliveryDestinationPolicyRequest < Struct.new(
+      :delivery_destination_name,
+      :delivery_destination_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The contents of the policy that you just created.
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestinationPolicyResponse AWS API Documentation
+    #
+    class PutDeliveryDestinationPolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A name for this delivery destination. This name must be unique for
+    #   all delivery destinations in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format for the logs that this delivery destination will receive.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_configuration
+    #   A structure that contains the ARN of the Amazon Web Services
+    #   resource that will receive the logs.
+    #   @return [Types::DeliveryDestinationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestinationRequest AWS API Documentation
+    #
+    class PutDeliveryDestinationRequest < Struct.new(
+      :name,
+      :output_format,
+      :delivery_destination_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_destination
+    #   A structure containing information about the delivery destination
+    #   that you just created or updated.
+    #   @return [Types::DeliveryDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestinationResponse AWS API Documentation
+    #
+    class PutDeliveryDestinationResponse < Struct.new(
+      :delivery_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A name for this delivery source. This name must be unique for all
+    #   delivery sources in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the Amazon Web Services resource that is generating and
+    #   sending logs. For example,
+    #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
+    #   @return [String]
+    #
+    # @!attribute [rw] log_type
+    #   Defines the type of log that the source is sending. For valid values
+    #   for this parameter, see the documentation for the source service.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliverySourceRequest AWS API Documentation
+    #
+    class PutDeliverySourceRequest < Struct.new(
+      :name,
+      :resource_arn,
+      :log_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivery_source
+    #   A structure containing information about the delivery source that
+    #   was just created or updated.
+    #   @return [Types::DeliverySource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliverySourceResponse AWS API Documentation
+    #
+    class PutDeliverySourceResponse < Struct.new(
+      :delivery_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2933,6 +3634,12 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This request exceeds a service quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Aws::EmptyStructure; end
+
     # The service cannot complete the request.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ServiceUnavailableException AWS API Documentation
@@ -3182,6 +3889,12 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The request was throttled because of quota limits.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
     # A resource can have no more than 50 tags.
     #
     # @!attribute [rw] message
@@ -3254,6 +3967,12 @@ module Aws::CloudWatchLogs
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # One of the parameters for the request is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
   end
 end

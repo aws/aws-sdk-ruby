@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-11-09)
+------------------
+
+* Feature - Support UBAM filetype for Omics Storage and make referenceArn optional
+
 1.18.0 (2023-11-08)
 ------------------
 

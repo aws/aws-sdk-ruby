@@ -814,6 +814,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableIpamOrganizationAdminAccount.build(context)
           when :disable_serial_console_access
             Aws::EC2::Endpoints::DisableSerialConsoleAccess.build(context)
+          when :disable_snapshot_block_public_access
+            Aws::EC2::Endpoints::DisableSnapshotBlockPublicAccess.build(context)
           when :disable_transit_gateway_route_table_propagation
             Aws::EC2::Endpoints::DisableTransitGatewayRouteTablePropagation.build(context)
           when :disable_vgw_route_propagation
@@ -872,6 +874,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableReachabilityAnalyzerOrganizationSharing.build(context)
           when :enable_serial_console_access
             Aws::EC2::Endpoints::EnableSerialConsoleAccess.build(context)
+          when :enable_snapshot_block_public_access
+            Aws::EC2::Endpoints::EnableSnapshotBlockPublicAccess.build(context)
           when :enable_transit_gateway_route_table_propagation
             Aws::EC2::Endpoints::EnableTransitGatewayRouteTablePropagation.build(context)
           when :enable_vgw_route_propagation
@@ -952,6 +956,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetSecurityGroupsForVpc.build(context)
           when :get_serial_console_access_status
             Aws::EC2::Endpoints::GetSerialConsoleAccessStatus.build(context)
+          when :get_snapshot_block_public_access_state
+            Aws::EC2::Endpoints::GetSnapshotBlockPublicAccessState.build(context)
           when :get_spot_placement_scores
             Aws::EC2::Endpoints::GetSpotPlacementScores.build(context)
           when :get_subnet_cidr_reservations

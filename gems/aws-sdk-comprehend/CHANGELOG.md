@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-11-09)
+------------------
+
+* Feature - This release adds support for toxicity detection and prompt safety classification.
+
 1.74.0 (2023-09-27)
 ------------------
 

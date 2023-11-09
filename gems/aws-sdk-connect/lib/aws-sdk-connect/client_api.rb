@@ -2758,6 +2758,7 @@ module Aws::Connect
     ListIntegrationAssociationsRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location: "querystring", location_name: "integrationType"))
     ListIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListIntegrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListIntegrationAssociationsRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "integrationArn"))
     ListIntegrationAssociationsRequest.struct_class = Types::ListIntegrationAssociationsRequest
 
     ListIntegrationAssociationsResponse.add_member(:integration_association_summary_list, Shapes::ShapeRef.new(shape: IntegrationAssociationSummaryList, location_name: "IntegrationAssociationSummaryList"))

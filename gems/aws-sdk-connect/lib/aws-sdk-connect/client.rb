@@ -1700,7 +1700,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -8044,6 +8044,9 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #
     # @return [Types::ListIntegrationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListIntegrationAssociationsResponse#integration_association_summary_list #integration_association_summary_list} => Array&lt;Types::IntegrationAssociationSummary&gt;
@@ -8055,9 +8058,10 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     integration_arn: "ARN",
     #   })
     #
     # @example Response structure
@@ -8066,7 +8070,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -14302,7 +14306,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

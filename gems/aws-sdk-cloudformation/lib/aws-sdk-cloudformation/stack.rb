@@ -575,6 +575,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -605,6 +610,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -927,6 +937,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -951,6 +966,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-11-09)
+------------------
+
+* Feature - The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.
+
 1.69.0 (2023-09-27)
 ------------------
 

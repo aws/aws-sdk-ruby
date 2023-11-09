@@ -28205,6 +28205,33 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSnapshotBlockPublicAccessRequest AWS API Documentation
+    #
+    class DisableSnapshotBlockPublicAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   Returns `unblocked` if the request succeeds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSnapshotBlockPublicAccessResult AWS API Documentation
+    #
+    class DisableSnapshotBlockPublicAccessResult < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transit_gateway_route_table_id
     #   The ID of the propagation route table.
     #   @return [String]
@@ -30349,6 +30376,62 @@ module Aws::EC2
     #
     class EnableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The mode in which to enable block public access for snapshots for
+    #   the Region. Specify one of the following values:
+    #
+    #   * `block-all-sharing` - Prevents all public sharing of snapshots in
+    #     the Region. Users in the account will no longer be able to request
+    #     new public sharing. Additionally, snapshots that are already
+    #     publicly shared are treated as private and they are no longer
+    #     publicly available.
+    #
+    #     <note markdown="1"> If you enable block public access for snapshots in
+    #     `block-all-sharing` mode, it does not change the permissions for
+    #     snapshots that are already publicly shared. Instead, it prevents
+    #     these snapshots from be publicly visible and publicly accessible.
+    #     Therefore, the attributes for these snapshots still indicate that
+    #     they are publicly shared, even though they are not publicly
+    #     available.
+    #
+    #      </note>
+    #
+    #   * `block-new-sharing` - Prevents only new public sharing of
+    #     snapshots in the Region. Users in the account will no longer be
+    #     able to request new public sharing. However, snapshots that are
+    #     already publicly shared, remain publicly available.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSnapshotBlockPublicAccessRequest AWS API Documentation
+    #
+    class EnableSnapshotBlockPublicAccessRequest < Struct.new(
+      :state,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of block public access for snapshots for the account and
+    #   Region. Returns either `block-all-sharing` or `block-new-sharing` if
+    #   the request succeeds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSnapshotBlockPublicAccessResult AWS API Documentation
+    #
+    class EnableSnapshotBlockPublicAccessResult < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34388,6 +34471,47 @@ module Aws::EC2
     #
     class GetSerialConsoleAccessStatusResult < Struct.new(
       :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSnapshotBlockPublicAccessStateRequest AWS API Documentation
+    #
+    class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The current state of block public access for snapshots. Possible
+    #   values include:
+    #
+    #   * `block-all-sharing` - All public sharing of snapshots is blocked.
+    #     Users in the account can't request new public sharing.
+    #     Additionally, snapshots that were already publicly shared are
+    #     treated as private and are not publicly available.
+    #
+    #   * `block-new-sharing` - Only new public sharing of snapshots is
+    #     blocked. Users in the account can't request new public sharing.
+    #     However, snapshots that were already publicly shared, remain
+    #     publicly available.
+    #
+    #   * `unblocked` - Public sharing is not blocked. Users can publicly
+    #     share snapshots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSnapshotBlockPublicAccessStateResult AWS API Documentation
+    #
+    class GetSnapshotBlockPublicAccessStateResult < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end

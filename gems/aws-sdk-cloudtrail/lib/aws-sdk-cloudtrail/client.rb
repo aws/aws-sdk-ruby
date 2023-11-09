@@ -828,6 +828,11 @@ module Aws::CloudTrail
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
+    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log group
+    #   for an organization trail.
+    #
+    #    </note>
+    #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
     #   to a user's log group. You must use a role that exists in your
@@ -1471,20 +1476,26 @@ module Aws::CloudTrail
     end
 
     # Describes the settings for the Insights event selectors that you
-    # configured for your trail. `GetInsightSelectors` shows if CloudTrail
-    # Insights event logging is enabled on the trail, and if it is, which
-    # insight types are enabled. If you run `GetInsightSelectors` on a trail
-    # that does not have Insights events enabled, the operation throws the
-    # exception `InsightNotEnabledException`
+    # configured for your trail or event data store. `GetInsightSelectors`
+    # shows if CloudTrail Insights event logging is enabled on the trail or
+    # event data store, and if it is, which Insights types are enabled. If
+    # you run `GetInsightSelectors` on a trail or event data store that does
+    # not have Insights events enabled, the operation throws the exception
+    # `InsightNotEnabledException`
     #
-    # For more information, see [Logging CloudTrail Insights Events for
-    # Trails ][1] in the *CloudTrail User Guide*.
+    # Specify either the `EventDataStore` parameter to get Insights event
+    # selectors for an event data store, or the `TrailName` parameter to the
+    # get Insights event selectors for a trail. You cannot specify these
+    # parameters together.
+    #
+    # For more information, see [Logging CloudTrail Insights events][1] in
+    # the *CloudTrail User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
     #
-    # @option params [required, String] :trail_name
+    # @option params [String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
     #
@@ -1504,15 +1515,26 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
+    #   You cannot use this parameter with the `EventDataStore` parameter.
+    #
+    # @option params [String] :event_data_store
+    #   Specifies the ARN (or ID suffix of the ARN) of the event data store
+    #   for which you want to get Insights selectors.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
     # @return [Types::GetInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInsightSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::GetInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #   * {Types::GetInsightSelectorsResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::GetInsightSelectorsResponse#insights_destination #insights_destination} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_insight_selectors({
-    #     trail_name: "String", # required
+    #     trail_name: "String",
+    #     event_data_store: "EventDataStoreArn",
     #   })
     #
     # @example Response structure
@@ -1520,6 +1542,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.event_data_store_arn #=> String
+    #   resp.insights_destination #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectors AWS API Documentation
     #
@@ -2149,8 +2173,16 @@ module Aws::CloudTrail
 
     # Looks up [management events][1] or [CloudTrail Insights events][2]
     # that are captured by CloudTrail. You can look up events that occurred
-    # in a Region within the last 90 days. Lookup supports the following
-    # attributes for management events:
+    # in a Region within the last 90 days.
+    #
+    # <note markdown="1"> `LookupEvents` returns recent Insights events for trails that enable
+    # Insights. To view Insights events for an event data store, you can run
+    # queries on your Insights event data store, and you can also view the
+    # Lake dashboard for Insights.
+    #
+    #  </note>
+    #
+    # Lookup supports the following attributes for management events:
     #
     # * Amazon Web Services access key
     #
@@ -2446,25 +2478,51 @@ module Aws::CloudTrail
     end
 
     # Lets you enable Insights event logging by specifying the Insights
-    # selectors that you want to enable on an existing trail. You also use
-    # `PutInsightSelectors` to turn off Insights event logging, by passing
-    # an empty list of insight types. The valid Insights event types in this
-    # release are `ApiErrorRateInsight` and `ApiCallRateInsight`.
+    # selectors that you want to enable on an existing trail or event data
+    # store. You also use `PutInsightSelectors` to turn off Insights event
+    # logging, by passing an empty list of Insights types. The valid
+    # Insights event types are `ApiErrorRateInsight` and
+    # `ApiCallRateInsight`.
     #
-    # To log CloudTrail Insights events on API call volume, the trail must
-    # log `write` management events. To log CloudTrail Insights events on
-    # API error rate, the trail must log `read` or `write` management
-    # events. You can call `GetEventSelectors` on a trail to check whether
-    # the trail logs management events.
+    # To enable Insights on an event data store, you must specify the ARNs
+    # (or ID suffix of the ARNs) for the source event data store
+    # (`EventDataStore`) and the destination event data store
+    # (`InsightsDestination`). The source event data store logs management
+    # events and enables Insights. The destination event data store logs
+    # Insights events based upon the management event activity of the source
+    # event data store. The source and destination event data stores must
+    # belong to the same Amazon Web Services account.
     #
-    # @option params [required, String] :trail_name
+    # To log Insights events for a trail, you must specify the name
+    # (`TrailName`) of the CloudTrail trail for which you want to change or
+    # add Insights selectors.
+    #
+    # To log CloudTrail Insights events on API call volume, the trail or
+    # event data store must log `write` management events. To log CloudTrail
+    # Insights events on API error rate, the trail or event data store must
+    # log `read` or `write` management events. You can call
+    # `GetEventSelectors` on a trail to check whether the trail logs
+    # management events. You can call `GetEventDataStore` on an event data
+    # store to check whether the event data store logs management events.
+    #
+    # For more information, see [Logging CloudTrail Insights events][1] in
+    # the *CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+    #
+    # @option params [String] :trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
     #
+    #   You cannot use this parameter with the `EventDataStore` and
+    #   `InsightsDestination` parameters.
+    #
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
-    #   Insight types.
+    #   A JSON string that contains the Insights types you want to log on a
+    #   trail or event data store. `ApiCallRateInsight` and
+    #   `ApiErrorRateInsight` are valid Insight types.
     #
     #   The `ApiCallRateInsight` Insights type analyzes write-only management
     #   API calls that are aggregated per minute against a baseline API call
@@ -2474,20 +2532,40 @@ module Aws::CloudTrail
     #   that result in error codes. The error is shown if the API call is
     #   unsuccessful.
     #
+    # @option params [String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the source event data store for
+    #   which you want to change or add Insights selectors. To enable Insights
+    #   on an event data store, you must provide both the `EventDataStore` and
+    #   `InsightsDestination` parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
+    # @option params [String] :insights_destination
+    #   The ARN (or ID suffix of the ARN) of the destination event data store
+    #   that logs Insights events. To enable Insights on an event data store,
+    #   you must provide both the `EventDataStore` and `InsightsDestination`
+    #   parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
     # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutInsightSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::PutInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #   * {Types::PutInsightSelectorsResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::PutInsightSelectorsResponse#insights_destination #insights_destination} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_insight_selectors({
-    #     trail_name: "String", # required
+    #     trail_name: "String",
     #     insight_selectors: [ # required
     #       {
     #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
     #       },
     #     ],
+    #     event_data_store: "EventDataStoreArn",
+    #     insights_destination: "EventDataStoreArn",
     #   })
     #
     # @example Response structure
@@ -2495,6 +2573,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.event_data_store_arn #=> String
+    #   resp.insights_destination #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectors AWS API Documentation
     #
@@ -2560,8 +2640,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Registers an organization’s member account as the CloudTrail delegated
-    # administrator.
+    # Registers an organization’s member account as the CloudTrail
+    # [delegated administrator][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html
     #
     # @option params [required, String] :member_account_id
     #   An organization member account ID that you want to designate as a
@@ -3073,9 +3157,9 @@ module Aws::CloudTrail
     # enabled.
     #
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
-    # includes or excludes management and data events in your event data
-    # store. For more information about `AdvancedEventSelectors`, see
-    # [AdvancedEventSelectors][1].
+    # includes or excludes management, data, or Insights events in your
+    # event data store. For more information about `AdvancedEventSelectors`,
+    # see [AdvancedEventSelectors][1].
     #
     # For event data stores for Config configuration items, Audit Manager
     # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
@@ -3104,6 +3188,13 @@ module Aws::CloudTrail
     # @option params [Boolean] :organization_enabled
     #   Specifies whether an event data store collects events logged for an
     #   organization in Organizations.
+    #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization event data store to a non-organization event data store,
+    #   or convert a non-organization event data store to an organization
+    #   event data store.
+    #
+    #    </note>
     #
     # @option params [Integer] :retention_period
     #   The retention period of the event data store, in days. You can set a
@@ -3325,6 +3416,11 @@ module Aws::CloudTrail
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
+    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log group
+    #   for an organization trail.
+    #
+    #    </note>
+    #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
     #   to a user's log group. You must use a role that exists in your
@@ -3359,13 +3455,18 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless the
     #   call is made on behalf of an Amazon Web Services account that is the
-    #   management account or delegated administrator account for an
-    #   organization in Organizations. If the trail is not an organization
-    #   trail and this is set to `true`, the trail will be created in all
-    #   Amazon Web Services accounts that belong to the organization. If the
-    #   trail is an organization trail and this is set to `false`, the trail
-    #   will remain in the current Amazon Web Services account but be deleted
-    #   from all member accounts in the organization.
+    #   management account for an organization in Organizations. If the trail
+    #   is not an organization trail and this is set to `true`, the trail will
+    #   be created in all Amazon Web Services accounts that belong to the
+    #   organization. If the trail is an organization trail and this is set to
+    #   `false`, the trail will remain in the current Amazon Web Services
+    #   account but be deleted from all member accounts in the organization.
+    #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization trail to a non-organization trail, or convert a
+    #   non-organization trail to an organization trail.
+    #
+    #    </note>
     #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3437,7 +3538,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -887,6 +887,11 @@ module Aws::CloudFormation
     #     For more information about macros, see [Using CloudFormation macros
     #     to perform custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -913,6 +918,11 @@ module Aws::CloudFormation
     #   policies for CloudFormation. For more information, see [Controlling
     #   access with Identity and Access Management][1] in the CloudFormation
     #   User Guide.
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -1234,6 +1244,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -1265,6 +1280,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -1553,6 +1573,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     operation_id: "ClientRequestToken",
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
@@ -2118,6 +2139,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     retain_stacks: false, # required
     #     operation_id: "ClientRequestToken",
@@ -3190,6 +3212,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.operation_preferences.failure_tolerance_percentage #=> Integer
     #   resp.stack_set_operation.operation_preferences.max_concurrent_count #=> Integer
     #   resp.stack_set_operation.operation_preferences.max_concurrent_percentage #=> Integer
+    #   resp.stack_set_operation.operation_preferences.concurrency_mode #=> String, one of "STRICT_FAILURE_TOLERANCE", "SOFT_FAILURE_TOLERANCE"
     #   resp.stack_set_operation.retain_stacks #=> Boolean
     #   resp.stack_set_operation.administration_role_arn #=> String
     #   resp.stack_set_operation.execution_role_name #=> String
@@ -3224,7 +3247,7 @@ module Aws::CloudFormation
     # Returns the description for the specified stack; if no stack name was
     # specified, then it returns the description for all the stacks created.
     #
-    # <note markdown="1"> If the stack doesn't exist, an `ValidationError` is returned.
+    # <note markdown="1"> If the stack doesn't exist, a `ValidationError` is returned.
     #
     #  </note>
     #
@@ -3750,6 +3773,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     operation_id: "ClientRequestToken",
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
@@ -4217,6 +4241,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     operation_id: "ClientRequestToken",
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
@@ -4833,6 +4858,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].operation_preferences.failure_tolerance_percentage #=> Integer
     #   resp.summaries[0].operation_preferences.max_concurrent_count #=> Integer
     #   resp.summaries[0].operation_preferences.max_concurrent_percentage #=> Integer
+    #   resp.summaries[0].operation_preferences.concurrency_mode #=> String, one of "STRICT_FAILURE_TOLERANCE", "SOFT_FAILURE_TOLERANCE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations AWS API Documentation
@@ -5612,7 +5638,7 @@ module Aws::CloudFormation
     #
     #   For CloudFormation to assume the specified execution role, the role
     #   must contain a trust relationship with the CloudFormation service
-    #   principle (`resources.cloudformation.amazonaws.com`). For more
+    #   principal (`resources.cloudformation.amazonaws.com`). For more
     #   information about adding trust relationships, see [Modifying a role
     #   trust policy][1] in the *Identity and Access Management User Guide*.
     #
@@ -6282,6 +6308,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -6307,6 +6338,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -6625,6 +6661,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     operation_id: "ClientRequestToken",
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
@@ -6998,6 +7035,7 @@ module Aws::CloudFormation
     #       failure_tolerance_percentage: 1,
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
+    #       concurrency_mode: "STRICT_FAILURE_TOLERANCE", # accepts STRICT_FAILURE_TOLERANCE, SOFT_FAILURE_TOLERANCE
     #     },
     #     administration_role_arn: "RoleARN",
     #     execution_role_name: "ExecutionRoleName",
@@ -7160,7 +7198,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

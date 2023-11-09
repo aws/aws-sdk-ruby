@@ -586,11 +586,14 @@ module Aws::CloudTrail
     GetImportResponse.add_member(:import_statistics, Shapes::ShapeRef.new(shape: ImportStatistics, location_name: "ImportStatistics"))
     GetImportResponse.struct_class = Types::GetImportResponse
 
-    GetInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
+    GetInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, location_name: "TrailName"))
+    GetInsightSelectorsRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStore"))
     GetInsightSelectorsRequest.struct_class = Types::GetInsightSelectorsRequest
 
     GetInsightSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
     GetInsightSelectorsResponse.add_member(:insight_selectors, Shapes::ShapeRef.new(shape: InsightSelectors, location_name: "InsightSelectors"))
+    GetInsightSelectorsResponse.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
+    GetInsightSelectorsResponse.add_member(:insights_destination, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "InsightsDestination"))
     GetInsightSelectorsResponse.struct_class = Types::GetInsightSelectorsResponse
 
     GetQueryResultsRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage"=>"EventDataStore is no longer required by GetQueryResultsRequest"}))
@@ -882,12 +885,16 @@ module Aws::CloudTrail
     PutEventSelectorsResponse.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     PutEventSelectorsResponse.struct_class = Types::PutEventSelectorsResponse
 
-    PutInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
+    PutInsightSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, location_name: "TrailName"))
     PutInsightSelectorsRequest.add_member(:insight_selectors, Shapes::ShapeRef.new(shape: InsightSelectors, required: true, location_name: "InsightSelectors"))
+    PutInsightSelectorsRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStore"))
+    PutInsightSelectorsRequest.add_member(:insights_destination, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "InsightsDestination"))
     PutInsightSelectorsRequest.struct_class = Types::PutInsightSelectorsRequest
 
     PutInsightSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
     PutInsightSelectorsResponse.add_member(:insight_selectors, Shapes::ShapeRef.new(shape: InsightSelectors, location_name: "InsightSelectors"))
+    PutInsightSelectorsResponse.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
+    PutInsightSelectorsResponse.add_member(:insights_destination, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "InsightsDestination"))
     PutInsightSelectorsResponse.struct_class = Types::PutInsightSelectorsResponse
 
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -1476,6 +1483,8 @@ module Aws::CloudTrail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetInsightSelectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInsightSelectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
@@ -1751,6 +1760,8 @@ module Aws::CloudTrail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutInsightSelectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutInsightSelectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
@@ -2003,6 +2014,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEventSelectorsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInsightSelectorsException)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreHasOngoingImportException)
         o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)

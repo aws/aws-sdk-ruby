@@ -548,6 +548,101 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates a *delivery*. A delivery is a connection between a logical
+    # *delivery source* and a logical *delivery destination* that you have
+    # already created.
+    #
+    # Only some Amazon Web Services services support being configured as a
+    # delivery source using this operation. These services are listed as
+    # **Supported \[V2 Permissions\]** in the table at [Enabling logging
+    # from Amazon Web Services services.][1]
+    #
+    # A delivery destination can represent a log group in CloudWatch Logs,
+    # an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.
+    #
+    # To configure logs delivery between a supported Amazon Web Services
+    # service and a destination, you must do the following:
+    #
+    # * Create a delivery source, which is a logical object that represents
+    #   the resource that is actually sending the logs. For more
+    #   information, see [PutDeliverySource][2].
+    #
+    # * Create a *delivery destination*, which is a logical object that
+    #   represents the actual delivery destination. For more information,
+    #   see [PutDeliveryDestination][3].
+    #
+    # * If you are delivering logs cross-account, you must use
+    #   [PutDeliveryDestinationPolicy][4] in the destination account to
+    #   assign an IAM policy to the destination. This policy allows delivery
+    #   to that destination.
+    #
+    # * Use `CreateDelivery` to create a *delivery* by pairing exactly one
+    #   delivery source and one delivery destination.
+    #
+    # You can configure a single delivery source to send logs to multiple
+    # destinations by creating multiple deliveries. You can also create
+    # multiple deliveries to configure multiple delivery sources to send
+    # logs to the same delivery destination.
+    #
+    # You can't update an existing delivery. You can only create and delete
+    # deliveries.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    #
+    # @option params [required, String] :delivery_source_name
+    #   The name of the delivery source to use for this delivery.
+    #
+    # @option params [required, String] :delivery_destination_arn
+    #   The ARN of the delivery destination to use for this delivery.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateDeliveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDeliveryResponse#delivery #delivery} => Types::Delivery
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_delivery({
+    #     delivery_source_name: "DeliverySourceName", # required
+    #     delivery_destination_arn: "Arn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery.id #=> String
+    #   resp.delivery.arn #=> String
+    #   resp.delivery.delivery_source_name #=> String
+    #   resp.delivery.delivery_destination_arn #=> String
+    #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.tags #=> Hash
+    #   resp.delivery.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateDelivery AWS API Documentation
+    #
+    # @overload create_delivery(params = {})
+    # @param [Hash] params ({})
+    def create_delivery(params = {}, options = {})
+      req = build_request(:create_delivery, params)
+      req.send_request(options)
+    end
+
     # Creates an export task so that you can efficiently export data from a
     # log group to an Amazon S3 bucket. When you perform a
     # `CreateExportTask` operation, you must use credentials that have
@@ -829,6 +924,135 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Deletes s *delivery*. A delivery is a connection between a logical
+    # *delivery source* and a logical *delivery destination*. Deleting a
+    # delivery only deletes the connection between the delivery source and
+    # delivery destination. It does not delete the delivery destination or
+    # the delivery source.
+    #
+    # @option params [required, String] :id
+    #   The unique ID of the delivery to delete. You can find the ID of a
+    #   delivery with the [DescribeDeliveries][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_delivery({
+    #     id: "DeliveryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDelivery AWS API Documentation
+    #
+    # @overload delete_delivery(params = {})
+    # @param [Hash] params ({})
+    def delete_delivery(params = {}, options = {})
+      req = build_request(:delete_delivery, params)
+      req.send_request(options)
+    end
+
+    # Deletes a *delivery destination*. A delivery is a connection between a
+    # logical *delivery source* and a logical *delivery destination*.
+    #
+    # You can't delete a delivery destination if any current deliveries are
+    # associated with it. To find whether any deliveries are associated with
+    # this delivery destination, use the [DescribeDeliveries][1] operation
+    # and check the `deliveryDestinationArn` field in the results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    #
+    # @option params [required, String] :name
+    #   The name of the delivery destination that you want to delete. You can
+    #   find a list of delivery destionation names by using the
+    #   [DescribeDeliveryDestinations][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_delivery_destination({
+    #     name: "DeliveryDestinationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliveryDestination AWS API Documentation
+    #
+    # @overload delete_delivery_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_delivery_destination(params = {}, options = {})
+      req = build_request(:delete_delivery_destination, params)
+      req.send_request(options)
+    end
+
+    # Deletes a delivery destination policy. For more information about
+    # these policies, see [PutDeliveryDestinationPolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
+    #
+    # @option params [required, String] :delivery_destination_name
+    #   The name of the delivery destination that you want to delete the
+    #   policy for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_delivery_destination_policy({
+    #     delivery_destination_name: "DeliveryDestinationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliveryDestinationPolicy AWS API Documentation
+    #
+    # @overload delete_delivery_destination_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_delivery_destination_policy(params = {}, options = {})
+      req = build_request(:delete_delivery_destination_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a *delivery source*. A delivery is a connection between a
+    # logical *delivery source* and a logical *delivery destination*.
+    #
+    # You can't delete a delivery source if any current deliveries are
+    # associated with it. To find whether any deliveries are associated with
+    # this delivery source, use the [DescribeDeliveries][1] operation and
+    # check the `deliverySourceName` field in the results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    #
+    # @option params [required, String] :name
+    #   The name of the delivery source that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_delivery_source({
+    #     name: "DeliverySourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDeliverySource AWS API Documentation
+    #
+    # @overload delete_delivery_source(params = {})
+    # @param [Hash] params ({})
+    def delete_delivery_source(params = {}, options = {})
+      req = build_request(:delete_delivery_source, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified destination, and eventually disables all the
     # subscription filters that publish to it. This operation does not
     # delete the physical resource encapsulated by the destination.
@@ -1094,6 +1318,145 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def describe_account_policies(params = {}, options = {})
       req = build_request(:describe_account_policies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the deliveries that have been created in the
+    # account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   Optionally specify the maximum number of deliveries to return in the
+    #   response.
+    #
+    # @return [Types::DescribeDeliveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDeliveriesResponse#deliveries #deliveries} => Array&lt;Types::Delivery&gt;
+    #   * {Types::DescribeDeliveriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_deliveries({
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deliveries #=> Array
+    #   resp.deliveries[0].id #=> String
+    #   resp.deliveries[0].arn #=> String
+    #   resp.deliveries[0].delivery_source_name #=> String
+    #   resp.deliveries[0].delivery_destination_arn #=> String
+    #   resp.deliveries[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.deliveries[0].tags #=> Hash
+    #   resp.deliveries[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveries AWS API Documentation
+    #
+    # @overload describe_deliveries(params = {})
+    # @param [Hash] params ({})
+    def describe_deliveries(params = {}, options = {})
+      req = build_request(:describe_deliveries, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the delivery destinations that have been created
+    # in the account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   Optionally specify the maximum number of delivery destinations to
+    #   return in the response.
+    #
+    # @return [Types::DescribeDeliveryDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDeliveryDestinationsResponse#delivery_destinations #delivery_destinations} => Array&lt;Types::DeliveryDestination&gt;
+    #   * {Types::DescribeDeliveryDestinationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_delivery_destinations({
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_destinations #=> Array
+    #   resp.delivery_destinations[0].name #=> String
+    #   resp.delivery_destinations[0].arn #=> String
+    #   resp.delivery_destinations[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery_destinations[0].output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
+    #   resp.delivery_destinations[0].delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destinations[0].tags #=> Hash
+    #   resp.delivery_destinations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveryDestinations AWS API Documentation
+    #
+    # @overload describe_delivery_destinations(params = {})
+    # @param [Hash] params ({})
+    def describe_delivery_destinations(params = {}, options = {})
+      req = build_request(:describe_delivery_destinations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the delivery sources that have been created in the
+    # account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   Optionally specify the maximum number of delivery sources to return in
+    #   the response.
+    #
+    # @return [Types::DescribeDeliverySourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDeliverySourcesResponse#delivery_sources #delivery_sources} => Array&lt;Types::DeliverySource&gt;
+    #   * {Types::DescribeDeliverySourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_delivery_sources({
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_sources #=> Array
+    #   resp.delivery_sources[0].name #=> String
+    #   resp.delivery_sources[0].arn #=> String
+    #   resp.delivery_sources[0].resource_arns #=> Array
+    #   resp.delivery_sources[0].resource_arns[0] #=> String
+    #   resp.delivery_sources[0].service #=> String
+    #   resp.delivery_sources[0].log_type #=> String
+    #   resp.delivery_sources[0].tags #=> Hash
+    #   resp.delivery_sources[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliverySources AWS API Documentation
+    #
+    # @overload describe_delivery_sources(params = {})
+    # @param [Hash] params ({})
+    def describe_delivery_sources(params = {}, options = {})
+      req = build_request(:describe_delivery_sources, params)
       req.send_request(options)
     end
 
@@ -1970,6 +2333,155 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns complete information about one *delivery*. A delivery is a
+    # connection between a logical *delivery source* and a logical *delivery
+    # destination*
+    #
+    # You need to specify the delivery `id` in this operation. You can find
+    # the IDs of the deliveries in your account with the
+    # [DescribeDeliveries][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    #
+    # @option params [required, String] :id
+    #   The ID of the delivery that you want to retrieve.
+    #
+    # @return [Types::GetDeliveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliveryResponse#delivery #delivery} => Types::Delivery
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delivery({
+    #     id: "DeliveryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery.id #=> String
+    #   resp.delivery.arn #=> String
+    #   resp.delivery.delivery_source_name #=> String
+    #   resp.delivery.delivery_destination_arn #=> String
+    #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.tags #=> Hash
+    #   resp.delivery.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDelivery AWS API Documentation
+    #
+    # @overload get_delivery(params = {})
+    # @param [Hash] params ({})
+    def get_delivery(params = {}, options = {})
+      req = build_request(:get_delivery, params)
+      req.send_request(options)
+    end
+
+    # Retrieves complete information about one delivery destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the delivery destination that you want to retrieve.
+    #
+    # @return [Types::GetDeliveryDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliveryDestinationResponse#delivery_destination #delivery_destination} => Types::DeliveryDestination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delivery_destination({
+    #     name: "DeliveryDestinationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_destination.name #=> String
+    #   resp.delivery_destination.arn #=> String
+    #   resp.delivery_destination.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery_destination.output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
+    #   resp.delivery_destination.delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destination.tags #=> Hash
+    #   resp.delivery_destination.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestination AWS API Documentation
+    #
+    # @overload get_delivery_destination(params = {})
+    # @param [Hash] params ({})
+    def get_delivery_destination(params = {}, options = {})
+      req = build_request(:get_delivery_destination, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the delivery destination policy assigned to the delivery
+    # destination that you specify. For more information about delivery
+    # destinations and their policies, see
+    # [PutDeliveryDestinationPolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
+    #
+    # @option params [required, String] :delivery_destination_name
+    #   The name of the delivery destination that you want to retrieve the
+    #   policy of.
+    #
+    # @return [Types::GetDeliveryDestinationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliveryDestinationPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delivery_destination_policy({
+    #     delivery_destination_name: "DeliveryDestinationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy.delivery_destination_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliveryDestinationPolicy AWS API Documentation
+    #
+    # @overload get_delivery_destination_policy(params = {})
+    # @param [Hash] params ({})
+    def get_delivery_destination_policy(params = {}, options = {})
+      req = build_request(:get_delivery_destination_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves complete information about one delivery source.
+    #
+    # @option params [required, String] :name
+    #   The name of the delivery source that you want to retrieve.
+    #
+    # @return [Types::GetDeliverySourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliverySourceResponse#delivery_source #delivery_source} => Types::DeliverySource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delivery_source({
+    #     name: "DeliverySourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_source.name #=> String
+    #   resp.delivery_source.arn #=> String
+    #   resp.delivery_source.resource_arns #=> Array
+    #   resp.delivery_source.resource_arns[0] #=> String
+    #   resp.delivery_source.service #=> String
+    #   resp.delivery_source.log_type #=> String
+    #   resp.delivery_source.tags #=> Hash
+    #   resp.delivery_source.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliverySource AWS API Documentation
+    #
+    # @overload get_delivery_source(params = {})
+    # @param [Hash] params ({})
+    def get_delivery_source(params = {}, options = {})
+      req = build_request(:get_delivery_source, params)
+      req.send_request(options)
+    end
+
     # Lists log events from the specified log stream. You can list all of
     # the log events or filter using a time range.
     #
@@ -2224,7 +2736,8 @@ module Aws::CloudWatchLogs
     # log record.
     #
     # `GetQueryResults` does not start running a query. To run a query, use
-    # [StartQuery][2].
+    # [StartQuery][2]. For more information about how long results of
+    # previous queries are available, see [CloudWatch Logs quotas][3].
     #
     # If the value of the `Status` field in the output is `Running`, this
     # operation returns only partial results. If you see a value of
@@ -2234,13 +2747,14 @@ module Aws::CloudWatchLogs
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account to start queries in linked
     # source accounts. For more information, see [CloudWatch cross-account
-    # observability][3].
+    # observability][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [required, String] :query_id
     #   The ID number of the query.
@@ -2599,6 +3113,282 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def put_data_protection_policy(params = {}, options = {})
       req = build_request(:put_data_protection_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a logical *delivery destination*. A delivery
+    # destination is an Amazon Web Services resource that represents an
+    # Amazon Web Services service that logs can be sent to. CloudWatch Logs,
+    # Amazon S3, and Kinesis Data Firehose are supported as logs delivery
+    # destinations.
+    #
+    # To configure logs delivery between a supported Amazon Web Services
+    # service and a destination, you must do the following:
+    #
+    # * Create a delivery source, which is a logical object that represents
+    #   the resource that is actually sending the logs. For more
+    #   information, see [PutDeliverySource][1].
+    #
+    # * Use `PutDeliveryDestination` to create a *delivery destination*,
+    #   which is a logical object that represents the actual delivery
+    #   destination.
+    #
+    # * If you are delivering logs cross-account, you must use
+    #   [PutDeliveryDestinationPolicy][2] in the destination account to
+    #   assign an IAM policy to the destination. This policy allows delivery
+    #   to that destination.
+    #
+    # * Use `CreateDelivery` to create a *delivery* by pairing exactly one
+    #   delivery source and one delivery destination. For more information,
+    #   see [CreateDelivery][3].
+    #
+    # You can configure a single delivery source to send logs to multiple
+    # destinations by creating multiple deliveries. You can also create
+    # multiple deliveries to configure multiple delivery sources to send
+    # logs to the same delivery destination.
+    #
+    # Only some Amazon Web Services services support being configured as a
+    # delivery source. These services are listed as **Supported \[V2
+    # Permissions\]** in the table at [Enabling logging from Amazon Web
+    # Services services.][4]
+    #
+    # If you use this operation to update an existing delivery destination,
+    # all the current delivery destination parameters are overwritten with
+    # the new parameter values that you specify.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    #
+    # @option params [required, String] :name
+    #   A name for this delivery destination. This name must be unique for all
+    #   delivery destinations in your account.
+    #
+    # @option params [String] :output_format
+    #   The format for the logs that this delivery destination will receive.
+    #
+    # @option params [required, Types::DeliveryDestinationConfiguration] :delivery_destination_configuration
+    #   A structure that contains the ARN of the Amazon Web Services resource
+    #   that will receive the logs.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::PutDeliveryDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDeliveryDestinationResponse#delivery_destination #delivery_destination} => Types::DeliveryDestination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_delivery_destination({
+    #     name: "DeliveryDestinationName", # required
+    #     output_format: "json", # accepts json, plain, w3c, raw, parquet
+    #     delivery_destination_configuration: { # required
+    #       destination_resource_arn: "Arn", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_destination.name #=> String
+    #   resp.delivery_destination.arn #=> String
+    #   resp.delivery_destination.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery_destination.output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
+    #   resp.delivery_destination.delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destination.tags #=> Hash
+    #   resp.delivery_destination.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestination AWS API Documentation
+    #
+    # @overload put_delivery_destination(params = {})
+    # @param [Hash] params ({})
+    def put_delivery_destination(params = {}, options = {})
+      req = build_request(:put_delivery_destination, params)
+      req.send_request(options)
+    end
+
+    # Creates and assigns an IAM policy that grants permissions to
+    # CloudWatch Logs to deliver logs cross-account to a specified
+    # destination in this account. To configure the delivery of logs from an
+    # Amazon Web Services service in another account to a logs delivery
+    # destination in the current account, you must do the following:
+    #
+    # * Create a delivery source, which is a logical object that represents
+    #   the resource that is actually sending the logs. For more
+    #   information, see [PutDeliverySource][1].
+    #
+    # * Create a *delivery destination*, which is a logical object that
+    #   represents the actual delivery destination. For more information,
+    #   see [PutDeliveryDestination][2].
+    #
+    # * Use this operation in the destination account to assign an IAM
+    #   policy to the destination. This policy allows delivery to that
+    #   destination.
+    #
+    # * Create a *delivery* by pairing exactly one delivery source and one
+    #   delivery destination. For more information, see [CreateDelivery][3].
+    #
+    # Only some Amazon Web Services services support being configured as a
+    # delivery source. These services are listed as **Supported \[V2
+    # Permissions\]** in the table at [Enabling logging from Amazon Web
+    # Services services.][4]
+    #
+    # The contents of the policy must include two statements. One statement
+    # enables general logs delivery, and the other allows delivery to the
+    # chosen destination. See the examples for the needed policies.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    #
+    # @option params [required, String] :delivery_destination_name
+    #   The name of the delivery destination to assign this policy to.
+    #
+    # @option params [required, String] :delivery_destination_policy
+    #   The contents of the policy.
+    #
+    # @return [Types::PutDeliveryDestinationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDeliveryDestinationPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_delivery_destination_policy({
+    #     delivery_destination_name: "DeliveryDestinationName", # required
+    #     delivery_destination_policy: "DeliveryDestinationPolicy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy.delivery_destination_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliveryDestinationPolicy AWS API Documentation
+    #
+    # @overload put_delivery_destination_policy(params = {})
+    # @param [Hash] params ({})
+    def put_delivery_destination_policy(params = {}, options = {})
+      req = build_request(:put_delivery_destination_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a logical *delivery source*. A delivery source
+    # represents an Amazon Web Services resource that sends logs to an logs
+    # delivery destination. The destination can be CloudWatch Logs, Amazon
+    # S3, or Kinesis Data Firehose.
+    #
+    # To configure logs delivery between a delivery destination and an
+    # Amazon Web Services service that is supported as a delivery source,
+    # you must do the following:
+    #
+    # * Use `PutDeliverySource` to create a delivery source, which is a
+    #   logical object that represents the resource that is actually sending
+    #   the logs.
+    #
+    # * Use `PutDeliveryDestination` to create a *delivery destination*,
+    #   which is a logical object that represents the actual delivery
+    #   destination. For more information, see [PutDeliveryDestination][1].
+    #
+    # * If you are delivering logs cross-account, you must use
+    #   [PutDeliveryDestinationPolicy][2] in the destination account to
+    #   assign an IAM policy to the destination. This policy allows delivery
+    #   to that destination.
+    #
+    # * Use `CreateDelivery` to create a *delivery* by pairing exactly one
+    #   delivery source and one delivery destination. For more information,
+    #   see [CreateDelivery][3].
+    #
+    # You can configure a single delivery source to send logs to multiple
+    # destinations by creating multiple deliveries. You can also create
+    # multiple deliveries to configure multiple delivery sources to send
+    # logs to the same delivery destination.
+    #
+    # Only some Amazon Web Services services support being configured as a
+    # delivery source. These services are listed as **Supported \[V2
+    # Permissions\]** in the table at [Enabling logging from Amazon Web
+    # Services services.][4]
+    #
+    # If you use this operation to update an existing delivery source, all
+    # the current delivery source parameters are overwritten with the new
+    # parameter values that you specify.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    #
+    # @option params [required, String] :name
+    #   A name for this delivery source. This name must be unique for all
+    #   delivery sources in your account.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Amazon Web Services resource that is generating and
+    #   sending logs. For example,
+    #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
+    #
+    # @option params [required, String] :log_type
+    #   Defines the type of log that the source is sending. For valid values
+    #   for this parameter, see the documentation for the source service.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::PutDeliverySourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDeliverySourceResponse#delivery_source #delivery_source} => Types::DeliverySource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_delivery_source({
+    #     name: "DeliverySourceName", # required
+    #     resource_arn: "Arn", # required
+    #     log_type: "LogType", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delivery_source.name #=> String
+    #   resp.delivery_source.arn #=> String
+    #   resp.delivery_source.resource_arns #=> Array
+    #   resp.delivery_source.resource_arns[0] #=> String
+    #   resp.delivery_source.service #=> String
+    #   resp.delivery_source.log_type #=> String
+    #   resp.delivery_source.tags #=> Hash
+    #   resp.delivery_source.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliverySource AWS API Documentation
+    #
+    # @overload put_delivery_source(params = {})
+    # @param [Hash] params ({})
+    def put_delivery_source(params = {}, options = {})
+      req = build_request(:put_delivery_source, params)
       req.send_request(options)
     end
 
@@ -3629,7 +4419,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -601,8 +601,12 @@ module Aws::EKS
     #     different than the existing value, Amazon EKS changes the value to
     #     the Amazon EKS default value.
     #
-    #   * **Preserve** – Not supported. You can set this value when updating
-    #     an add-on though. For more information, see [UpdateAddon][1].
+    #   * **Preserve** – This is similar to the NONE option. If the
+    #     self-managed version of the add-on is installed on your cluster
+    #     Amazon EKS doesn't change the add-on resource properties. Creation
+    #     of the add-on might fail if conflicts are detected. This option
+    #     works differently during the update operation. For more information,
+    #     see [UpdateAddon][1].
     #
     #   If you don't currently have the self-managed version of the add-on
     #   installed on your cluster, the Amazon EKS add-on is installed. Amazon
@@ -937,6 +941,101 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates an EKS Anywhere subscription. When a subscription is created,
+    # it is a contract agreement for the length of the term specified in the
+    # request. Licenses that are used to validate support are provisioned in
+    # Amazon Web Services License Manager and the caller account is granted
+    # access to EKS Anywhere Curated Packages.
+    #
+    # @option params [required, String] :name
+    #   The unique name for your subscription. It must be unique in your
+    #   Amazon Web Services account in the Amazon Web Services Region you're
+    #   creating the subscription in. The name can contain only alphanumeric
+    #   characters (case-sensitive), hyphens, and underscores. It must start
+    #   with an alphabetic character and can't be longer than 100 characters.
+    #
+    # @option params [required, Types::EksAnywhereSubscriptionTerm] :term
+    #   An object representing the term duration and term unit type of your
+    #   subscription. This determines the term length of your subscription.
+    #   Valid values are MONTHS for term unit and 12 or 36 for term duration,
+    #   indicating a 12 month or 36 month subscription. This value cannot be
+    #   changed after creating the subscription.
+    #
+    # @option params [Integer] :license_quantity
+    #   The number of licenses to purchase with the subscription. Valid values
+    #   are between 1 and 1000. This value cannot be changed after creating
+    #   the subscription.
+    #
+    # @option params [String] :license_type
+    #   The license type for all licenses in the subscription. Valid value is
+    #   CLUSTER. With the CLUSTER license type, each license covers support
+    #   for a single EKS Anywhere cluster.
+    #
+    # @option params [Boolean] :auto_renew
+    #   A boolean indicating whether the subscription auto renews at the end
+    #   of the term.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata for a subscription to assist with categorization and
+    #   organization. Each tag consists of a key and an optional value.
+    #   Subscription tags do not propagate to any other resources associated
+    #   with the subscription.
+    #
+    # @return [Types::CreateEksAnywhereSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEksAnywhereSubscriptionResponse#subscription #subscription} => Types::EksAnywhereSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_eks_anywhere_subscription({
+    #     name: "EksAnywhereSubscriptionName", # required
+    #     term: { # required
+    #       duration: 1,
+    #       unit: "MONTHS", # accepts MONTHS
+    #     },
+    #     license_quantity: 1,
+    #     license_type: "Cluster", # accepts Cluster
+    #     auto_renew: false,
+    #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription.id #=> String
+    #   resp.subscription.arn #=> String
+    #   resp.subscription.created_at #=> Time
+    #   resp.subscription.effective_date #=> Time
+    #   resp.subscription.expiration_date #=> Time
+    #   resp.subscription.license_quantity #=> Integer
+    #   resp.subscription.license_type #=> String, one of "Cluster"
+    #   resp.subscription.term.duration #=> Integer
+    #   resp.subscription.term.unit #=> String, one of "MONTHS"
+    #   resp.subscription.status #=> String
+    #   resp.subscription.auto_renew #=> Boolean
+    #   resp.subscription.license_arns #=> Array
+    #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.tags #=> Hash
+    #   resp.subscription.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateEksAnywhereSubscription AWS API Documentation
+    #
+    # @overload create_eks_anywhere_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_eks_anywhere_subscription(params = {}, options = {})
+      req = build_request(:create_eks_anywhere_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates an Fargate profile for your Amazon EKS cluster. You must have
     # at least one Fargate profile in a cluster to be able to run pods on
     # Fargate.
@@ -974,7 +1073,7 @@ module Aws::EKS
     #
     #
     #
-    # [1]: https://kubernetes.io/docs/admin/authorization/rbac/
+    # [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
     # [2]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
     # [3]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
     #
@@ -1075,16 +1174,12 @@ module Aws::EKS
 
     # Creates a managed node group for an Amazon EKS cluster. You can only
     # create a node group for your cluster that is equal to the current
-    # Kubernetes version for the cluster. All node groups are created with
-    # the latest AMI release version for the respective minor Kubernetes
-    # version of the cluster, unless you deploy a custom AMI using a launch
-    # template. For more information about using launch templates, see
-    # [Launch template support][1].
+    # Kubernetes version for the cluster.
     #
     # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
     # and associated Amazon EC2 instances that are managed by Amazon Web
     # Services for an Amazon EKS cluster. For more information, see [Managed
-    # node groups][2] in the *Amazon EKS User Guide*.
+    # node groups][1] in the *Amazon EKS User Guide*.
     #
     # <note markdown="1"> Windows AMI types are only supported for commercial Regions that
     # support Windows Amazon EKS.
@@ -1093,8 +1188,7 @@ module Aws::EKS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
-    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to create the node group in.
@@ -1542,6 +1636,52 @@ module Aws::EKS
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes an expired / inactive subscription. Deleting inactive
+    # subscriptions removes them from the Amazon Web Services Management
+    # Console view and from list/describe API responses. Subscriptions can
+    # only be cancelled within 7 days of creation, and are cancelled by
+    # creating a ticket in the Amazon Web Services Support Center.
+    #
+    # @option params [required, String] :id
+    #   The ID of the subscription.
+    #
+    # @return [Types::DeleteEksAnywhereSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEksAnywhereSubscriptionResponse#subscription #subscription} => Types::EksAnywhereSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_eks_anywhere_subscription({
+    #     id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription.id #=> String
+    #   resp.subscription.arn #=> String
+    #   resp.subscription.created_at #=> Time
+    #   resp.subscription.effective_date #=> Time
+    #   resp.subscription.expiration_date #=> Time
+    #   resp.subscription.license_quantity #=> Integer
+    #   resp.subscription.license_type #=> String, one of "Cluster"
+    #   resp.subscription.term.duration #=> Integer
+    #   resp.subscription.term.unit #=> String, one of "MONTHS"
+    #   resp.subscription.status #=> String
+    #   resp.subscription.auto_renew #=> Boolean
+    #   resp.subscription.license_arns #=> Array
+    #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.tags #=> Hash
+    #   resp.subscription.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteEksAnywhereSubscription AWS API Documentation
+    #
+    # @overload delete_eks_anywhere_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_eks_anywhere_subscription(params = {}, options = {})
+      req = build_request(:delete_eks_anywhere_subscription, params)
       req.send_request(options)
     end
 
@@ -2084,6 +2224,48 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns descriptive information about a subscription.
+    #
+    # @option params [required, String] :id
+    #   The ID of the subscription.
+    #
+    # @return [Types::DescribeEksAnywhereSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEksAnywhereSubscriptionResponse#subscription #subscription} => Types::EksAnywhereSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_eks_anywhere_subscription({
+    #     id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription.id #=> String
+    #   resp.subscription.arn #=> String
+    #   resp.subscription.created_at #=> Time
+    #   resp.subscription.effective_date #=> Time
+    #   resp.subscription.expiration_date #=> Time
+    #   resp.subscription.license_quantity #=> Integer
+    #   resp.subscription.license_type #=> String, one of "Cluster"
+    #   resp.subscription.term.duration #=> Integer
+    #   resp.subscription.term.unit #=> String, one of "MONTHS"
+    #   resp.subscription.status #=> String
+    #   resp.subscription.auto_renew #=> Boolean
+    #   resp.subscription.license_arns #=> Array
+    #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.tags #=> Hash
+    #   resp.subscription.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeEksAnywhereSubscription AWS API Documentation
+    #
+    # @overload describe_eks_anywhere_subscription(params = {})
+    # @param [Hash] params ({})
+    def describe_eks_anywhere_subscription(params = {}, options = {})
+      req = build_request(:describe_eks_anywhere_subscription, params)
+      req.send_request(options)
+    end
+
     # Returns descriptive information about an Fargate profile.
     #
     # @option params [required, String] :cluster_name
@@ -2332,7 +2514,11 @@ module Aws::EKS
     # Disassociates an identity provider configuration from a cluster. If
     # you disassociate an identity provider from your cluster, users
     # included in the provider can no longer access the cluster. However,
-    # you can still access the cluster with Amazon Web Services IAM users.
+    # you can still access the cluster with [IAM principals][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to disassociate an identity provider from.
@@ -2386,7 +2572,7 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the available add-ons.
+    # Lists the installed add-ons.
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster.
@@ -2517,6 +2703,71 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Displays the full description of the subscription.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of cluster results returned by
+    #   ListEksAnywhereSubscriptions in paginated output. When you use this
+    #   parameter, ListEksAnywhereSubscriptions returns only maxResults
+    #   results in a single page along with a nextToken response element. You
+    #   can see the remaining results of the initial request by sending
+    #   another ListEksAnywhereSubscriptions request with the returned
+    #   nextToken value. This value can be between 1 and 100. If you don't
+    #   use this parameter, ListEksAnywhereSubscriptions returns up to 10
+    #   results and a nextToken value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The nextToken value to include in a future
+    #   ListEksAnywhereSubscriptions request. When the results of a
+    #   ListEksAnywhereSubscriptions request exceed maxResults, you can use
+    #   this value to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #
+    # @option params [Array<String>] :include_status
+    #   An array of subscription statuses to filter on.
+    #
+    # @return [Types::ListEksAnywhereSubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEksAnywhereSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::EksAnywhereSubscription&gt;
+    #   * {Types::ListEksAnywhereSubscriptionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_eks_anywhere_subscriptions({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     include_status: ["CREATING"], # accepts CREATING, ACTIVE, UPDATING, EXPIRING, EXPIRED, DELETING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].id #=> String
+    #   resp.subscriptions[0].arn #=> String
+    #   resp.subscriptions[0].created_at #=> Time
+    #   resp.subscriptions[0].effective_date #=> Time
+    #   resp.subscriptions[0].expiration_date #=> Time
+    #   resp.subscriptions[0].license_quantity #=> Integer
+    #   resp.subscriptions[0].license_type #=> String, one of "Cluster"
+    #   resp.subscriptions[0].term.duration #=> Integer
+    #   resp.subscriptions[0].term.unit #=> String, one of "MONTHS"
+    #   resp.subscriptions[0].status #=> String
+    #   resp.subscriptions[0].auto_renew #=> Boolean
+    #   resp.subscriptions[0].license_arns #=> Array
+    #   resp.subscriptions[0].license_arns[0] #=> String
+    #   resp.subscriptions[0].tags #=> Hash
+    #   resp.subscriptions[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListEksAnywhereSubscriptions AWS API Documentation
+    #
+    # @overload list_eks_anywhere_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def list_eks_anywhere_subscriptions(params = {}, options = {})
+      req = build_request(:list_eks_anywhere_subscriptions, params)
       req.send_request(options)
     end
 
@@ -3274,6 +3525,61 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Update an EKS Anywhere Subscription. Only auto renewal and tags can be
+    # updated after subscription creation.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [required, Boolean] :auto_renew
+    #   A boolean indicating whether or not to automatically renew the
+    #   subscription.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateEksAnywhereSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEksAnywhereSubscriptionResponse#subscription #subscription} => Types::EksAnywhereSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_eks_anywhere_subscription({
+    #     id: "String", # required
+    #     auto_renew: false, # required
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription.id #=> String
+    #   resp.subscription.arn #=> String
+    #   resp.subscription.created_at #=> Time
+    #   resp.subscription.effective_date #=> Time
+    #   resp.subscription.expiration_date #=> Time
+    #   resp.subscription.license_quantity #=> Integer
+    #   resp.subscription.license_type #=> String, one of "Cluster"
+    #   resp.subscription.term.duration #=> Integer
+    #   resp.subscription.term.unit #=> String, one of "MONTHS"
+    #   resp.subscription.status #=> String
+    #   resp.subscription.auto_renew #=> Boolean
+    #   resp.subscription.license_arns #=> Array
+    #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.tags #=> Hash
+    #   resp.subscription.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateEksAnywhereSubscription AWS API Documentation
+    #
+    # @overload update_eks_anywhere_subscription(params = {})
+    # @param [Hash] params ({})
+    def update_eks_anywhere_subscription(params = {}, options = {})
+      req = build_request(:update_eks_anywhere_subscription, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon EKS managed node group configuration. Your node
     # group continues to function during the update. The response output
     # includes an update ID that you can use to track the status of your
@@ -3535,7 +3841,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
