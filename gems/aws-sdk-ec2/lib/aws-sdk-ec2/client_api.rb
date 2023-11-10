@@ -1238,8 +1238,10 @@ module Aws::EC2
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     ElasticIpAssociationId = Shapes::StringShape.new(name: 'ElasticIpAssociationId')
     EnaSrdSpecification = Shapes::StructureShape.new(name: 'EnaSrdSpecification')
+    EnaSrdSpecificationRequest = Shapes::StructureShape.new(name: 'EnaSrdSpecificationRequest')
     EnaSrdSupported = Shapes::BooleanShape.new(name: 'EnaSrdSupported')
     EnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'EnaSrdUdpSpecification')
+    EnaSrdUdpSpecificationRequest = Shapes::StructureShape.new(name: 'EnaSrdUdpSpecificationRequest')
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableAddressTransferRequest = Shapes::StructureShape.new(name: 'EnableAddressTransferRequest')
     EnableAddressTransferResult = Shapes::StructureShape.new(name: 'EnableAddressTransferResult')
@@ -1604,6 +1606,8 @@ module Aws::EC2
     InferenceDeviceName = Shapes::StringShape.new(name: 'InferenceDeviceName')
     InsideCidrBlocksStringList = Shapes::ListShape.new(name: 'InsideCidrBlocksStringList')
     Instance = Shapes::StructureShape.new(name: 'Instance')
+    InstanceAttachmentEnaSrdSpecification = Shapes::StructureShape.new(name: 'InstanceAttachmentEnaSrdSpecification')
+    InstanceAttachmentEnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'InstanceAttachmentEnaSrdUdpSpecification')
     InstanceAttribute = Shapes::StructureShape.new(name: 'InstanceAttribute')
     InstanceAttributeName = Shapes::StringShape.new(name: 'InstanceAttributeName')
     InstanceAutoRecoveryState = Shapes::StringShape.new(name: 'InstanceAutoRecoveryState')
@@ -1860,6 +1864,8 @@ module Aws::EC2
     LaunchTemplateElasticInferenceAcceleratorList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorList')
     LaunchTemplateElasticInferenceAcceleratorResponse = Shapes::StructureShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponse')
     LaunchTemplateElasticInferenceAcceleratorResponseList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponseList')
+    LaunchTemplateEnaSrdSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateEnaSrdSpecification')
+    LaunchTemplateEnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateEnaSrdUdpSpecification')
     LaunchTemplateEnclaveOptions = Shapes::StructureShape.new(name: 'LaunchTemplateEnclaveOptions')
     LaunchTemplateEnclaveOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateEnclaveOptionsRequest')
     LaunchTemplateErrorCode = Shapes::StringShape.new(name: 'LaunchTemplateErrorCode')
@@ -8112,8 +8118,15 @@ module Aws::EC2
     EnaSrdSpecification.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: EnaSrdUdpSpecification, location_name: "EnaSrdUdpSpecification"))
     EnaSrdSpecification.struct_class = Types::EnaSrdSpecification
 
+    EnaSrdSpecificationRequest.add_member(:ena_srd_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnaSrdEnabled"))
+    EnaSrdSpecificationRequest.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: EnaSrdUdpSpecificationRequest, location_name: "EnaSrdUdpSpecification"))
+    EnaSrdSpecificationRequest.struct_class = Types::EnaSrdSpecificationRequest
+
     EnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnaSrdUdpEnabled"))
     EnaSrdUdpSpecification.struct_class = Types::EnaSrdUdpSpecification
+
+    EnaSrdUdpSpecificationRequest.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnaSrdUdpEnabled"))
+    EnaSrdUdpSpecificationRequest.struct_class = Types::EnaSrdUdpSpecificationRequest
 
     EnableAddressTransferRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     EnableAddressTransferRequest.add_member(:transfer_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransferAccountId"))
@@ -9640,6 +9653,13 @@ module Aws::EC2
     Instance.add_member(:current_instance_boot_mode, Shapes::ShapeRef.new(shape: InstanceBootModeValues, location_name: "currentInstanceBootMode"))
     Instance.struct_class = Types::Instance
 
+    InstanceAttachmentEnaSrdSpecification.add_member(:ena_srd_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdEnabled"))
+    InstanceAttachmentEnaSrdSpecification.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: InstanceAttachmentEnaSrdUdpSpecification, location_name: "enaSrdUdpSpecification"))
+    InstanceAttachmentEnaSrdSpecification.struct_class = Types::InstanceAttachmentEnaSrdSpecification
+
+    InstanceAttachmentEnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdUdpEnabled"))
+    InstanceAttachmentEnaSrdUdpSpecification.struct_class = Types::InstanceAttachmentEnaSrdUdpSpecification
+
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
     InstanceAttribute.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappingList, location_name: "blockDeviceMapping"))
     InstanceAttribute.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "disableApiTermination"))
@@ -9851,6 +9871,7 @@ module Aws::EC2
     InstanceNetworkInterfaceAttachment.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "deviceIndex"))
     InstanceNetworkInterfaceAttachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "status"))
     InstanceNetworkInterfaceAttachment.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "networkCardIndex"))
+    InstanceNetworkInterfaceAttachment.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: InstanceAttachmentEnaSrdSpecification, location_name: "enaSrdSpecification"))
     InstanceNetworkInterfaceAttachment.struct_class = Types::InstanceNetworkInterfaceAttachment
 
     InstanceNetworkInterfaceList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterface, location_name: "item")
@@ -9875,6 +9896,7 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     InstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
+    InstanceNetworkInterfaceSpecification.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecificationRequest, location_name: "EnaSrdSpecification"))
     InstanceNetworkInterfaceSpecification.struct_class = Types::InstanceNetworkInterfaceSpecification
 
     InstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification, location_name: "item")
@@ -10492,6 +10514,13 @@ module Aws::EC2
 
     LaunchTemplateElasticInferenceAcceleratorResponseList.member = Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorResponse, location_name: "item")
 
+    LaunchTemplateEnaSrdSpecification.add_member(:ena_srd_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdEnabled"))
+    LaunchTemplateEnaSrdSpecification.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: LaunchTemplateEnaSrdUdpSpecification, location_name: "enaSrdUdpSpecification"))
+    LaunchTemplateEnaSrdSpecification.struct_class = Types::LaunchTemplateEnaSrdSpecification
+
+    LaunchTemplateEnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdUdpEnabled"))
+    LaunchTemplateEnaSrdUdpSpecification.struct_class = Types::LaunchTemplateEnaSrdUdpSpecification
+
     LaunchTemplateEnclaveOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     LaunchTemplateEnclaveOptions.struct_class = Types::LaunchTemplateEnclaveOptions
 
@@ -10563,6 +10592,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixListResponse, location_name: "ipv6PrefixSet"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "primaryIpv6"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: LaunchTemplateEnaSrdSpecification, location_name: "enaSrdSpecification"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecification
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecification, location_name: "item")
@@ -10587,6 +10617,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecificationRequest, location_name: "EnaSrdSpecification"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")

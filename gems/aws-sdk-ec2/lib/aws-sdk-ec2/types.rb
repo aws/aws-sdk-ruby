@@ -2887,16 +2887,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the ENA Express configuration for the network interface
-    # that's attached to the instance.
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
     #
     # @!attribute [rw] ena_srd_enabled
-    #   Indicates whether ENA Express is enabled for the network interface
-    #   that's attached to the instance.
+    #   Indicates whether ENA Express is enabled for the network interface.
     #   @return [Boolean]
     #
     # @!attribute [rw] ena_srd_udp_specification
-    #   ENA Express configuration for UDP network traffic.
+    #   Configures ENA Express for UDP network traffic.
     #   @return [Types::AttachmentEnaSrdUdpSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachmentEnaSrdSpecification AWS API Documentation
@@ -2908,8 +2918,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the ENA Express configuration for UDP traffic on the network
-    # interface that's attached to the instance.
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
     #
     # @!attribute [rw] ena_srd_udp_enabled
     #   Indicates whether UDP traffic to and from the instance uses ENA
@@ -19776,8 +19791,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance
-    #     or a Scheduled Instance (`spot` \| `scheduled`).
+    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance,
+    #     a Scheduled Instance, or a Capacity Block (`spot` \| `scheduled`
+    #     \| `capacity-block`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
     #     unsigned integer. The high byte is used for internal purposes and
@@ -29749,8 +29765,30 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Launch instances with ENA Express settings configured from your launch
+    # template.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Specifies whether ENA Express is enabled for the network interface
+    #   when you launch an instance from your launch template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Contains ENA Express settings for UDP network traffic in your launch
+    #   template.
+    #   @return [Types::EnaSrdUdpSpecificationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdSpecificationRequest AWS API Documentation
+    #
+    class EnaSrdSpecificationRequest < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # ENA Express is compatible with both TCP and UDP transport protocols.
-    # When it’s enabled, TCP traffic automatically uses it. However, some
+    # When it's enabled, TCP traffic automatically uses it. However, some
     # UDP-based applications are designed to handle network packets that are
     # out of order, without a need for retransmission, such as live video
     # broadcasting or other near-real-time applications. For UDP traffic,
@@ -29758,13 +29796,31 @@ module Aws::EC2
     # environment needs.
     #
     # @!attribute [rw] ena_srd_udp_enabled
-    #   Indicates whether UDP traffic uses ENA Express. To specify this
-    #   setting, you must first enable ENA Express.
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdUdpSpecification AWS API Documentation
     #
     class EnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures ENA Express for UDP network traffic from your launch
+    # template.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic uses ENA Express for your instance. To
+    #   ensure that UDP traffic can use ENA Express when you launch an
+    #   instance, you must also set **EnaSrdEnabled** in the
+    #   **EnaSrdSpecificationRequest** to `true` in your launch template.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdUdpSpecificationRequest AWS API Documentation
+    #
+    class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -37822,6 +37878,58 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Configures ENA Express for UDP network traffic.
+    #   @return [Types::InstanceAttachmentEnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttachmentEnaSrdSpecification AWS API Documentation
+    #
+    class InstanceAttachmentEnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttachmentEnaSrdUdpSpecification AWS API Documentation
+    #
+    class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an instance attribute.
     #
     # @!attribute [rw] groups
@@ -38776,6 +38884,11 @@ module Aws::EC2
     #   The index of the network card.
     #   @return [Integer]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Contains the ENA Express settings for the network interface that's
+    #   attached to the instance.
+    #   @return [Types::InstanceAttachmentEnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment AWS API Documentation
     #
     class InstanceNetworkInterfaceAttachment < Struct.new(
@@ -38784,7 +38897,8 @@ module Aws::EC2
       :delete_on_termination,
       :device_index,
       :status,
-      :network_card_index)
+      :network_card_index,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38955,6 +39069,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Specifies the ENA Express settings for the network interface that's
+    #   attached to the instance.
+    #   @return [Types::EnaSrdSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
@@ -38977,7 +39096,8 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42602,6 +42722,58 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Configures ENA Express for UDP network traffic.
+    #   @return [Types::LaunchTemplateEnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnaSrdSpecification AWS API Documentation
+    #
+    class LaunchTemplateEnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnaSrdUdpSpecification AWS API Documentation
+    #
+    class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates whether the instance is enabled for Amazon Web Services
     # Nitro Enclaves.
     #
@@ -43064,6 +43236,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Contains the ENA Express settings for instances launched from your
+    #   launch template.
+    #   @return [Types::LaunchTemplateEnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
@@ -43086,7 +43263,8 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43218,6 +43396,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Configure ENA Express settings for your launch template.
+    #   @return [Types::EnaSrdSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
@@ -43240,7 +43422,8 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43688,9 +43871,9 @@ module Aws::EC2
     #   tagged. When you create a launch template, you can specify tags for
     #   the following resource types only: `instance` \| `volume` \|
     #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`. If
-    #   the instance does include the resource type that you specify, the
-    #   instance launch fails. For example, not all instance types include
-    #   an Elastic GPU.
+    #   the instance does not include the resource type that you specify,
+    #   the instance launch fails. For example, not all instance types
+    #   include an Elastic GPU.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #
@@ -53948,8 +54131,7 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   One or more security group IDs. You can create a security group
-    #   using [CreateSecurityGroup][1]. You cannot specify both a security
-    #   group ID and security name in the same request.
+    #   using [CreateSecurityGroup][1].
     #
     #
     #
@@ -53958,8 +54140,7 @@ module Aws::EC2
     #
     # @!attribute [rw] security_groups
     #   One or more security group names. For a nondefault VPC, you must use
-    #   security group IDs instead. You cannot specify both a security group
-    #   ID and security name in the same request.
+    #   security group IDs instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_market_options

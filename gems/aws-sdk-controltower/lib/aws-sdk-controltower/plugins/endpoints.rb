@@ -66,6 +66,12 @@ module Aws::ControlTower
             Aws::ControlTower::Endpoints::GetEnabledControl.build(context)
           when :list_enabled_controls
             Aws::ControlTower::Endpoints::ListEnabledControls.build(context)
+          when :list_tags_for_resource
+            Aws::ControlTower::Endpoints::ListTagsForResource.build(context)
+          when :tag_resource
+            Aws::ControlTower::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::ControlTower::Endpoints::UntagResource.build(context)
           end
         end
       end

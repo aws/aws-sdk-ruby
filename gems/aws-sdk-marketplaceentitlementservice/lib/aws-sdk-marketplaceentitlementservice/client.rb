@@ -427,6 +427,8 @@ module Aws::MarketplaceEntitlementService
     #   * {Types::GetEntitlementsResult#entitlements #entitlements} => Array&lt;Types::Entitlement&gt;
     #   * {Types::GetEntitlementsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_entitlements({
@@ -473,7 +475,7 @@ module Aws::MarketplaceEntitlementService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplaceentitlementservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

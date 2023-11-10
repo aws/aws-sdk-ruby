@@ -40,10 +40,12 @@ module Aws::CostandUsageReportService
       include Aws::Structure
     end
 
-    # Requests a list of AWS Cost and Usage reports owned by the account.
+    # Requests a Amazon Web Services Cost and Usage Report list owned by the
+    # account.
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that AWS returns for the operation.
+    #   The maximum number of results that Amazon Web Services returns for
+    #   the operation.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -63,7 +65,8 @@ module Aws::CostandUsageReportService
     # response.
     #
     # @!attribute [rw] report_definitions
-    #   A list of AWS Cost and Usage reports owned by the account.
+    #   An Amazon Web Services Cost and Usage Report list owned by the
+    #   account.
     #   @return [Array<Types::ReportDefinition>]
     #
     # @!attribute [rw] next_token
@@ -110,14 +113,40 @@ module Aws::CostandUsageReportService
     end
 
     # @!attribute [rw] report_name
+    #   The report name of the report definition that tags are to be
+    #   returned for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :report_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags assigned to the report definition resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_name
     #   The name of the report that you want to create. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #   @return [String]
     #
     # @!attribute [rw] report_definition
-    #   The definition of AWS Cost and Usage Report. You can specify the
-    #   report name, time unit, report format, compression format, S3
-    #   bucket, additional artifacts, and schema elements in the definition.
+    #   The definition of Amazon Web Services Cost and Usage Report. You can
+    #   specify the report name, time unit, report format, compression
+    #   format, S3 bucket, additional artifacts, and schema elements in the
+    #   definition.
     #   @return [Types::ReportDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinitionRequest AWS API Documentation
@@ -140,10 +169,15 @@ module Aws::CostandUsageReportService
     #   content consists of the detailed metadata and data file information.
     #   @return [Types::ReportDefinition]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the report definition resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionRequest AWS API Documentation
     #
     class PutReportDefinitionRequest < Struct.new(
-      :report_definition)
+      :report_definition,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -155,9 +189,10 @@ module Aws::CostandUsageReportService
     #
     class PutReportDefinitionResponse < Aws::EmptyStructure; end
 
-    # The definition of AWS Cost and Usage Report. You can specify the
-    # report name, time unit, report format, compression format, S3 bucket,
-    # additional artifacts, and schema elements in the definition.
+    # The definition of Amazon Web Services Cost and Usage Report. You can
+    # specify the report name, time unit, report format, compression format,
+    # S3 bucket, additional artifacts, and schema elements in the
+    # definition.
     #
     # @!attribute [rw] report_name
     #   The name of the report that you want to create. The name must be
@@ -169,11 +204,11 @@ module Aws::CostandUsageReportService
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format that AWS saves the report in.
+    #   The format that Amazon Web Services saves the report in.
     #   @return [String]
     #
     # @!attribute [rw] compression
-    #   The compression format that AWS uses for the report.
+    #   The compression format that Amazon Web Services uses for the report.
     #   @return [String]
     #
     # @!attribute [rw] additional_schema_elements
@@ -182,16 +217,18 @@ module Aws::CostandUsageReportService
     #   @return [Array<String>]
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket where AWS delivers the report.
+    #   The S3 bucket where Amazon Web Services delivers the report.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
-    #   The prefix that AWS adds to the report name when AWS delivers the
-    #   report. Your prefix can't include spaces.
+    #   The prefix that Amazon Web Services adds to the report name when
+    #   Amazon Web Services delivers the report. Your prefix can't include
+    #   spaces.
     #   @return [String]
     #
     # @!attribute [rw] s3_region
-    #   The region of the S3 bucket that AWS delivers the report into.
+    #   The region of the S3 bucket that Amazon Web Services delivers the
+    #   report into.
     #   @return [String]
     #
     # @!attribute [rw] additional_artifacts
@@ -213,9 +250,17 @@ module Aws::CostandUsageReportService
     #   @return [String]
     #
     # @!attribute [rw] billing_view_arn
-    #   The Amazon resource name of the billing view. You can get this value
-    #   by using the billing view service public APIs.
+    #   The Amazon resource name of the billing view. The `BillingViewArn`
+    #   is needed to create Amazon Web Services Cost and Usage Report for
+    #   each billing group maintained in the Amazon Web Services Billing
+    #   Conductor service. The `BillingViewArn` for a billing group can be
+    #   constructed as:
+    #   `arn:aws:billing::payer-account-id:billingview/billing-group-primary-account-id`
     #   @return [String]
+    #
+    # @!attribute [rw] report_status
+    #   The status of the report.
+    #   @return [Types::ReportStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportDefinition AWS API Documentation
     #
@@ -231,7 +276,8 @@ module Aws::CostandUsageReportService
       :additional_artifacts,
       :refresh_closed_reports,
       :report_versioning,
-      :billing_view_arn)
+      :billing_view_arn,
+      :report_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -251,8 +297,111 @@ module Aws::CostandUsageReportService
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # A two element dictionary with a `lastDelivery` and `lastStatus` key
+    # whose values describe the date and status of the last delivered report
+    # for a particular report definition.
+    #
+    # @!attribute [rw] last_delivery
+    #   A timestamp that gives the date of a report delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status
+    #   An enum that gives the status of a report delivery.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportStatus AWS API Documentation
+    #
+    class ReportStatus < Struct.new(
+      :last_delivery,
+      :last_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified report (`ReportName`) in the request doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   A message to show the detail of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a tag. A tag is a key-value pair. You can add up to 50 tags
+    # to a report definition.
+    #
+    # @!attribute [rw] key
+    #   The key of the tag. Tag keys are case sensitive. Each report
+    #   definition can only have up to one tag with the same key. If you try
+    #   to add an existing tag with the same key, the existing tag value
+    #   will be updated to the new value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag. Tag values are case-sensitive. This can be an
+    #   empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_name
+    #   The report name of the report definition that tags are to be
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the report definition resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :report_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] report_name
+    #   The report name of the report definition that tags are to be
+    #   disassociated from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tags to be disassociated from the report definition resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :report_name,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   A message to show the detail of the exception.

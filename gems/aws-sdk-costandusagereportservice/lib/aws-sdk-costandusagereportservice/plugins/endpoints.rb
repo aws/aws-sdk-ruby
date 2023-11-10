@@ -60,10 +60,16 @@ module Aws::CostandUsageReportService
             Aws::CostandUsageReportService::Endpoints::DeleteReportDefinition.build(context)
           when :describe_report_definitions
             Aws::CostandUsageReportService::Endpoints::DescribeReportDefinitions.build(context)
+          when :list_tags_for_resource
+            Aws::CostandUsageReportService::Endpoints::ListTagsForResource.build(context)
           when :modify_report_definition
             Aws::CostandUsageReportService::Endpoints::ModifyReportDefinition.build(context)
           when :put_report_definition
             Aws::CostandUsageReportService::Endpoints::PutReportDefinition.build(context)
+          when :tag_resource
+            Aws::CostandUsageReportService::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::CostandUsageReportService::Endpoints::UntagResource.build(context)
           end
         end
       end

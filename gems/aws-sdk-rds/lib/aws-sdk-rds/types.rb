@@ -5890,8 +5890,8 @@ module Aws::RDS
     end
 
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as
-    #   the source for replication.
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -5906,8 +5906,8 @@ module Aws::RDS
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management System (Amazon Web Services
     #   KMS) key identifier for the key to use to encrypt the integration.
-    #   If you don't specify an encryption key, Aurora uses a default
-    #   Amazon Web Services owned key.
+    #   If you don't specify an encryption key, RDS uses a default Amazon
+    #   Web Services owned key.
     #   @return [String]
     #
     # @!attribute [rw] additional_encryption_context
@@ -7928,7 +7928,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_integrations
-    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   Indicates whether the DB engine version supports zero-ETL
     #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #
@@ -15029,17 +15029,11 @@ module Aws::RDS
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
 
-    # An Aurora zero-ETL integration with Amazon Redshift. For more
-    # information, see [Working with Amazon Aurora zero-ETL integrations
-    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    # A zero-ETL integration with Amazon Redshift.
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the Aurora DB cluster used as the
-    #   source for replication.
+    #   The Amazon Resource Name (ARN) of the database used as the source
+    #   for replication.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -25447,7 +25441,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_integrations
-    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   Indicates whether the DB engine version supports zero-ETL
     #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #

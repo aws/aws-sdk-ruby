@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.419.0 (2023-11-10)
+------------------
+
+* Feature - EC2 adds API updates to enable ENA Express at instance launch time.
+
 1.418.0 (2023-11-09)
 ------------------
 

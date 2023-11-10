@@ -157,6 +157,10 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be applied to the `EnabledControl` resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] target_identifier
     #   The ARN of the organizational unit. For information on how to find
     #   the `targetIdentifier`, see [the overview page][1].
@@ -170,11 +174,16 @@ module Aws::ControlTower
     #
     class EnableControlInput < Struct.new(
       :control_identifier,
+      :tags,
       :target_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledControl` resource.
+    #   @return [String]
+    #
     # @!attribute [rw] operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
     #   The operation is available for 90 days.
@@ -183,6 +192,7 @@ module Aws::ControlTower
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableControlOutput AWS API Documentation
     #
     class EnableControlOutput < Struct.new(
+      :arn,
       :operation_identifier)
       SENSITIVE = []
       include Aws::Structure
@@ -237,21 +247,14 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # A summary of enabled controls.
+    # Returns a summary of information about an enabled control.
     #
     # @!attribute [rw] arn
     #   The ARN of the enabled control.
     #   @return [String]
     #
     # @!attribute [rw] control_identifier
-    #   The ARN of the control. Only **Strongly recommended** and
-    #   **Elective** controls are permitted, with the exception of the
-    #   **Region deny** control. For information on how to find the
-    #   `controlIdentifier`, see [the overview page][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
+    #   The `controlIdentifier` of the enabled control.
     #   @return [String]
     #
     # @!attribute [rw] drift_status_summary
@@ -259,9 +262,7 @@ module Aws::ControlTower
     #   @return [Types::DriftStatusSummary]
     #
     # @!attribute [rw] status_summary
-    #   <zonbook />
-    #
-    #   <xhtml />
+    #   A short description of the status of the enabled control.
     #   @return [Types::EnablementStatusSummary]
     #
     # @!attribute [rw] target_identifier
@@ -334,7 +335,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] enabled_control_identifier
-    #   The ARN of the enabled control.
+    #   The `controlIdentifier` of the enabled control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetEnabledControlInput AWS API Documentation
@@ -417,6 +418,30 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags, as `key:value` strings.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An AWS Region in which AWS Control Tower expects to find the control
     # deployed.
     #
@@ -468,6 +493,27 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to be tagged.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be applied to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -495,6 +541,27 @@ module Aws::ControlTower
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Tag keys to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # The input fails to satisfy the constraints specified by an AWS
     # service.

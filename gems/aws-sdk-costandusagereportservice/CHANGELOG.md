@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-11-10)
+------------------
+
+* Feature - This release adds support for tagging and customers can now tag report definitions. Additionally, ReportStatus is now added to report definition to show when the last delivered time stamp and if it succeeded or not.
+
 1.50.0 (2023-09-27)
 ------------------
 

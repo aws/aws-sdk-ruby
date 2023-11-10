@@ -7628,17 +7628,11 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a zero-ETL integration with Amazon Redshift. For more
-    # information, see [Working with Amazon Aurora zero-ETL integrations
-    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    # Creates a zero-ETL integration with Amazon Redshift.
     #
     # @option params [required, String] :source_arn
-    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the
-    #   source for replication.
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
     #
     # @option params [required, String] :target_arn
     #   The ARN of the Redshift data warehouse to use as the target for
@@ -7650,7 +7644,7 @@ module Aws::RDS
     # @option params [String] :kms_key_id
     #   The Amazon Web Services Key Management System (Amazon Web Services
     #   KMS) key identifier for the key to use to encrypt the integration. If
-    #   you don't specify an encryption key, Aurora uses a default Amazon Web
+    #   you don't specify an encryption key, RDS uses a default Amazon Web
     #   Services owned key.
     #
     # @option params [Hash<String,String>] :additional_encryption_context
@@ -9792,13 +9786,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes a zero-ETL integration with Amazon Redshift. For more
-    # information, see [Deleting Amazon Aurora zero-ETL integrations with
-    # Amazon Redshift][1] in the *Amazon Aurora User Guide*
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html
+    # Deletes a zero-ETL integration with Amazon Redshift.
     #
     # @option params [required, String] :integration_identifier
     #   The unique identifier of the integration.
@@ -15024,14 +15012,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Describe one or more zero-ETL integration with Amazon Redshift. For
-    # more information, see [Viewing and monitoring Amazon Aurora zero-ETL
-    # integrations with Amazon Redshift][1] in the *Amazon Aurora User
-    # Guide*
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html
+    # Describe one or more zero-ETL integrations with Amazon Redshift.
     #
     # @option params [String] :integration_identifier
     #   The unique identifier of the integration.
@@ -29359,7 +29340,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.202.0'
+      context[:gem_version] = '1.203.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

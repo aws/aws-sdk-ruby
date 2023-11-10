@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.203.0 (2023-11-10)
+------------------
+
+* Feature - Updates Amazon RDS documentation for zero-ETL integrations.
+
 1.202.0 (2023-11-08)
 ------------------
 
