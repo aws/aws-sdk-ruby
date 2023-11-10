@@ -29,6 +29,9 @@ module Aws
 
       let(:identity_id) { 'identity_id' }
       let(:identity_pool_id) { 'pool_id' }
+      let(:logins) do
+        { 'login_provider' => 'login_token' }
+      end
 
       let(:resp) { double('client-resp', credentials: cognito_creds) }
 
@@ -134,8 +137,22 @@ module Aws
 
           expect(before_refresh_called).to be(true)
         end
-      end
 
+        it 'passes logins to the credentials' do
+          logins = { 'login_provider' => 'login_token' }
+          expect(client).to receive(:get_credentials_for_identity)
+            .with(identity_id: identity_id, logins: logins, custom_role_arn: nil)
+            .and_return(resp)
+
+          creds = CognitoIdentityCredentials.new(
+            client: client,
+            identity_id: identity_id,
+            logins: logins
+          )
+
+          expect(creds.logins).to eq(logins)
+        end
+      end
     end
   end
 end
