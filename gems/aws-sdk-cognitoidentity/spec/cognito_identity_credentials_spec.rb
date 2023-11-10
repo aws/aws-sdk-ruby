@@ -29,10 +29,6 @@ module Aws
 
       let(:identity_id) { 'identity_id' }
       let(:identity_pool_id) { 'pool_id' }
-      let(:logins) do
-        { 'login_provider' => 'login_token' }
-      end
-
       let(:resp) { double('client-resp', credentials: cognito_creds) }
 
       describe '#initialize' do
@@ -105,7 +101,7 @@ module Aws
       describe '#refresh' do
         it 'extracts credentials and expiration from the response' do
           expect(client).to receive(:get_credentials_for_identity)
-            .with(identity_id: identity_id, custom_role_arn: nil)
+            .with(identity_id: identity_id, custom_role_arn: nil, logins: {})
             .and_return(resp)
 
           creds = CognitoIdentityCredentials.new(
