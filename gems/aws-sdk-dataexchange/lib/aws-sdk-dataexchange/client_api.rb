@@ -736,7 +736,7 @@ module Aws::DataExchange
     NotificationDetails.add_member(:schema_change, Shapes::ShapeRef.new(shape: SchemaChangeRequestDetails, location_name: "SchemaChange"))
     NotificationDetails.struct_class = Types::NotificationDetails
 
-    OriginDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProductId"))
+    OriginDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: __string, location_name: "ProductId"))
     OriginDetails.struct_class = Types::OriginDetails
 
     RedshiftDataShareAsset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))

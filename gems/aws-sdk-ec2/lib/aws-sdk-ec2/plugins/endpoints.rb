@@ -592,6 +592,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeInstanceEventWindows.build(context)
           when :describe_instance_status
             Aws::EC2::Endpoints::DescribeInstanceStatus.build(context)
+          when :describe_instance_topology
+            Aws::EC2::Endpoints::DescribeInstanceTopology.build(context)
           when :describe_instance_type_offerings
             Aws::EC2::Endpoints::DescribeInstanceTypeOfferings.build(context)
           when :describe_instance_types

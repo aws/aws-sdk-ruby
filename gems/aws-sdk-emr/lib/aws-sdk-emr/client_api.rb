@@ -712,7 +712,7 @@ module Aws::EMR
     GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
 
     GetClusterSessionCredentialsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
-    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ExecutionRoleArn"))
+    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
     GetClusterSessionCredentialsInput.struct_class = Types::GetClusterSessionCredentialsInput
 
     GetClusterSessionCredentialsOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))

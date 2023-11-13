@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.420.0 (2023-11-13)
+------------------
+
+* Feature - Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
+
 1.419.0 (2023-11-10)
 ------------------
 

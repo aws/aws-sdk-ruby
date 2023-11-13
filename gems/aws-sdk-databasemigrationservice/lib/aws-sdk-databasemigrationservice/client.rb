@@ -630,9 +630,10 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :engine
     #   The type of database engine for the data provider. Valid values
-    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
-    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, and
+    #   `docdb`. A value of `"aurora"` represents Amazon Aurora
+    #   MySQL-Compatible Edition.
     #
     # @option params [required, Types::DataProviderSettings] :settings
     #   The settings in JSON format for a data provider.
@@ -1356,6 +1357,7 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       execute_timeout: 1,
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -1441,6 +1443,10 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       load_timeout: 1,
+    #       write_buffer_size: 1,
+    #       max_file_size: 1,
+    #       keep_csv_files: false,
     #     },
     #     resource_identifier: "String",
     #     doc_db_settings: {
@@ -1682,6 +1688,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.username #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -1760,6 +1767,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.username #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.ibm_db_2_settings.load_timeout #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.max_file_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.keep_csv_files #=> Boolean
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -2744,7 +2755,7 @@ module Aws::DatabaseMigrationService
     #   The description for the subnet group.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   One or more subnet IDs to be assigned to the subnet group.
+    #   Two or more subnet IDs to be assigned to the subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the subnet group.
@@ -3489,6 +3500,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.username #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -3567,6 +3579,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.username #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.ibm_db_2_settings.load_timeout #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.max_file_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.keep_csv_files #=> Boolean
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -4589,6 +4605,8 @@ module Aws::DatabaseMigrationService
     #   Filters applied to the data providers described in the form of
     #   key-value pairs.
     #
+    #   Valid filter names: data-provider-identifier
+    #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, DMS includes a
@@ -5131,6 +5149,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].my_sql_settings.username #=> String
     #   resp.endpoints[0].my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].my_sql_settings.execute_timeout #=> Integer
     #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -5209,6 +5228,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].ibm_db_2_settings.username #=> String
     #   resp.endpoints[0].ibm_db_2_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].ibm_db_2_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.load_timeout #=> Integer
+    #   resp.endpoints[0].ibm_db_2_settings.write_buffer_size #=> Integer
+    #   resp.endpoints[0].ibm_db_2_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].ibm_db_2_settings.keep_csv_files #=> Boolean
     #   resp.endpoints[0].doc_db_settings.username #=> String
     #   resp.endpoints[0].doc_db_settings.password #=> String
     #   resp.endpoints[0].doc_db_settings.server_name #=> String
@@ -7851,6 +7874,7 @@ module Aws::DatabaseMigrationService
     #   resp.replications[0].replication_create_time #=> Time
     #   resp.replications[0].replication_update_time #=> Time
     #   resp.replications[0].replication_last_stop_time #=> Time
+    #   resp.replications[0].replication_deprovision_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplications AWS API Documentation
     #
@@ -8324,9 +8348,10 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :engine
     #   The type of database engine for the data provider. Valid values
-    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
-    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, and
+    #   `docdb`. A value of `"aurora"` represents Amazon Aurora
+    #   MySQL-Compatible Edition.
     #
     # @option params [Boolean] :exact_settings
     #   If this attribute is Y, the current call to `ModifyDataProvider`
@@ -9028,6 +9053,7 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       execute_timeout: 1,
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -9113,6 +9139,10 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       load_timeout: 1,
+    #       write_buffer_size: 1,
+    #       max_file_size: 1,
+    #       keep_csv_files: false,
     #     },
     #     doc_db_settings: {
     #       username: "String",
@@ -9354,6 +9384,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.username #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -9432,6 +9463,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.username #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.ibm_db_2_settings.load_timeout #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.max_file_size #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.keep_csv_files #=> Boolean
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -11194,6 +11229,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.replication_create_time #=> Time
     #   resp.replication.replication_update_time #=> Time
     #   resp.replication.replication_last_stop_time #=> Time
+    #   resp.replication.replication_deprovision_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplication AWS API Documentation
     #
@@ -11611,6 +11647,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.replication_create_time #=> Time
     #   resp.replication.replication_update_time #=> Time
     #   resp.replication.replication_last_stop_time #=> Time
+    #   resp.replication.replication_deprovision_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplication AWS API Documentation
     #
@@ -11819,7 +11856,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

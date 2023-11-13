@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-11-13)
+------------------
+
+* Feature - Updated GetClusterSessionCredentials API  to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters to support IdentityCenter/PEZ integration.
+
 1.77.0 (2023-10-27)
 ------------------
 

@@ -1654,7 +1654,7 @@ module Aws::EMR
     # @option params [required, String] :cluster_id
     #   The unique identifier of the cluster.
     #
-    # @option params [required, String] :execution_role_arn
+    # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the runtime role for interactive
     #   workload submission on the cluster. The runtime role can be a
     #   cross-account IAM role. The runtime role ARN is a combination of
@@ -1670,7 +1670,7 @@ module Aws::EMR
     #
     #   resp = client.get_cluster_session_credentials({
     #     cluster_id: "XmlStringMaxLen256", # required
-    #     execution_role_arn: "ArnType", # required
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -4020,7 +4020,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

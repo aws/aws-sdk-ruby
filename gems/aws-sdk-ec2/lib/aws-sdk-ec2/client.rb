@@ -6312,8 +6312,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -6400,9 +6400,9 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -6455,9 +6455,9 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -6786,9 +6786,22 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mappings. This parameter cannot be used to modify the
-    #   encryption status of existing volumes or snapshots. To create an AMI
-    #   with encrypted snapshots, use the CopyImage action.
+    #   The block device mappings.
+    #
+    #   When using the CreateImage action:
+    #
+    #   * You can't change the volume size using the VolumeSize parameter. If
+    #     you want a different volume size, you must first change the volume
+    #     size of the source instance.
+    #
+    #   * You can't modify the encryption status of existing volumes or
+    #     snapshots. To create an AMI with volumes or snapshots that have a
+    #     different encryption status (for example, where the source volume
+    #     and snapshots are unencrypted, and you want to create an AMI with
+    #     encrypted volumes or snapshots), use the CopyImage action.
+    #
+    #   * The only option that can be changed for existing mappings or
+    #     snapshots is `DeleteOnTermination`.
     #
     # @option params [String] :description
     #   A description for the new image.
@@ -8252,8 +8265,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -8643,8 +8656,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -8808,9 +8821,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -13341,7 +13354,7 @@ module Aws::EC2
     #
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups to associate with the Verified Access
-    #   endpoint.
+    #   endpoint. Required if `AttachmentType` is set to `vpc`.
     #
     # @option params [Types::CreateVerifiedAccessEndpointLoadBalancerOptions] :load_balancer_options
     #   The load balancer details. This parameter is required if the endpoint
@@ -13379,7 +13392,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::CreateVerifiedAccessEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13507,7 +13520,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::CreateVerifiedAccessGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13698,7 +13711,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::CreateVerifiedAccessTrustProviderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18555,7 +18568,7 @@ module Aws::EC2
     # connection if it's in the `active` state. The owner of the requester
     # VPC can delete a VPC peering connection in the `pending-acceptance`
     # state. You cannot delete a VPC peering connection that's in the
-    # `failed` state.
+    # `failed` or `rejected` state.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21500,19 +21513,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describe details for Windows AMIs that are configured for faster
-    # launching.
+    # Describe details for Windows AMIs that are configured for Windows fast
+    # launch.
     #
     # @option params [Array<String>] :image_ids
-    #   Details for one or more Windows AMI image IDs.
+    #   Specify one or more Windows AMI image IDs for the request.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results.
     #
     #   * `resource-type` - The resource type for pre-provisioning.
-    #
-    #   * `launch-template` - The launch template that is associated with the
-    #     pre-provisioned Windows AMI.
     #
     #   * `owner-id` - The owner ID for the pre-provisioning resource.
     #
@@ -21960,9 +21970,9 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -22040,9 +22050,9 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -22095,9 +22105,9 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -24279,6 +24289,134 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes a tree-based hierarchy that represents the physical host
+    # placement of your EC2 instances within an Availability Zone or Local
+    # Zone. You can use this information to determine the relative proximity
+    # of your EC2 instances within the Amazon Web Services network to
+    # support your tightly coupled workloads.
+    #
+    # **Limitations**
+    #
+    # * Supported zones
+    #
+    #   * Availability Zone
+    #
+    #   * Local Zone
+    #
+    # * Supported instance types
+    #
+    #   * `hpc6a.48xlarge` \| `hpc6id.32xlarge` \| `hpc7a.12xlarge` \|
+    #     `hpc7a.24xlarge` \| `hpc7a.48xlarge` \| `hpc7a.96xlarge` \|
+    #     `hpc7g.4xlarge` \| `hpc7g.8xlarge` \| `hpc7g.16xlarge`
+    #
+    #   * `p3dn.24xlarge` \| `p4d.24xlarge` \| `p4de.24xlarge` \|
+    #     `p5.48xlarge`
+    #
+    #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge`
+    #
+    # For more information, see [Amazon EC2 instance topology][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You can't specify this parameter and the instance IDs parameter in
+    #   the same request.
+    #
+    #   Default: `20`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    #   Constraints: Maximum 100 explicitly specified instance IDs.
+    #
+    # @option params [Array<String>] :group_names
+    #   The name of the placement group that each instance is in.
+    #
+    #   Constraints: Maximum 100 explicitly specified placement group names.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The name of the Availability Zone (for
+    #     example, `us-west-2a`) or Local Zone (for example,
+    #     `us-west-2-lax-1b`) that the instance is in.
+    #
+    #   * `instance-type` - The instance type (for example, `p4d.24xlarge`) or
+    #     instance family (for example, `p4d*`). You can use the `*` wildcard
+    #     to match zero or more characters, or the `?` wildcard to match zero
+    #     or one character.
+    #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `usw2-az2`) or Local Zone (for example, `usw2-lax1-az1`) that the
+    #     instance is in.
+    #
+    # @return [Types::DescribeInstanceTopologyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceTopologyResult#instances #instances} => Array&lt;Types::InstanceTopology&gt;
+    #   * {Types::DescribeInstanceTopologyResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_topology({
+    #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
+    #     instance_ids: ["InstanceId"],
+    #     group_names: ["PlacementGroupName"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instances #=> Array
+    #   resp.instances[0].instance_id #=> String
+    #   resp.instances[0].instance_type #=> String
+    #   resp.instances[0].group_name #=> String
+    #   resp.instances[0].network_nodes #=> Array
+    #   resp.instances[0].network_nodes[0] #=> String
+    #   resp.instances[0].availability_zone #=> String
+    #   resp.instances[0].zone_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTopology AWS API Documentation
+    #
+    # @overload describe_instance_topology(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_topology(params = {}, options = {})
+      req = build_request(:describe_instance_topology, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all instance types offered. The results can be
     # filtered by location (Region or Availability Zone). If no location is
     # specified, the instance types offered in the current Region are
@@ -26457,9 +26595,9 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -32127,9 +32265,9 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -32178,9 +32316,9 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -37431,22 +37569,22 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Discontinue faster launching for a Windows AMI, and clean up existing
-    # pre-provisioned snapshots. When you disable faster launching, the AMI
-    # uses the standard launch process for each instance. All
-    # pre-provisioned snapshots must be removed before you can enable faster
-    # launching again.
+    # Discontinue Windows fast launch for a Windows AMI, and clean up
+    # existing pre-provisioned snapshots. After you disable Windows fast
+    # launch, the AMI uses the standard launch process for each new
+    # instance. Amazon EC2 must remove all pre-provisioned snapshots before
+    # you can enable Windows fast launch again.
     #
-    # <note markdown="1"> To change these settings, you must own the AMI.
+    # <note markdown="1"> You can only change these settings for Windows AMIs that you own or
+    # that have been shared with you.
     #
     #  </note>
     #
     # @option params [required, String] :image_id
-    #   The ID of the image for which you’re turning off faster launching, and
-    #   removing pre-provisioned snapshots.
+    #   Specify the ID of the image for which to disable Windows fast launch.
     #
     # @option params [Boolean] :force
-    #   Forces the image settings to turn off faster launching for your
+    #   Forces the image settings to turn off Windows fast launch for your
     #   Windows AMI. This parameter overrides any errors that are encountered
     #   while cleaning up resources in your account.
     #
@@ -37561,10 +37699,10 @@ module Aws::EC2
     # Sets the AMI state to `disabled` and removes all launch permissions
     # from the AMI. A disabled AMI can't be used for instance launches.
     #
-    # A disabled AMI can't be shared. If a public or shared AMI was
-    # previously shared, it is made private. If an AMI was shared with an
-    # Amazon Web Services account, organization, or Organizational Unit,
-    # they lose access to the disabled AMI.
+    # A disabled AMI can't be shared. If an AMI was public or previously
+    # shared, it is made private. If an AMI was shared with an Amazon Web
+    # Services account, organization, or Organizational Unit, they lose
+    # access to the disabled AMI.
     #
     # A disabled AMI does not appear in [DescribeImages][1] API calls by
     # default.
@@ -38082,7 +38220,7 @@ module Aws::EC2
     #
     #   resp = client.disassociate_client_vpn_target_network({
     #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #     association_id: "ClientVpnAssociationId", # required
+    #     association_id: "String", # required
     #     dry_run: false,
     #   })
     #
@@ -38880,7 +39018,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # When you enable faster launching for a Windows AMI, images are
+    # When you enable Windows fast launch for a Windows AMI, images are
     # pre-provisioned, using snapshots to launch instances up to 65% faster.
     # To create the optimized Windows image, Amazon EC2 launches an instance
     # and runs through Sysprep steps, rebooting as required. Then it creates
@@ -38888,22 +39026,23 @@ module Aws::EC2
     # reserved snapshots are automatically replenished as they are used,
     # depending on your settings for launch frequency.
     #
-    # <note markdown="1"> To change these settings, you must own the AMI.
+    # <note markdown="1"> You can only change these settings for Windows AMIs that you own or
+    # that have been shared with you.
     #
     #  </note>
     #
     # @option params [required, String] :image_id
-    #   The ID of the image for which you’re enabling faster launching.
+    #   Specify the ID of the image for which to enable Windows fast launch.
     #
     # @option params [String] :resource_type
-    #   The type of resource to use for pre-provisioning the Windows AMI for
-    #   faster launching. Supported values include: `snapshot`, which is the
+    #   The type of resource to use for pre-provisioning the AMI for Windows
+    #   fast launch. Supported values include: `snapshot`, which is the
     #   default value.
     #
     # @option params [Types::FastLaunchSnapshotConfigurationRequest] :snapshot_configuration
     #   Configuration settings for creating and managing the snapshots that
-    #   are used for pre-provisioning the Windows AMI for faster launching.
-    #   The associated `ResourceType` must be `snapshot`.
+    #   are used for pre-provisioning the AMI for Windows fast launch. The
+    #   associated `ResourceType` must be `snapshot`.
     #
     # @option params [Types::FastLaunchLaunchTemplateSpecificationRequest] :launch_template
     #   The launch template to use when launching Windows instances from
@@ -38912,7 +39051,7 @@ module Aws::EC2
     #
     # @option params [Integer] :max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the same
-    #   time to create pre-provisioned snapshots for Windows faster launching.
+    #   time to create pre-provisioned snapshots for Windows fast launch.
     #   Value must be `6` or greater.
     #
     # @option params [Boolean] :dry_run
@@ -40162,6 +40301,7 @@ module Aws::EC2
     #   * {Types::GetCoipPoolUsageResult#coip_pool_id #coip_pool_id} => String
     #   * {Types::GetCoipPoolUsageResult#coip_address_usages #coip_address_usages} => Array&lt;Types::CoipAddressUsage&gt;
     #   * {Types::GetCoipPoolUsageResult#local_gateway_route_table_id #local_gateway_route_table_id} => String
+    #   * {Types::GetCoipPoolUsageResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -40187,6 +40327,7 @@ module Aws::EC2
     #   resp.coip_address_usages[0].aws_service #=> String
     #   resp.coip_address_usages[0].co_ip #=> String
     #   resp.local_gateway_route_table_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCoipPoolUsage AWS API Documentation
     #
@@ -40777,8 +40918,8 @@ module Aws::EC2
     #         min: 1,
     #         max: 1,
     #       },
-    #       accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #       accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #       accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #       accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #       accelerator_total_memory_mi_b: {
     #         min: 1,
     #         max: 1,
@@ -41584,9 +41725,9 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
     #   resp.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
+    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -42652,8 +42793,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -45101,8 +45242,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -47697,8 +47838,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -48483,7 +48624,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::ModifyVerifiedAccessEndpointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -48621,7 +48762,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::ModifyVerifiedAccessGroupPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -48843,7 +48984,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #
     # @return [Types::ModifyVerifiedAccessTrustProviderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -50090,7 +50231,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Boolean] :skip_tunnel_replacement
-    #   Choose whether or not to trigger immediate tunnel replacement.
+    #   Choose whether or not to trigger immediate tunnel replacement. This is
+    #   only applicable when turning on or off `EnableTunnelLifecycleControl`.
     #
     #   Valid values: `True` \| `False`
     #
@@ -52843,8 +52985,8 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
-    #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #             accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #             accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -52912,8 +53054,8 @@ module Aws::EC2
     #                   min: 1,
     #                   max: 1,
     #                 },
-    #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
-    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p, inferentia, k520
+    #                 accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
+    #                 accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
     #                 accelerator_total_memory_mi_b: {
     #                   min: 1,
     #                   max: 1,
@@ -57642,7 +57784,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.419.0'
+      context[:gem_version] = '1.420.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

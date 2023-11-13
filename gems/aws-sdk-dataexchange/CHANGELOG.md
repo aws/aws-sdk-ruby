@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-11-13)
+------------------
+
+* Feature - Removed Required trait for DataSet.OriginDetails.ProductId.
+
 1.42.0 (2023-11-07)
 ------------------
 

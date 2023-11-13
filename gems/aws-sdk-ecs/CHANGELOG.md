@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2023-11-13)
+------------------
+
+* Feature - Adds a Client Token parameter to the ECS RunTask API. The Client Token parameter allows for idempotent RunTask requests.
+
 1.131.0 (2023-10-17)
 ------------------
 

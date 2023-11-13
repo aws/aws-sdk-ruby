@@ -1510,6 +1510,10 @@ module Aws::DatabaseMigrationService
     IBMDb2Settings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     IBMDb2Settings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     IBMDb2Settings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    IBMDb2Settings.add_member(:load_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "LoadTimeout"))
+    IBMDb2Settings.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "WriteBufferSize"))
+    IBMDb2Settings.add_member(:max_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxFileSize"))
+    IBMDb2Settings.add_member(:keep_csv_files, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "KeepCsvFiles"))
     IBMDb2Settings.struct_class = Types::IBMDb2Settings
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
@@ -1876,6 +1880,7 @@ module Aws::DatabaseMigrationService
     MySQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     MySQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     MySQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    MySQLSettings.add_member(:execute_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ExecuteTimeout"))
     MySQLSettings.struct_class = Types::MySQLSettings
 
     MySqlDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
@@ -2167,6 +2172,7 @@ module Aws::DatabaseMigrationService
     Replication.add_member(:replication_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationCreateTime"))
     Replication.add_member(:replication_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationUpdateTime"))
     Replication.add_member(:replication_last_stop_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationLastStopTime"))
+    Replication.add_member(:replication_deprovision_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationDeprovisionTime"))
     Replication.struct_class = Types::Replication
 
     ReplicationConfig.add_member(:replication_config_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationConfigIdentifier"))

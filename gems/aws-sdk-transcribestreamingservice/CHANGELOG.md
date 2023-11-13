@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2023-11-13)
+------------------
+
+* Feature - This release enables customers to call the AWS Transcribe streaming service with the capability of identifying multiple languages in the stream.
+
 1.53.0 (2023-09-27)
 ------------------
 

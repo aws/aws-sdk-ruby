@@ -2799,11 +2799,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -7796,9 +7796,22 @@ module Aws::EC2
     end
 
     # @!attribute [rw] block_device_mappings
-    #   The block device mappings. This parameter cannot be used to modify
-    #   the encryption status of existing volumes or snapshots. To create an
-    #   AMI with encrypted snapshots, use the CopyImage action.
+    #   The block device mappings.
+    #
+    #   When using the CreateImage action:
+    #
+    #   * You can't change the volume size using the VolumeSize parameter.
+    #     If you want a different volume size, you must first change the
+    #     volume size of the source instance.
+    #
+    #   * You can't modify the encryption status of existing volumes or
+    #     snapshots. To create an AMI with volumes or snapshots that have a
+    #     different encryption status (for example, where the source volume
+    #     and snapshots are unencrypted, and you want to create an AMI with
+    #     encrypted volumes or snapshots), use the CopyImage action.
+    #
+    #   * The only option that can be changed for existing mappings or
+    #     snapshots is `DeleteOnTermination`.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -11527,7 +11540,7 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups to associate with the Verified Access
-    #   endpoint.
+    #   endpoint. Required if `AttachmentType` is set to `vpc`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_balancer_options
@@ -11573,7 +11586,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointRequest AWS API Documentation
@@ -11599,7 +11612,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointResult AWS API Documentation
@@ -11647,7 +11660,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroupRequest AWS API Documentation
@@ -11665,7 +11678,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroupResult AWS API Documentation
@@ -11722,7 +11735,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstanceResult AWS API Documentation
@@ -11853,7 +11866,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderRequest AWS API Documentation
@@ -11875,7 +11888,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderResult AWS API Documentation
@@ -15069,7 +15082,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessEndpointResult AWS API Documentation
@@ -15115,7 +15128,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessGroupResult AWS API Documentation
@@ -15161,7 +15174,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessInstanceResult AWS API Documentation
@@ -15207,7 +15220,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessTrustProviderResult AWS API Documentation
@@ -17455,16 +17468,13 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_ids
-    #   Details for one or more Windows AMI image IDs.
+    #   Specify one or more Windows AMI image IDs for the request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   Use the following filters to streamline results.
     #
     #   * `resource-type` - The resource type for pre-provisioning.
-    #
-    #   * `launch-template` - The launch template that is associated with
-    #     the pre-provisioned Windows AMI.
     #
     #   * `owner-id` - The owner ID for the pre-provisioning resource.
     #
@@ -17525,17 +17535,17 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describe details about a fast-launch enabled Windows image that meets
-    # the requested criteria. Criteria are defined by the
+    # Describe details about a Windows image with Windows fast launch
+    # enabled that meets the requested criteria. Criteria are defined by the
     # `DescribeFastLaunchImages` action filters.
     #
     # @!attribute [rw] image_id
-    #   The image ID that identifies the fast-launch enabled Windows image.
+    #   The image ID that identifies the Windows fast launch enabled image.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type that is used for pre-provisioning the Windows AMI.
-    #   Supported values include: `snapshot`.
+    #   The resource type that Amazon EC2 uses for pre-provisioning the
+    #   Windows AMI. Supported values include: `snapshot`.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
@@ -17544,32 +17554,33 @@ module Aws::EC2
     #   @return [Types::FastLaunchSnapshotConfigurationResponse]
     #
     # @!attribute [rw] launch_template
-    #   The launch template that the fast-launch enabled Windows AMI uses
+    #   The launch template that the Windows fast launch enabled AMI uses
     #   when it launches Windows instances from pre-provisioned snapshots.
     #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner ID for the fast-launch enabled Windows AMI.
+    #   The owner ID for the Windows fast launch enabled AMI.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified Windows
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that faster launching for the Windows AMI changed to the
+    #   The reason that Windows fast launch for the AMI changed to the
     #   current state.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that faster launching for the Windows AMI changed to the
-    #   current state.
+    #   The time that Windows fast launch for the AMI changed to the current
+    #   state.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesSuccessItem AWS API Documentation
@@ -19404,6 +19415,96 @@ module Aws::EC2
     #
     class DescribeInstanceStatusResult < Struct.new(
       :instance_statuses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You can't specify this parameter and the instance IDs parameter in
+    #   the same request.
+    #
+    #   Default: `20`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    #   Constraints: Maximum 100 explicitly specified instance IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_names
+    #   The name of the placement group that each instance is in.
+    #
+    #   Constraints: Maximum 100 explicitly specified placement group names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The name of the Availability Zone (for
+    #     example, `us-west-2a`) or Local Zone (for example,
+    #     `us-west-2-lax-1b`) that the instance is in.
+    #
+    #   * `instance-type` - The instance type (for example, `p4d.24xlarge`)
+    #     or instance family (for example, `p4d*`). You can use the `*`
+    #     wildcard to match zero or more characters, or the `?` wildcard to
+    #     match zero or one character.
+    #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `usw2-az2`) or Local Zone (for example, `usw2-lax1-az1`) that the
+    #     instance is in.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTopologyRequest AWS API Documentation
+    #
+    class DescribeInstanceTopologyRequest < Struct.new(
+      :dry_run,
+      :next_token,
+      :max_results,
+      :instance_ids,
+      :group_names,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the topology of each instance.
+    #   @return [Array<Types::InstanceTopology>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTopologyResult AWS API Documentation
+    #
+    class DescribeInstanceTopologyResult < Struct.new(
+      :instances,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -25746,7 +25847,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoints
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoints.
     #   @return [Array<Types::VerifiedAccessEndpoint>]
     #
     # @!attribute [rw] next_token
@@ -25806,7 +25907,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_groups
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access groups.
     #   @return [Array<Types::VerifiedAccessGroup>]
     #
     # @!attribute [rw] next_token
@@ -25861,7 +25962,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] logging_configurations
-    #   The current logging configuration for the Verified Access instances.
+    #   The logging configuration for the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstanceLoggingConfiguration>]
     #
     # @!attribute [rw] next_token
@@ -25916,7 +26017,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instances
-    #   The IDs of the Verified Access instances.
+    #   Details about the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstance>]
     #
     # @!attribute [rw] next_token
@@ -25971,7 +26072,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_providers
-    #   The IDs of the Verified Access trust providers.
+    #   Details about the Verified Access trust providers.
     #   @return [Array<Types::VerifiedAccessTrustProvider>]
     #
     # @!attribute [rw] next_token
@@ -27505,11 +27606,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -27792,12 +27893,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which you’re turning off faster launching,
-    #   and removing pre-provisioned snapshots.
+    #   Specify the ID of the image for which to disable Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   Forces the image settings to turn off faster launching for your
+    #   Forces the image settings to turn off Windows fast launch for your
     #   Windows AMI. This parameter overrides any errors that are
     #   encountered while cleaning up resources in your account.
     #   @return [Boolean]
@@ -27820,19 +27921,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which faster-launching has been turned off.
+    #   The ID of the image for which Windows fast launch was disabled.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   The pre-provisioning resource type that must be cleaned after
-    #   turning off faster launching for the Windows AMI. Supported values
-    #   include: `snapshot`.
+    #   turning off Windows fast launch for the Windows AMI. Supported
+    #   values include: `snapshot`.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
-    #   Parameters that were used for faster launching for the Windows AMI
-    #   before faster launching was turned off. This informs the clean-up
-    #   process.
+    #   Parameters that were used for Windows fast launch for the Windows
+    #   AMI before Windows fast launch was disabled. This informs the
+    #   clean-up process.
     #   @return [Types::FastLaunchSnapshotConfigurationResponse]
     #
     # @!attribute [rw] launch_template
@@ -27842,27 +27943,28 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner of the Windows AMI for which faster launching was turned
-    #   off.
+    #   The owner of the Windows AMI for which Windows fast launch was
+    #   disabled.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified Windows
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that the state changed for faster launching for the
+    #   The reason that the state changed for Windows fast launch for the
     #   Windows AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that the state changed for faster launching for the Windows
-    #   AMI.
+    #   The time that the state changed for Windows fast launch for the
+    #   Windows AMI.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastLaunchResult AWS API Documentation
@@ -29941,19 +30043,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which you’re enabling faster launching.
+    #   Specify the ID of the image for which to enable Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to use for pre-provisioning the Windows AMI for
-    #   faster launching. Supported values include: `snapshot`, which is the
+    #   The type of resource to use for pre-provisioning the AMI for Windows
+    #   fast launch. Supported values include: `snapshot`, which is the
     #   default value.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
     #   Configuration settings for creating and managing the snapshots that
-    #   are used for pre-provisioning the Windows AMI for faster launching.
-    #   The associated `ResourceType` must be `snapshot`.
+    #   are used for pre-provisioning the AMI for Windows fast launch. The
+    #   associated `ResourceType` must be `snapshot`.
     #   @return [Types::FastLaunchSnapshotConfigurationRequest]
     #
     # @!attribute [rw] launch_template
@@ -29964,8 +30066,8 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching. Value must be `6` or greater.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch. Value must be `6` or greater.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -29989,13 +30091,13 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The image ID that identifies the Windows AMI for which faster
-    #   launching was enabled.
+    #   The image ID that identifies the AMI for which Windows fast launch
+    #   was enabled.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource that was defined for pre-provisioning the
-    #   Windows AMI for faster launching.
+    #   The type of resource that was defined for pre-provisioning the AMI
+    #   for Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
@@ -30012,27 +30114,25 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner ID for the Windows AMI for which faster launching was
-    #   enabled.
+    #   The owner ID for the AMI for which Windows fast launch was enabled.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that the state changed for faster launching for the
-    #   Windows AMI.
+    #   The reason that the state changed for Windows fast launch for the
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that the state changed for faster launching for the Windows
-    #   AMI.
+    #   The time that the state changed for Windows fast launch for the AMI.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastLaunchResult AWS API Documentation
@@ -31581,7 +31681,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Request to create a launch template for a fast-launch enabled Windows
+    # Request to create a launch template for a Windows fast launch enabled
     # AMI.
     #
     # <note markdown="1"> Note - You can specify either the `LaunchTemplateName` or the
@@ -31590,18 +31690,18 @@ module Aws::EC2
     #  </note>
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the ID of the launch template that the AMI should use for
+    #   Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the name of the launch template that the AMI should use for
+    #   Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the version of the launch template that the AMI should use
+    #   for Windows fast launch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationRequest AWS API Documentation
@@ -31614,22 +31714,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Identifies the launch template to use for faster launching of the
-    # Windows AMI.
+    # Identifies the launch template that the AMI uses for Windows fast
+    # launch.
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template for faster launching of the associated
-    #   Windows AMI.
+    #   The ID of the launch template that the AMI uses for Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template for faster launching of the
-    #   associated Windows AMI.
+    #   The name of the launch template that the AMI uses for Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the launch template for faster launching of the
-    #   associated Windows AMI.
+    #   The version of the launch template that the AMI uses for Windows
+    #   fast launch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationResponse AWS API Documentation
@@ -31643,11 +31743,11 @@ module Aws::EC2
     end
 
     # Configuration settings for creating and managing pre-provisioned
-    # snapshots for a fast-launch enabled Windows AMI.
+    # snapshots for a Windows fast launch enabled AMI.
     #
     # @!attribute [rw] target_resource_count
     #   The number of pre-provisioned snapshots to keep on hand for a
-    #   fast-launch enabled Windows AMI.
+    #   Windows fast launch enabled AMI.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationRequest AWS API Documentation
@@ -31659,11 +31759,11 @@ module Aws::EC2
     end
 
     # Configuration settings for creating and managing pre-provisioned
-    # snapshots for a fast-launch enabled Windows AMI.
+    # snapshots for a Windows fast launch enabled Windows AMI.
     #
     # @!attribute [rw] target_resource_count
     #   The number of pre-provisioned snapshots requested to keep on hand
-    #   for a fast-launch enabled Windows AMI.
+    #   for a Windows fast launch enabled AMI.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationResponse AWS API Documentation
@@ -33192,12 +33292,18 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCoipPoolUsageResult AWS API Documentation
     #
     class GetCoipPoolUsageResult < Struct.new(
       :coip_pool_id,
       :coip_address_usages,
-      :local_gateway_route_table_id)
+      :local_gateway_route_table_id,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40284,6 +40390,49 @@ module Aws::EC2
     class InstanceTagNotificationAttribute < Struct.new(
       :instance_tag_keys,
       :include_all_tags_of_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the instance topology.
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group that the instance is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_nodes
+    #   The network nodes. The nodes are hashed based on your account.
+    #   Instances from different accounts running under the same droplet
+    #   will return a different hashed list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone or Local Zone that the instance is
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_id
+    #   The ID of the Availability Zone or Local Zone that the instance is
+    #   in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTopology AWS API Documentation
+    #
+    class InstanceTopology < Struct.new(
+      :instance_id,
+      :instance_type,
+      :group_name,
+      :network_nodes,
+      :availability_zone,
+      :zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47668,7 +47817,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyRequest AWS API Documentation
@@ -47693,7 +47842,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyResult AWS API Documentation
@@ -47762,7 +47911,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The Verified Access endpoint details.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointResult AWS API Documentation
@@ -47806,7 +47955,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyRequest AWS API Documentation
@@ -47831,7 +47980,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyResult AWS API Documentation
@@ -47889,7 +48038,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   Details of Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupResult AWS API Documentation
@@ -47991,7 +48140,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceResult AWS API Documentation
@@ -48082,7 +48231,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderRequest AWS API Documentation
@@ -48099,7 +48248,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderResult AWS API Documentation
@@ -48863,7 +49012,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] skip_tunnel_replacement
-    #   Choose whether or not to trigger immediate tunnel replacement.
+    #   Choose whether or not to trigger immediate tunnel replacement. This
+    #   is only applicable when turning on or off
+    #   `EnableTunnelLifecycleControl`.
     #
     #   Valid values: `True` \| `False`
     #   @return [Boolean]
@@ -48981,11 +49132,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] dpd_timeout_seconds
-    #   The number of seconds after which a DPD timeout occurs.
+    #   The number of seconds after which a DPD timeout occurs. A DPD
+    #   timeout of 40 seconds means that the VPN endpoint will consider the
+    #   peer dead 30 seconds after the first failed keep-alive.
     #
     #   Constraints: A value greater than or equal to 30.
     #
-    #   Default: `30`
+    #   Default: `40`
     #   @return [Integer]
     #
     # @!attribute [rw] dpd_timeout_action
@@ -64330,7 +64483,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessEndpoint AWS API Documentation
@@ -64471,7 +64624,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessGroup AWS API Documentation
@@ -64518,7 +64671,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] fips_enabled
-    #   Describes whether support for Federal Information Processing
+    #   Indicates whether support for Federal Information Processing
     #   Standards (FIPS) is enabled on the instance.
     #   @return [Boolean]
     #
@@ -64676,13 +64829,14 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestinationOptions]
     #
     # @!attribute [rw] log_version
-    #   The logging version to use.
+    #   The logging version.
     #
     #   Valid values: `ocsf-0.1` \| `ocsf-1.0.0-rc.2`
     #   @return [String]
     #
     # @!attribute [rw] include_trust_context
-    #   Include trust data sent by trust providers into the logs.
+    #   Indicates whether to include trust data sent by trust providers in
+    #   the logs.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogOptions AWS API Documentation
@@ -64776,11 +64930,11 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestination]
     #
     # @!attribute [rw] log_version
-    #   Describes current setting for the logging version.
+    #   The log version.
     #   @return [String]
     #
     # @!attribute [rw] include_trust_context
-    #   Describes current setting for including trust data into the logs.
+    #   Indicates whether trust data is included in the logs.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogs AWS API Documentation
@@ -64820,17 +64974,17 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the options in use for server side encryption.
+    # The options in use for server side encryption.
     #
     # @!attribute [rw] customer_managed_key_enabled
-    #   Describes the use of customer managed KMS keys for server side
-    #   encryption.
+    #   Indicates whether customer managed KMS keys are in use for server
+    #   side encryption.
     #
     #   Valid values: `True` \| `False`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_arn
-    #   Describes the ARN of the KMS key.
+    #   The ARN of the KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessSseSpecificationResponse AWS API Documentation
@@ -64891,7 +65045,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessTrustProvider AWS API Documentation
@@ -64954,7 +65108,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] last_status_change
-    #   The date and time of the last change in status.
+    #   The date and time of the last change in status. This field is
+    #   updated when changes in IKE (Phase 1), IPSec (Phase 2), or BGP
+    #   status are detected.
     #   @return [Time]
     #
     # @!attribute [rw] outside_ip_address
