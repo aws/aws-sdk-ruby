@@ -23,7 +23,7 @@ module Aws
     #
     # ## Refreshing Credentials from Identity Service
     #
-    # The CognitoIdentityCredentials will auto-refresh the AWS credentials from
+    # The `CognitoIdentityCredentials` will auto-refresh the AWS credentials from
     # Cognito.  In addition to AWS credentials expiring after a given amount of
     # time, the login token from the identity provider will also expire.
     # Once this token expires, it will not be usable to refresh AWS credentials,
@@ -32,19 +32,18 @@ module Aws
     # supported by most identity providers. Consult the documentation for
     # the identity provider for refreshing tokens. Once the refreshed token is
     # acquired, you should make sure to update this new token in the
-    # CognitoIdentityCredentials object's {logins} property. The following
+    # `CognitoIdentityCredentials` object's {logins} property. The following
     # code will update the WebIdentityToken, assuming you have retrieved
     # an updated token from the identity provider:
     #
-    #     AWS.config.credentials.logins['graph.facebook.com'] = updatedToken;
-    #     AWS.config.credentials.refresh!  # required only if authentication state has changed
+    #     cognito_credentials.logins['graph.facebook.com'] = updatedToken;
+    #     cognito_credentials.refresh!  # required only if authentication state has changed
     #
-    # The CognitoIdentityCredentials also provides a `before_refresh` callback
+    # The `CognitoIdentityCredentials` also provides a `before_refresh` callback
     # that can be used to help manage refreshing identity provider tokens.
     # `before_refresh` is called when AWS credentials are required and need
     # to be refreshed and it has access to the CognitoIdentityCredentials object.
     class CognitoIdentityCredentials
-
       include CredentialProvider
       include RefreshingCredentials
 
@@ -54,8 +53,8 @@ module Aws
       #   identifier in the format REGION:GUID
       #
       # @option options [String] :identity_pool_id Required unless identity_id
-      #   is provided. A Amazon Cognito
-      #   Identity Pool ID)in the format REGION:GUID.
+      #   is provided. An Amazon Cognito Identity Pool ID in the
+      #   format REGION:GUID.
       #
       # @option options [Hash<String,String>] :logins A set of optional
       #   name-value pairs that map provider names to provider tokens.
@@ -69,16 +68,15 @@ module Aws
       #   that do not support role customization.
       #
       # @option options [Callable] before_refresh Proc called before
-      #   credentials are refreshed from Cognito.  Useful for updating logins/
-      #   auth tokens. `before_refresh` is called when AWS credentials are
-      #   required and need to be refreshed. Login tokens can be refreshed using
-      #   the following example:
+      #   credentials are refreshed from Cognito. `before_refresh` is called
+      #   when AWS credentials are required and need to be refreshed.
+      #   Login tokens can be refreshed using the following example:
       #
       #      before_refresh = Proc.new do |cognito_credentials| do
       #        cognito_credentials.logins['graph.facebook.com'] = update_token
       #      end
       #
-      # @option options [STS::CognitoIdentity] :client Optional CognitoIdentity
+      # @option options [CognitoIdentity::Client] :client Optional CognitoIdentity
       #   client. If not provided, a client will be constructed.
       def initialize(options = {})
         @identity_pool_id = options.delete(:identity_pool_id)
@@ -88,9 +86,9 @@ module Aws
         @async_refresh = false
 
         client_opts = {}
-        options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
+        options.each_pair { |k, v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
 
-        if !@identity_pool_id && !@identity_id
+        unless @identity_pool_id || @identity_id
           raise ArgumentError,
                 'Must provide either identity_pool_id or identity_id'
         end
@@ -109,15 +107,16 @@ module Aws
 
       # @return [String]
       def identity_id
-        @identity_id ||= @client
-                         .get_id(identity_pool_id: @identity_pool_id)
-                         .identity_id
+        @identity_id ||= @client.get_id(
+          identity_pool_id: @identity_pool_id,
+          logins: @logins
+        ).identity_id
       end
 
       private
 
       def refresh
-        @before_refresh.call(self) if @before_refresh
+        @before_refresh&.call(self)
 
         resp = @client.get_credentials_for_identity(
           identity_id: identity_id,
@@ -135,4 +134,3 @@ module Aws
     end
   end
 end
-

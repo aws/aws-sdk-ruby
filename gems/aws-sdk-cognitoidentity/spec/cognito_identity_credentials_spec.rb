@@ -87,7 +87,7 @@ module Aws
 
         it 'gets identity_id from the identity_pool_id' do
           expect(client).to receive(:get_id)
-            .with(identity_pool_id: identity_pool_id)
+            .with(identity_pool_id: identity_pool_id, logins: {})
             .and_return(double("getid", identity_id: identity_id))
 
           creds = CognitoIdentityCredentials.new(
