@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix exception handling with event streaming operations.
+
 1.56.0 (2023-09-27)
 ------------------
 
