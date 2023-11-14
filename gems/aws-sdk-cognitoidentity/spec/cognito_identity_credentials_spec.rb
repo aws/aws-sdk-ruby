@@ -29,6 +29,9 @@ module Aws
 
       let(:identity_id) { 'identity_id' }
       let(:identity_pool_id) { 'pool_id' }
+      let(:logins) do
+        { 'login_provider' => 'login_token' }
+      end
       let(:resp) { double('client-resp', credentials: cognito_creds) }
 
       describe '#initialize' do
@@ -87,11 +90,13 @@ module Aws
 
         it 'gets identity_id from the identity_pool_id' do
           expect(client).to receive(:get_id)
-            .with(identity_pool_id: identity_pool_id, logins: {})
+            .with(identity_pool_id: identity_pool_id, logins: logins)
             .and_return(double("getid", identity_id: identity_id))
 
           creds = CognitoIdentityCredentials.new(
-            client: client, identity_pool_id: identity_pool_id
+            client: client,
+            identity_pool_id: identity_pool_id,
+            logins: logins
           )
 
           expect(creds.identity_id).to eq(identity_id)
@@ -135,7 +140,6 @@ module Aws
         end
 
         it 'passes logins to the credentials' do
-          logins = { 'login_provider' => 'login_token' }
           expect(client).to receive(:get_credentials_for_identity)
             .with(identity_id: identity_id, logins: logins, custom_role_arn: nil)
             .and_return(resp)
