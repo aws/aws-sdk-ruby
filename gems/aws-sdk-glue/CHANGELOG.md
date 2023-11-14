@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2023-11-14)
+------------------
+
+* Feature - Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+
 1.158.0 (2023-11-02)
 ------------------
 

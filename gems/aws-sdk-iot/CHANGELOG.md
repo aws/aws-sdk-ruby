@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2023-11-14)
+------------------
+
+* Feature - This release introduces new attributes in API CreateSecurityProfile, UpdateSecurityProfile and DescribeSecurityProfile to support management of Metrics Export for AWS IoT Device Defender Detect.
+
 1.111.0 (2023-09-27)
 ------------------
 

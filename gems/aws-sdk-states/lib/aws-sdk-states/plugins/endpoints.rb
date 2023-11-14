@@ -102,6 +102,8 @@ module Aws::States
             Aws::States::Endpoints::ListTagsForResource.build(context)
           when :publish_state_machine_version
             Aws::States::Endpoints::PublishStateMachineVersion.build(context)
+          when :redrive_execution
+            Aws::States::Endpoints::RedriveExecution.build(context)
           when :send_task_failure
             Aws::States::Endpoints::SendTaskFailure.build(context)
           when :send_task_heartbeat

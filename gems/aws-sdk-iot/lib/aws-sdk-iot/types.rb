@@ -1300,12 +1300,18 @@ module Aws::IoT
     #   Suppresses alerts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] export_metric
+    #   Value indicates exporting metrics related to the behavior when it is
+    #   true.
+    #   @return [Boolean]
+    #
     class Behavior < Struct.new(
       :name,
       :metric,
       :metric_dimension,
       :criteria,
-      :suppress_alerts)
+      :suppress_alerts,
+      :export_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3773,6 +3779,10 @@ module Aws::IoT
     #   Metadata that can be used to manage the security profile.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class CreateSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_description,
@@ -3780,7 +3790,8 @@ module Aws::IoT
       :alert_targets,
       :additional_metrics_to_retain,
       :additional_metrics_to_retain_v2,
-      :tags)
+      :tags,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5999,6 +6010,10 @@ module Aws::IoT
     #   The time the security profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class DescribeSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn,
@@ -6009,7 +6024,8 @@ module Aws::IoT
       :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
-      :last_modified_date)
+      :last_modified_date,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11537,9 +11553,16 @@ module Aws::IoT
     #   The dimension of a metric. This can't be used with custom metrics.
     #   @return [Types::MetricDimension]
     #
+    # @!attribute [rw] export_metric
+    #   Value added in both Behavior and AdditionalMetricsToRetainV2 to
+    #   indicate if Device Defender Detect should export the corresponding
+    #   metrics.
+    #   @return [Boolean]
+    #
     class MetricToRetain < Struct.new(
       :metric,
-      :metric_dimension)
+      :metric_dimension,
+      :export_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11580,6 +11603,26 @@ module Aws::IoT
       :number,
       :numbers,
       :strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Set configurations for metrics export.
+    #
+    # @!attribute [rw] mqtt_topic
+    #   The MQTT topic that Device Defender Detect should publish messages
+    #   to for metrics export.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   This role ARN has permission to publish MQTT messages, after which
+    #   Device Defender Detect can assume the role and publish messages on
+    #   your behalf.
+    #   @return [String]
+    #
+    class MetricsExportConfig < Struct.new(
+      :mqtt_topic,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13239,7 +13282,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to return at one time. The response
+    #   might contain fewer results but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] query_version
@@ -14414,6 +14458,11 @@ module Aws::IoT
     #   information, see [Managed fields][1] in the *Amazon Web Services IoT
     #   Core Developer Guide*.
     #
+    #   <note markdown="1"> You can't modify managed fields by updating fleet indexing
+    #   configuration.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field
@@ -14537,7 +14586,18 @@ module Aws::IoT
     #
     # @!attribute [rw] managed_fields
     #   Contains fields that are indexed and whose types are already known
-    #   by the Fleet Indexing service.
+    #   by the Fleet Indexing service. This is an optional field. For more
+    #   information, see [Managed fields][1] in the *Amazon Web Services IoT
+    #   Core Developer Guide*.
+    #
+    #   <note markdown="1"> You can't modify managed fields by updating fleet indexing
+    #   configuration.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
@@ -16175,6 +16235,15 @@ module Aws::IoT
     #   `VersionConflictException` is thrown.
     #   @return [Integer]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
+    # @!attribute [rw] delete_metrics_export_config
+    #   Set the value as true to delete metrics export related
+    #   configurations.
+    #   @return [Boolean]
+    #
     class UpdateSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_description,
@@ -16185,7 +16254,9 @@ module Aws::IoT
       :delete_behaviors,
       :delete_alert_targets,
       :delete_additional_metrics_to_retain,
-      :expected_version)
+      :expected_version,
+      :metrics_export_config,
+      :delete_metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16239,6 +16310,10 @@ module Aws::IoT
     #   The time the security profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class UpdateSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn,
@@ -16249,7 +16324,8 @@ module Aws::IoT
       :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
-      :last_modified_date)
+      :last_modified_date,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end

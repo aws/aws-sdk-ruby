@@ -2998,6 +2998,9 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the security profile.
     #
+    # @option params [Types::MetricsExportConfig] :metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_name #security_profile_name} => String
@@ -3037,6 +3040,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #     alert_targets: {
@@ -3053,6 +3057,7 @@ module Aws::IoT
     #           dimension_name: "DimensionName", # required
     #           operator: "IN", # accepts IN, NOT_IN
     #         },
+    #         export_metric: false,
     #       },
     #     ],
     #     tags: [
@@ -3061,6 +3066,10 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     metrics_export_config: {
+    #       mqtt_topic: "MqttTopic", # required
+    #       role_arn: "RoleArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -3220,6 +3229,9 @@ module Aws::IoT
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
+    #
+    #  If the `ThingGroup` that you create has the exact same attributes as
+    # an existing `ThingGroup`, you will get a 200 success response.
     #
     #  </note>
     #
@@ -6393,6 +6405,7 @@ module Aws::IoT
     #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
     #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::DescribeSecurityProfileResponse#metrics_export_config #metrics_export_config} => Types::MetricsExportConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6427,6 +6440,7 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.behaviors[0].criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.behaviors[0].suppress_alerts #=> Boolean
+    #   resp.behaviors[0].export_metric #=> Boolean
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
@@ -6436,9 +6450,12 @@ module Aws::IoT
     #   resp.additional_metrics_to_retain_v2[0].metric #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
+    #   resp.additional_metrics_to_retain_v2[0].export_metric #=> Boolean
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.metrics_export_config.mqtt_topic #=> String
+    #   resp.metrics_export_config.role_arn #=> String
     #
     # @overload describe_security_profile(params = {})
     # @param [Hash] params ({})
@@ -8061,6 +8078,7 @@ module Aws::IoT
     #   resp.active_violations[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.active_violations[0].behavior.criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.active_violations[0].behavior.suppress_alerts #=> Boolean
+    #   resp.active_violations[0].behavior.export_metric #=> Boolean
     #   resp.active_violations[0].last_violation_value.count #=> Integer
     #   resp.active_violations[0].last_violation_value.cidrs #=> Array
     #   resp.active_violations[0].last_violation_value.cidrs[0] #=> String
@@ -11394,6 +11412,7 @@ module Aws::IoT
     #   resp.violation_events[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.violation_events[0].behavior.criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.violation_events[0].behavior.suppress_alerts #=> Boolean
+    #   resp.violation_events[0].behavior.export_metric #=> Boolean
     #   resp.violation_events[0].metric_value.count #=> Integer
     #   resp.violation_events[0].metric_value.cidrs #=> Array
     #   resp.violation_events[0].metric_value.cidrs[0] #=> String
@@ -12300,7 +12319,8 @@ module Aws::IoT
     #   no additional results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to return at one time. The response
+    #   might contain fewer results but will never contain more.
     #
     # @option params [String] :query_version
     #   The query version.
@@ -14304,6 +14324,12 @@ module Aws::IoT
     #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #
+    # @option params [Types::MetricsExportConfig] :metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #
+    # @option params [Boolean] :delete_metrics_export_config
+    #   Set the value as true to delete metrics export related configurations.
+    #
     # @return [Types::UpdateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSecurityProfileResponse#security_profile_name #security_profile_name} => String
@@ -14316,6 +14342,7 @@ module Aws::IoT
     #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
     #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::UpdateSecurityProfileResponse#metrics_export_config #metrics_export_config} => Types::MetricsExportConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -14351,6 +14378,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #     alert_targets: {
@@ -14367,12 +14395,18 @@ module Aws::IoT
     #           dimension_name: "DimensionName", # required
     #           operator: "IN", # accepts IN, NOT_IN
     #         },
+    #         export_metric: false,
     #       },
     #     ],
     #     delete_behaviors: false,
     #     delete_alert_targets: false,
     #     delete_additional_metrics_to_retain: false,
     #     expected_version: 1,
+    #     metrics_export_config: {
+    #       mqtt_topic: "MqttTopic", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     delete_metrics_export_config: false,
     #   })
     #
     # @example Response structure
@@ -14402,6 +14436,7 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.behaviors[0].criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.behaviors[0].suppress_alerts #=> Boolean
+    #   resp.behaviors[0].export_metric #=> Boolean
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
@@ -14411,9 +14446,12 @@ module Aws::IoT
     #   resp.additional_metrics_to_retain_v2[0].metric #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
+    #   resp.additional_metrics_to_retain_v2[0].export_metric #=> Boolean
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.metrics_export_config.mqtt_topic #=> String
+    #   resp.metrics_export_config.role_arn #=> String
     #
     # @overload update_security_profile(params = {})
     # @param [Hash] params ({})
@@ -14745,6 +14783,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #   })
@@ -14775,7 +14814,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -80,6 +80,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::BatchGetJobs.build(context)
           when :batch_get_partition
             Aws::Glue::Endpoints::BatchGetPartition.build(context)
+          when :batch_get_table_optimizer
+            Aws::Glue::Endpoints::BatchGetTableOptimizer.build(context)
           when :batch_get_triggers
             Aws::Glue::Endpoints::BatchGetTriggers.build(context)
           when :batch_get_workflows
@@ -134,6 +136,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::CreateSession.build(context)
           when :create_table
             Aws::Glue::Endpoints::CreateTable.build(context)
+          when :create_table_optimizer
+            Aws::Glue::Endpoints::CreateTableOptimizer.build(context)
           when :create_trigger
             Aws::Glue::Endpoints::CreateTrigger.build(context)
           when :create_user_defined_function
@@ -182,6 +186,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::DeleteSession.build(context)
           when :delete_table
             Aws::Glue::Endpoints::DeleteTable.build(context)
+          when :delete_table_optimizer
+            Aws::Glue::Endpoints::DeleteTableOptimizer.build(context)
           when :delete_table_version
             Aws::Glue::Endpoints::DeleteTableVersion.build(context)
           when :delete_trigger
@@ -290,6 +296,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetStatement.build(context)
           when :get_table
             Aws::Glue::Endpoints::GetTable.build(context)
+          when :get_table_optimizer
+            Aws::Glue::Endpoints::GetTableOptimizer.build(context)
           when :get_table_version
             Aws::Glue::Endpoints::GetTableVersion.build(context)
           when :get_table_versions
@@ -354,6 +362,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListSessions.build(context)
           when :list_statements
             Aws::Glue::Endpoints::ListStatements.build(context)
+          when :list_table_optimizer_runs
+            Aws::Glue::Endpoints::ListTableOptimizerRuns.build(context)
           when :list_triggers
             Aws::Glue::Endpoints::ListTriggers.build(context)
           when :list_workflows
@@ -454,6 +464,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::UpdateSourceControlFromJob.build(context)
           when :update_table
             Aws::Glue::Endpoints::UpdateTable.build(context)
+          when :update_table_optimizer
+            Aws::Glue::Endpoints::UpdateTableOptimizer.build(context)
           when :update_trigger
             Aws::Glue::Endpoints::UpdateTrigger.build(context)
           when :update_user_defined_function

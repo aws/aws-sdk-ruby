@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2023-11-14)
+------------------
+
+* Feature - Introducing SegmentAttributes parameter for StartChatContact API
+
 1.137.0 (2023-11-09)
 ------------------
 

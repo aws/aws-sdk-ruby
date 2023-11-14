@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-11-14)
+------------------
+
+* Feature - This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.
+
 1.59.0 (2023-09-27)
 ------------------
 

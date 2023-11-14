@@ -1374,6 +1374,15 @@ module Aws::CleanRooms
     #   control in IAM policies to control access to this resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] creator_payment_configuration
+    #   The collaboration creator's payment responsibilities set by the
+    #   collaboration creator.
+    #
+    #   If the collaboration creator hasn't specified anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -1384,7 +1393,8 @@ module Aws::CleanRooms
       :creator_display_name,
       :data_encryption_metadata,
       :query_log_status,
-      :tags)
+      :tags,
+      :creator_payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1553,7 +1563,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1568,13 +1578,25 @@ module Aws::CleanRooms
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
     #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #
+    #   Not required if the collaboration member has the member ability to
+    #   run queries.
+    #
+    #   Required if the collaboration member doesn't have the member
+    #   ability to run queries but is configured as a payer by the
+    #   collaboration creator.
+    #   @return [Types::MembershipPaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembershipInput AWS API Documentation
     #
     class CreateMembershipInput < Struct.new(
       :collaboration_identifier,
       :query_log_status,
       :tags,
-      :default_result_configuration)
+      :default_result_configuration,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1594,24 +1616,24 @@ module Aws::CleanRooms
     # The settings for client-side encryption for cryptographic computing.
     #
     # @!attribute [rw] allow_cleartext
-    #   Indicates whether encrypted tables can contain cleartext data (true)
-    #   or are to cryptographically process every column (false).
+    #   Indicates whether encrypted tables can contain cleartext data
+    #   (`TRUE`) or are to cryptographically process every column (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_duplicates
     #   Indicates whether Fingerprint columns can contain duplicate entries
-    #   (true) or are to contain only non-repeated values (false).
+    #   (`TRUE`) or are to contain only non-repeated values (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_joins_on_columns_with_different_names
     #   Indicates whether Fingerprint columns can be joined on any other
-    #   Fingerprint column with a different name (true) or can only be
-    #   joined on Fingerprint columns of the same name (false).
+    #   Fingerprint column with a different name (`TRUE`) or can only be
+    #   joined on Fingerprint columns of the same name (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] preserve_nulls
     #   Indicates whether NULL values are to be copied as NULL to encrypted
-    #   tables (true) or cryptographically processed (false).
+    #   tables (`TRUE`) or cryptographically processed (`FALSE`).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DataEncryptionMetadata AWS API Documentation
@@ -2512,12 +2534,22 @@ module Aws::CleanRooms
     #   The member's display name.
     #   @return [String]
     #
+    # @!attribute [rw] payment_configuration
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator.
+    #
+    #   If the collaboration creator hasn't speciﬁed anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MemberSpecification AWS API Documentation
     #
     class MemberSpecification < Struct.new(
       :account_id,
       :member_abilities,
-      :display_name)
+      :display_name,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,8 +2562,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the member. Valid values are `INVITED`, `ACTIVE`,
-    #   `LEFT`, and `REMOVED`.
+    #   The status of the member.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -2558,6 +2589,11 @@ module Aws::CleanRooms
     #   The unique ARN for the member's associated membership, if present.
     #   @return [String]
     #
+    # @!attribute [rw] payment_configuration
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MemberSummary AWS API Documentation
     #
     class MemberSummary < Struct.new(
@@ -2568,7 +2604,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :membership_id,
-      :membership_arn)
+      :membership_arn,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2613,8 +2650,7 @@ module Aws::CleanRooms
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the membership. Valid values are `ACTIVE`,
-    #   `REMOVED`, and `COLLABORATION\_DELETED`.
+    #   The status of the membership.
     #   @return [String]
     #
     # @!attribute [rw] member_abilities
@@ -2623,13 +2659,17 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #   @return [Types::MembershipPaymentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Membership AWS API Documentation
     #
@@ -2646,7 +2686,24 @@ module Aws::CleanRooms
       :status,
       :member_abilities,
       :query_log_status,
-      :default_result_configuration)
+      :default_result_configuration,
+      :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the payment responsibilities accepted by the
+    # collaboration member.
+    #
+    # @!attribute [rw] query_compute
+    #   The payment responsibilities accepted by the collaboration member
+    #   for query compute costs.
+    #   @return [Types::MembershipQueryComputePaymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipPaymentConfiguration AWS API Documentation
+    #
+    class MembershipPaymentConfiguration < Struct.new(
+      :query_compute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2695,6 +2752,35 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # An object representing the payment responsibilities accepted by the
+    # collaboration member for query compute costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration member has accepted to pay for
+    #   query compute costs (`TRUE`) or has not accepted to pay for query
+    #   compute costs (`FALSE`).
+    #
+    #   If the collaboration creator has not specified anyone to pay for
+    #   query compute costs, then the member who can query is the default
+    #   payer.
+    #
+    #   An error message is returned for the following reasons:
+    #
+    #   * If you set the value to `FALSE` but you are responsible to pay for
+    #     query compute costs.
+    #
+    #   * If you set the value to `TRUE` but you are not responsible to pay
+    #     for query compute costs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipQueryComputePaymentConfig AWS API Documentation
+    #
+    class MembershipQueryComputePaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The membership object listed by the request.
     #
     # @!attribute [rw] id
@@ -2736,13 +2822,16 @@ module Aws::CleanRooms
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the membership. Valid values are `ACTIVE`,
-    #   `REMOVED`, and `COLLABORATION\_DELETED`.
+    #   The status of the membership.
     #   @return [String]
     #
     # @!attribute [rw] member_abilities
     #   The abilities granted to the collaboration member.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #   @return [Types::MembershipPaymentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipSummary AWS API Documentation
     #
@@ -2757,7 +2846,24 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :status,
-      :member_abilities)
+      :member_abilities,
+      :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the collaboration member's payment
+    # responsibilities set by the collaboration creator.
+    #
+    # @!attribute [rw] query_compute
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator for query compute costs.
+    #   @return [Types::QueryComputePaymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PaymentConfiguration AWS API Documentation
+    #
+    class PaymentConfiguration < Struct.new(
+      :query_compute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3048,6 +3154,34 @@ module Aws::CleanRooms
       :membership_arn,
       :create_time,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the collaboration member's payment
+    # responsibilities set by the collaboration creator for query compute
+    # costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration creator has configured the
+    #   collaboration member to pay for query compute costs (`TRUE`) or has
+    #   not configured the collaboration member to pay for query compute
+    #   costs (`FALSE`).
+    #
+    #   Exactly one member can be configured to pay for query compute costs.
+    #   An error is returned if the collaboration creator sets a `TRUE`
+    #   value for more than one member in the collaboration.
+    #
+    #   If the collaboration creator hasn't specified anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer. An error is returned if the collaboration creator
+    #   sets a `FALSE` value for the member who can query.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/QueryComputePaymentConfig AWS API Documentation
+    #
+    class QueryComputePaymentConfig < Struct.new(
+      :is_responsible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3540,7 +3674,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.219.0 (2023-11-14)
+------------------
+
+* Feature - This release makes Model Registry Inference Specification fields as not required.
+
 1.218.0 (2023-11-01)
 ------------------
 

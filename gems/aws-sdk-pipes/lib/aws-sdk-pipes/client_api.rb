@@ -38,6 +38,9 @@ module Aws::Pipes
     CapacityProviderStrategyItem = Shapes::StructureShape.new(name: 'CapacityProviderStrategyItem')
     CapacityProviderStrategyItemBase = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemBase')
     CapacityProviderStrategyItemWeight = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemWeight')
+    CloudwatchLogGroupArn = Shapes::StringShape.new(name: 'CloudwatchLogGroupArn')
+    CloudwatchLogsLogDestination = Shapes::StructureShape.new(name: 'CloudwatchLogsLogDestination')
+    CloudwatchLogsLogDestinationParameters = Shapes::StructureShape.new(name: 'CloudwatchLogsLogDestinationParameters')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreatePipeRequest = Shapes::StructureShape.new(name: 'CreatePipeRequest')
     CreatePipeResponse = Shapes::StructureShape.new(name: 'CreatePipeResponse')
@@ -74,9 +77,14 @@ module Aws::Pipes
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FirehoseArn = Shapes::StringShape.new(name: 'FirehoseArn')
+    FirehoseLogDestination = Shapes::StructureShape.new(name: 'FirehoseLogDestination')
+    FirehoseLogDestinationParameters = Shapes::StructureShape.new(name: 'FirehoseLogDestinationParameters')
     HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    IncludeExecutionData = Shapes::ListShape.new(name: 'IncludeExecutionData')
+    IncludeExecutionDataOption = Shapes::StringShape.new(name: 'IncludeExecutionDataOption')
     InputTemplate = Shapes::StringShape.new(name: 'InputTemplate')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -94,6 +102,7 @@ module Aws::Pipes
     ListPipesResponse = Shapes::StructureShape.new(name: 'ListPipesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     MQBrokerAccessCredentials = Shapes::UnionShape.new(name: 'MQBrokerAccessCredentials')
     MQBrokerQueueName = Shapes::StringShape.new(name: 'MQBrokerQueueName')
@@ -117,6 +126,8 @@ module Aws::Pipes
     PipeEnrichmentHttpParameters = Shapes::StructureShape.new(name: 'PipeEnrichmentHttpParameters')
     PipeEnrichmentParameters = Shapes::StructureShape.new(name: 'PipeEnrichmentParameters')
     PipeList = Shapes::ListShape.new(name: 'PipeList')
+    PipeLogConfiguration = Shapes::StructureShape.new(name: 'PipeLogConfiguration')
+    PipeLogConfigurationParameters = Shapes::StructureShape.new(name: 'PipeLogConfigurationParameters')
     PipeName = Shapes::StringShape.new(name: 'PipeName')
     PipeSourceActiveMQBrokerParameters = Shapes::StructureShape.new(name: 'PipeSourceActiveMQBrokerParameters')
     PipeSourceDynamoDBStreamParameters = Shapes::StructureShape.new(name: 'PipeSourceDynamoDBStreamParameters')
@@ -158,6 +169,12 @@ module Aws::Pipes
     RequestedPipeStateDescribeResponse = Shapes::StringShape.new(name: 'RequestedPipeStateDescribeResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3LogDestination = Shapes::StructureShape.new(name: 'S3LogDestination')
+    S3LogDestinationParameters = Shapes::StructureShape.new(name: 'S3LogDestinationParameters')
+    S3LogDestinationParametersBucketNameString = Shapes::StringShape.new(name: 'S3LogDestinationParametersBucketNameString')
+    S3LogDestinationParametersBucketOwnerString = Shapes::StringShape.new(name: 'S3LogDestinationParametersBucketOwnerString')
+    S3LogDestinationParametersPrefixString = Shapes::StringShape.new(name: 'S3LogDestinationParametersPrefixString')
+    S3OutputFormat = Shapes::StringShape.new(name: 'S3OutputFormat')
     SageMakerPipelineParameter = Shapes::StructureShape.new(name: 'SageMakerPipelineParameter')
     SageMakerPipelineParameterList = Shapes::ListShape.new(name: 'SageMakerPipelineParameterList')
     SageMakerPipelineParameterName = Shapes::StringShape.new(name: 'SageMakerPipelineParameterName')
@@ -257,6 +274,12 @@ module Aws::Pipes
     CapacityProviderStrategyItem.add_member(:weight, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight"))
     CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
 
+    CloudwatchLogsLogDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudwatchLogGroupArn, location_name: "LogGroupArn"))
+    CloudwatchLogsLogDestination.struct_class = Types::CloudwatchLogsLogDestination
+
+    CloudwatchLogsLogDestinationParameters.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudwatchLogGroupArn, required: true, location_name: "LogGroupArn"))
+    CloudwatchLogsLogDestinationParameters.struct_class = Types::CloudwatchLogsLogDestinationParameters
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
@@ -266,6 +289,7 @@ module Aws::Pipes
     CreatePipeRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
     CreatePipeRequest.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
     CreatePipeRequest.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
+    CreatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
     CreatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     CreatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreatePipeRequest.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, required: true, location_name: "Source"))
@@ -308,6 +332,7 @@ module Aws::Pipes
     DescribePipeResponse.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
     DescribePipeResponse.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
     DescribePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribePipeResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfiguration, location_name: "LogConfiguration"))
     DescribePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
     DescribePipeResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribePipeResponse.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, location_name: "Source"))
@@ -376,8 +401,16 @@ module Aws::Pipes
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
+    FirehoseLogDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: FirehoseArn, location_name: "DeliveryStreamArn"))
+    FirehoseLogDestination.struct_class = Types::FirehoseLogDestination
+
+    FirehoseLogDestinationParameters.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: FirehoseArn, required: true, location_name: "DeliveryStreamArn"))
+    FirehoseLogDestinationParameters.struct_class = Types::FirehoseLogDestinationParameters
+
     HeaderParametersMap.key = Shapes::ShapeRef.new(shape: HeaderKey)
     HeaderParametersMap.value = Shapes::ShapeRef.new(shape: HeaderValue)
+
+    IncludeExecutionData.member = Shapes::ShapeRef.new(shape: IncludeExecutionDataOption)
 
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
@@ -448,6 +481,20 @@ module Aws::Pipes
     PipeEnrichmentParameters.struct_class = Types::PipeEnrichmentParameters
 
     PipeList.member = Shapes::ShapeRef.new(shape: Pipe)
+
+    PipeLogConfiguration.add_member(:cloudwatch_logs_log_destination, Shapes::ShapeRef.new(shape: CloudwatchLogsLogDestination, location_name: "CloudwatchLogsLogDestination"))
+    PipeLogConfiguration.add_member(:firehose_log_destination, Shapes::ShapeRef.new(shape: FirehoseLogDestination, location_name: "FirehoseLogDestination"))
+    PipeLogConfiguration.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location_name: "IncludeExecutionData"))
+    PipeLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "Level"))
+    PipeLogConfiguration.add_member(:s3_log_destination, Shapes::ShapeRef.new(shape: S3LogDestination, location_name: "S3LogDestination"))
+    PipeLogConfiguration.struct_class = Types::PipeLogConfiguration
+
+    PipeLogConfigurationParameters.add_member(:cloudwatch_logs_log_destination, Shapes::ShapeRef.new(shape: CloudwatchLogsLogDestinationParameters, location_name: "CloudwatchLogsLogDestination"))
+    PipeLogConfigurationParameters.add_member(:firehose_log_destination, Shapes::ShapeRef.new(shape: FirehoseLogDestinationParameters, location_name: "FirehoseLogDestination"))
+    PipeLogConfigurationParameters.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location_name: "IncludeExecutionData"))
+    PipeLogConfigurationParameters.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "Level"))
+    PipeLogConfigurationParameters.add_member(:s3_log_destination, Shapes::ShapeRef.new(shape: S3LogDestinationParameters, location_name: "S3LogDestination"))
+    PipeLogConfigurationParameters.struct_class = Types::PipeLogConfigurationParameters
 
     PipeSourceActiveMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     PipeSourceActiveMQBrokerParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MQBrokerAccessCredentials, required: true, location_name: "Credentials"))
@@ -611,6 +658,18 @@ module Aws::Pipes
     QueryStringParametersMap.key = Shapes::ShapeRef.new(shape: QueryStringKey)
     QueryStringParametersMap.value = Shapes::ShapeRef.new(shape: QueryStringValue)
 
+    S3LogDestination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    S3LogDestination.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "BucketOwner"))
+    S3LogDestination.add_member(:output_format, Shapes::ShapeRef.new(shape: S3OutputFormat, location_name: "OutputFormat"))
+    S3LogDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "Prefix"))
+    S3LogDestination.struct_class = Types::S3LogDestination
+
+    S3LogDestinationParameters.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3LogDestinationParametersBucketNameString, required: true, location_name: "BucketName"))
+    S3LogDestinationParameters.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: S3LogDestinationParametersBucketOwnerString, required: true, location_name: "BucketOwner"))
+    S3LogDestinationParameters.add_member(:output_format, Shapes::ShapeRef.new(shape: S3OutputFormat, location_name: "OutputFormat"))
+    S3LogDestinationParameters.add_member(:prefix, Shapes::ShapeRef.new(shape: S3LogDestinationParametersPrefixString, location_name: "Prefix"))
+    S3LogDestinationParameters.struct_class = Types::S3LogDestinationParameters
+
     SageMakerPipelineParameter.add_member(:name, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterName, required: true, location_name: "Name"))
     SageMakerPipelineParameter.add_member(:value, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterValue, required: true, location_name: "Value"))
     SageMakerPipelineParameter.struct_class = Types::SageMakerPipelineParameter
@@ -707,6 +766,7 @@ module Aws::Pipes
     UpdatePipeRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
     UpdatePipeRequest.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
     UpdatePipeRequest.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
+    UpdatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
     UpdatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     UpdatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     UpdatePipeRequest.add_member(:source_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceParameters, location_name: "SourceParameters"))

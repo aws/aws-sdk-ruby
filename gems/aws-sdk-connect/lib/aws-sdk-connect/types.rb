@@ -13783,6 +13783,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A value for a segment attribute. This is structured as a map where the
+    # key is `valueString` and the value is a string.
+    #
+    # @!attribute [rw] value_string
+    #   The value of a segment attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SegmentAttributeValue AWS API Documentation
+    #
+    class SegmentAttributeValue < Struct.new(
+      :value_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the send notification action.
     #
     # @!attribute [rw] delivery_method
@@ -14009,6 +14024,25 @@ module Aws::Connect
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   Attribute keys can include only alphanumeric, -, and \_.
+    #
+    #   This field can be used to show channel subtype, such as
+    #   `connect:Guide`.
+    #
+    #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive`
+    #   and `application/vnd.amazonaws.connect.message.interactive.response`
+    #   must be present in the SupportedMessagingContentTypes field of this
+    #   API in order to set `SegmentAttributes` as \\\{` "connect:Subtype":
+    #   \{"valueString" : "connect:Guide" \}\}`.
+    #
+    #    </note>
+    #   @return [Hash<String,Types::SegmentAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -14021,7 +14055,8 @@ module Aws::Connect
       :chat_duration_in_minutes,
       :supported_messaging_content_types,
       :persistent_chat,
-      :related_contact_id)
+      :related_contact_id,
+      :segment_attributes)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -233,6 +233,23 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] message_category
+    #   This parameter is the job count for the specified message category.
+    #
+    #   Example strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
     class BackupJob < Struct.new(
@@ -258,7 +275,85 @@ module Aws::Backup
       :backup_type,
       :parent_job_id,
       :is_parent,
-      :resource_name)
+      :resource_name,
+      :message_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a summary of jobs created or running within the most recent 30
+    # days.
+    #
+    # The returned summary may contain the following: Region, Account,
+    # State, RestourceType, MessageCategory, StartTime, EndTime, and Count
+    # of included jobs.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Regions within the job summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the jobs within the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This value is job count for jobs with the specified state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   This value is the job count for the specified resource type. The
+    #   request `GetSupportedResourceTypes` returns strings for supported
+    #   resource types.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_category
+    #   This parameter is the job count for the specified message category.
+    #
+    #   Example strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The value as a number of jobs in a job summary.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The value of time in number format of a job start time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The value of time in number format of a job end time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJobSummary AWS API Documentation
+    #
+    class BackupJobSummary < Struct.new(
+      :region,
+      :account_id,
+      :state,
+      :resource_type,
+      :message_category,
+      :count,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1301,6 +1396,23 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] message_category
+    #   This parameter is the job count for the specified message category.
+    #
+    #   Example strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
     #
     class CopyJob < Struct.new(
@@ -1324,7 +1436,85 @@ module Aws::Backup
       :composite_member_identifier,
       :number_of_child_jobs,
       :child_jobs_in_state,
-      :resource_name)
+      :resource_name,
+      :message_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a summary of copy jobs created or running within the most
+    # recent 30 days.
+    #
+    # The returned summary may contain the following: Region, Account,
+    # State, RestourceType, MessageCategory, StartTime, EndTime, and Count
+    # of included jobs.
+    #
+    # @!attribute [rw] region
+    #   This is the Amazon Web Services Regions within the job summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the jobs within the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This value is job count for jobs with the specified state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   This value is the job count for the specified resource type. The
+    #   request `GetSupportedResourceTypes` returns strings for supported
+    #   resource types
+    #   @return [String]
+    #
+    # @!attribute [rw] message_category
+    #   This parameter is the job count for the specified message category.
+    #
+    #   Example strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The value as a number of jobs in a job summary.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The value of time in number format of a job start time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The value of time in number format of a job end time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJobSummary AWS API Documentation
+    #
+    class CopyJobSummary < Struct.new(
+      :region,
+      :account_id,
+      :state,
+      :resource_type,
+      :message_category,
+      :count,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2216,6 +2406,18 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] message_category
+    #   This is the job count for the specified message category.
+    #
+    #   Example strings may include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
@@ -2243,7 +2445,8 @@ module Aws::Backup
       :is_parent,
       :number_of_child_jobs,
       :child_jobs_in_state,
-      :resource_name)
+      :resource_name,
+      :message_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3792,6 +3995,135 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part
+    #   of Amazon Web Services Organizations, jobs within requestor's
+    #   account will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for
+    #   example, an Amazon Elastic Block Store (Amazon EBS) volume or an
+    #   Amazon Relational Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobSummariesInput AWS API Documentation
+    #
+    class ListBackupJobSummariesInput < Struct.new(
+      :account_id,
+      :state,
+      :resource_type,
+      :message_category,
+      :aggregation_period,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_job_summaries
+    #   This request returns a summary that contains Region, Account, State,
+    #   ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    #   included jobs.
+    #   @return [Array<Types::BackupJobSummary>]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobSummariesOutput AWS API Documentation
+    #
+    class ListBackupJobSummariesOutput < Struct.new(
+      :backup_job_summaries,
+      :aggregation_period,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -3879,6 +4211,19 @@ module Aws::Backup
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #   @return [String]
     #
+    # @!attribute [rw] by_message_category
+    #   This returns a list of backup jobs for the specified message
+    #   category.
+    #
+    #   Example strings may include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of
+    #   MessageCategory strings.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
     #
     class ListBackupJobsInput < Struct.new(
@@ -3893,7 +4238,8 @@ module Aws::Backup
       :by_account_id,
       :by_complete_after,
       :by_complete_before,
-      :by_parent_job_id)
+      :by_parent_job_id,
+      :by_message_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4152,6 +4498,133 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part
+    #   of Amazon Web Services Organizations, jobs within requestor's
+    #   account will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for
+    #   example, an Amazon Elastic Block Store (Amazon EBS) volume or an
+    #   Amazon Relational Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobSummariesInput AWS API Documentation
+    #
+    class ListCopyJobSummariesInput < Struct.new(
+      :account_id,
+      :state,
+      :resource_type,
+      :message_category,
+      :aggregation_period,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_job_summaries
+    #   This return shows a summary that contains Region, Account, State,
+    #   ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    #   included jobs.
+    #   @return [Array<Types::CopyJobSummary>]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobSummariesOutput AWS API Documentation
+    #
+    class ListCopyJobSummariesOutput < Struct.new(
+      :copy_job_summaries,
+      :aggregation_period,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return maxResults number of items,
@@ -4233,6 +4706,24 @@ module Aws::Backup
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #   @return [String]
     #
+    # @!attribute [rw] by_message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -4247,7 +4738,8 @@ module Aws::Backup
       :by_account_id,
       :by_complete_before,
       :by_complete_after,
-      :by_parent_job_id)
+      :by_parent_job_id,
+      :by_message_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4749,6 +5241,116 @@ module Aws::Backup
     #
     class ListReportPlansOutput < Struct.new(
       :report_plans,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part
+    #   of Amazon Web Services Organizations, jobs within requestor's
+    #   account will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for
+    #   example, an Amazon Elastic Block Store (Amazon EBS) volume or an
+    #   Amazon Relational Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobSummariesInput AWS API Documentation
+    #
+    class ListRestoreJobSummariesInput < Struct.new(
+      :account_id,
+      :state,
+      :resource_type,
+      :aggregation_period,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restore_job_summaries
+    #   This return contains a summary that contains Region, Account, State,
+    #   ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    #   included jobs.
+    #   @return [Array<Types::RestoreJobSummary>]
+    #
+    # @!attribute [rw] aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobSummariesOutput AWS API Documentation
+    #
+    class ListRestoreJobSummariesOutput < Struct.new(
+      :restore_job_summaries,
+      :aggregation_period,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5719,6 +6321,65 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a summary of restore jobs created or running within the most
+    # recent 30 days.
+    #
+    # The returned summary may contain the following: Region, Account,
+    # State, ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Regions within the job summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the jobs within the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   This value is job count for jobs with the specified state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   This value is the job count for the specified resource type. The
+    #   request `GetSupportedResourceTypes` returns strings for supported
+    #   resource types.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The value as a number of jobs in a job summary.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The value of time in number format of a job start time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The value of time in number format of a job end time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreJobSummary AWS API Documentation
+    #
+    class RestoreJobSummary < Struct.new(
+      :region,
+      :account_id,
+      :state,
+      :resource_type,
+      :count,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end

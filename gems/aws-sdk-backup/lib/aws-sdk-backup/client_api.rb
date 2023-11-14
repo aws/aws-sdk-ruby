@@ -17,10 +17,14 @@ module Aws::Backup
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AdvancedBackupSetting = Shapes::StructureShape.new(name: 'AdvancedBackupSetting')
     AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
+    AggregationPeriod = Shapes::StringShape.new(name: 'AggregationPeriod')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobChildJobsInState = Shapes::MapShape.new(name: 'BackupJobChildJobsInState')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
+    BackupJobStatus = Shapes::StringShape.new(name: 'BackupJobStatus')
+    BackupJobSummary = Shapes::StructureShape.new(name: 'BackupJobSummary')
+    BackupJobSummaryList = Shapes::ListShape.new(name: 'BackupJobSummaryList')
     BackupJobsList = Shapes::ListShape.new(name: 'BackupJobsList')
     BackupOptionKey = Shapes::StringShape.new(name: 'BackupOptionKey')
     BackupOptionValue = Shapes::StringShape.new(name: 'BackupOptionValue')
@@ -69,6 +73,9 @@ module Aws::Backup
     CopyJob = Shapes::StructureShape.new(name: 'CopyJob')
     CopyJobChildJobsInState = Shapes::MapShape.new(name: 'CopyJobChildJobsInState')
     CopyJobState = Shapes::StringShape.new(name: 'CopyJobState')
+    CopyJobStatus = Shapes::StringShape.new(name: 'CopyJobStatus')
+    CopyJobSummary = Shapes::StructureShape.new(name: 'CopyJobSummary')
+    CopyJobSummaryList = Shapes::ListShape.new(name: 'CopyJobSummaryList')
     CopyJobsList = Shapes::ListShape.new(name: 'CopyJobsList')
     CreateBackupPlanInput = Shapes::StructureShape.new(name: 'CreateBackupPlanInput')
     CreateBackupPlanOutput = Shapes::StructureShape.new(name: 'CreateBackupPlanOutput')
@@ -161,6 +168,8 @@ module Aws::Backup
     LegalHoldsList = Shapes::ListShape.new(name: 'LegalHoldsList')
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListBackupJobSummariesInput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesInput')
+    ListBackupJobSummariesOutput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesOutput')
     ListBackupJobsInput = Shapes::StructureShape.new(name: 'ListBackupJobsInput')
     ListBackupJobsOutput = Shapes::StructureShape.new(name: 'ListBackupJobsOutput')
     ListBackupPlanTemplatesInput = Shapes::StructureShape.new(name: 'ListBackupPlanTemplatesInput')
@@ -173,6 +182,8 @@ module Aws::Backup
     ListBackupSelectionsOutput = Shapes::StructureShape.new(name: 'ListBackupSelectionsOutput')
     ListBackupVaultsInput = Shapes::StructureShape.new(name: 'ListBackupVaultsInput')
     ListBackupVaultsOutput = Shapes::StructureShape.new(name: 'ListBackupVaultsOutput')
+    ListCopyJobSummariesInput = Shapes::StructureShape.new(name: 'ListCopyJobSummariesInput')
+    ListCopyJobSummariesOutput = Shapes::StructureShape.new(name: 'ListCopyJobSummariesOutput')
     ListCopyJobsInput = Shapes::StructureShape.new(name: 'ListCopyJobsInput')
     ListCopyJobsOutput = Shapes::StructureShape.new(name: 'ListCopyJobsOutput')
     ListFrameworksInput = Shapes::StructureShape.new(name: 'ListFrameworksInput')
@@ -194,6 +205,8 @@ module Aws::Backup
     ListReportJobsOutput = Shapes::StructureShape.new(name: 'ListReportJobsOutput')
     ListReportPlansInput = Shapes::StructureShape.new(name: 'ListReportPlansInput')
     ListReportPlansOutput = Shapes::StructureShape.new(name: 'ListReportPlansOutput')
+    ListRestoreJobSummariesInput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesInput')
+    ListRestoreJobSummariesOutput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesOutput')
     ListRestoreJobsInput = Shapes::StructureShape.new(name: 'ListRestoreJobsInput')
     ListRestoreJobsOutput = Shapes::StructureShape.new(name: 'ListRestoreJobsOutput')
     ListTagsInput = Shapes::StructureShape.new(name: 'ListTagsInput')
@@ -201,6 +214,7 @@ module Aws::Backup
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxFrameworkInputs = Shapes::IntegerShape.new(name: 'MaxFrameworkInputs')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MessageCategory = Shapes::StringShape.new(name: 'MessageCategory')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
@@ -221,6 +235,7 @@ module Aws::Backup
     RecoveryPointSelection = Shapes::StructureShape.new(name: 'RecoveryPointSelection')
     RecoveryPointStatus = Shapes::StringShape.new(name: 'RecoveryPointStatus')
     RecoveryPointsList = Shapes::ListShape.new(name: 'RecoveryPointsList')
+    Region = Shapes::StringShape.new(name: 'Region')
     ReportDeliveryChannel = Shapes::StructureShape.new(name: 'ReportDeliveryChannel')
     ReportDestination = Shapes::StructureShape.new(name: 'ReportDestination')
     ReportJob = Shapes::StructureShape.new(name: 'ReportJob')
@@ -240,7 +255,10 @@ module Aws::Backup
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
+    RestoreJobState = Shapes::StringShape.new(name: 'RestoreJobState')
     RestoreJobStatus = Shapes::StringShape.new(name: 'RestoreJobStatus')
+    RestoreJobSummary = Shapes::StructureShape.new(name: 'RestoreJobSummary')
+    RestoreJobSummaryList = Shapes::ListShape.new(name: 'RestoreJobSummaryList')
     RestoreJobsList = Shapes::ListShape.new(name: 'RestoreJobsList')
     RestoreJobsListMember = Shapes::StructureShape.new(name: 'RestoreJobsListMember')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
@@ -320,10 +338,23 @@ module Aws::Backup
     BackupJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     BackupJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     BackupJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    BackupJob.add_member(:message_category, Shapes::ShapeRef.new(shape: string, location_name: "MessageCategory"))
     BackupJob.struct_class = Types::BackupJob
 
     BackupJobChildJobsInState.key = Shapes::ShapeRef.new(shape: BackupJobState)
     BackupJobChildJobsInState.value = Shapes::ShapeRef.new(shape: Long)
+
+    BackupJobSummary.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    BackupJobSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    BackupJobSummary.add_member(:state, Shapes::ShapeRef.new(shape: BackupJobStatus, location_name: "State"))
+    BackupJobSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    BackupJobSummary.add_member(:message_category, Shapes::ShapeRef.new(shape: MessageCategory, location_name: "MessageCategory"))
+    BackupJobSummary.add_member(:count, Shapes::ShapeRef.new(shape: integer, location_name: "Count"))
+    BackupJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartTime"))
+    BackupJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "EndTime"))
+    BackupJobSummary.struct_class = Types::BackupJobSummary
+
+    BackupJobSummaryList.member = Shapes::ShapeRef.new(shape: BackupJobSummary)
 
     BackupJobsList.member = Shapes::ShapeRef.new(shape: BackupJob)
 
@@ -498,10 +529,23 @@ module Aws::Backup
     CopyJob.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
     CopyJob.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: CopyJobChildJobsInState, location_name: "ChildJobsInState"))
     CopyJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    CopyJob.add_member(:message_category, Shapes::ShapeRef.new(shape: string, location_name: "MessageCategory"))
     CopyJob.struct_class = Types::CopyJob
 
     CopyJobChildJobsInState.key = Shapes::ShapeRef.new(shape: CopyJobState)
     CopyJobChildJobsInState.value = Shapes::ShapeRef.new(shape: Long)
+
+    CopyJobSummary.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    CopyJobSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    CopyJobSummary.add_member(:state, Shapes::ShapeRef.new(shape: CopyJobStatus, location_name: "State"))
+    CopyJobSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    CopyJobSummary.add_member(:message_category, Shapes::ShapeRef.new(shape: MessageCategory, location_name: "MessageCategory"))
+    CopyJobSummary.add_member(:count, Shapes::ShapeRef.new(shape: integer, location_name: "Count"))
+    CopyJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartTime"))
+    CopyJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "EndTime"))
+    CopyJobSummary.struct_class = Types::CopyJobSummary
+
+    CopyJobSummaryList.member = Shapes::ShapeRef.new(shape: CopyJobSummary)
 
     CopyJobsList.member = Shapes::ShapeRef.new(shape: CopyJob)
 
@@ -664,6 +708,7 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
     DescribeBackupJobOutput.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: BackupJobChildJobsInState, location_name: "ChildJobsInState"))
     DescribeBackupJobOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    DescribeBackupJobOutput.add_member(:message_category, Shapes::ShapeRef.new(shape: string, location_name: "MessageCategory"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
@@ -941,6 +986,20 @@ module Aws::Backup
     LimitExceededException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListBackupJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
+    ListBackupJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: BackupJobStatus, location: "querystring", location_name: "State"))
+    ListBackupJobSummariesInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "ResourceType"))
+    ListBackupJobSummariesInput.add_member(:message_category, Shapes::ShapeRef.new(shape: MessageCategory, location: "querystring", location_name: "MessageCategory"))
+    ListBackupJobSummariesInput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location: "querystring", location_name: "AggregationPeriod"))
+    ListBackupJobSummariesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListBackupJobSummariesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListBackupJobSummariesInput.struct_class = Types::ListBackupJobSummariesInput
+
+    ListBackupJobSummariesOutput.add_member(:backup_job_summaries, Shapes::ShapeRef.new(shape: BackupJobSummaryList, location_name: "BackupJobSummaries"))
+    ListBackupJobSummariesOutput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: string, location_name: "AggregationPeriod"))
+    ListBackupJobSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListBackupJobSummariesOutput.struct_class = Types::ListBackupJobSummariesOutput
+
     ListBackupJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListBackupJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBackupJobsInput.add_member(:by_resource_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "resourceArn"))
@@ -953,6 +1012,7 @@ module Aws::Backup
     ListBackupJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListBackupJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListBackupJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
+    ListBackupJobsInput.add_member(:by_message_category, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "messageCategory"))
     ListBackupJobsInput.struct_class = Types::ListBackupJobsInput
 
     ListBackupJobsOutput.add_member(:backup_jobs, Shapes::ShapeRef.new(shape: BackupJobsList, location_name: "BackupJobs"))
@@ -1004,6 +1064,20 @@ module Aws::Backup
     ListBackupVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListBackupVaultsOutput.struct_class = Types::ListBackupVaultsOutput
 
+    ListCopyJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
+    ListCopyJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: CopyJobStatus, location: "querystring", location_name: "State"))
+    ListCopyJobSummariesInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "ResourceType"))
+    ListCopyJobSummariesInput.add_member(:message_category, Shapes::ShapeRef.new(shape: MessageCategory, location: "querystring", location_name: "MessageCategory"))
+    ListCopyJobSummariesInput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location: "querystring", location_name: "AggregationPeriod"))
+    ListCopyJobSummariesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListCopyJobSummariesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListCopyJobSummariesInput.struct_class = Types::ListCopyJobSummariesInput
+
+    ListCopyJobSummariesOutput.add_member(:copy_job_summaries, Shapes::ShapeRef.new(shape: CopyJobSummaryList, location_name: "CopyJobSummaries"))
+    ListCopyJobSummariesOutput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: string, location_name: "AggregationPeriod"))
+    ListCopyJobSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListCopyJobSummariesOutput.struct_class = Types::ListCopyJobSummariesOutput
+
     ListCopyJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListCopyJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCopyJobsInput.add_member(:by_resource_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "resourceArn"))
@@ -1016,6 +1090,7 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListCopyJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListCopyJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
+    ListCopyJobsInput.add_member(:by_message_category, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "messageCategory"))
     ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
 
     ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
@@ -1111,6 +1186,19 @@ module Aws::Backup
     ListReportPlansOutput.add_member(:report_plans, Shapes::ShapeRef.new(shape: ReportPlanList, location_name: "ReportPlans"))
     ListReportPlansOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListReportPlansOutput.struct_class = Types::ListReportPlansOutput
+
+    ListRestoreJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
+    ListRestoreJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: RestoreJobState, location: "querystring", location_name: "State"))
+    ListRestoreJobSummariesInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "ResourceType"))
+    ListRestoreJobSummariesInput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location: "querystring", location_name: "AggregationPeriod"))
+    ListRestoreJobSummariesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListRestoreJobSummariesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListRestoreJobSummariesInput.struct_class = Types::ListRestoreJobSummariesInput
+
+    ListRestoreJobSummariesOutput.add_member(:restore_job_summaries, Shapes::ShapeRef.new(shape: RestoreJobSummaryList, location_name: "RestoreJobSummaries"))
+    ListRestoreJobSummariesOutput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: string, location_name: "AggregationPeriod"))
+    ListRestoreJobSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListRestoreJobSummariesOutput.struct_class = Types::ListRestoreJobSummariesOutput
 
     ListRestoreJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRestoreJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1287,6 +1375,17 @@ module Aws::Backup
     ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
+
+    RestoreJobSummary.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    RestoreJobSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    RestoreJobSummary.add_member(:state, Shapes::ShapeRef.new(shape: RestoreJobState, location_name: "State"))
+    RestoreJobSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RestoreJobSummary.add_member(:count, Shapes::ShapeRef.new(shape: integer, location_name: "Count"))
+    RestoreJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartTime"))
+    RestoreJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "EndTime"))
+    RestoreJobSummary.struct_class = Types::RestoreJobSummary
+
+    RestoreJobSummaryList.member = Shapes::ShapeRef.new(shape: RestoreJobSummary)
 
     RestoreJobsList.member = Shapes::ShapeRef.new(shape: RestoreJobsListMember)
 
@@ -1943,6 +2042,22 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:list_backup_job_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBackupJobSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/backup-job-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListBackupJobSummariesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBackupJobSummariesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_backup_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBackupJobs"
         o.http_method = "GET"
@@ -2040,6 +2155,22 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_copy_job_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCopyJobSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/copy-job-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListCopyJobSummariesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCopyJobSummariesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -2206,6 +2337,22 @@ module Aws::Backup
         o.http_request_uri = "/audit/report-plans"
         o.input = Shapes::ShapeRef.new(shape: ListReportPlansInput)
         o.output = Shapes::ShapeRef.new(shape: ListReportPlansOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_restore_job_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRestoreJobSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/restore-job-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListRestoreJobSummariesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRestoreJobSummariesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(

@@ -563,6 +563,21 @@ module Aws::Signer
     #   (signed by the parent CA) combined with a parent CA TBS hash (signed
     #   by the parent CA’s CA). Root certificates are defined as their own CA.
     #
+    #   The following example shows how to calculate a hash for this parameter
+    #   using OpenSSL commands:
+    #
+    #   `openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs`
+    #
+    #   `openssl sha384 < childCert.tbs -binary > childCertTbsHash`
+    #
+    #   `openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs`
+    #
+    #   `openssl sha384 < parentCert.tbs -binary > parentCertTbsHash xxd -p
+    #   childCertTbsHash > certificateHash.hex xxd -p parentCertTbsHash >>
+    #   certificateHash.hex`
+    #
+    #   `cat certificateHash.hex | tr -d '\n'`
+    #
     # @return [Types::GetRevocationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRevocationStatusResponse#revoked_entities #revoked_entities} => Array&lt;String&gt;
@@ -751,12 +766,12 @@ module Aws::Signer
 
     # Lists all your signing jobs. You can use the `maxResults` parameter to
     # limit the number of signing jobs that are returned in the response. If
-    # additional jobs remain to be listed, code signing returns a
-    # `nextToken` value. Use this value in subsequent calls to
-    # `ListSigningJobs` to fetch the remaining values. You can continue
-    # calling `ListSigningJobs` with your `maxResults` parameter and with
-    # new values that code signing returns in the `nextToken` parameter
-    # until all of your signing jobs have been returned.
+    # additional jobs remain to be listed, AWS Signer returns a `nextToken`
+    # value. Use this value in subsequent calls to `ListSigningJobs` to
+    # fetch the remaining values. You can continue calling `ListSigningJobs`
+    # with your `maxResults` parameter and with new values that Signer
+    # returns in the `nextToken` parameter until all of your signing jobs
+    # have been returned.
     #
     # @option params [String] :status
     #   A status value with which to filter your results.
@@ -848,13 +863,13 @@ module Aws::Signer
       req.send_request(options)
     end
 
-    # Lists all signing platforms available in code signing that match the
-    # request parameters. If additional jobs remain to be listed, code
-    # signing returns a `nextToken` value. Use this value in subsequent
-    # calls to `ListSigningJobs` to fetch the remaining values. You can
-    # continue calling `ListSigningJobs` with your `maxResults` parameter
-    # and with new values that code signing returns in the `nextToken`
-    # parameter until all of your signing jobs have been returned.
+    # Lists all signing platforms available in AWS Signer that match the
+    # request parameters. If additional jobs remain to be listed, Signer
+    # returns a `nextToken` value. Use this value in subsequent calls to
+    # `ListSigningJobs` to fetch the remaining values. You can continue
+    # calling `ListSigningJobs` with your `maxResults` parameter and with
+    # new values that Signer returns in the `nextToken` parameter until all
+    # of your signing jobs have been returned.
     #
     # @option params [String] :category
     #   The category type of a signing platform.
@@ -923,12 +938,12 @@ module Aws::Signer
 
     # Lists all available signing profiles in your AWS account. Returns only
     # profiles with an `ACTIVE` status unless the `includeCanceled` request
-    # field is set to `true`. If additional jobs remain to be listed, code
-    # signing returns a `nextToken` value. Use this value in subsequent
-    # calls to `ListSigningJobs` to fetch the remaining values. You can
-    # continue calling `ListSigningJobs` with your `maxResults` parameter
-    # and with new values that code signing returns in the `nextToken`
-    # parameter until all of your signing jobs have been returned.
+    # field is set to `true`. If additional jobs remain to be listed, AWS
+    # Signer returns a `nextToken` value. Use this value in subsequent calls
+    # to `ListSigningJobs` to fetch the remaining values. You can continue
+    # calling `ListSigningJobs` with your `maxResults` parameter and with
+    # new values that Signer returns in the `nextToken` parameter until all
+    # of your signing jobs have been returned.
     #
     # @option params [Boolean] :include_canceled
     #   Designates whether to include profiles with the status of `CANCELED`.
@@ -1024,7 +1039,7 @@ module Aws::Signer
       req.send_request(options)
     end
 
-    # Creates a signing profile. A signing profile is a code signing
+    # Creates a signing profile. A signing profile is a code-signing
     # template that can be used to carry out a pre-defined signing job.
     #
     # @option params [required, String] :profile_name
@@ -1220,7 +1235,8 @@ module Aws::Signer
     #   Specifies the object digest (hash) to sign.
     #
     # @option params [required, String] :payload_format
-    #   Payload content type
+    #   Payload content type. The single valid type is
+    #   `application/vnd.cncf.notary.payload.v1+json`.
     #
     # @return [Types::SignPayloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1264,14 +1280,14 @@ module Aws::Signer
     #
     # * Your S3 source bucket must be version enabled.
     #
-    # * You must create an S3 destination bucket. Code signing uses your S3
+    # * You must create an S3 destination bucket. AWS Signer uses your S3
     #   destination bucket to write your signed code.
     #
     # * You specify the name of the source and destination buckets when
     #   calling the `StartSigningJob` operation.
     #
     # * You must also specify a request token that identifies your request
-    #   to code signing.
+    #   to Signer.
     #
     # You can call the DescribeSigningJob and the ListSigningJobs actions
     # after you call `StartSigningJob`.
@@ -1417,7 +1433,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

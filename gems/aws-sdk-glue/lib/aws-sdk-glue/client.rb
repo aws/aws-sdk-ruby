@@ -2037,6 +2037,64 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns the configuration for the specified table optimizers.
+    #
+    # @option params [required, Array<Types::BatchGetTableOptimizerEntry>] :entries
+    #   A list of `BatchGetTableOptimizerEntry` objects specifying the table
+    #   optimizers to retrieve.
+    #
+    # @return [Types::BatchGetTableOptimizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetTableOptimizerResponse#table_optimizers #table_optimizers} => Array&lt;Types::BatchTableOptimizer&gt;
+    #   * {Types::BatchGetTableOptimizerResponse#failures #failures} => Array&lt;Types::BatchGetTableOptimizerError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_table_optimizer({
+    #     entries: [ # required
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "databaseNameString",
+    #         table_name: "tableNameString",
+    #         type: "compaction", # accepts compaction
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_optimizers #=> Array
+    #   resp.table_optimizers[0].catalog_id #=> String
+    #   resp.table_optimizers[0].database_name #=> String
+    #   resp.table_optimizers[0].table_name #=> String
+    #   resp.table_optimizers[0].table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizers[0].table_optimizer.configuration.role_arn #=> String
+    #   resp.table_optimizers[0].table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizers[0].table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizers[0].table_optimizer.last_run.start_timestamp #=> Time
+    #   resp.table_optimizers[0].table_optimizer.last_run.end_timestamp #=> Time
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_dpus #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.error #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].error.error_code #=> String
+    #   resp.failures[0].error.error_message #=> String
+    #   resp.failures[0].catalog_id #=> String
+    #   resp.failures[0].database_name #=> String
+    #   resp.failures[0].table_name #=> String
+    #   resp.failures[0].type #=> String, one of "compaction"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizer AWS API Documentation
+    #
+    # @overload batch_get_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def batch_get_table_optimizer(params = {}, options = {})
+      req = build_request(:batch_get_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of trigger names.
     # After calling the `ListTriggers` operation, you can call this
     # operation to access the data to which you have been granted
@@ -4500,6 +4558,50 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a new table optimizer for a specific function. `compaction` is
+    # the only currently supported optimizer type.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [required, Types::TableOptimizerConfiguration] :table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the configuration
+    #   of a table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     table_optimizer_configuration: { # required
+    #       role_arn: "ArnString",
+    #       enabled: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableOptimizer AWS API Documentation
+    #
+    # @overload create_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def create_table_optimizer(params = {}, options = {})
+      req = build_request(:create_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Creates a new trigger.
     #
     # @option params [required, String] :name
@@ -5412,6 +5514,41 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_table(params = {}, options = {})
       req = build_request(:delete_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes an optimizer and all associated metadata for a table. The
+    # optimization will no longer be performed on the table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableOptimizer AWS API Documentation
+    #
+    # @overload delete_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def delete_table_optimizer(params = {}, options = {})
+      req = build_request(:delete_table_optimizer, params)
       req.send_request(options)
     end
 
@@ -10552,6 +10689,63 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns the configuration of all optimizers associated with a
+    # specified table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer.
+    #
+    # @return [Types::GetTableOptimizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableOptimizerResponse#catalog_id #catalog_id} => String
+    #   * {Types::GetTableOptimizerResponse#database_name #database_name} => String
+    #   * {Types::GetTableOptimizerResponse#table_name #table_name} => String
+    #   * {Types::GetTableOptimizerResponse#table_optimizer #table_optimizer} => Types::TableOptimizer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.database_name #=> String
+    #   resp.table_name #=> String
+    #   resp.table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizer.configuration.role_arn #=> String
+    #   resp.table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizer.last_run.start_timestamp #=> Time
+    #   resp.table_optimizer.last_run.end_timestamp #=> Time
+    #   resp.table_optimizer.last_run.metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizer.last_run.metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizer.last_run.metrics.number_of_dpus #=> String
+    #   resp.table_optimizer.last_run.metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizer.last_run.error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableOptimizer AWS API Documentation
+    #
+    # @overload get_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def get_table_optimizer(params = {}, options = {})
+      req = build_request(:get_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Retrieves a specified version of a table.
     #
     # @option params [String] :catalog_id
@@ -13053,6 +13247,73 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Lists the history of previous optimizer runs for a specific table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of optimizer runs to return on each call.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListTableOptimizerRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableOptimizerRunsResponse#catalog_id #catalog_id} => String
+    #   * {Types::ListTableOptimizerRunsResponse#database_name #database_name} => String
+    #   * {Types::ListTableOptimizerRunsResponse#table_name #table_name} => String
+    #   * {Types::ListTableOptimizerRunsResponse#next_token #next_token} => String
+    #   * {Types::ListTableOptimizerRunsResponse#table_optimizer_runs #table_optimizer_runs} => Array&lt;Types::TableOptimizerRun&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_optimizer_runs({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     max_results: 1,
+    #     next_token: "ListTableOptimizerRunsToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.database_name #=> String
+    #   resp.table_name #=> String
+    #   resp.next_token #=> String
+    #   resp.table_optimizer_runs #=> Array
+    #   resp.table_optimizer_runs[0].event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizer_runs[0].start_timestamp #=> Time
+    #   resp.table_optimizer_runs[0].end_timestamp #=> Time
+    #   resp.table_optimizer_runs[0].metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizer_runs[0].metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizer_runs[0].metrics.number_of_dpus #=> String
+    #   resp.table_optimizer_runs[0].metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizer_runs[0].error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTableOptimizerRuns AWS API Documentation
+    #
+    # @overload list_table_optimizer_runs(params = {})
+    # @param [Hash] params ({})
+    def list_table_optimizer_runs(params = {}, options = {})
+      req = build_request(:list_table_optimizer_runs, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all trigger resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -13939,6 +14200,8 @@ module Aws::Glue
     # and comes up with recommendations for a potential ruleset. You can
     # then triage the ruleset and modify the generated ruleset to your
     # liking.
+    #
+    # Recommendation runs are automatically deleted after 90 days.
     #
     # @option params [required, Types::DataSource] :data_source
     #   The data source (Glue table) associated with this run.
@@ -16156,6 +16419,49 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates the configuration for an existing table optimizer.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [required, Types::TableOptimizerConfiguration] :table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the configuration
+    #   of a table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     table_optimizer_configuration: { # required
+    #       role_arn: "ArnString",
+    #       enabled: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableOptimizer AWS API Documentation
+    #
+    # @overload update_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def update_table_optimizer(params = {}, options = {})
+      req = build_request(:update_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Updates a trigger definition.
     #
     # @option params [required, String] :name
@@ -16354,7 +16660,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
