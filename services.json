@@ -681,7 +681,8 @@
     ]
   },
   "Macie": {
-    "models": "macie/2017-12-19"
+    "models": "macie/2017-12-19",
+    "deprecated": true
   },
   "Macie2": {
     "models": "macie2/2020-01-01"

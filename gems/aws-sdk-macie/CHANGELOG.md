@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Deprecated this service.
+
 1.47.0 (2023-09-27)
 ------------------
 
