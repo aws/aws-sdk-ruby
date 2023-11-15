@@ -1219,6 +1219,7 @@ module Aws::Redshift
     DeleteClusterSubnetGroupMessage.struct_class = Types::DeleteClusterSubnetGroupMessage
 
     DeleteCustomDomainAssociationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    DeleteCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, required: true, location_name: "CustomDomainName"))
     DeleteCustomDomainAssociationMessage.struct_class = Types::DeleteCustomDomainAssociationMessage
 
     DeleteEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointName"))
@@ -2002,8 +2003,8 @@ module Aws::Redshift
     ModifyClusterSubnetGroupResult.add_member(:cluster_subnet_group, Shapes::ShapeRef.new(shape: ClusterSubnetGroup, location_name: "ClusterSubnetGroup"))
     ModifyClusterSubnetGroupResult.struct_class = Types::ModifyClusterSubnetGroupResult
 
-    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, location_name: "CustomDomainName"))
-    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "CustomDomainCertificateArn"))
+    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, required: true, location_name: "CustomDomainName"))
+    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "CustomDomainCertificateArn"))
     ModifyCustomDomainAssociationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifyCustomDomainAssociationMessage.struct_class = Types::ModifyCustomDomainAssociationMessage
 
@@ -3191,6 +3192,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDomainAssociationNotFoundFault)
       end)
 
       api.add_operation(:delete_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -4173,6 +4175,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDomainAssociationNotFoundFault)
       end)
 
       api.add_operation(:modify_endpoint_access, Seahorse::Model::Operation.new.tap do |o|

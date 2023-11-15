@@ -3361,12 +3361,16 @@ module Aws::Redshift
     #   The identifier of the cluster to delete a custom domain association
     #   for.
     #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name for the custom domain association.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_custom_domain_association({
     #     cluster_identifier: "String", # required
+    #     custom_domain_name: "CustomDomainNameString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCustomDomainAssociation AWS API Documentation
@@ -9440,10 +9444,10 @@ module Aws::Redshift
 
     # Contains information for changing a custom domain association.
     #
-    # @option params [String] :custom_domain_name
+    # @option params [required, String] :custom_domain_name
     #   The custom domain name for a changed custom domain association.
     #
-    # @option params [String] :custom_domain_certificate_arn
+    # @option params [required, String] :custom_domain_certificate_arn
     #   The certificate Amazon Resource Name (ARN) for the changed custom
     #   domain association.
     #
@@ -9461,8 +9465,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_custom_domain_association({
-    #     custom_domain_name: "CustomDomainNameString",
-    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     custom_domain_name: "CustomDomainNameString", # required
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
     #     cluster_identifier: "String", # required
     #   })
     #
@@ -11991,7 +11995,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

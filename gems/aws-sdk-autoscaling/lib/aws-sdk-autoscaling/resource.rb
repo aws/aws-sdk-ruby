@@ -171,6 +171,10 @@ module Aws::AutoScaling
     #         type: "XmlStringMaxLen511",
     #       },
     #     ],
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -453,6 +457,14 @@ module Aws::AutoScaling
     #   can use any of the following as traffic sources for an Auto Scaling
     #   group: Classic Load Balancer, Application Load Balancer, Gateway Load
     #   Balancer, Network Load Balancer, and VPC Lattice.
+    # @option options [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.feature('resource') do

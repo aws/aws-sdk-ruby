@@ -66,6 +66,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::CreateJob.build(context)
           when :create_multi_region_access_point
             Aws::S3Control::Endpoints::CreateMultiRegionAccessPoint.build(context)
+          when :create_storage_lens_group
+            Aws::S3Control::Endpoints::CreateStorageLensGroup.build(context)
           when :delete_access_point
             Aws::S3Control::Endpoints::DeleteAccessPoint.build(context)
           when :delete_access_point_for_object_lambda
@@ -94,6 +96,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::DeleteStorageLensConfiguration.build(context)
           when :delete_storage_lens_configuration_tagging
             Aws::S3Control::Endpoints::DeleteStorageLensConfigurationTagging.build(context)
+          when :delete_storage_lens_group
+            Aws::S3Control::Endpoints::DeleteStorageLensGroup.build(context)
           when :describe_job
             Aws::S3Control::Endpoints::DescribeJob.build(context)
           when :describe_multi_region_access_point_operation
@@ -140,6 +144,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetStorageLensConfiguration.build(context)
           when :get_storage_lens_configuration_tagging
             Aws::S3Control::Endpoints::GetStorageLensConfigurationTagging.build(context)
+          when :get_storage_lens_group
+            Aws::S3Control::Endpoints::GetStorageLensGroup.build(context)
           when :list_access_points
             Aws::S3Control::Endpoints::ListAccessPoints.build(context)
           when :list_access_points_for_object_lambda
@@ -152,6 +158,10 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::ListRegionalBuckets.build(context)
           when :list_storage_lens_configurations
             Aws::S3Control::Endpoints::ListStorageLensConfigurations.build(context)
+          when :list_storage_lens_groups
+            Aws::S3Control::Endpoints::ListStorageLensGroups.build(context)
+          when :list_tags_for_resource
+            Aws::S3Control::Endpoints::ListTagsForResource.build(context)
           when :put_access_point_configuration_for_object_lambda
             Aws::S3Control::Endpoints::PutAccessPointConfigurationForObjectLambda.build(context)
           when :put_access_point_policy
@@ -180,10 +190,16 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::PutStorageLensConfigurationTagging.build(context)
           when :submit_multi_region_access_point_routes
             Aws::S3Control::Endpoints::SubmitMultiRegionAccessPointRoutes.build(context)
+          when :tag_resource
+            Aws::S3Control::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::S3Control::Endpoints::UntagResource.build(context)
           when :update_job_priority
             Aws::S3Control::Endpoints::UpdateJobPriority.build(context)
           when :update_job_status
             Aws::S3Control::Endpoints::UpdateJobStatus.build(context)
+          when :update_storage_lens_group
+            Aws::S3Control::Endpoints::UpdateStorageLensGroup.build(context)
           end
         end
       end

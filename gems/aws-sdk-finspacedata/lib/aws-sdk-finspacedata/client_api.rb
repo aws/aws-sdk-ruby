@@ -707,6 +707,7 @@ module Aws::FinSpaceData
         o.name = "AssociateUserToPermissionGroup"
         o.http_method = "POST"
         o.http_request_uri = "/permission-group/{permissionGroupId}/users/{userId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateUserToPermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateUserToPermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -721,6 +722,7 @@ module Aws::FinSpaceData
         o.name = "CreateChangeset"
         o.http_method = "POST"
         o.http_request_uri = "/datasets/{datasetId}/changesetsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateChangesetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChangesetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -736,6 +738,7 @@ module Aws::FinSpaceData
         o.name = "CreateDataView"
         o.http_method = "POST"
         o.http_request_uri = "/datasets/{datasetId}/dataviewsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateDataViewRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDataViewResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -750,6 +753,7 @@ module Aws::FinSpaceData
         o.name = "CreateDataset"
         o.http_method = "POST"
         o.http_request_uri = "/datasetsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -765,6 +769,7 @@ module Aws::FinSpaceData
         o.name = "CreatePermissionGroup"
         o.http_method = "POST"
         o.http_request_uri = "/permission-group"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreatePermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -779,6 +784,7 @@ module Aws::FinSpaceData
         o.name = "CreateUser"
         o.http_method = "POST"
         o.http_request_uri = "/user"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -793,6 +799,7 @@ module Aws::FinSpaceData
         o.name = "DeleteDataset"
         o.http_method = "DELETE"
         o.http_request_uri = "/datasetsv2/{datasetId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -808,6 +815,7 @@ module Aws::FinSpaceData
         o.name = "DeletePermissionGroup"
         o.http_method = "DELETE"
         o.http_request_uri = "/permission-group/{permissionGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeletePermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -823,6 +831,7 @@ module Aws::FinSpaceData
         o.name = "DisableUser"
         o.http_method = "POST"
         o.http_request_uri = "/user/{userId}/disable"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisableUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DisableUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -837,6 +846,7 @@ module Aws::FinSpaceData
         o.name = "DisassociateUserFromPermissionGroup"
         o.http_method = "DELETE"
         o.http_request_uri = "/permission-group/{permissionGroupId}/users/{userId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateUserFromPermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateUserFromPermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -851,6 +861,7 @@ module Aws::FinSpaceData
         o.name = "EnableUser"
         o.http_method = "POST"
         o.http_request_uri = "/user/{userId}/enable"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: EnableUserRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -866,6 +877,7 @@ module Aws::FinSpaceData
         o.name = "GetChangeset"
         o.http_method = "GET"
         o.http_request_uri = "/datasets/{datasetId}/changesetsv2/{changesetId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetChangesetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetChangesetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -880,6 +892,7 @@ module Aws::FinSpaceData
         o.name = "GetDataView"
         o.http_method = "GET"
         o.http_request_uri = "/datasets/{datasetId}/dataviewsv2/{dataviewId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetDataViewRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataViewResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -893,6 +906,7 @@ module Aws::FinSpaceData
         o.name = "GetDataset"
         o.http_method = "GET"
         o.http_request_uri = "/datasetsv2/{datasetId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -907,6 +921,7 @@ module Aws::FinSpaceData
         o.name = "GetExternalDataViewAccessDetails"
         o.http_method = "POST"
         o.http_request_uri = "/datasets/{datasetId}/dataviewsv2/{dataviewId}/external-access-details"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetExternalDataViewAccessDetailsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExternalDataViewAccessDetailsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -920,6 +935,7 @@ module Aws::FinSpaceData
         o.name = "GetPermissionGroup"
         o.http_method = "GET"
         o.http_request_uri = "/permission-group/{permissionGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetPermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -933,6 +949,7 @@ module Aws::FinSpaceData
         o.name = "GetProgrammaticAccessCredentials"
         o.http_method = "GET"
         o.http_request_uri = "/credentials/programmatic"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetProgrammaticAccessCredentialsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProgrammaticAccessCredentialsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -945,6 +962,7 @@ module Aws::FinSpaceData
         o.name = "GetUser"
         o.http_method = "GET"
         o.http_request_uri = "/user/{userId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetUserRequest)
         o.output = Shapes::ShapeRef.new(shape: GetUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -958,6 +976,7 @@ module Aws::FinSpaceData
         o.name = "GetWorkingLocation"
         o.http_method = "POST"
         o.http_request_uri = "/workingLocationV1"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetWorkingLocationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetWorkingLocationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -970,6 +989,7 @@ module Aws::FinSpaceData
         o.name = "ListChangesets"
         o.http_method = "GET"
         o.http_request_uri = "/datasets/{datasetId}/changesetsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListChangesetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChangesetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -990,6 +1010,7 @@ module Aws::FinSpaceData
         o.name = "ListDataViews"
         o.http_method = "GET"
         o.http_request_uri = "/datasets/{datasetId}/dataviewsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDataViewsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataViewsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1009,6 +1030,7 @@ module Aws::FinSpaceData
         o.name = "ListDatasets"
         o.http_method = "GET"
         o.http_request_uri = "/datasetsv2"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDatasetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1028,6 +1050,7 @@ module Aws::FinSpaceData
         o.name = "ListPermissionGroups"
         o.http_method = "GET"
         o.http_request_uri = "/permission-group"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListPermissionGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPermissionGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1046,6 +1069,7 @@ module Aws::FinSpaceData
         o.name = "ListPermissionGroupsByUser"
         o.http_method = "GET"
         o.http_request_uri = "/user/{userId}/permission-groups"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListPermissionGroupsByUserRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPermissionGroupsByUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1059,6 +1083,7 @@ module Aws::FinSpaceData
         o.name = "ListUsers"
         o.http_method = "GET"
         o.http_request_uri = "/user"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1077,6 +1102,7 @@ module Aws::FinSpaceData
         o.name = "ListUsersByPermissionGroup"
         o.http_method = "GET"
         o.http_request_uri = "/permission-group/{permissionGroupId}/users"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListUsersByPermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: ListUsersByPermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1090,6 +1116,7 @@ module Aws::FinSpaceData
         o.name = "ResetUserPassword"
         o.http_method = "POST"
         o.http_request_uri = "/user/{userId}/password"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ResetUserPasswordRequest)
         o.output = Shapes::ShapeRef.new(shape: ResetUserPasswordResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1104,6 +1131,7 @@ module Aws::FinSpaceData
         o.name = "UpdateChangeset"
         o.http_method = "PUT"
         o.http_request_uri = "/datasets/{datasetId}/changesetsv2/{changesetId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateChangesetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChangesetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1118,6 +1146,7 @@ module Aws::FinSpaceData
         o.name = "UpdateDataset"
         o.http_method = "PUT"
         o.http_request_uri = "/datasetsv2/{datasetId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1132,6 +1161,7 @@ module Aws::FinSpaceData
         o.name = "UpdatePermissionGroup"
         o.http_method = "PUT"
         o.http_request_uri = "/permission-group/{permissionGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdatePermissionGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePermissionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1146,6 +1176,7 @@ module Aws::FinSpaceData
         o.name = "UpdateUser"
         o.http_method = "PUT"
         o.http_request_uri = "/user/{userId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

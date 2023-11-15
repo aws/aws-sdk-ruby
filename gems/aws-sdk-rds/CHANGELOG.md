@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2023-11-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+
 1.203.0 (2023-11-10)
 ------------------
 

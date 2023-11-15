@@ -85,7 +85,7 @@ module Aws::MWAA
     #   Airflow (MWAA)][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
-    #   `2.6.3`, `2.7.2`.
+    #   `2.6.3`, `2.7.2`
     #
     #
     #
@@ -100,6 +100,20 @@ module Aws::MWAA
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_management
+    #   Defines whether the VPC endpoints configured for the environment are
+    #   created, and managed, by the customer or by Amazon MWAA. If set to
+    #   `SERVICE`, Amazon MWAA will create and manage the required VPC
+    #   endpoints in your VPC. If set to `CUSTOMER`, you must create, and
+    #   manage, the VPC endpoints for your VPC. If you choose to create an
+    #   environment in a shared VPC, you must set this value to `CUSTOMER`.
+    #   In a shared VPC deployment, the environment will remain in `PENDING`
+    #   status until you create the VPC endpoints. If you do not take action
+    #   to create the endpoints within 72 hours, the status will change to
+    #   `CREATE_FAILED`. You can delete the failed environment and create a
+    #   new one.
     #   @return [String]
     #
     # @!attribute [rw] environment_class
@@ -282,8 +296,8 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. For more information,
-    #   see [Apache Airflow access modes][1].
+    #   Defines the access mode for the Apache Airflow *web server*. For
+    #   more information, see [Apache Airflow access modes][1].
     #
     #
     #
@@ -304,6 +318,7 @@ module Aws::MWAA
       :airflow_configuration_options,
       :airflow_version,
       :dag_s3_path,
+      :endpoint_management,
       :environment_class,
       :execution_role_arn,
       :kms_key,
@@ -436,6 +451,17 @@ module Aws::MWAA
     #   The Amazon Resource Name (ARN) of the Amazon MWAA environment.
     #   @return [String]
     #
+    # @!attribute [rw] celery_executor_queue
+    #   The queue ARN for the environment's [Celery Executor][1]. Amazon
+    #   MWAA uses a Celery Executor to distribute tasks across multiple
+    #   workers. When you create an environment in a shared VPC, you must
+    #   provide access to the Celery Executor queue from your VPC.
+    #
+    #
+    #
+    #   [1]: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The day and time the environment was created.
     #   @return [Time]
@@ -448,6 +474,18 @@ module Aws::MWAA
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
+    #   @return [String]
+    #
+    # @!attribute [rw] database_vpc_endpoint_service
+    #   The VPC endpoint for the environment's Amazon RDS database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_management
+    #   Defines whether the VPC endpoints configured for the environment are
+    #   created, and managed, by the customer or by Amazon MWAA. If set to
+    #   `SERVICE`, Amazon MWAA will create and manage the required VPC
+    #   endpoints in your VPC. If set to `CUSTOMER`, you must create, and
+    #   manage, the VPC endpoints in your VPC.
     #   @return [String]
     #
     # @!attribute [rw] environment_class
@@ -626,7 +664,9 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Amazon MWAA environment. Valid values:
+    #   The status of the Amazon MWAA environment.
+    #
+    #   Valid values:
     #
     #   * `CREATING` - Indicates the request to create the environment is in
     #     progress.
@@ -644,6 +684,11 @@ module Aws::MWAA
     #
     #   * `AVAILABLE` - Indicates the request was successful and the
     #     environment is ready to use.
+    #
+    #   * `PENDING` - Indicates the request was successful, but the process
+    #     to create the environment is paused until you create the required
+    #     VPC endpoints in your VPC. After you create the VPC endpoints, the
+    #     process resumes.
     #
     #   * `UPDATING` - Indicates the request to update the environment is in
     #     progress.
@@ -686,7 +731,7 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. For more information,
+    #   The Apache Airflow *web server* access mode. For more information,
     #   see [Apache Airflow access modes][1].
     #
     #
@@ -704,6 +749,10 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html
     #   @return [String]
     #
+    # @!attribute [rw] webserver_vpc_endpoint_service
+    #   The VPC endpoint for the environment's web server.
+    #   @return [String]
+    #
     # @!attribute [rw] weekly_maintenance_window_start
     #   The day and time of the week in Coordinated Universal Time (UTC)
     #   24-hour standard time that weekly maintenance updates are scheduled.
@@ -716,8 +765,11 @@ module Aws::MWAA
       :airflow_configuration_options,
       :airflow_version,
       :arn,
+      :celery_executor_queue,
       :created_at,
       :dag_s3_path,
+      :database_vpc_endpoint_service,
+      :endpoint_management,
       :environment_class,
       :execution_role_arn,
       :kms_key,
@@ -740,6 +792,7 @@ module Aws::MWAA
       :tags,
       :webserver_access_mode,
       :webserver_url,
+      :webserver_vpc_endpoint_service,
       :weekly_maintenance_window_start)
       SENSITIVE = [:airflow_configuration_options]
       include Aws::Structure

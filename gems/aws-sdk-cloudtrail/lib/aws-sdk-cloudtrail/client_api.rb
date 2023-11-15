@@ -24,6 +24,7 @@ module Aws::CloudTrail
     AdvancedEventSelectors = Shapes::ListShape.new(name: 'AdvancedEventSelectors')
     AdvancedFieldSelector = Shapes::StructureShape.new(name: 'AdvancedFieldSelector')
     AdvancedFieldSelectors = Shapes::ListShape.new(name: 'AdvancedFieldSelectors')
+    BillingMode = Shapes::StringShape.new(name: 'BillingMode')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteBuffer = Shapes::BlobShape.new(name: 'ByteBuffer')
     CancelQueryRequest = Shapes::StructureShape.new(name: 'CancelQueryRequest')
@@ -381,6 +382,7 @@ module Aws::CloudTrail
     CreateEventDataStoreRequest.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, location_name: "TagsList"))
     CreateEventDataStoreRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
     CreateEventDataStoreRequest.add_member(:start_ingestion, Shapes::ShapeRef.new(shape: Boolean, location_name: "StartIngestion"))
+    CreateEventDataStoreRequest.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     CreateEventDataStoreRequest.struct_class = Types::CreateEventDataStoreRequest
 
     CreateEventDataStoreResponse.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
@@ -395,6 +397,7 @@ module Aws::CloudTrail
     CreateEventDataStoreResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
     CreateEventDataStoreResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
     CreateEventDataStoreResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    CreateEventDataStoreResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     CreateEventDataStoreResponse.struct_class = Types::CreateEventDataStoreResponse
 
     CreateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -562,6 +565,7 @@ module Aws::CloudTrail
     GetEventDataStoreResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
     GetEventDataStoreResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
     GetEventDataStoreResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    GetEventDataStoreResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     GetEventDataStoreResponse.struct_class = Types::GetEventDataStoreResponse
 
     GetEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
@@ -984,6 +988,7 @@ module Aws::CloudTrail
     RestoreEventDataStoreResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
     RestoreEventDataStoreResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
     RestoreEventDataStoreResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    RestoreEventDataStoreResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     RestoreEventDataStoreResponse.struct_class = Types::RestoreEventDataStoreResponse
 
     S3BucketDoesNotExistException.struct_class = Types::S3BucketDoesNotExistException
@@ -1123,6 +1128,7 @@ module Aws::CloudTrail
     UpdateEventDataStoreRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "RetentionPeriod"))
     UpdateEventDataStoreRequest.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: TerminationProtectionEnabled, location_name: "TerminationProtectionEnabled"))
     UpdateEventDataStoreRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    UpdateEventDataStoreRequest.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     UpdateEventDataStoreRequest.struct_class = Types::UpdateEventDataStoreRequest
 
     UpdateEventDataStoreResponse.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
@@ -1136,6 +1142,7 @@ module Aws::CloudTrail
     UpdateEventDataStoreResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedTimestamp"))
     UpdateEventDataStoreResponse.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "UpdatedTimestamp"))
     UpdateEventDataStoreResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    UpdateEventDataStoreResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     UpdateEventDataStoreResponse.struct_class = Types::UpdateEventDataStoreResponse
 
     UpdateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))

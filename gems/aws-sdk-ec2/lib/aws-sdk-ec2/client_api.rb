@@ -369,6 +369,8 @@ module Aws::EC2
     ConversionTask = Shapes::StructureShape.new(name: 'ConversionTask')
     ConversionTaskId = Shapes::StringShape.new(name: 'ConversionTaskId')
     ConversionTaskState = Shapes::StringShape.new(name: 'ConversionTaskState')
+    CoolOffPeriodRequestHours = Shapes::IntegerShape.new(name: 'CoolOffPeriodRequestHours')
+    CoolOffPeriodResponseHours = Shapes::IntegerShape.new(name: 'CoolOffPeriodResponseHours')
     CopyFpgaImageRequest = Shapes::StructureShape.new(name: 'CopyFpgaImageRequest')
     CopyFpgaImageResult = Shapes::StructureShape.new(name: 'CopyFpgaImageResult')
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
@@ -914,6 +916,9 @@ module Aws::EC2
     DescribeLocalGatewayVirtualInterfacesResult = Shapes::StructureShape.new(name: 'DescribeLocalGatewayVirtualInterfacesResult')
     DescribeLocalGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeLocalGatewaysRequest')
     DescribeLocalGatewaysResult = Shapes::StructureShape.new(name: 'DescribeLocalGatewaysResult')
+    DescribeLockedSnapshotsMaxResults = Shapes::IntegerShape.new(name: 'DescribeLockedSnapshotsMaxResults')
+    DescribeLockedSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsRequest')
+    DescribeLockedSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsResult')
     DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
     DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
@@ -1974,6 +1979,12 @@ module Aws::EC2
     LocalStorageTypeSet = Shapes::ListShape.new(name: 'LocalStorageTypeSet')
     Location = Shapes::StringShape.new(name: 'Location')
     LocationType = Shapes::StringShape.new(name: 'LocationType')
+    LockMode = Shapes::StringShape.new(name: 'LockMode')
+    LockSnapshotRequest = Shapes::StructureShape.new(name: 'LockSnapshotRequest')
+    LockSnapshotResult = Shapes::StructureShape.new(name: 'LockSnapshotResult')
+    LockState = Shapes::StringShape.new(name: 'LockState')
+    LockedSnapshotsInfo = Shapes::StructureShape.new(name: 'LockedSnapshotsInfo')
+    LockedSnapshotsInfoList = Shapes::ListShape.new(name: 'LockedSnapshotsInfoList')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaintenanceDetails = Shapes::StructureShape.new(name: 'MaintenanceDetails')
@@ -2515,6 +2526,8 @@ module Aws::EC2
     RestoreSnapshotTierRequestTemporaryRestoreDays = Shapes::IntegerShape.new(name: 'RestoreSnapshotTierRequestTemporaryRestoreDays')
     RestoreSnapshotTierResult = Shapes::StructureShape.new(name: 'RestoreSnapshotTierResult')
     ResultRange = Shapes::IntegerShape.new(name: 'ResultRange')
+    RetentionPeriodRequestDays = Shapes::IntegerShape.new(name: 'RetentionPeriodRequestDays')
+    RetentionPeriodResponseDays = Shapes::IntegerShape.new(name: 'RetentionPeriodResponseDays')
     RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
@@ -2906,6 +2919,8 @@ module Aws::EC2
     UnassignPrivateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'UnassignPrivateNatGatewayAddressRequest')
     UnassignPrivateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'UnassignPrivateNatGatewayAddressResult')
     UnlimitedSupportedInstanceFamily = Shapes::StringShape.new(name: 'UnlimitedSupportedInstanceFamily')
+    UnlockSnapshotRequest = Shapes::StructureShape.new(name: 'UnlockSnapshotRequest')
+    UnlockSnapshotResult = Shapes::StructureShape.new(name: 'UnlockSnapshotResult')
     UnmonitorInstancesRequest = Shapes::StructureShape.new(name: 'UnmonitorInstancesRequest')
     UnmonitorInstancesResult = Shapes::StructureShape.new(name: 'UnmonitorInstancesResult')
     UnsuccessfulInstanceCreditSpecificationErrorCode = Shapes::StringShape.new(name: 'UnsuccessfulInstanceCreditSpecificationErrorCode')
@@ -6813,6 +6828,17 @@ module Aws::EC2
     DescribeLocalGatewaysResult.add_member(:local_gateways, Shapes::ShapeRef.new(shape: LocalGatewaySet, location_name: "localGatewaySet"))
     DescribeLocalGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeLocalGatewaysResult.struct_class = Types::DescribeLocalGatewaysResult
+
+    DescribeLockedSnapshotsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeLockedSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsMaxResults, location_name: "MaxResults"))
+    DescribeLockedSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeLockedSnapshotsRequest.add_member(:snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIdStringList, location_name: "SnapshotId"))
+    DescribeLockedSnapshotsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeLockedSnapshotsRequest.struct_class = Types::DescribeLockedSnapshotsRequest
+
+    DescribeLockedSnapshotsResult.add_member(:snapshots, Shapes::ShapeRef.new(shape: LockedSnapshotsInfoList, location_name: "snapshotSet"))
+    DescribeLockedSnapshotsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeLockedSnapshotsResult.struct_class = Types::DescribeLockedSnapshotsResult
 
     DescribeManagedPrefixListsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeManagedPrefixListsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -10909,6 +10935,37 @@ module Aws::EC2
 
     LocalStorageTypeSet.member = Shapes::ShapeRef.new(shape: LocalStorageType, location_name: "item")
 
+    LockSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    LockSnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    LockSnapshotRequest.add_member(:lock_mode, Shapes::ShapeRef.new(shape: LockMode, required: true, location_name: "LockMode"))
+    LockSnapshotRequest.add_member(:cool_off_period, Shapes::ShapeRef.new(shape: CoolOffPeriodRequestHours, location_name: "CoolOffPeriod"))
+    LockSnapshotRequest.add_member(:lock_duration, Shapes::ShapeRef.new(shape: RetentionPeriodRequestDays, location_name: "LockDuration"))
+    LockSnapshotRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "ExpirationDate"))
+    LockSnapshotRequest.struct_class = Types::LockSnapshotRequest
+
+    LockSnapshotResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    LockSnapshotResult.add_member(:lock_state, Shapes::ShapeRef.new(shape: LockState, location_name: "lockState"))
+    LockSnapshotResult.add_member(:lock_duration, Shapes::ShapeRef.new(shape: RetentionPeriodResponseDays, location_name: "lockDuration"))
+    LockSnapshotResult.add_member(:cool_off_period, Shapes::ShapeRef.new(shape: CoolOffPeriodResponseHours, location_name: "coolOffPeriod"))
+    LockSnapshotResult.add_member(:cool_off_period_expires_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "coolOffPeriodExpiresOn"))
+    LockSnapshotResult.add_member(:lock_created_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockCreatedOn"))
+    LockSnapshotResult.add_member(:lock_expires_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockExpiresOn"))
+    LockSnapshotResult.add_member(:lock_duration_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockDurationStartTime"))
+    LockSnapshotResult.struct_class = Types::LockSnapshotResult
+
+    LockedSnapshotsInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    LockedSnapshotsInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    LockedSnapshotsInfo.add_member(:lock_state, Shapes::ShapeRef.new(shape: LockState, location_name: "lockState"))
+    LockedSnapshotsInfo.add_member(:lock_duration, Shapes::ShapeRef.new(shape: RetentionPeriodResponseDays, location_name: "lockDuration"))
+    LockedSnapshotsInfo.add_member(:cool_off_period, Shapes::ShapeRef.new(shape: CoolOffPeriodResponseHours, location_name: "coolOffPeriod"))
+    LockedSnapshotsInfo.add_member(:cool_off_period_expires_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "coolOffPeriodExpiresOn"))
+    LockedSnapshotsInfo.add_member(:lock_created_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockCreatedOn"))
+    LockedSnapshotsInfo.add_member(:lock_duration_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockDurationStartTime"))
+    LockedSnapshotsInfo.add_member(:lock_expires_on, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lockExpiresOn"))
+    LockedSnapshotsInfo.struct_class = Types::LockedSnapshotsInfo
+
+    LockedSnapshotsInfoList.member = Shapes::ShapeRef.new(shape: LockedSnapshotsInfo, location_name: "item")
+
     MaintenanceDetails.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: String, location_name: "pendingMaintenance"))
     MaintenanceDetails.add_member(:maintenance_auto_applied_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "maintenanceAutoAppliedAfter"))
     MaintenanceDetails.add_member(:last_maintenance_applied, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastMaintenanceApplied"))
@@ -14618,6 +14675,13 @@ module Aws::EC2
     UnassignPrivateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
     UnassignPrivateNatGatewayAddressResult.struct_class = Types::UnassignPrivateNatGatewayAddressResult
 
+    UnlockSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    UnlockSnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UnlockSnapshotRequest.struct_class = Types::UnlockSnapshotRequest
+
+    UnlockSnapshotResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    UnlockSnapshotResult.struct_class = Types::UnlockSnapshotResult
+
     UnmonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
     UnmonitorInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     UnmonitorInstancesRequest.struct_class = Types::UnmonitorInstancesRequest
@@ -17884,6 +17948,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_locked_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLockedSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsResult)
+      end)
+
       api.add_operation(:describe_managed_prefix_lists, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeManagedPrefixLists"
         o.http_method = "POST"
@@ -19875,6 +19947,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:lock_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "LockSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: LockSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: LockSnapshotResult)
+      end)
+
       api.add_operation(:modify_address_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyAddressAttribute"
         o.http_method = "POST"
@@ -20909,6 +20989,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnassignPrivateNatGatewayAddressRequest)
         o.output = Shapes::ShapeRef.new(shape: UnassignPrivateNatGatewayAddressResult)
+      end)
+
+      api.add_operation(:unlock_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnlockSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UnlockSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: UnlockSnapshotResult)
       end)
 
       api.add_operation(:unmonitor_instances, Seahorse::Model::Operation.new.tap do |o|

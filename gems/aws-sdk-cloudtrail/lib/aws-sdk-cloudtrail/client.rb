@@ -603,8 +603,12 @@ module Aws::CloudTrail
     #   organization in Organizations.
     #
     # @option params [Integer] :retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set a
+    #   retention period of up to 3653 days, the equivalent of 10 years. If
+    #   `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention period.
     #   For example, if you set a retention period of 90 days, CloudTrail will
@@ -663,6 +667,33 @@ module Aws::CloudTrail
     #   Specifies whether the event data store should start ingesting live
     #   events. The default is true.
     #
+    # @option params [String] :billing_mode
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for the
+    #   event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this billing
+    #     mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if you
+    #     expect to ingest more than 25 TB of event data per month and need a
+    #     retention period of up to 2557 days (about 7 years). The default
+    #     retention period for this billing mode is 2557 days.
+    #
+    #   The default value is `EXTENDABLE_RETENTION_PRICING`.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #
     # @return [Types::CreateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -677,6 +708,7 @@ module Aws::CloudTrail
     #   * {Types::CreateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::CreateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::CreateEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::CreateEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -710,6 +742,7 @@ module Aws::CloudTrail
     #     ],
     #     kms_key_id: "EventDataStoreKmsKeyId",
     #     start_ingestion: false,
+    #     billing_mode: "EXTENDABLE_RETENTION_PRICING", # accepts EXTENDABLE_RETENTION_PRICING, FIXED_RETENTION_PRICING
     #   })
     #
     # @example Response structure
@@ -743,6 +776,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStore AWS API Documentation
     #
@@ -1284,6 +1318,7 @@ module Aws::CloudTrail
     #   * {Types::GetEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1319,6 +1354,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
     #
@@ -2732,6 +2768,7 @@ module Aws::CloudTrail
     #   * {Types::RestoreEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::RestoreEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::RestoreEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::RestoreEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2767,6 +2804,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStore AWS API Documentation
     #
@@ -3153,8 +3191,10 @@ module Aws::CloudTrail
     # ARN or the ID portion of the ARN. Other parameters are optional, but
     # at least one optional parameter must be specified, or CloudTrail
     # throws an error. `RetentionPeriod` is in days, and valid values are
-    # integers between 90 and 2557. By default, `TerminationProtection` is
-    # enabled.
+    # integers between 7 and 3653 if the `BillingMode` is set to
+    # `EXTENDABLE_RETENTION_PRICING`, or between 7 and 2557 if `BillingMode`
+    # is set to `FIXED_RETENTION_PRICING`. By default,
+    # `TerminationProtection` is enabled.
     #
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
     # includes or excludes management, data, or Insights events in your
@@ -3197,8 +3237,12 @@ module Aws::CloudTrail
     #    </note>
     #
     # @option params [Integer] :retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set a
+    #   retention period of up to 3653 days, the equivalent of 10 years. If
+    #   `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention period.
     #   For example, if you set a retention period of 90 days, CloudTrail will
@@ -3248,6 +3292,40 @@ module Aws::CloudTrail
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #
+    # @option params [String] :billing_mode
+    #   <note markdown="1"> You can't change the billing mode from `EXTENDABLE_RETENTION_PRICING`
+    #   to `FIXED_RETENTION_PRICING`. If `BillingMode` is set to
+    #   `EXTENDABLE_RETENTION_PRICING` and you want to use
+    #   `FIXED_RETENTION_PRICING` instead, you'll need to stop ingestion on
+    #   the event data store and create a new event data store that uses
+    #   `FIXED_RETENTION_PRICING`.
+    #
+    #    </note>
+    #
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for the
+    #   event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this billing
+    #     mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if you
+    #     expect to ingest more than 25 TB of event data per month and need a
+    #     retention period of up to 2557 days (about 7 years). The default
+    #     retention period for this billing mode is 2557 days.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #
     # @return [Types::UpdateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -3261,6 +3339,7 @@ module Aws::CloudTrail
     #   * {Types::UpdateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3288,6 +3367,7 @@ module Aws::CloudTrail
     #     retention_period: 1,
     #     termination_protection_enabled: false,
     #     kms_key_id: "EventDataStoreKmsKeyId",
+    #     billing_mode: "EXTENDABLE_RETENTION_PRICING", # accepts EXTENDABLE_RETENTION_PRICING, FIXED_RETENTION_PRICING
     #   })
     #
     # @example Response structure
@@ -3318,6 +3398,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStore AWS API Documentation
     #
@@ -3538,7 +3619,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

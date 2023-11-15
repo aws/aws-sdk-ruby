@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.421.0 (2023-11-15)
+------------------
+
+* Feature - AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.
+
 1.420.0 (2023-11-13)
 ------------------
 

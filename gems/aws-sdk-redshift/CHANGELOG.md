@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2023-11-15)
+------------------
+
+* Feature - The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.
+
 1.102.0 (2023-11-01)
 ------------------
 

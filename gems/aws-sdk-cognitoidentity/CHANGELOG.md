@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.49.1 (2023-11-15)
+------------------
+
 * Issue - Pass provided `logins` when a `CognitoIdentityCredentials` client is created (#2941). 
 
 1.49.0 (2023-09-27)

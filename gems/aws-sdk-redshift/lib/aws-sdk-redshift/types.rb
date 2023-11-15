@@ -3505,10 +3505,15 @@ module Aws::Redshift
     #   for.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the custom domain association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCustomDomainAssociationMessage AWS API Documentation
     #
     class DeleteCustomDomainAssociationMessage < Struct.new(
-      :cluster_identifier)
+      :cluster_identifier,
+      :custom_domain_name)
       SENSITIVE = []
       include Aws::Structure
     end

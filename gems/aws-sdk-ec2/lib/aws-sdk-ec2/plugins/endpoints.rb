@@ -632,6 +632,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeLocalGatewayVirtualInterfaces.build(context)
           when :describe_local_gateways
             Aws::EC2::Endpoints::DescribeLocalGateways.build(context)
+          when :describe_locked_snapshots
+            Aws::EC2::Endpoints::DescribeLockedSnapshots.build(context)
           when :describe_managed_prefix_lists
             Aws::EC2::Endpoints::DescribeManagedPrefixLists.build(context)
           when :describe_moving_addresses
@@ -1004,6 +1006,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ListImagesInRecycleBin.build(context)
           when :list_snapshots_in_recycle_bin
             Aws::EC2::Endpoints::ListSnapshotsInRecycleBin.build(context)
+          when :lock_snapshot
+            Aws::EC2::Endpoints::LockSnapshot.build(context)
           when :modify_address_attribute
             Aws::EC2::Endpoints::ModifyAddressAttribute.build(context)
           when :modify_availability_zone_group
@@ -1260,6 +1264,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::UnassignPrivateIpAddresses.build(context)
           when :unassign_private_nat_gateway_address
             Aws::EC2::Endpoints::UnassignPrivateNatGatewayAddress.build(context)
+          when :unlock_snapshot
+            Aws::EC2::Endpoints::UnlockSnapshot.build(context)
           when :unmonitor_instances
             Aws::EC2::Endpoints::UnmonitorInstances.build(context)
           when :update_security_group_rule_descriptions_egress

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2023-11-15)
+------------------
+
+* Feature - Add Java 21 (java21) support to AWS Lambda
+
 1.109.0 (2023-11-14)
 ------------------
 

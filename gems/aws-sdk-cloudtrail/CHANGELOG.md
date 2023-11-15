@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-11-15)
+------------------
+
+* Feature - The Lake Repricing feature lets customers configure a BillingMode for an event data store. The BillingMode determines the cost for ingesting and storing events and the default and maximum retention period for the event data store.
+
 1.70.0 (2023-11-09)
 ------------------
 

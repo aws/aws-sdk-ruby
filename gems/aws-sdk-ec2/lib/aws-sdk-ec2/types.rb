@@ -21453,6 +21453,73 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `lock-state` - The state of the snapshot lock
+    #     (`compliance-cooloff` \| `governance` \| `compliance` \|
+    #     `expired`).
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_ids
+    #   The IDs of the snapshots for which to view the lock status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLockedSnapshotsRequest AWS API Documentation
+    #
+    class DescribeLockedSnapshotsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :snapshot_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshots
+    #   Information about the snapshots.
+    #   @return [Array<Types::LockedSnapshotsInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLockedSnapshotsResult AWS API Documentation
+    #
+    class DescribeLockedSnapshotsResult < Struct.new(
+      :snapshots,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -44694,6 +44761,251 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot to lock.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lock_mode
+    #   The mode in which to lock the snapshot. Specify one of the
+    #   following:
+    #
+    #   * `governance` - Locks the snapshot in governance mode. Snapshots
+    #     locked in governance mode can't be deleted until one of the
+    #     following conditions are met:
+    #
+    #     * The lock duration expires.
+    #
+    #     * The snapshot is unlocked by a user with the appropriate
+    #       permissions.
+    #
+    #     Users with the appropriate IAM permissions can unlock the
+    #     snapshot, increase or decrease the lock duration, and change the
+    #     lock mode to `compliance` at any time.
+    #
+    #     If you lock a snapshot in `governance` mode, omit <b>
+    #     CoolOffPeriod</b>.
+    #
+    #   * `compliance` - Locks the snapshot in compliance mode. Snapshots
+    #     locked in compliance mode can't be unlocked by any user. They can
+    #     be deleted only after the lock duration expires. Users can't
+    #     decrease the lock duration or change the lock mode to
+    #     `governance`. However, users with appropriate IAM permissions can
+    #     increase the lock duration at any time.
+    #
+    #     If you lock a snapshot in `compliance` mode, you can optionally
+    #     specify **CoolOffPeriod**.
+    #   @return [String]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The cooling-off period during which you can unlock the snapshot or
+    #   modify the lock settings after locking the snapshot in compliance
+    #   mode, in hours. After the cooling-off period expires, you can't
+    #   unlock or delete the snapshot, decrease the lock duration, or change
+    #   the lock mode. You can increase the lock duration after the
+    #   cooling-off period expires.
+    #
+    #   The cooling-off period is optional when locking a snapshot in
+    #   compliance mode. If you are locking the snapshot in governance mode,
+    #   omit this parameter.
+    #
+    #   To lock the snapshot in compliance mode immediately without a
+    #   cooling-off period, omit this parameter.
+    #
+    #   If you are extending the lock duration for a snapshot that is locked
+    #   in compliance mode after the cooling-off period has expired, omit
+    #   this parameter. If you specify a cooling-period in a such a request,
+    #   the request fails.
+    #
+    #   Allowed values: Min 1, max 72.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which to lock the snapshot, in days. The
+    #   snapshot lock will automatically expire after this period lapses.
+    #
+    #   You must specify either this parameter or **ExpirationDate**, but
+    #   not both.
+    #
+    #   Allowed values: Min: 1, max 36500
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date and time at which the snapshot lock is to automatically
+    #   expire, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #
+    #   You must specify either this parameter or **LockDuration**, but not
+    #   both.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockSnapshotRequest AWS API Documentation
+    #
+    class LockSnapshotRequest < Struct.new(
+      :snapshot_id,
+      :dry_run,
+      :lock_mode,
+      :cool_off_period,
+      :lock_duration,
+      :expiration_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_state
+    #   The state of the snapshot lock. Valid states include:
+    #
+    #   * `compliance-cooloff` - The snapshot has been locked in compliance
+    #     mode but it is still within the cooling-off period. The snapshot
+    #     can't be deleted, but it can be unlocked and the lock settings
+    #     can be modified by users with appropriate permissions.
+    #
+    #   * `governance` - The snapshot is locked in governance mode. The
+    #     snapshot can't be deleted, but it can be unlocked and the lock
+    #     settings can be modified by users with appropriate permissions.
+    #
+    #   * `compliance` - The snapshot is locked in compliance mode and the
+    #     cooling-off period has expired. The snapshot can't be unlocked or
+    #     deleted. The lock duration can only be increased by users with
+    #     appropriate permissions.
+    #
+    #   * `expired` - The snapshot was locked in compliance or governance
+    #     mode but the lock duration has expired. The snapshot is not locked
+    #     and can be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which the snapshot is locked, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The compliance mode cooling-off period, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period_expires_on
+    #   The date and time at which the compliance mode cooling-off period
+    #   expires, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_created_on
+    #   The date and time at which the snapshot was locked, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_on
+    #   The date and time at which the lock will expire, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_duration_start_time
+    #   The date and time at which the lock duration started, in the UTC
+    #   time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockSnapshotResult AWS API Documentation
+    #
+    class LockSnapshotResult < Struct.new(
+      :snapshot_id,
+      :lock_state,
+      :lock_duration,
+      :cool_off_period,
+      :cool_off_period_expires_on,
+      :lock_created_on,
+      :lock_expires_on,
+      :lock_duration_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a locked snapshot.
+    #
+    # @!attribute [rw] owner_id
+    #   The account ID of the Amazon Web Services account that owns the
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_state
+    #   The state of the snapshot lock. Valid states include:
+    #
+    #   * `compliance-cooloff` - The snapshot has been locked in compliance
+    #     mode but it is still within the cooling-off period. The snapshot
+    #     can't be deleted, but it can be unlocked and the lock settings
+    #     can be modified by users with appropriate permissions.
+    #
+    #   * `governance` - The snapshot is locked in governance mode. The
+    #     snapshot can't be deleted, but it can be unlocked and the lock
+    #     settings can be modified by users with appropriate permissions.
+    #
+    #   * `compliance` - The snapshot is locked in compliance mode and the
+    #     cooling-off period has expired. The snapshot can't be unlocked or
+    #     deleted. The lock duration can only be increased by users with
+    #     appropriate permissions.
+    #
+    #   * `expired` - The snapshot was locked in compliance or governance
+    #     mode but the lock duration has expired. The snapshot is not locked
+    #     and can be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which the snapshot is locked, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The compliance mode cooling-off period, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period_expires_on
+    #   The date and time at which the compliance mode cooling-off period
+    #   expires, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_created_on
+    #   The date and time at which the snapshot was locked, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_duration_start_time
+    #   The date and time at which the lock duration started, in the UTC
+    #   time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #
+    #   If you lock a snapshot that is in the `pending` state, the lock
+    #   duration starts only once the snapshot enters the `completed` state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_on
+    #   The date and time at which the lock will expire, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockedSnapshotsInfo AWS API Documentation
+    #
+    class LockedSnapshotsInfo < Struct.new(
+      :owner_id,
+      :snapshot_id,
+      :lock_state,
+      :lock_duration,
+      :cool_off_period,
+      :cool_off_period_expires_on,
+      :lock_created_on,
+      :lock_duration_start_time,
+      :lock_expires_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for Site-to-Site VPN tunnel endpoint maintenance events.
     #
     # @!attribute [rw] pending_maintenance
@@ -63934,6 +64246,38 @@ module Aws::EC2
     class UnassignPrivateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot to unlock.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnlockSnapshotRequest AWS API Documentation
+    #
+    class UnlockSnapshotRequest < Struct.new(
+      :snapshot_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnlockSnapshotResult AWS API Documentation
+    #
+    class UnlockSnapshotResult < Struct.new(
+      :snapshot_id)
       SENSITIVE = []
       include Aws::Structure
     end

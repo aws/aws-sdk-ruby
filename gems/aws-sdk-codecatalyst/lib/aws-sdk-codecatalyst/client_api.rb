@@ -86,6 +86,12 @@ module Aws::CodeCatalyst
     GetUserDetailsRequestIdString = Shapes::StringShape.new(name: 'GetUserDetailsRequestIdString')
     GetUserDetailsRequestUserNameString = Shapes::StringShape.new(name: 'GetUserDetailsRequestUserNameString')
     GetUserDetailsResponse = Shapes::StructureShape.new(name: 'GetUserDetailsResponse')
+    GetWorkflowRequest = Shapes::StructureShape.new(name: 'GetWorkflowRequest')
+    GetWorkflowRequestProjectNameString = Shapes::StringShape.new(name: 'GetWorkflowRequestProjectNameString')
+    GetWorkflowResponse = Shapes::StructureShape.new(name: 'GetWorkflowResponse')
+    GetWorkflowRunRequest = Shapes::StructureShape.new(name: 'GetWorkflowRunRequest')
+    GetWorkflowRunRequestProjectNameString = Shapes::StringShape.new(name: 'GetWorkflowRunRequestProjectNameString')
+    GetWorkflowRunResponse = Shapes::StructureShape.new(name: 'GetWorkflowRunResponse')
     Ide = Shapes::StructureShape.new(name: 'Ide')
     IdeConfiguration = Shapes::StructureShape.new(name: 'IdeConfiguration')
     IdeConfigurationList = Shapes::ListShape.new(name: 'IdeConfigurationList')
@@ -131,6 +137,16 @@ module Aws::CodeCatalyst
     ListSpacesRequest = Shapes::StructureShape.new(name: 'ListSpacesRequest')
     ListSpacesRequestNextTokenString = Shapes::StringShape.new(name: 'ListSpacesRequestNextTokenString')
     ListSpacesResponse = Shapes::StructureShape.new(name: 'ListSpacesResponse')
+    ListWorkflowRunsRequest = Shapes::StructureShape.new(name: 'ListWorkflowRunsRequest')
+    ListWorkflowRunsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkflowRunsRequestMaxResultsInteger')
+    ListWorkflowRunsRequestNextTokenString = Shapes::StringShape.new(name: 'ListWorkflowRunsRequestNextTokenString')
+    ListWorkflowRunsRequestProjectNameString = Shapes::StringShape.new(name: 'ListWorkflowRunsRequestProjectNameString')
+    ListWorkflowRunsResponse = Shapes::StructureShape.new(name: 'ListWorkflowRunsResponse')
+    ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
+    ListWorkflowsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkflowsRequestMaxResultsInteger')
+    ListWorkflowsRequestNextTokenString = Shapes::StringShape.new(name: 'ListWorkflowsRequestNextTokenString')
+    ListWorkflowsRequestSpaceNameString = Shapes::StringShape.new(name: 'ListWorkflowsRequestSpaceNameString')
+    ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
     NameString = Shapes::StringShape.new(name: 'NameString')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
     PersistentStorage = Shapes::StructureShape.new(name: 'PersistentStorage')
@@ -163,6 +179,11 @@ module Aws::CodeCatalyst
     StartDevEnvironmentSessionRequest = Shapes::StructureShape.new(name: 'StartDevEnvironmentSessionRequest')
     StartDevEnvironmentSessionResponse = Shapes::StructureShape.new(name: 'StartDevEnvironmentSessionResponse')
     StartDevEnvironmentSessionResponseSessionIdString = Shapes::StringShape.new(name: 'StartDevEnvironmentSessionResponseSessionIdString')
+    StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
+    StartWorkflowRunRequestClientTokenString = Shapes::StringShape.new(name: 'StartWorkflowRunRequestClientTokenString')
+    StartWorkflowRunRequestProjectNameString = Shapes::StringShape.new(name: 'StartWorkflowRunRequestProjectNameString')
+    StartWorkflowRunRequestSpaceNameString = Shapes::StringShape.new(name: 'StartWorkflowRunRequestSpaceNameString')
+    StartWorkflowRunResponse = Shapes::StructureShape.new(name: 'StartWorkflowRunResponse')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     StopDevEnvironmentRequest = Shapes::StructureShape.new(name: 'StopDevEnvironmentRequest')
     StopDevEnvironmentResponse = Shapes::StructureShape.new(name: 'StopDevEnvironmentResponse')
@@ -189,6 +210,21 @@ module Aws::CodeCatalyst
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VerifySessionResponse = Shapes::StructureShape.new(name: 'VerifySessionResponse')
     VerifySessionResponseIdentityString = Shapes::StringShape.new(name: 'VerifySessionResponseIdentityString')
+    WorkflowDefinition = Shapes::StructureShape.new(name: 'WorkflowDefinition')
+    WorkflowDefinitionSummary = Shapes::StructureShape.new(name: 'WorkflowDefinitionSummary')
+    WorkflowRunMode = Shapes::StringShape.new(name: 'WorkflowRunMode')
+    WorkflowRunSortCriteria = Shapes::StructureShape.new(name: 'WorkflowRunSortCriteria')
+    WorkflowRunSortCriteriaList = Shapes::ListShape.new(name: 'WorkflowRunSortCriteriaList')
+    WorkflowRunStatus = Shapes::StringShape.new(name: 'WorkflowRunStatus')
+    WorkflowRunStatusReason = Shapes::StructureShape.new(name: 'WorkflowRunStatusReason')
+    WorkflowRunStatusReasons = Shapes::ListShape.new(name: 'WorkflowRunStatusReasons')
+    WorkflowRunSummaries = Shapes::ListShape.new(name: 'WorkflowRunSummaries')
+    WorkflowRunSummary = Shapes::StructureShape.new(name: 'WorkflowRunSummary')
+    WorkflowSortCriteria = Shapes::StructureShape.new(name: 'WorkflowSortCriteria')
+    WorkflowSortCriteriaList = Shapes::ListShape.new(name: 'WorkflowSortCriteriaList')
+    WorkflowStatus = Shapes::StringShape.new(name: 'WorkflowStatus')
+    WorkflowSummaries = Shapes::ListShape.new(name: 'WorkflowSummaries')
+    WorkflowSummary = Shapes::StructureShape.new(name: 'WorkflowSummary')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -464,6 +500,40 @@ module Aws::CodeCatalyst
     GetUserDetailsResponse.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     GetUserDetailsResponse.struct_class = Types::GetUserDetailsResponse
 
+    GetWorkflowRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    GetWorkflowRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
+    GetWorkflowRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: GetWorkflowRequestProjectNameString, required: true, location: "uri", location_name: "projectName"))
+    GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
+
+    GetWorkflowResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    GetWorkflowResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    GetWorkflowResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    GetWorkflowResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GetWorkflowResponse.add_member(:source_repository_name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, location_name: "sourceRepositoryName"))
+    GetWorkflowResponse.add_member(:source_branch_name, Shapes::ShapeRef.new(shape: SourceRepositoryBranchString, location_name: "sourceBranchName"))
+    GetWorkflowResponse.add_member(:definition, Shapes::ShapeRef.new(shape: WorkflowDefinition, required: true, location_name: "definition"))
+    GetWorkflowResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    GetWorkflowResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedTime"))
+    GetWorkflowResponse.add_member(:run_mode, Shapes::ShapeRef.new(shape: WorkflowRunMode, required: true, location_name: "runMode"))
+    GetWorkflowResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowStatus, required: true, location_name: "status"))
+    GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
+
+    GetWorkflowRunRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    GetWorkflowRunRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
+    GetWorkflowRunRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: GetWorkflowRunRequestProjectNameString, required: true, location: "uri", location_name: "projectName"))
+    GetWorkflowRunRequest.struct_class = Types::GetWorkflowRunRequest
+
+    GetWorkflowRunResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    GetWorkflowRunResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    GetWorkflowRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    GetWorkflowRunResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "workflowId"))
+    GetWorkflowRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowRunStatus, required: true, location_name: "status"))
+    GetWorkflowRunResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: WorkflowRunStatusReasons, location_name: "statusReasons"))
+    GetWorkflowRunResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    GetWorkflowRunResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    GetWorkflowRunResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedTime"))
+    GetWorkflowRunResponse.struct_class = Types::GetWorkflowRunResponse
+
     Ide.add_member(:runtime, Shapes::ShapeRef.new(shape: IdeRuntimeString, location_name: "runtime"))
     Ide.add_member(:name, Shapes::ShapeRef.new(shape: IdeNameString, location_name: "name"))
     Ide.struct_class = Types::Ide
@@ -496,7 +566,7 @@ module Aws::CodeCatalyst
     ListDevEnvironmentSessionsResponse.struct_class = Types::ListDevEnvironmentSessionsResponse
 
     ListDevEnvironmentsRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
-    ListDevEnvironmentsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    ListDevEnvironmentsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, location_name: "projectName"))
     ListDevEnvironmentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ListDevEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDevEnvironmentsRequestNextTokenString, location_name: "nextToken"))
     ListDevEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDevEnvironmentsRequestMaxResultsInteger, location_name: "maxResults"))
@@ -573,6 +643,29 @@ module Aws::CodeCatalyst
     ListSpacesResponse.add_member(:items, Shapes::ShapeRef.new(shape: SpaceSummaries, location_name: "items"))
     ListSpacesResponse.struct_class = Types::ListSpacesResponse
 
+    ListWorkflowRunsRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    ListWorkflowRunsRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, location: "querystring", location_name: "workflowId"))
+    ListWorkflowRunsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ListWorkflowRunsRequestProjectNameString, required: true, location: "uri", location_name: "projectName"))
+    ListWorkflowRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListWorkflowRunsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListWorkflowRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkflowRunsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListWorkflowRunsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: WorkflowRunSortCriteriaList, location_name: "sortBy"))
+    ListWorkflowRunsRequest.struct_class = Types::ListWorkflowRunsRequest
+
+    ListWorkflowRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListWorkflowRunsResponse.add_member(:items, Shapes::ShapeRef.new(shape: WorkflowRunSummaries, location_name: "items"))
+    ListWorkflowRunsResponse.struct_class = Types::ListWorkflowRunsResponse
+
+    ListWorkflowsRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: ListWorkflowsRequestSpaceNameString, required: true, location: "uri", location_name: "spaceName"))
+    ListWorkflowsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListWorkflowsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkflowsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListWorkflowsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: WorkflowSortCriteriaList, location_name: "sortBy"))
+    ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
+
+    ListWorkflowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListWorkflowsResponse.add_member(:items, Shapes::ShapeRef.new(shape: WorkflowSummaries, location_name: "items"))
+    ListWorkflowsResponse.struct_class = Types::ListWorkflowsResponse
+
     PersistentStorage.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: PersistentStorageSizeInGiBInteger, required: true, location_name: "sizeInGiB"))
     PersistentStorage.struct_class = Types::PersistentStorage
 
@@ -643,6 +736,18 @@ module Aws::CodeCatalyst
     StartDevEnvironmentSessionResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
     StartDevEnvironmentSessionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
     StartDevEnvironmentSessionResponse.struct_class = Types::StartDevEnvironmentSessionResponse
+
+    StartWorkflowRunRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestSpaceNameString, required: true, location: "uri", location_name: "spaceName"))
+    StartWorkflowRunRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestProjectNameString, required: true, location: "uri", location_name: "projectName"))
+    StartWorkflowRunRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "querystring", location_name: "workflowId"))
+    StartWorkflowRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartWorkflowRunRequest.struct_class = Types::StartWorkflowRunRequest
+
+    StartWorkflowRunResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    StartWorkflowRunResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    StartWorkflowRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    StartWorkflowRunResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "workflowId"))
+    StartWorkflowRunResponse.struct_class = Types::StartWorkflowRunResponse
 
     StopDevEnvironmentRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
     StopDevEnvironmentRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
@@ -723,6 +828,49 @@ module Aws::CodeCatalyst
 
     VerifySessionResponse.add_member(:identity, Shapes::ShapeRef.new(shape: VerifySessionResponseIdentityString, location_name: "identity"))
     VerifySessionResponse.struct_class = Types::VerifySessionResponse
+
+    WorkflowDefinition.add_member(:path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "path"))
+    WorkflowDefinition.struct_class = Types::WorkflowDefinition
+
+    WorkflowDefinitionSummary.add_member(:path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "path"))
+    WorkflowDefinitionSummary.struct_class = Types::WorkflowDefinitionSummary
+
+    WorkflowRunSortCriteria.struct_class = Types::WorkflowRunSortCriteria
+
+    WorkflowRunSortCriteriaList.member = Shapes::ShapeRef.new(shape: WorkflowRunSortCriteria)
+
+    WorkflowRunStatusReason.struct_class = Types::WorkflowRunStatusReason
+
+    WorkflowRunStatusReasons.member = Shapes::ShapeRef.new(shape: WorkflowRunStatusReason)
+
+    WorkflowRunSummaries.member = Shapes::ShapeRef.new(shape: WorkflowRunSummary)
+
+    WorkflowRunSummary.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    WorkflowRunSummary.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "workflowId"))
+    WorkflowRunSummary.add_member(:workflow_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "workflowName"))
+    WorkflowRunSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowRunStatus, required: true, location_name: "status"))
+    WorkflowRunSummary.add_member(:status_reasons, Shapes::ShapeRef.new(shape: WorkflowRunStatusReasons, location_name: "statusReasons"))
+    WorkflowRunSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    WorkflowRunSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    WorkflowRunSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedTime"))
+    WorkflowRunSummary.struct_class = Types::WorkflowRunSummary
+
+    WorkflowSortCriteria.struct_class = Types::WorkflowSortCriteria
+
+    WorkflowSortCriteriaList.member = Shapes::ShapeRef.new(shape: WorkflowSortCriteria)
+
+    WorkflowSummaries.member = Shapes::ShapeRef.new(shape: WorkflowSummary)
+
+    WorkflowSummary.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    WorkflowSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    WorkflowSummary.add_member(:source_repository_name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location_name: "sourceRepositoryName"))
+    WorkflowSummary.add_member(:source_branch_name, Shapes::ShapeRef.new(shape: SourceRepositoryBranchString, required: true, location_name: "sourceBranchName"))
+    WorkflowSummary.add_member(:definition, Shapes::ShapeRef.new(shape: WorkflowDefinitionSummary, required: true, location_name: "definition"))
+    WorkflowSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    WorkflowSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedTime"))
+    WorkflowSummary.add_member(:run_mode, Shapes::ShapeRef.new(shape: WorkflowRunMode, required: true, location_name: "runMode"))
+    WorkflowSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowStatus, required: true, location_name: "status"))
+    WorkflowSummary.struct_class = Types::WorkflowSummary
 
 
     # @api private
@@ -980,6 +1128,34 @@ module Aws::CodeCatalyst
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkflow"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkflowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_workflow_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkflowRun"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkflowRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkflowRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_access_tokens, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAccessTokens"
         o.http_method = "POST"
@@ -1023,7 +1199,7 @@ module Aws::CodeCatalyst
       api.add_operation(:list_dev_environments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDevEnvironments"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments"
+        o.http_request_uri = "/v1/spaces/{spaceName}/devEnvironments"
         o.input = Shapes::ShapeRef.new(shape: ListDevEnvironmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDevEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1139,6 +1315,46 @@ module Aws::CodeCatalyst
         )
       end)
 
+      api.add_operation(:list_workflow_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkflowRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkflowRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkflowRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_workflows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkflows"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/workflows"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkflowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkflowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:start_dev_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDevEnvironment"
         o.http_method = "PUT"
@@ -1159,6 +1375,20 @@ module Aws::CodeCatalyst
         o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session"
         o.input = Shapes::ShapeRef.new(shape: StartDevEnvironmentSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDevEnvironmentSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_workflow_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartWorkflowRun"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns"
+        o.input = Shapes::ShapeRef.new(shape: StartWorkflowRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartWorkflowRunResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

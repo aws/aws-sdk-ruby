@@ -20449,9 +20449,9 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   * `5.5.46` (supported for 5.1 DB snapshots)
-    #
-    #   ^
+    #   For the list of engine versions that are available for upgrading a DB
+    #   snapshot, see [ Upgrading a MySQL DB snapshot engine version][1] in
+    #   the *Amazon RDS User Guide.*
     #
     #   **Oracle**
     #
@@ -20470,11 +20470,13 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   For the list of engine versions that are available for upgrading a DB
-    #   snapshot, see [ Upgrading the PostgreSQL DB Engine for Amazon RDS][1].
+    #   snapshot, see [ Upgrading a PostgreSQL DB snapshot engine version][2]
+    #   in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
     #
     # @option params [String] :option_group_name
     #   The option group to identify with the upgraded DB snapshot.
@@ -29340,7 +29342,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.203.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

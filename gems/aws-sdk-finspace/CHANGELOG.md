@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-11-15)
+------------------
+
+* Feature - Adding deprecated trait on Dataset Browser Environment APIs
+
 1.22.0 (2023-10-30)
 ------------------
 

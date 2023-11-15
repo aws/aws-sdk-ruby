@@ -99,7 +99,7 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # A container for the account-level Amazon S3 Storage Lens
+    # A container element for the account-level Amazon S3 Storage Lens
     # configuration.
     #
     # For more information about S3 Storage Lens, see [Assessing your
@@ -113,24 +113,31 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
     # @!attribute [rw] activity_metrics
-    #   A container for S3 Storage Lens activity metrics.
+    #   A container element for S3 Storage Lens activity metrics.
     #   @return [Types::ActivityMetrics]
     #
     # @!attribute [rw] bucket_level
-    #   A container for the S3 Storage Lens bucket-level configuration.
+    #   A container element for the S3 Storage Lens bucket-level
+    #   configuration.
     #   @return [Types::BucketLevel]
     #
     # @!attribute [rw] advanced_cost_optimization_metrics
-    #   A container for S3 Storage Lens advanced cost-optimization metrics.
+    #   A container element for S3 Storage Lens advanced cost-optimization
+    #   metrics.
     #   @return [Types::AdvancedCostOptimizationMetrics]
     #
     # @!attribute [rw] advanced_data_protection_metrics
-    #   A container for S3 Storage Lens advanced data-protection metrics.
+    #   A container element for S3 Storage Lens advanced data-protection
+    #   metrics.
     #   @return [Types::AdvancedDataProtectionMetrics]
     #
     # @!attribute [rw] detailed_status_codes_metrics
-    #   A container for detailed status code metrics.
+    #   A container element for detailed status code metrics.
     #   @return [Types::DetailedStatusCodesMetrics]
+    #
+    # @!attribute [rw] storage_lens_group_level
+    #   A container element for S3 Storage Lens groups metrics.
+    #   @return [Types::StorageLensGroupLevel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccountLevel AWS API Documentation
     #
@@ -139,7 +146,8 @@ module Aws::S3Control
       :bucket_level,
       :advanced_cost_optimization_metrics,
       :advanced_data_protection_metrics,
-      :detailed_status_codes_metrics)
+      :detailed_status_codes_metrics,
+      :storage_lens_group_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -931,6 +939,30 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that the Storage Lens group is
+    #   created from and associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_group
+    #   The Storage Lens group configuration.
+    #   @return [Types::StorageLensGroup]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that you're adding to your
+    #   Storage Lens group. This parameter is optional.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateStorageLensGroupRequest AWS API Documentation
+    #
+    class CreateStorageLensGroupRequest < Struct.new(
+      :account_id,
+      :storage_lens_group,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
     #   @return [String]
@@ -1347,6 +1379,24 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTaggingResult AWS API Documentation
     #
     class DeleteStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the Storage Lens group that you're trying to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID used to create the Storage Lens
+    #   group that you're trying to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensGroupRequest AWS API Documentation
+    #
+    class DeleteStorageLensGroupRequest < Struct.new(
+      :name,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
@@ -2490,6 +2540,38 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the Storage Lens group that you're trying to retrieve
+    #   the configuration details for.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID associated with the Storage Lens
+    #   group that you're trying to retrieve the details for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensGroupRequest AWS API Documentation
+    #
+    class GetStorageLensGroupRequest < Struct.new(
+      :name,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_lens_group
+    #   The name of the Storage Lens group that you're trying to retrieve
+    #   the configuration details for.
+    #   @return [Types::StorageLensGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensGroupResult AWS API Documentation
+    #
+    class GetStorageLensGroupResult < Struct.new(
+      :storage_lens_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3601,6 +3683,153 @@ module Aws::S3Control
     class ListStorageLensConfigurationsResult < Struct.new(
       :next_token,
       :storage_lens_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Each entry contains a Storage Lens group that exists in the specified
+    # home Region.
+    #
+    # @!attribute [rw] name
+    #   Contains the name of the Storage Lens group that exists in the
+    #   specified home Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_group_arn
+    #   Contains the Amazon Resource Name (ARN) of the Storage Lens group.
+    #   This property is read-only.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_region
+    #   Contains the Amazon Web Services Region where the Storage Lens group
+    #   was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensGroupEntry AWS API Documentation
+    #
+    class ListStorageLensGroupEntry < Struct.new(
+      :name,
+      :storage_lens_group_arn,
+      :home_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that owns the Storage Lens
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensGroupsRequest AWS API Documentation
+    #
+    class ListStorageLensGroupsRequest < Struct.new(
+      :account_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more Storage Lens groups
+    #   results available. The value of `NextToken` is a unique pagination
+    #   token for each page. Make the call again using the returned token to
+    #   retrieve the next page. Keep all other arguments unchanged. Each
+    #   pagination token expires after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_group_list
+    #   The list of Storage Lens groups that exist in the specified home
+    #   Region.
+    #   @return [Array<Types::ListStorageLensGroupEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensGroupsResult AWS API Documentation
+    #
+    class ListStorageLensGroupsResult < Struct.new(
+      :next_token,
+      :storage_lens_group_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the resource owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
+    #   list the tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :account_id,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that are associated with the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListTagsForResourceResult AWS API Documentation
+    #
+    class ListTagsForResourceResult < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition that specifies the object age range of included
+    # objects in days. Only integers are supported.
+    #
+    # @!attribute [rw] days_greater_than
+    #   Specifies the maximum object age in days. Must be a positive whole
+    #   number, greater than the minimum object age and less than or equal
+    #   to 2,147,483,647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] days_less_than
+    #   Specifies the minimum object age in days. The value must be a
+    #   positive whole number, greater than 0 and less than or equal to
+    #   2,147,483,647.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MatchObjectAge AWS API Documentation
+    #
+    class MatchObjectAge < Struct.new(
+      :days_greater_than,
+      :days_less_than)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition that specifies the object size range of included
+    # objects in bytes. Only integers are supported.
+    #
+    # @!attribute [rw] bytes_greater_than
+    #   Specifies the minimum object size in Bytes. The value must be a
+    #   positive number, greater than 0 and less than 5 TB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_less_than
+    #   Specifies the maximum object size in Bytes. The value must be a
+    #   positive number, greater than the minimum object size and less than
+    #   5 TB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MatchObjectSize AWS API Documentation
+    #
+    class MatchObjectSize < Struct.new(
+      :bytes_greater_than,
+      :bytes_less_than)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5158,7 +5387,7 @@ module Aws::S3Control
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
@@ -5873,6 +6102,215 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A custom grouping of objects that include filters for prefixes,
+    # suffixes, object tags, object size, or object age. You can create an
+    # S3 Storage Lens group that includes a single filter or multiple filter
+    # conditions. To specify multiple filter conditions, you use `AND` or
+    # `OR` logical operators.
+    #
+    # @!attribute [rw] name
+    #   Contains the name of the Storage Lens group.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Sets the criteria for the Storage Lens group data that is displayed.
+    #   For multiple filter conditions, the `AND` or `OR` logical operator
+    #   is used.
+    #   @return [Types::StorageLensGroupFilter]
+    #
+    # @!attribute [rw] storage_lens_group_arn
+    #   Contains the Amazon Resource Name (ARN) of the Storage Lens group.
+    #   This property is read-only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroup AWS API Documentation
+    #
+    class StorageLensGroup < Struct.new(
+      :name,
+      :filter,
+      :storage_lens_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A logical operator that allows multiple filter conditions to be joined
+    # for more complex comparisons of Storage Lens group data.
+    #
+    # @!attribute [rw] match_any_prefix
+    #   Contains a list of prefixes. At least one prefix must be specified.
+    #   Up to 10 prefixes are allowed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_suffix
+    #   Contains a list of suffixes. At least one suffix must be specified.
+    #   Up to 10 suffixes are allowed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_tag
+    #   Contains the list of object tags. At least one object tag must be
+    #   specified. Up to 10 object tags are allowed.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @!attribute [rw] match_object_age
+    #   Contains `DaysGreaterThan` and `DaysLessThan` to define the object
+    #   age range (minimum and maximum number of days).
+    #   @return [Types::MatchObjectAge]
+    #
+    # @!attribute [rw] match_object_size
+    #   Contains `BytesGreaterThan` and `BytesLessThan` to define the object
+    #   size range (minimum and maximum number of Bytes).
+    #   @return [Types::MatchObjectSize]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroupAndOperator AWS API Documentation
+    #
+    class StorageLensGroupAndOperator < Struct.new(
+      :match_any_prefix,
+      :match_any_suffix,
+      :match_any_tag,
+      :match_object_age,
+      :match_object_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter element sets the criteria for the Storage Lens group data
+    # that is displayed. For multiple filter conditions, the `AND` or `OR`
+    # logical operator is used.
+    #
+    # @!attribute [rw] match_any_prefix
+    #   Contains a list of prefixes. At least one prefix must be specified.
+    #   Up to 10 prefixes are allowed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_suffix
+    #   Contains a list of suffixes. At least one suffix must be specified.
+    #   Up to 10 suffixes are allowed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_tag
+    #   Contains the list of S3 object tags. At least one object tag must be
+    #   specified. Up to 10 object tags are allowed.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @!attribute [rw] match_object_age
+    #   Contains `DaysGreaterThan` and `DaysLessThan` to define the object
+    #   age range (minimum and maximum number of days).
+    #   @return [Types::MatchObjectAge]
+    #
+    # @!attribute [rw] match_object_size
+    #   Contains `BytesGreaterThan` and `BytesLessThan` to define the object
+    #   size range (minimum and maximum number of Bytes).
+    #   @return [Types::MatchObjectSize]
+    #
+    # @!attribute [rw] and
+    #   A logical operator that allows multiple filter conditions to be
+    #   joined for more complex comparisons of Storage Lens group data.
+    #   Objects must match all of the listed filter conditions that are
+    #   joined by the `And` logical operator. Only one of each filter
+    #   condition is allowed.
+    #   @return [Types::StorageLensGroupAndOperator]
+    #
+    # @!attribute [rw] or
+    #   A single logical operator that allows multiple filter conditions to
+    #   be joined. Objects can match any of the listed filter conditions,
+    #   which are joined by the `Or` logical operator. Only one of each
+    #   filter condition is allowed.
+    #   @return [Types::StorageLensGroupOrOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroupFilter AWS API Documentation
+    #
+    class StorageLensGroupFilter < Struct.new(
+      :match_any_prefix,
+      :match_any_suffix,
+      :match_any_tag,
+      :match_object_age,
+      :match_object_size,
+      :and,
+      :or)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Storage Lens groups to include in the Storage Lens group
+    # aggregation.
+    #
+    # @!attribute [rw] selection_criteria
+    #   Indicates which Storage Lens group ARNs to include or exclude in the
+    #   Storage Lens group aggregation. If this value is left null, then all
+    #   Storage Lens groups are selected.
+    #   @return [Types::StorageLensGroupLevelSelectionCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroupLevel AWS API Documentation
+    #
+    class StorageLensGroupLevel < Struct.new(
+      :selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates which Storage Lens group ARNs to include or exclude in the
+    # Storage Lens group aggregation. You can only attach Storage Lens
+    # groups to your Storage Lens dashboard if they're included in your
+    # Storage Lens group aggregation. If this value is left null, then all
+    # Storage Lens groups are selected.
+    #
+    # @!attribute [rw] include
+    #   Indicates which Storage Lens group ARNs to include in the Storage
+    #   Lens group aggregation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   Indicates which Storage Lens group ARNs to exclude from the Storage
+    #   Lens group aggregation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroupLevelSelectionCriteria AWS API Documentation
+    #
+    class StorageLensGroupLevelSelectionCriteria < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container element for specifying `Or` rule conditions. The rule
+    # conditions determine the subset of objects to which the `Or` rule
+    # applies. Objects can match any of the listed filter conditions, which
+    # are joined by the `Or` logical operator. Only one of each filter
+    # condition is allowed.
+    #
+    # @!attribute [rw] match_any_prefix
+    #   Filters objects that match any of the specified prefixes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_suffix
+    #   Filters objects that match any of the specified suffixes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_tag
+    #   Filters objects that match any of the specified S3 object tags.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @!attribute [rw] match_object_age
+    #   Filters objects that match the specified object age range.
+    #   @return [Types::MatchObjectAge]
+    #
+    # @!attribute [rw] match_object_size
+    #   Filters objects that match the specified object size range.
+    #   @return [Types::MatchObjectSize]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensGroupOrOperator AWS API Documentation
+    #
+    class StorageLensGroupOrOperator < Struct.new(
+      :match_any_prefix,
+      :match_any_suffix,
+      :match_any_tag,
+      :match_object_age,
+      :match_object_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key
     #   @return [String]
     #
@@ -5916,6 +6354,67 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SubmitMultiRegionAccessPointRoutesResult AWS API Documentation
     #
     class SubmitMultiRegionAccessPointRoutesResult < Aws::EmptyStructure; end
+
+    # An Amazon Web Services resource tag that's associated with your S3
+    # resource. You can add tags to new objects when you upload them, or you
+    # can add object tags to existing objects.
+    #
+    # <note markdown="1"> This data type is only supported for [S3 Storage Lens groups][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    #
+    # @!attribute [rw] key
+    #   The tag key for your Amazon Web Services resource. A tag key can be
+    #   up to 128 Unicode characters in length and is case-sensitive. System
+    #   created tags that begin with `aws:` aren’t supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value for your Amazon Web Services resource. A tag value can
+    #   be up to 256 Unicode characters in length and is case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that created the S3 resource that
+    #   you're trying to add tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   trying to add tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that you want to add to the
+    #   specified S3 resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :account_id,
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TagResourceResult AWS API Documentation
+    #
+    class TagResourceResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] tag_set
     #   A collection for a set of tags.
@@ -5988,6 +6487,35 @@ module Aws::S3Control
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that owns the resource that
+    #   you're trying to remove the tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
+    #   remove the resource tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key pair of the S3 resource tag that you're trying to
+    #   remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :account_id,
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResourceResult AWS API Documentation
+    #
+    class UntagResourceResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
@@ -6077,6 +6605,28 @@ module Aws::S3Control
       :job_id,
       :status,
       :status_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Storage Lens group that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the Storage Lens group owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_lens_group
+    #   The JSON file that contains the Storage Lens group configuration.
+    #   @return [Types::StorageLensGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateStorageLensGroupRequest AWS API Documentation
+    #
+    class UpdateStorageLensGroupRequest < Struct.new(
+      :name,
+      :account_id,
+      :storage_lens_group)
       SENSITIVE = []
       include Aws::Structure
     end
