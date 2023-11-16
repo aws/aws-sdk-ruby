@@ -212,6 +212,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetColumnStatisticsForPartition.build(context)
           when :get_column_statistics_for_table
             Aws::Glue::Endpoints::GetColumnStatisticsForTable.build(context)
+          when :get_column_statistics_task_run
+            Aws::Glue::Endpoints::GetColumnStatisticsTaskRun.build(context)
+          when :get_column_statistics_task_runs
+            Aws::Glue::Endpoints::GetColumnStatisticsTaskRuns.build(context)
           when :get_connection
             Aws::Glue::Endpoints::GetConnection.build(context)
           when :get_connections
@@ -332,6 +336,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ImportCatalogToGlue.build(context)
           when :list_blueprints
             Aws::Glue::Endpoints::ListBlueprints.build(context)
+          when :list_column_statistics_task_runs
+            Aws::Glue::Endpoints::ListColumnStatisticsTaskRuns.build(context)
           when :list_crawlers
             Aws::Glue::Endpoints::ListCrawlers.build(context)
           when :list_crawls
@@ -392,6 +398,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::SearchTables.build(context)
           when :start_blueprint_run
             Aws::Glue::Endpoints::StartBlueprintRun.build(context)
+          when :start_column_statistics_task_run
+            Aws::Glue::Endpoints::StartColumnStatisticsTaskRun.build(context)
           when :start_crawler
             Aws::Glue::Endpoints::StartCrawler.build(context)
           when :start_crawler_schedule
@@ -414,6 +422,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::StartTrigger.build(context)
           when :start_workflow_run
             Aws::Glue::Endpoints::StartWorkflowRun.build(context)
+          when :stop_column_statistics_task_run
+            Aws::Glue::Endpoints::StopColumnStatisticsTaskRun.build(context)
           when :stop_crawler
             Aws::Glue::Endpoints::StopCrawler.build(context)
           when :stop_crawler_schedule

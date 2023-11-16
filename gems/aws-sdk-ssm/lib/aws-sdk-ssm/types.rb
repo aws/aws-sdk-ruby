@@ -1336,6 +1336,10 @@ module Aws::SSM
     #   The name of the Change Manager change request.
     #   @return [String]
     #
+    # @!attribute [rw] variables
+    #   Variables defined for the automation.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -1371,7 +1375,8 @@ module Aws::SSM
       :runbooks,
       :ops_item_id,
       :association_id,
-      :change_request_name)
+      :change_request_name,
+      :variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3535,7 +3540,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -5269,6 +5274,14 @@ module Aws::SSM
     #
     #     Sample values: `Installed` \| `InstalledOther` \|
     #     `InstalledPendingReboot`
+    #
+    #     For lists of all `State` values, see [Understanding patch
+    #     compliance state values][1] in the *Amazon Web Services Systems
+    #     Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] next_token
@@ -12724,7 +12737,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -13328,7 +13341,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -13995,6 +14008,40 @@ module Aws::SSM
     class ParametersFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A detailed status of the parent step.
+    #
+    # @!attribute [rw] step_execution_id
+    #   The unique ID of a step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the automation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] iteration
+    #   The current repetition of the loop represented by an integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iterator_value
+    #   The current value of the specified iterator in the loop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParentStepDetails AWS API Documentation
+    #
+    class ParentStepDetails < Struct.new(
+      :step_execution_id,
+      :step_name,
+      :action,
+      :iteration,
+      :iterator_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17304,6 +17351,10 @@ module Aws::SSM
     #   The CloudWatch alarms that were invoked by the automation.
     #   @return [Array<Types::AlarmStateInformation>]
     #
+    # @!attribute [rw] parent_step_details
+    #   Information about the parent step.
+    #   @return [Types::ParentStepDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -17329,7 +17380,8 @@ module Aws::SSM
       :valid_next_steps,
       :targets,
       :target_location,
-      :triggered_alarms)
+      :triggered_alarms,
+      :parent_step_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17338,9 +17390,7 @@ module Aws::SSM
     # the call.
     #
     # @!attribute [rw] key
-    #   One or more keys to limit the results. Valid filter keys include the
-    #   following: StepName, Action, StepExecutionId, StepExecutionStatus,
-    #   StartTimeBefore, StartTimeAfter.
+    #   One or more keys to limit the results.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -19273,25 +19323,28 @@ module Aws::SSM
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
     #
-    #   * `/ssm/managed-instance/default-ec2-instance-management-role: The
-    #     name of an IAM role`
+    #   * For `/ssm/managed-instance/default-ec2-instance-management-role`,
+    #     enter the name of an IAM role.
     #
-    #   * `/ssm/automation/customer-script-log-destination`: `CloudWatch`
+    #   * For `/ssm/automation/customer-script-log-destination`, enter
+    #     `CloudWatch`.
     #
-    #   * `/ssm/automation/customer-script-log-group-name`: The name of an
-    #     Amazon CloudWatch Logs log group
+    #   * For `/ssm/automation/customer-script-log-group-name`, enter the
+    #     name of an Amazon CloudWatch Logs log group.
     #
-    #   * `/ssm/documents/console/public-sharing-permission`: `Enable` or
-    #     `Disable`
+    #   * For `/ssm/documents/console/public-sharing-permission`, enter
+    #     `Enable` or `Disable`.
     #
-    #   * `/ssm/managed-instance/activation-tier`: `standard` or `advanced`
+    #   * For `/ssm/managed-instance/activation-tier`, enter `standard` or
+    #     `advanced`.
     #
-    #   * `/ssm/opsinsights/opscenter`: `Enabled` or `Disabled`
+    #   * For `/ssm/opsinsights/opscenter`, enter `Enabled` or `Disabled`.
     #
-    #   * `/ssm/parameter-store/default-parameter-tier`: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
+    #   * For `/ssm/parameter-store/default-parameter-tier`, enter
+    #     `Standard`, `Advanced`, or `Intelligent-Tiering`
     #
-    #   * `/ssm/parameter-store/high-throughput-enabled`: `true` or `false`
+    #   * For `/ssm/parameter-store/high-throughput-enabled`, enter `true`
+    #     or `false`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation

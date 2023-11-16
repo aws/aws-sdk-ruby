@@ -86,6 +86,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::CreateNamespace.build(context)
           when :create_refresh_schedule
             Aws::QuickSight::Endpoints::CreateRefreshSchedule.build(context)
+          when :create_role_membership
+            Aws::QuickSight::Endpoints::CreateRoleMembership.build(context)
           when :create_template
             Aws::QuickSight::Endpoints::CreateTemplate.build(context)
           when :create_template_alias
@@ -128,6 +130,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteNamespace.build(context)
           when :delete_refresh_schedule
             Aws::QuickSight::Endpoints::DeleteRefreshSchedule.build(context)
+          when :delete_role_custom_permission
+            Aws::QuickSight::Endpoints::DeleteRoleCustomPermission.build(context)
+          when :delete_role_membership
+            Aws::QuickSight::Endpoints::DeleteRoleMembership.build(context)
           when :delete_template
             Aws::QuickSight::Endpoints::DeleteTemplate.build(context)
           when :delete_template_alias
@@ -202,6 +208,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeNamespace.build(context)
           when :describe_refresh_schedule
             Aws::QuickSight::Endpoints::DescribeRefreshSchedule.build(context)
+          when :describe_role_custom_permission
+            Aws::QuickSight::Endpoints::DescribeRoleCustomPermission.build(context)
           when :describe_template
             Aws::QuickSight::Endpoints::DescribeTemplate.build(context)
           when :describe_template_alias
@@ -268,6 +276,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListNamespaces.build(context)
           when :list_refresh_schedules
             Aws::QuickSight::Endpoints::ListRefreshSchedules.build(context)
+          when :list_role_memberships
+            Aws::QuickSight::Endpoints::ListRoleMemberships.build(context)
           when :list_tags_for_resource
             Aws::QuickSight::Endpoints::ListTagsForResource.build(context)
           when :list_template_aliases
@@ -356,6 +366,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdatePublicSharingSettings.build(context)
           when :update_refresh_schedule
             Aws::QuickSight::Endpoints::UpdateRefreshSchedule.build(context)
+          when :update_role_custom_permission
+            Aws::QuickSight::Endpoints::UpdateRoleCustomPermission.build(context)
           when :update_template
             Aws::QuickSight::Endpoints::UpdateTemplate.build(context)
           when :update_template_alias

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-11-16)
+------------------
+
+* Feature - Introduces new APIs ListIncidentFindings and BatchGetIncidentFindings to use findings related to an incident.
+
 1.29.0 (2023-09-27)
 ------------------
 

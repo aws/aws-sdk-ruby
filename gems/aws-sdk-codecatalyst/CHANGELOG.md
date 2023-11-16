@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-11-16)
+------------------
+
+* Feature - This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.
+
 1.12.0 (2023-11-15)
 ------------------
 

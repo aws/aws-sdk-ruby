@@ -169,6 +169,7 @@ module Aws::Glue
     ColumnImportance = Shapes::StructureShape.new(name: 'ColumnImportance')
     ColumnImportanceList = Shapes::ListShape.new(name: 'ColumnImportanceList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
+    ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
     ColumnNameString = Shapes::StringShape.new(name: 'ColumnNameString')
     ColumnRowFilter = Shapes::StructureShape.new(name: 'ColumnRowFilter')
     ColumnRowFilterList = Shapes::ListShape.new(name: 'ColumnRowFilterList')
@@ -177,6 +178,13 @@ module Aws::Glue
     ColumnStatisticsError = Shapes::StructureShape.new(name: 'ColumnStatisticsError')
     ColumnStatisticsErrors = Shapes::ListShape.new(name: 'ColumnStatisticsErrors')
     ColumnStatisticsList = Shapes::ListShape.new(name: 'ColumnStatisticsList')
+    ColumnStatisticsState = Shapes::StringShape.new(name: 'ColumnStatisticsState')
+    ColumnStatisticsTaskNotRunningException = Shapes::StructureShape.new(name: 'ColumnStatisticsTaskNotRunningException')
+    ColumnStatisticsTaskRun = Shapes::StructureShape.new(name: 'ColumnStatisticsTaskRun')
+    ColumnStatisticsTaskRunIdList = Shapes::ListShape.new(name: 'ColumnStatisticsTaskRunIdList')
+    ColumnStatisticsTaskRunningException = Shapes::StructureShape.new(name: 'ColumnStatisticsTaskRunningException')
+    ColumnStatisticsTaskRunsList = Shapes::ListShape.new(name: 'ColumnStatisticsTaskRunsList')
+    ColumnStatisticsTaskStoppingException = Shapes::StructureShape.new(name: 'ColumnStatisticsTaskStoppingException')
     ColumnStatisticsType = Shapes::StringShape.new(name: 'ColumnStatisticsType')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     ColumnValueStringList = Shapes::ListShape.new(name: 'ColumnValueStringList')
@@ -490,6 +498,10 @@ module Aws::Glue
     GetColumnStatisticsForPartitionResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsForPartitionResponse')
     GetColumnStatisticsForTableRequest = Shapes::StructureShape.new(name: 'GetColumnStatisticsForTableRequest')
     GetColumnStatisticsForTableResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsForTableResponse')
+    GetColumnStatisticsTaskRunRequest = Shapes::StructureShape.new(name: 'GetColumnStatisticsTaskRunRequest')
+    GetColumnStatisticsTaskRunResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsTaskRunResponse')
+    GetColumnStatisticsTaskRunsRequest = Shapes::StructureShape.new(name: 'GetColumnStatisticsTaskRunsRequest')
+    GetColumnStatisticsTaskRunsResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsTaskRunsResponse')
     GetConnectionRequest = Shapes::StructureShape.new(name: 'GetConnectionRequest')
     GetConnectionResponse = Shapes::StructureShape.new(name: 'GetConnectionResponse')
     GetConnectionsFilter = Shapes::StructureShape.new(name: 'GetConnectionsFilter')
@@ -700,6 +712,8 @@ module Aws::Glue
     LineageConfiguration = Shapes::StructureShape.new(name: 'LineageConfiguration')
     ListBlueprintsRequest = Shapes::StructureShape.new(name: 'ListBlueprintsRequest')
     ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
+    ListColumnStatisticsTaskRunsRequest = Shapes::StructureShape.new(name: 'ListColumnStatisticsTaskRunsRequest')
+    ListColumnStatisticsTaskRunsResponse = Shapes::StructureShape.new(name: 'ListColumnStatisticsTaskRunsResponse')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
     ListCrawlsRequest = Shapes::StructureShape.new(name: 'ListCrawlsRequest')
@@ -852,6 +866,7 @@ module Aws::Glue
     PiiType = Shapes::StringShape.new(name: 'PiiType')
     PolicyJsonString = Shapes::StringShape.new(name: 'PolicyJsonString')
     PollingTime = Shapes::IntegerShape.new(name: 'PollingTime')
+    PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     PostgreSQLCatalogSource = Shapes::StructureShape.new(name: 'PostgreSQLCatalogSource')
     PostgreSQLCatalogTarget = Shapes::StructureShape.new(name: 'PostgreSQLCatalogTarget')
@@ -940,6 +955,7 @@ module Aws::Glue
     S3SourceAdditionalOptions = Shapes::StructureShape.new(name: 'S3SourceAdditionalOptions')
     S3Target = Shapes::StructureShape.new(name: 'S3Target')
     S3TargetList = Shapes::ListShape.new(name: 'S3TargetList')
+    SampleSizePercentage = Shapes::FloatShape.new(name: 'SampleSizePercentage')
     ScalaCode = Shapes::StringShape.new(name: 'ScalaCode')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleState = Shapes::StringShape.new(name: 'ScheduleState')
@@ -1006,6 +1022,8 @@ module Aws::Glue
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     StartBlueprintRunRequest = Shapes::StructureShape.new(name: 'StartBlueprintRunRequest')
     StartBlueprintRunResponse = Shapes::StructureShape.new(name: 'StartBlueprintRunResponse')
+    StartColumnStatisticsTaskRunRequest = Shapes::StructureShape.new(name: 'StartColumnStatisticsTaskRunRequest')
+    StartColumnStatisticsTaskRunResponse = Shapes::StructureShape.new(name: 'StartColumnStatisticsTaskRunResponse')
     StartCrawlerRequest = Shapes::StructureShape.new(name: 'StartCrawlerRequest')
     StartCrawlerResponse = Shapes::StructureShape.new(name: 'StartCrawlerResponse')
     StartCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StartCrawlerScheduleRequest')
@@ -1035,6 +1053,8 @@ module Aws::Glue
     StatementOutput = Shapes::StructureShape.new(name: 'StatementOutput')
     StatementOutputData = Shapes::StructureShape.new(name: 'StatementOutputData')
     StatementState = Shapes::StringShape.new(name: 'StatementState')
+    StopColumnStatisticsTaskRunRequest = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunRequest')
+    StopColumnStatisticsTaskRunResponse = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunResponse')
     StopCrawlerRequest = Shapes::StructureShape.new(name: 'StopCrawlerRequest')
     StopCrawlerResponse = Shapes::StructureShape.new(name: 'StopCrawlerResponse')
     StopCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StopCrawlerScheduleRequest')
@@ -1780,6 +1800,8 @@ module Aws::Glue
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
 
+    ColumnNameList.member = Shapes::ShapeRef.new(shape: NameString)
+
     ColumnRowFilter.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ColumnName"))
     ColumnRowFilter.add_member(:row_filter_expression, Shapes::ShapeRef.new(shape: PredicateString, location_name: "RowFilterExpression"))
     ColumnRowFilter.struct_class = Types::ColumnRowFilter
@@ -1809,6 +1831,39 @@ module Aws::Glue
     ColumnStatisticsErrors.member = Shapes::ShapeRef.new(shape: ColumnStatisticsError)
 
     ColumnStatisticsList.member = Shapes::ShapeRef.new(shape: ColumnStatistics)
+
+    ColumnStatisticsTaskNotRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ColumnStatisticsTaskNotRunningException.struct_class = Types::ColumnStatisticsTaskNotRunningException
+
+    ColumnStatisticsTaskRun.add_member(:customer_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "CustomerId"))
+    ColumnStatisticsTaskRun.add_member(:column_statistics_task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ColumnStatisticsTaskRunId"))
+    ColumnStatisticsTaskRun.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
+    ColumnStatisticsTaskRun.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    ColumnStatisticsTaskRun.add_member(:column_name_list, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNameList"))
+    ColumnStatisticsTaskRun.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
+    ColumnStatisticsTaskRun.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    ColumnStatisticsTaskRun.add_member(:sample_size, Shapes::ShapeRef.new(shape: SampleSizePercentage, location_name: "SampleSize"))
+    ColumnStatisticsTaskRun.add_member(:security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "SecurityConfiguration"))
+    ColumnStatisticsTaskRun.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "NumberOfWorkers"))
+    ColumnStatisticsTaskRun.add_member(:worker_type, Shapes::ShapeRef.new(shape: NameString, location_name: "WorkerType"))
+    ColumnStatisticsTaskRun.add_member(:status, Shapes::ShapeRef.new(shape: ColumnStatisticsState, location_name: "Status"))
+    ColumnStatisticsTaskRun.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ColumnStatisticsTaskRun.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    ColumnStatisticsTaskRun.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    ColumnStatisticsTaskRun.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    ColumnStatisticsTaskRun.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
+    ColumnStatisticsTaskRun.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "DPUSeconds"))
+    ColumnStatisticsTaskRun.struct_class = Types::ColumnStatisticsTaskRun
+
+    ColumnStatisticsTaskRunIdList.member = Shapes::ShapeRef.new(shape: HashString)
+
+    ColumnStatisticsTaskRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ColumnStatisticsTaskRunningException.struct_class = Types::ColumnStatisticsTaskRunningException
+
+    ColumnStatisticsTaskRunsList.member = Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRun)
+
+    ColumnStatisticsTaskStoppingException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ColumnStatisticsTaskStoppingException.struct_class = Types::ColumnStatisticsTaskStoppingException
 
     ColumnValueStringList.member = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
@@ -3007,6 +3062,22 @@ module Aws::Glue
     GetColumnStatisticsForTableResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ColumnErrors, location_name: "Errors"))
     GetColumnStatisticsForTableResponse.struct_class = Types::GetColumnStatisticsForTableResponse
 
+    GetColumnStatisticsTaskRunRequest.add_member(:column_statistics_task_run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "ColumnStatisticsTaskRunId"))
+    GetColumnStatisticsTaskRunRequest.struct_class = Types::GetColumnStatisticsTaskRunRequest
+
+    GetColumnStatisticsTaskRunResponse.add_member(:column_statistics_task_run, Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRun, location_name: "ColumnStatisticsTaskRun"))
+    GetColumnStatisticsTaskRunResponse.struct_class = Types::GetColumnStatisticsTaskRunResponse
+
+    GetColumnStatisticsTaskRunsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
+    GetColumnStatisticsTaskRunsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetColumnStatisticsTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetColumnStatisticsTaskRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetColumnStatisticsTaskRunsRequest.struct_class = Types::GetColumnStatisticsTaskRunsRequest
+
+    GetColumnStatisticsTaskRunsResponse.add_member(:column_statistics_task_runs, Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRunsList, location_name: "ColumnStatisticsTaskRuns"))
+    GetColumnStatisticsTaskRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetColumnStatisticsTaskRunsResponse.struct_class = Types::GetColumnStatisticsTaskRunsResponse
+
     GetConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetConnectionRequest.add_member(:hide_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "HidePassword"))
@@ -3965,6 +4036,14 @@ module Aws::Glue
     ListBlueprintsResponse.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintNames, location_name: "Blueprints"))
     ListBlueprintsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListBlueprintsResponse.struct_class = Types::ListBlueprintsResponse
+
+    ListColumnStatisticsTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListColumnStatisticsTaskRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListColumnStatisticsTaskRunsRequest.struct_class = Types::ListColumnStatisticsTaskRunsRequest
+
+    ListColumnStatisticsTaskRunsResponse.add_member(:column_statistics_task_run_ids, Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRunIdList, location_name: "ColumnStatisticsTaskRunIds"))
+    ListColumnStatisticsTaskRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListColumnStatisticsTaskRunsResponse.struct_class = Types::ListColumnStatisticsTaskRunsResponse
 
     ListCrawlersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListCrawlersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -5023,6 +5102,18 @@ module Aws::Glue
     StartBlueprintRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
     StartBlueprintRunResponse.struct_class = Types::StartBlueprintRunResponse
 
+    StartColumnStatisticsTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    StartColumnStatisticsTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StartColumnStatisticsTaskRunRequest.add_member(:column_name_list, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNameList"))
+    StartColumnStatisticsTaskRunRequest.add_member(:role, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Role"))
+    StartColumnStatisticsTaskRunRequest.add_member(:sample_size, Shapes::ShapeRef.new(shape: SampleSizePercentage, location_name: "SampleSize"))
+    StartColumnStatisticsTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogID"))
+    StartColumnStatisticsTaskRunRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    StartColumnStatisticsTaskRunRequest.struct_class = Types::StartColumnStatisticsTaskRunRequest
+
+    StartColumnStatisticsTaskRunResponse.add_member(:column_statistics_task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ColumnStatisticsTaskRunId"))
+    StartColumnStatisticsTaskRunResponse.struct_class = Types::StartColumnStatisticsTaskRunResponse
+
     StartCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StartCrawlerRequest.struct_class = Types::StartCrawlerRequest
 
@@ -5139,6 +5230,12 @@ module Aws::Glue
 
     StatementOutputData.add_member(:text_plain, Shapes::ShapeRef.new(shape: GenericString, location_name: "TextPlain"))
     StatementOutputData.struct_class = Types::StatementOutputData
+
+    StopColumnStatisticsTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
+    StopColumnStatisticsTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StopColumnStatisticsTaskRunRequest.struct_class = Types::StopColumnStatisticsTaskRunRequest
+
+    StopColumnStatisticsTaskRunResponse.struct_class = Types::StopColumnStatisticsTaskRunResponse
 
     StopCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StopCrawlerRequest.struct_class = Types::StopCrawlerRequest
@@ -6751,6 +6848,32 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
+      api.add_operation(:get_column_statistics_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetColumnStatisticsTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetColumnStatisticsTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetColumnStatisticsTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:get_column_statistics_task_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetColumnStatisticsTaskRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetColumnStatisticsTaskRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetColumnStatisticsTaskRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetConnection"
         o.http_method = "POST"
@@ -7615,6 +7738,21 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_column_statistics_task_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListColumnStatisticsTaskRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListColumnStatisticsTaskRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListColumnStatisticsTaskRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_crawlers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCrawlers"
         o.http_method = "POST"
@@ -8080,6 +8218,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: IllegalBlueprintStateException)
       end)
 
+      api.add_operation(:start_column_statistics_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartColumnStatisticsTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartColumnStatisticsTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartColumnStatisticsTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRunningException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:start_crawler, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartCrawler"
         o.http_method = "POST"
@@ -8221,6 +8373,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
+      end)
+
+      api.add_operation(:stop_column_statistics_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopColumnStatisticsTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopColumnStatisticsTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopColumnStatisticsTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ColumnStatisticsTaskNotRunningException)
+        o.errors << Shapes::ShapeRef.new(shape: ColumnStatisticsTaskStoppingException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
       api.add_operation(:stop_crawler, Seahorse::Model::Operation.new.tap do |o|

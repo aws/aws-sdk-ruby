@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2023-11-16)
+------------------
+
+* Feature - GA release the ability to index and search devices based on their GeoLocation data. With GeoQueries you can narrow your search to retrieve devices located in the desired geographic boundary.
+
 1.112.0 (2023-11-14)
 ------------------
 

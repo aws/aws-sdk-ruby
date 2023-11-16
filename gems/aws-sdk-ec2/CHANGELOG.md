@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.422.0 (2023-11-16)
+------------------
+
+* Feature - Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider.
+
 1.421.0 (2023-11-15)
 ------------------
 

@@ -105,6 +105,7 @@ module Aws::Transfer
     DescribedWorkflow = Shapes::StructureShape.new(name: 'DescribedWorkflow')
     Description = Shapes::StringShape.new(name: 'Description')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
+    DirectoryListingOptimization = Shapes::StringShape.new(name: 'DirectoryListingOptimization')
     Domain = Shapes::StringShape.new(name: 'Domain')
     EfsFileLocation = Shapes::StructureShape.new(name: 'EfsFileLocation')
     EfsFileSystemId = Shapes::StringShape.new(name: 'EfsFileSystemId')
@@ -196,6 +197,7 @@ module Aws::Transfer
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MapEntry = Shapes::StringShape.new(name: 'MapEntry')
     MapTarget = Shapes::StringShape.new(name: 'MapTarget')
+    MapType = Shapes::StringShape.new(name: 'MapType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MdnResponse = Shapes::StringShape.new(name: 'MdnResponse')
     MdnSigningAlg = Shapes::StringShape.new(name: 'MdnSigningAlg')
@@ -230,6 +232,7 @@ module Aws::Transfer
     S3FileLocation = Shapes::StructureShape.new(name: 'S3FileLocation')
     S3InputFileLocation = Shapes::StructureShape.new(name: 'S3InputFileLocation')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3StorageOptions = Shapes::StructureShape.new(name: 'S3StorageOptions')
     S3Tag = Shapes::StructureShape.new(name: 'S3Tag')
     S3TagKey = Shapes::StringShape.new(name: 'S3TagKey')
     S3TagValue = Shapes::StringShape.new(name: 'S3TagValue')
@@ -413,6 +416,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    CreateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -672,6 +676,7 @@ module Aws::Transfer
     DescribedServer.add_member(:user_count, Shapes::ShapeRef.new(shape: UserCount, location_name: "UserCount"))
     DescribedServer.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     DescribedServer.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    DescribedServer.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     DescribedServer.struct_class = Types::DescribedServer
 
     DescribedUser.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -728,6 +733,7 @@ module Aws::Transfer
 
     HomeDirectoryMapEntry.add_member(:entry, Shapes::ShapeRef.new(shape: MapEntry, required: true, location_name: "Entry"))
     HomeDirectoryMapEntry.add_member(:target, Shapes::ShapeRef.new(shape: MapTarget, required: true, location_name: "Target"))
+    HomeDirectoryMapEntry.add_member(:type, Shapes::ShapeRef.new(shape: MapType, location_name: "Type"))
     HomeDirectoryMapEntry.struct_class = Types::HomeDirectoryMapEntry
 
     HomeDirectoryMappings.member = Shapes::ShapeRef.new(shape: HomeDirectoryMapEntry)
@@ -1027,6 +1033,9 @@ module Aws::Transfer
     S3InputFileLocation.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, location_name: "Key"))
     S3InputFileLocation.struct_class = Types::S3InputFileLocation
 
+    S3StorageOptions.add_member(:directory_listing_optimization, Shapes::ShapeRef.new(shape: DirectoryListingOptimization, location_name: "DirectoryListingOptimization"))
+    S3StorageOptions.struct_class = Types::S3StorageOptions
+
     S3Tag.add_member(:key, Shapes::ShapeRef.new(shape: S3TagKey, required: true, location_name: "Key"))
     S3Tag.add_member(:value, Shapes::ShapeRef.new(shape: S3TagValue, required: true, location_name: "Value"))
     S3Tag.struct_class = Types::S3Tag
@@ -1210,6 +1219,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     UpdateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    UpdateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
     UpdateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

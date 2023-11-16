@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-11-16)
+------------------
+
+* Feature - This release adds the Image Lifecycle Management feature to automate the process of deprecating, disabling and deleting outdated images and their associated resources.
+
 1.52.0 (2023-09-27)
 ------------------
 

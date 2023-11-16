@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.
+
 1.159.0 (2023-11-14)
 ------------------
 

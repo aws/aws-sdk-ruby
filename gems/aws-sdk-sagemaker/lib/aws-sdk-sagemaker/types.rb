@@ -11727,6 +11727,11 @@ module Aws::SageMaker
     #   The IAM Identity Center managed application instance ID.
     #   @return [String]
     #
+    # @!attribute [rw] single_sign_on_application_arn
+    #   The ARN of the associated Amazon Web Services Single Sign-On
+    #   application for this Domain.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status.
     #   @return [String]
@@ -11814,6 +11819,7 @@ module Aws::SageMaker
       :domain_name,
       :home_efs_file_system_id,
       :single_sign_on_managed_application_instance_id,
+      :single_sign_on_application_arn,
       :status,
       :creation_time,
       :last_modified_time,
@@ -37481,11 +37487,16 @@ module Aws::SageMaker
     #   attempts in total, not each individual attempt.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_pending_time_in_seconds
+    #   The maximum pending time in seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
     #
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      :max_wait_time_in_seconds)
+      :max_wait_time_in_seconds,
+      :max_pending_time_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

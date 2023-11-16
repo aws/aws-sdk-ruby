@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-11-16)
+------------------
+
+* Feature - Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.
+
 1.110.0 (2023-11-15)
 ------------------
 

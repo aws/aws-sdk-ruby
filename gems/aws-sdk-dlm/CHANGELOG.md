@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-11-16)
+------------------
+
+* Feature - This release adds support for Amazon Data Lifecycle Manager default policies for EBS snapshots and EBS-backed AMIs.
+
 1.63.0 (2023-11-07)
 ------------------
 

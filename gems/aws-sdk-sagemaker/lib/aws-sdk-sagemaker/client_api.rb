@@ -1234,6 +1234,7 @@ module Aws::SageMaker
     MaxParallelOfTests = Shapes::IntegerShape.new(name: 'MaxParallelOfTests')
     MaxParallelTrainingJobs = Shapes::IntegerShape.new(name: 'MaxParallelTrainingJobs')
     MaxPayloadInMB = Shapes::IntegerShape.new(name: 'MaxPayloadInMB')
+    MaxPendingTimeInSeconds = Shapes::IntegerShape.new(name: 'MaxPendingTimeInSeconds')
     MaxPercentageOfInputDatasetLabeled = Shapes::IntegerShape.new(name: 'MaxPercentageOfInputDatasetLabeled')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxRuntimeInSeconds')
@@ -1771,6 +1772,7 @@ module Aws::SageMaker
     ShadowModelVariantConfigList = Shapes::ListShape.new(name: 'ShadowModelVariantConfigList')
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
+    SingleSignOnApplicationArn = Shapes::StringShape.new(name: 'SingleSignOnApplicationArn')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
     SkipModelValidation = Shapes::StringShape.new(name: 'SkipModelValidation')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
@@ -4019,6 +4021,7 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DescribeDomainResponse.add_member(:home_efs_file_system_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "HomeEfsFileSystemId"))
     DescribeDomainResponse.add_member(:single_sign_on_managed_application_instance_id, Shapes::ShapeRef.new(shape: String256, location_name: "SingleSignOnManagedApplicationInstanceId"))
+    DescribeDomainResponse.add_member(:single_sign_on_application_arn, Shapes::ShapeRef.new(shape: SingleSignOnApplicationArn, location_name: "SingleSignOnApplicationArn"))
     DescribeDomainResponse.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "Status"))
     DescribeDomainResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     DescribeDomainResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
@@ -7199,7 +7202,7 @@ module Aws::SageMaker
     ModelPackageSummaries.key = Shapes::ShapeRef.new(shape: ModelPackageArn)
     ModelPackageSummaries.value = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageSummary)
 
-    ModelPackageSummary.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
+    ModelPackageSummary.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageName"))
     ModelPackageSummary.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageGroupName"))
     ModelPackageSummary.add_member(:model_package_version, Shapes::ShapeRef.new(shape: ModelPackageVersion, location_name: "ModelPackageVersion"))
     ModelPackageSummary.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -8468,6 +8471,7 @@ module Aws::SageMaker
 
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
     StoppingCondition.add_member(:max_wait_time_in_seconds, Shapes::ShapeRef.new(shape: MaxWaitTimeInSeconds, location_name: "MaxWaitTimeInSeconds"))
+    StoppingCondition.add_member(:max_pending_time_in_seconds, Shapes::ShapeRef.new(shape: MaxPendingTimeInSeconds, location_name: "MaxPendingTimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
 
     StudioLifecycleConfigDetails.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))

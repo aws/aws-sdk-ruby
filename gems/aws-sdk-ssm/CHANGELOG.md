@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.
+
 1.159.0 (2023-10-20)
 ------------------
 

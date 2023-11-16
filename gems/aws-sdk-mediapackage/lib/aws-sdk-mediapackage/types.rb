@@ -676,6 +676,8 @@ module Aws::MediaPackage
     #   Description (MPD). When set to FULL, elements like SegmentTemplate
     #   and ContentProtection are included in each Representation. When set
     #   to COMPACT, duplicate elements are combined and presented at the
+    #   AdaptationSet level. When set to DRM\_TOP\_LEVEL\_COMPACT, content
+    #   protection elements are placed the MPD level and referenced at the
     #   AdaptationSet level.
     #   @return [String]
     #

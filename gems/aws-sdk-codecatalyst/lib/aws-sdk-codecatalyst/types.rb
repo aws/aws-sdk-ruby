@@ -185,6 +185,10 @@ module Aws::CodeCatalyst
     #    </note>
     #   @return [Types::PersistentStorageConfiguration]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection to use connect to a Amazon VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironmentRequest AWS API Documentation
     #
     class CreateDevEnvironmentRequest < Struct.new(
@@ -196,7 +200,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,12 +218,18 @@ module Aws::CodeCatalyst
     #   The system-generated unique ID of the Dev Environment.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironmentResponse AWS API Documentation
     #
     class CreateDevEnvironmentResponse < Struct.new(
       :space_name,
       :project_name,
-      :id)
+      :id,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -742,6 +753,11 @@ module Aws::CodeCatalyst
     #   Dev Environment.
     #   @return [Types::PersistentStorage]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DevEnvironmentSummary AWS API Documentation
     #
     class DevEnvironmentSummary < Struct.new(
@@ -757,7 +773,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1024,6 +1041,11 @@ module Aws::CodeCatalyst
     #   16GB of persistent storage.
     #   @return [Types::PersistentStorage]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetDevEnvironmentResponse AWS API Documentation
     #
     class GetDevEnvironmentResponse < Struct.new(
@@ -1039,7 +1061,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end

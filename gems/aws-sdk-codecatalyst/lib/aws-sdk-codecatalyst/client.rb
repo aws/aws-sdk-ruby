@@ -503,11 +503,15 @@ module Aws::CodeCatalyst
     #
     #    </note>
     #
+    # @option params [String] :vpc_connection_name
+    #   The name of the connection to use connect to a Amazon VPC.
+    #
     # @return [Types::CreateDevEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEnvironmentResponse#space_name #space_name} => String
     #   * {Types::CreateDevEnvironmentResponse#project_name #project_name} => String
     #   * {Types::CreateDevEnvironmentResponse#id #id} => String
+    #   * {Types::CreateDevEnvironmentResponse#vpc_connection_name #vpc_connection_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -533,6 +537,7 @@ module Aws::CodeCatalyst
     #     persistent_storage: { # required
     #       size_in_gi_b: 1, # required
     #     },
+    #     vpc_connection_name: "NameString",
     #   })
     #
     # @example Response structure
@@ -540,6 +545,7 @@ module Aws::CodeCatalyst
     #   resp.space_name #=> String
     #   resp.project_name #=> String
     #   resp.id #=> String
+    #   resp.vpc_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironment AWS API Documentation
     #
@@ -915,6 +921,7 @@ module Aws::CodeCatalyst
     #   * {Types::GetDevEnvironmentResponse#instance_type #instance_type} => String
     #   * {Types::GetDevEnvironmentResponse#inactivity_timeout_minutes #inactivity_timeout_minutes} => Integer
     #   * {Types::GetDevEnvironmentResponse#persistent_storage #persistent_storage} => Types::PersistentStorage
+    #   * {Types::GetDevEnvironmentResponse#vpc_connection_name #vpc_connection_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -943,6 +950,7 @@ module Aws::CodeCatalyst
     #   resp.instance_type #=> String, one of "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large", "dev.standard1.xlarge"
     #   resp.inactivity_timeout_minutes #=> Integer
     #   resp.persistent_storage.size_in_gi_b #=> Integer
+    #   resp.vpc_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetDevEnvironment AWS API Documentation
     #
@@ -1458,6 +1466,7 @@ module Aws::CodeCatalyst
     #   resp.items[0].instance_type #=> String, one of "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large", "dev.standard1.xlarge"
     #   resp.items[0].inactivity_timeout_minutes #=> Integer
     #   resp.items[0].persistent_storage.size_in_gi_b #=> Integer
+    #   resp.items[0].vpc_connection_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListDevEnvironments AWS API Documentation
@@ -2383,7 +2392,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2874,7 +2874,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.description #=> String
     #   resp.verified_access_trust_provider.trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_provider.user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_provider.oidc_options.issuer #=> String
     #   resp.verified_access_trust_provider.oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_provider.oidc_options.token_endpoint #=> String
@@ -2883,6 +2883,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.oidc_options.client_secret #=> String
     #   resp.verified_access_trust_provider.oidc_options.scope #=> String
     #   resp.verified_access_trust_provider.device_options.tenant_id #=> String
+    #   resp.verified_access_trust_provider.device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_provider.policy_reference_name #=> String
     #   resp.verified_access_trust_provider.creation_time #=> String
     #   resp.verified_access_trust_provider.last_updated_time #=> String
@@ -2898,7 +2899,7 @@ module Aws::EC2
     #   resp.verified_access_instance.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instance.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instance.creation_time #=> String
     #   resp.verified_access_instance.last_updated_time #=> String
     #   resp.verified_access_instance.tags #=> Array
@@ -13641,7 +13642,7 @@ module Aws::EC2
     #   resp.verified_access_instance.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instance.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instance.creation_time #=> String
     #   resp.verified_access_instance.last_updated_time #=> String
     #   resp.verified_access_instance.tags #=> Array
@@ -13722,7 +13723,7 @@ module Aws::EC2
     #   resp = client.create_verified_access_trust_provider({
     #     trust_provider_type: "user", # required, accepts user, device
     #     user_trust_provider_type: "iam-identity-center", # accepts iam-identity-center, oidc
-    #     device_trust_provider_type: "jamf", # accepts jamf, crowdstrike
+    #     device_trust_provider_type: "jamf", # accepts jamf, crowdstrike, jumpcloud
     #     oidc_options: {
     #       issuer: "String",
     #       authorization_endpoint: "String",
@@ -13734,6 +13735,7 @@ module Aws::EC2
     #     },
     #     device_options: {
     #       tenant_id: "String",
+    #       public_signing_key_url: "String",
     #     },
     #     policy_reference_name: "String", # required
     #     description: "String",
@@ -13762,7 +13764,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.description #=> String
     #   resp.verified_access_trust_provider.trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_provider.user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_provider.oidc_options.issuer #=> String
     #   resp.verified_access_trust_provider.oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_provider.oidc_options.token_endpoint #=> String
@@ -13771,6 +13773,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.oidc_options.client_secret #=> String
     #   resp.verified_access_trust_provider.oidc_options.scope #=> String
     #   resp.verified_access_trust_provider.device_options.tenant_id #=> String
+    #   resp.verified_access_trust_provider.device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_provider.policy_reference_name #=> String
     #   resp.verified_access_trust_provider.creation_time #=> String
     #   resp.verified_access_trust_provider.last_updated_time #=> String
@@ -18253,7 +18256,7 @@ module Aws::EC2
     #   resp.verified_access_instance.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instance.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instance.creation_time #=> String
     #   resp.verified_access_instance.last_updated_time #=> String
     #   resp.verified_access_instance.tags #=> Array
@@ -18311,7 +18314,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.description #=> String
     #   resp.verified_access_trust_provider.trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_provider.user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_provider.oidc_options.issuer #=> String
     #   resp.verified_access_trust_provider.oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_provider.oidc_options.token_endpoint #=> String
@@ -18320,6 +18323,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.oidc_options.client_secret #=> String
     #   resp.verified_access_trust_provider.oidc_options.scope #=> String
     #   resp.verified_access_trust_provider.device_options.tenant_id #=> String
+    #   resp.verified_access_trust_provider.device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_provider.policy_reference_name #=> String
     #   resp.verified_access_trust_provider.creation_time #=> String
     #   resp.verified_access_trust_provider.last_updated_time #=> String
@@ -35006,7 +35010,7 @@ module Aws::EC2
     #   resp.verified_access_instances[0].verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instances[0].verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instances[0].verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instances[0].verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instances[0].verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instances[0].creation_time #=> String
     #   resp.verified_access_instances[0].last_updated_time #=> String
     #   resp.verified_access_instances[0].tags #=> Array
@@ -35076,7 +35080,7 @@ module Aws::EC2
     #   resp.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_providers[0].oidc_options.issuer #=> String
     #   resp.verified_access_trust_providers[0].oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_providers[0].oidc_options.token_endpoint #=> String
@@ -35085,6 +35089,7 @@ module Aws::EC2
     #   resp.verified_access_trust_providers[0].oidc_options.client_secret #=> String
     #   resp.verified_access_trust_providers[0].oidc_options.scope #=> String
     #   resp.verified_access_trust_providers[0].device_options.tenant_id #=> String
+    #   resp.verified_access_trust_providers[0].device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_providers[0].policy_reference_name #=> String
     #   resp.verified_access_trust_providers[0].creation_time #=> String
     #   resp.verified_access_trust_providers[0].last_updated_time #=> String
@@ -37321,7 +37326,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.description #=> String
     #   resp.verified_access_trust_provider.trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_provider.user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_provider.oidc_options.issuer #=> String
     #   resp.verified_access_trust_provider.oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_provider.oidc_options.token_endpoint #=> String
@@ -37330,6 +37335,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.oidc_options.client_secret #=> String
     #   resp.verified_access_trust_provider.oidc_options.scope #=> String
     #   resp.verified_access_trust_provider.device_options.tenant_id #=> String
+    #   resp.verified_access_trust_provider.device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_provider.policy_reference_name #=> String
     #   resp.verified_access_trust_provider.creation_time #=> String
     #   resp.verified_access_trust_provider.last_updated_time #=> String
@@ -37345,7 +37351,7 @@ module Aws::EC2
     #   resp.verified_access_instance.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instance.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instance.creation_time #=> String
     #   resp.verified_access_instance.last_updated_time #=> String
     #   resp.verified_access_instance.tags #=> Array
@@ -49061,7 +49067,7 @@ module Aws::EC2
     #   resp.verified_access_instance.verified_access_trust_providers[0].description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers[0].trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_instance.verified_access_trust_providers[0].user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_instance.verified_access_trust_providers[0].device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_instance.creation_time #=> String
     #   resp.verified_access_instance.last_updated_time #=> String
     #   resp.verified_access_instance.tags #=> Array
@@ -49174,6 +49180,10 @@ module Aws::EC2
     #   The options for an OpenID Connect-compatible user-identity trust
     #   provider.
     #
+    # @option params [Types::ModifyVerifiedAccessTrustProviderDeviceOptions] :device_options
+    #   The options for a device-based trust provider. This parameter is
+    #   required when the provider type is `device`.
+    #
     # @option params [String] :description
     #   A description for the Verified Access trust provider.
     #
@@ -49215,6 +49225,9 @@ module Aws::EC2
     #       client_secret: "ClientSecretType",
     #       scope: "String",
     #     },
+    #     device_options: {
+    #       public_signing_key_url: "String",
+    #     },
     #     description: "String",
     #     dry_run: false,
     #     client_token: "String",
@@ -49230,7 +49243,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.description #=> String
     #   resp.verified_access_trust_provider.trust_provider_type #=> String, one of "user", "device"
     #   resp.verified_access_trust_provider.user_trust_provider_type #=> String, one of "iam-identity-center", "oidc"
-    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike"
+    #   resp.verified_access_trust_provider.device_trust_provider_type #=> String, one of "jamf", "crowdstrike", "jumpcloud"
     #   resp.verified_access_trust_provider.oidc_options.issuer #=> String
     #   resp.verified_access_trust_provider.oidc_options.authorization_endpoint #=> String
     #   resp.verified_access_trust_provider.oidc_options.token_endpoint #=> String
@@ -49239,6 +49252,7 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.oidc_options.client_secret #=> String
     #   resp.verified_access_trust_provider.oidc_options.scope #=> String
     #   resp.verified_access_trust_provider.device_options.tenant_id #=> String
+    #   resp.verified_access_trust_provider.device_options.public_signing_key_url #=> String
     #   resp.verified_access_trust_provider.policy_reference_name #=> String
     #   resp.verified_access_trust_provider.creation_time #=> String
     #   resp.verified_access_trust_provider.last_updated_time #=> String
@@ -58034,7 +58048,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.421.0'
+      context[:gem_version] = '1.422.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

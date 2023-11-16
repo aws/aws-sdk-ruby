@@ -7490,6 +7490,8 @@ module Aws::FSx
     #
     # * `LustreRootSquashConfiguration`
     #
+    # * `PerUnitStorageThroughput`
+    #
     # * `StorageCapacity`
     #
     # * `WeeklyMaintenanceStartTime`
@@ -7712,6 +7714,7 @@ module Aws::FSx
     #         root_squash: "LustreRootSquash",
     #         no_squash_nids: ["LustreNoSquashNid"],
     #       },
+    #       per_unit_storage_throughput: 1,
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -8538,7 +8541,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

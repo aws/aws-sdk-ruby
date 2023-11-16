@@ -2835,8 +2835,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed
     #   on the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
     #   @return [Array<String>]
     #
     class CreateJobRequest < Struct.new(
@@ -2952,8 +2952,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed
     #   on the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
     #   @return [Array<String>]
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -5611,8 +5611,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed
     #   on the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
     #   @return [Array<String>]
     #
     class DescribeJobTemplateResponse < Struct.new(
@@ -6997,6 +6997,28 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A geolocation target that you select to index. Each geolocation target
+    # contains a `name` and `order` key-value pair that specifies the
+    # geolocation target fields.
+    #
+    # @!attribute [rw] name
+    #   The `name` of the geolocation target field. If the target field is
+    #   part of a named shadow, you must select the named shadow using the
+    #   `namedShadow` filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The `order` of the geolocation target field. This field is optional.
+    #   The default value is `LatLon`.
+    #   @return [String]
+    #
+    class GeoLocationTarget < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_profile_name
     #   The name of the security profile.
     #   @return [String]
@@ -7826,11 +7848,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Provides additional filters for specific data sources. Named shadow is
-    # the only data source that currently supports and requires a filter. To
-    # add named shadows to your fleet indexing configuration, set
-    # `namedShadowIndexingMode` to be `ON` and specify your shadow names in
-    # `filter`.
+    # Provides additional selections for named shadows and geolocation data.
+    #
+    # To add named shadows to your fleet indexing configuration, set
+    # `namedShadowIndexingMode` to be ON and specify your shadow names in
+    # `namedShadowNames` filter.
+    #
+    # To add geolocation data to your fleet indexing configuration:
+    #
+    # * If you store geolocation data in a class/unnamed shadow, set
+    #   `thingIndexingMode` to be `REGISTRY_AND_SHADOW` and specify your
+    #   geolocation data in `geoLocations` filter.
+    #
+    # * If you store geolocation data in a named shadow, set
+    #   `namedShadowIndexingMode` to be `ON`, add the shadow name in
+    #   `namedShadowNames` filter, and specify your geolocation data in
+    #   `geoLocations` filter. For more information, see [Managing fleet
+    #   indexing][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html
     #
     # @!attribute [rw] named_shadow_names
     #   The shadow names that you select to index. The default maximum
@@ -7843,8 +7881,21 @@ module Aws::IoT
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
     #   @return [Array<String>]
     #
+    # @!attribute [rw] geo_locations
+    #   The list of geolocation targets that you select to index. The
+    #   default maximum number of geolocation targets for indexing is `1`.
+    #   To increase the limit, see [Amazon Web Services IoT Device
+    #   Management Quotas][1] in the *Amazon Web Services General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
+    #   @return [Array<Types::GeoLocationTarget>]
+    #
     class IndexingFilter < Struct.new(
-      :named_shadow_names)
+      :named_shadow_names,
+      :geo_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8224,8 +8275,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed
     #   on the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
     #   @return [Array<String>]
     #
     class Job < Struct.new(
@@ -13282,8 +13333,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time. The response
-    #   might contain fewer results but will never contain more.
+    #   The maximum number of results to return per page at one time. The
+    #   response might contain fewer results but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] query_version
@@ -14605,11 +14656,28 @@ module Aws::IoT
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] filter
-    #   Provides additional filters for specific data sources. Named shadow
-    #   is the only data source that currently supports and requires a
-    #   filter. To add named shadows to your fleet indexing configuration,
-    #   set `namedShadowIndexingMode` to be `ON` and specify your shadow
-    #   names in `filter`.
+    #   Provides additional selections for named shadows and geolocation
+    #   data.
+    #
+    #   To add named shadows to your fleet indexing configuration, set
+    #   `namedShadowIndexingMode` to be ON and specify your shadow names in
+    #   `namedShadowNames` filter.
+    #
+    #   To add geolocation data to your fleet indexing configuration:
+    #
+    #   * If you store geolocation data in a class/unnamed shadow, set
+    #     `thingIndexingMode` to be `REGISTRY_AND_SHADOW` and specify your
+    #     geolocation data in `geoLocations` filter.
+    #
+    #   * If you store geolocation data in a named shadow, set
+    #     `namedShadowIndexingMode` to be `ON`, add the shadow name in
+    #     `namedShadowNames` filter, and specify your geolocation data in
+    #     `geoLocations` filter. For more information, see [Managing fleet
+    #     indexing][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html
     #   @return [Types::IndexingFilter]
     #
     class ThingIndexingConfiguration < Struct.new(

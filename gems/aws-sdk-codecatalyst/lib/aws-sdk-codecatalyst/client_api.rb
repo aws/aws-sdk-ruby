@@ -258,11 +258,13 @@ module Aws::CodeCatalyst
     CreateDevEnvironmentRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     CreateDevEnvironmentRequest.add_member(:inactivity_timeout_minutes, Shapes::ShapeRef.new(shape: InactivityTimeoutMinutes, location_name: "inactivityTimeoutMinutes"))
     CreateDevEnvironmentRequest.add_member(:persistent_storage, Shapes::ShapeRef.new(shape: PersistentStorageConfiguration, required: true, location_name: "persistentStorage"))
+    CreateDevEnvironmentRequest.add_member(:vpc_connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "vpcConnectionName"))
     CreateDevEnvironmentRequest.struct_class = Types::CreateDevEnvironmentRequest
 
     CreateDevEnvironmentResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
     CreateDevEnvironmentResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
     CreateDevEnvironmentResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    CreateDevEnvironmentResponse.add_member(:vpc_connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "vpcConnectionName"))
     CreateDevEnvironmentResponse.struct_class = Types::CreateDevEnvironmentResponse
 
     CreateProjectRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
@@ -378,6 +380,7 @@ module Aws::CodeCatalyst
     DevEnvironmentSummary.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     DevEnvironmentSummary.add_member(:inactivity_timeout_minutes, Shapes::ShapeRef.new(shape: InactivityTimeoutMinutes, required: true, location_name: "inactivityTimeoutMinutes"))
     DevEnvironmentSummary.add_member(:persistent_storage, Shapes::ShapeRef.new(shape: PersistentStorage, required: true, location_name: "persistentStorage"))
+    DevEnvironmentSummary.add_member(:vpc_connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "vpcConnectionName"))
     DevEnvironmentSummary.struct_class = Types::DevEnvironmentSummary
 
     DevEnvironmentSummaryList.member = Shapes::ShapeRef.new(shape: DevEnvironmentSummary)
@@ -440,6 +443,7 @@ module Aws::CodeCatalyst
     GetDevEnvironmentResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     GetDevEnvironmentResponse.add_member(:inactivity_timeout_minutes, Shapes::ShapeRef.new(shape: InactivityTimeoutMinutes, required: true, location_name: "inactivityTimeoutMinutes"))
     GetDevEnvironmentResponse.add_member(:persistent_storage, Shapes::ShapeRef.new(shape: PersistentStorage, required: true, location_name: "persistentStorage"))
+    GetDevEnvironmentResponse.add_member(:vpc_connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "vpcConnectionName"))
     GetDevEnvironmentResponse.struct_class = Types::GetDevEnvironmentResponse
 
     GetProjectRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))

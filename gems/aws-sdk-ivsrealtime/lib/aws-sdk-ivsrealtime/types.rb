@@ -22,6 +22,142 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Object specifying a channel as a destination.
+    #
+    # @!attribute [rw] channel_arn
+    #   ARN of the channel to use for broadcasting. The channel and stage
+    #   resources must be in the same AWS account and region. The channel
+    #   must be offline (not broadcasting).
+    #   @return [String]
+    #
+    # @!attribute [rw] encoder_configuration_arn
+    #   ARN of the EncoderConfiguration resource. The encoder configuration
+    #   and stage resources must be in the same AWS account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ChannelDestinationConfiguration AWS API Documentation
+    #
+    class ChannelDestinationConfiguration < Struct.new(
+      :channel_arn,
+      :encoder_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying a Composition resource.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the Composition resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   Array of Destination objects. A Composition can contain either one
+    #   destination (`channel` or `s3`) or two (one `channel` and one `s3`).
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] layout
+    #   Layout object to configure composition parameters.
+    #   @return [Types::LayoutConfiguration]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage used as input
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Composition AWS API Documentation
+    #
+    class Composition < Struct.new(
+      :arn,
+      :destinations,
+      :end_time,
+      :layout,
+      :stage_arn,
+      :start_time,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a Composition.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the Composition resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   Array of Destination objects.
+    #   @return [Array<Types::DestinationSummary>]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the attached stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CompositionSummary AWS API Documentation
+    #
+    class CompositionSummary < Struct.new(
+      :arn,
+      :destinations,
+      :end_time,
+      :stage_arn,
+      :start_time,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exception_message
     #   Updating or deleting a resource can cause an inconsistent state.
     #   @return [String]
@@ -30,6 +166,49 @@ module Aws::IVSRealTime
     #
     class ConflictException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Optional name to identify the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] video
+    #   Video configuration. Default: video resolution 1280x720, bitrate
+    #   2500 kbps, 30 fps.
+    #   @return [Types::Video]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfigurationRequest AWS API Documentation
+    #
+    class CreateEncoderConfigurationRequest < Struct.new(
+      :name,
+      :tags,
+      :video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encoder_configuration
+    #   The EncoderConfiguration that was created.
+    #   @return [Types::EncoderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfigurationResponse AWS API Documentation
+    #
+    class CreateEncoderConfigurationResponse < Struct.new(
+      :encoder_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -136,6 +315,65 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   Storage configuration name. The value does not need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   A complex type that contains a storage configuration for where
+    #   recorded video will be stored.
+    #   @return [Types::S3StorageConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStorageConfigurationRequest AWS API Documentation
+    #
+    class CreateStorageConfigurationRequest < Struct.new(
+      :name,
+      :s3,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_configuration
+    #   The StorageConfiguration that was created.
+    #   @return [Types::StorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStorageConfigurationResponse AWS API Documentation
+    #
+    class CreateStorageConfigurationResponse < Struct.new(
+      :storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the EncoderConfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteEncoderConfigurationRequest AWS API Documentation
+    #
+    class DeleteEncoderConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteEncoderConfigurationResponse AWS API Documentation
+    #
+    class DeleteEncoderConfigurationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] arn
     #   ARN of the stage to be deleted.
     #   @return [String]
@@ -151,6 +389,134 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteStageResponse AWS API Documentation
     #
     class DeleteStageResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] arn
+    #   ARN of the storage configuration to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteStorageConfigurationRequest AWS API Documentation
+    #
+    class DeleteStorageConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteStorageConfigurationResponse AWS API Documentation
+    #
+    class DeleteStorageConfigurationResponse < Aws::EmptyStructure; end
+
+    # Object specifying the status of a Destination.
+    #
+    # @!attribute [rw] configuration
+    #   Configuration used to create this destination.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] detail
+    #   Optional details regarding the status of the destination.
+    #   @return [Types::DestinationDetail]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the destination end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   Unique identifier for this destination, assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   UTC time of the destination start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition Destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :configuration,
+      :detail,
+      :end_time,
+      :id,
+      :start_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Complex data type that defines destination-configuration objects.
+    #
+    # @!attribute [rw] channel
+    #   An IVS channel to be used for broadcasting, for server-side
+    #   composition. Either a `channel` or an `s3` must be specified.
+    #   @return [Types::ChannelDestinationConfiguration]
+    #
+    # @!attribute [rw] name
+    #   Name that can be specified to help identify the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   An S3 storage configuration to be used for recording video data.
+    #   Either a `channel` or an `s3` must be specified.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DestinationConfiguration AWS API Documentation
+    #
+    class DestinationConfiguration < Struct.new(
+      :channel,
+      :name,
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Complex data type that defines destination-detail objects.
+    #
+    # @!attribute [rw] s3
+    #   An S3 detail object to return information about the S3 destination.
+    #   @return [Types::S3Detail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DestinationDetail AWS API Documentation
+    #
+    class DestinationDetail < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a Destination.
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the destination end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   Unique identifier for this destination, assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   UTC time of the destination start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition Destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DestinationSummary AWS API Documentation
+    #
+    class DestinationSummary < Struct.new(
+      :end_time,
+      :id,
+      :start_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] participant_id
     #   Identifier of the participant to be disconnected. This is assigned
@@ -178,6 +544,76 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DisconnectParticipantResponse AWS API Documentation
     #
     class DisconnectParticipantResponse < Aws::EmptyStructure; end
+
+    # Settings for transcoding.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the EncoderConfiguration resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Optional name to identify the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] video
+    #   Video configuration. Default: video resolution 1280x720, bitrate
+    #   2500 kbps, 30 fps
+    #   @return [Types::Video]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/EncoderConfiguration AWS API Documentation
+    #
+    class EncoderConfiguration < Struct.new(
+      :arn,
+      :name,
+      :tags,
+      :video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an EncoderConfiguration.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the EncoderConfiguration resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Optional name to identify the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/EncoderConfigurationSummary AWS API Documentation
+    #
+    class EncoderConfigurationSummary < Struct.new(
+      :arn,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An occurrence during a stage session.
     #
@@ -227,6 +663,54 @@ module Aws::IVSRealTime
       :name,
       :participant_id,
       :remote_participant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the Composition resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetCompositionRequest AWS API Documentation
+    #
+    class GetCompositionRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] composition
+    #   The Composition that was returned.
+    #   @return [Types::Composition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetCompositionResponse AWS API Documentation
+    #
+    class GetCompositionResponse < Struct.new(
+      :composition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the EncoderConfiguration resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetEncoderConfigurationRequest AWS API Documentation
+    #
+    class GetEncoderConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encoder_configuration
+    #   The EncoderConfiguration that was returned.
+    #   @return [Types::EncoderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetEncoderConfigurationResponse AWS API Documentation
+    #
+    class GetEncoderConfigurationResponse < Struct.new(
+      :encoder_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -319,6 +803,51 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   ARN of the storage configuration to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStorageConfigurationRequest AWS API Documentation
+    #
+    class GetStorageConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_configuration
+    #   The StorageConfiguration that was returned.
+    #   @return [Types::StorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStorageConfigurationResponse AWS API Documentation
+    #
+    class GetStorageConfigurationResponse < Struct.new(
+      :storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information specific to Grid layout, for server-side
+    # composition. See "Layouts" in [Server-Side Composition][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html
+    #
+    # @!attribute [rw] featured_participant_attribute
+    #   This attribute name identifies the featured slot. A participant with
+    #   this attribute set to `"true"` (as a string value) in
+    #   ParticipantTokenConfiguration is placed in the featured slot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GridConfiguration AWS API Documentation
+    #
+    class GridConfiguration < Struct.new(
+      :featured_participant_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exception_message
     #   Unexpected error during processing of request.
     #   @return [String]
@@ -331,13 +860,112 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Configuration information of supported layouts for server-side
+    # composition.
+    #
+    # @!attribute [rw] grid
+    #   Configuration related to grid layout. Default: Grid layout.
+    #   @return [Types::GridConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/LayoutConfiguration AWS API Documentation
+    #
+    class LayoutConfiguration < Struct.new(
+      :grid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_by_encoder_configuration_arn
+    #   Filters the Composition list to match the specified
+    #   EncoderConfiguration attached to at least one of its output.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_by_stage_arn
+    #   Filters the Composition list to match the specified Stage ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The first Composition to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListCompositionsRequest AWS API Documentation
+    #
+    class ListCompositionsRequest < Struct.new(
+      :filter_by_encoder_configuration_arn,
+      :filter_by_stage_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compositions
+    #   List of the matching Compositions (summary information only).
+    #   @return [Array<Types::CompositionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more compositions than `maxResults`, use `nextToken` in
+    #   the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListCompositionsResponse AWS API Documentation
+    #
+    class ListCompositionsResponse < Struct.new(
+      :compositions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The first encoder configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListEncoderConfigurationsRequest AWS API Documentation
+    #
+    class ListEncoderConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encoder_configurations
+    #   List of the matching EncoderConfigurations (summary information
+    #   only).
+    #   @return [Array<Types::EncoderConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more encoder configurations than `maxResults`, use
+    #   `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListEncoderConfigurationsResponse AWS API Documentation
+    #
+    class ListEncoderConfigurationsResponse < Struct.new(
+      :encoder_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   Maximum number of results to return. Default: 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The first participant to retrieve. This is used for pagination; see
-    #   the `nextToken` response field.
+    #   The first participant event to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
     #   @return [String]
     #
     # @!attribute [rw] participant_id
@@ -370,7 +998,7 @@ module Aws::IVSRealTime
     #   @return [Array<Types::Event>]
     #
     # @!attribute [rw] next_token
-    #   If there are more rooms than `maxResults`, use `nextToken` in the
+    #   If there are more events than `maxResults`, use `nextToken` in the
     #   request to get the next set.
     #   @return [String]
     #
@@ -435,8 +1063,8 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] next_token
-    #   If there are more rooms than `maxResults`, use `nextToken` in the
-    #   request to get the next set.
+    #   If there are more participants than `maxResults`, use `nextToken` in
+    #   the request to get the next set.
     #   @return [String]
     #
     # @!attribute [rw] participants
@@ -457,8 +1085,8 @@ module Aws::IVSRealTime
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The first stage to retrieve. This is used for pagination; see the
-    #   `nextToken` response field.
+    #   The first stage session to retrieve. This is used for pagination;
+    #   see the `nextToken` response field.
     #   @return [String]
     #
     # @!attribute [rw] stage_arn
@@ -476,8 +1104,8 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] next_token
-    #   If there are more rooms than `maxResults`, use `nextToken` in the
-    #   request to get the next set.
+    #   If there are more stage sessions than `maxResults`, use `nextToken`
+    #   in the request to get the next set.
     #   @return [String]
     #
     # @!attribute [rw] stage_sessions
@@ -512,7 +1140,7 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] next_token
-    #   If there are more rooms than `maxResults`, use `nextToken` in the
+    #   If there are more stages than `maxResults`, use `nextToken` in the
     #   request to get the next set.
     #   @return [String]
     #
@@ -525,6 +1153,43 @@ module Aws::IVSRealTime
     class ListStagesResponse < Struct.new(
       :next_token,
       :stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of storage configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The first storage configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurationsRequest AWS API Documentation
+    #
+    class ListStorageConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more storage configurations than `maxResults`, use
+    #   `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configurations
+    #   List of the matching storage configurations.
+    #   @return [Array<Types::StorageConfigurationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurationsResponse AWS API Documentation
+    #
+    class ListStorageConfigurationsResponse < Struct.new(
+      :next_token,
+      :storage_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -784,6 +1449,20 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # An object representing a configuration to record a stage stream.
+    #
+    # @!attribute [rw] format
+    #   The recording format for storing a recording in Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/RecordingConfiguration AWS API Documentation
+    #
+    class RecordingConfiguration < Struct.new(
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exception_message
     #   Request references a resource which does not exist.
     #   @return [String]
@@ -792,6 +1471,66 @@ module Aws::IVSRealTime
     #
     class ResourceNotFoundException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that describes an S3 location where recorded videos
+    # will be stored.
+    #
+    # @!attribute [rw] encoder_configuration_arns
+    #   ARNs of the EncoderConfiguration resource. The encoder configuration
+    #   and stage resources must be in the same AWS account and region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recording_configuration
+    #   Array of maps, each of the form `string:string (key:value)`. This is
+    #   an optional customer specification, currently used only to specify
+    #   the recording format for storing a recording in Amazon S3.
+    #   @return [Types::RecordingConfiguration]
+    #
+    # @!attribute [rw] storage_configuration_arn
+    #   ARN of the StorageConfiguration where recorded videos will be
+    #   stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/S3DestinationConfiguration AWS API Documentation
+    #
+    class S3DestinationConfiguration < Struct.new(
+      :encoder_configuration_arns,
+      :recording_configuration,
+      :storage_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Complex data type that defines S3Detail objects.
+    #
+    # @!attribute [rw] recording_prefix
+    #   The S3 bucket prefix under which the recording is stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/S3Detail AWS API Documentation
+    #
+    class S3Detail < Struct.new(
+      :recording_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that describes an S3 location where recorded videos
+    # will be stored.
+    #
+    # @!attribute [rw] bucket_name
+    #   Location (S3 bucket name) where recorded videos will be stored. Note
+    #   that the StorageConfiguration and S3 bucket must be in the same
+    #   region as the Composition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/S3StorageConfiguration AWS API Documentation
+    #
+    class S3StorageConfiguration < Struct.new(
+      :bucket_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -938,6 +1677,154 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] destinations
+    #   Array of destination configuration.
+    #   @return [Array<Types::DestinationConfiguration>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   Idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   Layout object to configure composition parameters.
+    #   @return [Types::LayoutConfiguration]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage to be used for compositing.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartCompositionRequest AWS API Documentation
+    #
+    class StartCompositionRequest < Struct.new(
+      :destinations,
+      :idempotency_token,
+      :layout,
+      :stage_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] composition
+    #   The Composition that was created.
+    #   @return [Types::Composition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartCompositionResponse AWS API Documentation
+    #
+    class StartCompositionResponse < Struct.new(
+      :composition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the Composition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StopCompositionRequest AWS API Documentation
+    #
+    class StopCompositionRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StopCompositionResponse AWS API Documentation
+    #
+    class StopCompositionResponse < Aws::EmptyStructure; end
+
+    # A complex type that describes a location where recorded videos will be
+    # stored.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the storage configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the storage configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   An S3 destination configuration where recorded videos will be
+    #   stored.
+    #   @return [Types::S3StorageConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StorageConfiguration AWS API Documentation
+    #
+    class StorageConfiguration < Struct.new(
+      :arn,
+      :name,
+      :s3,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a storage configuration.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the storage configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the storage configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   An S3 destination configuration where recorded videos will be
+    #   stored.
+    #   @return [Types::S3StorageConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StorageConfigurationSummary AWS API Documentation
+    #
+    class StorageConfigurationSummary < Struct.new(
+      :arn,
+      :name,
+      :s3,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be tagged. The ARN must be URL-encoded.
     #   @return [String]
@@ -1034,6 +1921,39 @@ module Aws::IVSRealTime
     #
     class ValidationException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for video.
+    #
+    # @!attribute [rw] bitrate
+    #   Bitrate for generated output, in bps. Default: 2500000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate
+    #   Video frame rate, in fps. Default: 30.
+    #   @return [Float]
+    #
+    # @!attribute [rw] height
+    #   Video-resolution height. Note that the maximum value is determined
+    #   by `width` times `height`, such that the maximum total pixels is
+    #   2073600 (1920x1080 or 1080x1920). Default: 720.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Video-resolution width. Note that the maximum value is determined by
+    #   `width` times `height`, such that the maximum total pixels is
+    #   2073600 (1920x1080 or 1080x1920). Default: 1280.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Video AWS API Documentation
+    #
+    class Video < Struct.new(
+      :bitrate,
+      :framerate,
+      :height,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end

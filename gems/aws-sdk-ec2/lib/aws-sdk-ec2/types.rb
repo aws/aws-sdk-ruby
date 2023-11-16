@@ -11753,10 +11753,16 @@ module Aws::EC2
     #   The ID of the tenant application with the device-identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderDeviceOptions AWS API Documentation
     #
     class CreateVerifiedAccessTrustProviderDeviceOptions < Struct.new(
-      :tenant_id)
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27766,10 +27772,16 @@ module Aws::EC2
     #   The ID of the tenant application with the device-identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeviceOptions AWS API Documentation
     #
     class DeviceOptions < Struct.new(
-      :tenant_id)
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48463,6 +48475,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Modifies the configuration of the specified device-based Amazon Web
+    # Services Verified Access trust provider.
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderDeviceOptions AWS API Documentation
+    #
+    class ModifyVerifiedAccessTrustProviderDeviceOptions < Struct.new(
+      :public_signing_key_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Options for an OpenID Connect-compatible user-identity trust provider.
     #
     # @!attribute [rw] issuer
@@ -48518,6 +48546,11 @@ module Aws::EC2
     #   provider.
     #   @return [Types::ModifyVerifiedAccessTrustProviderOidcOptions]
     #
+    # @!attribute [rw] device_options
+    #   The options for a device-based trust provider. This parameter is
+    #   required when the provider type is `device`.
+    #   @return [Types::ModifyVerifiedAccessTrustProviderDeviceOptions]
+    #
     # @!attribute [rw] description
     #   A description for the Verified Access trust provider.
     #   @return [String]
@@ -48551,6 +48584,7 @@ module Aws::EC2
     class ModifyVerifiedAccessTrustProviderRequest < Struct.new(
       :verified_access_trust_provider_id,
       :oidc_options,
+      :device_options,
       :description,
       :dry_run,
       :client_token,

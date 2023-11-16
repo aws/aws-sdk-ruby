@@ -1828,8 +1828,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed on
     #   the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single string.
-    #   Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN. Up
+    #   to 25 package version ARNs are allowed.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1986,8 +1986,8 @@ module Aws::IoT
     #   The package version Amazon Resource Names (ARNs) that are installed on
     #   the device when the job successfully completes.
     #
-    #   **Note:**The following Length Constraints relates to a single string.
-    #   Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN. Up
+    #   to 25 package version ARNs are allowed.
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7139,6 +7139,9 @@ module Aws::IoT
     #   resp.thing_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
     #   resp.thing_indexing_configuration.filter.named_shadow_names #=> Array
     #   resp.thing_indexing_configuration.filter.named_shadow_names[0] #=> String
+    #   resp.thing_indexing_configuration.filter.geo_locations #=> Array
+    #   resp.thing_indexing_configuration.filter.geo_locations[0].name #=> String
+    #   resp.thing_indexing_configuration.filter.geo_locations[0].order #=> String, one of "LatLon", "LonLat"
     #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_group_indexing_configuration.managed_fields #=> Array
     #   resp.thing_group_indexing_configuration.managed_fields[0].name #=> String
@@ -12319,8 +12322,8 @@ module Aws::IoT
     #   no additional results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time. The response
-    #   might contain fewer results but will never contain more.
+    #   The maximum number of results to return per page at one time. The
+    #   response might contain fewer results but will never contain more.
     #
     # @option params [String] :query_version
     #   The query version.
@@ -13746,6 +13749,12 @@ module Aws::IoT
     #       ],
     #       filter: {
     #         named_shadow_names: ["ShadowName"],
+    #         geo_locations: [
+    #           {
+    #             name: "TargetFieldName",
+    #             order: "LatLon", # accepts LatLon, LonLat
+    #           },
+    #         ],
     #       },
     #     },
     #     thing_group_indexing_configuration: {
@@ -14814,7 +14823,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

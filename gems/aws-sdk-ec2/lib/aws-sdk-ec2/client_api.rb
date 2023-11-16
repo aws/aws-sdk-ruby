@@ -2109,6 +2109,7 @@ module Aws::EC2
     ModifyVerifiedAccessInstanceLoggingConfigurationResult = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessInstanceLoggingConfigurationResult')
     ModifyVerifiedAccessInstanceRequest = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessInstanceRequest')
     ModifyVerifiedAccessInstanceResult = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessInstanceResult')
+    ModifyVerifiedAccessTrustProviderDeviceOptions = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessTrustProviderDeviceOptions')
     ModifyVerifiedAccessTrustProviderOidcOptions = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessTrustProviderOidcOptions')
     ModifyVerifiedAccessTrustProviderRequest = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessTrustProviderRequest')
     ModifyVerifiedAccessTrustProviderResult = Shapes::StructureShape.new(name: 'ModifyVerifiedAccessTrustProviderResult')
@@ -5254,6 +5255,7 @@ module Aws::EC2
     CreateVerifiedAccessInstanceResult.struct_class = Types::CreateVerifiedAccessInstanceResult
 
     CreateVerifiedAccessTrustProviderDeviceOptions.add_member(:tenant_id, Shapes::ShapeRef.new(shape: String, location_name: "TenantId"))
+    CreateVerifiedAccessTrustProviderDeviceOptions.add_member(:public_signing_key_url, Shapes::ShapeRef.new(shape: String, location_name: "PublicSigningKeyUrl"))
     CreateVerifiedAccessTrustProviderDeviceOptions.struct_class = Types::CreateVerifiedAccessTrustProviderDeviceOptions
 
     CreateVerifiedAccessTrustProviderOidcOptions.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "Issuer"))
@@ -7723,6 +7725,7 @@ module Aws::EC2
     DetachVpnGatewayRequest.struct_class = Types::DetachVpnGatewayRequest
 
     DeviceOptions.add_member(:tenant_id, Shapes::ShapeRef.new(shape: String, location_name: "tenantId"))
+    DeviceOptions.add_member(:public_signing_key_url, Shapes::ShapeRef.new(shape: String, location_name: "publicSigningKeyUrl"))
     DeviceOptions.struct_class = Types::DeviceOptions
 
     DhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
@@ -11565,6 +11568,9 @@ module Aws::EC2
     ModifyVerifiedAccessInstanceResult.add_member(:verified_access_instance, Shapes::ShapeRef.new(shape: VerifiedAccessInstance, location_name: "verifiedAccessInstance"))
     ModifyVerifiedAccessInstanceResult.struct_class = Types::ModifyVerifiedAccessInstanceResult
 
+    ModifyVerifiedAccessTrustProviderDeviceOptions.add_member(:public_signing_key_url, Shapes::ShapeRef.new(shape: String, location_name: "PublicSigningKeyUrl"))
+    ModifyVerifiedAccessTrustProviderDeviceOptions.struct_class = Types::ModifyVerifiedAccessTrustProviderDeviceOptions
+
     ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "Issuer"))
     ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "AuthorizationEndpoint"))
     ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "TokenEndpoint"))
@@ -11576,6 +11582,7 @@ module Aws::EC2
 
     ModifyVerifiedAccessTrustProviderRequest.add_member(:verified_access_trust_provider_id, Shapes::ShapeRef.new(shape: VerifiedAccessTrustProviderId, required: true, location_name: "VerifiedAccessTrustProviderId"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:oidc_options, Shapes::ShapeRef.new(shape: ModifyVerifiedAccessTrustProviderOidcOptions, location_name: "OidcOptions"))
+    ModifyVerifiedAccessTrustProviderRequest.add_member(:device_options, Shapes::ShapeRef.new(shape: ModifyVerifiedAccessTrustProviderDeviceOptions, location_name: "DeviceOptions"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))

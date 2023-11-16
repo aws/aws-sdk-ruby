@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-11-16)
+------------------
+
+* Feature - DRM_TOP_LEVEL_COMPACT allows placing content protection elements at the MPD level and referenced at the AdaptationSet level
+
 1.66.0 (2023-09-27)
 ------------------
 

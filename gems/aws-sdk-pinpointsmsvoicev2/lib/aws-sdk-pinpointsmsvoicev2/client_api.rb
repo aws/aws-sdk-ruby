@@ -24,6 +24,10 @@ module Aws::PinpointSMSVoiceV2
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssociateOriginationIdentityRequest = Shapes::StructureShape.new(name: 'AssociateOriginationIdentityRequest')
     AssociateOriginationIdentityResult = Shapes::StructureShape.new(name: 'AssociateOriginationIdentityResult')
+    AttachmentBody = Shapes::BlobShape.new(name: 'AttachmentBody')
+    AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
+    AttachmentUploadErrorReason = Shapes::StringShape.new(name: 'AttachmentUploadErrorReason')
+    AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogsDestination = Shapes::StructureShape.new(name: 'CloudWatchLogsDestination')
@@ -48,6 +52,16 @@ module Aws::PinpointSMSVoiceV2
     CreateOptOutListResult = Shapes::StructureShape.new(name: 'CreateOptOutListResult')
     CreatePoolRequest = Shapes::StructureShape.new(name: 'CreatePoolRequest')
     CreatePoolResult = Shapes::StructureShape.new(name: 'CreatePoolResult')
+    CreateRegistrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateRegistrationAssociationRequest')
+    CreateRegistrationAssociationResult = Shapes::StructureShape.new(name: 'CreateRegistrationAssociationResult')
+    CreateRegistrationAttachmentRequest = Shapes::StructureShape.new(name: 'CreateRegistrationAttachmentRequest')
+    CreateRegistrationAttachmentResult = Shapes::StructureShape.new(name: 'CreateRegistrationAttachmentResult')
+    CreateRegistrationRequest = Shapes::StructureShape.new(name: 'CreateRegistrationRequest')
+    CreateRegistrationResult = Shapes::StructureShape.new(name: 'CreateRegistrationResult')
+    CreateRegistrationVersionRequest = Shapes::StructureShape.new(name: 'CreateRegistrationVersionRequest')
+    CreateRegistrationVersionResult = Shapes::StructureShape.new(name: 'CreateRegistrationVersionResult')
+    CreateVerifiedDestinationNumberRequest = Shapes::StructureShape.new(name: 'CreateVerifiedDestinationNumberRequest')
+    CreateVerifiedDestinationNumberResult = Shapes::StructureShape.new(name: 'CreateVerifiedDestinationNumberResult')
     DeleteConfigurationSetRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetRequest')
     DeleteConfigurationSetResult = Shapes::StructureShape.new(name: 'DeleteConfigurationSetResult')
     DeleteDefaultMessageTypeRequest = Shapes::StructureShape.new(name: 'DeleteDefaultMessageTypeRequest')
@@ -64,8 +78,16 @@ module Aws::PinpointSMSVoiceV2
     DeleteOptedOutNumberResult = Shapes::StructureShape.new(name: 'DeleteOptedOutNumberResult')
     DeletePoolRequest = Shapes::StructureShape.new(name: 'DeletePoolRequest')
     DeletePoolResult = Shapes::StructureShape.new(name: 'DeletePoolResult')
+    DeleteRegistrationAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentRequest')
+    DeleteRegistrationAttachmentResult = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentResult')
+    DeleteRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationFieldValueRequest')
+    DeleteRegistrationFieldValueResult = Shapes::StructureShape.new(name: 'DeleteRegistrationFieldValueResult')
+    DeleteRegistrationRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationRequest')
+    DeleteRegistrationResult = Shapes::StructureShape.new(name: 'DeleteRegistrationResult')
     DeleteTextMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'DeleteTextMessageSpendLimitOverrideRequest')
     DeleteTextMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'DeleteTextMessageSpendLimitOverrideResult')
+    DeleteVerifiedDestinationNumberRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedDestinationNumberRequest')
+    DeleteVerifiedDestinationNumberResult = Shapes::StructureShape.new(name: 'DeleteVerifiedDestinationNumberResult')
     DeleteVoiceMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'DeleteVoiceMessageSpendLimitOverrideRequest')
     DeleteVoiceMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'DeleteVoiceMessageSpendLimitOverrideResult')
     DeliveryStreamArn = Shapes::StringShape.new(name: 'DeliveryStreamArn')
@@ -85,23 +107,47 @@ module Aws::PinpointSMSVoiceV2
     DescribePhoneNumbersResult = Shapes::StructureShape.new(name: 'DescribePhoneNumbersResult')
     DescribePoolsRequest = Shapes::StructureShape.new(name: 'DescribePoolsRequest')
     DescribePoolsResult = Shapes::StructureShape.new(name: 'DescribePoolsResult')
+    DescribeRegistrationAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationAttachmentsRequest')
+    DescribeRegistrationAttachmentsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationAttachmentsResult')
+    DescribeRegistrationFieldDefinitionsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationFieldDefinitionsRequest')
+    DescribeRegistrationFieldDefinitionsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationFieldDefinitionsResult')
+    DescribeRegistrationFieldValuesRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationFieldValuesRequest')
+    DescribeRegistrationFieldValuesResult = Shapes::StructureShape.new(name: 'DescribeRegistrationFieldValuesResult')
+    DescribeRegistrationSectionDefinitionsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationSectionDefinitionsRequest')
+    DescribeRegistrationSectionDefinitionsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationSectionDefinitionsResult')
+    DescribeRegistrationTypeDefinitionsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationTypeDefinitionsRequest')
+    DescribeRegistrationTypeDefinitionsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationTypeDefinitionsResult')
+    DescribeRegistrationVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationVersionsRequest')
+    DescribeRegistrationVersionsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationVersionsResult')
+    DescribeRegistrationsRequest = Shapes::StructureShape.new(name: 'DescribeRegistrationsRequest')
+    DescribeRegistrationsResult = Shapes::StructureShape.new(name: 'DescribeRegistrationsResult')
     DescribeSenderIdsRequest = Shapes::StructureShape.new(name: 'DescribeSenderIdsRequest')
     DescribeSenderIdsResult = Shapes::StructureShape.new(name: 'DescribeSenderIdsResult')
     DescribeSpendLimitsRequest = Shapes::StructureShape.new(name: 'DescribeSpendLimitsRequest')
     DescribeSpendLimitsResult = Shapes::StructureShape.new(name: 'DescribeSpendLimitsResult')
+    DescribeVerifiedDestinationNumbersRequest = Shapes::StructureShape.new(name: 'DescribeVerifiedDestinationNumbersRequest')
+    DescribeVerifiedDestinationNumbersResult = Shapes::StructureShape.new(name: 'DescribeVerifiedDestinationNumbersResult')
     DestinationCountryParameterKey = Shapes::StringShape.new(name: 'DestinationCountryParameterKey')
     DestinationCountryParameterValue = Shapes::StringShape.new(name: 'DestinationCountryParameterValue')
     DestinationCountryParameters = Shapes::MapShape.new(name: 'DestinationCountryParameters')
+    DestinationPhoneNumberList = Shapes::ListShape.new(name: 'DestinationPhoneNumberList')
     DisassociateOriginationIdentityRequest = Shapes::StructureShape.new(name: 'DisassociateOriginationIdentityRequest')
     DisassociateOriginationIdentityResult = Shapes::StructureShape.new(name: 'DisassociateOriginationIdentityResult')
+    DiscardRegistrationVersionRequest = Shapes::StructureShape.new(name: 'DiscardRegistrationVersionRequest')
+    DiscardRegistrationVersionResult = Shapes::StructureShape.new(name: 'DiscardRegistrationVersionResult')
     EventDestination = Shapes::StructureShape.new(name: 'EventDestination')
     EventDestinationList = Shapes::ListShape.new(name: 'EventDestinationList')
     EventDestinationName = Shapes::StringShape.new(name: 'EventDestinationName')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypeList = Shapes::ListShape.new(name: 'EventTypeList')
+    FieldPath = Shapes::StringShape.new(name: 'FieldPath')
+    FieldPathList = Shapes::ListShape.new(name: 'FieldPathList')
+    FieldRequirement = Shapes::StringShape.new(name: 'FieldRequirement')
+    FieldType = Shapes::StringShape.new(name: 'FieldType')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsoCountryCode = Shapes::StringShape.new(name: 'IsoCountryCode')
     Keyword = Shapes::StringShape.new(name: 'Keyword')
@@ -114,8 +160,11 @@ module Aws::PinpointSMSVoiceV2
     KeywordList = Shapes::ListShape.new(name: 'KeywordList')
     KeywordMessage = Shapes::StringShape.new(name: 'KeywordMessage')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
+    LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListPoolOriginationIdentitiesRequest = Shapes::StructureShape.new(name: 'ListPoolOriginationIdentitiesRequest')
     ListPoolOriginationIdentitiesResult = Shapes::StructureShape.new(name: 'ListPoolOriginationIdentitiesResult')
+    ListRegistrationAssociationsRequest = Shapes::StructureShape.new(name: 'ListRegistrationAssociationsRequest')
+    ListRegistrationAssociationsResult = Shapes::StructureShape.new(name: 'ListRegistrationAssociationsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
@@ -170,14 +219,78 @@ module Aws::PinpointSMSVoiceV2
     PutKeywordResult = Shapes::StructureShape.new(name: 'PutKeywordResult')
     PutOptedOutNumberRequest = Shapes::StructureShape.new(name: 'PutOptedOutNumberRequest')
     PutOptedOutNumberResult = Shapes::StructureShape.new(name: 'PutOptedOutNumberResult')
-    RegistrationId = Shapes::StringShape.new(name: 'RegistrationId')
+    PutRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueRequest')
+    PutRegistrationFieldValueResult = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueResult')
+    RegistrationAssociationBehavior = Shapes::StringShape.new(name: 'RegistrationAssociationBehavior')
+    RegistrationAssociationFilter = Shapes::StructureShape.new(name: 'RegistrationAssociationFilter')
+    RegistrationAssociationFilterList = Shapes::ListShape.new(name: 'RegistrationAssociationFilterList')
+    RegistrationAssociationFilterName = Shapes::StringShape.new(name: 'RegistrationAssociationFilterName')
+    RegistrationAssociationMetadata = Shapes::StructureShape.new(name: 'RegistrationAssociationMetadata')
+    RegistrationAssociationMetadataList = Shapes::ListShape.new(name: 'RegistrationAssociationMetadataList')
+    RegistrationAttachmentFilter = Shapes::StructureShape.new(name: 'RegistrationAttachmentFilter')
+    RegistrationAttachmentFilterList = Shapes::ListShape.new(name: 'RegistrationAttachmentFilterList')
+    RegistrationAttachmentFilterName = Shapes::StringShape.new(name: 'RegistrationAttachmentFilterName')
+    RegistrationAttachmentIdList = Shapes::ListShape.new(name: 'RegistrationAttachmentIdList')
+    RegistrationAttachmentIdOrArn = Shapes::StringShape.new(name: 'RegistrationAttachmentIdOrArn')
+    RegistrationAttachmentsInformation = Shapes::StructureShape.new(name: 'RegistrationAttachmentsInformation')
+    RegistrationAttachmentsInformationList = Shapes::ListShape.new(name: 'RegistrationAttachmentsInformationList')
+    RegistrationDeniedReasonInformation = Shapes::StructureShape.new(name: 'RegistrationDeniedReasonInformation')
+    RegistrationDeniedReasonInformationList = Shapes::ListShape.new(name: 'RegistrationDeniedReasonInformationList')
+    RegistrationDisassociationBehavior = Shapes::StringShape.new(name: 'RegistrationDisassociationBehavior')
+    RegistrationFieldDefinition = Shapes::StructureShape.new(name: 'RegistrationFieldDefinition')
+    RegistrationFieldDefinitionList = Shapes::ListShape.new(name: 'RegistrationFieldDefinitionList')
+    RegistrationFieldDisplayHints = Shapes::StructureShape.new(name: 'RegistrationFieldDisplayHints')
+    RegistrationFieldValueInformation = Shapes::StructureShape.new(name: 'RegistrationFieldValueInformation')
+    RegistrationFieldValueInformationList = Shapes::ListShape.new(name: 'RegistrationFieldValueInformationList')
+    RegistrationFilter = Shapes::StructureShape.new(name: 'RegistrationFilter')
+    RegistrationFilterList = Shapes::ListShape.new(name: 'RegistrationFilterList')
+    RegistrationFilterName = Shapes::StringShape.new(name: 'RegistrationFilterName')
+    RegistrationIdList = Shapes::ListShape.new(name: 'RegistrationIdList')
+    RegistrationIdOrArn = Shapes::StringShape.new(name: 'RegistrationIdOrArn')
+    RegistrationInformation = Shapes::StructureShape.new(name: 'RegistrationInformation')
+    RegistrationInformationList = Shapes::ListShape.new(name: 'RegistrationInformationList')
+    RegistrationSectionDefinition = Shapes::StructureShape.new(name: 'RegistrationSectionDefinition')
+    RegistrationSectionDefinitionList = Shapes::ListShape.new(name: 'RegistrationSectionDefinitionList')
+    RegistrationSectionDisplayHints = Shapes::StructureShape.new(name: 'RegistrationSectionDisplayHints')
+    RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
+    RegistrationType = Shapes::StringShape.new(name: 'RegistrationType')
+    RegistrationTypeDefinition = Shapes::StructureShape.new(name: 'RegistrationTypeDefinition')
+    RegistrationTypeDefinitionList = Shapes::ListShape.new(name: 'RegistrationTypeDefinitionList')
+    RegistrationTypeDisplayHints = Shapes::StructureShape.new(name: 'RegistrationTypeDisplayHints')
+    RegistrationTypeFilter = Shapes::StructureShape.new(name: 'RegistrationTypeFilter')
+    RegistrationTypeFilterList = Shapes::ListShape.new(name: 'RegistrationTypeFilterList')
+    RegistrationTypeFilterName = Shapes::StringShape.new(name: 'RegistrationTypeFilterName')
+    RegistrationTypeList = Shapes::ListShape.new(name: 'RegistrationTypeList')
+    RegistrationVersionFilter = Shapes::StructureShape.new(name: 'RegistrationVersionFilter')
+    RegistrationVersionFilterList = Shapes::ListShape.new(name: 'RegistrationVersionFilterList')
+    RegistrationVersionFilterName = Shapes::StringShape.new(name: 'RegistrationVersionFilterName')
+    RegistrationVersionInformation = Shapes::StructureShape.new(name: 'RegistrationVersionInformation')
+    RegistrationVersionInformationList = Shapes::ListShape.new(name: 'RegistrationVersionInformationList')
+    RegistrationVersionNumber = Shapes::IntegerShape.new(name: 'RegistrationVersionNumber')
+    RegistrationVersionNumberList = Shapes::ListShape.new(name: 'RegistrationVersionNumberList')
+    RegistrationVersionStatus = Shapes::StringShape.new(name: 'RegistrationVersionStatus')
+    RegistrationVersionStatusHistory = Shapes::StructureShape.new(name: 'RegistrationVersionStatusHistory')
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
     ReleasePhoneNumberResult = Shapes::StructureShape.new(name: 'ReleasePhoneNumberResult')
+    ReleaseSenderIdRequest = Shapes::StructureShape.new(name: 'ReleaseSenderIdRequest')
+    ReleaseSenderIdResult = Shapes::StructureShape.new(name: 'ReleaseSenderIdResult')
     RequestPhoneNumberRequest = Shapes::StructureShape.new(name: 'RequestPhoneNumberRequest')
     RequestPhoneNumberResult = Shapes::StructureShape.new(name: 'RequestPhoneNumberResult')
+    RequestSenderIdRequest = Shapes::StructureShape.new(name: 'RequestSenderIdRequest')
+    RequestSenderIdResult = Shapes::StructureShape.new(name: 'RequestSenderIdResult')
     RequestableNumberType = Shapes::StringShape.new(name: 'RequestableNumberType')
+    ResourceIdOrArn = Shapes::StringShape.new(name: 'ResourceIdOrArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SectionPath = Shapes::StringShape.new(name: 'SectionPath')
+    SectionPathList = Shapes::ListShape.new(name: 'SectionPathList')
+    SelectChoice = Shapes::StringShape.new(name: 'SelectChoice')
+    SelectChoiceList = Shapes::ListShape.new(name: 'SelectChoiceList')
+    SelectOptionDescription = Shapes::StructureShape.new(name: 'SelectOptionDescription')
+    SelectOptionDescriptionsList = Shapes::ListShape.new(name: 'SelectOptionDescriptionsList')
+    SelectValidation = Shapes::StructureShape.new(name: 'SelectValidation')
+    SendDestinationNumberVerificationCodeRequest = Shapes::StructureShape.new(name: 'SendDestinationNumberVerificationCodeRequest')
+    SendDestinationNumberVerificationCodeResult = Shapes::StructureShape.new(name: 'SendDestinationNumberVerificationCodeResult')
     SendTextMessageRequest = Shapes::StructureShape.new(name: 'SendTextMessageRequest')
     SendTextMessageResult = Shapes::StructureShape.new(name: 'SendTextMessageResult')
     SendVoiceMessageRequest = Shapes::StructureShape.new(name: 'SendVoiceMessageRequest')
@@ -207,6 +320,12 @@ module Aws::PinpointSMSVoiceV2
     SpendLimitList = Shapes::ListShape.new(name: 'SpendLimitList')
     SpendLimitName = Shapes::StringShape.new(name: 'SpendLimitName')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
+    StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SubmitRegistrationVersionRequest = Shapes::StructureShape.new(name: 'SubmitRegistrationVersionRequest')
+    SubmitRegistrationVersionResult = Shapes::StructureShape.new(name: 'SubmitRegistrationVersionResult')
+    SupportedAssociation = Shapes::StructureShape.new(name: 'SupportedAssociation')
+    SupportedAssociationList = Shapes::ListShape.new(name: 'SupportedAssociationList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -216,6 +335,8 @@ module Aws::PinpointSMSVoiceV2
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TextMessageBody = Shapes::StringShape.new(name: 'TextMessageBody')
     TextMessageOriginationIdentity = Shapes::StringShape.new(name: 'TextMessageOriginationIdentity')
+    TextValidation = Shapes::StructureShape.new(name: 'TextValidation')
+    TextValue = Shapes::StringShape.new(name: 'TextValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeToLive = Shapes::IntegerShape.new(name: 'TimeToLive')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -228,10 +349,25 @@ module Aws::PinpointSMSVoiceV2
     UpdatePhoneNumberResult = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResult')
     UpdatePoolRequest = Shapes::StructureShape.new(name: 'UpdatePoolRequest')
     UpdatePoolResult = Shapes::StructureShape.new(name: 'UpdatePoolResult')
+    UpdateSenderIdRequest = Shapes::StructureShape.new(name: 'UpdateSenderIdRequest')
+    UpdateSenderIdResult = Shapes::StructureShape.new(name: 'UpdateSenderIdResult')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VerificationChannel = Shapes::StringShape.new(name: 'VerificationChannel')
+    VerificationCode = Shapes::StringShape.new(name: 'VerificationCode')
+    VerificationMessageOriginationIdentity = Shapes::StringShape.new(name: 'VerificationMessageOriginationIdentity')
+    VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
+    VerifiedDestinationNumberFilter = Shapes::StructureShape.new(name: 'VerifiedDestinationNumberFilter')
+    VerifiedDestinationNumberFilterList = Shapes::ListShape.new(name: 'VerifiedDestinationNumberFilterList')
+    VerifiedDestinationNumberFilterName = Shapes::StringShape.new(name: 'VerifiedDestinationNumberFilterName')
+    VerifiedDestinationNumberIdList = Shapes::ListShape.new(name: 'VerifiedDestinationNumberIdList')
+    VerifiedDestinationNumberIdOrArn = Shapes::StringShape.new(name: 'VerifiedDestinationNumberIdOrArn')
+    VerifiedDestinationNumberInformation = Shapes::StructureShape.new(name: 'VerifiedDestinationNumberInformation')
+    VerifiedDestinationNumberInformationList = Shapes::ListShape.new(name: 'VerifiedDestinationNumberInformationList')
+    VerifyDestinationNumberRequest = Shapes::StructureShape.new(name: 'VerifyDestinationNumberRequest')
+    VerifyDestinationNumberResult = Shapes::StructureShape.new(name: 'VerifyDestinationNumberResult')
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceMessageBody = Shapes::StringShape.new(name: 'VoiceMessageBody')
     VoiceMessageBodyTextType = Shapes::StringShape.new(name: 'VoiceMessageBodyTextType')
@@ -348,6 +484,7 @@ module Aws::PinpointSMSVoiceV2
     CreatePoolResult.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     CreatePoolResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     CreatePoolResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    CreatePoolResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     CreatePoolResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     CreatePoolResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
     CreatePoolResult.add_member(:shared_routes_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SharedRoutesEnabled"))
@@ -355,6 +492,71 @@ module Aws::PinpointSMSVoiceV2
     CreatePoolResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePoolResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     CreatePoolResult.struct_class = Types::CreatePoolResult
+
+    CreateRegistrationAssociationRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    CreateRegistrationAssociationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "ResourceId"))
+    CreateRegistrationAssociationRequest.struct_class = Types::CreateRegistrationAssociationRequest
+
+    CreateRegistrationAssociationResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    CreateRegistrationAssociationResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    CreateRegistrationAssociationResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    CreateRegistrationAssociationResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    CreateRegistrationAssociationResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    CreateRegistrationAssociationResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    CreateRegistrationAssociationResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    CreateRegistrationAssociationResult.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    CreateRegistrationAssociationResult.struct_class = Types::CreateRegistrationAssociationResult
+
+    CreateRegistrationAttachmentRequest.add_member(:attachment_body, Shapes::ShapeRef.new(shape: AttachmentBody, location_name: "AttachmentBody"))
+    CreateRegistrationAttachmentRequest.add_member(:attachment_url, Shapes::ShapeRef.new(shape: AttachmentUrl, location_name: "AttachmentUrl"))
+    CreateRegistrationAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRegistrationAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRegistrationAttachmentRequest.struct_class = Types::CreateRegistrationAttachmentRequest
+
+    CreateRegistrationAttachmentResult.add_member(:registration_attachment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentArn"))
+    CreateRegistrationAttachmentResult.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentId"))
+    CreateRegistrationAttachmentResult.add_member(:attachment_status, Shapes::ShapeRef.new(shape: AttachmentStatus, required: true, location_name: "AttachmentStatus"))
+    CreateRegistrationAttachmentResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRegistrationAttachmentResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    CreateRegistrationAttachmentResult.struct_class = Types::CreateRegistrationAttachmentResult
+
+    CreateRegistrationRequest.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    CreateRegistrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRegistrationRequest.struct_class = Types::CreateRegistrationRequest
+
+    CreateRegistrationResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    CreateRegistrationResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    CreateRegistrationResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    CreateRegistrationResult.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "RegistrationStatus"))
+    CreateRegistrationResult.add_member(:current_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "CurrentVersionNumber"))
+    CreateRegistrationResult.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
+    CreateRegistrationResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRegistrationResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    CreateRegistrationResult.struct_class = Types::CreateRegistrationResult
+
+    CreateRegistrationVersionRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    CreateRegistrationVersionRequest.struct_class = Types::CreateRegistrationVersionRequest
+
+    CreateRegistrationVersionResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    CreateRegistrationVersionResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    CreateRegistrationVersionResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    CreateRegistrationVersionResult.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
+    CreateRegistrationVersionResult.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
+    CreateRegistrationVersionResult.struct_class = Types::CreateRegistrationVersionResult
+
+    CreateVerifiedDestinationNumberRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    CreateVerifiedDestinationNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVerifiedDestinationNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVerifiedDestinationNumberRequest.struct_class = Types::CreateVerifiedDestinationNumberRequest
+
+    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberArn"))
+    CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberId"))
+    CreateVerifiedDestinationNumberResult.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    CreateVerifiedDestinationNumberResult.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "Status"))
+    CreateVerifiedDestinationNumberResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVerifiedDestinationNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    CreateVerifiedDestinationNumberResult.struct_class = Types::CreateVerifiedDestinationNumberResult
 
     DeleteConfigurationSetRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, required: true, location_name: "ConfigurationSetName"))
     DeleteConfigurationSetRequest.struct_class = Types::DeleteConfigurationSetRequest
@@ -431,16 +633,63 @@ module Aws::PinpointSMSVoiceV2
     DeletePoolResult.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     DeletePoolResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     DeletePoolResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    DeletePoolResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     DeletePoolResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     DeletePoolResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
     DeletePoolResult.add_member(:shared_routes_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SharedRoutesEnabled"))
     DeletePoolResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     DeletePoolResult.struct_class = Types::DeletePoolResult
 
+    DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, required: true, location_name: "RegistrationAttachmentId"))
+    DeleteRegistrationAttachmentRequest.struct_class = Types::DeleteRegistrationAttachmentRequest
+
+    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentArn"))
+    DeleteRegistrationAttachmentResult.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentId"))
+    DeleteRegistrationAttachmentResult.add_member(:attachment_status, Shapes::ShapeRef.new(shape: AttachmentStatus, required: true, location_name: "AttachmentStatus"))
+    DeleteRegistrationAttachmentResult.add_member(:attachment_upload_error_reason, Shapes::ShapeRef.new(shape: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
+    DeleteRegistrationAttachmentResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    DeleteRegistrationAttachmentResult.struct_class = Types::DeleteRegistrationAttachmentResult
+
+    DeleteRegistrationFieldValueRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    DeleteRegistrationFieldValueRequest.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    DeleteRegistrationFieldValueRequest.struct_class = Types::DeleteRegistrationFieldValueRequest
+
+    DeleteRegistrationFieldValueResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    DeleteRegistrationFieldValueResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    DeleteRegistrationFieldValueResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    DeleteRegistrationFieldValueResult.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    DeleteRegistrationFieldValueResult.add_member(:select_choices, Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
+    DeleteRegistrationFieldValueResult.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
+    DeleteRegistrationFieldValueResult.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationAttachmentId"))
+    DeleteRegistrationFieldValueResult.struct_class = Types::DeleteRegistrationFieldValueResult
+
+    DeleteRegistrationRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    DeleteRegistrationRequest.struct_class = Types::DeleteRegistrationRequest
+
+    DeleteRegistrationResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    DeleteRegistrationResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    DeleteRegistrationResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    DeleteRegistrationResult.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "RegistrationStatus"))
+    DeleteRegistrationResult.add_member(:current_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "CurrentVersionNumber"))
+    DeleteRegistrationResult.add_member(:approved_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
+    DeleteRegistrationResult.add_member(:latest_denied_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
+    DeleteRegistrationResult.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
+    DeleteRegistrationResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    DeleteRegistrationResult.struct_class = Types::DeleteRegistrationResult
+
     DeleteTextMessageSpendLimitOverrideRequest.struct_class = Types::DeleteTextMessageSpendLimitOverrideRequest
 
     DeleteTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
     DeleteTextMessageSpendLimitOverrideResult.struct_class = Types::DeleteTextMessageSpendLimitOverrideResult
+
+    DeleteVerifiedDestinationNumberRequest.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, required: true, location_name: "VerifiedDestinationNumberId"))
+    DeleteVerifiedDestinationNumberRequest.struct_class = Types::DeleteVerifiedDestinationNumberRequest
+
+    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberArn"))
+    DeleteVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberId"))
+    DeleteVerifiedDestinationNumberResult.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    DeleteVerifiedDestinationNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    DeleteVerifiedDestinationNumberResult.struct_class = Types::DeleteVerifiedDestinationNumberResult
 
     DeleteVoiceMessageSpendLimitOverrideRequest.struct_class = Types::DeleteVoiceMessageSpendLimitOverrideRequest
 
@@ -528,6 +777,87 @@ module Aws::PinpointSMSVoiceV2
     DescribePoolsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePoolsResult.struct_class = Types::DescribePoolsResult
 
+    DescribeRegistrationAttachmentsRequest.add_member(:registration_attachment_ids, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdList, location_name: "RegistrationAttachmentIds"))
+    DescribeRegistrationAttachmentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationAttachmentFilterList, location_name: "Filters"))
+    DescribeRegistrationAttachmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationAttachmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationAttachmentsRequest.struct_class = Types::DescribeRegistrationAttachmentsRequest
+
+    DescribeRegistrationAttachmentsResult.add_member(:registration_attachments, Shapes::ShapeRef.new(shape: RegistrationAttachmentsInformationList, required: true, location_name: "RegistrationAttachments"))
+    DescribeRegistrationAttachmentsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationAttachmentsResult.struct_class = Types::DescribeRegistrationAttachmentsResult
+
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:section_path, Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:field_paths, Shapes::ShapeRef.new(shape: FieldPathList, location_name: "FieldPaths"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationFieldDefinitionsRequest.struct_class = Types::DescribeRegistrationFieldDefinitionsRequest
+
+    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    DescribeRegistrationFieldDefinitionsResult.add_member(:registration_field_definitions, Shapes::ShapeRef.new(shape: RegistrationFieldDefinitionList, required: true, location_name: "RegistrationFieldDefinitions"))
+    DescribeRegistrationFieldDefinitionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldDefinitionsResult.struct_class = Types::DescribeRegistrationFieldDefinitionsResult
+
+    DescribeRegistrationFieldValuesRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    DescribeRegistrationFieldValuesRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "VersionNumber"))
+    DescribeRegistrationFieldValuesRequest.add_member(:section_path, Shapes::ShapeRef.new(shape: SectionPath, location_name: "SectionPath"))
+    DescribeRegistrationFieldValuesRequest.add_member(:field_paths, Shapes::ShapeRef.new(shape: FieldPathList, location_name: "FieldPaths"))
+    DescribeRegistrationFieldValuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationFieldValuesRequest.struct_class = Types::DescribeRegistrationFieldValuesRequest
+
+    DescribeRegistrationFieldValuesResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    DescribeRegistrationFieldValuesResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    DescribeRegistrationFieldValuesResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    DescribeRegistrationFieldValuesResult.add_member(:registration_field_values, Shapes::ShapeRef.new(shape: RegistrationFieldValueInformationList, required: true, location_name: "RegistrationFieldValues"))
+    DescribeRegistrationFieldValuesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationFieldValuesResult.struct_class = Types::DescribeRegistrationFieldValuesResult
+
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:section_paths, Shapes::ShapeRef.new(shape: SectionPathList, location_name: "SectionPaths"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationSectionDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationSectionDefinitionsRequest.struct_class = Types::DescribeRegistrationSectionDefinitionsRequest
+
+    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    DescribeRegistrationSectionDefinitionsResult.add_member(:registration_section_definitions, Shapes::ShapeRef.new(shape: RegistrationSectionDefinitionList, required: true, location_name: "RegistrationSectionDefinitions"))
+    DescribeRegistrationSectionDefinitionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationSectionDefinitionsResult.struct_class = Types::DescribeRegistrationSectionDefinitionsResult
+
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:registration_types, Shapes::ShapeRef.new(shape: RegistrationTypeList, location_name: "RegistrationTypes"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationTypeFilterList, location_name: "Filters"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationTypeDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationTypeDefinitionsRequest.struct_class = Types::DescribeRegistrationTypeDefinitionsRequest
+
+    DescribeRegistrationTypeDefinitionsResult.add_member(:registration_type_definitions, Shapes::ShapeRef.new(shape: RegistrationTypeDefinitionList, required: true, location_name: "RegistrationTypeDefinitions"))
+    DescribeRegistrationTypeDefinitionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationTypeDefinitionsResult.struct_class = Types::DescribeRegistrationTypeDefinitionsResult
+
+    DescribeRegistrationVersionsRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    DescribeRegistrationVersionsRequest.add_member(:version_numbers, Shapes::ShapeRef.new(shape: RegistrationVersionNumberList, location_name: "VersionNumbers"))
+    DescribeRegistrationVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationVersionFilterList, location_name: "Filters"))
+    DescribeRegistrationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationVersionsRequest.struct_class = Types::DescribeRegistrationVersionsRequest
+
+    DescribeRegistrationVersionsResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    DescribeRegistrationVersionsResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    DescribeRegistrationVersionsResult.add_member(:registration_versions, Shapes::ShapeRef.new(shape: RegistrationVersionInformationList, required: true, location_name: "RegistrationVersions"))
+    DescribeRegistrationVersionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationVersionsResult.struct_class = Types::DescribeRegistrationVersionsResult
+
+    DescribeRegistrationsRequest.add_member(:registration_ids, Shapes::ShapeRef.new(shape: RegistrationIdList, location_name: "RegistrationIds"))
+    DescribeRegistrationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationFilterList, location_name: "Filters"))
+    DescribeRegistrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeRegistrationsRequest.struct_class = Types::DescribeRegistrationsRequest
+
+    DescribeRegistrationsResult.add_member(:registrations, Shapes::ShapeRef.new(shape: RegistrationInformationList, required: true, location_name: "Registrations"))
+    DescribeRegistrationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRegistrationsResult.struct_class = Types::DescribeRegistrationsResult
+
     DescribeSenderIdsRequest.add_member(:sender_ids, Shapes::ShapeRef.new(shape: SenderIdList, location_name: "SenderIds"))
     DescribeSenderIdsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SenderIdFilterList, location_name: "Filters"))
     DescribeSenderIdsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -546,8 +876,21 @@ module Aws::PinpointSMSVoiceV2
     DescribeSpendLimitsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeSpendLimitsResult.struct_class = Types::DescribeSpendLimitsResult
 
+    DescribeVerifiedDestinationNumbersRequest.add_member(:verified_destination_number_ids, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdList, location_name: "VerifiedDestinationNumberIds"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:destination_phone_numbers, Shapes::ShapeRef.new(shape: DestinationPhoneNumberList, location_name: "DestinationPhoneNumbers"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilterList, location_name: "Filters"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVerifiedDestinationNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeVerifiedDestinationNumbersRequest.struct_class = Types::DescribeVerifiedDestinationNumbersRequest
+
+    DescribeVerifiedDestinationNumbersResult.add_member(:verified_destination_numbers, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberInformationList, required: true, location_name: "VerifiedDestinationNumbers"))
+    DescribeVerifiedDestinationNumbersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVerifiedDestinationNumbersResult.struct_class = Types::DescribeVerifiedDestinationNumbersResult
+
     DestinationCountryParameters.key = Shapes::ShapeRef.new(shape: DestinationCountryParameterKey)
     DestinationCountryParameters.value = Shapes::ShapeRef.new(shape: DestinationCountryParameterValue)
+
+    DestinationPhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
 
     DisassociateOriginationIdentityRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, required: true, location_name: "PoolId"))
     DisassociateOriginationIdentityRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, required: true, location_name: "OriginationIdentity"))
@@ -562,6 +905,16 @@ module Aws::PinpointSMSVoiceV2
     DisassociateOriginationIdentityResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
     DisassociateOriginationIdentityResult.struct_class = Types::DisassociateOriginationIdentityResult
 
+    DiscardRegistrationVersionRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    DiscardRegistrationVersionRequest.struct_class = Types::DiscardRegistrationVersionRequest
+
+    DiscardRegistrationVersionResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    DiscardRegistrationVersionResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    DiscardRegistrationVersionResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    DiscardRegistrationVersionResult.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
+    DiscardRegistrationVersionResult.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
+    DiscardRegistrationVersionResult.struct_class = Types::DiscardRegistrationVersionResult
+
     EventDestination.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "EventDestinationName"))
     EventDestination.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypeList, required: true, location_name: "MatchingEventTypes"))
@@ -573,6 +926,8 @@ module Aws::PinpointSMSVoiceV2
     EventDestinationList.member = Shapes::ShapeRef.new(shape: EventDestination)
 
     EventTypeList.member = Shapes::ShapeRef.new(shape: EventType)
+
+    FieldPathList.member = Shapes::ShapeRef.new(shape: FieldPath)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
 
@@ -610,6 +965,19 @@ module Aws::PinpointSMSVoiceV2
     ListPoolOriginationIdentitiesResult.add_member(:origination_identities, Shapes::ShapeRef.new(shape: OriginationIdentityMetadataList, location_name: "OriginationIdentities"))
     ListPoolOriginationIdentitiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPoolOriginationIdentitiesResult.struct_class = Types::ListPoolOriginationIdentitiesResult
+
+    ListRegistrationAssociationsRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    ListRegistrationAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationAssociationFilterList, location_name: "Filters"))
+    ListRegistrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRegistrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRegistrationAssociationsRequest.struct_class = Types::ListRegistrationAssociationsRequest
+
+    ListRegistrationAssociationsResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    ListRegistrationAssociationsResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    ListRegistrationAssociationsResult.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    ListRegistrationAssociationsResult.add_member(:registration_associations, Shapes::ShapeRef.new(shape: RegistrationAssociationMetadataList, required: true, location_name: "RegistrationAssociations"))
+    ListRegistrationAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRegistrationAssociationsResult.struct_class = Types::ListRegistrationAssociationsResult
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -652,6 +1020,7 @@ module Aws::PinpointSMSVoiceV2
     OriginationIdentityMetadata.add_member(:origination_identity, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OriginationIdentity"))
     OriginationIdentityMetadata.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
     OriginationIdentityMetadata.add_member(:number_capabilities, Shapes::ShapeRef.new(shape: NumberCapabilityList, required: true, location_name: "NumberCapabilities"))
+    OriginationIdentityMetadata.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     OriginationIdentityMetadata.struct_class = Types::OriginationIdentityMetadata
 
     OriginationIdentityMetadataList.member = Shapes::ShapeRef.new(shape: OriginationIdentityMetadata)
@@ -675,10 +1044,12 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberInformation.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MonthlyLeasingPrice"))
     PhoneNumberInformation.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
     PhoneNumberInformation.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    PhoneNumberInformation.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     PhoneNumberInformation.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "SelfManagedOptOutsEnabled"))
     PhoneNumberInformation.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, required: true, location_name: "OptOutListName"))
     PhoneNumberInformation.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
     PhoneNumberInformation.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "PoolId"))
+    PhoneNumberInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     PhoneNumberInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
     PhoneNumberInformation.struct_class = Types::PhoneNumberInformation
 
@@ -698,6 +1069,7 @@ module Aws::PinpointSMSVoiceV2
     PoolInformation.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "MessageType"))
     PoolInformation.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
     PoolInformation.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    PoolInformation.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     PoolInformation.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "SelfManagedOptOutsEnabled"))
     PoolInformation.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, required: true, location_name: "OptOutListName"))
     PoolInformation.add_member(:shared_routes_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "SharedRoutesEnabled"))
@@ -737,6 +1109,175 @@ module Aws::PinpointSMSVoiceV2
     PutOptedOutNumberResult.add_member(:end_user_opted_out, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "EndUserOptedOut"))
     PutOptedOutNumberResult.struct_class = Types::PutOptedOutNumberResult
 
+    PutRegistrationFieldValueRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    PutRegistrationFieldValueRequest.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    PutRegistrationFieldValueRequest.add_member(:select_choices, Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
+    PutRegistrationFieldValueRequest.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
+    PutRegistrationFieldValueRequest.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
+    PutRegistrationFieldValueRequest.struct_class = Types::PutRegistrationFieldValueRequest
+
+    PutRegistrationFieldValueResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    PutRegistrationFieldValueResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    PutRegistrationFieldValueResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    PutRegistrationFieldValueResult.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    PutRegistrationFieldValueResult.add_member(:select_choices, Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
+    PutRegistrationFieldValueResult.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
+    PutRegistrationFieldValueResult.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationAttachmentId"))
+    PutRegistrationFieldValueResult.struct_class = Types::PutRegistrationFieldValueResult
+
+    RegistrationAssociationFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationAssociationFilterName, required: true, location_name: "Name"))
+    RegistrationAssociationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    RegistrationAssociationFilter.struct_class = Types::RegistrationAssociationFilter
+
+    RegistrationAssociationFilterList.member = Shapes::ShapeRef.new(shape: RegistrationAssociationFilter)
+
+    RegistrationAssociationMetadata.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    RegistrationAssociationMetadata.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    RegistrationAssociationMetadata.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    RegistrationAssociationMetadata.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    RegistrationAssociationMetadata.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    RegistrationAssociationMetadata.struct_class = Types::RegistrationAssociationMetadata
+
+    RegistrationAssociationMetadataList.member = Shapes::ShapeRef.new(shape: RegistrationAssociationMetadata)
+
+    RegistrationAttachmentFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationAttachmentFilterName, required: true, location_name: "Name"))
+    RegistrationAttachmentFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    RegistrationAttachmentFilter.struct_class = Types::RegistrationAttachmentFilter
+
+    RegistrationAttachmentFilterList.member = Shapes::ShapeRef.new(shape: RegistrationAttachmentFilter)
+
+    RegistrationAttachmentIdList.member = Shapes::ShapeRef.new(shape: RegistrationIdOrArn)
+
+    RegistrationAttachmentsInformation.add_member(:registration_attachment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentArn"))
+    RegistrationAttachmentsInformation.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentId"))
+    RegistrationAttachmentsInformation.add_member(:attachment_status, Shapes::ShapeRef.new(shape: AttachmentStatus, required: true, location_name: "AttachmentStatus"))
+    RegistrationAttachmentsInformation.add_member(:attachment_upload_error_reason, Shapes::ShapeRef.new(shape: AttachmentUploadErrorReason, location_name: "AttachmentUploadErrorReason"))
+    RegistrationAttachmentsInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    RegistrationAttachmentsInformation.struct_class = Types::RegistrationAttachmentsInformation
+
+    RegistrationAttachmentsInformationList.member = Shapes::ShapeRef.new(shape: RegistrationAttachmentsInformation)
+
+    RegistrationDeniedReasonInformation.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Reason"))
+    RegistrationDeniedReasonInformation.add_member(:short_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ShortDescription"))
+    RegistrationDeniedReasonInformation.add_member(:long_description, Shapes::ShapeRef.new(shape: String, location_name: "LongDescription"))
+    RegistrationDeniedReasonInformation.add_member(:documentation_title, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationTitle"))
+    RegistrationDeniedReasonInformation.add_member(:documentation_link, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationLink"))
+    RegistrationDeniedReasonInformation.struct_class = Types::RegistrationDeniedReasonInformation
+
+    RegistrationDeniedReasonInformationList.member = Shapes::ShapeRef.new(shape: RegistrationDeniedReasonInformation)
+
+    RegistrationFieldDefinition.add_member(:section_path, Shapes::ShapeRef.new(shape: SectionPath, required: true, location_name: "SectionPath"))
+    RegistrationFieldDefinition.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    RegistrationFieldDefinition.add_member(:field_type, Shapes::ShapeRef.new(shape: FieldType, required: true, location_name: "FieldType"))
+    RegistrationFieldDefinition.add_member(:field_requirement, Shapes::ShapeRef.new(shape: FieldRequirement, required: true, location_name: "FieldRequirement"))
+    RegistrationFieldDefinition.add_member(:select_validation, Shapes::ShapeRef.new(shape: SelectValidation, location_name: "SelectValidation"))
+    RegistrationFieldDefinition.add_member(:text_validation, Shapes::ShapeRef.new(shape: TextValidation, location_name: "TextValidation"))
+    RegistrationFieldDefinition.add_member(:display_hints, Shapes::ShapeRef.new(shape: RegistrationFieldDisplayHints, required: true, location_name: "DisplayHints"))
+    RegistrationFieldDefinition.struct_class = Types::RegistrationFieldDefinition
+
+    RegistrationFieldDefinitionList.member = Shapes::ShapeRef.new(shape: RegistrationFieldDefinition)
+
+    RegistrationFieldDisplayHints.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Title"))
+    RegistrationFieldDisplayHints.add_member(:short_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ShortDescription"))
+    RegistrationFieldDisplayHints.add_member(:long_description, Shapes::ShapeRef.new(shape: String, location_name: "LongDescription"))
+    RegistrationFieldDisplayHints.add_member(:documentation_title, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationTitle"))
+    RegistrationFieldDisplayHints.add_member(:documentation_link, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationLink"))
+    RegistrationFieldDisplayHints.add_member(:select_option_descriptions, Shapes::ShapeRef.new(shape: SelectOptionDescriptionsList, location_name: "SelectOptionDescriptions"))
+    RegistrationFieldDisplayHints.add_member(:text_validation_description, Shapes::ShapeRef.new(shape: String, location_name: "TextValidationDescription"))
+    RegistrationFieldDisplayHints.add_member(:example_text_value, Shapes::ShapeRef.new(shape: String, location_name: "ExampleTextValue"))
+    RegistrationFieldDisplayHints.struct_class = Types::RegistrationFieldDisplayHints
+
+    RegistrationFieldValueInformation.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
+    RegistrationFieldValueInformation.add_member(:select_choices, Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "SelectChoices"))
+    RegistrationFieldValueInformation.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
+    RegistrationFieldValueInformation.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
+    RegistrationFieldValueInformation.add_member(:denied_reason, Shapes::ShapeRef.new(shape: String, location_name: "DeniedReason"))
+    RegistrationFieldValueInformation.struct_class = Types::RegistrationFieldValueInformation
+
+    RegistrationFieldValueInformationList.member = Shapes::ShapeRef.new(shape: RegistrationFieldValueInformation)
+
+    RegistrationFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationFilterName, required: true, location_name: "Name"))
+    RegistrationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    RegistrationFilter.struct_class = Types::RegistrationFilter
+
+    RegistrationFilterList.member = Shapes::ShapeRef.new(shape: RegistrationFilter)
+
+    RegistrationIdList.member = Shapes::ShapeRef.new(shape: RegistrationIdOrArn)
+
+    RegistrationInformation.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    RegistrationInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    RegistrationInformation.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    RegistrationInformation.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "RegistrationStatus"))
+    RegistrationInformation.add_member(:current_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "CurrentVersionNumber"))
+    RegistrationInformation.add_member(:approved_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "ApprovedVersionNumber"))
+    RegistrationInformation.add_member(:latest_denied_version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, location_name: "LatestDeniedVersionNumber"))
+    RegistrationInformation.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "AdditionalAttributes"))
+    RegistrationInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    RegistrationInformation.struct_class = Types::RegistrationInformation
+
+    RegistrationInformationList.member = Shapes::ShapeRef.new(shape: RegistrationInformation)
+
+    RegistrationSectionDefinition.add_member(:section_path, Shapes::ShapeRef.new(shape: SectionPath, required: true, location_name: "SectionPath"))
+    RegistrationSectionDefinition.add_member(:display_hints, Shapes::ShapeRef.new(shape: RegistrationSectionDisplayHints, required: true, location_name: "DisplayHints"))
+    RegistrationSectionDefinition.struct_class = Types::RegistrationSectionDefinition
+
+    RegistrationSectionDefinitionList.member = Shapes::ShapeRef.new(shape: RegistrationSectionDefinition)
+
+    RegistrationSectionDisplayHints.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Title"))
+    RegistrationSectionDisplayHints.add_member(:short_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ShortDescription"))
+    RegistrationSectionDisplayHints.add_member(:long_description, Shapes::ShapeRef.new(shape: String, location_name: "LongDescription"))
+    RegistrationSectionDisplayHints.add_member(:documentation_title, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationTitle"))
+    RegistrationSectionDisplayHints.add_member(:documentation_link, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationLink"))
+    RegistrationSectionDisplayHints.struct_class = Types::RegistrationSectionDisplayHints
+
+    RegistrationTypeDefinition.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
+    RegistrationTypeDefinition.add_member(:supported_associations, Shapes::ShapeRef.new(shape: SupportedAssociationList, location_name: "SupportedAssociations"))
+    RegistrationTypeDefinition.add_member(:display_hints, Shapes::ShapeRef.new(shape: RegistrationTypeDisplayHints, required: true, location_name: "DisplayHints"))
+    RegistrationTypeDefinition.struct_class = Types::RegistrationTypeDefinition
+
+    RegistrationTypeDefinitionList.member = Shapes::ShapeRef.new(shape: RegistrationTypeDefinition)
+
+    RegistrationTypeDisplayHints.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Title"))
+    RegistrationTypeDisplayHints.add_member(:short_description, Shapes::ShapeRef.new(shape: String, location_name: "ShortDescription"))
+    RegistrationTypeDisplayHints.add_member(:long_description, Shapes::ShapeRef.new(shape: String, location_name: "LongDescription"))
+    RegistrationTypeDisplayHints.add_member(:documentation_title, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationTitle"))
+    RegistrationTypeDisplayHints.add_member(:documentation_link, Shapes::ShapeRef.new(shape: String, location_name: "DocumentationLink"))
+    RegistrationTypeDisplayHints.struct_class = Types::RegistrationTypeDisplayHints
+
+    RegistrationTypeFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationTypeFilterName, required: true, location_name: "Name"))
+    RegistrationTypeFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    RegistrationTypeFilter.struct_class = Types::RegistrationTypeFilter
+
+    RegistrationTypeFilterList.member = Shapes::ShapeRef.new(shape: RegistrationTypeFilter)
+
+    RegistrationTypeList.member = Shapes::ShapeRef.new(shape: RegistrationType)
+
+    RegistrationVersionFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationVersionFilterName, required: true, location_name: "Name"))
+    RegistrationVersionFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    RegistrationVersionFilter.struct_class = Types::RegistrationVersionFilter
+
+    RegistrationVersionFilterList.member = Shapes::ShapeRef.new(shape: RegistrationVersionFilter)
+
+    RegistrationVersionInformation.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    RegistrationVersionInformation.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
+    RegistrationVersionInformation.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
+    RegistrationVersionInformation.add_member(:denied_reasons, Shapes::ShapeRef.new(shape: RegistrationDeniedReasonInformationList, location_name: "DeniedReasons"))
+    RegistrationVersionInformation.struct_class = Types::RegistrationVersionInformation
+
+    RegistrationVersionInformationList.member = Shapes::ShapeRef.new(shape: RegistrationVersionInformation)
+
+    RegistrationVersionNumberList.member = Shapes::ShapeRef.new(shape: RegistrationVersionNumber)
+
+    RegistrationVersionStatusHistory.add_member(:draft_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "DraftTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:submitted_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReviewingTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:approved_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApprovedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:discarded_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DiscardedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:denied_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeniedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:revoked_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:archived_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ArchivedTimestamp"))
+    RegistrationVersionStatusHistory.struct_class = Types::RegistrationVersionStatusHistory
+
     ReleasePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberIdOrArn, required: true, location_name: "PhoneNumberId"))
     ReleasePhoneNumberRequest.struct_class = Types::ReleasePhoneNumberRequest
 
@@ -751,10 +1292,25 @@ module Aws::PinpointSMSVoiceV2
     ReleasePhoneNumberResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, location_name: "MonthlyLeasingPrice"))
     ReleasePhoneNumberResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     ReleasePhoneNumberResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    ReleasePhoneNumberResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     ReleasePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     ReleasePhoneNumberResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
+    ReleasePhoneNumberResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     ReleasePhoneNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     ReleasePhoneNumberResult.struct_class = Types::ReleasePhoneNumberResult
+
+    ReleaseSenderIdRequest.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderIdOrArn, required: true, location_name: "SenderId"))
+    ReleaseSenderIdRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    ReleaseSenderIdRequest.struct_class = Types::ReleaseSenderIdRequest
+
+    ReleaseSenderIdResult.add_member(:sender_id_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SenderIdArn"))
+    ReleaseSenderIdResult.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderId, required: true, location_name: "SenderId"))
+    ReleaseSenderIdResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    ReleaseSenderIdResult.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, required: true, location_name: "MessageTypes"))
+    ReleaseSenderIdResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MonthlyLeasingPrice"))
+    ReleaseSenderIdResult.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
+    ReleaseSenderIdResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
+    ReleaseSenderIdResult.struct_class = Types::ReleaseSenderIdResult
 
     RequestPhoneNumberRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
     RequestPhoneNumberRequest.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "MessageType"))
@@ -762,7 +1318,7 @@ module Aws::PinpointSMSVoiceV2
     RequestPhoneNumberRequest.add_member(:number_type, Shapes::ShapeRef.new(shape: RequestableNumberType, required: true, location_name: "NumberType"))
     RequestPhoneNumberRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
     RequestPhoneNumberRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId"))
-    RequestPhoneNumberRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationId, location_name: "RegistrationId"))
+    RequestPhoneNumberRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId"))
     RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     RequestPhoneNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RequestPhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -779,18 +1335,66 @@ module Aws::PinpointSMSVoiceV2
     RequestPhoneNumberResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, location_name: "MonthlyLeasingPrice"))
     RequestPhoneNumberResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     RequestPhoneNumberResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    RequestPhoneNumberResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     RequestPhoneNumberResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     RequestPhoneNumberResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
     RequestPhoneNumberResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DeletionProtectionEnabled"))
     RequestPhoneNumberResult.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "PoolId"))
+    RequestPhoneNumberResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     RequestPhoneNumberResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RequestPhoneNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     RequestPhoneNumberResult.struct_class = Types::RequestPhoneNumberResult
+
+    RequestSenderIdRequest.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderId, required: true, location_name: "SenderId"))
+    RequestSenderIdRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    RequestSenderIdRequest.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes"))
+    RequestSenderIdRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
+    RequestSenderIdRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RequestSenderIdRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RequestSenderIdRequest.struct_class = Types::RequestSenderIdRequest
+
+    RequestSenderIdResult.add_member(:sender_id_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SenderIdArn"))
+    RequestSenderIdResult.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderId, required: true, location_name: "SenderId"))
+    RequestSenderIdResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    RequestSenderIdResult.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, required: true, location_name: "MessageTypes"))
+    RequestSenderIdResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MonthlyLeasingPrice"))
+    RequestSenderIdResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
+    RequestSenderIdResult.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
+    RequestSenderIdResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RequestSenderIdResult.struct_class = Types::RequestSenderIdResult
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SectionPathList.member = Shapes::ShapeRef.new(shape: SectionPath)
+
+    SelectChoiceList.member = Shapes::ShapeRef.new(shape: SelectChoice)
+
+    SelectOptionDescription.add_member(:option, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Option"))
+    SelectOptionDescription.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "Title"))
+    SelectOptionDescription.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    SelectOptionDescription.struct_class = Types::SelectOptionDescription
+
+    SelectOptionDescriptionsList.member = Shapes::ShapeRef.new(shape: SelectOptionDescription)
+
+    SelectValidation.add_member(:min_choices, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MinChoices"))
+    SelectValidation.add_member(:max_choices, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaxChoices"))
+    SelectValidation.add_member(:options, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Options"))
+    SelectValidation.struct_class = Types::SelectValidation
+
+    SendDestinationNumberVerificationCodeRequest.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, required: true, location_name: "VerifiedDestinationNumberId"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:verification_channel, Shapes::ShapeRef.new(shape: VerificationChannel, required: true, location_name: "VerificationChannel"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: VerificationMessageOriginationIdentity, location_name: "OriginationIdentity"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:context, Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
+    SendDestinationNumberVerificationCodeRequest.add_member(:destination_country_parameters, Shapes::ShapeRef.new(shape: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
+    SendDestinationNumberVerificationCodeRequest.struct_class = Types::SendDestinationNumberVerificationCodeRequest
+
+    SendDestinationNumberVerificationCodeResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageId"))
+    SendDestinationNumberVerificationCodeResult.struct_class = Types::SendDestinationNumberVerificationCodeResult
 
     SendTextMessageRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     SendTextMessageRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: TextMessageOriginationIdentity, location_name: "OriginationIdentity"))
@@ -838,6 +1442,9 @@ module Aws::PinpointSMSVoiceV2
     SenderIdInformation.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
     SenderIdInformation.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, required: true, location_name: "MessageTypes"))
     SenderIdInformation.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MonthlyLeasingPrice"))
+    SenderIdInformation.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
+    SenderIdInformation.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
+    SenderIdInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     SenderIdInformation.struct_class = Types::SenderIdInformation
 
     SenderIdInformationList.member = Shapes::ShapeRef.new(shape: SenderIdInformation)
@@ -889,6 +1496,29 @@ module Aws::PinpointSMSVoiceV2
 
     SpendLimitList.member = Shapes::ShapeRef.new(shape: SpendLimit)
 
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    StringMap.key = Shapes::ShapeRef.new(shape: String)
+    StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    SubmitRegistrationVersionRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    SubmitRegistrationVersionRequest.struct_class = Types::SubmitRegistrationVersionRequest
+
+    SubmitRegistrationVersionResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
+    SubmitRegistrationVersionResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationId"))
+    SubmitRegistrationVersionResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
+    SubmitRegistrationVersionResult.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
+    SubmitRegistrationVersionResult.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
+    SubmitRegistrationVersionResult.struct_class = Types::SubmitRegistrationVersionResult
+
+    SupportedAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    SupportedAssociation.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    SupportedAssociation.add_member(:association_behavior, Shapes::ShapeRef.new(shape: RegistrationAssociationBehavior, required: true, location_name: "AssociationBehavior"))
+    SupportedAssociation.add_member(:disassociation_behavior, Shapes::ShapeRef.new(shape: RegistrationDisassociationBehavior, required: true, location_name: "DisassociationBehavior"))
+    SupportedAssociation.struct_class = Types::SupportedAssociation
+
+    SupportedAssociationList.member = Shapes::ShapeRef.new(shape: SupportedAssociation)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -902,6 +1532,11 @@ module Aws::PinpointSMSVoiceV2
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResult.struct_class = Types::TagResourceResult
+
+    TextValidation.add_member(:min_length, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MinLength"))
+    TextValidation.add_member(:max_length, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaxLength"))
+    TextValidation.add_member(:pattern, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Pattern"))
+    TextValidation.struct_class = Types::TextValidation
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -929,6 +1564,7 @@ module Aws::PinpointSMSVoiceV2
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberIdOrArn, required: true, location_name: "PhoneNumberId"))
     UpdatePhoneNumberRequest.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TwoWayEnabled"))
     UpdatePhoneNumberRequest.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePhoneNumberRequest.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdatePhoneNumberRequest.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SelfManagedOptOutsEnabled"))
     UpdatePhoneNumberRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
     UpdatePhoneNumberRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
@@ -945,15 +1581,18 @@ module Aws::PinpointSMSVoiceV2
     UpdatePhoneNumberResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, location_name: "MonthlyLeasingPrice"))
     UpdatePhoneNumberResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     UpdatePhoneNumberResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePhoneNumberResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdatePhoneNumberResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     UpdatePhoneNumberResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
     UpdatePhoneNumberResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DeletionProtectionEnabled"))
+    UpdatePhoneNumberResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     UpdatePhoneNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     UpdatePhoneNumberResult.struct_class = Types::UpdatePhoneNumberResult
 
     UpdatePoolRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, required: true, location_name: "PoolId"))
     UpdatePoolRequest.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TwoWayEnabled"))
     UpdatePoolRequest.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePoolRequest.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdatePoolRequest.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SelfManagedOptOutsEnabled"))
     UpdatePoolRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
     UpdatePoolRequest.add_member(:shared_routes_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SharedRoutesEnabled"))
@@ -966,12 +1605,28 @@ module Aws::PinpointSMSVoiceV2
     UpdatePoolResult.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     UpdatePoolResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "TwoWayEnabled"))
     UpdatePoolResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
+    UpdatePoolResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdatePoolResult.add_member(:self_managed_opt_outs_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SelfManagedOptOutsEnabled"))
     UpdatePoolResult.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, location_name: "OptOutListName"))
     UpdatePoolResult.add_member(:shared_routes_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "SharedRoutesEnabled"))
     UpdatePoolResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DeletionProtectionEnabled"))
     UpdatePoolResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     UpdatePoolResult.struct_class = Types::UpdatePoolResult
+
+    UpdateSenderIdRequest.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderIdOrArn, required: true, location_name: "SenderId"))
+    UpdateSenderIdRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    UpdateSenderIdRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
+    UpdateSenderIdRequest.struct_class = Types::UpdateSenderIdRequest
+
+    UpdateSenderIdResult.add_member(:sender_id_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SenderIdArn"))
+    UpdateSenderIdResult.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderId, required: true, location_name: "SenderId"))
+    UpdateSenderIdResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    UpdateSenderIdResult.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, required: true, location_name: "MessageTypes"))
+    UpdateSenderIdResult.add_member(:monthly_leasing_price, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MonthlyLeasingPrice"))
+    UpdateSenderIdResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
+    UpdateSenderIdResult.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
+    UpdateSenderIdResult.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
+    UpdateSenderIdResult.struct_class = Types::UpdateSenderIdResult
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
@@ -983,6 +1638,34 @@ module Aws::PinpointSMSVoiceV2
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VerifiedDestinationNumberFilter.add_member(:name, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilterName, required: true, location_name: "Name"))
+    VerifiedDestinationNumberFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    VerifiedDestinationNumberFilter.struct_class = Types::VerifiedDestinationNumberFilter
+
+    VerifiedDestinationNumberFilterList.member = Shapes::ShapeRef.new(shape: VerifiedDestinationNumberFilter)
+
+    VerifiedDestinationNumberIdList.member = Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn)
+
+    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberArn"))
+    VerifiedDestinationNumberInformation.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberId"))
+    VerifiedDestinationNumberInformation.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    VerifiedDestinationNumberInformation.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "Status"))
+    VerifiedDestinationNumberInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    VerifiedDestinationNumberInformation.struct_class = Types::VerifiedDestinationNumberInformation
+
+    VerifiedDestinationNumberInformationList.member = Shapes::ShapeRef.new(shape: VerifiedDestinationNumberInformation)
+
+    VerifyDestinationNumberRequest.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: VerifiedDestinationNumberIdOrArn, required: true, location_name: "VerifiedDestinationNumberId"))
+    VerifyDestinationNumberRequest.add_member(:verification_code, Shapes::ShapeRef.new(shape: VerificationCode, required: true, location_name: "VerificationCode"))
+    VerifyDestinationNumberRequest.struct_class = Types::VerifyDestinationNumberRequest
+
+    VerifyDestinationNumberResult.add_member(:verified_destination_number_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberArn"))
+    VerifyDestinationNumberResult.add_member(:verified_destination_number_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberId"))
+    VerifyDestinationNumberResult.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    VerifyDestinationNumberResult.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "Status"))
+    VerifyDestinationNumberResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    VerifyDestinationNumberResult.struct_class = Types::VerifyDestinationNumberResult
 
 
     # @api private
@@ -1071,6 +1754,78 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegistrationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_registration_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegistrationAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegistrationAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegistrationAssociationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_registration_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegistrationAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegistrationAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegistrationAttachmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_registration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegistrationVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegistrationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegistrationVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_verified_destination_number, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVerifiedDestinationNumber"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVerifiedDestinationNumberRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVerifiedDestinationNumberResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1184,6 +1939,48 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegistrationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_registration_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegistrationAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegistrationAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegistrationAttachmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_registration_field_value, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegistrationFieldValue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegistrationFieldValueRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegistrationFieldValueResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_text_message_spend_limit_override, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTextMessageSpendLimitOverride"
         o.http_method = "POST"
@@ -1193,6 +1990,20 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_verified_destination_number, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVerifiedDestinationNumber"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVerifiedDestinationNumberRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVerifiedDestinationNumberResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1358,6 +2169,136 @@ module Aws::PinpointSMSVoiceV2
         )
       end)
 
+      api.add_operation(:describe_registration_attachments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationAttachments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationAttachmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationAttachmentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registration_field_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationFieldDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationFieldDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationFieldDefinitionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registration_field_values, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationFieldValues"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationFieldValuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationFieldValuesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registration_section_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationSectionDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationSectionDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationSectionDefinitionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registration_type_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationTypeDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationTypeDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationTypeDefinitionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registration_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrationVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationVersionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_registrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegistrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegistrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegistrationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_sender_ids, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSenderIds"
         o.http_method = "POST"
@@ -1395,6 +2336,25 @@ module Aws::PinpointSMSVoiceV2
         )
       end)
 
+      api.add_operation(:describe_verified_destination_numbers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVerifiedDestinationNumbers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVerifiedDestinationNumbersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVerifiedDestinationNumbersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:disassociate_origination_identity, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateOriginationIdentity"
         o.http_method = "POST"
@@ -1409,12 +2369,45 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:discard_registration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DiscardRegistrationVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DiscardRegistrationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DiscardRegistrationVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_pool_origination_identities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPoolOriginationIdentities"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPoolOriginationIdentitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPoolOriginationIdentitiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_registration_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRegistrationAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRegistrationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRegistrationAssociationsResult)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1469,6 +2462,20 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:put_registration_field_value, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRegistrationFieldValue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRegistrationFieldValueRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRegistrationFieldValueResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:release_phone_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ReleasePhoneNumber"
         o.http_method = "POST"
@@ -1483,12 +2490,55 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:release_sender_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReleaseSenderId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReleaseSenderIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReleaseSenderIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:request_phone_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RequestPhoneNumber"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RequestPhoneNumberRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestPhoneNumberResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:request_sender_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RequestSenderId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RequestSenderIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: RequestSenderIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:send_destination_number_verification_code, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendDestinationNumberVerificationCode"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendDestinationNumberVerificationCodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendDestinationNumberVerificationCodeResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1578,6 +2628,20 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:submit_registration_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SubmitRegistrationVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SubmitRegistrationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: SubmitRegistrationVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1639,6 +2703,33 @@ module Aws::PinpointSMSVoiceV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdatePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_sender_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSenderId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSenderIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSenderIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:verify_destination_number, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyDestinationNumber"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: VerifyDestinationNumberRequest)
+        o.output = Shapes::ShapeRef.new(shape: VerifyDestinationNumberResult)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

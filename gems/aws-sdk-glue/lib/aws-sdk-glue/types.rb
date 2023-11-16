@@ -2715,6 +2715,155 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # An exception thrown when you try to stop a task run when there is no
+    # task running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskNotRunningException AWS API Documentation
+    #
+    class ColumnStatisticsTaskNotRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that shows the details of the column stats run.
+    #
+    # @!attribute [rw] customer_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which column statistics is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of the column names. If none is supplied, all column names
+    #   for the table will be used by default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that the service assumes to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #   @return [Float]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs for the column stats task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers used to generate column statistics. The job is
+    #   preconfigured to autoscale up to 25 instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of workers being used for generating stats. The default is
+    #   `g.1x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that this task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   The last point in time when this task was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dpu_seconds
+    #   The calculated DPU usage in seconds for all autoscaled workers.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskRun AWS API Documentation
+    #
+    class ColumnStatisticsTaskRun < Struct.new(
+      :customer_id,
+      :column_statistics_task_run_id,
+      :database_name,
+      :table_name,
+      :column_name_list,
+      :catalog_id,
+      :role,
+      :sample_size,
+      :security_configuration,
+      :number_of_workers,
+      :worker_type,
+      :status,
+      :creation_time,
+      :last_updated,
+      :start_time,
+      :end_time,
+      :error_message,
+      :dpu_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception thrown when you try to start another job while running a
+    # column stats generation job.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskRunningException AWS API Documentation
+    #
+    class ColumnStatisticsTaskRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception thrown when you try to stop a task run.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskStoppingException AWS API Documentation
+    #
+    class ColumnStatisticsTaskStoppingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Two processes are trying to modify a resource simultaneously.
     #
     # @!attribute [rw] message
@@ -8947,6 +9096,75 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunRequest < Struct.new(
+      :column_statistics_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run
+    #   A `ColumnStatisticsTaskRun` object representing the details of the
+    #   column stats run.
+    #   @return [Types::ColumnStatisticsTaskRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunResponse < Struct.new(
+      :column_statistics_task_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsRequest AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunsRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_runs
+    #   A list of column statistics task runs.
+    #   @return [Array<Types::ColumnStatisticsTaskRun>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all task runs have yet been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsResponse AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunsResponse < Struct.new(
+      :column_statistics_task_runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -14212,6 +14430,41 @@ module Aws::Glue
     end
 
     # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRunsRequest AWS API Documentation
+    #
+    class ListColumnStatisticsTaskRunsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run_ids
+    #   A list of column statistics task run IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all task run IDs have yet been
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRunsResponse AWS API Documentation
+    #
+    class ListColumnStatisticsTaskRunsResponse < Struct.new(
+      :column_statistics_task_run_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
     #   The maximum size of a list to return.
     #   @return [Integer]
     #
@@ -19207,6 +19460,64 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of the column names to generate statistics. If none is
+    #   supplied, all column names for the table will be used by default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that the service assumes to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #   @return [Float]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs for the column stats task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :column_name_list,
+      :role,
+      :sample_size,
+      :catalog_id,
+      :security_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the column statistics task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunResponse < Struct.new(
+      :column_statistics_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   Name of the crawler to start.
     #   @return [String]
@@ -19850,6 +20161,27 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   Name of the crawler to stop.

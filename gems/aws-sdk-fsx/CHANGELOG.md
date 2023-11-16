@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-11-16)
+------------------
+
+* Feature - Enables customers to update their PerUnitStorageThroughput on their Lustre file systems.
+
 1.78.0 (2023-10-06)
 ------------------
 

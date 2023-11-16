@@ -54,6 +54,6 @@ require_relative 'aws-sdk-lambda/event_streams'
 # @!group service
 module Aws::Lambda
 
-  GEM_VERSION = '1.110.0'
+  GEM_VERSION = '1.111.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-11-16)
+------------------
+
+* Feature - Added a new API response field which determines if there is an action required from the customer regarding their cluster.
+
 1.64.0 (2023-10-17)
 ------------------
 

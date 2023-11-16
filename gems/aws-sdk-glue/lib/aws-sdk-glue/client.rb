@@ -6147,6 +6147,117 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Get the associated metadata/information for a task run, given a task
+    # run ID.
+    #
+    # @option params [required, String] :column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #
+    # @return [Types::GetColumnStatisticsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsTaskRunResponse#column_statistics_task_run #column_statistics_task_run} => Types::ColumnStatisticsTaskRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_task_run({
+    #     column_statistics_task_run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run.customer_id #=> String
+    #   resp.column_statistics_task_run.column_statistics_task_run_id #=> String
+    #   resp.column_statistics_task_run.database_name #=> String
+    #   resp.column_statistics_task_run.table_name #=> String
+    #   resp.column_statistics_task_run.column_name_list #=> Array
+    #   resp.column_statistics_task_run.column_name_list[0] #=> String
+    #   resp.column_statistics_task_run.catalog_id #=> String
+    #   resp.column_statistics_task_run.role #=> String
+    #   resp.column_statistics_task_run.sample_size #=> Float
+    #   resp.column_statistics_task_run.security_configuration #=> String
+    #   resp.column_statistics_task_run.number_of_workers #=> Integer
+    #   resp.column_statistics_task_run.worker_type #=> String
+    #   resp.column_statistics_task_run.status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.column_statistics_task_run.creation_time #=> Time
+    #   resp.column_statistics_task_run.last_updated #=> Time
+    #   resp.column_statistics_task_run.start_time #=> Time
+    #   resp.column_statistics_task_run.end_time #=> Time
+    #   resp.column_statistics_task_run.error_message #=> String
+    #   resp.column_statistics_task_run.dpu_seconds #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload get_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:get_column_statistics_task_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all runs associated with the specified
+    # table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::GetColumnStatisticsTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsTaskRunsResponse#column_statistics_task_runs #column_statistics_task_runs} => Array&lt;Types::ColumnStatisticsTaskRun&gt;
+    #   * {Types::GetColumnStatisticsTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_task_runs({
+    #     database_name: "DatabaseName", # required
+    #     table_name: "NameString", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_runs #=> Array
+    #   resp.column_statistics_task_runs[0].customer_id #=> String
+    #   resp.column_statistics_task_runs[0].column_statistics_task_run_id #=> String
+    #   resp.column_statistics_task_runs[0].database_name #=> String
+    #   resp.column_statistics_task_runs[0].table_name #=> String
+    #   resp.column_statistics_task_runs[0].column_name_list #=> Array
+    #   resp.column_statistics_task_runs[0].column_name_list[0] #=> String
+    #   resp.column_statistics_task_runs[0].catalog_id #=> String
+    #   resp.column_statistics_task_runs[0].role #=> String
+    #   resp.column_statistics_task_runs[0].sample_size #=> Float
+    #   resp.column_statistics_task_runs[0].security_configuration #=> String
+    #   resp.column_statistics_task_runs[0].number_of_workers #=> Integer
+    #   resp.column_statistics_task_runs[0].worker_type #=> String
+    #   resp.column_statistics_task_runs[0].status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.column_statistics_task_runs[0].creation_time #=> Time
+    #   resp.column_statistics_task_runs[0].last_updated #=> Time
+    #   resp.column_statistics_task_runs[0].start_time #=> Time
+    #   resp.column_statistics_task_runs[0].end_time #=> Time
+    #   resp.column_statistics_task_runs[0].error_message #=> String
+    #   resp.column_statistics_task_runs[0].dpu_seconds #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRuns AWS API Documentation
+    #
+    # @overload get_column_statistics_task_runs(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_task_runs(params = {}, options = {})
+      req = build_request(:get_column_statistics_task_runs, params)
+      req.send_request(options)
+    end
+
     # Retrieves a connection definition from the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -12348,6 +12459,43 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # List all task runs for a particular account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListColumnStatisticsTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListColumnStatisticsTaskRunsResponse#column_statistics_task_run_ids #column_statistics_task_run_ids} => Array&lt;String&gt;
+    #   * {Types::ListColumnStatisticsTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_column_statistics_task_runs({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run_ids #=> Array
+    #   resp.column_statistics_task_run_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRuns AWS API Documentation
+    #
+    # @overload list_column_statistics_task_runs(params = {})
+    # @param [Hash] params ({})
+    def list_column_statistics_task_runs(params = {}, options = {})
+      req = build_request(:list_column_statistics_task_runs, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all crawler resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -14143,6 +14291,63 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Starts a column statistics task run, for a specified table and
+    # columns.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to generate statistics.
+    #
+    # @option params [Array<String>] :column_name_list
+    #   A list of the column names to generate statistics. If none is
+    #   supplied, all column names for the table will be used by default.
+    #
+    # @option params [required, String] :role
+    #   The IAM role that the service assumes to generate statistics.
+    #
+    # @option params [Float] :sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
+    # @option params [String] :security_configuration
+    #   Name of the security configuration that is used to encrypt CloudWatch
+    #   logs for the column stats task run.
+    #
+    # @return [Types::StartColumnStatisticsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartColumnStatisticsTaskRunResponse#column_statistics_task_run_id #column_statistics_task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_column_statistics_task_run({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     column_name_list: ["NameString"],
+    #     role: "NameString", # required
+    #     sample_size: 1.0,
+    #     catalog_id: "NameString",
+    #     security_configuration: "NameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload start_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:start_column_statistics_task_run, params)
+      req.send_request(options)
+    end
+
     # Starts a crawl using the specified crawler, regardless of what is
     # scheduled. If the crawler is already running, returns a
     # [CrawlerRunningException][1].
@@ -14803,6 +15008,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_workflow_run(params = {}, options = {})
       req = build_request(:start_workflow_run, params)
+      req.send_request(options)
+    end
+
+    # Stops a task run for the specified table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_column_statistics_task_run({
+    #     database_name: "DatabaseName", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload stop_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def stop_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:stop_column_statistics_task_run, params)
       req.send_request(options)
     end
 
@@ -16660,7 +16891,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

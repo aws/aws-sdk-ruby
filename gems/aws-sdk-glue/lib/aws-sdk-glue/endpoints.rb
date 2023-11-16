@@ -1104,6 +1104,34 @@ module Aws::Glue
       end
     end
 
+    class GetColumnStatisticsTaskRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Glue::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetColumnStatisticsTaskRuns
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Glue::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetConnection
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1944,6 +1972,20 @@ module Aws::Glue
       end
     end
 
+    class ListColumnStatisticsTaskRuns
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Glue::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListCrawlers
       def self.build(context)
         unless context.config.regional_endpoint
@@ -2364,6 +2406,20 @@ module Aws::Glue
       end
     end
 
+    class StartColumnStatisticsTaskRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Glue::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartCrawler
       def self.build(context)
         unless context.config.regional_endpoint
@@ -2505,6 +2561,20 @@ module Aws::Glue
     end
 
     class StartWorkflowRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Glue::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopColumnStatisticsTaskRun
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

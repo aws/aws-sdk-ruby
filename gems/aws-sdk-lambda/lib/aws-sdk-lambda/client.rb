@@ -1354,12 +1354,7 @@ module Aws::Lambda
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB. For
-    #   more information, see [Configuring ephemeral storage (console)][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
+    #   is 512, but can be any whole number between 512 and 10,240 MB.
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -1367,6 +1362,9 @@ module Aws::Lambda
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
+    #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1405,6 +1403,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1464,6 +1463,12 @@ module Aws::Lambda
     #     },
     #     snap_start: {
     #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
+    #     },
+    #     logging_config: {
+    #       log_format: "JSON", # accepts JSON, Text
+    #       application_log_level: "TRACE", # accepts TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #       log_group: "LogGroup",
     #     },
     #   })
     #
@@ -1528,6 +1533,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -2402,6 +2411,10 @@ module Aws::Lambda
     #   resp.configuration.runtime_version_config.runtime_version_arn #=> String
     #   resp.configuration.runtime_version_config.error.error_code #=> String
     #   resp.configuration.runtime_version_config.error.message #=> String
+    #   resp.configuration.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.configuration.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.configuration.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.configuration.logging_config.log_group #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2575,6 +2588,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2644,6 +2658,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3251,12 +3269,6 @@ module Aws::Lambda
     # For asynchronous function invocation, use Invoke.
     #
     # Invokes a function asynchronously.
-    #
-    # <note markdown="1"> If you do use the InvokeAsync action, note that it doesn't support
-    # the use of X-Ray active tracing. Trace ID is not propagated to the
-    # function, even if X-Ray active tracing is turned on.
-    #
-    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -3994,6 +4006,10 @@ module Aws::Lambda
     #   resp.functions[0].runtime_version_config.runtime_version_arn #=> String
     #   resp.functions[0].runtime_version_config.error.error_code #=> String
     #   resp.functions[0].runtime_version_config.error.message #=> String
+    #   resp.functions[0].logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.functions[0].logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.functions[0].logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.functions[0].logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -4406,6 +4422,10 @@ module Aws::Lambda
     #   resp.versions[0].runtime_version_config.runtime_version_arn #=> String
     #   resp.versions[0].runtime_version_config.error.error_code #=> String
     #   resp.versions[0].runtime_version_config.error.message #=> String
+    #   resp.versions[0].logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.versions[0].logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.versions[0].logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.versions[0].logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -4608,6 +4628,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4679,6 +4700,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -5803,6 +5828,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5880,6 +5906,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -6051,12 +6081,7 @@ module Aws::Lambda
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB. For
-    #   more information, see [Configuring ephemeral storage (console)][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
+    #   is 512, but can be any whole number between 512 and 10,240 MB.
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -6064,6 +6089,9 @@ module Aws::Lambda
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
+    #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6102,6 +6130,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6148,6 +6177,12 @@ module Aws::Lambda
     #     },
     #     snap_start: {
     #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
+    #     },
+    #     logging_config: {
+    #       log_format: "JSON", # accepts JSON, Text
+    #       application_log_level: "TRACE", # accepts TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #       log_group: "LogGroup",
     #     },
     #   })
     #
@@ -6212,6 +6247,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -6438,7 +6477,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

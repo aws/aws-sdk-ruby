@@ -555,6 +555,8 @@ module Aws::IoT
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
     GenericLongValue = Shapes::IntegerShape.new(name: 'GenericLongValue')
+    GeoLocationTarget = Shapes::StructureShape.new(name: 'GeoLocationTarget')
+    GeoLocationsFilter = Shapes::ListShape.new(name: 'GeoLocationsFilter')
     GetBehaviorModelTrainingSummariesRequest = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesRequest')
     GetBehaviorModelTrainingSummariesResponse = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesResponse')
     GetBucketsAggregationRequest = Shapes::StructureShape.new(name: 'GetBucketsAggregationRequest')
@@ -1162,6 +1164,8 @@ module Aws::IoT
     Target = Shapes::StringShape.new(name: 'Target')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TargetAuditCheckNames = Shapes::ListShape.new(name: 'TargetAuditCheckNames')
+    TargetFieldName = Shapes::StringShape.new(name: 'TargetFieldName')
+    TargetFieldOrder = Shapes::StringShape.new(name: 'TargetFieldOrder')
     TargetSelection = Shapes::StringShape.new(name: 'TargetSelection')
     TargetViolationIdsForDetectMitigationActions = Shapes::ListShape.new(name: 'TargetViolationIdsForDetectMitigationActions')
     Targets = Shapes::ListShape.new(name: 'Targets')
@@ -2937,6 +2941,12 @@ module Aws::IoT
 
     FleetMetricNameAndArnList.member = Shapes::ShapeRef.new(shape: FleetMetricNameAndArn)
 
+    GeoLocationTarget.add_member(:name, Shapes::ShapeRef.new(shape: TargetFieldName, location_name: "name"))
+    GeoLocationTarget.add_member(:order, Shapes::ShapeRef.new(shape: TargetFieldOrder, location_name: "order"))
+    GeoLocationTarget.struct_class = Types::GeoLocationTarget
+
+    GeoLocationsFilter.member = Shapes::ShapeRef.new(shape: GeoLocationTarget)
+
     GetBehaviorModelTrainingSummariesRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TinyMaxResults, location: "querystring", location_name: "maxResults"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -3143,6 +3153,7 @@ module Aws::IoT
     IndexNotReadyException.struct_class = Types::IndexNotReadyException
 
     IndexingFilter.add_member(:named_shadow_names, Shapes::ShapeRef.new(shape: NamedShadowNamesFilter, location_name: "namedShadowNames"))
+    IndexingFilter.add_member(:geo_locations, Shapes::ShapeRef.new(shape: GeoLocationsFilter, location_name: "geoLocations"))
     IndexingFilter.struct_class = Types::IndexingFilter
 
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))

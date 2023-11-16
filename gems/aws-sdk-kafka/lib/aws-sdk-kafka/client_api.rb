@@ -59,6 +59,7 @@ module Aws::Kafka
     CreateReplicatorResponse = Shapes::StructureShape.new(name: 'CreateReplicatorResponse')
     CreateVpcConnectionRequest = Shapes::StructureShape.new(name: 'CreateVpcConnectionRequest')
     CreateVpcConnectionResponse = Shapes::StructureShape.new(name: 'CreateVpcConnectionResponse')
+    CustomerActionStatus = Shapes::StringShape.new(name: 'CustomerActionStatus')
     DeleteClusterPolicyRequest = Shapes::StructureShape.new(name: 'DeleteClusterPolicyRequest')
     DeleteClusterPolicyResponse = Shapes::StructureShape.new(name: 'DeleteClusterPolicyResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
@@ -368,6 +369,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     ClusterInfo.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
     ClusterInfo.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
+    ClusterInfo.add_member(:customer_action_status, Shapes::ShapeRef.new(shape: CustomerActionStatus, location_name: "customerActionStatus"))
     ClusterInfo.struct_class = Types::ClusterInfo
 
     ClusterOperationInfo.add_member(:client_request_id, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestId"))
@@ -916,6 +918,7 @@ module Aws::Kafka
     Provisioned.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     Provisioned.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
     Provisioned.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
+    Provisioned.add_member(:customer_action_status, Shapes::ShapeRef.new(shape: CustomerActionStatus, location_name: "customerActionStatus"))
     Provisioned.struct_class = Types::Provisioned
 
     ProvisionedRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))

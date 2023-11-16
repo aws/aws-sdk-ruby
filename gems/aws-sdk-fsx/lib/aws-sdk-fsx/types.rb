@@ -105,10 +105,9 @@ module Aws::FSx
     #     completed successfully, the parent `FILE_SYSTEM_UPDATE` action
     #     status changes to `COMPLETED`. For more information, see [Managing
     #     storage capacity][2] in the *Amazon FSx for Windows File Server
-    #     User Guide*, [Managing storage and throughput capacity][3] in the
-    #     *Amazon FSx for Lustre User Guide*, and [Managing storage capacity
-    #     and provisioned IOPS][4] in the *Amazon FSx for NetApp ONTAP User
-    #     Guide*.
+    #     User Guide*, [Managing storage capacity][3] in the *Amazon FSx for
+    #     Lustre User Guide*, and [Managing storage capacity and provisioned
+    #     IOPS][4] in the *Amazon FSx for NetApp ONTAP User Guide*.
     #
     #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
     #     associate a new Domain Name System (DNS) alias with the file
@@ -8367,6 +8366,25 @@ module Aws::FSx
     #   as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   The throughput of an Amazon FSx for Lustre Persistent SSD-based file
+    #   system, measured in megabytes per second per tebibyte (MB/s/TiB).
+    #   You can increase or decrease your file system's throughput. Valid
+    #   values depend on the deployment type of the file system, as follows:
+    #
+    #   * For `PERSISTENT_1` SSD-based deployment types, valid values are
+    #     50, 100, and 200 MB/s/TiB.
+    #
+    #   * For `PERSISTENT_2` SSD-based deployment types, valid values are
+    #     125, 250, 500, and 1000 MB/s/TiB.
+    #
+    #   For more information, see [ Managing throughput capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -8376,7 +8394,8 @@ module Aws::FSx
       :auto_import_policy,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :per_unit_storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8520,7 +8539,7 @@ module Aws::FSx
     #   DeploymentType you choose, as follows:
     #
     #   * For `MULTI_AZ_1` and `SINGLE_AZ_2`, valid values are 160, 320,
-    #     640, 1280, 2560, 3840, 5120, 7680, or 10240 MBps.
+    #     640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.
     #
     #   * For `SINGLE_AZ_1`, valid values are 64, 128, 256, 512, 1024, 2048,
     #     3072, or 4096 MB/s.
