@@ -985,6 +985,7 @@ module Aws::Athena
     QueryExecutionStatistics.add_member(:data_manifest_location, Shapes::ShapeRef.new(shape: String, location_name: "DataManifestLocation"))
     QueryExecutionStatistics.add_member(:total_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "TotalExecutionTimeInMillis"))
     QueryExecutionStatistics.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
+    QueryExecutionStatistics.add_member(:service_pre_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServicePreProcessingTimeInMillis"))
     QueryExecutionStatistics.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
     QueryExecutionStatistics.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))
     QueryExecutionStatistics.add_member(:result_reuse_information, Shapes::ShapeRef.new(shape: ResultReuseInformation, location_name: "ResultReuseInformation"))
@@ -1009,6 +1010,7 @@ module Aws::Athena
     QueryRuntimeStatisticsRows.struct_class = Types::QueryRuntimeStatisticsRows
 
     QueryRuntimeStatisticsTimeline.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:service_pre_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServicePreProcessingTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:engine_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "EngineExecutionTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))

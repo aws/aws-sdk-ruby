@@ -798,6 +798,10 @@ module Aws::EC2
     #   provisioned range.
     #   @return [String]
     #
+    # @!attribute [rw] asn
+    #   The public 2-byte or 4-byte ASN that you want to advertise.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -809,6 +813,7 @@ module Aws::EC2
     #
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
+      :asn,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -1142,6 +1147,12 @@ module Aws::EC2
     #   A preview of the next available CIDR in a pool.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allowed_cidrs
+    #   Include a particular CIDR range that can be returned by the pool.
+    #   Allowed CIDRs are only allowed if using netmask length for
+    #   allocation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] disallowed_cidrs
     #   Exclude a particular CIDR range from being returned by the pool.
     #   Disallowed CIDRs are only allowed if using netmask length for
@@ -1158,6 +1169,7 @@ module Aws::EC2
       :client_token,
       :description,
       :preview_next_cidr,
+      :allowed_cidrs,
       :disallowed_cidrs)
       SENSITIVE = []
       include Aws::Structure
@@ -1551,6 +1563,62 @@ module Aws::EC2
     #
     class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Autonomous System Number (ASN) and BYOIP CIDR association.
+    #
+    # @!attribute [rw] asn
+    #   The association's ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   The association's CIDR.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The association's status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The association's state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AsnAssociation AWS API Documentation
+    #
+    class AsnAssociation < Struct.new(
+      :asn,
+      :cidr,
+      :status_message,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides authorization for Amazon to bring an Autonomous System Number
+    # (ASN) to a specific Amazon Web Services account using bring your own
+    # ASN (BYOASN). For details on the format of the message and signature,
+    # see [Tutorial: Bring your ASN to IPAM][1] in the *Amazon VPC IPAM
+    # guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html
+    #
+    # @!attribute [rw] message
+    #   The authorization context's message.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The authorization context's signature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AsnAuthorizationContext AWS API Documentation
+    #
+    class AsnAuthorizationContext < Struct.new(
+      :message,
+      :signature)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2028,6 +2096,43 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   The BYOIP CIDR you want to associate with an ASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamByoasnRequest AWS API Documentation
+    #
+    class AssociateIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :asn,
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asn_association
+    #   The ASN and BYOIP CIDR association.
+    #   @return [Types::AsnAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamByoasnResult AWS API Documentation
+    #
+    class AssociateIpamByoasnResult < Struct.new(
+      :asn_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
     #   If you have the required permissions, the error response is
@@ -2176,19 +2281,28 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 CIDR block for your subnet. The subnet must have a /64
-    #   prefix length.
+    #   The IPv6 CIDR block for your subnet.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
     #   The ID of your subnet.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_netmask_length
+    #   An IPv6 netmask length.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
       :ipv_6_cidr_block,
-      :subnet_id)
+      :subnet_id,
+      :ipv_6_ipam_pool_id,
+      :ipv_6_netmask_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2406,7 +2520,7 @@ module Aws::EC2
 
     # @!attribute [rw] amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IPv6 addresses, or the
+    #   for the VPC. You cannot specify the range of IPv6 addresses or the
     #   size of the CIDR block.
     #   @return [Boolean]
     #
@@ -3646,6 +3760,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The Autonomous System Number (ASN) and BYOIP CIDR association.
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_id
+    #   An IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The provisioning state of the BYOASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Byoasn AWS API Documentation
+    #
+    class Byoasn < Struct.new(
+      :asn,
+      :ipam_id,
+      :status_message,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an address range that is provisioned for use with
     # your Amazon Web Services resources through bring your own IP addresses
     # (BYOIP).
@@ -3657,6 +3800,10 @@ module Aws::EC2
     # @!attribute [rw] description
     #   The description of the address range.
     #   @return [String]
+    #
+    # @!attribute [rw] asn_associations
+    #   The BYOIP CIDR associations with ASNs.
+    #   @return [Array<Types::AsnAssociation>]
     #
     # @!attribute [rw] status_message
     #   Upon success, contains the ID of the address pool. Otherwise,
@@ -3672,6 +3819,7 @@ module Aws::EC2
     class ByoipCidr < Struct.new(
       :cidr,
       :description,
+      :asn_associations,
       :status_message,
       :state)
       SENSITIVE = []
@@ -5881,6 +6029,156 @@ module Aws::EC2
       :connection_notification_arn,
       :connection_events,
       :connection_notification_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking configuration that enables you to
+    # set the idle timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingConfiguration AWS API Documentation
+    #
+    class ConnectionTrackingConfiguration < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification that enables you to
+    # set the idle timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecification AWS API Documentation
+    #
+    class ConnectionTrackingSpecification < Struct.new(
+      :tcp_established_timeout,
+      :udp_timeout,
+      :udp_stream_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification request that
+    # enables you to set the idle timeout for connection tracking on an
+    # Elastic network interface. For more information, see [Connection
+    # tracking timeouts][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecificationRequest AWS API Documentation
+    #
+    class ConnectionTrackingSpecificationRequest < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification response that
+    # enables you to set the idle timeout for connection tracking on an
+    # Elastic network interface. For more information, see [Connection
+    # tracking timeouts][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecificationResponse AWS API Documentation
+    #
+    class ConnectionTrackingSpecificationResponse < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8263,6 +8561,10 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [String]
     #
+    # @!attribute [rw] source_resource
+    #   The resource used to provision CIDRs to a resource planning pool.
+    #   @return [Types::IpamPoolSourceResourceRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamPoolRequest AWS API Documentation
     #
     class CreateIpamPoolRequest < Struct.new(
@@ -8281,7 +8583,8 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       :aws_service,
-      :public_ip_source)
+      :public_ip_source,
+      :source_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8344,6 +8647,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamRequest AWS API Documentation
     #
     class CreateIpamRequest < Struct.new(
@@ -8351,7 +8665,8 @@ module Aws::EC2
       :description,
       :operating_regions,
       :tag_specifications,
-      :client_token)
+      :client_token,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9535,6 +9850,10 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A connection tracking specification for the network interface.
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
     #
     class CreateNetworkInterfaceRequest < Struct.new(
@@ -9554,7 +9873,8 @@ module Aws::EC2
       :subnet_id,
       :tag_specifications,
       :client_token,
-      :enable_primary_ipv_6)
+      :enable_primary_ipv_6,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10400,10 +10720,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
-    #
-    #   This parameter is required for an IPv6 only subnet.
+    #   The IPv6 network range for the subnet, in CIDR notation. This
+    #   parameter is required for an IPv6 only subnet.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -10427,6 +10745,22 @@ module Aws::EC2
     #   Indicates whether to create an IPv6 only subnet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_4_ipam_pool_id
+    #   An IPv4 IPAM pool ID for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_netmask_length
+    #   An IPv4 netmask length for the subnet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_netmask_length
+    #   An IPv6 netmask length for the subnet.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
@@ -10438,7 +10772,11 @@ module Aws::EC2
       :outpost_arn,
       :vpc_id,
       :dry_run,
-      :ipv_6_native)
+      :ipv_6_native,
+      :ipv_4_ipam_pool_id,
+      :ipv_4_netmask_length,
+      :ipv_6_ipam_pool_id,
+      :ipv_6_netmask_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13455,11 +13793,22 @@ module Aws::EC2
     #   The ID of the pool to delete.
     #   @return [String]
     #
+    # @!attribute [rw] cascade
+    #   Enables you to quickly delete an IPAM pool and all resources within
+    #   that pool, including provisioned CIDRs, allocations, and other
+    #   pools.
+    #
+    #   You can only use this option to delete pools in the private scope or
+    #   pools in the public scope with a source resource. A source resource
+    #   is a resource used to provision CIDRs to a resource planning pool.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamPoolRequest AWS API Documentation
     #
     class DeleteIpamPoolRequest < Struct.new(
       :dry_run,
-      :ipam_pool_id)
+      :ipam_pool_id,
+      :cascade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15502,6 +15851,43 @@ module Aws::EC2
     #
     class DeprovisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_id
+    #   The IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   An ASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionIpamByoasnRequest AWS API Documentation
+    #
+    class DeprovisionIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :asn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasn
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::Byoasn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionIpamByoasnResult AWS API Documentation
+    #
+    class DeprovisionIpamByoasnResult < Struct.new(
+      :byoasn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20390,6 +20776,51 @@ module Aws::EC2
     #
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamByoasnRequest AWS API Documentation
+    #
+    class DescribeIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasns
+    #   ASN and BYOIP CIDR associations.
+    #   @return [Array<Types::Byoasn>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamByoasnResult AWS API Documentation
+    #
+    class DescribeIpamByoasnResult < Struct.new(
+      :byoasns,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -28725,6 +29156,43 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   A BYOIP CIDR.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamByoasnRequest AWS API Documentation
+    #
+    class DisassociateIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :asn,
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asn_association
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::AsnAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamByoasnResult AWS API Documentation
+    #
+    class DisassociateIpamByoasnResult < Struct.new(
+      :asn_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
     #   If you have the required permissions, the error response is
@@ -34002,6 +34470,70 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] ipam_resource_discovery_id
+    #   An IPAM resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_region
+    #   The Amazon Web Services Region for the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of IPAM discovered public addresses to return in
+    #   one page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredPublicAddressesRequest AWS API Documentation
+    #
+    class GetIpamDiscoveredPublicAddressesRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id,
+      :address_region,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_discovered_public_addresses
+    #   IPAM discovered public addresses.
+    #   @return [Array<Types::IpamDiscoveredPublicAddress>]
+    #
+    # @!attribute [rw] oldest_sample_time
+    #   The oldest successful resource discovery time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredPublicAddressesResult AWS API Documentation
+    #
+    class GetIpamDiscoveredPublicAddressesResult < Struct.new(
+      :ipam_discovered_public_addresses,
+      :oldest_sample_time,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
     #   A resource discovery ID.
     #   @return [String]
     #
@@ -37740,7 +38272,8 @@ module Aws::EC2
     #   @return [Types::Placement]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   The platform. This value is `windows` for Windows instances;
+    #   otherwise, it is empty.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
@@ -38981,6 +39514,17 @@ module Aws::EC2
     #   interface.
     #   @return [Array<Types::InstanceIpv6Prefix>]
     #
+    # @!attribute [rw] connection_tracking_configuration
+    #   A security group connection tracking configuration that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -39001,7 +39545,8 @@ module Aws::EC2
       :vpc_id,
       :interface_type,
       :ipv_4_prefixes,
-      :ipv_6_prefixes)
+      :ipv_6_prefixes,
+      :connection_tracking_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39259,6 +39804,17 @@ module Aws::EC2
     #   attached to the instance.
     #   @return [Types::EnaSrdSpecificationRequest]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
@@ -39282,7 +39838,8 @@ module Aws::EC2
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
       :primary_ipv_6,
-      :ena_srd_specification)
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40985,6 +41542,21 @@ module Aws::EC2
     #   The IPAM's resource discovery association count.
     #   @return [Integer]
     #
+    # @!attribute [rw] state_message
+    #   The state message.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipam AWS API Documentation
     #
     class Ipam < Struct.new(
@@ -41001,7 +41573,9 @@ module Aws::EC2
       :tags,
       :default_resource_discovery_id,
       :default_resource_discovery_association_id,
-      :resource_discovery_association_count)
+      :resource_discovery_association_count,
+      :state_message,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41148,6 +41722,118 @@ module Aws::EC2
       :failure_reason,
       :last_attempted_discovery_time,
       :last_successful_discovery_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A public IP Address discovered by IPAM.
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_region
+    #   The Region of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_owner_id
+    #   The ID of the owner of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_allocation_id
+    #   The allocation ID of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The association status.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_type
+    #   The IP address type.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service associated with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_resource
+    #   The resource ARN or ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the resource with the assigned IP address is
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet that the resource with the assigned IP address
+    #   is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_pool_id
+    #   The ID of the public IPv4 pool that the resource with the assigned
+    #   IP address is from.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID of the resource with the assigned IP
+    #   address.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_description
+    #   The description of the network interface that IP address is assigned
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID of the instance the assigned IP address is assigned
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the IP address.
+    #   @return [Types::IpamPublicAddressTags]
+    #
+    # @!attribute [rw] network_border_group
+    #   The network border group that the resource that the IP address is
+    #   assigned to is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   Security groups associated with the resource that the IP address is
+    #   assigned to.
+    #   @return [Array<Types::IpamPublicAddressSecurityGroup>]
+    #
+    # @!attribute [rw] sample_time
+    #   The last successful resource discovery time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveredPublicAddress AWS API Documentation
+    #
+    class IpamDiscoveredPublicAddress < Struct.new(
+      :ipam_resource_discovery_id,
+      :address_region,
+      :address,
+      :address_owner_id,
+      :address_allocation_id,
+      :association_status,
+      :address_type,
+      :service,
+      :service_resource,
+      :vpc_id,
+      :subnet_id,
+      :public_ipv_4_pool_id,
+      :network_interface_id,
+      :network_interface_description,
+      :instance_id,
+      :tags,
+      :network_border_group,
+      :security_groups,
+      :sample_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41368,7 +42054,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state_message
-    #   A message related to the failed creation of an IPAM pool.
+    #   The state message.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -41459,6 +42145,10 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [String]
     #
+    # @!attribute [rw] source_resource
+    #   The resource used to provision CIDRs to a resource planning pool.
+    #   @return [Types::IpamPoolSourceResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPool AWS API Documentation
     #
     class IpamPool < Struct.new(
@@ -41484,7 +42174,8 @@ module Aws::EC2
       :allocation_resource_tags,
       :tags,
       :aws_service,
-      :public_ip_source)
+      :public_ip_source,
+      :source_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41594,6 +42285,116 @@ module Aws::EC2
     class IpamPoolCidrFailureReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource used to provision CIDRs to a resource planning pool.
+    #
+    # @!attribute [rw] resource_id
+    #   The source resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The source resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The source resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The source resource owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolSourceResource AWS API Documentation
+    #
+    class IpamPoolSourceResource < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_region,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource used to provision CIDRs to a resource planning pool.
+    #
+    # @!attribute [rw] resource_id
+    #   The source resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The source resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The source resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The source resource owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolSourceResourceRequest AWS API Documentation
+    #
+    class IpamPoolSourceResourceRequest < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_region,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The security group that the resource with the public IP address is in.
+    #
+    # @!attribute [rw] group_name
+    #   The security group's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The security group's ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressSecurityGroup AWS API Documentation
+    #
+    class IpamPublicAddressSecurityGroup < Struct.new(
+      :group_name,
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag for a public IP address discovered by IPAM.
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressTag AWS API Documentation
+    #
+    class IpamPublicAddressTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tags for a public IP address discovered by IPAM.
+    #
+    # @!attribute [rw] eip_tags
+    #   Tags for an Elastic IP address.
+    #   @return [Array<Types::IpamPublicAddressTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressTags AWS API Documentation
+    #
+    class IpamPublicAddressTags < Struct.new(
+      :eip_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43469,6 +44270,17 @@ module Aws::EC2
     #   launch template.
     #   @return [Types::LaunchTemplateEnaSrdSpecification]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
@@ -43492,7 +44304,8 @@ module Aws::EC2
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
       :primary_ipv_6,
-      :ena_srd_specification)
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43628,6 +44441,17 @@ module Aws::EC2
     #   Configure ENA Express settings for your launch template.
     #   @return [Types::EnaSrdSpecificationRequest]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
@@ -43651,7 +44475,8 @@ module Aws::EC2
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
       :primary_ipv_6,
-      :ena_srd_specification)
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46804,6 +47629,17 @@ module Aws::EC2
     #   The operating Regions to remove.
     #   @return [Array<Types::RemoveIpamOperatingRegion>]
     #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamRequest AWS API Documentation
     #
     class ModifyIpamRequest < Struct.new(
@@ -46811,7 +47647,8 @@ module Aws::EC2
       :ipam_id,
       :description,
       :add_operating_regions,
-      :remove_operating_regions)
+      :remove_operating_regions,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47218,6 +48055,10 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A connection tracking specification.
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
@@ -47228,7 +48069,8 @@ module Aws::EC2
       :network_interface_id,
       :source_dest_check,
       :ena_srd_specification,
-      :enable_primary_ipv_6)
+      :enable_primary_ipv_6,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50531,6 +51373,17 @@ module Aws::EC2
     #   The Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] connection_tracking_configuration
+    #   A security group connection tracking configuration that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingConfiguration]
+    #
     # @!attribute [rw] description
     #   A description.
     #   @return [String]
@@ -50638,6 +51491,7 @@ module Aws::EC2
       :association,
       :attachment,
       :availability_zone,
+      :connection_tracking_configuration,
       :description,
       :groups,
       :interface_type,
@@ -52472,6 +53326,48 @@ module Aws::EC2
     #
     class ProvisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_id
+    #   An IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_authorization_context
+    #   An ASN authorization context.
+    #   @return [Types::AsnAuthorizationContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamByoasnRequest AWS API Documentation
+    #
+    class ProvisionIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :asn,
+      :asn_authorization_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasn
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::Byoasn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamByoasnResult AWS API Documentation
+    #
+    class ProvisionIpamByoasnResult < Struct.new(
+      :byoasn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63987,11 +64883,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Currently available in **limited preview only**. If you are interested
-    # in using this feature, contact your account manager.
-    #
-    #  </note>
-    #
     # Information about an association between a branch network interface
     # with a trunk network interface.
     #

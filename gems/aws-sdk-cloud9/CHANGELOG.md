@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-11-17)
+------------------
+
+* Feature - A minor doc only update related to changing the date of an API change.
+
 1.60.0 (2023-10-18)
 ------------------
 

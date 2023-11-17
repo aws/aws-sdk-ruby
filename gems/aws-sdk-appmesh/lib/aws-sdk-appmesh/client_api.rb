@@ -385,7 +385,7 @@ module Aws::AppMesh
     ClientPolicy.struct_class = Types::ClientPolicy
 
     ClientPolicyTls.add_member(:certificate, Shapes::ShapeRef.new(shape: ClientTlsCertificate, location_name: "certificate"))
-    ClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce", metadata: {"box"=>true}))
+    ClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce"))
     ClientPolicyTls.add_member(:ports, Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
     ClientPolicyTls.add_member(:validation, Shapes::ShapeRef.new(shape: TlsValidationContext, required: true, location_name: "validation"))
     ClientPolicyTls.struct_class = Types::ClientPolicyTls
@@ -1325,7 +1325,7 @@ module Aws::AppMesh
     VirtualGatewayClientPolicy.struct_class = Types::VirtualGatewayClientPolicy
 
     VirtualGatewayClientPolicyTls.add_member(:certificate, Shapes::ShapeRef.new(shape: VirtualGatewayClientTlsCertificate, location_name: "certificate"))
-    VirtualGatewayClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce", metadata: {"box"=>true}))
+    VirtualGatewayClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce"))
     VirtualGatewayClientPolicyTls.add_member(:ports, Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
     VirtualGatewayClientPolicyTls.add_member(:validation, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContext, required: true, location_name: "validation"))
     VirtualGatewayClientPolicyTls.struct_class = Types::VirtualGatewayClientPolicyTls
@@ -1375,7 +1375,7 @@ module Aws::AppMesh
     VirtualGatewayHttp2ConnectionPool.struct_class = Types::VirtualGatewayHttp2ConnectionPool
 
     VirtualGatewayHttpConnectionPool.add_member(:max_connections, Shapes::ShapeRef.new(shape: MaxConnections, required: true, location_name: "maxConnections"))
-    VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", metadata: {"box"=>true}))
+    VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests"))
     VirtualGatewayHttpConnectionPool.struct_class = Types::VirtualGatewayHttpConnectionPool
 
     VirtualGatewayList.member = Shapes::ShapeRef.new(shape: VirtualGatewayRef)
@@ -1499,7 +1499,7 @@ module Aws::AppMesh
     VirtualNodeHttp2ConnectionPool.struct_class = Types::VirtualNodeHttp2ConnectionPool
 
     VirtualNodeHttpConnectionPool.add_member(:max_connections, Shapes::ShapeRef.new(shape: MaxConnections, required: true, location_name: "maxConnections"))
-    VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", metadata: {"box"=>true}))
+    VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests"))
     VirtualNodeHttpConnectionPool.struct_class = Types::VirtualNodeHttpConnectionPool
 
     VirtualNodeList.member = Shapes::ShapeRef.new(shape: VirtualNodeRef)

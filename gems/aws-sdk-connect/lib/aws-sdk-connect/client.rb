@@ -944,7 +944,7 @@ module Aws::Connect
     #   resp = client.batch_get_flow_association({
     #     instance_id: "InstanceId", # required
     #     resource_ids: ["ARN"], # required
-    #     resource_type: "SMS_PHONE_NUMBER", # accepts SMS_PHONE_NUMBER, VOICE_PHONE_NUMBER
+    #     resource_type: "VOICE_PHONE_NUMBER", # accepts VOICE_PHONE_NUMBER
     #   })
     #
     # @example Response structure
@@ -952,7 +952,7 @@ module Aws::Connect
     #   resp.flow_association_summary_list #=> Array
     #   resp.flow_association_summary_list[0].resource_id #=> String
     #   resp.flow_association_summary_list[0].flow_id #=> String
-    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "SMS_PHONE_NUMBER", "VOICE_PHONE_NUMBER"
+    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "VOICE_PHONE_NUMBER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociation AWS API Documentation
     #
@@ -1700,7 +1700,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION, FILE_SCANNER
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -8058,7 +8058,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION, FILE_SCANNER
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     next_token: "NextToken",
     #     max_results: 1,
     #     integration_arn: "ARN",
@@ -8070,7 +8070,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -14329,7 +14329,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

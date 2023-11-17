@@ -85,7 +85,8 @@ module Aws::EC2
       data[:placement]
     end
 
-    # The value is `Windows` for Windows instances; otherwise blank.
+    # The platform. This value is `windows` for Windows instances;
+    # otherwise, it is empty.
     # @return [String]
     def platform
       data[:platform]

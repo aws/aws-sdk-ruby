@@ -100,6 +100,8 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::DeleteSchedule.build(context)
           when :delete_tags
             Aws::MediaLive::Endpoints::DeleteTags.build(context)
+          when :describe_account_configuration
+            Aws::MediaLive::Endpoints::DescribeAccountConfiguration.build(context)
           when :describe_channel
             Aws::MediaLive::Endpoints::DescribeChannel.build(context)
           when :describe_input
@@ -120,8 +122,6 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::DescribeReservation.build(context)
           when :describe_schedule
             Aws::MediaLive::Endpoints::DescribeSchedule.build(context)
-          when :describe_account_configuration
-            Aws::MediaLive::Endpoints::DescribeAccountConfiguration.build(context)
           when :describe_thumbnails
             Aws::MediaLive::Endpoints::DescribeThumbnails.build(context)
           when :list_channels
@@ -150,8 +150,6 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::RebootInputDevice.build(context)
           when :reject_input_device_transfer
             Aws::MediaLive::Endpoints::RejectInputDeviceTransfer.build(context)
-          when :update_account_configuration
-            Aws::MediaLive::Endpoints::UpdateAccountConfiguration.build(context)
           when :start_channel
             Aws::MediaLive::Endpoints::StartChannel.build(context)
           when :start_input_device
@@ -168,6 +166,8 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::StopMultiplex.build(context)
           when :transfer_input_device
             Aws::MediaLive::Endpoints::TransferInputDevice.build(context)
+          when :update_account_configuration
+            Aws::MediaLive::Endpoints::UpdateAccountConfiguration.build(context)
           when :update_channel
             Aws::MediaLive::Endpoints::UpdateChannel.build(context)
           when :update_channel_class

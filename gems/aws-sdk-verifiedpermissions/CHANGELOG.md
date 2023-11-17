@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-11-17)
+------------------
+
+* Feature - Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
+
 1.11.0 (2023-10-19)
 ------------------
 

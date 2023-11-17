@@ -289,6 +289,11 @@ module Aws::RedshiftServerless
     #   The name of the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
@@ -306,6 +311,7 @@ module Aws::RedshiftServerless
       :log_exports,
       :manage_admin_password,
       :namespace_name,
+      :redshift_idc_application_arn,
       :tags)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure

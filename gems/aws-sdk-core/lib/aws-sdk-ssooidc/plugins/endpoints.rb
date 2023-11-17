@@ -58,6 +58,8 @@ module Aws::SSOOIDC
           case context.operation_name
           when :create_token
             Aws::SSOOIDC::Endpoints::CreateToken.build(context)
+          when :create_token_with_iam
+            Aws::SSOOIDC::Endpoints::CreateTokenWithIAM.build(context)
           when :register_client
             Aws::SSOOIDC::Endpoints::RegisterClient.build(context)
           when :start_device_authorization

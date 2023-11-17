@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2023-11-17)
+------------------
+
+* Feature - Removes all default 0 values for numbers and false values for booleans
+
 1.136.0 (2023-09-26)
 ------------------
 

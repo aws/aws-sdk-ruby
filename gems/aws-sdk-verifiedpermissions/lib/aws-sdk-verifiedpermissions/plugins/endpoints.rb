@@ -56,6 +56,8 @@ module Aws::VerifiedPermissions
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_is_authorized
+            Aws::VerifiedPermissions::Endpoints::BatchIsAuthorized.build(context)
           when :create_identity_source
             Aws::VerifiedPermissions::Endpoints::CreateIdentitySource.build(context)
           when :create_policy

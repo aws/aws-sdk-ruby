@@ -1350,8 +1350,15 @@ module Aws::KinesisVideo
     # A structure that encapsulates, or contains, the media storage
     # configuration properties.
     #
+    # * If `StorageStatus` is enabled, the data will be stored in the
+    #   `StreamARN` provided. In order for WebRTC Ingestion to work, the
+    #   stream must have data retention enabled.
+    #
+    # * If `StorageStatus` is disabled, no data will be stored, and the
+    #   `StreamARN` parameter will not be needed.
+    #
     # @!attribute [rw] stream_arn
-    #   The Amazon Resource Name (ARN) of the stream
+    #   The Amazon Resource Name (ARN) of the stream.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1932,9 +1939,12 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] data_retention_change_in_hours
-    #   The retention period, in hours. The value you specify replaces the
-    #   current value. The maximum value for this parameter is 87600 (ten
-    #   years).
+    #   The number of hours to adjust the current retention by. The value
+    #   you specify is added to or subtracted from the current value,
+    #   depending on the `operation`.
+    #
+    #   The minimum value for data retention is 0 and the maximum value is
+    #   87600 (ten years).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionInput AWS API Documentation

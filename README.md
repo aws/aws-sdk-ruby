@@ -583,7 +583,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon Lookout for Metrics                            | Aws::LookoutMetrics                      | aws-sdk-lookoutmetrics                      | 2017-07-25  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                    | aws-sdk-lookoutforvision                    | 2020-11-20  |
 | Amazon Machine Learning                               | Aws::MachineLearning                     | aws-sdk-machinelearning                     | 2014-12-12  |
-| Amazon Macie                                          | Aws::Macie                               | aws-sdk-macie                               | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                              | aws-sdk-macie2                              | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain                   | aws-sdk-managedblockchain                   | 2018-09-24  |
 | Amazon Managed Blockchain Query                       | Aws::ManagedBlockchainQuery              | aws-sdk-managedblockchainquery              | 2023-05-04  |
@@ -683,6 +682,7 @@ RubyGems.org page under "LINKS" section.
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
+| TrustedAdvisor Public API                             | Aws::TrustedAdvisor                      | aws-sdk-trustedadvisor                      | 2022-09-15  |
 
 ## License
 

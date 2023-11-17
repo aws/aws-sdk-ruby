@@ -627,6 +627,10 @@ module Aws::RedshiftServerless
     # @option params [required, String] :namespace_name
     #   The name of the namespace.
     #
+    # @option params [String] :redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM Identity
+    #   Center.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
     #
@@ -647,6 +651,7 @@ module Aws::RedshiftServerless
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
     #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
+    #     redshift_idc_application_arn: "RedshiftIdcApplicationArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2978,7 +2983,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

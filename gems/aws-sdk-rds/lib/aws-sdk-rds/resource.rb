@@ -79,6 +79,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",

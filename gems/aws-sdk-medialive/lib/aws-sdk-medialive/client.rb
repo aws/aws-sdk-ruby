@@ -664,6 +664,28 @@ module Aws::MediaLive
     #               fade_out: 1,
     #               layer: 1,
     #             },
+    #             static_image_output_activate_settings: {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image: { # required
+    #                 password_param: "__string",
+    #                 uri: "__stringMax2048", # required
+    #                 username: "__string",
+    #               },
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               output_names: ["__string"], # required
+    #               width: 1,
+    #             },
+    #             static_image_output_deactivate_settings: {
+    #               fade_out: 1,
+    #               layer: 1,
+    #               output_names: ["__string"], # required
+    #             },
     #           },
     #           schedule_action_start_settings: { # required
     #             fixed_mode_schedule_action_start_settings: {
@@ -745,6 +767,24 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_in #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.height #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.password_param #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.uri #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.username #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_x #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_y #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.opacity #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names[0] #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.width #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -807,6 +847,24 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_in #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.height #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.password_param #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.uri #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.username #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_x #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_y #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.opacity #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names[0] #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.width #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -1077,6 +1135,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -2176,6 +2235,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -2948,6 +3008,25 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Describe account configuration
+    #
+    # @return [Types::DescribeAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.account_configuration.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfiguration AWS API Documentation
+    #
+    # @overload describe_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_account_configuration(params = {}, options = {})
+      req = build_request(:describe_account_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets details about a channel
     #
     # @option params [required, String] :channel_id
@@ -3148,6 +3227,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -4229,6 +4309,24 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_in #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.height #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.password_param #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.uri #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image.username #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_x #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.image_y #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.opacity #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.output_names[0] #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_activate_settings.width #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
     #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -4239,25 +4337,6 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def describe_schedule(params = {}, options = {})
       req = build_request(:describe_schedule, params)
-      req.send_request(options)
-    end
-
-    # Get account configuration
-    #
-    # @return [Types::DescribeAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
-    #
-    # @example Response structure
-    #
-    #   resp.account_configuration.kms_key_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfiguration AWS API Documentation
-    #
-    # @overload describe_account_configuration(params = {})
-    # @param [Hash] params ({})
-    def describe_account_configuration(params = {}, options = {})
-      req = build_request(:describe_account_configuration, params)
       req.send_request(options)
     end
 
@@ -5070,35 +5149,6 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
-    # Update account configuration
-    #
-    # @option params [Types::AccountConfiguration] :account_configuration
-    #
-    # @return [Types::UpdateAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_account_configuration({
-    #     account_configuration: {
-    #       kms_key_id: "__string",
-    #     },
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.account_configuration.kms_key_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfiguration AWS API Documentation
-    #
-    # @overload update_account_configuration(params = {})
-    # @param [Hash] params ({})
-    def update_account_configuration(params = {}, options = {})
-      req = build_request(:update_account_configuration, params)
-      req.send_request(options)
-    end
-
     # Starts an existing channel
     #
     # @option params [required, String] :channel_id
@@ -5299,6 +5349,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -6102,6 +6153,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -6707,6 +6759,35 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Update account configuration
+    #
+    # @option params [Types::AccountConfiguration] :account_configuration
+    #
+    # @return [Types::UpdateAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_configuration({
+    #     account_configuration: {
+    #       kms_key_id: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_configuration.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfiguration AWS API Documentation
+    #
+    # @overload update_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_account_configuration(params = {}, options = {})
+      req = build_request(:update_account_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a channel.
     #
     # @option params [Types::CdiInputSpecification] :cdi_input_specification
@@ -6904,6 +6985,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -7615,6 +7697,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
     #   resp.channel.encoder_settings.global_configuration.input_end_action #=> String, one of "NONE", "SWITCH_AND_LOOP_INPUTS"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.black_frame_msec #=> Integer
@@ -8586,7 +8669,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

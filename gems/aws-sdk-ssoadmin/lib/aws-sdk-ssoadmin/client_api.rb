@@ -240,6 +240,7 @@ module Aws::SSOAdmin
     PutPermissionsBoundaryToPermissionSetResponse = Shapes::StructureShape.new(name: 'PutPermissionsBoundaryToPermissionSetResponse')
     Reason = Shapes::StringShape.new(name: 'Reason')
     RedirectUris = Shapes::ListShape.new(name: 'RedirectUris')
+    RefreshTokenGrant = Shapes::StructureShape.new(name: 'RefreshTokenGrant')
     RelayState = Shapes::StringShape.new(name: 'RelayState')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotFoundMessage = Shapes::StringShape.new(name: 'ResourceNotFoundMessage')
@@ -270,6 +271,7 @@ module Aws::SSOAdmin
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThrottlingExceptionMessage = Shapes::StringShape.new(name: 'ThrottlingExceptionMessage')
     Token = Shapes::StringShape.new(name: 'Token')
+    TokenExchangeGrant = Shapes::StructureShape.new(name: 'TokenExchangeGrant')
     TokenIssuerAudience = Shapes::StringShape.new(name: 'TokenIssuerAudience')
     TokenIssuerAudiences = Shapes::ListShape.new(name: 'TokenIssuerAudiences')
     TrustedTokenIssuerArn = Shapes::StringShape.new(name: 'TrustedTokenIssuerArn')
@@ -720,9 +722,13 @@ module Aws::SSOAdmin
 
     Grant.add_member(:authorization_code, Shapes::ShapeRef.new(shape: AuthorizationCodeGrant, location_name: "AuthorizationCode"))
     Grant.add_member(:jwt_bearer, Shapes::ShapeRef.new(shape: JwtBearerGrant, location_name: "JwtBearer"))
+    Grant.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshTokenGrant, location_name: "RefreshToken"))
+    Grant.add_member(:token_exchange, Shapes::ShapeRef.new(shape: TokenExchangeGrant, location_name: "TokenExchange"))
     Grant.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Grant.add_member_subclass(:authorization_code, Types::Grant::AuthorizationCode)
     Grant.add_member_subclass(:jwt_bearer, Types::Grant::JwtBearer)
+    Grant.add_member_subclass(:refresh_token, Types::Grant::RefreshToken)
+    Grant.add_member_subclass(:token_exchange, Types::Grant::TokenExchange)
     Grant.add_member_subclass(:unknown, Types::Grant::Unknown)
     Grant.struct_class = Types::Grant
 
@@ -1051,6 +1057,8 @@ module Aws::SSOAdmin
 
     RedirectUris.member = Shapes::ShapeRef.new(shape: URI)
 
+    RefreshTokenGrant.struct_class = Types::RefreshTokenGrant
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ResourceNotFoundMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -1096,6 +1104,8 @@ module Aws::SSOAdmin
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ThrottlingExceptionMessage, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TokenExchangeGrant.struct_class = Types::TokenExchangeGrant
 
     TokenIssuerAudiences.member = Shapes::ShapeRef.new(shape: TokenIssuerAudience)
 

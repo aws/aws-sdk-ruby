@@ -6313,6 +6313,10 @@ module Aws::RDS
     #   with this DB cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] status_infos
+    #   Reserved for future use.
+    #   @return [Array<Types::DBClusterStatusInfo>]
+    #
     # @!attribute [rw] db_cluster_members
     #   The list of DB instances that make up the DB cluster.
     #   @return [Array<Types::DBClusterMember>]
@@ -6711,6 +6715,7 @@ module Aws::RDS
       :preferred_maintenance_window,
       :replication_source_identifier,
       :read_replica_identifiers,
+      :status_infos,
       :db_cluster_members,
       :vpc_security_groups,
       :hosted_zone_id,
@@ -7728,6 +7733,35 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
     #
     class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] status_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] normal
+    #   Reserved for future use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterStatusInfo AWS API Documentation
+    #
+    class DBClusterStatusInfo < Struct.new(
+      :status_type,
+      :normal,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
@@ -19906,11 +19940,16 @@ module Aws::RDS
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] replica_mode
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RdsCustomClusterConfiguration AWS API Documentation
     #
     class RdsCustomClusterConfiguration < Struct.new(
       :interconnect_subnet_id,
-      :transit_gateway_multicast_domain_id)
+      :transit_gateway_multicast_domain_id,
+      :replica_mode)
       SENSITIVE = []
       include Aws::Structure
     end

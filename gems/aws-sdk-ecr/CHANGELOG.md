@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-11-17)
+------------------
+
+* Feature - Documentation and operational updates for Amazon ECR, adding support for pull through cache rules for upstream registries that require authentication.
+
 1.65.0 (2023-09-27)
 ------------------
 

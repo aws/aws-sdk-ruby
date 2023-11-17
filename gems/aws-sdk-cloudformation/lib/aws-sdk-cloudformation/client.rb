@@ -916,8 +916,8 @@ module Aws::CloudFormation
     #   grants permissions to all resource types. Identity and Access
     #   Management (IAM) uses this parameter for condition keys in IAM
     #   policies for CloudFormation. For more information, see [Controlling
-    #   access with Identity and Access Management][1] in the CloudFormation
-    #   User Guide.
+    #   access with Identity and Access Management][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -1030,6 +1030,23 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #
+    # @option params [Boolean] :import_existing_resources
+    #   Indicates if the stack set imports resources that already exist.
+    #
+    #   <note markdown="1"> This parameter can only import resources that have custom names in
+    #   templates. For more information, see [name type][1] in the
+    #   *CloudFormation User Guide*. To import resources that do not accept
+    #   custom names, such as EC2 instances, use the resource import feature
+    #   instead. For more information, see [Bringing existing resources into
+    #   CloudFormation management][2] in the *CloudFormation User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #
     # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChangeSetOutput#id #id} => String
@@ -1084,6 +1101,7 @@ module Aws::CloudFormation
     #     ],
     #     include_nested_stacks: false,
     #     on_stack_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
+    #     import_existing_resources: false,
     #   })
     #
     # @example Response structure
@@ -1117,7 +1135,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1130,7 +1148,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -2315,7 +2333,7 @@ module Aws::CloudFormation
     # Returns the inputs for the change set and a list of changes that
     # CloudFormation will make if you execute the change set. For more
     # information, see [Updating Stacks Using Change Sets][1] in the
-    # CloudFormation User Guide.
+    # *CloudFormation User Guide*.
     #
     #
     #
@@ -2355,6 +2373,7 @@ module Aws::CloudFormation
     #   * {Types::DescribeChangeSetOutput#parent_change_set_id #parent_change_set_id} => String
     #   * {Types::DescribeChangeSetOutput#root_change_set_id #root_change_set_id} => String
     #   * {Types::DescribeChangeSetOutput#on_stack_failure #on_stack_failure} => String
+    #   * {Types::DescribeChangeSetOutput#import_existing_resources #import_existing_resources} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2416,6 +2435,7 @@ module Aws::CloudFormation
     #   resp.parent_change_set_id #=> String
     #   resp.root_change_set_id #=> String
     #   resp.on_stack_failure #=> String, one of "DO_NOTHING", "ROLLBACK", "DELETE"
+    #   resp.import_existing_resources #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2667,7 +2687,7 @@ module Aws::CloudFormation
 
     # Returns all stack related events for a specified stack in reverse
     # chronological order. For more information about a stack's event
-    # history, go to [Stacks][1] in the CloudFormation User Guide.
+    # history, go to [Stacks][1] in the *CloudFormation User Guide*.
     #
     # <note markdown="1"> You can list events for stacks that have failed to create or have been
     # deleted by specifying the unique stack identifier (stack ID).
@@ -3799,7 +3819,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3812,7 +3832,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   CloudFormation User Guide.
+    #   *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -4046,7 +4066,8 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information about
-    #   templates, see [Template anatomy][1] in the CloudFormation User Guide.
+    #   templates, see [Template anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -4059,7 +4080,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information about
-    #   templates, see [Template anatomy][1] in the CloudFormation User Guide.
+    #   templates, see [Template anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -4301,6 +4323,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].include_nested_stacks #=> Boolean
     #   resp.summaries[0].parent_change_set_id #=> String
     #   resp.summaries[0].root_change_set_id #=> String
+    #   resp.summaries[0].import_existing_resources #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets AWS API Documentation
@@ -5766,8 +5789,8 @@ module Aws::CloudFormation
     #
     # @option params [String] :stack_policy_body
     #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent updates to stack resources][1] in the CloudFormation User
-    #   Guide. You can specify either the `StackPolicyBody` or the
+    #   to [ Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -6171,7 +6194,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -6185,7 +6208,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   CloudFormation User Guide.
+    #   *CloudFormation User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -7125,7 +7148,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -7138,7 +7161,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -7198,7 +7221,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

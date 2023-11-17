@@ -110,6 +110,11 @@ module Aws::EC2
     ArchitectureTypeSet = Shapes::ListShape.new(name: 'ArchitectureTypeSet')
     ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AsnAssociation = Shapes::StructureShape.new(name: 'AsnAssociation')
+    AsnAssociationSet = Shapes::ListShape.new(name: 'AsnAssociationSet')
+    AsnAssociationState = Shapes::StringShape.new(name: 'AsnAssociationState')
+    AsnAuthorizationContext = Shapes::StructureShape.new(name: 'AsnAuthorizationContext')
+    AsnState = Shapes::StringShape.new(name: 'AsnState')
     AssetId = Shapes::StringShape.new(name: 'AssetId')
     AssetIdList = Shapes::ListShape.new(name: 'AssetIdList')
     AssignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'AssignIpv6AddressesRequest')
@@ -131,6 +136,8 @@ module Aws::EC2
     AssociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileResult')
     AssociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowRequest')
     AssociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'AssociateInstanceEventWindowResult')
+    AssociateIpamByoasnRequest = Shapes::StructureShape.new(name: 'AssociateIpamByoasnRequest')
+    AssociateIpamByoasnResult = Shapes::StructureShape.new(name: 'AssociateIpamByoasnResult')
     AssociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryRequest')
     AssociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryResult')
     AssociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressRequest')
@@ -228,6 +235,8 @@ module Aws::EC2
     BundleTaskState = Shapes::StringShape.new(name: 'BundleTaskState')
     BurstablePerformance = Shapes::StringShape.new(name: 'BurstablePerformance')
     BurstablePerformanceFlag = Shapes::BooleanShape.new(name: 'BurstablePerformanceFlag')
+    Byoasn = Shapes::StructureShape.new(name: 'Byoasn')
+    ByoasnSet = Shapes::ListShape.new(name: 'ByoasnSet')
     ByoipCidr = Shapes::StructureShape.new(name: 'ByoipCidr')
     ByoipCidrSet = Shapes::ListShape.new(name: 'ByoipCidrSet')
     ByoipCidrState = Shapes::StringShape.new(name: 'ByoipCidrState')
@@ -363,6 +372,10 @@ module Aws::EC2
     ConnectionNotificationSet = Shapes::ListShape.new(name: 'ConnectionNotificationSet')
     ConnectionNotificationState = Shapes::StringShape.new(name: 'ConnectionNotificationState')
     ConnectionNotificationType = Shapes::StringShape.new(name: 'ConnectionNotificationType')
+    ConnectionTrackingConfiguration = Shapes::StructureShape.new(name: 'ConnectionTrackingConfiguration')
+    ConnectionTrackingSpecification = Shapes::StructureShape.new(name: 'ConnectionTrackingSpecification')
+    ConnectionTrackingSpecificationRequest = Shapes::StructureShape.new(name: 'ConnectionTrackingSpecificationRequest')
+    ConnectionTrackingSpecificationResponse = Shapes::StructureShape.new(name: 'ConnectionTrackingSpecificationResponse')
     ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
     ContainerFormat = Shapes::StringShape.new(name: 'ContainerFormat')
     ConversionIdStringList = Shapes::ListShape.new(name: 'ConversionIdStringList')
@@ -728,6 +741,8 @@ module Aws::EC2
     DeleteVpnGatewayRequest = Shapes::StructureShape.new(name: 'DeleteVpnGatewayRequest')
     DeprovisionByoipCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrRequest')
     DeprovisionByoipCidrResult = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrResult')
+    DeprovisionIpamByoasnRequest = Shapes::StructureShape.new(name: 'DeprovisionIpamByoasnRequest')
+    DeprovisionIpamByoasnResult = Shapes::StructureShape.new(name: 'DeprovisionIpamByoasnResult')
     DeprovisionIpamPoolCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionIpamPoolCidrRequest')
     DeprovisionIpamPoolCidrResult = Shapes::StructureShape.new(name: 'DeprovisionIpamPoolCidrResult')
     DeprovisionPublicIpv4PoolCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionPublicIpv4PoolCidrRequest')
@@ -885,6 +900,9 @@ module Aws::EC2
     DescribeInternetGatewaysMaxResults = Shapes::IntegerShape.new(name: 'DescribeInternetGatewaysMaxResults')
     DescribeInternetGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeInternetGatewaysRequest')
     DescribeInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeInternetGatewaysResult')
+    DescribeIpamByoasnMaxResults = Shapes::IntegerShape.new(name: 'DescribeIpamByoasnMaxResults')
+    DescribeIpamByoasnRequest = Shapes::StructureShape.new(name: 'DescribeIpamByoasnRequest')
+    DescribeIpamByoasnResult = Shapes::StructureShape.new(name: 'DescribeIpamByoasnResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
     DescribeIpamResourceDiscoveriesRequest = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveriesRequest')
@@ -1167,6 +1185,8 @@ module Aws::EC2
     DisassociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileResult')
     DisassociateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowRequest')
     DisassociateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DisassociateInstanceEventWindowResult')
+    DisassociateIpamByoasnRequest = Shapes::StructureShape.new(name: 'DisassociateIpamByoasnRequest')
+    DisassociateIpamByoasnResult = Shapes::StructureShape.new(name: 'DisassociateIpamByoasnResult')
     DisassociateIpamResourceDiscoveryRequest = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryRequest')
     DisassociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryResult')
     DisassociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressRequest')
@@ -1445,6 +1465,8 @@ module Aws::EC2
     GetIpamAddressHistoryResult = Shapes::StructureShape.new(name: 'GetIpamAddressHistoryResult')
     GetIpamDiscoveredAccountsRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredAccountsRequest')
     GetIpamDiscoveredAccountsResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredAccountsResult')
+    GetIpamDiscoveredPublicAddressesRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredPublicAddressesRequest')
+    GetIpamDiscoveredPublicAddressesResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredPublicAddressesResult')
     GetIpamDiscoveredResourceCidrsRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsRequest')
     GetIpamDiscoveredResourceCidrsResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsResult')
     GetIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'GetIpamPoolAllocationsMaxResults')
@@ -1760,6 +1782,8 @@ module Aws::EC2
     IpamComplianceStatus = Shapes::StringShape.new(name: 'IpamComplianceStatus')
     IpamDiscoveredAccount = Shapes::StructureShape.new(name: 'IpamDiscoveredAccount')
     IpamDiscoveredAccountSet = Shapes::ListShape.new(name: 'IpamDiscoveredAccountSet')
+    IpamDiscoveredPublicAddress = Shapes::StructureShape.new(name: 'IpamDiscoveredPublicAddress')
+    IpamDiscoveredPublicAddressSet = Shapes::ListShape.new(name: 'IpamDiscoveredPublicAddressSet')
     IpamDiscoveredResourceCidr = Shapes::StructureShape.new(name: 'IpamDiscoveredResourceCidr')
     IpamDiscoveredResourceCidrSet = Shapes::ListShape.new(name: 'IpamDiscoveredResourceCidrSet')
     IpamDiscoveryFailureCode = Shapes::StringShape.new(name: 'IpamDiscoveryFailureCode')
@@ -1773,6 +1797,7 @@ module Aws::EC2
     IpamOverlapStatus = Shapes::StringShape.new(name: 'IpamOverlapStatus')
     IpamPool = Shapes::StructureShape.new(name: 'IpamPool')
     IpamPoolAllocation = Shapes::StructureShape.new(name: 'IpamPoolAllocation')
+    IpamPoolAllocationAllowedCidrs = Shapes::ListShape.new(name: 'IpamPoolAllocationAllowedCidrs')
     IpamPoolAllocationDisallowedCidrs = Shapes::ListShape.new(name: 'IpamPoolAllocationDisallowedCidrs')
     IpamPoolAllocationId = Shapes::StringShape.new(name: 'IpamPoolAllocationId')
     IpamPoolAllocationResourceType = Shapes::StringShape.new(name: 'IpamPoolAllocationResourceType')
@@ -1787,7 +1812,18 @@ module Aws::EC2
     IpamPoolId = Shapes::StringShape.new(name: 'IpamPoolId')
     IpamPoolPublicIpSource = Shapes::StringShape.new(name: 'IpamPoolPublicIpSource')
     IpamPoolSet = Shapes::ListShape.new(name: 'IpamPoolSet')
+    IpamPoolSourceResource = Shapes::StructureShape.new(name: 'IpamPoolSourceResource')
+    IpamPoolSourceResourceRequest = Shapes::StructureShape.new(name: 'IpamPoolSourceResourceRequest')
+    IpamPoolSourceResourceType = Shapes::StringShape.new(name: 'IpamPoolSourceResourceType')
     IpamPoolState = Shapes::StringShape.new(name: 'IpamPoolState')
+    IpamPublicAddressAssociationStatus = Shapes::StringShape.new(name: 'IpamPublicAddressAssociationStatus')
+    IpamPublicAddressAwsService = Shapes::StringShape.new(name: 'IpamPublicAddressAwsService')
+    IpamPublicAddressSecurityGroup = Shapes::StructureShape.new(name: 'IpamPublicAddressSecurityGroup')
+    IpamPublicAddressSecurityGroupList = Shapes::ListShape.new(name: 'IpamPublicAddressSecurityGroupList')
+    IpamPublicAddressTag = Shapes::StructureShape.new(name: 'IpamPublicAddressTag')
+    IpamPublicAddressTagList = Shapes::ListShape.new(name: 'IpamPublicAddressTagList')
+    IpamPublicAddressTags = Shapes::StructureShape.new(name: 'IpamPublicAddressTags')
+    IpamPublicAddressType = Shapes::StringShape.new(name: 'IpamPublicAddressType')
     IpamResourceCidr = Shapes::StructureShape.new(name: 'IpamResourceCidr')
     IpamResourceCidrSet = Shapes::ListShape.new(name: 'IpamResourceCidrSet')
     IpamResourceDiscovery = Shapes::StructureShape.new(name: 'IpamResourceDiscovery')
@@ -1808,6 +1844,7 @@ module Aws::EC2
     IpamScopeType = Shapes::StringShape.new(name: 'IpamScopeType')
     IpamSet = Shapes::ListShape.new(name: 'IpamSet')
     IpamState = Shapes::StringShape.new(name: 'IpamState')
+    IpamTier = Shapes::StringShape.new(name: 'IpamTier')
     Ipv4PoolCoipId = Shapes::StringShape.new(name: 'Ipv4PoolCoipId')
     Ipv4PoolEc2Id = Shapes::StringShape.new(name: 'Ipv4PoolEc2Id')
     Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
@@ -2359,6 +2396,8 @@ module Aws::EC2
     ProtocolValue = Shapes::StringShape.new(name: 'ProtocolValue')
     ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
     ProvisionByoipCidrResult = Shapes::StructureShape.new(name: 'ProvisionByoipCidrResult')
+    ProvisionIpamByoasnRequest = Shapes::StructureShape.new(name: 'ProvisionIpamByoasnRequest')
+    ProvisionIpamByoasnResult = Shapes::StructureShape.new(name: 'ProvisionIpamByoasnResult')
     ProvisionIpamPoolCidrRequest = Shapes::StructureShape.new(name: 'ProvisionIpamPoolCidrRequest')
     ProvisionIpamPoolCidrResult = Shapes::StructureShape.new(name: 'ProvisionIpamPoolCidrResult')
     ProvisionPublicIpv4PoolCidrRequest = Shapes::StructureShape.new(name: 'ProvisionPublicIpv4PoolCidrRequest')
@@ -3295,6 +3334,7 @@ module Aws::EC2
     AddressTransferList.member = Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "item")
 
     AdvertiseByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    AdvertiseByoipCidrRequest.add_member(:asn, Shapes::ShapeRef.new(shape: String, location_name: "Asn"))
     AdvertiseByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AdvertiseByoipCidrRequest.struct_class = Types::AdvertiseByoipCidrRequest
 
@@ -3343,6 +3383,7 @@ module Aws::EC2
     AllocateIpamPoolCidrRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     AllocateIpamPoolCidrRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     AllocateIpamPoolCidrRequest.add_member(:preview_next_cidr, Shapes::ShapeRef.new(shape: Boolean, location_name: "PreviewNextCidr"))
+    AllocateIpamPoolCidrRequest.add_member(:allowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationAllowedCidrs, location_name: "AllowedCidr"))
     AllocateIpamPoolCidrRequest.add_member(:disallowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationDisallowedCidrs, location_name: "DisallowedCidr"))
     AllocateIpamPoolCidrRequest.struct_class = Types::AllocateIpamPoolCidrRequest
 
@@ -3441,6 +3482,18 @@ module Aws::EC2
 
     ArnList.member = Shapes::ShapeRef.new(shape: ResourceArn, location_name: "item")
 
+    AsnAssociation.add_member(:asn, Shapes::ShapeRef.new(shape: String, location_name: "asn"))
+    AsnAssociation.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
+    AsnAssociation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    AsnAssociation.add_member(:state, Shapes::ShapeRef.new(shape: AsnAssociationState, location_name: "state"))
+    AsnAssociation.struct_class = Types::AsnAssociation
+
+    AsnAssociationSet.member = Shapes::ShapeRef.new(shape: AsnAssociation, location_name: "item")
+
+    AsnAuthorizationContext.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    AsnAuthorizationContext.add_member(:signature, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Signature"))
+    AsnAuthorizationContext.struct_class = Types::AsnAuthorizationContext
+
     AssetIdList.member = Shapes::ShapeRef.new(shape: AssetId)
 
     AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
@@ -3535,6 +3588,14 @@ module Aws::EC2
     AssociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
     AssociateInstanceEventWindowResult.struct_class = Types::AssociateInstanceEventWindowResult
 
+    AssociateIpamByoasnRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateIpamByoasnRequest.add_member(:asn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Asn"))
+    AssociateIpamByoasnRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    AssociateIpamByoasnRequest.struct_class = Types::AssociateIpamByoasnRequest
+
+    AssociateIpamByoasnResult.add_member(:asn_association, Shapes::ShapeRef.new(shape: AsnAssociation, location_name: "asnAssociation"))
+    AssociateIpamByoasnResult.struct_class = Types::AssociateIpamByoasnResult
+
     AssociateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AssociateIpamResourceDiscoveryRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
     AssociateIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
@@ -3565,8 +3626,10 @@ module Aws::EC2
     AssociateRouteTableResult.add_member(:association_state, Shapes::ShapeRef.new(shape: RouteTableAssociationState, location_name: "associationState"))
     AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
 
-    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
+    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
     AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
+    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv6IpamPoolId"))
+    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_netmask_length, Shapes::ShapeRef.new(shape: NetmaskLength, location_name: "Ipv6NetmaskLength"))
     AssociateSubnetCidrBlockRequest.struct_class = Types::AssociateSubnetCidrBlockRequest
 
     AssociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
@@ -3852,8 +3915,17 @@ module Aws::EC2
 
     BundleTaskList.member = Shapes::ShapeRef.new(shape: BundleTask, location_name: "item")
 
+    Byoasn.add_member(:asn, Shapes::ShapeRef.new(shape: String, location_name: "asn"))
+    Byoasn.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, location_name: "ipamId"))
+    Byoasn.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    Byoasn.add_member(:state, Shapes::ShapeRef.new(shape: AsnState, location_name: "state"))
+    Byoasn.struct_class = Types::Byoasn
+
+    ByoasnSet.member = Shapes::ShapeRef.new(shape: Byoasn, location_name: "item")
+
     ByoipCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
     ByoipCidr.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ByoipCidr.add_member(:asn_associations, Shapes::ShapeRef.new(shape: AsnAssociationSet, location_name: "asnAssociationSet"))
     ByoipCidr.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ByoipCidr.add_member(:state, Shapes::ShapeRef.new(shape: ByoipCidrState, location_name: "state"))
     ByoipCidr.struct_class = Types::ByoipCidr
@@ -4294,6 +4366,26 @@ module Aws::EC2
 
     ConnectionNotificationSet.member = Shapes::ShapeRef.new(shape: ConnectionNotification, location_name: "item")
 
+    ConnectionTrackingConfiguration.add_member(:tcp_established_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "tcpEstablishedTimeout"))
+    ConnectionTrackingConfiguration.add_member(:udp_stream_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpStreamTimeout"))
+    ConnectionTrackingConfiguration.add_member(:udp_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpTimeout"))
+    ConnectionTrackingConfiguration.struct_class = Types::ConnectionTrackingConfiguration
+
+    ConnectionTrackingSpecification.add_member(:tcp_established_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "tcpEstablishedTimeout"))
+    ConnectionTrackingSpecification.add_member(:udp_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpTimeout"))
+    ConnectionTrackingSpecification.add_member(:udp_stream_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpStreamTimeout"))
+    ConnectionTrackingSpecification.struct_class = Types::ConnectionTrackingSpecification
+
+    ConnectionTrackingSpecificationRequest.add_member(:tcp_established_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "TcpEstablishedTimeout"))
+    ConnectionTrackingSpecificationRequest.add_member(:udp_stream_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "UdpStreamTimeout"))
+    ConnectionTrackingSpecificationRequest.add_member(:udp_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "UdpTimeout"))
+    ConnectionTrackingSpecificationRequest.struct_class = Types::ConnectionTrackingSpecificationRequest
+
+    ConnectionTrackingSpecificationResponse.add_member(:tcp_established_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "tcpEstablishedTimeout"))
+    ConnectionTrackingSpecificationResponse.add_member(:udp_stream_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpStreamTimeout"))
+    ConnectionTrackingSpecificationResponse.add_member(:udp_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "udpTimeout"))
+    ConnectionTrackingSpecificationResponse.struct_class = Types::ConnectionTrackingSpecificationResponse
+
     ConversionIdStringList.member = Shapes::ShapeRef.new(shape: ConversionTaskId, location_name: "item")
 
     ConversionTask.add_member(:conversion_task_id, Shapes::ShapeRef.new(shape: String, location_name: "conversionTaskId"))
@@ -4651,6 +4743,7 @@ module Aws::EC2
     CreateIpamPoolRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIpamPoolRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: IpamPoolAwsService, location_name: "AwsService"))
     CreateIpamPoolRequest.add_member(:public_ip_source, Shapes::ShapeRef.new(shape: IpamPoolPublicIpSource, location_name: "PublicIpSource"))
+    CreateIpamPoolRequest.add_member(:source_resource, Shapes::ShapeRef.new(shape: IpamPoolSourceResourceRequest, location_name: "SourceResource"))
     CreateIpamPoolRequest.struct_class = Types::CreateIpamPoolRequest
 
     CreateIpamPoolResult.add_member(:ipam_pool, Shapes::ShapeRef.new(shape: IpamPool, location_name: "ipamPool"))
@@ -4661,6 +4754,7 @@ module Aws::EC2
     CreateIpamRequest.add_member(:operating_regions, Shapes::ShapeRef.new(shape: AddIpamOperatingRegionSet, location_name: "OperatingRegion"))
     CreateIpamRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateIpamRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIpamRequest.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "Tier"))
     CreateIpamRequest.struct_class = Types::CreateIpamRequest
 
     CreateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4859,6 +4953,7 @@ module Aws::EC2
     CreateNetworkInterfaceRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNetworkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateNetworkInterfaceRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
+    CreateNetworkInterfaceRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
     CreateNetworkInterfaceRequest.struct_class = Types::CreateNetworkInterfaceRequest
 
     CreateNetworkInterfaceResult.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
@@ -5009,6 +5104,10 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
+    CreateSubnetRequest.add_member(:ipv_4_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv4IpamPoolId"))
+    CreateSubnetRequest.add_member(:ipv_4_netmask_length, Shapes::ShapeRef.new(shape: NetmaskLength, location_name: "Ipv4NetmaskLength"))
+    CreateSubnetRequest.add_member(:ipv_6_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv6IpamPoolId"))
+    CreateSubnetRequest.add_member(:ipv_6_netmask_length, Shapes::ShapeRef.new(shape: NetmaskLength, location_name: "Ipv6NetmaskLength"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -5565,6 +5664,7 @@ module Aws::EC2
 
     DeleteIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
+    DeleteIpamPoolRequest.add_member(:cascade, Shapes::ShapeRef.new(shape: Boolean, location_name: "Cascade"))
     DeleteIpamPoolRequest.struct_class = Types::DeleteIpamPoolRequest
 
     DeleteIpamPoolResult.add_member(:ipam_pool, Shapes::ShapeRef.new(shape: IpamPool, location_name: "ipamPool"))
@@ -5985,6 +6085,14 @@ module Aws::EC2
 
     DeprovisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     DeprovisionByoipCidrResult.struct_class = Types::DeprovisionByoipCidrResult
+
+    DeprovisionIpamByoasnRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeprovisionIpamByoasnRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    DeprovisionIpamByoasnRequest.add_member(:asn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Asn"))
+    DeprovisionIpamByoasnRequest.struct_class = Types::DeprovisionIpamByoasnRequest
+
+    DeprovisionIpamByoasnResult.add_member(:byoasn, Shapes::ShapeRef.new(shape: Byoasn, location_name: "byoasn"))
+    DeprovisionIpamByoasnResult.struct_class = Types::DeprovisionIpamByoasnResult
 
     DeprovisionIpamPoolCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeprovisionIpamPoolCidrRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -6660,6 +6768,15 @@ module Aws::EC2
     DescribeInternetGatewaysResult.add_member(:internet_gateways, Shapes::ShapeRef.new(shape: InternetGatewayList, location_name: "internetGatewaySet"))
     DescribeInternetGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInternetGatewaysResult.struct_class = Types::DescribeInternetGatewaysResult
+
+    DescribeIpamByoasnRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamByoasnRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeIpamByoasnMaxResults, location_name: "MaxResults"))
+    DescribeIpamByoasnRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamByoasnRequest.struct_class = Types::DescribeIpamByoasnRequest
+
+    DescribeIpamByoasnResult.add_member(:byoasns, Shapes::ShapeRef.new(shape: ByoasnSet, location_name: "byoasnSet"))
+    DescribeIpamByoasnResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeIpamByoasnResult.struct_class = Types::DescribeIpamByoasnResult
 
     DescribeIpamPoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamPoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -7933,6 +8050,14 @@ module Aws::EC2
     DisassociateInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
     DisassociateInstanceEventWindowResult.struct_class = Types::DisassociateInstanceEventWindowResult
 
+    DisassociateIpamByoasnRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateIpamByoasnRequest.add_member(:asn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Asn"))
+    DisassociateIpamByoasnRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    DisassociateIpamByoasnRequest.struct_class = Types::DisassociateIpamByoasnRequest
+
+    DisassociateIpamByoasnResult.add_member(:asn_association, Shapes::ShapeRef.new(shape: AsnAssociation, location_name: "asnAssociation"))
+    DisassociateIpamByoasnResult.struct_class = Types::DisassociateIpamByoasnResult
+
     DisassociateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisassociateIpamResourceDiscoveryRequest.add_member(:ipam_resource_discovery_association_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationId, required: true, location_name: "IpamResourceDiscoveryAssociationId"))
     DisassociateIpamResourceDiscoveryRequest.struct_class = Types::DisassociateIpamResourceDiscoveryRequest
@@ -8932,6 +9057,19 @@ module Aws::EC2
     GetIpamDiscoveredAccountsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetIpamDiscoveredAccountsResult.struct_class = Types::GetIpamDiscoveredAccountsResult
 
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:address_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AddressRegion"))
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetIpamDiscoveredPublicAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    GetIpamDiscoveredPublicAddressesRequest.struct_class = Types::GetIpamDiscoveredPublicAddressesRequest
+
+    GetIpamDiscoveredPublicAddressesResult.add_member(:ipam_discovered_public_addresses, Shapes::ShapeRef.new(shape: IpamDiscoveredPublicAddressSet, location_name: "ipamDiscoveredPublicAddressSet"))
+    GetIpamDiscoveredPublicAddressesResult.add_member(:oldest_sample_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "oldestSampleTime"))
+    GetIpamDiscoveredPublicAddressesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIpamDiscoveredPublicAddressesResult.struct_class = Types::GetIpamDiscoveredPublicAddressesResult
+
     GetIpamDiscoveredResourceCidrsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetIpamDiscoveredResourceCidrsRequest.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, required: true, location_name: "IpamResourceDiscoveryId"))
     GetIpamDiscoveredResourceCidrsRequest.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceRegion"))
@@ -9909,6 +10047,7 @@ module Aws::EC2
     InstanceNetworkInterface.add_member(:interface_type, Shapes::ShapeRef.new(shape: String, location_name: "interfaceType"))
     InstanceNetworkInterface.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv4PrefixList, location_name: "ipv4PrefixSet"))
     InstanceNetworkInterface.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv6PrefixList, location_name: "ipv6PrefixSet"))
+    InstanceNetworkInterface.add_member(:connection_tracking_configuration, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationResponse, location_name: "connectionTrackingConfiguration"))
     InstanceNetworkInterface.struct_class = Types::InstanceNetworkInterface
 
     InstanceNetworkInterfaceAssociation.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
@@ -9950,6 +10089,7 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     InstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
     InstanceNetworkInterfaceSpecification.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecificationRequest, location_name: "EnaSrdSpecification"))
+    InstanceNetworkInterfaceSpecification.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
     InstanceNetworkInterfaceSpecification.struct_class = Types::InstanceNetworkInterfaceSpecification
 
     InstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification, location_name: "item")
@@ -10200,6 +10340,8 @@ module Aws::EC2
     Ipam.add_member(:default_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "defaultResourceDiscoveryId"))
     Ipam.add_member(:default_resource_discovery_association_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryAssociationId, location_name: "defaultResourceDiscoveryAssociationId"))
     Ipam.add_member(:resource_discovery_association_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resourceDiscoveryAssociationCount"))
+    Ipam.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    Ipam.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "tier"))
     Ipam.struct_class = Types::Ipam
 
     IpamAddressHistoryRecord.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerId"))
@@ -10229,6 +10371,29 @@ module Aws::EC2
     IpamDiscoveredAccount.struct_class = Types::IpamDiscoveredAccount
 
     IpamDiscoveredAccountSet.member = Shapes::ShapeRef.new(shape: IpamDiscoveredAccount, location_name: "item")
+
+    IpamDiscoveredPublicAddress.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "ipamResourceDiscoveryId"))
+    IpamDiscoveredPublicAddress.add_member(:address_region, Shapes::ShapeRef.new(shape: String, location_name: "addressRegion"))
+    IpamDiscoveredPublicAddress.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "address"))
+    IpamDiscoveredPublicAddress.add_member(:address_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "addressOwnerId"))
+    IpamDiscoveredPublicAddress.add_member(:address_allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "addressAllocationId"))
+    IpamDiscoveredPublicAddress.add_member(:association_status, Shapes::ShapeRef.new(shape: IpamPublicAddressAssociationStatus, location_name: "associationStatus"))
+    IpamDiscoveredPublicAddress.add_member(:address_type, Shapes::ShapeRef.new(shape: IpamPublicAddressType, location_name: "addressType"))
+    IpamDiscoveredPublicAddress.add_member(:service, Shapes::ShapeRef.new(shape: IpamPublicAddressAwsService, location_name: "service"))
+    IpamDiscoveredPublicAddress.add_member(:service_resource, Shapes::ShapeRef.new(shape: String, location_name: "serviceResource"))
+    IpamDiscoveredPublicAddress.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    IpamDiscoveredPublicAddress.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+    IpamDiscoveredPublicAddress.add_member(:public_ipv_4_pool_id, Shapes::ShapeRef.new(shape: String, location_name: "publicIpv4PoolId"))
+    IpamDiscoveredPublicAddress.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+    IpamDiscoveredPublicAddress.add_member(:network_interface_description, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceDescription"))
+    IpamDiscoveredPublicAddress.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    IpamDiscoveredPublicAddress.add_member(:tags, Shapes::ShapeRef.new(shape: IpamPublicAddressTags, location_name: "tags"))
+    IpamDiscoveredPublicAddress.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
+    IpamDiscoveredPublicAddress.add_member(:security_groups, Shapes::ShapeRef.new(shape: IpamPublicAddressSecurityGroupList, location_name: "securityGroupSet"))
+    IpamDiscoveredPublicAddress.add_member(:sample_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "sampleTime"))
+    IpamDiscoveredPublicAddress.struct_class = Types::IpamDiscoveredPublicAddress
+
+    IpamDiscoveredPublicAddressSet.member = Shapes::ShapeRef.new(shape: IpamDiscoveredPublicAddress, location_name: "item")
 
     IpamDiscoveredResourceCidr.add_member(:ipam_resource_discovery_id, Shapes::ShapeRef.new(shape: IpamResourceDiscoveryId, location_name: "ipamResourceDiscoveryId"))
     IpamDiscoveredResourceCidr.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
@@ -10276,6 +10441,7 @@ module Aws::EC2
     IpamPool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     IpamPool.add_member(:aws_service, Shapes::ShapeRef.new(shape: IpamPoolAwsService, location_name: "awsService"))
     IpamPool.add_member(:public_ip_source, Shapes::ShapeRef.new(shape: IpamPoolPublicIpSource, location_name: "publicIpSource"))
+    IpamPool.add_member(:source_resource, Shapes::ShapeRef.new(shape: IpamPoolSourceResource, location_name: "sourceResource"))
     IpamPool.struct_class = Types::IpamPool
 
     IpamPoolAllocation.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
@@ -10286,6 +10452,8 @@ module Aws::EC2
     IpamPoolAllocation.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
     IpamPoolAllocation.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwner"))
     IpamPoolAllocation.struct_class = Types::IpamPoolAllocation
+
+    IpamPoolAllocationAllowedCidrs.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     IpamPoolAllocationDisallowedCidrs.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -10305,6 +10473,33 @@ module Aws::EC2
     IpamPoolCidrSet.member = Shapes::ShapeRef.new(shape: IpamPoolCidr, location_name: "item")
 
     IpamPoolSet.member = Shapes::ShapeRef.new(shape: IpamPool, location_name: "item")
+
+    IpamPoolSourceResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    IpamPoolSourceResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPoolSourceResourceType, location_name: "resourceType"))
+    IpamPoolSourceResource.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
+    IpamPoolSourceResource.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwner"))
+    IpamPoolSourceResource.struct_class = Types::IpamPoolSourceResource
+
+    IpamPoolSourceResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
+    IpamPoolSourceResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPoolSourceResourceType, location_name: "ResourceType"))
+    IpamPoolSourceResourceRequest.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "ResourceRegion"))
+    IpamPoolSourceResourceRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwner"))
+    IpamPoolSourceResourceRequest.struct_class = Types::IpamPoolSourceResourceRequest
+
+    IpamPublicAddressSecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    IpamPublicAddressSecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    IpamPublicAddressSecurityGroup.struct_class = Types::IpamPublicAddressSecurityGroup
+
+    IpamPublicAddressSecurityGroupList.member = Shapes::ShapeRef.new(shape: IpamPublicAddressSecurityGroup, location_name: "item")
+
+    IpamPublicAddressTag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    IpamPublicAddressTag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    IpamPublicAddressTag.struct_class = Types::IpamPublicAddressTag
+
+    IpamPublicAddressTagList.member = Shapes::ShapeRef.new(shape: IpamPublicAddressTag, location_name: "item")
+
+    IpamPublicAddressTags.add_member(:eip_tags, Shapes::ShapeRef.new(shape: IpamPublicAddressTagList, location_name: "eipTagSet"))
+    IpamPublicAddressTags.struct_class = Types::IpamPublicAddressTags
 
     IpamResourceCidr.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, location_name: "ipamId"))
     IpamResourceCidr.add_member(:ipam_scope_id, Shapes::ShapeRef.new(shape: IpamScopeId, location_name: "ipamScopeId"))
@@ -10656,6 +10851,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "primaryIpv6"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: LaunchTemplateEnaSrdSpecification, location_name: "enaSrdSpecification"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecification, location_name: "connectionTrackingSpecification"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecification
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecification, location_name: "item")
@@ -10681,6 +10877,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecificationRequest, location_name: "EnaSrdSpecification"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")
@@ -11259,6 +11456,7 @@ module Aws::EC2
     ModifyIpamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ModifyIpamRequest.add_member(:add_operating_regions, Shapes::ShapeRef.new(shape: AddIpamOperatingRegionSet, location_name: "AddOperatingRegion"))
     ModifyIpamRequest.add_member(:remove_operating_regions, Shapes::ShapeRef.new(shape: RemoveIpamOperatingRegionSet, location_name: "RemoveOperatingRegion"))
+    ModifyIpamRequest.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "Tier"))
     ModifyIpamRequest.struct_class = Types::ModifyIpamRequest
 
     ModifyIpamResourceCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -11335,6 +11533,7 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
+    ModifyNetworkInterfaceAttributeRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
     ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -11961,6 +12160,7 @@ module Aws::EC2
     NetworkInterface.add_member(:association, Shapes::ShapeRef.new(shape: NetworkInterfaceAssociation, location_name: "association"))
     NetworkInterface.add_member(:attachment, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachment, location_name: "attachment"))
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    NetworkInterface.add_member(:connection_tracking_configuration, Shapes::ShapeRef.new(shape: ConnectionTrackingConfiguration, location_name: "connectionTrackingConfiguration"))
     NetworkInterface.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     NetworkInterface.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
     NetworkInterface.add_member(:interface_type, Shapes::ShapeRef.new(shape: NetworkInterfaceType, location_name: "interfaceType"))
@@ -12423,6 +12623,15 @@ module Aws::EC2
 
     ProvisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     ProvisionByoipCidrResult.struct_class = Types::ProvisionByoipCidrResult
+
+    ProvisionIpamByoasnRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ProvisionIpamByoasnRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    ProvisionIpamByoasnRequest.add_member(:asn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Asn"))
+    ProvisionIpamByoasnRequest.add_member(:asn_authorization_context, Shapes::ShapeRef.new(shape: AsnAuthorizationContext, required: true, location_name: "AsnAuthorizationContext"))
+    ProvisionIpamByoasnRequest.struct_class = Types::ProvisionIpamByoasnRequest
+
+    ProvisionIpamByoasnResult.add_member(:byoasn, Shapes::ShapeRef.new(shape: Byoasn, location_name: "byoasn"))
+    ProvisionIpamByoasnResult.struct_class = Types::ProvisionIpamByoasnResult
 
     ProvisionIpamPoolCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ProvisionIpamPoolCidrRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -15501,6 +15710,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssociateInstanceEventWindowResult)
       end)
 
+      api.add_operation(:associate_ipam_byoasn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIpamByoasn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIpamByoasnRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIpamByoasnResult)
+      end)
+
       api.add_operation(:associate_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateIpamResourceDiscovery"
         o.http_method = "POST"
@@ -17021,6 +17238,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DeprovisionByoipCidrResult)
       end)
 
+      api.add_operation(:deprovision_ipam_byoasn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeprovisionIpamByoasn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeprovisionIpamByoasnRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeprovisionIpamByoasnResult)
+      end)
+
       api.add_operation(:deprovision_ipam_pool_cidr, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeprovisionIpamPoolCidr"
         o.http_method = "POST"
@@ -17749,6 +17974,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_ipam_byoasn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamByoasn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamByoasnRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamByoasnResult)
       end)
 
       api.add_operation(:describe_ipam_pools, Seahorse::Model::Operation.new.tap do |o|
@@ -19138,6 +19371,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateInstanceEventWindowResult)
       end)
 
+      api.add_operation(:disassociate_ipam_byoasn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIpamByoasn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIpamByoasnRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIpamByoasnResult)
+      end)
+
       api.add_operation(:disassociate_ipam_resource_discovery, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateIpamResourceDiscovery"
         o.http_method = "POST"
@@ -19556,6 +19797,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_ipam_discovered_public_addresses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpamDiscoveredPublicAddresses"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIpamDiscoveredPublicAddressesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpamDiscoveredPublicAddressesResult)
       end)
 
       api.add_operation(:get_ipam_discovered_resource_cidrs, Seahorse::Model::Operation.new.tap do |o|
@@ -20504,6 +20753,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ProvisionByoipCidrRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvisionByoipCidrResult)
+      end)
+
+      api.add_operation(:provision_ipam_byoasn, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ProvisionIpamByoasn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ProvisionIpamByoasnRequest)
+        o.output = Shapes::ShapeRef.new(shape: ProvisionIpamByoasnResult)
       end)
 
       api.add_operation(:provision_ipam_pool_cidr, Seahorse::Model::Operation.new.tap do |o|

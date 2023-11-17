@@ -211,6 +211,12 @@ module Aws::RDS
       data[:read_replica_identifiers]
     end
 
+    # Reserved for future use.
+    # @return [Array<Types::DBClusterStatusInfo>]
+    def status_infos
+      data[:status_infos]
+    end
+
     # The list of DB instances that make up the DB cluster.
     # @return [Array<Types::DBClusterMember>]
     def db_cluster_members
@@ -855,6 +861,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
@@ -2499,6 +2506,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #   })
     # @param [Hash] options ({})

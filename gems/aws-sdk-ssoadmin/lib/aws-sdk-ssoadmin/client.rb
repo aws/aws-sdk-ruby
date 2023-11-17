@@ -3410,6 +3410,10 @@ module Aws::SSOAdmin
     #           },
     #         ],
     #       },
+    #       refresh_token: {
+    #       },
+    #       token_exchange: {
+    #       },
     #     },
     #     grant_type: "authorization_code", # required, accepts authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer, urn:ietf:params:oauth:grant-type:token-exchange
     #   })
@@ -3804,7 +3808,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

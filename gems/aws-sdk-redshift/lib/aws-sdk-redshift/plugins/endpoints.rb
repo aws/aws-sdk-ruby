@@ -100,6 +100,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::CreateHsmClientCertificate.build(context)
           when :create_hsm_configuration
             Aws::Redshift::Endpoints::CreateHsmConfiguration.build(context)
+          when :create_redshift_idc_application
+            Aws::Redshift::Endpoints::CreateRedshiftIdcApplication.build(context)
           when :create_scheduled_action
             Aws::Redshift::Endpoints::CreateScheduledAction.build(context)
           when :create_snapshot_copy_grant
@@ -136,6 +138,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DeleteHsmConfiguration.build(context)
           when :delete_partner
             Aws::Redshift::Endpoints::DeletePartner.build(context)
+          when :delete_redshift_idc_application
+            Aws::Redshift::Endpoints::DeleteRedshiftIdcApplication.build(context)
           when :delete_resource_policy
             Aws::Redshift::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_scheduled_action
@@ -204,6 +208,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DescribeOrderableClusterOptions.build(context)
           when :describe_partners
             Aws::Redshift::Endpoints::DescribePartners.build(context)
+          when :describe_redshift_idc_applications
+            Aws::Redshift::Endpoints::DescribeRedshiftIdcApplications.build(context)
           when :describe_reserved_node_exchange_status
             Aws::Redshift::Endpoints::DescribeReservedNodeExchangeStatus.build(context)
           when :describe_reserved_node_offerings
@@ -274,6 +280,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::ModifyEndpointAccess.build(context)
           when :modify_event_subscription
             Aws::Redshift::Endpoints::ModifyEventSubscription.build(context)
+          when :modify_redshift_idc_application
+            Aws::Redshift::Endpoints::ModifyRedshiftIdcApplication.build(context)
           when :modify_scheduled_action
             Aws::Redshift::Endpoints::ModifyScheduledAction.build(context)
           when :modify_snapshot_copy_retention_period
