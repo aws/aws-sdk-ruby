@@ -94,8 +94,8 @@ module Aws
       end
 
       def flattened_list_or_map?(shape)
-        shape.is_a?(ListShape) && shape.flattened ||
-          shape.is_a?(MapShape) && shape.flattened
+        (shape.is_a?(ListShape) && shape.flattened) ||
+          (shape.is_a?(MapShape) && shape.flattened)
       end
 
     end
