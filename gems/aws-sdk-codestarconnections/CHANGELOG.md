@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2023-11-20)
+------------------
+
+* Feature - This release updates a few CodeStar Connections related APIs.
+
 1.34.0 (2023-11-17)
 ------------------
 

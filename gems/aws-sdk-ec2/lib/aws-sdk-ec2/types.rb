@@ -11760,6 +11760,29 @@ module Aws::EC2
     #   Enable or disable DNS support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway (TGW). Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   If you don't enable or disable SecurityGroupReferencingSupport in
+    #   the request, the attachment will inherit the security group
+    #   referencing support setting on the transit gateway.
+    #
+    #   For important information about this feature, see [Create a transit
+    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
+    #   Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Enable or disable IPv6 support. The default is `disable`.
     #   @return [String]
@@ -11775,6 +11798,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []
@@ -48691,6 +48715,24 @@ module Aws::EC2
     #   Enable or disable DNS support.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway (TGW). Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   For important information about this feature, see [Create a transit
+    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
+    #   @return [String]
+    #
     # @!attribute [rw] auto_accept_shared_attachments
     #   Enable or disable automatic acceptance of attachment requests.
     #   @return [String]
@@ -48731,6 +48773,7 @@ module Aws::EC2
       :remove_transit_gateway_cidr_blocks,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :auto_accept_shared_attachments,
       :default_route_table_association,
       :association_default_route_table_id,
@@ -48872,6 +48915,25 @@ module Aws::EC2
     #   Enable or disable DNS support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway (TGW). Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   For important information about this feature, see [Create a transit
+    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
+    #   Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Enable or disable IPv6 support. The default is `enable`.
     #   @return [String]
@@ -48887,6 +48949,7 @@ module Aws::EC2
     #
     class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []
@@ -54035,7 +54098,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of the VPC peering connection (if applicable).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReferencedSecurityGroup AWS API Documentation
@@ -59465,7 +59528,25 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of the VPC peering connection (if applicable). For more
+    #   information about security group referencing for peering
+    #   connections, see [Update your security groups to reference peer
+    #   security groups][1] in the *VPC Peering Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/peering/vpc-peering-security-groups.html
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway (if applicable). For more information
+    #   about security group referencing for transit gateways, see [Create a
+    #   transit gateway attachment to a VPC][1] in the *Amazon Web Services
+    #   Transit Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tgw/tgw-vpc-attachments.html#create-vpc-attachment
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupReference AWS API Documentation
@@ -59473,7 +59554,8 @@ module Aws::EC2
     class SecurityGroupReference < Struct.new(
       :group_id,
       :referencing_vpc_id,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :transit_gateway_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64108,6 +64190,24 @@ module Aws::EC2
     #   Indicates whether DNS support is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway (TGW). Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   For important information about this feature, see [Create a transit
+    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
+    #   @return [String]
+    #
     # @!attribute [rw] multicast_support
     #   Indicates whether multicast is enabled on the transit gateway
     #   @return [String]
@@ -64124,6 +64224,7 @@ module Aws::EC2
       :propagation_default_route_table_id,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :multicast_support)
       SENSITIVE = []
       include Aws::Structure
@@ -64489,6 +64590,24 @@ module Aws::EC2
     #   Enable or disable DNS support. Enabled by default.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway (TGW). Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   For important information about this feature, see [Create a transit
+    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
+    #   @return [String]
+    #
     # @!attribute [rw] multicast_support
     #   Indicates whether multicast is enabled on the transit gateway
     #   @return [String]
@@ -64508,6 +64627,7 @@ module Aws::EC2
       :default_route_table_propagation,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :multicast_support,
       :transit_gateway_cidr_blocks)
       SENSITIVE = []
@@ -64865,6 +64985,16 @@ module Aws::EC2
     #   Indicates whether DNS support is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   For important information about this feature, see [Create a transit
+    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
+    #   Gateway Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Indicates whether IPv6 support is disabled.
     #   @return [String]
@@ -64877,6 +65007,7 @@ module Aws::EC2
     #
     class TransitGatewayVpcAttachmentOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []

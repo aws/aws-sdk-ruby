@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.424.0 (2023-11-20)
+------------------
+
+* Feature - This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.
+
 1.423.0 (2023-11-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-11-20)
+------------------
+
+* Feature - Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.
+
 1.55.0 (2023-11-06)
 ------------------
 

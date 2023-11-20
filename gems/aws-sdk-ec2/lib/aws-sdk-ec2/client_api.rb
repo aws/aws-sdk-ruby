@@ -2649,6 +2649,7 @@ module Aws::EC2
     SecurityGroupName = Shapes::StringShape.new(name: 'SecurityGroupName')
     SecurityGroupReference = Shapes::StructureShape.new(name: 'SecurityGroupReference')
     SecurityGroupReferences = Shapes::ListShape.new(name: 'SecurityGroupReferences')
+    SecurityGroupReferencingSupportValue = Shapes::StringShape.new(name: 'SecurityGroupReferencingSupportValue')
     SecurityGroupRule = Shapes::StructureShape.new(name: 'SecurityGroupRule')
     SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
     SecurityGroupRuleDescriptionList = Shapes::ListShape.new(name: 'SecurityGroupRuleDescriptionList')
@@ -5291,6 +5292,7 @@ module Aws::EC2
     CreateTransitGatewayVpcAttachmentRequest.struct_class = Types::CreateTransitGatewayVpcAttachmentRequest
 
     CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
+    CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "SecurityGroupReferencingSupport"))
     CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "Ipv6Support"))
     CreateTransitGatewayVpcAttachmentRequestOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "ApplianceModeSupport"))
     CreateTransitGatewayVpcAttachmentRequestOptions.struct_class = Types::CreateTransitGatewayVpcAttachmentRequestOptions
@@ -11648,6 +11650,7 @@ module Aws::EC2
     ModifyTransitGatewayOptions.add_member(:remove_transit_gateway_cidr_blocks, Shapes::ShapeRef.new(shape: TransitGatewayCidrBlockStringList, location_name: "RemoveTransitGatewayCidrBlocks"))
     ModifyTransitGatewayOptions.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: VpnEcmpSupportValue, location_name: "VpnEcmpSupport"))
     ModifyTransitGatewayOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
+    ModifyTransitGatewayOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "SecurityGroupReferencingSupport"))
     ModifyTransitGatewayOptions.add_member(:auto_accept_shared_attachments, Shapes::ShapeRef.new(shape: AutoAcceptSharedAttachmentsValue, location_name: "AutoAcceptSharedAttachments"))
     ModifyTransitGatewayOptions.add_member(:default_route_table_association, Shapes::ShapeRef.new(shape: DefaultRouteTableAssociationValue, location_name: "DefaultRouteTableAssociation"))
     ModifyTransitGatewayOptions.add_member(:association_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "AssociationDefaultRouteTableId"))
@@ -11683,6 +11686,7 @@ module Aws::EC2
     ModifyTransitGatewayVpcAttachmentRequest.struct_class = Types::ModifyTransitGatewayVpcAttachmentRequest
 
     ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
+    ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "SecurityGroupReferencingSupport"))
     ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "Ipv6Support"))
     ModifyTransitGatewayVpcAttachmentRequestOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "ApplianceModeSupport"))
     ModifyTransitGatewayVpcAttachmentRequestOptions.struct_class = Types::ModifyTransitGatewayVpcAttachmentRequestOptions
@@ -13747,6 +13751,7 @@ module Aws::EC2
     SecurityGroupReference.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     SecurityGroupReference.add_member(:referencing_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "referencingVpcId"))
     SecurityGroupReference.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
+    SecurityGroupReference.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
     SecurityGroupReference.struct_class = Types::SecurityGroupReference
 
     SecurityGroupReferences.member = Shapes::ShapeRef.new(shape: SecurityGroupReference, location_name: "item")
@@ -14644,6 +14649,7 @@ module Aws::EC2
     TransitGatewayOptions.add_member(:propagation_default_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "propagationDefaultRouteTableId"))
     TransitGatewayOptions.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: VpnEcmpSupportValue, location_name: "vpnEcmpSupport"))
     TransitGatewayOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "dnsSupport"))
+    TransitGatewayOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "securityGroupReferencingSupport"))
     TransitGatewayOptions.add_member(:multicast_support, Shapes::ShapeRef.new(shape: MulticastSupportValue, location_name: "multicastSupport"))
     TransitGatewayOptions.struct_class = Types::TransitGatewayOptions
 
@@ -14731,6 +14737,7 @@ module Aws::EC2
     TransitGatewayRequestOptions.add_member(:default_route_table_propagation, Shapes::ShapeRef.new(shape: DefaultRouteTablePropagationValue, location_name: "DefaultRouteTablePropagation"))
     TransitGatewayRequestOptions.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: VpnEcmpSupportValue, location_name: "VpnEcmpSupport"))
     TransitGatewayRequestOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
+    TransitGatewayRequestOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "SecurityGroupReferencingSupport"))
     TransitGatewayRequestOptions.add_member(:multicast_support, Shapes::ShapeRef.new(shape: MulticastSupportValue, location_name: "MulticastSupport"))
     TransitGatewayRequestOptions.add_member(:transit_gateway_cidr_blocks, Shapes::ShapeRef.new(shape: TransitGatewayCidrBlockStringList, location_name: "TransitGatewayCidrBlocks"))
     TransitGatewayRequestOptions.struct_class = Types::TransitGatewayRequestOptions
@@ -14824,6 +14831,7 @@ module Aws::EC2
     TransitGatewayVpcAttachmentList.member = Shapes::ShapeRef.new(shape: TransitGatewayVpcAttachment, location_name: "item")
 
     TransitGatewayVpcAttachmentOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "dnsSupport"))
+    TransitGatewayVpcAttachmentOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "securityGroupReferencingSupport"))
     TransitGatewayVpcAttachmentOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Ipv6SupportValue, location_name: "ipv6Support"))
     TransitGatewayVpcAttachmentOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "applianceModeSupport"))
     TransitGatewayVpcAttachmentOptions.struct_class = Types::TransitGatewayVpcAttachmentOptions

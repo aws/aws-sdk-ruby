@@ -646,6 +646,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
@@ -3233,9 +3234,17 @@ module Aws::EC2
     # For information about VPC security group quotas, see [Amazon VPC
     # quotas][1].
     #
+    # <note markdown="1"> If you want to reference a security group across VPCs attached to a
+    # transit gateway using the [security group referencing feature][2],
+    # note that you can only reference security groups for ingress rules.
+    # You cannot reference a security group for egress rules.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12691,6 +12700,7 @@ module Aws::EC2
     #       default_route_table_propagation: "enable", # accepts enable, disable
     #       vpn_ecmp_support: "enable", # accepts enable, disable
     #       dns_support: "enable", # accepts enable, disable
+    #       security_group_referencing_support: "enable", # accepts enable, disable
     #       multicast_support: "enable", # accepts enable, disable
     #       transit_gateway_cidr_blocks: ["String"],
     #     },
@@ -12726,6 +12736,7 @@ module Aws::EC2
     #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
     #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.multicast_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.tags #=> Array
     #   resp.transit_gateway.tags[0].key #=> String
@@ -13416,6 +13427,7 @@ module Aws::EC2
     #     subnet_ids: ["SubnetId"], # required
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
+    #       security_group_referencing_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
     #       appliance_mode_support: "enable", # accepts enable, disable
     #     },
@@ -13444,6 +13456,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
@@ -17735,6 +17748,7 @@ module Aws::EC2
     #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
     #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.multicast_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.tags #=> Array
     #   resp.transit_gateway.tags[0].key #=> String
@@ -18206,6 +18220,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
@@ -31312,8 +31327,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the VPCs on the other side of a VPC peering connection that
-    # are referencing the security groups you've specified in this request.
+    # Describes the VPCs on the other side of a VPC peering connection or
+    # the VPCs attached to a transit gateway that are referencing the
+    # security groups you've specified in this request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -31363,6 +31379,7 @@ module Aws::EC2
     #   resp.security_group_reference_set[0].group_id #=> String
     #   resp.security_group_reference_set[0].referencing_vpc_id #=> String
     #   resp.security_group_reference_set[0].vpc_peering_connection_id #=> String
+    #   resp.security_group_reference_set[0].transit_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferences AWS API Documentation
     #
@@ -33228,9 +33245,16 @@ module Aws::EC2
 
     # Describes the stale security group rules for security groups in a
     # specified VPC. Rules are stale when they reference a deleted security
-    # group in the same VPC or in a peer VPC, or if they reference a
-    # security group in a peer VPC for which the VPC peering connection has
-    # been deleted.
+    # group in the same VPC, peered VPC, or in separate VPCs attached to a
+    # transit gateway (with [security group referencing support][1]
+    # enabled). Rules can also be stale if they reference a security group
+    # in a peer VPC for which the VPC peering connection has been deleted or
+    # if they reference a security group in a VPC that has been detached
+    # from a transit gateway.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -34785,6 +34809,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachments[0].subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachments[0].creation_time #=> Time
     #   resp.transit_gateway_vpc_attachments[0].options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachments[0].options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachments[0].options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachments[0].options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachments[0].tags #=> Array
@@ -34900,6 +34925,7 @@ module Aws::EC2
     #   resp.transit_gateways[0].options.propagation_default_route_table_id #=> String
     #   resp.transit_gateways[0].options.vpn_ecmp_support #=> String, one of "enable", "disable"
     #   resp.transit_gateways[0].options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateways[0].options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateways[0].options.multicast_support #=> String, one of "enable", "disable"
     #   resp.transit_gateways[0].tags #=> Array
     #   resp.transit_gateways[0].tags[0].key #=> String
@@ -48979,6 +49005,7 @@ module Aws::EC2
     #       remove_transit_gateway_cidr_blocks: ["String"],
     #       vpn_ecmp_support: "enable", # accepts enable, disable
     #       dns_support: "enable", # accepts enable, disable
+    #       security_group_referencing_support: "enable", # accepts enable, disable
     #       auto_accept_shared_attachments: "enable", # accepts enable, disable
     #       default_route_table_association: "enable", # accepts enable, disable
     #       association_default_route_table_id: "TransitGatewayRouteTableId",
@@ -49007,6 +49034,7 @@ module Aws::EC2
     #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
     #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.multicast_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway.tags #=> Array
     #   resp.transit_gateway.tags[0].key #=> String
@@ -49109,6 +49137,7 @@ module Aws::EC2
     #     remove_subnet_ids: ["SubnetId"],
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
+    #       security_group_referencing_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
     #       appliance_mode_support: "enable", # accepts enable, disable
     #     },
@@ -49126,6 +49155,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
@@ -52486,6 +52516,7 @@ module Aws::EC2
     #   resp.transit_gateway_vpc_attachment.subnet_ids[0] #=> String
     #   resp.transit_gateway_vpc_attachment.creation_time #=> Time
     #   resp.transit_gateway_vpc_attachment.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_vpc_attachment.options.security_group_referencing_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.ipv_6_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.options.appliance_mode_support #=> String, one of "enable", "disable"
     #   resp.transit_gateway_vpc_attachment.tags #=> Array
@@ -58573,7 +58604,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.423.0'
+      context[:gem_version] = '1.424.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
