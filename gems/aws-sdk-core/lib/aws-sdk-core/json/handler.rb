@@ -59,7 +59,10 @@ module Aws
             end
             resp_struct
           else
-            Parser.new(rules).parse(json == '' ? '{}' : json)
+            Parser.new(
+              rules,
+              query_compatible: query_compatible?(context)
+            ).parse(json == '' ? '{}' : json)
           end
         else
           EmptyStructure.new
@@ -81,6 +84,10 @@ module Aws
 
       def simple_json?(context)
         context.config.simple_json
+      end
+
+      def query_compatible?(context)
+        context.config.api.metadata.key?('awsQueryCompatible')
       end
 
     end
