@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - For `awsQueryCompatible` services, default an empty list to all list shapes that were previously flattened in the query protocol.
+
 3.186.0 (2023-11-02)
 ------------------
 

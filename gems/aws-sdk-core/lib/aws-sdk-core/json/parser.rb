@@ -10,8 +10,9 @@ module Aws
       include Seahorse::Model::Shapes
 
       # @param [Seahorse::Model::ShapeRef] rules
-      def initialize(rules)
+      def initialize(rules, query_compatible: false)
         @rules = rules
+        @query_compatible = query_compatible
       end
 
       # @param [String<JSON>] json
@@ -32,6 +33,18 @@ module Aws
             target[:unknown] = { 'name' => key, 'value' => value }
           end
         end
+        # In services that were previously Query/XML, members that were
+        # "flattened" defaulted to empty lists. In JSON, these values are nil,
+        # which is backwards incompatible. To preserve backwards compatibility,
+        # we set a default value of [] for these members.
+        if @query_compatible
+          ref.shape.members.each do |member_name, member_target|
+            if member_target.shape.flattened && target[member_name].nil?
+              target[member_name] = []
+            end
+          end
+        end
+
         if shape.union
           # convert to subclass
           member_subclass = shape.member_subclass(target.member).new
