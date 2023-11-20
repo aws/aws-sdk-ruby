@@ -39,9 +39,10 @@ module Aws
         # we set a default value of [] for these members.
         if @query_compatible
           ref.shape.members.each do |member_name, member_target|
-            if member_target.shape.flattened && target[member_name].nil?
-              target[member_name] = []
-            end
+            next unless flattened_list_or_map?(member_target.shape) &&
+                        target[member_name].nil?
+
+            target[member_name] = []
           end
         end
 
@@ -90,6 +91,11 @@ module Aws
       # @return [Time]
       def time(value)
         value.is_a?(Numeric) ? Time.at(value) : Time.parse(value)
+      end
+
+      def flattened_list_or_map?(shape)
+        shape.is_a?(ListShape) && shape.flattened ||
+          shape.is_a?(MapShape) && shape.flattened
       end
 
     end
