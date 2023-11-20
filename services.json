@@ -1143,6 +1143,9 @@
       "Aws::Translate::Plugins::TranslateDocumentEncoding"
     ]
   },
+  "TrustedAdvisor": {
+    "models": "trustedadvisor/2022-09-15"
+  },
   "VPCLattice": {
     "models": "vpc-lattice/2022-11-30"
   },

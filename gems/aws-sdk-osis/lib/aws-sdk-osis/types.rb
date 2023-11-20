@@ -16,6 +16,22 @@ module Aws::OSIS
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
+    # Options that specify the configuration of a persistent buffer. To
+    # configure how OpenSearch Ingestion encrypts this data, set the
+    # EncryptionAtRestOptions.
+    #
+    # @!attribute [rw] persistent_buffer_enabled
+    #   Whether persistent buffering should be enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/BufferOptions AWS API Documentation
+    #
+    class BufferOptions < Struct.new(
+      :persistent_buffer_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Progress details for a specific stage of a pipeline configuration
     # change.
     #
@@ -131,6 +147,15 @@ module Aws::OSIS
     #   creates the pipeline with a public endpoint.
     #   @return [Types::VpcOptions]
     #
+    # @!attribute [rw] buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #   @return [Types::BufferOptions]
+    #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to
+    #   a persistent buffer.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
     # @!attribute [rw] tags
     #   List of tags to add to the pipeline upon creation.
     #   @return [Array<Types::Tag>]
@@ -144,6 +169,8 @@ module Aws::OSIS
       :pipeline_configuration_body,
       :log_publishing_options,
       :vpc_options,
+      :buffer_options,
+      :encryption_at_rest_options,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -176,6 +203,21 @@ module Aws::OSIS
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DeletePipelineResponse AWS API Documentation
     #
     class DeletePipelineResponse < Aws::EmptyStructure; end
+
+    # Options to control how OpenSearch encrypts all data-at-rest.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key used to encrypt data-at-rest in OpenSearch
+    #   Ingestion. By default, data is encrypted using an AWS owned key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/EncryptionAtRestOptions AWS API Documentation
+    #
+    class EncryptionAtRestOptions < Struct.new(
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] blueprint_name
     #   The name of the blueprint to retrieve.
@@ -424,6 +466,25 @@ module Aws::OSIS
     #   The VPC interface endpoints that have access to the pipeline.
     #   @return [Array<Types::VpcEndpoint>]
     #
+    # @!attribute [rw] buffer_options
+    #   Options that specify the configuration of a persistent buffer. To
+    #   configure how OpenSearch Ingestion encrypts this data, set the
+    #   EncryptionAtRestOptions.
+    #   @return [Types::BufferOptions]
+    #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Options to control how OpenSearch encrypts all data-at-rest.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
+    # @!attribute [rw] service_vpc_endpoints
+    #   A list of VPC endpoints that OpenSearch Ingestion has created to
+    #   other AWS services.
+    #   @return [Array<Types::ServiceVpcEndpoint>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the given pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/Pipeline AWS API Documentation
     #
     class Pipeline < Struct.new(
@@ -438,7 +499,11 @@ module Aws::OSIS
       :last_updated_at,
       :ingest_endpoint_urls,
       :log_publishing_options,
-      :vpc_endpoints)
+      :vpc_endpoints,
+      :buffer_options,
+      :encryption_at_rest_options,
+      :service_vpc_endpoints,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -524,6 +589,10 @@ module Aws::OSIS
     #   The date and time when the pipeline was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the given pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineSummary AWS API Documentation
     #
     class PipelineSummary < Struct.new(
@@ -534,7 +603,8 @@ module Aws::OSIS
       :min_units,
       :max_units,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -550,6 +620,26 @@ module Aws::OSIS
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # A container for information about VPC endpoints that were created to
+    # other services
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service for which a VPC endpoint was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ServiceVpcEndpoint AWS API Documentation
+    #
+    class ServiceVpcEndpoint < Struct.new(
+      :service_name,
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline to start.
@@ -687,6 +777,15 @@ module Aws::OSIS
     #   Key-value pairs to configure log publishing.
     #   @return [Types::LogPublishingOptions]
     #
+    # @!attribute [rw] buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #   @return [Types::BufferOptions]
+    #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to
+    #   a persistent buffer.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipelineRequest AWS API Documentation
     #
     class UpdatePipelineRequest < Struct.new(
@@ -694,7 +793,9 @@ module Aws::OSIS
       :min_units,
       :max_units,
       :pipeline_configuration_body,
-      :log_publishing_options)
+      :log_publishing_options,
+      :buffer_options,
+      :encryption_at_rest_options)
       SENSITIVE = []
       include Aws::Structure
     end

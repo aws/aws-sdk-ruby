@@ -510,10 +510,12 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    # A structure that defines configuration settings for an application
+    # that supports the OAuth 2.0 Authorization Code Grant.
     #
     # @!attribute [rw] redirect_uris
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   A list of URIs that are valid locations to redirect a user's
+    #   browser after the user is authorized.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AuthorizationCodeGrant AWS API Documentation
@@ -1999,25 +2001,39 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    # The Grant union represents the set of possible configuration options
+    # for the selected grant type. Exactly one member of the union must be
+    # specified, and must match the grant type selected.
     #
     # @note Grant is a union - when making an API calls you must set exactly one of the members.
     #
     # @note Grant is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Grant corresponding to the set member.
     #
     # @!attribute [rw] authorization_code
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   Configuration options for the `authorization_code` grant type.
     #   @return [Types::AuthorizationCodeGrant]
     #
     # @!attribute [rw] jwt_bearer
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   Configuration options for the
+    #   `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type.
     #   @return [Types::JwtBearerGrant]
+    #
+    # @!attribute [rw] refresh_token
+    #   Configuration options for the `refresh_token` grant type.
+    #   @return [Types::RefreshTokenGrant]
+    #
+    # @!attribute [rw] token_exchange
+    #   Configuration options for the
+    #   `urn:ietf:params:oauth:grant-type:token-exchange` grant type.
+    #   @return [Types::TokenExchangeGrant]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/Grant AWS API Documentation
     #
     class Grant < Struct.new(
       :authorization_code,
       :jwt_bearer,
+      :refresh_token,
+      :token_exchange,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2025,17 +2041,19 @@ module Aws::SSOAdmin
 
       class AuthorizationCode < Grant; end
       class JwtBearer < Grant; end
+      class RefreshToken < Grant; end
+      class TokenExchange < Grant; end
       class Unknown < Grant; end
     end
 
-    # ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    # A structure that defines a single grant and its configuration.
     #
     # @!attribute [rw] grant
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   The configuration structure for the selected grant.
     #   @return [Types::Grant]
     #
     # @!attribute [rw] grant_type
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   The type of the selected grant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GrantItem AWS API Documentation
@@ -2136,10 +2154,12 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
-    # ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    # A structure that defines configuration settings for an application
+    # that supports the JWT Bearer Token Authorization Grant.
     #
     # @!attribute [rw] authorized_token_issuers
-    #   ~~~\[ TODO: ADD DESCRIPTION HERE \]~~~
+    #   A list of allowed token issuers trusted by the Identity Center
+    #   instances for this application.
     #   @return [Array<Types::AuthorizedTokenIssuer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/JwtBearerGrant AWS API Documentation
@@ -3739,6 +3759,15 @@ module Aws::SSOAdmin
     #
     class PutPermissionsBoundaryToPermissionSetResponse < Aws::EmptyStructure; end
 
+    # A structure that defines configuration settings for an application
+    # that supports the OAuth 2.0 Refresh Token Grant.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/RefreshTokenGrant AWS API Documentation
+    #
+    class RefreshTokenGrant < Aws::EmptyStructure; end
+
     # Indicates that a requested resource is not found.
     #
     # @!attribute [rw] message
@@ -3917,6 +3946,15 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # A structure that defines configuration settings for an application
+    # that supports the OAuth 2.0 Token Exchange Grant.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/TokenExchangeGrant AWS API Documentation
+    #
+    class TokenExchangeGrant < Aws::EmptyStructure; end
+
     # A structure that describes the configuration of a trusted token
     # issuer. The structure and available settings are determined by the
     # type of the trusted token issuer.
@@ -4025,6 +4063,9 @@ module Aws::SSOAdmin
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # A structure that describes the options for the access portal
+    # associated with an application that can be updated.
+    #
     # @!attribute [rw] sign_in_options
     #   A structure that describes the sign-in options for an application
     #   portal.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-11-17)
+------------------
+
+* Feature - Launch support for IAM Identity Center Trusted Identity Propagation and workspace storage encryption using AWS KMS in EMR Studio
+
 1.78.0 (2023-11-13)
 ------------------
 

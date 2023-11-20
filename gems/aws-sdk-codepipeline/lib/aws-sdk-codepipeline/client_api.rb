@@ -287,6 +287,9 @@ module Aws::CodePipeline
     SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SourceRevision = Shapes::StructureShape.new(name: 'SourceRevision')
     SourceRevisionList = Shapes::ListShape.new(name: 'SourceRevisionList')
+    SourceRevisionOverride = Shapes::StructureShape.new(name: 'SourceRevisionOverride')
+    SourceRevisionOverrideList = Shapes::ListShape.new(name: 'SourceRevisionOverrideList')
+    SourceRevisionType = Shapes::StringShape.new(name: 'SourceRevisionType')
     StageActionDeclarationList = Shapes::ListShape.new(name: 'StageActionDeclarationList')
     StageBlockerDeclarationList = Shapes::ListShape.new(name: 'StageBlockerDeclarationList')
     StageContext = Shapes::StructureShape.new(name: 'StageContext')
@@ -1087,6 +1090,13 @@ module Aws::CodePipeline
 
     SourceRevisionList.member = Shapes::ShapeRef.new(shape: SourceRevision)
 
+    SourceRevisionOverride.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
+    SourceRevisionOverride.add_member(:revision_type, Shapes::ShapeRef.new(shape: SourceRevisionType, required: true, location_name: "revisionType"))
+    SourceRevisionOverride.add_member(:revision_value, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revisionValue"))
+    SourceRevisionOverride.struct_class = Types::SourceRevisionOverride
+
+    SourceRevisionOverrideList.member = Shapes::ShapeRef.new(shape: SourceRevisionOverride)
+
     StageActionDeclarationList.member = Shapes::ShapeRef.new(shape: ActionDeclaration)
 
     StageBlockerDeclarationList.member = Shapes::ShapeRef.new(shape: BlockerDeclaration)
@@ -1119,6 +1129,7 @@ module Aws::CodePipeline
     StartPipelineExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
     StartPipelineExecutionInput.add_member(:variables, Shapes::ShapeRef.new(shape: PipelineVariableList, location_name: "variables"))
     StartPipelineExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartPipelineExecutionInput.add_member(:source_revisions, Shapes::ShapeRef.new(shape: SourceRevisionOverrideList, location_name: "sourceRevisions"))
     StartPipelineExecutionInput.struct_class = Types::StartPipelineExecutionInput
 
     StartPipelineExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))

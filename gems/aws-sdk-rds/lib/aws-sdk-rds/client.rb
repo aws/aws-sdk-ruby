@@ -1037,6 +1037,13 @@ module Aws::RDS
 
     # Copies the specified DB cluster parameter group.
     #
+    # <note markdown="1"> You can't copy a default DB cluster parameter group. Instead, create
+    # a new custom DB cluster parameter group, which copies the default
+    # parameters and values for the specified DB cluster parameter group
+    # family.
+    #
+    #  </note>
+    #
     # @option params [required, String] :source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB cluster
     #   parameter group. For information about creating an ARN, see [
@@ -1421,6 +1428,12 @@ module Aws::RDS
     end
 
     # Copies the specified DB parameter group.
+    #
+    # <note markdown="1"> You can't copy a default DB parameter group. Instead, create a new
+    # custom DB parameter group, which copies the default parameters and
+    # values for the specified DB parameter group family.
+    #
+    #  </note>
     #
     # @option params [required, String] :source_db_parameter_group_identifier
     #   The identifier or ARN for the source DB parameter group. For
@@ -3465,6 +3478,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
@@ -3529,6 +3543,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -3564,6 +3583,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -3598,6 +3618,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -8473,6 +8494,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -8508,6 +8534,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -8542,6 +8569,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -11816,6 +11844,11 @@ module Aws::RDS
     #   resp.db_clusters[0].replication_source_identifier #=> String
     #   resp.db_clusters[0].read_replica_identifiers #=> Array
     #   resp.db_clusters[0].read_replica_identifiers[0] #=> String
+    #   resp.db_clusters[0].status_infos #=> Array
+    #   resp.db_clusters[0].status_infos[0].status_type #=> String
+    #   resp.db_clusters[0].status_infos[0].normal #=> Boolean
+    #   resp.db_clusters[0].status_infos[0].status #=> String
+    #   resp.db_clusters[0].status_infos[0].message #=> String
     #   resp.db_clusters[0].db_cluster_members #=> Array
     #   resp.db_clusters[0].db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_clusters[0].db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -11851,6 +11884,7 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_clusters[0].rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_clusters[0].rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_clusters[0].rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
@@ -11885,6 +11919,7 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
@@ -16651,6 +16686,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -16686,6 +16726,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -16720,6 +16761,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -18280,6 +18322,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -18315,6 +18362,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -18349,6 +18397,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21666,6 +21715,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -21701,6 +21755,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -21735,6 +21790,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -21947,6 +22003,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -21982,6 +22043,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -22016,6 +22078,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -23414,6 +23477,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -23449,6 +23517,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -23483,6 +23552,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -24082,6 +24152,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #   })
     #
@@ -24118,6 +24189,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -24153,6 +24229,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -24187,6 +24264,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -24761,6 +24839,7 @@ module Aws::RDS
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
     #   })
     #
@@ -24797,6 +24876,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -24832,6 +24916,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -24866,6 +24951,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -27577,6 +27663,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -27612,6 +27703,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -27646,6 +27738,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -28404,6 +28497,11 @@ module Aws::RDS
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.status_infos #=> Array
+    #   resp.db_cluster.status_infos[0].status_type #=> String
+    #   resp.db_cluster.status_infos[0].normal #=> Boolean
+    #   resp.db_cluster.status_infos[0].status #=> String
+    #   resp.db_cluster.status_infos[0].message #=> String
     #   resp.db_cluster.db_cluster_members #=> Array
     #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
@@ -28439,6 +28537,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -28473,6 +28572,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
@@ -29342,7 +29442,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.204.0'
+      context[:gem_version] = '1.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

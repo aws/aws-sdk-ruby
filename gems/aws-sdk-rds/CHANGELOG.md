@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2023-11-17)
+------------------
+
+* Feature - This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+
 1.204.0 (2023-11-15)
 ------------------
 

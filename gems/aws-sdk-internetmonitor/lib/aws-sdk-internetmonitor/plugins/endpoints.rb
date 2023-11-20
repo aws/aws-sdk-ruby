@@ -64,12 +64,20 @@ module Aws::InternetMonitor
             Aws::InternetMonitor::Endpoints::GetHealthEvent.build(context)
           when :get_monitor
             Aws::InternetMonitor::Endpoints::GetMonitor.build(context)
+          when :get_query_results
+            Aws::InternetMonitor::Endpoints::GetQueryResults.build(context)
+          when :get_query_status
+            Aws::InternetMonitor::Endpoints::GetQueryStatus.build(context)
           when :list_health_events
             Aws::InternetMonitor::Endpoints::ListHealthEvents.build(context)
           when :list_monitors
             Aws::InternetMonitor::Endpoints::ListMonitors.build(context)
           when :list_tags_for_resource
             Aws::InternetMonitor::Endpoints::ListTagsForResource.build(context)
+          when :start_query
+            Aws::InternetMonitor::Endpoints::StartQuery.build(context)
+          when :stop_query
+            Aws::InternetMonitor::Endpoints::StopQuery.build(context)
           when :tag_resource
             Aws::InternetMonitor::Endpoints::TagResource.build(context)
           when :untag_resource

@@ -33,7 +33,7 @@ require_relative 'aws-sdk-verifiedpermissions/customizations'
 # structure.
 #
 #     verified_permissions = Aws::VerifiedPermissions::Client.new
-#     resp = verified_permissions.create_identity_source(params)
+#     resp = verified_permissions.batch_is_authorized(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-verifiedpermissions/customizations'
 # @!group service
 module Aws::VerifiedPermissions
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

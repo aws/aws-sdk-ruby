@@ -1497,7 +1497,8 @@ module Aws::DLM
     # @!attribute [rw] execution_handler_service
     #   Indicates the service used to execute the pre and/or post scripts.
     #
-    #   * If you are using custom SSM documents, specify
+    #   * If you are using custom SSM documents or automating
+    #     application-consistent snapshots of SAP HANA workloads, specify
     #     `AWS_SYSTEMS_MANAGER`.
     #
     #   * If you are automating VSS Backups, omit this parameter.
@@ -1511,6 +1512,10 @@ module Aws::DLM
     #   * If you are automating VSS backups, specify `AWS_VSS_BACKUP`. In
     #     this case, Amazon Data Lifecycle Manager automatically uses the
     #     `AWSEC2-CreateVssSnapshot` SSM document.
+    #
+    #   * If you are automating application-consistent snapshots for SAP
+    #     HANA workloads, specify
+    #     `AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA`.
     #
     #   * If you are using a custom SSM document that you own, specify
     #     either the name or ARN of the SSM document. If you are using a

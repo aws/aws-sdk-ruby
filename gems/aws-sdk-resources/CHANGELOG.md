@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.175.0 (2023-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-trustedadvisor` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-macie` gem.
+
 3.174.0 (2023-11-03)
 ------------------
 

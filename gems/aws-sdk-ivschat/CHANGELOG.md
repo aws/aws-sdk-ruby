@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-11-17)
+------------------
+
+* Feature - type & defaulting refinement to various range properties
+
 1.16.0 (2023-09-27)
 ------------------
 

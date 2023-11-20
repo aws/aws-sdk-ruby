@@ -398,6 +398,28 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The authorized token issuer for the Amazon Redshift IAM Identity
+    # Center application.
+    #
+    # @!attribute [rw] trusted_token_issuer_arn
+    #   The ARN for the authorized token issuer for integrating Amazon
+    #   Redshift with IDC Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_audiences_list
+    #   The list of audiences for the authorized token issuer for
+    #   integrating Amazon Redshift with IDC Identity Center.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizedTokenIssuer AWS API Documentation
+    #
+    class AuthorizedTokenIssuer < Struct.new(
+      :trusted_token_issuer_arn,
+      :authorized_audiences_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an availability zone.
     #
     # @!attribute [rw] name
@@ -2285,6 +2307,11 @@ module Aws::Redshift
     #   Zones (AZ).
     #   @return [Boolean]
     #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The Amazon resource name (ARN) of the Amazon Redshift IAM Identity
+    #   Center application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2325,7 +2352,8 @@ module Aws::Redshift
       :manage_master_password,
       :master_password_secret_kms_key_id,
       :ip_address_type,
-      :multi_az)
+      :multi_az,
+      :redshift_idc_application_arn)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -2839,6 +2867,68 @@ module Aws::Redshift
     #
     class CreateHsmConfigurationResult < Struct.new(
       :hsm_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] idc_instance_arn
+    #   The Amazon resource name (ARN) of the IAM Identity Center instance
+    #   where Amazon Redshift creates a new managed application.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_idc_application_name
+    #   The name of the Redshift application in IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_namespace
+    #   The namespace for the Amazon Redshift IAM Identity Center
+    #   application instance. It determines which managed application
+    #   verifies the connection token.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift IAM Identity Center
+    #   application instance. It appears in the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The IAM role ARN for the Amazon Redshift IAM Identity Center
+    #   application instance. It has the required permissions to be assumed
+    #   and invoke the IDC Identity Center API.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_token_issuer_list
+    #   The token issuer list for the Amazon Redshift IAM Identity Center
+    #   application instance.
+    #   @return [Array<Types::AuthorizedTokenIssuer>]
+    #
+    # @!attribute [rw] service_integrations
+    #   A collection of service integrations for the Redshift IAM Identity
+    #   Center application.
+    #   @return [Array<Types::ServiceIntegrationsUnion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplicationMessage AWS API Documentation
+    #
+    class CreateRedshiftIdcApplicationMessage < Struct.new(
+      :idc_instance_arn,
+      :redshift_idc_application_name,
+      :identity_namespace,
+      :idc_display_name,
+      :iam_role_arn,
+      :authorized_token_issuer_list,
+      :service_integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redshift_idc_application
+    #   Contains properties for the Redshift IDC application.
+    #   @return [Types::RedshiftIdcApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplicationResult AWS API Documentation
+    #
+    class CreateRedshiftIdcApplicationResult < Struct.new(
+      :redshift_idc_application)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3568,6 +3658,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for a deleted Amazon Redshift IAM Identity Center
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteRedshiftIdcApplicationMessage AWS API Documentation
+    #
+    class DeleteRedshiftIdcApplicationMessage < Struct.new(
+      :redshift_idc_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource of which its resource
     #   policy is deleted.
@@ -3651,6 +3754,12 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A dependent service denied access for the integration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DependentServiceAccessDeniedFault AWS API Documentation
+    #
+    class DependentServiceAccessDeniedFault < Aws::EmptyStructure; end
 
     # The request cannot be completed because a dependent service is
     # throttling requests made by Amazon Redshift on your behalf. Wait and
@@ -5133,6 +5242,60 @@ module Aws::Redshift
     #
     class DescribePartnersOutputMessage < Struct.new(
       :partner_integration_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in a marker field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeRedshiftIdcApplicationsMessage AWS API Documentation
+    #
+    class DescribeRedshiftIdcApplicationsMessage < Struct.new(
+      :redshift_idc_application_arn,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redshift_idc_applications
+    #   The list of Amazon Redshift IAM Identity Center applications.
+    #   @return [Array<Types::RedshiftIdcApplication>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeRedshiftIdcApplicationsResult AWS API Documentation
+    #
+    class DescribeRedshiftIdcApplicationsResult < Struct.new(
+      :redshift_idc_applications,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7284,6 +7447,43 @@ module Aws::Redshift
     #
     class Ipv6CidrBlockNotFoundFault < Aws::EmptyStructure; end
 
+    # The Lake Formation scope.
+    #
+    # @!attribute [rw] authorization
+    #   Determines whether the query scope is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LakeFormationQuery AWS API Documentation
+    #
+    class LakeFormationQuery < Struct.new(
+      :authorization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of scopes set up for Lake Formation integration.
+    #
+    # @note LakeFormationScopeUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LakeFormationScopeUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LakeFormationScopeUnion corresponding to the set member.
+    #
+    # @!attribute [rw] lake_formation_query
+    #   The Lake Formation scope.
+    #   @return [Types::LakeFormationQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LakeFormationScopeUnion AWS API Documentation
+    #
+    class LakeFormationScopeUnion < Struct.new(
+      :lake_formation_query,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LakeFormationQuery < LakeFormationScopeUnion; end
+      class Unknown < LakeFormationScopeUnion; end
+    end
+
     # The encryption key has exceeded its grant limit in Amazon Web Services
     # KMS.
     #
@@ -8218,6 +8418,63 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_namespace
+    #   The namespace for the Amazon Redshift IAM Identity Center
+    #   application to change. It determines which managed application
+    #   verifies the connection token.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The IAM role ARN associated with the Amazon Redshift IAM Identity
+    #   Center application to change. It has the required permissions to be
+    #   assumed and invoke the IDC Identity Center API.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift IAM Identity Center
+    #   application to change. It appears on the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_token_issuer_list
+    #   The authorized token issuer list for the Amazon Redshift IAM
+    #   Identity Center application to change.
+    #   @return [Array<Types::AuthorizedTokenIssuer>]
+    #
+    # @!attribute [rw] service_integrations
+    #   A collection of service integrations associated with the
+    #   application.
+    #   @return [Array<Types::ServiceIntegrationsUnion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyRedshiftIdcApplicationMessage AWS API Documentation
+    #
+    class ModifyRedshiftIdcApplicationMessage < Struct.new(
+      :redshift_idc_application_arn,
+      :identity_namespace,
+      :iam_role_arn,
+      :idc_display_name,
+      :authorized_token_issuer_list,
+      :service_integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redshift_idc_application
+    #   Contains properties for the Redshift IDC application.
+    #   @return [Types::RedshiftIdcApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyRedshiftIdcApplicationResult AWS API Documentation
+    #
+    class ModifyRedshiftIdcApplicationResult < Struct.new(
+      :redshift_idc_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] scheduled_action_name
     #   The name of the scheduled action to modify.
     #   @return [String]
@@ -8944,6 +9201,94 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Contains properties for the Redshift IDC application.
+    #
+    # @!attribute [rw] idc_instance_arn
+    #   The ARN for the IAM Identity Center instance that Redshift
+    #   integrates with.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_idc_application_name
+    #   The name of the Redshift application in IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_namespace
+    #   The identity namespace for the Amazon Redshift IAM Identity Center
+    #   application. It determines which managed application verifies the
+    #   connection token.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift IAM Identity Center
+    #   application. It appears on the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN for the Amazon Redshift IAM Identity Center application. It
+    #   has the required permissions to be assumed and invoke the IDC
+    #   Identity Center API.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_managed_application_arn
+    #   The ARN for the Amazon Redshift IAM Identity Center application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_onboard_status
+    #   The onboarding status for the Amazon Redshift IAM Identity Center
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_token_issuer_list
+    #   The authorized token issuer list for the Amazon Redshift IAM
+    #   Identity Center application.
+    #   @return [Array<Types::AuthorizedTokenIssuer>]
+    #
+    # @!attribute [rw] service_integrations
+    #   A list of service integrations for the Redshift IAM Identity Center
+    #   application.
+    #   @return [Array<Types::ServiceIntegrationsUnion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplication AWS API Documentation
+    #
+    class RedshiftIdcApplication < Struct.new(
+      :idc_instance_arn,
+      :redshift_idc_application_name,
+      :redshift_idc_application_arn,
+      :identity_namespace,
+      :idc_display_name,
+      :iam_role_arn,
+      :idc_managed_application_arn,
+      :idc_onboard_status,
+      :authorized_token_issuer_list,
+      :service_integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The application you attempted to add already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplicationAlreadyExistsFault AWS API Documentation
+    #
+    class RedshiftIdcApplicationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The application you attempted to find doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplicationNotExistsFault AWS API Documentation
+    #
+    class RedshiftIdcApplicationNotExistsFault < Aws::EmptyStructure; end
+
+    # The maximum number of Redshift IAM Identity Center applications was
+    # exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplicationQuotaExceededFault AWS API Documentation
+    #
+    class RedshiftIdcApplicationQuotaExceededFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to reject.
@@ -10474,6 +10819,29 @@ module Aws::Redshift
       :cluster_nodes)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A list of service integrations.
+    #
+    # @note ServiceIntegrationsUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ServiceIntegrationsUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceIntegrationsUnion corresponding to the set member.
+    #
+    # @!attribute [rw] lake_formation
+    #   A list of scopes set up for Lake Formation integration.
+    #   @return [Array<Types::LakeFormationScopeUnion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ServiceIntegrationsUnion AWS API Documentation
+    #
+    class ServiceIntegrationsUnion < Struct.new(
+      :lake_formation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LakeFormation < ServiceIntegrationsUnion; end
+      class Unknown < ServiceIntegrationsUnion; end
     end
 
     # Describes a snapshot.

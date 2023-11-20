@@ -15,6 +15,7 @@ module Aws::OSIS
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BufferOptions = Shapes::StructureShape.new(name: 'BufferOptions')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
     ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
     ChangeProgressStageStatuses = Shapes::StringShape.new(name: 'ChangeProgressStageStatuses')
@@ -27,6 +28,7 @@ module Aws::OSIS
     CreatePipelineResponse = Shapes::StructureShape.new(name: 'CreatePipelineResponse')
     DeletePipelineRequest = Shapes::StructureShape.new(name: 'DeletePipelineRequest')
     DeletePipelineResponse = Shapes::StructureShape.new(name: 'DeletePipelineResponse')
+    EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     GetPipelineBlueprintRequest = Shapes::StructureShape.new(name: 'GetPipelineBlueprintRequest')
     GetPipelineBlueprintResponse = Shapes::StructureShape.new(name: 'GetPipelineBlueprintResponse')
     GetPipelineChangeProgressRequest = Shapes::StructureShape.new(name: 'GetPipelineChangeProgressRequest')
@@ -37,6 +39,7 @@ module Aws::OSIS
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListPipelineBlueprintsRequest = Shapes::StructureShape.new(name: 'ListPipelineBlueprintsRequest')
     ListPipelineBlueprintsResponse = Shapes::StructureShape.new(name: 'ListPipelineBlueprintsResponse')
@@ -64,6 +67,8 @@ module Aws::OSIS
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    ServiceVpcEndpoint = Shapes::StructureShape.new(name: 'ServiceVpcEndpoint')
+    ServiceVpcEndpointsList = Shapes::ListShape.new(name: 'ServiceVpcEndpointsList')
     StartPipelineRequest = Shapes::StructureShape.new(name: 'StartPipelineRequest')
     StartPipelineResponse = Shapes::StructureShape.new(name: 'StartPipelineResponse')
     StopPipelineRequest = Shapes::StructureShape.new(name: 'StopPipelineRequest')
@@ -89,10 +94,14 @@ module Aws::OSIS
     ValidationMessage = Shapes::StructureShape.new(name: 'ValidationMessage')
     ValidationMessageList = Shapes::ListShape.new(name: 'ValidationMessageList')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
+    VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     VpcEndpointsList = Shapes::ListShape.new(name: 'VpcEndpointsList')
     VpcOptions = Shapes::StructureShape.new(name: 'VpcOptions')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    BufferOptions.add_member(:persistent_buffer_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PersistentBufferEnabled"))
+    BufferOptions.struct_class = Types::BufferOptions
 
     ChangeProgressStage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ChangeProgressStage.add_member(:status, Shapes::ShapeRef.new(shape: ChangeProgressStageStatuses, location_name: "Status"))
@@ -121,6 +130,8 @@ module Aws::OSIS
     CreatePipelineRequest.add_member(:pipeline_configuration_body, Shapes::ShapeRef.new(shape: PipelineConfigurationBody, required: true, location_name: "PipelineConfigurationBody"))
     CreatePipelineRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     CreatePipelineRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VpcOptions, location_name: "VpcOptions"))
+    CreatePipelineRequest.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
+    CreatePipelineRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     CreatePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePipelineRequest.struct_class = Types::CreatePipelineRequest
 
@@ -131,6 +142,9 @@ module Aws::OSIS
     DeletePipelineRequest.struct_class = Types::DeletePipelineRequest
 
     DeletePipelineResponse.struct_class = Types::DeletePipelineResponse
+
+    EncryptionAtRestOptions.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    EncryptionAtRestOptions.struct_class = Types::EncryptionAtRestOptions
 
     GetPipelineBlueprintRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "BlueprintName"))
     GetPipelineBlueprintRequest.struct_class = Types::GetPipelineBlueprintRequest
@@ -193,6 +207,10 @@ module Aws::OSIS
     Pipeline.add_member(:ingest_endpoint_urls, Shapes::ShapeRef.new(shape: IngestEndpointUrlsList, location_name: "IngestEndpointUrls"))
     Pipeline.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     Pipeline.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpointsList, location_name: "VpcEndpoints"))
+    Pipeline.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
+    Pipeline.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    Pipeline.add_member(:service_vpc_endpoints, Shapes::ShapeRef.new(shape: ServiceVpcEndpointsList, location_name: "ServiceVpcEndpoints"))
+    Pipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Pipeline.struct_class = Types::Pipeline
 
     PipelineBlueprint.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: String, location_name: "BlueprintName"))
@@ -215,6 +233,7 @@ module Aws::OSIS
     PipelineSummary.add_member(:max_units, Shapes::ShapeRef.new(shape: PipelineUnits, location_name: "MaxUnits"))
     PipelineSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     PipelineSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    PipelineSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PipelineSummary.struct_class = Types::PipelineSummary
 
     PipelineSummaryList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
@@ -224,6 +243,12 @@ module Aws::OSIS
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    ServiceVpcEndpoint.add_member(:service_name, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "ServiceName"))
+    ServiceVpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    ServiceVpcEndpoint.struct_class = Types::ServiceVpcEndpoint
+
+    ServiceVpcEndpointsList.member = Shapes::ShapeRef.new(shape: ServiceVpcEndpoint)
 
     StartPipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location: "uri", location_name: "PipelineName"))
     StartPipelineRequest.struct_class = Types::StartPipelineRequest
@@ -264,6 +289,8 @@ module Aws::OSIS
     UpdatePipelineRequest.add_member(:max_units, Shapes::ShapeRef.new(shape: PipelineUnits, location_name: "MaxUnits"))
     UpdatePipelineRequest.add_member(:pipeline_configuration_body, Shapes::ShapeRef.new(shape: PipelineConfigurationBody, location_name: "PipelineConfigurationBody"))
     UpdatePipelineRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    UpdatePipelineRequest.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
+    UpdatePipelineRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     UpdatePipelineRequest.struct_class = Types::UpdatePipelineRequest
 
     UpdatePipelineResponse.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
@@ -321,6 +348,7 @@ module Aws::OSIS
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_pipeline, Seahorse::Model::Operation.new.tap do |o|

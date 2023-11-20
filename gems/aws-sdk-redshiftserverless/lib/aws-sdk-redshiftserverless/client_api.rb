@@ -128,6 +128,7 @@ module Aws::RedshiftServerless
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RecoveryPoint = Shapes::StructureShape.new(name: 'RecoveryPoint')
     RecoveryPointList = Shapes::ListShape.new(name: 'RecoveryPointList')
+    RedshiftIdcApplicationArn = Shapes::StringShape.new(name: 'RedshiftIdcApplicationArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
     RestoreFromRecoveryPointRequest = Shapes::StructureShape.new(name: 'RestoreFromRecoveryPointRequest')
@@ -251,6 +252,7 @@ module Aws::RedshiftServerless
     CreateNamespaceRequest.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
     CreateNamespaceRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     CreateNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateNamespaceRequest.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationArn, location_name: "redshiftIdcApplicationArn"))
     CreateNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateNamespaceRequest.struct_class = Types::CreateNamespaceRequest
 

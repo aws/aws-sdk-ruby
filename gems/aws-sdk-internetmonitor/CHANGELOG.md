@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-11-17)
+------------------
+
+* Feature - Adds new querying capabilities for running data queries on a monitor
+
 1.10.0 (2023-09-27)
 ------------------
 

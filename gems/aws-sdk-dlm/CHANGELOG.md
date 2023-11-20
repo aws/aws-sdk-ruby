@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-11-17)
+------------------
+
+* Feature - Added support for SAP HANA in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies with pre and post scripts.
+
 1.64.0 (2023-11-16)
 ------------------
 

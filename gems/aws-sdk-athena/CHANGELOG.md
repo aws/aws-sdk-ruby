@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-11-17)
+------------------
+
+* Feature - Adding SerivicePreProcessing time metric
+
 1.75.0 (2023-09-27)
 ------------------
 

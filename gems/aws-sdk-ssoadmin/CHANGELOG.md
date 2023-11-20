@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-11-17)
+------------------
+
+* Feature - Improves support for configuring RefreshToken and TokenExchange grants on applications.
+
 1.31.0 (2023-11-16)
 ------------------
 

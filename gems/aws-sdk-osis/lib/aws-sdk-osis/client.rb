@@ -420,6 +420,13 @@ module Aws::OSIS
     #   pipeline. If you don't specify these values, OpenSearch Ingestion
     #   creates the pipeline with a public endpoint.
     #
+    # @option params [Types::BufferOptions] :buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to a
+    #   persistent buffer.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   List of tags to add to the pipeline upon creation.
     #
@@ -443,6 +450,12 @@ module Aws::OSIS
     #     vpc_options: {
     #       subnet_ids: ["SubnetId"], # required
     #       security_group_ids: ["SecurityGroupId"],
+    #     },
+    #     buffer_options: {
+    #       persistent_buffer_enabled: false, # required
+    #     },
+    #     encryption_at_rest_options: {
+    #       kms_key_arn: "KmsKeyArn", # required
     #     },
     #     tags: [
     #       {
@@ -474,6 +487,14 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipeline AWS API Documentation
     #
@@ -548,6 +569,14 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipeline AWS API Documentation
     #
@@ -707,6 +736,9 @@ module Aws::OSIS
     #   resp.pipelines[0].max_units #=> Integer
     #   resp.pipelines[0].created_at #=> Time
     #   resp.pipelines[0].last_updated_at #=> Time
+    #   resp.pipelines[0].tags #=> Array
+    #   resp.pipelines[0].tags[0].key #=> String
+    #   resp.pipelines[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelines AWS API Documentation
     #
@@ -795,6 +827,14 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StartPipeline AWS API Documentation
     #
@@ -847,6 +887,14 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StopPipeline AWS API Documentation
     #
@@ -950,6 +998,13 @@ module Aws::OSIS
     # @option params [Types::LogPublishingOptions] :log_publishing_options
     #   Key-value pairs to configure log publishing.
     #
+    # @option params [Types::BufferOptions] :buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to a
+    #   persistent buffer.
+    #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline #pipeline} => Types::Pipeline
@@ -966,6 +1021,12 @@ module Aws::OSIS
     #       cloud_watch_log_destination: {
     #         log_group: "LogGroup", # required
     #       },
+    #     },
+    #     buffer_options: {
+    #       persistent_buffer_enabled: false, # required
+    #     },
+    #     encryption_at_rest_options: {
+    #       kms_key_arn: "KmsKeyArn", # required
     #     },
     #   })
     #
@@ -991,6 +1052,14 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipeline AWS API Documentation
     #
@@ -1054,7 +1123,7 @@ module Aws::OSIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

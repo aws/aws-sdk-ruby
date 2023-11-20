@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-11-17)
+------------------
+
+* Feature - This release adds QuickResponse as a new Wisdom resource and Wisdom APIs for import, create, read, search, update and delete QuickResponse resources.
+
 1.22.0 (2023-10-30)
 ------------------
 

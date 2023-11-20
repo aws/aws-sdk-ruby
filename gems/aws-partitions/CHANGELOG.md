@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.853.0 (2023-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TrustedAdvisor`.
+
 1.852.0 (2023-11-16)
 ------------------
 

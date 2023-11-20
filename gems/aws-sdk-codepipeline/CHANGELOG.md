@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-11-17)
+------------------
+
+* Feature - CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision
+
 1.64.0 (2023-10-24)
 ------------------
 

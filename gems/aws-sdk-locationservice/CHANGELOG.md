@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-11-17)
+------------------
+
+* Feature - Remove default value and allow nullable for request parameters having minimum value larger than zero.
+
 1.39.0 (2023-10-12)
 ------------------
 

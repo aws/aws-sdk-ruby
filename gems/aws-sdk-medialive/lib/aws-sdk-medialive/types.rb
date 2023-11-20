@@ -164,6 +164,10 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key to use for all features that use key
+    #   encryption. Specify the ARN of a KMS key that you have created. Or
+    #   leave blank to use the key that MediaLive creates and manages for
+    #   you.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AccountConfiguration AWS API Documentation
@@ -2958,6 +2962,36 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
+    #
+    class DescribeAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -3623,6 +3657,49 @@ module Aws::MediaLive
     class DescribeScheduleResponse < Struct.new(
       :next_token,
       :schedule_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
+    #
+    class DescribeThumbnailsRequest < Struct.new(
+      :channel_id,
+      :pipeline_id,
+      :thumbnail_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
+    #
+    class DescribeThumbnailsResponse < Struct.new(
+      :thumbnail_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thumbnail details for all the pipelines of a running channel.
+    #
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
+    #
+    class DescribeThumbnailsResultModel < Struct.new(
+      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4382,10 +4459,17 @@ module Aws::MediaLive
     #   first delete all input prepare actions from the schedule.
     #   @return [String]
     #
+    # @!attribute [rw] output_static_image_overlay_schedule_actions
+    #   Enables the output static image overlay feature. Enabling this
+    #   feature allows you to send channel schedule updates to
+    #   display/clear/modify image overlays on an output-by-output bases.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FeatureActivations AWS API Documentation
     #
     class FeatureActivations < Struct.new(
-      :input_prepare_schedule_actions)
+      :input_prepare_schedule_actions,
+      :output_static_image_overlay_schedule_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4612,79 +4696,6 @@ module Aws::MediaLive
     #
     class GatewayTimeoutException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @api private
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
-    #
-    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
-    #
-    class DescribeAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
-    #
-    class DescribeAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] channel_id
-    #   @return [String]
-    #
-    # @!attribute [rw] pipeline_id
-    #   @return [String]
-    #
-    # @!attribute [rw] thumbnail_type
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
-    #
-    class DescribeThumbnailsRequest < Struct.new(
-      :channel_id,
-      :pipeline_id,
-      :thumbnail_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
-    #
-    class DescribeThumbnailsResponse < Struct.new(
-      :thumbnail_details)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Thumbnail details for all the pipelines of a running channel.
-    #
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
-    #
-    class DescribeThumbnailsResultModel < Struct.new(
-      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10559,6 +10570,16 @@ module Aws::MediaLive
     #   Action to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
+    # @!attribute [rw] static_image_output_activate_settings
+    #   Action to activate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_output_deactivate_settings
+    #   Action to deactivate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputDeactivateScheduleActionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
@@ -10574,7 +10595,9 @@ module Aws::MediaLive
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
       :static_image_activate_settings,
-      :static_image_deactivate_settings)
+      :static_image_deactivate_settings,
+      :static_image_output_activate_settings,
+      :static_image_output_deactivate_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10979,54 +11002,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequest < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The desired new account configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequestModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
-    #
-    class UpdateAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's updated configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Smpte Tt Destination Settings
     #
     # @api private
@@ -11361,6 +11336,120 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to activate a static image.
+    #
+    # @!attribute [rw] duration
+    #   The duration in milliseconds for the image to remain on the video.
+    #   If omitted or set to 0 the duration is unlimited and the image will
+    #   remain until it is explicitly deactivated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_in
+    #   The time in milliseconds for the image to fade in. The fade-in
+    #   starts at the start time of the overlay. Default is 0 (no fade-in).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_out
+    #   Applies only if a duration is specified. The time in milliseconds
+    #   for the image to fade out. The fade-out starts when the duration
+    #   time is hit, so it effectively extends the duration. Default is 0
+    #   (no fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified height. Leave
+    #   blank to use the native height of the overlay.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image
+    #   The location and filename of the image file to overlay on the video.
+    #   The file must be a 32-bit BMP, PNG, or TGA file, and must not be
+    #   larger (in pixels) than the input video.
+    #   @return [Types::InputLocation]
+    #
+    # @!attribute [rw] image_x
+    #   Placement of the left edge of the overlay relative to the left edge
+    #   of the video frame, in pixels. 0 (the default) is the left edge of
+    #   the frame. If the placement causes the overlay to extend beyond the
+    #   right edge of the underlying video, then the overlay is cropped on
+    #   the right.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Placement of the top edge of the overlay relative to the top edge of
+    #   the video frame, in pixels. 0 (the default) is the top edge of the
+    #   frame. If the placement causes the overlay to extend beyond the
+    #   bottom edge of the underlying video, then the overlay is cropped on
+    #   the bottom.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The number of the layer, 0 to 7. There are 8 layers that can be
+    #   overlaid on the video, each layer with a different image. The layers
+    #   are in Z order, which means that overlays with higher values of
+    #   layer are inserted on top of overlays with lower values of layer.
+    #   Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] opacity
+    #   Opacity of image where 0 is transparent and 100 is fully opaque.
+    #   Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the activation should apply to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] width
+    #   The width of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified width. Leave
+    #   blank to use the native width of the overlay.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputActivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :fade_in,
+      :fade_out,
+      :height,
+      :image,
+      :image_x,
+      :image_y,
+      :layer,
+      :opacity,
+      :output_names,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the action to deactivate the image in a specific layer.
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Default is 0 (no
+    #   fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The image overlay layer to deactivate, 0 to 7. Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the deactivation should apply to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputDeactivateScheduleActionSettings < Struct.new(
+      :fade_out,
+      :layer,
+      :output_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Static Key Settings
     #
     # @!attribute [rw] key_provider_server
@@ -11671,7 +11760,9 @@ module Aws::MediaLive
     # Thumbnail Configuration
     #
     # @!attribute [rw] state
-    #   Whether Thumbnail is enabled.
+    #   Enables the thumbnail feature. The feature generates thumbnails of
+    #   the incoming video in each pipeline in the channel. AUTO turns the
+    #   feature on, DISABLE turns the feature off.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailConfiguration AWS API Documentation
@@ -11974,6 +12065,54 @@ module Aws::MediaLive
     class UnprocessableEntityException < Struct.new(
       :element_path,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequest < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The desired new account configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequestModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's updated configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

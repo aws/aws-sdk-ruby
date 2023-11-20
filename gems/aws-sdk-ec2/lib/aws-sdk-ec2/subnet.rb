@@ -414,6 +414,11 @@ module Aws::EC2
     #             ena_srd_udp_enabled: false,
     #           },
     #         },
+    #         connection_tracking_specification: {
+    #           tcp_established_timeout: 1,
+    #           udp_stream_timeout: 1,
+    #           udp_timeout: 1,
+    #         },
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -912,6 +917,11 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     enable_primary_ipv_6: false,
+    #     connection_tracking_specification: {
+    #       tcp_established_timeout: 1,
+    #       udp_stream_timeout: 1,
+    #       udp_timeout: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :description
@@ -1018,6 +1028,8 @@ module Aws::EC2
     #   with an ENI attached to your instance and you enable a primary IPv6
     #   address, the first IPv6 GUA address associated with the ENI becomes
     #   the primary IPv6 address.
+    # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
+    #   A connection tracking specification for the network interface.
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       options = options.merge(subnet_id: @id)

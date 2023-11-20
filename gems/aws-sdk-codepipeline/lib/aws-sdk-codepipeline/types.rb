@@ -1997,6 +1997,17 @@ module Aws::CodePipeline
     #
     #  </note>
     #
+    # <note markdown="1"> V2 type pipelines, along with triggers on Git tags and pipeline-level
+    # variables, are not currently supported for CloudFormation and CDK
+    # resources in CodePipeline. For more information about V2 type
+    # pipelines, see [Pipeline types][1] in the *CodePipeline User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
+    #
     # @!attribute [rw] source_action_name
     #   The name of the pipeline source action where the trigger
     #   configuration, such as Git tags, is specified. The trigger
@@ -2854,10 +2865,19 @@ module Aws::CodePipeline
     #   For information about which type of pipeline to choose, see [What
     #   type of pipeline is right for me?][2].
     #
+    #   <note markdown="1"> V2 type pipelines, along with triggers on Git tags and
+    #   pipeline-level variables, are not currently supported for
+    #   CloudFormation and CDK resources in CodePipeline. For more
+    #   information about V2 type pipelines, see [Pipeline types][3] in the
+    #   *CodePipeline User Guide*.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://aws.amazon.com/codepipeline/pricing/
     #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html
+    #   [3]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
     #   @return [String]
     #
     # @!attribute [rw] triggers
@@ -3148,10 +3168,19 @@ module Aws::CodePipeline
     #   For information about which type of pipeline to choose, see [What
     #   type of pipeline is right for me?][2].
     #
+    #   <note markdown="1"> V2 type pipelines, along with triggers on Git tags and
+    #   pipeline-level variables, are not currently supported for
+    #   CloudFormation and CDK resources in CodePipeline. For more
+    #   information about V2 type pipelines, see [Pipeline types][3] in the
+    #   *CodePipeline User Guide*.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://aws.amazon.com/codepipeline/pricing/
     #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html
+    #   [3]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -3188,6 +3217,17 @@ module Aws::CodePipeline
     #
     #  </note>
     #
+    # <note markdown="1"> V2 type pipelines, along with triggers on Git tags and pipeline-level
+    # variables, are not currently supported for CloudFormation and CDK
+    # resources in CodePipeline. For more information about V2 type
+    # pipelines, see [Pipeline types][1] in the *CodePipeline User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
+    #
     # @!attribute [rw] provider_type
     #   The source provider for the event, such as connections configured
     #   for a repository with Git tags, for the specified trigger
@@ -3210,6 +3250,17 @@ module Aws::CodePipeline
 
     # A pipeline-level variable used for a pipeline execution.
     #
+    # <note markdown="1"> V2 type pipelines, along with triggers on Git tags and pipeline-level
+    # variables, are not currently supported for CloudFormation and CDK
+    # resources in CodePipeline. For more information about V2 type
+    # pipelines, see [Pipeline types][1] in the *CodePipeline User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
+    #
     # @!attribute [rw] name
     #   The name of a pipeline-level variable.
     #   @return [String]
@@ -3228,6 +3279,17 @@ module Aws::CodePipeline
     end
 
     # A variable declared at the pipeline level.
+    #
+    # <note markdown="1"> V2 type pipelines, along with triggers on Git tags and pipeline-level
+    # variables, are not currently supported for CloudFormation and CDK
+    # resources in CodePipeline. For more information about V2 type
+    # pipelines, see [Pipeline types][1] in the *CodePipeline User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html
     #
     # @!attribute [rw] name
     #   The name of a pipeline-level variable.
@@ -3783,6 +3845,36 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # A list that allows you to specify, or override, the source revision
+    # for a pipeline execution that's being started. A source revision is
+    # the version with all the changes to your application code, or source
+    # artifact, for the pipeline execution.
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action where the override will be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_type
+    #   The type of source revision, based on the source provider. For
+    #   example, the revision type for the CodeCommit action provider is the
+    #   commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_value
+    #   The source revision, or version of your source artifact, with the
+    #   changes that you want to run in the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevisionOverride AWS API Documentation
+    #
+    class SourceRevisionOverride < Struct.new(
+      :action_name,
+      :revision_type,
+      :revision_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about a stage to a job worker.
     #
     # @!attribute [rw] name
@@ -3916,12 +4008,20 @@ module Aws::CodePipeline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] source_revisions
+    #   A list that allows you to specify, or override, the source revision
+    #   for a pipeline execution that's being started. A source revision is
+    #   the version with all the changes to your application code, or source
+    #   artifact, for the pipeline execution.
+    #   @return [Array<Types::SourceRevisionOverride>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionInput AWS API Documentation
     #
     class StartPipelineExecutionInput < Struct.new(
       :name,
       :variables,
-      :client_request_token)
+      :client_request_token,
+      :source_revisions)
       SENSITIVE = []
       include Aws::Structure
     end

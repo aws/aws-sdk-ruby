@@ -18,6 +18,12 @@ module Aws::VerifiedPermissions
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
+    BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
+    BatchIsAuthorizedInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInputItem')
+    BatchIsAuthorizedInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedInputList')
+    BatchIsAuthorizedOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutput')
+    BatchIsAuthorizedOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutputItem')
+    BatchIsAuthorizedOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -178,6 +184,30 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:record, Types::AttributeValue::Record)
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
+
+    BatchIsAuthorizedInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedInput.struct_class = Types::BatchIsAuthorizedInput
+
+    BatchIsAuthorizedInputItem.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedInputItem.struct_class = Types::BatchIsAuthorizedInputItem
+
+    BatchIsAuthorizedInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem)
+
+    BatchIsAuthorizedOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedOutput.struct_class = Types::BatchIsAuthorizedOutput
+
+    BatchIsAuthorizedOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedOutputItem.struct_class = Types::BatchIsAuthorizedOutputItem
+
+    BatchIsAuthorizedOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputItem)
 
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
 
@@ -695,6 +725,19 @@ module Aws::VerifiedPermissions
         "targetPrefix" => "VerifiedPermissions",
         "uid" => "verifiedpermissions-2021-12-01",
       }
+
+      api.add_operation(:batch_is_authorized, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorized"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:create_identity_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIdentitySource"

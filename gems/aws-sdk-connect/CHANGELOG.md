@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2023-11-17)
+------------------
+
+* Feature - This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+
 1.138.0 (2023-11-14)
 ------------------
 

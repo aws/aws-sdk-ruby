@@ -188,6 +188,11 @@ module Aws::EC2
     #             ena_srd_udp_enabled: false,
     #           },
     #         },
+    #         connection_tracking_specification: {
+    #           tcp_established_timeout: 1,
+    #           udp_stream_timeout: 1,
+    #           udp_timeout: 1,
+    #         },
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -911,6 +916,11 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     enable_primary_ipv_6: false,
+    #     connection_tracking_specification: {
+    #       tcp_established_timeout: 1,
+    #       udp_stream_timeout: 1,
+    #       udp_timeout: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :description
@@ -1019,6 +1029,8 @@ module Aws::EC2
     #   with an ENI attached to your instance and you enable a primary IPv6
     #   address, the first IPv6 GUA address associated with the ENI becomes
     #   the primary IPv6 address.
+    # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
+    #   A connection tracking specification for the network interface.
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do
@@ -1265,6 +1277,10 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #     ipv_6_native: false,
+    #     ipv_4_ipam_pool_id: "IpamPoolId",
+    #     ipv_4_netmask_length: 1,
+    #     ipv_6_ipam_pool_id: "IpamPoolId",
+    #     ipv_6_netmask_length: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1296,10 +1312,8 @@ module Aws::EC2
     #
     #   This parameter is not supported for an IPv6 only subnet.
     # @option options [String] :ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
-    #
-    #   This parameter is required for an IPv6 only subnet.
+    #   The IPv6 network range for the subnet, in CIDR notation. This
+    #   parameter is required for an IPv6 only subnet.
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
@@ -1313,6 +1327,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ipv_6_native
     #   Indicates whether to create an IPv6 only subnet.
+    # @option options [String] :ipv_4_ipam_pool_id
+    #   An IPv4 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_4_netmask_length
+    #   An IPv4 netmask length for the subnet.
+    # @option options [String] :ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_6_netmask_length
+    #   An IPv6 netmask length for the subnet.
     # @return [Subnet]
     def create_subnet(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do
