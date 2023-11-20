@@ -54,25 +54,13 @@ module Aws
           let(:md5_of_attributes) { '756d7f4338696745d063b420a2f7e502' }
 
           before(:each) do
-            if client.config.api.metadata['protocol'] == 'json'
-              response_body = <<-JSON
-                {
-                 "MD5OfMessageAttributes": "#{md5_of_attributes}",
-                 "MD5OfMessageBody": "900150983cd24fb0d6963f7d28e17f72",
-                 "MessageId": "5fea7756-0ea4-451a-a703-a558b933e274"
-                }
-              JSON
-            else
-              response_body = <<-XML
-                <SendMessageResponse>
-                  <SendMessageResult>
-                    <MD5OfMessageBody>900150983cd24fb0d6963f7d28e17f72</MD5OfMessageBody>
-                    <MD5OfMessageAttributes>#{md5_of_attributes}</MD5OfMessageAttributes>
-                    <MessageId>5fea7756-0ea4-451a-a703-a558b933e274</MessageId>
-                  </SendMessageResult>
-                </SendMessageResponse>
-              XML
-            end
+            response_body = <<-JSON
+              {
+               "MD5OfMessageAttributes": "#{md5_of_attributes}",
+               "MD5OfMessageBody": "900150983cd24fb0d6963f7d28e17f72",
+               "MessageId": "5fea7756-0ea4-451a-a703-a558b933e274"
+              }
+            JSON
 
             client.handle(step: :send) do |context|
               context.http_response.signal_done(
@@ -167,42 +155,22 @@ module Aws
         describe '#send_message_batch' do
 
           before(:each) do
-            if client.config.api.metadata['protocol'] == 'json'
-              client.handle(step: :send) do |context|
-                context.http_response.signal_done(
-                  status_code: 200,
-                  headers: {},
-                  body:<<-JSON)
-                  {
-                    "Successful": [
-                      {
-                        "Id": "msg-id",
-                        "MD5OfMessageBody": "900150983cd24fb0d6963f7d28e17f72",
-                        "MD5OfMessageAttributes": "756d7f4338696745d063b420a2f7e502"
-                      }
-                    ]
-                  }
-                JSON
-                Seahorse::Client::Response.new(context: context)
-              end
-            else
-              client.handle(step: :send) do |context|
-                context.http_response.signal_done(
-                  status_code: 200,
-                  headers: {},
-                  body:<<-XML)
-                  <SendMessageBatchResponse>
-                    <SendMessageBatchResult>
-                      <SendMessageBatchResultEntry>
-                        <Id>msg-id</Id>
-                        <MD5OfMessageBody>900150983cd24fb0d6963f7d28e17f72</MD5OfMessageBody>
-                        <MD5OfMessageAttributes>756d7f4338696745d063b420a2f7e502</MD5OfMessageAttributes>
-                      </SendMessageBatchResultEntry>
-                    </SendMessageBatchResult>
-                  </SendMessageBatchResponse>
-                XML
-                Seahorse::Client::Response.new(context: context)
-              end
+            client.handle(step: :send) do |context|
+              context.http_response.signal_done(
+                status_code: 200,
+                headers: {},
+                body:<<-JSON)
+                {
+                  "Successful": [
+                    {
+                      "Id": "msg-id",
+                      "MD5OfMessageBody": "900150983cd24fb0d6963f7d28e17f72",
+                      "MD5OfMessageAttributes": "756d7f4338696745d063b420a2f7e502"
+                    }
+                  ]
+                }
+              JSON
+              Seahorse::Client::Response.new(context: context)
             end
           end
 
@@ -253,39 +221,21 @@ module Aws
           end
 
           it 'skips failed errors' do
-            if client.config.api.metadata['protocol'] == 'json'
-              client.handle(step: :send) do |context|
-                context.http_response.signal_done(
-                  status_code: 200,
-                  headers: {},
-                  body:<<-JSON)
-                  {
-                    "Successful": [],
-                    "Failed": [
-                      {
-                        "Id": "msg-id"
-                      }
-                    ]
-                  }
-                JSON
-                Seahorse::Client::Response.new(context: context)
-              end
-            else
-              client.handle(step: :send) do |context|
-                context.http_response.signal_done(
-                  status_code: 200,
-                  headers: {},
-                  body:<<-XML)
-                  <SendMessageBatchResponse>
-                    <SendMessageBatchResult>
-                      <BatchResultErrorEntry>
-                        <Id>msg-id</Id>
-                      </BatchResultErrorEntry>
-                    </SendMessageBatchResult>
-                  </SendMessageBatchResponse>
-                XML
-                Seahorse::Client::Response.new(context: context)
-              end
+            client.handle(step: :send) do |context|
+              context.http_response.signal_done(
+                status_code: 200,
+                headers: {},
+                body:<<-JSON)
+                {
+                  "Successful": [],
+                  "Failed": [
+                    {
+                      "Id": "msg-id"
+                    }
+                  ]
+                }
+              JSON
+              Seahorse::Client::Response.new(context: context)
             end
             expect {
               client.send_message_batch(
