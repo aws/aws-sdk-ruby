@@ -6,7 +6,7 @@ require 'resolv'
 
 module Aws
   # An auto-refreshing credential provider that loads credentials from
-  # instances running in containers.
+  # instances running in ECS.
   #
   #     ecs_credentials = Aws::ECSCredentials.new(retries: 3)
   #     ec2 = Aws::EC2::Client.new(credentials: ecs_credentials)
@@ -16,12 +16,6 @@ module Aws
 
     # @api private
     class Non200Response < RuntimeError; end
-
-    # Raised when the token file cannot be read.
-    class TokenFileReadError < RuntimeError; end
-
-    # Raised when the token file is invalid.
-    class InvalidTokenError < RuntimeError; end
 
     # These are the errors we trap when attempting to talk to the
     # instance metadata service.  Any of these imply the service
@@ -47,7 +41,7 @@ module Aws
     #   is set and `credential_path` is not set.
     # @option options [String] :credential_path By default, the value of the
     #   AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variable.
-    # @option options [String] :endpoint The container credential endpoint.
+    # @option options [String] :endpoint The ECS credential endpoint.
     #   By default, this is the value of the AWS_CONTAINER_CREDENTIALS_FULL_URI
     #   environment variable. This value is ignored if `credential_path` or
     #   ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] is set.
@@ -70,6 +64,7 @@ module Aws
       endpoint = options[:endpoint] ||
                  ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
       initialize_uri(options, credential_path, endpoint)
+      @authorization_token = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN']
 
       @retries = options[:retries] || 5
       @http_open_timeout = options[:http_open_timeout] || 5
@@ -108,18 +103,11 @@ module Aws
 
     def initialize_full_uri(endpoint)
       uri = URI.parse(endpoint)
-      validate_full_uri_scheme!(uri)
       validate_full_uri!(uri)
-      @host = uri.hostname
+      @host = uri.host
       @port = uri.port
       @scheme = uri.scheme
-      @credential_path = uri.request_uri
-    end
-
-    def validate_full_uri_scheme!(full_uri)
-      return if full_uri.is_a?(URI::HTTP) || full_uri.is_a?(URI::HTTPS)
-
-      raise ArgumentError, "'#{full_uri}' must be a valid HTTP or HTTPS URI"
+      @credential_path = uri.path
     end
 
     # Validate that the full URI is using a loopback address if scheme is http.
@@ -127,44 +115,25 @@ module Aws
       return unless full_uri.scheme == 'http'
 
       begin
-        return if valid_ip_address?(IPAddr.new(full_uri.host))
+        return if ip_loopback?(IPAddr.new(full_uri.host))
       rescue IPAddr::InvalidAddressError
         addresses = Resolv.getaddresses(full_uri.host)
-        return if addresses.all? { |addr| valid_ip_address?(IPAddr.new(addr)) }
+        return if addresses.all? { |addr| ip_loopback?(IPAddr.new(addr)) }
       end
 
       raise ArgumentError,
-            'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a local loopback '\
-            'or an ECS or EKS link-local address when using the http scheme.'
-    end
-
-    def valid_ip_address?(ip_address)
-      ip_loopback?(ip_address) || ecs_or_eks_ip?(ip_address)
+            'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a loopback '\
+            'address when using the http scheme.'
     end
 
     # loopback? method is available in Ruby 2.5+
     # Replicate the logic here.
-    # loopback (IPv4 127.0.0.0/8, IPv6 ::1/128)
     def ip_loopback?(ip_address)
       case ip_address.family
       when Socket::AF_INET
         ip_address & 0xff000000 == 0x7f000000
       when Socket::AF_INET6
         ip_address == 1
-      else
-        false
-      end
-    end
-
-    # Verify that the IP address is a link-local address from ECS or EKS.
-    # ECS container host (IPv4 `169.254.170.2`)
-    # EKS container host (IPv4 `169.254.170.23`, IPv6 `fd00:ec2::23`)
-    def ecs_or_eks_ip?(ip_address)
-      case ip_address.family
-      when Socket::AF_INET
-        [0xa9feaa02, 0xa9feaa17].include?(ip_address)
-      when Socket::AF_INET6
-        ip_address == 0xfd00_0ec2_0000_0000_0000_0000_0000_0023
       else
         false
       end
@@ -205,34 +174,8 @@ module Aws
           http_get(conn, @credential_path)
         end
       end
-    rescue TokenFileReadError, InvalidTokenError
-      raise
     rescue StandardError
       '{}'
-    end
-
-    def fetch_authorization_token
-      if (path = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE'])
-        fetch_authorization_token_file(path)
-      elsif (token = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN'])
-        token
-      end
-    end
-
-    def fetch_authorization_token_file(path)
-      File.read(path).strip
-    rescue Errno::ENOENT
-      raise TokenFileReadError,
-            'AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE is set '\
-            "but the file doesn't exist: #{path}"
-    end
-
-    def validate_authorization_token!(token)
-      return unless token.include?("\r\n")
-
-      raise InvalidTokenError,
-            'Invalid Authorization token: token contains '\
-            'a newline and carriage return character.'
     end
 
     def open_connection
@@ -247,18 +190,11 @@ module Aws
 
     def http_get(connection, path)
       request = Net::HTTP::Get.new(path)
-      set_authorization_token(request)
+      request['Authorization'] = @authorization_token if @authorization_token
       response = connection.request(request)
       raise Non200Response unless response.code.to_i == 200
 
       response.body
-    end
-
-    def set_authorization_token(request)
-      if (authorization_token = fetch_authorization_token)
-        validate_authorization_token!(authorization_token)
-        request['Authorization'] = authorization_token
-      end
     end
 
     def retry_errors(error_classes, options = {})
@@ -266,8 +202,6 @@ module Aws
       retries = 0
       begin
         yield
-      rescue TokenFileReadError, InvalidTokenError
-        raise
       rescue *error_classes => _e
         raise unless retries < max_retries
 
