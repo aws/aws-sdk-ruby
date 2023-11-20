@@ -7,17 +7,17 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::Macie
+module Aws::TrustedAdvisor
 
-  # When Macie returns an error response, the Ruby SDK constructs and raises an error.
-  # These errors all extend Aws::Macie::Errors::ServiceError < {Aws::Errors::ServiceError}
+  # When TrustedAdvisor returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::TrustedAdvisor::Errors::ServiceError < {Aws::Errors::ServiceError}
   #
-  # You can rescue all Macie errors using ServiceError:
+  # You can rescue all TrustedAdvisor errors using ServiceError:
   #
   #     begin
   #       # do stuff
-  #     rescue Aws::Macie::Errors::ServiceError
-  #       # rescues all Macie API errors
+  #     rescue Aws::TrustedAdvisor::Errors::ServiceError
+  #       # rescues all TrustedAdvisor API errors
   #     end
   #
   #
@@ -28,9 +28,11 @@ module Aws::Macie
   #
   # ## Error Classes
   # * {AccessDeniedException}
-  # * {InternalException}
-  # * {InvalidInputException}
-  # * {LimitExceededException}
+  # * {ConflictException}
+  # * {InternalServerException}
+  # * {ResourceNotFoundException}
+  # * {ThrottlingException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -42,34 +44,9 @@ module Aws::Macie
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::Macie::Types::AccessDeniedException] data
+      # @param [Aws::TrustedAdvisor::Types::AccessDeniedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def resource_type
-        @data[:resource_type]
-      end
-    end
-
-    class InternalException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Macie::Types::InternalException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def error_code
-        @data[:error_code]
       end
 
       # @return [String]
@@ -78,43 +55,28 @@ module Aws::Macie
       end
     end
 
-    class InvalidInputException < ServiceError
+    class ConflictException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::Macie::Types::InvalidInputException] data
+      # @param [Aws::TrustedAdvisor::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
 
       # @return [String]
-      def error_code
-        @data[:error_code]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
-      end
-
-      # @return [String]
-      def field_name
-        @data[:field_name]
       end
     end
 
-    class LimitExceededException < ServiceError
+    class InternalServerException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::Macie::Types::LimitExceededException] data
+      # @param [Aws::TrustedAdvisor::Types::InternalServerException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def error_code
-        @data[:error_code]
       end
 
       # @return [String]
@@ -122,9 +84,61 @@ module Aws::Macie
         @message || @data[:message]
       end
 
+      def retryable?
+        true
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::TrustedAdvisor::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
       # @return [String]
-      def resource_type
-        @data[:resource_type]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::TrustedAdvisor::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::TrustedAdvisor::Types::ValidationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.854.0 (2023-11-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.853.0 (2023-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TrustedAdvisor`.
+
+1.852.0 (2023-11-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.851.0 (2023-11-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.850.0 (2023-11-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.849.0 (2023-11-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.848.0 (2023-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.847.0 (2023-11-07)
 ------------------
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-fms/customizations'
 # @!group service
 module Aws::FMS
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end

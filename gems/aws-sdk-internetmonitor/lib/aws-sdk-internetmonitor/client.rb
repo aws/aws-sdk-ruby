@@ -583,7 +583,7 @@ module Aws::InternetMonitor
     #   The name of the monitor.
     #
     # @option params [required, String] :event_id
-    #   The internally generated identifier of a health event. Because
+    #   The internally-generated identifier of a health event. Because
     #   `EventID` contains the forward slash (“/”) character, you must
     #   URL-encode the `EventID` field in the request URL.
     #
@@ -722,6 +722,114 @@ module Aws::InternetMonitor
     # @param [Hash] params ({})
     def get_monitor(params = {}, options = {})
       req = build_request(:get_monitor, params)
+      req.send_request(options)
+    end
+
+    # Return the data for a query with the Amazon CloudWatch Internet
+    # Monitor query interface. Specify the query that you want to return
+    # results for by providing a `QueryId` and a monitor name.
+    #
+    # For more information about using the query interface, including
+    # examples, see [Using the Amazon CloudWatch Internet Monitor query
+    # interface][1] in the Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the monitor to return data for.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query that you want to return data results for. A
+    #   `QueryId` is an internally-generated identifier for a specific query.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The number of query results that you want to return with this call.
+    #
+    # @return [Types::GetQueryResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsOutput#fields #fields} => Array&lt;Types::QueryField&gt;
+    #   * {Types::GetQueryResultsOutput#data #data} => Array&lt;Array&lt;String&gt;&gt;
+    #   * {Types::GetQueryResultsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fields #=> Array
+    #   resp.fields[0].name #=> String
+    #   resp.fields[0].type #=> String
+    #   resp.data #=> Array
+    #   resp.data[0] #=> Array
+    #   resp.data[0][0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryResults AWS API Documentation
+    #
+    # @overload get_query_results(params = {})
+    # @param [Hash] params ({})
+    def get_query_results(params = {}, options = {})
+      req = build_request(:get_query_results, params)
+      req.send_request(options)
+    end
+
+    # Returns the current status of a query for the Amazon CloudWatch
+    # Internet Monitor query interface, for a specified query ID and
+    # monitor. When you run a query, check the status to make sure that the
+    # query has `SUCCEEDED` before you review the results.
+    #
+    # * `QUEUED`: The query is scheduled to run.
+    #
+    # * `RUNNING`: The query is in progress but not complete.
+    #
+    # * `SUCCEEDED`: The query completed sucessfully.
+    #
+    # * `FAILED`: The query failed due to an error.
+    #
+    # * `CANCELED`: The query was canceled.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the monitor.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query that you want to return the status for. A
+    #   `QueryId` is an internally-generated dentifier for a specific query.
+    #
+    # @return [Types::GetQueryStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryStatusOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_status({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryStatus AWS API Documentation
+    #
+    # @overload get_query_status(params = {})
+    # @param [Hash] params ({})
+    def get_query_status(params = {}, options = {})
+      req = build_request(:get_query_status, params)
       req.send_request(options)
     end
 
@@ -907,6 +1015,125 @@ module Aws::InternetMonitor
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Start a query to return data for a specific query type for the Amazon
+    # CloudWatch Internet Monitor query interface. Specify a time period for
+    # the data that you want returned by using `StartTime` and `EndTime`.
+    # You filter the query results to return by providing parameters that
+    # you specify with `FilterParameters`.
+    #
+    # For more information about using the query interface, including
+    # examples, see [Using the Amazon CloudWatch Internet Monitor query
+    # interface][1] in the Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the monitor to query.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The timestamp that is the beginning of the period that you want to
+    #   retrieve data for with your query.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The timestamp that is the end of the period that you want to retrieve
+    #   data for with your query.
+    #
+    # @option params [required, String] :query_type
+    #   The type of query to run. The following are the three types of queries
+    #   that you can run using the Internet Monitor query interface:
+    #
+    #   * `MEASUREMENTS`: TBD definition
+    #
+    #   * `TOP_LOCATIONS`: TBD definition
+    #
+    #   * `TOP_LOCATION_DETAILS`: TBD definition
+    #
+    #   For lists of the fields returned with each query type and more
+    #   information about how each type of query is performed, see [ Using the
+    #   Amazon CloudWatch Internet Monitor query interface][1] in the Amazon
+    #   CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #
+    # @option params [Array<Types::FilterParameter>] :filter_parameters
+    #   The `FilterParameters` field that you use with Amazon CloudWatch
+    #   Internet Monitor queries is a string the defines how you want a query
+    #   to be filtered. The filter parameters that you can specify depend on
+    #   the query type, since each query type returns a different set of
+    #   Internet Monitor data.
+    #
+    #   For more information about specifying filter parameters, see [Using
+    #   the Amazon CloudWatch Internet Monitor query interface][1] in the
+    #   Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #
+    # @return [Types::StartQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryOutput#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query({
+    #     monitor_name: "ResourceName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     query_type: "MEASUREMENTS", # required, accepts MEASUREMENTS, TOP_LOCATIONS, TOP_LOCATION_DETAILS
+    #     filter_parameters: [
+    #       {
+    #         field: "String",
+    #         operator: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StartQuery AWS API Documentation
+    #
+    # @overload start_query(params = {})
+    # @param [Hash] params ({})
+    def start_query(params = {}, options = {})
+      req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
+    # Stop a query that is progress for a specific monitor.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the monitor.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query that you want to stop. A `QueryId` is an
+    #   internally-generated identifier for a specific query.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_query({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StopQuery AWS API Documentation
+    #
+    # @overload stop_query(params = {})
+    # @param [Hash] params ({})
+    def stop_query(params = {}, options = {})
+      req = build_request(:stop_query, params)
       req.send_request(options)
     end
 
@@ -1125,7 +1352,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

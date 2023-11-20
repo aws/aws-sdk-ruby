@@ -2133,7 +2133,6 @@
         "sourceFileType",
         "subjectId",
         "sampleId",
-        "referenceArn",
         "name"
       ],
       "members":{
@@ -2683,7 +2682,8 @@
       "enum":[
         "FASTQ",
         "BAM",
-        "CRAM"
+        "CRAM",
+        "UBAM"
       ]
     },
     "Filter":{
@@ -3326,7 +3326,9 @@
         "accelerators":{"shape":"Accelerators"},
         "retentionMode":{"shape":"RunRetentionMode"},
         "failureReason":{"shape":"RunFailureReason"},
-        "logLocation":{"shape":"RunLogLocation"}
+        "logLocation":{"shape":"RunLogLocation"},
+        "uuid":{"shape":"RunUuid"},
+        "runOutputUri":{"shape":"RunOutputUri"}
       }
     },
     "GetRunResponsePriorityInteger":{
@@ -4689,7 +4691,7 @@
       "members":{
         "name":{"shape":"ReadSetName"},
         "status":{"shape":"ReadSetStatus"},
-        "referenceArn":{"shape":"ReferenceArn"},
+        "referenceArn":{"shape":"ReferenceArnFilter"},
         "createdAfter":{"shape":"SyntheticTimestamp_date_time"},
         "createdBefore":{"shape":"SyntheticTimestamp_date_time"},
         "sampleId":{"shape":"SampleId"},
@@ -4848,6 +4850,12 @@
       "max":127,
       "min":1,
       "pattern":"arn:.+"
+    },
+    "ReferenceArnFilter":{
+      "type":"string",
+      "max":127,
+      "min":0,
+      "pattern":"$|^arn:.+"
     },
     "ReferenceDescription":{
       "type":"string",
@@ -5303,6 +5311,12 @@
       "type":"timestamp",
       "timestampFormat":"iso8601"
     },
+    "RunUuid":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
+    },
     "S3Destination":{
       "type":"string",
       "pattern":"s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?"
@@ -5633,8 +5647,7 @@
         "sourceFiles",
         "sourceFileType",
         "subjectId",
-        "sampleId",
-        "referenceArn"
+        "sampleId"
       ],
       "members":{
         "sourceFiles":{"shape":"SourceFiles"},
@@ -5746,7 +5759,9 @@
         "arn":{"shape":"RunArn"},
         "id":{"shape":"RunId"},
         "status":{"shape":"RunStatus"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "uuid":{"shape":"RunUuid"},
+        "runOutputUri":{"shape":"RunOutputUri"}
       }
     },
     "StartVariantImportRequest":{

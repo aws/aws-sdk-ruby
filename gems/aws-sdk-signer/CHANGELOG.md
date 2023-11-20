@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2023-11-14)
+------------------
+
+* Feature - Documentation updates for AWS Signer
+
 1.47.0 (2023-09-27)
 ------------------
 

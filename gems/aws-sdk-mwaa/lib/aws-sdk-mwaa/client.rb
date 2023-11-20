@@ -443,7 +443,7 @@ module Aws::MWAA
     #   Airflow (MWAA)][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
-    #   `2.7.2`.
+    #   `2.7.2`
     #
     #
     #
@@ -457,6 +457,19 @@ module Aws::MWAA
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
+    #
+    # @option params [String] :endpoint_management
+    #   Defines whether the VPC endpoints configured for the environment are
+    #   created, and managed, by the customer or by Amazon MWAA. If set to
+    #   `SERVICE`, Amazon MWAA will create and manage the required VPC
+    #   endpoints in your VPC. If set to `CUSTOMER`, you must create, and
+    #   manage, the VPC endpoints for your VPC. If you choose to create an
+    #   environment in a shared VPC, you must set this value to `CUSTOMER`. In
+    #   a shared VPC deployment, the environment will remain in `PENDING`
+    #   status until you create the VPC endpoints. If you do not take action
+    #   to create the endpoints within 72 hours, the status will change to
+    #   `CREATE_FAILED`. You can delete the failed environment and create a
+    #   new one.
     #
     # @option params [String] :environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
@@ -619,8 +632,8 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [String] :webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. For more information, see
-    #   [Apache Airflow access modes][1].
+    #   Defines the access mode for the Apache Airflow *web server*. For more
+    #   information, see [Apache Airflow access modes][1].
     #
     #
     #
@@ -645,6 +658,7 @@ module Aws::MWAA
     #     },
     #     airflow_version: "AirflowVersion",
     #     dag_s3_path: "RelativePath", # required
+    #     endpoint_management: "CUSTOMER", # accepts CUSTOMER, SERVICE
     #     environment_class: "EnvironmentClass",
     #     execution_role_arn: "IamRoleArn", # required
     #     kms_key: "KmsKey",
@@ -788,8 +802,11 @@ module Aws::MWAA
     #   resp.environment.airflow_configuration_options["ConfigKey"] #=> String
     #   resp.environment.airflow_version #=> String
     #   resp.environment.arn #=> String
+    #   resp.environment.celery_executor_queue #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.dag_s3_path #=> String
+    #   resp.environment.database_vpc_endpoint_service #=> String
+    #   resp.environment.endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.environment.environment_class #=> String
     #   resp.environment.execution_role_arn #=> String
     #   resp.environment.kms_key #=> String
@@ -829,11 +846,12 @@ module Aws::MWAA
     #   resp.environment.source_bucket_arn #=> String
     #   resp.environment.startup_script_s3_object_version #=> String
     #   resp.environment.startup_script_s3_path #=> String
-    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT"
+    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT", "PENDING"
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["TagKey"] #=> String
     #   resp.environment.webserver_access_mode #=> String, one of "PRIVATE_ONLY", "PUBLIC_ONLY"
     #   resp.environment.webserver_url #=> String
+    #   resp.environment.webserver_vpc_endpoint_service #=> String
     #   resp.environment.weekly_maintenance_window_start #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/GetEnvironment AWS API Documentation
@@ -1306,7 +1324,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

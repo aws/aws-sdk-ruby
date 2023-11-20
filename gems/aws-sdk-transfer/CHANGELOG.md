@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-11-16)
+------------------
+
+* Feature - Introduced S3StorageOptions for servers to enable directory listing optimizations and added Type fields to logical directory mappings.
+
 1.83.0 (2023-10-26)
 ------------------
 

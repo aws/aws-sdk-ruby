@@ -2354,6 +2354,12 @@ module Aws::CodePipeline
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::SourceRevisionOverride>] :source_revisions
+    #   A list that allows you to specify, or override, the source revision
+    #   for a pipeline execution that's being started. A source revision is
+    #   the version with all the changes to your application code, or source
+    #   artifact, for the pipeline execution.
+    #
     # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionOutput#pipeline_execution_id #pipeline_execution_id} => String
@@ -2369,6 +2375,13 @@ module Aws::CodePipeline
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     source_revisions: [
+    #       {
+    #         action_name: "ActionName", # required
+    #         revision_type: "COMMIT_ID", # required, accepts COMMIT_ID, IMAGE_DIGEST, S3_OBJECT_VERSION_ID
+    #         revision_value: "Revision", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2744,7 +2757,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

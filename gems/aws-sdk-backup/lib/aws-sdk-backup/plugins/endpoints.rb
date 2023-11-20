@@ -136,6 +136,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::GetRecoveryPointRestoreMetadata.build(context)
           when :get_supported_resource_types
             Aws::Backup::Endpoints::GetSupportedResourceTypes.build(context)
+          when :list_backup_job_summaries
+            Aws::Backup::Endpoints::ListBackupJobSummaries.build(context)
           when :list_backup_jobs
             Aws::Backup::Endpoints::ListBackupJobs.build(context)
           when :list_backup_plan_templates
@@ -148,6 +150,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListBackupSelections.build(context)
           when :list_backup_vaults
             Aws::Backup::Endpoints::ListBackupVaults.build(context)
+          when :list_copy_job_summaries
+            Aws::Backup::Endpoints::ListCopyJobSummaries.build(context)
           when :list_copy_jobs
             Aws::Backup::Endpoints::ListCopyJobs.build(context)
           when :list_frameworks
@@ -168,6 +172,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListReportJobs.build(context)
           when :list_report_plans
             Aws::Backup::Endpoints::ListReportPlans.build(context)
+          when :list_restore_job_summaries
+            Aws::Backup::Endpoints::ListRestoreJobSummaries.build(context)
           when :list_restore_jobs
             Aws::Backup::Endpoints::ListRestoreJobs.build(context)
           when :list_tags

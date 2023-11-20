@@ -797,6 +797,10 @@ module Aws::Connect
     SecurityProfilesSearchFilter = Shapes::StructureShape.new(name: 'SecurityProfilesSearchFilter')
     SecurityProfilesSearchSummaryList = Shapes::ListShape.new(name: 'SecurityProfilesSearchSummaryList')
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
+    SegmentAttributeName = Shapes::StringShape.new(name: 'SegmentAttributeName')
+    SegmentAttributeValue = Shapes::StructureShape.new(name: 'SegmentAttributeValue')
+    SegmentAttributeValueString = Shapes::StringShape.new(name: 'SegmentAttributeValueString')
+    SegmentAttributes = Shapes::MapShape.new(name: 'SegmentAttributes')
     SendNotificationActionDefinition = Shapes::StructureShape.new(name: 'SendNotificationActionDefinition')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignInConfig = Shapes::StructureShape.new(name: 'SignInConfig')
@@ -2758,6 +2762,7 @@ module Aws::Connect
     ListIntegrationAssociationsRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location: "querystring", location_name: "integrationType"))
     ListIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListIntegrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListIntegrationAssociationsRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "integrationArn"))
     ListIntegrationAssociationsRequest.struct_class = Types::ListIntegrationAssociationsRequest
 
     ListIntegrationAssociationsResponse.add_member(:integration_association_summary_list, Shapes::ShapeRef.new(shape: IntegrationAssociationSummaryList, location_name: "IntegrationAssociationSummaryList"))
@@ -3569,7 +3574,7 @@ module Aws::Connect
     SearchSecurityProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
 
-    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchUsersRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: UserSearchFilter, location_name: "SearchFilter"))
@@ -3643,6 +3648,12 @@ module Aws::Connect
 
     SecurityProfilesSearchSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSearchSummary)
 
+    SegmentAttributeValue.add_member(:value_string, Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: "ValueString"))
+    SegmentAttributeValue.struct_class = Types::SegmentAttributeValue
+
+    SegmentAttributes.key = Shapes::ShapeRef.new(shape: SegmentAttributeName)
+    SegmentAttributes.value = Shapes::ShapeRef.new(shape: SegmentAttributeValue)
+
     SendNotificationActionDefinition.add_member(:delivery_method, Shapes::ShapeRef.new(shape: NotificationDeliveryType, required: true, location_name: "DeliveryMethod"))
     SendNotificationActionDefinition.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, location_name: "Subject"))
     SendNotificationActionDefinition.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Content"))
@@ -3679,6 +3690,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
     StartChatContactRequest.add_member(:persistent_chat, Shapes::ShapeRef.new(shape: PersistentChat, location_name: "PersistentChat"))
     StartChatContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    StartChatContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))

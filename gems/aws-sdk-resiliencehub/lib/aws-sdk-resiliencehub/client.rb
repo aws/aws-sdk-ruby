@@ -1651,6 +1651,11 @@ module Aws::ResilienceHub
     #   resp.assessment.policy.tags #=> Hash
     #   resp.assessment.policy.tags["TagKey"] #=> String
     #   resp.assessment.policy.tier #=> String, one of "MissionCritical", "Critical", "Important", "CoreServices", "NonCritical", "NotApplicable"
+    #   resp.assessment.resiliency_score.component_score #=> Hash
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].excluded_count #=> Integer
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].outstanding_count #=> Integer
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].possible_score #=> Float
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].score #=> Float
     #   resp.assessment.resiliency_score.disruption_score #=> Hash
     #   resp.assessment.resiliency_score.disruption_score["DisruptionType"] #=> Float
     #   resp.assessment.resiliency_score.score #=> Float
@@ -2216,6 +2221,7 @@ module Aws::ResilienceHub
     #   resp.alarm_recommendations[0].name #=> String
     #   resp.alarm_recommendations[0].prerequisite #=> String
     #   resp.alarm_recommendations[0].recommendation_id #=> String
+    #   resp.alarm_recommendations[0].recommendation_status #=> String, one of "Implemented", "Inactive", "NotImplemented", "Excluded"
     #   resp.alarm_recommendations[0].reference_id #=> String
     #   resp.alarm_recommendations[0].type #=> String, one of "Metric", "Composite", "Canary", "Logs", "Event"
     #   resp.next_token #=> String
@@ -2456,6 +2462,11 @@ module Aws::ResilienceHub
     #   resp.component_compliances[0].cost.currency #=> String
     #   resp.component_compliances[0].cost.frequency #=> String, one of "Hourly", "Daily", "Monthly", "Yearly"
     #   resp.component_compliances[0].message #=> String
+    #   resp.component_compliances[0].resiliency_score.component_score #=> Hash
+    #   resp.component_compliances[0].resiliency_score.component_score["ResiliencyScoreType"].excluded_count #=> Integer
+    #   resp.component_compliances[0].resiliency_score.component_score["ResiliencyScoreType"].outstanding_count #=> Integer
+    #   resp.component_compliances[0].resiliency_score.component_score["ResiliencyScoreType"].possible_score #=> Float
+    #   resp.component_compliances[0].resiliency_score.component_score["ResiliencyScoreType"].score #=> Float
     #   resp.component_compliances[0].resiliency_score.disruption_score #=> Hash
     #   resp.component_compliances[0].resiliency_score.disruption_score["DisruptionType"] #=> Float
     #   resp.component_compliances[0].resiliency_score.score #=> Float
@@ -3191,6 +3202,7 @@ module Aws::ResilienceHub
     #   resp.sop_recommendations[0].name #=> String
     #   resp.sop_recommendations[0].prerequisite #=> String
     #   resp.sop_recommendations[0].recommendation_id #=> String
+    #   resp.sop_recommendations[0].recommendation_status #=> String, one of "Implemented", "Inactive", "NotImplemented", "Excluded"
     #   resp.sop_recommendations[0].reference_id #=> String
     #   resp.sop_recommendations[0].service_type #=> String, one of "SSM"
     #
@@ -3341,6 +3353,7 @@ module Aws::ResilienceHub
     #   resp.test_recommendations[0].name #=> String
     #   resp.test_recommendations[0].prerequisite #=> String
     #   resp.test_recommendations[0].recommendation_id #=> String
+    #   resp.test_recommendations[0].recommendation_status #=> String, one of "Implemented", "Inactive", "NotImplemented", "Excluded"
     #   resp.test_recommendations[0].reference_id #=> String
     #   resp.test_recommendations[0].risk #=> String, one of "Small", "Medium", "High"
     #   resp.test_recommendations[0].type #=> String, one of "Software", "Hardware", "AZ", "Region"
@@ -3956,6 +3969,11 @@ module Aws::ResilienceHub
     #   resp.assessment.policy.tags #=> Hash
     #   resp.assessment.policy.tags["TagKey"] #=> String
     #   resp.assessment.policy.tier #=> String, one of "MissionCritical", "Critical", "Important", "CoreServices", "NonCritical", "NotApplicable"
+    #   resp.assessment.resiliency_score.component_score #=> Hash
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].excluded_count #=> Integer
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].outstanding_count #=> Integer
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].possible_score #=> Float
+    #   resp.assessment.resiliency_score.component_score["ResiliencyScoreType"].score #=> Float
     #   resp.assessment.resiliency_score.disruption_score #=> Hash
     #   resp.assessment.resiliency_score.disruption_score["DisruptionType"] #=> Float
     #   resp.assessment.resiliency_score.score #=> Float
@@ -4511,7 +4529,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

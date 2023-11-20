@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-11-08)
+------------------
+
+* Feature - Added API support for new GuardDuty EKS Audit Log finding types.
+
 1.81.0 (2023-10-17)
 ------------------
 

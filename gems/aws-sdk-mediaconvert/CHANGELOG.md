@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2023-11-10)
+------------------
+
+* Feature - This release includes the ability to specify any input source as the primary input for corresponding follow modes, and allows users to specify fit and fill behaviors without resizing content.
+
 1.119.0 (2023-10-03)
 ------------------
 

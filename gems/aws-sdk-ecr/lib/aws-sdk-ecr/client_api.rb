@@ -42,6 +42,7 @@ module Aws::ECR
     CreateRepositoryRequest = Shapes::StructureShape.new(name: 'CreateRepositoryRequest')
     CreateRepositoryResponse = Shapes::StructureShape.new(name: 'CreateRepositoryResponse')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
+    CredentialArn = Shapes::StringShape.new(name: 'CredentialArn')
     CvssScore = Shapes::StructureShape.new(name: 'CvssScore')
     CvssScoreAdjustment = Shapes::StructureShape.new(name: 'CvssScoreAdjustment')
     CvssScoreAdjustmentList = Shapes::ListShape.new(name: 'CvssScoreAdjustmentList')
@@ -139,6 +140,7 @@ module Aws::ECR
     InvalidLayerPartException = Shapes::StructureShape.new(name: 'InvalidLayerPartException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
+    IsPTCRuleValid = Shapes::BooleanShape.new(name: 'IsPTCRuleValid')
     KmsError = Shapes::StringShape.new(name: 'KmsError')
     KmsException = Shapes::StructureShape.new(name: 'KmsException')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
@@ -180,6 +182,7 @@ module Aws::ECR
     MediaTypeList = Shapes::ListShape.new(name: 'MediaTypeList')
     Metric = Shapes::StringShape.new(name: 'Metric')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PTCValidateFailure = Shapes::StringShape.new(name: 'PTCValidateFailure')
     PackageManager = Shapes::StringShape.new(name: 'PackageManager')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     PartSize = Shapes::IntegerShape.new(name: 'PartSize')
@@ -268,6 +271,7 @@ module Aws::ECR
     Score = Shapes::FloatShape.new(name: 'Score')
     ScoreDetails = Shapes::StructureShape.new(name: 'ScoreDetails')
     ScoringVector = Shapes::StringShape.new(name: 'ScoringVector')
+    SecretNotFoundException = Shapes::StructureShape.new(name: 'SecretNotFoundException')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
@@ -292,15 +296,25 @@ module Aws::ECR
     Title = Shapes::StringShape.new(name: 'Title')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Type = Shapes::StringShape.new(name: 'Type')
+    UnableToAccessSecretException = Shapes::StructureShape.new(name: 'UnableToAccessSecretException')
+    UnableToDecryptSecretValueException = Shapes::StructureShape.new(name: 'UnableToDecryptSecretValueException')
+    UnableToGetUpstreamImageException = Shapes::StructureShape.new(name: 'UnableToGetUpstreamImageException')
+    UnableToGetUpstreamLayerException = Shapes::StructureShape.new(name: 'UnableToGetUpstreamLayerException')
     UnsupportedImageTypeException = Shapes::StructureShape.new(name: 'UnsupportedImageTypeException')
     UnsupportedUpstreamRegistryException = Shapes::StructureShape.new(name: 'UnsupportedUpstreamRegistryException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdatePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'UpdatePullThroughCacheRuleRequest')
+    UpdatePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'UpdatePullThroughCacheRuleResponse')
+    UpdatedTimestamp = Shapes::TimestampShape.new(name: 'UpdatedTimestamp')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     UploadLayerPartRequest = Shapes::StructureShape.new(name: 'UploadLayerPartRequest')
     UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
     UploadNotFoundException = Shapes::StructureShape.new(name: 'UploadNotFoundException')
+    UpstreamRegistry = Shapes::StringShape.new(name: 'UpstreamRegistry')
     Url = Shapes::StringShape.new(name: 'Url')
+    ValidatePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'ValidatePullThroughCacheRuleRequest')
+    ValidatePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'ValidatePullThroughCacheRuleResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
     VulnerabilityId = Shapes::StringShape.new(name: 'VulnerabilityId')
@@ -384,12 +398,16 @@ module Aws::ECR
     CreatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
     CreatePullThroughCacheRuleRequest.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "upstreamRegistryUrl"))
     CreatePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    CreatePullThroughCacheRuleRequest.add_member(:upstream_registry, Shapes::ShapeRef.new(shape: UpstreamRegistry, location_name: "upstreamRegistry"))
+    CreatePullThroughCacheRuleRequest.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
     CreatePullThroughCacheRuleRequest.struct_class = Types::CreatePullThroughCacheRuleRequest
 
     CreatePullThroughCacheRuleResponse.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
     CreatePullThroughCacheRuleResponse.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
     CreatePullThroughCacheRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     CreatePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    CreatePullThroughCacheRuleResponse.add_member(:upstream_registry, Shapes::ShapeRef.new(shape: UpstreamRegistry, location_name: "upstreamRegistry"))
+    CreatePullThroughCacheRuleResponse.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
     CreatePullThroughCacheRuleResponse.struct_class = Types::CreatePullThroughCacheRuleResponse
 
     CreateRepositoryRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -442,6 +460,7 @@ module Aws::ECR
     DeletePullThroughCacheRuleResponse.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
     DeletePullThroughCacheRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     DeletePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeletePullThroughCacheRuleResponse.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
     DeletePullThroughCacheRuleResponse.struct_class = Types::DeletePullThroughCacheRuleResponse
 
     DeleteRegistryPolicyRequest.struct_class = Types::DeleteRegistryPolicyRequest
@@ -841,6 +860,9 @@ module Aws::ECR
     PullThroughCacheRule.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
     PullThroughCacheRule.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     PullThroughCacheRule.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PullThroughCacheRule.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
+    PullThroughCacheRule.add_member(:upstream_registry, Shapes::ShapeRef.new(shape: UpstreamRegistry, location_name: "upstreamRegistry"))
+    PullThroughCacheRule.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "updatedAt"))
     PullThroughCacheRule.struct_class = Types::PullThroughCacheRule
 
     PullThroughCacheRuleAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1029,6 +1051,9 @@ module Aws::ECR
     ScoreDetails.add_member(:cvss, Shapes::ShapeRef.new(shape: CvssScoreDetails, location_name: "cvss"))
     ScoreDetails.struct_class = Types::ScoreDetails
 
+    SecretNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SecretNotFoundException.struct_class = Types::SecretNotFoundException
+
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServerException.struct_class = Types::ServerException
 
@@ -1085,6 +1110,18 @@ module Aws::ECR
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    UnableToAccessSecretException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnableToAccessSecretException.struct_class = Types::UnableToAccessSecretException
+
+    UnableToDecryptSecretValueException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnableToDecryptSecretValueException.struct_class = Types::UnableToDecryptSecretValueException
+
+    UnableToGetUpstreamImageException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnableToGetUpstreamImageException.struct_class = Types::UnableToGetUpstreamImageException
+
+    UnableToGetUpstreamLayerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnableToGetUpstreamLayerException.struct_class = Types::UnableToGetUpstreamLayerException
+
     UnsupportedImageTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedImageTypeException.struct_class = Types::UnsupportedImageTypeException
 
@@ -1096,6 +1133,17 @@ module Aws::ECR
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdatePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    UpdatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
+    UpdatePullThroughCacheRuleRequest.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, required: true, location_name: "credentialArn"))
+    UpdatePullThroughCacheRuleRequest.struct_class = Types::UpdatePullThroughCacheRuleRequest
+
+    UpdatePullThroughCacheRuleResponse.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    UpdatePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    UpdatePullThroughCacheRuleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedTimestamp, location_name: "updatedAt"))
+    UpdatePullThroughCacheRuleResponse.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
+    UpdatePullThroughCacheRuleResponse.struct_class = Types::UpdatePullThroughCacheRuleResponse
 
     UploadLayerPartRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     UploadLayerPartRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -1113,6 +1161,18 @@ module Aws::ECR
 
     UploadNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UploadNotFoundException.struct_class = Types::UploadNotFoundException
+
+    ValidatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
+    ValidatePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ValidatePullThroughCacheRuleRequest.struct_class = Types::ValidatePullThroughCacheRuleRequest
+
+    ValidatePullThroughCacheRuleResponse.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    ValidatePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ValidatePullThroughCacheRuleResponse.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
+    ValidatePullThroughCacheRuleResponse.add_member(:credential_arn, Shapes::ShapeRef.new(shape: CredentialArn, location_name: "credentialArn"))
+    ValidatePullThroughCacheRuleResponse.add_member(:is_valid, Shapes::ShapeRef.new(shape: IsPTCRuleValid, location_name: "isValid"))
+    ValidatePullThroughCacheRuleResponse.add_member(:failure, Shapes::ShapeRef.new(shape: PTCValidateFailure, location_name: "failure"))
+    ValidatePullThroughCacheRuleResponse.struct_class = Types::ValidatePullThroughCacheRuleResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1180,6 +1240,8 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToGetUpstreamImageException)
       end)
 
       api.add_operation(:batch_get_repository_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1223,6 +1285,9 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUpstreamRegistryException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToAccessSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: SecretNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToDecryptSecretValueException)
       end)
 
       api.add_operation(:create_repository, Seahorse::Model::Operation.new.tap do |o|
@@ -1420,6 +1485,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LayersNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LayerInaccessibleException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToGetUpstreamLayerException)
       end)
 
       api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1681,6 +1747,21 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:update_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePullThroughCacheRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePullThroughCacheRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePullThroughCacheRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToAccessSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: SecretNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToDecryptSecretValueException)
+      end)
+
       api.add_operation(:upload_layer_part, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UploadLayerPart"
         o.http_method = "POST"
@@ -1694,6 +1775,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: UploadNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: KmsException)
+      end)
+
+      api.add_operation(:validate_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidatePullThroughCacheRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ValidatePullThroughCacheRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidatePullThroughCacheRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleNotFoundException)
       end)
     end
 

@@ -3,6 +3,18 @@ Unreleased Changes
 
 * Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and also allow for ECS and EKS link-local http addresses.
 
+3.187.1 (2023-11-20)
+------------------
+
+* Issue - For `awsQueryCompatible` services, default an empty list or map for shapes that were previously flattened in the query protocol.
+
+3.187.0 (2023-11-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
 3.186.0 (2023-11-02)
 ------------------
 

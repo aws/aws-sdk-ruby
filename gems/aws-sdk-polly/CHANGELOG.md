@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-11-16)
+------------------
+
+* Feature - Add new engine - long-form - dedicated for longer content, such as news articles, training materials, or marketing videos.
+
 1.77.0 (2023-11-06)
 ------------------
 

@@ -388,6 +388,65 @@ module Aws::IVSRealTime
 
     # @!group API Operations
 
+    # Creates an EncoderConfiguration object.
+    #
+    # @option params [String] :name
+    #   Optional name to identify the resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [Types::Video] :video
+    #   Video configuration. Default: video resolution 1280x720, bitrate 2500
+    #   kbps, 30 fps.
+    #
+    # @return [Types::CreateEncoderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEncoderConfigurationResponse#encoder_configuration #encoder_configuration} => Types::EncoderConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_encoder_configuration({
+    #     name: "EncoderConfigurationName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     video: {
+    #       bitrate: 1,
+    #       framerate: 1.0,
+    #       height: 1,
+    #       width: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.encoder_configuration.arn #=> String
+    #   resp.encoder_configuration.name #=> String
+    #   resp.encoder_configuration.tags #=> Hash
+    #   resp.encoder_configuration.tags["TagKey"] #=> String
+    #   resp.encoder_configuration.video.bitrate #=> Integer
+    #   resp.encoder_configuration.video.framerate #=> Float
+    #   resp.encoder_configuration.video.height #=> Integer
+    #   resp.encoder_configuration.video.width #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfiguration AWS API Documentation
+    #
+    # @overload create_encoder_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_encoder_configuration(params = {}, options = {})
+      req = build_request(:create_encoder_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates an additional token for a specified stage. This can be done
     # after stage creation or when tokens expire. Tokens always are scoped
     # to the stage for which they are created.
@@ -527,6 +586,85 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Creates a new storage configuration, used to enable recording to
+    # Amazon S3. When a StorageConfiguration is created, IVS will modify the
+    # S3 bucketPolicy of the provided bucket. This will ensure that IVS has
+    # sufficient permissions to write content to the provided bucket.
+    #
+    # @option params [String] :name
+    #   Storage configuration name. The value does not need to be unique.
+    #
+    # @option params [required, Types::S3StorageConfiguration] :s3
+    #   A complex type that contains a storage configuration for where
+    #   recorded video will be stored.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStorageConfigurationResponse#storage_configuration #storage_configuration} => Types::StorageConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_storage_configuration({
+    #     name: "StorageConfigurationName",
+    #     s3: { # required
+    #       bucket_name: "S3BucketName", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_configuration.arn #=> String
+    #   resp.storage_configuration.name #=> String
+    #   resp.storage_configuration.s3.bucket_name #=> String
+    #   resp.storage_configuration.tags #=> Hash
+    #   resp.storage_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStorageConfiguration AWS API Documentation
+    #
+    # @overload create_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_storage_configuration(params = {}, options = {})
+      req = build_request(:create_storage_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes an EncoderConfiguration resource. Ensures that no Compositions
+    # are using this template; otherwise, returns an error.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the EncoderConfiguration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_encoder_configuration({
+    #     arn: "EncoderConfigurationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteEncoderConfiguration AWS API Documentation
+    #
+    # @overload delete_encoder_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_encoder_configuration(params = {}, options = {})
+      req = build_request(:delete_encoder_configuration, params)
+      req.send_request(options)
+    end
+
     # Shuts down and deletes the specified stage (disconnecting all
     # participants).
     #
@@ -547,6 +685,34 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def delete_stage(params = {}, options = {})
       req = build_request(:delete_stage, params)
+      req.send_request(options)
+    end
+
+    # Deletes the storage configuration for the specified ARN.
+    #
+    # If you try to delete a storage configuration that is used by a
+    # Composition, you will get an error (409 ConflictException). To avoid
+    # this, for all Compositions that reference the storage configuration,
+    # first use StopComposition and wait for it to complete, then use
+    # DeleteStorageConfiguration.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the storage configuration to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_configuration({
+    #     arn: "StorageConfigurationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteStorageConfiguration AWS API Documentation
+    #
+    # @overload delete_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_configuration(params = {}, options = {})
+      req = build_request(:delete_storage_configuration, params)
       req.send_request(options)
     end
 
@@ -579,6 +745,89 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def disconnect_participant(params = {}, options = {})
       req = build_request(:disconnect_participant, params)
+      req.send_request(options)
+    end
+
+    # Get information about the specified Composition resource.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the Composition resource.
+    #
+    # @return [Types::GetCompositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCompositionResponse#composition #composition} => Types::Composition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_composition({
+    #     arn: "CompositionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.composition.arn #=> String
+    #   resp.composition.destinations #=> Array
+    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
+    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.name #=> String
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
+    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
+    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
+    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
+    #   resp.composition.destinations[0].end_time #=> Time
+    #   resp.composition.destinations[0].id #=> String
+    #   resp.composition.destinations[0].start_time #=> Time
+    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.composition.end_time #=> Time
+    #   resp.composition.layout.grid.featured_participant_attribute #=> String
+    #   resp.composition.stage_arn #=> String
+    #   resp.composition.start_time #=> Time
+    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
+    #   resp.composition.tags #=> Hash
+    #   resp.composition.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetComposition AWS API Documentation
+    #
+    # @overload get_composition(params = {})
+    # @param [Hash] params ({})
+    def get_composition(params = {}, options = {})
+      req = build_request(:get_composition, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified EncoderConfiguration resource.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the EncoderConfiguration resource.
+    #
+    # @return [Types::GetEncoderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEncoderConfigurationResponse#encoder_configuration #encoder_configuration} => Types::EncoderConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_encoder_configuration({
+    #     arn: "EncoderConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.encoder_configuration.arn #=> String
+    #   resp.encoder_configuration.name #=> String
+    #   resp.encoder_configuration.tags #=> Hash
+    #   resp.encoder_configuration.tags["TagKey"] #=> String
+    #   resp.encoder_configuration.video.bitrate #=> Integer
+    #   resp.encoder_configuration.video.framerate #=> Float
+    #   resp.encoder_configuration.video.height #=> Integer
+    #   resp.encoder_configuration.video.width #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetEncoderConfiguration AWS API Documentation
+    #
+    # @overload get_encoder_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_encoder_configuration(params = {}, options = {})
+      req = build_request(:get_encoder_configuration, params)
       req.send_request(options)
     end
 
@@ -697,6 +946,139 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Gets the storage configuration for the specified ARN.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the storage configuration to be retrieved.
+    #
+    # @return [Types::GetStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageConfigurationResponse#storage_configuration #storage_configuration} => Types::StorageConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_configuration({
+    #     arn: "StorageConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_configuration.arn #=> String
+    #   resp.storage_configuration.name #=> String
+    #   resp.storage_configuration.s3.bucket_name #=> String
+    #   resp.storage_configuration.tags #=> Hash
+    #   resp.storage_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStorageConfiguration AWS API Documentation
+    #
+    # @overload get_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_storage_configuration(params = {}, options = {})
+      req = build_request(:get_storage_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about all Compositions in your account, in
+    # the AWS region where the API request is processed.
+    #
+    # @option params [String] :filter_by_encoder_configuration_arn
+    #   Filters the Composition list to match the specified
+    #   EncoderConfiguration attached to at least one of its output.
+    #
+    # @option params [String] :filter_by_stage_arn
+    #   Filters the Composition list to match the specified Stage ARN.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 100.
+    #
+    # @option params [String] :next_token
+    #   The first Composition to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #
+    # @return [Types::ListCompositionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCompositionsResponse#compositions #compositions} => Array&lt;Types::CompositionSummary&gt;
+    #   * {Types::ListCompositionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_compositions({
+    #     filter_by_encoder_configuration_arn: "EncoderConfigurationArn",
+    #     filter_by_stage_arn: "StageArn",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compositions #=> Array
+    #   resp.compositions[0].arn #=> String
+    #   resp.compositions[0].destinations #=> Array
+    #   resp.compositions[0].destinations[0].end_time #=> Time
+    #   resp.compositions[0].destinations[0].id #=> String
+    #   resp.compositions[0].destinations[0].start_time #=> Time
+    #   resp.compositions[0].destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.compositions[0].end_time #=> Time
+    #   resp.compositions[0].stage_arn #=> String
+    #   resp.compositions[0].start_time #=> Time
+    #   resp.compositions[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
+    #   resp.compositions[0].tags #=> Hash
+    #   resp.compositions[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListCompositions AWS API Documentation
+    #
+    # @overload list_compositions(params = {})
+    # @param [Hash] params ({})
+    def list_compositions(params = {}, options = {})
+      req = build_request(:list_compositions, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about all EncoderConfigurations in your
+    # account, in the AWS region where the API request is processed.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 100.
+    #
+    # @option params [String] :next_token
+    #   The first encoder configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #
+    # @return [Types::ListEncoderConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEncoderConfigurationsResponse#encoder_configurations #encoder_configurations} => Array&lt;Types::EncoderConfigurationSummary&gt;
+    #   * {Types::ListEncoderConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_encoder_configurations({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.encoder_configurations #=> Array
+    #   resp.encoder_configurations[0].arn #=> String
+    #   resp.encoder_configurations[0].name #=> String
+    #   resp.encoder_configurations[0].tags #=> Hash
+    #   resp.encoder_configurations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListEncoderConfigurations AWS API Documentation
+    #
+    # @overload list_encoder_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_encoder_configurations(params = {}, options = {})
+      req = build_request(:list_encoder_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists events for a specified participant that occurred during a
     # specified stage session.
     #
@@ -704,8 +1086,8 @@ module Aws::IVSRealTime
     #   Maximum number of results to return. Default: 50.
     #
     # @option params [String] :next_token
-    #   The first participant to retrieve. This is used for pagination; see
-    #   the `nextToken` response field.
+    #   The first participant event to retrieve. This is used for pagination;
+    #   see the `nextToken` response field.
     #
     # @option params [required, String] :participant_id
     #   Unique identifier for this participant. This is assigned by IVS and
@@ -829,8 +1211,8 @@ module Aws::IVSRealTime
     #   Maximum number of results to return. Default: 50.
     #
     # @option params [String] :next_token
-    #   The first stage to retrieve. This is used for pagination; see the
-    #   `nextToken` response field.
+    #   The first stage session to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
     #
     # @option params [required, String] :stage_arn
     #   Stage ARN.
@@ -910,6 +1292,50 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Gets summary information about all storage configurations in your
+    # account, in the AWS region where the API request is processed.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of storage configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
+    #
+    # @option params [String] :next_token
+    #   The first storage configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #
+    # @return [Types::ListStorageConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListStorageConfigurationsResponse#storage_configurations #storage_configurations} => Array&lt;Types::StorageConfigurationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_configurations({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.storage_configurations #=> Array
+    #   resp.storage_configurations[0].arn #=> String
+    #   resp.storage_configurations[0].name #=> String
+    #   resp.storage_configurations[0].s3.bucket_name #=> String
+    #   resp.storage_configurations[0].tags #=> Hash
+    #   resp.storage_configurations[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurations AWS API Documentation
+    #
+    # @overload list_storage_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_storage_configurations(params = {}, options = {})
+      req = build_request(:list_storage_configurations, params)
+      req.send_request(options)
+    end
+
     # Gets information about AWS tags for the specified ARN.
     #
     # @option params [required, String] :resource_arn
@@ -936,6 +1362,143 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Starts a Composition from a stage based on the configuration provided
+    # in the request.
+    #
+    # A Composition is an ephemeral resource that exists after this endpoint
+    # returns successfully. Composition stops and the resource is deleted:
+    #
+    # * When StopComposition is called.
+    #
+    # * After a 1-minute timeout, when all participants are disconnected
+    #   from the stage.
+    #
+    # * After a 1-minute timeout, if there are no participants in the stage
+    #   when StartComposition is called.
+    #
+    # * When broadcasting to the IVS channel fails and all retries are
+    #   exhausted.
+    #
+    # * When broadcasting is disconnected and all attempts to reconnect are
+    #   exhausted.
+    #
+    # @option params [required, Array<Types::DestinationConfiguration>] :destinations
+    #   Array of destination configuration.
+    #
+    # @option params [String] :idempotency_token
+    #   Idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::LayoutConfiguration] :layout
+    #   Layout object to configure composition parameters.
+    #
+    # @option params [required, String] :stage_arn
+    #   ARN of the stage to be used for compositing.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::StartCompositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCompositionResponse#composition #composition} => Types::Composition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_composition({
+    #     destinations: [ # required
+    #       {
+    #         channel: {
+    #           channel_arn: "ChannelArn", # required
+    #           encoder_configuration_arn: "EncoderConfigurationArn",
+    #         },
+    #         name: "DestinationConfigurationName",
+    #         s3: {
+    #           encoder_configuration_arns: ["EncoderConfigurationArn"], # required
+    #           recording_configuration: {
+    #             format: "HLS", # accepts HLS
+    #           },
+    #           storage_configuration_arn: "StorageConfigurationArn", # required
+    #         },
+    #       },
+    #     ],
+    #     idempotency_token: "CompositionClientToken",
+    #     layout: {
+    #       grid: {
+    #         featured_participant_attribute: "AttributeKey",
+    #       },
+    #     },
+    #     stage_arn: "StageArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.composition.arn #=> String
+    #   resp.composition.destinations #=> Array
+    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
+    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.name #=> String
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
+    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
+    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
+    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
+    #   resp.composition.destinations[0].end_time #=> Time
+    #   resp.composition.destinations[0].id #=> String
+    #   resp.composition.destinations[0].start_time #=> Time
+    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.composition.end_time #=> Time
+    #   resp.composition.layout.grid.featured_participant_attribute #=> String
+    #   resp.composition.stage_arn #=> String
+    #   resp.composition.start_time #=> Time
+    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
+    #   resp.composition.tags #=> Hash
+    #   resp.composition.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartComposition AWS API Documentation
+    #
+    # @overload start_composition(params = {})
+    # @param [Hash] params ({})
+    def start_composition(params = {}, options = {})
+      req = build_request(:start_composition, params)
+      req.send_request(options)
+    end
+
+    # Stops and deletes a Composition resource. Any broadcast from the
+    # Composition resource is stopped.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the Composition.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_composition({
+    #     arn: "CompositionArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StopComposition AWS API Documentation
+    #
+    # @overload stop_composition(params = {})
+    # @param [Hash] params ({})
+    def stop_composition(params = {}, options = {})
+      req = build_request(:stop_composition, params)
       req.send_request(options)
     end
 
@@ -1058,7 +1621,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

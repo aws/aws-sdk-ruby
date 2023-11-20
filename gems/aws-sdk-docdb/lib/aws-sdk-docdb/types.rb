@@ -668,6 +668,24 @@ module Aws::DocDB
     #   The cluster identifier of the new global cluster.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
+    #   <note markdown="1"> When you create a DocumentDB DB cluster with the storage type set to
+    #   `iopt1`, the storage type is returned in the response. The storage
+    #   type isn't returned when you set it to `standard`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -696,6 +714,7 @@ module Aws::DocDB
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
       :global_cluster_identifier,
+      :storage_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1340,6 +1359,20 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   Storage type associated with your cluster
+    #
+    #   Storage type associated with your cluster
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -1374,7 +1407,8 @@ module Aws::DocDB
       :clone_group_id,
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1669,6 +1703,18 @@ module Aws::DocDB
     #   the ARN for the source cluster snapshot; otherwise, a null value.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   Storage type associated with your cluster snapshot
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -1688,7 +1734,8 @@ module Aws::DocDB
       :storage_encrypted,
       :kms_key_id,
       :db_cluster_snapshot_arn,
-      :source_db_cluster_snapshot_arn)
+      :source_db_cluster_snapshot_arn,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4079,6 +4126,18 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -4095,7 +4154,8 @@ module Aws::DocDB
       :cloudwatch_logs_export_configuration,
       :engine_version,
       :allow_major_version_upgrade,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4552,6 +4612,10 @@ module Aws::DocDB
     #   Indicates whether an instance is in a virtual private cloud (VPC).
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -4560,7 +4624,8 @@ module Aws::DocDB
       :db_instance_class,
       :license_model,
       :availability_zones,
-      :vpc)
+      :vpc,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5137,6 +5202,18 @@ module Aws::DocDB
     #   and it cannot end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -5152,7 +5229,8 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
-      :db_cluster_parameter_group_name)
+      :db_cluster_parameter_group_name,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5308,6 +5386,18 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -5322,7 +5412,8 @@ module Aws::DocDB
       :tags,
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end

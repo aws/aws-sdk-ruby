@@ -2352,7 +2352,7 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html
-    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobObjective AWS API Documentation
@@ -4977,7 +4977,7 @@ module Aws::SageMaker
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] model_deploy_config
@@ -11727,6 +11727,11 @@ module Aws::SageMaker
     #   The IAM Identity Center managed application instance ID.
     #   @return [String]
     #
+    # @!attribute [rw] single_sign_on_application_arn
+    #   The ARN of the associated Amazon Web Services Single Sign-On
+    #   application for this Domain.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status.
     #   @return [String]
@@ -11814,6 +11819,7 @@ module Aws::SageMaker
       :domain_name,
       :home_efs_file_system_id,
       :single_sign_on_managed_application_instance_id,
+      :single_sign_on_application_arn,
       :status,
       :creation_time,
       :last_modified_time,
@@ -37481,11 +37487,16 @@ module Aws::SageMaker
     #   attempts in total, not each individual attempt.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_pending_time_in_seconds
+    #   The maximum pending time in seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
     #
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      :max_wait_time_in_seconds)
+      :max_wait_time_in_seconds,
+      :max_pending_time_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37952,7 +37963,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/llms-finetuning-models.html#llms-finetuning-supported-llms
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-models.html#autopilot-llms-finetuning-supported-llms
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextGenerationJobConfig AWS API Documentation

@@ -7,7 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::Macie
+module Aws::TrustedAdvisor
 
   class Resource
 

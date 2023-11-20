@@ -2294,11 +2294,15 @@ module Aws::Macie2
     # @return [Types::GetRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRevealConfigurationResponse#configuration #configuration} => Types::RevealConfiguration
+    #   * {Types::GetRevealConfigurationResponse#retrieval_configuration #retrieval_configuration} => Types::RetrievalConfiguration
     #
     # @example Response structure
     #
     #   resp.configuration.kms_key_id #=> String
     #   resp.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retrieval_configuration.external_id #=> String
+    #   resp.retrieval_configuration.retrieval_mode #=> String, one of "CALLER_CREDENTIALS", "ASSUME_ROLE"
+    #   resp.retrieval_configuration.role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfiguration AWS API Documentation
     #
@@ -2367,7 +2371,7 @@ module Aws::Macie2
     #
     #   resp.code #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.reasons #=> Array
-    #   resp.reasons[0] #=> String, one of "OBJECT_EXCEEDS_SIZE_QUOTA", "UNSUPPORTED_OBJECT_TYPE", "UNSUPPORTED_FINDING_TYPE", "INVALID_CLASSIFICATION_RESULT", "OBJECT_UNAVAILABLE"
+    #   resp.reasons[0] #=> String, one of "OBJECT_EXCEEDS_SIZE_QUOTA", "UNSUPPORTED_OBJECT_TYPE", "UNSUPPORTED_FINDING_TYPE", "INVALID_CLASSIFICATION_RESULT", "OBJECT_UNAVAILABLE", "ACCOUNT_NOT_IN_ORGANIZATION", "MISSING_GET_MEMBER_PERMISSION", "ROLE_TOO_PERMISSIVE", "MEMBER_ROLE_TOO_PERMISSIVE", "INVALID_RESULT_SIGNATURE", "RESULT_NOT_SIGNED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesAvailability AWS API Documentation
     #
@@ -3758,16 +3762,30 @@ module Aws::Macie2
     # occurrences of sensitive data reported by findings.
     #
     # @option params [required, Types::RevealConfiguration] :configuration
-    #   Specifies the configuration settings for retrieving occurrences of
-    #   sensitive data reported by findings, and the status of the
-    #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an Key
-    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    #   the specified key to encrypt the sensitive data that you retrieve.
+    #   Specifies the status of the Amazon Macie configuration for retrieving
+    #   occurrences of sensitive data reported by findings, and the Key
+    #   Management Service (KMS) key to use to encrypt sensitive data that's
+    #   retrieved. When you enable the configuration for the first time, your
+    #   request must specify an KMS key. Otherwise, an error occurs.
+    #
+    # @option params [Types::UpdateRetrievalConfiguration] :retrieval_configuration
+    #   Specifies the access method and settings to use when retrieving
+    #   occurrences of sensitive data reported by findings. If your request
+    #   specifies an Identity and Access Management (IAM) role to assume when
+    #   retrieving the sensitive data, Amazon Macie verifies that the role
+    #   exists and the attached policies are configured correctly. If there's
+    #   an issue, Macie returns an error. For information about addressing the
+    #   issue, see [Retrieving sensitive data samples with findings][1] in the
+    #   *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
     #
     # @return [Types::UpdateRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRevealConfigurationResponse#configuration #configuration} => Types::RevealConfiguration
+    #   * {Types::UpdateRevealConfigurationResponse#retrieval_configuration #retrieval_configuration} => Types::RetrievalConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3776,12 +3794,19 @@ module Aws::Macie2
     #       kms_key_id: "__stringMin1Max2048",
     #       status: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
+    #     retrieval_configuration: {
+    #       retrieval_mode: "CALLER_CREDENTIALS", # required, accepts CALLER_CREDENTIALS, ASSUME_ROLE
+    #       role_name: "__stringMin1Max64PatternW",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.configuration.kms_key_id #=> String
     #   resp.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retrieval_configuration.external_id #=> String
+    #   resp.retrieval_configuration.retrieval_mode #=> String, one of "CALLER_CREDENTIALS", "ASSUME_ROLE"
+    #   resp.retrieval_configuration.role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfiguration AWS API Documentation
     #
@@ -3862,7 +3887,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

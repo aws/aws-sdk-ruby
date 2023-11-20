@@ -175,6 +175,8 @@ module Aws::RDS
     DBClusterSnapshotList = Shapes::ListShape.new(name: 'DBClusterSnapshotList')
     DBClusterSnapshotMessage = Shapes::StructureShape.new(name: 'DBClusterSnapshotMessage')
     DBClusterSnapshotNotFoundFault = Shapes::StructureShape.new(name: 'DBClusterSnapshotNotFoundFault')
+    DBClusterStatusInfo = Shapes::StructureShape.new(name: 'DBClusterStatusInfo')
+    DBClusterStatusInfoList = Shapes::ListShape.new(name: 'DBClusterStatusInfoList')
     DBEngineVersion = Shapes::StructureShape.new(name: 'DBEngineVersion')
     DBEngineVersionList = Shapes::ListShape.new(name: 'DBEngineVersionList')
     DBEngineVersionMessage = Shapes::StructureShape.new(name: 'DBEngineVersionMessage')
@@ -1306,6 +1308,7 @@ module Aws::RDS
     DBCluster.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
     DBCluster.add_member(:replication_source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSourceIdentifier"))
     DBCluster.add_member(:read_replica_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaIdentifierList, location_name: "ReadReplicaIdentifiers"))
+    DBCluster.add_member(:status_infos, Shapes::ShapeRef.new(shape: DBClusterStatusInfoList, location_name: "StatusInfos"))
     DBCluster.add_member(:db_cluster_members, Shapes::ShapeRef.new(shape: DBClusterMemberList, location_name: "DBClusterMembers"))
     DBCluster.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: VpcSecurityGroupMembershipList, location_name: "VpcSecurityGroups"))
     DBCluster.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "HostedZoneId"))
@@ -1546,6 +1549,14 @@ module Aws::RDS
     DBClusterSnapshotMessage.struct_class = Types::DBClusterSnapshotMessage
 
     DBClusterSnapshotNotFoundFault.struct_class = Types::DBClusterSnapshotNotFoundFault
+
+    DBClusterStatusInfo.add_member(:status_type, Shapes::ShapeRef.new(shape: String, location_name: "StatusType"))
+    DBClusterStatusInfo.add_member(:normal, Shapes::ShapeRef.new(shape: Boolean, location_name: "Normal"))
+    DBClusterStatusInfo.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBClusterStatusInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DBClusterStatusInfo.struct_class = Types::DBClusterStatusInfo
+
+    DBClusterStatusInfoList.member = Shapes::ShapeRef.new(shape: DBClusterStatusInfo, location_name: "DBClusterStatusInfo")
 
     DBEngineVersion.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DBEngineVersion.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -3317,6 +3328,7 @@ module Aws::RDS
 
     RdsCustomClusterConfiguration.add_member(:interconnect_subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "InterconnectSubnetId"))
     RdsCustomClusterConfiguration.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayMulticastDomainId"))
+    RdsCustomClusterConfiguration.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
     RdsCustomClusterConfiguration.struct_class = Types::RdsCustomClusterConfiguration
 
     ReadReplicaDBClusterIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBClusterIdentifier")
@@ -4234,6 +4246,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
@@ -4245,6 +4258,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
       end)
 
       api.add_operation(:create_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -5428,6 +5442,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|

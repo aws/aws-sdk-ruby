@@ -1933,11 +1933,17 @@ module Aws::RDS
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_custom_db_engine_version_identifier
-    #   Reserved for future use.
+    #   The ARN of a CEV to use as a source for creating a new CEV. You can
+    #   specify a different Amazon Machine Imagine (AMI) by using either
+    #   `Source` or `UseAwsProvidedLatestImage`. You can't specify a
+    #   different JSON manifest when you specify
+    #   `SourceCustomDbEngineVersionIdentifier`.
     #   @return [String]
     #
     # @!attribute [rw] use_aws_provided_latest_image
-    #   Reserved for future use.
+    #   Specifies whether to use the latest service-provided Amazon Machine
+    #   Image (AMI) for the CEV. If you specify `UseAwsProvidedLatestImage`,
+    #   you can't also specify `ImageId`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersionMessage AWS API Documentation
@@ -5884,8 +5890,8 @@ module Aws::RDS
     end
 
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the Aurora DB cluster to use as
-    #   the source for replication.
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -5900,8 +5906,8 @@ module Aws::RDS
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management System (Amazon Web Services
     #   KMS) key identifier for the key to use to encrypt the integration.
-    #   If you don't specify an encryption key, Aurora uses a default
-    #   Amazon Web Services owned key.
+    #   If you don't specify an encryption key, RDS uses a default Amazon
+    #   Web Services owned key.
     #   @return [String]
     #
     # @!attribute [rw] additional_encryption_context
@@ -6307,6 +6313,10 @@ module Aws::RDS
     #   with this DB cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] status_infos
+    #   Reserved for future use.
+    #   @return [Array<Types::DBClusterStatusInfo>]
+    #
     # @!attribute [rw] db_cluster_members
     #   The list of DB instances that make up the DB cluster.
     #   @return [Array<Types::DBClusterMember>]
@@ -6705,6 +6715,7 @@ module Aws::RDS
       :preferred_maintenance_window,
       :replication_source_identifier,
       :read_replica_identifiers,
+      :status_infos,
       :db_cluster_members,
       :vpc_security_groups,
       :hosted_zone_id,
@@ -7723,6 +7734,35 @@ module Aws::RDS
     #
     class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
 
+    # Reserved for future use.
+    #
+    # @!attribute [rw] status_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] normal
+    #   Reserved for future use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterStatusInfo AWS API Documentation
+    #
+    class DBClusterStatusInfo < Struct.new(
+      :status_type,
+      :normal,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
     #
@@ -7922,7 +7962,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_integrations
-    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   Indicates whether the DB engine version supports zero-ETL
     #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #
@@ -15023,17 +15063,11 @@ module Aws::RDS
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
 
-    # An Aurora zero-ETL integration with Amazon Redshift. For more
-    # information, see [Working with Amazon Aurora zero-ETL integrations
-    # with Amazon Redshift][1] in the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html
+    # A zero-ETL integration with Amazon Redshift.
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the Aurora DB cluster used as the
-    #   source for replication.
+    #   The Amazon Resource Name (ARN) of the database used as the source
+    #   for replication.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -18109,9 +18143,9 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   * `5.5.46` (supported for 5.1 DB snapshots)
-    #
-    #   ^
+    #   For the list of engine versions that are available for upgrading a
+    #   DB snapshot, see [ Upgrading a MySQL DB snapshot engine version][1]
+    #   in the *Amazon RDS User Guide.*
     #
     #   **Oracle**
     #
@@ -18130,12 +18164,13 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   For the list of engine versions that are available for upgrading a
-    #   DB snapshot, see [ Upgrading the PostgreSQL DB Engine for Amazon
-    #   RDS][1].
+    #   DB snapshot, see [ Upgrading a PostgreSQL DB snapshot engine
+    #   version][2] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
     #   @return [String]
     #
     # @!attribute [rw] option_group_name
@@ -19905,11 +19940,16 @@ module Aws::RDS
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] replica_mode
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RdsCustomClusterConfiguration AWS API Documentation
     #
     class RdsCustomClusterConfiguration < Struct.new(
       :interconnect_subnet_id,
-      :transit_gateway_multicast_domain_id)
+      :transit_gateway_multicast_domain_id,
+      :replica_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25441,7 +25481,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_integrations
-    #   Indicates whether the DB engine version supports Aurora zero-ETL
+    #   Indicates whether the DB engine version supports zero-ETL
     #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #

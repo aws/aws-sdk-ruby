@@ -136,8 +136,12 @@ module Aws::ECR
             Aws::ECR::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::ECR::Endpoints::UntagResource.build(context)
+          when :update_pull_through_cache_rule
+            Aws::ECR::Endpoints::UpdatePullThroughCacheRule.build(context)
           when :upload_layer_part
             Aws::ECR::Endpoints::UploadLayerPart.build(context)
+          when :validate_pull_through_cache_rule
+            Aws::ECR::Endpoints::ValidatePullThroughCacheRule.build(context)
           end
         end
       end

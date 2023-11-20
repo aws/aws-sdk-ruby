@@ -335,6 +335,7 @@ module Aws::IoT
     DeleteJobExecutionRequest = Shapes::StructureShape.new(name: 'DeleteJobExecutionRequest')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
+    DeleteMetricsExportConfig = Shapes::BooleanShape.new(name: 'DeleteMetricsExportConfig')
     DeleteMitigationActionRequest = Shapes::StructureShape.new(name: 'DeleteMitigationActionRequest')
     DeleteMitigationActionResponse = Shapes::StructureShape.new(name: 'DeleteMitigationActionResponse')
     DeleteOTAUpdateRequest = Shapes::StructureShape.new(name: 'DeleteOTAUpdateRequest')
@@ -523,6 +524,7 @@ module Aws::IoT
     ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     ExplicitDeny = Shapes::StructureShape.new(name: 'ExplicitDeny')
     ExponentialRolloutRate = Shapes::StructureShape.new(name: 'ExponentialRolloutRate')
+    ExportMetric = Shapes::BooleanShape.new(name: 'ExportMetric')
     FailedChecksCount = Shapes::IntegerShape.new(name: 'FailedChecksCount')
     FailedFindingsCount = Shapes::IntegerShape.new(name: 'FailedFindingsCount')
     FailedThings = Shapes::IntegerShape.new(name: 'FailedThings')
@@ -553,6 +555,8 @@ module Aws::IoT
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
     GenericLongValue = Shapes::IntegerShape.new(name: 'GenericLongValue')
+    GeoLocationTarget = Shapes::StructureShape.new(name: 'GeoLocationTarget')
+    GeoLocationsFilter = Shapes::ListShape.new(name: 'GeoLocationsFilter')
     GetBehaviorModelTrainingSummariesRequest = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesRequest')
     GetBehaviorModelTrainingSummariesResponse = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesResponse')
     GetBucketsAggregationRequest = Shapes::StructureShape.new(name: 'GetBucketsAggregationRequest')
@@ -839,6 +843,7 @@ module Aws::IoT
     MetricNames = Shapes::ListShape.new(name: 'MetricNames')
     MetricToRetain = Shapes::StructureShape.new(name: 'MetricToRetain')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
+    MetricsExportConfig = Shapes::StructureShape.new(name: 'MetricsExportConfig')
     Minimum = Shapes::FloatShape.new(name: 'Minimum')
     MinimumNumberOfExecutedThings = Shapes::IntegerShape.new(name: 'MinimumNumberOfExecutedThings')
     MissingContextValue = Shapes::StringShape.new(name: 'MissingContextValue')
@@ -859,6 +864,7 @@ module Aws::IoT
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
     MqttHeaders = Shapes::StructureShape.new(name: 'MqttHeaders')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
+    MqttTopic = Shapes::StringShape.new(name: 'MqttTopic')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
     NamedShadowIndexingMode = Shapes::StringShape.new(name: 'NamedShadowIndexingMode')
     NamedShadowNamesFilter = Shapes::ListShape.new(name: 'NamedShadowNamesFilter')
@@ -1158,6 +1164,8 @@ module Aws::IoT
     Target = Shapes::StringShape.new(name: 'Target')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TargetAuditCheckNames = Shapes::ListShape.new(name: 'TargetAuditCheckNames')
+    TargetFieldName = Shapes::StringShape.new(name: 'TargetFieldName')
+    TargetFieldOrder = Shapes::StringShape.new(name: 'TargetFieldOrder')
     TargetSelection = Shapes::StringShape.new(name: 'TargetSelection')
     TargetViolationIdsForDetectMitigationActions = Shapes::ListShape.new(name: 'TargetViolationIdsForDetectMitigationActions')
     Targets = Shapes::ListShape.new(name: 'Targets')
@@ -1670,6 +1678,7 @@ module Aws::IoT
     Behavior.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
     Behavior.add_member(:criteria, Shapes::ShapeRef.new(shape: BehaviorCriteria, location_name: "criteria"))
     Behavior.add_member(:suppress_alerts, Shapes::ShapeRef.new(shape: SuppressAlerts, location_name: "suppressAlerts"))
+    Behavior.add_member(:export_metric, Shapes::ShapeRef.new(shape: ExportMetric, location_name: "exportMetric"))
     Behavior.struct_class = Types::Behavior
 
     BehaviorCriteria.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "comparisonOperator"))
@@ -2169,6 +2178,7 @@ module Aws::IoT
     CreateSecurityProfileRequest.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage"=>"Use additionalMetricsToRetainV2."}))
     CreateSecurityProfileRequest.add_member(:additional_metrics_to_retain_v2, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainV2List, location_name: "additionalMetricsToRetainV2"))
     CreateSecurityProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateSecurityProfileRequest.add_member(:metrics_export_config, Shapes::ShapeRef.new(shape: MetricsExportConfig, location_name: "metricsExportConfig"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
     CreateSecurityProfileResponse.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
@@ -2699,6 +2709,7 @@ module Aws::IoT
     DescribeSecurityProfileResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     DescribeSecurityProfileResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     DescribeSecurityProfileResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedDate"))
+    DescribeSecurityProfileResponse.add_member(:metrics_export_config, Shapes::ShapeRef.new(shape: MetricsExportConfig, location_name: "metricsExportConfig"))
     DescribeSecurityProfileResponse.struct_class = Types::DescribeSecurityProfileResponse
 
     DescribeStreamRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, required: true, location: "uri", location_name: "streamId"))
@@ -2930,6 +2941,12 @@ module Aws::IoT
 
     FleetMetricNameAndArnList.member = Shapes::ShapeRef.new(shape: FleetMetricNameAndArn)
 
+    GeoLocationTarget.add_member(:name, Shapes::ShapeRef.new(shape: TargetFieldName, location_name: "name"))
+    GeoLocationTarget.add_member(:order, Shapes::ShapeRef.new(shape: TargetFieldOrder, location_name: "order"))
+    GeoLocationTarget.struct_class = Types::GeoLocationTarget
+
+    GeoLocationsFilter.member = Shapes::ShapeRef.new(shape: GeoLocationTarget)
+
     GetBehaviorModelTrainingSummariesRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TinyMaxResults, location: "querystring", location_name: "maxResults"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -3136,6 +3153,7 @@ module Aws::IoT
     IndexNotReadyException.struct_class = Types::IndexNotReadyException
 
     IndexingFilter.add_member(:named_shadow_names, Shapes::ShapeRef.new(shape: NamedShadowNamesFilter, location_name: "namedShadowNames"))
+    IndexingFilter.add_member(:geo_locations, Shapes::ShapeRef.new(shape: GeoLocationsFilter, location_name: "geoLocations"))
     IndexingFilter.struct_class = Types::IndexingFilter
 
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -3957,6 +3975,7 @@ module Aws::IoT
 
     MetricToRetain.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, required: true, location_name: "metric"))
     MetricToRetain.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
+    MetricToRetain.add_member(:export_metric, Shapes::ShapeRef.new(shape: ExportMetric, location_name: "exportMetric"))
     MetricToRetain.struct_class = Types::MetricToRetain
 
     MetricValue.add_member(:count, Shapes::ShapeRef.new(shape: UnsignedLong, location_name: "count"))
@@ -3966,6 +3985,10 @@ module Aws::IoT
     MetricValue.add_member(:numbers, Shapes::ShapeRef.new(shape: NumberList, location_name: "numbers"))
     MetricValue.add_member(:strings, Shapes::ShapeRef.new(shape: StringList, location_name: "strings"))
     MetricValue.struct_class = Types::MetricValue
+
+    MetricsExportConfig.add_member(:mqtt_topic, Shapes::ShapeRef.new(shape: MqttTopic, required: true, location_name: "mqttTopic"))
+    MetricsExportConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MetricsExportConfig.struct_class = Types::MetricsExportConfig
 
     MissingContextValues.member = Shapes::ShapeRef.new(shape: MissingContextValue)
 
@@ -5037,6 +5060,8 @@ module Aws::IoT
     UpdateSecurityProfileRequest.add_member(:delete_alert_targets, Shapes::ShapeRef.new(shape: DeleteAlertTargets, location_name: "deleteAlertTargets"))
     UpdateSecurityProfileRequest.add_member(:delete_additional_metrics_to_retain, Shapes::ShapeRef.new(shape: DeleteAdditionalMetricsToRetain, location_name: "deleteAdditionalMetricsToRetain"))
     UpdateSecurityProfileRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location: "querystring", location_name: "expectedVersion"))
+    UpdateSecurityProfileRequest.add_member(:metrics_export_config, Shapes::ShapeRef.new(shape: MetricsExportConfig, location_name: "metricsExportConfig"))
+    UpdateSecurityProfileRequest.add_member(:delete_metrics_export_config, Shapes::ShapeRef.new(shape: DeleteMetricsExportConfig, location_name: "deleteMetricsExportConfig"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateSecurityProfileResponse.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
@@ -5049,6 +5074,7 @@ module Aws::IoT
     UpdateSecurityProfileResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     UpdateSecurityProfileResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     UpdateSecurityProfileResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedDate"))
+    UpdateSecurityProfileResponse.add_member(:metrics_export_config, Shapes::ShapeRef.new(shape: MetricsExportConfig, location_name: "metricsExportConfig"))
     UpdateSecurityProfileResponse.struct_class = Types::UpdateSecurityProfileResponse
 
     UpdateStreamRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, required: true, location: "uri", location_name: "streamId"))

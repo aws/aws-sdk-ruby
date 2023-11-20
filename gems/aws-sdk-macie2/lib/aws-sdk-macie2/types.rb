@@ -3248,18 +3248,24 @@ module Aws::Macie2
     # the configuration for an Amazon Macie account.
     #
     # @!attribute [rw] configuration
-    #   Specifies the configuration settings for retrieving occurrences of
-    #   sensitive data reported by findings, and the status of the
-    #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an Key
-    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    #   the specified key to encrypt the sensitive data that you retrieve.
+    #   Specifies the status of the Amazon Macie configuration for
+    #   retrieving occurrences of sensitive data reported by findings, and
+    #   the Key Management Service (KMS) key to use to encrypt sensitive
+    #   data that's retrieved. When you enable the configuration for the
+    #   first time, your request must specify an KMS key. Otherwise, an
+    #   error occurs.
     #   @return [Types::RevealConfiguration]
+    #
+    # @!attribute [rw] retrieval_configuration
+    #   Provides information about the access method and settings that are
+    #   used to retrieve occurrences of sensitive data reported by findings.
+    #   @return [Types::RetrievalConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfigurationResponse AWS API Documentation
     #
     class GetRevealConfigurationResponse < Struct.new(
-      :configuration)
+      :configuration,
+      :retrieval_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5071,12 +5077,35 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the configuration settings for retrieving occurrences of
-    # sensitive data reported by findings, and the status of the
-    # configuration for an Amazon Macie account. When you enable the
-    # configuration for the first time, your request must specify an Key
-    # Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    # the specified key to encrypt the sensitive data that you retrieve.
+    # Provides information about the access method and settings that are
+    # used to retrieve occurrences of sensitive data reported by findings.
+    #
+    # @!attribute [rw] external_id
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_mode
+    #   The access method to use when retrieving occurrences of sensitive
+    #   data reported by findings. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/RetrievalConfiguration AWS API Documentation
+    #
+    class RetrievalConfiguration < Struct.new(
+      :external_id,
+      :retrieval_mode,
+      :role_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the status of the Amazon Macie configuration for retrieving
+    # occurrences of sensitive data reported by findings, and the Key
+    # Management Service (KMS) key to use to encrypt sensitive data that's
+    # retrieved. When you enable the configuration for the first time, your
+    # request must specify an KMS key. Otherwise, an error occurs.
     #
     # @!attribute [rw] kms_key_id
     #   @return [String]
@@ -6615,23 +6644,75 @@ module Aws::Macie2
     #
     class UpdateResourceProfileResponse < Aws::EmptyStructure; end
 
-    # Specifies the configuration settings for retrieving occurrences of
+    # Specifies the access method and settings to use when retrieving
+    # occurrences of sensitive data reported by findings. If your request
+    # specifies an Identity and Access Management (IAM) role to assume when
+    # retrieving the sensitive data, Amazon Macie verifies that the role
+    # exists and the attached policies are configured correctly. If there's
+    # an issue, Macie returns an error. For information about addressing the
+    # issue, see [Retrieving sensitive data samples with findings][1] in the
+    # *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
+    #
+    # @!attribute [rw] retrieval_mode
+    #   The access method to use when retrieving occurrences of sensitive
+    #   data reported by findings. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRetrievalConfiguration AWS API Documentation
+    #
+    class UpdateRetrievalConfiguration < Struct.new(
+      :retrieval_mode,
+      :role_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration settings for retrieving occurrences of
     # sensitive data reported by findings, and the status of the
-    # configuration for an Amazon Macie account.
+    # configuration for an Amazon Macie account. If you don't specify
+    # retrievalConfiguration values for an existing configuration, Macie
+    # sets the access method to CALLER\_CREDENTIALS. If your current access
+    # method is ASSUME\_ROLE, Macie also deletes the external ID and role
+    # name currently specified for the configuration. To keep these settings
+    # for an existing configuration, specify the current
+    # retrievalConfiguration values in your request.
     #
     # @!attribute [rw] configuration
-    #   Specifies the configuration settings for retrieving occurrences of
-    #   sensitive data reported by findings, and the status of the
-    #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an Key
-    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    #   the specified key to encrypt the sensitive data that you retrieve.
+    #   Specifies the status of the Amazon Macie configuration for
+    #   retrieving occurrences of sensitive data reported by findings, and
+    #   the Key Management Service (KMS) key to use to encrypt sensitive
+    #   data that's retrieved. When you enable the configuration for the
+    #   first time, your request must specify an KMS key. Otherwise, an
+    #   error occurs.
     #   @return [Types::RevealConfiguration]
+    #
+    # @!attribute [rw] retrieval_configuration
+    #   Specifies the access method and settings to use when retrieving
+    #   occurrences of sensitive data reported by findings. If your request
+    #   specifies an Identity and Access Management (IAM) role to assume
+    #   when retrieving the sensitive data, Amazon Macie verifies that the
+    #   role exists and the attached policies are configured correctly. If
+    #   there's an issue, Macie returns an error. For information about
+    #   addressing the issue, see [Retrieving sensitive data samples with
+    #   findings][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
+    #   @return [Types::UpdateRetrievalConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationRequest AWS API Documentation
     #
     class UpdateRevealConfigurationRequest < Struct.new(
-      :configuration)
+      :configuration,
+      :retrieval_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6641,18 +6722,24 @@ module Aws::Macie2
     # status of the configuration for an Amazon Macie account.
     #
     # @!attribute [rw] configuration
-    #   Specifies the configuration settings for retrieving occurrences of
-    #   sensitive data reported by findings, and the status of the
-    #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an Key
-    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    #   the specified key to encrypt the sensitive data that you retrieve.
+    #   Specifies the status of the Amazon Macie configuration for
+    #   retrieving occurrences of sensitive data reported by findings, and
+    #   the Key Management Service (KMS) key to use to encrypt sensitive
+    #   data that's retrieved. When you enable the configuration for the
+    #   first time, your request must specify an KMS key. Otherwise, an
+    #   error occurs.
     #   @return [Types::RevealConfiguration]
+    #
+    # @!attribute [rw] retrieval_configuration
+    #   Provides information about the access method and settings that are
+    #   used to retrieve occurrences of sensitive data reported by findings.
+    #   @return [Types::RetrievalConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationResponse AWS API Documentation
     #
     class UpdateRevealConfigurationResponse < Struct.new(
-      :configuration)
+      :configuration,
+      :retrieval_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

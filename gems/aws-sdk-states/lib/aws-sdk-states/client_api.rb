@@ -30,6 +30,7 @@ module Aws::States
     BilledMemoryUsed = Shapes::IntegerShape.new(name: 'BilledMemoryUsed')
     BillingDetails = Shapes::StructureShape.new(name: 'BillingDetails')
     CharacterRestrictedName = Shapes::StringShape.new(name: 'CharacterRestrictedName')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchEventsExecutionDataDetails = Shapes::StructureShape.new(name: 'CloudWatchEventsExecutionDataDetails')
     CloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroup')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -71,6 +72,10 @@ module Aws::States
     ExecutionLimitExceeded = Shapes::StructureShape.new(name: 'ExecutionLimitExceeded')
     ExecutionList = Shapes::ListShape.new(name: 'ExecutionList')
     ExecutionListItem = Shapes::StructureShape.new(name: 'ExecutionListItem')
+    ExecutionNotRedrivable = Shapes::StructureShape.new(name: 'ExecutionNotRedrivable')
+    ExecutionRedriveFilter = Shapes::StringShape.new(name: 'ExecutionRedriveFilter')
+    ExecutionRedriveStatus = Shapes::StringShape.new(name: 'ExecutionRedriveStatus')
+    ExecutionRedrivenEventDetails = Shapes::StructureShape.new(name: 'ExecutionRedrivenEventDetails')
     ExecutionStartedEventDetails = Shapes::StructureShape.new(name: 'ExecutionStartedEventDetails')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExecutionSucceededEventDetails = Shapes::StructureShape.new(name: 'ExecutionSucceededEventDetails')
@@ -120,6 +125,7 @@ module Aws::States
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LongArn = Shapes::StringShape.new(name: 'LongArn')
+    LongObject = Shapes::IntegerShape.new(name: 'LongObject')
     MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
     MapRunExecutionCounts = Shapes::StructureShape.new(name: 'MapRunExecutionCounts')
     MapRunFailedEventDetails = Shapes::StructureShape.new(name: 'MapRunFailedEventDetails')
@@ -127,6 +133,7 @@ module Aws::States
     MapRunLabel = Shapes::StringShape.new(name: 'MapRunLabel')
     MapRunList = Shapes::ListShape.new(name: 'MapRunList')
     MapRunListItem = Shapes::StructureShape.new(name: 'MapRunListItem')
+    MapRunRedrivenEventDetails = Shapes::StructureShape.new(name: 'MapRunRedrivenEventDetails')
     MapRunStartedEventDetails = Shapes::StructureShape.new(name: 'MapRunStartedEventDetails')
     MapRunStatus = Shapes::StringShape.new(name: 'MapRunStatus')
     MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
@@ -138,6 +145,9 @@ module Aws::States
     Publish = Shapes::BooleanShape.new(name: 'Publish')
     PublishStateMachineVersionInput = Shapes::StructureShape.new(name: 'PublishStateMachineVersionInput')
     PublishStateMachineVersionOutput = Shapes::StructureShape.new(name: 'PublishStateMachineVersionOutput')
+    RedriveCount = Shapes::IntegerShape.new(name: 'RedriveCount')
+    RedriveExecutionInput = Shapes::StructureShape.new(name: 'RedriveExecutionInput')
+    RedriveExecutionOutput = Shapes::StructureShape.new(name: 'RedriveExecutionOutput')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
@@ -354,6 +364,10 @@ module Aws::States
     DescribeExecutionOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     DescribeExecutionOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     DescribeExecutionOutput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
+    DescribeExecutionOutput.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount"))
+    DescribeExecutionOutput.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "redriveDate"))
+    DescribeExecutionOutput.add_member(:redrive_status, Shapes::ShapeRef.new(shape: ExecutionRedriveStatus, location_name: "redriveStatus"))
+    DescribeExecutionOutput.add_member(:redrive_status_reason, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "redriveStatusReason"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
 
     DescribeMapRunInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
@@ -369,6 +383,8 @@ module Aws::States
     DescribeMapRunOutput.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: ToleratedFailureCount, required: true, location_name: "toleratedFailureCount"))
     DescribeMapRunOutput.add_member(:item_counts, Shapes::ShapeRef.new(shape: MapRunItemCounts, required: true, location_name: "itemCounts"))
     DescribeMapRunOutput.add_member(:execution_counts, Shapes::ShapeRef.new(shape: MapRunExecutionCounts, required: true, location_name: "executionCounts"))
+    DescribeMapRunOutput.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount"))
+    DescribeMapRunOutput.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "redriveDate"))
     DescribeMapRunOutput.struct_class = Types::DescribeMapRunOutput
 
     DescribeStateMachineAliasInput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineAliasArn"))
@@ -443,7 +459,15 @@ module Aws::States
     ExecutionListItem.add_member(:item_count, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "itemCount", metadata: {"box"=>true}))
     ExecutionListItem.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     ExecutionListItem.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
+    ExecutionListItem.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount", metadata: {"box"=>true}))
+    ExecutionListItem.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "redriveDate"))
     ExecutionListItem.struct_class = Types::ExecutionListItem
+
+    ExecutionNotRedrivable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExecutionNotRedrivable.struct_class = Types::ExecutionNotRedrivable
+
+    ExecutionRedrivenEventDetails.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount"))
+    ExecutionRedrivenEventDetails.struct_class = Types::ExecutionRedrivenEventDetails
 
     ExecutionStartedEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     ExecutionStartedEventDetails.add_member(:input_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "inputDetails"))
@@ -502,6 +526,7 @@ module Aws::States
     HistoryEvent.add_member(:execution_succeeded_event_details, Shapes::ShapeRef.new(shape: ExecutionSucceededEventDetails, location_name: "executionSucceededEventDetails"))
     HistoryEvent.add_member(:execution_aborted_event_details, Shapes::ShapeRef.new(shape: ExecutionAbortedEventDetails, location_name: "executionAbortedEventDetails"))
     HistoryEvent.add_member(:execution_timed_out_event_details, Shapes::ShapeRef.new(shape: ExecutionTimedOutEventDetails, location_name: "executionTimedOutEventDetails"))
+    HistoryEvent.add_member(:execution_redriven_event_details, Shapes::ShapeRef.new(shape: ExecutionRedrivenEventDetails, location_name: "executionRedrivenEventDetails"))
     HistoryEvent.add_member(:map_state_started_event_details, Shapes::ShapeRef.new(shape: MapStateStartedEventDetails, location_name: "mapStateStartedEventDetails"))
     HistoryEvent.add_member(:map_iteration_started_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationStartedEventDetails"))
     HistoryEvent.add_member(:map_iteration_succeeded_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationSucceededEventDetails"))
@@ -517,6 +542,7 @@ module Aws::States
     HistoryEvent.add_member(:state_exited_event_details, Shapes::ShapeRef.new(shape: StateExitedEventDetails, location_name: "stateExitedEventDetails"))
     HistoryEvent.add_member(:map_run_started_event_details, Shapes::ShapeRef.new(shape: MapRunStartedEventDetails, location_name: "mapRunStartedEventDetails"))
     HistoryEvent.add_member(:map_run_failed_event_details, Shapes::ShapeRef.new(shape: MapRunFailedEventDetails, location_name: "mapRunFailedEventDetails"))
+    HistoryEvent.add_member(:map_run_redriven_event_details, Shapes::ShapeRef.new(shape: MapRunRedrivenEventDetails, location_name: "mapRunRedrivenEventDetails"))
     HistoryEvent.struct_class = Types::HistoryEvent
 
     HistoryEventExecutionDataDetails.add_member(:truncated, Shapes::ShapeRef.new(shape: truncated, location_name: "truncated"))
@@ -588,6 +614,7 @@ module Aws::States
     ListExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
     ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    ListExecutionsInput.add_member(:redrive_filter, Shapes::ShapeRef.new(shape: ExecutionRedriveFilter, location_name: "redriveFilter"))
     ListExecutionsInput.struct_class = Types::ListExecutionsInput
 
     ListExecutionsOutput.add_member(:executions, Shapes::ShapeRef.new(shape: ExecutionList, required: true, location_name: "executions"))
@@ -657,6 +684,8 @@ module Aws::States
     MapRunExecutionCounts.add_member(:aborted, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "aborted"))
     MapRunExecutionCounts.add_member(:total, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "total"))
     MapRunExecutionCounts.add_member(:results_written, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "resultsWritten"))
+    MapRunExecutionCounts.add_member(:failures_not_redrivable, Shapes::ShapeRef.new(shape: LongObject, location_name: "failuresNotRedrivable"))
+    MapRunExecutionCounts.add_member(:pending_redrive, Shapes::ShapeRef.new(shape: LongObject, location_name: "pendingRedrive"))
     MapRunExecutionCounts.struct_class = Types::MapRunExecutionCounts
 
     MapRunFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -671,6 +700,8 @@ module Aws::States
     MapRunItemCounts.add_member(:aborted, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "aborted"))
     MapRunItemCounts.add_member(:total, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "total"))
     MapRunItemCounts.add_member(:results_written, Shapes::ShapeRef.new(shape: UnsignedLong, required: true, location_name: "resultsWritten"))
+    MapRunItemCounts.add_member(:failures_not_redrivable, Shapes::ShapeRef.new(shape: LongObject, location_name: "failuresNotRedrivable"))
+    MapRunItemCounts.add_member(:pending_redrive, Shapes::ShapeRef.new(shape: LongObject, location_name: "pendingRedrive"))
     MapRunItemCounts.struct_class = Types::MapRunItemCounts
 
     MapRunList.member = Shapes::ShapeRef.new(shape: MapRunListItem)
@@ -681,6 +712,10 @@ module Aws::States
     MapRunListItem.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
     MapRunListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
     MapRunListItem.struct_class = Types::MapRunListItem
+
+    MapRunRedrivenEventDetails.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
+    MapRunRedrivenEventDetails.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount"))
+    MapRunRedrivenEventDetails.struct_class = Types::MapRunRedrivenEventDetails
 
     MapRunStartedEventDetails.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     MapRunStartedEventDetails.struct_class = Types::MapRunStartedEventDetails
@@ -699,6 +734,13 @@ module Aws::States
     PublishStateMachineVersionOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     PublishStateMachineVersionOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineVersionArn"))
     PublishStateMachineVersionOutput.struct_class = Types::PublishStateMachineVersionOutput
+
+    RedriveExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    RedriveExecutionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RedriveExecutionInput.struct_class = Types::RedriveExecutionInput
+
+    RedriveExecutionOutput.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "redriveDate"))
+    RedriveExecutionOutput.struct_class = Types::RedriveExecutionOutput
 
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFound.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
@@ -1243,6 +1285,18 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+      end)
+
+      api.add_operation(:redrive_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RedriveExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RedriveExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: RedriveExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: ExecutionNotRedrivable)
+        o.errors << Shapes::ShapeRef.new(shape: ExecutionLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
       end)
 

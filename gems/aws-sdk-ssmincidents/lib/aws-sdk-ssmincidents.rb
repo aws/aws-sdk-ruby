@@ -33,7 +33,7 @@ require_relative 'aws-sdk-ssmincidents/customizations'
 # structure.
 #
 #     ssm_incidents = Aws::SSMIncidents::Client.new
-#     resp = ssm_incidents.create_replication_set(params)
+#     resp = ssm_incidents.batch_get_incident_findings(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-ssmincidents/customizations'
 # @!group service
 module Aws::SSMIncidents
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

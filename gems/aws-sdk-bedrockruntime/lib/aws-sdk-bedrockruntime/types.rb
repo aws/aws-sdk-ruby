@@ -31,7 +31,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -207,7 +208,8 @@ module Aws::BedrockRuntime
     class ModelStreamErrorException < Struct.new(
       :message,
       :original_message,
-      :original_status_code)
+      :original_status_code,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -221,7 +223,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ModelTimeoutException AWS API Documentation
     #
     class ModelTimeoutException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -277,7 +280,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -291,7 +295,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end

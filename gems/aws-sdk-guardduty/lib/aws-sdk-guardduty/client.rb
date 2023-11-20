@@ -728,6 +728,8 @@ module Aws::GuardDuty
     #
     #   * service.action.dnsRequestAction.domain
     #
+    #   * service.action.dnsRequestAction.domainWithSuffix
+    #
     #   * service.action.networkConnectionAction.blocked
     #
     #   * service.action.networkConnectionAction.connectionDirection
@@ -752,7 +754,13 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.namespace
+    #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
+    #
     #   * service.action.kubernetesApiCallAction.requestUri
+    #
+    #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
@@ -2133,6 +2141,9 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups[0] #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name #=> Array
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name[0] #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.impersonated_user.username #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.impersonated_user.groups #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.impersonated_user.groups[0] #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.name #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.type #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.uid #=> String
@@ -2148,9 +2159,13 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].volume_mounts[0].name #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].volume_mounts[0].mount_path #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].security_context.privileged #=> Boolean
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes #=> Array
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes[0].name #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes[0].host_path.path #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.service_account_name #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.host_ipc #=> Boolean
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.host_pid #=> Boolean
     #   resp.findings[0].resource.resource_type #=> String
     #   resp.findings[0].resource.ebs_volume_details.scanned_volume_details #=> Array
     #   resp.findings[0].resource.ebs_volume_details.scanned_volume_details[0].volume_arn #=> String
@@ -2199,6 +2214,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].volume_mounts[0].name #=> String
     #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].volume_mounts[0].mount_path #=> String
     #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].security_context.privileged #=> Boolean
+    #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.findings[0].resource.ecs_cluster_details.task_details.group #=> String
     #   resp.findings[0].resource.container_details.container_runtime #=> String
     #   resp.findings[0].resource.container_details.id #=> String
@@ -2209,6 +2225,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.container_details.volume_mounts[0].name #=> String
     #   resp.findings[0].resource.container_details.volume_mounts[0].mount_path #=> String
     #   resp.findings[0].resource.container_details.security_context.privileged #=> Boolean
+    #   resp.findings[0].resource.container_details.security_context.allow_privilege_escalation #=> Boolean
     #   resp.findings[0].resource.rds_db_instance_details.db_instance_identifier #=> String
     #   resp.findings[0].resource.rds_db_instance_details.engine #=> String
     #   resp.findings[0].resource.rds_db_instance_details.engine_version #=> String
@@ -2314,6 +2331,10 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.org #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.status_code #=> Integer
     #   resp.findings[0].service.action.kubernetes_api_call_action.parameters #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.resource #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.subresource #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.namespace #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.resource_name #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.country.country_name #=> String
@@ -2329,6 +2350,18 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].application #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].failed_login_attempts #=> Integer
     #   resp.findings[0].service.action.rds_login_attempt_action.login_attributes[0].successful_login_attempts #=> Integer
+    #   resp.findings[0].service.action.kubernetes_permission_checked_details.verb #=> String
+    #   resp.findings[0].service.action.kubernetes_permission_checked_details.resource #=> String
+    #   resp.findings[0].service.action.kubernetes_permission_checked_details.namespace #=> String
+    #   resp.findings[0].service.action.kubernetes_permission_checked_details.allowed #=> Boolean
+    #   resp.findings[0].service.action.kubernetes_role_binding_details.kind #=> String
+    #   resp.findings[0].service.action.kubernetes_role_binding_details.name #=> String
+    #   resp.findings[0].service.action.kubernetes_role_binding_details.uid #=> String
+    #   resp.findings[0].service.action.kubernetes_role_binding_details.role_ref_name #=> String
+    #   resp.findings[0].service.action.kubernetes_role_binding_details.role_ref_kind #=> String
+    #   resp.findings[0].service.action.kubernetes_role_details.kind #=> String
+    #   resp.findings[0].service.action.kubernetes_role_details.name #=> String
+    #   resp.findings[0].service.action.kubernetes_role_details.uid #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details #=> Array
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
@@ -2456,6 +2489,19 @@ module Aws::GuardDuty
     #   resp.findings[0].service.runtime_details.context.iana_protocol_number #=> Integer
     #   resp.findings[0].service.runtime_details.context.memory_regions #=> Array
     #   resp.findings[0].service.runtime_details.context.memory_regions[0] #=> String
+    #   resp.findings[0].service.detection.anomaly.profiles #=> Hash
+    #   resp.findings[0].service.detection.anomaly.profiles["String"] #=> Hash
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"] #=> Array
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_type #=> String, one of "FREQUENCY"
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE"
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.text #=> Array
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.text[0] #=> String
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior #=> Hash
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"] #=> Hash
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_type #=> String, one of "FREQUENCY"
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE"
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text #=> Array
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text[0] #=> String
     #   resp.findings[0].severity #=> Float
     #   resp.findings[0].title #=> String
     #   resp.findings[0].type #=> String
@@ -4491,7 +4537,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

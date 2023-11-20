@@ -13,6 +13,7 @@ module Aws::CloudWatchLogs
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPolicy = Shapes::StringShape.new(name: 'AccessPolicy')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
@@ -24,6 +25,9 @@ module Aws::CloudWatchLogs
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateDeliveryRequest = Shapes::StructureShape.new(name: 'CreateDeliveryRequest')
+    CreateDeliveryResponse = Shapes::StructureShape.new(name: 'CreateDeliveryResponse')
     CreateExportTaskRequest = Shapes::StructureShape.new(name: 'CreateExportTaskRequest')
     CreateExportTaskResponse = Shapes::StructureShape.new(name: 'CreateExportTaskResponse')
     CreateLogGroupRequest = Shapes::StructureShape.new(name: 'CreateLogGroupRequest')
@@ -35,6 +39,10 @@ module Aws::CloudWatchLogs
     DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
     DeleteAccountPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccountPolicyRequest')
     DeleteDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteDataProtectionPolicyRequest')
+    DeleteDeliveryDestinationPolicyRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryDestinationPolicyRequest')
+    DeleteDeliveryDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryDestinationRequest')
+    DeleteDeliveryRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryRequest')
+    DeleteDeliverySourceRequest = Shapes::StructureShape.new(name: 'DeleteDeliverySourceRequest')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteLogGroupRequest = Shapes::StructureShape.new(name: 'DeleteLogGroupRequest')
     DeleteLogStreamRequest = Shapes::StructureShape.new(name: 'DeleteLogStreamRequest')
@@ -44,9 +52,27 @@ module Aws::CloudWatchLogs
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
+    Deliveries = Shapes::ListShape.new(name: 'Deliveries')
+    Delivery = Shapes::StructureShape.new(name: 'Delivery')
+    DeliveryDestination = Shapes::StructureShape.new(name: 'DeliveryDestination')
+    DeliveryDestinationConfiguration = Shapes::StructureShape.new(name: 'DeliveryDestinationConfiguration')
+    DeliveryDestinationName = Shapes::StringShape.new(name: 'DeliveryDestinationName')
+    DeliveryDestinationPolicy = Shapes::StringShape.new(name: 'DeliveryDestinationPolicy')
+    DeliveryDestinationType = Shapes::StringShape.new(name: 'DeliveryDestinationType')
+    DeliveryDestinations = Shapes::ListShape.new(name: 'DeliveryDestinations')
+    DeliveryId = Shapes::StringShape.new(name: 'DeliveryId')
+    DeliverySource = Shapes::StructureShape.new(name: 'DeliverySource')
+    DeliverySourceName = Shapes::StringShape.new(name: 'DeliverySourceName')
+    DeliverySources = Shapes::ListShape.new(name: 'DeliverySources')
     Descending = Shapes::BooleanShape.new(name: 'Descending')
     DescribeAccountPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeAccountPoliciesRequest')
     DescribeAccountPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeAccountPoliciesResponse')
+    DescribeDeliveriesRequest = Shapes::StructureShape.new(name: 'DescribeDeliveriesRequest')
+    DescribeDeliveriesResponse = Shapes::StructureShape.new(name: 'DescribeDeliveriesResponse')
+    DescribeDeliveryDestinationsRequest = Shapes::StructureShape.new(name: 'DescribeDeliveryDestinationsRequest')
+    DescribeDeliveryDestinationsResponse = Shapes::StructureShape.new(name: 'DescribeDeliveryDestinationsResponse')
+    DescribeDeliverySourcesRequest = Shapes::StructureShape.new(name: 'DescribeDeliverySourcesRequest')
+    DescribeDeliverySourcesResponse = Shapes::StructureShape.new(name: 'DescribeDeliverySourcesResponse')
     DescribeDestinationsRequest = Shapes::StructureShape.new(name: 'DescribeDestinationsRequest')
     DescribeDestinationsResponse = Shapes::StructureShape.new(name: 'DescribeDestinationsResponse')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
@@ -103,6 +129,14 @@ module Aws::CloudWatchLogs
     ForceUpdate = Shapes::BooleanShape.new(name: 'ForceUpdate')
     GetDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'GetDataProtectionPolicyRequest')
     GetDataProtectionPolicyResponse = Shapes::StructureShape.new(name: 'GetDataProtectionPolicyResponse')
+    GetDeliveryDestinationPolicyRequest = Shapes::StructureShape.new(name: 'GetDeliveryDestinationPolicyRequest')
+    GetDeliveryDestinationPolicyResponse = Shapes::StructureShape.new(name: 'GetDeliveryDestinationPolicyResponse')
+    GetDeliveryDestinationRequest = Shapes::StructureShape.new(name: 'GetDeliveryDestinationRequest')
+    GetDeliveryDestinationResponse = Shapes::StructureShape.new(name: 'GetDeliveryDestinationResponse')
+    GetDeliveryRequest = Shapes::StructureShape.new(name: 'GetDeliveryRequest')
+    GetDeliveryResponse = Shapes::StructureShape.new(name: 'GetDeliveryResponse')
+    GetDeliverySourceRequest = Shapes::StructureShape.new(name: 'GetDeliverySourceRequest')
+    GetDeliverySourceResponse = Shapes::StructureShape.new(name: 'GetDeliverySourceResponse')
     GetLogEventsRequest = Shapes::StructureShape.new(name: 'GetLogEventsRequest')
     GetLogEventsResponse = Shapes::StructureShape.new(name: 'GetLogEventsResponse')
     GetLogGroupFieldsRequest = Shapes::StructureShape.new(name: 'GetLogGroupFieldsRequest')
@@ -143,6 +177,7 @@ module Aws::CloudWatchLogs
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     LogStreamSearchedCompletely = Shapes::BooleanShape.new(name: 'LogStreamSearchedCompletely')
     LogStreams = Shapes::ListShape.new(name: 'LogStreams')
+    LogType = Shapes::StringShape.new(name: 'LogType')
     MalformedQueryException = Shapes::StructureShape.new(name: 'MalformedQueryException')
     Message = Shapes::StringShape.new(name: 'Message')
     MetricFilter = Shapes::StructureShape.new(name: 'MetricFilter')
@@ -157,9 +192,11 @@ module Aws::CloudWatchLogs
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OperationAbortedException = Shapes::StructureShape.new(name: 'OperationAbortedException')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OutputLogEvent = Shapes::StructureShape.new(name: 'OutputLogEvent')
     OutputLogEvents = Shapes::ListShape.new(name: 'OutputLogEvents')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
@@ -167,6 +204,12 @@ module Aws::CloudWatchLogs
     PutAccountPolicyResponse = Shapes::StructureShape.new(name: 'PutAccountPolicyResponse')
     PutDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyRequest')
     PutDataProtectionPolicyResponse = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyResponse')
+    PutDeliveryDestinationPolicyRequest = Shapes::StructureShape.new(name: 'PutDeliveryDestinationPolicyRequest')
+    PutDeliveryDestinationPolicyResponse = Shapes::StructureShape.new(name: 'PutDeliveryDestinationPolicyResponse')
+    PutDeliveryDestinationRequest = Shapes::StructureShape.new(name: 'PutDeliveryDestinationRequest')
+    PutDeliveryDestinationResponse = Shapes::StructureShape.new(name: 'PutDeliveryDestinationResponse')
+    PutDeliverySourceRequest = Shapes::StructureShape.new(name: 'PutDeliverySourceRequest')
+    PutDeliverySourceResponse = Shapes::StructureShape.new(name: 'PutDeliverySourceResponse')
     PutDestinationPolicyRequest = Shapes::StructureShape.new(name: 'PutDestinationPolicyRequest')
     PutDestinationRequest = Shapes::StructureShape.new(name: 'PutDestinationRequest')
     PutDestinationResponse = Shapes::StructureShape.new(name: 'PutDestinationResponse')
@@ -196,6 +239,7 @@ module Aws::CloudWatchLogs
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     RejectedLogEventsInfo = Shapes::StructureShape.new(name: 'RejectedLogEventsInfo')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
+    ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicies = Shapes::ListShape.new(name: 'ResourcePolicies')
@@ -207,6 +251,8 @@ module Aws::CloudWatchLogs
     SearchedLogStream = Shapes::StructureShape.new(name: 'SearchedLogStream')
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
     SequenceToken = Shapes::StringShape.new(name: 'SequenceToken')
+    Service = Shapes::StringShape.new(name: 'Service')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
     StartFromHead = Shapes::BooleanShape.new(name: 'StartFromHead')
@@ -230,6 +276,7 @@ module Aws::CloudWatchLogs
     TestEventMessages = Shapes::ListShape.new(name: 'TestEventMessages')
     TestMetricFilterRequest = Shapes::StructureShape.new(name: 'TestMetricFilterRequest')
     TestMetricFilterResponse = Shapes::StructureShape.new(name: 'TestMetricFilterResponse')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
@@ -237,7 +284,10 @@ module Aws::CloudWatchLogs
     UnrecognizedClientException = Shapes::StructureShape.new(name: 'UnrecognizedClientException')
     UntagLogGroupRequest = Shapes::StructureShape.new(name: 'UntagLogGroupRequest')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
+
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
@@ -258,6 +308,16 @@ module Aws::CloudWatchLogs
 
     CancelExportTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, required: true, location_name: "taskId"))
     CancelExportTaskRequest.struct_class = Types::CancelExportTaskRequest
+
+    ConflictException.struct_class = Types::ConflictException
+
+    CreateDeliveryRequest.add_member(:delivery_source_name, Shapes::ShapeRef.new(shape: DeliverySourceName, required: true, location_name: "deliverySourceName"))
+    CreateDeliveryRequest.add_member(:delivery_destination_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "deliveryDestinationArn"))
+    CreateDeliveryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateDeliveryRequest.struct_class = Types::CreateDeliveryRequest
+
+    CreateDeliveryResponse.add_member(:delivery, Shapes::ShapeRef.new(shape: Delivery, location_name: "delivery"))
+    CreateDeliveryResponse.struct_class = Types::CreateDeliveryResponse
 
     CreateExportTaskRequest.add_member(:task_name, Shapes::ShapeRef.new(shape: ExportTaskName, location_name: "taskName"))
     CreateExportTaskRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
@@ -290,6 +350,18 @@ module Aws::CloudWatchLogs
     DeleteDataProtectionPolicyRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     DeleteDataProtectionPolicyRequest.struct_class = Types::DeleteDataProtectionPolicyRequest
 
+    DeleteDeliveryDestinationPolicyRequest.add_member(:delivery_destination_name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "deliveryDestinationName"))
+    DeleteDeliveryDestinationPolicyRequest.struct_class = Types::DeleteDeliveryDestinationPolicyRequest
+
+    DeleteDeliveryDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "name"))
+    DeleteDeliveryDestinationRequest.struct_class = Types::DeleteDeliveryDestinationRequest
+
+    DeleteDeliveryRequest.add_member(:id, Shapes::ShapeRef.new(shape: DeliveryId, required: true, location_name: "id"))
+    DeleteDeliveryRequest.struct_class = Types::DeleteDeliveryRequest
+
+    DeleteDeliverySourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliverySourceName, required: true, location_name: "name"))
+    DeleteDeliverySourceRequest.struct_class = Types::DeleteDeliverySourceRequest
+
     DeleteDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     DeleteDestinationRequest.struct_class = Types::DeleteDestinationRequest
 
@@ -320,6 +392,39 @@ module Aws::CloudWatchLogs
     DeleteSubscriptionFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
     DeleteSubscriptionFilterRequest.struct_class = Types::DeleteSubscriptionFilterRequest
 
+    Deliveries.member = Shapes::ShapeRef.new(shape: Delivery)
+
+    Delivery.add_member(:id, Shapes::ShapeRef.new(shape: DeliveryId, location_name: "id"))
+    Delivery.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    Delivery.add_member(:delivery_source_name, Shapes::ShapeRef.new(shape: DeliverySourceName, location_name: "deliverySourceName"))
+    Delivery.add_member(:delivery_destination_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "deliveryDestinationArn"))
+    Delivery.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, location_name: "deliveryDestinationType"))
+    Delivery.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Delivery.struct_class = Types::Delivery
+
+    DeliveryDestination.add_member(:name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, location_name: "name"))
+    DeliveryDestination.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DeliveryDestination.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, location_name: "deliveryDestinationType"))
+    DeliveryDestination.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "outputFormat"))
+    DeliveryDestination.add_member(:delivery_destination_configuration, Shapes::ShapeRef.new(shape: DeliveryDestinationConfiguration, location_name: "deliveryDestinationConfiguration"))
+    DeliveryDestination.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeliveryDestination.struct_class = Types::DeliveryDestination
+
+    DeliveryDestinationConfiguration.add_member(:destination_resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "destinationResourceArn"))
+    DeliveryDestinationConfiguration.struct_class = Types::DeliveryDestinationConfiguration
+
+    DeliveryDestinations.member = Shapes::ShapeRef.new(shape: DeliveryDestination)
+
+    DeliverySource.add_member(:name, Shapes::ShapeRef.new(shape: DeliverySourceName, location_name: "name"))
+    DeliverySource.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DeliverySource.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "resourceArns"))
+    DeliverySource.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
+    DeliverySource.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "logType"))
+    DeliverySource.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeliverySource.struct_class = Types::DeliverySource
+
+    DeliverySources.member = Shapes::ShapeRef.new(shape: DeliverySource)
+
     DescribeAccountPoliciesRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     DescribeAccountPoliciesRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
     DescribeAccountPoliciesRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
@@ -327,6 +432,30 @@ module Aws::CloudWatchLogs
 
     DescribeAccountPoliciesResponse.add_member(:account_policies, Shapes::ShapeRef.new(shape: AccountPolicies, location_name: "accountPolicies"))
     DescribeAccountPoliciesResponse.struct_class = Types::DescribeAccountPoliciesResponse
+
+    DescribeDeliveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliveriesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveriesRequest.struct_class = Types::DescribeDeliveriesRequest
+
+    DescribeDeliveriesResponse.add_member(:deliveries, Shapes::ShapeRef.new(shape: Deliveries, location_name: "deliveries"))
+    DescribeDeliveriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliveriesResponse.struct_class = Types::DescribeDeliveriesResponse
+
+    DescribeDeliveryDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliveryDestinationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveryDestinationsRequest.struct_class = Types::DescribeDeliveryDestinationsRequest
+
+    DescribeDeliveryDestinationsResponse.add_member(:delivery_destinations, Shapes::ShapeRef.new(shape: DeliveryDestinations, location_name: "deliveryDestinations"))
+    DescribeDeliveryDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliveryDestinationsResponse.struct_class = Types::DescribeDeliveryDestinationsResponse
+
+    DescribeDeliverySourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliverySourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliverySourcesRequest.struct_class = Types::DescribeDeliverySourcesRequest
+
+    DescribeDeliverySourcesResponse.add_member(:delivery_sources, Shapes::ShapeRef.new(shape: DeliverySources, location_name: "deliverySources"))
+    DescribeDeliverySourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeDeliverySourcesResponse.struct_class = Types::DescribeDeliverySourcesResponse
 
     DescribeDestinationsRequest.add_member(:destination_name_prefix, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationNamePrefix"))
     DescribeDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -497,6 +626,30 @@ module Aws::CloudWatchLogs
     GetDataProtectionPolicyResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     GetDataProtectionPolicyResponse.struct_class = Types::GetDataProtectionPolicyResponse
 
+    GetDeliveryDestinationPolicyRequest.add_member(:delivery_destination_name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "deliveryDestinationName"))
+    GetDeliveryDestinationPolicyRequest.struct_class = Types::GetDeliveryDestinationPolicyRequest
+
+    GetDeliveryDestinationPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    GetDeliveryDestinationPolicyResponse.struct_class = Types::GetDeliveryDestinationPolicyResponse
+
+    GetDeliveryDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "name"))
+    GetDeliveryDestinationRequest.struct_class = Types::GetDeliveryDestinationRequest
+
+    GetDeliveryDestinationResponse.add_member(:delivery_destination, Shapes::ShapeRef.new(shape: DeliveryDestination, location_name: "deliveryDestination"))
+    GetDeliveryDestinationResponse.struct_class = Types::GetDeliveryDestinationResponse
+
+    GetDeliveryRequest.add_member(:id, Shapes::ShapeRef.new(shape: DeliveryId, required: true, location_name: "id"))
+    GetDeliveryRequest.struct_class = Types::GetDeliveryRequest
+
+    GetDeliveryResponse.add_member(:delivery, Shapes::ShapeRef.new(shape: Delivery, location_name: "delivery"))
+    GetDeliveryResponse.struct_class = Types::GetDeliveryResponse
+
+    GetDeliverySourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliverySourceName, required: true, location_name: "name"))
+    GetDeliverySourceRequest.struct_class = Types::GetDeliverySourceRequest
+
+    GetDeliverySourceResponse.add_member(:delivery_source, Shapes::ShapeRef.new(shape: DeliverySource, location_name: "deliverySource"))
+    GetDeliverySourceResponse.struct_class = Types::GetDeliverySourceResponse
+
     GetLogEventsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     GetLogEventsRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, location_name: "logGroupIdentifier"))
     GetLogEventsRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
@@ -644,6 +797,9 @@ module Aws::CloudWatchLogs
 
     OutputLogEvents.member = Shapes::ShapeRef.new(shape: OutputLogEvent)
 
+    Policy.add_member(:delivery_destination_policy, Shapes::ShapeRef.new(shape: DeliveryDestinationPolicy, location_name: "deliveryDestinationPolicy"))
+    Policy.struct_class = Types::Policy
+
     PutAccountPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "policyName"))
     PutAccountPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: AccountPolicyDocument, required: true, location_name: "policyDocument"))
     PutAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
@@ -661,6 +817,31 @@ module Aws::CloudWatchLogs
     PutDataProtectionPolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: DataProtectionPolicyDocument, location_name: "policyDocument"))
     PutDataProtectionPolicyResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     PutDataProtectionPolicyResponse.struct_class = Types::PutDataProtectionPolicyResponse
+
+    PutDeliveryDestinationPolicyRequest.add_member(:delivery_destination_name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "deliveryDestinationName"))
+    PutDeliveryDestinationPolicyRequest.add_member(:delivery_destination_policy, Shapes::ShapeRef.new(shape: DeliveryDestinationPolicy, required: true, location_name: "deliveryDestinationPolicy"))
+    PutDeliveryDestinationPolicyRequest.struct_class = Types::PutDeliveryDestinationPolicyRequest
+
+    PutDeliveryDestinationPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    PutDeliveryDestinationPolicyResponse.struct_class = Types::PutDeliveryDestinationPolicyResponse
+
+    PutDeliveryDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliveryDestinationName, required: true, location_name: "name"))
+    PutDeliveryDestinationRequest.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "outputFormat"))
+    PutDeliveryDestinationRequest.add_member(:delivery_destination_configuration, Shapes::ShapeRef.new(shape: DeliveryDestinationConfiguration, required: true, location_name: "deliveryDestinationConfiguration"))
+    PutDeliveryDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PutDeliveryDestinationRequest.struct_class = Types::PutDeliveryDestinationRequest
+
+    PutDeliveryDestinationResponse.add_member(:delivery_destination, Shapes::ShapeRef.new(shape: DeliveryDestination, location_name: "deliveryDestination"))
+    PutDeliveryDestinationResponse.struct_class = Types::PutDeliveryDestinationResponse
+
+    PutDeliverySourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeliverySourceName, required: true, location_name: "name"))
+    PutDeliverySourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    PutDeliverySourceRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "logType"))
+    PutDeliverySourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PutDeliverySourceRequest.struct_class = Types::PutDeliverySourceRequest
+
+    PutDeliverySourceResponse.add_member(:delivery_source, Shapes::ShapeRef.new(shape: DeliverySource, location_name: "deliverySource"))
+    PutDeliverySourceResponse.struct_class = Types::PutDeliverySourceResponse
 
     PutDestinationPolicyRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     PutDestinationPolicyRequest.add_member(:access_policy, Shapes::ShapeRef.new(shape: AccessPolicy, required: true, location_name: "accessPolicy"))
@@ -761,6 +942,8 @@ module Aws::CloudWatchLogs
 
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
+    ResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
+
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourcePolicies.member = Shapes::ShapeRef.new(shape: ResourcePolicy)
@@ -781,6 +964,8 @@ module Aws::CloudWatchLogs
     SearchedLogStream.struct_class = Types::SearchedLogStream
 
     SearchedLogStreams.member = Shapes::ShapeRef.new(shape: SearchedLogStream)
+
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
@@ -837,6 +1022,8 @@ module Aws::CloudWatchLogs
     TestMetricFilterResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MetricFilterMatches, location_name: "matches"))
     TestMetricFilterResponse.struct_class = Types::TestMetricFilterResponse
 
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
@@ -850,6 +1037,8 @@ module Aws::CloudWatchLogs
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -891,6 +1080,21 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_delivery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDelivery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDeliveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDeliveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -954,6 +1158,60 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_delivery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDelivery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeliveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_delivery_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeliveryDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeliveryDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_delivery_destination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeliveryDestinationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeliveryDestinationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_delivery_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeliverySource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeliverySourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_destination, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,6 +1318,60 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_deliveries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDeliveries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDeliveriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDeliveriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_delivery_destinations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDeliveryDestinations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDeliveryDestinationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDeliveryDestinationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_delivery_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDeliverySources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDeliverySourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDeliverySourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_destinations, Seahorse::Model::Operation.new.tap do |o|
@@ -1227,6 +1539,56 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:get_delivery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDelivery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_delivery_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeliveryDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliveryDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliveryDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_delivery_destination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeliveryDestinationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliveryDestinationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliveryDestinationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_delivery_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeliverySource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliverySourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliverySourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_log_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLogEvents"
         o.http_method = "POST"
@@ -1324,6 +1686,46 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_delivery_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDeliveryDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutDeliveryDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDeliveryDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_delivery_destination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDeliveryDestinationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutDeliveryDestinationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDeliveryDestinationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_delivery_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDeliverySource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutDeliverySourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDeliverySourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:put_destination, Seahorse::Model::Operation.new.tap do |o|

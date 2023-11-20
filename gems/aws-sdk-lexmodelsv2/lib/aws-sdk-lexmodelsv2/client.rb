@@ -864,6 +864,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #       audio_log_settings: [
@@ -876,6 +877,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #     },
@@ -902,11 +904,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
     #   resp.bot_id #=> String
@@ -3244,11 +3248,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_history_events #=> Array
     #   resp.bot_alias_history_events[0].bot_version #=> String
@@ -8251,6 +8257,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #       audio_log_settings: [
@@ -8263,6 +8270,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #     },
@@ -8286,11 +8294,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
     #   resp.bot_id #=> String
@@ -9716,7 +9726,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

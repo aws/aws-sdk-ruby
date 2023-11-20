@@ -143,6 +143,8 @@ module Aws::Comprehend
     DetectSyntaxResponse = Shapes::StructureShape.new(name: 'DetectSyntaxResponse')
     DetectTargetedSentimentRequest = Shapes::StructureShape.new(name: 'DetectTargetedSentimentRequest')
     DetectTargetedSentimentResponse = Shapes::StructureShape.new(name: 'DetectTargetedSentimentResponse')
+    DetectToxicContentRequest = Shapes::StructureShape.new(name: 'DetectToxicContentRequest')
+    DetectToxicContentResponse = Shapes::StructureShape.new(name: 'DetectToxicContentResponse')
     DocumentClass = Shapes::StructureShape.new(name: 'DocumentClass')
     DocumentClassificationConfig = Shapes::StructureShape.new(name: 'DocumentClassificationConfig')
     DocumentClassificationJobFilter = Shapes::StructureShape.new(name: 'DocumentClassificationJobFilter')
@@ -307,6 +309,9 @@ module Aws::Comprehend
     ListOfRelationships = Shapes::ListShape.new(name: 'ListOfRelationships')
     ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
     ListOfTargetedSentimentEntities = Shapes::ListShape.new(name: 'ListOfTargetedSentimentEntities')
+    ListOfTextSegments = Shapes::ListShape.new(name: 'ListOfTextSegments')
+    ListOfToxicContent = Shapes::ListShape.new(name: 'ListOfToxicContent')
+    ListOfToxicLabels = Shapes::ListShape.new(name: 'ListOfToxicLabels')
     ListOfWarnings = Shapes::ListShape.new(name: 'ListOfWarnings')
     ListPiiEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsRequest')
     ListPiiEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsResponse')
@@ -420,6 +425,7 @@ module Aws::Comprehend
     TargetedSentimentEntityType = Shapes::StringShape.new(name: 'TargetedSentimentEntityType')
     TargetedSentimentMention = Shapes::StructureShape.new(name: 'TargetedSentimentMention')
     TaskConfig = Shapes::StructureShape.new(name: 'TaskConfig')
+    TextSegment = Shapes::StructureShape.new(name: 'TextSegment')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -428,6 +434,9 @@ module Aws::Comprehend
     TopicsDetectionJobFilter = Shapes::StructureShape.new(name: 'TopicsDetectionJobFilter')
     TopicsDetectionJobProperties = Shapes::StructureShape.new(name: 'TopicsDetectionJobProperties')
     TopicsDetectionJobPropertiesList = Shapes::ListShape.new(name: 'TopicsDetectionJobPropertiesList')
+    ToxicContent = Shapes::StructureShape.new(name: 'ToxicContent')
+    ToxicContentType = Shapes::StringShape.new(name: 'ToxicContentType')
+    ToxicLabels = Shapes::StructureShape.new(name: 'ToxicLabels')
     UnsupportedLanguageException = Shapes::StructureShape.new(name: 'UnsupportedLanguageException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -914,6 +923,13 @@ module Aws::Comprehend
 
     DetectTargetedSentimentResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfTargetedSentimentEntities, location_name: "Entities"))
     DetectTargetedSentimentResponse.struct_class = Types::DetectTargetedSentimentResponse
+
+    DetectToxicContentRequest.add_member(:text_segments, Shapes::ShapeRef.new(shape: ListOfTextSegments, required: true, location_name: "TextSegments"))
+    DetectToxicContentRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    DetectToxicContentRequest.struct_class = Types::DetectToxicContentRequest
+
+    DetectToxicContentResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfToxicLabels, location_name: "ResultList"))
+    DetectToxicContentResponse.struct_class = Types::DetectToxicContentResponse
 
     DocumentClass.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DocumentClass.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -1531,6 +1547,12 @@ module Aws::Comprehend
 
     ListOfTargetedSentimentEntities.member = Shapes::ShapeRef.new(shape: TargetedSentimentEntity)
 
+    ListOfTextSegments.member = Shapes::ShapeRef.new(shape: TextSegment)
+
+    ListOfToxicContent.member = Shapes::ShapeRef.new(shape: ToxicContent)
+
+    ListOfToxicLabels.member = Shapes::ShapeRef.new(shape: ToxicLabels)
+
     ListOfWarnings.member = Shapes::ShapeRef.new(shape: WarningsListItem)
 
     ListPiiEntitiesDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobFilter, location_name: "Filter"))
@@ -1969,6 +1991,9 @@ module Aws::Comprehend
     TaskConfig.add_member(:entity_recognition_config, Shapes::ShapeRef.new(shape: EntityRecognitionConfig, location_name: "EntityRecognitionConfig"))
     TaskConfig.struct_class = Types::TaskConfig
 
+    TextSegment.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
+    TextSegment.struct_class = Types::TextSegment
+
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
 
@@ -2003,6 +2028,14 @@ module Aws::Comprehend
     TopicsDetectionJobProperties.struct_class = Types::TopicsDetectionJobProperties
 
     TopicsDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: TopicsDetectionJobProperties)
+
+    ToxicContent.add_member(:name, Shapes::ShapeRef.new(shape: ToxicContentType, location_name: "Name"))
+    ToxicContent.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    ToxicContent.struct_class = Types::ToxicContent
+
+    ToxicLabels.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfToxicContent, location_name: "Labels"))
+    ToxicLabels.add_member(:toxicity, Shapes::ShapeRef.new(shape: Float, location_name: "Toxicity"))
+    ToxicLabels.struct_class = Types::ToxicLabels
 
     UnsupportedLanguageException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedLanguageException.struct_class = Types::UnsupportedLanguageException
@@ -2582,6 +2615,18 @@ module Aws::Comprehend
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetectTargetedSentimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DetectTargetedSentimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:detect_toxic_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectToxicContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectToxicContentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectToxicContentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)

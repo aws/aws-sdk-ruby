@@ -873,6 +873,7 @@ module Aws::SSM
     ParametersFilterList = Shapes::ListShape.new(name: 'ParametersFilterList')
     ParametersFilterValue = Shapes::StringShape.new(name: 'ParametersFilterValue')
     ParametersFilterValueList = Shapes::ListShape.new(name: 'ParametersFilterValueList')
+    ParentStepDetails = Shapes::StructureShape.new(name: 'ParentStepDetails')
     Patch = Shapes::StructureShape.new(name: 'Patch')
     PatchAction = Shapes::StringShape.new(name: 'PatchAction')
     PatchAdvisoryId = Shapes::StringShape.new(name: 'PatchAdvisoryId')
@@ -1475,6 +1476,7 @@ module Aws::SSM
     AutomationExecution.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: String, location_name: "OpsItemId"))
     AutomationExecution.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "AssociationId"))
     AutomationExecution.add_member(:change_request_name, Shapes::ShapeRef.new(shape: ChangeRequestName, location_name: "ChangeRequestName"))
+    AutomationExecution.add_member(:variables, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Variables"))
     AutomationExecution.struct_class = Types::AutomationExecution
 
     AutomationExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: AutomationExecutionFilterKey, required: true, location_name: "Key"))
@@ -3835,6 +3837,13 @@ module Aws::SSM
 
     ParametersFilterValueList.member = Shapes::ShapeRef.new(shape: ParametersFilterValue)
 
+    ParentStepDetails.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: String, location_name: "StepExecutionId"))
+    ParentStepDetails.add_member(:step_name, Shapes::ShapeRef.new(shape: String, location_name: "StepName"))
+    ParentStepDetails.add_member(:action, Shapes::ShapeRef.new(shape: AutomationActionName, location_name: "Action"))
+    ParentStepDetails.add_member(:iteration, Shapes::ShapeRef.new(shape: Integer, location_name: "Iteration", metadata: {"box"=>true}))
+    ParentStepDetails.add_member(:iterator_value, Shapes::ShapeRef.new(shape: String, location_name: "IteratorValue"))
+    ParentStepDetails.struct_class = Types::ParentStepDetails
+
     Patch.add_member(:id, Shapes::ShapeRef.new(shape: PatchId, location_name: "Id"))
     Patch.add_member(:release_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ReleaseDate"))
     Patch.add_member(:title, Shapes::ShapeRef.new(shape: PatchTitle, location_name: "Title"))
@@ -4384,6 +4393,7 @@ module Aws::SSM
     StepExecution.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets", metadata: {"box"=>true}))
     StepExecution.add_member(:target_location, Shapes::ShapeRef.new(shape: TargetLocation, location_name: "TargetLocation", metadata: {"box"=>true}))
     StepExecution.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
+    StepExecution.add_member(:parent_step_details, Shapes::ShapeRef.new(shape: ParentStepDetails, location_name: "ParentStepDetails"))
     StepExecution.struct_class = Types::StepExecution
 
     StepExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: StepExecutionFilterKey, required: true, location_name: "Key"))

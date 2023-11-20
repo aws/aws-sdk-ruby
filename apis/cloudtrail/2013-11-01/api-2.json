@@ -373,6 +373,8 @@
       "input":{"shape":"GetInsightSelectorsRequest"},
       "output":{"shape":"GetInsightSelectorsResponse"},
       "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidParameterCombinationException"},
         {"shape":"TrailNotFoundException"},
         {"shape":"InvalidTrailNameException"},
         {"shape":"CloudTrailARNInvalidException"},
@@ -651,6 +653,8 @@
       "input":{"shape":"PutInsightSelectorsRequest"},
       "output":{"shape":"PutInsightSelectorsResponse"},
       "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidParameterCombinationException"},
         {"shape":"TrailNotFoundException"},
         {"shape":"InvalidTrailNameException"},
         {"shape":"CloudTrailARNInvalidException"},
@@ -950,6 +954,7 @@
         {"shape":"EventDataStoreARNInvalidException"},
         {"shape":"EventDataStoreNotFoundException"},
         {"shape":"InvalidEventSelectorsException"},
+        {"shape":"InvalidInsightSelectorsException"},
         {"shape":"EventDataStoreHasOngoingImportException"},
         {"shape":"InactiveEventDataStoreException"},
         {"shape":"InvalidParameterException"},
@@ -1090,6 +1095,13 @@
       "type":"list",
       "member":{"shape":"AdvancedFieldSelector"},
       "min":1
+    },
+    "BillingMode":{
+      "type":"string",
+      "enum":[
+        "EXTENDABLE_RETENTION_PRICING",
+        "FIXED_RETENTION_PRICING"
+      ]
     },
     "Boolean":{"type":"boolean"},
     "ByteBuffer":{"type":"blob"},
@@ -1241,7 +1253,8 @@
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
         "TagsList":{"shape":"TagsList"},
         "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
-        "StartIngestion":{"shape":"Boolean"}
+        "StartIngestion":{"shape":"Boolean"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "CreateEventDataStoreResponse":{
@@ -1258,7 +1271,8 @@
         "TagsList":{"shape":"TagsList"},
         "CreatedTimestamp":{"shape":"Date"},
         "UpdatedTimestamp":{"shape":"Date"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "CreateTrailRequest":{
@@ -1664,7 +1678,8 @@
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
         "CreatedTimestamp":{"shape":"Date"},
         "UpdatedTimestamp":{"shape":"Date"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "GetEventSelectorsRequest":{
@@ -1705,16 +1720,18 @@
     },
     "GetInsightSelectorsRequest":{
       "type":"structure",
-      "required":["TrailName"],
       "members":{
-        "TrailName":{"shape":"String"}
+        "TrailName":{"shape":"String"},
+        "EventDataStore":{"shape":"EventDataStoreArn"}
       }
     },
     "GetInsightSelectorsResponse":{
       "type":"structure",
       "members":{
         "TrailARN":{"shape":"String"},
-        "InsightSelectors":{"shape":"InsightSelectors"}
+        "InsightSelectors":{"shape":"InsightSelectors"},
+        "EventDataStoreArn":{"shape":"EventDataStoreArn"},
+        "InsightsDestination":{"shape":"EventDataStoreArn"}
       }
     },
     "GetQueryResultsRequest":{
@@ -2430,20 +2447,21 @@
     },
     "PutInsightSelectorsRequest":{
       "type":"structure",
-      "required":[
-        "TrailName",
-        "InsightSelectors"
-      ],
+      "required":["InsightSelectors"],
       "members":{
         "TrailName":{"shape":"String"},
-        "InsightSelectors":{"shape":"InsightSelectors"}
+        "InsightSelectors":{"shape":"InsightSelectors"},
+        "EventDataStore":{"shape":"EventDataStoreArn"},
+        "InsightsDestination":{"shape":"EventDataStoreArn"}
       }
     },
     "PutInsightSelectorsResponse":{
       "type":"structure",
       "members":{
         "TrailARN":{"shape":"String"},
-        "InsightSelectors":{"shape":"InsightSelectors"}
+        "InsightSelectors":{"shape":"InsightSelectors"},
+        "EventDataStoreArn":{"shape":"EventDataStoreArn"},
+        "InsightsDestination":{"shape":"EventDataStoreArn"}
       }
     },
     "PutResourcePolicyRequest":{
@@ -2673,12 +2691,13 @@
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
         "CreatedTimestamp":{"shape":"Date"},
         "UpdatedTimestamp":{"shape":"Date"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "RetentionPeriod":{
       "type":"integer",
-      "max":2557,
+      "max":3653,
       "min":7
     },
     "S3BucketDoesNotExistException":{
@@ -2972,7 +2991,8 @@
         "OrganizationEnabled":{"shape":"Boolean"},
         "RetentionPeriod":{"shape":"RetentionPeriod"},
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "UpdateEventDataStoreResponse":{
@@ -2988,7 +3008,8 @@
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
         "CreatedTimestamp":{"shape":"Date"},
         "UpdatedTimestamp":{"shape":"Date"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "BillingMode":{"shape":"BillingMode"}
       }
     },
     "UpdateTrailRequest":{

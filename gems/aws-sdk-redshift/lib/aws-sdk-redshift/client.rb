@@ -1537,6 +1537,10 @@ module Aws::Redshift
     #   If true, Amazon Redshift will deploy the cluster in two Availability
     #   Zones (AZ).
     #
+    # @option params [String] :redshift_idc_application_arn
+    #   The Amazon resource name (ARN) of the Amazon Redshift IAM Identity
+    #   Center application.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1587,6 +1591,7 @@ module Aws::Redshift
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
     #     multi_az: false,
+    #     redshift_idc_application_arn: "String",
     #   })
     #
     # @example Response structure
@@ -2488,6 +2493,96 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates an Amazon Redshift application for use with IAM Identity
+    # Center.
+    #
+    # @option params [required, String] :idc_instance_arn
+    #   The Amazon resource name (ARN) of the IAM Identity Center instance
+    #   where Amazon Redshift creates a new managed application.
+    #
+    # @option params [required, String] :redshift_idc_application_name
+    #   The name of the Redshift application in IAM Identity Center.
+    #
+    # @option params [String] :identity_namespace
+    #   The namespace for the Amazon Redshift IAM Identity Center application
+    #   instance. It determines which managed application verifies the
+    #   connection token.
+    #
+    # @option params [required, String] :idc_display_name
+    #   The display name for the Amazon Redshift IAM Identity Center
+    #   application instance. It appears in the console.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The IAM role ARN for the Amazon Redshift IAM Identity Center
+    #   application instance. It has the required permissions to be assumed
+    #   and invoke the IDC Identity Center API.
+    #
+    # @option params [Array<Types::AuthorizedTokenIssuer>] :authorized_token_issuer_list
+    #   The token issuer list for the Amazon Redshift IAM Identity Center
+    #   application instance.
+    #
+    # @option params [Array<Types::ServiceIntegrationsUnion>] :service_integrations
+    #   A collection of service integrations for the Redshift IAM Identity
+    #   Center application.
+    #
+    # @return [Types::CreateRedshiftIdcApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRedshiftIdcApplicationResult#redshift_idc_application #redshift_idc_application} => Types::RedshiftIdcApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_redshift_idc_application({
+    #     idc_instance_arn: "String", # required
+    #     redshift_idc_application_name: "RedshiftIdcApplicationName", # required
+    #     identity_namespace: "IdentityNamespaceString",
+    #     idc_display_name: "IdcDisplayNameString", # required
+    #     iam_role_arn: "String", # required
+    #     authorized_token_issuer_list: [
+    #       {
+    #         trusted_token_issuer_arn: "String",
+    #         authorized_audiences_list: ["String"],
+    #       },
+    #     ],
+    #     service_integrations: [
+    #       {
+    #         lake_formation: [
+    #           {
+    #             lake_formation_query: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.redshift_idc_application.idc_instance_arn #=> String
+    #   resp.redshift_idc_application.redshift_idc_application_name #=> String
+    #   resp.redshift_idc_application.redshift_idc_application_arn #=> String
+    #   resp.redshift_idc_application.identity_namespace #=> String
+    #   resp.redshift_idc_application.idc_display_name #=> String
+    #   resp.redshift_idc_application.iam_role_arn #=> String
+    #   resp.redshift_idc_application.idc_managed_application_arn #=> String
+    #   resp.redshift_idc_application.idc_onboard_status #=> String
+    #   resp.redshift_idc_application.authorized_token_issuer_list #=> Array
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].trusted_token_issuer_arn #=> String
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].authorized_audiences_list #=> Array
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].authorized_audiences_list[0] #=> String
+    #   resp.redshift_idc_application.service_integrations #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].lake_formation #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplication AWS API Documentation
+    #
+    # @overload create_redshift_idc_application(params = {})
+    # @param [Hash] params ({})
+    def create_redshift_idc_application(params = {}, options = {})
+      req = build_request(:create_redshift_idc_application, params)
+      req.send_request(options)
+    end
+
     # Creates a scheduled action. A scheduled action contains a schedule and
     # an Amazon Redshift API action. For example, you can create a schedule
     # of when to run the `ResizeCluster` API operation.
@@ -3361,12 +3456,16 @@ module Aws::Redshift
     #   The identifier of the cluster to delete a custom domain association
     #   for.
     #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name for the custom domain association.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_custom_domain_association({
     #     cluster_identifier: "String", # required
+    #     custom_domain_name: "CustomDomainNameString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCustomDomainAssociation AWS API Documentation
@@ -3542,6 +3641,28 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_partner(params = {}, options = {})
       req = build_request(:delete_partner, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Redshift IAM Identity Center application.
+    #
+    # @option params [required, String] :redshift_idc_application_arn
+    #   The ARN for a deleted Amazon Redshift IAM Identity Center application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_redshift_idc_application({
+    #     redshift_idc_application_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteRedshiftIdcApplication AWS API Documentation
+    #
+    # @overload delete_redshift_idc_application(params = {})
+    # @param [Hash] params ({})
+    def delete_redshift_idc_application(params = {}, options = {})
+      req = build_request(:delete_redshift_idc_application, params)
       req.send_request(options)
     end
 
@@ -6096,6 +6217,71 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_partners(params = {}, options = {})
       req = build_request(:describe_partners, params)
+      req.send_request(options)
+    end
+
+    # Lists the Amazon Redshift IAM Identity Center applications.
+    #
+    # @option params [String] :redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM Identity
+    #   Center.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified MaxRecords
+    #   value, a value is returned in a marker field of the response. You can
+    #   retrieve the next set of records by retrying the command with the
+    #   returned marker value.
+    #
+    # @option params [String] :marker
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   marker value in the Marker parameter and retrying the command. If the
+    #   Marker field is empty, all response records have been retrieved for
+    #   the request.
+    #
+    # @return [Types::DescribeRedshiftIdcApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRedshiftIdcApplicationsResult#redshift_idc_applications #redshift_idc_applications} => Array&lt;Types::RedshiftIdcApplication&gt;
+    #   * {Types::DescribeRedshiftIdcApplicationsResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_redshift_idc_applications({
+    #     redshift_idc_application_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.redshift_idc_applications #=> Array
+    #   resp.redshift_idc_applications[0].idc_instance_arn #=> String
+    #   resp.redshift_idc_applications[0].redshift_idc_application_name #=> String
+    #   resp.redshift_idc_applications[0].redshift_idc_application_arn #=> String
+    #   resp.redshift_idc_applications[0].identity_namespace #=> String
+    #   resp.redshift_idc_applications[0].idc_display_name #=> String
+    #   resp.redshift_idc_applications[0].iam_role_arn #=> String
+    #   resp.redshift_idc_applications[0].idc_managed_application_arn #=> String
+    #   resp.redshift_idc_applications[0].idc_onboard_status #=> String
+    #   resp.redshift_idc_applications[0].authorized_token_issuer_list #=> Array
+    #   resp.redshift_idc_applications[0].authorized_token_issuer_list[0].trusted_token_issuer_arn #=> String
+    #   resp.redshift_idc_applications[0].authorized_token_issuer_list[0].authorized_audiences_list #=> Array
+    #   resp.redshift_idc_applications[0].authorized_token_issuer_list[0].authorized_audiences_list[0] #=> String
+    #   resp.redshift_idc_applications[0].service_integrations #=> Array
+    #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation #=> Array
+    #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeRedshiftIdcApplications AWS API Documentation
+    #
+    # @overload describe_redshift_idc_applications(params = {})
+    # @param [Hash] params ({})
+    def describe_redshift_idc_applications(params = {}, options = {})
+      req = build_request(:describe_redshift_idc_applications, params)
       req.send_request(options)
     end
 
@@ -9440,10 +9626,10 @@ module Aws::Redshift
 
     # Contains information for changing a custom domain association.
     #
-    # @option params [String] :custom_domain_name
+    # @option params [required, String] :custom_domain_name
     #   The custom domain name for a changed custom domain association.
     #
-    # @option params [String] :custom_domain_certificate_arn
+    # @option params [required, String] :custom_domain_certificate_arn
     #   The certificate Amazon Resource Name (ARN) for the changed custom
     #   domain association.
     #
@@ -9461,8 +9647,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_custom_domain_association({
-    #     custom_domain_name: "CustomDomainNameString",
-    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     custom_domain_name: "CustomDomainNameString", # required
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
     #     cluster_identifier: "String", # required
     #   })
     #
@@ -9630,6 +9816,90 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_event_subscription(params = {}, options = {})
       req = build_request(:modify_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Changes an existing Amazon Redshift IAM Identity Center application.
+    #
+    # @option params [required, String] :redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM Identity
+    #   Center.
+    #
+    # @option params [String] :identity_namespace
+    #   The namespace for the Amazon Redshift IAM Identity Center application
+    #   to change. It determines which managed application verifies the
+    #   connection token.
+    #
+    # @option params [String] :iam_role_arn
+    #   The IAM role ARN associated with the Amazon Redshift IAM Identity
+    #   Center application to change. It has the required permissions to be
+    #   assumed and invoke the IDC Identity Center API.
+    #
+    # @option params [String] :idc_display_name
+    #   The display name for the Amazon Redshift IAM Identity Center
+    #   application to change. It appears on the console.
+    #
+    # @option params [Array<Types::AuthorizedTokenIssuer>] :authorized_token_issuer_list
+    #   The authorized token issuer list for the Amazon Redshift IAM Identity
+    #   Center application to change.
+    #
+    # @option params [Array<Types::ServiceIntegrationsUnion>] :service_integrations
+    #   A collection of service integrations associated with the application.
+    #
+    # @return [Types::ModifyRedshiftIdcApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyRedshiftIdcApplicationResult#redshift_idc_application #redshift_idc_application} => Types::RedshiftIdcApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_redshift_idc_application({
+    #     redshift_idc_application_arn: "String", # required
+    #     identity_namespace: "IdentityNamespaceString",
+    #     iam_role_arn: "String",
+    #     idc_display_name: "IdcDisplayNameString",
+    #     authorized_token_issuer_list: [
+    #       {
+    #         trusted_token_issuer_arn: "String",
+    #         authorized_audiences_list: ["String"],
+    #       },
+    #     ],
+    #     service_integrations: [
+    #       {
+    #         lake_formation: [
+    #           {
+    #             lake_formation_query: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.redshift_idc_application.idc_instance_arn #=> String
+    #   resp.redshift_idc_application.redshift_idc_application_name #=> String
+    #   resp.redshift_idc_application.redshift_idc_application_arn #=> String
+    #   resp.redshift_idc_application.identity_namespace #=> String
+    #   resp.redshift_idc_application.idc_display_name #=> String
+    #   resp.redshift_idc_application.iam_role_arn #=> String
+    #   resp.redshift_idc_application.idc_managed_application_arn #=> String
+    #   resp.redshift_idc_application.idc_onboard_status #=> String
+    #   resp.redshift_idc_application.authorized_token_issuer_list #=> Array
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].trusted_token_issuer_arn #=> String
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].authorized_audiences_list #=> Array
+    #   resp.redshift_idc_application.authorized_token_issuer_list[0].authorized_audiences_list[0] #=> String
+    #   resp.redshift_idc_application.service_integrations #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].lake_formation #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyRedshiftIdcApplication AWS API Documentation
+    #
+    # @overload modify_redshift_idc_application(params = {})
+    # @param [Hash] params ({})
+    def modify_redshift_idc_application(params = {}, options = {})
+      req = build_request(:modify_redshift_idc_application, params)
       req.send_request(options)
     end
 
@@ -11991,7 +12261,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

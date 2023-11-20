@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-11-14)
+------------------
+
+* Feature - AWS Backup - Features: Provide Job Summary for your backup activity.
+
 1.59.0 (2023-09-27)
 ------------------
 

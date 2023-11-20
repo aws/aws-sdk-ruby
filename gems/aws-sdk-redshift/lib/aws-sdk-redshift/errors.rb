@@ -59,6 +59,7 @@ module Aws::Redshift
   # * {CopyToRegionDisabledFault}
   # * {CustomCnameAssociationFault}
   # * {CustomDomainAssociationNotFoundFault}
+  # * {DependentServiceAccessDeniedFault}
   # * {DependentServiceRequestThrottlingFault}
   # * {DependentServiceUnavailableFault}
   # * {EndpointAlreadyExistsFault}
@@ -116,6 +117,9 @@ module Aws::Redshift
   # * {NumberOfNodesPerClusterLimitExceededFault}
   # * {NumberOfNodesQuotaExceededFault}
   # * {PartnerNotFoundFault}
+  # * {RedshiftIdcApplicationAlreadyExistsFault}
+  # * {RedshiftIdcApplicationNotExistsFault}
+  # * {RedshiftIdcApplicationQuotaExceededFault}
   # * {ReservedNodeAlreadyExistsFault}
   # * {ReservedNodeAlreadyMigratedFault}
   # * {ReservedNodeExchangeNotFoundFault}
@@ -481,6 +485,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::CustomDomainAssociationNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DependentServiceAccessDeniedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::DependentServiceAccessDeniedFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1051,6 +1065,36 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::PartnerNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class RedshiftIdcApplicationAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::RedshiftIdcApplicationAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class RedshiftIdcApplicationNotExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::RedshiftIdcApplicationNotExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class RedshiftIdcApplicationQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::RedshiftIdcApplicationQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -430,6 +430,38 @@ module Aws::AppRegistry
     # specified by its ARN or name. The application can be specified by ARN,
     # ID, or name.
     #
+    # **Minimum permissions**
+    #
+    # You must have the following permissions to associate a resource using
+    # the `OPTIONS` parameter set to `APPLY_APPLICATION_TAG`.
+    #
+    # * `tag:GetResources`
+    #
+    # * `tag:TagResources`
+    #
+    # You must also have these additional permissions if you don't use the
+    # `AWSServiceCatalogAppRegistryFullAccess` policy. For more information,
+    # see [AWSServiceCatalogAppRegistryFullAccess][1] in the AppRegistry
+    # Administrator Guide.
+    #
+    # * `resource-groups:DisassociateResource`
+    #
+    # * `cloudformation:UpdateStack`
+    #
+    # * `cloudformation:DescribeStacks`
+    #
+    # <note markdown="1"> In addition, you must have the tagging permission defined by the
+    # Amazon Web Services service that creates the resource. For more
+    # information, see [TagResources][2] in the *Resource Groups Tagging API
+    # Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html
+    # [2]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html
+    #
     # @option params [required, String] :application
     #   The name, ID, or ARN of the application.
     #
@@ -440,10 +472,14 @@ module Aws::AppRegistry
     #   The name or ID of the resource of which the application will be
     #   associated.
     #
+    # @option params [Array<String>] :options
+    #   Determines whether an application tag is applied or skipped.
+    #
     # @return [Types::AssociateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateResourceResponse#application_arn #application_arn} => String
     #   * {Types::AssociateResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::AssociateResourceResponse#options #options} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -451,12 +487,15 @@ module Aws::AppRegistry
     #     application: "ApplicationSpecifier", # required
     #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
+    #     options: ["APPLY_APPLICATION_TAG"], # accepts APPLY_APPLICATION_TAG, SKIP_APPLICATION_TAG
     #   })
     #
     # @example Response structure
     #
     #   resp.application_arn #=> String
     #   resp.resource_arn #=> String
+    #   resp.options #=> Array
+    #   resp.options[0] #=> String, one of "APPLY_APPLICATION_TAG", "SKIP_APPLICATION_TAG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateResource AWS API Documentation
     #
@@ -516,6 +555,8 @@ module Aws::AppRegistry
     #   resp.application.last_update_time #=> Time
     #   resp.application.tags #=> Hash
     #   resp.application.tags["TagKey"] #=> String
+    #   resp.application.application_tag #=> Hash
+    #   resp.application.application_tag["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/CreateApplication AWS API Documentation
     #
@@ -704,6 +745,40 @@ module Aws::AppRegistry
     # Disassociates a resource from application. Both the resource and the
     # application can be specified either by ID or name.
     #
+    # **Minimum permissions**
+    #
+    # You must have the following permissions to remove a resource that's
+    # been associated with an application using the `APPLY_APPLICATION_TAG`
+    # option for [AssociateResource][1].
+    #
+    # * `tag:GetResources`
+    #
+    # * `tag:UntagResources`
+    #
+    # You must also have the following permissions if you don't use the
+    # `AWSServiceCatalogAppRegistryFullAccess` policy. For more information,
+    # see [AWSServiceCatalogAppRegistryFullAccess][2] in the AppRegistry
+    # Administrator Guide.
+    #
+    # * `resource-groups:DisassociateResource`
+    #
+    # * `cloudformation:UpdateStack`
+    #
+    # * `cloudformation:DescribeStacks`
+    #
+    # <note markdown="1"> In addition, you must have the tagging permission defined by the
+    # Amazon Web Services service that creates the resource. For more
+    # information, see [UntagResources][3] in the *Resource Groups Tagging
+    # API Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateResource.html
+    # [2]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html
+    # [3]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_UntTagResources.html
+    #
     # @option params [required, String] :application
     #   The name or ID of the application.
     #
@@ -761,6 +836,7 @@ module Aws::AppRegistry
     #   * {Types::GetApplicationResponse#associated_resource_count #associated_resource_count} => Integer
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetApplicationResponse#integrations #integrations} => Types::Integrations
+    #   * {Types::GetApplicationResponse#application_tag #application_tag} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -782,6 +858,11 @@ module Aws::AppRegistry
     #   resp.integrations.resource_group.state #=> String, one of "CREATING", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.integrations.resource_group.arn #=> String
     #   resp.integrations.resource_group.error_message #=> String
+    #   resp.integrations.application_tag_resource_group.state #=> String, one of "CREATING", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.integrations.application_tag_resource_group.arn #=> String
+    #   resp.integrations.application_tag_resource_group.error_message #=> String
+    #   resp.application_tag #=> Hash
+    #   resp.application_tag["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplication AWS API Documentation
     #
@@ -803,9 +884,23 @@ module Aws::AppRegistry
     # @option params [required, String] :resource
     #   The name or ID of the resource associated with the application.
     #
+    # @option params [String] :next_token
+    #   A unique pagination token for each page of results. Make the call
+    #   again with the returned token to retrieve the next page of results.
+    #
+    # @option params [Array<String>] :resource_tag_status
+    #   States whether an application tag is applied, not applied, in the
+    #   process of being applied, or skipped.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. If the parameter is omitted,
+    #   it defaults to 25. The value is optional.
+    #
     # @return [Types::GetAssociatedResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAssociatedResourceResponse#resource #resource} => Types::Resource
+    #   * {Types::GetAssociatedResourceResponse#options #options} => Array&lt;String&gt;
+    #   * {Types::GetAssociatedResourceResponse#application_tag_result #application_tag_result} => Types::ApplicationTagResult
     #
     # @example Request syntax with placeholder values
     #
@@ -813,6 +908,9 @@ module Aws::AppRegistry
     #     application: "ApplicationSpecifier", # required
     #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
+    #     next_token: "NextToken",
+    #     resource_tag_status: ["SUCCESS"], # accepts SUCCESS, FAILED, IN_PROGRESS, SKIPPED
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -823,6 +921,16 @@ module Aws::AppRegistry
     #   resp.resource.integrations.resource_group.state #=> String, one of "CREATING", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.resource.integrations.resource_group.arn #=> String
     #   resp.resource.integrations.resource_group.error_message #=> String
+    #   resp.options #=> Array
+    #   resp.options[0] #=> String, one of "APPLY_APPLICATION_TAG", "SKIP_APPLICATION_TAG"
+    #   resp.application_tag_result.application_tag_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILURE"
+    #   resp.application_tag_result.error_message #=> String
+    #   resp.application_tag_result.resources #=> Array
+    #   resp.application_tag_result.resources[0].resource_arn #=> String
+    #   resp.application_tag_result.resources[0].error_message #=> String
+    #   resp.application_tag_result.resources[0].status #=> String
+    #   resp.application_tag_result.resources[0].resource_type #=> String
+    #   resp.application_tag_result.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResource AWS API Documentation
     #
@@ -1033,6 +1141,8 @@ module Aws::AppRegistry
     #   resp.resources[0].arn #=> String
     #   resp.resources[0].resource_type #=> String, one of "CFN_STACK", "RESOURCE_TAG_VALUE"
     #   resp.resources[0].resource_details.tag_value #=> String
+    #   resp.resources[0].options #=> Array
+    #   resp.resources[0].options[0] #=> String, one of "APPLY_APPLICATION_TAG", "SKIP_APPLICATION_TAG"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAssociatedResources AWS API Documentation
@@ -1334,6 +1444,8 @@ module Aws::AppRegistry
     #   resp.application.last_update_time #=> Time
     #   resp.application.tags #=> Hash
     #   resp.application.tags["TagKey"] #=> String
+    #   resp.application.application_tag #=> Hash
+    #   resp.application.application_tag["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/UpdateApplication AWS API Documentation
     #
@@ -1410,7 +1522,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

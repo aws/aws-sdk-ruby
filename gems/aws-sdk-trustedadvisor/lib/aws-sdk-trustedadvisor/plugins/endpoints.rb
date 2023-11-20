@@ -8,18 +8,18 @@
 # WARNING ABOUT GENERATED CODE
 
 
-module Aws::Macie
+module Aws::TrustedAdvisor
   module Plugins
     class Endpoints < Seahorse::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::Macie::EndpointProvider',
+        doc_type: 'Aws::TrustedAdvisor::EndpointProvider',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
-                   '`Aws::Macie::EndpointParameters`'
+                   '`Aws::TrustedAdvisor::EndpointParameters`'
       ) do |cfg|
-        Aws::Macie::EndpointProvider.new
+        Aws::TrustedAdvisor::EndpointProvider.new
       end
 
       # @api private
@@ -56,20 +56,26 @@ module Aws::Macie
 
         def parameters_for_operation(context)
           case context.operation_name
-          when :associate_member_account
-            Aws::Macie::Endpoints::AssociateMemberAccount.build(context)
-          when :associate_s3_resources
-            Aws::Macie::Endpoints::AssociateS3Resources.build(context)
-          when :disassociate_member_account
-            Aws::Macie::Endpoints::DisassociateMemberAccount.build(context)
-          when :disassociate_s3_resources
-            Aws::Macie::Endpoints::DisassociateS3Resources.build(context)
-          when :list_member_accounts
-            Aws::Macie::Endpoints::ListMemberAccounts.build(context)
-          when :list_s3_resources
-            Aws::Macie::Endpoints::ListS3Resources.build(context)
-          when :update_s3_resources
-            Aws::Macie::Endpoints::UpdateS3Resources.build(context)
+          when :get_organization_recommendation
+            Aws::TrustedAdvisor::Endpoints::GetOrganizationRecommendation.build(context)
+          when :get_recommendation
+            Aws::TrustedAdvisor::Endpoints::GetRecommendation.build(context)
+          when :list_checks
+            Aws::TrustedAdvisor::Endpoints::ListChecks.build(context)
+          when :list_organization_recommendation_accounts
+            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendationAccounts.build(context)
+          when :list_organization_recommendation_resources
+            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendationResources.build(context)
+          when :list_organization_recommendations
+            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendations.build(context)
+          when :list_recommendation_resources
+            Aws::TrustedAdvisor::Endpoints::ListRecommendationResources.build(context)
+          when :list_recommendations
+            Aws::TrustedAdvisor::Endpoints::ListRecommendations.build(context)
+          when :update_organization_recommendation_lifecycle
+            Aws::TrustedAdvisor::Endpoints::UpdateOrganizationRecommendationLifecycle.build(context)
+          when :update_recommendation_lifecycle
+            Aws::TrustedAdvisor::Endpoints::UpdateRecommendationLifecycle.build(context)
           end
         end
       end

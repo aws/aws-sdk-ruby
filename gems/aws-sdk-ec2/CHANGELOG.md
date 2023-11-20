@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.424.0 (2023-11-20)
+------------------
+
+* Feature - This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.
+
+1.423.0 (2023-11-17)
+------------------
+
+* Feature - This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM.
+
+1.422.0 (2023-11-16)
+------------------
+
+* Feature - Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider.
+
+1.421.0 (2023-11-15)
+------------------
+
+* Feature - AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.
+
+1.420.0 (2023-11-13)
+------------------
+
+* Feature - Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
+
+1.419.0 (2023-11-10)
+------------------
+
+* Feature - EC2 adds API updates to enable ENA Express at instance launch time.
+
+1.418.0 (2023-11-09)
+------------------
+
+* Feature - AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.
+
 1.417.0 (2023-10-31)
 ------------------
 

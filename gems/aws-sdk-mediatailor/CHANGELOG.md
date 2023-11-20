@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-11-14)
+------------------
+
+* Feature - Removed unnecessary default values.
+
 1.71.0 (2023-10-04)
 ------------------
 

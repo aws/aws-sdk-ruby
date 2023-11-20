@@ -1102,6 +1102,122 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates a new S3 Storage Lens group and associates it with the
+    # specified Amazon Web Services account ID. An S3 Storage Lens group is
+    # a custom grouping of objects based on prefix, suffix, object tags,
+    # object size, object age, or a combination of these filters. For each
+    # Storage Lens group that you’ve created, you can also optionally add
+    # Amazon Web Services resource tags. For more information about S3
+    # Storage Lens groups, see [Working with S3 Storage Lens groups][1].
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:CreateStorageLensGroup` action. If you’re trying to create a
+    # Storage Lens group with Amazon Web Services resource tags, you must
+    # also have permission to perform the `s3:TagResource` action. For more
+    # information about the required Storage Lens Groups permissions, see
+    # [Setting account permissions to use S3 Storage Lens groups][2].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that the Storage Lens group is
+    #   created from and associated with.
+    #
+    # @option params [required, Types::StorageLensGroup] :storage_lens_group
+    #   The Storage Lens group configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you're adding to your
+    #   Storage Lens group. This parameter is optional.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_storage_lens_group({
+    #     account_id: "AccountId",
+    #     storage_lens_group: { # required
+    #       name: "StorageLensGroupName", # required
+    #       filter: { # required
+    #         match_any_prefix: ["Prefix"],
+    #         match_any_suffix: ["Suffix"],
+    #         match_any_tag: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #         match_object_age: {
+    #           days_greater_than: 1,
+    #           days_less_than: 1,
+    #         },
+    #         match_object_size: {
+    #           bytes_greater_than: 1,
+    #           bytes_less_than: 1,
+    #         },
+    #         and: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #         or: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #       },
+    #       storage_lens_group_arn: "StorageLensGroupArn",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateStorageLensGroup AWS API Documentation
+    #
+    # @overload create_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def create_storage_lens_group(params = {}, options = {})
+      req = build_request(:create_storage_lens_group, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified access point.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
@@ -1394,10 +1510,10 @@ module Aws::S3Control
     # the deleted lifecycle configuration. For more information, see [Using
     # Amazon S3 on Outposts][2] in *Amazon S3 User Guide*.
     #
-    # To use this action, you must have permission to perform the
-    # `s3-outposts:DeleteLifecycleConfiguration` action. By default, the
-    # bucket owner has this permission and the Outposts bucket owner can
-    # grant this permission to others.
+    # To use this operation, you must have permission to perform the
+    # `s3-outposts:PutLifecycleConfiguration` action. By default, the bucket
+    # owner has this permission and the Outposts bucket owner can grant this
+    # permission to others.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
     # additional parameter of `x-amz-outpost-id` to be passed with the
@@ -1953,6 +2069,46 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def delete_storage_lens_configuration_tagging(params = {}, options = {})
       req = build_request(:delete_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing S3 Storage Lens group.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:DeleteStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you're trying to delete.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID used to create the Storage Lens
+    #   group that you're trying to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensGroup AWS API Documentation
+    #
+    # @overload delete_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_group(params = {}, options = {})
+      req = build_request(:delete_storage_lens_group, params)
       req.send_request(options)
     end
 
@@ -3580,6 +3736,10 @@ module Aws::S3Control
     #   resp.storage_lens_configuration.account_level.advanced_cost_optimization_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.account_level.advanced_data_protection_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.account_level.detailed_status_codes_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.include #=> Array
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.include[0] #=> String
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.exclude #=> Array
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.exclude[0] #=> String
     #   resp.storage_lens_configuration.include.buckets #=> Array
     #   resp.storage_lens_configuration.include.buckets[0] #=> String
     #   resp.storage_lens_configuration.include.regions #=> Array
@@ -3654,6 +3814,87 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def get_storage_lens_configuration_tagging(params = {}, options = {})
       req = build_request(:get_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Storage Lens group configuration details.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:GetStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you're trying to retrieve the
+    #   configuration details for.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID associated with the Storage Lens
+    #   group that you're trying to retrieve the details for.
+    #
+    # @return [Types::GetStorageLensGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensGroupResult#storage_lens_group #storage_lens_group} => Types::StorageLensGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_lens_group.name #=> String
+    #   resp.storage_lens_group.filter.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.and.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.and.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.and.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.and.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.or.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.or.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.or.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.or.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.storage_lens_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensGroup AWS API Documentation
+    #
+    # @overload get_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_group(params = {}, options = {})
+      req = build_request(:get_storage_lens_group, params)
       req.send_request(options)
     end
 
@@ -4109,6 +4350,113 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def list_storage_lens_configurations(params = {}, options = {})
       req = build_request(:list_storage_lens_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists all the Storage Lens groups in the specified home Region.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:ListStorageLensGroups` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that owns the Storage Lens groups.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` if there are no more
+    #   results.
+    #
+    # @return [Types::ListStorageLensGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageLensGroupsResult#next_token #next_token} => String
+    #   * {Types::ListStorageLensGroupsResult#storage_lens_group_list #storage_lens_group_list} => Array&lt;Types::ListStorageLensGroupEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_lens_groups({
+    #     account_id: "AccountId",
+    #     next_token: "ContinuationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.storage_lens_group_list #=> Array
+    #   resp.storage_lens_group_list[0].name #=> String
+    #   resp.storage_lens_group_list[0].storage_lens_group_arn #=> String
+    #   resp.storage_lens_group_list[0].home_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensGroups AWS API Documentation
+    #
+    # @overload list_storage_lens_groups(params = {})
+    # @param [Hash] params ({})
+    def list_storage_lens_groups(params = {}, options = {})
+      req = build_request(:list_storage_lens_groups, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to list all the Amazon Web Services resource
+    # tags for the specified resource.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:ListTagsForResource` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][2].
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the resource owner.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
+    #   list the tags for.
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -5246,6 +5594,12 @@ module Aws::S3Control
     #         detailed_status_codes_metrics: {
     #           is_enabled: false,
     #         },
+    #         storage_lens_group_level: {
+    #           selection_criteria: {
+    #             include: ["StorageLensGroupArn"],
+    #             exclude: ["StorageLensGroupArn"],
+    #           },
+    #         },
     #       },
     #       include: {
     #         buckets: ["S3BucketArnString"],
@@ -5425,6 +5779,115 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates a new Amazon Web Services resource tag or updates an existing
+    # resource tag. You can add up to 50 Amazon Web Services resource tags
+    # for each S3 resource.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:TagResource` action. For more information about the required
+    # Storage Lens Groups permissions, see [Setting account permissions to
+    # use S3 Storage Lens groups][1].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][2].
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that created the S3 resource that
+    #   you're trying to add tags to.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
+    #   to add tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you want to add to the
+    #   specified S3 resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # This operation removes the specified Amazon Web Services resource tags
+    # from an S3 resource.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:UntagResource` action. For more information about the required
+    # Storage Lens Groups permissions, see [Setting account permissions to
+    # use S3 Storage Lens groups][1].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][2].
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that owns the resource that you're
+    #   trying to remove the tags from.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
+    #   remove the resource tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key pair of the S3 resource tag that you're trying to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #     tag_keys: ["TagKeyString"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing S3 Batch Operations job's priority. For more
     # information, see [S3 Batch Operations][1] in the *Amazon S3 User
     # Guide*.
@@ -5555,6 +6018,106 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Updates the existing Storage Lens group.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:UpdateStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you want to update.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the Storage Lens group owner.
+    #
+    # @option params [required, Types::StorageLensGroup] :storage_lens_group
+    #   The JSON file that contains the Storage Lens group configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #     storage_lens_group: { # required
+    #       name: "StorageLensGroupName", # required
+    #       filter: { # required
+    #         match_any_prefix: ["Prefix"],
+    #         match_any_suffix: ["Suffix"],
+    #         match_any_tag: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #         match_object_age: {
+    #           days_greater_than: 1,
+    #           days_less_than: 1,
+    #         },
+    #         match_object_size: {
+    #           bytes_greater_than: 1,
+    #           bytes_less_than: 1,
+    #         },
+    #         and: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #         or: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #       },
+    #       storage_lens_group_arn: "StorageLensGroupArn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateStorageLensGroup AWS API Documentation
+    #
+    # @overload update_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def update_storage_lens_group(params = {}, options = {})
+      req = build_request(:update_storage_lens_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5568,7 +6131,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

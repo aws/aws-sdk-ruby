@@ -31,6 +31,7 @@ module Aws::Lambda
     AllowOriginsList = Shapes::ListShape.new(name: 'AllowOriginsList')
     AllowedPublishers = Shapes::StructureShape.new(name: 'AllowedPublishers')
     AmazonManagedKafkaEventSourceConfig = Shapes::StructureShape.new(name: 'AmazonManagedKafkaEventSourceConfig')
+    ApplicationLogLevel = Shapes::StringShape.new(name: 'ApplicationLogLevel')
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     ArchitecturesList = Shapes::ListShape.new(name: 'ArchitecturesList')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -229,7 +230,10 @@ module Aws::Lambda
     ListVersionsByFunctionRequest = Shapes::StructureShape.new(name: 'ListVersionsByFunctionRequest')
     ListVersionsByFunctionResponse = Shapes::StructureShape.new(name: 'ListVersionsByFunctionResponse')
     LocalMountPath = Shapes::StringShape.new(name: 'LocalMountPath')
+    LogFormat = Shapes::StringShape.new(name: 'LogFormat')
+    LogGroup = Shapes::StringShape.new(name: 'LogGroup')
     LogType = Shapes::StringShape.new(name: 'LogType')
+    LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MasterRegion = Shapes::StringShape.new(name: 'MasterRegion')
     MaxAge = Shapes::IntegerShape.new(name: 'MaxAge')
@@ -328,6 +332,7 @@ module Aws::Lambda
     SubnetIPAddressLimitReachedException = Shapes::StructureShape.new(name: 'SubnetIPAddressLimitReachedException')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SystemLogLevel = Shapes::StringShape.new(name: 'SystemLogLevel')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -535,6 +540,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     CreateFunctionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     CreateFunctionRequest.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStart, location_name: "SnapStart"))
+    CreateFunctionRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -752,6 +758,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     FunctionConfiguration.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStartResponse, location_name: "SnapStart"))
     FunctionConfiguration.add_member(:runtime_version_config, Shapes::ShapeRef.new(shape: RuntimeVersionConfig, location_name: "RuntimeVersionConfig"))
+    FunctionConfiguration.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1164,6 +1171,12 @@ module Aws::Lambda
     ListVersionsByFunctionResponse.add_member(:versions, Shapes::ShapeRef.new(shape: FunctionList, location_name: "Versions"))
     ListVersionsByFunctionResponse.struct_class = Types::ListVersionsByFunctionResponse
 
+    LoggingConfig.add_member(:log_format, Shapes::ShapeRef.new(shape: LogFormat, location_name: "LogFormat"))
+    LoggingConfig.add_member(:application_log_level, Shapes::ShapeRef.new(shape: ApplicationLogLevel, location_name: "ApplicationLogLevel"))
+    LoggingConfig.add_member(:system_log_level, Shapes::ShapeRef.new(shape: SystemLogLevel, location_name: "SystemLogLevel"))
+    LoggingConfig.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
+    LoggingConfig.struct_class = Types::LoggingConfig
+
     OnFailure.add_member(:destination, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "Destination"))
     OnFailure.struct_class = Types::OnFailure
 
@@ -1453,6 +1466,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     UpdateFunctionConfigurationRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     UpdateFunctionConfigurationRequest.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStart, location_name: "SnapStart"))
+    UpdateFunctionConfigurationRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-11-16)
+------------------
+
+* Feature - Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.
+
+1.110.0 (2023-11-15)
+------------------
+
+* Feature - Add Java 21 (java21) support to AWS Lambda
+
+1.109.0 (2023-11-14)
+------------------
+
+* Feature - Add Python 3.12 (python3.12) support to AWS Lambda
+
+1.108.0 (2023-11-09)
+------------------
+
+* Feature - Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.
+
+1.107.0 (2023-11-08)
+------------------
+
+* Feature - Add Node 20 (nodejs20.x) support to AWS Lambda.
+
 1.106.0 (2023-10-12)
 ------------------
 

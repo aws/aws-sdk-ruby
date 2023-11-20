@@ -57,6 +57,8 @@ module Aws::EKS
     CreateAddonResponse = Shapes::StructureShape.new(name: 'CreateAddonResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
+    CreateEksAnywhereSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateEksAnywhereSubscriptionRequest')
+    CreateEksAnywhereSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateEksAnywhereSubscriptionResponse')
     CreateFargateProfileRequest = Shapes::StructureShape.new(name: 'CreateFargateProfileRequest')
     CreateFargateProfileResponse = Shapes::StructureShape.new(name: 'CreateFargateProfileResponse')
     CreateNodegroupRequest = Shapes::StructureShape.new(name: 'CreateNodegroupRequest')
@@ -65,6 +67,8 @@ module Aws::EKS
     DeleteAddonResponse = Shapes::StructureShape.new(name: 'DeleteAddonResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
+    DeleteEksAnywhereSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteEksAnywhereSubscriptionRequest')
+    DeleteEksAnywhereSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteEksAnywhereSubscriptionResponse')
     DeleteFargateProfileRequest = Shapes::StructureShape.new(name: 'DeleteFargateProfileRequest')
     DeleteFargateProfileResponse = Shapes::StructureShape.new(name: 'DeleteFargateProfileResponse')
     DeleteNodegroupRequest = Shapes::StructureShape.new(name: 'DeleteNodegroupRequest')
@@ -80,6 +84,8 @@ module Aws::EKS
     DescribeAddonVersionsResponse = Shapes::StructureShape.new(name: 'DescribeAddonVersionsResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeEksAnywhereSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeEksAnywhereSubscriptionRequest')
+    DescribeEksAnywhereSubscriptionResponse = Shapes::StructureShape.new(name: 'DescribeEksAnywhereSubscriptionResponse')
     DescribeFargateProfileRequest = Shapes::StructureShape.new(name: 'DescribeFargateProfileRequest')
     DescribeFargateProfileResponse = Shapes::StructureShape.new(name: 'DescribeFargateProfileResponse')
     DescribeIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigRequest')
@@ -90,6 +96,14 @@ module Aws::EKS
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
     DisassociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigRequest')
     DisassociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigResponse')
+    EksAnywhereSubscription = Shapes::StructureShape.new(name: 'EksAnywhereSubscription')
+    EksAnywhereSubscriptionLicenseType = Shapes::StringShape.new(name: 'EksAnywhereSubscriptionLicenseType')
+    EksAnywhereSubscriptionList = Shapes::ListShape.new(name: 'EksAnywhereSubscriptionList')
+    EksAnywhereSubscriptionName = Shapes::StringShape.new(name: 'EksAnywhereSubscriptionName')
+    EksAnywhereSubscriptionStatus = Shapes::StringShape.new(name: 'EksAnywhereSubscriptionStatus')
+    EksAnywhereSubscriptionStatusValues = Shapes::ListShape.new(name: 'EksAnywhereSubscriptionStatusValues')
+    EksAnywhereSubscriptionTerm = Shapes::StructureShape.new(name: 'EksAnywhereSubscriptionTerm')
+    EksAnywhereSubscriptionTermUnit = Shapes::StringShape.new(name: 'EksAnywhereSubscriptionTermUnit')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionConfigList = Shapes::ListShape.new(name: 'EncryptionConfigList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -106,6 +120,7 @@ module Aws::EKS
     IdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'IdentityProviderConfigResponse')
     IdentityProviderConfigs = Shapes::ListShape.new(name: 'IdentityProviderConfigs')
     IncludeClustersList = Shapes::ListShape.new(name: 'IncludeClustersList')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IpFamily = Shapes::StringShape.new(name: 'IpFamily')
@@ -120,6 +135,9 @@ module Aws::EKS
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListEksAnywhereSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListEksAnywhereSubscriptionsRequest')
+    ListEksAnywhereSubscriptionsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListEksAnywhereSubscriptionsRequestMaxResults')
+    ListEksAnywhereSubscriptionsResponse = Shapes::StructureShape.new(name: 'ListEksAnywhereSubscriptionsResponse')
     ListFargateProfilesRequest = Shapes::StructureShape.new(name: 'ListFargateProfilesRequest')
     ListFargateProfilesResponse = Shapes::StructureShape.new(name: 'ListFargateProfilesResponse')
     ListIdentityProviderConfigsRequest = Shapes::StructureShape.new(name: 'ListIdentityProviderConfigsRequest')
@@ -187,6 +205,8 @@ module Aws::EKS
     UpdateClusterConfigResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigResponse')
     UpdateClusterVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterVersionRequest')
     UpdateClusterVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterVersionResponse')
+    UpdateEksAnywhereSubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateEksAnywhereSubscriptionRequest')
+    UpdateEksAnywhereSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateEksAnywhereSubscriptionResponse')
     UpdateLabelsPayload = Shapes::StructureShape.new(name: 'UpdateLabelsPayload')
     UpdateNodegroupConfigRequest = Shapes::StructureShape.new(name: 'UpdateNodegroupConfigRequest')
     UpdateNodegroupConfigResponse = Shapes::StructureShape.new(name: 'UpdateNodegroupConfigResponse')
@@ -292,6 +312,7 @@ module Aws::EKS
     ClientException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ClientException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ClientException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    ClientException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
 
@@ -379,6 +400,18 @@ module Aws::EKS
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
+    CreateEksAnywhereSubscriptionRequest.add_member(:name, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionName, required: true, location_name: "name"))
+    CreateEksAnywhereSubscriptionRequest.add_member(:term, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionTerm, required: true, location_name: "term"))
+    CreateEksAnywhereSubscriptionRequest.add_member(:license_quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "licenseQuantity"))
+    CreateEksAnywhereSubscriptionRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionLicenseType, location_name: "licenseType"))
+    CreateEksAnywhereSubscriptionRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoRenew"))
+    CreateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateEksAnywhereSubscriptionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEksAnywhereSubscriptionRequest.struct_class = Types::CreateEksAnywhereSubscriptionRequest
+
+    CreateEksAnywhereSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: EksAnywhereSubscription, location_name: "subscription"))
+    CreateEksAnywhereSubscriptionResponse.struct_class = Types::CreateEksAnywhereSubscriptionResponse
+
     CreateFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fargateProfileName"))
     CreateFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     CreateFargateProfileRequest.add_member(:pod_execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "podExecutionRoleArn"))
@@ -427,6 +460,12 @@ module Aws::EKS
 
     DeleteClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
+
+    DeleteEksAnywhereSubscriptionRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
+    DeleteEksAnywhereSubscriptionRequest.struct_class = Types::DeleteEksAnywhereSubscriptionRequest
+
+    DeleteEksAnywhereSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: EksAnywhereSubscription, location_name: "subscription"))
+    DeleteEksAnywhereSubscriptionResponse.struct_class = Types::DeleteEksAnywhereSubscriptionResponse
 
     DeleteFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeleteFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "fargateProfileName"))
@@ -483,6 +522,12 @@ module Aws::EKS
     DescribeClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
 
+    DescribeEksAnywhereSubscriptionRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
+    DescribeEksAnywhereSubscriptionRequest.struct_class = Types::DescribeEksAnywhereSubscriptionRequest
+
+    DescribeEksAnywhereSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: EksAnywhereSubscription, location_name: "subscription"))
+    DescribeEksAnywhereSubscriptionResponse.struct_class = Types::DescribeEksAnywhereSubscriptionResponse
+
     DescribeFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "fargateProfileName"))
     DescribeFargateProfileRequest.struct_class = Types::DescribeFargateProfileRequest
@@ -520,6 +565,28 @@ module Aws::EKS
 
     DisassociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     DisassociateIdentityProviderConfigResponse.struct_class = Types::DisassociateIdentityProviderConfigResponse
+
+    EksAnywhereSubscription.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    EksAnywhereSubscription.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    EksAnywhereSubscription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    EksAnywhereSubscription.add_member(:effective_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "effectiveDate"))
+    EksAnywhereSubscription.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    EksAnywhereSubscription.add_member(:license_quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "licenseQuantity"))
+    EksAnywhereSubscription.add_member(:license_type, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionLicenseType, location_name: "licenseType"))
+    EksAnywhereSubscription.add_member(:term, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionTerm, location_name: "term"))
+    EksAnywhereSubscription.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    EksAnywhereSubscription.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoRenew"))
+    EksAnywhereSubscription.add_member(:license_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "licenseArns"))
+    EksAnywhereSubscription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    EksAnywhereSubscription.struct_class = Types::EksAnywhereSubscription
+
+    EksAnywhereSubscriptionList.member = Shapes::ShapeRef.new(shape: EksAnywhereSubscription)
+
+    EksAnywhereSubscriptionStatusValues.member = Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionStatus)
+
+    EksAnywhereSubscriptionTerm.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
+    EksAnywhereSubscriptionTerm.add_member(:unit, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionTermUnit, location_name: "unit"))
+    EksAnywhereSubscriptionTerm.struct_class = Types::EksAnywhereSubscriptionTerm
 
     EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, location_name: "resources"))
     EncryptionConfig.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
@@ -572,12 +639,14 @@ module Aws::EKS
     InvalidParameterException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     InvalidParameterException.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
     InvalidParameterException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    InvalidParameterException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidRequestException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     InvalidRequestException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     InvalidRequestException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    InvalidRequestException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
@@ -619,6 +688,15 @@ module Aws::EKS
     ListClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: StringList, location_name: "clusters"))
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
+
+    ListEksAnywhereSubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEksAnywhereSubscriptionsRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListEksAnywhereSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListEksAnywhereSubscriptionsRequest.add_member(:include_status, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionStatusValues, location: "querystring", location_name: "includeStatus"))
+    ListEksAnywhereSubscriptionsRequest.struct_class = Types::ListEksAnywhereSubscriptionsRequest
+
+    ListEksAnywhereSubscriptionsResponse.add_member(:subscriptions, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionList, location_name: "subscriptions"))
+    ListEksAnywhereSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListEksAnywhereSubscriptionsResponse.struct_class = Types::ListEksAnywhereSubscriptionsResponse
 
     ListFargateProfilesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     ListFargateProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: FargateProfilesRequestMaxResults, location: "querystring", location_name: "maxResults"))
@@ -784,6 +862,7 @@ module Aws::EKS
 
     ResourceLimitExceededException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ResourceLimitExceededException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
+    ResourceLimitExceededException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
 
@@ -791,6 +870,7 @@ module Aws::EKS
     ResourceNotFoundException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ResourceNotFoundException.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
     ResourceNotFoundException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    ResourceNotFoundException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -800,6 +880,7 @@ module Aws::EKS
     ServerException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ServerException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ServerException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
+    ServerException.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionId"))
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServerException.struct_class = Types::ServerException
 
@@ -872,6 +953,14 @@ module Aws::EKS
 
     UpdateClusterVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     UpdateClusterVersionResponse.struct_class = Types::UpdateClusterVersionResponse
+
+    UpdateEksAnywhereSubscriptionRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
+    UpdateEksAnywhereSubscriptionRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoRenew"))
+    UpdateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateEksAnywhereSubscriptionRequest.struct_class = Types::UpdateEksAnywhereSubscriptionRequest
+
+    UpdateEksAnywhereSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: EksAnywhereSubscription, location_name: "subscription"))
+    UpdateEksAnywhereSubscriptionResponse.struct_class = Types::UpdateEksAnywhereSubscriptionResponse
 
     UpdateLabelsPayload.add_member(:add_or_update_labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "addOrUpdateLabels"))
     UpdateLabelsPayload.add_member(:remove_labels, Shapes::ShapeRef.new(shape: labelsKeyList, location_name: "removeLabels"))
@@ -1013,6 +1102,19 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZoneException)
       end)
 
+      api.add_operation(:create_eks_anywhere_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEksAnywhereSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/eks-anywhere-subscriptions"
+        o.input = Shapes::ShapeRef.new(shape: CreateEksAnywhereSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEksAnywhereSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:create_fargate_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFargateProfile"
         o.http_method = "POST"
@@ -1066,6 +1168,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_eks_anywhere_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEksAnywhereSubscription"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/eks-anywhere-subscriptions/{id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEksAnywhereSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEksAnywhereSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:delete_fargate_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1155,6 +1269,18 @@ module Aws::EKS
         o.http_request_uri = "/clusters/{name}"
         o.input = Shapes::ShapeRef.new(shape: DescribeClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_eks_anywhere_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEksAnywhereSubscription"
+        o.http_method = "GET"
+        o.http_request_uri = "/eks-anywhere-subscriptions/{id}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEksAnywhereSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEksAnywhereSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
@@ -1260,6 +1386,18 @@ module Aws::EKS
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_eks_anywhere_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEksAnywhereSubscriptions"
+        o.http_method = "GET"
+        o.http_request_uri = "/eks-anywhere-subscriptions"
+        o.input = Shapes::ShapeRef.new(shape: ListEksAnywhereSubscriptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEksAnywhereSubscriptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_fargate_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -1420,6 +1558,19 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_eks_anywhere_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEksAnywhereSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/eks-anywhere-subscriptions/{id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEksAnywhereSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEksAnywhereSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)

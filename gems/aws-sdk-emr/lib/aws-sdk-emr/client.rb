@@ -401,7 +401,7 @@ module Aws::EMR
     # Adds an instance fleet to a running cluster.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and higher, excluding 5.0.x.
+    # releases 4.8.0 and later, excluding 5.0.x.
     #
     #  </note>
     #
@@ -742,11 +742,11 @@ module Aws::EMR
     end
 
     # Cancels a pending step or steps in a running cluster. Available only
-    # in Amazon EMR versions 4.8.0 and higher, excluding version 5.0.0. A
+    # in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A
     # maximum of 256 steps are allowed in each CancelSteps request.
     # CancelSteps is idempotent but asynchronous; it does not guarantee that
     # a step will be canceled, even if the request is successfully
-    # submitted. When you use Amazon EMR releases 5.28.0 and higher, you can
+    # submitted. When you use Amazon EMR releases 5.28.0 and later, you can
     # cancel steps that are in a `PENDING` or `RUNNING` state. In earlier
     # versions of Amazon EMR, you can only cancel steps that are in a
     # `PENDING` state.
@@ -900,6 +900,23 @@ module Aws::EMR
     #   with a maximum of 128 characters, and an optional value string with a
     #   maximum of 256 characters.
     #
+    # @option params [Boolean] :trusted_identity_propagation_enabled
+    #   A Boolean indicating whether to enable Trusted identity propagation
+    #   for the Studio. The default value is `false`.
+    #
+    # @option params [String] :idc_user_assignment
+    #   Specifies whether IAM Identity Center user assignment is `REQUIRED` or
+    #   `OPTIONAL`. If the value is set to `REQUIRED`, users must be
+    #   explicitly assigned to the Studio application to access the Studio.
+    #
+    # @option params [String] :idc_instance_arn
+    #   The ARN of the IAM Identity Center instance to create the Studio
+    #   application.
+    #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Types::CreateStudioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStudioOutput#studio_id #studio_id} => String
@@ -926,6 +943,10 @@ module Aws::EMR
     #         value: "String",
     #       },
     #     ],
+    #     trusted_identity_propagation_enabled: false,
+    #     idc_user_assignment: "REQUIRED", # accepts REQUIRED, OPTIONAL
+    #     idc_instance_arn: "ArnType",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @example Response structure
@@ -1575,6 +1596,10 @@ module Aws::EMR
     #   resp.studio.tags #=> Array
     #   resp.studio.tags[0].key #=> String
     #   resp.studio.tags[0].value #=> String
+    #   resp.studio.idc_instance_arn #=> String
+    #   resp.studio.trusted_identity_propagation_enabled #=> Boolean
+    #   resp.studio.idc_user_assignment #=> String, one of "REQUIRED", "OPTIONAL"
+    #   resp.studio.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStudio AWS API Documentation
     #
@@ -1654,7 +1679,7 @@ module Aws::EMR
     # @option params [required, String] :cluster_id
     #   The unique identifier of the cluster.
     #
-    # @option params [required, String] :execution_role_arn
+    # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the runtime role for interactive
     #   workload submission on the cluster. The runtime role can be a
     #   cross-account IAM role. The runtime role ARN is a combination of
@@ -1670,7 +1695,7 @@ module Aws::EMR
     #
     #   resp = client.get_cluster_session_credentials({
     #     cluster_id: "XmlStringMaxLen256", # required
-    #     execution_role_arn: "ArnType", # required
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -1899,7 +1924,7 @@ module Aws::EMR
     # Lists all available details about the instance fleets in a cluster.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and higher, excluding 5.0.x versions.
+    # releases 4.8.0 and later, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2613,7 +2638,7 @@ module Aws::EMR
     # atomically.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # releases 4.8.0 and higher, excluding 5.0.x versions.
+    # releases 4.8.0 and later, excluding 5.0.x versions.
     #
     #  </note>
     #
@@ -2816,7 +2841,7 @@ module Aws::EMR
     end
 
     # <note markdown="1"> Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0
-    # and higher. For more information, see [Using an auto-termination
+    # and later. For more information, see [Using an auto-termination
     # policy][1].
     #
     #  </note>
@@ -3091,7 +3116,7 @@ module Aws::EMR
     # your results.
     #
     # <note markdown="1"> The instance fleets configuration is available only in Amazon EMR
-    # releases 4.8.0 and higher, excluding 5.0.x versions. The RunJobFlow
+    # releases 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow
     # request can contain InstanceFleets parameters or InstanceGroups
     # parameters, but not both.
     #
@@ -3107,15 +3132,14 @@ module Aws::EMR
     # @option params [String] :log_encryption_kms_key_id
     #   The KMS key used for encrypting log files. If a value is not provided,
     #   the logs remain encrypted by AES-256. This attribute is only available
-    #   with Amazon EMR releases 5.30.0 and higher, excluding Amazon EMR
-    #   6.0.0.
+    #   with Amazon EMR releases 5.30.0 and later, excluding Amazon EMR 6.0.0.
     #
     # @option params [String] :additional_info
     #   A JSON string for selecting additional features.
     #
     # @option params [String] :ami_version
     #   Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR
-    #   releases 4.0 and higher, `ReleaseLabel` is used. To specify a custom
+    #   releases 4.0 and later, `ReleaseLabel` is used. To specify a custom
     #   AMI, use `CustomAmiID`.
     #
     # @option params [String] :release_label
@@ -3126,7 +3150,7 @@ module Aws::EMR
     #   Amazon EMR release versions and included application versions and
     #   features, see
     #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
-    #   label applies only to Amazon EMR releases version 4.0 and higher.
+    #   label applies only to Amazon EMR releases version 4.0 and later.
     #   Earlier versions use `AmiVersion`.
     #
     #
@@ -3145,7 +3169,7 @@ module Aws::EMR
     #
     # @option params [Array<String>] :supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   higher, use Applications.
+    #   later, use Applications.
     #
     #    </note>
     #
@@ -3163,7 +3187,7 @@ module Aws::EMR
     #
     # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   higher, use Applications.
+    #   later, use Applications.
     #
     #    </note>
     #
@@ -3199,7 +3223,7 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
-    #   Applies to Amazon EMR releases 4.0 and higher. A case-insensitive list
+    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive list
     #   of applications for Amazon EMR to install and configure when launching
     #   the cluster. For a list of applications available for each Amazon EMR
     #   release version, see the [Amazon EMRRelease Guide][1].
@@ -3209,7 +3233,7 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [Array<Types::Configuration>] :configurations
-    #   For Amazon EMR releases 4.0 and higher. The list of configurations
+    #   For Amazon EMR releases 4.0 and later. The list of configurations
     #   supplied for the Amazon EMR cluster that you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
@@ -3266,18 +3290,18 @@ module Aws::EMR
     #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
     #   nodes at the instance-hour boundary, regardless of when the request to
     #   terminate the instance was submitted. This option is only available
-    #   with Amazon EMR 5.1.0 and higher and is the default for clusters
+    #   with Amazon EMR 5.1.0 and later and is the default for clusters
     #   created using that version. `TERMINATE_AT_TASK_COMPLETION` indicates
     #   that Amazon EMR adds nodes to a deny list and drains tasks from nodes
     #   before terminating the Amazon EC2 instances, regardless of the
     #   instance-hour boundary. With either behavior, Amazon EMR removes the
     #   least active nodes first and blocks instance termination if it could
     #   lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` available only
-    #   in Amazon EMR releases 4.1.0 and higher, and is the default for
+    #   in Amazon EMR releases 4.1.0 and later, and is the default for
     #   releases of Amazon EMR earlier than 5.1.0.
     #
     # @option params [String] :custom_ami_id
-    #   Available only in Amazon EMR releases 5.7.0 and higher. The ID of a
+    #   Available only in Amazon EMR releases 5.7.0 and later. The ID of a
     #   custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this
     #   AMI when it launches cluster Amazon EC2 instances. For more
     #   information about custom AMIs in Amazon EMR, see [Using a Custom
@@ -3297,9 +3321,9 @@ module Aws::EMR
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     #
     # @option params [Integer] :ebs_root_volume_size
-    #   The size, in GiB, of the Amazon EBS root device volume for the Linux
-    #   AMI that each Amazon EC2 instance uses. Available in Amazon EMR
-    #   releases 4.x and higher.
+    #   The size, in GiB, of the Amazon EBS root device volume of the Linux
+    #   AMI that is used for each Amazon EC2 instance. Available in Amazon EMR
+    #   releases 4.x and later.
     #
     # @option params [String] :repo_upgrade_on_boot
     #   Applies only when `CustomAmiID` is used. Specifies which updates from
@@ -3344,14 +3368,14 @@ module Aws::EMR
     #   uses the latest validated Amazon Linux release for cluster launch.
     #
     # @option params [Integer] :ebs_root_volume_iops
-    #   The IOPS for the Amazon EBS root device volume for the Linux AMI that
-    #   each Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0
-    #   and higher.
+    #   The IOPS, of the Amazon EBS root device volume of the Linux AMI that
+    #   is used for each Amazon EC2 instance. Available in Amazon EMR releases
+    #   6.15.0 and later.
     #
     # @option params [Integer] :ebs_root_volume_throughput
-    #   The throughput, in MiB/s, of the Amazon EBS root device volume for the
-    #   Linux AMI that each Amazon EC2 instance uses. Available in Amazon EMR
-    #   releases 6.15.0 and higher.
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume of the
+    #   Linux AMI that is used for each Amazon EC2 instance. Available in
+    #   Amazon EMR releases 6.15.0 and later.
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3930,6 +3954,10 @@ module Aws::EMR
     #   The Amazon S3 location to back up Workspaces and notebook files for
     #   the Amazon EMR Studio.
     #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3940,6 +3968,7 @@ module Aws::EMR
     #     description: "XmlStringMaxLen256",
     #     subnet_ids: ["String"],
     #     default_s3_location: "XmlString",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudio AWS API Documentation
@@ -4020,7 +4049,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

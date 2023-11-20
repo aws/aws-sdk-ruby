@@ -52,6 +52,6 @@ require_relative 'aws-sdk-controltower/customizations'
 # @!group service
 module Aws::ControlTower
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

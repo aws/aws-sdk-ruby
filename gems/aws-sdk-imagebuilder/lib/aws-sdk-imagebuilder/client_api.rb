@@ -27,6 +27,8 @@ module Aws::Imagebuilder
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
     CancelImageCreationRequest = Shapes::StructureShape.new(name: 'CancelImageCreationRequest')
     CancelImageCreationResponse = Shapes::StructureShape.new(name: 'CancelImageCreationResponse')
+    CancelLifecycleExecutionRequest = Shapes::StructureShape.new(name: 'CancelLifecycleExecutionRequest')
+    CancelLifecycleExecutionResponse = Shapes::StructureShape.new(name: 'CancelLifecycleExecutionResponse')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Component = Shapes::StructureShape.new(name: 'Component')
@@ -76,6 +78,8 @@ module Aws::Imagebuilder
     CreateImageResponse = Shapes::StructureShape.new(name: 'CreateImageResponse')
     CreateInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'CreateInfrastructureConfigurationRequest')
     CreateInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'CreateInfrastructureConfigurationResponse')
+    CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
+    CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CvssScore = Shapes::StructureShape.new(name: 'CvssScore')
     CvssScoreAdjustment = Shapes::StructureShape.new(name: 'CvssScoreAdjustment')
     CvssScoreAdjustmentList = Shapes::ListShape.new(name: 'CvssScoreAdjustmentList')
@@ -97,6 +101,8 @@ module Aws::Imagebuilder
     DeleteImageResponse = Shapes::StructureShape.new(name: 'DeleteImageResponse')
     DeleteInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteInfrastructureConfigurationRequest')
     DeleteInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteInfrastructureConfigurationResponse')
+    DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
+    DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
     DiskImageFormat = Shapes::StringShape.new(name: 'DiskImageFormat')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionConfiguration = Shapes::StructureShape.new(name: 'DistributionConfiguration')
@@ -146,6 +152,10 @@ module Aws::Imagebuilder
     GetImageResponse = Shapes::StructureShape.new(name: 'GetImageResponse')
     GetInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'GetInfrastructureConfigurationRequest')
     GetInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'GetInfrastructureConfigurationResponse')
+    GetLifecycleExecutionRequest = Shapes::StructureShape.new(name: 'GetLifecycleExecutionRequest')
+    GetLifecycleExecutionResponse = Shapes::StructureShape.new(name: 'GetLifecycleExecutionResponse')
+    GetLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'GetLifecyclePolicyRequest')
+    GetLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyResponse')
     GetWorkflowExecutionRequest = Shapes::StructureShape.new(name: 'GetWorkflowExecutionRequest')
     GetWorkflowExecutionResponse = Shapes::StructureShape.new(name: 'GetWorkflowExecutionResponse')
     GetWorkflowStepExecutionRequest = Shapes::StructureShape.new(name: 'GetWorkflowStepExecutionRequest')
@@ -220,6 +230,43 @@ module Aws::Imagebuilder
     LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
     LicenseConfigurationArn = Shapes::StringShape.new(name: 'LicenseConfigurationArn')
     LicenseConfigurationArnList = Shapes::ListShape.new(name: 'LicenseConfigurationArnList')
+    LifecycleExecution = Shapes::StructureShape.new(name: 'LifecycleExecution')
+    LifecycleExecutionId = Shapes::StringShape.new(name: 'LifecycleExecutionId')
+    LifecycleExecutionResource = Shapes::StructureShape.new(name: 'LifecycleExecutionResource')
+    LifecycleExecutionResourceAction = Shapes::StructureShape.new(name: 'LifecycleExecutionResourceAction')
+    LifecycleExecutionResourceActionName = Shapes::StringShape.new(name: 'LifecycleExecutionResourceActionName')
+    LifecycleExecutionResourceList = Shapes::ListShape.new(name: 'LifecycleExecutionResourceList')
+    LifecycleExecutionResourceState = Shapes::StructureShape.new(name: 'LifecycleExecutionResourceState')
+    LifecycleExecutionResourceStatus = Shapes::StringShape.new(name: 'LifecycleExecutionResourceStatus')
+    LifecycleExecutionResourcesImpactedSummary = Shapes::StructureShape.new(name: 'LifecycleExecutionResourcesImpactedSummary')
+    LifecycleExecutionSnapshotResource = Shapes::StructureShape.new(name: 'LifecycleExecutionSnapshotResource')
+    LifecycleExecutionSnapshotResourceList = Shapes::ListShape.new(name: 'LifecycleExecutionSnapshotResourceList')
+    LifecycleExecutionState = Shapes::StructureShape.new(name: 'LifecycleExecutionState')
+    LifecycleExecutionStatus = Shapes::StringShape.new(name: 'LifecycleExecutionStatus')
+    LifecycleExecutionsList = Shapes::ListShape.new(name: 'LifecycleExecutionsList')
+    LifecyclePolicy = Shapes::StructureShape.new(name: 'LifecyclePolicy')
+    LifecyclePolicyArn = Shapes::StringShape.new(name: 'LifecyclePolicyArn')
+    LifecyclePolicyDetail = Shapes::StructureShape.new(name: 'LifecyclePolicyDetail')
+    LifecyclePolicyDetailAction = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailAction')
+    LifecyclePolicyDetailActionIncludeResources = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailActionIncludeResources')
+    LifecyclePolicyDetailActionType = Shapes::StringShape.new(name: 'LifecyclePolicyDetailActionType')
+    LifecyclePolicyDetailExclusionRules = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailExclusionRules')
+    LifecyclePolicyDetailExclusionRulesAmis = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailExclusionRulesAmis')
+    LifecyclePolicyDetailExclusionRulesAmisLastLaunched = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailExclusionRulesAmisLastLaunched')
+    LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue = Shapes::IntegerShape.new(name: 'LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue')
+    LifecyclePolicyDetailFilter = Shapes::StructureShape.new(name: 'LifecyclePolicyDetailFilter')
+    LifecyclePolicyDetailFilterRetainAtLeast = Shapes::IntegerShape.new(name: 'LifecyclePolicyDetailFilterRetainAtLeast')
+    LifecyclePolicyDetailFilterType = Shapes::StringShape.new(name: 'LifecyclePolicyDetailFilterType')
+    LifecyclePolicyDetailFilterValue = Shapes::IntegerShape.new(name: 'LifecyclePolicyDetailFilterValue')
+    LifecyclePolicyDetails = Shapes::ListShape.new(name: 'LifecyclePolicyDetails')
+    LifecyclePolicyResourceSelection = Shapes::StructureShape.new(name: 'LifecyclePolicyResourceSelection')
+    LifecyclePolicyResourceSelectionRecipe = Shapes::StructureShape.new(name: 'LifecyclePolicyResourceSelectionRecipe')
+    LifecyclePolicyResourceSelectionRecipes = Shapes::ListShape.new(name: 'LifecyclePolicyResourceSelectionRecipes')
+    LifecyclePolicyResourceType = Shapes::StringShape.new(name: 'LifecyclePolicyResourceType')
+    LifecyclePolicyStatus = Shapes::StringShape.new(name: 'LifecyclePolicyStatus')
+    LifecyclePolicySummary = Shapes::StructureShape.new(name: 'LifecyclePolicySummary')
+    LifecyclePolicySummaryList = Shapes::ListShape.new(name: 'LifecyclePolicySummaryList')
+    LifecyclePolicyTimeUnit = Shapes::StringShape.new(name: 'LifecyclePolicyTimeUnit')
     ListComponentBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsRequest')
     ListComponentBuildVersionsResponse = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
@@ -246,6 +293,12 @@ module Aws::Imagebuilder
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
     ListInfrastructureConfigurationsRequest = Shapes::StructureShape.new(name: 'ListInfrastructureConfigurationsRequest')
     ListInfrastructureConfigurationsResponse = Shapes::StructureShape.new(name: 'ListInfrastructureConfigurationsResponse')
+    ListLifecycleExecutionResourcesRequest = Shapes::StructureShape.new(name: 'ListLifecycleExecutionResourcesRequest')
+    ListLifecycleExecutionResourcesResponse = Shapes::StructureShape.new(name: 'ListLifecycleExecutionResourcesResponse')
+    ListLifecycleExecutionsRequest = Shapes::StructureShape.new(name: 'ListLifecycleExecutionsRequest')
+    ListLifecycleExecutionsResponse = Shapes::StructureShape.new(name: 'ListLifecycleExecutionsResponse')
+    ListLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'ListLifecyclePoliciesRequest')
+    ListLifecyclePoliciesResponse = Shapes::StructureShape.new(name: 'ListLifecyclePoliciesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWorkflowExecutionsRequest = Shapes::StructureShape.new(name: 'ListWorkflowExecutionsRequest')
@@ -290,8 +343,13 @@ module Aws::Imagebuilder
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
+    ResourceState = Shapes::StructureShape.new(name: 'ResourceState')
+    ResourceStateUpdateExclusionRules = Shapes::StructureShape.new(name: 'ResourceStateUpdateExclusionRules')
+    ResourceStateUpdateIncludeResources = Shapes::StructureShape.new(name: 'ResourceStateUpdateIncludeResources')
+    ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceTagMap = Shapes::MapShape.new(name: 'ResourceTagMap')
     RestrictedInteger = Shapes::IntegerShape.new(name: 'RestrictedInteger')
+    RoleNameOrArn = Shapes::StringShape.new(name: 'RoleNameOrArn')
     S3ExportConfiguration = Shapes::StructureShape.new(name: 'S3ExportConfiguration')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -305,6 +363,8 @@ module Aws::Imagebuilder
     SourceLayerHash = Shapes::StringShape.new(name: 'SourceLayerHash')
     StartImagePipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionRequest')
     StartImagePipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionResponse')
+    StartResourceStateUpdateRequest = Shapes::StructureShape.new(name: 'StartResourceStateUpdateRequest')
+    StartResourceStateUpdateResponse = Shapes::StructureShape.new(name: 'StartResourceStateUpdateResponse')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SystemsManagerAgent = Shapes::StructureShape.new(name: 'SystemsManagerAgent')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -324,6 +384,8 @@ module Aws::Imagebuilder
     UpdateImagePipelineResponse = Shapes::StructureShape.new(name: 'UpdateImagePipelineResponse')
     UpdateInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateInfrastructureConfigurationRequest')
     UpdateInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateInfrastructureConfigurationResponse')
+    UpdateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyRequest')
+    UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
     UserDataOverride = Shapes::StringShape.new(name: 'UserDataOverride')
     VersionNumber = Shapes::StringShape.new(name: 'VersionNumber')
@@ -392,6 +454,13 @@ module Aws::Imagebuilder
     CancelImageCreationResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     CancelImageCreationResponse.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
     CancelImageCreationResponse.struct_class = Types::CancelImageCreationResponse
+
+    CancelLifecycleExecutionRequest.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, required: true, location_name: "lifecycleExecutionId"))
+    CancelLifecycleExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CancelLifecycleExecutionRequest.struct_class = Types::CancelLifecycleExecutionRequest
+
+    CancelLifecycleExecutionResponse.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
+    CancelLifecycleExecutionResponse.struct_class = Types::CancelLifecycleExecutionResponse
 
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ClientException.struct_class = Types::ClientException
@@ -642,6 +711,21 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationResponse.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: "infrastructureConfigurationArn"))
     CreateInfrastructureConfigurationResponse.struct_class = Types::CreateInfrastructureConfigurationResponse
 
+    CreateLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    CreateLifecyclePolicyRequest.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyStatus, location_name: "status"))
+    CreateLifecyclePolicyRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, required: true, location_name: "executionRole"))
+    CreateLifecyclePolicyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceType, required: true, location_name: "resourceType"))
+    CreateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: LifecyclePolicyDetails, required: true, location_name: "policyDetails"))
+    CreateLifecyclePolicyRequest.add_member(:resource_selection, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelection, required: true, location_name: "resourceSelection"))
+    CreateLifecyclePolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLifecyclePolicyRequest.struct_class = Types::CreateLifecyclePolicyRequest
+
+    CreateLifecyclePolicyResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
+    CreateLifecyclePolicyResponse.struct_class = Types::CreateLifecyclePolicyResponse
+
     CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "baseScore"))
     CvssScore.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scoringVector"))
     CvssScore.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "version"))
@@ -712,6 +796,12 @@ module Aws::Imagebuilder
     DeleteInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     DeleteInfrastructureConfigurationResponse.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: "infrastructureConfigurationArn"))
     DeleteInfrastructureConfigurationResponse.struct_class = Types::DeleteInfrastructureConfigurationResponse
+
+    DeleteLifecyclePolicyRequest.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, required: true, location: "querystring", location_name: "lifecyclePolicyArn"))
+    DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
+
+    DeleteLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
+    DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
 
     Distribution.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "region"))
     Distribution.add_member(:ami_distribution_configuration, Shapes::ShapeRef.new(shape: AmiDistributionConfiguration, location_name: "amiDistributionConfiguration"))
@@ -864,6 +954,18 @@ module Aws::Imagebuilder
     GetInfrastructureConfigurationResponse.add_member(:infrastructure_configuration, Shapes::ShapeRef.new(shape: InfrastructureConfiguration, location_name: "infrastructureConfiguration"))
     GetInfrastructureConfigurationResponse.struct_class = Types::GetInfrastructureConfigurationResponse
 
+    GetLifecycleExecutionRequest.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, required: true, location: "querystring", location_name: "lifecycleExecutionId"))
+    GetLifecycleExecutionRequest.struct_class = Types::GetLifecycleExecutionRequest
+
+    GetLifecycleExecutionResponse.add_member(:lifecycle_execution, Shapes::ShapeRef.new(shape: LifecycleExecution, location_name: "lifecycleExecution"))
+    GetLifecycleExecutionResponse.struct_class = Types::GetLifecycleExecutionResponse
+
+    GetLifecyclePolicyRequest.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, required: true, location: "querystring", location_name: "lifecyclePolicyArn"))
+    GetLifecyclePolicyRequest.struct_class = Types::GetLifecyclePolicyRequest
+
+    GetLifecyclePolicyResponse.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, location_name: "lifecyclePolicy"))
+    GetLifecyclePolicyResponse.struct_class = Types::GetLifecyclePolicyResponse
+
     GetWorkflowExecutionRequest.add_member(:workflow_execution_id, Shapes::ShapeRef.new(shape: WorkflowExecutionId, required: true, location: "querystring", location_name: "workflowExecutionId"))
     GetWorkflowExecutionRequest.struct_class = Types::GetWorkflowExecutionRequest
 
@@ -929,6 +1031,8 @@ module Aws::Imagebuilder
     Image.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "imageSource"))
     Image.add_member(:scan_state, Shapes::ShapeRef.new(shape: ImageScanState, location_name: "scanState"))
     Image.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "deprecationTime"))
+    Image.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
     Image.struct_class = Types::Image
 
     ImageAggregation.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
@@ -1053,6 +1157,8 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ImageSummary.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
     ImageSummary.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "imageSource"))
+    ImageSummary.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "deprecationTime"))
+    ImageSummary.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
     ImageSummary.struct_class = Types::ImageSummary
 
     ImageSummaryList.member = Shapes::ShapeRef.new(shape: ImageSummary)
@@ -1194,6 +1300,123 @@ module Aws::Imagebuilder
 
     LicenseConfigurationArnList.member = Shapes::ShapeRef.new(shape: LicenseConfigurationArn)
 
+    LifecycleExecution.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
+    LifecycleExecution.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
+    LifecycleExecution.add_member(:resources_impacted_summary, Shapes::ShapeRef.new(shape: LifecycleExecutionResourcesImpactedSummary, location_name: "resourcesImpactedSummary"))
+    LifecycleExecution.add_member(:state, Shapes::ShapeRef.new(shape: LifecycleExecutionState, location_name: "state"))
+    LifecycleExecution.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "startTime"))
+    LifecycleExecution.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "endTime"))
+    LifecycleExecution.struct_class = Types::LifecycleExecution
+
+    LifecycleExecutionResource.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "accountId"))
+    LifecycleExecutionResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceId"))
+    LifecycleExecutionResource.add_member(:state, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceState, location_name: "state"))
+    LifecycleExecutionResource.add_member(:action, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceAction, location_name: "action"))
+    LifecycleExecutionResource.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "region"))
+    LifecycleExecutionResource.add_member(:snapshots, Shapes::ShapeRef.new(shape: LifecycleExecutionSnapshotResourceList, location_name: "snapshots"))
+    LifecycleExecutionResource.add_member(:image_uris, Shapes::ShapeRef.new(shape: StringList, location_name: "imageUris"))
+    LifecycleExecutionResource.struct_class = Types::LifecycleExecutionResource
+
+    LifecycleExecutionResourceAction.add_member(:name, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceActionName, location_name: "name"))
+    LifecycleExecutionResourceAction.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    LifecycleExecutionResourceAction.struct_class = Types::LifecycleExecutionResourceAction
+
+    LifecycleExecutionResourceList.member = Shapes::ShapeRef.new(shape: LifecycleExecutionResource)
+
+    LifecycleExecutionResourceState.add_member(:status, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceStatus, location_name: "status"))
+    LifecycleExecutionResourceState.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    LifecycleExecutionResourceState.struct_class = Types::LifecycleExecutionResourceState
+
+    LifecycleExecutionResourcesImpactedSummary.add_member(:has_impacted_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasImpactedResources"))
+    LifecycleExecutionResourcesImpactedSummary.struct_class = Types::LifecycleExecutionResourcesImpactedSummary
+
+    LifecycleExecutionSnapshotResource.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "snapshotId"))
+    LifecycleExecutionSnapshotResource.add_member(:state, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceState, location_name: "state"))
+    LifecycleExecutionSnapshotResource.struct_class = Types::LifecycleExecutionSnapshotResource
+
+    LifecycleExecutionSnapshotResourceList.member = Shapes::ShapeRef.new(shape: LifecycleExecutionSnapshotResource)
+
+    LifecycleExecutionState.add_member(:status, Shapes::ShapeRef.new(shape: LifecycleExecutionStatus, location_name: "status"))
+    LifecycleExecutionState.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    LifecycleExecutionState.struct_class = Types::LifecycleExecutionState
+
+    LifecycleExecutionsList.member = Shapes::ShapeRef.new(shape: LifecycleExecution)
+
+    LifecyclePolicy.add_member(:arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "arn"))
+    LifecyclePolicy.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LifecyclePolicy.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    LifecyclePolicy.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyStatus, location_name: "status"))
+    LifecyclePolicy.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    LifecyclePolicy.add_member(:resource_type, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceType, location_name: "resourceType"))
+    LifecyclePolicy.add_member(:policy_details, Shapes::ShapeRef.new(shape: LifecyclePolicyDetails, location_name: "policyDetails"))
+    LifecyclePolicy.add_member(:resource_selection, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelection, location_name: "resourceSelection"))
+    LifecyclePolicy.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateCreated"))
+    LifecyclePolicy.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateUpdated"))
+    LifecyclePolicy.add_member(:date_last_run, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateLastRun"))
+    LifecyclePolicy.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    LifecyclePolicy.struct_class = Types::LifecyclePolicy
+
+    LifecyclePolicyDetail.add_member(:action, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailAction, required: true, location_name: "action"))
+    LifecyclePolicyDetail.add_member(:filter, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailFilter, required: true, location_name: "filter"))
+    LifecyclePolicyDetail.add_member(:exclusion_rules, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailExclusionRules, location_name: "exclusionRules"))
+    LifecyclePolicyDetail.struct_class = Types::LifecyclePolicyDetail
+
+    LifecyclePolicyDetailAction.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailActionType, required: true, location_name: "type"))
+    LifecyclePolicyDetailAction.add_member(:include_resources, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailActionIncludeResources, location_name: "includeResources"))
+    LifecyclePolicyDetailAction.struct_class = Types::LifecyclePolicyDetailAction
+
+    LifecyclePolicyDetailActionIncludeResources.add_member(:amis, Shapes::ShapeRef.new(shape: Boolean, location_name: "amis"))
+    LifecyclePolicyDetailActionIncludeResources.add_member(:snapshots, Shapes::ShapeRef.new(shape: Boolean, location_name: "snapshots"))
+    LifecyclePolicyDetailActionIncludeResources.add_member(:containers, Shapes::ShapeRef.new(shape: Boolean, location_name: "containers"))
+    LifecyclePolicyDetailActionIncludeResources.struct_class = Types::LifecyclePolicyDetailActionIncludeResources
+
+    LifecyclePolicyDetailExclusionRules.add_member(:tag_map, Shapes::ShapeRef.new(shape: TagMap, location_name: "tagMap"))
+    LifecyclePolicyDetailExclusionRules.add_member(:amis, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailExclusionRulesAmis, location_name: "amis"))
+    LifecyclePolicyDetailExclusionRules.struct_class = Types::LifecyclePolicyDetailExclusionRules
+
+    LifecyclePolicyDetailExclusionRulesAmis.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
+    LifecyclePolicyDetailExclusionRulesAmis.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "regions"))
+    LifecyclePolicyDetailExclusionRulesAmis.add_member(:shared_accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "sharedAccounts"))
+    LifecyclePolicyDetailExclusionRulesAmis.add_member(:last_launched, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailExclusionRulesAmisLastLaunched, location_name: "lastLaunched"))
+    LifecyclePolicyDetailExclusionRulesAmis.add_member(:tag_map, Shapes::ShapeRef.new(shape: TagMap, location_name: "tagMap"))
+    LifecyclePolicyDetailExclusionRulesAmis.struct_class = Types::LifecyclePolicyDetailExclusionRulesAmis
+
+    LifecyclePolicyDetailExclusionRulesAmisLastLaunched.add_member(:value, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue, required: true, location_name: "value"))
+    LifecyclePolicyDetailExclusionRulesAmisLastLaunched.add_member(:unit, Shapes::ShapeRef.new(shape: LifecyclePolicyTimeUnit, required: true, location_name: "unit"))
+    LifecyclePolicyDetailExclusionRulesAmisLastLaunched.struct_class = Types::LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+
+    LifecyclePolicyDetailFilter.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailFilterType, required: true, location_name: "type"))
+    LifecyclePolicyDetailFilter.add_member(:value, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailFilterValue, required: true, location_name: "value"))
+    LifecyclePolicyDetailFilter.add_member(:unit, Shapes::ShapeRef.new(shape: LifecyclePolicyTimeUnit, location_name: "unit"))
+    LifecyclePolicyDetailFilter.add_member(:retain_at_least, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailFilterRetainAtLeast, location_name: "retainAtLeast"))
+    LifecyclePolicyDetailFilter.struct_class = Types::LifecyclePolicyDetailFilter
+
+    LifecyclePolicyDetails.member = Shapes::ShapeRef.new(shape: LifecyclePolicyDetail)
+
+    LifecyclePolicyResourceSelection.add_member(:recipes, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelectionRecipes, location_name: "recipes"))
+    LifecyclePolicyResourceSelection.add_member(:tag_map, Shapes::ShapeRef.new(shape: TagMap, location_name: "tagMap"))
+    LifecyclePolicyResourceSelection.struct_class = Types::LifecyclePolicyResourceSelection
+
+    LifecyclePolicyResourceSelectionRecipe.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    LifecyclePolicyResourceSelectionRecipe.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    LifecyclePolicyResourceSelectionRecipe.struct_class = Types::LifecyclePolicyResourceSelectionRecipe
+
+    LifecyclePolicyResourceSelectionRecipes.member = Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelectionRecipe)
+
+    LifecyclePolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "arn"))
+    LifecyclePolicySummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LifecyclePolicySummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    LifecyclePolicySummary.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyStatus, location_name: "status"))
+    LifecyclePolicySummary.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    LifecyclePolicySummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceType, location_name: "resourceType"))
+    LifecyclePolicySummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateCreated"))
+    LifecyclePolicySummary.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateUpdated"))
+    LifecyclePolicySummary.add_member(:date_last_run, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "dateLastRun"))
+    LifecyclePolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    LifecyclePolicySummary.struct_class = Types::LifecyclePolicySummary
+
+    LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
+
     ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, required: true, location_name: "componentVersionArn"))
     ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListComponentBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -1333,6 +1556,36 @@ module Aws::Imagebuilder
     ListInfrastructureConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListInfrastructureConfigurationsResponse.struct_class = Types::ListInfrastructureConfigurationsResponse
 
+    ListLifecycleExecutionResourcesRequest.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, required: true, location_name: "lifecycleExecutionId"))
+    ListLifecycleExecutionResourcesRequest.add_member(:parent_resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "parentResourceId"))
+    ListLifecycleExecutionResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecycleExecutionResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecycleExecutionResourcesRequest.struct_class = Types::ListLifecycleExecutionResourcesRequest
+
+    ListLifecycleExecutionResourcesResponse.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
+    ListLifecycleExecutionResourcesResponse.add_member(:lifecycle_execution_state, Shapes::ShapeRef.new(shape: LifecycleExecutionState, location_name: "lifecycleExecutionState"))
+    ListLifecycleExecutionResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceList, location_name: "resources"))
+    ListLifecycleExecutionResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecycleExecutionResourcesResponse.struct_class = Types::ListLifecycleExecutionResourcesResponse
+
+    ListLifecycleExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecycleExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecycleExecutionsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, required: true, location_name: "resourceArn"))
+    ListLifecycleExecutionsRequest.struct_class = Types::ListLifecycleExecutionsRequest
+
+    ListLifecycleExecutionsResponse.add_member(:lifecycle_executions, Shapes::ShapeRef.new(shape: LifecycleExecutionsList, location_name: "lifecycleExecutions"))
+    ListLifecycleExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecycleExecutionsResponse.struct_class = Types::ListLifecycleExecutionsResponse
+
+    ListLifecyclePoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListLifecyclePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecyclePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecyclePoliciesRequest.struct_class = Types::ListLifecyclePoliciesRequest
+
+    ListLifecyclePoliciesResponse.add_member(:lifecycle_policy_summary_list, Shapes::ShapeRef.new(shape: LifecyclePolicySummaryList, location_name: "lifecyclePolicySummaryList"))
+    ListLifecyclePoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLifecyclePoliciesResponse.struct_class = Types::ListLifecyclePoliciesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1445,6 +1698,17 @@ module Aws::Imagebuilder
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceState.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    ResourceState.struct_class = Types::ResourceState
+
+    ResourceStateUpdateExclusionRules.add_member(:amis, Shapes::ShapeRef.new(shape: LifecyclePolicyDetailExclusionRulesAmis, location_name: "amis"))
+    ResourceStateUpdateExclusionRules.struct_class = Types::ResourceStateUpdateExclusionRules
+
+    ResourceStateUpdateIncludeResources.add_member(:amis, Shapes::ShapeRef.new(shape: Boolean, location_name: "amis"))
+    ResourceStateUpdateIncludeResources.add_member(:snapshots, Shapes::ShapeRef.new(shape: Boolean, location_name: "snapshots"))
+    ResourceStateUpdateIncludeResources.add_member(:containers, Shapes::ShapeRef.new(shape: Boolean, location_name: "containers"))
+    ResourceStateUpdateIncludeResources.struct_class = Types::ResourceStateUpdateIncludeResources
+
     ResourceTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     ResourceTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
@@ -1488,6 +1752,19 @@ module Aws::Imagebuilder
     StartImagePipelineExecutionResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     StartImagePipelineExecutionResponse.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
     StartImagePipelineExecutionResponse.struct_class = Types::StartImagePipelineExecutionResponse
+
+    StartResourceStateUpdateRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "resourceArn"))
+    StartResourceStateUpdateRequest.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, required: true, location_name: "state"))
+    StartResourceStateUpdateRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    StartResourceStateUpdateRequest.add_member(:include_resources, Shapes::ShapeRef.new(shape: ResourceStateUpdateIncludeResources, location_name: "includeResources"))
+    StartResourceStateUpdateRequest.add_member(:exclusion_rules, Shapes::ShapeRef.new(shape: ResourceStateUpdateExclusionRules, location_name: "exclusionRules"))
+    StartResourceStateUpdateRequest.add_member(:update_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updateAt"))
+    StartResourceStateUpdateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartResourceStateUpdateRequest.struct_class = Types::StartResourceStateUpdateRequest
+
+    StartResourceStateUpdateResponse.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
+    StartResourceStateUpdateResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "resourceArn"))
+    StartResourceStateUpdateResponse.struct_class = Types::StartResourceStateUpdateResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -1565,6 +1842,19 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationResponse.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: "infrastructureConfigurationArn"))
     UpdateInfrastructureConfigurationResponse.struct_class = Types::UpdateInfrastructureConfigurationResponse
 
+    UpdateLifecyclePolicyRequest.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, required: true, location_name: "lifecyclePolicyArn"))
+    UpdateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    UpdateLifecyclePolicyRequest.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyStatus, location_name: "status"))
+    UpdateLifecyclePolicyRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, required: true, location_name: "executionRole"))
+    UpdateLifecyclePolicyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceType, required: true, location_name: "resourceType"))
+    UpdateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: LifecyclePolicyDetails, required: true, location_name: "policyDetails"))
+    UpdateLifecyclePolicyRequest.add_member(:resource_selection, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelection, required: true, location_name: "resourceSelection"))
+    UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateLifecyclePolicyRequest.struct_class = Types::UpdateLifecyclePolicyRequest
+
+    UpdateLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
+    UpdateLifecyclePolicyResponse.struct_class = Types::UpdateLifecyclePolicyResponse
+
     VulnerabilityIdAggregation.add_member(:vulnerability_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "vulnerabilityId"))
     VulnerabilityIdAggregation.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     VulnerabilityIdAggregation.struct_class = Types::VulnerabilityIdAggregation
@@ -1640,6 +1930,22 @@ module Aws::Imagebuilder
         o.http_request_uri = "/CancelImageCreation"
         o.input = Shapes::ShapeRef.new(shape: CancelImageCreationRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelImageCreationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:cancel_lifecycle_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelLifecycleExecution"
+        o.http_method = "PUT"
+        o.http_request_uri = "/CancelLifecycleExecution"
+        o.input = Shapes::ShapeRef.new(shape: CancelLifecycleExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelLifecycleExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1779,6 +2085,24 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLifecyclePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/CreateLifecyclePolicy"
+        o.input = Shapes::ShapeRef.new(shape: CreateLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_component, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteComponent"
         o.http_method = "DELETE"
@@ -1879,6 +2203,21 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
+      end)
+
+      api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLifecyclePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/DeleteLifecyclePolicy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
@@ -2030,6 +2369,34 @@ module Aws::Imagebuilder
         o.http_request_uri = "/GetInfrastructureConfiguration"
         o.input = Shapes::ShapeRef.new(shape: GetInfrastructureConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInfrastructureConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:get_lifecycle_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecycleExecution"
+        o.http_method = "GET"
+        o.http_request_uri = "/GetLifecycleExecution"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecycleExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecycleExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecyclePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/GetLifecyclePolicy"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -2369,6 +2736,69 @@ module Aws::Imagebuilder
         )
       end)
 
+      api.add_operation(:list_lifecycle_execution_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLifecycleExecutionResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListLifecycleExecutionResources"
+        o.input = Shapes::ShapeRef.new(shape: ListLifecycleExecutionResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLifecycleExecutionResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_lifecycle_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLifecycleExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListLifecycleExecutions"
+        o.input = Shapes::ShapeRef.new(shape: ListLifecycleExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLifecycleExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_lifecycle_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLifecyclePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListLifecyclePolicies"
+        o.input = Shapes::ShapeRef.new(shape: ListLifecyclePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLifecyclePoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -2503,6 +2933,23 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:start_resource_state_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartResourceStateUpdate"
+        o.http_method = "PUT"
+        o.http_request_uri = "/StartResourceStateUpdate"
+        o.input = Shapes::ShapeRef.new(shape: StartResourceStateUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartResourceStateUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -2572,6 +3019,23 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLifecyclePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/UpdateLifecyclePolicy"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
     end
 

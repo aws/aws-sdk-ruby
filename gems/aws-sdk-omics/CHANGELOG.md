@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-11-09)
+------------------
+
+* Feature - Support UBAM filetype for Omics Storage and make referenceArn optional
+
+1.18.0 (2023-11-08)
+------------------
+
+* Feature - Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+
 1.17.0 (2023-10-19)
 ------------------
 

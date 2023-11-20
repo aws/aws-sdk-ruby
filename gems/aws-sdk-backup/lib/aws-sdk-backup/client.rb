@@ -1309,6 +1309,7 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#number_of_child_jobs #number_of_child_jobs} => Integer
     #   * {Types::DescribeBackupJobOutput#child_jobs_in_state #child_jobs_in_state} => Hash&lt;String,Integer&gt;
     #   * {Types::DescribeBackupJobOutput#resource_name #resource_name} => String
+    #   * {Types::DescribeBackupJobOutput#message_category #message_category} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1348,6 +1349,7 @@ module Aws::Backup
     #   resp.child_jobs_in_state #=> Hash
     #   resp.child_jobs_in_state["BackupJobState"] #=> Integer
     #   resp.resource_name #=> String
+    #   resp.message_category #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJob AWS API Documentation
     #
@@ -1455,6 +1457,7 @@ module Aws::Backup
     #   resp.copy_job.child_jobs_in_state #=> Hash
     #   resp.copy_job.child_jobs_in_state["CopyJobState"] #=> Integer
     #   resp.copy_job.resource_name #=> String
+    #   resp.copy_job.message_category #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJob AWS API Documentation
     #
@@ -2365,6 +2368,133 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This is a request for a summary of backup jobs created or running
+    # within the most recent 30 days. You can include parameters AccountID,
+    # State, ResourceType, MessageCategory, AggregationPeriod, MaxResults,
+    # or NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListBackupJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupJobSummariesOutput#backup_job_summaries #backup_job_summaries} => Array&lt;Types::BackupJobSummary&gt;
+    #   * {Types::ListBackupJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListBackupJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backup_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED, PARTIAL, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     message_category: "MessageCategory",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_job_summaries #=> Array
+    #   resp.backup_job_summaries[0].region #=> String
+    #   resp.backup_job_summaries[0].account_id #=> String
+    #   resp.backup_job_summaries[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED", "PARTIAL", "AGGREGATE_ALL", "ANY"
+    #   resp.backup_job_summaries[0].resource_type #=> String
+    #   resp.backup_job_summaries[0].message_category #=> String
+    #   resp.backup_job_summaries[0].count #=> Integer
+    #   resp.backup_job_summaries[0].start_time #=> Time
+    #   resp.backup_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobSummaries AWS API Documentation
+    #
+    # @overload list_backup_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_backup_job_summaries(params = {}, options = {})
+      req = build_request(:list_backup_job_summaries, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing backup jobs for an authenticated account
     # for the last 30 days. For a longer period of time, consider using
     # these [monitoring tools][1].
@@ -2447,6 +2577,17 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #
+    # @option params [String] :by_message_category
+    #   This returns a list of backup jobs for the specified message category.
+    #
+    #   Example strings may include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of MessageCategory
+    #   strings.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
@@ -2469,6 +2610,7 @@ module Aws::Backup
     #     by_complete_after: Time.now,
     #     by_complete_before: Time.now,
     #     by_parent_job_id: "string",
+    #     by_message_category: "string",
     #   })
     #
     # @example Response structure
@@ -2501,6 +2643,7 @@ module Aws::Backup
     #   resp.backup_jobs[0].parent_job_id #=> String
     #   resp.backup_jobs[0].is_parent #=> Boolean
     #   resp.backup_jobs[0].resource_name #=> String
+    #   resp.backup_jobs[0].message_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobs AWS API Documentation
@@ -2778,6 +2921,131 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request obtains a list of copy jobs created or running within the
+    # the most recent 30 days. You can include parameters AccountID, State,
+    # ResourceType, MessageCategory, AggregationPeriod, MaxResults, or
+    # NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # RestourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListCopyJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCopyJobSummariesOutput#copy_job_summaries #copy_job_summaries} => Array&lt;Types::CopyJobSummary&gt;
+    #   * {Types::ListCopyJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListCopyJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_copy_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, RUNNING, ABORTING, ABORTED, COMPLETING, COMPLETED, FAILING, FAILED, PARTIAL, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     message_category: "MessageCategory",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_job_summaries #=> Array
+    #   resp.copy_job_summaries[0].region #=> String
+    #   resp.copy_job_summaries[0].account_id #=> String
+    #   resp.copy_job_summaries[0].state #=> String, one of "CREATED", "RUNNING", "ABORTING", "ABORTED", "COMPLETING", "COMPLETED", "FAILING", "FAILED", "PARTIAL", "AGGREGATE_ALL", "ANY"
+    #   resp.copy_job_summaries[0].resource_type #=> String
+    #   resp.copy_job_summaries[0].message_category #=> String
+    #   resp.copy_job_summaries[0].count #=> Integer
+    #   resp.copy_job_summaries[0].start_time #=> Time
+    #   resp.copy_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobSummaries AWS API Documentation
+    #
+    # @overload list_copy_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_copy_job_summaries(params = {}, options = {})
+      req = build_request(:list_copy_job_summaries, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about your copy jobs.
     #
     # @option params [String] :next_token
@@ -2849,6 +3117,23 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #
+    # @option params [String] :by_message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -2871,6 +3156,7 @@ module Aws::Backup
     #     by_complete_before: Time.now,
     #     by_complete_after: Time.now,
     #     by_parent_job_id: "string",
+    #     by_message_category: "string",
     #   })
     #
     # @example Response structure
@@ -2901,6 +3187,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].child_jobs_in_state #=> Hash
     #   resp.copy_jobs[0].child_jobs_in_state["CopyJobState"] #=> Integer
     #   resp.copy_jobs[0].resource_name #=> String
+    #   resp.copy_jobs[0].message_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobs AWS API Documentation
@@ -3458,6 +3745,114 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_report_plans(params = {}, options = {})
       req = build_request(:list_report_plans, params)
+      req.send_request(options)
+    end
+
+    # This request obtains a summary of restore jobs created or running
+    # within the the most recent 30 days. You can include parameters
+    # AccountID, State, ResourceType, AggregationPeriod, MaxResults, or
+    # NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # RestourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListRestoreJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreJobSummariesOutput#restore_job_summaries #restore_job_summaries} => Array&lt;Types::RestoreJobSummary&gt;
+    #   * {Types::ListRestoreJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListRestoreJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTED, COMPLETED, FAILED, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_job_summaries #=> Array
+    #   resp.restore_job_summaries[0].region #=> String
+    #   resp.restore_job_summaries[0].account_id #=> String
+    #   resp.restore_job_summaries[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTED", "COMPLETED", "FAILED", "AGGREGATE_ALL", "ANY"
+    #   resp.restore_job_summaries[0].resource_type #=> String
+    #   resp.restore_job_summaries[0].count #=> Integer
+    #   resp.restore_job_summaries[0].start_time #=> Time
+    #   resp.restore_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobSummaries AWS API Documentation
+    #
+    # @overload list_restore_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_restore_job_summaries(params = {}, options = {})
+      req = build_request(:list_restore_job_summaries, params)
       req.send_request(options)
     end
 
@@ -4661,7 +5056,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

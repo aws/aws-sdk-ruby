@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-11-17)
+------------------
+
+* Feature - Updated SDK for Amazon Redshift Serverless, which provides the ability to configure a connection with IAM Identity Center to manage user and group access to databases.
+
+1.18.0 (2023-11-08)
+------------------
+
+* Feature - Added a new parameter in the workgroup that helps you control your cost for compute resources. This feature provides a ceiling for RPUs that Amazon Redshift Serverless can scale up to. When automatic compute scaling is required, having a higher value for MaxRPU can enhance query throughput.
+
 1.17.0 (2023-10-30)
 ------------------
 

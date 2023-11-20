@@ -627,6 +627,10 @@ module Aws::RedshiftServerless
     # @option params [required, String] :namespace_name
     #   The name of the namespace.
     #
+    # @option params [String] :redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM Identity
+    #   Center.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
     #
@@ -647,6 +651,7 @@ module Aws::RedshiftServerless
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
     #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
+    #     redshift_idc_application_arn: "RedshiftIdcApplicationArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -843,6 +848,10 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC instead of over the internet.
     #
+    # @option params [Integer] :max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
+    #   serve queries. The max capacity is specified in RPUs.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to associate with the workgroup.
     #
@@ -881,6 +890,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     max_capacity: 1,
     #     namespace_name: "NamespaceName", # required
     #     port: 1,
     #     publicly_accessible: false,
@@ -916,6 +926,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
@@ -1207,6 +1218,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
@@ -1663,6 +1675,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
@@ -2205,6 +2218,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
+    #   resp.workgroups[0].max_capacity #=> Integer
     #   resp.workgroups[0].namespace_name #=> String
     #   resp.workgroups[0].patch_version #=> String
     #   resp.workgroups[0].port #=> Integer
@@ -2866,6 +2880,10 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC.
     #
+    # @option params [Integer] :max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
+    #   serve queries. The max capacity is specified in RPUs.
+    #
     # @option params [Integer] :port
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
@@ -2899,6 +2917,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     max_capacity: 1,
     #     port: 1,
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
@@ -2927,6 +2946,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
@@ -2963,7 +2983,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

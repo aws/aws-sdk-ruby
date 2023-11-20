@@ -289,6 +289,11 @@ module Aws::RedshiftServerless
     #   The name of the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
@@ -306,6 +311,7 @@ module Aws::RedshiftServerless
       :log_exports,
       :manage_admin_password,
       :namespace_name,
+      :redshift_idc_application_arn,
       :tags)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure
@@ -443,6 +449,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC instead of over the internet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to associate with the workgroup.
     #   @return [String]
@@ -479,6 +490,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
       :port,
       :publicly_accessible,
@@ -2583,6 +2595,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] port
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
@@ -2612,6 +2629,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2792,6 +2810,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] namespace_name
     #   The namespace the workgroup is associated with.
     #   @return [String]
@@ -2861,6 +2884,7 @@ module Aws::RedshiftServerless
       :custom_domain_name,
       :endpoint,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
       :patch_version,
       :port,

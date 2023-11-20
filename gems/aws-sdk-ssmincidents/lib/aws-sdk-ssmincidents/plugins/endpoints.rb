@@ -56,6 +56,8 @@ module Aws::SSMIncidents
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_incident_findings
+            Aws::SSMIncidents::Endpoints::BatchGetIncidentFindings.build(context)
           when :create_replication_set
             Aws::SSMIncidents::Endpoints::CreateReplicationSet.build(context)
           when :create_response_plan
@@ -82,6 +84,8 @@ module Aws::SSMIncidents
             Aws::SSMIncidents::Endpoints::GetResponsePlan.build(context)
           when :get_timeline_event
             Aws::SSMIncidents::Endpoints::GetTimelineEvent.build(context)
+          when :list_incident_findings
+            Aws::SSMIncidents::Endpoints::ListIncidentFindings.build(context)
           when :list_incident_records
             Aws::SSMIncidents::Endpoints::ListIncidentRecords.build(context)
           when :list_related_items

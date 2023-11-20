@@ -444,7 +444,7 @@ module Aws::ControlTower
     # that creates AWS resources on the specified organizational unit and
     # the accounts it contains. The resources created will vary according to
     # the control that you specify. For usage examples, see [ *the AWS
-    # Control Tower User Guide* ][1]
+    # Control Tower User Guide* ][1].
     #
     #
     #
@@ -460,6 +460,9 @@ module Aws::ControlTower
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to be applied to the `EnabledControl` resource.
+    #
     # @option params [required, String] :target_identifier
     #   The ARN of the organizational unit. For information on how to find the
     #   `targetIdentifier`, see [the overview page][1].
@@ -470,17 +473,22 @@ module Aws::ControlTower
     #
     # @return [Types::EnableControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::EnableControlOutput#arn #arn} => String
     #   * {Types::EnableControlOutput#operation_identifier #operation_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_control({
     #     control_identifier: "ControlIdentifier", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     target_identifier: "TargetIdentifier", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.arn #=> String
     #   resp.operation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableControl AWS API Documentation
@@ -495,7 +503,7 @@ module Aws::ControlTower
     # Returns the status of a particular `EnableControl` or `DisableControl`
     # operation. Displays a message in case of error. Details for an
     # operation are available for 90 days. For usage examples, see [ *the
-    # AWS Control Tower User Guide* ][1]
+    # AWS Control Tower User Guide* ][1].
     #
     #
     #
@@ -532,24 +540,15 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Provides details about the enabled control. For usage examples, see [
+    # Retrieves details about an enabled control. For usage examples, see [
     # *the AWS Control Tower User Guide* ][1].
-    #
-    # **Returned values**
-    #
-    # * TargetRegions: Shows target AWS Regions where the enabled control is
-    #   available to be deployed.
-    #
-    # * StatusSummary: Provides a detailed summary of the deployment status.
-    #
-    # * DriftSummary: Provides a detailed summary of the drifted status.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
     # @option params [required, String] :enabled_control_identifier
-    #   The ARN of the enabled control.
+    #   The `controlIdentifier` of the enabled control.
     #
     # @return [Types::GetEnabledControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -583,7 +582,7 @@ module Aws::ControlTower
 
     # Lists the controls enabled by AWS Control Tower on the specified
     # organizational unit and the accounts it contains. For usage examples,
-    # see [ *the AWS Control Tower User Guide* ][1]
+    # see [ *the AWS Control Tower User Guide* ][1].
     #
     #
     #
@@ -639,6 +638,104 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Returns a list of tags associated with the resource. For usage
+    # examples, see [ *the AWS Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Applies tags to a resource. For usage examples, see [ *the AWS Control
+    # Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to be tagged.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   Tags to be applied to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource. For usage examples, see [ *the AWS
+    # Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Tag keys to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -652,7 +749,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

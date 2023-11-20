@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2023-11-17)
+------------------
+
+* Feature - This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+
+1.138.0 (2023-11-14)
+------------------
+
+* Feature - Introducing SegmentAttributes parameter for StartChatContact API
+
+1.137.0 (2023-11-09)
+------------------
+
+* Feature - This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.
+
+1.136.0 (2023-11-08)
+------------------
+
+* Feature - This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+
 1.135.0 (2023-11-06)
 ------------------
 

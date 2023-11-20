@@ -1572,11 +1572,16 @@ module Aws::LexModelsV2
     #   is enabled for a bot.
     #   @return [Types::AudioLogDestination]
     #
+    # @!attribute [rw] selective_logging_enabled
+    #   The option to enable selective conversation log capture for audio.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioLogSetting AWS API Documentation
     #
     class AudioLogSetting < Struct.new(
       :enabled,
-      :destination)
+      :destination,
+      :selective_logging_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12812,11 +12817,16 @@ module Aws::LexModelsV2
     #   conversation text logs.
     #   @return [Types::TextLogDestination]
     #
+    # @!attribute [rw] selective_logging_enabled
+    #   The option to enable selective conversation log capture for text.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TextLogSetting AWS API Documentation
     #
     class TextLogSetting < Struct.new(
       :enabled,
-      :destination)
+      :destination,
+      :selective_logging_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

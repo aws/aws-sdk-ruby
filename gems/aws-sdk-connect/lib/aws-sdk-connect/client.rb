@@ -944,7 +944,7 @@ module Aws::Connect
     #   resp = client.batch_get_flow_association({
     #     instance_id: "InstanceId", # required
     #     resource_ids: ["ARN"], # required
-    #     resource_type: "SMS_PHONE_NUMBER", # accepts SMS_PHONE_NUMBER, VOICE_PHONE_NUMBER
+    #     resource_type: "VOICE_PHONE_NUMBER", # accepts VOICE_PHONE_NUMBER
     #   })
     #
     # @example Response structure
@@ -952,7 +952,7 @@ module Aws::Connect
     #   resp.flow_association_summary_list #=> Array
     #   resp.flow_association_summary_list[0].resource_id #=> String
     #   resp.flow_association_summary_list[0].flow_id #=> String
-    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "SMS_PHONE_NUMBER", "VOICE_PHONE_NUMBER"
+    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "VOICE_PHONE_NUMBER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociation AWS API Documentation
     #
@@ -1700,7 +1700,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -8044,6 +8044,9 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #
     # @return [Types::ListIntegrationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListIntegrationAssociationsResponse#integration_association_summary_list #integration_association_summary_list} => Array&lt;Types::IntegrationAssociationSummary&gt;
@@ -8055,9 +8058,10 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     integration_arn: "ARN",
     #   })
     #
     # @example Response structure
@@ -8066,7 +8070,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -10646,7 +10650,7 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @option params [String] :instance_id
+    # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -10691,7 +10695,7 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_users({
-    #     instance_id: "InstanceId",
+    #     instance_id: "InstanceId", # required
     #     next_token: "NextToken2500",
     #     max_results: 1,
     #     search_filter: {
@@ -10967,6 +10971,24 @@ module Aws::Connect
     #
     #    </note>
     #
+    # @option params [Hash<String,Types::SegmentAttributeValue>] :segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   Attribute keys can include only alphanumeric, -, and \_.
+    #
+    #   This field can be used to show channel subtype, such as
+    #   `connect:Guide`.
+    #
+    #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive` and
+    #   `application/vnd.amazonaws.connect.message.interactive.response` must
+    #   be present in the SupportedMessagingContentTypes field of this API in
+    #   order to set `SegmentAttributes` as \\\{` "connect:Subtype":
+    #   \{"valueString" : "connect:Guide" \}\}`.
+    #
+    #    </note>
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -10997,6 +11019,11 @@ module Aws::Connect
     #       source_contact_id: "ContactId",
     #     },
     #     related_contact_id: "ContactId",
+    #     segment_attributes: {
+    #       "SegmentAttributeName" => {
+    #         value_string: "SegmentAttributeValueString",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -14302,7 +14329,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

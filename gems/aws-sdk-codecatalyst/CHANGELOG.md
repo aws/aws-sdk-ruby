@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-11-16)
+------------------
+
+* Feature - This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.
+
+1.12.0 (2023-11-15)
+------------------
+
+* Feature - This release adds functionality for retrieving information about workflows and workflow runs and starting workflow runs in Amazon CodeCatalyst.
+
 1.11.0 (2023-09-27)
 ------------------
 

@@ -314,7 +314,7 @@ module Aws::SsmSap
     IpAddressMember.struct_class = Types::IpAddressMember
 
     ListApplicationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListApplicationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListApplicationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListApplicationsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListApplicationsInput.struct_class = Types::ListApplicationsInput
 
@@ -324,7 +324,7 @@ module Aws::SsmSap
 
     ListComponentsInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     ListComponentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListComponentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListComponentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListComponentsInput.struct_class = Types::ListComponentsInput
 
     ListComponentsOutput.add_member(:components, Shapes::ShapeRef.new(shape: ComponentSummaryList, location_name: "Components"))
@@ -334,7 +334,7 @@ module Aws::SsmSap
     ListDatabasesInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     ListDatabasesInput.add_member(:component_id, Shapes::ShapeRef.new(shape: ComponentId, location_name: "ComponentId"))
     ListDatabasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListDatabasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListDatabasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListDatabasesInput.struct_class = Types::ListDatabasesInput
 
     ListDatabasesOutput.add_member(:databases, Shapes::ShapeRef.new(shape: DatabaseSummaryList, location_name: "Databases"))
@@ -342,7 +342,7 @@ module Aws::SsmSap
     ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
     ListOperationsInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
-    ListOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOperationsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListOperationsInput.struct_class = Types::ListOperationsInput

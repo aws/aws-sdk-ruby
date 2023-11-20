@@ -7,7 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::Macie
+module Aws::TrustedAdvisor
   # Endpoint parameters used to influence endpoints per request.
   #
   # @!attribute region

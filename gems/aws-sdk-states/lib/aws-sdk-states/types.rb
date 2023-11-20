@@ -756,6 +756,74 @@ module Aws::States
     #   state machine version ARN, this field will be null.
     #   @return [String]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   not updated for redrives that failed to start or are pending to be
+    #   redriven.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven. If you have not yet
+    #   redriven an execution, the `redriveDate` is null.
+    #
+    #   The `redriveDate` is unavailable if you redrive a Map Run that
+    #   starts child workflow executions of type `EXPRESS`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] redrive_status
+    #   Indicates whether or not an execution can be redriven at a given
+    #   point in time.
+    #
+    #   * For executions of type `STANDARD`, `redriveStatus` is
+    #     `NOT_REDRIVABLE` if calling the RedriveExecution API action would
+    #     return the `ExecutionNotRedrivable` error.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `STANDARD`, `redriveStatus` indicates whether or not the Map Run
+    #     can redrive child workflow executions.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `EXPRESS`, `redriveStatus` indicates whether or not the Map Run
+    #     can redrive child workflow executions.
+    #
+    #     You can redrive failed or timed out `EXPRESS` workflows *only if*
+    #     they're a part of a Map Run. When you [redrive][1] the Map Run,
+    #     these workflows are restarted using the StartExecution API action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+    #   @return [String]
+    #
+    # @!attribute [rw] redrive_status_reason
+    #   When `redriveStatus` is `NOT_REDRIVABLE`, `redriveStatusReason`
+    #   specifies the reason why an execution cannot be redriven.
+    #
+    #   * For executions of type `STANDARD`, or for a Distributed Map that
+    #     includes child workflows of type `STANDARD`, `redriveStatusReason`
+    #     can include one of the following reasons:
+    #
+    #     * `State machine is in DELETING status`.
+    #
+    #     * `Execution is RUNNING and cannot be redriven`.
+    #
+    #     * `Execution is SUCCEEDED and cannot be redriven`.
+    #
+    #     * `Execution was started before the launch of RedriveExecution`.
+    #
+    #     * `Execution history event limit exceeded`.
+    #
+    #     * `Execution has exceeded the max execution time`.
+    #
+    #     * `Execution redrivable period exceeded`.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `EXPRESS`, `redriveStatusReason` is only returned if the child
+    #     workflows are not redrivable. This happens when the child workflow
+    #     executions have completed successfully.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
     #
     class DescribeExecutionOutput < Struct.new(
@@ -774,8 +842,12 @@ module Aws::States
       :error,
       :cause,
       :state_machine_version_arn,
-      :state_machine_alias_arn)
-      SENSITIVE = [:input, :output, :error, :cause]
+      :state_machine_alias_arn,
+      :redrive_count,
+      :redrive_date,
+      :redrive_status,
+      :redrive_status_reason)
+      SENSITIVE = [:input, :output, :error, :cause, :redrive_status_reason]
       include Aws::Structure
     end
 
@@ -840,6 +912,18 @@ module Aws::States
     #   `succeeded`.
     #   @return [Types::MapRunExecutionCounts]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven a Map Run. If you have not yet
+    #   redriven a Map Run, the `redriveCount` is 0. This count is not
+    #   updated for redrives that failed to start or are pending to be
+    #   redriven.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date a Map Run was last redriven. If you have not yet redriven a
+    #   Map Run, the `redriveDate` is null.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRunOutput AWS API Documentation
     #
     class DescribeMapRunOutput < Struct.new(
@@ -852,7 +936,9 @@ module Aws::States
       :tolerated_failure_percentage,
       :tolerated_failure_count,
       :item_counts,
-      :execution_counts)
+      :execution_counts,
+      :redrive_count,
+      :redrive_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1282,6 +1368,17 @@ module Aws::States
     #   or a version ARN, it returns null.
     #   @return [String]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   not updated for redrives that failed to start or are pending to be
+    #   redriven.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem AWS API Documentation
     #
     class ExecutionListItem < Struct.new(
@@ -1294,7 +1391,40 @@ module Aws::States
       :map_run_arn,
       :item_count,
       :state_machine_version_arn,
-      :state_machine_alias_arn)
+      :state_machine_alias_arn,
+      :redrive_count,
+      :redrive_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The execution Amazon Resource Name (ARN) that you specified for
+    # `executionArn` cannot be redriven.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionNotRedrivable AWS API Documentation
+    #
+    class ExecutionNotRedrivable < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a redriven execution.
+    #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   not updated for redrives that failed to start or are pending to be
+    #   redriven.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionRedrivenEventDetails AWS API Documentation
+    #
+    class ExecutionRedrivenEventDetails < Struct.new(
+      :redrive_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1584,6 +1714,10 @@ module Aws::States
     #   the execution.
     #   @return [Types::ExecutionTimedOutEventDetails]
     #
+    # @!attribute [rw] execution_redriven_event_details
+    #   Contains details about the redrive attempt of an execution.
+    #   @return [Types::ExecutionRedrivenEventDetails]
+    #
     # @!attribute [rw] map_state_started_event_details
     #   Contains details about Map state that was started.
     #   @return [Types::MapStateStartedEventDetails]
@@ -1652,6 +1786,10 @@ module Aws::States
     #   Contains error and cause details about a Map Run that failed.
     #   @return [Types::MapRunFailedEventDetails]
     #
+    # @!attribute [rw] map_run_redriven_event_details
+    #   Contains details about the redrive attempt of a Map Run.
+    #   @return [Types::MapRunRedrivenEventDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent AWS API Documentation
     #
     class HistoryEvent < Struct.new(
@@ -1678,6 +1816,7 @@ module Aws::States
       :execution_succeeded_event_details,
       :execution_aborted_event_details,
       :execution_timed_out_event_details,
+      :execution_redriven_event_details,
       :map_state_started_event_details,
       :map_iteration_started_event_details,
       :map_iteration_succeeded_event_details,
@@ -1692,7 +1831,8 @@ module Aws::States
       :state_entered_event_details,
       :state_exited_event_details,
       :map_run_started_event_details,
-      :map_run_failed_event_details)
+      :map_run_failed_event_details,
+      :map_run_redriven_event_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2059,6 +2199,20 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
     #   @return [String]
     #
+    # @!attribute [rw] redrive_filter
+    #   Sets a filter to list executions based on whether or not they have
+    #   been redriven.
+    #
+    #   For a Distributed Map, `redriveFilter` sets a filter to list child
+    #   workflow executions based on whether or not they have been redriven.
+    #
+    #   If you do not provide a `redriveFilter`, Step Functions returns a
+    #   list of both redriven and non-redriven executions.
+    #
+    #   If you provide a state machine ARN in `redriveFilter`, the API
+    #   returns a validation exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput AWS API Documentation
     #
     class ListExecutionsInput < Struct.new(
@@ -2066,7 +2220,8 @@ module Aws::States
       :status_filter,
       :max_results,
       :next_token,
-      :map_run_arn)
+      :map_run_arn,
+      :redrive_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2452,6 +2607,21 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
     #   @return [Integer]
     #
+    # @!attribute [rw] failures_not_redrivable
+    #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` child workflow
+    #   executions that cannot be redriven because their execution status is
+    #   terminal. For example, if your execution event history contains
+    #   25,000 entries, or the `toleratedFailureCount` or
+    #   `toleratedFailurePercentage` for the Distributed Map has exceeded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_redrive
+    #   The number of unsuccessful child workflow executions currently
+    #   waiting to be redriven. The status of these child workflow
+    #   executions could be `FAILED`, `ABORTED`, or `TIMED_OUT` in the
+    #   original execution attempt or a previous redrive attempt.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunExecutionCounts AWS API Documentation
     #
     class MapRunExecutionCounts < Struct.new(
@@ -2462,7 +2632,9 @@ module Aws::States
       :timed_out,
       :aborted,
       :total,
-      :results_written)
+      :results_written,
+      :failures_not_redrivable,
+      :pending_redrive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2536,6 +2708,20 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
     #   @return [Integer]
     #
+    # @!attribute [rw] failures_not_redrivable
+    #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` items in child
+    #   workflow executions that cannot be redriven because the execution
+    #   status of those child workflows is terminal. For example, if your
+    #   execution event history contains 25,000 entries, or the
+    #   `toleratedFailureCount` or `toleratedFailurePercentage` for the
+    #   Distributed Map has exceeded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_redrive
+    #   The number of unsuccessful items in child workflow executions
+    #   currently waiting to be redriven.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunItemCounts AWS API Documentation
     #
     class MapRunItemCounts < Struct.new(
@@ -2546,7 +2732,9 @@ module Aws::States
       :timed_out,
       :aborted,
       :total,
-      :results_written)
+      :results_written,
+      :failures_not_redrivable,
+      :pending_redrive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2582,6 +2770,27 @@ module Aws::States
       :state_machine_arn,
       :start_date,
       :stop_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Map Run that was redriven.
+    #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run that was redriven.
+    #   @return [String]
+    #
+    # @!attribute [rw] redrive_count
+    #   The number of times the Map Run has been redriven at this point in
+    #   the execution's history including this event. The redrive count for
+    #   a redriven Map Run is always greater than 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunRedrivenEventDetails AWS API Documentation
+    #
+    class MapRunRedrivenEventDetails < Struct.new(
+      :map_run_arn,
+      :redrive_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2683,6 +2892,42 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_arn
+    #   The Amazon Resource Name (ARN) of the execution to be redriven.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don’t specify a client token, the
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency. The API uses one of
+    #   the last 10 client tokens provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RedriveExecutionInput AWS API Documentation
+    #
+    class RedriveExecutionInput < Struct.new(
+      :execution_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RedriveExecutionOutput AWS API Documentation
+    #
+    class RedriveExecutionOutput < Struct.new(
+      :redrive_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Could not find the referenced resource.
     #
     # @!attribute [rw] message
@@ -2714,9 +2959,9 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] weight
-    #   The percentage of traffic you want to route to the second state
-    #   machine version. The sum of the weights in the routing configuration
-    #   must be equal to 100.
+    #   The percentage of traffic you want to route to a state machine
+    #   version. The sum of the weights in the routing configuration must be
+    #   equal to 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RoutingConfigurationListItem AWS API Documentation
@@ -2871,6 +3116,10 @@ module Aws::States
     #   Amazon Web Services account, Region, and state machine for 90 days.
     #   For more information, see [ Limits Related to State Machine
     #   Executions][1] in the *Step Functions Developer Guide*.
+    #
+    #   If you don't provide a name for the execution, Step Functions
+    #   automatically generates a universally unique identifier (UUID) as
+    #   the execution name.
     #
     #   A name must *not* contain:
     #
@@ -3390,6 +3639,8 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The activity does not exist.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3618,6 +3869,9 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The task token has either expired or the task associated with the
+    # token has already been closed.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #

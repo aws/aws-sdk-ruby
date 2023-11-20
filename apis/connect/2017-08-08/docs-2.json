@@ -287,6 +287,7 @@
         "IntegrationAssociationSummary$IntegrationArn": "<p>The Amazon Resource Name (ARN) for the AppIntegration.</p>",
         "KinesisFirehoseConfig$FirehoseArn": "<p>The Amazon Resource Name (ARN) of the delivery stream.</p>",
         "KinesisStreamConfig$StreamArn": "<p>The Amazon Resource Name (ARN) of the data stream.</p>",
+        "ListIntegrationAssociationsRequest$IntegrationArn": "<p>The Amazon Resource Name (ARN) of the integration.</p>",
         "ListPhoneNumbersSummary$PhoneNumberArn": "<p>The Amazon Resource Name (ARN) of the phone number.</p>",
         "ListPhoneNumbersSummary$TargetArn": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through.</p>",
         "ListPhoneNumbersV2Request$TargetArn": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. If both <code>TargetArn</code> and <code>InstanceId</code> input are not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.</p>",
@@ -5709,6 +5710,30 @@
       "refs": {
         "Credentials$AccessToken": "<p>An access token generated for a federated user to access Amazon Connect.</p>",
         "Credentials$RefreshToken": "<p>Renews a token generated for a user to access the Amazon Connect instance.</p>"
+      }
+    },
+    "SegmentAttributeName": {
+      "base": null,
+      "refs": {
+        "SegmentAttributes$key": null
+      }
+    },
+    "SegmentAttributeValue": {
+      "base": "<p>A value for a segment attribute. This is structured as a map where the key is <code>valueString</code> and the value is a string.</p>",
+      "refs": {
+        "SegmentAttributes$value": null
+      }
+    },
+    "SegmentAttributeValueString": {
+      "base": null,
+      "refs": {
+        "SegmentAttributeValue$ValueString": "<p>The value of a segment attribute.</p>"
+      }
+    },
+    "SegmentAttributes": {
+      "base": null,
+      "refs": {
+        "StartChatContactRequest$SegmentAttributes": "<p>A set of system defined key-value pairs stored on individual contact segments using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in flows.</p> <p>Attribute keys can include only alphanumeric, -, and _.</p> <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p> <note> <p>The types <code>application/vnd.amazonaws.connect.message.interactive</code> and <code>application/vnd.amazonaws.connect.message.interactive.response</code> must be present in the SupportedMessagingContentTypes field of this API in order to set <code>SegmentAttributes</code> as {<code> \"connect:Subtype\": {\"valueString\" : \"connect:Guide\" }}</code>.</p> </note>"
       }
     },
     "SendNotificationActionDefinition": {

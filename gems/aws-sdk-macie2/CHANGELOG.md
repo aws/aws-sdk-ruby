@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-11-16)
+------------------
+
+* Feature - This release adds support for configuring Macie to assume an IAM role when retrieving sample occurrences of sensitive data reported by findings.
+
 1.61.0 (2023-09-27)
 ------------------
 

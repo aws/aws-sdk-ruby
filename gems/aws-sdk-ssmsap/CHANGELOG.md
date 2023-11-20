@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-11-15)
+------------------
+
+* Feature - Update the default value of MaxResult to 50.
+
 1.12.0 (2023-10-26)
 ------------------
 

@@ -7972,8 +7972,10 @@
         "PINPOINT_APP",
         "WISDOM_ASSISTANT",
         "WISDOM_KNOWLEDGE_BASE",
+        "WISDOM_QUICK_RESPONSES",
         "CASES_DOMAIN",
-        "APPLICATION"
+        "APPLICATION",
+        "FILE_SCANNER"
       ]
     },
     "InternalServiceException":{
@@ -8460,10 +8462,7 @@
     },
     "ListFlowAssociationResourceType":{
       "type":"string",
-      "enum":[
-        "SMS_PHONE_NUMBER",
-        "VOICE_PHONE_NUMBER"
-      ]
+      "enum":["VOICE_PHONE_NUMBER"]
     },
     "ListHoursOfOperationsRequest":{
       "type":"structure",
@@ -8606,6 +8605,11 @@
           "box":true,
           "location":"querystring",
           "locationName":"maxResults"
+        },
+        "IntegrationArn":{
+          "shape":"ARN",
+          "location":"querystring",
+          "locationName":"integrationArn"
         }
       }
     },
@@ -11148,6 +11152,7 @@
     },
     "SearchUsersRequest":{
       "type":"structure",
+      "required":["InstanceId"],
       "members":{
         "InstanceId":{"shape":"InstanceId"},
         "NextToken":{"shape":"NextToken2500"},
@@ -11298,6 +11303,27 @@
       "type":"string",
       "sensitive":true
     },
+    "SegmentAttributeName":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "SegmentAttributeValue":{
+      "type":"structure",
+      "members":{
+        "ValueString":{"shape":"SegmentAttributeValueString"}
+      }
+    },
+    "SegmentAttributeValueString":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "SegmentAttributes":{
+      "type":"map",
+      "key":{"shape":"SegmentAttributeName"},
+      "value":{"shape":"SegmentAttributeValue"}
+    },
     "SendNotificationActionDefinition":{
       "type":"structure",
       "required":[
@@ -11414,7 +11440,8 @@
         "ChatDurationInMinutes":{"shape":"ChatDurationInMinutes"},
         "SupportedMessagingContentTypes":{"shape":"SupportedMessagingContentTypes"},
         "PersistentChat":{"shape":"PersistentChat"},
-        "RelatedContactId":{"shape":"ContactId"}
+        "RelatedContactId":{"shape":"ContactId"},
+        "SegmentAttributes":{"shape":"SegmentAttributes"}
       }
     },
     "StartChatContactResponse":{

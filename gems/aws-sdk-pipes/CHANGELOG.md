@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-11-17)
+------------------
+
+* Feature - TargetParameters now properly supports BatchJobParameters.ArrayProperties.Size and BatchJobParameters.RetryStrategy.Attempts being optional, and EcsTaskParameters.Overrides.EphemeralStorage.SizeInGiB now properly required when setting EphemeralStorage
+
+1.11.0 (2023-11-14)
+------------------
+
+* Feature - Added support (via new LogConfiguration field in CreatePipe and UpdatePipe APIs) for logging to Amazon CloudWatch Logs, Amazon Simple Storage Service (Amazon S3), and Amazon Kinesis Data Firehose
+
 1.10.0 (2023-09-27)
 ------------------
 

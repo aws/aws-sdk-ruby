@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2023-11-17)
+------------------
+
+* Feature - Updated SDK for Amazon Redshift, which you can use to configure a connection with IAM Identity Center to manage access to databases. With these, you can create a connection through a managed application. You can also change a managed application, delete it, or get information about an existing one.
+
+1.103.0 (2023-11-15)
+------------------
+
+* Feature - The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.
+
 1.102.0 (2023-11-01)
 ------------------
 

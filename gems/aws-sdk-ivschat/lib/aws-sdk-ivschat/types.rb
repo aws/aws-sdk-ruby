@@ -90,7 +90,7 @@ module Aws::Ivschat
       :room_identifier,
       :session_duration_in_minutes,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:attributes, :user_id]
       include Aws::Structure
     end
 
@@ -115,7 +115,7 @@ module Aws::Ivschat
       :session_expiration_time,
       :token,
       :token_expiration_time)
-      SENSITIVE = []
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 
@@ -444,7 +444,7 @@ module Aws::Ivschat
       :reason,
       :room_identifier,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:user_id]
       include Aws::Structure
     end
 

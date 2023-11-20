@@ -941,6 +941,7 @@ module Aws::Finspace
         o.name = "CreateEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/environment"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1033,6 +1034,7 @@ module Aws::Finspace
         o.name = "DeleteEnvironment"
         o.http_method = "DELETE"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1101,6 +1103,7 @@ module Aws::Finspace
         o.name = "GetEnvironment"
         o.http_method = "GET"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1192,6 +1195,7 @@ module Aws::Finspace
         o.name = "ListEnvironments"
         o.http_method = "GET"
         o.http_request_uri = "/environment"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1337,6 +1341,7 @@ module Aws::Finspace
         o.name = "UpdateEnvironment"
         o.http_method = "PUT"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

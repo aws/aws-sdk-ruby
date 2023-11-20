@@ -263,7 +263,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AiffSettings AWS API Documentation
@@ -364,25 +364,37 @@ module Aws::MediaConvert
     #
     class AssociateCertificateResponse < Aws::EmptyStructure; end
 
-    # When you mimic a multi-channel audio layout with multiple mono-channel
-    # tracks, you can tag each channel layout manually. For example, you
-    # would tag the tracks that contain your left, right, and center audio
-    # with Left (L), Right (R), and Center (C), respectively. When you
-    # don't specify a value, MediaConvert labels your track as Center (C)
-    # by default. To use audio layout tagging, your output must be in a
-    # QuickTime (.mov) container; your audio codec must be AAC, WAV, or
-    # AIFF; and you must set up your audio track to have only one channel.
+    # Specify the QuickTime audio channel layout tags for the audio channels
+    # in this audio track. When you don't specify a value, MediaConvert
+    # labels your track as Center (C) by default. To use Audio layout
+    # tagging, your output must be in a QuickTime (MOV) container and your
+    # audio codec must be AAC, WAV, or AIFF.
     #
     # @!attribute [rw] channel_tag
-    #   You can add a tag for this mono-channel audio track to mimic its
-    #   placement in a multi-channel layout. For example, if this track is
-    #   the left surround channel, choose Left surround (LS).
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. Enter channel layout tags in the same
+    #   order as your output's audio channel order. For example, if your
+    #   output audio track has a left and a right channel, enter Left (L)
+    #   for the first channel and Right (R) for the second. If your output
+    #   has multiple single-channel audio tracks, enter a single channel
+    #   layout tag for each track.
     #   @return [String]
+    #
+    # @!attribute [rw] channel_tags
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. Enter channel layout tags in the same
+    #   order as your output's audio channel order. For example, if your
+    #   output audio track has a left and a right channel, enter Left (L)
+    #   for the first channel and Right (R) for the second. If your output
+    #   has multiple single-channel audio tracks, enter a single channel
+    #   layout tag for each track.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioChannelTaggingSettings AWS API Documentation
     #
     class AudioChannelTaggingSettings < Struct.new(
-      :channel_tag)
+      :channel_tag,
+      :channel_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -484,15 +496,11 @@ module Aws::MediaConvert
     # correspond to a group of output audio tracks.
     #
     # @!attribute [rw] audio_channel_tagging_settings
-    #   When you mimic a multi-channel audio layout with multiple
-    #   mono-channel tracks, you can tag each channel layout manually. For
-    #   example, you would tag the tracks that contain your left, right, and
-    #   center audio with Left (L), Right (R), and Center (C), respectively.
-    #   When you don't specify a value, MediaConvert labels your track as
-    #   Center (C) by default. To use audio layout tagging, your output must
-    #   be in a QuickTime (.mov) container; your audio codec must be AAC,
-    #   WAV, or AIFF; and you must set up your audio track to have only one
-    #   channel.
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. When you don't specify a value,
+    #   MediaConvert labels your track as Center (C) by default. To use
+    #   Audio layout tagging, your output must be in a QuickTime (MOV)
+    #   container and your audio codec must be AAC, WAV, or AIFF.
     #   @return [Types::AudioChannelTaggingSettings]
     #
     # @!attribute [rw] audio_normalization_settings
@@ -4694,9 +4702,10 @@ module Aws::MediaConvert
     # Settings for F4v container
     #
     # @!attribute [rw] moov_placement
-    #   If set to PROGRESSIVE\_DOWNLOAD, the MOOV atom is relocated to the
-    #   beginning of the archive as required for progressive downloading.
-    #   Otherwise it is placed normally at the end.
+    #   To place the MOOV atom at the beginning of your output, which is
+    #   useful for progressive downloading: Leave blank or choose
+    #   Progressive download. To place the MOOV at the end of your output:
+    #   Choose Normal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/F4vSettings AWS API Documentation
@@ -4822,7 +4831,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FlacSettings AWS API Documentation
@@ -7873,6 +7882,18 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
+    # @!attribute [rw] follow_source
+    #   Specify the input that MediaConvert references for your default
+    #   output settings. MediaConvert uses this input's Resolution, Frame
+    #   rate, and Pixel aspect ratio for all outputs that you don't
+    #   manually specify different output settings for. Enabling this
+    #   setting will disable "Follow source" for all other inputs. If
+    #   MediaConvert cannot follow your source, for example if you specify
+    #   an audio-only input, MediaConvert uses the first followable input
+    #   instead. In your JSON job specification, enter an integer from 1 to
+    #   150 corresponding to the order of your inputs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs to define source file used in the transcode job. There
     #   can be multiple inputs add in a job. These inputs will be
@@ -7946,6 +7967,7 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
+      :follow_source,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -8071,6 +8093,18 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
+    # @!attribute [rw] follow_source
+    #   Specify the input that MediaConvert references for your default
+    #   output settings. MediaConvert uses this input's Resolution, Frame
+    #   rate, and Pixel aspect ratio for all outputs that you don't
+    #   manually specify different output settings for. Enabling this
+    #   setting will disable "Follow source" for all other inputs. If
+    #   MediaConvert cannot follow your source, for example if you specify
+    #   an audio-only input, MediaConvert uses the first followable input
+    #   instead. In your JSON job specification, enter an integer from 1 to
+    #   150 corresponding to the order of your inputs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs to define the source file used in the transcode job.
     #   There can only be one input in a job template. Using the API, you
@@ -8144,6 +8178,7 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
+      :follow_source,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -9315,7 +9350,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp2Settings AWS API Documentation
@@ -9347,7 +9382,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @!attribute [rw] vbr_quality
@@ -9413,9 +9448,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] moov_placement
-    #   If set to PROGRESSIVE\_DOWNLOAD, the MOOV atom is relocated to the
-    #   beginning of the archive as required for progressive downloading.
-    #   Otherwise it is placed normally at the end.
+    #   To place the MOOV atom at the beginning of your output, which is
+    #   useful for progressive downloading: Leave blank or choose
+    #   Progressive download. To place the MOOV at the end of your output:
+    #   Choose Normal.
     #   @return [String]
     #
     # @!attribute [rw] mp_4_major_brand
@@ -10445,7 +10481,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Optional. Sample rate in hz. Valid values are 16000, 24000, and
+    #   Optional. Sample rate in Hz. Valid values are 16000, 24000, and
     #   48000. The default value is 48000.
     #   @return [Integer]
     #
@@ -12352,12 +12388,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   Specify how the service handles outputs that have a different aspect
-    #   ratio from the input aspect ratio. Choose Stretch to output to have
-    #   the service stretch your video image to fit. Keep the setting
-    #   Default to have the service letterbox your video instead. This
-    #   setting overrides any value that you specify for the setting
-    #   Selection placement in this output.
+    #   Specify the video Scaling behavior when your output has a different
+    #   resolution than your input. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
     #   @return [String]
     #
     # @!attribute [rw] sharpness
@@ -12440,7 +12473,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Overlay one or more videos on top of your input video.
+    # Overlay one or more videos on top of your input video. For more
+    # information, see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
     #
     # @!attribute [rw] end_timecode
     #   Enter the end timecode in the underlying input video for this
@@ -12499,11 +12534,11 @@ module Aws::MediaConvert
     #   @return [Array<Types::VideoOverlayInputClipping>]
     #
     # @!attribute [rw] timecode_source
-    #   Specify the starting timecode for your video overlay. To use the
-    #   timecode present in your video overlay: Choose Embedded. To use a
-    #   zerobased timecode: Choose Start at 0. To choose a timecode: Choose
-    #   Specified start. When you do, enter the starting timecode in Start
-    #   timecode. If you don't specify a value for Timecode source,
+    #   Specify the timecode source for your video overlay input clips. To
+    #   use the timecode present in your video overlay: Choose Embedded. To
+    #   use a zerobased timecode: Choose Start at 0. To choose a timecode:
+    #   Choose Specified start. When you do, enter the starting timecode in
+    #   Start timecode. If you don't specify a value for Timecode source,
     #   MediaConvert uses Embedded by default.
     #   @return [String]
     #

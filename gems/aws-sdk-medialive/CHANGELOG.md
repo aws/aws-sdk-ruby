@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2023-11-17)
+------------------
+
+* Feature - MediaLive has now added support for per-output static image overlay.
+
 1.109.0 (2023-09-27)
 ------------------
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-athena/customizations'
 # @!group service
 module Aws::Athena
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end

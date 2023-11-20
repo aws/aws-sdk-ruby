@@ -837,6 +837,7 @@
         "logExports":{"shape":"LogExportList"},
         "manageAdminPassword":{"shape":"Boolean"},
         "namespaceName":{"shape":"NamespaceName"},
+        "redshiftIdcApplicationArn":{"shape":"RedshiftIdcApplicationArn"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -896,6 +897,7 @@
         "baseCapacity":{"shape":"Integer"},
         "configParameters":{"shape":"ConfigParameterList"},
         "enhancedVpcRouting":{"shape":"Boolean"},
+        "maxCapacity":{"shape":"Integer"},
         "namespaceName":{"shape":"NamespaceName"},
         "port":{"shape":"Integer"},
         "publiclyAccessible":{"shape":"Boolean"},
@@ -1565,6 +1567,11 @@
       "type":"list",
       "member":{"shape":"RecoveryPoint"}
     },
+    "RedshiftIdcApplicationArn":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "required":["message"],
@@ -1920,6 +1927,7 @@
         "baseCapacity":{"shape":"Integer"},
         "configParameters":{"shape":"ConfigParameterList"},
         "enhancedVpcRouting":{"shape":"Boolean"},
+        "maxCapacity":{"shape":"Integer"},
         "port":{"shape":"Integer"},
         "publiclyAccessible":{"shape":"Boolean"},
         "securityGroupIds":{"shape":"SecurityGroupIdList"},
@@ -2022,6 +2030,7 @@
         "customDomainName":{"shape":"CustomDomainName"},
         "endpoint":{"shape":"Endpoint"},
         "enhancedVpcRouting":{"shape":"Boolean"},
+        "maxCapacity":{"shape":"Integer"},
         "namespaceName":{"shape":"String"},
         "patchVersion":{"shape":"String"},
         "port":{"shape":"Integer"},

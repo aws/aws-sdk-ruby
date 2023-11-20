@@ -11,13 +11,14 @@ module Aws::EKS
   module Types
 
     # You don't have permissions to perform the requested operation. The
-    # user or role that is making the request must have at least one IAM
+    # [IAM principal][1] making the request must have at least one IAM
     # permissions policy attached that grants the required permissions. For
-    # more information, see [Access Management][1] in the *IAM User Guide*.
+    # more information, see [Access management][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -367,9 +368,13 @@ module Aws::EKS
     end
 
     # These errors are usually caused by a client action. Actions can
-    # include using an action or resource on behalf of a user that doesn't
-    # have permissions to use the action or resource or specifying an
-    # identifier that is not valid.
+    # include using an action or resource on behalf of an [IAM principal][1]
+    # that doesn't have permissions to use the action or resource or
+    # specifying an identifier that is not valid.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
     #
     # @!attribute [rw] cluster_name
     #   The Amazon EKS cluster associated with the exception.
@@ -382,6 +387,10 @@ module Aws::EKS
     # @!attribute [rw] addon_name
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -391,6 +400,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :addon_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -658,8 +668,8 @@ module Aws::EKS
 
     # The placement configuration for all the control plane instances of
     # your local Amazon EKS cluster on an Amazon Web Services Outpost. For
-    # more information, see [Capacity considerations][1] in the *Amazon EKS
-    # User Guide*
+    # more information, see [Capacity considerations][1] in the Amazon EKS
+    # User Guide.
     #
     #
     #
@@ -756,8 +766,12 @@ module Aws::EKS
     #     different than the existing value, Amazon EKS changes the value to
     #     the Amazon EKS default value.
     #
-    #   * **Preserve** – Not supported. You can set this value when updating
-    #     an add-on though. For more information, see [UpdateAddon][1].
+    #   * **Preserve** – This is similar to the NONE option. If the
+    #     self-managed version of the add-on is installed on your cluster
+    #     Amazon EKS doesn't change the add-on resource properties.
+    #     Creation of the add-on might fail if conflicts are detected. This
+    #     option works differently during the update operation. For more
+    #     information, see [UpdateAddon][1].
     #
     #   If you don't currently have the self-managed version of the add-on
     #   installed on your cluster, the Amazon EKS add-on is installed.
@@ -946,6 +960,81 @@ module Aws::EKS
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique name for your subscription. It must be unique in your
+    #   Amazon Web Services account in the Amazon Web Services Region
+    #   you're creating the subscription in. The name can contain only
+    #   alphanumeric characters (case-sensitive), hyphens, and underscores.
+    #   It must start with an alphabetic character and can't be longer than
+    #   100 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] term
+    #   An object representing the term duration and term unit type of your
+    #   subscription. This determines the term length of your subscription.
+    #   Valid values are MONTHS for term unit and 12 or 36 for term
+    #   duration, indicating a 12 month or 36 month subscription. This value
+    #   cannot be changed after creating the subscription.
+    #   @return [Types::EksAnywhereSubscriptionTerm]
+    #
+    # @!attribute [rw] license_quantity
+    #   The number of licenses to purchase with the subscription. Valid
+    #   values are between 1 and 1000. This value cannot be changed after
+    #   creating the subscription.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] license_type
+    #   The license type for all licenses in the subscription. Valid value
+    #   is CLUSTER. With the CLUSTER license type, each license covers
+    #   support for a single EKS Anywhere cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_renew
+    #   A boolean indicating whether the subscription auto renews at the end
+    #   of the term.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata for a subscription to assist with categorization and
+    #   organization. Each tag consists of a key and an optional value.
+    #   Subscription tags do not propagate to any other resources associated
+    #   with the subscription.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateEksAnywhereSubscriptionRequest AWS API Documentation
+    #
+    class CreateEksAnywhereSubscriptionRequest < Struct.new(
+      :name,
+      :term,
+      :license_quantity,
+      :license_type,
+      :auto_renew,
+      :client_request_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription
+    #   The full description of the subscription.
+    #   @return [Types::EksAnywhereSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateEksAnywhereSubscriptionResponse AWS API Documentation
+    #
+    class CreateEksAnywhereSubscriptionResponse < Struct.new(
+      :subscription)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1328,6 +1417,30 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteEksAnywhereSubscriptionRequest AWS API Documentation
+    #
+    class DeleteEksAnywhereSubscriptionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription
+    #   The full description of the subscription to be deleted.
+    #   @return [Types::EksAnywhereSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteEksAnywhereSubscriptionResponse AWS API Documentation
+    #
+    class DeleteEksAnywhereSubscriptionResponse < Struct.new(
+      :subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster associated with the Fargate
     #   profile to delete.
@@ -1618,6 +1731,30 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeEksAnywhereSubscriptionRequest AWS API Documentation
+    #
+    class DescribeEksAnywhereSubscriptionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription
+    #   The full description of the subscription.
+    #   @return [Types::EksAnywhereSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeEksAnywhereSubscriptionResponse AWS API Documentation
+    #
+    class DescribeEksAnywhereSubscriptionResponse < Struct.new(
+      :subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of the Amazon EKS cluster associated with the Fargate
     #   profile.
@@ -1788,6 +1925,109 @@ module Aws::EKS
     #
     class DisassociateIdentityProviderConfigResponse < Struct.new(
       :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An EKS Anywhere subscription authorizing the customer to support for
+    # licensed clusters and access to EKS Anywhere Curated Packages.
+    #
+    # @!attribute [rw] id
+    #   UUID identifying a subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp in seconds for when the subscription was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] effective_date
+    #   The Unix timestamp in seconds for when the subscription is
+    #   effective.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_date
+    #   The Unix timestamp in seconds for when the subscription will expire
+    #   or auto renew, depending on the auto renew configuration of the
+    #   subscription object.
+    #   @return [Time]
+    #
+    # @!attribute [rw] license_quantity
+    #   The number of licenses included in a subscription. Valid values are
+    #   between 1 and 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] license_type
+    #   The type of licenses included in the subscription. Valid value is
+    #   CLUSTER. With the CLUSTER license type, each license covers support
+    #   for a single EKS Anywhere cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] term
+    #   An EksAnywhereSubscriptionTerm object.
+    #   @return [Types::EksAnywhereSubscriptionTerm]
+    #
+    # @!attribute [rw] status
+    #   The status of a subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_renew
+    #   A boolean indicating whether or not a subscription will auto renew
+    #   when it expires.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] license_arns
+    #   License Manager License ARNs associated with the subscription.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The metadata for a subscription to assist with categorization and
+    #   organization. Each tag consists of a key and an optional value.
+    #   Subscription tags do not propagate to any other resources associated
+    #   with the subscription.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EksAnywhereSubscription AWS API Documentation
+    #
+    class EksAnywhereSubscription < Struct.new(
+      :id,
+      :arn,
+      :created_at,
+      :effective_date,
+      :expiration_date,
+      :license_quantity,
+      :license_type,
+      :term,
+      :status,
+      :auto_renew,
+      :license_arns,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the term duration and term unit type of your
+    # subscription. This determines the term length of your subscription.
+    # Valid values are MONTHS for term unit and 12 or 36 for term duration,
+    # indicating a 12 month or 36 month subscription.
+    #
+    # @!attribute [rw] duration
+    #   The duration of the subscription term. Valid values are 12 and 36,
+    #   indicating a 12 month or 36 month subscription.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The term unit of the subscription. Valid value is MONTHS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EksAnywhereSubscriptionTerm AWS API Documentation
+    #
+    class EksAnywhereSubscriptionTerm < Struct.new(
+      :duration,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2020,6 +2260,10 @@ module Aws::EKS
     # @!attribute [rw] addon_name
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2030,6 +2274,7 @@ module Aws::EKS
       :nodegroup_name,
       :fargate_profile_name,
       :addon_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2049,6 +2294,10 @@ module Aws::EKS
     # @!attribute [rw] addon_name
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2058,6 +2307,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :addon_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2345,7 +2595,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] addons
-    #   A list of available add-ons.
+    #   A list of installed add-ons.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2427,6 +2677,62 @@ module Aws::EKS
     #
     class ListClustersResponse < Struct.new(
       :clusters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of cluster results returned by
+    #   ListEksAnywhereSubscriptions in paginated output. When you use this
+    #   parameter, ListEksAnywhereSubscriptions returns only maxResults
+    #   results in a single page along with a nextToken response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another ListEksAnywhereSubscriptions request with the returned
+    #   nextToken value. This value can be between 1 and 100. If you don't
+    #   use this parameter, ListEksAnywhereSubscriptions returns up to 10
+    #   results and a nextToken value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken value to include in a future
+    #   ListEksAnywhereSubscriptions request. When the results of a
+    #   ListEksAnywhereSubscriptions request exceed maxResults, you can use
+    #   this value to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_status
+    #   An array of subscription statuses to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListEksAnywhereSubscriptionsRequest AWS API Documentation
+    #
+    class ListEksAnywhereSubscriptionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :include_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscriptions
+    #   A list of all subscription objects in the region, filtered by
+    #   includeStatus and paginated by nextToken and maxResults.
+    #   @return [Array<Types::EksAnywhereSubscription>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken value to include in a future
+    #   ListEksAnywhereSubscriptions request. When the results of a
+    #   ListEksAnywhereSubscriptions request exceed maxResults, you can use
+    #   this value to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListEksAnywhereSubscriptionsResponse AWS API Documentation
+    #
+    class ListEksAnywhereSubscriptionsResponse < Struct.new(
+      :subscriptions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3323,15 +3629,16 @@ module Aws::EKS
     #
     # @!attribute [rw] key_arn
     #   Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must
-    #   be symmetric, created in the same region as the cluster, and if the
-    #   KMS key was created in a different account, the user must have
-    #   access to the KMS key. For more information, see [Allowing Users in
-    #   Other Accounts to Use a KMS key][1] in the *Key Management Service
-    #   Developer Guide*.
+    #   be symmetric and created in the same Amazon Web Services Region as
+    #   the cluster. If the KMS key was created in a different account, the
+    #   [IAM principal][1] must have access to the KMS key. For more
+    #   information, see [Allowing users in other accounts to use a KMS
+    #   key][2] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Provider AWS API Documentation
@@ -3467,6 +3774,10 @@ module Aws::EKS
     #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3475,6 +3786,7 @@ module Aws::EKS
     class ResourceLimitExceededException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3500,6 +3812,10 @@ module Aws::EKS
     # @!attribute [rw] addon_name
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3510,6 +3826,7 @@ module Aws::EKS
       :nodegroup_name,
       :fargate_profile_name,
       :addon_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3542,6 +3859,10 @@ module Aws::EKS
     # @!attribute [rw] addon_name
     #   @return [String]
     #
+    # @!attribute [rw] subscription_id
+    #   The Amazon EKS subscription ID with the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3551,6 +3872,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :addon_name,
+      :subscription_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3914,6 +4236,44 @@ module Aws::EKS
     #
     class UpdateClusterVersionResponse < Struct.new(
       :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_renew
+    #   A boolean indicating whether or not to automatically renew the
+    #   subscription.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateEksAnywhereSubscriptionRequest AWS API Documentation
+    #
+    class UpdateEksAnywhereSubscriptionRequest < Struct.new(
+      :id,
+      :auto_renew,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription
+    #   The full description of the updated subscription.
+    #   @return [Types::EksAnywhereSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateEksAnywhereSubscriptionResponse AWS API Documentation
+    #
+    class UpdateEksAnywhereSubscriptionResponse < Struct.new(
+      :subscription)
       SENSITIVE = []
       include Aws::Structure
     end

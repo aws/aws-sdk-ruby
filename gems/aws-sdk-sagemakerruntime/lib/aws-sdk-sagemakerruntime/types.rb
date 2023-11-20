@@ -46,7 +46,8 @@ module Aws::SageMakerRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InternalStreamFailure AWS API Documentation
     #
     class InternalStreamFailure < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -560,7 +561,8 @@ module Aws::SageMakerRuntime
     #
     class ModelStreamError < Struct.new(
       :message,
-      :error_code)
+      :error_code,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end

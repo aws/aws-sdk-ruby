@@ -138,6 +138,8 @@ module Aws::Comprehend
             Aws::Comprehend::Endpoints::DetectSyntax.build(context)
           when :detect_targeted_sentiment
             Aws::Comprehend::Endpoints::DetectTargetedSentiment.build(context)
+          when :detect_toxic_content
+            Aws::Comprehend::Endpoints::DetectToxicContent.build(context)
           when :import_model
             Aws::Comprehend::Endpoints::ImportModel.build(context)
           when :list_datasets

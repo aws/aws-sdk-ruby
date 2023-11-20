@@ -10,69 +10,13 @@
 
 require_relative 'spec_helper'
 
-module Aws::Macie
+module Aws::TrustedAdvisor
   describe EndpointProvider do
-    subject { Aws::Macie::EndpointProvider.new }
-
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context 'For region us-west-2 with FIPS enabled and DualStack disabled' do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>true, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
+    subject { Aws::TrustedAdvisor::EndpointProvider.new }
 
     context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -84,9 +28,23 @@ module Aws::Macie
       end
     end
 
+    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -98,9 +56,23 @@ module Aws::Macie
       end
     end
 
+    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -114,7 +86,7 @@ module Aws::Macie
 
     context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.cn-north-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -128,7 +100,7 @@ module Aws::Macie
 
     context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -142,7 +114,7 @@ module Aws::Macie
 
     context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.cn-north-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -156,7 +128,7 @@ module Aws::Macie
 
     context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-gov-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -170,7 +142,7 @@ module Aws::Macie
 
     context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-gov-east-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-gov-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -184,7 +156,7 @@ module Aws::Macie
 
     context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-gov-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -198,7 +170,7 @@ module Aws::Macie
 
     context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-gov-east-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-gov-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -225,7 +197,7 @@ module Aws::Macie
 
     context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-iso-east-1.c2s.ic.gov"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-iso-east-1.c2s.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -252,7 +224,7 @@ module Aws::Macie
 
     context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-iso-east-1.c2s.ic.gov"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-iso-east-1.c2s.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -279,7 +251,7 @@ module Aws::Macie
 
     context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie-fips.us-isob-east-1.sc2s.sgov.gov"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -306,7 +278,7 @@ module Aws::Macie
 
     context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://macie.us-isob-east-1.sc2s.sgov.gov"}}
+        {"endpoint"=>{"url"=>"https://trustedadvisor.us-isob-east-1.sc2s.sgov.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

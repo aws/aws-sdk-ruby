@@ -436,7 +436,7 @@ module Aws::Cloud9
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
     #   path.
     #
-    #   From November 20, 2023, you will be required to include the `imageId`
+    #   From December 04, 2023, you will be required to include the `imageId`
     #   parameter for the `CreateEnvironmentEC2` action. This change will be
     #   reflected across all direct methods of communicating with the API,
     #   such as Amazon Web Services SDK, Amazon Web Services CLI and Amazon
@@ -456,7 +456,7 @@ module Aws::Cloud9
     #
     #   <b>AMI aliases </b>
     #
-    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
+    #   * Amazon Linux (default): `amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
@@ -466,9 +466,8 @@ module Aws::Cloud9
     #
     #   **SSM paths**
     #
-    #   * <b>Amazon Linux (default):
-    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
-    #     </b>
+    #   * Amazon Linux (default):
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
@@ -521,6 +520,7 @@ module Aws::Cloud9
     #     name: "my-demo-environment", 
     #     automatic_stop_time_minutes: 60, 
     #     description: "This is my demonstration environment.", 
+    #     image_id: "amazonlinux-2-x86_64", 
     #     instance_type: "t2.micro", 
     #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
     #     subnet_id: "subnet-6300cd1b", 
@@ -1266,7 +1266,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

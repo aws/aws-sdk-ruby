@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-11-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix exception handling with event streaming operations.
+
 1.1.0 (2023-10-02)
 ------------------
 

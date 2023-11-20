@@ -70,6 +70,8 @@ module Aws::ResourceExplorer2
             Aws::ResourceExplorer2::Endpoints::DeleteView.build(context)
           when :disassociate_default_view
             Aws::ResourceExplorer2::Endpoints::DisassociateDefaultView.build(context)
+          when :get_account_level_service_configuration
+            Aws::ResourceExplorer2::Endpoints::GetAccountLevelServiceConfiguration.build(context)
           when :get_default_view
             Aws::ResourceExplorer2::Endpoints::GetDefaultView.build(context)
           when :get_index
@@ -78,6 +80,8 @@ module Aws::ResourceExplorer2
             Aws::ResourceExplorer2::Endpoints::GetView.build(context)
           when :list_indexes
             Aws::ResourceExplorer2::Endpoints::ListIndexes.build(context)
+          when :list_indexes_for_members
+            Aws::ResourceExplorer2::Endpoints::ListIndexesForMembers.build(context)
           when :list_supported_resource_types
             Aws::ResourceExplorer2::Endpoints::ListSupportedResourceTypes.build(context)
           when :list_tags_for_resource
