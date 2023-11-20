@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
 
+* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and also allow for ECS and EKS link-local http addresses.
+
 3.187.1 (2023-11-20)
 ------------------
 
