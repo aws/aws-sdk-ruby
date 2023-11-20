@@ -27,7 +27,7 @@ module Aws
               context.http_response.signal_done(
                 status_code: 200,
                 headers: {},
-                body: '{"Messages": []}'
+                body: '{}'
               )
               Seahorse::Client::Response.new(context: context)
             end
