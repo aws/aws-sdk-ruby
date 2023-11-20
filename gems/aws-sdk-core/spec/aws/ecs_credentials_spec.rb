@@ -287,6 +287,8 @@ module Aws
       it 'uses an http IPv6 if it is a loopback' do
         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ipv6.to_s
         stub_request(:get, loopback_ipv6).to_return(status: 200, body: resp)
+        # fails AL2012 somehow
+        stub_request(:get, "http://::1/path").to_return(status: 200, body: resp)
         c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')
@@ -330,6 +332,8 @@ module Aws
         else
           stub_request(method, uri).with(headers: headers).and_return(**resp)
         end
+        # fails AL2012 somehow
+        stub_request(:get, "http://::1/path")
       end
 
       test_cases.each do |test_case|
