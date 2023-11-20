@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Handle null messages in response (#2947).
+* Issue - Tempfix. Default null messages in `receive_message` to empty array (#2947).
 
 1.67.0 (2023-11-09)
 ------------------

@@ -995,6 +995,7 @@
     "models": "sqs/2012-11-05",
     "addPlugins": [
       "Aws::SQS::Plugins::QueueUrls",
+      "Aws::SQS::Plugins::QueryCompatible",
       "Aws::SQS::Plugins::Md5s"
     ]
   },

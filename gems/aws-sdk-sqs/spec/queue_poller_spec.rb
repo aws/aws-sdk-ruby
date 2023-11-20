@@ -149,16 +149,6 @@ module Aws
           expect(yielded.body).to eq('body')
         end
 
-        it 'handles nil messages' do
-          client.stub_responses(
-            :receive_message,
-            [
-              { messages: nil },
-            ]
-          )
-          poller.poll(idle_timeout: 0)
-        end
-
         it 'yields an array when max messages is greater than 1' do
           client.stub_responses(
             :receive_message,

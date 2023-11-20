@@ -406,7 +406,7 @@ module Aws
 
       def get_messages(config, stats)
         config.before_request&.call(stats)
-        messages = send_request(config).messages || []
+        messages = send_request(config).messages
         stats.request_count += 1
         messages
       end
