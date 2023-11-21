@@ -641,7 +641,8 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs. This
     #   value is stored as object metadata and automatically gets passed on to
     #   Amazon Web Services KMS for future `GetObject` or `CopyObject`
-    #   operations on this object.
+    #   operations on this object. This value must be explicitly added during
+    #   CopyObject operations.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using Key Management Service

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.176.0 (2023-11-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-inspectorscan` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudfrontkeyvaluestore` gem.
+
 3.175.0 (2023-11-17)
 ------------------
 

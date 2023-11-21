@@ -203,6 +203,13 @@ module Aws::S3
     #           },
     #         ],
     #         target_prefix: "TargetPrefix", # required
+    #         target_object_key_format: {
+    #           simple_prefix: {
+    #           },
+    #           partitioned_prefix: {
+    #             partition_date_source: "EventTime", # accepts EventTime, DeliveryTime
+    #           },
+    #         },
     #       },
     #     },
     #     content_md5: "ContentMD5",

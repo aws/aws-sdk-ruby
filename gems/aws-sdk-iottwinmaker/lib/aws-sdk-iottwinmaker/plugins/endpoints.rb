@@ -58,10 +58,14 @@ module Aws::IoTTwinMaker
           case context.operation_name
           when :batch_put_property_values
             Aws::IoTTwinMaker::Endpoints::BatchPutPropertyValues.build(context)
+          when :cancel_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::CancelMetadataTransferJob.build(context)
           when :create_component_type
             Aws::IoTTwinMaker::Endpoints::CreateComponentType.build(context)
           when :create_entity
             Aws::IoTTwinMaker::Endpoints::CreateEntity.build(context)
+          when :create_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::CreateMetadataTransferJob.build(context)
           when :create_scene
             Aws::IoTTwinMaker::Endpoints::CreateScene.build(context)
           when :create_sync_job
@@ -84,6 +88,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::GetComponentType.build(context)
           when :get_entity
             Aws::IoTTwinMaker::Endpoints::GetEntity.build(context)
+          when :get_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::GetMetadataTransferJob.build(context)
           when :get_pricing_plan
             Aws::IoTTwinMaker::Endpoints::GetPricingPlan.build(context)
           when :get_property_value
@@ -98,8 +104,14 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::GetWorkspace.build(context)
           when :list_component_types
             Aws::IoTTwinMaker::Endpoints::ListComponentTypes.build(context)
+          when :list_components
+            Aws::IoTTwinMaker::Endpoints::ListComponents.build(context)
           when :list_entities
             Aws::IoTTwinMaker::Endpoints::ListEntities.build(context)
+          when :list_metadata_transfer_jobs
+            Aws::IoTTwinMaker::Endpoints::ListMetadataTransferJobs.build(context)
+          when :list_properties
+            Aws::IoTTwinMaker::Endpoints::ListProperties.build(context)
           when :list_scenes
             Aws::IoTTwinMaker::Endpoints::ListScenes.build(context)
           when :list_sync_jobs

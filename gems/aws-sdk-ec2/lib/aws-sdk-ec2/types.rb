@@ -12341,14 +12341,14 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   `io1` and `io2` volumes support up to 64,000 IOPS only on [Instances
-    #   built on the Nitro System][1]. Other instance families support
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
     #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
@@ -12395,13 +12395,15 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -24746,9 +24748,9 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `launch.block-device-mapping.volume-type` - The type of EBS
-    #     volume: `gp2` for General Purpose SSD, `io1` or `io2` for
-    #     Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for
-    #     Cold HDD, or `standard` for Magnetic.
+    #     volume: `gp2` or `gp3` for General Purpose SSD, `io1` or `io2` for
+    #     Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
+    #     for Cold HDD, or `standard` for Magnetic.
     #
     #   * `launch.group-id` - The ID of the security group for the instance.
     #
@@ -29808,19 +29810,18 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
-    #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
-    #   `gp2`, `st1`, `sc1`, or `standard` volumes.
+    #   for `gp3` volumes is 3,000 IOPS.
     #
     #
     #
@@ -29837,21 +29838,22 @@ module Aws::EC2
     #   snapshot size. You can specify a volume size that is equal to or
     #   larger than the snapshot size.
     #
-    #   The following are the supported volumes sizes for each volume type:
+    #   The following are the supported sizes for each volume type:
     #
-    #   * `gp2` and `gp3`:1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
     #   The volume type. For more information, see [Amazon EBS volume
-    #   types][1] in the *Amazon EC2 User Guide*. If the volume type is
-    #   `io1` or `io2`, you must specify the IOPS that the volume supports.
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -43656,19 +43658,18 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is supported for `io1`, `io2`, and `gp3` volumes
-    #   only. This parameter is not supported for `gp2`, `st1`, `sc1`, or
-    #   `standard` volumes.
+    #   only.
     #
     #
     #
@@ -43689,13 +43690,15 @@ module Aws::EC2
     #   ID or a volume size. The following are the supported volumes sizes
     #   for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
@@ -49553,13 +49556,15 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #
     #   Default: The existing size is retained.
     #   @return [Integer]
@@ -49582,15 +49587,23 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
+    #
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   Default: The existing value is retained if you keep the same volume
     #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
     #   default is 3,000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
@@ -58873,21 +58886,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) to provision for an
-    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for
-    #   `io1`, and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for
-    #   volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only
-    #   on [instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS. For more information, see
-    #   [Amazon EBS volume types][2] in the *Amazon EC2 User Guide*.
-    #
-    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
-    #   `io2`) volumes.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   The number of I/O operations per second (IOPS) to provision for a
+    #   `gp3`, `io1`, or `io2` volume.
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -58902,9 +58902,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. `gp2` for General Purpose SSD, `io1` or ` io2` for
-    #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
-    #   for `sc1`, or `standard` for Magnetic.
+    #   The volume type.
     #
     #   Default: `gp2`
     #   @return [String]

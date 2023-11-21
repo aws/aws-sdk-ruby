@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.425.0 (2023-11-21)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
 1.424.0 (2023-11-20)
 ------------------
 

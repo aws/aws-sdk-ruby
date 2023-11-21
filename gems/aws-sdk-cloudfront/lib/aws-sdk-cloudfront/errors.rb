@@ -33,12 +33,17 @@ module Aws::CloudFront
   # * {CachePolicyAlreadyExists}
   # * {CachePolicyInUse}
   # * {CannotChangeImmutablePublicKeyFields}
+  # * {CannotDeleteEntityWhileInUse}
   # * {CloudFrontOriginAccessIdentityAlreadyExists}
   # * {CloudFrontOriginAccessIdentityInUse}
   # * {ContinuousDeploymentPolicyAlreadyExists}
   # * {ContinuousDeploymentPolicyInUse}
   # * {DistributionAlreadyExists}
   # * {DistributionNotDisabled}
+  # * {EntityAlreadyExists}
+  # * {EntityLimitExceeded}
+  # * {EntityNotFound}
+  # * {EntitySizeLimitExceeded}
   # * {FieldLevelEncryptionConfigAlreadyExists}
   # * {FieldLevelEncryptionConfigInUse}
   # * {FieldLevelEncryptionProfileAlreadyExists}
@@ -268,6 +273,21 @@ module Aws::CloudFront
       end
     end
 
+    class CannotDeleteEntityWhileInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::CannotDeleteEntityWhileInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class CloudFrontOriginAccessIdentityAlreadyExists < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -348,6 +368,66 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::DistributionNotDisabled] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntityAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::EntityAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntityLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::EntityLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntityNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::EntityNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntitySizeLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::EntitySizeLimitExceeded] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
