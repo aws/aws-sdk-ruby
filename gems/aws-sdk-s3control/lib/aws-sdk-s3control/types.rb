@@ -2887,18 +2887,40 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] created_after
-    #   If provided, the generated manifest should include only source
-    #   bucket objects that were created after this time.
+    #   If provided, the generated manifest includes only source bucket
+    #   objects that were created after this time.
     #   @return [Time]
     #
     # @!attribute [rw] created_before
-    #   If provided, the generated manifest should include only source
-    #   bucket objects that were created before this time.
+    #   If provided, the generated manifest includes only source bucket
+    #   objects that were created before this time.
     #   @return [Time]
     #
     # @!attribute [rw] object_replication_statuses
-    #   If provided, the generated manifest should include only source
-    #   bucket objects that have one of the specified Replication statuses.
+    #   If provided, the generated manifest includes only source bucket
+    #   objects that have one of the specified Replication statuses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key_name_constraint
+    #   If provided, the generated manifest includes only source bucket
+    #   objects whose object keys match the string constraints specified for
+    #   `MatchAnyPrefix`, `MatchAnySuffix`, and `MatchAnySubstring`.
+    #   @return [Types::KeyNameConstraint]
+    #
+    # @!attribute [rw] object_size_greater_than_bytes
+    #   If provided, the generated manifest includes only source bucket
+    #   objects whose file size is greater than the specified number of
+    #   bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_size_less_than_bytes
+    #   If provided, the generated manifest includes only source bucket
+    #   objects whose file size is less than the specified number of bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_any_storage_class
+    #   If provided, the generated manifest includes only source bucket
+    #   objects that are stored with the specified storage class.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifestGeneratorFilter AWS API Documentation
@@ -2907,7 +2929,11 @@ module Aws::S3Control
       :eligible_for_replication,
       :created_after,
       :created_before,
-      :object_replication_statuses)
+      :object_replication_statuses,
+      :key_name_constraint,
+      :object_size_greater_than_bytes,
+      :object_size_less_than_bytes,
+      :match_any_storage_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3141,6 +3167,35 @@ module Aws::S3Control
     #
     class JobTimers < Struct.new(
       :elapsed_time_in_active_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If provided, the generated manifest includes only source bucket
+    # objects whose object keys match the string constraints specified for
+    # `MatchAnyPrefix`, `MatchAnySuffix`, and `MatchAnySubstring`.
+    #
+    # @!attribute [rw] match_any_prefix
+    #   If provided, the generated manifest includes objects where the
+    #   specified string appears at the start of the object key string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_suffix
+    #   If provided, the generated manifest includes objects where the
+    #   specified string appears at the end of the object key string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_any_substring
+    #   If provided, the generated manifest includes objects where the
+    #   specified string appears anywhere within the object key string.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/KeyNameConstraint AWS API Documentation
+    #
+    class KeyNameConstraint < Struct.new(
+      :match_any_prefix,
+      :match_any_suffix,
+      :match_any_substring)
       SENSITIVE = []
       include Aws::Structure
     end

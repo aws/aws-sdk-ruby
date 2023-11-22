@@ -11728,8 +11728,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_application_arn
-    #   The ARN of the associated Amazon Web Services Single Sign-On
-    #   application for this Domain.
+    #   The ARN of the application managed by SageMaker in IAM Identity
+    #   Center. This value is only returned for domains created after
+    #   September 19, 2023.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -28468,6 +28469,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The access configuration file for the ML model. You can explicitly
+    # accept the model end-user license agreement (EULA) within the
+    # `ModelAccessConfig`. For more information, see [End-user license
+    # agreements][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies agreement to the model end-user license agreement (EULA).
+    #   The `AcceptEula` value must be explicitly defined as `True` in order
+    #   to accept the EULA that this model requires. You are responsible for
+    #   reviewing and complying with any applicable license terms and making
+    #   sure they are acceptable for your use case before downloading or
+    #   using a model.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelAccessConfig AWS API Documentation
+    #
+    class ModelAccessConfig < Struct.new(
+      :accept_eula)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the location that is configured for storing
     # model artifacts.
     #
@@ -35981,12 +36008,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
     #   @return [String]
     #
+    # @!attribute [rw] model_access_config
+    #   Specifies the access configuration file for the ML model. You can
+    #   explicitly accept the model end-user license agreement (EULA) within
+    #   the `ModelAccessConfig`. You are responsible for reviewing and
+    #   complying with any applicable license terms and making sure they are
+    #   acceptable for your use case before downloading or using a model.
+    #   @return [Types::ModelAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
     #
     class S3ModelDataSource < Struct.new(
       :s3_uri,
       :s3_data_type,
-      :compression_type)
+      :compression_type,
+      :model_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37488,7 +37524,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_pending_time_in_seconds
-    #   The maximum pending time in seconds.
+    #   The maximum length of time, in seconds, that a training or
+    #   compilation job can be pending before it is stopped.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation

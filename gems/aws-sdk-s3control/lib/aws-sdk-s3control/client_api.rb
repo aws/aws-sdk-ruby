@@ -201,6 +201,7 @@ module Aws::S3Control
     JobTimeInStateSeconds = Shapes::IntegerShape.new(name: 'JobTimeInStateSeconds')
     JobTimers = Shapes::StructureShape.new(name: 'JobTimers')
     JobTotalNumberOfTasks = Shapes::IntegerShape.new(name: 'JobTotalNumberOfTasks')
+    KeyNameConstraint = Shapes::StructureShape.new(name: 'KeyNameConstraint')
     KmsKeyArnString = Shapes::StringShape.new(name: 'KmsKeyArnString')
     LambdaInvokeOperation = Shapes::StructureShape.new(name: 'LambdaInvokeOperation')
     LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
@@ -259,6 +260,7 @@ module Aws::S3Control
     NoSuchPublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'NoSuchPublicAccessBlockConfiguration')
     NoSuchPublicAccessBlockConfigurationMessage = Shapes::StringShape.new(name: 'NoSuchPublicAccessBlockConfigurationMessage')
     NonEmptyMaxLength1024String = Shapes::StringShape.new(name: 'NonEmptyMaxLength1024String')
+    NonEmptyMaxLength1024StringList = Shapes::ListShape.new(name: 'NonEmptyMaxLength1024StringList')
     NonEmptyMaxLength2048String = Shapes::StringShape.new(name: 'NonEmptyMaxLength2048String')
     NonEmptyMaxLength256String = Shapes::StringShape.new(name: 'NonEmptyMaxLength256String')
     NonEmptyMaxLength64String = Shapes::StringShape.new(name: 'NonEmptyMaxLength64String')
@@ -400,6 +402,7 @@ module Aws::S3Control
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
+    StorageClassList = Shapes::ListShape.new(name: 'StorageClassList')
     StorageLensArn = Shapes::StringShape.new(name: 'StorageLensArn')
     StorageLensAwsOrg = Shapes::StructureShape.new(name: 'StorageLensAwsOrg')
     StorageLensConfiguration = Shapes::StructureShape.new(name: 'StorageLensConfiguration')
@@ -974,6 +977,10 @@ module Aws::S3Control
     JobManifestGeneratorFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedAfter"))
     JobManifestGeneratorFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedBefore"))
     JobManifestGeneratorFilter.add_member(:object_replication_statuses, Shapes::ShapeRef.new(shape: ReplicationStatusFilterList, location_name: "ObjectReplicationStatuses"))
+    JobManifestGeneratorFilter.add_member(:key_name_constraint, Shapes::ShapeRef.new(shape: KeyNameConstraint, location_name: "KeyNameConstraint"))
+    JobManifestGeneratorFilter.add_member(:object_size_greater_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThanBytes", metadata: {"box"=>true}))
+    JobManifestGeneratorFilter.add_member(:object_size_less_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThanBytes", metadata: {"box"=>true}))
+    JobManifestGeneratorFilter.add_member(:match_any_storage_class, Shapes::ShapeRef.new(shape: StorageClassList, location_name: "MatchAnyStorageClass"))
     JobManifestGeneratorFilter.struct_class = Types::JobManifestGeneratorFilter
 
     JobManifestLocation.add_member(:object_arn, Shapes::ShapeRef.new(shape: S3KeyArnString, required: true, location_name: "ObjectArn"))
@@ -1016,6 +1023,11 @@ module Aws::S3Control
 
     JobTimers.add_member(:elapsed_time_in_active_seconds, Shapes::ShapeRef.new(shape: JobTimeInStateSeconds, location_name: "ElapsedTimeInActiveSeconds", metadata: {"box"=>true}))
     JobTimers.struct_class = Types::JobTimers
+
+    KeyNameConstraint.add_member(:match_any_prefix, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnyPrefix"))
+    KeyNameConstraint.add_member(:match_any_suffix, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnySuffix"))
+    KeyNameConstraint.add_member(:match_any_substring, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnySubstring"))
+    KeyNameConstraint.struct_class = Types::KeyNameConstraint
 
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, location_name: "FunctionArn"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
@@ -1183,6 +1195,8 @@ module Aws::S3Control
 
     NoSuchPublicAccessBlockConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: NoSuchPublicAccessBlockConfigurationMessage, location_name: "Message"))
     NoSuchPublicAccessBlockConfiguration.struct_class = Types::NoSuchPublicAccessBlockConfiguration
+
+    NonEmptyMaxLength1024StringList.member = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
 
     NoncurrentVersionExpiration.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
     NoncurrentVersionExpiration.add_member(:newer_noncurrent_versions, Shapes::ShapeRef.new(shape: NoncurrentVersionCount, location_name: "NewerNoncurrentVersions", metadata: {"box"=>true}))
@@ -1542,6 +1556,8 @@ module Aws::S3Control
 
     SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
     SseKmsEncryptedObjects.struct_class = Types::SseKmsEncryptedObjects
+
+    StorageClassList.member = Shapes::ShapeRef.new(shape: S3StorageClass)
 
     StorageLensAwsOrg.add_member(:arn, Shapes::ShapeRef.new(shape: AwsOrgArn, required: true, location_name: "Arn"))
     StorageLensAwsOrg.struct_class = Types::StorageLensAwsOrg

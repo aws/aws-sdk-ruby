@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.221.0 (2023-11-22)
+------------------
+
+* Feature - This feature adds the end user license agreement status as a model access configuration parameter.
+
 1.220.0 (2023-11-16)
 ------------------
 

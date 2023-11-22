@@ -62,6 +62,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::CreateStream.build(context)
           when :decrease_stream_retention_period
             Aws::Kinesis::Endpoints::DecreaseStreamRetentionPeriod.build(context)
+          when :delete_resource_policy
+            Aws::Kinesis::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_stream
             Aws::Kinesis::Endpoints::DeleteStream.build(context)
           when :deregister_stream_consumer
@@ -80,6 +82,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::EnableEnhancedMonitoring.build(context)
           when :get_records
             Aws::Kinesis::Endpoints::GetRecords.build(context)
+          when :get_resource_policy
+            Aws::Kinesis::Endpoints::GetResourcePolicy.build(context)
           when :get_shard_iterator
             Aws::Kinesis::Endpoints::GetShardIterator.build(context)
           when :increase_stream_retention_period
@@ -98,6 +102,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::PutRecord.build(context)
           when :put_records
             Aws::Kinesis::Endpoints::PutRecords.build(context)
+          when :put_resource_policy
+            Aws::Kinesis::Endpoints::PutResourcePolicy.build(context)
           when :register_stream_consumer
             Aws::Kinesis::Endpoints::RegisterStreamConsumer.build(context)
           when :remove_tags_from_stream

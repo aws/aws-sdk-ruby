@@ -994,6 +994,14 @@ module Aws::S3Control
     #           created_after: Time.now,
     #           created_before: Time.now,
     #           object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #           key_name_constraint: {
+    #             match_any_prefix: ["NonEmptyMaxLength1024String"],
+    #             match_any_suffix: ["NonEmptyMaxLength1024String"],
+    #             match_any_substring: ["NonEmptyMaxLength1024String"],
+    #           },
+    #           object_size_greater_than_bytes: 1,
+    #           object_size_less_than_bytes: 1,
+    #           match_any_storage_class: ["STANDARD"], # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         },
     #         enable_manifest_output: false, # required
     #       },
@@ -2251,6 +2259,16 @@ module Aws::S3Control
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.created_before #=> Time
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses #=> Array
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses[0] #=> String, one of "COMPLETED", "FAILED", "REPLICA", "NONE"
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_prefix #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_prefix[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_suffix #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_suffix[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_substring #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_substring[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_size_greater_than_bytes #=> Integer
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_size_less_than_bytes #=> Integer
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class[0] #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.job.manifest_generator.s3_job_manifest_generator.enable_manifest_output #=> Boolean
     #   resp.job.generated_manifest_descriptor.format #=> String, one of "S3InventoryReport_CSV_20211130"
     #   resp.job.generated_manifest_descriptor.location.object_arn #=> String
@@ -6131,7 +6149,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

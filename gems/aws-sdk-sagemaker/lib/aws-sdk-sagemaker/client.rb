@@ -5063,6 +5063,9 @@ module Aws::SageMaker
     #           s3_uri: "S3ModelUri", # required
     #           s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
     #           compression_type: "None", # required, accepts None, Gzip
+    #           model_access_config: {
+    #             accept_eula: false, # required
+    #           },
     #         },
     #       },
     #     },
@@ -5091,6 +5094,9 @@ module Aws::SageMaker
     #             s3_uri: "S3ModelUri", # required
     #             s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
     #             compression_type: "None", # required, accepts None, Gzip
+    #             model_access_config: {
+    #               accept_eula: false, # required
+    #             },
     #           },
     #         },
     #       },
@@ -12744,6 +12750,7 @@ module Aws::SageMaker
     #   resp.primary_container.model_data_source.s3_data_source.s3_uri #=> String
     #   resp.primary_container.model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.primary_container.model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.primary_container.model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
@@ -12759,6 +12766,7 @@ module Aws::SageMaker
     #   resp.containers[0].model_data_source.s3_data_source.s3_uri #=> String
     #   resp.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.inference_execution_config.mode #=> String, one of "Serial", "Direct"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
@@ -24305,7 +24313,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.220.0'
+      context[:gem_version] = '1.221.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

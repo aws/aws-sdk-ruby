@@ -25,6 +25,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -42,6 +43,7 @@ module Aws::Kinesis
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -59,6 +61,25 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
+        )
+      end
+    end
+
+    class DeleteResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Kinesis::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: "control",
+          consumer_arn: nil,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end
@@ -76,6 +97,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -93,6 +115,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
+          resource_arn: nil,
         )
       end
     end
@@ -110,6 +133,7 @@ module Aws::Kinesis
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -127,6 +151,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -144,6 +169,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
+          resource_arn: nil,
         )
       end
     end
@@ -161,6 +187,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -178,6 +205,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -195,6 +223,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -212,6 +241,25 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
+          resource_arn: nil,
+        )
+      end
+    end
+
+    class GetResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Kinesis::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: "control",
+          consumer_arn: nil,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end
@@ -229,6 +277,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -246,6 +295,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -263,6 +313,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -280,6 +331,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -297,6 +349,7 @@ module Aws::Kinesis
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -314,6 +367,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -331,6 +385,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -348,6 +403,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -365,6 +421,25 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
+          resource_arn: nil,
+        )
+      end
+    end
+
+    class PutResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Kinesis::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+          stream_arn: nil,
+          operation_type: "control",
+          consumer_arn: nil,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end
@@ -382,6 +457,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -399,6 +475,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -416,6 +493,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -433,6 +511,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -450,6 +529,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -467,6 +547,7 @@ module Aws::Kinesis
           stream_arn: nil,
           operation_type: "data",
           consumer_arn: context.params[:consumer_arn],
+          resource_arn: nil,
         )
       end
     end
@@ -484,6 +565,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end
@@ -501,6 +583,7 @@ module Aws::Kinesis
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
+          resource_arn: nil,
         )
       end
     end

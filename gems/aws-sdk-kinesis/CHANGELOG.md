@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-11-22)
+------------------
+
+* Feature - This release adds support for resource based policies on streams and consumers.
+
 1.52.0 (2023-09-27)
 ------------------
 

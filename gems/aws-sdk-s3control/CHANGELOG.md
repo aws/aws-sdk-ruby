@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-11-22)
+------------------
+
+* Feature - Amazon S3 Batch Operations now manages buckets or prefixes in a single step.
+
 1.71.0 (2023-11-15)
 ------------------
 

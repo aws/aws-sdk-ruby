@@ -605,7 +605,7 @@ module Aws::SSO
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.187.1'
+      context[:gem_version] = '3.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

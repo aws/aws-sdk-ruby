@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-11-22)
+------------------
+
 * Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
 
 1.1.0 (2021-09-01)
