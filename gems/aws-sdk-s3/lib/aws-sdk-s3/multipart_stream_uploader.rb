@@ -192,7 +192,6 @@ module Aws
               error
             end
           end
-          thread.abort_on_exception = true
           thread
         end
       end
