@@ -221,15 +221,32 @@ module Aws
         end
 
         it 'raises an error when checksum validation fails on multipart' do
-          client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+          client.stub_responses(:get_object, { body: 'body', checksum_sha1: 'invalid' })
 
           thread = double(value: nil)
-          allow(thread).to receive(:abort_on_exception=)
           expect(Thread).to receive(:new).and_yield.and_return(thread)
 
           expect do
             large_obj.download_file(path)
           end.to raise_error(Aws::Errors::ChecksumError)
+        end
+
+        it 'does not interrupt the main thread when an exception occurs' do
+          client.stub_responses(
+            :get_object,
+            {
+              body: 'body',
+              checksum_sha1: 'invalid'
+            }
+          )
+
+          threads = []
+          threads << Thread.new do
+            expect { large_obj.download_file(path) }
+              .to raise_error(Aws::Errors::ChecksumError)
+          end
+
+          expect { threads.each(&:join) }.not_to raise_error
         end
 
         it 'calls on_checksum_validated on single part' do
