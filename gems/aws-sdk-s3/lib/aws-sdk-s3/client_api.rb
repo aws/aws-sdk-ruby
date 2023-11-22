@@ -423,6 +423,8 @@ module Aws::S3
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
     PartNumberMarker = Shapes::IntegerShape.new(name: 'PartNumberMarker')
+    PartitionDateSource = Shapes::StringShape.new(name: 'PartitionDateSource')
+    PartitionedPrefix = Shapes::StructureShape.new(name: 'PartitionedPrefix')
     Parts = Shapes::ListShape.new(name: 'Parts', flattened: true)
     PartsCount = Shapes::IntegerShape.new(name: 'PartsCount')
     PartsList = Shapes::ListShape.new(name: 'PartsList', flattened: true)
@@ -542,6 +544,7 @@ module Aws::S3
     ServerSideEncryptionRule = Shapes::StructureShape.new(name: 'ServerSideEncryptionRule')
     ServerSideEncryptionRules = Shapes::ListShape.new(name: 'ServerSideEncryptionRules', flattened: true)
     Setting = Shapes::BooleanShape.new(name: 'Setting')
+    SimplePrefix = Shapes::StructureShape.new(name: 'SimplePrefix')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SkipValidation = Shapes::BooleanShape.new(name: 'SkipValidation')
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
@@ -565,6 +568,7 @@ module Aws::S3
     TargetBucket = Shapes::StringShape.new(name: 'TargetBucket')
     TargetGrant = Shapes::StructureShape.new(name: 'TargetGrant')
     TargetGrants = Shapes::ListShape.new(name: 'TargetGrants')
+    TargetObjectKeyFormat = Shapes::StructureShape.new(name: 'TargetObjectKeyFormat')
     TargetPrefix = Shapes::StringShape.new(name: 'TargetPrefix')
     Tier = Shapes::StringShape.new(name: 'Tier')
     Tiering = Shapes::StructureShape.new(name: 'Tiering')
@@ -1797,6 +1801,7 @@ module Aws::S3
     LoggingEnabled.add_member(:target_bucket, Shapes::ShapeRef.new(shape: TargetBucket, required: true, location_name: "TargetBucket"))
     LoggingEnabled.add_member(:target_grants, Shapes::ShapeRef.new(shape: TargetGrants, location_name: "TargetGrants"))
     LoggingEnabled.add_member(:target_prefix, Shapes::ShapeRef.new(shape: TargetPrefix, required: true, location_name: "TargetPrefix"))
+    LoggingEnabled.add_member(:target_object_key_format, Shapes::ShapeRef.new(shape: TargetObjectKeyFormat, location_name: "TargetObjectKeyFormat"))
     LoggingEnabled.struct_class = Types::LoggingEnabled
 
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
@@ -1961,6 +1966,9 @@ module Aws::S3
     Part.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     Part.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     Part.struct_class = Types::Part
+
+    PartitionedPrefix.add_member(:partition_date_source, Shapes::ShapeRef.new(shape: PartitionDateSource, location_name: "PartitionDateSource"))
+    PartitionedPrefix.struct_class = Types::PartitionedPrefix
 
     Parts.member = Shapes::ShapeRef.new(shape: Part)
 
@@ -2493,6 +2501,8 @@ module Aws::S3
 
     ServerSideEncryptionRules.member = Shapes::ShapeRef.new(shape: ServerSideEncryptionRule)
 
+    SimplePrefix.struct_class = Types::SimplePrefix
+
     SourceSelectionCriteria.add_member(:sse_kms_encrypted_objects, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjects, location_name: "SseKmsEncryptedObjects"))
     SourceSelectionCriteria.add_member(:replica_modifications, Shapes::ShapeRef.new(shape: ReplicaModifications, location_name: "ReplicaModifications"))
     SourceSelectionCriteria.struct_class = Types::SourceSelectionCriteria
@@ -2529,6 +2539,10 @@ module Aws::S3
     TargetGrant.struct_class = Types::TargetGrant
 
     TargetGrants.member = Shapes::ShapeRef.new(shape: TargetGrant, location_name: "Grant")
+
+    TargetObjectKeyFormat.add_member(:simple_prefix, Shapes::ShapeRef.new(shape: SimplePrefix, location_name: "SimplePrefix"))
+    TargetObjectKeyFormat.add_member(:partitioned_prefix, Shapes::ShapeRef.new(shape: PartitionedPrefix, location_name: "PartitionedPrefix"))
+    TargetObjectKeyFormat.struct_class = Types::TargetObjectKeyFormat
 
     Tiering.add_member(:days, Shapes::ShapeRef.new(shape: IntelligentTieringDays, required: true, location_name: "Days"))
     Tiering.add_member(:access_tier, Shapes::ShapeRef.new(shape: IntelligentTieringAccessTier, required: true, location_name: "AccessTier"))

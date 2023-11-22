@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2023-11-21)
+------------------
+
+* Feature - Add support for automatic date based partitioning in S3 Server Access Logs.
+
 1.137.0 (2023-11-17)
 ------------------
 

@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
 
+1.855.0 (2023-11-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::InspectorScan`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudFrontKeyValueStore`.
+
 1.854.0 (2023-11-20)
 ------------------
 

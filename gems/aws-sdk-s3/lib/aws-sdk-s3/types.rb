@@ -963,13 +963,14 @@ module Aws::S3
     #
     # @!attribute [rw] sse_customer_algorithm
     #   The server-side encryption (SSE) algorithm used to encrypt the
-    #   object. This parameter is needed only when the object was created
-    #   using a checksum algorithm. For more information, see [Protecting
-    #   data using SSE-C keys][1] in the *Amazon S3 User Guide*.
+    #   object. This parameter is required only when the object was created
+    #   using a checksum algorithm or if your bucket policy requires the use
+    #   of SSE-C. For more information, see [Protecting data using SSE-C
+    #   keys][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html#ssec-require-condition-key
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
@@ -1479,7 +1480,8 @@ module Aws::S3
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded
     #   UTF-8 string holding JSON with the encryption context key-value
-    #   pairs.
+    #   pairs. This value must be explicitly added to specify encryption
+    #   context for CopyObject requests.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -2583,7 +2585,7 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified
-    #   Date and time the object was last modified.
+    #   Date and time when the object was last modified.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerEntry AWS API Documentation
@@ -5296,7 +5298,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Creation date of the object.
+    #   Date and time when the object was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] content_length
@@ -6146,7 +6148,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Creation date of the object.
+    #   Date and time when the object was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] content_length
@@ -8589,12 +8591,17 @@ module Aws::S3
     #   to distinguish which log files came from which bucket.
     #   @return [String]
     #
+    # @!attribute [rw] target_object_key_format
+    #   Amazon S3 key format for log objects.
+    #   @return [Types::TargetObjectKeyFormat]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled AWS API Documentation
     #
     class LoggingEnabled < Struct.new(
       :target_bucket,
       :target_grants,
-      :target_prefix)
+      :target_prefix,
+      :target_object_key_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8821,7 +8828,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] newer_noncurrent_versions
-    #   Specifies how many noncurrent versions Amazon S3 will retain. If
+    #   Specifies how many newer noncurrent versions must exist before
+    #   Amazon S3 can perform the associated action on a given version. If
     #   there are this many more recent noncurrent versions, Amazon S3 will
     #   take the associated action. For more information about noncurrent
     #   versions, see [Lifecycle configuration elements][1] in the *Amazon
@@ -8867,7 +8875,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] newer_noncurrent_versions
-    #   Specifies how many noncurrent versions Amazon S3 will retain. If
+    #   Specifies how many newer noncurrent versions must exist before
+    #   Amazon S3 can perform the associated action on a given version. If
     #   there are this many more recent noncurrent versions, Amazon S3 will
     #   take the associated action. For more information about noncurrent
     #   versions, see [Lifecycle configuration elements][1] in the *Amazon
@@ -9271,7 +9280,7 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified
-    #   Date and time the object was last modified.
+    #   Date and time when the object was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] owner
@@ -9508,6 +9517,27 @@ module Aws::S3
       :checksum_crc32c,
       :checksum_sha1,
       :checksum_sha256)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon S3 keys for log objects are partitioned in the following
+    # format:
+    #
+    # `[DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`
+    #
+    # PartitionedPrefix defaults to EventTime delivery when server access
+    # logs are delivered.
+    #
+    # @!attribute [rw] partition_date_source
+    #   Specifies the partition date source for the partitioned prefix.
+    #   PartitionDateSource can be EventTime or DeliveryTime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PartitionedPrefix AWS API Documentation
+    #
+    class PartitionedPrefix < Struct.new(
+      :partition_date_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11444,7 +11474,8 @@ module Aws::S3
     #   UTF-8 string holding JSON with the encryption context key-value
     #   pairs. This value is stored as object metadata and automatically
     #   gets passed on to Amazon Web Services KMS for future `GetObject` or
-    #   `CopyObject` operations on this object.
+    #   `CopyObject` operations on this object. This value must be
+    #   explicitly added during CopyObject operations.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -13039,6 +13070,17 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # To use simple format for S3 keys for log objects, set SimplePrefix to
+    # an empty object.
+    #
+    # `[DestinationPrefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SimplePrefix AWS API Documentation
+    #
+    class SimplePrefix < Aws::EmptyStructure; end
+
     # A container that describes additional filters for identifying the
     # source objects that you want to replicate. You can choose to enable or
     # disable the replication of these objects. Currently, Amazon S3
@@ -13227,6 +13269,27 @@ module Aws::S3
     class TargetGrant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon S3 key format for log objects. Only one format,
+    # PartitionedPrefix or SimplePrefix, is allowed.
+    #
+    # @!attribute [rw] simple_prefix
+    #   To use the simple format for S3 keys for log objects. To specify
+    #   SimplePrefix format, set SimplePrefix to \\\{\\}.
+    #   @return [Types::SimplePrefix]
+    #
+    # @!attribute [rw] partitioned_prefix
+    #   Partitioned S3 key for log objects.
+    #   @return [Types::PartitionedPrefix]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TargetObjectKeyFormat AWS API Documentation
+    #
+    class TargetObjectKeyFormat < Struct.new(
+      :simple_prefix,
+      :partitioned_prefix)
       SENSITIVE = []
       include Aws::Structure
     end

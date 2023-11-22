@@ -97,7 +97,7 @@ module Aws::S3
       data[:archive_status]
     end
 
-    # Creation date of the object.
+    # Date and time when the object was last modified.
     # @return [Time]
     def last_modified
       data[:last_modified]
@@ -792,7 +792,9 @@ module Aws::S3
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded UTF-8
-    #   string holding JSON with the encryption context key-value pairs.
+    #   string holding JSON with the encryption context key-value pairs. This
+    #   value must be explicitly added to specify encryption context for
+    #   CopyObject requests.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using Key Management Service
@@ -1453,7 +1455,8 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs. This
     #   value is stored as object metadata and automatically gets passed on to
     #   Amazon Web Services KMS for future `GetObject` or `CopyObject`
-    #   operations on this object.
+    #   operations on this object. This value must be explicitly added during
+    #   CopyObject operations.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using Key Management Service

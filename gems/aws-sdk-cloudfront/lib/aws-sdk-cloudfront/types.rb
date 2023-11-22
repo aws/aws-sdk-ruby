@@ -1021,6 +1021,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The Key Value Store entity cannot be deleted while it is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CannotDeleteEntityWhileInUse AWS API Documentation
+    #
+    class CannotDeleteEntityWhileInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CloudFront origin access identity.
     #
     # @!attribute [rw] id
@@ -2091,6 +2104,52 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the Key Value Store. The maximum length of the name is
+    #   32 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source
+    #   The S3 bucket that provides the source for the import. The source
+    #   must be in a valid JSON format.
+    #   @return [Types::ImportSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStoreRequest AWS API Documentation
+    #
+    class CreateKeyValueStoreRequest < Struct.new(
+      :name,
+      :comment,
+      :import_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_value_store
+    #   The resulting Key Value Store.
+    #   @return [Types::KeyValueStore]
+    #
+    # @!attribute [rw] etag
+    #   The ETag in the resulting Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the resulting Key Value Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStoreResult AWS API Documentation
+    #
+    class CreateKeyValueStoreResult < Struct.new(
+      :key_value_store,
+      :etag,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] distribution_id
     #   The ID of the distribution that you are enabling metrics for.
     #   @return [String]
@@ -3134,6 +3193,23 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The Key Value Store to delete, if a match occurs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyValueStoreRequest AWS API Documentation
+    #
+    class DeleteKeyValueStoreRequest < Struct.new(
+      :name,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] distribution_id
     #   The ID of the distribution that you are disabling metrics for.
     #   @return [String]
@@ -3302,6 +3378,35 @@ module Aws::CloudFront
     #
     class DescribeFunctionResult < Struct.new(
       :function_summary,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Key Value Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStoreRequest AWS API Documentation
+    #
+    class DescribeKeyValueStoreRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_value_store
+    #   The resulting Key Value Store.
+    #   @return [Types::KeyValueStore]
+    #
+    # @!attribute [rw] etag
+    #   The ETag of the resulting Key Value Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStoreResult AWS API Documentation
+    #
+    class DescribeKeyValueStoreResult < Struct.new(
+      :key_value_store,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -4023,6 +4128,59 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The Key Value Store entity already exists. You must provide a unique
+    # Key Value Store entity.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EntityAlreadyExists AWS API Documentation
+    #
+    class EntityAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store entity limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EntityLimitExceeded AWS API Documentation
+    #
+    class EntityLimitExceeded < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store entity was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EntityNotFound AWS API Documentation
+    #
+    class EntityNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store entity size limit was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EntitySizeLimitExceeded AWS API Documentation
+    #
+    class EntitySizeLimitExceeded < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex data type that includes the profile configurations and other
     # options specified for field-level encryption.
     #
@@ -4112,7 +4270,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # List of field-level encrpytion configurations.
+    # List of field-level encryption configurations.
     #
     # @!attribute [rw] next_marker
     #   If there are more elements to be listed, this element is present and
@@ -4281,8 +4439,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The time when the the field-level encryption profile summary was
-    #   last updated.
+    #   The time when the field-level encryption profile summary was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -4590,14 +4748,19 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The function's runtime environment verion.
+    #   The function's runtime environment version.
     #   @return [String]
+    #
+    # @!attribute [rw] key_value_store_associations
+    #   The configuration for the Key Value Store associations.
+    #   @return [Types::KeyValueStoreAssociations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionConfig AWS API Documentation
     #
     class FunctionConfig < Struct.new(
       :comment,
-      :runtime)
+      :runtime,
+      :key_value_store_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5772,6 +5935,26 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The import source for the Key Value Store.
+    #
+    # @!attribute [rw] source_type
+    #   The source type of the import source for the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the import source for the Key
+    #   Value Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ImportSource AWS API Documentation
+    #
+    class ImportSource < Struct.new(
+      :source_type,
+      :source_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The value of `Quantity` and the size of `Items` don't match.
     #
     # @!attribute [rw] message
@@ -6446,6 +6629,110 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyPairIds AWS API Documentation
     #
     class KeyPairIds < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store. Use this to separate data from function code,
+    # allowing you to update data without having to publish a new version of
+    # a function. The Key Value Store holds keys and their corresponding
+    # values.
+    #
+    # @!attribute [rw] name
+    #   The name of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique Id for the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment for the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last-modified time of the Key Value Store.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStore AWS API Documentation
+    #
+    class KeyValueStore < Struct.new(
+      :name,
+      :id,
+      :comment,
+      :arn,
+      :status,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store association.
+    #
+    # @!attribute [rw] key_value_store_arn
+    #   The Amazon Resource Name (ARN) of the Key Value Store association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreAssociation AWS API Documentation
+    #
+    class KeyValueStoreAssociation < Struct.new(
+      :key_value_store_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store associations.
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of Key Value Store associations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The items of the Key Value Store association.
+    #   @return [Array<Types::KeyValueStoreAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreAssociations AWS API Documentation
+    #
+    class KeyValueStoreAssociations < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Key Value Store list.
+    #
+    # @!attribute [rw] next_marker
+    #   The next marker associated with the Key Value Store list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of items in the Key Value Store list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of the Key Value Store list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The items of the Key Value Store list.
+    #   @return [Array<Types::KeyValueStore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreList AWS API Documentation
+    #
+    class KeyValueStoreList < Struct.new(
+      :next_marker,
+      :max_items,
       :quantity,
       :items)
       SENSITIVE = []
@@ -7215,6 +7502,40 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] marker
+    #   The marker associated with the Key Value Stores list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of items in the Key Value Stores list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the request for the Key Value Stores list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStoresRequest AWS API Documentation
+    #
+    class ListKeyValueStoresRequest < Struct.new(
+      :marker,
+      :max_items,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_value_store_list
+    #   The resulting Key Value Stores list.
+    #   @return [Types::KeyValueStoreList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStoresResult AWS API Documentation
+    #
+    class ListKeyValueStoresResult < Struct.new(
+      :key_value_store_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
     #   Use this field when paginating results to indicate where to begin in
     #   your list of origin access controls. The response includes the items
     #   in the list that occur after the marker. To get the next page of the
@@ -7798,9 +8119,9 @@ module Aws::CloudFront
     #
     #   * An Elastic Load Balancing load balancer
     #
-    #   * An AWS Elemental MediaPackage endpoint
+    #   * An Elemental MediaPackage endpoint
     #
-    #   * An AWS Elemental MediaStore container
+    #   * An Elemental MediaStore container
     #
     #   * Any other HTTP server, running on an Amazon EC2 instance or any
     #     other kind of host
@@ -8181,7 +8502,7 @@ module Aws::CloudFront
     # An origin group includes two origins (a primary origin and a second
     # origin to failover to) and a failover criteria that you specify. You
     # create an origin group to support origin failover in CloudFront. When
-    # you create or update a distribution, you can specifiy the origin group
+    # you create or update a distribution, you can specify the origin group
     # instead of a single origin, and CloudFront will failover from the
     # primary origin to the second origin under the failover conditions that
     # you've chosen.
@@ -12404,6 +12725,45 @@ module Aws::CloudFront
     #
     class UpdateKeyGroupResult < Struct.new(
       :key_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Key Value Store to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment of the Key Value Store to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The Key Value Store to update, if a match occurs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStoreRequest AWS API Documentation
+    #
+    class UpdateKeyValueStoreRequest < Struct.new(
+      :name,
+      :comment,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_value_store
+    #   The resulting Key Value Store to update.
+    #   @return [Types::KeyValueStore]
+    #
+    # @!attribute [rw] etag
+    #   The ETag of the resulting Key Value Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStoreResult AWS API Documentation
+    #
+    class UpdateKeyValueStoreResult < Struct.new(
+      :key_value_store,
       :etag)
       SENSITIVE = []
       include Aws::Structure

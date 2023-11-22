@@ -93,7 +93,7 @@ module Aws::S3
       data[:is_latest]
     end
 
-    # Date and time the object was last modified.
+    # Date and time when the object was last modified.
     # @return [Time]
     def last_modified
       data[:last_modified]

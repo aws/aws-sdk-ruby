@@ -15,7 +15,7 @@ module Aws
       ].each do |error_class|
         it "returns no credentials for #{error_class}" do
           stub_request(:get, "http://169.254.170.2#{path}").to_raise(error_class)
-          credentials = ECSCredentials.new(credential_path: path, backoff: 0)
+          credentials = ECSCredentials.new(credential_path: path, backoff: 0, retries: 0)
           expect(credentials.set?).to be(false)
         end
       end
@@ -56,7 +56,7 @@ module Aws
       end
 
       it 'populates credentials from the instance profile' do
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid')
         expect(c.credentials.secret_access_key).to eq('secret')
         expect(c.credentials.session_token).to eq('session-token')
@@ -75,7 +75,7 @@ module Aws
       it "ignores ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] if also set" do
         # is not stubbed and should not be used
         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://amazon.com:1234/path'
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid')
         expect(c.credentials.secret_access_key).to eq('secret')
         expect(c.credentials.session_token).to eq('session-token')
@@ -120,7 +120,7 @@ module Aws
       end
 
       context 'retries' do
-        it 'defaults to 0' do
+        it 'defaults to 5' do
           stub_request(:get, "http://169.254.170.2#{path}").to_raise(SocketError)
           expect(ECSCredentials.new(backoff: 0).retries).to be(5)
         end
@@ -142,7 +142,7 @@ module Aws
         it 'retries if the first load fails' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 200, body: resp2)
-          c = ECSCredentials.new(backoff: 0)
+          c = ECSCredentials.new(backoff: 0, retries: 0)
           expect(c.credentials.access_key_id).to eq('akid-2')
           expect(c.credentials.secret_access_key).to eq('secret-2')
           expect(c.credentials.session_token).to eq('session-token-2')
@@ -155,7 +155,7 @@ module Aws
             .to_return(status: 200, body: '')
             .to_return(status: 200, body: '{')
             .to_return(status: 200, body: resp2)
-          c = ECSCredentials.new(backoff: 0)
+          c = ECSCredentials.new(backoff: 0, retries: 0)
           expect(c.credentials.access_key_id).to eq('akid-2')
           expect(c.credentials.secret_access_key).to eq('secret-2')
           expect(c.credentials.session_token).to eq('session-token-2')
@@ -169,7 +169,7 @@ module Aws
             .to_return(status: 200, body: '{')
             .to_return(status: 200, body: ' ')
           expect do
-            ECSCredentials.new(backoff: 0)
+            ECSCredentials.new(backoff: 0, retries: 0)
           end.to raise_error(
             Aws::Errors::MetadataParserError,
             'Failed to parse metadata service response.'
@@ -183,7 +183,7 @@ module Aws
             .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
             .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           expect do
-            ECSCredentials.new(backoff: 0)
+            ECSCredentials.new(backoff: 0, retries: 0)
           end.to raise_error(ArgumentError)
         end
       end
@@ -196,7 +196,7 @@ module Aws
 
           it 'validates the token for carriage return and newline' do
             expect do
-              ECSCredentials.new(backoff: 0)
+              ECSCredentials.new(backoff: 0, retries: 0)
             end.to raise_error(ECSCredentials::InvalidTokenError)
           end
         end
@@ -209,7 +209,7 @@ module Aws
 
           it 'validates the token for carriage return and newline' do
             expect do
-              ECSCredentials.new(backoff: 0)
+              ECSCredentials.new(backoff: 0, retries: 0)
             end.to raise_error(ECSCredentials::InvalidTokenError)
           end
         end
@@ -219,9 +219,9 @@ module Aws
     # This section is redundant with json runner tests, but keeping anyway
     context 'AWS_CONTAINER_CREDENTIALS_FULL_URI is set' do
       let(:full_uri) { 'https://amazon.com:1234/path' }
-      let(:loopback_uri) { 'http://localhost/path' }
-      let(:loopback_ip) { 'http://127.0.0.1/path' }
-      let(:loopback_ipv6) { 'http://[::1]/path' }
+      let(:loopback_uri) { URI('http://localhost/path') }
+      let(:loopback_ip) { URI('http://127.0.0.1/path') }
+      let(:loopback_ipv6) { URI('http://[::1]/path') }
       let(:expiration) { Time.now.utc + 3600 }
 
       let(:resp) { <<~JSON.strip }
@@ -245,19 +245,19 @@ module Aws
           %w[205.251.242.103 52.94.236.248 54.239.28.85]
         )
         expect do
-          ECSCredentials.new(backoff: 0)
+          ECSCredentials.new(backoff: 0, retries: 0)
         end.to raise_error(ArgumentError, /loopback/)
       end
 
       it 'raises for an http IP that is not a loopback' do
         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://205.251.242.103/path'
         expect do
-          ECSCredentials.new(backoff: 0)
+          ECSCredentials.new(backoff: 0, retries: 0)
         end.to raise_error(ArgumentError, /loopback/)
       end
 
       it 'uses the full uri if https' do
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')
         expect(c.credentials.session_token).to eq('session-token-full')
@@ -265,9 +265,9 @@ module Aws
       end
 
       it 'uses an http URI if it is a loopback' do
-        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_uri
+        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_uri.to_s
         stub_request(:get, loopback_uri).to_return(status: 200, body: resp)
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')
         expect(c.credentials.session_token).to eq('session-token-full')
@@ -275,9 +275,9 @@ module Aws
       end
 
       it 'uses an http IP if it is a loopback' do
-        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ip
+        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ip.to_s
         stub_request(:get, loopback_ip).to_return(status: 200, body: resp)
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')
         expect(c.credentials.session_token).to eq('session-token-full')
@@ -285,9 +285,9 @@ module Aws
       end
 
       it 'uses an http IPv6 if it is a loopback' do
-        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ipv6
+        ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = loopback_ipv6.to_s
         stub_request(:get, loopback_ipv6).to_return(status: 200, body: resp)
-        c = ECSCredentials.new(backoff: 0)
+        c = ECSCredentials.new(backoff: 0, retries: 0)
         expect(c.credentials.access_key_id).to eq('akid-full')
         expect(c.credentials.secret_access_key).to eq('secret-full')
         expect(c.credentials.session_token).to eq('session-token-full')
@@ -321,7 +321,7 @@ module Aws
 
       def setup_request(request)
         method = request['method'].downcase.to_sym
-        uri = request['uri']
+        uri = URI(request['uri'])
         headers = request['headers']
 
         resp = { body: '{}', status: 200 }
@@ -374,10 +374,10 @@ module Aws
         case expect['reason']
         when /301 Moved Permanently/, /401 Unauthorized/,
              /429 Too Many Requests/, /500 Internal Server Error/
-          creds = ECSCredentials.new(backoff: 0)
+          creds = ECSCredentials.new(backoff: 0, retries: 0)
           expect(creds.set?).to be(false)
         else
-          expect { ECSCredentials.new(backoff: 0) }
+          expect { ECSCredentials.new(backoff: 0, retries: 0) }
             .to raise_error(RuntimeError)
         end
       end
@@ -390,7 +390,7 @@ module Aws
           if expect['type'] == 'error'
             handle_expectation(expect)
           elsif expect['type'] == 'success'
-            c = ECSCredentials.new(backoff: 0)
+            c = ECSCredentials.new(backoff: 0, retries: 0)
             credentials = expect['credentials']
             expect(c.credentials.access_key_id).to eq(credentials['access_key_id'])
             expect(c.credentials.secret_access_key).to eq(credentials['secret_access_key'])

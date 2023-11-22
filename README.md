@@ -500,6 +500,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Chime SDK Voice                                | Aws::ChimeSDKVoice                       | aws-sdk-chimesdkvoice                       | 2022-08-03  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                      | aws-sdk-clouddirectory                      | 2017-01-11  |
 | Amazon CloudFront                                     | Aws::CloudFront                          | aws-sdk-cloudfront                          | 2020-05-31  |
+| Amazon CloudFront KeyValueStore                       | Aws::CloudFrontKeyValueStore             | aws-sdk-cloudfrontkeyvaluestore             | 2022-07-26  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                            | aws-sdk-cloudhsm                            | 2014-05-30  |
 | Amazon CloudSearch                                    | Aws::CloudSearch                         | aws-sdk-cloudsearch                         | 2013-01-01  |
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain                   | aws-sdk-cloudsearchdomain                   | 2013-01-01  |
@@ -668,6 +669,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
+| Inspector Scan                                        | Aws::InspectorScan                       | aws-sdk-inspectorscan                       | 2023-08-08  |
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
