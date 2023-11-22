@@ -54,9 +54,9 @@ When `true`, HTTP2 debug output will be sent to the `:logger`.
         DOCS
 
         option(:enable_alpn, default: false, doc_type: 'Boolean', docstring: <<-DOCS)
-Setting to `true` to enable ALPN in HTTP2 over TLS, requires Ruby version >= 2.3 and
-Openssl version >= 1.0.2. Defaults to false. Note: not all service HTTP2 operations
-supports ALPN on server side, please refer to service documentation.
+Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
+Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
+side, please refer to service documentation.
         DOCS
 
         option(:logger)

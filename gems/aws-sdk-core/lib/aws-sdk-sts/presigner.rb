@@ -35,7 +35,7 @@ module Aws
       #   )
       #
       # This can be easily converted to a token used by the EKS service:
-      # {https://ruby-doc.org/stdlib-2.3.1/libdoc/base64/rdoc/Base64.html#method-i-encode64}
+      # {https://docs.ruby-lang.org/en/3.2/Base64.html#method-i-encode64}
       # "k8s-aws-v1." + Base64.urlsafe_encode64(url).chomp("==")
       def get_caller_identity_presigned_url(options = {})
         req = @client.build_request(:get_caller_identity, {})

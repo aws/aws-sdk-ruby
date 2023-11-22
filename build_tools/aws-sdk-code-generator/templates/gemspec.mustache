@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('{{gem}}', '{{&version}}')
   {{/dependencies}}
 
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.5'
   {{#deprecated?}}
   spec.post_install_message = '*** {{gem_name}} is deprecated ***'
   {{/deprecated?}}
