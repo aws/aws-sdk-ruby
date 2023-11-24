@@ -170,7 +170,6 @@ module Aws
 
           it 'reports progress for multipart uploads' do
             thread = double(value: nil)
-            allow(thread).to receive(:abort_on_exception=)
             allow(Thread).to receive(:new).and_yield.and_return(thread)
 
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
