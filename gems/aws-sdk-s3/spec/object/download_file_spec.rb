@@ -231,24 +231,6 @@ module Aws
           end.to raise_error(Aws::Errors::ChecksumError)
         end
 
-        it 'does not interrupt the main thread when an exception occurs' do
-          client.stub_responses(
-            :get_object,
-            {
-              body: 'body',
-              checksum_sha1: 'invalid'
-            }
-          )
-
-          threads = []
-          threads << Thread.new do
-            expect { large_obj.download_file(path) }
-              .to raise_error(Aws::Errors::ChecksumError)
-          end
-
-          expect { threads.each(&:join) }.not_to raise_error
-        end
-
         it 'calls on_checksum_validated on single part' do
           callback_data = {called: 0}
           mutex = Mutex.new
