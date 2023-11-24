@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix thread interruptions in multipart `download_file`, `file_uploader` and `stream_uploader` (#2944).
+
 1.139.0 (2023-11-22)
 ------------------
 
