@@ -229,6 +229,24 @@ module Aws
       end
     end
 
+    context 's3_disable_express_session_auth selection' do
+      it 'can resolve s3_disable_express_session_auth from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_disable_express_session_auth'
+        )
+        expect(config.s3_disable_express_session_auth).to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_do_not_use_express_zonal_auth'
+        )
+        expect(config.s3_disable_express_session_auth).to eq('false')
+      end
+    end
+
     context 'retry_mode selection' do
       it 'can resolve retry_mode from config file' do
         config = SharedConfig.new(

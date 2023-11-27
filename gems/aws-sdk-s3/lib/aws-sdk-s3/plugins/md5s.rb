@@ -22,7 +22,8 @@ module Aws
           CHUNK_SIZE = 1 * 1024 * 1024 # one MB
 
           def call(context)
-            if !context[:checksum_algorithms] # skip in favor of flexible checksum
+            if !context[:checksum_algorithms] && # skip in favor of flexible checksum
+               !context[:s3_express_endpoint] # s3 express endpoints do not support md5
               body = context.http_request.body
               if body.respond_to?(:size) && body.size > 0
                 context.http_request.headers['Content-Md5'] ||= md5(body)

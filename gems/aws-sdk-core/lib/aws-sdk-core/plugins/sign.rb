@@ -13,7 +13,7 @@ module Aws
       option(:sigv4_region)
       option(:unsigned_operations, default: [])
 
-      supported_auth_types = %w[sigv4 bearer none]
+      supported_auth_types = %w[sigv4 bearer sigv4-s3express none]
       supported_auth_types += ['sigv4a'] if Aws::Sigv4::Signer.use_crt?
       SUPPORTED_AUTH_TYPES = supported_auth_types.freeze
 
@@ -24,10 +24,14 @@ module Aws
 
       # @api private
       # Return a signer with the `sign(context)` method
-      def self.signer_for(auth_scheme, config, region_override = nil)
+      def self.signer_for(auth_scheme, config, sigv4_region_override = nil, sigv4_credentials_override = nil)
         case auth_scheme['name']
-        when 'sigv4', 'sigv4a'
-          SignatureV4.new(auth_scheme, config, region_override)
+        when 'sigv4', 'sigv4a', 'sigv4-s3express'
+          sigv4_overrides = {
+            region: sigv4_region_override,
+            credentials: sigv4_credentials_override
+          }
+          SignatureV4.new(auth_scheme, config, sigv4_overrides)
         when 'bearer'
           Bearer.new
         else
@@ -42,7 +46,8 @@ module Aws
             signer = Sign.signer_for(
               context[:auth_scheme],
               context.config,
-              context[:sigv4_region]
+              context[:sigv4_region],
+              context[:sigv4_credentials]
             )
             signer.sign(context)
           end
@@ -88,12 +93,12 @@ module Aws
 
       # @api private
       class SignatureV4
-        def initialize(auth_scheme, config, region_override = nil)
+        def initialize(auth_scheme, config, sigv4_overrides = {})
           scheme_name = auth_scheme['name']
 
-          unless %w[sigv4 sigv4a].include?(scheme_name)
+          unless %w[sigv4 sigv4a sigv4-s3express].include?(scheme_name)
             raise ArgumentError,
-                  "Expected sigv4 or sigv4a auth scheme, got #{scheme_name}"
+                  "Expected sigv4, sigv4a, or sigv4-s3express auth scheme, got #{scheme_name}"
           end
 
           region = if scheme_name == 'sigv4a'
@@ -104,8 +109,8 @@ module Aws
           begin
             @signer = Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
-              region: region_override || config.sigv4_region || region,
-              credentials_provider: config.credentials,
+              region: sigv4_overrides[:region] || config.sigv4_region || region,
+              credentials_provider: sigv4_overrides[:credentials] || config.credentials,
               signing_algorithm: scheme_name.to_sym,
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
               normalize_path: !!!auth_scheme['disableNormalizePath'],

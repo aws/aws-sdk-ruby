@@ -388,6 +388,19 @@ module Aws
           expect(signature.canonical_request.lines.to_a[1]).to eq "/foo%bar\n"
         end
 
+        it 'can sign with s3session tokens' do
+          options[:signing_algorithm] = 'sigv4-s3express'.to_sym
+          options[:credentials_provider] = StaticCredentialsProvider.new(
+            access_key_id: 's3-akid',
+            secret_access_key: 's3-secret',
+            session_token: 's3-token'
+          )
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com',
+          )
+          expect(signature.headers['x-amz-s3session-token']).to eq('s3-token')
+        end
       end
 
       context '#sign_event' do

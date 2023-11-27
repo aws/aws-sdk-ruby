@@ -251,7 +251,14 @@ module Aws
         sigv4_headers = {}
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
-        sigv4_headers['x-amz-security-token'] = creds.session_token if creds.session_token
+        if creds.session_token
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
+            sigv4_headers['x-amz-s3session-token'] = creds.session_token
+          else
+            sigv4_headers['x-amz-security-token'] = creds.session_token
+          end
+        end
+
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
@@ -424,7 +431,13 @@ module Aws
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
         params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
-        params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
+        if creds.session_token
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
+            params['X-Amz-S3session-Token'] = creds.session_token
+          else
+            params['X-Amz-Security-Token'] = creds.session_token
+          end
+        end
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
         params = params.map do |key, value|

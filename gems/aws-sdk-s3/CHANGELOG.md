@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Express authentication and endpoints. Express session auth can be disabled with the `disable_s3_express_session_auth` Client option, the `AWS_S3_DISABLE_EXPRESS_SESSION_AUTH` environment variable, and the `s3_disable_express_session_auth` shared config option. A custom `express_credentials_provider` can be configured onto the Client.
+
 1.140.0 (2023-11-27)
 ------------------
 
@@ -68,6 +70,7 @@ Unreleased Changes
 * Feature - S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
 
 * Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+
 * Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
 
 1.129.0 (2023-07-11)

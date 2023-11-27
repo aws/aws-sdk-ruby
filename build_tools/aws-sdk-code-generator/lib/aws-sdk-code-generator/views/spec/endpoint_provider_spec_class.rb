@@ -90,6 +90,10 @@ module AwsSdkCodeGenerator
               !@expect['endpoint']['properties']['authSchemes'].empty?
           end
 
+          def s3_express_auth?
+            expect_auth? && expected_auth['name'] == 'sigv4-s3express'
+          end
+
           def expected_headers
             @expect['endpoint']['headers'].map { |k,v| Param.new(k, v.join(",")) }
           end
