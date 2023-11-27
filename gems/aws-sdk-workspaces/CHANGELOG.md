@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2023-11-27)
+------------------
+
+* Feature - The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.
+
 1.92.0 (2023-11-22)
 ------------------
 

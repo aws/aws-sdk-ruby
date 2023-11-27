@@ -154,6 +154,7 @@ module Aws::EFS
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyRequests = Shapes::StructureShape.new(name: 'TooManyRequests')
+    TransitionToArchiveRules = Shapes::StringShape.new(name: 'TransitionToArchiveRules')
     TransitionToIARules = Shapes::StringShape.new(name: 'TransitionToIARules')
     TransitionToPrimaryStorageClassRules = Shapes::StringShape.new(name: 'TransitionToPrimaryStorageClassRules')
     Uid = Shapes::IntegerShape.new(name: 'Uid')
@@ -400,6 +401,7 @@ module Aws::EFS
     FileSystemSize.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     FileSystemSize.add_member(:value_in_ia, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInIA"))
     FileSystemSize.add_member(:value_in_standard, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInStandard"))
+    FileSystemSize.add_member(:value_in_archive, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInArchive"))
     FileSystemSize.struct_class = Types::FileSystemSize
 
     IncorrectFileSystemLifeCycleState.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
@@ -433,6 +435,7 @@ module Aws::EFS
 
     LifecyclePolicy.add_member(:transition_to_ia, Shapes::ShapeRef.new(shape: TransitionToIARules, location_name: "TransitionToIA"))
     LifecyclePolicy.add_member(:transition_to_primary_storage_class, Shapes::ShapeRef.new(shape: TransitionToPrimaryStorageClassRules, location_name: "TransitionToPrimaryStorageClass"))
+    LifecyclePolicy.add_member(:transition_to_archive, Shapes::ShapeRef.new(shape: TransitionToArchiveRules, location_name: "TransitionToArchive"))
     LifecyclePolicy.struct_class = Types::LifecyclePolicy
 
     ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ResourceId"))
@@ -859,6 +862,12 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_replication_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -872,6 +881,12 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|

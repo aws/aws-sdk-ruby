@@ -160,6 +160,7 @@ module Aws::TranscribeService
     SubtitleOutputStartIndex = Shapes::IntegerShape.new(name: 'SubtitleOutputStartIndex')
     Subtitles = Shapes::StructureShape.new(name: 'Subtitles')
     SubtitlesOutput = Shapes::StructureShape.new(name: 'SubtitlesOutput')
+    Summarization = Shapes::StructureShape.new(name: 'Summarization')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -237,6 +238,7 @@ module Aws::TranscribeService
     CallAnalyticsJobSettings.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     CallAnalyticsJobSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     CallAnalyticsJobSettings.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
+    CallAnalyticsJobSettings.add_member(:summarization, Shapes::ShapeRef.new(shape: Summarization, location_name: "Summarization"))
     CallAnalyticsJobSettings.struct_class = Types::CallAnalyticsJobSettings
 
     CallAnalyticsJobSummaries.member = Shapes::ShapeRef.new(shape: CallAnalyticsJobSummary)
@@ -741,6 +743,9 @@ module Aws::TranscribeService
     SubtitlesOutput.add_member(:subtitle_file_uris, Shapes::ShapeRef.new(shape: SubtitleFileUris, location_name: "SubtitleFileUris"))
     SubtitlesOutput.add_member(:output_start_index, Shapes::ShapeRef.new(shape: SubtitleOutputStartIndex, location_name: "OutputStartIndex"))
     SubtitlesOutput.struct_class = Types::SubtitlesOutput
+
+    Summarization.add_member(:generate_abstractive_summary, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "GenerateAbstractiveSummary"))
+    Summarization.struct_class = Types::Summarization
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))

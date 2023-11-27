@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-11-27)
+------------------
+
+* Feature - Add support for Runtime Monitoring for ECS and ECS-EC2.
+
 1.83.0 (2023-11-22)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.857.0 (2023-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkSpacesThinClient`.
+
+* Feature - Added support for enumerating regions for `Aws::Repostspace`.
+
+* Feature - Added support for enumerating regions for `Aws::FreeTier`.
+
+* Feature - Added support for enumerating regions for `Aws::EKSAuth`.
+
+* Feature - Added support for enumerating regions for `Aws::CostOptimizationHub`.
+
+* Feature - Added support for enumerating regions for `Aws::BCMDataExports`.
+
 1.856.0 (2023-11-22)
 ------------------
 

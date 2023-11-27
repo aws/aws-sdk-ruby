@@ -32,7 +32,7 @@ require_relative 'aws-sdk-personalizeruntime/customizations'
 # structure.
 #
 #     personalize_runtime = Aws::PersonalizeRuntime::Client.new
-#     resp = personalize_runtime.get_personalized_ranking(params)
+#     resp = personalize_runtime.get_action_recommendations(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-personalizeruntime/customizations'
 # @!group service
 module Aws::PersonalizeRuntime
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end

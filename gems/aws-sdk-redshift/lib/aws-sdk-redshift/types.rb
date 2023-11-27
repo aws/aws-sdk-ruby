@@ -152,13 +152,18 @@ module Aws::Redshift
     #   Region.
     #   @return [String]
     #
+    # @!attribute [rw] allow_writes
+    #   If set to true, allows write operations for a datashare.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumerMessage AWS API Documentation
     #
     class AssociateDataShareConsumerMessage < Struct.new(
       :data_share_arn,
       :associate_entire_account,
       :consumer_arn,
-      :consumer_region)
+      :consumer_region,
+      :allow_writes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -320,11 +325,16 @@ module Aws::Redshift
     #   keyword, such as ADX.
     #   @return [String]
     #
+    # @!attribute [rw] allow_writes
+    #   If set to true, allows write operations for a datashare.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShareMessage AWS API Documentation
     #
     class AuthorizeDataShareMessage < Struct.new(
       :data_share_arn,
-      :consumer_identifier)
+      :consumer_identifier,
+      :allow_writes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3281,6 +3291,16 @@ module Aws::Redshift
     #   The status change data of the datashare that is associated.
     #   @return [Time]
     #
+    # @!attribute [rw] producer_allowed_writes
+    #   Specifies whether write operations were allowed during data share
+    #   authorization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] consumer_accepted_writes
+    #   Specifies whether write operations were allowed during data share
+    #   association.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataShareAssociation AWS API Documentation
     #
     class DataShareAssociation < Struct.new(
@@ -3288,7 +3308,9 @@ module Aws::Redshift
       :status,
       :consumer_region,
       :created_date,
-      :status_change_date)
+      :status_change_date,
+      :producer_allowed_writes,
+      :consumer_accepted_writes)
       SENSITIVE = []
       include Aws::Structure
     end

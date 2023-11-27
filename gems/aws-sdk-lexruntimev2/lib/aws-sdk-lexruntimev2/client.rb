@@ -530,6 +530,7 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
+    #   resp.interpretations[0].interpretation_source #=> String, one of "Bedrock", "Lex"
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
     #   resp.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
@@ -946,6 +947,7 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].sub_slots #=> Types::Slots
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
+    #   resp.interpretations[0].interpretation_source #=> String, one of "Bedrock", "Lex"
     #   resp.request_attributes #=> Hash
     #   resp.request_attributes["NonEmptyString"] #=> String
     #   resp.session_id #=> String
@@ -1167,7 +1169,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

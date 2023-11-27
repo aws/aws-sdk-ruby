@@ -589,7 +589,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
     # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
@@ -738,6 +738,132 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates an *anomaly detector* that regularly scans one or more log
+    # groups and look for patterns and anomalies in the logs.
+    #
+    # An anomaly detector can help surface issues by automatically
+    # discovering anomalies in your log event traffic. An anomaly detector
+    # uses machine learning algorithms to scan log events and find
+    # *patterns*. A pattern is a shared text structure that recurs among
+    # your log fields. Patterns provide a useful tool for analyzing large
+    # sets of logs because a large number of log events can often be
+    # compressed into a few patterns.
+    #
+    # The anomaly detector uses pattern recognition to find `anomalies`,
+    # which are unusual log events. It uses the `evaluationFrequency` to
+    # compare current log events and patterns with trained baselines.
+    #
+    # Fields within a pattern are called *tokens*. Fields that vary within a
+    # pattern, such as a request ID or timestamp, are referred to as
+    # *dynamic tokens* and represented by `<*>`.
+    #
+    # The following is an example of a pattern:
+    #
+    # `[INFO] Request time: <*> ms`
+    #
+    # This pattern represents log events like `[INFO] Request time: 327 ms`
+    # and other similar log events that differ only by the number, in this
+    # csse 327. When the pattern is displayed, the different numbers are
+    # replaced by `<*>`
+    #
+    # <note markdown="1"> Any parts of log events that are masked as sensitive data are not
+    # scanned for anomalies. For more information about masking sensitive
+    # data, see [Help protect sensitive log data with masking][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
+    #
+    # @option params [required, Array<String>] :log_group_arn_list
+    #   An array containing the ARNs of the log groups that this anomaly
+    #   detector will watch. You must specify at least one ARN.
+    #
+    # @option params [String] :detector_name
+    #   A name for this anomaly detector.
+    #
+    # @option params [String] :evaluation_frequency
+    #   Specifies how often the anomaly detector is to run and look for
+    #   anomalies. Set this value according to the frequency that the log
+    #   group receives new logs. For example, if the log group receives new
+    #   log events every 10 minutes, then 15 minutes might be a good setting
+    #   for `evaluationFrequency` .
+    #
+    # @option params [String] :filter_pattern
+    #   You can use this parameter to limit the anomaly detection model to
+    #   examine only log events that match the pattern you specify here. For
+    #   more information, see [Filter and Pattern Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #
+    # @option params [String] :kms_key_id
+    #   Optionally assigns a KMS key to secure this anomaly detector and its
+    #   findings. If a key is assigned, the anomalies found and the model used
+    #   by this detector are encrypted at rest with the key. If a key is
+    #   assigned to an anomaly detector, a user must have permissions for both
+    #   this key and for the anomaly detector to retrieve information about
+    #   the anomalies that it finds.
+    #
+    #   For more information about using a KMS key and to see the required IAM
+    #   policy, see [Use a KMS key with an anomaly detector][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/LogsAnomalyDetection-KMS.html
+    #
+    # @option params [Integer] :anomaly_visibility_time
+    #   The number of days to have visibility on an anomaly. After this time
+    #   period has elapsed for an anomaly, it will be automatically baselined
+    #   and the anomaly detector will treat new occurrences of a similar
+    #   anomaly as normal. Therefore, if you do not correct the cause of an
+    #   anomaly during the time period specified in `anomalyVisibilityTime`,
+    #   it will be considered normal going forward and will not be detected as
+    #   an anomaly.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateLogAnomalyDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLogAnomalyDetectorResponse#anomaly_detector_arn #anomaly_detector_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_log_anomaly_detector({
+    #     log_group_arn_list: ["LogGroupArn"], # required
+    #     detector_name: "DetectorName",
+    #     evaluation_frequency: "ONE_MIN", # accepts ONE_MIN, FIVE_MIN, TEN_MIN, FIFTEEN_MIN, THIRTY_MIN, ONE_HOUR
+    #     filter_pattern: "FilterPattern",
+    #     kms_key_id: "KmsKeyId",
+    #     anomaly_visibility_time: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogAnomalyDetector AWS API Documentation
+    #
+    # @overload create_log_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def create_log_anomaly_detector(params = {}, options = {})
+      req = build_request(:create_log_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Creates a log group with the specified name. You can create up to
     # 1,000,000 log groups per Region per account.
     #
@@ -775,7 +901,7 @@ module Aws::CloudWatchLogs
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
     # @option params [required, String] :log_group_name
-    #   The name of the log group.
+    #   A name for the log group.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) of the KMS key to use when encrypting
@@ -802,6 +928,24 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #
+    # @option params [String] :log_group_class
+    #   Use this parameter to specify the log group class for this log group.
+    #   There are two classes:
+    #
+    #   * The `Standard` log class supports all CloudWatch Logs features.
+    #
+    #   * The `Infrequent Access` log class supports a subset of CloudWatch
+    #     Logs features and incurs lower costs.
+    #
+    #   If you omit this parameter, the default of `STANDARD` is used.
+    #
+    #   For details about the features supported by each class, see [Log
+    #   classes][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -812,6 +956,7 @@ module Aws::CloudWatchLogs
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup AWS API Documentation
@@ -1074,6 +1219,34 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def delete_destination(params = {}, options = {})
       req = build_request(:delete_destination, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified CloudWatch Logs anomaly detector.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The ARN of the anomaly detector to delete. You can find the ARNs of
+    #   log anomaly detectors in your account by using the
+    #   [ListLogAnomalyDetectors][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_log_anomaly_detector({
+    #     anomaly_detector_arn: "AnomalyDetectorArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogAnomalyDetector AWS API Documentation
+    #
+    # @overload delete_log_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def delete_log_anomaly_detector(params = {}, options = {})
+      req = build_request(:delete_log_anomaly_detector, params)
       req.send_request(options)
     end
 
@@ -1635,6 +1808,22 @@ module Aws::CloudWatchLogs
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
     #
+    # @option params [String] :log_group_class
+    #   Specifies the log group class for this log group. There are two
+    #   classes:
+    #
+    #   * The `Standard` log class supports all CloudWatch Logs features.
+    #
+    #   * The `Infrequent Access` log class supports a subset of CloudWatch
+    #     Logs features and incurs lower costs.
+    #
+    #   For details about the features supported by each class, see [Log
+    #   classes][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+    #
     # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLogGroupsResponse#log_groups #log_groups} => Array&lt;Types::LogGroup&gt;
@@ -1651,6 +1840,7 @@ module Aws::CloudWatchLogs
     #     next_token: "NextToken",
     #     limit: 1,
     #     include_linked_accounts: false,
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS
     #   })
     #
     # @example Response structure
@@ -1666,6 +1856,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].data_protection_status #=> String, one of "ACTIVATED", "DELETED", "ARCHIVED", "DISABLED"
     #   resp.log_groups[0].inherited_properties #=> Array
     #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -2482,6 +2673,57 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Retrieves information about the log anomaly detector that you specify.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The ARN of the anomaly detector to retrieve information about. You can
+    #   find the ARNs of log anomaly detectors in your account by using the
+    #   [ListLogAnomalyDetectors][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html
+    #
+    # @return [Types::GetLogAnomalyDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogAnomalyDetectorResponse#detector_name #detector_name} => String
+    #   * {Types::GetLogAnomalyDetectorResponse#log_group_arn_list #log_group_arn_list} => Array&lt;String&gt;
+    #   * {Types::GetLogAnomalyDetectorResponse#evaluation_frequency #evaluation_frequency} => String
+    #   * {Types::GetLogAnomalyDetectorResponse#filter_pattern #filter_pattern} => String
+    #   * {Types::GetLogAnomalyDetectorResponse#anomaly_detector_status #anomaly_detector_status} => String
+    #   * {Types::GetLogAnomalyDetectorResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetLogAnomalyDetectorResponse#creation_time_stamp #creation_time_stamp} => Integer
+    #   * {Types::GetLogAnomalyDetectorResponse#last_modified_time_stamp #last_modified_time_stamp} => Integer
+    #   * {Types::GetLogAnomalyDetectorResponse#anomaly_visibility_time #anomaly_visibility_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_anomaly_detector({
+    #     anomaly_detector_arn: "AnomalyDetectorArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.detector_name #=> String
+    #   resp.log_group_arn_list #=> Array
+    #   resp.log_group_arn_list[0] #=> String
+    #   resp.evaluation_frequency #=> String, one of "ONE_MIN", "FIVE_MIN", "TEN_MIN", "FIFTEEN_MIN", "THIRTY_MIN", "ONE_HOUR"
+    #   resp.filter_pattern #=> String
+    #   resp.anomaly_detector_status #=> String, one of "INITIALIZING", "TRAINING", "ANALYZING", "FAILED", "DELETED", "PAUSED"
+    #   resp.kms_key_id #=> String
+    #   resp.creation_time_stamp #=> Integer
+    #   resp.last_modified_time_stamp #=> Integer
+    #   resp.anomaly_visibility_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogAnomalyDetector AWS API Documentation
+    #
+    # @overload get_log_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def get_log_anomaly_detector(params = {}, options = {})
+      req = build_request(:get_log_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Lists log events from the specified log stream. You can list all of
     # the log events or filter using a time range.
     #
@@ -2790,6 +3032,137 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def get_query_results(params = {}, options = {})
       req = build_request(:get_query_results, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of anomalies that log anomaly detectors have found. For
+    # details about the structure format of each anomaly object that is
+    # returned, see the example in this section.
+    #
+    # @option params [String] :anomaly_detector_arn
+    #   Use this to optionally limit the results to only the anomalies found
+    #   by a certain anomaly detector.
+    #
+    # @option params [String] :suppression_state
+    #   You can specify this parameter if you want to the operation to return
+    #   only anomalies that are currently either suppressed or unsuppressed.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return. If you don't specify a value,
+    #   the default maximum value of 50 items is used.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::ListAnomaliesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnomaliesResponse#anomalies #anomalies} => Array&lt;Types::Anomaly&gt;
+    #   * {Types::ListAnomaliesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_anomalies({
+    #     anomaly_detector_arn: "AnomalyDetectorArn",
+    #     suppression_state: "SUPPRESSED", # accepts SUPPRESSED, UNSUPPRESSED
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomalies #=> Array
+    #   resp.anomalies[0].anomaly_id #=> String
+    #   resp.anomalies[0].pattern_id #=> String
+    #   resp.anomalies[0].anomaly_detector_arn #=> String
+    #   resp.anomalies[0].pattern_string #=> String
+    #   resp.anomalies[0].pattern_regex #=> String
+    #   resp.anomalies[0].priority #=> String
+    #   resp.anomalies[0].first_seen #=> Integer
+    #   resp.anomalies[0].last_seen #=> Integer
+    #   resp.anomalies[0].description #=> String
+    #   resp.anomalies[0].active #=> Boolean
+    #   resp.anomalies[0].state #=> String, one of "Active", "Suppressed", "Baseline"
+    #   resp.anomalies[0].histogram #=> Hash
+    #   resp.anomalies[0].histogram["Time"] #=> Integer
+    #   resp.anomalies[0].log_samples #=> Array
+    #   resp.anomalies[0].log_samples[0] #=> String
+    #   resp.anomalies[0].pattern_tokens #=> Array
+    #   resp.anomalies[0].pattern_tokens[0].dynamic_token_position #=> Integer
+    #   resp.anomalies[0].pattern_tokens[0].is_dynamic #=> Boolean
+    #   resp.anomalies[0].pattern_tokens[0].token_string #=> String
+    #   resp.anomalies[0].pattern_tokens[0].enumerations #=> Hash
+    #   resp.anomalies[0].pattern_tokens[0].enumerations["TokenString"] #=> Integer
+    #   resp.anomalies[0].log_group_arn_list #=> Array
+    #   resp.anomalies[0].log_group_arn_list[0] #=> String
+    #   resp.anomalies[0].suppressed #=> Boolean
+    #   resp.anomalies[0].suppressed_date #=> Integer
+    #   resp.anomalies[0].suppressed_until #=> Integer
+    #   resp.anomalies[0].is_pattern_level_suppression #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListAnomalies AWS API Documentation
+    #
+    # @overload list_anomalies(params = {})
+    # @param [Hash] params ({})
+    def list_anomalies(params = {}, options = {})
+      req = build_request(:list_anomalies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the log anomaly detectors in the account.
+    #
+    # @option params [String] :filter_log_group_arn
+    #   Use this to optionally filter the results to only include anomaly
+    #   detectors that are associated with the specified log group.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return. If you don't specify a value,
+    #   the default maximum value of 50 items is used.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::ListLogAnomalyDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogAnomalyDetectorsResponse#anomaly_detectors #anomaly_detectors} => Array&lt;Types::AnomalyDetector&gt;
+    #   * {Types::ListLogAnomalyDetectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_anomaly_detectors({
+    #     filter_log_group_arn: "LogGroupArn",
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detectors #=> Array
+    #   resp.anomaly_detectors[0].anomaly_detector_arn #=> String
+    #   resp.anomaly_detectors[0].detector_name #=> String
+    #   resp.anomaly_detectors[0].log_group_arn_list #=> Array
+    #   resp.anomaly_detectors[0].log_group_arn_list[0] #=> String
+    #   resp.anomaly_detectors[0].evaluation_frequency #=> String, one of "ONE_MIN", "FIVE_MIN", "TEN_MIN", "FIFTEEN_MIN", "THIRTY_MIN", "ONE_HOUR"
+    #   resp.anomaly_detectors[0].filter_pattern #=> String
+    #   resp.anomaly_detectors[0].anomaly_detector_status #=> String, one of "INITIALIZING", "TRAINING", "ANALYZING", "FAILED", "DELETED", "PAUSED"
+    #   resp.anomaly_detectors[0].kms_key_id #=> String
+    #   resp.anomaly_detectors[0].creation_time_stamp #=> Integer
+    #   resp.anomaly_detectors[0].last_modified_time_stamp #=> Integer
+    #   resp.anomaly_detectors[0].anomaly_visibility_time #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogAnomalyDetectors AWS API Documentation
+    #
+    # @overload list_log_anomaly_detectors(params = {})
+    # @param [Hash] params ({})
+    def list_log_anomaly_detectors(params = {}, options = {})
+      req = build_request(:list_log_anomaly_detectors, params)
       req.send_request(options)
     end
 
@@ -3161,7 +3534,7 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
-    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     #
     # @option params [required, String] :name
     #   A name for this delivery destination. This name must be unique for all
@@ -3255,7 +3628,7 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
-    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     #
     # @option params [required, String] :delivery_destination_name
     #   The name of the delivery destination to assign this policy to.
@@ -3332,7 +3705,7 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
-    # [4]: https://docs.aws.amazon.com/ AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     #
     # @option params [required, String] :name
     #   A name for this delivery source. This name must be unique for all
@@ -4406,6 +4779,126 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Use this operation to *suppress* anomaly detection for a specified
+    # anomaly or pattern. If you suppress an anomaly, CloudWatch Logs won’t
+    # report new occurrences of that anomaly and won't update that anomaly
+    # with new data. If you suppress a pattern, CloudWatch Logs won’t report
+    # any anomalies related to that pattern.
+    #
+    # You must specify either `anomalyId` or `patternId`, but you can't
+    # specify both parameters in the same operation.
+    #
+    # If you have previously used this operation to suppress detection of a
+    # pattern or anomaly, you can use it again to cause CloudWatch Logs to
+    # end the suppression. To do this, use this operation and specify the
+    # anomaly or pattern to stop suppressing, and omit the `suppressionType`
+    # and `suppressionPeriod` parameters.
+    #
+    # @option params [String] :anomaly_id
+    #   If you are suppressing or unsuppressing an anomaly, specify its unique
+    #   ID here. You can find anomaly IDs by using the [ListAnomalies][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html
+    #
+    # @option params [String] :pattern_id
+    #   If you are suppressing or unsuppressing an pattern, specify its unique
+    #   ID here. You can find pattern IDs by using the [ListAnomalies][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The ARN of the anomaly detector that this operation is to act on.
+    #
+    # @option params [String] :suppression_type
+    #   Use this to specify whether the suppression to be temporary or
+    #   infinite. If you specify `LIMITED`, you must also specify a
+    #   `suppressionPeriod`. If you specify `INFINITE`, any value for
+    #   `suppressionPeriod` is ignored.
+    #
+    # @option params [Types::SuppressionPeriod] :suppression_period
+    #   If you are temporarily suppressing an anomaly or pattern, use this
+    #   structure to specify how long the suppression is to last.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_anomaly({
+    #     anomaly_id: "AnomalyId",
+    #     pattern_id: "PatternId",
+    #     anomaly_detector_arn: "AnomalyDetectorArn", # required
+    #     suppression_type: "LIMITED", # accepts LIMITED, INFINITE
+    #     suppression_period: {
+    #       value: 1,
+    #       suppression_unit: "SECONDS", # accepts SECONDS, MINUTES, HOURS
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateAnomaly AWS API Documentation
+    #
+    # @overload update_anomaly(params = {})
+    # @param [Hash] params ({})
+    def update_anomaly(params = {}, options = {})
+      req = build_request(:update_anomaly, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing log anomaly detector.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The ARN of the anomaly detector that you want to update.
+    #
+    # @option params [String] :evaluation_frequency
+    #   Specifies how often the anomaly detector runs and look for anomalies.
+    #   Set this value according to the frequency that the log group receives
+    #   new logs. For example, if the log group receives new log events every
+    #   10 minutes, then setting `evaluationFrequency` to `FIFTEEN_MIN` might
+    #   be appropriate.
+    #
+    # @option params [String] :filter_pattern
+    #   A symbolic description of how CloudWatch Logs should interpret the
+    #   data in each log event. For example, a log event can contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
+    #
+    # @option params [Integer] :anomaly_visibility_time
+    #   The number of days to use as the life cycle of anomalies. After this
+    #   time, anomalies are automatically baselined and the anomaly detector
+    #   model will treat new occurrences of similar event as normal.
+    #   Therefore, if you do not correct the cause of an anomaly during this
+    #   time, it will be considered normal going forward and will not be
+    #   detected.
+    #
+    # @option params [required, Boolean] :enabled
+    #   Use this parameter to pause or restart the anomaly detector.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_log_anomaly_detector({
+    #     anomaly_detector_arn: "AnomalyDetectorArn", # required
+    #     evaluation_frequency: "ONE_MIN", # accepts ONE_MIN, FIVE_MIN, TEN_MIN, FIFTEEN_MIN, THIRTY_MIN, ONE_HOUR
+    #     filter_pattern: "FilterPattern",
+    #     anomaly_visibility_time: 1,
+    #     enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateLogAnomalyDetector AWS API Documentation
+    #
+    # @overload update_log_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def update_log_anomaly_detector(params = {}, options = {})
+      req = build_request(:update_log_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4419,7 +4912,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

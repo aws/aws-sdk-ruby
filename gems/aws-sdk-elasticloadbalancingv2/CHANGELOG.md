@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-11-27)
+------------------
+
+* Feature - This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.
+
 1.94.0 (2023-11-22)
 ------------------
 

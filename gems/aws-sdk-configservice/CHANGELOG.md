@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-11-27)
+------------------
+
+* Feature - Support Periodic Recording for Configuration Recorder
+
 1.101.0 (2023-11-22)
 ------------------
 

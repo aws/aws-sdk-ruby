@@ -56,6 +56,8 @@ module Aws::SecretsManager
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_secret_value
+            Aws::SecretsManager::Endpoints::BatchGetSecretValue.build(context)
           when :cancel_rotate_secret
             Aws::SecretsManager::Endpoints::CancelRotateSecret.build(context)
           when :create_secret

@@ -709,17 +709,39 @@ module Aws::EKS
     # to your cluster's control plane over the Kubernetes API server
     # endpoint and a certificate file that is created for your cluster.
     #
+    # You can use the `endpointPublicAccess` and `endpointPrivateAccess`
+    # parameters to enable or disable public and private access to your
+    # cluster's Kubernetes API server endpoint. By default, public access
+    # is enabled, and private access is disabled. For more information, see
+    # [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
+    # EKS User Guide</i> </i>.
+    #
+    # You can use the `logging` parameter to enable or disable exporting the
+    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
+    # default, cluster control plane logs aren't exported to CloudWatch
+    # Logs. For more information, see [Amazon EKS Cluster Control Plane
+    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    # apply to exported control plane logs. For more information, see
+    # [CloudWatch Pricing][3].
+    #
+    #  </note>
+    #
     # In most cases, it takes several minutes to create a cluster. After you
     # create an Amazon EKS cluster, you must configure your Kubernetes
     # tooling to communicate with the API server and launch nodes into your
     # cluster. For more information, see [Managing Cluster
-    # Authentication][1] and [Launching Amazon EKS nodes][2] in the *Amazon
+    # Authentication][4] and [Launching Amazon EKS nodes][5] in the *Amazon
     # EKS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
-    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [3]: http://aws.amazon.com/cloudwatch/pricing/
+    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [5]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
     #   The unique name to give to your cluster.
@@ -963,8 +985,8 @@ module Aws::EKS
     #
     # @option params [Integer] :license_quantity
     #   The number of licenses to purchase with the subscription. Valid values
-    #   are between 1 and 1000. This value cannot be changed after creating
-    #   the subscription.
+    #   are between 1 and 100. This value can't be changed after creating the
+    #   subscription.
     #
     # @option params [String] :license_type
     #   The license type for all licenses in the subscription. Valid value is
@@ -985,7 +1007,7 @@ module Aws::EKS
     # @option params [Hash<String,String>] :tags
     #   The metadata for a subscription to assist with categorization and
     #   organization. Each tag consists of a key and an optional value.
-    #   Subscription tags do not propagate to any other resources associated
+    #   Subscription tags don't propagate to any other resources associated
     #   with the subscription.
     #
     # @return [Types::CreateEksAnywhereSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1469,6 +1491,120 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates an EKS Pod Identity association between a service account in
+    # an Amazon EKS cluster and an IAM role with *EKS Pod Identity*. Use EKS
+    # Pod Identity to give temporary IAM credentials to pods and the
+    # credentials are rotated automatically.
+    #
+    # Amazon EKS Pod Identity associations provide the ability to manage
+    # credentials for your applications, similar to the way that 7EC2l
+    # instance profiles provide credentials to Amazon EC2 instances.
+    #
+    # If a pod uses a service account that has an association, Amazon EKS
+    # sets environment variables in the containers of the pod. The
+    # environment variables configure the Amazon Web Services SDKs,
+    # including the Command Line Interface, to use the EKS Pod Identity
+    # credentials.
+    #
+    # Pod Identity is a simpler method than *IAM roles for service
+    # accounts*, as this method doesn't use OIDC identity providers.
+    # Additionally, you can configure a role for Pod Identity once, and
+    # reuse it across clusters.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster to create the association in.
+    #
+    # @option params [required, String] :namespace
+    #   The name of the Kubernetes namespace inside the cluster to create the
+    #   association in. The service account and the pods that use the service
+    #   account must be in this namespace.
+    #
+    # @option params [required, String] :service_account
+    #   The name of the Kubernetes service account inside the cluster to
+    #   associate the IAM credentials with.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   service account. The EKS Pod Identity agent manages credentials to
+    #   assume this role for applications in the containers in the pods that
+    #   use this service account.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata that you apply to a resource to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value. You define both.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource – 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length – 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length – 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for
+    #     Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count against
+    #     your tags per resource limit.
+    #
+    # @return [Types::CreatePodIdentityAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePodIdentityAssociationResponse#association #association} => Types::PodIdentityAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_pod_identity_association({
+    #     cluster_name: "String", # required
+    #     namespace: "String", # required
+    #     service_account: "String", # required
+    #     role_arn: "String", # required
+    #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.cluster_name #=> String
+    #   resp.association.namespace #=> String
+    #   resp.association.service_account #=> String
+    #   resp.association.role_arn #=> String
+    #   resp.association.association_arn #=> String
+    #   resp.association.association_id #=> String
+    #   resp.association.tags #=> Hash
+    #   resp.association.tags["TagKey"] #=> String
+    #   resp.association.created_at #=> Time
+    #   resp.association.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreatePodIdentityAssociation AWS API Documentation
+    #
+    # @overload create_pod_identity_association(params = {})
+    # @param [Hash] params ({})
+    def create_pod_identity_association(params = {}, options = {})
+      req = build_request(:create_pod_identity_association, params)
+      req.send_request(options)
+    end
+
     # Delete an Amazon EKS add-on.
     #
     # When you remove the add-on, it will also be deleted from the cluster.
@@ -1639,10 +1775,10 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Deletes an expired / inactive subscription. Deleting inactive
+    # Deletes an expired or inactive subscription. Deleting inactive
     # subscriptions removes them from the Amazon Web Services Management
     # Console view and from list/describe API responses. Subscriptions can
-    # only be cancelled within 7 days of creation, and are cancelled by
+    # only be cancelled within 7 days of creation and are cancelled by
     # creating a ticket in the Amazon Web Services Support Center.
     #
     # @option params [required, String] :id
@@ -1813,6 +1949,52 @@ module Aws::EKS
     # @param [Hash] params ({})
     def delete_nodegroup(params = {}, options = {})
       req = build_request(:delete_nodegroup, params)
+      req.send_request(options)
+    end
+
+    # Deletes a EKS Pod Identity association.
+    #
+    # The temporary Amazon Web Services credentials from the previous IAM
+    # role session might still be valid until the session expiry. If you
+    # need to immediately revoke the temporary session credentials, then go
+    # to the role in the IAM console.
+    #
+    # @option params [required, String] :cluster_name
+    #   The cluster name that
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the association to be deleted.
+    #
+    # @return [Types::DeletePodIdentityAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePodIdentityAssociationResponse#association #association} => Types::PodIdentityAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_pod_identity_association({
+    #     cluster_name: "String", # required
+    #     association_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.cluster_name #=> String
+    #   resp.association.namespace #=> String
+    #   resp.association.service_account #=> String
+    #   resp.association.role_arn #=> String
+    #   resp.association.association_arn #=> String
+    #   resp.association.association_id #=> String
+    #   resp.association.tags #=> Hash
+    #   resp.association.tags["TagKey"] #=> String
+    #   resp.association.created_at #=> Time
+    #   resp.association.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeletePodIdentityAssociation AWS API Documentation
+    #
+    # @overload delete_pod_identity_association(params = {})
+    # @param [Hash] params ({})
+    def delete_pod_identity_association(params = {}, options = {})
+      req = build_request(:delete_pod_identity_association, params)
       req.send_request(options)
     end
 
@@ -2448,6 +2630,53 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns descriptive information about an EKS Pod Identity association.
+    #
+    # This action requires the ID of the association. You can get the ID
+    # from the response to the `CreatePodIdentityAssocation` for newly
+    # created associations. Or, you can list the IDs for associations with
+    # `ListPodIdentityAssociations` and filter the list by namespace or
+    # service account.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that the association is in.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the association that you want the description of.
+    #
+    # @return [Types::DescribePodIdentityAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePodIdentityAssociationResponse#association #association} => Types::PodIdentityAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pod_identity_association({
+    #     cluster_name: "String", # required
+    #     association_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.cluster_name #=> String
+    #   resp.association.namespace #=> String
+    #   resp.association.service_account #=> String
+    #   resp.association.role_arn #=> String
+    #   resp.association.association_arn #=> String
+    #   resp.association.association_id #=> String
+    #   resp.association.tags #=> Hash
+    #   resp.association.tags["TagKey"] #=> String
+    #   resp.association.created_at #=> Time
+    #   resp.association.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribePodIdentityAssociation AWS API Documentation
+    #
+    # @overload describe_pod_identity_association(params = {})
+    # @param [Hash] params ({})
+    def describe_pod_identity_association(params = {}, options = {})
+      req = build_request(:describe_pod_identity_association, params)
+      req.send_request(options)
+    end
+
     # Returns descriptive information about an update against your Amazon
     # EKS cluster or associated managed node group or Amazon EKS add-on.
     #
@@ -2720,11 +2949,11 @@ module Aws::EKS
     #   results and a nextToken value if applicable.
     #
     # @option params [String] :next_token
-    #   The nextToken value to include in a future
-    #   ListEksAnywhereSubscriptions request. When the results of a
-    #   ListEksAnywhereSubscriptions request exceed maxResults, you can use
-    #   this value to retrieve the next page of results. This value is null
-    #   when there are no more results to return.
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListEksAnywhereSubscriptions` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
     #
     # @option params [Array<String>] :include_status
     #   An array of subscription statuses to filter on.
@@ -2733,6 +2962,8 @@ module Aws::EKS
     #
     #   * {Types::ListEksAnywhereSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::EksAnywhereSubscription&gt;
     #   * {Types::ListEksAnywhereSubscriptionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2932,6 +3163,79 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_nodegroups(params = {}, options = {})
       req = build_request(:list_nodegroups, params)
+      req.send_request(options)
+    end
+
+    # List the EKS Pod Identity associations in a cluster. You can filter
+    # the list by the namespace that the association is in or the service
+    # account that the association uses.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that the associations are in.
+    #
+    # @option params [String] :namespace
+    #   The name of the Kubernetes namespace inside the cluster that the
+    #   associations are in.
+    #
+    # @option params [String] :service_account
+    #   The name of the Kubernetes service account that the associations use.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of EKS Pod Identity association results returned by
+    #   `ListPodIdentityAssociations` in paginated output. When you use this
+    #   parameter, `ListPodIdentityAssociations` returns only `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListPodIdentityAssociations` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListPodIdentityAssociations` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated `ListUpdates`
+    #   request where `maxResults` was used and the results exceeded the value
+    #   of that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListPodIdentityAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPodIdentityAssociationsResponse#associations #associations} => Array&lt;Types::PodIdentityAssociationSummary&gt;
+    #   * {Types::ListPodIdentityAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pod_identity_associations({
+    #     cluster_name: "String", # required
+    #     namespace: "String",
+    #     service_account: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].cluster_name #=> String
+    #   resp.associations[0].namespace #=> String
+    #   resp.associations[0].service_account #=> String
+    #   resp.associations[0].association_arn #=> String
+    #   resp.associations[0].association_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListPodIdentityAssociations AWS API Documentation
+    #
+    # @overload list_pod_identity_associations(params = {})
+    # @param [Hash] params ({})
+    def list_pod_identity_associations(params = {}, options = {})
+      req = build_request(:list_pod_identity_associations, params)
       req.send_request(options)
     end
 
@@ -3364,8 +3668,14 @@ module Aws::EKS
     # more information, see [Amazon EKS cluster endpoint access control][3]
     # in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
-    # You can't update the subnets or security group IDs for an existing
-    # cluster.
+    # You can also use this API operation to choose different subnets and
+    # security groups for the cluster. You must specify at least two subnets
+    # that are in different Availability Zones. You can't change which VPC
+    # the subnets are from, the subnets must be in the same VPC as the
+    # subnets that the cluster was created with. For more information about
+    # the VPC requirements, see
+    # [https://docs.aws.amazon.com/eks/latest/userguide/network\_reqs.html][4]
+    # in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     # Cluster updates are asynchronous, and they should finish within a few
     # minutes. During an update, the cluster status moves to `UPDATING`
@@ -3378,6 +3688,7 @@ module Aws::EKS
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
     # [2]: http://aws.amazon.com/cloudwatch/pricing/
     # [3]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to update.
@@ -3529,6 +3840,7 @@ module Aws::EKS
     # updated after subscription creation.
     #
     # @option params [required, String] :id
+    #   The ID of the subscription.
     #
     # @option params [required, Boolean] :auto_renew
     #   A boolean indicating whether or not to automatically renew the
@@ -3828,6 +4140,63 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Updates a EKS Pod Identity association. Only the IAM role can be
+    # changed; an association can't be moved between clusters, namespaces,
+    # or service accounts. If you need to edit the namespace or service
+    # account, you need to remove the association and then create a new
+    # association with your desired settings.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that you want to update the association in.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the association to be updated.
+    #
+    # @option params [String] :role_arn
+    #   The new IAM role to change the
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdatePodIdentityAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePodIdentityAssociationResponse#association #association} => Types::PodIdentityAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pod_identity_association({
+    #     cluster_name: "String", # required
+    #     association_id: "String", # required
+    #     role_arn: "String",
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.cluster_name #=> String
+    #   resp.association.namespace #=> String
+    #   resp.association.service_account #=> String
+    #   resp.association.role_arn #=> String
+    #   resp.association.association_arn #=> String
+    #   resp.association.association_id #=> String
+    #   resp.association.tags #=> Hash
+    #   resp.association.tags["TagKey"] #=> String
+    #   resp.association.created_at #=> Time
+    #   resp.association.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdatePodIdentityAssociation AWS API Documentation
+    #
+    # @overload update_pod_identity_association(params = {})
+    # @param [Hash] params ({})
+    def update_pod_identity_association(params = {}, options = {})
+      req = build_request(:update_pod_identity_association, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3841,7 +4210,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

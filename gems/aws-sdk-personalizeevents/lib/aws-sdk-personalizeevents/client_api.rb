@@ -13,6 +13,14 @@ module Aws::PersonalizeEvents
 
     include Seahorse::Model
 
+    Action = Shapes::StructureShape.new(name: 'Action')
+    ActionId = Shapes::StringShape.new(name: 'ActionId')
+    ActionImpression = Shapes::ListShape.new(name: 'ActionImpression')
+    ActionInteraction = Shapes::StructureShape.new(name: 'ActionInteraction')
+    ActionInteractionProperties = Shapes::StringShape.new(name: 'ActionInteractionProperties')
+    ActionInteractionsList = Shapes::ListShape.new(name: 'ActionInteractionsList')
+    ActionList = Shapes::ListShape.new(name: 'ActionList')
+    ActionProperties = Shapes::StringShape.new(name: 'ActionProperties')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Date = Shapes::TimestampShape.new(name: 'Date')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -28,6 +36,8 @@ module Aws::PersonalizeEvents
     ItemList = Shapes::ListShape.new(name: 'ItemList')
     ItemProperties = Shapes::StringShape.new(name: 'ItemProperties')
     MetricAttribution = Shapes::StructureShape.new(name: 'MetricAttribution')
+    PutActionInteractionsRequest = Shapes::StructureShape.new(name: 'PutActionInteractionsRequest')
+    PutActionsRequest = Shapes::StructureShape.new(name: 'PutActionsRequest')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutItemsRequest = Shapes::StructureShape.new(name: 'PutItemsRequest')
     PutUsersRequest = Shapes::StructureShape.new(name: 'PutUsersRequest')
@@ -39,6 +49,27 @@ module Aws::PersonalizeEvents
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserList = Shapes::ListShape.new(name: 'UserList')
     UserProperties = Shapes::StringShape.new(name: 'UserProperties')
+
+    Action.add_member(:action_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "actionId"))
+    Action.add_member(:properties, Shapes::ShapeRef.new(shape: ActionProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    Action.struct_class = Types::Action
+
+    ActionImpression.member = Shapes::ShapeRef.new(shape: ActionId)
+
+    ActionInteraction.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "actionId"))
+    ActionInteraction.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    ActionInteraction.add_member(:session_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "sessionId"))
+    ActionInteraction.add_member(:timestamp, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "timestamp"))
+    ActionInteraction.add_member(:event_type, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "eventType"))
+    ActionInteraction.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
+    ActionInteraction.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
+    ActionInteraction.add_member(:impression, Shapes::ShapeRef.new(shape: ActionImpression, location_name: "impression"))
+    ActionInteraction.add_member(:properties, Shapes::ShapeRef.new(shape: ActionInteractionProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    ActionInteraction.struct_class = Types::ActionInteraction
+
+    ActionInteractionsList.member = Shapes::ShapeRef.new(shape: ActionInteraction)
+
+    ActionList.member = Shapes::ShapeRef.new(shape: Action)
 
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
     Event.add_member(:event_type, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "eventType"))
@@ -66,6 +97,14 @@ module Aws::PersonalizeEvents
 
     MetricAttribution.add_member(:event_attribution_source, Shapes::ShapeRef.new(shape: EventAttributionSource, required: true, location_name: "eventAttributionSource"))
     MetricAttribution.struct_class = Types::MetricAttribution
+
+    PutActionInteractionsRequest.add_member(:tracking_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "trackingId"))
+    PutActionInteractionsRequest.add_member(:action_interactions, Shapes::ShapeRef.new(shape: ActionInteractionsList, required: true, location_name: "actionInteractions"))
+    PutActionInteractionsRequest.struct_class = Types::PutActionInteractionsRequest
+
+    PutActionsRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
+    PutActionsRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, required: true, location_name: "actions"))
+    PutActionsRequest.struct_class = Types::PutActionsRequest
 
     PutEventsRequest.add_member(:tracking_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "trackingId"))
     PutEventsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
@@ -110,6 +149,28 @@ module Aws::PersonalizeEvents
         "signingName" => "personalize",
         "uid" => "personalize-events-2018-03-22",
       }
+
+      api.add_operation(:put_action_interactions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutActionInteractions"
+        o.http_method = "POST"
+        o.http_request_uri = "/action-interactions"
+        o.input = Shapes::ShapeRef.new(shape: PutActionInteractionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:put_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/actions"
+        o.input = Shapes::ShapeRef.new(shape: PutActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
 
       api.add_operation(:put_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutEvents"

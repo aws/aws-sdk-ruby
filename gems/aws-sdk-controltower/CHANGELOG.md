@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-11-27)
+------------------
+
+* Feature - Add APIs to create and manage a landing zone.
+
 1.12.0 (2023-11-22)
 ------------------
 

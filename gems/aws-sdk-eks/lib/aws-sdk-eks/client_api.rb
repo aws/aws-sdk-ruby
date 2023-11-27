@@ -63,6 +63,8 @@ module Aws::EKS
     CreateFargateProfileResponse = Shapes::StructureShape.new(name: 'CreateFargateProfileResponse')
     CreateNodegroupRequest = Shapes::StructureShape.new(name: 'CreateNodegroupRequest')
     CreateNodegroupResponse = Shapes::StructureShape.new(name: 'CreateNodegroupResponse')
+    CreatePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'CreatePodIdentityAssociationRequest')
+    CreatePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'CreatePodIdentityAssociationResponse')
     DeleteAddonRequest = Shapes::StructureShape.new(name: 'DeleteAddonRequest')
     DeleteAddonResponse = Shapes::StructureShape.new(name: 'DeleteAddonResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
@@ -73,6 +75,8 @@ module Aws::EKS
     DeleteFargateProfileResponse = Shapes::StructureShape.new(name: 'DeleteFargateProfileResponse')
     DeleteNodegroupRequest = Shapes::StructureShape.new(name: 'DeleteNodegroupRequest')
     DeleteNodegroupResponse = Shapes::StructureShape.new(name: 'DeleteNodegroupResponse')
+    DeletePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'DeletePodIdentityAssociationRequest')
+    DeletePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'DeletePodIdentityAssociationResponse')
     DeregisterClusterRequest = Shapes::StructureShape.new(name: 'DeregisterClusterRequest')
     DeregisterClusterResponse = Shapes::StructureShape.new(name: 'DeregisterClusterResponse')
     DescribeAddonConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAddonConfigurationRequest')
@@ -92,6 +96,8 @@ module Aws::EKS
     DescribeIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigResponse')
     DescribeNodegroupRequest = Shapes::StructureShape.new(name: 'DescribeNodegroupRequest')
     DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
+    DescribePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'DescribePodIdentityAssociationRequest')
+    DescribePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'DescribePodIdentityAssociationResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
     DisassociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigRequest')
@@ -146,6 +152,9 @@ module Aws::EKS
     ListNodegroupsRequest = Shapes::StructureShape.new(name: 'ListNodegroupsRequest')
     ListNodegroupsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListNodegroupsRequestMaxResults')
     ListNodegroupsResponse = Shapes::StructureShape.new(name: 'ListNodegroupsResponse')
+    ListPodIdentityAssociationsMaxResults = Shapes::IntegerShape.new(name: 'ListPodIdentityAssociationsMaxResults')
+    ListPodIdentityAssociationsRequest = Shapes::StructureShape.new(name: 'ListPodIdentityAssociationsRequest')
+    ListPodIdentityAssociationsResponse = Shapes::StructureShape.new(name: 'ListPodIdentityAssociationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUpdatesRequest = Shapes::StructureShape.new(name: 'ListUpdatesRequest')
@@ -172,6 +181,9 @@ module Aws::EKS
     OutpostConfigRequest = Shapes::StructureShape.new(name: 'OutpostConfigRequest')
     OutpostConfigResponse = Shapes::StructureShape.new(name: 'OutpostConfigResponse')
     PercentCapacity = Shapes::IntegerShape.new(name: 'PercentCapacity')
+    PodIdentityAssociation = Shapes::StructureShape.new(name: 'PodIdentityAssociation')
+    PodIdentityAssociationSummaries = Shapes::ListShape.new(name: 'PodIdentityAssociationSummaries')
+    PodIdentityAssociationSummary = Shapes::StructureShape.new(name: 'PodIdentityAssociationSummary')
     Provider = Shapes::StructureShape.new(name: 'Provider')
     RegisterClusterRequest = Shapes::StructureShape.new(name: 'RegisterClusterRequest')
     RegisterClusterResponse = Shapes::StructureShape.new(name: 'RegisterClusterResponse')
@@ -215,6 +227,8 @@ module Aws::EKS
     UpdateParam = Shapes::StructureShape.new(name: 'UpdateParam')
     UpdateParamType = Shapes::StringShape.new(name: 'UpdateParamType')
     UpdateParams = Shapes::ListShape.new(name: 'UpdateParams')
+    UpdatePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'UpdatePodIdentityAssociationRequest')
+    UpdatePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'UpdatePodIdentityAssociationResponse')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     UpdateTaintsPayload = Shapes::StructureShape.new(name: 'UpdateTaintsPayload')
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
@@ -447,6 +461,17 @@ module Aws::EKS
     CreateNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
     CreateNodegroupResponse.struct_class = Types::CreateNodegroupResponse
 
+    CreatePodIdentityAssociationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    CreatePodIdentityAssociationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespace"))
+    CreatePodIdentityAssociationRequest.add_member(:service_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccount"))
+    CreatePodIdentityAssociationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
+    CreatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreatePodIdentityAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePodIdentityAssociationRequest.struct_class = Types::CreatePodIdentityAssociationRequest
+
+    CreatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
+    CreatePodIdentityAssociationResponse.struct_class = Types::CreatePodIdentityAssociationResponse
+
     DeleteAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     DeleteAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
     DeleteAddonRequest.add_member(:preserve, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "preserve"))
@@ -480,6 +505,13 @@ module Aws::EKS
 
     DeleteNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
     DeleteNodegroupResponse.struct_class = Types::DeleteNodegroupResponse
+
+    DeletePodIdentityAssociationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeletePodIdentityAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    DeletePodIdentityAssociationRequest.struct_class = Types::DeletePodIdentityAssociationRequest
+
+    DeletePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
+    DeletePodIdentityAssociationResponse.struct_class = Types::DeletePodIdentityAssociationResponse
 
     DeregisterClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeregisterClusterRequest.struct_class = Types::DeregisterClusterRequest
@@ -548,6 +580,13 @@ module Aws::EKS
 
     DescribeNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
     DescribeNodegroupResponse.struct_class = Types::DescribeNodegroupResponse
+
+    DescribePodIdentityAssociationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribePodIdentityAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    DescribePodIdentityAssociationRequest.struct_class = Types::DescribePodIdentityAssociationRequest
+
+    DescribePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
+    DescribePodIdentityAssociationResponse.struct_class = Types::DescribePodIdentityAssociationResponse
 
     DescribeUpdateRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeUpdateRequest.add_member(:update_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "updateId"))
@@ -725,6 +764,17 @@ module Aws::EKS
     ListNodegroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListNodegroupsResponse.struct_class = Types::ListNodegroupsResponse
 
+    ListPodIdentityAssociationsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListPodIdentityAssociationsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "namespace"))
+    ListPodIdentityAssociationsRequest.add_member(:service_account, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "serviceAccount"))
+    ListPodIdentityAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPodIdentityAssociationsMaxResults, location: "querystring", location_name: "maxResults"))
+    ListPodIdentityAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListPodIdentityAssociationsRequest.struct_class = Types::ListPodIdentityAssociationsRequest
+
+    ListPodIdentityAssociationsResponse.add_member(:associations, Shapes::ShapeRef.new(shape: PodIdentityAssociationSummaries, location_name: "associations"))
+    ListPodIdentityAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPodIdentityAssociationsResponse.struct_class = Types::ListPodIdentityAssociationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -837,6 +887,26 @@ module Aws::EKS
     OutpostConfigResponse.add_member(:control_plane_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "controlPlaneInstanceType"))
     OutpostConfigResponse.add_member(:control_plane_placement, Shapes::ShapeRef.new(shape: ControlPlanePlacementResponse, location_name: "controlPlanePlacement"))
     OutpostConfigResponse.struct_class = Types::OutpostConfigResponse
+
+    PodIdentityAssociation.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    PodIdentityAssociation.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    PodIdentityAssociation.add_member(:service_account, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccount"))
+    PodIdentityAssociation.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    PodIdentityAssociation.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
+    PodIdentityAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    PodIdentityAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    PodIdentityAssociation.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    PodIdentityAssociation.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    PodIdentityAssociation.struct_class = Types::PodIdentityAssociation
+
+    PodIdentityAssociationSummaries.member = Shapes::ShapeRef.new(shape: PodIdentityAssociationSummary)
+
+    PodIdentityAssociationSummary.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    PodIdentityAssociationSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    PodIdentityAssociationSummary.add_member(:service_account, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccount"))
+    PodIdentityAssociationSummary.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
+    PodIdentityAssociationSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    PodIdentityAssociationSummary.struct_class = Types::PodIdentityAssociationSummary
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
     Provider.struct_class = Types::Provider
@@ -996,6 +1066,15 @@ module Aws::EKS
 
     UpdateParams.member = Shapes::ShapeRef.new(shape: UpdateParam)
 
+    UpdatePodIdentityAssociationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdatePodIdentityAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    UpdatePodIdentityAssociationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    UpdatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePodIdentityAssociationRequest.struct_class = Types::UpdatePodIdentityAssociationRequest
+
+    UpdatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
+    UpdatePodIdentityAssociationResponse.struct_class = Types::UpdatePodIdentityAssociationResponse
+
     UpdateTaintsPayload.add_member(:add_or_update_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "addOrUpdateTaints"))
     UpdateTaintsPayload.add_member(:remove_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "removeTaints"))
     UpdateTaintsPayload.struct_class = Types::UpdateTaintsPayload
@@ -1144,6 +1223,20 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:create_pod_identity_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePodIdentityAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/pod-identity-associations"
+        o.input = Shapes::ShapeRef.new(shape: CreatePodIdentityAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePodIdentityAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_addon, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAddon"
         o.http_method = "DELETE"
@@ -1206,6 +1299,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_pod_identity_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePodIdentityAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/clusters/{name}/pod-identity-associations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePodIdentityAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePodIdentityAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:deregister_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -1325,6 +1430,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:describe_pod_identity_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePodIdentityAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/pod-identity-associations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribePodIdentityAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePodIdentityAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:describe_update, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeUpdate"
         o.http_method = "GET"
@@ -1398,6 +1515,12 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_fargate_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -1448,6 +1571,24 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_pod_identity_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPodIdentityAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/pod-identity-associations"
+        o.input = Shapes::ShapeRef.new(shape: ListPodIdentityAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPodIdentityAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1601,6 +1742,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_pod_identity_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePodIdentityAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/pod-identity-associations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePodIdentityAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePodIdentityAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
     end
 

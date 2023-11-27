@@ -84,6 +84,12 @@ module Aws::States
     GetActivityTaskOutput = Shapes::StructureShape.new(name: 'GetActivityTaskOutput')
     GetExecutionHistoryInput = Shapes::StructureShape.new(name: 'GetExecutionHistoryInput')
     GetExecutionHistoryOutput = Shapes::StructureShape.new(name: 'GetExecutionHistoryOutput')
+    HTTPBody = Shapes::StringShape.new(name: 'HTTPBody')
+    HTTPHeaders = Shapes::StringShape.new(name: 'HTTPHeaders')
+    HTTPMethod = Shapes::StringShape.new(name: 'HTTPMethod')
+    HTTPProtocol = Shapes::StringShape.new(name: 'HTTPProtocol')
+    HTTPStatusCode = Shapes::StringShape.new(name: 'HTTPStatusCode')
+    HTTPStatusMessage = Shapes::StringShape.new(name: 'HTTPStatusMessage')
     HistoryEvent = Shapes::StructureShape.new(name: 'HistoryEvent')
     HistoryEventExecutionDataDetails = Shapes::StructureShape.new(name: 'HistoryEventExecutionDataDetails')
     HistoryEventList = Shapes::ListShape.new(name: 'HistoryEventList')
@@ -91,6 +97,10 @@ module Aws::States
     Identity = Shapes::StringShape.new(name: 'Identity')
     IncludeExecutionData = Shapes::BooleanShape.new(name: 'IncludeExecutionData')
     IncludeExecutionDataGetExecutionHistory = Shapes::BooleanShape.new(name: 'IncludeExecutionDataGetExecutionHistory')
+    InspectionData = Shapes::StructureShape.new(name: 'InspectionData')
+    InspectionDataRequest = Shapes::StructureShape.new(name: 'InspectionDataRequest')
+    InspectionDataResponse = Shapes::StructureShape.new(name: 'InspectionDataResponse')
+    InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
     InvalidArn = Shapes::StructureShape.new(name: 'InvalidArn')
     InvalidDefinition = Shapes::StructureShape.new(name: 'InvalidDefinition')
     InvalidExecutionInput = Shapes::StructureShape.new(name: 'InvalidExecutionInput')
@@ -149,6 +159,7 @@ module Aws::States
     RedriveExecutionInput = Shapes::StructureShape.new(name: 'RedriveExecutionInput')
     RedriveExecutionOutput = Shapes::StructureShape.new(name: 'RedriveExecutionOutput')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    RevealSecrets = Shapes::BooleanShape.new(name: 'RevealSecrets')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoutingConfigurationList = Shapes::ListShape.new(name: 'RoutingConfigurationList')
@@ -183,6 +194,7 @@ module Aws::States
     StateMachineTypeNotSupported = Shapes::StructureShape.new(name: 'StateMachineTypeNotSupported')
     StateMachineVersionList = Shapes::ListShape.new(name: 'StateMachineVersionList')
     StateMachineVersionListItem = Shapes::StructureShape.new(name: 'StateMachineVersionListItem')
+    StateName = Shapes::StringShape.new(name: 'StateName')
     StopExecutionInput = Shapes::StructureShape.new(name: 'StopExecutionInput')
     StopExecutionOutput = Shapes::StructureShape.new(name: 'StopExecutionOutput')
     SyncExecutionStatus = Shapes::StringShape.new(name: 'SyncExecutionStatus')
@@ -205,6 +217,9 @@ module Aws::States
     TaskTimedOut = Shapes::StructureShape.new(name: 'TaskTimedOut')
     TaskTimedOutEventDetails = Shapes::StructureShape.new(name: 'TaskTimedOutEventDetails')
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
+    TestExecutionStatus = Shapes::StringShape.new(name: 'TestExecutionStatus')
+    TestStateInput = Shapes::StructureShape.new(name: 'TestStateInput')
+    TestStateOutput = Shapes::StructureShape.new(name: 'TestStateOutput')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     ToleratedFailureCount = Shapes::IntegerShape.new(name: 'ToleratedFailureCount')
@@ -212,6 +227,7 @@ module Aws::States
     TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
     TraceHeader = Shapes::StringShape.new(name: 'TraceHeader')
     TracingConfiguration = Shapes::StructureShape.new(name: 'TracingConfiguration')
+    URL = Shapes::StringShape.new(name: 'URL')
     UnsignedInteger = Shapes::IntegerShape.new(name: 'UnsignedInteger')
     UnsignedLong = Shapes::IntegerShape.new(name: 'UnsignedLong')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -549,6 +565,30 @@ module Aws::States
     HistoryEventExecutionDataDetails.struct_class = Types::HistoryEventExecutionDataDetails
 
     HistoryEventList.member = Shapes::ShapeRef.new(shape: HistoryEvent)
+
+    InspectionData.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    InspectionData.add_member(:after_input_path, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterInputPath"))
+    InspectionData.add_member(:after_parameters, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterParameters"))
+    InspectionData.add_member(:result, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "result"))
+    InspectionData.add_member(:after_result_selector, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterResultSelector"))
+    InspectionData.add_member(:after_result_path, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterResultPath"))
+    InspectionData.add_member(:request, Shapes::ShapeRef.new(shape: InspectionDataRequest, location_name: "request"))
+    InspectionData.add_member(:response, Shapes::ShapeRef.new(shape: InspectionDataResponse, location_name: "response"))
+    InspectionData.struct_class = Types::InspectionData
+
+    InspectionDataRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: HTTPProtocol, location_name: "protocol"))
+    InspectionDataRequest.add_member(:method, Shapes::ShapeRef.new(shape: HTTPMethod, location_name: "method"))
+    InspectionDataRequest.add_member(:url, Shapes::ShapeRef.new(shape: URL, location_name: "url"))
+    InspectionDataRequest.add_member(:headers, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "headers"))
+    InspectionDataRequest.add_member(:body, Shapes::ShapeRef.new(shape: HTTPBody, location_name: "body"))
+    InspectionDataRequest.struct_class = Types::InspectionDataRequest
+
+    InspectionDataResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: HTTPProtocol, location_name: "protocol"))
+    InspectionDataResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: HTTPStatusCode, location_name: "statusCode"))
+    InspectionDataResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: HTTPStatusMessage, location_name: "statusMessage"))
+    InspectionDataResponse.add_member(:headers, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "headers"))
+    InspectionDataResponse.add_member(:body, Shapes::ShapeRef.new(shape: HTTPBody, location_name: "body"))
+    InspectionDataResponse.struct_class = Types::InspectionDataResponse
 
     InvalidArn.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidArn.struct_class = Types::InvalidArn
@@ -929,6 +969,21 @@ module Aws::States
     TaskTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     TaskTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     TaskTimedOutEventDetails.struct_class = Types::TaskTimedOutEventDetails
+
+    TestStateInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
+    TestStateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    TestStateInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    TestStateInput.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, location_name: "inspectionLevel"))
+    TestStateInput.add_member(:reveal_secrets, Shapes::ShapeRef.new(shape: RevealSecrets, location_name: "revealSecrets"))
+    TestStateInput.struct_class = Types::TestStateInput
+
+    TestStateOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
+    TestStateOutput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    TestStateOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    TestStateOutput.add_member(:inspection_data, Shapes::ShapeRef.new(shape: InspectionData, location_name: "inspectionData"))
+    TestStateOutput.add_member(:next_state, Shapes::ShapeRef.new(shape: StateName, location_name: "nextState"))
+    TestStateOutput.add_member(:status, Shapes::ShapeRef.new(shape: TestExecutionStatus, location_name: "status"))
+    TestStateOutput.struct_class = Types::TestStateOutput
 
     TooManyTags.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTags.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
@@ -1389,6 +1444,21 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
       end)
 
+      api.add_operation(:test_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "sync-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: TestStateInput)
+        o.output = Shapes::ShapeRef.new(shape: TestStateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExecutionInput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "POST"
@@ -1438,6 +1508,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
       end)
     end
 

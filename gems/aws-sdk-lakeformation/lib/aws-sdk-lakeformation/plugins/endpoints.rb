@@ -72,18 +72,24 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::CreateDataCellsFilter.build(context)
           when :create_lf_tag
             Aws::LakeFormation::Endpoints::CreateLFTag.build(context)
+          when :create_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::CreateLakeFormationIdentityCenterConfiguration.build(context)
           when :create_lake_formation_opt_in
             Aws::LakeFormation::Endpoints::CreateLakeFormationOptIn.build(context)
           when :delete_data_cells_filter
             Aws::LakeFormation::Endpoints::DeleteDataCellsFilter.build(context)
           when :delete_lf_tag
             Aws::LakeFormation::Endpoints::DeleteLFTag.build(context)
+          when :delete_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::DeleteLakeFormationIdentityCenterConfiguration.build(context)
           when :delete_lake_formation_opt_in
             Aws::LakeFormation::Endpoints::DeleteLakeFormationOptIn.build(context)
           when :delete_objects_on_cancel
             Aws::LakeFormation::Endpoints::DeleteObjectsOnCancel.build(context)
           when :deregister_resource
             Aws::LakeFormation::Endpoints::DeregisterResource.build(context)
+          when :describe_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::DescribeLakeFormationIdentityCenterConfiguration.build(context)
           when :describe_resource
             Aws::LakeFormation::Endpoints::DescribeResource.build(context)
           when :describe_transaction
@@ -150,6 +156,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::UpdateDataCellsFilter.build(context)
           when :update_lf_tag
             Aws::LakeFormation::Endpoints::UpdateLFTag.build(context)
+          when :update_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::UpdateLakeFormationIdentityCenterConfiguration.build(context)
           when :update_resource
             Aws::LakeFormation::Endpoints::UpdateResource.build(context)
           when :update_table_objects

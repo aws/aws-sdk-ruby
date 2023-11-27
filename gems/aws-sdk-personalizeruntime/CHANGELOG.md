@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-11-27)
+------------------
+
+* Feature - Enables metadata in recommendations and next best action recommendations
+
 1.43.0 (2023-11-22)
 ------------------
 

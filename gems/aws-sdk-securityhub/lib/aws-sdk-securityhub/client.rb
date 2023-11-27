@@ -845,10 +845,14 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
     #   resp.rules[0].criteria.confidence[0].eq #=> Float
+    #   resp.rules[0].criteria.confidence[0].gt #=> Float
+    #   resp.rules[0].criteria.confidence[0].lt #=> Float
     #   resp.rules[0].criteria.criticality #=> Array
     #   resp.rules[0].criteria.criticality[0].gte #=> Float
     #   resp.rules[0].criteria.criticality[0].lte #=> Float
     #   resp.rules[0].criteria.criticality[0].eq #=> Float
+    #   resp.rules[0].criteria.criticality[0].gt #=> Float
+    #   resp.rules[0].criteria.criticality[0].lt #=> Float
     #   resp.rules[0].criteria.title #=> Array
     #   resp.rules[0].criteria.title[0].value #=> String
     #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -991,21 +995,41 @@ module Aws::SecurityHub
     #     security_controls: [
     #       {
     #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
+    #         last_update_reason: "Stayed with default value", 
+    #         parameters: {
+    #           "daysToExpiration" => {
+    #             value: {
+    #               integer: 30, 
+    #             }, 
+    #             value_type: "DEFAULT", 
+    #           }, 
+    #         }, 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1", 
     #         security_control_id: "ACM.1", 
     #         security_control_status: "ENABLED", 
     #         severity_rating: "MEDIUM", 
     #         title: "Imported and ACM-issued certificates should be renewed after a specified time period", 
+    #         update_status: "UPDATING", 
     #       }, 
     #       {
     #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
+    #         last_update_reason: "Updated control parameters to comply with internal requirements", 
+    #         parameters: {
+    #           "loggingLevel" => {
+    #             value: {
+    #               enum: "ERROR", 
+    #             }, 
+    #             value_type: "CUSTOM", 
+    #           }, 
+    #         }, 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1", 
     #         security_control_id: "APIGateway.1", 
     #         security_control_status: "ENABLED", 
     #         severity_rating: "MEDIUM", 
     #         title: "API Gateway REST and WebSocket API execution logging should be enabled", 
+    #         update_status: "UPDATING", 
     #       }, 
     #     ], 
     #   }
@@ -1026,6 +1050,21 @@ module Aws::SecurityHub
     #   resp.security_controls[0].remediation_url #=> String
     #   resp.security_controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.security_controls[0].security_control_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.security_controls[0].update_status #=> String, one of "READY", "UPDATING"
+    #   resp.security_controls[0].parameters #=> Hash
+    #   resp.security_controls[0].parameters["NonEmptyString"].value_type #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer #=> Integer
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer_list[0] #=> Integer
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.double #=> Float
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string_list[0] #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.boolean #=> Boolean
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
+    #   resp.security_controls[0].last_update_reason #=> String
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
     #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
@@ -1403,6 +1442,8 @@ module Aws::SecurityHub
     #               gte: 1.0,
     #               lte: 1.0,
     #               eq: 1.0,
+    #               gt: 1.0,
+    #               lt: 1.0,
     #             },
     #           ],
     #           criticality: [
@@ -1410,6 +1451,8 @@ module Aws::SecurityHub
     #               gte: 1.0,
     #               lte: 1.0,
     #               eq: 1.0,
+    #               gt: 1.0,
+    #               lt: 1.0,
     #             },
     #           ],
     #           title: [
@@ -2192,6 +2235,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -2199,6 +2244,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -2641,6 +2688,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -2648,6 +2697,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -2661,6 +2712,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -2668,6 +2721,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -2771,6 +2826,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -2800,6 +2857,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -2825,6 +2884,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -2832,6 +2893,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -3136,6 +3199,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -3143,6 +3208,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -3187,6 +3254,30 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -5009,6 +5100,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -5016,6 +5109,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -5029,6 +5124,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -5036,6 +5133,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -5139,6 +5238,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -5168,6 +5269,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -5193,6 +5296,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -5200,6 +5305,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -5504,6 +5611,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -5511,6 +5620,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -5555,6 +5666,30 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -5756,10 +5891,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
     #   resp.insights[0].filters.severity_product[0].eq #=> Float
+    #   resp.insights[0].filters.severity_product[0].gt #=> Float
+    #   resp.insights[0].filters.severity_product[0].lt #=> Float
     #   resp.insights[0].filters.severity_normalized #=> Array
     #   resp.insights[0].filters.severity_normalized[0].gte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].gt #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].lt #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
     #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5767,10 +5906,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
     #   resp.insights[0].filters.confidence[0].eq #=> Float
+    #   resp.insights[0].filters.confidence[0].gt #=> Float
+    #   resp.insights[0].filters.confidence[0].lt #=> Float
     #   resp.insights[0].filters.criticality #=> Array
     #   resp.insights[0].filters.criticality[0].gte #=> Float
     #   resp.insights[0].filters.criticality[0].lte #=> Float
     #   resp.insights[0].filters.criticality[0].eq #=> Float
+    #   resp.insights[0].filters.criticality[0].gt #=> Float
+    #   resp.insights[0].filters.criticality[0].lt #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
     #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5823,6 +5966,8 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port[0].gte #=> Float
     #   resp.insights[0].filters.network_source_port[0].lte #=> Float
     #   resp.insights[0].filters.network_source_port[0].eq #=> Float
+    #   resp.insights[0].filters.network_source_port[0].gt #=> Float
+    #   resp.insights[0].filters.network_source_port[0].lt #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
     #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5837,6 +5982,8 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port[0].gte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].gt #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].lt #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
     #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5850,10 +5997,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
     #   resp.insights[0].filters.process_pid[0].eq #=> Float
+    #   resp.insights[0].filters.process_pid[0].gt #=> Float
+    #   resp.insights[0].filters.process_pid[0].lt #=> Float
     #   resp.insights[0].filters.process_parent_pid #=> Array
     #   resp.insights[0].filters.process_parent_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].gt #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].lt #=> Float
     #   resp.insights[0].filters.process_launched_at #=> Array
     #   resp.insights[0].filters.process_launched_at[0].start #=> String
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
@@ -6006,10 +6157,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].gt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].lt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].gt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].lt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6033,6 +6188,18 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.compliance_associated_standards_id #=> Array
     #   resp.insights[0].filters.compliance_associated_standards_id[0].value #=> String
     #   resp.insights[0].filters.compliance_associated_standards_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.vulnerabilities_exploit_available #=> Array
+    #   resp.insights[0].filters.vulnerabilities_exploit_available[0].value #=> String
+    #   resp.insights[0].filters.vulnerabilities_exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.vulnerabilities_fix_available #=> Array
+    #   resp.insights[0].filters.vulnerabilities_fix_available[0].value #=> String
+    #   resp.insights[0].filters.vulnerabilities_fix_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.compliance_security_control_parameters_name #=> Array
+    #   resp.insights[0].filters.compliance_security_control_parameters_name[0].value #=> String
+    #   resp.insights[0].filters.compliance_security_control_parameters_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.compliance_security_control_parameters_value #=> Array
+    #   resp.insights[0].filters.compliance_security_control_parameters_value[0].value #=> String
+    #   resp.insights[0].filters.compliance_security_control_parameters_value[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -6198,6 +6365,107 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def get_members(params = {}, options = {})
       req = build_request(:get_members, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the definition of a security control. The definition
+    # includes the control title, description, Region availability,
+    # parameter definitions, and other details.
+    #
+    # @option params [required, String] :security_control_id
+    #   The ID of the security control to retrieve the definition for. This
+    #   field doesn’t accept an Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetSecurityControlDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityControlDefinitionResponse#security_control_definition #security_control_definition} => Types::SecurityControlDefinition
+    #
+    #
+    # @example Example: To get the definition of a security control.
+    #
+    #   # The following example retrieves definition details for the specified security control.
+    #
+    #   resp = client.get_security_control_definition({
+    #     security_control_id: "EC2.4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_control_definition: {
+    #       current_region_availability: "AVAILABLE", 
+    #       description: "This control checks whether an Amazon EC2 instance has been stopped for longer than the allowed number of days. The control fails if an EC2 instance is stopped for longer than the maximum allowed time period. Unless you provide a custom parameter value for the maximum allowed time period, Security Hub uses a default value of 30 days.", 
+    #       parameter_definitions: {
+    #         "AllowedDays" => {
+    #           configuration_options: {
+    #             integer: {
+    #               default_value: 30, 
+    #               max: 365, 
+    #               min: 1, 
+    #             }, 
+    #           }, 
+    #           description: "Number of days the EC2 instance is allowed to be in a stopped state before generating a failed finding", 
+    #         }, 
+    #       }, 
+    #       remediation_url: "https://docs.aws.amazon.com/console/securityhub/EC2.4/remediation", 
+    #       security_control_id: "EC2.4", 
+    #       severity_rating: "MEDIUM", 
+    #       title: "Stopped Amazon EC2 instances should be removed after a specified time period", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_control_definition({
+    #     security_control_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_control_definition.security_control_id #=> String
+    #   resp.security_control_definition.title #=> String
+    #   resp.security_control_definition.description #=> String
+    #   resp.security_control_definition.remediation_url #=> String
+    #   resp.security_control_definition.severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.security_control_definition.current_region_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.security_control_definition.customizable_properties #=> Array
+    #   resp.security_control_definition.customizable_properties[0] #=> String, one of "Parameters"
+    #   resp.security_control_definition.parameter_definitions #=> Hash
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.default_value #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.min #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.max #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value[0] #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.min #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.max #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.default_value #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.min #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.max #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.default_value #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.re_2_expression #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.expression_description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.re_2_expression #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.expression_description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.boolean.default_value #=> Boolean
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.default_value #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinition AWS API Documentation
+    #
+    # @overload get_security_control_definition(params = {})
+    # @param [Hash] params ({})
+    def get_security_control_definition(params = {}, options = {})
+      req = build_request(:get_security_control_definition, params)
       req.send_request(options)
     end
 
@@ -6742,6 +7010,9 @@ module Aws::SecurityHub
     #     security_control_definitions: [
     #       {
     #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #           "Parameters", 
+    #         ], 
     #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_id: "ACM.1", 
@@ -6750,6 +7021,9 @@ module Aws::SecurityHub
     #       }, 
     #       {
     #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #           "Parameters", 
+    #         ], 
     #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_id: "APIGateway.1", 
@@ -6784,6 +7058,38 @@ module Aws::SecurityHub
     #   resp.security_control_definitions[0].remediation_url #=> String
     #   resp.security_control_definitions[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.security_control_definitions[0].current_region_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.security_control_definitions[0].customizable_properties #=> Array
+    #   resp.security_control_definitions[0].customizable_properties[0] #=> String, one of "Parameters"
+    #   resp.security_control_definitions[0].parameter_definitions #=> Hash
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.default_value #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.min #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.max #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value[0] #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.min #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.max #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.default_value #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.min #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.max #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.default_value #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.re_2_expression #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.expression_description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.re_2_expression #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.expression_description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.boolean.default_value #=> Boolean
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.default_value #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
@@ -7279,6 +7585,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -7286,6 +7594,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -7299,6 +7609,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -7306,6 +7618,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -7409,6 +7723,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -7438,6 +7754,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -7463,6 +7781,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -7470,6 +7790,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -7774,6 +8096,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -7781,6 +8105,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -7825,6 +8151,30 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -7975,6 +8325,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -7982,6 +8334,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -7995,6 +8349,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -8002,6 +8358,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -8105,6 +8463,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -8134,6 +8494,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -8159,6 +8521,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -8166,6 +8530,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -8470,6 +8836,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -8477,6 +8845,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -8521,6 +8891,30 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -8592,6 +8986,74 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def update_organization_configuration(params = {}, options = {})
       req = build_request(:update_organization_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a security control.
+    #
+    # @option params [required, String] :security_control_id
+    #   The Amazon Resource Name (ARN) or ID of the control to update.
+    #
+    # @option params [required, Hash<String,Types::ParameterConfiguration>] :parameters
+    #   An object that specifies which security control parameters to update.
+    #
+    # @option params [String] :last_update_reason
+    #   The most recent reason for updating the properties of the security
+    #   control. This field accepts alphanumeric characters in addition to
+    #   white spaces, dashes, and underscores.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update security control properties
+    #
+    #   # The following example updates the specified security control. Specifically, this example updates control parameters.
+    #
+    #   resp = client.update_security_control({
+    #     last_update_reason: "Comply with internal requirements", 
+    #     parameters: {
+    #       "maxCredentialUsageAge" => {
+    #         value: {
+    #           integer: 15, 
+    #         }, 
+    #         value_type: "CUSTOM", 
+    #       }, 
+    #     }, 
+    #     security_control_id: "ACM.1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_control({
+    #     security_control_id: "NonEmptyString", # required
+    #     parameters: { # required
+    #       "NonEmptyString" => {
+    #         value_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #         value: {
+    #           integer: 1,
+    #           integer_list: [1],
+    #           double: 1.0,
+    #           string: "NonEmptyString",
+    #           string_list: ["NonEmptyString"],
+    #           boolean: false,
+    #           enum: "NonEmptyString",
+    #           enum_list: ["NonEmptyString"],
+    #         },
+    #       },
+    #     },
+    #     last_update_reason: "AlphaNumericNonEmptyString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControl AWS API Documentation
+    #
+    # @overload update_security_control(params = {})
+    # @param [Hash] params ({})
+    def update_security_control(params = {}, options = {})
+      req = build_request(:update_security_control, params)
       req.send_request(options)
     end
 
@@ -8703,7 +9165,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

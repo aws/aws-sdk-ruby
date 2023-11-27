@@ -759,8 +759,7 @@ module Aws::States
     # @!attribute [rw] redrive_count
     #   The number of times you've redriven an execution. If you have not
     #   yet redriven an execution, the `redriveCount` is 0. This count is
-    #   not updated for redrives that failed to start or are pending to be
-    #   redriven.
+    #   only updated if you successfully redrive an execution.
     #   @return [Integer]
     #
     # @!attribute [rw] redrive_date
@@ -914,9 +913,8 @@ module Aws::States
     #
     # @!attribute [rw] redrive_count
     #   The number of times you've redriven a Map Run. If you have not yet
-    #   redriven a Map Run, the `redriveCount` is 0. This count is not
-    #   updated for redrives that failed to start or are pending to be
-    #   redriven.
+    #   redriven a Map Run, the `redriveCount` is 0. This count is only
+    #   updated if you successfully redrive a Map Run.
     #   @return [Integer]
     #
     # @!attribute [rw] redrive_date
@@ -1371,8 +1369,7 @@ module Aws::States
     # @!attribute [rw] redrive_count
     #   The number of times you've redriven an execution. If you have not
     #   yet redriven an execution, the `redriveCount` is 0. This count is
-    #   not updated for redrives that failed to start or are pending to be
-    #   redriven.
+    #   only updated when you successfully redrive an execution.
     #   @return [Integer]
     #
     # @!attribute [rw] redrive_date
@@ -1848,6 +1845,149 @@ module Aws::States
     #
     class HistoryEventExecutionDataDetails < Struct.new(
       :truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP request and
+    # response information.
+    #
+    # @!attribute [rw] input
+    #   The raw state input.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_input_path
+    #   The input after Step Functions applies the [InputPath][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath
+    #   @return [String]
+    #
+    # @!attribute [rw] after_parameters
+    #   The effective input after Step Functions applies the [Parameters][1]
+    #   filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   The state's raw result.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_result_selector
+    #   The effective result after Step Functions applies the
+    #   [ResultSelector][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector
+    #   @return [String]
+    #
+    # @!attribute [rw] after_result_path
+    #   The effective result combined with the raw state input after Step
+    #   Functions applies the [ResultPath][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html
+    #   @return [String]
+    #
+    # @!attribute [rw] request
+    #   The raw HTTP request that is sent when you test an HTTP Task.
+    #   @return [Types::InspectionDataRequest]
+    #
+    # @!attribute [rw] response
+    #   The raw HTTP response that is returned when you test an HTTP Task.
+    #   @return [Types::InspectionDataResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionData AWS API Documentation
+    #
+    class InspectionData < Struct.new(
+      :input,
+      :after_input_path,
+      :after_parameters,
+      :result,
+      :after_result_selector,
+      :after_result_path,
+      :request,
+      :response)
+      SENSITIVE = [:input, :after_input_path, :after_parameters, :result, :after_result_selector, :after_result_path]
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP request
+    # information.
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to make the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   The HTTP method used for the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The API endpoint used for the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   The request headers associated with the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The request body for the HTTP request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionDataRequest AWS API Documentation
+    #
+    class InspectionDataRequest < Struct.new(
+      :protocol,
+      :method,
+      :url,
+      :headers,
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP response
+    # information. The `inspectionLevel` request parameter specifies which
+    # details are returned.
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to return the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP response status code for the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The message associated with the HTTP status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   The response headers associated with the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The HTTP response returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionDataResponse AWS API Documentation
+    #
+    class InspectionDataResponse < Struct.new(
+      :protocol,
+      :status_code,
+      :status_message,
+      :headers,
+      :body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2610,9 +2750,9 @@ module Aws::States
     # @!attribute [rw] failures_not_redrivable
     #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` child workflow
     #   executions that cannot be redriven because their execution status is
-    #   terminal. For example, if your execution event history contains
-    #   25,000 entries, or the `toleratedFailureCount` or
-    #   `toleratedFailurePercentage` for the Distributed Map has exceeded.
+    #   terminal. For example, child workflows with an execution status of
+    #   `FAILED`, `ABORTED`, or `TIMED_OUT` and a `redriveStatus` of
+    #   `NOT_REDRIVABLE`.
     #   @return [Integer]
     #
     # @!attribute [rw] pending_redrive
@@ -2711,10 +2851,9 @@ module Aws::States
     # @!attribute [rw] failures_not_redrivable
     #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` items in child
     #   workflow executions that cannot be redriven because the execution
-    #   status of those child workflows is terminal. For example, if your
-    #   execution event history contains 25,000 entries, or the
-    #   `toleratedFailureCount` or `toleratedFailurePercentage` for the
-    #   Distributed Map has exceeded.
+    #   status of those child workflows is terminal. For example, child
+    #   workflows with an execution status of `FAILED`, `ABORTED`, or
+    #   `TIMED_OUT` and a `redriveStatus` of `NOT_REDRIVABLE`.
     #   @return [Integer]
     #
     # @!attribute [rw] pending_redrive
@@ -2900,8 +3039,10 @@ module Aws::States
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
     #   Amazon Web Services SDK automatically generates a client token and
-    #   uses it for the request to ensure idempotency. The API uses one of
-    #   the last 10 client tokens provided.
+    #   uses it for the request to ensure idempotency. The API will return
+    #   idempotent responses for the last 10 client tokens used to
+    #   successfully redrive the execution. These client tokens are valid
+    #   for up to 15 minutes after they are first used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3910,6 +4051,118 @@ module Aws::States
       :error,
       :cause)
       SENSITIVE = [:error, :cause]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definition
+    #   The [Amazon States Language][1] (ASL) definition of the state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the execution role with the
+    #   required IAM permissions for the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   A string that contains the JSON input data for the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_level
+    #   Determines the values to return when a state is tested. You can
+    #   specify one of the following types:
+    #
+    #   * `INFO`: Shows the final state output. By default, Step Functions
+    #     sets `inspectionLevel` to `INFO` if you don't specify a level.
+    #
+    #   * `DEBUG`: Shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   * `TRACE`: Shows the HTTP request and response for an HTTP Task.
+    #     This level also shows the final state output along with the input
+    #     and output data processing result.
+    #
+    #   Each of these levels also provide information about the status of
+    #   the state execution and the next state to transition to.
+    #   @return [String]
+    #
+    # @!attribute [rw] reveal_secrets
+    #   Specifies whether or not to include secret information in the test
+    #   result. For HTTP Tasks, a secret includes the data that an
+    #   EventBridge connection adds to modify the HTTP request headers,
+    #   query parameters, and body. Step Functions doesn't omit any
+    #   information included in the state definition or the HTTP response.
+    #
+    #   If you set `revealSecrets` to `true`, you must make sure that the
+    #   IAM user that calls the `TestState` API has permission for the
+    #   `states:RevealSecrets` action. For an example of IAM policy that
+    #   sets the `states:RevealSecrets` permission, see [IAM permissions to
+    #   test a state][1]. Without this permission, Step Functions throws an
+    #   access denied error.
+    #
+    #   By default, `revealSecrets` is set to `false`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestStateInput AWS API Documentation
+    #
+    class TestStateInput < Struct.new(
+      :definition,
+      :role_arn,
+      :input,
+      :inspection_level,
+      :reveal_secrets)
+      SENSITIVE = [:definition, :input]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] output
+    #   The JSON output data of the state. Length constraints apply to the
+    #   payload size, and are expressed as bytes in UTF-8 encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error returned when the execution of a state fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A detailed explanation of the cause for the error when the execution
+    #   of a state fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_data
+    #   Returns additional details about the state's execution, including
+    #   its input and output data processing flow, and HTTP request and
+    #   response information. The `inspectionLevel` request parameter
+    #   specifies which details are returned.
+    #   @return [Types::InspectionData]
+    #
+    # @!attribute [rw] next_state
+    #   The name of the next state to transition to. If you haven't defined
+    #   a next state in your definition or if the execution of the state
+    #   fails, this ﬁeld doesn't contain a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The execution status of the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestStateOutput AWS API Documentation
+    #
+    class TestStateOutput < Struct.new(
+      :output,
+      :error,
+      :cause,
+      :inspection_data,
+      :next_state,
+      :status)
+      SENSITIVE = [:output, :error, :cause, :inspection_data]
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-11-27)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.
+
 1.50.0 (2023-11-22)
 ------------------
 

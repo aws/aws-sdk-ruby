@@ -70,6 +70,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::CreateFargateProfile.build(context)
           when :create_nodegroup
             Aws::EKS::Endpoints::CreateNodegroup.build(context)
+          when :create_pod_identity_association
+            Aws::EKS::Endpoints::CreatePodIdentityAssociation.build(context)
           when :delete_addon
             Aws::EKS::Endpoints::DeleteAddon.build(context)
           when :delete_cluster
@@ -80,6 +82,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DeleteFargateProfile.build(context)
           when :delete_nodegroup
             Aws::EKS::Endpoints::DeleteNodegroup.build(context)
+          when :delete_pod_identity_association
+            Aws::EKS::Endpoints::DeletePodIdentityAssociation.build(context)
           when :deregister_cluster
             Aws::EKS::Endpoints::DeregisterCluster.build(context)
           when :describe_addon
@@ -98,6 +102,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DescribeIdentityProviderConfig.build(context)
           when :describe_nodegroup
             Aws::EKS::Endpoints::DescribeNodegroup.build(context)
+          when :describe_pod_identity_association
+            Aws::EKS::Endpoints::DescribePodIdentityAssociation.build(context)
           when :describe_update
             Aws::EKS::Endpoints::DescribeUpdate.build(context)
           when :disassociate_identity_provider_config
@@ -114,6 +120,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::ListIdentityProviderConfigs.build(context)
           when :list_nodegroups
             Aws::EKS::Endpoints::ListNodegroups.build(context)
+          when :list_pod_identity_associations
+            Aws::EKS::Endpoints::ListPodIdentityAssociations.build(context)
           when :list_tags_for_resource
             Aws::EKS::Endpoints::ListTagsForResource.build(context)
           when :list_updates
@@ -136,6 +144,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::UpdateNodegroupConfig.build(context)
           when :update_nodegroup_version
             Aws::EKS::Endpoints::UpdateNodegroupVersion.build(context)
+          when :update_pod_identity_association
+            Aws::EKS::Endpoints::UpdatePodIdentityAssociation.build(context)
           end
         end
       end

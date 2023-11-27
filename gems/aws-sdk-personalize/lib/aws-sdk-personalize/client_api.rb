@@ -24,6 +24,7 @@ module Aws::Personalize
     BatchInferenceJob = Shapes::StructureShape.new(name: 'BatchInferenceJob')
     BatchInferenceJobConfig = Shapes::StructureShape.new(name: 'BatchInferenceJobConfig')
     BatchInferenceJobInput = Shapes::StructureShape.new(name: 'BatchInferenceJobInput')
+    BatchInferenceJobMode = Shapes::StringShape.new(name: 'BatchInferenceJobMode')
     BatchInferenceJobOutput = Shapes::StructureShape.new(name: 'BatchInferenceJobOutput')
     BatchInferenceJobSummary = Shapes::StructureShape.new(name: 'BatchInferenceJobSummary')
     BatchInferenceJobs = Shapes::ListShape.new(name: 'BatchInferenceJobs')
@@ -159,6 +160,7 @@ module Aws::Personalize
     FeatureTransformation = Shapes::StructureShape.new(name: 'FeatureTransformation')
     FeatureTransformationParameters = Shapes::MapShape.new(name: 'FeatureTransformationParameters')
     FeaturizationParameters = Shapes::MapShape.new(name: 'FeaturizationParameters')
+    FieldsForThemeGeneration = Shapes::StructureShape.new(name: 'FieldsForThemeGeneration')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     FilterSummary = Shapes::StructureShape.new(name: 'FilterSummary')
@@ -277,6 +279,7 @@ module Aws::Personalize
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    ThemeGenerationConfig = Shapes::StructureShape.new(name: 'ThemeGenerationConfig')
     TooManyTagKeysException = Shapes::StructureShape.new(name: 'TooManyTagKeysException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
@@ -333,6 +336,8 @@ module Aws::Personalize
     BatchInferenceJob.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, location_name: "jobOutput"))
     BatchInferenceJob.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     BatchInferenceJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    BatchInferenceJob.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
+    BatchInferenceJob.add_member(:theme_generation_config, Shapes::ShapeRef.new(shape: ThemeGenerationConfig, location_name: "themeGenerationConfig"))
     BatchInferenceJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     BatchInferenceJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     BatchInferenceJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
@@ -354,6 +359,7 @@ module Aws::Personalize
     BatchInferenceJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     BatchInferenceJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     BatchInferenceJobSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    BatchInferenceJobSummary.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
     BatchInferenceJobSummary.struct_class = Types::BatchInferenceJobSummary
 
     BatchInferenceJobs.member = Shapes::ShapeRef.new(shape: BatchInferenceJobSummary)
@@ -402,6 +408,7 @@ module Aws::Personalize
     Campaign.struct_class = Types::Campaign
 
     CampaignConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    CampaignConfig.add_member(:enable_metadata_with_recommendations, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMetadataWithRecommendations"))
     CampaignConfig.struct_class = Types::CampaignConfig
 
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -449,6 +456,8 @@ module Aws::Personalize
     CreateBatchInferenceJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateBatchInferenceJobRequest.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     CreateBatchInferenceJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateBatchInferenceJobRequest.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
+    CreateBatchInferenceJobRequest.add_member(:theme_generation_config, Shapes::ShapeRef.new(shape: ThemeGenerationConfig, location_name: "themeGenerationConfig"))
     CreateBatchInferenceJobRequest.struct_class = Types::CreateBatchInferenceJobRequest
 
     CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
@@ -600,6 +609,7 @@ module Aws::Personalize
     Dataset.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Dataset.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     Dataset.add_member(:latest_dataset_update, Shapes::ShapeRef.new(shape: DatasetUpdateSummary, location_name: "latestDatasetUpdate"))
+    Dataset.add_member(:tracking_id, Shapes::ShapeRef.new(shape: TrackingId, location_name: "trackingId"))
     Dataset.struct_class = Types::Dataset
 
     DatasetExportJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
@@ -898,6 +908,9 @@ module Aws::Personalize
     FeaturizationParameters.key = Shapes::ShapeRef.new(shape: ParameterName)
     FeaturizationParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
+    FieldsForThemeGeneration.add_member(:item_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "itemName"))
+    FieldsForThemeGeneration.struct_class = Types::FieldsForThemeGeneration
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Filter.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     Filter.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
@@ -1190,6 +1203,7 @@ module Aws::Personalize
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
     RecommenderConfig.add_member(:min_recommendation_requests_per_second, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minRecommendationRequestsPerSecond"))
     RecommenderConfig.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
+    RecommenderConfig.add_member(:enable_metadata_with_recommendations, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMetadataWithRecommendations"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -1318,6 +1332,9 @@ module Aws::Personalize
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    ThemeGenerationConfig.add_member(:fields_for_theme_generation, Shapes::ShapeRef.new(shape: FieldsForThemeGeneration, required: true, location_name: "fieldsForThemeGeneration"))
+    ThemeGenerationConfig.struct_class = Types::ThemeGenerationConfig
 
     TooManyTagKeysException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTagKeysException.struct_class = Types::TooManyTagKeysException

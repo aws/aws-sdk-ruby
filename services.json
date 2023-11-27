@@ -96,6 +96,9 @@
   "AutoScalingPlans": {
     "models": "autoscaling-plans/2018-01-06"
   },
+  "BCMDataExports": {
+    "models": "bcm-data-exports/2023-11-26"
+  },
   "Backup": {
     "models": "backup/2018-11-15"
   },
@@ -287,6 +290,9 @@
   "CostExplorer": {
     "models": "ce/2017-10-25"
   },
+  "CostOptimizationHub": {
+    "models": "cost-optimization-hub/2022-07-26"
+  },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06"
   },
@@ -386,6 +392,9 @@
   "EKS": {
     "models": "eks/2017-11-01"
   },
+  "EKSAuth": {
+    "models": "eks-auth/2023-11-26"
+  },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
   },
@@ -454,6 +463,9 @@
   },
   "FraudDetector": {
     "models": "frauddetector/2019-11-15"
+  },
+  "FreeTier": {
+    "models": "freetier/2023-09-07"
   },
   "GameLift": {
     "models": "gamelift/2015-10-01"
@@ -905,6 +917,9 @@
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },
+  "Repostspace": {
+    "models": "repostspace/2022-05-13"
+  },
   "ResilienceHub": {
     "models": "resiliencehub/2020-04-30"
   },
@@ -1187,6 +1202,9 @@
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
+  },
+  "WorkSpacesThinClient": {
+    "models": "workspaces-thin-client/2023-08-22"
   },
   "WorkSpacesWeb": {
     "models": "workspaces-web/2020-07-08"

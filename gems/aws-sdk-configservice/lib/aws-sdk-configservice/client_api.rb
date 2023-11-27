@@ -94,6 +94,7 @@ module Aws::ConfigService
     ConfigurationAggregatorNameList = Shapes::ListShape.new(name: 'ConfigurationAggregatorNameList')
     ConfigurationItem = Shapes::StructureShape.new(name: 'ConfigurationItem')
     ConfigurationItemCaptureTime = Shapes::TimestampShape.new(name: 'ConfigurationItemCaptureTime')
+    ConfigurationItemDeliveryTime = Shapes::TimestampShape.new(name: 'ConfigurationItemDeliveryTime')
     ConfigurationItemList = Shapes::ListShape.new(name: 'ConfigurationItemList')
     ConfigurationItemMD5Hash = Shapes::StringShape.new(name: 'ConfigurationItemMD5Hash')
     ConfigurationItemStatus = Shapes::StringShape.new(name: 'ConfigurationItemStatus')
@@ -219,6 +220,7 @@ module Aws::ConfigService
     DescribeRemediationExecutionStatusResponse = Shapes::StructureShape.new(name: 'DescribeRemediationExecutionStatusResponse')
     DescribeRetentionConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsRequest')
     DescribeRetentionConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsResponse')
+    Description = Shapes::StringShape.new(name: 'Description')
     DiscoveredResourceIdentifierList = Shapes::ListShape.new(name: 'DiscoveredResourceIdentifierList')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
@@ -435,7 +437,12 @@ module Aws::ConfigService
     QueryName = Shapes::StringShape.new(name: 'QueryName')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
+    RecordingFrequency = Shapes::StringShape.new(name: 'RecordingFrequency')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
+    RecordingMode = Shapes::StructureShape.new(name: 'RecordingMode')
+    RecordingModeOverride = Shapes::StructureShape.new(name: 'RecordingModeOverride')
+    RecordingModeOverrides = Shapes::ListShape.new(name: 'RecordingModeOverrides')
+    RecordingModeResourceTypesList = Shapes::ListShape.new(name: 'RecordingModeResourceTypesList')
     RecordingStrategy = Shapes::StructureShape.new(name: 'RecordingStrategy')
     RecordingStrategyType = Shapes::StringShape.new(name: 'RecordingStrategyType')
     ReevaluateConfigRuleNames = Shapes::ListShape.new(name: 'ReevaluateConfigRuleNames')
@@ -672,6 +679,8 @@ module Aws::ConfigService
     BaseConfigurationItem.add_member(:resource_creation_time, Shapes::ShapeRef.new(shape: ResourceCreationTime, location_name: "resourceCreationTime"))
     BaseConfigurationItem.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
     BaseConfigurationItem.add_member(:supplementary_configuration, Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
+    BaseConfigurationItem.add_member(:recording_frequency, Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency"))
+    BaseConfigurationItem.add_member(:configuration_item_delivery_time, Shapes::ShapeRef.new(shape: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
     BaseConfigurationItem.struct_class = Types::BaseConfigurationItem
 
     BaseConfigurationItems.member = Shapes::ShapeRef.new(shape: BaseConfigurationItem)
@@ -821,6 +830,8 @@ module Aws::ConfigService
     ConfigurationItem.add_member(:relationships, Shapes::ShapeRef.new(shape: RelationshipList, location_name: "relationships"))
     ConfigurationItem.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
     ConfigurationItem.add_member(:supplementary_configuration, Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
+    ConfigurationItem.add_member(:recording_frequency, Shapes::ShapeRef.new(shape: RecordingFrequency, location_name: "recordingFrequency"))
+    ConfigurationItem.add_member(:configuration_item_delivery_time, Shapes::ShapeRef.new(shape: ConfigurationItemDeliveryTime, location_name: "configurationItemDeliveryTime"))
     ConfigurationItem.struct_class = Types::ConfigurationItem
 
     ConfigurationItemList.member = Shapes::ShapeRef.new(shape: ConfigurationItem)
@@ -828,6 +839,7 @@ module Aws::ConfigService
     ConfigurationRecorder.add_member(:name, Shapes::ShapeRef.new(shape: RecorderName, location_name: "name"))
     ConfigurationRecorder.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleARN"))
     ConfigurationRecorder.add_member(:recording_group, Shapes::ShapeRef.new(shape: RecordingGroup, location_name: "recordingGroup"))
+    ConfigurationRecorder.add_member(:recording_mode, Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
     ConfigurationRecorder.struct_class = Types::ConfigurationRecorder
 
     ConfigurationRecorderList.member = Shapes::ShapeRef.new(shape: ConfigurationRecorder)
@@ -1914,6 +1926,19 @@ module Aws::ConfigService
     RecordingGroup.add_member(:exclusion_by_resource_types, Shapes::ShapeRef.new(shape: ExclusionByResourceTypes, location_name: "exclusionByResourceTypes"))
     RecordingGroup.add_member(:recording_strategy, Shapes::ShapeRef.new(shape: RecordingStrategy, location_name: "recordingStrategy"))
     RecordingGroup.struct_class = Types::RecordingGroup
+
+    RecordingMode.add_member(:recording_frequency, Shapes::ShapeRef.new(shape: RecordingFrequency, required: true, location_name: "recordingFrequency"))
+    RecordingMode.add_member(:recording_mode_overrides, Shapes::ShapeRef.new(shape: RecordingModeOverrides, location_name: "recordingModeOverrides"))
+    RecordingMode.struct_class = Types::RecordingMode
+
+    RecordingModeOverride.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    RecordingModeOverride.add_member(:resource_types, Shapes::ShapeRef.new(shape: RecordingModeResourceTypesList, required: true, location_name: "resourceTypes"))
+    RecordingModeOverride.add_member(:recording_frequency, Shapes::ShapeRef.new(shape: RecordingFrequency, required: true, location_name: "recordingFrequency"))
+    RecordingModeOverride.struct_class = Types::RecordingModeOverride
+
+    RecordingModeOverrides.member = Shapes::ShapeRef.new(shape: RecordingModeOverride)
+
+    RecordingModeResourceTypesList.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     RecordingStrategy.add_member(:use_only, Shapes::ShapeRef.new(shape: RecordingStrategyType, location_name: "useOnly"))
     RecordingStrategy.struct_class = Types::RecordingStrategy
@@ -3220,6 +3245,7 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: PutConfigurationRecorderRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfConfigurationRecordersExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRecorderNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRecordingGroupException)

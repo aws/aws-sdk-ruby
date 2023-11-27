@@ -997,8 +997,9 @@ module Aws::CloudTrail
     # the event data store enters a `PENDING_DELETION` state, and is
     # automatically deleted after a wait period of seven days.
     # `TerminationProtectionEnabled` must be set to `False` on the event
-    # data store; this operation cannot work if
-    # `TerminationProtectionEnabled` is `True`.
+    # data store and the `FederationStatus` must be `DISABLED`. You cannot
+    # delete an event data store if `TerminationProtectionEnabled` is `True`
+    # or the `FederationStatus` is `ENABLED`.
     #
     # After you run `DeleteEventDataStore` on an event data store, you
     # cannot run `ListQueries`, `DescribeQuery`, or `GetQueryResults` on
@@ -1238,6 +1239,109 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Disables Lake query federation on the specified event data store. When
+    # you disable federation, CloudTrail removes the metadata associated
+    # with the federated event data store in the Glue Data Catalog and
+    # removes registration for the federation role ARN and event data store
+    # in Lake Formation. No CloudTrail Lake data is deleted when you disable
+    # federation.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to disable Lake query federation.
+    #
+    # @return [Types::DisableFederationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableFederationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::DisableFederationResponse#federation_status #federation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_federation({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederation AWS API Documentation
+    #
+    # @overload disable_federation(params = {})
+    # @param [Hash] params ({})
+    def disable_federation(params = {}, options = {})
+      req = build_request(:disable_federation, params)
+      req.send_request(options)
+    end
+
+    # Enables Lake query federation on the specified event data store.
+    # Federating an event data store lets you view the metadata associated
+    # with the event data store in the Glue [Data Catalog][1] and run SQL
+    # queries against your event data using Amazon Athena. The table
+    # metadata stored in the Glue Data Catalog lets the Athena query engine
+    # know how to find, read, and process the data that you want to query.
+    #
+    # When you enable Lake query federation, CloudTrail creates a federated
+    # database named `aws:cloudtrail` (if the database doesn't already
+    # exist) and a federated table in the Glue Data Catalog. The event data
+    # store ID is used for the table name. CloudTrail registers the role ARN
+    # and event data store in [Lake Formation][2], the service responsible
+    # for revoking or granting permissions to the federated resources in the
+    # Glue Data Catalog.
+    #
+    # For more information about Lake query federation, see [Federate an
+    # event data store][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
+    # [2]: https://docs.aws.amazon.com/lake-formation/latest/dg/how-it-works.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to enable Lake query federation.
+    #
+    # @option params [required, String] :federation_role_arn
+    #   The ARN of the federation role to use for the event data store. Amazon
+    #   Web Services services like Lake Formation use this federation role to
+    #   access data for the federated event data store. The federation role
+    #   must exist in your account and provide the [required minimum
+    #   permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role
+    #
+    # @return [Types::EnableFederationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableFederationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::EnableFederationResponse#federation_status #federation_status} => String
+    #   * {Types::EnableFederationResponse#federation_role_arn #federation_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_federation({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     federation_role_arn: "FederationRoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederation AWS API Documentation
+    #
+    # @overload enable_federation(params = {})
+    # @param [Hash] params ({})
+    def enable_federation(params = {}, options = {})
+      req = build_request(:enable_federation, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific channel.
     #
     # @option params [required, String] :channel
@@ -1319,6 +1423,8 @@ module Aws::CloudTrail
     #   * {Types::GetEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #   * {Types::GetEventDataStoreResponse#billing_mode #billing_mode} => String
+    #   * {Types::GetEventDataStoreResponse#federation_status #federation_status} => String
+    #   * {Types::GetEventDataStoreResponse#federation_role_arn #federation_role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1355,6 +1461,8 @@ module Aws::CloudTrail
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
     #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
     #
@@ -3340,6 +3448,8 @@ module Aws::CloudTrail
     #   * {Types::UpdateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #   * {Types::UpdateEventDataStoreResponse#billing_mode #billing_mode} => String
+    #   * {Types::UpdateEventDataStoreResponse#federation_status #federation_status} => String
+    #   * {Types::UpdateEventDataStoreResponse#federation_role_arn #federation_role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3399,6 +3509,8 @@ module Aws::CloudTrail
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
     #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStore AWS API Documentation
     #
@@ -3619,7 +3731,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

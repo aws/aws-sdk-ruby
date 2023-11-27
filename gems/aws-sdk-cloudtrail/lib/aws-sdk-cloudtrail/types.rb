@@ -10,6 +10,12 @@
 module Aws::CloudTrail
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # This exception is thrown when you start a new import and a previous
     # import is still in progress.
     #
@@ -688,6 +694,14 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudWatchLogsDeliveryUnavailableException AWS API Documentation
     #
     class CloudWatchLogsDeliveryUnavailableException < Aws::EmptyStructure; end
+
+    # You are trying to update a resource when another request is in
+    # progress. Allow sufficient wait time for the previous request to
+    # complete, then retry your request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
 
     # This exception is thrown when the specified resource is not ready for
     # an operation. This can occur when you try to run an operation on a
@@ -1718,6 +1732,86 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to disable Lake query federation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederationRequest AWS API Documentation
+    #
+    class DisableFederationRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store for which you disabled Lake query
+    #   federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   The federation status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederationResponse AWS API Documentation
+    #
+    class DisableFederationResponse < Struct.new(
+      :event_data_store_arn,
+      :federation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to enable Lake query federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   The ARN of the federation role to use for the event data store.
+    #   Amazon Web Services services like Lake Formation use this federation
+    #   role to access data for the federated event data store. The
+    #   federation role must exist in your account and provide the [required
+    #   minimum permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederationRequest AWS API Documentation
+    #
+    class EnableFederationRequest < Struct.new(
+      :event_data_store,
+      :federation_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store for which you enabled Lake query
+    #   federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   The federation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   The ARN of the federation role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederationResponse AWS API Documentation
+    #
+    class EnableFederationResponse < Struct.new(
+      :event_data_store_arn,
+      :federation_status,
+      :federation_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an event that was returned by a lookup
     # request. The result includes a representation of a CloudTrail event.
     #
@@ -1861,6 +1955,15 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreAlreadyExistsException AWS API Documentation
     #
     class EventDataStoreAlreadyExistsException < Aws::EmptyStructure; end
+
+    # You cannot delete the event data store because Lake query federation
+    # is enabled. To delete the event data store, run the
+    # `DisableFederation` operation to disable Lake query federation on the
+    # event data store.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreFederationEnabledException AWS API Documentation
+    #
+    class EventDataStoreFederationEnabledException < Aws::EmptyStructure; end
 
     # This exception is thrown when you try to update or delete an event
     # data store that currently has an import in progress.
@@ -2100,6 +2203,23 @@ module Aws::CloudTrail
     #   The billing mode for the event data store.
     #   @return [String]
     #
+    # @!attribute [rw] federation_status
+    #   Indicates the [Lake query federation][1] status. The status is
+    #   `ENABLED` if Lake query federation is enabled, or `DISABLED` if Lake
+    #   query federation is disabled. You cannot delete an event data store
+    #   if the `FederationStatus` is `ENABLED`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   If Lake query federation is enabled, provides the ARN of the
+    #   federation role used to access the resources for the federated event
+    #   data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreResponse AWS API Documentation
     #
     class GetEventDataStoreResponse < Struct.new(
@@ -2114,7 +2234,9 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       :kms_key_id,
-      :billing_mode)
+      :billing_mode,
+      :federation_status,
+      :federation_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5000,6 +5122,23 @@ module Aws::CloudTrail
     #   The billing mode for the event data store.
     #   @return [String]
     #
+    # @!attribute [rw] federation_status
+    #   Indicates the [Lake query federation][1] status. The status is
+    #   `ENABLED` if Lake query federation is enabled, or `DISABLED` if Lake
+    #   query federation is disabled. You cannot delete an event data store
+    #   if the `FederationStatus` is `ENABLED`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   If Lake query federation is enabled, provides the ARN of the
+    #   federation role used to access the resources for the federated event
+    #   data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreResponse AWS API Documentation
     #
     class UpdateEventDataStoreResponse < Struct.new(
@@ -5014,7 +5153,9 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       :kms_key_id,
-      :billing_mode)
+      :billing_mode,
+      :federation_status,
+      :federation_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

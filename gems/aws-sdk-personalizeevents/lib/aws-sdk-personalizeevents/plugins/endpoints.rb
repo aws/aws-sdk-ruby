@@ -56,6 +56,10 @@ module Aws::PersonalizeEvents
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :put_action_interactions
+            Aws::PersonalizeEvents::Endpoints::PutActionInteractions.build(context)
+          when :put_actions
+            Aws::PersonalizeEvents::Endpoints::PutActions.build(context)
           when :put_events
             Aws::PersonalizeEvents::Endpoints::PutEvents.build(context)
           when :put_items

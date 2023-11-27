@@ -388,11 +388,94 @@ module Aws::ControlTower
 
     # @!group API Operations
 
+    # Creates a new landing zone. This starts an asynchronous operation that
+    # creates and configures a landing zone based on the parameters
+    # specified in the manifest JSON file.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to be applied to the landing zone.
+    #
+    # @option params [required, String] :version
+    #   The landing zone version.
+    #
+    # @return [Types::CreateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLandingZoneOutput#arn #arn} => String
+    #   * {Types::CreateLandingZoneOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_landing_zone({
+    #     manifest: { # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     version: "LandingZoneVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZone AWS API Documentation
+    #
+    # @overload create_landing_zone(params = {})
+    # @param [Hash] params ({})
+    def create_landing_zone(params = {}, options = {})
+      req = build_request(:create_landing_zone, params)
+      req.send_request(options)
+    end
+
+    # This decommissions a landing zone. This starts an asynchronous
+    # operation that deletes Amazon Web Services Control Tower resources
+    # deployed in Amazon Web Services Control Tower managed accounts.
+    #
+    # @option params [required, String] :landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #
+    # @return [Types::DeleteLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLandingZoneOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_landing_zone({
+    #     landing_zone_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DeleteLandingZone AWS API Documentation
+    #
+    # @overload delete_landing_zone(params = {})
+    # @param [Hash] params ({})
+    def delete_landing_zone(params = {}, options = {})
+      req = build_request(:delete_landing_zone, params)
+      req.send_request(options)
+    end
+
     # This API call turns off a control. It starts an asynchronous operation
-    # that deletes AWS resources on the specified organizational unit and
-    # the accounts it contains. The resources will vary according to the
-    # control that you specify. For usage examples, see [ *the AWS Control
-    # Tower User Guide* ][1].
+    # that deletes Amazon Web Services resources on the specified
+    # organizational unit and the accounts it contains. The resources will
+    # vary according to the control that you specify. For usage examples,
+    # see [ *the Amazon Web Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -441,10 +524,11 @@ module Aws::ControlTower
     end
 
     # This API call activates a control. It starts an asynchronous operation
-    # that creates AWS resources on the specified organizational unit and
-    # the accounts it contains. The resources created will vary according to
-    # the control that you specify. For usage examples, see [ *the AWS
-    # Control Tower User Guide* ][1].
+    # that creates Amazon Web Services resources on the specified
+    # organizational unit and the accounts it contains. The resources
+    # created will vary according to the control that you specify. For usage
+    # examples, see [ *the Amazon Web Services Control Tower User Guide*
+    # ][1].
     #
     #
     #
@@ -503,7 +587,7 @@ module Aws::ControlTower
     # Returns the status of a particular `EnableControl` or `DisableControl`
     # operation. Displays a message in case of error. Details for an
     # operation are available for 90 days. For usage examples, see [ *the
-    # AWS Control Tower User Guide* ][1].
+    # Amazon Web Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -541,7 +625,7 @@ module Aws::ControlTower
     end
 
     # Retrieves details about an enabled control. For usage examples, see [
-    # *the AWS Control Tower User Guide* ][1].
+    # *the Amazon Web Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -580,9 +664,76 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Lists the controls enabled by AWS Control Tower on the specified
-    # organizational unit and the accounts it contains. For usage examples,
-    # see [ *the AWS Control Tower User Guide* ][1].
+    # Returns details about the landing zone. Displays a message in case of
+    # error.
+    #
+    # @option params [required, String] :landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #
+    # @return [Types::GetLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLandingZoneOutput#landing_zone #landing_zone} => Types::LandingZoneDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_landing_zone({
+    #     landing_zone_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.landing_zone.arn #=> String
+    #   resp.landing_zone.drift_status.status #=> String, one of "DRIFTED", "IN_SYNC"
+    #   resp.landing_zone.latest_available_version #=> String
+    #   resp.landing_zone.status #=> String, one of "ACTIVE", "PROCESSING", "FAILED"
+    #   resp.landing_zone.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZone AWS API Documentation
+    #
+    # @overload get_landing_zone(params = {})
+    # @param [Hash] params ({})
+    def get_landing_zone(params = {}, options = {})
+      req = build_request(:get_landing_zone, params)
+      req.send_request(options)
+    end
+
+    # Returns the status of the specified landing zone operation. Details
+    # for an operation are available for X days.
+    #
+    # @option params [required, String] :operation_identifier
+    #   A unique identifier assigned to a landing zone operation.
+    #
+    # @return [Types::GetLandingZoneOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLandingZoneOperationOutput#operation_details #operation_details} => Types::LandingZoneOperationDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_landing_zone_operation({
+    #     operation_identifier: "OperationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_details.end_time #=> Time
+    #   resp.operation_details.operation_type #=> String, one of "DELETE", "CREATE", "UPDATE", "RESET"
+    #   resp.operation_details.start_time #=> Time
+    #   resp.operation_details.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.operation_details.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneOperation AWS API Documentation
+    #
+    # @overload get_landing_zone_operation(params = {})
+    # @param [Hash] params ({})
+    def get_landing_zone_operation(params = {}, options = {})
+      req = build_request(:get_landing_zone_operation, params)
+      req.send_request(options)
+    end
+
+    # Lists the controls enabled by Amazon Web Services Control Tower on the
+    # specified organizational unit and the accounts it contains. For usage
+    # examples, see [ *the Amazon Web Services Control Tower User Guide*
+    # ][1].
     #
     #
     #
@@ -638,8 +789,51 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Returns the landing zone ARN for the landing zone deployed in your
+    # managed account. This API also creates an ARN for existing accounts
+    # that do not yet have a landing zone ARN.
+    #
+    # The return limit is one landing zone ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of returned landing zone ARNs.
+    #
+    # @option params [String] :next_token
+    #   The token to continue the list from a previous API call with the same
+    #   parameters.
+    #
+    # @return [Types::ListLandingZonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLandingZonesOutput#landing_zones #landing_zones} => Array&lt;Types::LandingZoneSummary&gt;
+    #   * {Types::ListLandingZonesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_landing_zones({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.landing_zones #=> Array
+    #   resp.landing_zones[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZones AWS API Documentation
+    #
+    # @overload list_landing_zones(params = {})
+    # @param [Hash] params ({})
+    def list_landing_zones(params = {}, options = {})
+      req = build_request(:list_landing_zones, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags associated with the resource. For usage
-    # examples, see [ *the AWS Control Tower User Guide* ][1].
+    # examples, see [ *the Amazon Web Services Control Tower User Guide*
+    # ][1].
     #
     #
     #
@@ -672,8 +866,38 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Applies tags to a resource. For usage examples, see [ *the AWS Control
-    # Tower User Guide* ][1].
+    # This API call resets a landing zone. It starts an asynchronous
+    # operation that resets the landing zone to the parameters specified in
+    # its original configuration.
+    #
+    # @option params [required, String] :landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #
+    # @return [Types::ResetLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetLandingZoneOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_landing_zone({
+    #     landing_zone_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetLandingZone AWS API Documentation
+    #
+    # @overload reset_landing_zone(params = {})
+    # @param [Hash] params ({})
+    def reset_landing_zone(params = {}, options = {})
+      req = build_request(:reset_landing_zone, params)
+      req.send_request(options)
+    end
+
+    # Applies tags to a resource. For usage examples, see [ *the Amazon Web
+    # Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -705,8 +929,8 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Removes tags from a resource. For usage examples, see [ *the AWS
-    # Control Tower User Guide* ][1].
+    # Removes tags from a resource. For usage examples, see [ *the Amazon
+    # Web Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -736,6 +960,56 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # This API call updates the landing zone. It starts an asynchronous
+    # operation that updates the landing zone based on the new landing zone
+    # version or the updated parameters specified in the updated manifest
+    # file.
+    #
+    # @option params [required, String] :landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1]
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #
+    # @option params [required, String] :version
+    #   The landing zone version.
+    #
+    # @return [Types::UpdateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLandingZoneOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_landing_zone({
+    #     landing_zone_identifier: "String", # required
+    #     manifest: { # required
+    #     },
+    #     version: "LandingZoneVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZone AWS API Documentation
+    #
+    # @overload update_landing_zone(params = {})
+    # @param [Hash] params ({})
+    def update_landing_zone(params = {}, options = {})
+      req = build_request(:update_landing_zone, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -749,7 +1023,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

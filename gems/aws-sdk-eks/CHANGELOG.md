@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for the applications running in their EKS clusters.
+
 1.93.0 (2023-11-22)
 ------------------
 

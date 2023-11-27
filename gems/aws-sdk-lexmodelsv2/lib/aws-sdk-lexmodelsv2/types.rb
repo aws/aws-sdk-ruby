@@ -1836,6 +1836,21 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains information about the Amazon Bedrock model used to interpret
+    # the prompt used in descriptive bot building.
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the foundation model used in descriptive bot building.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BedrockModelSpecification AWS API Documentation
+    #
+    class BedrockModelSpecification < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides a record of an event that affects a bot alias. For example,
     # when the version of a bot that the alias points to changes.
     #
@@ -2603,6 +2618,27 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains specifications about the Amazon Lex build time generative AI
+    # capabilities from Amazon Bedrock that you can turn on for your bot.
+    #
+    # @!attribute [rw] descriptive_bot_builder
+    #   An object containing specifications for the descriptive bot building
+    #   feature.
+    #   @return [Types::DescriptiveBotBuilderSpecification]
+    #
+    # @!attribute [rw] sample_utterance_generation
+    #   Contains specifications for the sample utterance generation feature.
+    #   @return [Types::SampleUtteranceGenerationSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BuildtimeSettings AWS API Documentation
+    #
+    class BuildtimeSettings < Struct.new(
+      :descriptive_bot_builder,
+      :sample_utterance_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies attributes for sorting a list of built-in intents.
     #
     # @!attribute [rw] attribute
@@ -3251,6 +3287,11 @@ module Aws::LexModelsV2
     #   with the user.
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   Contains specifications about the generative AI capabilities from
+    #   Amazon Bedrock that you can turn on for your bot.
+    #   @return [Types::GenerativeAISettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleRequest AWS API Documentation
     #
     class CreateBotLocaleRequest < Struct.new(
@@ -3259,7 +3300,8 @@ module Aws::LexModelsV2
       :locale_id,
       :description,
       :nlu_intent_confidence_threshold,
-      :voice_settings)
+      :voice_settings,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3315,6 +3357,11 @@ module Aws::LexModelsV2
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   Contains specifications about the generative AI capabilities from
+    #   Amazon Bedrock that you can turn on for your bot.
+    #   @return [Types::GenerativeAISettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleResponse AWS API Documentation
     #
     class CreateBotLocaleResponse < Struct.new(
@@ -3326,7 +3373,8 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :bot_locale_status,
-      :creation_date_time)
+      :creation_date_time,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5383,6 +5431,11 @@ module Aws::LexModelsV2
     #   `failureReasons` field.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   Contains settings for Amazon Bedrock's generative AI features for
+    #   your bot locale.
+    #   @return [Types::GenerativeAISettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -5401,7 +5454,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :last_build_submitted_date_time,
       :bot_locale_history_events,
-      :recommended_actions)
+      :recommended_actions,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5517,6 +5571,99 @@ module Aws::LexModelsV2
     #
     class DescribeBotRequest < Struct.new(
       :bot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot for which to return the generation
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot for which to return the generation details.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot for which to return the generation details.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the generation request for which to return
+    #   the generation details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotResourceGenerationRequest AWS API Documentation
+    #
+    class DescribeBotResourceGenerationRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :generation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot for which the generation request
+    #   was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot for which the generation request was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot for which the generation request was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The generation ID for which to return the generation details.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   A list of reasons why the generation of bot resources through
+    #   natural language description failed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] generation_status
+    #   The status of the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_input_prompt
+    #   The prompt used in the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_bot_locale_url
+    #   The Amazon S3 location of the generated bot locale configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time at which the item was generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model used to generate the bot resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time at which the generated item was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotResourceGenerationResponse AWS API Documentation
+    #
+    class DescribeBotResourceGenerationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :generation_id,
+      :failure_reasons,
+      :generation_status,
+      :generation_input_prompt,
+      :generated_bot_locale_url,
+      :creation_date_time,
+      :model_arn,
+      :last_updated_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6591,6 +6738,27 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains specifications for the descriptive bot building feature.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the descriptive bot building feature is activated
+    #   or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bedrock_model_specification
+    #   An object containing information about the Amazon Bedrock model used
+    #   to interpret the prompt used in descriptive bot building.
+    #   @return [Types::BedrockModelSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescriptiveBotBuilderSpecification AWS API Documentation
+    #
+    class DescriptiveBotBuilderSpecification < Struct.new(
+      :enabled,
+      :bedrock_model_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the action that the bot executes at runtime when the
     # conversation reaches this step.
     #
@@ -7056,6 +7224,145 @@ module Aws::LexModelsV2
       :start_response,
       :update_response,
       :timeout_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intent_id
+    #   The intent unique Id for the bot request to generate utterances.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot unique Id for the bot request to generate utterances.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version for the bot request to generate utterances.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The unique locale Id for the bot request to generate utterances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerateBotElementRequest AWS API Documentation
+    #
+    class GenerateBotElementRequest < Struct.new(
+      :intent_id,
+      :bot_id,
+      :bot_version,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique bot Id for the bot which received the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The unique bot version for the bot which received the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The unique locale Id for the bot which received the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_id
+    #   The unique intent Id for the bot which received the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_utterances
+    #   The sample utterances for the bot which received the response.
+    #   @return [Array<Types::SampleUtterance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerateBotElementResponse AWS API Documentation
+    #
+    class GenerateBotElementResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :intent_id,
+      :sample_utterances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the attribute and method by which to sort the generation
+    # request information.
+    #
+    # @!attribute [rw] attribute
+    #   The attribute by which to sort the generation request information.
+    #   You can sort by the following attributes.
+    #
+    #   * `creationStartTime` – The time at which the generation request was
+    #     created.
+    #
+    #   * `lastUpdatedTime` – The time at which the generation request was
+    #     last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order by which to sort the generation request information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerationSortBy AWS API Documentation
+    #
+    class GenerationSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a generation request made for the bot
+    # locale.
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_status
+    #   The status of the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time at which the generation request was made.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time at which the generation request was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerationSummary AWS API Documentation
+    #
+    class GenerationSummary < Struct.new(
+      :generation_id,
+      :generation_status,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains specifications about the generative AI capabilities from
+    # Amazon Bedrock that you can turn on for your bot.
+    #
+    # @!attribute [rw] runtime_settings
+    #   Contains specifications about the Amazon Lex runtime generative AI
+    #   capabilities from Amazon Bedrock that you can turn on for your bot.
+    #   @return [Types::RuntimeSettings]
+    #
+    # @!attribute [rw] buildtime_settings
+    #   Contains specifications about the Amazon Lex build time generative
+    #   AI capabilities from Amazon Bedrock that you can turn on for your
+    #   bot.
+    #   @return [Types::BuildtimeSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerativeAISettings AWS API Documentation
+    #
+    class GenerativeAISettings < Struct.new(
+      :runtime_settings,
+      :buildtime_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8217,6 +8524,85 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :bot_recommendation_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot whose generation requests you want
+    #   to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot whose generation requests you want to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot whose generation requests you want to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   An object containing information about the attribute and the method
+    #   by which to sort the results
+    #   @return [Types::GenerationSortBy]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the number specified
+    #   in the `maxResults`, the response returns a token in the `nextToken`
+    #   field. Use this token when making a request to return the next batch
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotResourceGenerationsRequest AWS API Documentation
+    #
+    class ListBotResourceGenerationsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :sort_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot for which the generation requests
+    #   were made.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot for which the generation requests were made.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot for which the generation requests were made.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_summaries
+    #   A list of objects, each containing information about a generation
+    #   request for the bot locale.
+    #   @return [Array<Types::GenerationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the number specified
+    #   in the `maxResults`, the response returns a token in the `nextToken`
+    #   field. Use this token when making a request to return the next batch
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotResourceGenerationsResponse AWS API Documentation
+    #
+    class ListBotResourceGenerationsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :generation_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -10723,6 +11109,22 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains specifications about the Amazon Lex runtime generative AI
+    # capabilities from Amazon Bedrock that you can turn on for your bot.
+    #
+    # @!attribute [rw] slot_resolution_improvement
+    #   An object containing specifications for the assisted slot resolution
+    #   feature.
+    #   @return [Types::SlotResolutionImprovementSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeSettings AWS API Documentation
+    #
+    class RuntimeSettings < Struct.new(
+      :slot_resolution_improvement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon S3 bucket for logging audio conversations
     #
     # @!attribute [rw] kms_key_arn
@@ -10821,6 +11223,26 @@ module Aws::LexModelsV2
     #
     class SampleUtterance < Struct.new(
       :utterance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains specifications for the sample utterance generation feature.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether to enable sample utterance generation or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bedrock_model_specification
+    #   Contains information about the Amazon Bedrock model used to
+    #   interpret the prompt used in descriptive bot building.
+    #   @return [Types::BedrockModelSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SampleUtteranceGenerationSpecification AWS API Documentation
+    #
+    class SampleUtteranceGenerationSpecification < Struct.new(
+      :enabled,
+      :bedrock_model_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11244,6 +11666,45 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains specifications for the assisted slot resolution feature.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether assisted slot resolution is turned on or off.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bedrock_model_specification
+    #   An object containing information about the Amazon Bedrock model used
+    #   to assist slot resolution.
+    #   @return [Types::BedrockModelSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotResolutionImprovementSpecification AWS API Documentation
+    #
+    class SlotResolutionImprovementSpecification < Struct.new(
+      :enabled,
+      :bedrock_model_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about whether assisted slot resolution is turned
+    # on for the slot or not.
+    #
+    # @!attribute [rw] slot_resolution_strategy
+    #   Specifies whether assisted slot resolution is turned on for the slot
+    #   or not. If the value is `EnhancedFallback`, assisted slot resolution
+    #   is activated when Amazon Lex defaults to the
+    #   `AMAZON.FallbackIntent`. If the value is `Default`, assisted slot
+    #   resolution is turned off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotResolutionSetting AWS API Documentation
+    #
+    class SlotResolutionSetting < Struct.new(
+      :slot_resolution_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the success and failure rate of slot resolution in
     # the results of a test execution.
     #
@@ -11549,6 +12010,11 @@ module Aws::LexModelsV2
     #   successfully entered by a user.
     #   @return [Types::SlotCaptureSetting]
     #
+    # @!attribute [rw] slot_resolution_setting
+    #   An object containing information about whether assisted slot
+    #   resolution is turned on for the slot or not.
+    #   @return [Types::SlotResolutionSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValueElicitationSetting AWS API Documentation
     #
     class SlotValueElicitationSetting < Struct.new(
@@ -11557,7 +12023,8 @@ module Aws::LexModelsV2
       :prompt_specification,
       :sample_utterances,
       :wait_and_continue_specification,
-      :slot_capture_setting)
+      :slot_capture_setting,
+      :slot_resolution_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11778,6 +12245,81 @@ module Aws::LexModelsV2
       :creation_date_time,
       :transcript_source_setting,
       :encryption_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_input_prompt
+    #   The prompt to generate intents and slot types for the bot locale.
+    #   Your description should be both *detailed* and *precise* to help
+    #   generate appropriate and sufficient intents for your bot. Include a
+    #   list of actions to improve the intent creation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot for which to generate intents and
+    #   slot types.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot for which to generate intents and slot types.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot for which to generate intents and slot types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotResourceGenerationRequest AWS API Documentation
+    #
+    class StartBotResourceGenerationRequest < Struct.new(
+      :generation_input_prompt,
+      :bot_id,
+      :bot_version,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_input_prompt
+    #   The prompt that was used generate intents and slot types for the bot
+    #   locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot for which the generation request
+    #   was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot for which the generation request was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot for which the generation request was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_status
+    #   The status of the generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time at which the generation request was made.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotResourceGenerationResponse AWS API Documentation
+    #
+    class StartBotResourceGenerationResponse < Struct.new(
+      :generation_input_prompt,
+      :generation_id,
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :generation_status,
+      :creation_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13072,6 +13614,13 @@ module Aws::LexModelsV2
     #   interaction with the user.
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   Contains settings for generative AI features powered by Amazon
+    #   Bedrock for your bot locale. Use this object to turn generative AI
+    #   features on and off. Pricing may differ if you turn a feature on.
+    #   For more information, see LINK.
+    #   @return [Types::GenerativeAISettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleRequest AWS API Documentation
     #
     class UpdateBotLocaleRequest < Struct.new(
@@ -13080,7 +13629,8 @@ module Aws::LexModelsV2
       :locale_id,
       :description,
       :nlu_intent_confidence_threshold,
-      :voice_settings)
+      :voice_settings,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13139,6 +13689,11 @@ module Aws::LexModelsV2
     #   `failureReasons` field.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] generative_ai_settings
+    #   Contains settings for generative AI features powered by Amazon
+    #   Bedrock for your bot locale.
+    #   @return [Types::GenerativeAISettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -13153,7 +13708,8 @@ module Aws::LexModelsV2
       :failure_reasons,
       :creation_date_time,
       :last_updated_date_time,
-      :recommended_actions)
+      :recommended_actions,
+      :generative_ai_settings)
       SENSITIVE = []
       include Aws::Structure
     end

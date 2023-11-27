@@ -34,6 +34,7 @@ module Aws::GuardDuty
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
     Administrator = Shapes::StructureShape.new(name: 'Administrator')
     AffectedResources = Shapes::MapShape.new(name: 'AffectedResources')
+    AgentDetails = Shapes::StructureShape.new(name: 'AgentDetails')
     Anomaly = Shapes::StructureShape.new(name: 'Anomaly')
     AnomalyObject = Shapes::StructureShape.new(name: 'AnomalyObject')
     AnomalyProfileFeatureObjects = Shapes::ListShape.new(name: 'AnomalyProfileFeatureObjects')
@@ -57,11 +58,14 @@ module Aws::GuardDuty
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Container = Shapes::StructureShape.new(name: 'Container')
+    ContainerInstanceDetails = Shapes::StructureShape.new(name: 'ContainerInstanceDetails')
     Containers = Shapes::ListShape.new(name: 'Containers')
     CountByCoverageStatus = Shapes::MapShape.new(name: 'CountByCoverageStatus')
     CountByResourceType = Shapes::MapShape.new(name: 'CountByResourceType')
     CountBySeverity = Shapes::MapShape.new(name: 'CountBySeverity')
     Country = Shapes::StructureShape.new(name: 'Country')
+    CoverageEc2InstanceDetails = Shapes::StructureShape.new(name: 'CoverageEc2InstanceDetails')
+    CoverageEcsClusterDetails = Shapes::StructureShape.new(name: 'CoverageEcsClusterDetails')
     CoverageEksClusterDetails = Shapes::StructureShape.new(name: 'CoverageEksClusterDetails')
     CoverageFilterCondition = Shapes::StructureShape.new(name: 'CoverageFilterCondition')
     CoverageFilterCriteria = Shapes::StructureShape.new(name: 'CoverageFilterCriteria')
@@ -166,6 +170,7 @@ module Aws::GuardDuty
     Eq = Shapes::ListShape.new(name: 'Eq')
     Equals = Shapes::ListShape.new(name: 'Equals')
     Evidence = Shapes::StructureShape.new(name: 'Evidence')
+    FargateDetails = Shapes::StructureShape.new(name: 'FargateDetails')
     FeatureAdditionalConfiguration = Shapes::StringShape.new(name: 'FeatureAdditionalConfiguration')
     FeatureStatus = Shapes::StringShape.new(name: 'FeatureStatus')
     Feedback = Shapes::StringShape.new(name: 'Feedback')
@@ -245,6 +250,7 @@ module Aws::GuardDuty
     IpSetIds = Shapes::ListShape.new(name: 'IpSetIds')
     IpSetStatus = Shapes::StringShape.new(name: 'IpSetStatus')
     Ipv6Addresses = Shapes::ListShape.new(name: 'Ipv6Addresses')
+    Issues = Shapes::ListShape.new(name: 'Issues')
     KubernetesApiCallAction = Shapes::StructureShape.new(name: 'KubernetesApiCallAction')
     KubernetesAuditLogsConfiguration = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfiguration')
     KubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfigurationResult')
@@ -554,6 +560,9 @@ module Aws::GuardDuty
     AffectedResources.key = Shapes::ShapeRef.new(shape: String)
     AffectedResources.value = Shapes::ShapeRef.new(shape: String)
 
+    AgentDetails.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    AgentDetails.struct_class = Types::AgentDetails
+
     Anomaly.add_member(:profiles, Shapes::ShapeRef.new(shape: AnomalyProfiles, location_name: "profiles"))
     Anomaly.add_member(:unusual, Shapes::ShapeRef.new(shape: AnomalyUnusual, location_name: "unusual"))
     Anomaly.struct_class = Types::Anomaly
@@ -649,6 +658,10 @@ module Aws::GuardDuty
     Container.add_member(:security_context, Shapes::ShapeRef.new(shape: SecurityContext, location_name: "securityContext"))
     Container.struct_class = Types::Container
 
+    ContainerInstanceDetails.add_member(:covered_container_instances, Shapes::ShapeRef.new(shape: Long, location_name: "coveredContainerInstances"))
+    ContainerInstanceDetails.add_member(:compatible_container_instances, Shapes::ShapeRef.new(shape: Long, location_name: "compatibleContainerInstances"))
+    ContainerInstanceDetails.struct_class = Types::ContainerInstanceDetails
+
     Containers.member = Shapes::ShapeRef.new(shape: Container)
 
     CountByCoverageStatus.key = Shapes::ShapeRef.new(shape: CoverageStatus)
@@ -663,6 +676,18 @@ module Aws::GuardDuty
     Country.add_member(:country_code, Shapes::ShapeRef.new(shape: String, location_name: "countryCode"))
     Country.add_member(:country_name, Shapes::ShapeRef.new(shape: String, location_name: "countryName"))
     Country.struct_class = Types::Country
+
+    CoverageEc2InstanceDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    CoverageEc2InstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CoverageEc2InstanceDetails.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    CoverageEc2InstanceDetails.add_member(:agent_details, Shapes::ShapeRef.new(shape: AgentDetails, location_name: "agentDetails"))
+    CoverageEc2InstanceDetails.add_member(:management_type, Shapes::ShapeRef.new(shape: ManagementType, location_name: "managementType"))
+    CoverageEc2InstanceDetails.struct_class = Types::CoverageEc2InstanceDetails
+
+    CoverageEcsClusterDetails.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    CoverageEcsClusterDetails.add_member(:fargate_details, Shapes::ShapeRef.new(shape: FargateDetails, location_name: "fargateDetails"))
+    CoverageEcsClusterDetails.add_member(:container_instance_details, Shapes::ShapeRef.new(shape: ContainerInstanceDetails, location_name: "containerInstanceDetails"))
+    CoverageEcsClusterDetails.struct_class = Types::CoverageEcsClusterDetails
 
     CoverageEksClusterDetails.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     CoverageEksClusterDetails.add_member(:covered_nodes, Shapes::ShapeRef.new(shape: Long, location_name: "coveredNodes"))
@@ -695,6 +720,8 @@ module Aws::GuardDuty
 
     CoverageResourceDetails.add_member(:eks_cluster_details, Shapes::ShapeRef.new(shape: CoverageEksClusterDetails, location_name: "eksClusterDetails"))
     CoverageResourceDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    CoverageResourceDetails.add_member(:ecs_cluster_details, Shapes::ShapeRef.new(shape: CoverageEcsClusterDetails, location_name: "ecsClusterDetails"))
+    CoverageResourceDetails.add_member(:ec2_instance_details, Shapes::ShapeRef.new(shape: CoverageEc2InstanceDetails, location_name: "ec2InstanceDetails"))
     CoverageResourceDetails.struct_class = Types::CoverageResourceDetails
 
     CoverageResources.member = Shapes::ShapeRef.new(shape: CoverageResource)
@@ -1033,6 +1060,10 @@ module Aws::GuardDuty
     Evidence.add_member(:threat_intelligence_details, Shapes::ShapeRef.new(shape: ThreatIntelligenceDetails, location_name: "threatIntelligenceDetails"))
     Evidence.struct_class = Types::Evidence
 
+    FargateDetails.add_member(:issues, Shapes::ShapeRef.new(shape: Issues, location_name: "issues"))
+    FargateDetails.add_member(:management_type, Shapes::ShapeRef.new(shape: ManagementType, location_name: "managementType"))
+    FargateDetails.struct_class = Types::FargateDetails
+
     FilePaths.member = Shapes::ShapeRef.new(shape: ScanFilePath)
 
     FilterCondition.add_member(:equals_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "equalsValue"))
@@ -1285,6 +1316,8 @@ module Aws::GuardDuty
     IpSetIds.member = Shapes::ShapeRef.new(shape: String)
 
     Ipv6Addresses.member = Shapes::ShapeRef.new(shape: String)
+
+    Issues.member = Shapes::ShapeRef.new(shape: String)
 
     KubernetesApiCallAction.add_member(:request_uri, Shapes::ShapeRef.new(shape: String, location_name: "requestUri"))
     KubernetesApiCallAction.add_member(:verb, Shapes::ShapeRef.new(shape: String, location_name: "verb"))

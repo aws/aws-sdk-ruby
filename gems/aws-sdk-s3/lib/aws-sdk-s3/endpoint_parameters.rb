@@ -55,6 +55,16 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
+  # @!attribute key
+  #   The S3 Key used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Key.
+  #
+  #   @return [String]
+  #
+  # @!attribute prefix
+  #   The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.
+  #
+  #   @return [String]
+  #
   # @!attribute disable_access_points
   #   Internal parameter to disable Access Point Buckets
   #
@@ -80,6 +90,8 @@ module Aws::S3
     :accelerate,
     :use_global_endpoint,
     :use_object_lambda_endpoint,
+    :key,
+    :prefix,
     :disable_access_points,
     :disable_multi_region_access_points,
     :use_arn_region,
@@ -98,6 +110,8 @@ module Aws::S3
         'Accelerate' => :accelerate,
         'UseGlobalEndpoint' => :use_global_endpoint,
         'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
+        'Key' => :key,
+        'Prefix' => :prefix,
         'DisableAccessPoints' => :disable_access_points,
         'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
         'UseArnRegion' => :use_arn_region,
@@ -134,6 +148,8 @@ module Aws::S3
         raise ArgumentError, "Missing required EndpointParameter: :use_global_endpoint"
       end
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
+      self[:key] = options[:key]
+      self[:prefix] = options[:prefix]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]
       self[:disable_multi_region_access_points] = false if self[:disable_multi_region_access_points].nil?

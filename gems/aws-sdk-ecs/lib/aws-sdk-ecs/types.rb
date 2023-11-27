@@ -7347,11 +7347,19 @@ module Aws::ECS
     #   the Fargate tasks maintenance, see [Amazon Web Services Fargate task
     #   maintenance][3] in the *Amazon ECS Developer Guide*.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or
+    #   disabled by your security administrator in your Amazon ECS account.
+    #   Amazon GuardDuty controls this account setting on your behalf. For
+    #   more information, see [Protecting Amazon ECS workloads with Amazon
+    #   ECS Runtime Monitoring][4].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7411,9 +7419,17 @@ module Aws::ECS
     #   `fargateTaskRetirementWaitPeriod`, the wait time to retire a Fargate
     #   task is affected.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or
+    #   disabled by your security administrator in your Amazon ECS account.
+    #   Amazon GuardDuty controls this account setting on your behalf. For
+    #   more information, see [Protecting Amazon ECS workloads with Amazon
+    #   ECS Runtime Monitoring][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -9315,12 +9331,23 @@ module Aws::ECS
     #   If this field is omitted, the authenticated user is assumed.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Indicates whether Amazon Web Services manages the account setting,
+    #   or if the user manages it.
+    #
+    #   `aws_managed` account settings are read-only, as Amazon Web Services
+    #   manages such on the customer's behalf. Currently, the
+    #   `guardDutyActivate` account setting is the only one Amazon Web
+    #   Services manages.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Setting AWS API Documentation
     #
     class Setting < Struct.new(
       :name,
       :value,
-      :principal_arn)
+      :principal_arn,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

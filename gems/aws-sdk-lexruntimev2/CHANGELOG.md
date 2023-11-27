@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-11-27)
+------------------
+
+* Feature - This release introduces support for interpretationSource in the runtime service response.
+
 1.27.0 (2023-11-22)
 ------------------
 

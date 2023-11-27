@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+
 1.36.0 (2023-11-22)
 ------------------
 

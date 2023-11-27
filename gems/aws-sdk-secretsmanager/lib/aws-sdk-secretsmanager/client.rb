@@ -398,6 +398,105 @@ module Aws::SecretsManager
 
     # @!group API Operations
 
+    # Retrieves the contents of the encrypted fields `SecretString` or
+    # `SecretBinary` for up to 20 secrets. To retrieve a single secret, call
+    # GetSecretValue.
+    #
+    # To choose which secrets to retrieve, you can specify a list of secrets
+    # by name or ARN, or you can use filters. If Secrets Manager encounters
+    # errors such as `AccessDeniedException` while attempting to retrieve
+    # any of the secrets, you can see the errors in `Errors` in the
+    # response.
+    #
+    # Secrets Manager generates CloudTrail `GetSecretValue` log entries for
+    # each secret you request when you call this action. Do not include
+    # sensitive information in request parameters because it might be
+    # logged. For more information, see [Logging Secrets Manager events with
+    # CloudTrail][1].
+    #
+    # <b>Required permissions: </b> `secretsmanager:BatchGetSecretValue`,
+    # and you must have `secretsmanager:GetSecretValue` for each secret. If
+    # you use filters, you must also have `secretsmanager:ListSecrets`. If
+    # the secrets are encrypted using customer-managed keys instead of the
+    # Amazon Web Services managed key `aws/secretsmanager`, then you also
+    # need `kms:Decrypt` permissions for the keys. For more information, see
+    # [ IAM policy actions for Secrets Manager][2] and [Authentication and
+    # access control in Secrets Manager][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
+    # @option params [Array<String>] :secret_id_list
+    #   The ARN or names of the secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters to choose which secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #
+    # @option params [Integer] :max_results
+    #   The number of results to include in the response.
+    #
+    #   If there are more results available, in the response, Secrets Manager
+    #   includes `NextToken`. To get the next results, call
+    #   `BatchGetSecretValue` again with the value from `NextToken`.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where the output should continue from, if a
+    #   previous call did not show all results. To get the next results, call
+    #   `BatchGetSecretValue` again with this value.
+    #
+    # @return [Types::BatchGetSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetSecretValueResponse#secret_values #secret_values} => Array&lt;Types::SecretValueEntry&gt;
+    #   * {Types::BatchGetSecretValueResponse#next_token #next_token} => String
+    #   * {Types::BatchGetSecretValueResponse#errors #errors} => Array&lt;Types::APIErrorType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_secret_value({
+    #     secret_id_list: ["SecretIdType"],
+    #     filters: [
+    #       {
+    #         key: "description", # accepts description, name, tag-key, tag-value, primary-region, owning-service, all
+    #         values: ["FilterValueStringType"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextTokenType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.secret_values #=> Array
+    #   resp.secret_values[0].arn #=> String
+    #   resp.secret_values[0].name #=> String
+    #   resp.secret_values[0].version_id #=> String
+    #   resp.secret_values[0].secret_binary #=> String
+    #   resp.secret_values[0].secret_string #=> String
+    #   resp.secret_values[0].version_stages #=> Array
+    #   resp.secret_values[0].version_stages[0] #=> String
+    #   resp.secret_values[0].created_date #=> Time
+    #   resp.next_token #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].secret_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/BatchGetSecretValue AWS API Documentation
+    #
+    # @overload batch_get_secret_value(params = {})
+    # @param [Hash] params ({})
+    def batch_get_secret_value(params = {}, options = {})
+      req = build_request(:batch_get_secret_value, params)
+      req.send_request(options)
+    end
+
     # Turns off automatic rotation, and if a rotation is currently in
     # progress, cancels the rotation.
     #
@@ -1294,6 +1393,9 @@ module Aws::SecretsManager
     # `SecretBinary` from the specified version of a secret, whichever
     # contains content.
     #
+    # To retrieve the values for a group of secrets, call
+    # BatchGetSecretValue.
+    #
     # We recommend that you cache your secret values by using client-side
     # caching. Caching secrets improves speed and reduces your costs. For
     # more information, see [Cache secrets for your applications][1].
@@ -1552,7 +1654,7 @@ module Aws::SecretsManager
     #
     # To list the versions of a secret, use ListSecretVersionIds.
     #
-    # To get the secret value from `SecretString` or `SecretBinary`, call
+    # To retrieve the values for the secrets, call BatchGetSecretValue or
     # GetSecretValue.
     #
     # For information about finding secrets in the console, see [Find
@@ -3086,7 +3188,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

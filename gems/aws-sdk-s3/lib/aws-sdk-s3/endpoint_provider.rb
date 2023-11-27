@@ -19,6 +19,8 @@ module Aws::S3
       accelerate = parameters.accelerate
       use_global_endpoint = parameters.use_global_endpoint
       use_object_lambda_endpoint = parameters.use_object_lambda_endpoint
+      key = parameters.key
+      prefix = parameters.prefix
       disable_access_points = parameters.disable_access_points
       disable_multi_region_access_points = parameters.disable_multi_region_access_points
       use_arn_region = parameters.use_arn_region

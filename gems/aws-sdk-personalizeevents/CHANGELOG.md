@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-11-27)
+------------------
+
+* Feature - This release enables PutActions and PutActionInteractions
+
 1.38.0 (2023-11-22)
 ------------------
 

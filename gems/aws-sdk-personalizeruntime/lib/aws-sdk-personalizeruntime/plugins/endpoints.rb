@@ -56,6 +56,8 @@ module Aws::PersonalizeRuntime
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :get_action_recommendations
+            Aws::PersonalizeRuntime::Endpoints::GetActionRecommendations.build(context)
           when :get_personalized_ranking
             Aws::PersonalizeRuntime::Endpoints::GetPersonalizedRanking.build(context)
           when :get_recommendations

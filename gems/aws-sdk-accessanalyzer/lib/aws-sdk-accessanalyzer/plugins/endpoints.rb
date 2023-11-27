@@ -60,6 +60,10 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::ApplyArchiveRule.build(context)
           when :cancel_policy_generation
             Aws::AccessAnalyzer::Endpoints::CancelPolicyGeneration.build(context)
+          when :check_access_not_granted
+            Aws::AccessAnalyzer::Endpoints::CheckAccessNotGranted.build(context)
+          when :check_no_new_access
+            Aws::AccessAnalyzer::Endpoints::CheckNoNewAccess.build(context)
           when :create_access_preview
             Aws::AccessAnalyzer::Endpoints::CreateAccessPreview.build(context)
           when :create_analyzer
@@ -80,6 +84,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::GetArchiveRule.build(context)
           when :get_finding
             Aws::AccessAnalyzer::Endpoints::GetFinding.build(context)
+          when :get_finding_v2
+            Aws::AccessAnalyzer::Endpoints::GetFindingV2.build(context)
           when :get_generated_policy
             Aws::AccessAnalyzer::Endpoints::GetGeneratedPolicy.build(context)
           when :list_access_preview_findings
@@ -94,6 +100,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::ListArchiveRules.build(context)
           when :list_findings
             Aws::AccessAnalyzer::Endpoints::ListFindings.build(context)
+          when :list_findings_v2
+            Aws::AccessAnalyzer::Endpoints::ListFindingsV2.build(context)
           when :list_policy_generations
             Aws::AccessAnalyzer::Endpoints::ListPolicyGenerations.build(context)
           when :list_tags_for_resource

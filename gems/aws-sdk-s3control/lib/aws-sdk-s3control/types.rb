@@ -43,6 +43,36 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The configuration options of the S3 Access Grants location. It
+    # contains the `S3SubPrefix` field. The grant scope, the data to which
+    # you are granting access, is the result of appending the `Subprefix`
+    # field to the scope of the registered location.
+    #
+    # @!attribute [rw] s3_sub_prefix
+    #   The `S3SubPrefix` is appended to the location scope creating the
+    #   grant scope. Use this field to narrow the scope of the grant to a
+    #   subset of the location scope. This field is required if the location
+    #   scope is the default location `s3://` because you cannot create a
+    #   grant for all of your S3 data in the Region and must narrow the
+    #   scope. For example, if the location scope is the default location
+    #   `s3://`, the `S3SubPrefx` can be a &lt;bucket-name&gt;/*, so the
+    #   full grant scope path would be `s3://<bucket-name>/*`. Or the
+    #   `S3SubPrefx` can be `<bucket-name>/<prefix-name>*`, so the full
+    #   grant scope path would be or `s3://<bucket-name>/<prefix-name>*`.
+    #
+    #   If the `S3SubPrefix` includes a prefix, append the wildcard
+    #   character `*` after the prefix to indicate that you want to include
+    #   all object key names in the bucket that start with that prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessGrantsLocationConfiguration AWS API Documentation
+    #
+    class AccessGrantsLocationConfiguration < Struct.new(
+      :s3_sub_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An access point used to access a bucket.
     #
     # @!attribute [rw] name
@@ -232,6 +262,33 @@ module Aws::S3Control
     #
     class AdvancedDataProtectionMetrics < Struct.new(
       :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AssociateAccessGrantsIdentityCenterRequest AWS API Documentation
+    #
+    class AssociateAccessGrantsIdentityCenterRequest < Struct.new(
+      :account_id,
+      :identity_center_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -479,6 +536,317 @@ module Aws::S3Control
     #
     class CloudWatchMetrics < Struct.new(
       :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #
+    #   If you are passing the `default` location, you cannot create an
+    #   access grant for the entire default location. You must also specify
+    #   a bucket or a bucket and prefix in the `Subprefix` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_configuration
+    #   The configuration options of the grant location. The grant location
+    #   is the S3 path to the data to which you are granting access. It
+    #   contains the `S3SubPrefix` field. The grant scope is the result of
+    #   appending the subprefix to the location scope of the registered
+    #   location.
+    #   @return [Types::AccessGrantsLocationConfiguration]
+    #
+    # @!attribute [rw] grantee
+    #   The user, group, or role to which you are granting access. You can
+    #   grant access to an IAM user or role. If you have added your
+    #   corporate directory to Amazon Web Services IAM Identity Center and
+    #   associated your Identity Center instance with your S3 Access Grants
+    #   instance, the grantee can also be a corporate directory user or
+    #   group.
+    #   @return [Types::Grantee]
+    #
+    # @!attribute [rw] permission
+    #   The type of access that you are granting to your S3 data, which can
+    #   be set to one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If an application ARN is included in the request to create
+    #   an access grant, the grantee can only access the S3 data through
+    #   this application.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix_type
+    #   The type of `S3SubPrefix`. The only possible value is `Object`. Pass
+    #   this value if the access grant scope is an object. Do not pass this
+    #   value if the access grant scope is a bucket or a bucket and a
+    #   prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that you are adding to the
+    #   access grant. Each tag is a label consisting of a user-defined key
+    #   and value. Tags can help you manage, identify, organize, search for,
+    #   and filter resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantRequest AWS API Documentation
+    #
+    class CreateAccessGrantRequest < Struct.new(
+      :account_id,
+      :access_grants_location_id,
+      :access_grants_location_configuration,
+      :grantee,
+      :permission,
+      :application_arn,
+      :s3_prefix_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you created the access grant.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grant_arn
+    #   The Amazon Resource Name (ARN) of the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee
+    #   The user, group, or role to which you are granting access. You can
+    #   grant access to an IAM user or role. If you have added your
+    #   corporate directory to Amazon Web Services IAM Identity Center and
+    #   associated your Identity Center instance with your S3 Access Grants
+    #   instance, the grantee can also be a corporate directory user or
+    #   group.
+    #   @return [Types::Grantee]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_configuration
+    #   The configuration options of the grant location. The grant location
+    #   is the S3 path to the data to which you are granting access.
+    #   @return [Types::AccessGrantsLocationConfiguration]
+    #
+    # @!attribute [rw] permission
+    #   The type of access that you are granting to your S3 data, which can
+    #   be set to one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If the grant includes an application ARN, the grantee can
+    #   only access the S3 data through this application.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data to which you are granting access. It is the
+    #   result of appending the `Subprefix` to the location scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantResult AWS API Documentation
+    #
+    class CreateAccessGrantResult < Struct.new(
+      :created_at,
+      :access_grant_id,
+      :access_grant_arn,
+      :grantee,
+      :access_grants_location_id,
+      :access_grants_location_configuration,
+      :permission,
+      :application_arn,
+      :grant_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_arn
+    #   If you would like to associate your S3 Access Grants instance with
+    #   an Amazon Web Services IAM Identity Center instance, use this field
+    #   to pass the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   IAM Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that you are adding to the S3
+    #   Access Grants instance. Each tag is a label consisting of a
+    #   user-defined key and value. Tags can help you manage, identify,
+    #   organize, search for, and filter resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsInstanceRequest AWS API Documentation
+    #
+    class CreateAccessGrantsInstanceRequest < Struct.new(
+      :account_id,
+      :identity_center_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grants_instance_id
+    #   The ID of the S3 Access Grants instance. The ID is `default`. You
+    #   can have one S3 Access Grants instance per Region per account.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance passed in the
+    #   request. S3 Access Grants creates this Identity Center application
+    #   for this specific S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsInstanceResult AWS API Documentation
+    #
+    class CreateAccessGrantsInstanceResult < Struct.new(
+      :created_at,
+      :access_grants_instance_id,
+      :access_grants_instance_arn,
+      :identity_center_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 path to the location that you are registering. The location
+    #   scope can be the default S3 location `s3://`, the S3 path to a
+    #   bucket `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`. A prefix in S3 is a string of characters
+    #   at the beginning of an object key name used to organize the objects
+    #   that you store in your S3 buckets. For example, object key names
+    #   that start with the `engineering/` prefix or object key names that
+    #   start with the `marketing/campaigns/` prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services resource tags that you are adding to the S3
+    #   Access Grants location. Each tag is a label consisting of a
+    #   user-defined key and value. Tags can help you manage, identify,
+    #   organize, search for, and filter resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsLocationRequest AWS API Documentation
+    #
+    class CreateAccessGrantsLocationRequest < Struct.new(
+      :account_id,
+      :location_scope,
+      :iam_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you registered the location.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_arn
+    #   The Amazon Resource Name (ARN) of the location you are registering.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 URI path to the location that you are registering. The
+    #   location scope can be the default S3 location `s3://`, the S3 path
+    #   to a bucket, or the S3 path to a bucket and prefix. A prefix in S3
+    #   is a string of characters at the beginning of an object key name
+    #   used to organize the objects that you store in your S3 buckets. For
+    #   example, object key names that start with the `engineering/` prefix
+    #   or object key names that start with the `marketing/campaigns/`
+    #   prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsLocationResult AWS API Documentation
+    #
+    class CreateAccessGrantsLocationResult < Struct.new(
+      :created_at,
+      :access_grants_location_id,
+      :access_grants_location_arn,
+      :location_scope,
+      :iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -958,6 +1326,109 @@ module Aws::S3Control
       :account_id,
       :storage_lens_group,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Security Token Service temporary credential
+    # that S3 Access Grants vends to grantees and client applications.
+    #
+    # @!attribute [rw] access_key_id
+    #   The unique access key ID of the Amazon Web Services STS temporary
+    #   credential that S3 Access Grants vends to grantees and client
+    #   applications.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret access key of the Amazon Web Services STS temporary
+    #   credential that S3 Access Grants vends to grantees and client
+    #   applications.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The Amazon Web Services STS temporary credential that S3 Access
+    #   Grants vends to grantees and client applications.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The expiration date and time of the temporary credential that S3
+    #   Access Grants vends to grantees and client applications.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Credentials AWS API Documentation
+    #
+    class Credentials < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
+      SENSITIVE = [:access_key_id, :secret_access_key, :session_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantRequest AWS API Documentation
+    #
+    class DeleteAccessGrantRequest < Struct.new(
+      :account_id,
+      :access_grant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstanceRequest AWS API Documentation
+    #
+    class DeleteAccessGrantsInstanceRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstanceResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location that you are deregistering from
+    #   your S3 Access Grants instance. S3 Access Grants assigned this ID
+    #   when you registered the location. S3 Access Grants assigns the ID
+    #   `default` to the default location `s3://` and assigns an
+    #   auto-generated ID to other locations that you register.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsLocationRequest AWS API Documentation
+    #
+    class DeleteAccessGrantsLocationRequest < Struct.new(
+      :account_id,
+      :access_grants_location_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1568,6 +2039,19 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DissociateAccessGrantsIdentityCenterRequest AWS API Documentation
+    #
+    class DissociateAccessGrantsIdentityCenterRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies encryption-related information for an Amazon S3 bucket that
     # is a destination for replicated objects.
     #
@@ -1673,6 +2157,282 @@ module Aws::S3Control
     class GeneratedManifestEncryption < Struct.new(
       :sses3,
       :ssekms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantRequest AWS API Documentation
+    #
+    class GetAccessGrantRequest < Struct.new(
+      :account_id,
+      :access_grant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you created the access grant.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grant_arn
+    #   The Amazon Resource Name (ARN) of the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee
+    #   The user, group, or role to which you are granting access. You can
+    #   grant access to an IAM user or role. If you have added a corporate
+    #   directory to Amazon Web Services IAM Identity Center and associated
+    #   this Identity Center instance with the S3 Access Grants instance,
+    #   the grantee can also be a corporate directory user or group.
+    #   @return [Types::Grantee]
+    #
+    # @!attribute [rw] permission
+    #   The type of permission that was granted in the access grant. Can be
+    #   one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_configuration
+    #   The configuration options of the grant location. The grant location
+    #   is the S3 path to the data to which you are granting access.
+    #   @return [Types::AccessGrantsLocationConfiguration]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data to which you are granting access. It is the
+    #   result of appending the `Subprefix` to the location scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If the grant includes an application ARN, the grantee can
+    #   only access the S3 data through this application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantResult AWS API Documentation
+    #
+    class GetAccessGrantResult < Struct.new(
+      :created_at,
+      :access_grant_id,
+      :access_grant_arn,
+      :grantee,
+      :permission,
+      :access_grants_location_id,
+      :access_grants_location_configuration,
+      :grant_scope,
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The S3 prefix of the access grants that you would like to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceForPrefixRequest AWS API Documentation
+    #
+    class GetAccessGrantsInstanceForPrefixRequest < Struct.new(
+      :account_id,
+      :s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_grants_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_instance_id
+    #   The ID of the S3 Access Grants instance. The ID is `default`. You
+    #   can have one S3 Access Grants instance per Region per account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceForPrefixResult AWS API Documentation
+    #
+    class GetAccessGrantsInstanceForPrefixResult < Struct.new(
+      :access_grants_instance_arn,
+      :access_grants_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceRequest AWS API Documentation
+    #
+    class GetAccessGrantsInstanceRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceResourcePolicyRequest AWS API Documentation
+    #
+    class GetAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource policy of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The Organization of the resource policy of the S3 Access Grants
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance
+    #   resource policy.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceResourcePolicyResult AWS API Documentation
+    #
+    class GetAccessGrantsInstanceResourcePolicyResult < Struct.new(
+      :policy,
+      :organization,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_grants_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_instance_id
+    #   The ID of the S3 Access Grants instance. The ID is `default`. You
+    #   can have one S3 Access Grants instance per Region per account.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the Amazon Web Services IAM Identity Center
+    #   instance application; a subresource of the original Identity Center
+    #   instance. S3 Access Grants creates this Identity Center application
+    #   for the specific S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceResult AWS API Documentation
+    #
+    class GetAccessGrantsInstanceResult < Struct.new(
+      :access_grants_instance_arn,
+      :access_grants_instance_id,
+      :identity_center_arn,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location that you are retrieving. S3 Access
+    #   Grants assigns this ID when you register the location. S3 Access
+    #   Grants assigns the ID `default` to the default location `s3://` and
+    #   assigns an auto-generated ID to other locations that you register.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsLocationRequest AWS API Documentation
+    #
+    class GetAccessGrantsLocationRequest < Struct.new(
+      :account_id,
+      :access_grants_location_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you registered the location.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_arn
+    #   The Amazon Resource Name (ARN) of the registered location.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 URI path to the registered location. The location scope can
+    #   be the default S3 location `s3://`, the S3 path to a bucket, or the
+    #   S3 path to a bucket and prefix. A prefix in S3 is a string of
+    #   characters at the beginning of an object key name used to organize
+    #   the objects that you store in your S3 buckets. For example, object
+    #   key names that start with the `engineering/` prefix or object key
+    #   names that start with the `marketing/campaigns/` prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsLocationResult AWS API Documentation
+    #
+    class GetAccessGrantsLocationResult < Struct.new(
+      :created_at,
+      :access_grants_location_id,
+      :access_grants_location_arn,
+      :location_scope,
+      :iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2266,6 +3026,88 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The S3 URI path of the data to which you are requesting temporary
+    #   access credentials. If the requesting account has an access grant
+    #   for this data, S3 Access Grants vends temporary access credentials
+    #   in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The type of permission granted to your S3 data, which can be set to
+    #   one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The session duration, in seconds, of the temporary access credential
+    #   that S3 Access Grants vends to the grantee or client application.
+    #   The default value is 1 hour, but the grantee can specify a range
+    #   from 900 seconds (15 minutes) up to 43200 seconds (12 hours). If the
+    #   grantee requests a value higher than this maximum, the operation
+    #   fails.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] privilege
+    #   The scope of the temporary access credential that S3 Access Grants
+    #   vends to the grantee or client application.
+    #
+    #   * `Default` – The scope of the returned temporary access token is
+    #     the scope of the grant that is closest to the target scope.
+    #
+    #   * `Minimal` – The scope of the returned temporary access token is
+    #     the same as the requested target scope as long as the requested
+    #     scope is the same as or a subset of the grant scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of `Target`. The only possible value is `Object`. Pass this
+    #   value if the target data that you would like to access is a path to
+    #   an object. Do not pass this value if the target data is a bucket or
+    #   a bucket and a prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccessRequest AWS API Documentation
+    #
+    class GetDataAccessRequest < Struct.new(
+      :account_id,
+      :target,
+      :permission,
+      :duration_seconds,
+      :privilege,
+      :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The temporary credential token that S3 Access Grants vends.
+    #   @return [Types::Credentials]
+    #
+    # @!attribute [rw] matched_grant_target
+    #   The S3 URI path of the data to which you are being granted temporary
+    #   access credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccessResult AWS API Documentation
+    #
+    class GetDataAccessResult < Struct.new(
+      :credentials,
+      :matched_grant_target)
+      SENSITIVE = [:credentials]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch
     #   Operations job.
     #   @return [String]
@@ -2568,6 +3410,47 @@ module Aws::S3Control
     #
     class GetStorageLensGroupResult < Struct.new(
       :storage_lens_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The user, group, or role to which you are granting access. You can
+    # grant access to an IAM user or role. If you have added your corporate
+    # directory to Amazon Web Services IAM Identity Center and associated
+    # your Identity Center instance with your S3 Access Grants instance, the
+    # grantee can also be a corporate directory user or group.
+    #
+    # @!attribute [rw] grantee_type
+    #   The type of the grantee to which access has been granted. It can be
+    #   one of the following values:
+    #
+    #   * `IAM` - An IAM user or role.
+    #
+    #   * `DIRECTORY_USER` - Your corporate directory user. You can use this
+    #     option if you have added your corporate identity directory to IAM
+    #     Identity Center and associated the IAM Identity Center instance
+    #     with your S3 Access Grants instance.
+    #
+    #   * `DIRECTORY_GROUP` - Your corporate directory group. You can use
+    #     this option if you have added your corporate identity directory to
+    #     IAM Identity Center and associated the IAM Identity Center
+    #     instance with your S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_identifier
+    #   The unique identifier of the `Grantee`. If the grantee type is
+    #   `IAM`, the identifier is the IAM Amazon Resource Name (ARN) of the
+    #   user or role. If the grantee type is a directory user or group, the
+    #   identifier is 128-bit universally unique identifier (UUID) in the
+    #   format `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`. You can obtain this
+    #   UUID from your Amazon Web Services IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Grantee AWS API Documentation
+    #
+    class Grantee < Struct.new(
+      :grantee_type,
+      :grantee_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3405,6 +4288,372 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Information about the access grant.
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grant_arn
+    #   The Amazon Resource Name (ARN) of the access grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee
+    #   The user, group, or role to which you are granting access. You can
+    #   grant access to an IAM user or role. If you have added your
+    #   corporate directory to Amazon Web Services IAM Identity Center and
+    #   associated your Identity Center instance with your S3 Access Grants
+    #   instance, the grantee can also be a corporate directory user or
+    #   group.
+    #   @return [Types::Grantee]
+    #
+    # @!attribute [rw] permission
+    #   The type of access granted to your S3 data, which can be set to one
+    #   of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_configuration
+    #   The configuration options of the grant location. The grant location
+    #   is the S3 path to the data to which you are granting access.
+    #   @return [Types::AccessGrantsLocationConfiguration]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data to which you are granting access. It is the
+    #   result of appending the `Subprefix` to the location scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If the grant includes an application ARN, the grantee can
+    #   only access the S3 data through this application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantEntry AWS API Documentation
+    #
+    class ListAccessGrantEntry < Struct.new(
+      :created_at,
+      :access_grant_id,
+      :access_grant_arn,
+      :grantee,
+      :permission,
+      :access_grants_location_id,
+      :access_grants_location_configuration,
+      :grant_scope,
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the S3 Access Grants instance.
+    #
+    # @!attribute [rw] access_grants_instance_id
+    #   The ID of the S3 Access Grants instance. The ID is `default`. You
+    #   can have one S3 Access Grants instance per Region per account.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] identity_center_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstanceEntry AWS API Documentation
+    #
+    class ListAccessGrantsInstanceEntry < Struct.new(
+      :access_grants_instance_id,
+      :access_grants_instance_arn,
+      :created_at,
+      :identity_center_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Instances` request in
+    #   order to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the
+    #   `NextToken` to determine if there are more results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstancesRequest AWS API Documentation
+    #
+    class ListAccessGrantsInstancesRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Instances` request in
+    #   order to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_instances_list
+    #   A container for a list of S3 Access Grants instances.
+    #   @return [Array<Types::ListAccessGrantsInstanceEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstancesResult AWS API Documentation
+    #
+    class ListAccessGrantsInstancesResult < Struct.new(
+      :next_token,
+      :access_grants_instances_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for information about the registered location.
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you registered the location.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_arn
+    #   The Amazon Resource Name (ARN) of the registered location.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 path to the location that you are registering. The location
+    #   scope can be the default S3 location `s3://`, the S3 path to a
+    #   bucket `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`. A prefix in S3 is a string of characters
+    #   at the beginning of an object key name used to organize the objects
+    #   that you store in your S3 buckets. For example, object key names
+    #   that start with the `engineering/` prefix or object key names that
+    #   start with the `marketing/campaigns/` prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsLocationsEntry AWS API Documentation
+    #
+    class ListAccessGrantsLocationsEntry < Struct.new(
+      :created_at,
+      :access_grants_location_id,
+      :access_grants_location_arn,
+      :location_scope,
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Locations` request in
+    #   order to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the
+    #   `NextToken` to determine if there are more results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 path to the location that you are registering. The location
+    #   scope can be the default S3 location `s3://`, the S3 path to a
+    #   bucket `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`. A prefix in S3 is a string of characters
+    #   at the beginning of an object key name used to organize the objects
+    #   that you store in your S3 buckets. For example, object key names
+    #   that start with the `engineering/` prefix or object key names that
+    #   start with the `marketing/campaigns/` prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsLocationsRequest AWS API Documentation
+    #
+    class ListAccessGrantsLocationsRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results,
+      :location_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Locations` request in
+    #   order to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_locations_list
+    #   A container for a list of registered locations in an S3 Access
+    #   Grants instance.
+    #   @return [Array<Types::ListAccessGrantsLocationsEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsLocationsResult AWS API Documentation
+    #
+    class ListAccessGrantsLocationsResult < Struct.new(
+      :next_token,
+      :access_grants_locations_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants` request in order to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the
+    #   `NextToken` to determine if there are more results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] grantee_type
+    #   The type of the grantee to which access has been granted. It can be
+    #   one of the following values:
+    #
+    #   * `IAM` - An IAM user or role.
+    #
+    #   * `DIRECTORY_USER` - Your corporate directory user. You can use this
+    #     option if you have added your corporate identity directory to IAM
+    #     Identity Center and associated the IAM Identity Center instance
+    #     with your S3 Access Grants instance.
+    #
+    #   * `DIRECTORY_GROUP` - Your corporate directory group. You can use
+    #     this option if you have added your corporate identity directory to
+    #     IAM Identity Center and associated the IAM Identity Center
+    #     instance with your S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_identifier
+    #   The unique identifer of the `Grantee`. If the grantee type is `IAM`,
+    #   the identifier is the IAM Amazon Resource Name (ARN) of the user or
+    #   role. If the grantee type is a directory user or group, the
+    #   identifier is 128-bit universally unique identifier (UUID) in the
+    #   format `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`. You can obtain this
+    #   UUID from your Amazon Web Services IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The type of permission granted to your S3 data, which can be set to
+    #   one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data to which you are granting access. It is the
+    #   result of appending the `Subprefix` to the location scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If the grant includes an application ARN, the grantee can
+    #   only access the S3 data through this application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsRequest AWS API Documentation
+    #
+    class ListAccessGrantsRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results,
+      :grantee_type,
+      :grantee_identifier,
+      :permission,
+      :grant_scope,
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants` request in order to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_list
+    #   A container for a list of grants in an S3 Access Grants instance.
+    #   @return [Array<Types::ListAccessGrantEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsResult AWS API Documentation
+    #
+    class ListAccessGrantsResult < Struct.new(
+      :next_token,
+      :access_grants_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   The account ID for the account that owns the specified Object Lambda
     #   Access Point.
@@ -3817,7 +5066,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the S3 resource that you want to
-    #   list the tags for.
+    #   list the tags for. The tagged resource can be an S3 Storage Lens
+    #   group or S3 Access Grants instance, registered location, or grant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListTagsForResourceRequest AWS API Documentation
@@ -4461,6 +5711,55 @@ module Aws::S3Control
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource policy of the S3 Access Grants instance that you are
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The Organization of the resource policy of the S3 Access Grants
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessGrantsInstanceResourcePolicyRequest AWS API Documentation
+    #
+    class PutAccessGrantsInstanceResourcePolicyRequest < Struct.new(
+      :account_id,
+      :policy,
+      :organization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The updated resource policy of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The Organization of the resource policy of the S3 Access Grants
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the S3 Access Grants instance
+    #   resource policy.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessGrantsInstanceResourcePolicyResult AWS API Documentation
+    #
+    class PutAccessGrantsInstanceResourcePolicyResult < Struct.new(
+      :policy,
+      :organization,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6414,23 +7713,29 @@ module Aws::S3Control
     # resource. You can add tags to new objects when you upload them, or you
     # can add object tags to existing objects.
     #
-    # <note markdown="1"> This data type is only supported for [S3 Storage Lens groups][1].
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
+    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
+    # Lens group or S3 Access Grants instance, registered location, or
+    # grant.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
     #
     # @!attribute [rw] key
-    #   The tag key for your Amazon Web Services resource. A tag key can be
-    #   up to 128 Unicode characters in length and is case-sensitive. System
-    #   created tags that begin with `aws:` aren’t supported.
+    #   The key of the key-value pair of a tag added to your Amazon Web
+    #   Services resource. A tag key can be up to 128 Unicode characters in
+    #   length and is case-sensitive. System created tags that begin with
+    #   `aws:` aren’t supported.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The tag value for your Amazon Web Services resource. A tag value can
-    #   be up to 256 Unicode characters in length and is case-sensitive.
+    #   The value of the key-value pair of a tag added to your Amazon Web
+    #   Services resource. A tag value can be up to 256 Unicode characters
+    #   in length and is case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Tag AWS API Documentation
@@ -6444,12 +7749,13 @@ module Aws::S3Control
 
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that created the S3 resource that
-    #   you're trying to add tags to.
+    #   you're trying to add tags to or the requester's account ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the S3 resource that you're
-    #   trying to add tags to.
+    #   trying to add tags to. The tagged resource can be an S3 Storage Lens
+    #   group or S3 Access Grants instance, registered location, or grant.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6549,13 +7855,13 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
-    #   remove the resource tags from.
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   trying to remove the tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag key pair of the S3 resource tag that you're trying to
-    #   remove.
+    #   The array of tag key-value pairs that you're trying to remove from
+    #   of the S3 resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResourceRequest AWS API Documentation
@@ -6571,6 +7877,87 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResourceResult AWS API Documentation
     #
     class UntagResourceResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that is making this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location that you are updating. S3 Access
+    #   Grants assigns this ID when you register the location. S3 Access
+    #   Grants assigns the ID `default` to the default location `s3://` and
+    #   assigns an auto-generated ID to other locations that you register.
+    #
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigned this ID when you registered the location.
+    #   S3 Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #
+    #   If you are passing the `default` location, you cannot create an
+    #   access grant for the entire default location. You must also specify
+    #   a bucket or a bucket and prefix in the `Subprefix` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateAccessGrantsLocationRequest AWS API Documentation
+    #
+    class UpdateAccessGrantsLocationRequest < Struct.new(
+      :account_id,
+      :access_grants_location_id,
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The date and time when you registered the location.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_grants_location_id
+    #   The ID of the registered location to which you are granting access.
+    #   S3 Access Grants assigned this ID when you registered the location.
+    #   S3 Access Grants assigns the ID `default` to the default location
+    #   `s3://` and assigns an auto-generated ID to other locations that you
+    #   register.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_grants_location_arn
+    #   The Amazon Resource Name (ARN) of the registered location that you
+    #   are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_scope
+    #   The S3 URI path of the location that you are updating. You cannot
+    #   update the scope of the registered location. The location scope can
+    #   be the default S3 location `s3://`, the S3 path to a bucket
+    #   `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role of the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateAccessGrantsLocationResult AWS API Documentation
+    #
+    class UpdateAccessGrantsLocationResult < Struct.new(
+      :created_at,
+      :access_grants_location_id,
+      :access_grants_location_arn,
+      :location_scope,
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the S3 Batch

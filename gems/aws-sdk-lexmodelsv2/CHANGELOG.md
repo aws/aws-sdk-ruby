@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-11-27)
+------------------
+
+* Feature - This release introduces new generative AI features in AWS Lex: Assisted Slot Resolution, Descriptive Bot Building, and Sample Utterance Generation. These features leverage large language models available through Amazon Bedrock to improve the bot builder and customer experiences.
+
 1.44.0 (2023-11-22)
 ------------------
 

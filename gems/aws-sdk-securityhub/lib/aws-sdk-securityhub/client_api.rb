@@ -36,6 +36,7 @@ module Aws::SecurityHub
     AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
     AdminsMaxResults = Shapes::IntegerShape.new(name: 'AdminsMaxResults')
+    AlphaNumericNonEmptyString = Shapes::StringShape.new(name: 'AlphaNumericNonEmptyString')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociatedStandard = Shapes::StructureShape.new(name: 'AssociatedStandard')
     AssociatedStandardsList = Shapes::ListShape.new(name: 'AssociatedStandardsList')
@@ -716,6 +717,7 @@ module Aws::SecurityHub
     BatchUpdateStandardsControlAssociationsRequest = Shapes::StructureShape.new(name: 'BatchUpdateStandardsControlAssociationsRequest')
     BatchUpdateStandardsControlAssociationsResponse = Shapes::StructureShape.new(name: 'BatchUpdateStandardsControlAssociationsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanConfigurationOptions = Shapes::StructureShape.new(name: 'BooleanConfigurationOptions')
     BooleanFilter = Shapes::StructureShape.new(name: 'BooleanFilter')
     BooleanFilterList = Shapes::ListShape.new(name: 'BooleanFilterList')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
@@ -730,6 +732,7 @@ module Aws::SecurityHub
     CodeVulnerabilitiesFilePath = Shapes::StructureShape.new(name: 'CodeVulnerabilitiesFilePath')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
+    ConfigurationOptions = Shapes::UnionShape.new(name: 'ConfigurationOptions')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
     ControlFindingGenerator = Shapes::StringShape.new(name: 'ControlFindingGenerator')
     ControlStatus = Shapes::StringShape.new(name: 'ControlStatus')
@@ -748,6 +751,7 @@ module Aws::SecurityHub
     CustomDataIdentifiersDetections = Shapes::StructureShape.new(name: 'CustomDataIdentifiersDetections')
     CustomDataIdentifiersDetectionsList = Shapes::ListShape.new(name: 'CustomDataIdentifiersDetectionsList')
     CustomDataIdentifiersResult = Shapes::StructureShape.new(name: 'CustomDataIdentifiersResult')
+    CustomizableProperties = Shapes::ListShape.new(name: 'CustomizableProperties')
     Cvss = Shapes::StructureShape.new(name: 'Cvss')
     CvssList = Shapes::ListShape.new(name: 'CvssList')
     DataClassificationDetails = Shapes::StructureShape.new(name: 'DataClassificationDetails')
@@ -793,12 +797,15 @@ module Aws::SecurityHub
     DisassociateMembersResponse = Shapes::StructureShape.new(name: 'DisassociateMembersResponse')
     DnsRequestAction = Shapes::StructureShape.new(name: 'DnsRequestAction')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleConfigurationOptions = Shapes::StructureShape.new(name: 'DoubleConfigurationOptions')
     EnableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'EnableImportFindingsForProductRequest')
     EnableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'EnableImportFindingsForProductResponse')
     EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
     EnableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountResponse')
     EnableSecurityHubRequest = Shapes::StructureShape.new(name: 'EnableSecurityHubRequest')
     EnableSecurityHubResponse = Shapes::StructureShape.new(name: 'EnableSecurityHubResponse')
+    EnumConfigurationOptions = Shapes::StructureShape.new(name: 'EnumConfigurationOptions')
+    EnumListConfigurationOptions = Shapes::StructureShape.new(name: 'EnumListConfigurationOptions')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
     FilePathList = Shapes::ListShape.new(name: 'FilePathList')
     FilePaths = Shapes::StructureShape.new(name: 'FilePaths')
@@ -841,6 +848,8 @@ module Aws::SecurityHub
     GetMasterAccountResponse = Shapes::StructureShape.new(name: 'GetMasterAccountResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
+    GetSecurityControlDefinitionRequest = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionRequest')
+    GetSecurityControlDefinitionResponse = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionResponse')
     IcmpTypeCode = Shapes::StructureShape.new(name: 'IcmpTypeCode')
     ImportFindingsError = Shapes::StructureShape.new(name: 'ImportFindingsError')
     ImportFindingsErrorList = Shapes::ListShape.new(name: 'ImportFindingsErrorList')
@@ -850,7 +859,9 @@ module Aws::SecurityHub
     InsightResultValueList = Shapes::ListShape.new(name: 'InsightResultValueList')
     InsightResults = Shapes::StructureShape.new(name: 'InsightResults')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerConfigurationOptions = Shapes::StructureShape.new(name: 'IntegerConfigurationOptions')
     IntegerList = Shapes::ListShape.new(name: 'IntegerList')
+    IntegerListConfigurationOptions = Shapes::StructureShape.new(name: 'IntegerListConfigurationOptions')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     IntegrationTypeList = Shapes::ListShape.new(name: 'IntegrationTypeList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -915,6 +926,12 @@ module Aws::SecurityHub
     Occurrences = Shapes::StructureShape.new(name: 'Occurrences')
     Page = Shapes::StructureShape.new(name: 'Page')
     Pages = Shapes::ListShape.new(name: 'Pages')
+    ParameterConfiguration = Shapes::StructureShape.new(name: 'ParameterConfiguration')
+    ParameterDefinition = Shapes::StructureShape.new(name: 'ParameterDefinition')
+    ParameterDefinitions = Shapes::MapShape.new(name: 'ParameterDefinitions')
+    ParameterValue = Shapes::UnionShape.new(name: 'ParameterValue')
+    ParameterValueType = Shapes::StringShape.new(name: 'ParameterValueType')
+    Parameters = Shapes::MapShape.new(name: 'Parameters')
     Partition = Shapes::StringShape.new(name: 'Partition')
     PatchSummary = Shapes::StructureShape.new(name: 'PatchSummary')
     PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
@@ -945,6 +962,7 @@ module Aws::SecurityHub
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Result = Shapes::StructureShape.new(name: 'Result')
@@ -986,6 +1004,9 @@ module Aws::SecurityHub
     SecurityControl = Shapes::StructureShape.new(name: 'SecurityControl')
     SecurityControlDefinition = Shapes::StructureShape.new(name: 'SecurityControlDefinition')
     SecurityControlDefinitions = Shapes::ListShape.new(name: 'SecurityControlDefinitions')
+    SecurityControlParameter = Shapes::StructureShape.new(name: 'SecurityControlParameter')
+    SecurityControlParametersList = Shapes::ListShape.new(name: 'SecurityControlParametersList')
+    SecurityControlProperty = Shapes::StringShape.new(name: 'SecurityControlProperty')
     SecurityControls = Shapes::ListShape.new(name: 'SecurityControls')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     SensitiveDataDetections = Shapes::StructureShape.new(name: 'SensitiveDataDetections')
@@ -1031,10 +1052,12 @@ module Aws::SecurityHub
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     StatusReasonCode = Shapes::StringShape.new(name: 'StatusReasonCode')
     StatusReasonsList = Shapes::ListShape.new(name: 'StatusReasonsList')
+    StringConfigurationOptions = Shapes::StructureShape.new(name: 'StringConfigurationOptions')
     StringFilter = Shapes::StructureShape.new(name: 'StringFilter')
     StringFilterComparison = Shapes::StringShape.new(name: 'StringFilterComparison')
     StringFilterList = Shapes::ListShape.new(name: 'StringFilterList')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringListConfigurationOptions = Shapes::StructureShape.new(name: 'StringListConfigurationOptions')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -1072,10 +1095,13 @@ module Aws::SecurityHub
     UpdateInsightResponse = Shapes::StructureShape.new(name: 'UpdateInsightResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
     UpdateOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationResponse')
+    UpdateSecurityControlRequest = Shapes::StructureShape.new(name: 'UpdateSecurityControlRequest')
+    UpdateSecurityControlResponse = Shapes::StructureShape.new(name: 'UpdateSecurityControlResponse')
     UpdateSecurityHubConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSecurityHubConfigurationRequest')
     UpdateSecurityHubConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSecurityHubConfigurationResponse')
     UpdateStandardsControlRequest = Shapes::StructureShape.new(name: 'UpdateStandardsControlRequest')
     UpdateStandardsControlResponse = Shapes::StructureShape.new(name: 'UpdateStandardsControlResponse')
+    UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     VerificationState = Shapes::StringShape.new(name: 'VerificationState')
     VolumeMount = Shapes::StructureShape.new(name: 'VolumeMount')
     VolumeMountList = Shapes::ListShape.new(name: 'VolumeMountList')
@@ -4614,6 +4640,10 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:sample, Shapes::ShapeRef.new(shape: BooleanFilterList, location_name: "Sample"))
     AwsSecurityFindingFilters.add_member(:compliance_security_control_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceSecurityControlId"))
     AwsSecurityFindingFilters.add_member(:compliance_associated_standards_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceAssociatedStandardsId"))
+    AwsSecurityFindingFilters.add_member(:vulnerabilities_exploit_available, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "VulnerabilitiesExploitAvailable"))
+    AwsSecurityFindingFilters.add_member(:vulnerabilities_fix_available, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "VulnerabilitiesFixAvailable"))
+    AwsSecurityFindingFilters.add_member(:compliance_security_control_parameters_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceSecurityControlParametersName"))
+    AwsSecurityFindingFilters.add_member(:compliance_security_control_parameters_value, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ComplianceSecurityControlParametersValue"))
     AwsSecurityFindingFilters.struct_class = Types::AwsSecurityFindingFilters
 
     AwsSecurityFindingIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -4998,6 +5028,9 @@ module Aws::SecurityHub
     BatchUpdateStandardsControlAssociationsResponse.add_member(:unprocessed_association_updates, Shapes::ShapeRef.new(shape: UnprocessedStandardsControlAssociationUpdates, location_name: "UnprocessedAssociationUpdates"))
     BatchUpdateStandardsControlAssociationsResponse.struct_class = Types::BatchUpdateStandardsControlAssociationsResponse
 
+    BooleanConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultValue"))
+    BooleanConfigurationOptions.struct_class = Types::BooleanConfigurationOptions
+
     BooleanFilter.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     BooleanFilter.struct_class = Types::BooleanFilter
 
@@ -5051,7 +5084,28 @@ module Aws::SecurityHub
     Compliance.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasonsList, location_name: "StatusReasons"))
     Compliance.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SecurityControlId"))
     Compliance.add_member(:associated_standards, Shapes::ShapeRef.new(shape: AssociatedStandardsList, location_name: "AssociatedStandards"))
+    Compliance.add_member(:security_control_parameters, Shapes::ShapeRef.new(shape: SecurityControlParametersList, location_name: "SecurityControlParameters"))
     Compliance.struct_class = Types::Compliance
+
+    ConfigurationOptions.add_member(:integer, Shapes::ShapeRef.new(shape: IntegerConfigurationOptions, location_name: "Integer"))
+    ConfigurationOptions.add_member(:integer_list, Shapes::ShapeRef.new(shape: IntegerListConfigurationOptions, location_name: "IntegerList"))
+    ConfigurationOptions.add_member(:double, Shapes::ShapeRef.new(shape: DoubleConfigurationOptions, location_name: "Double"))
+    ConfigurationOptions.add_member(:string, Shapes::ShapeRef.new(shape: StringConfigurationOptions, location_name: "String"))
+    ConfigurationOptions.add_member(:string_list, Shapes::ShapeRef.new(shape: StringListConfigurationOptions, location_name: "StringList"))
+    ConfigurationOptions.add_member(:boolean, Shapes::ShapeRef.new(shape: BooleanConfigurationOptions, location_name: "Boolean"))
+    ConfigurationOptions.add_member(:enum, Shapes::ShapeRef.new(shape: EnumConfigurationOptions, location_name: "Enum"))
+    ConfigurationOptions.add_member(:enum_list, Shapes::ShapeRef.new(shape: EnumListConfigurationOptions, location_name: "EnumList"))
+    ConfigurationOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationOptions.add_member_subclass(:integer, Types::ConfigurationOptions::Integer)
+    ConfigurationOptions.add_member_subclass(:integer_list, Types::ConfigurationOptions::IntegerList)
+    ConfigurationOptions.add_member_subclass(:double, Types::ConfigurationOptions::Double)
+    ConfigurationOptions.add_member_subclass(:string, Types::ConfigurationOptions::String)
+    ConfigurationOptions.add_member_subclass(:string_list, Types::ConfigurationOptions::StringList)
+    ConfigurationOptions.add_member_subclass(:boolean, Types::ConfigurationOptions::Boolean)
+    ConfigurationOptions.add_member_subclass(:enum, Types::ConfigurationOptions::Enum)
+    ConfigurationOptions.add_member_subclass(:enum_list, Types::ConfigurationOptions::EnumList)
+    ConfigurationOptions.add_member_subclass(:unknown, Types::ConfigurationOptions::Unknown)
+    ConfigurationOptions.struct_class = Types::ConfigurationOptions
 
     ContainerDetails.add_member(:container_runtime, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerRuntime"))
     ContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
@@ -5122,6 +5176,8 @@ module Aws::SecurityHub
     CustomDataIdentifiersResult.add_member(:detections, Shapes::ShapeRef.new(shape: CustomDataIdentifiersDetectionsList, location_name: "Detections"))
     CustomDataIdentifiersResult.add_member(:total_count, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCount"))
     CustomDataIdentifiersResult.struct_class = Types::CustomDataIdentifiersResult
+
+    CustomizableProperties.member = Shapes::ShapeRef.new(shape: SecurityControlProperty)
 
     Cvss.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
     Cvss.add_member(:base_score, Shapes::ShapeRef.new(shape: Double, location_name: "BaseScore"))
@@ -5265,6 +5321,11 @@ module Aws::SecurityHub
     DnsRequestAction.add_member(:blocked, Shapes::ShapeRef.new(shape: Boolean, location_name: "Blocked"))
     DnsRequestAction.struct_class = Types::DnsRequestAction
 
+    DoubleConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: Double, location_name: "DefaultValue"))
+    DoubleConfigurationOptions.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min"))
+    DoubleConfigurationOptions.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max"))
+    DoubleConfigurationOptions.struct_class = Types::DoubleConfigurationOptions
+
     EnableImportFindingsForProductRequest.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
     EnableImportFindingsForProductRequest.struct_class = Types::EnableImportFindingsForProductRequest
 
@@ -5282,6 +5343,15 @@ module Aws::SecurityHub
     EnableSecurityHubRequest.struct_class = Types::EnableSecurityHubRequest
 
     EnableSecurityHubResponse.struct_class = Types::EnableSecurityHubResponse
+
+    EnumConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultValue"))
+    EnumConfigurationOptions.add_member(:allowed_values, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedValues"))
+    EnumConfigurationOptions.struct_class = Types::EnumConfigurationOptions
+
+    EnumListConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: StringList, location_name: "DefaultValue"))
+    EnumListConfigurationOptions.add_member(:max_items, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxItems"))
+    EnumListConfigurationOptions.add_member(:allowed_values, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedValues"))
+    EnumListConfigurationOptions.struct_class = Types::EnumListConfigurationOptions
 
     FieldMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     FieldMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -5440,6 +5510,12 @@ module Aws::SecurityHub
     GetMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     GetMembersResponse.struct_class = Types::GetMembersResponse
 
+    GetSecurityControlDefinitionRequest.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "querystring", location_name: "SecurityControlId"))
+    GetSecurityControlDefinitionRequest.struct_class = Types::GetSecurityControlDefinitionRequest
+
+    GetSecurityControlDefinitionResponse.add_member(:security_control_definition, Shapes::ShapeRef.new(shape: SecurityControlDefinition, required: true, location_name: "SecurityControlDefinition"))
+    GetSecurityControlDefinitionResponse.struct_class = Types::GetSecurityControlDefinitionResponse
+
     IcmpTypeCode.add_member(:code, Shapes::ShapeRef.new(shape: Integer, location_name: "Code"))
     IcmpTypeCode.add_member(:type, Shapes::ShapeRef.new(shape: Integer, location_name: "Type"))
     IcmpTypeCode.struct_class = Types::IcmpTypeCode
@@ -5470,7 +5546,18 @@ module Aws::SecurityHub
     InsightResults.add_member(:result_values, Shapes::ShapeRef.new(shape: InsightResultValueList, required: true, location_name: "ResultValues"))
     InsightResults.struct_class = Types::InsightResults
 
+    IntegerConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: Integer, location_name: "DefaultValue"))
+    IntegerConfigurationOptions.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    IntegerConfigurationOptions.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    IntegerConfigurationOptions.struct_class = Types::IntegerConfigurationOptions
+
     IntegerList.member = Shapes::ShapeRef.new(shape: Integer)
+
+    IntegerListConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: IntegerList, location_name: "DefaultValue"))
+    IntegerListConfigurationOptions.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "Min"))
+    IntegerListConfigurationOptions.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
+    IntegerListConfigurationOptions.add_member(:max_items, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxItems"))
+    IntegerListConfigurationOptions.struct_class = Types::IntegerListConfigurationOptions
 
     IntegrationTypeList.member = Shapes::ShapeRef.new(shape: IntegrationType)
 
@@ -5683,6 +5770,8 @@ module Aws::SecurityHub
     NumberFilter.add_member(:gte, Shapes::ShapeRef.new(shape: Double, location_name: "Gte"))
     NumberFilter.add_member(:lte, Shapes::ShapeRef.new(shape: Double, location_name: "Lte"))
     NumberFilter.add_member(:eq, Shapes::ShapeRef.new(shape: Double, location_name: "Eq"))
+    NumberFilter.add_member(:gt, Shapes::ShapeRef.new(shape: Double, location_name: "Gt"))
+    NumberFilter.add_member(:lt, Shapes::ShapeRef.new(shape: Double, location_name: "Lt"))
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
@@ -5700,6 +5789,40 @@ module Aws::SecurityHub
     Page.struct_class = Types::Page
 
     Pages.member = Shapes::ShapeRef.new(shape: Page)
+
+    ParameterConfiguration.add_member(:value_type, Shapes::ShapeRef.new(shape: ParameterValueType, required: true, location_name: "ValueType"))
+    ParameterConfiguration.add_member(:value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "Value"))
+    ParameterConfiguration.struct_class = Types::ParameterConfiguration
+
+    ParameterDefinition.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    ParameterDefinition.add_member(:configuration_options, Shapes::ShapeRef.new(shape: ConfigurationOptions, required: true, location_name: "ConfigurationOptions"))
+    ParameterDefinition.struct_class = Types::ParameterDefinition
+
+    ParameterDefinitions.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    ParameterDefinitions.value = Shapes::ShapeRef.new(shape: ParameterDefinition)
+
+    ParameterValue.add_member(:integer, Shapes::ShapeRef.new(shape: Integer, location_name: "Integer"))
+    ParameterValue.add_member(:integer_list, Shapes::ShapeRef.new(shape: IntegerList, location_name: "IntegerList"))
+    ParameterValue.add_member(:double, Shapes::ShapeRef.new(shape: Double, location_name: "Double"))
+    ParameterValue.add_member(:string, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "String"))
+    ParameterValue.add_member(:string_list, Shapes::ShapeRef.new(shape: StringList, location_name: "StringList"))
+    ParameterValue.add_member(:boolean, Shapes::ShapeRef.new(shape: Boolean, location_name: "Boolean"))
+    ParameterValue.add_member(:enum, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Enum"))
+    ParameterValue.add_member(:enum_list, Shapes::ShapeRef.new(shape: StringList, location_name: "EnumList"))
+    ParameterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ParameterValue.add_member_subclass(:integer, Types::ParameterValue::Integer)
+    ParameterValue.add_member_subclass(:integer_list, Types::ParameterValue::IntegerList)
+    ParameterValue.add_member_subclass(:double, Types::ParameterValue::Double)
+    ParameterValue.add_member_subclass(:string, Types::ParameterValue::String)
+    ParameterValue.add_member_subclass(:string_list, Types::ParameterValue::StringList)
+    ParameterValue.add_member_subclass(:boolean, Types::ParameterValue::Boolean)
+    ParameterValue.add_member_subclass(:enum, Types::ParameterValue::Enum)
+    ParameterValue.add_member_subclass(:enum_list, Types::ParameterValue::EnumList)
+    ParameterValue.add_member_subclass(:unknown, Types::ParameterValue::Unknown)
+    ParameterValue.struct_class = Types::ParameterValue
+
+    Parameters.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    Parameters.value = Shapes::ShapeRef.new(shape: ParameterConfiguration)
 
     PatchSummary.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
     PatchSummary.add_member(:installed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledCount"))
@@ -5904,6 +6027,10 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_msk_cluster, Shapes::ShapeRef.new(shape: AwsMskClusterDetails, location_name: "AwsMskCluster"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ResourceInUseException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
@@ -6049,6 +6176,9 @@ module Aws::SecurityHub
     SecurityControl.add_member(:remediation_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RemediationUrl"))
     SecurityControl.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, required: true, location_name: "SeverityRating"))
     SecurityControl.add_member(:security_control_status, Shapes::ShapeRef.new(shape: ControlStatus, required: true, location_name: "SecurityControlStatus"))
+    SecurityControl.add_member(:update_status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "UpdateStatus"))
+    SecurityControl.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    SecurityControl.add_member(:last_update_reason, Shapes::ShapeRef.new(shape: AlphaNumericNonEmptyString, location_name: "LastUpdateReason"))
     SecurityControl.struct_class = Types::SecurityControl
 
     SecurityControlDefinition.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
@@ -6057,9 +6187,17 @@ module Aws::SecurityHub
     SecurityControlDefinition.add_member(:remediation_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RemediationUrl"))
     SecurityControlDefinition.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, required: true, location_name: "SeverityRating"))
     SecurityControlDefinition.add_member(:current_region_availability, Shapes::ShapeRef.new(shape: RegionAvailabilityStatus, required: true, location_name: "CurrentRegionAvailability"))
+    SecurityControlDefinition.add_member(:customizable_properties, Shapes::ShapeRef.new(shape: CustomizableProperties, location_name: "CustomizableProperties"))
+    SecurityControlDefinition.add_member(:parameter_definitions, Shapes::ShapeRef.new(shape: ParameterDefinitions, location_name: "ParameterDefinitions"))
     SecurityControlDefinition.struct_class = Types::SecurityControlDefinition
 
     SecurityControlDefinitions.member = Shapes::ShapeRef.new(shape: SecurityControlDefinition)
+
+    SecurityControlParameter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    SecurityControlParameter.add_member(:value, Shapes::ShapeRef.new(shape: TypeList, location_name: "Value"))
+    SecurityControlParameter.struct_class = Types::SecurityControlParameter
+
+    SecurityControlParametersList.member = Shapes::ShapeRef.new(shape: SecurityControlParameter)
 
     SecurityControls.member = Shapes::ShapeRef.new(shape: SecurityControl)
 
@@ -6221,6 +6359,11 @@ module Aws::SecurityHub
 
     StatusReasonsList.member = Shapes::ShapeRef.new(shape: StatusReason)
 
+    StringConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultValue"))
+    StringConfigurationOptions.add_member(:re_2_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Re2Expression"))
+    StringConfigurationOptions.add_member(:expression_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpressionDescription"))
+    StringConfigurationOptions.struct_class = Types::StringConfigurationOptions
+
     StringFilter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
     StringFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: StringFilterComparison, location_name: "Comparison"))
     StringFilter.struct_class = Types::StringFilter
@@ -6228,6 +6371,12 @@ module Aws::SecurityHub
     StringFilterList.member = Shapes::ShapeRef.new(shape: StringFilter)
 
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    StringListConfigurationOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: StringList, location_name: "DefaultValue"))
+    StringListConfigurationOptions.add_member(:re_2_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Re2Expression"))
+    StringListConfigurationOptions.add_member(:max_items, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxItems"))
+    StringListConfigurationOptions.add_member(:expression_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpressionDescription"))
+    StringListConfigurationOptions.struct_class = Types::StringListConfigurationOptions
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -6344,6 +6493,13 @@ module Aws::SecurityHub
     UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
 
     UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
+
+    UpdateSecurityControlRequest.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
+    UpdateSecurityControlRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, required: true, location_name: "Parameters"))
+    UpdateSecurityControlRequest.add_member(:last_update_reason, Shapes::ShapeRef.new(shape: AlphaNumericNonEmptyString, location_name: "LastUpdateReason"))
+    UpdateSecurityControlRequest.struct_class = Types::UpdateSecurityControlRequest
+
+    UpdateSecurityControlResponse.struct_class = Types::UpdateSecurityControlResponse
 
     UpdateSecurityHubConfigurationRequest.add_member(:auto_enable_controls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnableControls"))
     UpdateSecurityHubConfigurationRequest.add_member(:control_finding_generator, Shapes::ShapeRef.new(shape: ControlFindingGenerator, location_name: "ControlFindingGenerator"))
@@ -7098,6 +7254,19 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_security_control_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSecurityControlDefinition"
+        o.http_method = "GET"
+        o.http_request_uri = "/securityControl/definition"
+        o.input = Shapes::ShapeRef.new(shape: GetSecurityControlDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSecurityControlDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:invite_members, Seahorse::Model::Operation.new.tap do |o|
         o.name = "InviteMembers"
         o.http_method = "POST"
@@ -7346,6 +7515,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_security_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSecurityControl"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/securityControl/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSecurityControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSecurityControlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_security_hub_configuration, Seahorse::Model::Operation.new.tap do |o|

@@ -62,6 +62,8 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::CreateLoggingConfiguration.build(context)
           when :create_rule_groups_namespace
             Aws::PrometheusService::Endpoints::CreateRuleGroupsNamespace.build(context)
+          when :create_scraper
+            Aws::PrometheusService::Endpoints::CreateScraper.build(context)
           when :create_workspace
             Aws::PrometheusService::Endpoints::CreateWorkspace.build(context)
           when :delete_alert_manager_definition
@@ -70,6 +72,8 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::DeleteLoggingConfiguration.build(context)
           when :delete_rule_groups_namespace
             Aws::PrometheusService::Endpoints::DeleteRuleGroupsNamespace.build(context)
+          when :delete_scraper
+            Aws::PrometheusService::Endpoints::DeleteScraper.build(context)
           when :delete_workspace
             Aws::PrometheusService::Endpoints::DeleteWorkspace.build(context)
           when :describe_alert_manager_definition
@@ -78,10 +82,16 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::DescribeLoggingConfiguration.build(context)
           when :describe_rule_groups_namespace
             Aws::PrometheusService::Endpoints::DescribeRuleGroupsNamespace.build(context)
+          when :describe_scraper
+            Aws::PrometheusService::Endpoints::DescribeScraper.build(context)
           when :describe_workspace
             Aws::PrometheusService::Endpoints::DescribeWorkspace.build(context)
+          when :get_default_scraper_configuration
+            Aws::PrometheusService::Endpoints::GetDefaultScraperConfiguration.build(context)
           when :list_rule_groups_namespaces
             Aws::PrometheusService::Endpoints::ListRuleGroupsNamespaces.build(context)
+          when :list_scrapers
+            Aws::PrometheusService::Endpoints::ListScrapers.build(context)
           when :list_tags_for_resource
             Aws::PrometheusService::Endpoints::ListTagsForResource.build(context)
           when :list_workspaces

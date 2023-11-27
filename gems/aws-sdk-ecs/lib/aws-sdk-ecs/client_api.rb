@@ -305,6 +305,7 @@ module Aws::ECS
     Session = Shapes::StructureShape.new(name: 'Session')
     Setting = Shapes::StructureShape.new(name: 'Setting')
     SettingName = Shapes::StringShape.new(name: 'SettingName')
+    SettingType = Shapes::StringShape.new(name: 'SettingType')
     Settings = Shapes::ListShape.new(name: 'Settings')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StabilityStatus = Shapes::StringShape.new(name: 'StabilityStatus')
@@ -1477,6 +1478,7 @@ module Aws::ECS
     Setting.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, location_name: "name"))
     Setting.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Setting.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
+    Setting.add_member(:type, Shapes::ShapeRef.new(shape: SettingType, location_name: "type"))
     Setting.struct_class = Types::Setting
 
     Settings.member = Shapes::ShapeRef.new(shape: Setting)

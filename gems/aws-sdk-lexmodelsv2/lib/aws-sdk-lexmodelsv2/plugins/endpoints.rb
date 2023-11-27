@@ -124,6 +124,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DescribeBotLocale.build(context)
           when :describe_bot_recommendation
             Aws::LexModelsV2::Endpoints::DescribeBotRecommendation.build(context)
+          when :describe_bot_resource_generation
+            Aws::LexModelsV2::Endpoints::DescribeBotResourceGeneration.build(context)
           when :describe_bot_version
             Aws::LexModelsV2::Endpoints::DescribeBotVersion.build(context)
           when :describe_custom_vocabulary_metadata
@@ -148,6 +150,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DescribeTestSetDiscrepancyReport.build(context)
           when :describe_test_set_generation
             Aws::LexModelsV2::Endpoints::DescribeTestSetGeneration.build(context)
+          when :generate_bot_element
+            Aws::LexModelsV2::Endpoints::GenerateBotElement.build(context)
           when :get_test_execution_artifacts_url
             Aws::LexModelsV2::Endpoints::GetTestExecutionArtifactsUrl.build(context)
           when :list_aggregated_utterances
@@ -158,6 +162,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::ListBotLocales.build(context)
           when :list_bot_recommendations
             Aws::LexModelsV2::Endpoints::ListBotRecommendations.build(context)
+          when :list_bot_resource_generations
+            Aws::LexModelsV2::Endpoints::ListBotResourceGenerations.build(context)
           when :list_bot_versions
             Aws::LexModelsV2::Endpoints::ListBotVersions.build(context)
           when :list_bots
@@ -208,6 +214,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::SearchAssociatedTranscripts.build(context)
           when :start_bot_recommendation
             Aws::LexModelsV2::Endpoints::StartBotRecommendation.build(context)
+          when :start_bot_resource_generation
+            Aws::LexModelsV2::Endpoints::StartBotResourceGeneration.build(context)
           when :start_import
             Aws::LexModelsV2::Endpoints::StartImport.build(context)
           when :start_test_execution

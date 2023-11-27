@@ -2110,6 +2110,26 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The authorized targets that are associated with a service.
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_targets
+    #   Aist of authorized targets that are represented by IAM Identity
+    #   Center application ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AuthorizedTargetsByService AWS API Documentation
+    #
+    class AuthorizedTargetsByService < Struct.new(
+      :service,
+      :authorized_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for IoT Analytics.
     #
     # @!attribute [rw] data_set_name
@@ -9534,6 +9554,42 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete an
+    #   identity propagation configuration from.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service that you want to delete
+    #   the associated access scopes and authorized targets from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfigRequest AWS API Documentation
+    #
+    class DeleteIdentityPropagationConfigRequest < Struct.new(
+      :aws_account_id,
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfigResponse AWS API Documentation
+    #
+    class DeleteIdentityPropagationConfigResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that you want to delete
     #   the Amazon QuickSight namespace from.
     #   @return [String]
@@ -16423,6 +16479,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The parameters for an IAM Identity Center configuration.
+    #
+    # @!attribute [rw] enable_identity_propagation
+    #   A Boolean option that controls whether Trusted Identity Propagation
+    #   should be used.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :enable_identity_propagation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The identity type specified isn't supported. Supported identity types
     # include `IAM` and `QUICKSIGHT`.
     #
@@ -18601,6 +18672,59 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contain the identity
+    #   propagation configurations of.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigsRequest AWS API Documentation
+    #
+    class ListIdentityPropagationConfigsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] services
+    #   A list of services and their authorized targets that the Amazon
+    #   QuickSight IAM Identity Center application can access.
+    #   @return [Array<Types::AuthorizedTargetsByService>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigsResponse AWS API Documentation
+    #
+    class ListIdentityPropagationConfigsResponse < Struct.new(
+      :services,
+      :next_token,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22596,6 +22720,14 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html
     #   @return [Types::RedshiftIAMParameters]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   An optional parameter that configures IAM Identity Center
+    #   authentication to grant Amazon QuickSight access to your cluster.
+    #
+    #   This parameter can only be specified if your Amazon QuickSight
+    #   account is configured with IAM Identity Center.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftParameters AWS API Documentation
     #
     class RedshiftParameters < Struct.new(
@@ -22603,7 +22735,8 @@ module Aws::QuickSight
       :port,
       :database,
       :cluster_id,
-      :iam_parameters)
+      :iam_parameters,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30823,6 +30956,48 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       :assignment_status,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the identity
+    #   propagation configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service that contains the
+    #   authorized targets that you want to add or update.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_targets
+    #   Specifies a list of application ARNs that represent the authorized
+    #   targets for a service.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfigRequest AWS API Documentation
+    #
+    class UpdateIdentityPropagationConfigRequest < Struct.new(
+      :aws_account_id,
+      :service,
+      :authorized_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfigResponse AWS API Documentation
+    #
+    class UpdateIdentityPropagationConfigResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []

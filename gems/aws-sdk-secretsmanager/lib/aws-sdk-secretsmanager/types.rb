@@ -10,6 +10,97 @@
 module Aws::SecretsManager
   module Types
 
+    # The error Secrets Manager encountered while retrieving an individual
+    # secret as part of BatchGetSecretValue.
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN or name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error Secrets Manager encountered while retrieving an individual
+    #   secret as part of BatchGetSecretValue, for example
+    #   `ResourceNotFoundException`,`InvalidParameterException`,
+    #   `InvalidRequestException`, `DecryptionFailure`, or
+    #   `AccessDeniedException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/APIErrorType AWS API Documentation
+    #
+    class APIErrorType < Struct.new(
+      :secret_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secret_id_list
+    #   The ARN or names of the secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters to choose which secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The number of results to include in the response.
+    #
+    #   If there are more results available, in the response, Secrets
+    #   Manager includes `NextToken`. To get the next results, call
+    #   `BatchGetSecretValue` again with the value from `NextToken`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where the output should continue from, if a
+    #   previous call did not show all results. To get the next results,
+    #   call `BatchGetSecretValue` again with this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/BatchGetSecretValueRequest AWS API Documentation
+    #
+    class BatchGetSecretValueRequest < Struct.new(
+      :secret_id_list,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secret_values
+    #   A list of secret values.
+    #   @return [Array<Types::SecretValueEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   Secrets Manager includes this value if there's more output
+    #   available than what is included in the current response. This can
+    #   occur even when the response includes no values at all, such as when
+    #   you ask for a filtered view of a long list. To get the next results,
+    #   call `BatchGetSecretValue` again with this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors Secrets Manager encountered while attempting to
+    #   retrieve individual secrets.
+    #   @return [Array<Types::APIErrorType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/BatchGetSecretValueResponse AWS API Documentation
+    #
+    class BatchGetSecretValueResponse < Struct.new(
+      :secret_values,
+      :next_token,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -1715,10 +1806,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret. You can use forward slashes in the
-    #   name to represent a path hierarchy. For example,
-    #   `/prod/databases/dbserver1` could represent the secret for a server
-    #   named `dbserver1` in the folder `databases` in the folder `prod`.
+    #   The friendly name of the secret.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1840,6 +1928,59 @@ module Aws::SecretsManager
       :created_date,
       :primary_region)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the secret value and other details for a
+    # secret.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The unique version identifier of this version of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_binary
+    #   The decrypted secret value, if the secret value was originally
+    #   provided as binary data in the form of a byte array. The parameter
+    #   represents the binary data as a [base64-encoded][1] string.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc4648#section-4
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_string
+    #   The decrypted secret value, if the secret value was originally
+    #   provided as a string or through the Secrets Manager console.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_stages
+    #   A list of all of the staging labels currently attached to this
+    #   version of the secret.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_date
+    #   The date the secret was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretValueEntry AWS API Documentation
+    #
+    class SecretValueEntry < Struct.new(
+      :arn,
+      :name,
+      :version_id,
+      :secret_binary,
+      :secret_string,
+      :version_stages,
+      :created_date)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 

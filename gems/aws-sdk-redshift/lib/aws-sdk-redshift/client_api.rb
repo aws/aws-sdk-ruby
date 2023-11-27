@@ -633,6 +633,7 @@ module Aws::Redshift
     AssociateDataShareConsumerMessage.add_member(:associate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AssociateEntireAccount"))
     AssociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
     AssociateDataShareConsumerMessage.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
+    AssociateDataShareConsumerMessage.add_member(:allow_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowWrites"))
     AssociateDataShareConsumerMessage.struct_class = Types::AssociateDataShareConsumerMessage
 
     AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
@@ -682,6 +683,7 @@ module Aws::Redshift
 
     AuthorizeDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     AuthorizeDataShareMessage.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConsumerIdentifier"))
+    AuthorizeDataShareMessage.add_member(:allow_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowWrites"))
     AuthorizeDataShareMessage.struct_class = Types::AuthorizeDataShareMessage
 
     AuthorizeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
@@ -1199,6 +1201,8 @@ module Aws::Redshift
     DataShareAssociation.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
     DataShareAssociation.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
     DataShareAssociation.add_member(:status_change_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StatusChangeDate"))
+    DataShareAssociation.add_member(:producer_allowed_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ProducerAllowedWrites"))
+    DataShareAssociation.add_member(:consumer_accepted_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ConsumerAcceptedWrites"))
     DataShareAssociation.struct_class = Types::DataShareAssociation
 
     DataShareAssociationList.member = Shapes::ShapeRef.new(shape: DataShareAssociation)

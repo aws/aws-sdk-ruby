@@ -118,6 +118,8 @@ module Aws::States
             Aws::States::Endpoints::StopExecution.build(context)
           when :tag_resource
             Aws::States::Endpoints::TagResource.build(context)
+          when :test_state
+            Aws::States::Endpoints::TestState.build(context)
           when :untag_resource
             Aws::States::Endpoints::UntagResource.build(context)
           when :update_map_run

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-11-27)
+------------------
+
+* Feature - Adding support for EFS Archive lifecycle configuration.
+
 1.68.0 (2023-11-22)
 ------------------
 

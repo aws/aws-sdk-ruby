@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2023-11-27)
+------------------
+
+* Feature - AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+
 1.85.0 (2023-11-22)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-11-27)
+------------------
+
+* Feature - Added support for FSx for ONTAP scale-out file systems and FlexGroup volumes. Added the HAPairs field and ThroughputCapacityPerHAPair for filesystem. Added AggregateConfiguration (containing Aggregates and ConstituentsPerAggregate) and SizeInBytes for volume.
+
 1.80.0 (2023-11-22)
 ------------------
 

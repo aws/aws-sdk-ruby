@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.178.0 (2023-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workspacesthinclient` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-repostspace` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-freetier` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-eksauth` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-costoptimizationhub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bcmdataexports` gem.
+
 3.177.0 (2023-11-22)
 ------------------
 

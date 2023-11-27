@@ -10,7 +10,7 @@
 module Aws::ControlTower
   module Types
 
-    # User does not have sufficient access to perform this action.
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -71,6 +71,78 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] manifest
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be applied to the landing zone.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version
+    #   The landing zone version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZoneInput AWS API Documentation
+    #
+    class CreateLandingZoneInput < Struct.new(
+      :manifest,
+      :tags,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the landing zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_identifier
+    #   A unique identifier assigned to a `CreateLandingZone` operation. You
+    #   can use this identifier as an input of `GetLandingZoneOperation` to
+    #   check the operation's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZoneOutput AWS API Documentation
+    #
+    class CreateLandingZoneOutput < Struct.new(
+      :arn,
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DeleteLandingZoneInput AWS API Documentation
+    #
+    class DeleteLandingZoneInput < Struct.new(
+      :landing_zone_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   A unique identifier assigned to a `DeleteLandingZone` operation. You
+    #   can use this identifier as an input of `GetLandingZoneOperation` to
+    #   check the operation's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DeleteLandingZoneOutput AWS API Documentation
+    #
+    class DeleteLandingZoneOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
@@ -115,10 +187,11 @@ module Aws::ControlTower
 
     # The drift summary of the enabled control.
     #
-    # AWS Control Tower expects the enabled control configuration to include
-    # all supported and governed Regions. If the enabled control differs
-    # from the expected configuration, it is defined to be in a state of
-    # drift. You can repair this drift by resetting the enabled control.
+    # Amazon Web Services Control Tower expects the enabled control
+    # configuration to include all supported and governed Regions. If the
+    # enabled control differs from the expected configuration, it is defined
+    # to be in a state of drift. You can repair this drift by resetting the
+    # enabled control.
     #
     # @!attribute [rw] drift_status
     #   The drift status of the enabled control.
@@ -126,16 +199,19 @@ module Aws::ControlTower
     #   Valid values:
     #
     #   * `DRIFTED`: The `enabledControl` deployed in this configuration
-    #     doesn’t match the configuration that AWS Control Tower expected.
+    #     doesn’t match the configuration that Amazon Web Services Control
+    #     Tower expected.
     #
     #   * `IN_SYNC`: The `enabledControl` deployed in this configuration
-    #     matches the configuration that AWS Control Tower expected.
+    #     matches the configuration that Amazon Web Services Control Tower
+    #     expected.
     #
-    #   * `NOT_CHECKING`: AWS Control Tower does not check drift for this
-    #     enabled control. Drift is not supported for the control type.
+    #   * `NOT_CHECKING`: Amazon Web Services Control Tower does not check
+    #     drift for this enabled control. Drift is not supported for the
+    #     control type.
     #
-    #   * `UNKNOWN`: AWS Control Tower is not able to check the drift status
-    #     for the enabled control.
+    #   * `UNKNOWN`: Amazon Web Services Control Tower is not able to check
+    #     the drift status for the enabled control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DriftStatusSummary AWS API Documentation
@@ -231,7 +307,7 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] target_regions
-    #   Target AWS Regions for the enabled control.
+    #   Target Amazon Web Services Regions for the enabled control.
     #   @return [Array<Types::Region>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlDetails AWS API Documentation
@@ -358,6 +434,54 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneInput AWS API Documentation
+    #
+    class GetLandingZoneInput < Struct.new(
+      :landing_zone_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   A unique identifier assigned to a landing zone operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneOperationInput AWS API Documentation
+    #
+    class GetLandingZoneOperationInput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_details
+    #   The landing zone operation details.
+    #   @return [Types::LandingZoneOperationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneOperationOutput AWS API Documentation
+    #
+    class GetLandingZoneOperationOutput < Struct.new(
+      :operation_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] landing_zone
+    #   Information about the landing zone.
+    #   @return [Types::LandingZoneDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneOutput AWS API Documentation
+    #
+    class GetLandingZoneOutput < Struct.new(
+      :landing_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unexpected error during processing of request.
     #
     # @!attribute [rw] message
@@ -367,6 +491,148 @@ module Aws::ControlTower
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the landing zone.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the landing zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_status
+    #   The drift status of the landing zone.
+    #   @return [Types::LandingZoneDriftStatusSummary]
+    #
+    # @!attribute [rw] latest_available_version
+    #   The latest available version of the landing zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest
+    #   The landing zone manifest.yaml text file that specifies the landing
+    #   zone configurations.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] status
+    #   The landing zone deployment status.
+    #
+    #   Valid values:
+    #
+    #   * `ACTIVE`: The landing zone is actively deployed.
+    #
+    #   * `PROCESSING`: The landing zone is processing deployment.
+    #
+    #   * `FAILED`: The landing zone failed deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The landing zone's current deployed version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneDetail AWS API Documentation
+    #
+    class LandingZoneDetail < Struct.new(
+      :arn,
+      :drift_status,
+      :latest_available_version,
+      :manifest,
+      :status,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The drift status summary of the landing zone.
+    #
+    # If the landing zone differs from the expected configuration, it is
+    # defined to be in a state of drift. You can repair this drift by
+    # resetting the landing zone.
+    #
+    # @!attribute [rw] status
+    #   The drift status of the landing zone.
+    #
+    #   Valid values:
+    #
+    #   * `DRIFTED`: The landing zone deployed in this configuration does
+    #     not match the configuration that Amazon Web Services Control Tower
+    #     expected.
+    #
+    #   * `IN_SYNC`: The landing zone deployed in this configuration matches
+    #     the configuration that Amazon Web Services Control Tower expected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneDriftStatusSummary AWS API Documentation
+    #
+    class LandingZoneDriftStatusSummary < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a landing zone operation.
+    #
+    # @!attribute [rw] end_time
+    #   The landing zone operation end time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_type
+    #   The landing zone operation type.
+    #
+    #   Valid values:
+    #
+    #   * `DELETE`: The `DeleteLandingZone` operation.
+    #
+    #   * `CREATE`: The `CreateLandingZone` operation.
+    #
+    #   * `UPDATE`: The `UpdateLandingZone` operation.
+    #
+    #   * `RESET`: The `ResetLandingZone` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The landing zone operation start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The landing zone operation status.
+    #
+    #   Valid values:
+    #
+    #   * `SUCCEEDED`: The landing zone operation succeeded.
+    #
+    #   * `IN_PROGRESS`: The landing zone operation is in progress.
+    #
+    #   * `FAILED`: The landing zone operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the operation result is FAILED, this string contains a message
+    #   explaining why the operation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationDetail AWS API Documentation
+    #
+    class LandingZoneOperationDetail < Struct.new(
+      :end_time,
+      :operation_type,
+      :start_time,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a summary of information about a landing zone.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the landing zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneSummary AWS API Documentation
+    #
+    class LandingZoneSummary < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -400,8 +666,8 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] enabled_controls
-    #   Lists the controls enabled by AWS Control Tower on the specified
-    #   organizational unit and the accounts it contains.
+    #   Lists the controls enabled by Amazon Web Services Control Tower on
+    #   the specified organizational unit and the accounts it contains.
     #   @return [Array<Types::EnabledControlSummary>]
     #
     # @!attribute [rw] next_token
@@ -413,6 +679,42 @@ module Aws::ControlTower
     #
     class ListEnabledControlsOutput < Struct.new(
       :enabled_controls,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of returned landing zone ARNs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to continue the list from a previous API call with the
+    #   same parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZonesInput AWS API Documentation
+    #
+    class ListLandingZonesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] landing_zones
+    #   The ARN of the landing zone.
+    #   @return [Array<Types::LandingZoneSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Retrieves the next page of results. If the string is empty, the
+    #   current response is the end of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZonesOutput AWS API Documentation
+    #
+    class ListLandingZonesOutput < Struct.new(
+      :landing_zones,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -442,8 +744,8 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # An AWS Region in which AWS Control Tower expects to find the control
-    # deployed.
+    # An Amazon Web Services Region in which Amazon Web Services Control
+    # Tower expects to find the control deployed.
     #
     # The expected Regions are based on the Regions that are governed by the
     # landing zone. In certain cases, a control is not actually enabled in
@@ -455,13 +757,39 @@ module Aws::ControlTower
     # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance
     #
     # @!attribute [rw] name
-    #   The AWS Region name.
+    #   The Amazon Web Services Region name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/Region AWS API Documentation
     #
     class Region < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetLandingZoneInput AWS API Documentation
+    #
+    class ResetLandingZoneInput < Struct.new(
+      :landing_zone_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   A unique identifier assigned to a `ResetLandingZone` operation. You
+    #   can use this identifier as an input of `GetLandingZoneOperation` to
+    #   check the operation's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetLandingZoneOutput AWS API Documentation
+    #
+    class ResetLandingZoneOutput < Struct.new(
+      :operation_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -563,8 +891,49 @@ module Aws::ControlTower
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # @!attribute [rw] landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] version
+    #   The landing zone version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZoneInput AWS API Documentation
+    #
+    class UpdateLandingZoneInput < Struct.new(
+      :landing_zone_identifier,
+      :manifest,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   A unique identifier assigned to a `UpdateLandingZone` operation. You
+    #   can use this identifier as an input of `GetLandingZoneOperation` to
+    #   check the operation's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZoneOutput AWS API Documentation
+    #
+    class UpdateLandingZoneOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

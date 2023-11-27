@@ -1400,6 +1400,9 @@ module Aws::QuickSight
     #           database_groups: ["DatabaseGroup"],
     #           auto_create_database_user: false,
     #         },
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -1530,6 +1533,9 @@ module Aws::QuickSight
     #                 database_user: "DatabaseUser", # required
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
+    #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
     #               },
     #             },
     #             s3_parameters: {
@@ -3443,6 +3449,47 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes all access scopes and authorized targets that are associated
+    # with a service from the Amazon QuickSight IAM Identity Center
+    # application.
+    #
+    # This operation is only supported for Amazon QuickSight accounts that
+    # use IAM Identity Center.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete an
+    #   identity propagation configuration from.
+    #
+    # @option params [required, String] :service
+    #   The name of the Amazon Web Services service that you want to delete
+    #   the associated access scopes and authorized targets from.
+    #
+    # @return [Types::DeleteIdentityPropagationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIdentityPropagationConfigResponse#request_id #request_id} => String
+    #   * {Types::DeleteIdentityPropagationConfigResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_identity_propagation_config({
+    #     aws_account_id: "AwsAccountId", # required
+    #     service: "REDSHIFT", # required, accepts REDSHIFT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfig AWS API Documentation
+    #
+    # @overload delete_identity_propagation_config(params = {})
+    # @param [Hash] params ({})
+    def delete_identity_propagation_config(params = {}, options = {})
+      req = build_request(:delete_identity_propagation_config, params)
+      req.send_request(options)
+    end
+
     # Deletes a namespace and the users and groups that are associated with
     # the namespace. This is an asynchronous process. Assets including
     # dashboards, analyses, datasets and data sources are not deleted. To
@@ -4571,6 +4618,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -5371,6 +5419,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
     #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_source.data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.role_arn #=> String
@@ -5441,6 +5490,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -7823,6 +7873,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -7893,6 +7944,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -8268,6 +8320,57 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_iam_policy_assignments_for_user(params = {}, options = {})
       req = build_request(:list_iam_policy_assignments_for_user, params)
+      req.send_request(options)
+    end
+
+    # Lists all services and authorized targets that the Amazon QuickSight
+    # IAM Identity Center application can access.
+    #
+    # This operation is only supported for Amazon QuickSight accounts that
+    # use IAM Identity Center.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contain the identity
+    #   propagation configurations of.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListIdentityPropagationConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdentityPropagationConfigsResponse#services #services} => Array&lt;Types::AuthorizedTargetsByService&gt;
+    #   * {Types::ListIdentityPropagationConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListIdentityPropagationConfigsResponse#status #status} => Integer
+    #   * {Types::ListIdentityPropagationConfigsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_identity_propagation_configs({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.services #=> Array
+    #   resp.services[0].service #=> String, one of "REDSHIFT"
+    #   resp.services[0].authorized_targets #=> Array
+    #   resp.services[0].authorized_targets[0] #=> String
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigs AWS API Documentation
+    #
+    # @overload list_identity_propagation_configs(params = {})
+    # @param [Hash] params ({})
+    def list_identity_propagation_configs(params = {}, options = {})
+      req = build_request(:list_identity_propagation_configs, params)
       req.send_request(options)
     end
 
@@ -10148,6 +10251,9 @@ module Aws::QuickSight
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
     #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -11565,6 +11671,9 @@ module Aws::QuickSight
     #           database_groups: ["DatabaseGroup"],
     #           auto_create_database_user: false,
     #         },
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -11695,6 +11804,9 @@ module Aws::QuickSight
     #                 database_user: "DatabaseUser", # required
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
+    #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
     #               },
     #             },
     #             s3_parameters: {
@@ -12077,6 +12189,51 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_iam_policy_assignment(params = {}, options = {})
       req = build_request(:update_iam_policy_assignment, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates services and authorized targets to configure what the
+    # Amazon QuickSight IAM Identity Center application can access.
+    #
+    # This operation is only supported for Amazon QuickSight accounts using
+    # IAM Identity Center
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the identity
+    #   propagation configuration that you want to update.
+    #
+    # @option params [required, String] :service
+    #   The name of the Amazon Web Services service that contains the
+    #   authorized targets that you want to add or update.
+    #
+    # @option params [Array<String>] :authorized_targets
+    #   Specifies a list of application ARNs that represent the authorized
+    #   targets for a service.
+    #
+    # @return [Types::UpdateIdentityPropagationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdentityPropagationConfigResponse#request_id #request_id} => String
+    #   * {Types::UpdateIdentityPropagationConfigResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_identity_propagation_config({
+    #     aws_account_id: "AwsAccountId", # required
+    #     service: "REDSHIFT", # required, accepts REDSHIFT
+    #     authorized_targets: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfig AWS API Documentation
+    #
+    # @overload update_identity_propagation_config(params = {})
+    # @param [Hash] params ({})
+    def update_identity_propagation_config(params = {}, options = {})
+      req = build_request(:update_identity_propagation_config, params)
       req.send_request(options)
     end
 
@@ -13325,7 +13482,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

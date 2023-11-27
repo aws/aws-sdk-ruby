@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-11-27)
+------------------
+
+* Feature - Add optional NetworkType property to Accessor APIs
+
 1.46.0 (2023-11-22)
 ------------------
 

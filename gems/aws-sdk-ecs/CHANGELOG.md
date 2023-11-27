@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2023-11-27)
+------------------
+
+* Feature - Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.
+
 1.133.0 (2023-11-22)
 ------------------
 

@@ -530,6 +530,81 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Create a scraper.
+    #
+    # @option params [String] :alias
+    #   An optional user-assigned alias for this scraper. This alias is for
+    #   user reference and does not need to be unique.
+    #
+    # @option params [required, Types::ScrapeConfiguration] :scrape_configuration
+    #   The configuration used to create the scraper.
+    #
+    # @option params [required, Types::Source] :source
+    #   The source that the scraper will be discovering and collecting metrics
+    #   from.
+    #
+    # @option params [required, Types::Destination] :destination
+    #   The destination that the scraper will be producing metrics to.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional, user-provided tags for this scraper.
+    #
+    # @return [Types::CreateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScraperResponse#scraper_id #scraper_id} => String
+    #   * {Types::CreateScraperResponse#arn #arn} => String
+    #   * {Types::CreateScraperResponse#status #status} => Types::ScraperStatus
+    #   * {Types::CreateScraperResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scraper({
+    #     alias: "ScraperAlias",
+    #     scrape_configuration: { # required
+    #       configuration_blob: "data",
+    #     },
+    #     source: { # required
+    #       eks_configuration: {
+    #         cluster_arn: "ClusterArn", # required
+    #         security_group_ids: ["SecurityGroupId"],
+    #         subnet_ids: ["SubnetId"], # required
+    #       },
+    #     },
+    #     destination: { # required
+    #       amp_configuration: {
+    #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #     },
+    #     client_token: "IdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scraper_id #=> String
+    #   resp.arn #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraper AWS API Documentation
+    #
+    # @overload create_scraper(params = {})
+    # @param [Hash] params ({})
+    def create_scraper(params = {}, options = {})
+      req = build_request(:create_scraper, params)
+      req.send_request(options)
+    end
+
     # Creates a new AMP workspace.
     #
     # @option params [String] :alias
@@ -675,6 +750,44 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Deletes a scraper.
+    #
+    # @option params [required, String] :scraper_id
+    #   The ID of the scraper to delete.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteScraperResponse#scraper_id #scraper_id} => String
+    #   * {Types::DeleteScraperResponse#status #status} => Types::ScraperStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scraper({
+    #     scraper_id: "ScraperId", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scraper_id #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraper AWS API Documentation
+    #
+    # @overload delete_scraper(params = {})
+    # @param [Hash] params ({})
+    def delete_scraper(params = {}, options = {})
+      req = build_request(:delete_scraper, params)
+      req.send_request(options)
+    end
+
     # Deletes an AMP workspace.
     #
     # @option params [required, String] :workspace_id
@@ -810,6 +923,56 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Describe an existing scraper.
+    #
+    # @option params [required, String] :scraper_id
+    #   The IDs of the scraper to describe.
+    #
+    # @return [Types::DescribeScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScraperResponse#scraper #scraper} => Types::ScraperDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scraper({
+    #     scraper_id: "ScraperId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scraper.alias #=> String
+    #   resp.scraper.scraper_id #=> String
+    #   resp.scraper.arn #=> String
+    #   resp.scraper.role_arn #=> String
+    #   resp.scraper.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.scraper.created_at #=> Time
+    #   resp.scraper.last_modified_at #=> Time
+    #   resp.scraper.tags #=> Hash
+    #   resp.scraper.tags["TagKey"] #=> String
+    #   resp.scraper.status_reason #=> String
+    #   resp.scraper.scrape_configuration.configuration_blob #=> String
+    #   resp.scraper.source.eks_configuration.cluster_arn #=> String
+    #   resp.scraper.source.eks_configuration.security_group_ids #=> Array
+    #   resp.scraper.source.eks_configuration.security_group_ids[0] #=> String
+    #   resp.scraper.source.eks_configuration.subnet_ids #=> Array
+    #   resp.scraper.source.eks_configuration.subnet_ids[0] #=> String
+    #   resp.scraper.destination.amp_configuration.workspace_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * scraper_active
+    #   * scraper_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraper AWS API Documentation
+    #
+    # @overload describe_scraper(params = {})
+    # @param [Hash] params ({})
+    def describe_scraper(params = {}, options = {})
+      req = build_request(:describe_scraper, params)
+      req.send_request(options)
+    end
+
     # Describes an existing AMP workspace.
     #
     # @option params [required, String] :workspace_id
@@ -848,6 +1011,25 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def describe_workspace(params = {}, options = {})
       req = build_request(:describe_workspace, params)
+      req.send_request(options)
+    end
+
+    # Gets a default configuration.
+    #
+    # @return [Types::GetDefaultScraperConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDefaultScraperConfigurationResponse#configuration #configuration} => String
+    #
+    # @example Response structure
+    #
+    #   resp.configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/GetDefaultScraperConfiguration AWS API Documentation
+    #
+    # @overload get_default_scraper_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_default_scraper_configuration(params = {}, options = {})
+      req = build_request(:get_default_scraper_configuration, params)
       req.send_request(options)
     end
 
@@ -903,6 +1085,68 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def list_rule_groups_namespaces(params = {}, options = {})
       req = build_request(:list_rule_groups_namespaces, params)
+      req.send_request(options)
+    end
+
+    # Lists all scrapers in a customer account, including scrapers being
+    # created or deleted. You may provide filters to return a more specific
+    # list of results.
+    #
+    # @option params [Hash<String,Array>] :filters
+    #   A list of scraper filters.
+    #
+    # @option params [String] :next_token
+    #   Pagination token to request the next page in a paginated list. This
+    #   token is obtained from the output of the previous ListScrapers
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to return in response (default=100, maximum=1000).
+    #
+    # @return [Types::ListScrapersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScrapersResponse#scrapers #scrapers} => Array&lt;Types::ScraperSummary&gt;
+    #   * {Types::ListScrapersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scrapers({
+    #     filters: {
+    #       "FilterKey" => ["FilterValue"],
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scrapers #=> Array
+    #   resp.scrapers[0].alias #=> String
+    #   resp.scrapers[0].scraper_id #=> String
+    #   resp.scrapers[0].arn #=> String
+    #   resp.scrapers[0].role_arn #=> String
+    #   resp.scrapers[0].status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.scrapers[0].created_at #=> Time
+    #   resp.scrapers[0].last_modified_at #=> Time
+    #   resp.scrapers[0].tags #=> Hash
+    #   resp.scrapers[0].tags["TagKey"] #=> String
+    #   resp.scrapers[0].status_reason #=> String
+    #   resp.scrapers[0].source.eks_configuration.cluster_arn #=> String
+    #   resp.scrapers[0].source.eks_configuration.security_group_ids #=> Array
+    #   resp.scrapers[0].source.eks_configuration.security_group_ids[0] #=> String
+    #   resp.scrapers[0].source.eks_configuration.subnet_ids #=> Array
+    #   resp.scrapers[0].source.eks_configuration.subnet_ids[0] #=> String
+    #   resp.scrapers[0].destination.amp_configuration.workspace_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapers AWS API Documentation
+    #
+    # @overload list_scrapers(params = {})
+    # @param [Hash] params ({})
+    def list_scrapers(params = {}, options = {})
+      req = build_request(:list_scrapers, params)
       req.send_request(options)
     end
 
@@ -1223,7 +1467,7 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1291,6 +1535,8 @@ module Aws::PrometheusService
     #
     # | waiter_name       | params                      | :delay   | :max_attempts |
     # | ----------------- | --------------------------- | -------- | ------------- |
+    # | scraper_active    | {Client#describe_scraper}   | 2        | 60            |
+    # | scraper_deleted   | {Client#describe_scraper}   | 2        | 60            |
     # | workspace_active  | {Client#describe_workspace} | 2        | 60            |
     # | workspace_deleted | {Client#describe_workspace} | 2        | 60            |
     #
@@ -1343,6 +1589,8 @@ module Aws::PrometheusService
 
     def waiters
       {
+        scraper_active: Waiters::ScraperActive,
+        scraper_deleted: Waiters::ScraperDeleted,
         workspace_active: Waiters::WorkspaceActive,
         workspace_deleted: Waiters::WorkspaceDeleted
       }

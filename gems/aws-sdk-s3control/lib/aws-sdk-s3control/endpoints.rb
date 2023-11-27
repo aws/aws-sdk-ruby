@@ -12,6 +12,86 @@ module Aws::S3Control
   # @api private
   module Endpoints
 
+    class AssociateAccessGrantsIdentityCenter
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class CreateAccessGrant
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class CreateAccessGrantsInstance
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class CreateAccessGrantsLocation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
     class CreateAccessPoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -113,6 +193,86 @@ module Aws::S3Control
     end
 
     class CreateStorageLensGroup
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class DeleteAccessGrant
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class DeleteAccessGrantsInstance
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class DeleteAccessGrantsInstanceResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class DeleteAccessGrantsLocation
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -472,6 +632,126 @@ module Aws::S3Control
       end
     end
 
+    class DissociateAccessGrantsIdentityCenter
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class GetAccessGrant
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class GetAccessGrantsInstance
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class GetAccessGrantsInstanceForPrefix
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class GetAccessGrantsInstanceResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class GetAccessGrantsLocation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
     class GetAccessPoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -732,6 +1012,26 @@ module Aws::S3Control
       end
     end
 
+    class GetDataAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
     class GetJobTagging
       def self.build(context)
         unless context.config.regional_endpoint
@@ -912,6 +1212,66 @@ module Aws::S3Control
       end
     end
 
+    class ListAccessGrants
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class ListAccessGrantsInstances
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class ListAccessGrantsLocations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
     class ListAccessPoints
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1053,6 +1413,26 @@ module Aws::S3Control
     end
 
     class ListTagsForResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class PutAccessGrantsInstanceResourcePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1373,6 +1753,26 @@ module Aws::S3Control
     end
 
     class UntagResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3Control::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          account_id: context.params[:account_id],
+          requires_account_id: true,
+          outpost_id: nil,
+          bucket: nil,
+          access_point_name: nil,
+          use_arn_region: context.config.s3_use_arn_region,
+        )
+      end
+    end
+
+    class UpdateAccessGrantsLocation
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

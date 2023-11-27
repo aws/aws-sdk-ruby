@@ -367,6 +367,12 @@ module Aws::TranscribeService
     #   `
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
+    # @!attribute [rw] summarization
+    #   Contains `GenerateAbstractiveSummary`, which is a required parameter
+    #   if you want to enable Generative call summarization in your Call
+    #   Analytics request.
+    #   @return [Types::Summarization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobSettings AWS API Documentation
     #
     class CallAnalyticsJobSettings < Struct.new(
@@ -376,7 +382,8 @@ module Aws::TranscribeService
       :language_model_name,
       :content_redaction,
       :language_options,
-      :language_id_settings)
+      :language_id_settings,
+      :summarization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4236,6 +4243,32 @@ module Aws::TranscribeService
       :formats,
       :subtitle_file_uris,
       :output_start_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains `GenerateAbstractiveSummary`, which is a required parameter
+    # if you want to enable Generative call summarization in your Call
+    # Analytics request.
+    #
+    # @!attribute [rw] generate_abstractive_summary
+    #   Enables Generative call summarization in your Call Analytics request
+    #
+    #   Generative call summarization provides a summary of the transcript
+    #   including important components discussed in the conversation.
+    #
+    #   For more information, see [Enabling generative call
+    #   summarization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-enable-summarization.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Summarization AWS API Documentation
+    #
+    class Summarization < Struct.new(
+      :generate_abstractive_summary)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2157,10 +2157,11 @@ module Aws::States
     # `RedriveExecution` API action reschedules and redrives only the
     # iterations and branches that failed or aborted.
     #
-    # To redrive a workflow that includes a Distributed Map state with
-    # failed child workflow executions, you must redrive the [parent
-    # workflow][4]. The parent workflow redrives all the unsuccessful
-    # states, including Distributed Map.
+    # To redrive a workflow that includes a Distributed Map state whose Map
+    # Run failed, you must redrive the [parent workflow][4]. The parent
+    # workflow redrives all the unsuccessful states, including a failed Map
+    # Run. If a Map Run was not started in the original execution attempt,
+    # the redriven parent workflow starts the Map Run.
     #
     # <note markdown="1"> This API action is not supported by `EXPRESS` state machines.
     #
@@ -2208,8 +2209,10 @@ module Aws::States
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you don’t specify a client token, the
     #   Amazon Web Services SDK automatically generates a client token and
-    #   uses it for the request to ensure idempotency. The API uses one of the
-    #   last 10 client tokens provided.
+    #   uses it for the request to ensure idempotency. The API will return
+    #   idempotent responses for the last 10 client tokens used to
+    #   successfully redrive the execution. These client tokens are valid for
+    #   up to 15 minutes after they are first used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2722,6 +2725,164 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Accepts the definition of a single state and executes it. You can test
+    # a state without creating a state machine or updating an existing state
+    # machine. Using this API, you can test the following:
+    #
+    # * A state's [input and output processing][1] data flow
+    #
+    # * An [Amazon Web Services service integration][2] request and response
+    #
+    # * An [HTTP Task][3] request and response
+    #
+    # You can call this API on only one state at a time. The states that you
+    # can test include the following:
+    #
+    # * [All Task types][4] except [Activity][5]
+    #
+    # * [Pass][6]
+    #
+    # * [Wait][7]
+    #
+    # * [Choice][8]
+    #
+    # * [Succeed][9]
+    #
+    # * [Fail][10]
+    #
+    # The `TestState` API assumes an IAM role which must contain the
+    # required IAM permissions for the resources your state is accessing.
+    # For information about the permissions a state might need, see [IAM
+    # permissions to test a state][11].
+    #
+    # The `TestState` API can run for up to five minutes. If the execution
+    # of a state exceeds this duration, it fails with the `States.Timeout`
+    # error.
+    #
+    # `TestState` doesn't support [Activity tasks][5], `.sync` or
+    # `.waitForTaskToken` [service integration patterns][12],
+    # [Parallel][13], or [Map][14] states.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html
+    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html
+    # [4]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types
+    # [5]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
+    # [6]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html
+    # [7]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html
+    # [8]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html
+    # [9]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html
+    # [10]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html
+    # [11]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    # [12]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html
+    # [13]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
+    # [14]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
+    #
+    # @option params [required, String] :definition
+    #   The [Amazon States Language][1] (ASL) definition of the state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the execution role with the required
+    #   IAM permissions for the state.
+    #
+    # @option params [String] :input
+    #   A string that contains the JSON input data for the state.
+    #
+    # @option params [String] :inspection_level
+    #   Determines the values to return when a state is tested. You can
+    #   specify one of the following types:
+    #
+    #   * `INFO`: Shows the final state output. By default, Step Functions
+    #     sets `inspectionLevel` to `INFO` if you don't specify a level.
+    #
+    #   * `DEBUG`: Shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   * `TRACE`: Shows the HTTP request and response for an HTTP Task. This
+    #     level also shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   Each of these levels also provide information about the status of the
+    #   state execution and the next state to transition to.
+    #
+    # @option params [Boolean] :reveal_secrets
+    #   Specifies whether or not to include secret information in the test
+    #   result. For HTTP Tasks, a secret includes the data that an EventBridge
+    #   connection adds to modify the HTTP request headers, query parameters,
+    #   and body. Step Functions doesn't omit any information included in the
+    #   state definition or the HTTP response.
+    #
+    #   If you set `revealSecrets` to `true`, you must make sure that the IAM
+    #   user that calls the `TestState` API has permission for the
+    #   `states:RevealSecrets` action. For an example of IAM policy that sets
+    #   the `states:RevealSecrets` permission, see [IAM permissions to test a
+    #   state][1]. Without this permission, Step Functions throws an access
+    #   denied error.
+    #
+    #   By default, `revealSecrets` is set to `false`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    #
+    # @return [Types::TestStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestStateOutput#output #output} => String
+    #   * {Types::TestStateOutput#error #error} => String
+    #   * {Types::TestStateOutput#cause #cause} => String
+    #   * {Types::TestStateOutput#inspection_data #inspection_data} => Types::InspectionData
+    #   * {Types::TestStateOutput#next_state #next_state} => String
+    #   * {Types::TestStateOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_state({
+    #     definition: "Definition", # required
+    #     role_arn: "Arn", # required
+    #     input: "SensitiveData",
+    #     inspection_level: "INFO", # accepts INFO, DEBUG, TRACE
+    #     reveal_secrets: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output #=> String
+    #   resp.error #=> String
+    #   resp.cause #=> String
+    #   resp.inspection_data.input #=> String
+    #   resp.inspection_data.after_input_path #=> String
+    #   resp.inspection_data.after_parameters #=> String
+    #   resp.inspection_data.result #=> String
+    #   resp.inspection_data.after_result_selector #=> String
+    #   resp.inspection_data.after_result_path #=> String
+    #   resp.inspection_data.request.protocol #=> String
+    #   resp.inspection_data.request.method #=> String
+    #   resp.inspection_data.request.url #=> String
+    #   resp.inspection_data.request.headers #=> String
+    #   resp.inspection_data.request.body #=> String
+    #   resp.inspection_data.response.protocol #=> String
+    #   resp.inspection_data.response.status_code #=> String
+    #   resp.inspection_data.response.status_message #=> String
+    #   resp.inspection_data.response.headers #=> String
+    #   resp.inspection_data.response.body #=> String
+    #   resp.next_state #=> String
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "RETRIABLE", "CAUGHT_ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestState AWS API Documentation
+    #
+    # @overload test_state(params = {})
+    # @param [Hash] params ({})
+    def test_state(params = {}, options = {})
+      req = build_request(:test_state, params)
+      req.send_request(options)
+    end
+
     # Remove a tag from a Step Functions resource
     #
     # @option params [required, String] :resource_arn
@@ -3018,7 +3179,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

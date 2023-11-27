@@ -126,6 +126,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteGroupMembership.build(context)
           when :delete_iam_policy_assignment
             Aws::QuickSight::Endpoints::DeleteIAMPolicyAssignment.build(context)
+          when :delete_identity_propagation_config
+            Aws::QuickSight::Endpoints::DeleteIdentityPropagationConfig.build(context)
           when :delete_namespace
             Aws::QuickSight::Endpoints::DeleteNamespace.build(context)
           when :delete_refresh_schedule
@@ -270,6 +272,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListIAMPolicyAssignments.build(context)
           when :list_iam_policy_assignments_for_user
             Aws::QuickSight::Endpoints::ListIAMPolicyAssignmentsForUser.build(context)
+          when :list_identity_propagation_configs
+            Aws::QuickSight::Endpoints::ListIdentityPropagationConfigs.build(context)
           when :list_ingestions
             Aws::QuickSight::Endpoints::ListIngestions.build(context)
           when :list_namespaces
@@ -360,6 +364,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateGroup.build(context)
           when :update_iam_policy_assignment
             Aws::QuickSight::Endpoints::UpdateIAMPolicyAssignment.build(context)
+          when :update_identity_propagation_config
+            Aws::QuickSight::Endpoints::UpdateIdentityPropagationConfig.build(context)
           when :update_ip_restriction
             Aws::QuickSight::Endpoints::UpdateIpRestriction.build(context)
           when :update_public_sharing_settings

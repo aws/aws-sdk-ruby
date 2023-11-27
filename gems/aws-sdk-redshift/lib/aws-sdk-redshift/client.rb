@@ -507,6 +507,9 @@ module Aws::Redshift
     #   existing and future namespaces in the specified Amazon Web Services
     #   Region.
     #
+    # @option params [Boolean] :allow_writes
+    #   If set to true, allows write operations for a datashare.
+    #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DataShare#data_share_arn #data_share_arn} => String
@@ -522,6 +525,7 @@ module Aws::Redshift
     #     associate_entire_account: false,
     #     consumer_arn: "String",
     #     consumer_region: "String",
+    #     allow_writes: false,
     #   })
     #
     # @example Response structure
@@ -535,6 +539,8 @@ module Aws::Redshift
     #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumer AWS API Documentation
@@ -646,6 +652,9 @@ module Aws::Redshift
     #   datashare. This identifier is an Amazon Web Services account ID or a
     #   keyword, such as ADX.
     #
+    # @option params [Boolean] :allow_writes
+    #   If set to true, allows write operations for a datashare.
+    #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DataShare#data_share_arn #data_share_arn} => String
@@ -659,6 +668,7 @@ module Aws::Redshift
     #   resp = client.authorize_data_share({
     #     data_share_arn: "String", # required
     #     consumer_identifier: "String", # required
+    #     allow_writes: false,
     #   })
     #
     # @example Response structure
@@ -672,6 +682,8 @@ module Aws::Redshift
     #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShare AWS API Documentation
@@ -3005,6 +3017,8 @@ module Aws::Redshift
     #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShare AWS API Documentation
@@ -5035,6 +5049,8 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_shares[0].data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
@@ -5103,6 +5119,8 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_shares[0].data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
@@ -5171,6 +5189,8 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].consumer_region #=> String
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_shares[0].data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
@@ -7430,6 +7450,8 @@ module Aws::Redshift
     #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisassociateDataShareConsumer AWS API Documentation
@@ -10768,6 +10790,8 @@ module Aws::Redshift
     #   resp.data_share_associations[0].consumer_region #=> String
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.data_share_associations[0].producer_allowed_writes #=> Boolean
+    #   resp.data_share_associations[0].consumer_accepted_writes #=> Boolean
     #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RejectDataShare AWS API Documentation
@@ -12261,7 +12285,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

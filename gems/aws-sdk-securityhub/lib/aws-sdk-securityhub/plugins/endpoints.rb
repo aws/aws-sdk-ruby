@@ -152,6 +152,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::GetMasterAccount.build(context)
           when :get_members
             Aws::SecurityHub::Endpoints::GetMembers.build(context)
+          when :get_security_control_definition
+            Aws::SecurityHub::Endpoints::GetSecurityControlDefinition.build(context)
           when :invite_members
             Aws::SecurityHub::Endpoints::InviteMembers.build(context)
           when :list_automation_rules
@@ -186,6 +188,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::UpdateInsight.build(context)
           when :update_organization_configuration
             Aws::SecurityHub::Endpoints::UpdateOrganizationConfiguration.build(context)
+          when :update_security_control
+            Aws::SecurityHub::Endpoints::UpdateSecurityControl.build(context)
           when :update_security_hub_configuration
             Aws::SecurityHub::Endpoints::UpdateSecurityHubConfiguration.build(context)
           when :update_standards_control

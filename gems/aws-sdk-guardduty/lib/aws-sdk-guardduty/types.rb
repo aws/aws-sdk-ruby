@@ -332,6 +332,20 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the installed GuardDuty security agent.
+    #
+    # @!attribute [rw] version
+    #   Version of the installed GuardDuty security agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AgentDetails AWS API Documentation
+    #
+    class AgentDetails < Struct.new(
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the anomalies.
     #
     # @!attribute [rw] profiles
@@ -753,6 +767,27 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Amazon EC2 instance that is running the
+    # Amazon ECS container.
+    #
+    # @!attribute [rw] covered_container_instances
+    #   Represents the nodes in the Amazon ECS cluster that has a `HEALTHY`
+    #   coverage status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_container_instances
+    #   Represents total number of nodes in the Amazon ECS cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ContainerInstanceDetails AWS API Documentation
+    #
+    class ContainerInstanceDetails < Struct.new(
+      :covered_container_instances,
+      :compatible_container_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the country where the remote IP address is
     # located.
     #
@@ -769,6 +804,87 @@ module Aws::GuardDuty
     class Country < Struct.new(
       :country_code,
       :country_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
+    # your Amazon EC2 instances (currently in preview release) and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # Contains information about the Amazon EC2 instance runtime coverage
+    # details.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon EC2 instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Amazon EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The cluster ARN of the Amazon ECS cluster running on the Amazon EC2
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_details
+    #   Information about the installed security agent.
+    #   @return [Types::AgentDetails]
+    #
+    # @!attribute [rw] management_type
+    #   Indicates how the GuardDuty security agent is managed for this
+    #   resource.
+    #
+    #   * `AUTO_MANAGED` indicates that GuardDuty deploys and manages
+    #     updates for this resource.
+    #
+    #   * `MANUAL` indicates that you are responsible to deploy, update, and
+    #     manage the GuardDuty security agent updates for this resource.
+    #
+    #   <note markdown="1"> The `DISABLED` status doesn't apply to Amazon EC2 instances and
+    #   Amazon EKS clusters that run on Amazon EC2 instances.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageEc2InstanceDetails AWS API Documentation
+    #
+    class CoverageEc2InstanceDetails < Struct.new(
+      :instance_id,
+      :instance_type,
+      :cluster_arn,
+      :agent_details,
+      :management_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about Amazon ECS cluster runtime coverage
+    # details.
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon ECS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_details
+    #   Information about the Fargate details associated with the Amazon ECS
+    #   cluster.
+    #   @return [Types::FargateDetails]
+    #
+    # @!attribute [rw] container_instance_details
+    #   Information about the Amazon ECS container running on Amazon EC2
+    #   instance.
+    #   @return [Types::ContainerInstanceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageEcsClusterDetails AWS API Documentation
+    #
+    class CoverageEcsClusterDetails < Struct.new(
+      :cluster_name,
+      :fargate_details,
+      :container_instance_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,11 +1051,29 @@ module Aws::GuardDuty
     #   The type of Amazon Web Services resource.
     #   @return [String]
     #
+    # @!attribute [rw] ecs_cluster_details
+    #   Information about the Amazon ECS cluster that is assessed for
+    #   runtime coverage.
+    #   @return [Types::CoverageEcsClusterDetails]
+    #
+    # @!attribute [rw] ec2_instance_details
+    #   <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
+    #   your Amazon EC2 instances (currently in preview release) and is
+    #   subject to change.
+    #
+    #    </note>
+    #
+    #   Information about the Amazon EC2 instance assessed for runtime
+    #   coverage.
+    #   @return [Types::CoverageEc2InstanceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
     #
     class CoverageResourceDetails < Struct.new(
       :eks_cluster_details,
-      :resource_type)
+      :resource_type,
+      :ecs_cluster_details,
+      :ec2_instance_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2660,6 +2794,37 @@ module Aws::GuardDuty
     #
     class Evidence < Struct.new(
       :threat_intelligence_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about AWS Fargate details associated with an
+    # Amazon ECS cluster.
+    #
+    # @!attribute [rw] issues
+    #   Runtime coverage issues identified for the resource running on AWS
+    #   Fargate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] management_type
+    #   Indicates how the GuardDuty security agent is managed for this
+    #   resource.
+    #
+    #   * `AUTO_MANAGED` indicates that GuardDuty deploys and manages
+    #     updates for this resource.
+    #
+    #   * `MANUAL` indicates that you are responsible to deploy, update, and
+    #     manage the GuardDuty security agent updates for this resource.
+    #
+    #   * `DISABLED` indicates that the deployment of the GuardDuty security
+    #     agent is disabled for this resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FargateDetails AWS API Documentation
+    #
+    class FargateDetails < Struct.new(
+      :issues,
+      :management_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -167,6 +167,9 @@ module Aws::QuickSight
     AuthenticationMethodOption = Shapes::StringShape.new(name: 'AuthenticationMethodOption')
     AuthorSpecifiedAggregation = Shapes::StringShape.new(name: 'AuthorSpecifiedAggregation')
     AuthorSpecifiedAggregations = Shapes::ListShape.new(name: 'AuthorSpecifiedAggregations')
+    AuthorizedTargetsByService = Shapes::StructureShape.new(name: 'AuthorizedTargetsByService')
+    AuthorizedTargetsByServices = Shapes::ListShape.new(name: 'AuthorizedTargetsByServices')
+    AuthorizedTargetsList = Shapes::ListShape.new(name: 'AuthorizedTargetsList')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAndAccountId = Shapes::StringShape.new(name: 'AwsAndAccountId')
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
@@ -534,6 +537,8 @@ module Aws::QuickSight
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentRequest')
     DeleteIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentResponse')
+    DeleteIdentityPropagationConfigRequest = Shapes::StructureShape.new(name: 'DeleteIdentityPropagationConfigRequest')
+    DeleteIdentityPropagationConfigResponse = Shapes::StructureShape.new(name: 'DeleteIdentityPropagationConfigResponse')
     DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
     DeleteNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteNamespaceResponse')
     DeleteRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DeleteRefreshScheduleRequest')
@@ -860,6 +865,7 @@ module Aws::QuickSight
     IAMPolicyAssignmentSummaryList = Shapes::ListShape.new(name: 'IAMPolicyAssignmentSummaryList')
     IPv4Address = Shapes::StringShape.new(name: 'IPv4Address')
     Icon = Shapes::StringShape.new(name: 'Icon')
+    IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
     IdentityMap = Shapes::MapShape.new(name: 'IdentityMap')
     IdentityName = Shapes::StringShape.new(name: 'IdentityName')
     IdentityNameList = Shapes::ListShape.new(name: 'IdentityNameList')
@@ -976,6 +982,9 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsForUserResponse = Shapes::StructureShape.new(name: 'ListIAMPolicyAssignmentsForUserResponse')
     ListIAMPolicyAssignmentsRequest = Shapes::StructureShape.new(name: 'ListIAMPolicyAssignmentsRequest')
     ListIAMPolicyAssignmentsResponse = Shapes::StructureShape.new(name: 'ListIAMPolicyAssignmentsResponse')
+    ListIdentityPropagationConfigsRequest = Shapes::StructureShape.new(name: 'ListIdentityPropagationConfigsRequest')
+    ListIdentityPropagationConfigsResponse = Shapes::StructureShape.new(name: 'ListIdentityPropagationConfigsResponse')
+    ListIdentityPropagationMaxResults = Shapes::IntegerShape.new(name: 'ListIdentityPropagationMaxResults')
     ListIngestionsRequest = Shapes::StructureShape.new(name: 'ListIngestionsRequest')
     ListIngestionsResponse = Shapes::StructureShape.new(name: 'ListIngestionsResponse')
     ListNamespacesRequest = Shapes::StructureShape.new(name: 'ListNamespacesRequest')
@@ -1346,6 +1355,7 @@ module Aws::QuickSight
     SeriesItem = Shapes::StructureShape.new(name: 'SeriesItem')
     SeriesItemList = Shapes::ListShape.new(name: 'SeriesItemList')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
+    ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
     SessionTag = Shapes::StructureShape.new(name: 'SessionTag')
@@ -1671,6 +1681,8 @@ module Aws::QuickSight
     UpdateGroupResponse = Shapes::StructureShape.new(name: 'UpdateGroupResponse')
     UpdateIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentRequest')
     UpdateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentResponse')
+    UpdateIdentityPropagationConfigRequest = Shapes::StructureShape.new(name: 'UpdateIdentityPropagationConfigRequest')
+    UpdateIdentityPropagationConfigResponse = Shapes::StructureShape.new(name: 'UpdateIdentityPropagationConfigResponse')
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
@@ -2237,6 +2249,14 @@ module Aws::QuickSight
     AuroraPostgreSqlParameters.struct_class = Types::AuroraPostgreSqlParameters
 
     AuthorSpecifiedAggregations.member = Shapes::ShapeRef.new(shape: AuthorSpecifiedAggregation)
+
+    AuthorizedTargetsByService.add_member(:service, Shapes::ShapeRef.new(shape: ServiceType, location_name: "Service"))
+    AuthorizedTargetsByService.add_member(:authorized_targets, Shapes::ShapeRef.new(shape: AuthorizedTargetsList, location_name: "AuthorizedTargets"))
+    AuthorizedTargetsByService.struct_class = Types::AuthorizedTargetsByService
+
+    AuthorizedTargetsByServices.member = Shapes::ShapeRef.new(shape: AuthorizedTargetsByService)
+
+    AuthorizedTargetsList.member = Shapes::ShapeRef.new(shape: String)
 
     AwsIotAnalyticsParameters.add_member(:data_set_name, Shapes::ShapeRef.new(shape: DataSetName, required: true, location_name: "DataSetName"))
     AwsIotAnalyticsParameters.struct_class = Types::AwsIotAnalyticsParameters
@@ -3718,6 +3738,14 @@ module Aws::QuickSight
     DeleteIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteIAMPolicyAssignmentResponse.struct_class = Types::DeleteIAMPolicyAssignmentResponse
 
+    DeleteIdentityPropagationConfigRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteIdentityPropagationConfigRequest.add_member(:service, Shapes::ShapeRef.new(shape: ServiceType, required: true, location: "uri", location_name: "Service"))
+    DeleteIdentityPropagationConfigRequest.struct_class = Types::DeleteIdentityPropagationConfigRequest
+
+    DeleteIdentityPropagationConfigResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteIdentityPropagationConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteIdentityPropagationConfigResponse.struct_class = Types::DeleteIdentityPropagationConfigResponse
+
     DeleteNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     DeleteNamespaceRequest.struct_class = Types::DeleteNamespaceRequest
@@ -5110,6 +5138,9 @@ module Aws::QuickSight
 
     IAMPolicyAssignmentSummaryList.member = Shapes::ShapeRef.new(shape: IAMPolicyAssignmentSummary)
 
+    IdentityCenterConfiguration.add_member(:enable_identity_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIdentityPropagation", metadata: {"box"=>true}))
+    IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
+
     IdentityMap.key = Shapes::ShapeRef.new(shape: String)
     IdentityMap.value = Shapes::ShapeRef.new(shape: IdentityNameList)
 
@@ -5561,6 +5592,17 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListIAMPolicyAssignmentsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListIAMPolicyAssignmentsResponse.struct_class = Types::ListIAMPolicyAssignmentsResponse
+
+    ListIdentityPropagationConfigsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListIdentityPropagationConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIdentityPropagationMaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListIdentityPropagationConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListIdentityPropagationConfigsRequest.struct_class = Types::ListIdentityPropagationConfigsRequest
+
+    ListIdentityPropagationConfigsResponse.add_member(:services, Shapes::ShapeRef.new(shape: AuthorizedTargetsByServices, location_name: "Services"))
+    ListIdentityPropagationConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListIdentityPropagationConfigsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListIdentityPropagationConfigsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListIdentityPropagationConfigsResponse.struct_class = Types::ListIdentityPropagationConfigsResponse
 
     ListIngestionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     ListIngestionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
@@ -6395,6 +6437,7 @@ module Aws::QuickSight
     RedshiftParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RedshiftParameters.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     RedshiftParameters.add_member(:iam_parameters, Shapes::ShapeRef.new(shape: RedshiftIAMParameters, location_name: "IAMParameters"))
+    RedshiftParameters.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
     RedshiftParameters.struct_class = Types::RedshiftParameters
 
     ReferenceLine.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
@@ -8046,6 +8089,15 @@ module Aws::QuickSight
     UpdateIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateIAMPolicyAssignmentResponse.struct_class = Types::UpdateIAMPolicyAssignmentResponse
 
+    UpdateIdentityPropagationConfigRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateIdentityPropagationConfigRequest.add_member(:service, Shapes::ShapeRef.new(shape: ServiceType, required: true, location: "uri", location_name: "Service"))
+    UpdateIdentityPropagationConfigRequest.add_member(:authorized_targets, Shapes::ShapeRef.new(shape: AuthorizedTargetsList, location_name: "AuthorizedTargets"))
+    UpdateIdentityPropagationConfigRequest.struct_class = Types::UpdateIdentityPropagationConfigRequest
+
+    UpdateIdentityPropagationConfigResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateIdentityPropagationConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateIdentityPropagationConfigResponse.struct_class = Types::UpdateIdentityPropagationConfigResponse
+
     UpdateIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateIpRestrictionRequest.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
     UpdateIpRestrictionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
@@ -9005,6 +9057,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdatingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_identity_propagation_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdentityPropagationConfig"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/identity-propagation-config/{Service}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdentityPropagationConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIdentityPropagationConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -10128,6 +10193,19 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:list_identity_propagation_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdentityPropagationConfigs"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/identity-propagation-config"
+        o.input = Shapes::ShapeRef.new(shape: ListIdentityPropagationConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIdentityPropagationConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:list_ingestions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIngestions"
         o.http_method = "GET"
@@ -10899,6 +10977,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdatingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_identity_propagation_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIdentityPropagationConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/identity-propagation-config/{Service}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIdentityPropagationConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIdentityPropagationConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

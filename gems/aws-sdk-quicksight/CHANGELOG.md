@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2023-11-27)
+------------------
+
+* Feature - This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.
+
 1.97.0 (2023-11-22)
 ------------------
 

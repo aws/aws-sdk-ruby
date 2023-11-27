@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2023-11-27)
+------------------
+
+* Feature - Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.
+
 * Issue - Fix thread interruptions in multipart `download_file`, `file_uploader` and `stream_uploader` (#2944).
 
 1.139.0 (2023-11-22)

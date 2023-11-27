@@ -80,6 +80,10 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::DescribeQuery.build(context)
           when :describe_trails
             Aws::CloudTrail::Endpoints::DescribeTrails.build(context)
+          when :disable_federation
+            Aws::CloudTrail::Endpoints::DisableFederation.build(context)
+          when :enable_federation
+            Aws::CloudTrail::Endpoints::EnableFederation.build(context)
           when :get_channel
             Aws::CloudTrail::Endpoints::GetChannel.build(context)
           when :get_event_data_store

@@ -60,6 +60,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::AddListenerCertificates.build(context)
           when :add_tags
             Aws::ElasticLoadBalancingV2::Endpoints::AddTags.build(context)
+          when :add_trust_store_revocations
+            Aws::ElasticLoadBalancingV2::Endpoints::AddTrustStoreRevocations.build(context)
           when :create_listener
             Aws::ElasticLoadBalancingV2::Endpoints::CreateListener.build(context)
           when :create_load_balancer
@@ -68,6 +70,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::CreateRule.build(context)
           when :create_target_group
             Aws::ElasticLoadBalancingV2::Endpoints::CreateTargetGroup.build(context)
+          when :create_trust_store
+            Aws::ElasticLoadBalancingV2::Endpoints::CreateTrustStore.build(context)
           when :delete_listener
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteListener.build(context)
           when :delete_load_balancer
@@ -76,6 +80,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteRule.build(context)
           when :delete_target_group
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteTargetGroup.build(context)
+          when :delete_trust_store
+            Aws::ElasticLoadBalancingV2::Endpoints::DeleteTrustStore.build(context)
           when :deregister_targets
             Aws::ElasticLoadBalancingV2::Endpoints::DeregisterTargets.build(context)
           when :describe_account_limits
@@ -100,6 +106,16 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeTargetGroups.build(context)
           when :describe_target_health
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeTargetHealth.build(context)
+          when :describe_trust_store_associations
+            Aws::ElasticLoadBalancingV2::Endpoints::DescribeTrustStoreAssociations.build(context)
+          when :describe_trust_store_revocations
+            Aws::ElasticLoadBalancingV2::Endpoints::DescribeTrustStoreRevocations.build(context)
+          when :describe_trust_stores
+            Aws::ElasticLoadBalancingV2::Endpoints::DescribeTrustStores.build(context)
+          when :get_trust_store_ca_certificates_bundle
+            Aws::ElasticLoadBalancingV2::Endpoints::GetTrustStoreCaCertificatesBundle.build(context)
+          when :get_trust_store_revocation_content
+            Aws::ElasticLoadBalancingV2::Endpoints::GetTrustStoreRevocationContent.build(context)
           when :modify_listener
             Aws::ElasticLoadBalancingV2::Endpoints::ModifyListener.build(context)
           when :modify_load_balancer_attributes
@@ -110,12 +126,16 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::ModifyTargetGroup.build(context)
           when :modify_target_group_attributes
             Aws::ElasticLoadBalancingV2::Endpoints::ModifyTargetGroupAttributes.build(context)
+          when :modify_trust_store
+            Aws::ElasticLoadBalancingV2::Endpoints::ModifyTrustStore.build(context)
           when :register_targets
             Aws::ElasticLoadBalancingV2::Endpoints::RegisterTargets.build(context)
           when :remove_listener_certificates
             Aws::ElasticLoadBalancingV2::Endpoints::RemoveListenerCertificates.build(context)
           when :remove_tags
             Aws::ElasticLoadBalancingV2::Endpoints::RemoveTags.build(context)
+          when :remove_trust_store_revocations
+            Aws::ElasticLoadBalancingV2::Endpoints::RemoveTrustStoreRevocations.build(context)
           when :set_ip_address_type
             Aws::ElasticLoadBalancingV2::Endpoints::SetIpAddressType.build(context)
           when :set_rule_priorities

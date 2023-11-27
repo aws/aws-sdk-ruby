@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for the Amazon Managed Service for Prometheus collector, a fully managed, agentless Prometheus metrics scraping capability.
+
 1.25.0 (2023-11-22)
 ------------------
 

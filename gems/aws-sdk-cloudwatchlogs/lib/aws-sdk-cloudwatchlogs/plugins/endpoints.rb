@@ -64,6 +64,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::CreateDelivery.build(context)
           when :create_export_task
             Aws::CloudWatchLogs::Endpoints::CreateExportTask.build(context)
+          when :create_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::CreateLogAnomalyDetector.build(context)
           when :create_log_group
             Aws::CloudWatchLogs::Endpoints::CreateLogGroup.build(context)
           when :create_log_stream
@@ -82,6 +84,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteDeliverySource.build(context)
           when :delete_destination
             Aws::CloudWatchLogs::Endpoints::DeleteDestination.build(context)
+          when :delete_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::DeleteLogAnomalyDetector.build(context)
           when :delete_log_group
             Aws::CloudWatchLogs::Endpoints::DeleteLogGroup.build(context)
           when :delete_log_stream
@@ -136,6 +140,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::GetDeliveryDestinationPolicy.build(context)
           when :get_delivery_source
             Aws::CloudWatchLogs::Endpoints::GetDeliverySource.build(context)
+          when :get_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::GetLogAnomalyDetector.build(context)
           when :get_log_events
             Aws::CloudWatchLogs::Endpoints::GetLogEvents.build(context)
           when :get_log_group_fields
@@ -144,6 +150,10 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::GetLogRecord.build(context)
           when :get_query_results
             Aws::CloudWatchLogs::Endpoints::GetQueryResults.build(context)
+          when :list_anomalies
+            Aws::CloudWatchLogs::Endpoints::ListAnomalies.build(context)
+          when :list_log_anomaly_detectors
+            Aws::CloudWatchLogs::Endpoints::ListLogAnomalyDetectors.build(context)
           when :list_tags_for_resource
             Aws::CloudWatchLogs::Endpoints::ListTagsForResource.build(context)
           when :list_tags_log_group
@@ -188,6 +198,10 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::UntagLogGroup.build(context)
           when :untag_resource
             Aws::CloudWatchLogs::Endpoints::UntagResource.build(context)
+          when :update_anomaly
+            Aws::CloudWatchLogs::Endpoints::UpdateAnomaly.build(context)
+          when :update_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::UpdateLogAnomalyDetector.build(context)
           end
         end
       end

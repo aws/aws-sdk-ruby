@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-11-27)
+------------------
+
+* Feature - Added new APIs in Detective to support resource investigations
+
 1.42.0 (2023-11-22)
 ------------------
 
