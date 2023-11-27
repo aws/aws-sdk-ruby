@@ -26,11 +26,16 @@ module Aws::ControlTower
     DeleteLandingZoneOutput = Shapes::StructureShape.new(name: 'DeleteLandingZoneOutput')
     DisableControlInput = Shapes::StructureShape.new(name: 'DisableControlInput')
     DisableControlOutput = Shapes::StructureShape.new(name: 'DisableControlOutput')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DriftStatus = Shapes::StringShape.new(name: 'DriftStatus')
     DriftStatusSummary = Shapes::StructureShape.new(name: 'DriftStatusSummary')
     EnableControlInput = Shapes::StructureShape.new(name: 'EnableControlInput')
     EnableControlOutput = Shapes::StructureShape.new(name: 'EnableControlOutput')
     EnabledControlDetails = Shapes::StructureShape.new(name: 'EnabledControlDetails')
+    EnabledControlParameter = Shapes::StructureShape.new(name: 'EnabledControlParameter')
+    EnabledControlParameterSummaries = Shapes::ListShape.new(name: 'EnabledControlParameterSummaries')
+    EnabledControlParameterSummary = Shapes::StructureShape.new(name: 'EnabledControlParameterSummary')
+    EnabledControlParameters = Shapes::ListShape.new(name: 'EnabledControlParameters')
     EnabledControlSummary = Shapes::StructureShape.new(name: 'EnabledControlSummary')
     EnabledControls = Shapes::ListShape.new(name: 'EnabledControls')
     EnablementStatus = Shapes::StringShape.new(name: 'EnablementStatus')
@@ -85,6 +90,8 @@ module Aws::ControlTower
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateEnabledControlInput = Shapes::StructureShape.new(name: 'UpdateEnabledControlInput')
+    UpdateEnabledControlOutput = Shapes::StructureShape.new(name: 'UpdateEnabledControlOutput')
     UpdateLandingZoneInput = Shapes::StructureShape.new(name: 'UpdateLandingZoneInput')
     UpdateLandingZoneOutput = Shapes::StructureShape.new(name: 'UpdateLandingZoneOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -128,6 +135,7 @@ module Aws::ControlTower
     DriftStatusSummary.struct_class = Types::DriftStatusSummary
 
     EnableControlInput.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, required: true, location_name: "controlIdentifier"))
+    EnableControlInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledControlParameters, location_name: "parameters"))
     EnableControlInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     EnableControlInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, required: true, location_name: "targetIdentifier"))
     EnableControlInput.struct_class = Types::EnableControlInput
@@ -139,10 +147,23 @@ module Aws::ControlTower
     EnabledControlDetails.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     EnabledControlDetails.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, location_name: "controlIdentifier"))
     EnabledControlDetails.add_member(:drift_status_summary, Shapes::ShapeRef.new(shape: DriftStatusSummary, location_name: "driftStatusSummary"))
+    EnabledControlDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledControlParameterSummaries, location_name: "parameters"))
     EnabledControlDetails.add_member(:status_summary, Shapes::ShapeRef.new(shape: EnablementStatusSummary, location_name: "statusSummary"))
     EnabledControlDetails.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, location_name: "targetIdentifier"))
     EnabledControlDetails.add_member(:target_regions, Shapes::ShapeRef.new(shape: TargetRegions, location_name: "targetRegions"))
     EnabledControlDetails.struct_class = Types::EnabledControlDetails
+
+    EnabledControlParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    EnabledControlParameter.add_member(:value, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "value"))
+    EnabledControlParameter.struct_class = Types::EnabledControlParameter
+
+    EnabledControlParameterSummaries.member = Shapes::ShapeRef.new(shape: EnabledControlParameterSummary)
+
+    EnabledControlParameterSummary.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    EnabledControlParameterSummary.add_member(:value, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "value"))
+    EnabledControlParameterSummary.struct_class = Types::EnabledControlParameterSummary
+
+    EnabledControlParameters.member = Shapes::ShapeRef.new(shape: EnabledControlParameter)
 
     EnabledControlSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     EnabledControlSummary.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, location_name: "controlIdentifier"))
@@ -269,6 +290,13 @@ module Aws::ControlTower
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateEnabledControlInput.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledControlIdentifier"))
+    UpdateEnabledControlInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledControlParameters, required: true, location_name: "parameters"))
+    UpdateEnabledControlInput.struct_class = Types::UpdateEnabledControlInput
+
+    UpdateEnabledControlOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    UpdateEnabledControlOutput.struct_class = Types::UpdateEnabledControlOutput
 
     UpdateLandingZoneInput.add_member(:landing_zone_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "landingZoneIdentifier"))
     UpdateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
@@ -489,6 +517,21 @@ module Aws::ControlTower
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_enabled_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEnabledControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-enabled-control"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEnabledControlInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEnabledControlOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

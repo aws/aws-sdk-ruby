@@ -709,16 +709,16 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
-    #   Name of the DB instance to create from the DB snapshot. This parameter
-    #   isn't case-sensitive.
+    #   The name of the DB instance to create from the DB snapshot. This
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 numbers, letters, or hyphens
+    #   * Must contain from 1 to 63 numbers, letters, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-snapshot-id`
     # @option options [String] :db_instance_class
@@ -749,10 +749,13 @@ module Aws::RDS
     #
     #   Example: `us-east-1a`
     # @option options [String] :db_subnet_group_name
-    #   The DB subnet group name to use for the new instance.
+    #   The name of the DB subnet group to use for the new instance.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB subnet group.
+    #
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     # @option options [Boolean] :multi_az
@@ -793,10 +796,11 @@ module Aws::RDS
     #   Valid Values: `license-included` \| `bring-your-own-license` \|
     #   `general-public-license`
     # @option options [String] :db_name
-    #   The database name for the restored DB instance.
+    #   The name of the database for the restored DB instance.
     #
-    #   This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB
-    #   engines. It also doesn't apply to RDS Custom DB instances.
+    #   This parameter only applies to RDS for Oracle and RDS for SQL Server
+    #   DB instances. It doesn't apply to the other engines or to RDS Custom
+    #   DB instances.
     # @option options [String] :engine
     #   The database engine to use for the new instance.
     #
@@ -809,6 +813,10 @@ module Aws::RDS
     #   snapshot.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -889,10 +897,10 @@ module Aws::RDS
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB instance
-    #   in. The domain/ must be created prior to this operation. Currently,
-    #   you can create only MySQL, Microsoft SQL Server, Oracle, and
-    #   PostgreSQL DB instances in an Active Directory Domain.
+    #   The Active Directory directory ID to restore the DB instance in. The
+    #   domain/ must be created prior to this operation. Currently, you can
+    #   create only Db2, MySQL, Microsoft SQL Server, Oracle, and PostgreSQL
+    #   DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
@@ -985,10 +993,10 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #   The list of logs for the restored DB instance to export to CloudWatch
+    #   Logs. The values in the list depend on the DB engine. For more
+    #   information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -1015,7 +1023,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #   * If supplied, must match the name of an existing DB parameter group.
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #

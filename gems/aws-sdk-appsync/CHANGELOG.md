@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-11-27)
+------------------
+
+* Feature - This update enables introspection of Aurora cluster databases using the RDS Data API
+
 1.67.0 (2023-11-22)
 ------------------
 

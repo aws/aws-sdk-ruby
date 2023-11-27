@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-11-27)
+------------------
+
+* Feature - Adding support for EFS Replication to existing file system.
+
 1.69.0 (2023-11-27)
 ------------------
 

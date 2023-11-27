@@ -84,6 +84,8 @@ module Aws::ControlTower
             Aws::ControlTower::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::ControlTower::Endpoints::UntagResource.build(context)
+          when :update_enabled_control
+            Aws::ControlTower::Endpoints::UpdateEnabledControl.build(context)
           when :update_landing_zone
             Aws::ControlTower::Endpoints::UpdateLandingZone.build(context)
           end

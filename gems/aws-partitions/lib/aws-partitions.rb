@@ -275,6 +275,7 @@ module Aws
             'AugmentedAIRuntime' => 'a2i-runtime.sagemaker',
             'AutoScaling' => 'autoscaling',
             'AutoScalingPlans' => 'autoscaling-plans',
+            'B2bi' => 'b2bi',
             'BCMDataExports' => 'bcm-data-exports',
             'Backup' => 'backup',
             'BackupGateway' => 'backup-gateway',

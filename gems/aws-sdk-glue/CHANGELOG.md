@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2023-11-27)
+------------------
+
+* Feature - add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities
+
 1.161.0 (2023-11-22)
 ------------------
 

@@ -278,6 +278,34 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the source file system in a replication is encrypted but
+    # the destination file system is unencrypted.
+    #
+    # @!attribute [rw] error_code
+    #   The error code is a string that uniquely identifies an error
+    #   condition. It is meant to be read and understood by programs that
+    #   detect and handle errors by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message contains a generic description of the error
+    #   condition in English. It is intended for a human audience. Simple
+    #   programs display the message directly to the end user if they
+    #   encounter an error condition they don't know how or don't care to
+    #   handle. Sophisticated programs with more exhaustive error handling
+    #   and proper internationalization are more likely to ignore the error
+    #   message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
     #   idempotent creation.
@@ -1151,8 +1179,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Describes the destination file system to create in the replication
-    # configuration.
+    # Describes the new or existing destination file system for the
+    # replication configuration.
     #
     # @!attribute [rw] region
     #   To create a file system that uses Regional storage, specify the
@@ -1167,8 +1195,8 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   Specifies the Key Management Service (KMS) key that you want to use
-    #   to encrypt the destination file system. If you do not specify a KMS
+    #   Specify the Key Management Service (KMS) key that you want to use to
+    #   encrypt the destination file system. If you do not specify a KMS
     #   key, Amazon EFS uses your default KMS key for Amazon EFS,
     #   `/aws/elasticfilesystem`. This ID can be in one of the following
     #   formats:
@@ -1186,12 +1214,20 @@ module Aws::EFS
     #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #   @return [String]
     #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to use for the destination. The file
+    #   system's replication overwrite replication must be disabled. If you
+    #   do not provide an ID, then EFS creates a new file system for the
+    #   replication destination.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DestinationToCreate AWS API Documentation
     #
     class DestinationToCreate < Struct.new(
       :region,
       :availability_zone_name,
-      :kms_key_id)
+      :kms_key_id,
+      :file_system_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1335,6 +1371,10 @@ module Aws::EFS
     #   `Tag` objects.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_system_protection
+    #   Describes the protection on the file system.
+    #   @return [Types::FileSystemProtectionDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription AWS API Documentation
     #
     class FileSystemDescription < Struct.new(
@@ -1354,7 +1394,8 @@ module Aws::EFS
       :provisioned_throughput_in_mibps,
       :availability_zone_name,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :file_system_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1456,6 +1497,37 @@ module Aws::EFS
     class FileSystemPolicyDescription < Struct.new(
       :file_system_id,
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the protection on a file system.
+    #
+    # @!attribute [rw] replication_overwrite_protection
+    #   The status of the file system's replication overwrite protection.
+    #
+    #   * `ENABLED` – The file system cannot be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     writeable. Replication overwrite protection is `ENABLED` by
+    #     default.
+    #
+    #   * `DISABLED` – The file system can be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     read-only and can only be modified by EFS replication.
+    #
+    #   * `REPLICATING` – The file system is being used as the destination
+    #     file system in a replication configuration. The file system is
+    #     read-only and is only modified only by EFS replication.
+    #
+    #   If the replication configuration is deleted, the file system's
+    #   replication overwrite protection is re-enabled, the file system
+    #   becomes writeable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemProtectionDescription AWS API Documentation
+    #
+    class FileSystemProtectionDescription < Struct.new(
+      :replication_overwrite_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1694,9 +1766,8 @@ module Aws::EFS
     end
 
     # Describes a policy used by Lifecycle management that specifies when to
-    # transition files into and out of the Infrequent Access (IA) and
-    # Archive storage classes. For more information, see [Managing file
-    # system storage][1].
+    # transition files into and out of storage classes. For more
+    # information, see [Managing file system storage][1].
     #
     # <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     # `PutLifecycleConfiguration` API action, Amazon EFS requires that each
@@ -2196,6 +2267,34 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the file system is already included in a replication
+    # configuration.&gt;
+    #
+    # @!attribute [rw] error_code
+    #   The error code is a string that uniquely identifies an error
+    #   condition. It is meant to be read and understood by programs that
+    #   detect and handle errors by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message contains a generic description of the error
+    #   condition in English. It is intended for a human audience. Simple
+    #   programs display the message directly to the end user if they
+    #   encounter an error condition they don't know how or don't care to
+    #   handle. Sophisticated programs with more exhaustive error handling
+    #   and proper internationalization are more likely to ignore the error
+    #   message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ReplicationAlreadyExists AWS API Documentation
+    #
+    class ReplicationAlreadyExists < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the replication configuration for a specific file system.
     #
     # @!attribute [rw] source_file_system_id
@@ -2582,6 +2681,40 @@ module Aws::EFS
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_overwrite_protection
+    #   The status of the file system's replication overwrite protection.
+    #
+    #   * `ENABLED` – The file system cannot be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     writeable. Replication overwrite protection is `ENABLED` by
+    #     default.
+    #
+    #   * `DISABLED` – The file system can be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     read-only and can only be modified by EFS replication.
+    #
+    #   * `REPLICATING` – The file system is being used as the destination
+    #     file system in a replication configuration. The file system is
+    #     read-only and is only modified only by EFS replication.
+    #
+    #   If the replication configuration is deleted, the file system's
+    #   replication overwrite protection is re-enabled, the file system
+    #   becomes writeable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemProtectionRequest AWS API Documentation
+    #
+    class UpdateFileSystemProtectionRequest < Struct.new(
+      :file_system_id,
+      :replication_overwrite_protection)
       SENSITIVE = []
       include Aws::Structure
     end

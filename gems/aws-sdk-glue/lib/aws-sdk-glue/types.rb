@@ -3407,9 +3407,19 @@ module Aws::Glue
     #   The `connectionType`, as provided to the underlying Glue library.
     #   This node type supports the following connection types:
     #
+    #   * `opensearch`
+    #
+    #   * `azuresql`
+    #
+    #   * `azurecosmos`
+    #
     #   * `bigquery`
     #
-    #   ^
+    #   * `saphana`
+    #
+    #   * `teradata`
+    #
+    #   * `vertica`
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -3447,9 +3457,19 @@ module Aws::Glue
     #   The `connectionType`, as provided to the underlying Glue library.
     #   This node type supports the following connection types:
     #
+    #   * `opensearch`
+    #
+    #   * `azuresql`
+    #
+    #   * `azurecosmos`
+    #
     #   * `bigquery`
     #
-    #   ^
+    #   * `saphana`
+    #
+    #   * `teradata`
+    #
+    #   * `vertica`
     #   @return [String]
     #
     # @!attribute [rw] data

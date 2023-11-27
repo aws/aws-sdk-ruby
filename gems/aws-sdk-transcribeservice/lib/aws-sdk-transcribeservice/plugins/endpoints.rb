@@ -72,6 +72,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::DeleteCallAnalyticsJob.build(context)
           when :delete_language_model
             Aws::TranscribeService::Endpoints::DeleteLanguageModel.build(context)
+          when :delete_medical_scribe_job
+            Aws::TranscribeService::Endpoints::DeleteMedicalScribeJob.build(context)
           when :delete_medical_transcription_job
             Aws::TranscribeService::Endpoints::DeleteMedicalTranscriptionJob.build(context)
           when :delete_medical_vocabulary
@@ -88,6 +90,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::GetCallAnalyticsCategory.build(context)
           when :get_call_analytics_job
             Aws::TranscribeService::Endpoints::GetCallAnalyticsJob.build(context)
+          when :get_medical_scribe_job
+            Aws::TranscribeService::Endpoints::GetMedicalScribeJob.build(context)
           when :get_medical_transcription_job
             Aws::TranscribeService::Endpoints::GetMedicalTranscriptionJob.build(context)
           when :get_medical_vocabulary
@@ -104,6 +108,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::ListCallAnalyticsJobs.build(context)
           when :list_language_models
             Aws::TranscribeService::Endpoints::ListLanguageModels.build(context)
+          when :list_medical_scribe_jobs
+            Aws::TranscribeService::Endpoints::ListMedicalScribeJobs.build(context)
           when :list_medical_transcription_jobs
             Aws::TranscribeService::Endpoints::ListMedicalTranscriptionJobs.build(context)
           when :list_medical_vocabularies
@@ -118,6 +124,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::ListVocabularyFilters.build(context)
           when :start_call_analytics_job
             Aws::TranscribeService::Endpoints::StartCallAnalyticsJob.build(context)
+          when :start_medical_scribe_job
+            Aws::TranscribeService::Endpoints::StartMedicalScribeJob.build(context)
           when :start_medical_transcription_job
             Aws::TranscribeService::Endpoints::StartMedicalTranscriptionJob.build(context)
           when :start_transcription_job

@@ -335,6 +335,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService         | aws-sdk-applicationdiscoveryservice         | 2015-11-01  |
 | AWS Audit Manager                                     | Aws::AuditManager                        | aws-sdk-auditmanager                        | 2017-07-25  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                    | aws-sdk-autoscalingplans                    | 2018-01-06  |
+| AWS B2B Data Interchange                              | Aws::B2bi                                | aws-sdk-b2bi                                | 2022-06-23  |
 | AWS Backup                                            | Aws::Backup                              | aws-sdk-backup                              | 2018-11-15  |
 | AWS Backup Gateway                                    | Aws::BackupGateway                       | aws-sdk-backupgateway                       | 2021-01-01  |
 | AWS Backup Storage                                    | Aws::BackupStorage                       | aws-sdk-backupstorage                       | 2018-04-10  |

@@ -112,6 +112,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::GetApiCache.build(context)
           when :get_data_source
             Aws::AppSync::Endpoints::GetDataSource.build(context)
+          when :get_data_source_introspection
+            Aws::AppSync::Endpoints::GetDataSourceIntrospection.build(context)
           when :get_domain_name
             Aws::AppSync::Endpoints::GetDomainName.build(context)
           when :get_function
@@ -150,6 +152,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::ListTypes.build(context)
           when :list_types_by_association
             Aws::AppSync::Endpoints::ListTypesByAssociation.build(context)
+          when :start_data_source_introspection
+            Aws::AppSync::Endpoints::StartDataSourceIntrospection.build(context)
           when :start_schema_creation
             Aws::AppSync::Endpoints::StartSchemaCreation.build(context)
           when :start_schema_merge

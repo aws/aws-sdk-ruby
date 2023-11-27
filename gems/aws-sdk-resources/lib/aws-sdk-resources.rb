@@ -36,6 +36,7 @@ module Aws
   autoload :AugmentedAIRuntime, 'aws-sdk-augmentedairuntime'
   autoload :AutoScaling, 'aws-sdk-autoscaling'
   autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
+  autoload :B2bi, 'aws-sdk-b2bi'
   autoload :BCMDataExports, 'aws-sdk-bcmdataexports'
   autoload :Backup, 'aws-sdk-backup'
   autoload :BackupGateway, 'aws-sdk-backupgateway'

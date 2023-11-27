@@ -91,6 +91,10 @@ module Aws::Backup
     CreateLogicallyAirGappedBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateLogicallyAirGappedBackupVaultOutput')
     CreateReportPlanInput = Shapes::StructureShape.new(name: 'CreateReportPlanInput')
     CreateReportPlanOutput = Shapes::StructureShape.new(name: 'CreateReportPlanOutput')
+    CreateRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'CreateRestoreTestingPlanInput')
+    CreateRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'CreateRestoreTestingPlanOutput')
+    CreateRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'CreateRestoreTestingSelectionInput')
+    CreateRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'CreateRestoreTestingSelectionOutput')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     DateRange = Shapes::StructureShape.new(name: 'DateRange')
     DeleteBackupPlanInput = Shapes::StructureShape.new(name: 'DeleteBackupPlanInput')
@@ -103,6 +107,8 @@ module Aws::Backup
     DeleteFrameworkInput = Shapes::StructureShape.new(name: 'DeleteFrameworkInput')
     DeleteRecoveryPointInput = Shapes::StructureShape.new(name: 'DeleteRecoveryPointInput')
     DeleteReportPlanInput = Shapes::StructureShape.new(name: 'DeleteReportPlanInput')
+    DeleteRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'DeleteRestoreTestingPlanInput')
+    DeleteRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'DeleteRestoreTestingSelectionInput')
     DependencyFailureException = Shapes::StructureShape.new(name: 'DependencyFailureException')
     DescribeBackupJobInput = Shapes::StructureShape.new(name: 'DescribeBackupJobInput')
     DescribeBackupJobOutput = Shapes::StructureShape.new(name: 'DescribeBackupJobOutput')
@@ -153,6 +159,14 @@ module Aws::Backup
     GetLegalHoldOutput = Shapes::StructureShape.new(name: 'GetLegalHoldOutput')
     GetRecoveryPointRestoreMetadataInput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataInput')
     GetRecoveryPointRestoreMetadataOutput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataOutput')
+    GetRestoreJobMetadataInput = Shapes::StructureShape.new(name: 'GetRestoreJobMetadataInput')
+    GetRestoreJobMetadataOutput = Shapes::StructureShape.new(name: 'GetRestoreJobMetadataOutput')
+    GetRestoreTestingInferredMetadataInput = Shapes::StructureShape.new(name: 'GetRestoreTestingInferredMetadataInput')
+    GetRestoreTestingInferredMetadataOutput = Shapes::StructureShape.new(name: 'GetRestoreTestingInferredMetadataOutput')
+    GetRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'GetRestoreTestingPlanInput')
+    GetRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'GetRestoreTestingPlanOutput')
+    GetRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'GetRestoreTestingSelectionInput')
+    GetRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'GetRestoreTestingSelectionOutput')
     GetSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'GetSupportedResourceTypesOutput')
     GlobalSettings = Shapes::MapShape.new(name: 'GlobalSettings')
     GlobalSettingsName = Shapes::StringShape.new(name: 'GlobalSettingsName')
@@ -163,6 +177,8 @@ module Aws::Backup
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
+    KeyValue = Shapes::StructureShape.new(name: 'KeyValue')
+    KeyValueList = Shapes::ListShape.new(name: 'KeyValueList')
     LegalHold = Shapes::StructureShape.new(name: 'LegalHold')
     LegalHoldStatus = Shapes::StringShape.new(name: 'LegalHoldStatus')
     LegalHoldsList = Shapes::ListShape.new(name: 'LegalHoldsList')
@@ -207,8 +223,16 @@ module Aws::Backup
     ListReportPlansOutput = Shapes::StructureShape.new(name: 'ListReportPlansOutput')
     ListRestoreJobSummariesInput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesInput')
     ListRestoreJobSummariesOutput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesOutput')
+    ListRestoreJobsByProtectedResourceInput = Shapes::StructureShape.new(name: 'ListRestoreJobsByProtectedResourceInput')
+    ListRestoreJobsByProtectedResourceOutput = Shapes::StructureShape.new(name: 'ListRestoreJobsByProtectedResourceOutput')
     ListRestoreJobsInput = Shapes::StructureShape.new(name: 'ListRestoreJobsInput')
     ListRestoreJobsOutput = Shapes::StructureShape.new(name: 'ListRestoreJobsOutput')
+    ListRestoreTestingPlansInput = Shapes::StructureShape.new(name: 'ListRestoreTestingPlansInput')
+    ListRestoreTestingPlansInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRestoreTestingPlansInputMaxResultsInteger')
+    ListRestoreTestingPlansOutput = Shapes::StructureShape.new(name: 'ListRestoreTestingPlansOutput')
+    ListRestoreTestingSelectionsInput = Shapes::StructureShape.new(name: 'ListRestoreTestingSelectionsInput')
+    ListRestoreTestingSelectionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRestoreTestingSelectionsInputMaxResultsInteger')
+    ListRestoreTestingSelectionsOutput = Shapes::StructureShape.new(name: 'ListRestoreTestingSelectionsOutput')
     ListTagsInput = Shapes::StructureShape.new(name: 'ListTagsInput')
     ListTagsOutput = Shapes::StructureShape.new(name: 'ListTagsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -222,10 +246,12 @@ module Aws::Backup
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ProtectedResource = Shapes::StructureShape.new(name: 'ProtectedResource')
+    ProtectedResourceConditions = Shapes::StructureShape.new(name: 'ProtectedResourceConditions')
     ProtectedResourcesList = Shapes::ListShape.new(name: 'ProtectedResourcesList')
     PutBackupVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'PutBackupVaultAccessPolicyInput')
     PutBackupVaultLockConfigurationInput = Shapes::StructureShape.new(name: 'PutBackupVaultLockConfigurationInput')
     PutBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'PutBackupVaultNotificationsInput')
+    PutRestoreValidationResultInput = Shapes::StructureShape.new(name: 'PutRestoreValidationResultInput')
     RecoveryPointByBackupVault = Shapes::StructureShape.new(name: 'RecoveryPointByBackupVault')
     RecoveryPointByBackupVaultList = Shapes::ListShape.new(name: 'RecoveryPointByBackupVaultList')
     RecoveryPointByResource = Shapes::StructureShape.new(name: 'RecoveryPointByResource')
@@ -254,6 +280,8 @@ module Aws::Backup
     ResourceTypeManagementPreference = Shapes::MapShape.new(name: 'ResourceTypeManagementPreference')
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    RestoreDeletionStatus = Shapes::StringShape.new(name: 'RestoreDeletionStatus')
+    RestoreJobCreator = Shapes::StructureShape.new(name: 'RestoreJobCreator')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
     RestoreJobState = Shapes::StringShape.new(name: 'RestoreJobState')
     RestoreJobStatus = Shapes::StringShape.new(name: 'RestoreJobStatus')
@@ -261,6 +289,22 @@ module Aws::Backup
     RestoreJobSummaryList = Shapes::ListShape.new(name: 'RestoreJobSummaryList')
     RestoreJobsList = Shapes::ListShape.new(name: 'RestoreJobsList')
     RestoreJobsListMember = Shapes::StructureShape.new(name: 'RestoreJobsListMember')
+    RestoreTestingPlanForCreate = Shapes::StructureShape.new(name: 'RestoreTestingPlanForCreate')
+    RestoreTestingPlanForGet = Shapes::StructureShape.new(name: 'RestoreTestingPlanForGet')
+    RestoreTestingPlanForList = Shapes::StructureShape.new(name: 'RestoreTestingPlanForList')
+    RestoreTestingPlanForUpdate = Shapes::StructureShape.new(name: 'RestoreTestingPlanForUpdate')
+    RestoreTestingPlans = Shapes::ListShape.new(name: 'RestoreTestingPlans')
+    RestoreTestingRecoveryPointSelection = Shapes::StructureShape.new(name: 'RestoreTestingRecoveryPointSelection')
+    RestoreTestingRecoveryPointSelectionAlgorithm = Shapes::StringShape.new(name: 'RestoreTestingRecoveryPointSelectionAlgorithm')
+    RestoreTestingRecoveryPointType = Shapes::StringShape.new(name: 'RestoreTestingRecoveryPointType')
+    RestoreTestingRecoveryPointTypeList = Shapes::ListShape.new(name: 'RestoreTestingRecoveryPointTypeList')
+    RestoreTestingSelectionForCreate = Shapes::StructureShape.new(name: 'RestoreTestingSelectionForCreate')
+    RestoreTestingSelectionForGet = Shapes::StructureShape.new(name: 'RestoreTestingSelectionForGet')
+    RestoreTestingSelectionForList = Shapes::StructureShape.new(name: 'RestoreTestingSelectionForList')
+    RestoreTestingSelectionForUpdate = Shapes::StructureShape.new(name: 'RestoreTestingSelectionForUpdate')
+    RestoreTestingSelections = Shapes::ListShape.new(name: 'RestoreTestingSelections')
+    RestoreValidationStatus = Shapes::StringShape.new(name: 'RestoreValidationStatus')
+    SensitiveStringMap = Shapes::MapShape.new(name: 'SensitiveStringMap')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartBackupJobInput = Shapes::StructureShape.new(name: 'StartBackupJobInput')
     StartBackupJobOutput = Shapes::StructureShape.new(name: 'StartBackupJobOutput')
@@ -272,11 +316,13 @@ module Aws::Backup
     StartRestoreJobOutput = Shapes::StructureShape.new(name: 'StartRestoreJobOutput')
     StopBackupJobInput = Shapes::StructureShape.new(name: 'StopBackupJobInput')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
+    String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateBackupPlanInput = Shapes::StructureShape.new(name: 'UpdateBackupPlanInput')
@@ -289,6 +335,10 @@ module Aws::Backup
     UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
     UpdateReportPlanInput = Shapes::StructureShape.new(name: 'UpdateReportPlanInput')
     UpdateReportPlanOutput = Shapes::StructureShape.new(name: 'UpdateReportPlanOutput')
+    UpdateRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingPlanInput')
+    UpdateRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingPlanOutput')
+    UpdateRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingSelectionInput')
+    UpdateRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingSelectionOutput')
     VaultNames = Shapes::ListShape.new(name: 'VaultNames')
     VaultState = Shapes::StringShape.new(name: 'VaultState')
     VaultType = Shapes::StringShape.new(name: 'VaultType')
@@ -338,6 +388,7 @@ module Aws::Backup
     BackupJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     BackupJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     BackupJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    BackupJob.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
     BackupJob.add_member(:message_category, Shapes::ShapeRef.new(shape: string, location_name: "MessageCategory"))
     BackupJob.struct_class = Types::BackupJob
 
@@ -635,6 +686,27 @@ module Aws::Backup
     CreateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
 
+    CreateRestoreTestingPlanInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: String, location_name: "CreatorRequestId"))
+    CreateRestoreTestingPlanInput.add_member(:restore_testing_plan, Shapes::ShapeRef.new(shape: RestoreTestingPlanForCreate, required: true, location_name: "RestoreTestingPlan"))
+    CreateRestoreTestingPlanInput.add_member(:tags, Shapes::ShapeRef.new(shape: SensitiveStringMap, location_name: "Tags"))
+    CreateRestoreTestingPlanInput.struct_class = Types::CreateRestoreTestingPlanInput
+
+    CreateRestoreTestingPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CreateRestoreTestingPlanOutput.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    CreateRestoreTestingPlanOutput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    CreateRestoreTestingPlanOutput.struct_class = Types::CreateRestoreTestingPlanOutput
+
+    CreateRestoreTestingSelectionInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: String, location_name: "CreatorRequestId"))
+    CreateRestoreTestingSelectionInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    CreateRestoreTestingSelectionInput.add_member(:restore_testing_selection, Shapes::ShapeRef.new(shape: RestoreTestingSelectionForCreate, required: true, location_name: "RestoreTestingSelection"))
+    CreateRestoreTestingSelectionInput.struct_class = Types::CreateRestoreTestingSelectionInput
+
+    CreateRestoreTestingSelectionOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CreateRestoreTestingSelectionOutput.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    CreateRestoreTestingSelectionOutput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    CreateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
+    CreateRestoreTestingSelectionOutput.struct_class = Types::CreateRestoreTestingSelectionOutput
+
     DateRange.add_member(:from_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "FromDate"))
     DateRange.add_member(:to_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "ToDate"))
     DateRange.struct_class = Types::DateRange
@@ -674,6 +746,13 @@ module Aws::Backup
     DeleteReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
     DeleteReportPlanInput.struct_class = Types::DeleteReportPlanInput
 
+    DeleteRestoreTestingPlanInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    DeleteRestoreTestingPlanInput.struct_class = Types::DeleteRestoreTestingPlanInput
+
+    DeleteRestoreTestingSelectionInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    DeleteRestoreTestingSelectionInput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingSelectionName"))
+    DeleteRestoreTestingSelectionInput.struct_class = Types::DeleteRestoreTestingSelectionInput
+
     DependencyFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     DependencyFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     DependencyFailureException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
@@ -708,6 +787,7 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
     DescribeBackupJobOutput.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: BackupJobChildJobsInState, location_name: "ChildJobsInState"))
     DescribeBackupJobOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    DescribeBackupJobOutput.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
     DescribeBackupJobOutput.add_member(:message_category, Shapes::ShapeRef.new(shape: string, location_name: "MessageCategory"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
@@ -760,6 +840,11 @@ module Aws::Backup
     DescribeProtectedResourceOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeProtectedResourceOutput.add_member(:last_backup_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastBackupTime"))
     DescribeProtectedResourceOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    DescribeProtectedResourceOutput.add_member(:last_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LastBackupVaultArn"))
+    DescribeProtectedResourceOutput.add_member(:last_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LastRecoveryPointArn"))
+    DescribeProtectedResourceOutput.add_member(:latest_restore_execution_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "LatestRestoreExecutionTimeMinutes"))
+    DescribeProtectedResourceOutput.add_member(:latest_restore_job_creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LatestRestoreJobCreationDate"))
+    DescribeProtectedResourceOutput.add_member(:latest_restore_recovery_point_creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LatestRestoreRecoveryPointCreationDate"))
     DescribeProtectedResourceOutput.struct_class = Types::DescribeProtectedResourceOutput
 
     DescribeRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
@@ -826,6 +911,12 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:expected_completion_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "ExpectedCompletionTimeMinutes"))
     DescribeRestoreJobOutput.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
     DescribeRestoreJobOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    DescribeRestoreJobOutput.add_member(:recovery_point_creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "RecoveryPointCreationDate"))
+    DescribeRestoreJobOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: RestoreJobCreator, location_name: "CreatedBy"))
+    DescribeRestoreJobOutput.add_member(:validation_status, Shapes::ShapeRef.new(shape: RestoreValidationStatus, location_name: "ValidationStatus"))
+    DescribeRestoreJobOutput.add_member(:validation_status_message, Shapes::ShapeRef.new(shape: string, location_name: "ValidationStatusMessage"))
+    DescribeRestoreJobOutput.add_member(:deletion_status, Shapes::ShapeRef.new(shape: RestoreDeletionStatus, location_name: "DeletionStatus"))
+    DescribeRestoreJobOutput.add_member(:deletion_status_message, Shapes::ShapeRef.new(shape: string, location_name: "DeletionStatusMessage"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
 
     DisassociateRecoveryPointFromParentInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
@@ -939,7 +1030,36 @@ module Aws::Backup
     GetRecoveryPointRestoreMetadataOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
     GetRecoveryPointRestoreMetadataOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     GetRecoveryPointRestoreMetadataOutput.add_member(:restore_metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "RestoreMetadata"))
+    GetRecoveryPointRestoreMetadataOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     GetRecoveryPointRestoreMetadataOutput.struct_class = Types::GetRecoveryPointRestoreMetadataOutput
+
+    GetRestoreJobMetadataInput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, required: true, location: "uri", location_name: "restoreJobId"))
+    GetRestoreJobMetadataInput.struct_class = Types::GetRestoreJobMetadataInput
+
+    GetRestoreJobMetadataOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, location_name: "RestoreJobId"))
+    GetRestoreJobMetadataOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    GetRestoreJobMetadataOutput.struct_class = Types::GetRestoreJobMetadataOutput
+
+    GetRestoreTestingInferredMetadataInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "BackupVaultAccountId"))
+    GetRestoreTestingInferredMetadataInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "BackupVaultName"))
+    GetRestoreTestingInferredMetadataInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "RecoveryPointArn"))
+    GetRestoreTestingInferredMetadataInput.struct_class = Types::GetRestoreTestingInferredMetadataInput
+
+    GetRestoreTestingInferredMetadataOutput.add_member(:inferred_metadata, Shapes::ShapeRef.new(shape: stringMap, required: true, location_name: "InferredMetadata"))
+    GetRestoreTestingInferredMetadataOutput.struct_class = Types::GetRestoreTestingInferredMetadataOutput
+
+    GetRestoreTestingPlanInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    GetRestoreTestingPlanInput.struct_class = Types::GetRestoreTestingPlanInput
+
+    GetRestoreTestingPlanOutput.add_member(:restore_testing_plan, Shapes::ShapeRef.new(shape: RestoreTestingPlanForGet, required: true, location_name: "RestoreTestingPlan"))
+    GetRestoreTestingPlanOutput.struct_class = Types::GetRestoreTestingPlanOutput
+
+    GetRestoreTestingSelectionInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    GetRestoreTestingSelectionInput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingSelectionName"))
+    GetRestoreTestingSelectionInput.struct_class = Types::GetRestoreTestingSelectionInput
+
+    GetRestoreTestingSelectionOutput.add_member(:restore_testing_selection, Shapes::ShapeRef.new(shape: RestoreTestingSelectionForGet, required: true, location_name: "RestoreTestingSelection"))
+    GetRestoreTestingSelectionOutput.struct_class = Types::GetRestoreTestingSelectionOutput
 
     GetSupportedResourceTypesOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.struct_class = Types::GetSupportedResourceTypesOutput
@@ -965,6 +1085,12 @@ module Aws::Backup
     InvalidResourceStateException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     InvalidResourceStateException.struct_class = Types::InvalidResourceStateException
 
+    KeyValue.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
+    KeyValue.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    KeyValue.struct_class = Types::KeyValue
+
+    KeyValueList.member = Shapes::ShapeRef.new(shape: KeyValue)
+
     LegalHold.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "Title"))
     LegalHold.add_member(:status, Shapes::ShapeRef.new(shape: LegalHoldStatus, location_name: "Status"))
     LegalHold.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "Description"))
@@ -978,6 +1104,7 @@ module Aws::Backup
 
     Lifecycle.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
+    Lifecycle.add_member(:opt_in_to_archive_for_supported_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptInToArchiveForSupportedResources"))
     Lifecycle.struct_class = Types::Lifecycle
 
     LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
@@ -1200,6 +1327,18 @@ module Aws::Backup
     ListRestoreJobSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListRestoreJobSummariesOutput.struct_class = Types::ListRestoreJobSummariesOutput
 
+    ListRestoreJobsByProtectedResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
+    ListRestoreJobsByProtectedResourceInput.add_member(:by_status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location: "querystring", location_name: "status"))
+    ListRestoreJobsByProtectedResourceInput.add_member(:by_recovery_point_creation_date_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "recoveryPointCreationDateAfter"))
+    ListRestoreJobsByProtectedResourceInput.add_member(:by_recovery_point_creation_date_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "recoveryPointCreationDateBefore"))
+    ListRestoreJobsByProtectedResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListRestoreJobsByProtectedResourceInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRestoreJobsByProtectedResourceInput.struct_class = Types::ListRestoreJobsByProtectedResourceInput
+
+    ListRestoreJobsByProtectedResourceOutput.add_member(:restore_jobs, Shapes::ShapeRef.new(shape: RestoreJobsList, location_name: "RestoreJobs"))
+    ListRestoreJobsByProtectedResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListRestoreJobsByProtectedResourceOutput.struct_class = Types::ListRestoreJobsByProtectedResourceOutput
+
     ListRestoreJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRestoreJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListRestoreJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
@@ -1208,11 +1347,29 @@ module Aws::Backup
     ListRestoreJobsInput.add_member(:by_status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location: "querystring", location_name: "status"))
     ListRestoreJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListRestoreJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
+    ListRestoreJobsInput.add_member(:by_restore_testing_plan_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "restoreTestingPlanArn"))
     ListRestoreJobsInput.struct_class = Types::ListRestoreJobsInput
 
     ListRestoreJobsOutput.add_member(:restore_jobs, Shapes::ShapeRef.new(shape: RestoreJobsList, location_name: "RestoreJobs"))
     ListRestoreJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListRestoreJobsOutput.struct_class = Types::ListRestoreJobsOutput
+
+    ListRestoreTestingPlansInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRestoreTestingPlansInputMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListRestoreTestingPlansInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListRestoreTestingPlansInput.struct_class = Types::ListRestoreTestingPlansInput
+
+    ListRestoreTestingPlansOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRestoreTestingPlansOutput.add_member(:restore_testing_plans, Shapes::ShapeRef.new(shape: RestoreTestingPlans, required: true, location_name: "RestoreTestingPlans"))
+    ListRestoreTestingPlansOutput.struct_class = Types::ListRestoreTestingPlansOutput
+
+    ListRestoreTestingSelectionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRestoreTestingSelectionsInputMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListRestoreTestingSelectionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListRestoreTestingSelectionsInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    ListRestoreTestingSelectionsInput.struct_class = Types::ListRestoreTestingSelectionsInput
+
+    ListRestoreTestingSelectionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRestoreTestingSelectionsOutput.add_member(:restore_testing_selections, Shapes::ShapeRef.new(shape: RestoreTestingSelections, required: true, location_name: "RestoreTestingSelections"))
+    ListRestoreTestingSelectionsOutput.struct_class = Types::ListRestoreTestingSelectionsOutput
 
     ListTagsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
@@ -1236,7 +1393,13 @@ module Aws::Backup
     ProtectedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ProtectedResource.add_member(:last_backup_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastBackupTime"))
     ProtectedResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    ProtectedResource.add_member(:last_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LastBackupVaultArn"))
+    ProtectedResource.add_member(:last_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LastRecoveryPointArn"))
     ProtectedResource.struct_class = Types::ProtectedResource
+
+    ProtectedResourceConditions.add_member(:string_equals, Shapes::ShapeRef.new(shape: KeyValueList, location_name: "StringEquals"))
+    ProtectedResourceConditions.add_member(:string_not_equals, Shapes::ShapeRef.new(shape: KeyValueList, location_name: "StringNotEquals"))
+    ProtectedResourceConditions.struct_class = Types::ProtectedResourceConditions
 
     ProtectedResourcesList.member = Shapes::ShapeRef.new(shape: ProtectedResource)
 
@@ -1254,6 +1417,11 @@ module Aws::Backup
     PutBackupVaultNotificationsInput.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "SNSTopicArn"))
     PutBackupVaultNotificationsInput.add_member(:backup_vault_events, Shapes::ShapeRef.new(shape: BackupVaultEvents, required: true, location_name: "BackupVaultEvents"))
     PutBackupVaultNotificationsInput.struct_class = Types::PutBackupVaultNotificationsInput
+
+    PutRestoreValidationResultInput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, required: true, location: "uri", location_name: "restoreJobId"))
+    PutRestoreValidationResultInput.add_member(:validation_status, Shapes::ShapeRef.new(shape: RestoreValidationStatus, required: true, location_name: "ValidationStatus"))
+    PutRestoreValidationResultInput.add_member(:validation_status_message, Shapes::ShapeRef.new(shape: string, location_name: "ValidationStatusMessage"))
+    PutRestoreValidationResultInput.struct_class = Types::PutRestoreValidationResultInput
 
     RecoveryPointByBackupVault.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     RecoveryPointByBackupVault.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
@@ -1376,6 +1544,9 @@ module Aws::Backup
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
 
+    RestoreJobCreator.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RestoreTestingPlanArn"))
+    RestoreJobCreator.struct_class = Types::RestoreJobCreator
+
     RestoreJobSummary.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
     RestoreJobSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     RestoreJobSummary.add_member(:state, Shapes::ShapeRef.new(shape: RestoreJobState, location_name: "State"))
@@ -1402,7 +1573,100 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:expected_completion_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "ExpectedCompletionTimeMinutes"))
     RestoreJobsListMember.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
     RestoreJobsListMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RestoreJobsListMember.add_member(:recovery_point_creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "RecoveryPointCreationDate"))
+    RestoreJobsListMember.add_member(:created_by, Shapes::ShapeRef.new(shape: RestoreJobCreator, location_name: "CreatedBy"))
+    RestoreJobsListMember.add_member(:validation_status, Shapes::ShapeRef.new(shape: RestoreValidationStatus, location_name: "ValidationStatus"))
+    RestoreJobsListMember.add_member(:validation_status_message, Shapes::ShapeRef.new(shape: string, location_name: "ValidationStatusMessage"))
+    RestoreJobsListMember.add_member(:deletion_status, Shapes::ShapeRef.new(shape: RestoreDeletionStatus, location_name: "DeletionStatus"))
+    RestoreJobsListMember.add_member(:deletion_status_message, Shapes::ShapeRef.new(shape: string, location_name: "DeletionStatusMessage"))
     RestoreJobsListMember.struct_class = Types::RestoreJobsListMember
+
+    RestoreTestingPlanForCreate.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointSelection, required: true, location_name: "RecoveryPointSelection"))
+    RestoreTestingPlanForCreate.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    RestoreTestingPlanForCreate.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleExpression"))
+    RestoreTestingPlanForCreate.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleExpressionTimezone"))
+    RestoreTestingPlanForCreate.add_member(:start_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "StartWindowHours"))
+    RestoreTestingPlanForCreate.struct_class = Types::RestoreTestingPlanForCreate
+
+    RestoreTestingPlanForGet.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    RestoreTestingPlanForGet.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: String, location_name: "CreatorRequestId"))
+    RestoreTestingPlanForGet.add_member(:last_execution_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastExecutionTime"))
+    RestoreTestingPlanForGet.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTime"))
+    RestoreTestingPlanForGet.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointSelection, required: true, location_name: "RecoveryPointSelection"))
+    RestoreTestingPlanForGet.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    RestoreTestingPlanForGet.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    RestoreTestingPlanForGet.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleExpression"))
+    RestoreTestingPlanForGet.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleExpressionTimezone"))
+    RestoreTestingPlanForGet.add_member(:start_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "StartWindowHours"))
+    RestoreTestingPlanForGet.struct_class = Types::RestoreTestingPlanForGet
+
+    RestoreTestingPlanForList.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    RestoreTestingPlanForList.add_member(:last_execution_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastExecutionTime"))
+    RestoreTestingPlanForList.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTime"))
+    RestoreTestingPlanForList.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    RestoreTestingPlanForList.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    RestoreTestingPlanForList.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleExpression"))
+    RestoreTestingPlanForList.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleExpressionTimezone"))
+    RestoreTestingPlanForList.add_member(:start_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "StartWindowHours"))
+    RestoreTestingPlanForList.struct_class = Types::RestoreTestingPlanForList
+
+    RestoreTestingPlanForUpdate.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointSelection, location_name: "RecoveryPointSelection"))
+    RestoreTestingPlanForUpdate.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleExpression"))
+    RestoreTestingPlanForUpdate.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleExpressionTimezone"))
+    RestoreTestingPlanForUpdate.add_member(:start_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "StartWindowHours"))
+    RestoreTestingPlanForUpdate.struct_class = Types::RestoreTestingPlanForUpdate
+
+    RestoreTestingPlans.member = Shapes::ShapeRef.new(shape: RestoreTestingPlanForList)
+
+    RestoreTestingRecoveryPointSelection.add_member(:algorithm, Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointSelectionAlgorithm, location_name: "Algorithm"))
+    RestoreTestingRecoveryPointSelection.add_member(:exclude_vaults, Shapes::ShapeRef.new(shape: stringList, location_name: "ExcludeVaults"))
+    RestoreTestingRecoveryPointSelection.add_member(:include_vaults, Shapes::ShapeRef.new(shape: stringList, location_name: "IncludeVaults"))
+    RestoreTestingRecoveryPointSelection.add_member(:recovery_point_types, Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointTypeList, location_name: "RecoveryPointTypes"))
+    RestoreTestingRecoveryPointSelection.add_member(:selection_window_days, Shapes::ShapeRef.new(shape: integer, location_name: "SelectionWindowDays"))
+    RestoreTestingRecoveryPointSelection.struct_class = Types::RestoreTestingRecoveryPointSelection
+
+    RestoreTestingRecoveryPointTypeList.member = Shapes::ShapeRef.new(shape: RestoreTestingRecoveryPointType)
+
+    RestoreTestingSelectionForCreate.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    RestoreTestingSelectionForCreate.add_member(:protected_resource_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "ProtectedResourceArns"))
+    RestoreTestingSelectionForCreate.add_member(:protected_resource_conditions, Shapes::ShapeRef.new(shape: ProtectedResourceConditions, location_name: "ProtectedResourceConditions"))
+    RestoreTestingSelectionForCreate.add_member(:protected_resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProtectedResourceType"))
+    RestoreTestingSelectionForCreate.add_member(:restore_metadata_overrides, Shapes::ShapeRef.new(shape: SensitiveStringMap, location_name: "RestoreMetadataOverrides"))
+    RestoreTestingSelectionForCreate.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
+    RestoreTestingSelectionForCreate.add_member(:validation_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "ValidationWindowHours"))
+    RestoreTestingSelectionForCreate.struct_class = Types::RestoreTestingSelectionForCreate
+
+    RestoreTestingSelectionForGet.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    RestoreTestingSelectionForGet.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: String, location_name: "CreatorRequestId"))
+    RestoreTestingSelectionForGet.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    RestoreTestingSelectionForGet.add_member(:protected_resource_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "ProtectedResourceArns"))
+    RestoreTestingSelectionForGet.add_member(:protected_resource_conditions, Shapes::ShapeRef.new(shape: ProtectedResourceConditions, location_name: "ProtectedResourceConditions"))
+    RestoreTestingSelectionForGet.add_member(:protected_resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProtectedResourceType"))
+    RestoreTestingSelectionForGet.add_member(:restore_metadata_overrides, Shapes::ShapeRef.new(shape: SensitiveStringMap, location_name: "RestoreMetadataOverrides"))
+    RestoreTestingSelectionForGet.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    RestoreTestingSelectionForGet.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
+    RestoreTestingSelectionForGet.add_member(:validation_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "ValidationWindowHours"))
+    RestoreTestingSelectionForGet.struct_class = Types::RestoreTestingSelectionForGet
+
+    RestoreTestingSelectionForList.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    RestoreTestingSelectionForList.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    RestoreTestingSelectionForList.add_member(:protected_resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProtectedResourceType"))
+    RestoreTestingSelectionForList.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    RestoreTestingSelectionForList.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
+    RestoreTestingSelectionForList.add_member(:validation_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "ValidationWindowHours"))
+    RestoreTestingSelectionForList.struct_class = Types::RestoreTestingSelectionForList
+
+    RestoreTestingSelectionForUpdate.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
+    RestoreTestingSelectionForUpdate.add_member(:protected_resource_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "ProtectedResourceArns"))
+    RestoreTestingSelectionForUpdate.add_member(:protected_resource_conditions, Shapes::ShapeRef.new(shape: ProtectedResourceConditions, location_name: "ProtectedResourceConditions"))
+    RestoreTestingSelectionForUpdate.add_member(:restore_metadata_overrides, Shapes::ShapeRef.new(shape: SensitiveStringMap, location_name: "RestoreMetadataOverrides"))
+    RestoreTestingSelectionForUpdate.add_member(:validation_window_hours, Shapes::ShapeRef.new(shape: integer, location_name: "ValidationWindowHours"))
+    RestoreTestingSelectionForUpdate.struct_class = Types::RestoreTestingSelectionForUpdate
+
+    RestoreTestingSelections.member = Shapes::ShapeRef.new(shape: RestoreTestingSelectionForList)
+
+    SensitiveStringMap.key = Shapes::ShapeRef.new(shape: String)
+    SensitiveStringMap.value = Shapes::ShapeRef.new(shape: String)
 
     ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -1525,6 +1789,28 @@ module Aws::Backup
     UpdateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
     UpdateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     UpdateReportPlanOutput.struct_class = Types::UpdateReportPlanOutput
+
+    UpdateRestoreTestingPlanInput.add_member(:restore_testing_plan, Shapes::ShapeRef.new(shape: RestoreTestingPlanForUpdate, required: true, location_name: "RestoreTestingPlan"))
+    UpdateRestoreTestingPlanInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    UpdateRestoreTestingPlanInput.struct_class = Types::UpdateRestoreTestingPlanInput
+
+    UpdateRestoreTestingPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    UpdateRestoreTestingPlanOutput.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    UpdateRestoreTestingPlanOutput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    UpdateRestoreTestingPlanOutput.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateRestoreTestingPlanOutput.struct_class = Types::UpdateRestoreTestingPlanOutput
+
+    UpdateRestoreTestingSelectionInput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingPlanName"))
+    UpdateRestoreTestingSelectionInput.add_member(:restore_testing_selection, Shapes::ShapeRef.new(shape: RestoreTestingSelectionForUpdate, required: true, location_name: "RestoreTestingSelection"))
+    UpdateRestoreTestingSelectionInput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingSelectionName"))
+    UpdateRestoreTestingSelectionInput.struct_class = Types::UpdateRestoreTestingSelectionInput
+
+    UpdateRestoreTestingSelectionOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanArn"))
+    UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingPlanName"))
+    UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
+    UpdateRestoreTestingSelectionOutput.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
+    UpdateRestoreTestingSelectionOutput.struct_class = Types::UpdateRestoreTestingSelectionOutput
 
     VaultNames.member = Shapes::ShapeRef.new(shape: string)
 
@@ -1654,6 +1940,34 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
       end)
 
+      api.add_operation(:create_restore_testing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRestoreTestingPlan"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-testing/plans"
+        o.input = Shapes::ShapeRef.new(shape: CreateRestoreTestingPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRestoreTestingPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_restore_testing_selection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRestoreTestingSelection"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}/selections"
+        o.input = Shapes::ShapeRef.new(shape: CreateRestoreTestingSelectionInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRestoreTestingSelectionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_backup_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBackupPlan"
         o.http_method = "DELETE"
@@ -1767,6 +2081,26 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_restore_testing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRestoreTestingPlan"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRestoreTestingPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_restore_testing_selection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRestoreTestingSelection"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRestoreTestingSelectionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_backup_job, Seahorse::Model::Operation.new.tap do |o|
@@ -2030,6 +2364,50 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_restore_job_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRestoreJobMetadata"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-jobs/{restoreJobId}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: GetRestoreJobMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRestoreJobMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_restore_testing_inferred_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRestoreTestingInferredMetadata"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-testing/inferred-metadata"
+        o.input = Shapes::ShapeRef.new(shape: GetRestoreTestingInferredMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRestoreTestingInferredMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_restore_testing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRestoreTestingPlan"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: GetRestoreTestingPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRestoreTestingPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_restore_testing_selection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRestoreTestingSelection"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}"
+        o.input = Shapes::ShapeRef.new(shape: GetRestoreTestingSelectionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRestoreTestingSelectionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -2381,6 +2759,57 @@ module Aws::Backup
         )
       end)
 
+      api.add_operation(:list_restore_jobs_by_protected_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRestoreJobsByProtectedResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/resources/{resourceArn}/restore-jobs/"
+        o.input = Shapes::ShapeRef.new(shape: ListRestoreJobsByProtectedResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRestoreJobsByProtectedResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_restore_testing_plans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRestoreTestingPlans"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-testing/plans"
+        o.input = Shapes::ShapeRef.new(shape: ListRestoreTestingPlansInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRestoreTestingPlansOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_restore_testing_selections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRestoreTestingSelections"
+        o.http_method = "GET"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}/selections"
+        o.input = Shapes::ShapeRef.new(shape: ListRestoreTestingSelectionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRestoreTestingSelectionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "GET"
@@ -2433,6 +2862,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_restore_validation_result, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRestoreValidationResult"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-jobs/{restoreJobId}/validations"
+        o.input = Shapes::ShapeRef.new(shape: PutRestoreValidationResultInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -2601,6 +3043,32 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_restore_testing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRestoreTestingPlan"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRestoreTestingPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRestoreTestingPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_restore_testing_selection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRestoreTestingSelection"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRestoreTestingSelectionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRestoreTestingSelectionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end
 

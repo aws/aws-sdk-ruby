@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-11-27)
+------------------
+
+* Feature - AWS FIS adds support for multi-account experiments & empty target resolution. This release also introduces the CreateTargetAccountConfiguration API that allows experiments across multiple AWS accounts, and the ListExperimentResolvedTargets API to list target details.
+
 1.24.0 (2023-11-22)
 ------------------
 

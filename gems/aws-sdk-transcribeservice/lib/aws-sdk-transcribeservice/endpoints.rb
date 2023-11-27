@@ -124,6 +124,20 @@ module Aws::TranscribeService
       end
     end
 
+    class DeleteMedicalScribeJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::TranscribeService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteMedicalTranscriptionJob
       def self.build(context)
         unless context.config.regional_endpoint
@@ -223,6 +237,20 @@ module Aws::TranscribeService
     end
 
     class GetCallAnalyticsJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::TranscribeService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetMedicalScribeJob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -348,6 +376,20 @@ module Aws::TranscribeService
       end
     end
 
+    class ListMedicalScribeJobs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::TranscribeService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListMedicalTranscriptionJobs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -433,6 +475,20 @@ module Aws::TranscribeService
     end
 
     class StartCallAnalyticsJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::TranscribeService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartMedicalScribeJob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

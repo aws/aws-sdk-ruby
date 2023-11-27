@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-11-27)
+------------------
+
+* Feature - This release adds the following support: 1. The EnableControl API can configure controls that are configurable.  2. The GetEnabledControl API shows the configured parameters on an enabled control. 3. The new UpdateEnabledControl API can change parameters on an enabled control.
+
 1.13.0 (2023-11-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-11-27)
+------------------
+
+* Feature - AWS Backup now supports restore testing, a new feature that allows customers to automate restore testing and validating their backups. Additionally, this release adds support for EBS Snapshots Archive tier.
+
 1.61.0 (2023-11-22)
 ------------------
 

@@ -116,6 +116,8 @@ module Aws::EFS
             Aws::EFS::Endpoints::UntagResource.build(context)
           when :update_file_system
             Aws::EFS::Endpoints::UpdateFileSystem.build(context)
+          when :update_file_system_protection
+            Aws::EFS::Endpoints::UpdateFileSystemProtection.build(context)
           end
         end
       end

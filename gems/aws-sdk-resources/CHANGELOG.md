@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.179.0 (2023-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-b2bi` gem.
+
 3.178.0 (2023-11-27)
 ------------------
 

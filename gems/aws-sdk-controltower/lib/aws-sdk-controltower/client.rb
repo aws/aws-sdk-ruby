@@ -388,9 +388,9 @@ module Aws::ControlTower
 
     # @!group API Operations
 
-    # Creates a new landing zone. This starts an asynchronous operation that
-    # creates and configures a landing zone based on the parameters
-    # specified in the manifest JSON file.
+    # Creates a new landing zone. This API call starts an asynchronous
+    # operation that creates and configures a landing zone, based on the
+    # parameters specified in the manifest JSON file.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
     #   The manifest.yaml file is a text file that describes your Amazon Web
@@ -409,7 +409,7 @@ module Aws::ControlTower
     #   Tags to be applied to the landing zone.
     #
     # @option params [required, String] :version
-    #   The landing zone version.
+    #   The landing zone version, for example, 3.0.
     #
     # @return [Types::CreateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -441,9 +441,9 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # This decommissions a landing zone. This starts an asynchronous
+    # Decommissions a landing zone. This API call starts an asynchronous
     # operation that deletes Amazon Web Services Control Tower resources
-    # deployed in Amazon Web Services Control Tower managed accounts.
+    # deployed in accounts managed by Amazon Web Services Control Tower.
     #
     # @option params [required, String] :landing_zone_identifier
     #   The unique identifier of the landing zone.
@@ -483,9 +483,9 @@ module Aws::ControlTower
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
-    #   controls are permitted, with the exception of the **Region deny**
-    #   control. For information on how to find the `controlIdentifier`, see
-    #   [the overview page][1].
+    #   controls are permitted, with the exception of the **landing zone
+    #   Region deny** control. For information on how to find the
+    #   `controlIdentifier`, see [the overview page][1].
     #
     #
     #
@@ -536,13 +536,16 @@ module Aws::ControlTower
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
-    #   controls are permitted, with the exception of the **Region deny**
-    #   control. For information on how to find the `controlIdentifier`, see
-    #   [the overview page][1].
+    #   controls are permitted, with the exception of the **landing zone
+    #   Region deny** control. For information on how to find the
+    #   `controlIdentifier`, see [the overview page][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
+    #
+    # @option params [Array<Types::EnabledControlParameter>] :parameters
+    #   An array of `EnabledControlParameter` objects
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to be applied to the `EnabledControl` resource.
@@ -564,6 +567,13 @@ module Aws::ControlTower
     #
     #   resp = client.enable_control({
     #     control_identifier: "ControlIdentifier", # required
+    #     parameters: [
+    #       {
+    #         key: "String", # required
+    #         value: { # required
+    #         },
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -610,7 +620,7 @@ module Aws::ControlTower
     # @example Response structure
     #
     #   resp.control_operation.end_time #=> Time
-    #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL"
+    #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL"
     #   resp.control_operation.start_time #=> Time
     #   resp.control_operation.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
     #   resp.control_operation.status_message #=> String
@@ -649,6 +659,8 @@ module Aws::ControlTower
     #   resp.enabled_control_details.arn #=> String
     #   resp.enabled_control_details.control_identifier #=> String
     #   resp.enabled_control_details.drift_status_summary.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"
+    #   resp.enabled_control_details.parameters #=> Array
+    #   resp.enabled_control_details.parameters[0].key #=> String
     #   resp.enabled_control_details.status_summary.last_operation_identifier #=> String
     #   resp.enabled_control_details.status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
     #   resp.enabled_control_details.target_identifier #=> String
@@ -698,7 +710,7 @@ module Aws::ControlTower
     end
 
     # Returns the status of the specified landing zone operation. Details
-    # for an operation are available for X days.
+    # for an operation are available for 60 days.
     #
     # @option params [required, String] :operation_identifier
     #   A unique identifier assigned to a landing zone operation.
@@ -793,10 +805,10 @@ module Aws::ControlTower
     # managed account. This API also creates an ARN for existing accounts
     # that do not yet have a landing zone ARN.
     #
-    # The return limit is one landing zone ARN.
+    # Returns one landing zone ARN.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of returned landing zone ARNs.
+    #   The maximum number of returned landing zone ARNs, which is one.
     #
     # @option params [String] :next_token
     #   The token to continue the list from a previous API call with the same
@@ -960,17 +972,75 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Updates the configuration of an already enabled control.
+    #
+    # If the enabled control shows an `EnablementStatus` of SUCCEEDED,
+    # supply parameters that are different from the currently configured
+    # parameters. Otherwise, Amazon Web Services Control Tower will not
+    # accept the request.
+    #
+    # If the enabled control shows an `EnablementStatus` of FAILED, Amazon
+    # Web Services Control Tower will update the control to match any valid
+    # parameters that you supply.
+    #
+    # If the `DriftSummary` status for the control shows as DRIFTED, you
+    # cannot call this API. Instead, you can update the control by calling
+    # `DisableControl` and again calling `EnableControl`, or you can run an
+    # extending governance operation. For usage examples, see [ *the Amazon
+    # Web Services Control Tower User Guide* ][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    #
+    # @option params [required, String] :enabled_control_identifier
+    #   The ARN of the enabled control that will be updated.
+    #
+    # @option params [required, Array<Types::EnabledControlParameter>] :parameters
+    #   A key/value pair, where `Key` is of type `String` and `Value` is of
+    #   type `Document`.
+    #
+    # @return [Types::UpdateEnabledControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEnabledControlOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_enabled_control({
+    #     enabled_control_identifier: "Arn", # required
+    #     parameters: [ # required
+    #       {
+    #         key: "String", # required
+    #         value: { # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledControl AWS API Documentation
+    #
+    # @overload update_enabled_control(params = {})
+    # @param [Hash] params ({})
+    def update_enabled_control(params = {}, options = {})
+      req = build_request(:update_enabled_control, params)
+      req.send_request(options)
+    end
+
     # This API call updates the landing zone. It starts an asynchronous
     # operation that updates the landing zone based on the new landing zone
-    # version or the updated parameters specified in the updated manifest
-    # file.
+    # version, or on the changed parameters specified in the updated
+    # manifest file.
     #
     # @option params [required, String] :landing_zone_identifier
     #   The unique identifier of the landing zone.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1]
+    #   The `manifest.yaml` file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -982,7 +1052,7 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
     #
     # @option params [required, String] :version
-    #   The landing zone version.
+    #   The landing zone version, for example, 3.2.
     #
     # @return [Types::UpdateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1023,7 +1093,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

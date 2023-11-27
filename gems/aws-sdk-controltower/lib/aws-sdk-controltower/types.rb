@@ -23,7 +23,7 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # Updating or deleting a resource can cause an inconsistent state.
+    # Updating or deleting the resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -85,7 +85,7 @@ module Aws::ControlTower
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] version
-    #   The landing zone version.
+    #   The landing zone version, for example, 3.0.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZoneInput AWS API Documentation
@@ -99,7 +99,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the landing zone.
+    #   The ARN of the landing zone resource.
     #   @return [String]
     #
     # @!attribute [rw] operation_identifier
@@ -130,9 +130,9 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] operation_identifier
-    #   A unique identifier assigned to a `DeleteLandingZone` operation. You
-    #   can use this identifier as an input of `GetLandingZoneOperation` to
-    #   check the operation's status.
+    #   &gt;A unique identifier assigned to a `DeleteLandingZone` operation.
+    #   You can use this identifier as an input parameter of
+    #   `GetLandingZoneOperation` to check the operation's status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DeleteLandingZoneOutput AWS API Documentation
@@ -146,8 +146,8 @@ module Aws::ControlTower
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
-    #   **Region deny** control. For information on how to find the
-    #   `controlIdentifier`, see [the overview page][1].
+    #   **landing zone Region deny** control. For information on how to find
+    #   the `controlIdentifier`, see [the overview page][1].
     #
     #
     #
@@ -225,13 +225,17 @@ module Aws::ControlTower
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
-    #   **Region deny** control. For information on how to find the
-    #   `controlIdentifier`, see [the overview page][1].
+    #   **landing zone Region deny** control. For information on how to find
+    #   the `controlIdentifier`, see [the overview page][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An array of `EnabledControlParameter` objects
+    #   @return [Array<Types::EnabledControlParameter>]
     #
     # @!attribute [rw] tags
     #   Tags to be applied to the `EnabledControl` resource.
@@ -250,6 +254,7 @@ module Aws::ControlTower
     #
     class EnableControlInput < Struct.new(
       :control_identifier,
+      :parameters,
       :tags,
       :target_identifier)
       SENSITIVE = []
@@ -293,6 +298,10 @@ module Aws::ControlTower
     #   The drift status of the enabled control.
     #   @return [Types::DriftStatusSummary]
     #
+    # @!attribute [rw] parameters
+    #   Array of `EnabledControlParameter` objects.
+    #   @return [Array<Types::EnabledControlParameterSummary>]
+    #
     # @!attribute [rw] status_summary
     #   The deployment summary of the enabled control.
     #   @return [Types::EnablementStatusSummary]
@@ -316,9 +325,52 @@ module Aws::ControlTower
       :arn,
       :control_identifier,
       :drift_status_summary,
+      :parameters,
       :status_summary,
       :target_identifier,
       :target_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of parameters that configure the behavior of the enabled
+    # control. A key/value pair, where `Key` is of type `String` and `Value`
+    # is of type `Document`.
+    #
+    # @!attribute [rw] key
+    #   The key of a key/value pair. It is of type `string`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a key/value pair. It can be of type `array` `string`,
+    #   `number`, `object`, or `boolean`.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlParameter AWS API Documentation
+    #
+    class EnabledControlParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a summary of information about the parameters of an enabled
+    # control.
+    #
+    # @!attribute [rw] key
+    #   The key of a key/value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a key/value pair.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlParameterSummary AWS API Documentation
+    #
+    class EnabledControlParameterSummary < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -459,7 +511,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] operation_details
-    #   The landing zone operation details.
+    #   Details about a landing zone operation.
     #   @return [Types::LandingZoneOperationDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetLandingZoneOperationOutput AWS API Documentation
@@ -482,7 +534,7 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # Unexpected error during processing of request.
+    # An unexpected error occurred during processing of a request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -510,20 +562,12 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The landing zone manifest.yaml text file that specifies the landing
-    #   zone configurations.
+    #   The landing zone `manifest.yaml` text file that specifies the
+    #   landing zone configurations.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] status
     #   The landing zone deployment status.
-    #
-    #   Valid values:
-    #
-    #   * `ACTIVE`: The landing zone is actively deployed.
-    #
-    #   * `PROCESSING`: The landing zone is processing deployment.
-    #
-    #   * `FAILED`: The landing zone failed deployment.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -595,8 +639,6 @@ module Aws::ControlTower
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The landing zone operation status.
-    #
     #   Valid values:
     #
     #   * `SUCCEEDED`: The landing zone operation succeeded.
@@ -672,7 +714,7 @@ module Aws::ControlTower
     #
     # @!attribute [rw] next_token
     #   Retrieves the next page of results. If the string is empty, the
-    #   current response is the end of the results.
+    #   response is the end of the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControlsOutput AWS API Documentation
@@ -685,7 +727,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of returned landing zone ARNs.
+    #   The maximum number of returned landing zone ARNs, which is one.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -708,7 +750,7 @@ module Aws::ControlTower
     #
     # @!attribute [rw] next_token
     #   Retrieves the next page of results. If the string is empty, the
-    #   current response is the end of the results.
+    #   response is the end of the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZonesOutput AWS API Documentation
@@ -782,8 +824,8 @@ module Aws::ControlTower
 
     # @!attribute [rw] operation_identifier
     #   A unique identifier assigned to a `ResetLandingZone` operation. You
-    #   can use this identifier as an input of `GetLandingZoneOperation` to
-    #   check the operation's status.
+    #   can use this identifier as an input parameter of
+    #   `GetLandingZoneOperation` to check the operation's status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetLandingZoneOutput AWS API Documentation
@@ -794,7 +836,7 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # Request references a resource which does not exist.
+    # The request references a resource that does not exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -807,8 +849,8 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # Request would cause a service quota to be exceeded. The limit is 10
-    # concurrent operations.
+    # The request would cause a service quota to be exceeded. The limit is
+    # 10 concurrent operations.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -842,7 +884,7 @@ module Aws::ControlTower
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # Request was denied due to request throttling.
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -852,7 +894,7 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   The number of seconds the caller should wait before retrying.
+    #   The number of seconds to wait before retrying.
     #   @return [Integer]
     #
     # @!attribute [rw] service_code
@@ -891,13 +933,43 @@ module Aws::ControlTower
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] enabled_control_identifier
+    #   The ARN of the enabled control that will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A key/value pair, where `Key` is of type `String` and `Value` is of
+    #   type `Document`.
+    #   @return [Array<Types::EnabledControlParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledControlInput AWS API Documentation
+    #
+    class UpdateEnabledControlInput < Struct.new(
+      :enabled_control_identifier,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The operation identifier for this `UpdateEnabledControl` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledControlOutput AWS API Documentation
+    #
+    class UpdateEnabledControlOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] landing_zone_identifier
     #   The unique identifier of the landing zone.
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1]
+    #   The `manifest.yaml` file is a text file that describes your Amazon
+    #   Web Services resources. For examples, review [The manifest file][1].
     #
     #
     #
@@ -905,7 +977,7 @@ module Aws::ControlTower
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] version
-    #   The landing zone version.
+    #   The landing zone version, for example, 3.2.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZoneInput AWS API Documentation
@@ -932,7 +1004,7 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an Amazon Web
+    # The input does not satisfy the constraints specified by an Amazon Web
     # Services service.
     #
     # @!attribute [rw] message

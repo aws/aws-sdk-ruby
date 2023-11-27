@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.858.0 (2023-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::B2bi`.
+
 1.857.0 (2023-11-27)
 ------------------
 

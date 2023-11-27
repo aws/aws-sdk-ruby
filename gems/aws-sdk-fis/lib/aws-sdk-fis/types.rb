@@ -168,6 +168,25 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies experiment options for an experiment template.
+    #
+    # @!attribute [rw] account_targeting
+    #   Specifies the account targeting setting for experiment options.
+    #   @return [String]
+    #
+    # @!attribute [rw] empty_target_resolution_mode
+    #   Specifies the empty target resolution mode for experiment options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateExperimentOptionsInput AWS API Documentation
+    #
+    class CreateExperimentTemplateExperimentOptionsInput < Struct.new(
+      :account_targeting,
+      :empty_target_resolution_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration for experiment logging.
     #
     # @!attribute [rw] cloud_watch_logs_configuration
@@ -229,6 +248,10 @@ module Aws::FIS
     #   The configuration for experiment logging.
     #   @return [Types::CreateExperimentTemplateLogConfigurationInput]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for the experiment template.
+    #   @return [Types::CreateExperimentTemplateExperimentOptionsInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateRequest AWS API Documentation
     #
     class CreateExperimentTemplateRequest < Struct.new(
@@ -239,7 +262,8 @@ module Aws::FIS
       :actions,
       :role_arn,
       :tags,
-      :log_configuration)
+      :log_configuration,
+      :experiment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -341,6 +365,55 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_template_id
+    #   The experiment template ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateTargetAccountConfigurationRequest AWS API Documentation
+    #
+    class CreateTargetAccountConfigurationRequest < Struct.new(
+      :client_token,
+      :experiment_template_id,
+      :account_id,
+      :role_arn,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configuration
+    #   Information about the target account configuration.
+    #   @return [Types::TargetAccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateTargetAccountConfigurationResponse AWS API Documentation
+    #
+    class CreateTargetAccountConfigurationResponse < Struct.new(
+      :target_account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -361,6 +434,35 @@ module Aws::FIS
     #
     class DeleteExperimentTemplateResponse < Struct.new(
       :experiment_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] experiment_template_id
+    #   The ID of the experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteTargetAccountConfigurationRequest AWS API Documentation
+    #
+    class DeleteTargetAccountConfigurationRequest < Struct.new(
+      :experiment_template_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configuration
+    #   Information about the target account configuration.
+    #   @return [Types::TargetAccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteTargetAccountConfigurationResponse AWS API Documentation
+    #
+    class DeleteTargetAccountConfigurationResponse < Struct.new(
+      :target_account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -416,6 +518,14 @@ module Aws::FIS
     #   The configuration for experiment logging.
     #   @return [Types::ExperimentLogConfiguration]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for the experiment.
+    #   @return [Types::ExperimentOptions]
+    #
+    # @!attribute [rw] target_account_configurations_count
+    #   The count of target account configurations for the experiment.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/Experiment AWS API Documentation
     #
     class Experiment < Struct.new(
@@ -430,7 +540,9 @@ module Aws::FIS
       :start_time,
       :end_time,
       :tags,
-      :log_configuration)
+      :log_configuration,
+      :experiment_options,
+      :target_account_configurations_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -540,6 +652,25 @@ module Aws::FIS
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for an experiment.
+    #
+    # @!attribute [rw] account_targeting
+    #   The account targeting setting for an experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] empty_target_resolution_mode
+    #   The empty target resolution mode for an experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentOptions AWS API Documentation
+    #
+    class ExperimentOptions < Struct.new(
+      :account_targeting,
+      :empty_target_resolution_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -676,6 +807,56 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Describes a target account configuration for an experiment.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTargetAccountConfiguration AWS API Documentation
+    #
+    class ExperimentTargetAccountConfiguration < Struct.new(
+      :role_arn,
+      :account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of a target account configuration.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTargetAccountConfigurationSummary AWS API Documentation
+    #
+    class ExperimentTargetAccountConfigurationSummary < Struct.new(
+      :role_arn,
+      :account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a filter used for the target resources in an experiment.
     #
     # @!attribute [rw] path
@@ -737,6 +918,15 @@ module Aws::FIS
     #   The configuration for experiment logging.
     #   @return [Types::ExperimentTemplateLogConfiguration]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for an experiment template.
+    #   @return [Types::ExperimentTemplateExperimentOptions]
+    #
+    # @!attribute [rw] target_account_configurations_count
+    #   The count of target account configurations for the experiment
+    #   template.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplate AWS API Documentation
     #
     class ExperimentTemplate < Struct.new(
@@ -749,7 +939,9 @@ module Aws::FIS
       :last_update_time,
       :role_arn,
       :tags,
-      :log_configuration)
+      :log_configuration,
+      :experiment_options,
+      :target_account_configurations_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -817,6 +1009,25 @@ module Aws::FIS
     #
     class ExperimentTemplateCloudWatchLogsLogConfigurationInput < Struct.new(
       :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the experiment options for an experiment template.
+    #
+    # @!attribute [rw] account_targeting
+    #   The account targeting setting for an experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] empty_target_resolution_mode
+    #   The empty target resolution mode for an experiment template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateExperimentOptions AWS API Documentation
+    #
+    class ExperimentTemplateExperimentOptions < Struct.new(
+      :account_targeting,
+      :empty_target_resolution_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1072,6 +1283,35 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] experiment_id
+    #   The ID of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTargetAccountConfigurationRequest AWS API Documentation
+    #
+    class GetExperimentTargetAccountConfigurationRequest < Struct.new(
+      :experiment_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configuration
+    #   Information about the target account configuration.
+    #   @return [Types::ExperimentTargetAccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTargetAccountConfigurationResponse AWS API Documentation
+    #
+    class GetExperimentTargetAccountConfigurationResponse < Struct.new(
+      :target_account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -1092,6 +1332,35 @@ module Aws::FIS
     #
     class GetExperimentTemplateResponse < Struct.new(
       :experiment_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] experiment_template_id
+    #   The ID of the experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetAccountConfigurationRequest AWS API Documentation
+    #
+    class GetTargetAccountConfigurationRequest < Struct.new(
+      :experiment_template_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configuration
+    #   Information about the target account configuration.
+    #   @return [Types::TargetAccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetAccountConfigurationResponse AWS API Documentation
+    #
+    class GetTargetAccountConfigurationResponse < Struct.new(
+      :target_account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1152,6 +1421,88 @@ module Aws::FIS
     #
     class ListActionsResponse < Struct.new(
       :actions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] experiment_id
+    #   The ID of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_name
+    #   The name of the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentResolvedTargetsRequest AWS API Documentation
+    #
+    class ListExperimentResolvedTargetsRequest < Struct.new(
+      :experiment_id,
+      :max_results,
+      :next_token,
+      :target_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolved_targets
+    #   The resolved targets.
+    #   @return [Array<Types::ResolvedTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentResolvedTargetsResponse AWS API Documentation
+    #
+    class ListExperimentResolvedTargetsResponse < Struct.new(
+      :resolved_targets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] experiment_id
+    #   The ID of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentTargetAccountConfigurationsRequest AWS API Documentation
+    #
+    class ListExperimentTargetAccountConfigurationsRequest < Struct.new(
+      :experiment_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configurations
+    #   The target account configurations.
+    #   @return [Array<Types::ExperimentTargetAccountConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentTargetAccountConfigurationsResponse AWS API Documentation
+    #
+    class ListExperimentTargetAccountConfigurationsResponse < Struct.new(
+      :target_account_configurations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1255,6 +1606,48 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] experiment_template_id
+    #   The ID of the experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTargetAccountConfigurationsRequest AWS API Documentation
+    #
+    class ListTargetAccountConfigurationsRequest < Struct.new(
+      :experiment_template_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configurations
+    #   The target account configurations.
+    #   @return [Array<Types::TargetAccountConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTargetAccountConfigurationsResponse AWS API Documentation
+    #
+    class ListTargetAccountConfigurationsResponse < Struct.new(
+      :target_account_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -1288,6 +1681,30 @@ module Aws::FIS
     class ListTargetResourceTypesResponse < Struct.new(
       :target_resource_types,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a resolved target.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_name
+    #   The name of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_information
+    #   Information about the target.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ResolvedTarget AWS API Documentation
+    #
+    class ResolvedTarget < Struct.new(
+      :resource_type,
+      :target_name,
+      :target_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1400,6 +1817,56 @@ module Aws::FIS
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Describes a target account configuration.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TargetAccountConfiguration AWS API Documentation
+    #
+    class TargetAccountConfiguration < Struct.new(
+      :role_arn,
+      :account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of a target account configuration.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TargetAccountConfigurationSummary AWS API Documentation
+    #
+    class TargetAccountConfigurationSummary < Struct.new(
+      :role_arn,
+      :account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes a resource type.
     #
@@ -1521,6 +1988,20 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies an experiment option for an experiment template.
+    #
+    # @!attribute [rw] empty_target_resolution_mode
+    #   The empty target resolution mode of the experiment template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateExperimentOptionsInput AWS API Documentation
+    #
+    class UpdateExperimentTemplateExperimentOptionsInput < Struct.new(
+      :empty_target_resolution_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration for experiment logging.
     #
     # @!attribute [rw] cloud_watch_logs_configuration
@@ -1574,6 +2055,10 @@ module Aws::FIS
     #   The configuration for experiment logging.
     #   @return [Types::UpdateExperimentTemplateLogConfigurationInput]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for the experiment template.
+    #   @return [Types::UpdateExperimentTemplateExperimentOptionsInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateRequest AWS API Documentation
     #
     class UpdateExperimentTemplateRequest < Struct.new(
@@ -1583,7 +2068,8 @@ module Aws::FIS
       :targets,
       :actions,
       :role_arn,
-      :log_configuration)
+      :log_configuration,
+      :experiment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1661,6 +2147,46 @@ module Aws::FIS
       :filters,
       :selection_mode,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] experiment_template_id
+    #   The ID of the experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role for the target
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateTargetAccountConfigurationRequest AWS API Documentation
+    #
+    class UpdateTargetAccountConfigurationRequest < Struct.new(
+      :experiment_template_id,
+      :account_id,
+      :role_arn,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_configuration
+    #   Information about the target account configuration.
+    #   @return [Types::TargetAccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateTargetAccountConfigurationResponse AWS API Documentation
+    #
+    class UpdateTargetAccountConfigurationResponse < Struct.new(
+      :target_account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

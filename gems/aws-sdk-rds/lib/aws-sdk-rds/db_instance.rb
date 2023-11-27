@@ -1003,117 +1003,132 @@ module Aws::RDS
     #   The meaning of this parameter differs according to the database engine
     #   you use.
     #
-    #   **MySQL**
+    #   Amazon Aurora MySQL
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora MySQL DB cluster is created. If this parameter isn't
+    #     specified for an Aurora MySQL DB cluster, no database is created in
+    #     the DB cluster.
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must contain 1 to 64 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon Aurora PostgreSQL
     #
-    #   **MariaDB**
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora PostgreSQL DB cluster is created. If this parameter
+    #     isn't specified for an Aurora PostgreSQL DB cluster, a database
+    #     named `postgres` is created in the DB cluster.
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0 to 9).
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon RDS Custom for Oracle
     #
-    #   **PostgreSQL**
+    #   : The Oracle System ID (SID) of the created RDS Custom DB instance. If
+    #     you don't specify a value, the default value is `ORCL` for non-CDBs
+    #     and `RDSCDB` for CDBs.
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, a database named `postgres` is
-    #   created in the DB instance.
+    #     Default: `ORCL`
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 63 letters, numbers, or underscores.
+    #     * Must contain 1 to 8 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Must contain a letter.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #     * Can't be a word reserved by the database engine.
     #
-    #   **Oracle**
+    #   Amazon RDS Custom for SQL Server
     #
-    #   The Oracle System ID (SID) of the created DB instance. If you don't
-    #   specify a value, the default value is `ORCL`. You can't specify the
-    #   string `null`, or any other reserved word, for `DBName`.
+    #   : Not applicable. Must be null.
     #
-    #   Default: `ORCL`
+    #   RDS for Db2
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   * Can't be longer than 8 characters
+    #     Constraints:
     #
-    #   ^
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   **Amazon RDS Custom for Oracle**
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
-    #   you don't specify a value, the default value is `ORCL` for non-CDBs
-    #   and `RDSCDB` for CDBs.
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Default: `ORCL`
+    #   RDS for MariaDB
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   * It must contain 1 to 8 alphanumeric characters.
+    #     Constraints:
     #
-    #   * It must contain a letter.
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   * It can't be a word reserved by the database engine.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   **Amazon RDS Custom for SQL Server**
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Not applicable. Must be null.
+    #   RDS for MySQL
     #
-    #   **SQL Server**
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   Not applicable. Must be null.
+    #     Constraints:
     #
-    #   **Amazon Aurora MySQL**
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   The name of the database to create when the primary DB instance of the
-    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
-    #   for an Aurora MySQL DB cluster, no database is created in the DB
-    #   cluster.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   Constraints:
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   * It must contain 1 to 64 alphanumeric characters.
+    #   RDS for Oracle
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The Oracle System ID (SID) of the created DB instance. If you don't
+    #     specify a value, the default value is `ORCL`. You can't specify the
+    #     string `null`, or any other reserved word, for `DBName`.
     #
-    #   **Amazon Aurora PostgreSQL**
+    #     Default: `ORCL`
     #
-    #   The name of the database to create when the primary DB instance of the
-    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
-    #   specified for an Aurora PostgreSQL DB cluster, a database named
-    #   `postgres` is created in the DB cluster.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * Can't be longer than 8 characters.
     #
-    #   * It must contain 1 to 63 alphanumeric characters.
+    #     ^
     #
-    #   * It must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0 to 9).
+    #   RDS for PostgreSQL
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, a database named `postgres` is
+    #     created in the DB instance.
+    #
+    #     Constraints:
+    #
+    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
+    #     * Can't be a word reserved by the specified database engine.
+    #
+    #   RDS for SQL Server
+    #
+    #   : Not applicable. Must be null.
     # @option options [Integer] :allocated_storage
     #   The amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
@@ -1135,6 +1150,17 @@ module Aws::RDS
     #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
+    #
+    #   RDS for Db2
+    #
+    #   : Constraints to the amount of storage for each storage type are the
+    #     following:
+    #
+    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
+    #       20 to 64000.
+    #
+    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #       64000.
     #
     #   RDS for MariaDB
     #
@@ -1247,6 +1273,10 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
+    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -1298,6 +1328,8 @@ module Aws::RDS
     #     or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -1450,6 +1482,8 @@ module Aws::RDS
     #
     #   Default:
     #
+    #   * RDS for Db2 - `50000`
+    #
     #   * RDS for MariaDB - `3306`
     #
     #   * RDS for Microsoft SQL Server - `1433`
@@ -1505,40 +1539,46 @@ module Aws::RDS
     #   : See [RDS Custom for SQL Server general requirements][2] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Db2
+    #
+    #   : For information, see [Db2 on Amazon RDS versions][3] in the *Amazon
+    #     RDS User Guide*.
+    #
     #   RDS for MariaDB
     #
-    #   : For information, see [MariaDB on Amazon RDS versions][3] in the
+    #   : For information, see [MariaDB on Amazon RDS versions][4] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Microsoft SQL Server
     #
     #   : For information, see [Microsoft SQL Server versions on Amazon
-    #     RDS][4] in the *Amazon RDS User Guide*.
+    #     RDS][5] in the *Amazon RDS User Guide*.
     #
     #   RDS for MySQL
     #
-    #   : For information, see [MySQL on Amazon RDS versions][5] in the
+    #   : For information, see [MySQL on Amazon RDS versions][6] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Oracle
     #
-    #   : For information, see [Oracle Database Engine release notes][6] in
+    #   : For information, see [Oracle Database Engine release notes][7] in
     #     the *Amazon RDS User Guide*.
     #
     #   RDS for PostgreSQL
     #
     #   : For information, see [Amazon RDS for PostgreSQL versions and
-    #     extensions][7] in the *Amazon RDS User Guide*.
+    #     extensions][8] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Db2.html#Db2.Concepts.VersionMgmt
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
+    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
     #   the DB instance during the maintenance window. By default, minor
@@ -1553,6 +1593,8 @@ module Aws::RDS
     #   instances.
     #
     #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -1574,7 +1616,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * For RDS for MariaDB, MySQL, Oracle, and PostgreSQL - Must be a
+    #   * For RDS for Db2, MariaDB, MySQL, Oracle, and PostgreSQL - Must be a
     #     multiple between .5 and 50 of the storage amount for the DB
     #     instance.
     #
@@ -1708,8 +1750,8 @@ module Aws::RDS
     #   must explicitly specify a key.
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
-    #   Currently, only Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB
-    #   instances can be created in an Active Directory Domain.
+    #   Currently, you can create only Db2, MySQL, Microsoft SQL Server,
+    #   Oracle, and PostgreSQL DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
@@ -1890,9 +1932,9 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS returns an error.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs. For more information, see [ Publishing Database Logs
-    #   to Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #   The list of log types to enable for exporting to CloudWatch Logs. For
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to the following DB instances:
     #
@@ -1902,6 +1944,8 @@ module Aws::RDS
     #   * RDS Custom
     #
     #   The following values are valid for each DB engine:
+    #
+    #   * RDS for Db2 - `diag.log | notify.log`
     #
     #   * RDS for MariaDB - `audit | error | general | slowquery`
     #
@@ -1999,7 +2043,7 @@ module Aws::RDS
     # @option options [String] :backup_target
     #   The location for storing automated backups and manual snapshots.
     #
-    #   Valie Values:
+    #   Valid Values:
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #
@@ -2946,7 +2990,7 @@ module Aws::RDS
     #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
-    #   For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
+    #   For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
     #   PostgreSQL, the value supplied must be at least 10% greater than the
     #   current value. Values that are not at least 10% greater than the
     #   existing value are rounded up so that they are 10% greater than the
@@ -3066,7 +3110,7 @@ module Aws::RDS
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
     #
-    #   <note markdown="1"> Amazon RDS API operations never return the password, so this action
+    #   <note markdown="1"> Amazon RDS API operations never return the password, so this operation
     #   provides a way to regain access to a primary instance user if the
     #   password is lost. This includes restoring privileges that might have
     #   been accidentally revoked.
@@ -3087,9 +3131,12 @@ module Aws::RDS
     #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   * Can include any printable ASCII character except "/", """, or
-    #     "@".
+    #     "@". For RDS for Oracle, can't include the "&amp;" (ampersand)
+    #     or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -3286,6 +3333,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * RDS for Db2 - `bring-your-own-license`
+    #
     #   * RDS for MariaDB - `general-public-license`
     #
     #   * RDS for Microsoft SQL Server - `license-included`
@@ -3421,7 +3470,7 @@ module Aws::RDS
     # @option options [String] :domain
     #   The Active Directory directory ID to move the DB instance to. Specify
     #   `none` to remove the instance from its current domain. You must create
-    #   the domain before this operation. Currently, you can create only
+    #   the domain before this operation. Currently, you can create only Db2,
     #   MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an
     #   Active Directory Domain.
     #
@@ -3511,6 +3560,8 @@ module Aws::RDS
     #   Default:
     #
     #   * Amazon Aurora - `3306`
+    #
+    #   * RDS for Db2 - `50000`
     #
     #   * RDS for MariaDB - `3306`
     #
@@ -4200,16 +4251,25 @@ module Aws::RDS
     # @option options [String] :db_name
     #   The database name for the restored DB instance.
     #
-    #   <note markdown="1"> This parameter isn't supported for the MySQL or MariaDB engines. It
-    #   also doesn't apply to RDS Custom.
+    #   This parameter doesn't apply to the following DB instances:
     #
-    #    </note>
+    #   * RDS Custom
+    #
+    #   * RDS for Db2
+    #
+    #   * RDS for MariaDB
+    #
+    #   * RDS for MySQL
     # @option options [String] :engine
     #   The database engine to use for the new instance.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -4490,11 +4550,16 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     # @option options [String] :backup_target
-    #   Specifies where automated backups and manual snapshots are stored for
+    #   The location for storing automated backups and manual snapshots for
     #   the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Valid Values:
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #
+    #   Default: `region`
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.

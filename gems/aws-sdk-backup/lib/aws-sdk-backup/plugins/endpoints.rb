@@ -72,6 +72,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::CreateLogicallyAirGappedBackupVault.build(context)
           when :create_report_plan
             Aws::Backup::Endpoints::CreateReportPlan.build(context)
+          when :create_restore_testing_plan
+            Aws::Backup::Endpoints::CreateRestoreTestingPlan.build(context)
+          when :create_restore_testing_selection
+            Aws::Backup::Endpoints::CreateRestoreTestingSelection.build(context)
           when :delete_backup_plan
             Aws::Backup::Endpoints::DeleteBackupPlan.build(context)
           when :delete_backup_selection
@@ -90,6 +94,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::DeleteRecoveryPoint.build(context)
           when :delete_report_plan
             Aws::Backup::Endpoints::DeleteReportPlan.build(context)
+          when :delete_restore_testing_plan
+            Aws::Backup::Endpoints::DeleteRestoreTestingPlan.build(context)
+          when :delete_restore_testing_selection
+            Aws::Backup::Endpoints::DeleteRestoreTestingSelection.build(context)
           when :describe_backup_job
             Aws::Backup::Endpoints::DescribeBackupJob.build(context)
           when :describe_backup_vault
@@ -134,6 +142,14 @@ module Aws::Backup
             Aws::Backup::Endpoints::GetLegalHold.build(context)
           when :get_recovery_point_restore_metadata
             Aws::Backup::Endpoints::GetRecoveryPointRestoreMetadata.build(context)
+          when :get_restore_job_metadata
+            Aws::Backup::Endpoints::GetRestoreJobMetadata.build(context)
+          when :get_restore_testing_inferred_metadata
+            Aws::Backup::Endpoints::GetRestoreTestingInferredMetadata.build(context)
+          when :get_restore_testing_plan
+            Aws::Backup::Endpoints::GetRestoreTestingPlan.build(context)
+          when :get_restore_testing_selection
+            Aws::Backup::Endpoints::GetRestoreTestingSelection.build(context)
           when :get_supported_resource_types
             Aws::Backup::Endpoints::GetSupportedResourceTypes.build(context)
           when :list_backup_job_summaries
@@ -176,6 +192,12 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListRestoreJobSummaries.build(context)
           when :list_restore_jobs
             Aws::Backup::Endpoints::ListRestoreJobs.build(context)
+          when :list_restore_jobs_by_protected_resource
+            Aws::Backup::Endpoints::ListRestoreJobsByProtectedResource.build(context)
+          when :list_restore_testing_plans
+            Aws::Backup::Endpoints::ListRestoreTestingPlans.build(context)
+          when :list_restore_testing_selections
+            Aws::Backup::Endpoints::ListRestoreTestingSelections.build(context)
           when :list_tags
             Aws::Backup::Endpoints::ListTags.build(context)
           when :put_backup_vault_access_policy
@@ -184,6 +206,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::PutBackupVaultLockConfiguration.build(context)
           when :put_backup_vault_notifications
             Aws::Backup::Endpoints::PutBackupVaultNotifications.build(context)
+          when :put_restore_validation_result
+            Aws::Backup::Endpoints::PutRestoreValidationResult.build(context)
           when :start_backup_job
             Aws::Backup::Endpoints::StartBackupJob.build(context)
           when :start_copy_job
@@ -210,6 +234,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::UpdateRegionSettings.build(context)
           when :update_report_plan
             Aws::Backup::Endpoints::UpdateReportPlan.build(context)
+          when :update_restore_testing_plan
+            Aws::Backup::Endpoints::UpdateRestoreTestingPlan.build(context)
+          when :update_restore_testing_selection
+            Aws::Backup::Endpoints::UpdateRestoreTestingSelection.build(context)
           end
         end
       end

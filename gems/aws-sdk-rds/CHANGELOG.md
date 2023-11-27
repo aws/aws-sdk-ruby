@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.207.0 (2023-11-27)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for RDS for Db2.
+
 1.206.0 (2023-11-22)
 ------------------
 

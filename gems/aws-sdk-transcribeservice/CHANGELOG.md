@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for AWS HealthScribe APIs within Amazon Transcribe
+
 1.92.0 (2023-11-27)
 ------------------
 

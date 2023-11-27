@@ -96,6 +96,9 @@
   "AutoScalingPlans": {
     "models": "autoscaling-plans/2018-01-06"
   },
+  "B2bi": {
+    "models": "b2bi/2022-06-23"
+  },
   "BCMDataExports": {
     "models": "bcm-data-exports/2023-11-26"
   },
