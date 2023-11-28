@@ -207,7 +207,6 @@ module BuildTools
           label = label.delete('{}')
           input_shape = api['shapes'][operation['input']['shape']]
           input_shape['members'][label].delete('hostLabel')
-          input_shape['required']&.delete(label)
         end
       end
     end
