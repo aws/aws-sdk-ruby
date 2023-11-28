@@ -66,6 +66,8 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::BatchStopUpdateAction.build(context)
           when :complete_migration
             Aws::ElastiCache::Endpoints::CompleteMigration.build(context)
+          when :copy_serverless_cache_snapshot
+            Aws::ElastiCache::Endpoints::CopyServerlessCacheSnapshot.build(context)
           when :copy_snapshot
             Aws::ElastiCache::Endpoints::CopySnapshot.build(context)
           when :create_cache_cluster
@@ -80,6 +82,10 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::CreateGlobalReplicationGroup.build(context)
           when :create_replication_group
             Aws::ElastiCache::Endpoints::CreateReplicationGroup.build(context)
+          when :create_serverless_cache
+            Aws::ElastiCache::Endpoints::CreateServerlessCache.build(context)
+          when :create_serverless_cache_snapshot
+            Aws::ElastiCache::Endpoints::CreateServerlessCacheSnapshot.build(context)
           when :create_snapshot
             Aws::ElastiCache::Endpoints::CreateSnapshot.build(context)
           when :create_user
@@ -102,6 +108,10 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::DeleteGlobalReplicationGroup.build(context)
           when :delete_replication_group
             Aws::ElastiCache::Endpoints::DeleteReplicationGroup.build(context)
+          when :delete_serverless_cache
+            Aws::ElastiCache::Endpoints::DeleteServerlessCache.build(context)
+          when :delete_serverless_cache_snapshot
+            Aws::ElastiCache::Endpoints::DeleteServerlessCacheSnapshot.build(context)
           when :delete_snapshot
             Aws::ElastiCache::Endpoints::DeleteSnapshot.build(context)
           when :delete_user
@@ -132,6 +142,10 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::DescribeReservedCacheNodes.build(context)
           when :describe_reserved_cache_nodes_offerings
             Aws::ElastiCache::Endpoints::DescribeReservedCacheNodesOfferings.build(context)
+          when :describe_serverless_cache_snapshots
+            Aws::ElastiCache::Endpoints::DescribeServerlessCacheSnapshots.build(context)
+          when :describe_serverless_caches
+            Aws::ElastiCache::Endpoints::DescribeServerlessCaches.build(context)
           when :describe_service_updates
             Aws::ElastiCache::Endpoints::DescribeServiceUpdates.build(context)
           when :describe_snapshots
@@ -144,6 +158,8 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::DescribeUsers.build(context)
           when :disassociate_global_replication_group
             Aws::ElastiCache::Endpoints::DisassociateGlobalReplicationGroup.build(context)
+          when :export_serverless_cache_snapshot
+            Aws::ElastiCache::Endpoints::ExportServerlessCacheSnapshot.build(context)
           when :failover_global_replication_group
             Aws::ElastiCache::Endpoints::FailoverGlobalReplicationGroup.build(context)
           when :increase_node_groups_in_global_replication_group
@@ -166,6 +182,8 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::ModifyReplicationGroup.build(context)
           when :modify_replication_group_shard_configuration
             Aws::ElastiCache::Endpoints::ModifyReplicationGroupShardConfiguration.build(context)
+          when :modify_serverless_cache
+            Aws::ElastiCache::Endpoints::ModifyServerlessCache.build(context)
           when :modify_user
             Aws::ElastiCache::Endpoints::ModifyUser.build(context)
           when :modify_user_group
