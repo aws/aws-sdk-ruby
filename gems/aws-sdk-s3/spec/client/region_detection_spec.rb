@@ -49,7 +49,7 @@ module Aws
           expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler)
             .to receive(:warn)
           expect_auth({ 'signingRegion' => 'us-east-1' })
-          expect_auth({ 'signingRegion' => 'us-east-1' }, 'us-west-2')
+          expect_auth({ 'signingRegion' => 'us-east-1' }, region: 'us-west-2')
           resp = client.put_object(bucket: 'bucket', key: 'key', body: 'body')
           host = resp.context.http_request.endpoint.host
           expect(host).to eq('bucket.s3.us-west-2.amazonaws.com')
@@ -151,7 +151,7 @@ module Aws
             .to receive(:warn)
 
           expect_auth({ 'signingRegion' => 'us-east-1' })
-          expect_auth({ 'signingRegion' => 'us-east-1' }, 'us-west-2')
+          expect_auth({ 'signingRegion' => 'us-east-1' }, region: 'us-west-2')
           client.put_object(bucket: 'bucket', key: 'key', body: 'body')
           expect(stub_publisher.metrics.size).to eq(1)
           metric = stub_publisher.metrics.first

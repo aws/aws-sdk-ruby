@@ -12,7 +12,8 @@ module Aws
 
         def call(context)
           if checksum_required?(context) &&
-             !context[:checksum_algorithms] # skip in favor of flexible checksum
+             !context[:checksum_algorithms] && # skip in favor of flexible checksum
+             !context[:s3_express_endpoint] # s3 express endpoints do not support md5
             body = context.http_request.body
             context.http_request.headers['Content-Md5'] ||= md5(body)
           end

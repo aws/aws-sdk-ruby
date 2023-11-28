@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Express authentication.
+
 3.188.0 (2023-11-22)
 ------------------
 

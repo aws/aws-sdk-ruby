@@ -218,6 +218,7 @@ module Aws
       :s3_use_arn_region,
       :s3_us_east_1_regional_endpoint,
       :s3_disable_multiregion_access_points,
+      :s3_disable_express_session_auth,
       :defaults_mode,
       :sdk_ua_app_id,
       :disable_request_compression,

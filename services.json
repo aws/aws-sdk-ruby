@@ -966,7 +966,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.6"
+      "aws-sigv4": "~> 1.8"
     },
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
@@ -975,6 +975,7 @@
       "Aws::S3::Plugins::BucketNameRestrictions",
       "Aws::S3::Plugins::Dualstack",
       "Aws::S3::Plugins::Expect100Continue",
+      "Aws::S3::Plugins::ExpressSessionAuth",
       "Aws::S3::Plugins::GetBucketLocationFix",
       "Aws::S3::Plugins::Http200Errors",
       "Aws::S3::Plugins::IADRegionalEndpoint",
@@ -984,9 +985,9 @@
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
+      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums",
       "Aws::S3::Plugins::StreamingRetry",
-      "Aws::S3::Plugins::UrlEncodedKeys",
-      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums"
+      "Aws::S3::Plugins::UrlEncodedKeys"
     ]
   },
   "S3Control": {

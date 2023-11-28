@@ -456,6 +456,35 @@ module Aws
           end
         end
       end
+
+      context 'express endpoints' do
+        it 'uses express credentials' do
+          bucket = 'presign-bucket--use1-az2--x-s3'
+          credentials = {
+            access_key_id: 's3-akid',
+            secret_access_key: 's3-secret',
+            session_token: 's3-session',
+            expiration: Time.now + 60 * 5
+          }
+          client.stub_responses(:create_session, credentials: credentials)
+          expect(client).to receive(:create_session)
+            .with({bucket: bucket}).and_call_original
+
+          url = subject.presigned_url(:get_object, bucket: bucket, key: 'obj')
+          expect(url).to include('X-Amz-Credential=s3-akid')
+          expect(url).to include('s3express%2Faws4_request')
+          expect(url).to include('X-Amz-S3session-Token=s3-session')
+        end
+
+        it 'does not use express credentials when disabled' do
+          client_opts[:disable_s3_express_session_auth] = true
+          bucket = 'presign-bucket--use1-az2--x-s3'
+          expect(client).not_to receive(:create_session)
+
+          url = subject.presigned_url(:get_object, bucket: bucket, key: 'obj')
+          expect(url).not_to include('X-Amz-S3session-Token')
+        end
+      end
     end
   end
 end

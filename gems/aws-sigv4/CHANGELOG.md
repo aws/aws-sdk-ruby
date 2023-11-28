@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `sigv4-s3express` signing algorithm.
+
 1.7.0 (2023-11-22)
 ------------------
 

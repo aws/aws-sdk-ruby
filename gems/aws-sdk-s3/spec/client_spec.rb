@@ -376,6 +376,26 @@ BODY
 </CreateBucketConfiguration>
             XML
         end
+
+        it 'does not apply location constraint if location is set' do
+          s3 = Client.new(region: 'eu-west-1')
+          s3.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = s3.create_bucket(
+            bucket: 'aws-sdk',
+            create_bucket_configuration: {
+              location: { type: 'AvailabilityZone', name: 'us-west-1a' }
+            }
+          )
+          expect(resp.context.http_request.body_contents.strip)
+            .to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
+<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Location><Type>AvailabilityZone</Type><Name>us-west-1a</Name></Location>
+</CreateBucketConfiguration>
+            XML
+        end
       end
 
       describe '#delete_bucket' do
