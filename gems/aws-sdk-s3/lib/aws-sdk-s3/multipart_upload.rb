@@ -69,6 +69,11 @@ module Aws::S3
     end
 
     # The class of storage used to store the object.
+    #
+    # <note markdown="1"> **Directory buckets** - Only the S3 Express One Zone storage class is
+    # supported by directory buckets to store objects.
+    #
+    #  </note>
     # @return [String]
     def storage_class
       data[:storage_class]
@@ -76,6 +81,11 @@ module Aws::S3
 
     # Specifies the owner of the object that is part of the multipart
     # upload.
+    #
+    # <note markdown="1"> **Directory buckets** - The bucket owner is returned as the object
+    # owner for all the objects.
+    #
+    #  </note>
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -234,19 +244,23 @@ module Aws::S3
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination Amazon S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading objects
-    #   from Requester Pays buckets, see [Downloading Objects in Requester
-    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination S3 bucket has Requester
+    #   Pays enabled, the requester will pay for corresponding charges to copy
+    #   the object. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request fails with the HTTP status code `403
-    #   Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @return [Types::AbortMultipartUploadOutput]
     def abort(options = {})
       options = options.merge(
@@ -331,25 +345,33 @@ module Aws::S3
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination Amazon S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading objects
-    #   from Requester Pays buckets, see [Downloading Objects in Requester
-    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination S3 bucket has Requester
+    #   Pays enabled, the requester will pay for corresponding charges to copy
+    #   the object. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request fails with the HTTP status code `403
-    #   Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :sse_customer_algorithm
     #   The server-side encryption (SSE) algorithm used to encrypt the object.
     #   This parameter is required only when the object was created using a
     #   checksum algorithm or if your bucket policy requires the use of SSE-C.
     #   For more information, see [Protecting data using SSE-C keys][1] in the
     #   *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
@@ -360,6 +382,10 @@ module Aws::S3
     #   For more information, see [Protecting data using SSE-C keys][1] in the
     #   *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
@@ -368,6 +394,10 @@ module Aws::S3
     #   parameter is needed only when the object was created using a checksum
     #   algorithm. For more information, see [Protecting data using SSE-C
     #   keys][1] in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
@@ -425,24 +455,32 @@ module Aws::S3
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination Amazon S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading objects
-    #   from Requester Pays buckets, see [Downloading Objects in Requester
-    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination S3 bucket has Requester
+    #   Pays enabled, the requester will pay for corresponding charges to copy
+    #   the object. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request fails with the HTTP status code `403
-    #   Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :sse_customer_algorithm
     #   The server-side encryption (SSE) algorithm used to encrypt the object.
     #   This parameter is needed only when the object was created using a
     #   checksum algorithm. For more information, see [Protecting data using
     #   SSE-C keys][1] in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
@@ -453,6 +491,10 @@ module Aws::S3
     #   For more information, see [Protecting data using SSE-C keys][1] in the
     #   *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
@@ -461,6 +503,10 @@ module Aws::S3
     #   parameter is needed only when the object was created using a checksum
     #   algorithm. For more information, see [Protecting data using SSE-C
     #   keys][1] in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #

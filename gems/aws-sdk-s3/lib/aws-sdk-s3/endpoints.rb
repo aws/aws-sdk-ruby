@@ -32,6 +32,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -56,6 +58,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -80,6 +84,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: true,
         )
       end
     end
@@ -104,6 +110,8 @@ module Aws::S3
           disable_access_points: true,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -128,6 +136,34 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
+        )
+      end
+    end
+
+    class CreateSession
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3::EndpointParameters.new(
+          bucket: context.params[:bucket],
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          force_path_style: context.config.force_path_style,
+          accelerate: context[:use_accelerate_endpoint],
+          use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
+          use_object_lambda_endpoint: nil,
+          key: nil,
+          prefix: nil,
+          disable_access_points: nil,
+          disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
+          use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: true,
         )
       end
     end
@@ -152,6 +188,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -176,6 +214,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -200,6 +240,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -224,6 +266,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -248,6 +292,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -272,6 +318,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -296,6 +344,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -320,6 +370,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -344,6 +396,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -368,6 +422,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -392,6 +448,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -416,6 +474,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -440,6 +500,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -464,6 +526,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -488,6 +552,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -512,6 +578,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -536,6 +604,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -560,6 +630,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -584,6 +656,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -608,6 +682,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -632,6 +708,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -656,6 +734,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -680,6 +760,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -704,6 +786,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -728,6 +812,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -752,6 +838,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -776,6 +864,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -800,6 +890,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -824,6 +916,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -848,6 +942,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -872,6 +968,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -896,6 +994,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -920,6 +1020,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -944,6 +1046,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -968,6 +1072,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -992,6 +1098,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1016,6 +1124,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1040,6 +1150,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1064,6 +1176,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1088,6 +1202,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1112,6 +1228,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1136,6 +1254,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1160,6 +1280,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1184,6 +1306,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1208,6 +1332,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1232,6 +1358,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1256,6 +1384,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1280,6 +1410,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1304,6 +1436,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1328,6 +1462,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1352,6 +1488,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1376,6 +1514,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1400,6 +1540,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1424,6 +1566,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1448,6 +1592,34 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
+        )
+      end
+    end
+
+    class ListDirectoryBuckets
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::S3::EndpointParameters.new(
+          bucket: nil,
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context[:use_dualstack_endpoint],
+          endpoint: endpoint,
+          force_path_style: context.config.force_path_style,
+          accelerate: context[:use_accelerate_endpoint],
+          use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
+          use_object_lambda_endpoint: nil,
+          key: nil,
+          prefix: nil,
+          disable_access_points: nil,
+          disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
+          use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1472,6 +1644,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1496,6 +1670,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1520,6 +1696,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1544,6 +1722,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1568,6 +1748,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1592,6 +1774,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1616,6 +1800,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1640,6 +1826,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1664,6 +1852,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1688,6 +1878,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1712,6 +1904,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1736,6 +1930,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1760,6 +1956,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1784,6 +1982,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1808,6 +2008,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1832,6 +2034,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1856,6 +2060,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1880,6 +2086,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1904,6 +2112,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1928,6 +2138,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1952,6 +2164,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -1976,6 +2190,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2000,6 +2216,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2024,6 +2242,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2048,6 +2268,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2072,6 +2294,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2096,6 +2320,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2120,6 +2346,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2144,6 +2372,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2168,6 +2398,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2192,6 +2424,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2216,6 +2450,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: true,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2240,6 +2476,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2264,6 +2502,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2288,6 +2528,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
@@ -2312,6 +2554,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: true,
         )
       end
     end
@@ -2336,6 +2580,8 @@ module Aws::S3
           disable_access_points: nil,
           disable_multi_region_access_points: context.config.s3_disable_multiregion_access_points,
           use_arn_region: context.config.s3_use_arn_region,
+          use_s3_express_control_endpoint: nil,
+          disable_s3_express_session_auth: context.config.disable_s3_express_session_auth,
         )
       end
     end
