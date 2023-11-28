@@ -49,10 +49,7 @@
         {"shape":"ObjectNotInActiveTierError"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html",
-      "alias":"PutObjectCopy",
-      "staticContextParams":{
-        "DisableS3ExpressSessionAuth":{"value":true}
-      }
+      "alias":"PutObjectCopy"
     },
     "CreateBucket":{
       "name":"CreateBucket",
@@ -69,8 +66,7 @@
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html",
       "alias":"PutBucket",
       "staticContextParams":{
-        "DisableAccessPoints":{"value":true},
-        "UseS3ExpressControlEndpoint":{"value":true}
+        "DisableAccessPoints":{"value":true}
       }
     },
     "CreateMultipartUpload":{
@@ -84,21 +80,6 @@
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html",
       "alias":"InitiateMultipartUpload"
     },
-    "CreateSession":{
-      "name":"CreateSession",
-      "http":{
-        "method":"GET",
-        "requestUri":"/{Bucket}?session"
-      },
-      "input":{"shape":"CreateSessionRequest"},
-      "output":{"shape":"CreateSessionOutput"},
-      "errors":[
-        {"shape":"NoSuchBucket"}
-      ],
-      "staticContextParams":{
-        "DisableS3ExpressSessionAuth":{"value":true}
-      }
-    },
     "DeleteBucket":{
       "name":"DeleteBucket",
       "http":{
@@ -107,10 +88,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html"
     },
     "DeleteBucketAnalyticsConfiguration":{
       "name":"DeleteBucketAnalyticsConfiguration",
@@ -119,10 +97,7 @@
         "requestUri":"/{Bucket}?analytics",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketAnalyticsConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketAnalyticsConfigurationRequest"}
     },
     "DeleteBucketCors":{
       "name":"DeleteBucketCors",
@@ -132,10 +107,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketCorsRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html"
     },
     "DeleteBucketEncryption":{
       "name":"DeleteBucketEncryption",
@@ -144,10 +116,7 @@
         "requestUri":"/{Bucket}?encryption",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketEncryptionRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketEncryptionRequest"}
     },
     "DeleteBucketIntelligentTieringConfiguration":{
       "name":"DeleteBucketIntelligentTieringConfiguration",
@@ -156,10 +125,7 @@
         "requestUri":"/{Bucket}?intelligent-tiering",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketIntelligentTieringConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketIntelligentTieringConfigurationRequest"}
     },
     "DeleteBucketInventoryConfiguration":{
       "name":"DeleteBucketInventoryConfiguration",
@@ -168,10 +134,7 @@
         "requestUri":"/{Bucket}?inventory",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketInventoryConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketInventoryConfigurationRequest"}
     },
     "DeleteBucketLifecycle":{
       "name":"DeleteBucketLifecycle",
@@ -181,10 +144,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketLifecycleRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html"
     },
     "DeleteBucketMetricsConfiguration":{
       "name":"DeleteBucketMetricsConfiguration",
@@ -193,10 +153,7 @@
         "requestUri":"/{Bucket}?metrics",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketMetricsConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketMetricsConfigurationRequest"}
     },
     "DeleteBucketOwnershipControls":{
       "name":"DeleteBucketOwnershipControls",
@@ -205,10 +162,7 @@
         "requestUri":"/{Bucket}?ownershipControls",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketOwnershipControlsRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketOwnershipControlsRequest"}
     },
     "DeleteBucketPolicy":{
       "name":"DeleteBucketPolicy",
@@ -218,10 +172,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketPolicyRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html"
     },
     "DeleteBucketReplication":{
       "name":"DeleteBucketReplication",
@@ -230,10 +181,7 @@
         "requestUri":"/{Bucket}?replication",
         "responseCode":204
       },
-      "input":{"shape":"DeleteBucketReplicationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeleteBucketReplicationRequest"}
     },
     "DeleteBucketTagging":{
       "name":"DeleteBucketTagging",
@@ -243,10 +191,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketTaggingRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html"
     },
     "DeleteBucketWebsite":{
       "name":"DeleteBucketWebsite",
@@ -256,10 +201,7 @@
         "responseCode":204
       },
       "input":{"shape":"DeleteBucketWebsiteRequest"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html"
     },
     "DeleteObject":{
       "name":"DeleteObject",
@@ -304,10 +246,7 @@
         "requestUri":"/{Bucket}?publicAccessBlock",
         "responseCode":204
       },
-      "input":{"shape":"DeletePublicAccessBlockRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"DeletePublicAccessBlockRequest"}
     },
     "GetBucketAccelerateConfiguration":{
       "name":"GetBucketAccelerateConfiguration",
@@ -316,10 +255,7 @@
         "requestUri":"/{Bucket}?accelerate"
       },
       "input":{"shape":"GetBucketAccelerateConfigurationRequest"},
-      "output":{"shape":"GetBucketAccelerateConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketAccelerateConfigurationOutput"}
     },
     "GetBucketAcl":{
       "name":"GetBucketAcl",
@@ -329,10 +265,7 @@
       },
       "input":{"shape":"GetBucketAclRequest"},
       "output":{"shape":"GetBucketAclOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html"
     },
     "GetBucketAnalyticsConfiguration":{
       "name":"GetBucketAnalyticsConfiguration",
@@ -341,10 +274,7 @@
         "requestUri":"/{Bucket}?analytics"
       },
       "input":{"shape":"GetBucketAnalyticsConfigurationRequest"},
-      "output":{"shape":"GetBucketAnalyticsConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketAnalyticsConfigurationOutput"}
     },
     "GetBucketCors":{
       "name":"GetBucketCors",
@@ -354,10 +284,7 @@
       },
       "input":{"shape":"GetBucketCorsRequest"},
       "output":{"shape":"GetBucketCorsOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html"
     },
     "GetBucketEncryption":{
       "name":"GetBucketEncryption",
@@ -366,10 +293,7 @@
         "requestUri":"/{Bucket}?encryption"
       },
       "input":{"shape":"GetBucketEncryptionRequest"},
-      "output":{"shape":"GetBucketEncryptionOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketEncryptionOutput"}
     },
     "GetBucketIntelligentTieringConfiguration":{
       "name":"GetBucketIntelligentTieringConfiguration",
@@ -378,10 +302,7 @@
         "requestUri":"/{Bucket}?intelligent-tiering"
       },
       "input":{"shape":"GetBucketIntelligentTieringConfigurationRequest"},
-      "output":{"shape":"GetBucketIntelligentTieringConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketIntelligentTieringConfigurationOutput"}
     },
     "GetBucketInventoryConfiguration":{
       "name":"GetBucketInventoryConfiguration",
@@ -390,10 +311,7 @@
         "requestUri":"/{Bucket}?inventory"
       },
       "input":{"shape":"GetBucketInventoryConfigurationRequest"},
-      "output":{"shape":"GetBucketInventoryConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketInventoryConfigurationOutput"}
     },
     "GetBucketLifecycle":{
       "name":"GetBucketLifecycle",
@@ -404,10 +322,7 @@
       "input":{"shape":"GetBucketLifecycleRequest"},
       "output":{"shape":"GetBucketLifecycleOutput"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html",
-      "deprecated":true,
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "deprecated":true
     },
     "GetBucketLifecycleConfiguration":{
       "name":"GetBucketLifecycleConfiguration",
@@ -416,10 +331,7 @@
         "requestUri":"/{Bucket}?lifecycle"
       },
       "input":{"shape":"GetBucketLifecycleConfigurationRequest"},
-      "output":{"shape":"GetBucketLifecycleConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketLifecycleConfigurationOutput"}
     },
     "GetBucketLocation":{
       "name":"GetBucketLocation",
@@ -429,10 +341,7 @@
       },
       "input":{"shape":"GetBucketLocationRequest"},
       "output":{"shape":"GetBucketLocationOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html"
     },
     "GetBucketLogging":{
       "name":"GetBucketLogging",
@@ -442,10 +351,7 @@
       },
       "input":{"shape":"GetBucketLoggingRequest"},
       "output":{"shape":"GetBucketLoggingOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html"
     },
     "GetBucketMetricsConfiguration":{
       "name":"GetBucketMetricsConfiguration",
@@ -454,10 +360,7 @@
         "requestUri":"/{Bucket}?metrics"
       },
       "input":{"shape":"GetBucketMetricsConfigurationRequest"},
-      "output":{"shape":"GetBucketMetricsConfigurationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketMetricsConfigurationOutput"}
     },
     "GetBucketNotification":{
       "name":"GetBucketNotification",
@@ -468,10 +371,7 @@
       "input":{"shape":"GetBucketNotificationConfigurationRequest"},
       "output":{"shape":"NotificationConfigurationDeprecated"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html",
-      "deprecated":true,
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "deprecated":true
     },
     "GetBucketNotificationConfiguration":{
       "name":"GetBucketNotificationConfiguration",
@@ -480,10 +380,7 @@
         "requestUri":"/{Bucket}?notification"
       },
       "input":{"shape":"GetBucketNotificationConfigurationRequest"},
-      "output":{"shape":"NotificationConfiguration"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"NotificationConfiguration"}
     },
     "GetBucketOwnershipControls":{
       "name":"GetBucketOwnershipControls",
@@ -492,10 +389,7 @@
         "requestUri":"/{Bucket}?ownershipControls"
       },
       "input":{"shape":"GetBucketOwnershipControlsRequest"},
-      "output":{"shape":"GetBucketOwnershipControlsOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketOwnershipControlsOutput"}
     },
     "GetBucketPolicy":{
       "name":"GetBucketPolicy",
@@ -505,10 +399,7 @@
       },
       "input":{"shape":"GetBucketPolicyRequest"},
       "output":{"shape":"GetBucketPolicyOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html"
     },
     "GetBucketPolicyStatus":{
       "name":"GetBucketPolicyStatus",
@@ -517,10 +408,7 @@
         "requestUri":"/{Bucket}?policyStatus"
       },
       "input":{"shape":"GetBucketPolicyStatusRequest"},
-      "output":{"shape":"GetBucketPolicyStatusOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketPolicyStatusOutput"}
     },
     "GetBucketReplication":{
       "name":"GetBucketReplication",
@@ -529,10 +417,7 @@
         "requestUri":"/{Bucket}?replication"
       },
       "input":{"shape":"GetBucketReplicationRequest"},
-      "output":{"shape":"GetBucketReplicationOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetBucketReplicationOutput"}
     },
     "GetBucketRequestPayment":{
       "name":"GetBucketRequestPayment",
@@ -542,10 +427,7 @@
       },
       "input":{"shape":"GetBucketRequestPaymentRequest"},
       "output":{"shape":"GetBucketRequestPaymentOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html"
     },
     "GetBucketTagging":{
       "name":"GetBucketTagging",
@@ -555,10 +437,7 @@
       },
       "input":{"shape":"GetBucketTaggingRequest"},
       "output":{"shape":"GetBucketTaggingOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html"
     },
     "GetBucketVersioning":{
       "name":"GetBucketVersioning",
@@ -568,10 +447,7 @@
       },
       "input":{"shape":"GetBucketVersioningRequest"},
       "output":{"shape":"GetBucketVersioningOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html"
     },
     "GetBucketWebsite":{
       "name":"GetBucketWebsite",
@@ -581,10 +457,7 @@
       },
       "input":{"shape":"GetBucketWebsiteRequest"},
       "output":{"shape":"GetBucketWebsiteOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html",
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html"
     },
     "GetObject":{
       "name":"GetObject",
@@ -687,10 +560,7 @@
         "requestUri":"/{Bucket}?publicAccessBlock"
       },
       "input":{"shape":"GetPublicAccessBlockRequest"},
-      "output":{"shape":"GetPublicAccessBlockOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"GetPublicAccessBlockOutput"}
     },
     "HeadBucket":{
       "name":"HeadBucket",
@@ -699,7 +569,6 @@
         "requestUri":"/{Bucket}"
       },
       "input":{"shape":"HeadBucketRequest"},
-      "output":{"shape":"HeadBucketOutput"},
       "errors":[
         {"shape":"NoSuchBucket"}
       ],
@@ -725,10 +594,7 @@
         "requestUri":"/{Bucket}?analytics"
       },
       "input":{"shape":"ListBucketAnalyticsConfigurationsRequest"},
-      "output":{"shape":"ListBucketAnalyticsConfigurationsOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"ListBucketAnalyticsConfigurationsOutput"}
     },
     "ListBucketIntelligentTieringConfigurations":{
       "name":"ListBucketIntelligentTieringConfigurations",
@@ -737,10 +603,7 @@
         "requestUri":"/{Bucket}?intelligent-tiering"
       },
       "input":{"shape":"ListBucketIntelligentTieringConfigurationsRequest"},
-      "output":{"shape":"ListBucketIntelligentTieringConfigurationsOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"ListBucketIntelligentTieringConfigurationsOutput"}
     },
     "ListBucketInventoryConfigurations":{
       "name":"ListBucketInventoryConfigurations",
@@ -749,10 +612,7 @@
         "requestUri":"/{Bucket}?inventory"
       },
       "input":{"shape":"ListBucketInventoryConfigurationsRequest"},
-      "output":{"shape":"ListBucketInventoryConfigurationsOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "output":{"shape":"ListBucketInventoryConfigurationsOutput"}
     },
     "ListBucketMetricsConfigurations":{
       "name":"ListBucketMetricsConfigurations",
@@ -772,18 +632,6 @@
       "output":{"shape":"ListBucketsOutput"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html",
       "alias":"GetService"
-    },
-    "ListDirectoryBuckets":{
-      "name":"ListDirectoryBuckets",
-      "http":{
-        "method":"GET",
-        "requestUri":"/"
-      },
-      "input":{"shape":"ListDirectoryBucketsRequest"},
-      "output":{"shape":"ListDirectoryBucketsOutput"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
     },
     "ListMultipartUploads":{
       "name":"ListMultipartUploads",
@@ -852,9 +700,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":false
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketAcl":{
@@ -868,9 +713,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketAnalyticsConfiguration":{
@@ -879,10 +721,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?analytics"
       },
-      "input":{"shape":"PutBucketAnalyticsConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"PutBucketAnalyticsConfigurationRequest"}
     },
     "PutBucketCors":{
       "name":"PutBucketCors",
@@ -895,9 +734,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketEncryption":{
@@ -910,9 +746,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketIntelligentTieringConfiguration":{
@@ -921,10 +754,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?intelligent-tiering"
       },
-      "input":{"shape":"PutBucketIntelligentTieringConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"PutBucketIntelligentTieringConfigurationRequest"}
     },
     "PutBucketInventoryConfiguration":{
       "name":"PutBucketInventoryConfiguration",
@@ -932,10 +762,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?inventory"
       },
-      "input":{"shape":"PutBucketInventoryConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"PutBucketInventoryConfigurationRequest"}
     },
     "PutBucketLifecycle":{
       "name":"PutBucketLifecycle",
@@ -949,9 +776,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketLifecycleConfiguration":{
@@ -964,9 +788,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketLogging":{
@@ -980,9 +801,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketMetricsConfiguration":{
@@ -991,10 +809,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?metrics"
       },
-      "input":{"shape":"PutBucketMetricsConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"PutBucketMetricsConfigurationRequest"}
     },
     "PutBucketNotification":{
       "name":"PutBucketNotification",
@@ -1008,9 +823,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketNotificationConfiguration":{
@@ -1019,10 +831,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?notification"
       },
-      "input":{"shape":"PutBucketNotificationConfigurationRequest"},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "input":{"shape":"PutBucketNotificationConfigurationRequest"}
     },
     "PutBucketOwnershipControls":{
       "name":"PutBucketOwnershipControls",
@@ -1031,10 +840,7 @@
         "requestUri":"/{Bucket}?ownershipControls"
       },
       "input":{"shape":"PutBucketOwnershipControlsRequest"},
-      "httpChecksum":{"requestChecksumRequired":true},
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
-      }
+      "httpChecksum":{"requestChecksumRequired":true}
     },
     "PutBucketPolicy":{
       "name":"PutBucketPolicy",
@@ -1047,9 +853,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketReplication":{
@@ -1062,9 +865,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketRequestPayment":{
@@ -1078,9 +878,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketTagging":{
@@ -1094,9 +891,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketVersioning":{
@@ -1110,9 +904,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutBucketWebsite":{
@@ -1126,9 +917,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "PutObject":{
@@ -1224,9 +1012,6 @@
       "httpChecksum":{
         "requestAlgorithmMember":"ChecksumAlgorithm",
         "requestChecksumRequired":true
-      },
-      "staticContextParams":{
-        "UseS3ExpressControlEndpoint":{"value":true}
       }
     },
     "RestoreObject":{
@@ -1282,10 +1067,7 @@
       },
       "input":{"shape":"UploadPartCopyRequest"},
       "output":{"shape":"UploadPartCopyOutput"},
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html",
-      "staticContextParams":{
-        "DisableS3ExpressSessionAuth":{"value":true}
-      }
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html"
     },
     "WriteGetObjectResponse":{
       "name":"WriteGetObjectResponse",
@@ -1382,11 +1164,6 @@
       "members":{
         "Owner":{"shape":"OwnerOverride"}
       }
-    },
-    "AccessKeyIdValue":{"type":"string"},
-    "AccessPointAlias":{
-      "type":"boolean",
-      "box":true
     },
     "AccessPointArn":{"type":"string"},
     "AccountId":{"type":"string"},
@@ -1499,14 +1276,12 @@
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":409},
       "exception":true
     },
     "BucketAlreadyOwnedByYou":{
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":409},
       "exception":true
     },
     "BucketCannedACL":{
@@ -1517,13 +1292,6 @@
         "public-read-write",
         "authenticated-read"
       ]
-    },
-    "BucketInfo":{
-      "type":"structure",
-      "members":{
-        "DataRedundancy":{"shape":"DataRedundancy"},
-        "Type":{"shape":"BucketType"}
-      }
     },
     "BucketKeyEnabled":{
       "type":"boolean",
@@ -1548,7 +1316,6 @@
         "ap-northeast-2",
         "ap-northeast-3",
         "ap-south-1",
-        "ap-south-2",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-southeast-3",
@@ -1559,7 +1326,6 @@
         "eu-central-1",
         "eu-north-1",
         "eu-south-1",
-        "eu-south-2",
         "eu-west-1",
         "eu-west-2",
         "eu-west-3",
@@ -1569,10 +1335,11 @@
         "us-gov-east-1",
         "us-gov-west-1",
         "us-west-1",
-        "us-west-2"
+        "us-west-2",
+        "ap-south-2",
+        "eu-south-2"
       ]
     },
-    "BucketLocationName":{"type":"string"},
     "BucketLoggingStatus":{
       "type":"structure",
       "members":{
@@ -1588,10 +1355,6 @@
       ]
     },
     "BucketName":{"type":"string"},
-    "BucketType":{
-      "type":"string",
-      "enum":["Directory"]
-    },
     "BucketVersioningStatus":{
       "type":"string",
       "enum":[
@@ -2241,9 +2004,7 @@
     "CreateBucketConfiguration":{
       "type":"structure",
       "members":{
-        "LocationConstraint":{"shape":"BucketLocationConstraint"},
-        "Location":{"shape":"LocationInfo"},
-        "Bucket":{"shape":"BucketInfo"}
+        "LocationConstraint":{"shape":"BucketLocationConstraint"}
       }
     },
     "CreateBucketOutput":{
@@ -2536,38 +2297,7 @@
         }
       }
     },
-    "CreateSessionOutput":{
-      "type":"structure",
-      "required":["Credentials"],
-      "members":{
-        "Credentials":{
-          "shape":"SessionCredentials",
-          "locationName":"Credentials"
-        }
-      }
-    },
-    "CreateSessionRequest":{
-      "type":"structure",
-      "required":["Bucket"],
-      "members":{
-        "SessionMode":{
-          "shape":"SessionMode",
-          "location":"header",
-          "locationName":"x-amz-create-session-mode"
-        },
-        "Bucket":{
-          "shape":"BucketName",
-          "contextParam":{"name":"Bucket"},
-          "location":"uri",
-          "locationName":"Bucket"
-        }
-      }
-    },
     "CreationDate":{"type":"timestamp"},
-    "DataRedundancy":{
-      "type":"string",
-      "enum":["SingleAvailabilityZone"]
-    },
     "Date":{
       "type":"timestamp",
       "timestampFormat":"iso8601"
@@ -3089,11 +2819,6 @@
         "ReplicationTime":{"shape":"ReplicationTime"},
         "Metrics":{"shape":"Metrics"}
       }
-    },
-    "DirectoryBucketToken":{
-      "type":"string",
-      "max":1024,
-      "min":0
     },
     "DisplayName":{"type":"string"},
     "ETag":{"type":"string"},
@@ -4549,31 +4274,6 @@
         "locationName":"Grant"
       }
     },
-    "HeadBucketOutput":{
-      "type":"structure",
-      "members":{
-        "BucketLocationType":{
-          "shape":"LocationType",
-          "location":"header",
-          "locationName":"x-amz-bucket-location-type"
-        },
-        "BucketLocationName":{
-          "shape":"BucketLocationName",
-          "location":"header",
-          "locationName":"x-amz-bucket-location-name"
-        },
-        "BucketRegion":{
-          "shape":"Region",
-          "location":"header",
-          "locationName":"x-amz-bucket-region"
-        },
-        "AccessPointAlias":{
-          "shape":"AccessPointAlias",
-          "location":"header",
-          "locationName":"x-amz-access-point-alias"
-        }
-      }
-    },
     "HeadBucketRequest":{
       "type":"structure",
       "required":["Bucket"],
@@ -4950,7 +4650,6 @@
         "StorageClass":{"shape":"StorageClass"},
         "AccessTier":{"shape":"IntelligentTieringAccessTier"}
       },
-      "error":{"httpStatusCode":403},
       "exception":true
     },
     "InventoryConfiguration":{
@@ -5350,28 +5049,6 @@
       "members":{
         "Buckets":{"shape":"Buckets"},
         "Owner":{"shape":"Owner"}
-      }
-    },
-    "ListDirectoryBucketsOutput":{
-      "type":"structure",
-      "members":{
-        "Buckets":{"shape":"Buckets"},
-        "ContinuationToken":{"shape":"DirectoryBucketToken"}
-      }
-    },
-    "ListDirectoryBucketsRequest":{
-      "type":"structure",
-      "members":{
-        "ContinuationToken":{
-          "shape":"DirectoryBucketToken",
-          "location":"querystring",
-          "locationName":"continuation-token"
-        },
-        "MaxDirectoryBuckets":{
-          "shape":"MaxDirectoryBuckets",
-          "location":"querystring",
-          "locationName":"max-directory-buckets"
-        }
       }
     },
     "ListMultipartUploadsOutput":{
@@ -5795,19 +5472,7 @@
       }
     },
     "Location":{"type":"string"},
-    "LocationInfo":{
-      "type":"structure",
-      "members":{
-        "Type":{"shape":"LocationType"},
-        "Name":{"shape":"LocationNameAsString"}
-      }
-    },
-    "LocationNameAsString":{"type":"string"},
     "LocationPrefix":{"type":"string"},
-    "LocationType":{
-      "type":"string",
-      "enum":["AvailabilityZone"]
-    },
     "LoggingEnabled":{
       "type":"structure",
       "required":[
@@ -5840,12 +5505,6 @@
     "MaxAgeSeconds":{
       "type":"integer",
       "box":true
-    },
-    "MaxDirectoryBuckets":{
-      "type":"integer",
-      "box":true,
-      "max":1000,
-      "min":0
     },
     "MaxKeys":{"type":"integer"},
     "MaxParts":{"type":"integer"},
@@ -5958,21 +5617,18 @@
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":404},
       "exception":true
     },
     "NoSuchKey":{
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":404},
       "exception":true
     },
     "NoSuchUpload":{
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":404},
       "exception":true
     },
     "NoncurrentVersionExpiration":{
@@ -6048,7 +5704,6 @@
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":403},
       "exception":true
     },
     "ObjectAttributes":{
@@ -6163,7 +5818,6 @@
       "type":"structure",
       "members":{
       },
-      "error":{"httpStatusCode":403},
       "exception":true
     },
     "ObjectOwnership":{
@@ -6209,8 +5863,7 @@
         "DEEP_ARCHIVE",
         "OUTPOSTS",
         "GLACIER_IR",
-        "SNOW",
-        "EXPRESS_ONEZONE"
+        "SNOW"
       ]
     },
     "ObjectVersion":{
@@ -7853,11 +7506,6 @@
         "Protocol":{"shape":"Protocol"}
       }
     },
-    "Region":{
-      "type":"string",
-      "max":20,
-      "min":0
-    },
     "ReplaceKeyPrefixWith":{"type":"string"},
     "ReplaceKeyWith":{"type":"string"},
     "ReplicaKmsKeyID":{"type":"string"},
@@ -8314,45 +7962,6 @@
       "member":{"shape":"ServerSideEncryptionRule"},
       "flattened":true
     },
-    "SessionCredentialValue":{
-      "type":"string",
-      "sensitive":true
-    },
-    "SessionCredentials":{
-      "type":"structure",
-      "required":[
-        "AccessKeyId",
-        "SecretAccessKey",
-        "SessionToken",
-        "Expiration"
-      ],
-      "members":{
-        "AccessKeyId":{
-          "shape":"AccessKeyIdValue",
-          "locationName":"AccessKeyId"
-        },
-        "SecretAccessKey":{
-          "shape":"SessionCredentialValue",
-          "locationName":"SecretAccessKey"
-        },
-        "SessionToken":{
-          "shape":"SessionCredentialValue",
-          "locationName":"SessionToken"
-        },
-        "Expiration":{
-          "shape":"SessionExpiration",
-          "locationName":"Expiration"
-        }
-      }
-    },
-    "SessionExpiration":{"type":"timestamp"},
-    "SessionMode":{
-      "type":"string",
-      "enum":[
-        "ReadOnly",
-        "ReadWrite"
-      ]
-    },
     "Setting":{
       "type":"boolean",
       "box":true
@@ -8427,8 +8036,7 @@
         "DEEP_ARCHIVE",
         "OUTPOSTS",
         "GLACIER_IR",
-        "SNOW",
-        "EXPRESS_ONEZONE"
+        "SNOW"
       ]
     },
     "StorageClassAnalysis":{
@@ -9181,10 +8789,6 @@
     },
     "DisableMultiRegionAccessPoints":{
       "documentation":"Disables this client's usage of Multi-Region Access Points.",
-      "type":"boolean"
-    },
-    "DisableS3ExpressSessionAuth":{
-      "documentation":"Disables this client's usage of Session Auth for S3Express\n      buckets and reverts to using conventional SigV4 for those.",
       "type":"boolean"
     },
     "ForcePathStyle":{

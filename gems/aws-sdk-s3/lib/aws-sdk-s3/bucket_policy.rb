@@ -185,15 +185,9 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the account ID that
-    #   you provide does not match the actual owner of the bucket, the request
-    #   fails with the HTTP status code `403 Forbidden` (access denied).
-    #
-    #   <note markdown="1"> For directory buckets, this header is not supported in this API
-    #   operation. If you specify this header, the request fails with the HTTP
-    #   status code `501 Not Implemented`.
-    #
-    #    </note>
+    #   The account ID of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request fails with the HTTP status code `403
+    #   Forbidden` (access denied).
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
@@ -219,42 +213,17 @@ module Aws::S3
     #   For requests made using the Amazon Web Services Command Line Interface
     #   (CLI) or Amazon Web Services SDKs, this field is calculated
     #   automatically.
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
     # @option options [String] :checksum_algorithm
     #   Indicates the algorithm used to create the checksum for the object
-    #   when you use the SDK. This header will not provide any additional
-    #   functionality if you don't use the SDK. When you send this header,
-    #   there must be a corresponding `x-amz-checksum-algorithm ` or
-    #   `x-amz-trailer` header sent. Otherwise, Amazon S3 fails the request
-    #   with the HTTP status code `400 Bad Request`.
+    #   when using the SDK. This header will not provide any additional
+    #   functionality if not using the SDK. When sending this header, there
+    #   must be a corresponding `x-amz-checksum` or `x-amz-trailer` header
+    #   sent. Otherwise, Amazon S3 fails the request with the HTTP status code
+    #   `400 Bad Request`. For more information, see [Checking object
+    #   integrity][1] in the *Amazon S3 User Guide*.
     #
-    #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
-    #   the supported algorithm from the following list:
-    #
-    #   * CRC32
-    #
-    #   * CRC32C
-    #
-    #   * SHA1
-    #
-    #   * SHA256
-    #
-    #   For more information, see [Checking object integrity][1] in the
-    #   *Amazon S3 User Guide*.
-    #
-    #   If the individual checksum value you provide through
-    #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
-    #
-    #   <note markdown="1"> For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
-    #   is the default checksum algorithm that's used for performance.
-    #
-    #    </note>
+    #   If you provide an individual checksum, Amazon S3 ignores any provided
+    #   `ChecksumAlgorithm` parameter.
     #
     #
     #
@@ -262,25 +231,12 @@ module Aws::S3
     # @option options [Boolean] :confirm_remove_self_bucket_access
     #   Set this parameter to true to confirm that you want to remove your
     #   permissions to change this bucket policy in the future.
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
     # @option options [required, String] :policy
     #   The bucket policy as a JSON document.
-    #
-    #   For directory buckets, the only IAM action supported in the bucket
-    #   policy is `s3express:CreateSession`.
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the account ID that
-    #   you provide does not match the actual owner of the bucket, the request
-    #   fails with the HTTP status code `403 Forbidden` (access denied).
-    #
-    #   <note markdown="1"> For directory buckets, this header is not supported in this API
-    #   operation. If you specify this header, the request fails with the HTTP
-    #   status code `501 Not Implemented`.
-    #
-    #    </note>
+    #   The account ID of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request fails with the HTTP status code `403
+    #   Forbidden` (access denied).
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

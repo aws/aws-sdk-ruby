@@ -80,16 +80,6 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
-  # @!attribute use_s3_express_control_endpoint
-  #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. CreateBucket)
-  #
-  #   @return [Boolean]
-  #
-  # @!attribute disable_s3_express_session_auth
-  #   Parameter to indicate whether S3Express session auth should be disabled
-  #
-  #   @return [Boolean]
-  #
   EndpointParameters = Struct.new(
     :bucket,
     :region,
@@ -105,8 +95,6 @@ module Aws::S3
     :disable_access_points,
     :disable_multi_region_access_points,
     :use_arn_region,
-    :use_s3_express_control_endpoint,
-    :disable_s3_express_session_auth,
   ) do
     include Aws::Structure
 
@@ -127,8 +115,6 @@ module Aws::S3
         'DisableAccessPoints' => :disable_access_points,
         'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
         'UseArnRegion' => :use_arn_region,
-        'UseS3ExpressControlEndpoint' => :use_s3_express_control_endpoint,
-        'DisableS3ExpressSessionAuth' => :disable_s3_express_session_auth,
       }.freeze
     end
 
@@ -171,8 +157,6 @@ module Aws::S3
         raise ArgumentError, "Missing required EndpointParameter: :disable_multi_region_access_points"
       end
       self[:use_arn_region] = options[:use_arn_region]
-      self[:use_s3_express_control_endpoint] = options[:use_s3_express_control_endpoint]
-      self[:disable_s3_express_session_auth] = options[:disable_s3_express_session_auth]
     end
   end
 end
