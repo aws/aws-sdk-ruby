@@ -266,9 +266,9 @@ module Aws::S3
     #   bucket. If this element is empty, notifications are turned off for the
     #   bucket.
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the account ID that
-    #   you provide does not match the actual owner of the bucket, the request
-    #   fails with the HTTP status code `403 Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request fails with the HTTP status code `403
+    #   Forbidden` (access denied).
     # @option options [Boolean] :skip_destination_validation
     #   Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
     #   True or false value.

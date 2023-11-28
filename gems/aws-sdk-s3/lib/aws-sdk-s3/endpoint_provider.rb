@@ -24,8 +24,6 @@ module Aws::S3
       disable_access_points = parameters.disable_access_points
       disable_multi_region_access_points = parameters.disable_multi_region_access_points
       use_arn_region = parameters.use_arn_region
-      use_s3_express_control_endpoint = parameters.use_s3_express_control_endpoint
-      disable_s3_express_session_auth = parameters.disable_s3_express_session_auth
       if Aws::Endpoints::Matchers.set?(region)
         if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           raise ArgumentError, "Accelerate cannot be used with FIPS"
@@ -41,84 +39,6 @@ module Aws::S3
         end
         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && (partition_result = Aws::Endpoints::Matchers.aws_partition(region)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
           raise ArgumentError, "Partition does not support FIPS"
-        end
-        if Aws::Endpoints::Matchers.set?(bucket) && (bucket_suffix = Aws::Endpoints::Matchers.substring(bucket, 0, 6, true)) && Aws::Endpoints::Matchers.string_equals?(bucket_suffix, "--x-s3")
-          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-            raise ArgumentError, "S3Express does not support Dual-stack."
-          end
-          if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true)
-            raise ArgumentError, "S3Express does not support S3 Accelerate."
-          end
-          if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-            if Aws::Endpoints::Matchers.set?(disable_s3_express_session_auth) && Aws::Endpoints::Matchers.boolean_equals?(disable_s3_express_session_auth, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(url, "isIp"), true)
-                if (uri_encoded_bucket = Aws::Endpoints::Matchers.uri_encode(bucket))
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}/#{uri_encoded_bucket}#{url['path']}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-                end
-              end
-              if Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, false)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{bucket}.#{url['authority']}#{url['path']}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              raise ArgumentError, "S3Express bucket name is not a valid virtual hostable name."
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(url, "isIp"), true)
-              if (uri_encoded_bucket = Aws::Endpoints::Matchers.uri_encode(bucket))
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}/#{uri_encoded_bucket}#{url['path']}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-            end
-            if Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, false)
-              return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{bucket}.#{url['authority']}#{url['path']}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-            end
-            raise ArgumentError, "S3Express bucket name is not a valid virtual hostable name."
-          end
-          if Aws::Endpoints::Matchers.set?(use_s3_express_control_endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_s3_express_control_endpoint, true)
-            if (uri_encoded_bucket = Aws::Endpoints::Matchers.uri_encode(bucket)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint))
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                return Aws::Endpoints::Endpoint.new(url: "https://s3express-control-fips.#{region}.amazonaws.com/#{uri_encoded_bucket}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              return Aws::Endpoints::Endpoint.new(url: "https://s3express-control.#{region}.amazonaws.com/#{uri_encoded_bucket}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-            end
-          end
-          if Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, false)
-            if Aws::Endpoints::Matchers.set?(disable_s3_express_session_auth) && Aws::Endpoints::Matchers.boolean_equals?(disable_s3_express_session_auth, true)
-              if (s3express_availability_zone_id = Aws::Endpoints::Matchers.substring(bucket, 6, 14, true)) && (s3express_availability_zone_delim = Aws::Endpoints::Matchers.substring(bucket, 14, 16, true)) && Aws::Endpoints::Matchers.string_equals?(s3express_availability_zone_delim, "--")
-                if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-fips-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-                end
-                return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              if (s3express_availability_zone_id = Aws::Endpoints::Matchers.substring(bucket, 6, 15, true)) && (s3express_availability_zone_delim = Aws::Endpoints::Matchers.substring(bucket, 15, 17, true)) && Aws::Endpoints::Matchers.string_equals?(s3express_availability_zone_delim, "--")
-                if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-fips-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-                end
-                return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              raise ArgumentError, "Unrecognized S3Express bucket name format."
-            end
-            if (s3express_availability_zone_id = Aws::Endpoints::Matchers.substring(bucket, 6, 14, true)) && (s3express_availability_zone_delim = Aws::Endpoints::Matchers.substring(bucket, 14, 16, true)) && Aws::Endpoints::Matchers.string_equals?(s3express_availability_zone_delim, "--")
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-fips-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-            end
-            if (s3express_availability_zone_id = Aws::Endpoints::Matchers.substring(bucket, 6, 15, true)) && (s3express_availability_zone_delim = Aws::Endpoints::Matchers.substring(bucket, 15, 17, true)) && Aws::Endpoints::Matchers.string_equals?(s3express_availability_zone_delim, "--")
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-fips-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-              end
-              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3express-#{s3express_availability_zone_id}.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-            end
-            raise ArgumentError, "Unrecognized S3Express bucket name format."
-          end
-          raise ArgumentError, "S3Express bucket name is not a valid virtual hostable name."
-        end
-        if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(bucket)) && Aws::Endpoints::Matchers.set?(use_s3_express_control_endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_s3_express_control_endpoint, true)
-          if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-            return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-          end
-          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-            return Aws::Endpoints::Endpoint.new(url: "https://s3express-control-fips.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
-          end
-          return Aws::Endpoints::Endpoint.new(url: "https://s3express-control.#{region}.amazonaws.com", headers: {}, properties: {"backend"=>"S3Express", "authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3express", "signingRegion"=>"#{region}"}]})
         end
         if Aws::Endpoints::Matchers.set?(bucket) && (hardware_type = Aws::Endpoints::Matchers.substring(bucket, 49, 50, true)) && (region_prefix = Aws::Endpoints::Matchers.substring(bucket, 8, 12, true)) && (bucket_alias_suffix = Aws::Endpoints::Matchers.substring(bucket, 0, 7, true)) && (outpost_id = Aws::Endpoints::Matchers.substring(bucket, 32, 49, true)) && (region_partition = Aws::Endpoints::Matchers.aws_partition(region)) && Aws::Endpoints::Matchers.string_equals?(bucket_alias_suffix, "--op-s3")
           if Aws::Endpoints::Matchers.valid_host_label?(outpost_id, false)
