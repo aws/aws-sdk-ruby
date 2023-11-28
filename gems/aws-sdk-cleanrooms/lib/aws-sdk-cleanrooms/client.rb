@@ -616,6 +616,14 @@ module Aws::CleanRooms
     #   you define. When you use tagging, you can also use tag-based access
     #   control in IAM policies to control access to this resource.
     #
+    # @option params [Types::PaymentConfiguration] :creator_payment_configuration
+    #   The collaboration creator's payment responsibilities set by the
+    #   collaboration creator.
+    #
+    #   If the collaboration creator hasn't specified anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -628,6 +636,11 @@ module Aws::CleanRooms
     #         account_id: "AccountId", # required
     #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
     #         display_name: "DisplayName", # required
+    #         payment_configuration: {
+    #           query_compute: { # required
+    #             is_responsible: false, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     name: "CollaborationName", # required
@@ -643,6 +656,11 @@ module Aws::CleanRooms
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     creator_payment_configuration: {
+    #       query_compute: { # required
+    #         is_responsible: false, # required
+    #       },
     #     },
     #   })
     #
@@ -924,7 +942,7 @@ module Aws::CleanRooms
     #
     # @option params [required, String] :query_log_status
     #   An indicator as to whether query logging has been enabled or disabled
-    #   for the collaboration.
+    #   for the membership.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
@@ -935,6 +953,16 @@ module Aws::CleanRooms
     # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
+    #
+    # @option params [Types::MembershipPaymentConfiguration] :payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #
+    #   Not required if the collaboration member has the member ability to run
+    #   queries.
+    #
+    #   Required if the collaboration member doesn't have the member ability
+    #   to run queries but is configured as a payer by the collaboration
+    #   creator.
     #
     # @return [Types::CreateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -958,6 +986,11 @@ module Aws::CleanRooms
     #       },
     #       role_arn: "RoleArn",
     #     },
+    #     payment_configuration: {
+    #       query_compute: { # required
+    #         is_responsible: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -979,6 +1012,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -1495,6 +1529,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -1964,6 +1999,7 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].update_time #=> Time
     #   resp.member_summaries[0].membership_id #=> String
     #   resp.member_summaries[0].membership_arn #=> String
+    #   resp.member_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembers AWS API Documentation
     #
@@ -2017,6 +2053,7 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership_summaries[0].member_abilities #=> Array
     #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMemberships AWS API Documentation
     #
@@ -2611,7 +2648,7 @@ module Aws::CleanRooms
     #
     # @option params [String] :query_log_status
     #   An indicator as to whether query logging has been enabled or disabled
-    #   for the collaboration.
+    #   for the membership.
     #
     # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
     #   The default protected query result configuration as specified by the
@@ -2657,6 +2694,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -2734,7 +2772,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

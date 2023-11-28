@@ -25,16 +25,17 @@ module Aws::Connect
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,12 +59,16 @@ module Aws::Connect
           case context.operation_name
           when :activate_evaluation_form
             Aws::Connect::Endpoints::ActivateEvaluationForm.build(context)
+          when :associate_analytics_data_set
+            Aws::Connect::Endpoints::AssociateAnalyticsDataSet.build(context)
           when :associate_approved_origin
             Aws::Connect::Endpoints::AssociateApprovedOrigin.build(context)
           when :associate_bot
             Aws::Connect::Endpoints::AssociateBot.build(context)
           when :associate_default_vocabulary
             Aws::Connect::Endpoints::AssociateDefaultVocabulary.build(context)
+          when :associate_flow
+            Aws::Connect::Endpoints::AssociateFlow.build(context)
           when :associate_instance_storage_config
             Aws::Connect::Endpoints::AssociateInstanceStorageConfig.build(context)
           when :associate_lambda_function
@@ -80,6 +85,14 @@ module Aws::Connect
             Aws::Connect::Endpoints::AssociateSecurityKey.build(context)
           when :associate_traffic_distribution_group_user
             Aws::Connect::Endpoints::AssociateTrafficDistributionGroupUser.build(context)
+          when :batch_associate_analytics_data_set
+            Aws::Connect::Endpoints::BatchAssociateAnalyticsDataSet.build(context)
+          when :batch_disassociate_analytics_data_set
+            Aws::Connect::Endpoints::BatchDisassociateAnalyticsDataSet.build(context)
+          when :batch_get_flow_association
+            Aws::Connect::Endpoints::BatchGetFlowAssociation.build(context)
+          when :batch_put_contact
+            Aws::Connect::Endpoints::BatchPutContact.build(context)
           when :claim_phone_number
             Aws::Connect::Endpoints::ClaimPhoneNumber.build(context)
           when :create_agent_status
@@ -98,6 +111,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateIntegrationAssociation.build(context)
           when :create_participant
             Aws::Connect::Endpoints::CreateParticipant.build(context)
+          when :create_persistent_contact_association
+            Aws::Connect::Endpoints::CreatePersistentContactAssociation.build(context)
           when :create_prompt
             Aws::Connect::Endpoints::CreatePrompt.build(context)
           when :create_queue
@@ -216,10 +231,14 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeView.build(context)
           when :describe_vocabulary
             Aws::Connect::Endpoints::DescribeVocabulary.build(context)
+          when :disassociate_analytics_data_set
+            Aws::Connect::Endpoints::DisassociateAnalyticsDataSet.build(context)
           when :disassociate_approved_origin
             Aws::Connect::Endpoints::DisassociateApprovedOrigin.build(context)
           when :disassociate_bot
             Aws::Connect::Endpoints::DisassociateBot.build(context)
+          when :disassociate_flow
+            Aws::Connect::Endpoints::DisassociateFlow.build(context)
           when :disassociate_instance_storage_config
             Aws::Connect::Endpoints::DisassociateInstanceStorageConfig.build(context)
           when :disassociate_lambda_function
@@ -246,6 +265,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::GetCurrentUserData.build(context)
           when :get_federation_token
             Aws::Connect::Endpoints::GetFederationToken.build(context)
+          when :get_flow_association
+            Aws::Connect::Endpoints::GetFlowAssociation.build(context)
           when :get_metric_data
             Aws::Connect::Endpoints::GetMetricData.build(context)
           when :get_metric_data_v2
@@ -256,8 +277,12 @@ module Aws::Connect
             Aws::Connect::Endpoints::GetTaskTemplate.build(context)
           when :get_traffic_distribution
             Aws::Connect::Endpoints::GetTrafficDistribution.build(context)
+          when :import_phone_number
+            Aws::Connect::Endpoints::ImportPhoneNumber.build(context)
           when :list_agent_statuses
             Aws::Connect::Endpoints::ListAgentStatuses.build(context)
+          when :list_analytics_data_associations
+            Aws::Connect::Endpoints::ListAnalyticsDataAssociations.build(context)
           when :list_approved_origins
             Aws::Connect::Endpoints::ListApprovedOrigins.build(context)
           when :list_bots
@@ -276,6 +301,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListEvaluationFormVersions.build(context)
           when :list_evaluation_forms
             Aws::Connect::Endpoints::ListEvaluationForms.build(context)
+          when :list_flow_associations
+            Aws::Connect::Endpoints::ListFlowAssociations.build(context)
           when :list_hours_of_operations
             Aws::Connect::Endpoints::ListHoursOfOperations.build(context)
           when :list_instance_attributes
@@ -302,6 +329,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListQueues.build(context)
           when :list_quick_connects
             Aws::Connect::Endpoints::ListQuickConnects.build(context)
+          when :list_realtime_contact_analysis_segments_v2
+            Aws::Connect::Endpoints::ListRealtimeContactAnalysisSegmentsV2.build(context)
           when :list_routing_profile_queues
             Aws::Connect::Endpoints::ListRoutingProfileQueues.build(context)
           when :list_routing_profiles
@@ -364,6 +393,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::SearchUsers.build(context)
           when :search_vocabularies
             Aws::Connect::Endpoints::SearchVocabularies.build(context)
+          when :send_chat_integration_event
+            Aws::Connect::Endpoints::SendChatIntegrationEvent.build(context)
           when :start_chat_contact
             Aws::Connect::Endpoints::StartChatContact.build(context)
           when :start_contact_evaluation
@@ -376,6 +407,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::StartOutboundVoiceContact.build(context)
           when :start_task_contact
             Aws::Connect::Endpoints::StartTaskContact.build(context)
+          when :start_web_rtc_contact
+            Aws::Connect::Endpoints::StartWebRTCContact.build(context)
           when :stop_contact
             Aws::Connect::Endpoints::StopContact.build(context)
           when :stop_contact_recording
@@ -424,6 +457,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateParticipantRoleConfig.build(context)
           when :update_phone_number
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
+          when :update_phone_number_metadata
+            Aws::Connect::Endpoints::UpdatePhoneNumberMetadata.build(context)
           when :update_prompt
             Aws::Connect::Endpoints::UpdatePrompt.build(context)
           when :update_queue_hours_of_operation

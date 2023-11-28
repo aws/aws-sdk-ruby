@@ -51,7 +51,7 @@ group :repl do
 end
 
 group :development do
-  gem 'rubocop', '0.81.0'
+  gem 'rubocop', '1.28.0'
 end
 
 group :benchmark do

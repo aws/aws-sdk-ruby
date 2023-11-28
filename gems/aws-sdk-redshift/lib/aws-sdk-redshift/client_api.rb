@@ -49,6 +49,9 @@ module Aws::Redshift
     AuthorizeEndpointAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeEndpointAccessMessage')
     AuthorizeSnapshotAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessMessage')
     AuthorizeSnapshotAccessResult = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessResult')
+    AuthorizedAudienceList = Shapes::ListShape.new(name: 'AuthorizedAudienceList')
+    AuthorizedTokenIssuer = Shapes::StructureShape.new(name: 'AuthorizedTokenIssuer')
+    AuthorizedTokenIssuerList = Shapes::ListShape.new(name: 'AuthorizedTokenIssuerList')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     BatchDeleteClusterSnapshotsRequest = Shapes::StructureShape.new(name: 'BatchDeleteClusterSnapshotsRequest')
@@ -116,6 +119,7 @@ module Aws::Redshift
     ClusterVersionList = Shapes::ListShape.new(name: 'ClusterVersionList')
     ClusterVersionsMessage = Shapes::StructureShape.new(name: 'ClusterVersionsMessage')
     ClustersMessage = Shapes::StructureShape.new(name: 'ClustersMessage')
+    ConflictPolicyUpdateFault = Shapes::StructureShape.new(name: 'ConflictPolicyUpdateFault')
     CopyClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyClusterSnapshotMessage')
     CopyClusterSnapshotResult = Shapes::StructureShape.new(name: 'CopyClusterSnapshotResult')
     CopyToRegionDisabledFault = Shapes::StructureShape.new(name: 'CopyToRegionDisabledFault')
@@ -140,6 +144,8 @@ module Aws::Redshift
     CreateHsmClientCertificateResult = Shapes::StructureShape.new(name: 'CreateHsmClientCertificateResult')
     CreateHsmConfigurationMessage = Shapes::StructureShape.new(name: 'CreateHsmConfigurationMessage')
     CreateHsmConfigurationResult = Shapes::StructureShape.new(name: 'CreateHsmConfigurationResult')
+    CreateRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'CreateRedshiftIdcApplicationMessage')
+    CreateRedshiftIdcApplicationResult = Shapes::StructureShape.new(name: 'CreateRedshiftIdcApplicationResult')
     CreateScheduledActionMessage = Shapes::StructureShape.new(name: 'CreateScheduledActionMessage')
     CreateSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantMessage')
     CreateSnapshotCopyGrantResult = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantResult')
@@ -180,11 +186,14 @@ module Aws::Redshift
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
     DeleteHsmClientCertificateMessage = Shapes::StructureShape.new(name: 'DeleteHsmClientCertificateMessage')
     DeleteHsmConfigurationMessage = Shapes::StructureShape.new(name: 'DeleteHsmConfigurationMessage')
+    DeleteRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'DeleteRedshiftIdcApplicationMessage')
+    DeleteResourcePolicyMessage = Shapes::StructureShape.new(name: 'DeleteResourcePolicyMessage')
     DeleteScheduledActionMessage = Shapes::StructureShape.new(name: 'DeleteScheduledActionMessage')
     DeleteSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyGrantMessage')
     DeleteSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotScheduleMessage')
     DeleteTagsMessage = Shapes::StructureShape.new(name: 'DeleteTagsMessage')
     DeleteUsageLimitMessage = Shapes::StructureShape.new(name: 'DeleteUsageLimitMessage')
+    DependentServiceAccessDeniedFault = Shapes::StructureShape.new(name: 'DependentServiceAccessDeniedFault')
     DependentServiceRequestThrottlingFault = Shapes::StructureShape.new(name: 'DependentServiceRequestThrottlingFault')
     DependentServiceUnavailableFault = Shapes::StructureShape.new(name: 'DependentServiceUnavailableFault')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
@@ -215,11 +224,14 @@ module Aws::Redshift
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeHsmClientCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeHsmClientCertificatesMessage')
     DescribeHsmConfigurationsMessage = Shapes::StructureShape.new(name: 'DescribeHsmConfigurationsMessage')
+    DescribeInboundIntegrationsMessage = Shapes::StructureShape.new(name: 'DescribeInboundIntegrationsMessage')
     DescribeLoggingStatusMessage = Shapes::StructureShape.new(name: 'DescribeLoggingStatusMessage')
     DescribeNodeConfigurationOptionsMessage = Shapes::StructureShape.new(name: 'DescribeNodeConfigurationOptionsMessage')
     DescribeOrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableClusterOptionsMessage')
     DescribePartnersInputMessage = Shapes::StructureShape.new(name: 'DescribePartnersInputMessage')
     DescribePartnersOutputMessage = Shapes::StructureShape.new(name: 'DescribePartnersOutputMessage')
+    DescribeRedshiftIdcApplicationsMessage = Shapes::StructureShape.new(name: 'DescribeRedshiftIdcApplicationsMessage')
+    DescribeRedshiftIdcApplicationsResult = Shapes::StructureShape.new(name: 'DescribeRedshiftIdcApplicationsResult')
     DescribeReservedNodeExchangeStatusInputMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeExchangeStatusInputMessage')
     DescribeReservedNodeExchangeStatusOutputMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeExchangeStatusOutputMessage')
     DescribeReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeOfferingsMessage')
@@ -272,12 +284,16 @@ module Aws::Redshift
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    FailoverPrimaryComputeInputMessage = Shapes::StructureShape.new(name: 'FailoverPrimaryComputeInputMessage')
+    FailoverPrimaryComputeResult = Shapes::StructureShape.new(name: 'FailoverPrimaryComputeResult')
     GetClusterCredentialsMessage = Shapes::StructureShape.new(name: 'GetClusterCredentialsMessage')
     GetClusterCredentialsWithIAMMessage = Shapes::StructureShape.new(name: 'GetClusterCredentialsWithIAMMessage')
     GetReservedNodeExchangeConfigurationOptionsInputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeConfigurationOptionsInputMessage')
     GetReservedNodeExchangeConfigurationOptionsOutputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeConfigurationOptionsOutputMessage')
     GetReservedNodeExchangeOfferingsInputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeOfferingsInputMessage')
     GetReservedNodeExchangeOfferingsOutputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeOfferingsOutputMessage')
+    GetResourcePolicyMessage = Shapes::StructureShape.new(name: 'GetResourcePolicyMessage')
+    GetResourcePolicyResult = Shapes::StructureShape.new(name: 'GetResourcePolicyResult')
     HsmClientCertificate = Shapes::StructureShape.new(name: 'HsmClientCertificate')
     HsmClientCertificateAlreadyExistsFault = Shapes::StructureShape.new(name: 'HsmClientCertificateAlreadyExistsFault')
     HsmClientCertificateList = Shapes::ListShape.new(name: 'HsmClientCertificateList')
@@ -294,15 +310,23 @@ module Aws::Redshift
     IPRange = Shapes::StructureShape.new(name: 'IPRange')
     IPRangeList = Shapes::ListShape.new(name: 'IPRangeList')
     IamRoleArnList = Shapes::ListShape.new(name: 'IamRoleArnList')
+    IdcDisplayNameString = Shapes::StringShape.new(name: 'IdcDisplayNameString')
+    IdentityNamespaceString = Shapes::StringShape.new(name: 'IdentityNamespaceString')
     ImportTablesCompleted = Shapes::ListShape.new(name: 'ImportTablesCompleted')
     ImportTablesInProgress = Shapes::ListShape.new(name: 'ImportTablesInProgress')
     ImportTablesNotStarted = Shapes::ListShape.new(name: 'ImportTablesNotStarted')
     InProgressTableRestoreQuotaExceededFault = Shapes::StructureShape.new(name: 'InProgressTableRestoreQuotaExceededFault')
+    InboundIntegration = Shapes::StructureShape.new(name: 'InboundIntegration')
+    InboundIntegrationList = Shapes::ListShape.new(name: 'InboundIntegrationList')
+    InboundIntegrationsMessage = Shapes::StructureShape.new(name: 'InboundIntegrationsMessage')
     IncompatibleOrderableOptions = Shapes::StructureShape.new(name: 'IncompatibleOrderableOptions')
     InsufficientClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientClusterCapacityFault')
     InsufficientS3BucketPolicyFault = Shapes::StructureShape.new(name: 'InsufficientS3BucketPolicyFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    IntegrationError = Shapes::StructureShape.new(name: 'IntegrationError')
+    IntegrationErrorList = Shapes::ListShape.new(name: 'IntegrationErrorList')
+    IntegrationNotFoundFault = Shapes::StructureShape.new(name: 'IntegrationNotFoundFault')
     InvalidAuthenticationProfileRequestFault = Shapes::StructureShape.new(name: 'InvalidAuthenticationProfileRequestFault')
     InvalidAuthorizationStateFault = Shapes::StructureShape.new(name: 'InvalidAuthorizationStateFault')
     InvalidClusterParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterParameterGroupStateFault')
@@ -319,6 +343,7 @@ module Aws::Redshift
     InvalidHsmClientCertificateStateFault = Shapes::StructureShape.new(name: 'InvalidHsmClientCertificateStateFault')
     InvalidHsmConfigurationStateFault = Shapes::StructureShape.new(name: 'InvalidHsmConfigurationStateFault')
     InvalidNamespaceFault = Shapes::StructureShape.new(name: 'InvalidNamespaceFault')
+    InvalidPolicyFault = Shapes::StructureShape.new(name: 'InvalidPolicyFault')
     InvalidReservedNodeStateFault = Shapes::StructureShape.new(name: 'InvalidReservedNodeStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidRetentionPeriodFault = Shapes::StructureShape.new(name: 'InvalidRetentionPeriodFault')
@@ -333,6 +358,10 @@ module Aws::Redshift
     InvalidTagFault = Shapes::StructureShape.new(name: 'InvalidTagFault')
     InvalidUsageLimitFault = Shapes::StructureShape.new(name: 'InvalidUsageLimitFault')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
+    Ipv6CidrBlockNotFoundFault = Shapes::StructureShape.new(name: 'Ipv6CidrBlockNotFoundFault')
+    LakeFormationQuery = Shapes::StructureShape.new(name: 'LakeFormationQuery')
+    LakeFormationScopeUnion = Shapes::UnionShape.new(name: 'LakeFormationScopeUnion')
+    LakeFormationServiceIntegrations = Shapes::ListShape.new(name: 'LakeFormationServiceIntegrations')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
@@ -364,6 +393,8 @@ module Aws::Redshift
     ModifyEndpointAccessMessage = Shapes::StructureShape.new(name: 'ModifyEndpointAccessMessage')
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
+    ModifyRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationMessage')
+    ModifyRedshiftIdcApplicationResult = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationResult')
     ModifyScheduledActionMessage = Shapes::StructureShape.new(name: 'ModifyScheduledActionMessage')
     ModifySnapshotCopyRetentionPeriodMessage = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodMessage')
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
@@ -404,10 +435,18 @@ module Aws::Redshift
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
     PurchaseReservedNodeOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingMessage')
     PurchaseReservedNodeOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingResult')
+    PutResourcePolicyMessage = Shapes::StructureShape.new(name: 'PutResourcePolicyMessage')
+    PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
     RebootClusterMessage = Shapes::StructureShape.new(name: 'RebootClusterMessage')
     RebootClusterResult = Shapes::StructureShape.new(name: 'RebootClusterResult')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    RedshiftIdcApplication = Shapes::StructureShape.new(name: 'RedshiftIdcApplication')
+    RedshiftIdcApplicationAlreadyExistsFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationAlreadyExistsFault')
+    RedshiftIdcApplicationList = Shapes::ListShape.new(name: 'RedshiftIdcApplicationList')
+    RedshiftIdcApplicationName = Shapes::StringShape.new(name: 'RedshiftIdcApplicationName')
+    RedshiftIdcApplicationNotExistsFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationNotExistsFault')
+    RedshiftIdcApplicationQuotaExceededFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationQuotaExceededFault')
     RejectDataShareMessage = Shapes::StructureShape.new(name: 'RejectDataShareMessage')
     ReservedNode = Shapes::StructureShape.new(name: 'ReservedNode')
     ReservedNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyExistsFault')
@@ -435,6 +474,7 @@ module Aws::Redshift
     ResizeNotFoundFault = Shapes::StructureShape.new(name: 'ResizeNotFoundFault')
     ResizeProgressMessage = Shapes::StructureShape.new(name: 'ResizeProgressMessage')
     ResourceNotFoundFault = Shapes::StructureShape.new(name: 'ResourceNotFoundFault')
+    ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
     RestorableNodeTypeList = Shapes::ListShape.new(name: 'RestorableNodeTypeList')
     RestoreFromClusterSnapshotMessage = Shapes::StructureShape.new(name: 'RestoreFromClusterSnapshotMessage')
     RestoreFromClusterSnapshotResult = Shapes::StructureShape.new(name: 'RestoreFromClusterSnapshotResult')
@@ -473,7 +513,11 @@ module Aws::Redshift
     ScheduledActionTypeValues = Shapes::StringShape.new(name: 'ScheduledActionTypeValues')
     ScheduledActionsMessage = Shapes::StructureShape.new(name: 'ScheduledActionsMessage')
     ScheduledSnapshotTimeList = Shapes::ListShape.new(name: 'ScheduledSnapshotTimeList')
+    SecondaryClusterInfo = Shapes::StructureShape.new(name: 'SecondaryClusterInfo')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
+    ServiceAuthorization = Shapes::StringShape.new(name: 'ServiceAuthorization')
+    ServiceIntegrationList = Shapes::ListShape.new(name: 'ServiceIntegrationList')
+    ServiceIntegrationsUnion = Shapes::UnionShape.new(name: 'ServiceIntegrationsUnion')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotAttributeToSortBy = Shapes::StringShape.new(name: 'SnapshotAttributeToSortBy')
     SnapshotCopyAlreadyDisabledFault = Shapes::StructureShape.new(name: 'SnapshotCopyAlreadyDisabledFault')
@@ -555,6 +599,7 @@ module Aws::Redshift
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
+    ZeroETLIntegrationStatus = Shapes::StringShape.new(name: 'ZeroETLIntegrationStatus')
 
     AcceptReservedNodeExchangeInputMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedNodeId"))
     AcceptReservedNodeExchangeInputMessage.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetReservedNodeOfferingId"))
@@ -588,6 +633,7 @@ module Aws::Redshift
     AssociateDataShareConsumerMessage.add_member(:associate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AssociateEntireAccount"))
     AssociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
     AssociateDataShareConsumerMessage.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
+    AssociateDataShareConsumerMessage.add_member(:allow_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowWrites"))
     AssociateDataShareConsumerMessage.struct_class = Types::AssociateDataShareConsumerMessage
 
     AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
@@ -637,6 +683,7 @@ module Aws::Redshift
 
     AuthorizeDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     AuthorizeDataShareMessage.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConsumerIdentifier"))
+    AuthorizeDataShareMessage.add_member(:allow_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowWrites"))
     AuthorizeDataShareMessage.struct_class = Types::AuthorizeDataShareMessage
 
     AuthorizeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
@@ -652,6 +699,14 @@ module Aws::Redshift
 
     AuthorizeSnapshotAccessResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     AuthorizeSnapshotAccessResult.struct_class = Types::AuthorizeSnapshotAccessResult
+
+    AuthorizedAudienceList.member = Shapes::ShapeRef.new(shape: String)
+
+    AuthorizedTokenIssuer.add_member(:trusted_token_issuer_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrustedTokenIssuerArn"))
+    AuthorizedTokenIssuer.add_member(:authorized_audiences_list, Shapes::ShapeRef.new(shape: AuthorizedAudienceList, location_name: "AuthorizedAudiencesList"))
+    AuthorizedTokenIssuer.struct_class = Types::AuthorizedTokenIssuer
+
+    AuthorizedTokenIssuerList.member = Shapes::ShapeRef.new(shape: AuthorizedTokenIssuer)
 
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     AvailabilityZone.add_member(:supported_platforms, Shapes::ShapeRef.new(shape: SupportedPlatformsList, location_name: "SupportedPlatforms"))
@@ -751,6 +806,9 @@ module Aws::Redshift
     Cluster.add_member(:custom_domain_certificate_expiry_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CustomDomainCertificateExpiryDate"))
     Cluster.add_member(:master_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretArn"))
     Cluster.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    Cluster.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
+    Cluster.add_member(:multi_az, Shapes::ShapeRef.new(shape: String, location_name: "MultiAZ"))
+    Cluster.add_member(:multi_az_secondary, Shapes::ShapeRef.new(shape: SecondaryClusterInfo, location_name: "MultiAZSecondary"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -886,6 +944,7 @@ module Aws::Redshift
     ClusterSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     ClusterSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ClusterSubnetGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ClusterSubnetGroup.add_member(:supported_cluster_ip_address_types, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SupportedClusterIpAddressTypes"))
     ClusterSubnetGroup.struct_class = Types::ClusterSubnetGroup
 
     ClusterSubnetGroupAlreadyExistsFault.struct_class = Types::ClusterSubnetGroupAlreadyExistsFault
@@ -916,6 +975,8 @@ module Aws::Redshift
     ClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ClustersMessage.add_member(:clusters, Shapes::ShapeRef.new(shape: ClusterList, location_name: "Clusters"))
     ClustersMessage.struct_class = Types::ClustersMessage
+
+    ConflictPolicyUpdateFault.struct_class = Types::ConflictPolicyUpdateFault
 
     CopyClusterSnapshotMessage.add_member(:source_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotIdentifier"))
     CopyClusterSnapshotMessage.add_member(:source_snapshot_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceSnapshotClusterIdentifier"))
@@ -972,6 +1033,9 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:load_sample_data, Shapes::ShapeRef.new(shape: String, location_name: "LoadSampleData"))
     CreateClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     CreateClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    CreateClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
+    CreateClusterMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
+    CreateClusterMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1062,6 +1126,18 @@ module Aws::Redshift
     CreateHsmConfigurationResult.add_member(:hsm_configuration, Shapes::ShapeRef.new(shape: HsmConfiguration, location_name: "HsmConfiguration"))
     CreateHsmConfigurationResult.struct_class = Types::CreateHsmConfigurationResult
 
+    CreateRedshiftIdcApplicationMessage.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IdcInstanceArn"))
+    CreateRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_name, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationName, required: true, location_name: "RedshiftIdcApplicationName"))
+    CreateRedshiftIdcApplicationMessage.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
+    CreateRedshiftIdcApplicationMessage.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, required: true, location_name: "IdcDisplayName"))
+    CreateRedshiftIdcApplicationMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    CreateRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
+    CreateRedshiftIdcApplicationMessage.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    CreateRedshiftIdcApplicationMessage.struct_class = Types::CreateRedshiftIdcApplicationMessage
+
+    CreateRedshiftIdcApplicationResult.add_member(:redshift_idc_application, Shapes::ShapeRef.new(shape: RedshiftIdcApplication, location_name: "RedshiftIdcApplication"))
+    CreateRedshiftIdcApplicationResult.struct_class = Types::CreateRedshiftIdcApplicationResult
+
     CreateScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
     CreateScheduledActionMessage.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, required: true, location_name: "TargetAction"))
     CreateScheduledActionMessage.add_member(:schedule, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Schedule"))
@@ -1125,6 +1201,8 @@ module Aws::Redshift
     DataShareAssociation.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
     DataShareAssociation.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
     DataShareAssociation.add_member(:status_change_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StatusChangeDate"))
+    DataShareAssociation.add_member(:producer_allowed_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ProducerAllowedWrites"))
+    DataShareAssociation.add_member(:consumer_accepted_writes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ConsumerAcceptedWrites"))
     DataShareAssociation.struct_class = Types::DataShareAssociation
 
     DataShareAssociationList.member = Shapes::ShapeRef.new(shape: DataShareAssociation)
@@ -1191,6 +1269,7 @@ module Aws::Redshift
     DeleteClusterSubnetGroupMessage.struct_class = Types::DeleteClusterSubnetGroupMessage
 
     DeleteCustomDomainAssociationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    DeleteCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, required: true, location_name: "CustomDomainName"))
     DeleteCustomDomainAssociationMessage.struct_class = Types::DeleteCustomDomainAssociationMessage
 
     DeleteEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointName"))
@@ -1204,6 +1283,12 @@ module Aws::Redshift
 
     DeleteHsmConfigurationMessage.add_member(:hsm_configuration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "HsmConfigurationIdentifier"))
     DeleteHsmConfigurationMessage.struct_class = Types::DeleteHsmConfigurationMessage
+
+    DeleteRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RedshiftIdcApplicationArn"))
+    DeleteRedshiftIdcApplicationMessage.struct_class = Types::DeleteRedshiftIdcApplicationMessage
+
+    DeleteResourcePolicyMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyMessage.struct_class = Types::DeleteResourcePolicyMessage
 
     DeleteScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
     DeleteScheduledActionMessage.struct_class = Types::DeleteScheduledActionMessage
@@ -1220,6 +1305,8 @@ module Aws::Redshift
 
     DeleteUsageLimitMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UsageLimitId"))
     DeleteUsageLimitMessage.struct_class = Types::DeleteUsageLimitMessage
+
+    DependentServiceAccessDeniedFault.struct_class = Types::DependentServiceAccessDeniedFault
 
     DependentServiceRequestThrottlingFault.struct_class = Types::DependentServiceRequestThrottlingFault
 
@@ -1390,6 +1477,12 @@ module Aws::Redshift
     DescribeHsmConfigurationsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeHsmConfigurationsMessage.struct_class = Types::DescribeHsmConfigurationsMessage
 
+    DescribeInboundIntegrationsMessage.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String, location_name: "IntegrationArn"))
+    DescribeInboundIntegrationsMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+    DescribeInboundIntegrationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeInboundIntegrationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeInboundIntegrationsMessage.struct_class = Types::DescribeInboundIntegrationsMessage
+
     DescribeLoggingStatusMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DescribeLoggingStatusMessage.struct_class = Types::DescribeLoggingStatusMessage
 
@@ -1417,6 +1510,15 @@ module Aws::Redshift
 
     DescribePartnersOutputMessage.add_member(:partner_integration_info_list, Shapes::ShapeRef.new(shape: PartnerIntegrationInfoList, location_name: "PartnerIntegrationInfoList"))
     DescribePartnersOutputMessage.struct_class = Types::DescribePartnersOutputMessage
+
+    DescribeRedshiftIdcApplicationsMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
+    DescribeRedshiftIdcApplicationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeRedshiftIdcApplicationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeRedshiftIdcApplicationsMessage.struct_class = Types::DescribeRedshiftIdcApplicationsMessage
+
+    DescribeRedshiftIdcApplicationsResult.add_member(:redshift_idc_applications, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationList, location_name: "RedshiftIdcApplications"))
+    DescribeRedshiftIdcApplicationsResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeRedshiftIdcApplicationsResult.struct_class = Types::DescribeRedshiftIdcApplicationsResult
 
     DescribeReservedNodeExchangeStatusInputMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
     DescribeReservedNodeExchangeStatusInputMessage.add_member(:reserved_node_exchange_request_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeExchangeRequestId"))
@@ -1648,6 +1750,12 @@ module Aws::Redshift
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
 
+    FailoverPrimaryComputeInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    FailoverPrimaryComputeInputMessage.struct_class = Types::FailoverPrimaryComputeInputMessage
+
+    FailoverPrimaryComputeResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    FailoverPrimaryComputeResult.struct_class = Types::FailoverPrimaryComputeResult
+
     GetClusterCredentialsMessage.add_member(:db_user, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DbUser"))
     GetClusterCredentialsMessage.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DbName"))
     GetClusterCredentialsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
@@ -1682,6 +1790,12 @@ module Aws::Redshift
     GetReservedNodeExchangeOfferingsOutputMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     GetReservedNodeExchangeOfferingsOutputMessage.add_member(:reserved_node_offerings, Shapes::ShapeRef.new(shape: ReservedNodeOfferingList, location_name: "ReservedNodeOfferings"))
     GetReservedNodeExchangeOfferingsOutputMessage.struct_class = Types::GetReservedNodeExchangeOfferingsOutputMessage
+
+    GetResourcePolicyMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    GetResourcePolicyMessage.struct_class = Types::GetResourcePolicyMessage
+
+    GetResourcePolicyResult.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    GetResourcePolicyResult.struct_class = Types::GetResourcePolicyResult
 
     HsmClientCertificate.add_member(:hsm_client_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "HsmClientCertificateIdentifier"))
     HsmClientCertificate.add_member(:hsm_client_certificate_public_key, Shapes::ShapeRef.new(shape: String, location_name: "HsmClientCertificatePublicKey"))
@@ -1741,11 +1855,33 @@ module Aws::Redshift
 
     InProgressTableRestoreQuotaExceededFault.struct_class = Types::InProgressTableRestoreQuotaExceededFault
 
+    InboundIntegration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String, location_name: "IntegrationArn"))
+    InboundIntegration.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
+    InboundIntegration.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+    InboundIntegration.add_member(:status, Shapes::ShapeRef.new(shape: ZeroETLIntegrationStatus, location_name: "Status"))
+    InboundIntegration.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
+    InboundIntegration.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    InboundIntegration.struct_class = Types::InboundIntegration
+
+    InboundIntegrationList.member = Shapes::ShapeRef.new(shape: InboundIntegration, location_name: "InboundIntegration")
+
+    InboundIntegrationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    InboundIntegrationsMessage.add_member(:inbound_integrations, Shapes::ShapeRef.new(shape: InboundIntegrationList, location_name: "InboundIntegrations"))
+    InboundIntegrationsMessage.struct_class = Types::InboundIntegrationsMessage
+
     IncompatibleOrderableOptions.struct_class = Types::IncompatibleOrderableOptions
 
     InsufficientClusterCapacityFault.struct_class = Types::InsufficientClusterCapacityFault
 
     InsufficientS3BucketPolicyFault.struct_class = Types::InsufficientS3BucketPolicyFault
+
+    IntegrationError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    IntegrationError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    IntegrationError.struct_class = Types::IntegrationError
+
+    IntegrationErrorList.member = Shapes::ShapeRef.new(shape: IntegrationError, location_name: "IntegrationError")
+
+    IntegrationNotFoundFault.struct_class = Types::IntegrationNotFoundFault
 
     InvalidAuthenticationProfileRequestFault.struct_class = Types::InvalidAuthenticationProfileRequestFault
 
@@ -1779,6 +1915,8 @@ module Aws::Redshift
 
     InvalidNamespaceFault.struct_class = Types::InvalidNamespaceFault
 
+    InvalidPolicyFault.struct_class = Types::InvalidPolicyFault
+
     InvalidReservedNodeStateFault.struct_class = Types::InvalidReservedNodeStateFault
 
     InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
@@ -1806,6 +1944,19 @@ module Aws::Redshift
     InvalidUsageLimitFault.struct_class = Types::InvalidUsageLimitFault
 
     InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
+
+    Ipv6CidrBlockNotFoundFault.struct_class = Types::Ipv6CidrBlockNotFoundFault
+
+    LakeFormationQuery.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
+    LakeFormationQuery.struct_class = Types::LakeFormationQuery
+
+    LakeFormationScopeUnion.add_member(:lake_formation_query, Shapes::ShapeRef.new(shape: LakeFormationQuery, location_name: "LakeFormationQuery"))
+    LakeFormationScopeUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    LakeFormationScopeUnion.add_member_subclass(:lake_formation_query, Types::LakeFormationScopeUnion::LakeFormationQuery)
+    LakeFormationScopeUnion.add_member_subclass(:unknown, Types::LakeFormationScopeUnion::Unknown)
+    LakeFormationScopeUnion.struct_class = Types::LakeFormationScopeUnion
+
+    LakeFormationServiceIntegrations.member = Shapes::ShapeRef.new(shape: LakeFormationScopeUnion)
 
     LimitExceededFault.struct_class = Types::LimitExceededFault
 
@@ -1895,6 +2046,8 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     ModifyClusterMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     ModifyClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    ModifyClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
+    ModifyClusterMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1925,8 +2078,8 @@ module Aws::Redshift
     ModifyClusterSubnetGroupResult.add_member(:cluster_subnet_group, Shapes::ShapeRef.new(shape: ClusterSubnetGroup, location_name: "ClusterSubnetGroup"))
     ModifyClusterSubnetGroupResult.struct_class = Types::ModifyClusterSubnetGroupResult
 
-    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, location_name: "CustomDomainName"))
-    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "CustomDomainCertificateArn"))
+    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainNameString, required: true, location_name: "CustomDomainName"))
+    ModifyCustomDomainAssociationMessage.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "CustomDomainCertificateArn"))
     ModifyCustomDomainAssociationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifyCustomDomainAssociationMessage.struct_class = Types::ModifyCustomDomainAssociationMessage
 
@@ -1951,6 +2104,17 @@ module Aws::Redshift
 
     ModifyEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     ModifyEventSubscriptionResult.struct_class = Types::ModifyEventSubscriptionResult
+
+    ModifyRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RedshiftIdcApplicationArn"))
+    ModifyRedshiftIdcApplicationMessage.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
+    ModifyRedshiftIdcApplicationMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
+    ModifyRedshiftIdcApplicationMessage.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, location_name: "IdcDisplayName"))
+    ModifyRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
+    ModifyRedshiftIdcApplicationMessage.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    ModifyRedshiftIdcApplicationMessage.struct_class = Types::ModifyRedshiftIdcApplicationMessage
+
+    ModifyRedshiftIdcApplicationResult.add_member(:redshift_idc_application, Shapes::ShapeRef.new(shape: RedshiftIdcApplication, location_name: "RedshiftIdcApplication"))
+    ModifyRedshiftIdcApplicationResult.struct_class = Types::ModifyRedshiftIdcApplicationResult
 
     ModifyScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
     ModifyScheduledActionMessage.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, location_name: "TargetAction"))
@@ -1983,6 +2147,7 @@ module Aws::Redshift
     NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
     NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Address"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "NetworkInterface")
@@ -2087,6 +2252,13 @@ module Aws::Redshift
     PurchaseReservedNodeOfferingResult.add_member(:reserved_node, Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode"))
     PurchaseReservedNodeOfferingResult.struct_class = Types::PurchaseReservedNodeOfferingResult
 
+    PutResourcePolicyMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyMessage.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Policy"))
+    PutResourcePolicyMessage.struct_class = Types::PutResourcePolicyMessage
+
+    PutResourcePolicyResult.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    PutResourcePolicyResult.struct_class = Types::PutResourcePolicyResult
+
     RebootClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     RebootClusterMessage.struct_class = Types::RebootClusterMessage
 
@@ -2098,6 +2270,26 @@ module Aws::Redshift
     RecurringCharge.struct_class = Types::RecurringCharge
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
+
+    RedshiftIdcApplication.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcInstanceArn"))
+    RedshiftIdcApplication.add_member(:redshift_idc_application_name, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationName, location_name: "RedshiftIdcApplicationName"))
+    RedshiftIdcApplication.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
+    RedshiftIdcApplication.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
+    RedshiftIdcApplication.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, location_name: "IdcDisplayName"))
+    RedshiftIdcApplication.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
+    RedshiftIdcApplication.add_member(:idc_managed_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcManagedApplicationArn"))
+    RedshiftIdcApplication.add_member(:idc_onboard_status, Shapes::ShapeRef.new(shape: String, location_name: "IdcOnboardStatus"))
+    RedshiftIdcApplication.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
+    RedshiftIdcApplication.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    RedshiftIdcApplication.struct_class = Types::RedshiftIdcApplication
+
+    RedshiftIdcApplicationAlreadyExistsFault.struct_class = Types::RedshiftIdcApplicationAlreadyExistsFault
+
+    RedshiftIdcApplicationList.member = Shapes::ShapeRef.new(shape: RedshiftIdcApplication)
+
+    RedshiftIdcApplicationNotExistsFault.struct_class = Types::RedshiftIdcApplicationNotExistsFault
+
+    RedshiftIdcApplicationQuotaExceededFault.struct_class = Types::RedshiftIdcApplicationQuotaExceededFault
 
     RejectDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     RejectDataShareMessage.struct_class = Types::RejectDataShareMessage
@@ -2215,6 +2407,10 @@ module Aws::Redshift
 
     ResourceNotFoundFault.struct_class = Types::ResourceNotFoundFault
 
+    ResourcePolicy.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    ResourcePolicy.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    ResourcePolicy.struct_class = Types::ResourcePolicy
+
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
 
     RestoreFromClusterSnapshotMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
@@ -2252,6 +2448,8 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
     RestoreFromClusterSnapshotMessage.add_member(:manage_master_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterPassword"))
     RestoreFromClusterSnapshotMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    RestoreFromClusterSnapshotMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
+    RestoreFromClusterSnapshotMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -2371,6 +2569,18 @@ module Aws::Redshift
     ScheduledActionsMessage.struct_class = Types::ScheduledActionsMessage
 
     ScheduledSnapshotTimeList.member = Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotTime")
+
+    SecondaryClusterInfo.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    SecondaryClusterInfo.add_member(:cluster_nodes, Shapes::ShapeRef.new(shape: ClusterNodesList, location_name: "ClusterNodes"))
+    SecondaryClusterInfo.struct_class = Types::SecondaryClusterInfo
+
+    ServiceIntegrationList.member = Shapes::ShapeRef.new(shape: ServiceIntegrationsUnion)
+
+    ServiceIntegrationsUnion.add_member(:lake_formation, Shapes::ShapeRef.new(shape: LakeFormationServiceIntegrations, location_name: "LakeFormation"))
+    ServiceIntegrationsUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ServiceIntegrationsUnion.add_member_subclass(:lake_formation, Types::ServiceIntegrationsUnion::LakeFormation)
+    ServiceIntegrationsUnion.add_member_subclass(:unknown, Types::ServiceIntegrationsUnion::Unknown)
+    ServiceIntegrationsUnion.struct_class = Types::ServiceIntegrationsUnion
 
     Snapshot.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotIdentifier"))
     Snapshot.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
@@ -2665,6 +2875,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:associate_data_share_consumer, Seahorse::Model::Operation.new.tap do |o|
@@ -2764,6 +2975,7 @@ module Aws::Redshift
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CopyClusterSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: CopyClusterSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSnapshotStateFault)
@@ -2810,6 +3022,9 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterTrackFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
       end)
 
       api.add_operation(:create_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2939,18 +3154,33 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:create_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRedshiftIdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRedshiftIdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateRedshiftIdcApplicationResult)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationQuotaExceededFault)
+      end)
+
       api.add_operation(:create_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateScheduledAction"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateScheduledActionMessage)
         o.output = Shapes::ShapeRef.new(shape: ScheduledAction)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduledActionAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduledActionQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduledActionTypeUnsupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidScheduleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidScheduledActionFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:create_snapshot_copy_grant, Seahorse::Model::Operation.new.tap do |o|
@@ -3090,6 +3320,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDomainAssociationNotFoundFault)
       end)
 
       api.add_operation(:delete_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -3144,6 +3375,29 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:delete_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRedshiftIdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRedshiftIdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+      end)
+
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
@@ -3535,6 +3789,23 @@ module Aws::Redshift
         )
       end)
 
+      api.add_operation(:describe_inbound_integrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInboundIntegrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInboundIntegrationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: InboundIntegrationsMessage)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_logging_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeLoggingStatus"
         o.http_method = "POST"
@@ -3542,6 +3813,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DescribeLoggingStatusMessage)
         o.output = Shapes::ShapeRef.new(shape: LoggingStatus)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:describe_node_configuration_options, Seahorse::Model::Operation.new.tap do |o|
@@ -3585,6 +3857,25 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: DescribePartnersOutputMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:describe_redshift_idc_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRedshiftIdcApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRedshiftIdcApplicationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRedshiftIdcApplicationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_reserved_node_exchange_status, Seahorse::Model::Operation.new.tap do |o|
@@ -3645,6 +3936,7 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ResizeProgressMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResizeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:describe_scheduled_actions, Seahorse::Model::Operation.new.tap do |o|
@@ -3757,6 +4049,7 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: LoggingStatus)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:disable_snapshot_copy, Seahorse::Model::Operation.new.tap do |o|
@@ -3769,6 +4062,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SnapshotCopyAlreadyDisabledFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:disassociate_data_share_consumer, Seahorse::Model::Operation.new.tap do |o|
@@ -3793,6 +4087,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketNameFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:enable_snapshot_copy, Seahorse::Model::Operation.new.tap do |o|
@@ -3812,6 +4107,18 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
+      end)
+
+      api.add_operation(:failover_primary_compute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "FailoverPrimaryCompute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: FailoverPrimaryComputeInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: FailoverPrimaryComputeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:get_cluster_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -3876,6 +4183,17 @@ module Aws::Redshift
         )
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyMessage)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
       api.add_operation(:modify_aqua_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyAquaConfiguration"
         o.http_method = "POST"
@@ -3925,6 +4243,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRetentionPeriodFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 
       api.add_operation(:modify_cluster_db_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -3936,6 +4255,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterOnLatestRevisionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:modify_cluster_iam_roles, Seahorse::Model::Operation.new.tap do |o|
@@ -4013,6 +4333,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomCnameAssociationFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDomainAssociationNotFoundFault)
       end)
 
       api.add_operation(:modify_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -4046,17 +4367,31 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubscriptionStateFault)
       end)
 
+      api.add_operation(:modify_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyRedshiftIdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyRedshiftIdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyRedshiftIdcApplicationResult)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+      end)
+
       api.add_operation(:modify_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyScheduledAction"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyScheduledActionMessage)
         o.output = Shapes::ShapeRef.new(shape: ScheduledAction)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduledActionNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduledActionTypeUnsupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidScheduleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidScheduledActionFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:modify_snapshot_copy_retention_period, Seahorse::Model::Operation.new.tap do |o|
@@ -4102,6 +4437,7 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: PauseClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:purchase_reserved_node_offering, Seahorse::Model::Operation.new.tap do |o|
@@ -4113,6 +4449,18 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyMessage)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictPolicyUpdateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
@@ -4206,6 +4554,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4232,6 +4581,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:revoke_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -4281,6 +4631,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:update_partner_status, Seahorse::Model::Operation.new.tap do |o|
@@ -4292,6 +4643,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
     end
 

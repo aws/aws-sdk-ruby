@@ -89,8 +89,8 @@ module Aws::RDS
       data[:event_categories_list]
     end
 
-    # A Boolean value indicating if the subscription is enabled. True
-    # indicates the subscription is enabled.
+    # Specifies whether the subscription is enabled. True indicates the
+    # subscription is enabled.
     # @return [Boolean]
     def enabled
       data[:enabled]

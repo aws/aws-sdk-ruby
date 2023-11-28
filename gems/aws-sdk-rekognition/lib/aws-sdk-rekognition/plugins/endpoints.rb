@@ -25,16 +25,17 @@ module Aws::Rekognition
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -132,6 +133,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::GetFaceSearch.build(context)
           when :get_label_detection
             Aws::Rekognition::Endpoints::GetLabelDetection.build(context)
+          when :get_media_analysis_job
+            Aws::Rekognition::Endpoints::GetMediaAnalysisJob.build(context)
           when :get_person_tracking
             Aws::Rekognition::Endpoints::GetPersonTracking.build(context)
           when :get_segment_detection
@@ -148,6 +151,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::ListDatasetLabels.build(context)
           when :list_faces
             Aws::Rekognition::Endpoints::ListFaces.build(context)
+          when :list_media_analysis_jobs
+            Aws::Rekognition::Endpoints::ListMediaAnalysisJobs.build(context)
           when :list_project_policies
             Aws::Rekognition::Endpoints::ListProjectPolicies.build(context)
           when :list_stream_processors
@@ -178,6 +183,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::StartFaceSearch.build(context)
           when :start_label_detection
             Aws::Rekognition::Endpoints::StartLabelDetection.build(context)
+          when :start_media_analysis_job
+            Aws::Rekognition::Endpoints::StartMediaAnalysisJob.build(context)
           when :start_person_tracking
             Aws::Rekognition::Endpoints::StartPersonTracking.build(context)
           when :start_project_version

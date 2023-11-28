@@ -60,6 +60,10 @@ module Aws::AppRegistry
     #   Key-value pairs you can use to associate with the application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] application_tag
+    #   A key-value pair that identifies an associated resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -69,7 +73,8 @@ module Aws::AppRegistry
       :description,
       :creation_time,
       :last_update_time,
-      :tags)
+      :tags,
+      :application_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -114,6 +119,38 @@ module Aws::AppRegistry
       :description,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of the application tag that's applied to a resource.
+    #
+    # @!attribute [rw] application_tag_status
+    #   The application tag is in the process of being applied to a
+    #   resource, was successfully applied to a resource, or failed to apply
+    #   to a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The message returned if the call fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The resources associated with an application
+    #   @return [Array<Types::ResourcesListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A unique pagination token for each page of results. Make the call
+    #   again with the returned token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ApplicationTagResult AWS API Documentation
+    #
+    class ApplicationTagResult < Struct.new(
+      :application_tag_status,
+      :error_message,
+      :resources,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -168,12 +205,17 @@ module Aws::AppRegistry
     #   associated.
     #   @return [String]
     #
+    # @!attribute [rw] options
+    #   Determines whether an application tag is applied or skipped.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateResourceRequest AWS API Documentation
     #
     class AssociateResourceRequest < Struct.new(
       :application,
       :resource_type,
-      :resource)
+      :resource,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -187,11 +229,16 @@ module Aws::AppRegistry
     #   The Amazon resource name (ARN) that specifies the resource.
     #   @return [String]
     #
+    # @!attribute [rw] options
+    #   Determines whether an application tag is applied or skipped.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateResourceResponse AWS API Documentation
     #
     class AssociateResourceResponse < Struct.new(
       :application_arn,
-      :resource_arn)
+      :resource_arn,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -622,6 +669,10 @@ module Aws::AppRegistry
     #   services, such as Resource Groups.
     #   @return [Types::Integrations]
     #
+    # @!attribute [rw] application_tag
+    #   A key-value pair that identifies an associated resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -633,7 +684,8 @@ module Aws::AppRegistry
       :last_update_time,
       :associated_resource_count,
       :tags,
-      :integrations)
+      :integrations,
+      :application_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -650,12 +702,30 @@ module Aws::AppRegistry
     #   The name or ID of the resource associated with the application.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   A unique pagination token for each page of results. Make the call
+    #   again with the returned token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_tag_status
+    #   States whether an application tag is applied, not applied, in the
+    #   process of being applied, or skipped.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. If the parameter is
+    #   omitted, it defaults to 25. The value is optional.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResourceRequest AWS API Documentation
     #
     class GetAssociatedResourceRequest < Struct.new(
       :application,
       :resource_type,
-      :resource)
+      :resource,
+      :next_token,
+      :resource_tag_status,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -664,10 +734,20 @@ module Aws::AppRegistry
     #   The resource associated with the application.
     #   @return [Types::Resource]
     #
+    # @!attribute [rw] options
+    #   Determines whether an application tag is applied or skipped.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] application_tag_result
+    #   The result of the application that's tag applied to a resource.
+    #   @return [Types::ApplicationTagResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResourceResponse AWS API Documentation
     #
     class GetAssociatedResourceResponse < Struct.new(
-      :resource)
+      :resource,
+      :options,
+      :application_tag_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -761,10 +841,15 @@ module Aws::AppRegistry
     #   The information about the resource group integration.
     #   @return [Types::ResourceGroup]
     #
+    # @!attribute [rw] application_tag_resource_group
+    #   The information about the resource group integration.
+    #   @return [Types::ResourceGroup]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/Integrations AWS API Documentation
     #
     class Integrations < Struct.new(
-      :resource_group)
+      :resource_group,
+      :application_tag_resource_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1124,13 +1209,18 @@ module Aws::AppRegistry
     #   The details related to the resource.
     #   @return [Types::ResourceDetails]
     #
+    # @!attribute [rw] options
+    #   Determines whether an application tag is applied or skipped.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourceInfo AWS API Documentation
     #
     class ResourceInfo < Struct.new(
       :name,
       :arn,
       :resource_type,
-      :resource_details)
+      :resource_details,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1158,6 +1248,35 @@ module Aws::AppRegistry
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource in a list of resources.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon resource name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The message returned if the call fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the list item.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Provides information about the AppRegistry resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourcesListItem AWS API Documentation
+    #
+    class ResourcesListItem < Struct.new(
+      :resource_arn,
+      :error_message,
+      :status,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end

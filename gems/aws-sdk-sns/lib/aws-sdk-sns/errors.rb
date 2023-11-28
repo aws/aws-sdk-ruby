@@ -39,6 +39,7 @@ module Aws::SNS
   # * {InvalidParameterException}
   # * {InvalidParameterValueException}
   # * {InvalidSecurityException}
+  # * {InvalidStateException}
   # * {KMSAccessDeniedException}
   # * {KMSDisabledException}
   # * {KMSInvalidStateException}
@@ -48,6 +49,7 @@ module Aws::SNS
   # * {NotFoundException}
   # * {OptedOutException}
   # * {PlatformApplicationDisabledException}
+  # * {ReplayLimitExceededException}
   # * {ResourceNotFoundException}
   # * {StaleTagException}
   # * {SubscriptionLimitExceededException}
@@ -246,6 +248,21 @@ module Aws::SNS
       end
     end
 
+    class InvalidStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::InvalidStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class KMSAccessDeniedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -371,6 +388,21 @@ module Aws::SNS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SNS::Types::PlatformApplicationDisabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplayLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::ReplayLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

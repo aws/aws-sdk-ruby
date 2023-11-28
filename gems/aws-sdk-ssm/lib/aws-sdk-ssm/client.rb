@@ -2401,6 +2401,55 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Delete an OpsItem. You must have permission in Identity and Access
+    # Management (IAM) to delete an OpsItem.
+    #
+    # Note the following important information about this operation.
+    #
+    #  * Deleting an OpsItem is irreversible. You can't restore a deleted
+    #   OpsItem.
+    #
+    # * This operation uses an *eventual consistency model*, which means the
+    #   system can take a few minutes to complete this operation. If you
+    #   delete an OpsItem and immediately call, for example, GetOpsItem, the
+    #   deleted OpsItem might still appear in the response.
+    #
+    # * This operation is idempotent. The system doesn't throw an exception
+    #   if you repeatedly call this operation for the same OpsItem. If the
+    #   first call is successful, all additional calls return the same
+    #   successful response as the first call.
+    #
+    # * This operation doesn't support cross-account calls. A delegated
+    #   administrator or management account can't delete OpsItems in other
+    #   accounts, even if OpsCenter has been set up for cross-account
+    #   administration. For more information about cross-account
+    #   administration, see [Setting up OpsCenter to centrally manage
+    #   OpsItems across accounts][1] in the *Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setting-up-cross-account.html
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ops_item({
+    #     ops_item_id: "OpsItemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsItem AWS API Documentation
+    #
+    # @overload delete_ops_item(params = {})
+    # @param [Hash] params ({})
+    def delete_ops_item(params = {}, options = {})
+      req = build_request(:delete_ops_item, params)
+      req.send_request(options)
+    end
+
     # Delete OpsMetadata related to an application.
     #
     # @option params [required, String] :ops_metadata_arn
@@ -3067,7 +3116,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].automation_execution_id #=> String
     #   resp.automation_execution_metadata_list[0].document_name #=> String
     #   resp.automation_execution_metadata_list[0].document_version #=> String
-    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution_metadata_list[0].execution_start_time #=> Time
     #   resp.automation_execution_metadata_list[0].execution_end_time #=> Time
     #   resp.automation_execution_metadata_list[0].executed_by #=> String
@@ -3183,7 +3232,7 @@ module Aws::SSM
     #     automation_execution_id: "AutomationExecutionId", # required
     #     filters: [
     #       {
-    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
+    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action, ParentStepExecutionId, ParentStepIteration, ParentStepIteratorValue
     #         values: ["StepExecutionFilterValue"], # required
     #       },
     #     ],
@@ -3202,7 +3251,7 @@ module Aws::SSM
     #   resp.step_executions[0].max_attempts #=> Integer
     #   resp.step_executions[0].execution_start_time #=> Time
     #   resp.step_executions[0].execution_end_time #=> Time
-    #   resp.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.step_executions[0].response_code #=> String
     #   resp.step_executions[0].inputs #=> Hash
     #   resp.step_executions[0].inputs["String"] #=> String
@@ -3242,6 +3291,11 @@ module Aws::SSM
     #   resp.step_executions[0].triggered_alarms #=> Array
     #   resp.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.step_executions[0].parent_step_details.step_execution_id #=> String
+    #   resp.step_executions[0].parent_step_details.step_name #=> String
+    #   resp.step_executions[0].parent_step_details.action #=> String
+    #   resp.step_executions[0].parent_step_details.iteration #=> Integer
+    #   resp.step_executions[0].parent_step_details.iterator_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -4011,6 +4065,14 @@ module Aws::SSM
     #
     #     Sample values: `Installed` \| `InstalledOther` \|
     #     `InstalledPendingReboot`
+    #
+    #     For lists of all `State` values, see [Understanding patch compliance
+    #     state values][1] in the *Amazon Web Services Systems Manager User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -5306,7 +5368,7 @@ module Aws::SSM
     #   resp.automation_execution.document_version #=> String
     #   resp.automation_execution.execution_start_time #=> Time
     #   resp.automation_execution.execution_end_time #=> Time
-    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution.step_executions #=> Array
     #   resp.automation_execution.step_executions[0].step_name #=> String
     #   resp.automation_execution.step_executions[0].action #=> String
@@ -5315,7 +5377,7 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].max_attempts #=> Integer
     #   resp.automation_execution.step_executions[0].execution_start_time #=> Time
     #   resp.automation_execution.step_executions[0].execution_end_time #=> Time
-    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution.step_executions[0].response_code #=> String
     #   resp.automation_execution.step_executions[0].inputs #=> Hash
     #   resp.automation_execution.step_executions[0].inputs["String"] #=> String
@@ -5355,6 +5417,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].triggered_alarms #=> Array
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.automation_execution.step_executions[0].parent_step_details.step_execution_id #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.step_name #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.action #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.iteration #=> Integer
+    #   resp.automation_execution.step_executions[0].parent_step_details.iterator_value #=> String
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -5438,6 +5505,9 @@ module Aws::SSM
     #   resp.automation_execution.ops_item_id #=> String
     #   resp.automation_execution.association_id #=> String
     #   resp.automation_execution.change_request_name #=> String
+    #   resp.automation_execution.variables #=> Hash
+    #   resp.automation_execution.variables["AutomationParameterKey"] #=> Array
+    #   resp.automation_execution.variables["AutomationParameterKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -12133,25 +12203,28 @@ module Aws::SSM
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
     #
-    #   * `/ssm/managed-instance/default-ec2-instance-management-role: The
-    #     name of an IAM role`
+    #   * For `/ssm/managed-instance/default-ec2-instance-management-role`,
+    #     enter the name of an IAM role.
     #
-    #   * `/ssm/automation/customer-script-log-destination`: `CloudWatch`
+    #   * For `/ssm/automation/customer-script-log-destination`, enter
+    #     `CloudWatch`.
     #
-    #   * `/ssm/automation/customer-script-log-group-name`: The name of an
-    #     Amazon CloudWatch Logs log group
+    #   * For `/ssm/automation/customer-script-log-group-name`, enter the name
+    #     of an Amazon CloudWatch Logs log group.
     #
-    #   * `/ssm/documents/console/public-sharing-permission`: `Enable` or
-    #     `Disable`
+    #   * For `/ssm/documents/console/public-sharing-permission`, enter
+    #     `Enable` or `Disable`.
     #
-    #   * `/ssm/managed-instance/activation-tier`: `standard` or `advanced`
+    #   * For `/ssm/managed-instance/activation-tier`, enter `standard` or
+    #     `advanced`.
     #
-    #   * `/ssm/opsinsights/opscenter`: `Enabled` or `Disabled`
+    #   * For `/ssm/opsinsights/opscenter`, enter `Enabled` or `Disabled`.
     #
-    #   * `/ssm/parameter-store/default-parameter-tier`: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
+    #   * For `/ssm/parameter-store/default-parameter-tier`, enter `Standard`,
+    #     `Advanced`, or `Intelligent-Tiering`
     #
-    #   * `/ssm/parameter-store/high-throughput-enabled`: `true` or `false`
+    #   * For `/ssm/parameter-store/high-throughput-enabled`, enter `true` or
+    #     `false`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12184,7 +12257,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -16,6 +16,7 @@ module Aws::MWAA
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AirflowConfigurationOptions = Shapes::MapShape.new(name: 'AirflowConfigurationOptions')
     AirflowVersion = Shapes::StringShape.new(name: 'AirflowVersion')
+    CeleryExecutorQueue = Shapes::StringShape.new(name: 'CeleryExecutorQueue')
     CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
     ConfigKey = Shapes::StringShape.new(name: 'ConfigKey')
     ConfigValue = Shapes::StringShape.new(name: 'ConfigValue')
@@ -31,6 +32,7 @@ module Aws::MWAA
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EndpointManagement = Shapes::StringShape.new(name: 'EndpointManagement')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentClass = Shapes::StringShape.new(name: 'EnvironmentClass')
@@ -96,6 +98,7 @@ module Aws::MWAA
     UpdateSource = Shapes::StringShape.new(name: 'UpdateSource')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     WebserverAccessMode = Shapes::StringShape.new(name: 'WebserverAccessMode')
     WebserverUrl = Shapes::StringShape.new(name: 'WebserverUrl')
     WeeklyMaintenanceWindowStart = Shapes::StringShape.new(name: 'WeeklyMaintenanceWindowStart')
@@ -116,6 +119,7 @@ module Aws::MWAA
     CreateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
     CreateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     CreateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, required: true, location_name: "DagS3Path"))
+    CreateEnvironmentInput.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
     CreateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
     CreateEnvironmentInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateEnvironmentInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
@@ -156,13 +160,16 @@ module Aws::MWAA
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
 
-    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension, deprecated: true)
 
     Environment.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
     Environment.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
+    Environment.add_member(:celery_executor_queue, Shapes::ShapeRef.new(shape: CeleryExecutorQueue, location_name: "CeleryExecutorQueue"))
     Environment.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
     Environment.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
+    Environment.add_member(:database_vpc_endpoint_service, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "DatabaseVpcEndpointService"))
+    Environment.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
     Environment.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
     Environment.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
     Environment.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
@@ -185,6 +192,7 @@ module Aws::MWAA
     Environment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Environment.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
     Environment.add_member(:webserver_url, Shapes::ShapeRef.new(shape: WebserverUrl, location_name: "WebserverUrl"))
+    Environment.add_member(:webserver_vpc_endpoint_service, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "WebserverVpcEndpointService"))
     Environment.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     Environment.struct_class = Types::Environment
 
@@ -233,11 +241,11 @@ module Aws::MWAA
     LoggingConfigurationInput.add_member(:worker_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WorkerLogs"))
     LoggingConfigurationInput.struct_class = Types::LoggingConfigurationInput
 
-    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum)
+    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum, deprecated: true)
 
-    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions"))
     MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MetricName"))
-    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
+    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, deprecated: true, location_name: "StatisticValues"))
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
@@ -257,7 +265,7 @@ module Aws::MWAA
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     PublishMetricsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "EnvironmentName"))
-    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, location_name: "MetricData"))
+    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, deprecated: true, location_name: "MetricData"))
     PublishMetricsInput.struct_class = Types::PublishMetricsInput
 
     PublishMetricsOutput.struct_class = Types::PublishMetricsOutput
@@ -450,6 +458,7 @@ module Aws::MWAA
         o.name = "PublishMetrics"
         o.http_method = "POST"
         o.http_request_uri = "/metrics/environments/{EnvironmentName}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "ops.",
         }

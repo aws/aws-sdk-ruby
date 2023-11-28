@@ -25,16 +25,17 @@ module Aws::CodeCatalyst
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -90,6 +91,10 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::GetSubscription.build(context)
           when :get_user_details
             Aws::CodeCatalyst::Endpoints::GetUserDetails.build(context)
+          when :get_workflow
+            Aws::CodeCatalyst::Endpoints::GetWorkflow.build(context)
+          when :get_workflow_run
+            Aws::CodeCatalyst::Endpoints::GetWorkflowRun.build(context)
           when :list_access_tokens
             Aws::CodeCatalyst::Endpoints::ListAccessTokens.build(context)
           when :list_dev_environment_sessions
@@ -106,10 +111,16 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::ListSourceRepositoryBranches.build(context)
           when :list_spaces
             Aws::CodeCatalyst::Endpoints::ListSpaces.build(context)
+          when :list_workflow_runs
+            Aws::CodeCatalyst::Endpoints::ListWorkflowRuns.build(context)
+          when :list_workflows
+            Aws::CodeCatalyst::Endpoints::ListWorkflows.build(context)
           when :start_dev_environment
             Aws::CodeCatalyst::Endpoints::StartDevEnvironment.build(context)
           when :start_dev_environment_session
             Aws::CodeCatalyst::Endpoints::StartDevEnvironmentSession.build(context)
+          when :start_workflow_run
+            Aws::CodeCatalyst::Endpoints::StartWorkflowRun.build(context)
           when :stop_dev_environment
             Aws::CodeCatalyst::Endpoints::StopDevEnvironment.build(context)
           when :stop_dev_environment_session

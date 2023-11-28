@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for AWS HealthScribe APIs within Amazon Transcribe
+
+1.92.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for transcriptions from audio sources in 64 new languages and introduces generative call summarization in Transcribe Call Analytics (Post call)
+
+1.91.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.90.0 (2023-10-12)
 ------------------
 

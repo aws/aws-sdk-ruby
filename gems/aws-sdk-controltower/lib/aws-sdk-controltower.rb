@@ -32,7 +32,7 @@ require_relative 'aws-sdk-controltower/customizations'
 # structure.
 #
 #     control_tower = Aws::ControlTower::Client.new
-#     resp = control_tower.disable_control(params)
+#     resp = control_tower.create_landing_zone(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-controltower/customizations'
 # @!group service
 module Aws::ControlTower
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.15.0'
 
 end

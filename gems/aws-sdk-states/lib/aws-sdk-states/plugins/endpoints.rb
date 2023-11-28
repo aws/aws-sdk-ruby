@@ -25,16 +25,17 @@ module Aws::States
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -102,6 +103,8 @@ module Aws::States
             Aws::States::Endpoints::ListTagsForResource.build(context)
           when :publish_state_machine_version
             Aws::States::Endpoints::PublishStateMachineVersion.build(context)
+          when :redrive_execution
+            Aws::States::Endpoints::RedriveExecution.build(context)
           when :send_task_failure
             Aws::States::Endpoints::SendTaskFailure.build(context)
           when :send_task_heartbeat
@@ -116,6 +119,8 @@ module Aws::States
             Aws::States::Endpoints::StopExecution.build(context)
           when :tag_resource
             Aws::States::Endpoints::TagResource.build(context)
+          when :test_state
+            Aws::States::Endpoints::TestState.build(context)
           when :untag_resource
             Aws::States::Endpoints::UntagResource.build(context)
           when :update_map_run

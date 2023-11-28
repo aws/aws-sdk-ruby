@@ -554,10 +554,9 @@ module Aws::WAFV2
     #     includes it in the logs. For information about the logging fields,
     #     see [Log fields][1] in the *WAF Developer Guide*.
     #
-    #   * `HeaderOrder`: The comma-separated list of header names to match
-    #     for. WAF creates a string that contains the ordered list of header
-    #     names, from the headers in the web request, and then matches
-    #     against that string.
+    #   * `HeaderOrder`: The list of header names to match for. WAF creates
+    #     a string that contains the ordered list of header names, from the
+    #     headers in the web request, and then matches against that string.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
@@ -978,7 +977,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the cookies to inspect with the rule inspection
-    #   criteria. If you specify `All`, WAF inspects both keys and values.
+    #   criteria. If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -3561,7 +3567,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the headers to match with the rule inspection criteria.
-    #   If you specify `All`, WAF inspects both keys and values.
+    #   If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -3928,7 +3941,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the JSON to match against using the `MatchPattern`. If
-    #   you specify `All`, WAF matches against keys and values.
+    #   you specify `ALL`, WAF matches against keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior

@@ -601,9 +601,10 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine
     #   The type of database engine for the data provider. Valid values
-    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
-    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, and
+    #   `docdb`. A value of `"aurora"` represents Amazon Aurora
+    #   MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -1600,7 +1601,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   One or more subnet IDs to be assigned to the subnet group.
+    #   Two or more subnet IDs to be assigned to the subnet group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1815,9 +1816,10 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine
     #   The type of database engine for the data provider. Valid values
-    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
-    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, and
+    #   `docdb`. A value of `"aurora"` represents Amazon Aurora
+    #   MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -2680,6 +2682,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to the data providers described in the form of
     #   key-value pairs.
+    #
+    #   Valid filter names: data-provider-identifier
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -5036,9 +5040,10 @@ module Aws::DatabaseMigrationService
     #   The database engine name. Valid values, depending on the
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
-    #   `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
-    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
-    #   `"documentdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
+    #   `"redshift-serverless"`, `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`,
+    #   `"sybase"`, `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
+    #   `"elasticsearch"`, `"documentdb"`, `"sqlserver"`, `"neptune"`, and
+    #   `"babelfish"`.
     #   @return [String]
     #
     # @!attribute [rw] engine_display_name
@@ -5903,6 +5908,31 @@ module Aws::DatabaseMigrationService
     #   details.
     #   @return [String]
     #
+    # @!attribute [rw] load_timeout
+    #   The amount of time (in milliseconds) before DMS times out operations
+    #   performed by DMS on the Db2 target. The default value is 1200 (20
+    #   minutes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   The size (in KB) of the in-memory file write buffer used when
+    #   generating .csv files on the local disk on the DMS replication
+    #   instance. The default value is 1024 (1 MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of .csv files used to transfer
+    #   data to Db2 LUW.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] keep_csv_files
+    #   If true, DMS saves any .csv files to the Db2 LUW target that were
+    #   used to replicate data. DMS uses these files for analysis and
+    #   troubleshooting.
+    #
+    #   The default value is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/IBMDb2Settings AWS API Documentation
     #
     class IBMDb2Settings < Struct.new(
@@ -5915,7 +5945,11 @@ module Aws::DatabaseMigrationService
       :max_k_bytes_per_read,
       :username,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :load_timeout,
+      :write_buffer_size,
+      :max_file_size,
+      :keep_csv_files)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -6909,9 +6943,10 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine
     #   The type of database engine for the data provider. Valid values
-    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
-    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, and
+    #   `docdb`. A value of `"aurora"` represents Amazon Aurora
+    #   MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] exact_settings
@@ -8236,6 +8271,11 @@ module Aws::DatabaseMigrationService
     #   details.
     #   @return [String]
     #
+    # @!attribute [rw] execute_timeout
+    #   Sets the client statement timeout (in seconds) for a MySQL source
+    #   endpoint.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
@@ -8252,7 +8292,8 @@ module Aws::DatabaseMigrationService
       :server_timezone,
       :username,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :execute_timeout)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -10296,6 +10337,10 @@ module Aws::DatabaseMigrationService
     #   The timestamp when replication was last stopped.
     #   @return [Time]
     #
+    # @!attribute [rw] replication_deprovision_time
+    #   The timestamp when DMS will deprovision the replication.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Replication AWS API Documentation
     #
     class Replication < Struct.new(
@@ -10316,7 +10361,8 @@ module Aws::DatabaseMigrationService
       :recovery_checkpoint,
       :replication_create_time,
       :replication_update_time,
-      :replication_last_stop_time)
+      :replication_last_stop_time,
+      :replication_deprovision_time)
       SENSITIVE = []
       include Aws::Structure
     end

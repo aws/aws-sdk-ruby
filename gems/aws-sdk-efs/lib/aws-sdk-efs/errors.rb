@@ -32,6 +32,7 @@ module Aws::EFS
   # * {AccessPointNotFound}
   # * {AvailabilityZonesMismatch}
   # * {BadRequest}
+  # * {ConflictException}
   # * {DependencyTimeout}
   # * {FileSystemAlreadyExists}
   # * {FileSystemInUse}
@@ -48,6 +49,7 @@ module Aws::EFS
   # * {NetworkInterfaceLimitExceeded}
   # * {NoFreeAddressesInSubnet}
   # * {PolicyNotFound}
+  # * {ReplicationAlreadyExists}
   # * {ReplicationNotFound}
   # * {SecurityGroupLimitExceeded}
   # * {SecurityGroupNotFound}
@@ -154,6 +156,26 @@ module Aws::EFS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EFS::Types::BadRequest] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EFS::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -479,6 +501,26 @@ module Aws::EFS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EFS::Types::PolicyNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplicationAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EFS::Types::ReplicationAlreadyExists] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-10-27)
+------------------
+
+* Feature - Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.
+
 1.71.0 (2023-09-28)
 ------------------
 

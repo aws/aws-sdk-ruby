@@ -32,7 +32,7 @@ require_relative 'aws-sdk-personalizeevents/customizations'
 # structure.
 #
 #     personalize_events = Aws::PersonalizeEvents::Client.new
-#     resp = personalize_events.put_events(params)
+#     resp = personalize_events.put_action_interactions(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-personalizeevents/customizations'
 # @!group service
 module Aws::PersonalizeEvents
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.40.0'
 
 end

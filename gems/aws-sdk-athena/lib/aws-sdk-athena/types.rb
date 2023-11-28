@@ -646,12 +646,7 @@ module Aws::Athena
     #       `AwsDataCatalog` that already exists in your account, of which
     #       you can have only one and cannot modify.
     #
-    #     * Queries that specify a Glue Data Catalog other than the default
-    #       `AwsDataCatalog` must be run on Athena engine version 2.
-    #
-    #     * In Regions where Athena engine version 2 is not available,
-    #       creating new Glue data catalogs results in an `INVALID_INPUT`
-    #       error.
+    #     ^
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -888,12 +883,14 @@ module Aws::Athena
     #
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
 
-    # Specifies the KMS key that is used to encrypt the user's data stores
-    # in Athena. This setting does not apply to Athena SQL workgroups.
+    # Specifies the customer managed KMS key that is used to encrypt the
+    # user's data stores in Athena. When an Amazon Web Services managed key
+    # is used, this value is null. This setting does not apply to Athena SQL
+    # workgroups.
     #
     # @!attribute [rw] kms_key
-    #   The KMS key that is used to encrypt the user's data stores in
-    #   Athena.
+    #   The customer managed KMS key that is used to encrypt the user's
+    #   data stores in Athena.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CustomerContentEncryptionConfiguration AWS API Documentation
@@ -966,8 +963,7 @@ module Aws::Athena
     #       `AwsDataCatalog` that already exists in your account, of which
     #       you can have only one and cannot modify.
     #
-    #     * Queries that specify a Glue Data Catalog other than the default
-    #       `AwsDataCatalog` must be run on Athena engine version 2.
+    #     ^
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
@@ -3103,6 +3099,11 @@ module Aws::Athena
     #   might automatically add the query back to the queue.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_pre_processing_time_in_millis
+    #   The number of milliseconds that Athena took to preprocess the query
+    #   before submitting the query to the query engine.
+    #   @return [Integer]
+    #
     # @!attribute [rw] query_planning_time_in_millis
     #   The number of milliseconds that Athena took to plan the query
     #   processing flow. This includes the time spent retrieving table
@@ -3129,6 +3130,7 @@ module Aws::Athena
       :data_manifest_location,
       :total_execution_time_in_millis,
       :query_queue_time_in_millis,
+      :service_pre_processing_time_in_millis,
       :query_planning_time_in_millis,
       :service_processing_time_in_millis,
       :result_reuse_information)
@@ -3254,6 +3256,11 @@ module Aws::Athena
     #   might automatically add the query back to the queue.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_pre_processing_time_in_millis
+    #   The number of milliseconds that Athena spends on preprocessing
+    #   before it submits the query to the engine.
+    #   @return [Integer]
+    #
     # @!attribute [rw] query_planning_time_in_millis
     #   The number of milliseconds that Athena took to plan the query
     #   processing flow. This includes the time spent retrieving table
@@ -3279,6 +3286,7 @@ module Aws::Athena
     #
     class QueryRuntimeStatisticsTimeline < Struct.new(
       :query_queue_time_in_millis,
+      :service_pre_processing_time_in_millis,
       :query_planning_time_in_millis,
       :engine_execution_time_in_millis,
       :service_processing_time_in_millis,
@@ -3728,7 +3736,8 @@ module Aws::Athena
     # Contains session configuration information.
     #
     # @!attribute [rw] execution_role
-    #   The ARN of the execution role used for the session.
+    #   The ARN of the execution role used in a Spark session to access user
+    #   resources. This property applies only to Spark-enabled workgroups.
     #   @return [String]
     #
     # @!attribute [rw] working_directory
@@ -3879,7 +3888,9 @@ module Aws::Athena
     #   @return [Types::CalculationConfiguration]
     #
     # @!attribute [rw] code_block
-    #   A string that contains the code of the calculation.
+    #   A string that contains the code of the calculation. Use this
+    #   parameter instead of CalculationConfiguration$CodeBlock, which is
+    #   deprecated.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -4824,7 +4835,8 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   Role used in a session for accessing the user's resources.
+    #   Role used in a Spark session for accessing the user's resources.
+    #   This property applies only to Spark-enabled workgroups.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration
@@ -4936,13 +4948,15 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   Contains the ARN of the execution role for the workgroup
+    #   The ARN of the execution role used to access user resources. This
+    #   property applies only to Spark-enabled workgroups.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration
-    #   Specifies the KMS key that is used to encrypt the user's data
-    #   stores in Athena. This setting does not apply to Athena SQL
-    #   workgroups.
+    #   Specifies the customer managed KMS key that is used to encrypt the
+    #   user's data stores in Athena. When an Amazon Web Services managed
+    #   key is used, this value is null. This setting does not apply to
+    #   Athena SQL workgroups.
     #   @return [Types::CustomerContentEncryptionConfiguration]
     #
     # @!attribute [rw] enable_minimum_encryption_configuration

@@ -218,6 +218,8 @@ module Aws::Rekognition
     GetLabelDetectionRequest = Shapes::StructureShape.new(name: 'GetLabelDetectionRequest')
     GetLabelDetectionRequestMetadata = Shapes::StructureShape.new(name: 'GetLabelDetectionRequestMetadata')
     GetLabelDetectionResponse = Shapes::StructureShape.new(name: 'GetLabelDetectionResponse')
+    GetMediaAnalysisJobRequest = Shapes::StructureShape.new(name: 'GetMediaAnalysisJobRequest')
+    GetMediaAnalysisJobResponse = Shapes::StructureShape.new(name: 'GetMediaAnalysisJobResponse')
     GetPersonTrackingRequest = Shapes::StructureShape.new(name: 'GetPersonTrackingRequest')
     GetPersonTrackingResponse = Shapes::StructureShape.new(name: 'GetPersonTrackingResponse')
     GetSegmentDetectionRequest = Shapes::StructureShape.new(name: 'GetSegmentDetectionRequest')
@@ -250,6 +252,7 @@ module Aws::Rekognition
     Instances = Shapes::ListShape.new(name: 'Instances')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidImageFormatException = Shapes::StructureShape.new(name: 'InvalidImageFormatException')
+    InvalidManifestException = Shapes::StructureShape.new(name: 'InvalidManifestException')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
@@ -293,6 +296,9 @@ module Aws::Rekognition
     ListDatasetLabelsResponse = Shapes::StructureShape.new(name: 'ListDatasetLabelsResponse')
     ListFacesRequest = Shapes::StructureShape.new(name: 'ListFacesRequest')
     ListFacesResponse = Shapes::StructureShape.new(name: 'ListFacesResponse')
+    ListMediaAnalysisJobsPageSize = Shapes::IntegerShape.new(name: 'ListMediaAnalysisJobsPageSize')
+    ListMediaAnalysisJobsRequest = Shapes::StructureShape.new(name: 'ListMediaAnalysisJobsRequest')
+    ListMediaAnalysisJobsResponse = Shapes::StructureShape.new(name: 'ListMediaAnalysisJobsResponse')
     ListProjectPoliciesPageSize = Shapes::IntegerShape.new(name: 'ListProjectPoliciesPageSize')
     ListProjectPoliciesRequest = Shapes::StructureShape.new(name: 'ListProjectPoliciesRequest')
     ListProjectPoliciesResponse = Shapes::StructureShape.new(name: 'ListProjectPoliciesResponse')
@@ -315,6 +321,20 @@ module Aws::Rekognition
     MaxPixelThreshold = Shapes::FloatShape.new(name: 'MaxPixelThreshold')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxUserResults = Shapes::IntegerShape.new(name: 'MaxUserResults')
+    MediaAnalysisDetectModerationLabelsConfig = Shapes::StructureShape.new(name: 'MediaAnalysisDetectModerationLabelsConfig')
+    MediaAnalysisInput = Shapes::StructureShape.new(name: 'MediaAnalysisInput')
+    MediaAnalysisJobDescription = Shapes::StructureShape.new(name: 'MediaAnalysisJobDescription')
+    MediaAnalysisJobDescriptions = Shapes::ListShape.new(name: 'MediaAnalysisJobDescriptions')
+    MediaAnalysisJobFailureCode = Shapes::StringShape.new(name: 'MediaAnalysisJobFailureCode')
+    MediaAnalysisJobFailureDetails = Shapes::StructureShape.new(name: 'MediaAnalysisJobFailureDetails')
+    MediaAnalysisJobId = Shapes::StringShape.new(name: 'MediaAnalysisJobId')
+    MediaAnalysisJobName = Shapes::StringShape.new(name: 'MediaAnalysisJobName')
+    MediaAnalysisJobStatus = Shapes::StringShape.new(name: 'MediaAnalysisJobStatus')
+    MediaAnalysisManifestSummary = Shapes::StructureShape.new(name: 'MediaAnalysisManifestSummary')
+    MediaAnalysisOperationsConfig = Shapes::StructureShape.new(name: 'MediaAnalysisOperationsConfig')
+    MediaAnalysisOutputConfig = Shapes::StructureShape.new(name: 'MediaAnalysisOutputConfig')
+    MediaAnalysisResults = Shapes::StructureShape.new(name: 'MediaAnalysisResults')
+    MediaAnalysisS3KeyPrefix = Shapes::StringShape.new(name: 'MediaAnalysisS3KeyPrefix')
     MinCoveragePercentage = Shapes::FloatShape.new(name: 'MinCoveragePercentage')
     ModerationLabel = Shapes::StructureShape.new(name: 'ModerationLabel')
     ModerationLabels = Shapes::ListShape.new(name: 'ModerationLabels')
@@ -422,6 +442,8 @@ module Aws::Rekognition
     StartFaceSearchResponse = Shapes::StructureShape.new(name: 'StartFaceSearchResponse')
     StartLabelDetectionRequest = Shapes::StructureShape.new(name: 'StartLabelDetectionRequest')
     StartLabelDetectionResponse = Shapes::StructureShape.new(name: 'StartLabelDetectionResponse')
+    StartMediaAnalysisJobRequest = Shapes::StructureShape.new(name: 'StartMediaAnalysisJobRequest')
+    StartMediaAnalysisJobResponse = Shapes::StructureShape.new(name: 'StartMediaAnalysisJobResponse')
     StartPersonTrackingRequest = Shapes::StructureShape.new(name: 'StartPersonTrackingRequest')
     StartPersonTrackingResponse = Shapes::StructureShape.new(name: 'StartPersonTrackingResponse')
     StartProjectVersionRequest = Shapes::StructureShape.new(name: 'StartProjectVersionRequest')
@@ -1280,6 +1302,23 @@ module Aws::Rekognition
     GetLabelDetectionResponse.add_member(:get_request_metadata, Shapes::ShapeRef.new(shape: GetLabelDetectionRequestMetadata, location_name: "GetRequestMetadata"))
     GetLabelDetectionResponse.struct_class = Types::GetLabelDetectionResponse
 
+    GetMediaAnalysisJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: MediaAnalysisJobId, required: true, location_name: "JobId"))
+    GetMediaAnalysisJobRequest.struct_class = Types::GetMediaAnalysisJobRequest
+
+    GetMediaAnalysisJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: MediaAnalysisJobId, required: true, location_name: "JobId"))
+    GetMediaAnalysisJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: MediaAnalysisJobName, location_name: "JobName"))
+    GetMediaAnalysisJobResponse.add_member(:operations_config, Shapes::ShapeRef.new(shape: MediaAnalysisOperationsConfig, required: true, location_name: "OperationsConfig"))
+    GetMediaAnalysisJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: MediaAnalysisJobStatus, required: true, location_name: "Status"))
+    GetMediaAnalysisJobResponse.add_member(:failure_details, Shapes::ShapeRef.new(shape: MediaAnalysisJobFailureDetails, location_name: "FailureDetails"))
+    GetMediaAnalysisJobResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTimestamp"))
+    GetMediaAnalysisJobResponse.add_member(:completion_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTimestamp"))
+    GetMediaAnalysisJobResponse.add_member(:input, Shapes::ShapeRef.new(shape: MediaAnalysisInput, required: true, location_name: "Input"))
+    GetMediaAnalysisJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: MediaAnalysisOutputConfig, required: true, location_name: "OutputConfig"))
+    GetMediaAnalysisJobResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    GetMediaAnalysisJobResponse.add_member(:results, Shapes::ShapeRef.new(shape: MediaAnalysisResults, location_name: "Results"))
+    GetMediaAnalysisJobResponse.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: MediaAnalysisManifestSummary, location_name: "ManifestSummary"))
+    GetMediaAnalysisJobResponse.struct_class = Types::GetMediaAnalysisJobResponse
+
     GetPersonTrackingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetPersonTrackingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetPersonTrackingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -1389,6 +1428,8 @@ module Aws::Rekognition
 
     InvalidImageFormatException.struct_class = Types::InvalidImageFormatException
 
+    InvalidManifestException.struct_class = Types::InvalidManifestException
+
     InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
 
     InvalidParameterException.struct_class = Types::InvalidParameterException
@@ -1496,6 +1537,14 @@ module Aws::Rekognition
     ListFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     ListFacesResponse.struct_class = Types::ListFacesResponse
 
+    ListMediaAnalysisJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    ListMediaAnalysisJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMediaAnalysisJobsPageSize, location_name: "MaxResults"))
+    ListMediaAnalysisJobsRequest.struct_class = Types::ListMediaAnalysisJobsRequest
+
+    ListMediaAnalysisJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
+    ListMediaAnalysisJobsResponse.add_member(:media_analysis_jobs, Shapes::ShapeRef.new(shape: MediaAnalysisJobDescriptions, required: true, location_name: "MediaAnalysisJobs"))
+    ListMediaAnalysisJobsResponse.struct_class = Types::ListMediaAnalysisJobsResponse
+
     ListProjectPoliciesRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
     ListProjectPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExtendedPaginationToken, location_name: "NextToken"))
     ListProjectPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListProjectPoliciesPageSize, location_name: "MaxResults"))
@@ -1537,6 +1586,46 @@ module Aws::Rekognition
     MatchedUser.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
     MatchedUser.add_member(:user_status, Shapes::ShapeRef.new(shape: UserStatus, location_name: "UserStatus"))
     MatchedUser.struct_class = Types::MatchedUser
+
+    MediaAnalysisDetectModerationLabelsConfig.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    MediaAnalysisDetectModerationLabelsConfig.add_member(:project_version, Shapes::ShapeRef.new(shape: ProjectVersionId, location_name: "ProjectVersion"))
+    MediaAnalysisDetectModerationLabelsConfig.struct_class = Types::MediaAnalysisDetectModerationLabelsConfig
+
+    MediaAnalysisInput.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, required: true, location_name: "S3Object"))
+    MediaAnalysisInput.struct_class = Types::MediaAnalysisInput
+
+    MediaAnalysisJobDescription.add_member(:job_id, Shapes::ShapeRef.new(shape: MediaAnalysisJobId, required: true, location_name: "JobId"))
+    MediaAnalysisJobDescription.add_member(:job_name, Shapes::ShapeRef.new(shape: MediaAnalysisJobName, location_name: "JobName"))
+    MediaAnalysisJobDescription.add_member(:operations_config, Shapes::ShapeRef.new(shape: MediaAnalysisOperationsConfig, required: true, location_name: "OperationsConfig"))
+    MediaAnalysisJobDescription.add_member(:status, Shapes::ShapeRef.new(shape: MediaAnalysisJobStatus, required: true, location_name: "Status"))
+    MediaAnalysisJobDescription.add_member(:failure_details, Shapes::ShapeRef.new(shape: MediaAnalysisJobFailureDetails, location_name: "FailureDetails"))
+    MediaAnalysisJobDescription.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTimestamp"))
+    MediaAnalysisJobDescription.add_member(:completion_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTimestamp"))
+    MediaAnalysisJobDescription.add_member(:input, Shapes::ShapeRef.new(shape: MediaAnalysisInput, required: true, location_name: "Input"))
+    MediaAnalysisJobDescription.add_member(:output_config, Shapes::ShapeRef.new(shape: MediaAnalysisOutputConfig, required: true, location_name: "OutputConfig"))
+    MediaAnalysisJobDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    MediaAnalysisJobDescription.add_member(:results, Shapes::ShapeRef.new(shape: MediaAnalysisResults, location_name: "Results"))
+    MediaAnalysisJobDescription.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: MediaAnalysisManifestSummary, location_name: "ManifestSummary"))
+    MediaAnalysisJobDescription.struct_class = Types::MediaAnalysisJobDescription
+
+    MediaAnalysisJobDescriptions.member = Shapes::ShapeRef.new(shape: MediaAnalysisJobDescription)
+
+    MediaAnalysisJobFailureDetails.add_member(:code, Shapes::ShapeRef.new(shape: MediaAnalysisJobFailureCode, location_name: "Code"))
+    MediaAnalysisJobFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MediaAnalysisJobFailureDetails.struct_class = Types::MediaAnalysisJobFailureDetails
+
+    MediaAnalysisManifestSummary.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    MediaAnalysisManifestSummary.struct_class = Types::MediaAnalysisManifestSummary
+
+    MediaAnalysisOperationsConfig.add_member(:detect_moderation_labels, Shapes::ShapeRef.new(shape: MediaAnalysisDetectModerationLabelsConfig, location_name: "DetectModerationLabels"))
+    MediaAnalysisOperationsConfig.struct_class = Types::MediaAnalysisOperationsConfig
+
+    MediaAnalysisOutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    MediaAnalysisOutputConfig.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: MediaAnalysisS3KeyPrefix, location_name: "S3KeyPrefix"))
+    MediaAnalysisOutputConfig.struct_class = Types::MediaAnalysisOutputConfig
+
+    MediaAnalysisResults.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    MediaAnalysisResults.struct_class = Types::MediaAnalysisResults
 
     ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ModerationLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1856,6 +1945,17 @@ module Aws::Rekognition
 
     StartLabelDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartLabelDetectionResponse.struct_class = Types::StartLabelDetectionResponse
+
+    StartMediaAnalysisJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartMediaAnalysisJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: MediaAnalysisJobName, location_name: "JobName"))
+    StartMediaAnalysisJobRequest.add_member(:operations_config, Shapes::ShapeRef.new(shape: MediaAnalysisOperationsConfig, required: true, location_name: "OperationsConfig"))
+    StartMediaAnalysisJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: MediaAnalysisInput, required: true, location_name: "Input"))
+    StartMediaAnalysisJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: MediaAnalysisOutputConfig, required: true, location_name: "OutputConfig"))
+    StartMediaAnalysisJobRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    StartMediaAnalysisJobRequest.struct_class = Types::StartMediaAnalysisJobRequest
+
+    StartMediaAnalysisJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: MediaAnalysisJobId, required: true, location_name: "JobId"))
+    StartMediaAnalysisJobResponse.struct_class = Types::StartMediaAnalysisJobResponse
 
     StartPersonTrackingRequest.add_member(:video, Shapes::ShapeRef.new(shape: Video, required: true, location_name: "Video"))
     StartPersonTrackingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
@@ -2767,6 +2867,20 @@ module Aws::Rekognition
         )
       end)
 
+      api.add_operation(:get_media_analysis_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMediaAnalysisJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMediaAnalysisJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMediaAnalysisJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_person_tracking, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPersonTracking"
         o.http_method = "POST"
@@ -2928,6 +3042,26 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_media_analysis_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMediaAnalysisJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMediaAnalysisJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMediaAnalysisJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3194,6 +3328,25 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_media_analysis_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMediaAnalysisJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMediaAnalysisJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMediaAnalysisJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidManifestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
       end)
 
       api.add_operation(:start_person_tracking, Seahorse::Model::Operation.new.tap do |o|

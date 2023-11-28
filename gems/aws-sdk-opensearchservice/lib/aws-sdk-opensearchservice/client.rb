@@ -630,6 +630,9 @@ module Aws::OpenSearchService
     #   Identity and Access Management (IAM) policy document specifying the
     #   access policies for the new domain.
     #
+    # @option params [String] :ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #
     # @option params [Types::SnapshotOptions] :snapshot_options
     #   DEPRECATED. Container for the parameters required to configure
     #   automated snapshots of domain indexes.
@@ -754,6 +757,7 @@ module Aws::OpenSearchService
     #       throughput: 1,
     #     },
     #     access_policies: "PolicyDocument",
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     snapshot_options: {
     #       automated_snapshot_start_hour: 1,
     #     },
@@ -854,6 +858,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -877,6 +882,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1165,6 +1171,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -1188,6 +1195,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1446,6 +1454,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -1469,6 +1478,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1695,6 +1705,12 @@ module Aws::OpenSearchService
     #   resp.domain_config.access_policies.status.update_version #=> Integer
     #   resp.domain_config.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.access_policies.status.pending_deletion #=> Boolean
+    #   resp.domain_config.ip_address_type.options #=> String, one of "ipv4", "dualstack"
+    #   resp.domain_config.ip_address_type.status.creation_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_version #=> Integer
+    #   resp.domain_config.ip_address_type.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.ip_address_type.status.pending_deletion #=> Boolean
     #   resp.domain_config.snapshot_options.options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_config.snapshot_options.status.creation_date #=> Time
     #   resp.domain_config.snapshot_options.status.update_date #=> Time
@@ -1940,6 +1956,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].created #=> Boolean
     #   resp.domain_status_list[0].deleted #=> Boolean
     #   resp.domain_status_list[0].endpoint #=> String
+    #   resp.domain_status_list[0].endpoint_v2 #=> String
     #   resp.domain_status_list[0].endpoints #=> Hash
     #   resp.domain_status_list[0].endpoints["String"] #=> String
     #   resp.domain_status_list[0].processing #=> Boolean
@@ -1963,6 +1980,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].ebs_options.iops #=> Integer
     #   resp.domain_status_list[0].ebs_options.throughput #=> Integer
     #   resp.domain_status_list[0].access_policies #=> String
+    #   resp.domain_status_list[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status_list[0].vpc_options.vpc_id #=> String
     #   resp.domain_status_list[0].vpc_options.subnet_ids #=> Array
@@ -2073,6 +2091,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.created #=> Boolean
     #   resp.dry_run_config.deleted #=> Boolean
     #   resp.dry_run_config.endpoint #=> String
+    #   resp.dry_run_config.endpoint_v2 #=> String
     #   resp.dry_run_config.endpoints #=> Hash
     #   resp.dry_run_config.endpoints["String"] #=> String
     #   resp.dry_run_config.processing #=> Boolean
@@ -2096,6 +2115,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.ebs_options.iops #=> Integer
     #   resp.dry_run_config.ebs_options.throughput #=> Integer
     #   resp.dry_run_config.access_policies #=> String
+    #   resp.dry_run_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.dry_run_config.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.dry_run_config.vpc_options.vpc_id #=> String
     #   resp.dry_run_config.vpc_options.subnet_ids #=> Array
@@ -2678,6 +2698,48 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # The status of the maintenance action.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :maintenance_id
+    #   The request ID of the maintenance action.
+    #
+    # @return [Types::GetDomainMaintenanceStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainMaintenanceStatusResponse#status #status} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#status_message #status_message} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#node_id #node_id} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#action #action} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#created_at #created_at} => Time
+    #   * {Types::GetDomainMaintenanceStatusResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_maintenance_status({
+    #     domain_name: "DomainName", # required
+    #     maintenance_id: "RequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "TIMED_OUT"
+    #   resp.status_message #=> String
+    #   resp.node_id #=> String
+    #   resp.action #=> String, one of "REBOOT_NODE", "RESTART_SEARCH_PROCESS", "RESTART_DASHBOARD"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatus AWS API Documentation
+    #
+    # @overload get_domain_maintenance_status(params = {})
+    # @param [Hash] params ({})
+    def get_domain_maintenance_status(params = {}, options = {})
+      req = build_request(:get_domain_maintenance_status, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Amazon OpenSearch Service package versions, along
     # with their creation time, commit message, and plugin properties (if
     # the package is a zip plugin package). For more information, see
@@ -2823,6 +2885,66 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_upgrade_status(params = {}, options = {})
       req = build_request(:get_upgrade_status, params)
+      req.send_request(options)
+    end
+
+    # A list of maintenance actions for the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [String] :action
+    #   The name of the action.
+    #
+    # @option params [String] :status
+    #   The status of the action.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListDomainMaintenances` operation returns a
+    #   `nextToken`, include the returned `nextToken` in subsequent
+    #   `ListDomainMaintenances` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListDomainMaintenancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainMaintenancesResponse#domain_maintenances #domain_maintenances} => Array&lt;Types::DomainMaintenanceDetails&gt;
+    #   * {Types::ListDomainMaintenancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_maintenances({
+    #     domain_name: "DomainName", # required
+    #     action: "REBOOT_NODE", # accepts REBOOT_NODE, RESTART_SEARCH_PROCESS, RESTART_DASHBOARD
+    #     status: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, TIMED_OUT
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_maintenances #=> Array
+    #   resp.domain_maintenances[0].maintenance_id #=> String
+    #   resp.domain_maintenances[0].domain_name #=> String
+    #   resp.domain_maintenances[0].action #=> String, one of "REBOOT_NODE", "RESTART_SEARCH_PROCESS", "RESTART_DASHBOARD"
+    #   resp.domain_maintenances[0].node_id #=> String
+    #   resp.domain_maintenances[0].status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "TIMED_OUT"
+    #   resp.domain_maintenances[0].status_message #=> String
+    #   resp.domain_maintenances[0].created_at #=> Time
+    #   resp.domain_maintenances[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainMaintenances AWS API Documentation
+    #
+    # @overload list_domain_maintenances(params = {})
+    # @param [Hash] params ({})
+    def list_domain_maintenances(params = {}, options = {})
+      req = build_request(:list_domain_maintenances, params)
       req.send_request(options)
     end
 
@@ -3442,6 +3564,44 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Starts the node maintenance process on the data node. These processes
+    # can include a node reboot, an Opensearch or Elasticsearch process
+    # restart, or a Dashboard or Kibana restart.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :action
+    #   The name of the action.
+    #
+    # @option params [String] :node_id
+    #   The ID of the data node.
+    #
+    # @return [Types::StartDomainMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDomainMaintenanceResponse#maintenance_id #maintenance_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_domain_maintenance({
+    #     domain_name: "DomainName", # required
+    #     action: "REBOOT_NODE", # required, accepts REBOOT_NODE, RESTART_SEARCH_PROCESS, RESTART_DASHBOARD
+    #     node_id: "NodeId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.maintenance_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenance AWS API Documentation
+    #
+    # @overload start_domain_maintenance(params = {})
+    # @param [Hash] params ({})
+    def start_domain_maintenance(params = {}, options = {})
+      req = build_request(:start_domain_maintenance, params)
+      req.send_request(options)
+    end
+
     # Schedules a service software update for an Amazon OpenSearch Service
     # domain. For more information, see [Service software updates in Amazon
     # OpenSearch Service][1].
@@ -3571,6 +3731,9 @@ module Aws::OpenSearchService
     #   Identity and Access Management (IAM) access policy as a JSON-formatted
     #   string.
     #
+    # @option params [String] :ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #
@@ -3667,6 +3830,7 @@ module Aws::OpenSearchService
     #       "String" => "String",
     #     },
     #     access_policies: "PolicyDocument",
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     log_publishing_options: {
     #       "INDEX_SLOW_LOGS" => {
     #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
@@ -3781,6 +3945,12 @@ module Aws::OpenSearchService
     #   resp.domain_config.access_policies.status.update_version #=> Integer
     #   resp.domain_config.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.access_policies.status.pending_deletion #=> Boolean
+    #   resp.domain_config.ip_address_type.options #=> String, one of "ipv4", "dualstack"
+    #   resp.domain_config.ip_address_type.status.creation_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_version #=> Integer
+    #   resp.domain_config.ip_address_type.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.ip_address_type.status.pending_deletion #=> Boolean
     #   resp.domain_config.snapshot_options.options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_config.snapshot_options.status.creation_date #=> Time
     #   resp.domain_config.snapshot_options.status.update_date #=> Time
@@ -4180,7 +4350,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

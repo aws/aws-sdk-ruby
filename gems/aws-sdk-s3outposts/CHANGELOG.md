@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2023-10-30)
+------------------
+
+* Feature - Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
+
 1.24.0 (2023-09-27)
 ------------------
 

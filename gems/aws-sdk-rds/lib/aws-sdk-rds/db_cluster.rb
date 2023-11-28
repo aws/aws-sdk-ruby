@@ -211,6 +211,12 @@ module Aws::RDS
       data[:read_replica_identifiers]
     end
 
+    # Reserved for future use.
+    # @return [Array<Types::DBClusterStatusInfo>]
+    def status_infos
+      data[:status_infos]
+    end
+
     # The list of DB instances that make up the DB cluster.
     # @return [Array<Types::DBClusterMember>]
     def db_cluster_members
@@ -362,6 +368,12 @@ module Aws::RDS
     # @return [Types::ScalingConfigurationInfo]
     def scaling_configuration_info
       data[:scaling_configuration_info]
+    end
+
+    # Reserved for future use.
+    # @return [Types::RdsCustomClusterConfiguration]
+    def rds_custom_cluster_configuration
+      data[:rds_custom_cluster_configuration]
     end
 
     # Indicates whether the DB cluster has deletion protection enabled. The
@@ -846,6 +858,11 @@ module Aws::RDS
     #       timeout_action: "String",
     #       seconds_before_timeout: 1,
     #     },
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
@@ -1269,6 +1286,8 @@ module Aws::RDS
     #   of the DB cluster.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     # @option options [Boolean] :deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled. The
     #   database can't be deleted when deletion protection is enabled. By
@@ -2484,6 +2503,11 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -2841,6 +2865,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

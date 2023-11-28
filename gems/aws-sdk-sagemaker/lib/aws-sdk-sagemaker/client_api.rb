@@ -14,6 +14,7 @@ module Aws::SageMaker
     include Seahorse::Model
 
     Accept = Shapes::StringShape.new(name: 'Accept')
+    AcceptEula = Shapes::BooleanShape.new(name: 'AcceptEula')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionArn = Shapes::StringShape.new(name: 'ActionArn')
     ActionSource = Shapes::StructureShape.new(name: 'ActionSource')
@@ -157,6 +158,7 @@ module Aws::SageMaker
     AutotuneMode = Shapes::StringShape.new(name: 'AutotuneMode')
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
     BacktestResultsLocation = Shapes::StringShape.new(name: 'BacktestResultsLocation')
+    BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     BatchDataCaptureConfig = Shapes::StructureShape.new(name: 'BatchDataCaptureConfig')
     BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
     BatchDescribeModelPackageErrorMap = Shapes::MapShape.new(name: 'BatchDescribeModelPackageErrorMap')
@@ -1233,6 +1235,7 @@ module Aws::SageMaker
     MaxParallelOfTests = Shapes::IntegerShape.new(name: 'MaxParallelOfTests')
     MaxParallelTrainingJobs = Shapes::IntegerShape.new(name: 'MaxParallelTrainingJobs')
     MaxPayloadInMB = Shapes::IntegerShape.new(name: 'MaxPayloadInMB')
+    MaxPendingTimeInSeconds = Shapes::IntegerShape.new(name: 'MaxPendingTimeInSeconds')
     MaxPercentageOfInputDatasetLabeled = Shapes::IntegerShape.new(name: 'MaxPercentageOfInputDatasetLabeled')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxRuntimeInSeconds')
@@ -1258,6 +1261,7 @@ module Aws::SageMaker
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     MinimumInstanceMetadataServiceVersion = Shapes::StringShape.new(name: 'MinimumInstanceMetadataServiceVersion')
     Model = Shapes::StructureShape.new(name: 'Model')
+    ModelAccessConfig = Shapes::StructureShape.new(name: 'ModelAccessConfig')
     ModelApprovalStatus = Shapes::StringShape.new(name: 'ModelApprovalStatus')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelArtifacts = Shapes::StructureShape.new(name: 'ModelArtifacts')
@@ -1770,6 +1774,7 @@ module Aws::SageMaker
     ShadowModelVariantConfigList = Shapes::ListShape.new(name: 'ShadowModelVariantConfigList')
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
+    SingleSignOnApplicationArn = Shapes::StringShape.new(name: 'SingleSignOnApplicationArn')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
     SkipModelValidation = Shapes::StringShape.new(name: 'SkipModelValidation')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
@@ -1893,6 +1898,8 @@ module Aws::SageMaker
     TenthFractionsOfACent = Shapes::IntegerShape.new(name: 'TenthFractionsOfACent')
     TerminationWaitInSeconds = Shapes::IntegerShape.new(name: 'TerminationWaitInSeconds')
     TextClassificationJobConfig = Shapes::StructureShape.new(name: 'TextClassificationJobConfig')
+    TextGenerationJobConfig = Shapes::StructureShape.new(name: 'TextGenerationJobConfig')
+    TextGenerationResolvedAttributes = Shapes::StructureShape.new(name: 'TextGenerationResolvedAttributes')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
     TimeSeriesConfig = Shapes::StructureShape.new(name: 'TimeSeriesConfig')
     TimeSeriesForecastingJobConfig = Shapes::StructureShape.new(name: 'TimeSeriesForecastingJobConfig')
@@ -2427,17 +2434,21 @@ module Aws::SageMaker
     AutoMLProblemTypeConfig.add_member(:text_classification_job_config, Shapes::ShapeRef.new(shape: TextClassificationJobConfig, location_name: "TextClassificationJobConfig"))
     AutoMLProblemTypeConfig.add_member(:tabular_job_config, Shapes::ShapeRef.new(shape: TabularJobConfig, location_name: "TabularJobConfig"))
     AutoMLProblemTypeConfig.add_member(:time_series_forecasting_job_config, Shapes::ShapeRef.new(shape: TimeSeriesForecastingJobConfig, location_name: "TimeSeriesForecastingJobConfig"))
+    AutoMLProblemTypeConfig.add_member(:text_generation_job_config, Shapes::ShapeRef.new(shape: TextGenerationJobConfig, location_name: "TextGenerationJobConfig"))
     AutoMLProblemTypeConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AutoMLProblemTypeConfig.add_member_subclass(:image_classification_job_config, Types::AutoMLProblemTypeConfig::ImageClassificationJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:text_classification_job_config, Types::AutoMLProblemTypeConfig::TextClassificationJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:tabular_job_config, Types::AutoMLProblemTypeConfig::TabularJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:time_series_forecasting_job_config, Types::AutoMLProblemTypeConfig::TimeSeriesForecastingJobConfig)
+    AutoMLProblemTypeConfig.add_member_subclass(:text_generation_job_config, Types::AutoMLProblemTypeConfig::TextGenerationJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:unknown, Types::AutoMLProblemTypeConfig::Unknown)
     AutoMLProblemTypeConfig.struct_class = Types::AutoMLProblemTypeConfig
 
     AutoMLProblemTypeResolvedAttributes.add_member(:tabular_resolved_attributes, Shapes::ShapeRef.new(shape: TabularResolvedAttributes, location_name: "TabularResolvedAttributes"))
+    AutoMLProblemTypeResolvedAttributes.add_member(:text_generation_resolved_attributes, Shapes::ShapeRef.new(shape: TextGenerationResolvedAttributes, location_name: "TextGenerationResolvedAttributes"))
     AutoMLProblemTypeResolvedAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AutoMLProblemTypeResolvedAttributes.add_member_subclass(:tabular_resolved_attributes, Types::AutoMLProblemTypeResolvedAttributes::TabularResolvedAttributes)
+    AutoMLProblemTypeResolvedAttributes.add_member_subclass(:text_generation_resolved_attributes, Types::AutoMLProblemTypeResolvedAttributes::TextGenerationResolvedAttributes)
     AutoMLProblemTypeResolvedAttributes.add_member_subclass(:unknown, Types::AutoMLProblemTypeResolvedAttributes::Unknown)
     AutoMLProblemTypeResolvedAttributes.struct_class = Types::AutoMLProblemTypeResolvedAttributes
 
@@ -4012,6 +4023,7 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DescribeDomainResponse.add_member(:home_efs_file_system_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "HomeEfsFileSystemId"))
     DescribeDomainResponse.add_member(:single_sign_on_managed_application_instance_id, Shapes::ShapeRef.new(shape: String256, location_name: "SingleSignOnManagedApplicationInstanceId"))
+    DescribeDomainResponse.add_member(:single_sign_on_application_arn, Shapes::ShapeRef.new(shape: SingleSignOnApplicationArn, location_name: "SingleSignOnApplicationArn"))
     DescribeDomainResponse.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "Status"))
     DescribeDomainResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     DescribeDomainResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
@@ -5695,8 +5707,8 @@ module Aws::SageMaker
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, location_name: "SupportedTransformInstanceTypes"))
     InferenceSpecification.add_member(:supported_realtime_inference_instance_types, Shapes::ShapeRef.new(shape: RealtimeInferenceInstanceTypes, location_name: "SupportedRealtimeInferenceInstanceTypes"))
-    InferenceSpecification.add_member(:supported_content_types, Shapes::ShapeRef.new(shape: ContentTypes, required: true, location_name: "SupportedContentTypes"))
-    InferenceSpecification.add_member(:supported_response_mime_types, Shapes::ShapeRef.new(shape: ResponseMIMETypes, required: true, location_name: "SupportedResponseMIMETypes"))
+    InferenceSpecification.add_member(:supported_content_types, Shapes::ShapeRef.new(shape: ContentTypes, location_name: "SupportedContentTypes"))
+    InferenceSpecification.add_member(:supported_response_mime_types, Shapes::ShapeRef.new(shape: ResponseMIMETypes, location_name: "SupportedResponseMIMETypes"))
     InferenceSpecification.struct_class = Types::InferenceSpecification
 
     InputConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -6917,6 +6929,9 @@ module Aws::SageMaker
     Model.add_member(:deployment_recommendation, Shapes::ShapeRef.new(shape: DeploymentRecommendation, location_name: "DeploymentRecommendation"))
     Model.struct_class = Types::Model
 
+    ModelAccessConfig.add_member(:accept_eula, Shapes::ShapeRef.new(shape: AcceptEula, required: true, location_name: "AcceptEula"))
+    ModelAccessConfig.struct_class = Types::ModelAccessConfig
+
     ModelArtifacts.add_member(:s3_model_artifacts, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3ModelArtifacts"))
     ModelArtifacts.struct_class = Types::ModelArtifacts
 
@@ -7042,6 +7057,7 @@ module Aws::SageMaker
     ModelDashboardMonitoringSchedule.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
     ModelDashboardMonitoringSchedule.add_member(:monitoring_alert_summaries, Shapes::ShapeRef.new(shape: MonitoringAlertSummaryList, location_name: "MonitoringAlertSummaries"))
     ModelDashboardMonitoringSchedule.add_member(:last_monitoring_execution_summary, Shapes::ShapeRef.new(shape: MonitoringExecutionSummary, location_name: "LastMonitoringExecutionSummary"))
+    ModelDashboardMonitoringSchedule.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelDashboardMonitoringSchedule.struct_class = Types::ModelDashboardMonitoringSchedule
 
     ModelDashboardMonitoringSchedules.member = Shapes::ShapeRef.new(shape: ModelDashboardMonitoringSchedule)
@@ -7191,7 +7207,7 @@ module Aws::SageMaker
     ModelPackageSummaries.key = Shapes::ShapeRef.new(shape: ModelPackageArn)
     ModelPackageSummaries.value = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageSummary)
 
-    ModelPackageSummary.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
+    ModelPackageSummary.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageName"))
     ModelPackageSummary.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageGroupName"))
     ModelPackageSummary.add_member(:model_package_version, Shapes::ShapeRef.new(shape: ModelPackageVersion, location_name: "ModelPackageVersion"))
     ModelPackageSummary.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -8206,6 +8222,7 @@ module Aws::SageMaker
     S3ModelDataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3ModelUri, required: true, location_name: "S3Uri"))
     S3ModelDataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: S3ModelDataType, required: true, location_name: "S3DataType"))
     S3ModelDataSource.add_member(:compression_type, Shapes::ShapeRef.new(shape: ModelCompressionType, required: true, location_name: "CompressionType"))
+    S3ModelDataSource.add_member(:model_access_config, Shapes::ShapeRef.new(shape: ModelAccessConfig, location_name: "ModelAccessConfig"))
     S3ModelDataSource.struct_class = Types::S3ModelDataSource
 
     S3StorageConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -8460,6 +8477,7 @@ module Aws::SageMaker
 
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
     StoppingCondition.add_member(:max_wait_time_in_seconds, Shapes::ShapeRef.new(shape: MaxWaitTimeInSeconds, location_name: "MaxWaitTimeInSeconds"))
+    StoppingCondition.add_member(:max_pending_time_in_seconds, Shapes::ShapeRef.new(shape: MaxPendingTimeInSeconds, location_name: "MaxPendingTimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
 
     StudioLifecycleConfigDetails.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))
@@ -8528,6 +8546,13 @@ module Aws::SageMaker
     TextClassificationJobConfig.add_member(:content_column, Shapes::ShapeRef.new(shape: ContentColumn, required: true, location_name: "ContentColumn"))
     TextClassificationJobConfig.add_member(:target_label_column, Shapes::ShapeRef.new(shape: TargetLabelColumn, required: true, location_name: "TargetLabelColumn"))
     TextClassificationJobConfig.struct_class = Types::TextClassificationJobConfig
+
+    TextGenerationJobConfig.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
+    TextGenerationJobConfig.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
+    TextGenerationJobConfig.struct_class = Types::TextGenerationJobConfig
+
+    TextGenerationResolvedAttributes.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
+    TextGenerationResolvedAttributes.struct_class = Types::TextGenerationResolvedAttributes
 
     TimeSeriesConfig.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     TimeSeriesConfig.add_member(:timestamp_attribute_name, Shapes::ShapeRef.new(shape: TimestampAttributeName, required: true, location_name: "TimestampAttributeName"))

@@ -394,7 +394,7 @@ module Aws::OpenSearchService
 
     context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://es.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://aos.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -464,7 +464,7 @@ module Aws::OpenSearchService
 
     context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://es.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://aos.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -548,7 +548,7 @@ module Aws::OpenSearchService
 
     context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://es.us-gov-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://aos.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

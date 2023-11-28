@@ -25,16 +25,17 @@ module Aws::FSx
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,6 +63,8 @@ module Aws::FSx
             Aws::FSx::Endpoints::CancelDataRepositoryTask.build(context)
           when :copy_backup
             Aws::FSx::Endpoints::CopyBackup.build(context)
+          when :copy_snapshot_and_update_volume
+            Aws::FSx::Endpoints::CopySnapshotAndUpdateVolume.build(context)
           when :create_backup
             Aws::FSx::Endpoints::CreateBackup.build(context)
           when :create_data_repository_association
@@ -108,6 +111,8 @@ module Aws::FSx
             Aws::FSx::Endpoints::DescribeFileSystemAliases.build(context)
           when :describe_file_systems
             Aws::FSx::Endpoints::DescribeFileSystems.build(context)
+          when :describe_shared_vpc_configuration
+            Aws::FSx::Endpoints::DescribeSharedVpcConfiguration.build(context)
           when :describe_snapshots
             Aws::FSx::Endpoints::DescribeSnapshots.build(context)
           when :describe_storage_virtual_machines
@@ -134,6 +139,8 @@ module Aws::FSx
             Aws::FSx::Endpoints::UpdateFileCache.build(context)
           when :update_file_system
             Aws::FSx::Endpoints::UpdateFileSystem.build(context)
+          when :update_shared_vpc_configuration
+            Aws::FSx::Endpoints::UpdateSharedVpcConfiguration.build(context)
           when :update_snapshot
             Aws::FSx::Endpoints::UpdateSnapshot.build(context)
           when :update_storage_virtual_machine

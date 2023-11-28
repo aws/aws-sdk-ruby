@@ -103,6 +103,19 @@ module Aws::ResourceExplorer2
       end
     end
 
+    class GetAccountLevelServiceConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResourceExplorer2::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetDefaultView
       def self.build(context)
         unless context.config.regional_endpoint
@@ -143,6 +156,19 @@ module Aws::ResourceExplorer2
     end
 
     class ListIndexes
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResourceExplorer2::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListIndexesForMembers
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

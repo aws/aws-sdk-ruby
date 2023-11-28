@@ -589,10 +589,20 @@ module Aws::AppStream
     #   The desired number of streaming instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] desired_sessions
+    #   The desired number of user sessions for a multi-session fleet. This
+    #   is not allowed for single-session fleets.
+    #
+    #   When you create a fleet, you must set either the DesiredSessions or
+    #   DesiredInstances attribute, based on the type of fleet you create.
+    #   You can’t define both attributes or leave both attributes blank.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacity AWS API Documentation
     #
     class ComputeCapacity < Struct.new(
-      :desired_instances)
+      :desired_instances,
+      :desired_sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -617,13 +627,53 @@ module Aws::AppStream
     #   stream sessions.
     #   @return [Integer]
     #
+    # @!attribute [rw] desired_user_sessions
+    #   The total number of sessions slots that are either running or
+    #   pending. This represents the total number of concurrent streaming
+    #   sessions your fleet can support in a steady state.
+    #
+    #   DesiredUserSessionCapacity = ActualUserSessionCapacity +
+    #   PendingUserSessionCapacity
+    #
+    #   This only applies to multi-session fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_user_sessions
+    #   The number of idle session slots currently available for user
+    #   sessions.
+    #
+    #   AvailableUserSessionCapacity = ActualUserSessionCapacity -
+    #   ActiveUserSessions
+    #
+    #   This only applies to multi-session fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_user_sessions
+    #   The number of user sessions currently being used for streaming
+    #   sessions. This only applies to multi-session fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actual_user_sessions
+    #   The total number of session slots that are available for streaming
+    #   or are currently streaming.
+    #
+    #   ActualUserSessionCapacity = AvailableUserSessionCapacity +
+    #   ActiveUserSessions
+    #
+    #   This only applies to multi-session fleets.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacityStatus AWS API Documentation
     #
     class ComputeCapacityStatus < Struct.new(
       :desired,
       :running,
       :in_use,
-      :available)
+      :available,
+      :desired_user_sessions,
+      :available_user_sessions,
+      :active_user_sessions,
+      :actual_user_sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1210,7 +1260,7 @@ module Aws::AppStream
     #   this time elapses, the instance is terminated and replaced by a new
     #   instance.
     #
-    #   Specify a value between 600 and 360000.
+    #   Specify a value between 600 and 432000.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
@@ -1340,6 +1390,11 @@ module Aws::AppStream
     #   only applies to Elastic fleets.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only
+    #   applies to multi-session fleets.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1363,7 +1418,8 @@ module Aws::AppStream
       :platform,
       :max_concurrent_sessions,
       :usb_device_filter_strings,
-      :session_script_s3_location)
+      :session_script_s3_location,
+      :max_sessions_per_instance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2673,6 +2729,10 @@ module Aws::AppStream
     #   default is to authenticate users using a streaming URL.
     #   @return [String]
     #
+    # @!attribute [rw] instance_id
+    #   The identifier for the instance hosting the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
     #
     class DescribeSessionsRequest < Struct.new(
@@ -2681,7 +2741,8 @@ module Aws::AppStream
       :user_id,
       :next_token,
       :limit,
-      :authentication_type)
+      :authentication_type,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3492,6 +3553,11 @@ module Aws::AppStream
     #   only applies to Elastic fleets.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only
+    #   applies to multi-session fleets.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -3518,7 +3584,8 @@ module Aws::AppStream
       :platform,
       :max_concurrent_sessions,
       :usb_device_filter_strings,
-      :session_script_s3_location)
+      :session_script_s3_location,
+      :max_sessions_per_instance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4393,6 +4460,10 @@ module Aws::AppStream
     #   The network details for the streaming session.
     #   @return [Types::NetworkAccessConfiguration]
     #
+    # @!attribute [rw] instance_id
+    #   The identifier for the instance hosting the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -4405,7 +4476,8 @@ module Aws::AppStream
       :start_time,
       :max_expiration_time,
       :authentication_type,
-      :network_access_configuration)
+      :network_access_configuration,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5262,6 +5334,11 @@ module Aws::AppStream
     #   only applies to Elastic fleets.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only
+    #   applies to multi-session fleets.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -5285,7 +5362,8 @@ module Aws::AppStream
       :platform,
       :max_concurrent_sessions,
       :usb_device_filter_strings,
-      :session_script_s3_location)
+      :session_script_s3_location,
+      :max_sessions_per_instance)
       SENSITIVE = []
       include Aws::Structure
     end

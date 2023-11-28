@@ -76,6 +76,17 @@ module Aws::AppSync
     CreateTypeRequest = Shapes::StructureShape.new(name: 'CreateTypeRequest')
     CreateTypeResponse = Shapes::StructureShape.new(name: 'CreateTypeResponse')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceIntrospectionModel = Shapes::StructureShape.new(name: 'DataSourceIntrospectionModel')
+    DataSourceIntrospectionModelField = Shapes::StructureShape.new(name: 'DataSourceIntrospectionModelField')
+    DataSourceIntrospectionModelFieldType = Shapes::StructureShape.new(name: 'DataSourceIntrospectionModelFieldType')
+    DataSourceIntrospectionModelFieldTypeValues = Shapes::ListShape.new(name: 'DataSourceIntrospectionModelFieldTypeValues')
+    DataSourceIntrospectionModelFields = Shapes::ListShape.new(name: 'DataSourceIntrospectionModelFields')
+    DataSourceIntrospectionModelIndex = Shapes::StructureShape.new(name: 'DataSourceIntrospectionModelIndex')
+    DataSourceIntrospectionModelIndexFields = Shapes::ListShape.new(name: 'DataSourceIntrospectionModelIndexFields')
+    DataSourceIntrospectionModelIndexes = Shapes::ListShape.new(name: 'DataSourceIntrospectionModelIndexes')
+    DataSourceIntrospectionModels = Shapes::ListShape.new(name: 'DataSourceIntrospectionModels')
+    DataSourceIntrospectionResult = Shapes::StructureShape.new(name: 'DataSourceIntrospectionResult')
+    DataSourceIntrospectionStatus = Shapes::StringShape.new(name: 'DataSourceIntrospectionStatus')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
     Date = Shapes::TimestampShape.new(name: 'Date')
@@ -128,6 +139,8 @@ module Aws::AppSync
     GetApiAssociationResponse = Shapes::StructureShape.new(name: 'GetApiAssociationResponse')
     GetApiCacheRequest = Shapes::StructureShape.new(name: 'GetApiCacheRequest')
     GetApiCacheResponse = Shapes::StructureShape.new(name: 'GetApiCacheResponse')
+    GetDataSourceIntrospectionRequest = Shapes::StructureShape.new(name: 'GetDataSourceIntrospectionRequest')
+    GetDataSourceIntrospectionResponse = Shapes::StructureShape.new(name: 'GetDataSourceIntrospectionResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
     GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
     GetDomainNameRequest = Shapes::StructureShape.new(name: 'GetDomainNameRequest')
@@ -194,6 +207,10 @@ module Aws::AppSync
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
+    RdsDataApiConfig = Shapes::StructureShape.new(name: 'RdsDataApiConfig')
+    RdsDataApiConfigDatabaseName = Shapes::StringShape.new(name: 'RdsDataApiConfigDatabaseName')
+    RdsDataApiConfigResourceArn = Shapes::StringShape.new(name: 'RdsDataApiConfigResourceArn')
+    RdsDataApiConfigSecretArn = Shapes::StringShape.new(name: 'RdsDataApiConfigSecretArn')
     RdsHttpEndpointConfig = Shapes::StructureShape.new(name: 'RdsHttpEndpointConfig')
     RelationalDatabaseDataSourceConfig = Shapes::StructureShape.new(name: 'RelationalDatabaseDataSourceConfig')
     RelationalDatabaseSourceType = Shapes::StringShape.new(name: 'RelationalDatabaseSourceType')
@@ -209,6 +226,8 @@ module Aws::AppSync
     SourceApiAssociationStatus = Shapes::StringShape.new(name: 'SourceApiAssociationStatus')
     SourceApiAssociationSummary = Shapes::StructureShape.new(name: 'SourceApiAssociationSummary')
     SourceApiAssociationSummaryList = Shapes::ListShape.new(name: 'SourceApiAssociationSummaryList')
+    StartDataSourceIntrospectionRequest = Shapes::StructureShape.new(name: 'StartDataSourceIntrospectionRequest')
+    StartDataSourceIntrospectionResponse = Shapes::StructureShape.new(name: 'StartDataSourceIntrospectionResponse')
     StartSchemaCreationRequest = Shapes::StructureShape.new(name: 'StartSchemaCreationRequest')
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
     StartSchemaMergeRequest = Shapes::StructureShape.new(name: 'StartSchemaMergeRequest')
@@ -480,6 +499,42 @@ module Aws::AppSync
     DataSource.add_member(:event_bridge_config, Shapes::ShapeRef.new(shape: EventBridgeDataSourceConfig, location_name: "eventBridgeConfig"))
     DataSource.struct_class = Types::DataSource
 
+    DataSourceIntrospectionModel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DataSourceIntrospectionModel.add_member(:fields, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelFields, location_name: "fields"))
+    DataSourceIntrospectionModel.add_member(:primary_key, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelIndex, location_name: "primaryKey"))
+    DataSourceIntrospectionModel.add_member(:indexes, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelIndexes, location_name: "indexes"))
+    DataSourceIntrospectionModel.add_member(:sdl, Shapes::ShapeRef.new(shape: String, location_name: "sdl"))
+    DataSourceIntrospectionModel.struct_class = Types::DataSourceIntrospectionModel
+
+    DataSourceIntrospectionModelField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DataSourceIntrospectionModelField.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelFieldType, location_name: "type"))
+    DataSourceIntrospectionModelField.add_member(:length, Shapes::ShapeRef.new(shape: Long, location_name: "length"))
+    DataSourceIntrospectionModelField.struct_class = Types::DataSourceIntrospectionModelField
+
+    DataSourceIntrospectionModelFieldType.add_member(:kind, Shapes::ShapeRef.new(shape: String, location_name: "kind"))
+    DataSourceIntrospectionModelFieldType.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DataSourceIntrospectionModelFieldType.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelFieldType, location_name: "type"))
+    DataSourceIntrospectionModelFieldType.add_member(:values, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelFieldTypeValues, location_name: "values"))
+    DataSourceIntrospectionModelFieldType.struct_class = Types::DataSourceIntrospectionModelFieldType
+
+    DataSourceIntrospectionModelFieldTypeValues.member = Shapes::ShapeRef.new(shape: String)
+
+    DataSourceIntrospectionModelFields.member = Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelField)
+
+    DataSourceIntrospectionModelIndex.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DataSourceIntrospectionModelIndex.add_member(:fields, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelIndexFields, location_name: "fields"))
+    DataSourceIntrospectionModelIndex.struct_class = Types::DataSourceIntrospectionModelIndex
+
+    DataSourceIntrospectionModelIndexFields.member = Shapes::ShapeRef.new(shape: String)
+
+    DataSourceIntrospectionModelIndexes.member = Shapes::ShapeRef.new(shape: DataSourceIntrospectionModelIndex)
+
+    DataSourceIntrospectionModels.member = Shapes::ShapeRef.new(shape: DataSourceIntrospectionModel)
+
+    DataSourceIntrospectionResult.add_member(:models, Shapes::ShapeRef.new(shape: DataSourceIntrospectionModels, location_name: "models"))
+    DataSourceIntrospectionResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DataSourceIntrospectionResult.struct_class = Types::DataSourceIntrospectionResult
+
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
 
     DeleteApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
@@ -636,6 +691,18 @@ module Aws::AppSync
 
     GetApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
     GetApiCacheResponse.struct_class = Types::GetApiCacheResponse
+
+    GetDataSourceIntrospectionRequest.add_member(:introspection_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "introspectionId"))
+    GetDataSourceIntrospectionRequest.add_member(:include_models_sdl, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeModelsSDL"))
+    GetDataSourceIntrospectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    GetDataSourceIntrospectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetDataSourceIntrospectionRequest.struct_class = Types::GetDataSourceIntrospectionRequest
+
+    GetDataSourceIntrospectionResponse.add_member(:introspection_id, Shapes::ShapeRef.new(shape: String, location_name: "introspectionId"))
+    GetDataSourceIntrospectionResponse.add_member(:introspection_status, Shapes::ShapeRef.new(shape: DataSourceIntrospectionStatus, location_name: "introspectionStatus"))
+    GetDataSourceIntrospectionResponse.add_member(:introspection_status_detail, Shapes::ShapeRef.new(shape: String, location_name: "introspectionStatusDetail"))
+    GetDataSourceIntrospectionResponse.add_member(:introspection_result, Shapes::ShapeRef.new(shape: DataSourceIntrospectionResult, location_name: "introspectionResult"))
+    GetDataSourceIntrospectionResponse.struct_class = Types::GetDataSourceIntrospectionResponse
 
     GetDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
@@ -877,6 +944,11 @@ module Aws::AppSync
     PipelineConfig.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsIds, location_name: "functions"))
     PipelineConfig.struct_class = Types::PipelineConfig
 
+    RdsDataApiConfig.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RdsDataApiConfigResourceArn, required: true, location_name: "resourceArn"))
+    RdsDataApiConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: RdsDataApiConfigSecretArn, required: true, location_name: "secretArn"))
+    RdsDataApiConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RdsDataApiConfigDatabaseName, required: true, location_name: "databaseName"))
+    RdsDataApiConfig.struct_class = Types::RdsDataApiConfig
+
     RdsHttpEndpointConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "awsRegion"))
     RdsHttpEndpointConfig.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "dbClusterIdentifier"))
     RdsHttpEndpointConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "databaseName"))
@@ -931,6 +1003,14 @@ module Aws::AppSync
     SourceApiAssociationSummary.struct_class = Types::SourceApiAssociationSummary
 
     SourceApiAssociationSummaryList.member = Shapes::ShapeRef.new(shape: SourceApiAssociationSummary)
+
+    StartDataSourceIntrospectionRequest.add_member(:rds_data_api_config, Shapes::ShapeRef.new(shape: RdsDataApiConfig, location_name: "rdsDataApiConfig"))
+    StartDataSourceIntrospectionRequest.struct_class = Types::StartDataSourceIntrospectionRequest
+
+    StartDataSourceIntrospectionResponse.add_member(:introspection_id, Shapes::ShapeRef.new(shape: String, location_name: "introspectionId"))
+    StartDataSourceIntrospectionResponse.add_member(:introspection_status, Shapes::ShapeRef.new(shape: DataSourceIntrospectionStatus, location_name: "introspectionStatus"))
+    StartDataSourceIntrospectionResponse.add_member(:introspection_status_detail, Shapes::ShapeRef.new(shape: String, location_name: "introspectionStatusDetail"))
+    StartDataSourceIntrospectionResponse.struct_class = Types::StartDataSourceIntrospectionResponse
 
     StartSchemaCreationRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     StartSchemaCreationRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "definition"))
@@ -1476,6 +1556,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:get_data_source_introspection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataSourceIntrospection"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/datasources/introspections/{introspectionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetDataSourceIntrospectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataSourceIntrospectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:get_domain_name, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDomainName"
         o.http_method = "GET"
@@ -1704,6 +1795,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:start_data_source_introspection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDataSourceIntrospection"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/datasources/introspections"
+        o.input = Shapes::ShapeRef.new(shape: StartDataSourceIntrospectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDataSourceIntrospectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:start_schema_creation, Seahorse::Model::Operation.new.tap do |o|

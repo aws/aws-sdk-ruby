@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2023-11-27)
+------------------
+
+* Feature - Add support for Runtime Monitoring for ECS and ECS-EC2.
+
+1.83.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-11-08)
+------------------
+
+* Feature - Added API support for new GuardDuty EKS Audit Log finding types.
+
 1.81.0 (2023-10-17)
 ------------------
 

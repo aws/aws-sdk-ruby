@@ -766,8 +766,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] trace_content
-    #   Trace content for your wireless gateway and wireless device
-    #   resources.
+    #   Trace content for your wireless devices, gateways, and multicast
+    #   groups.
     #   @return [Types::TraceContent]
     #
     # @!attribute [rw] wireless_devices
@@ -1992,12 +1992,12 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] trace_content
-    #   Trace content for your wireless gateway and wireless device
-    #   resources.
+    #   Trace content for your wireless devices, gateways, and multicast
+    #   groups.
     #   @return [Types::TraceContent]
     #
     # @!attribute [rw] wireless_devices
-    #   List of wireless gateway resources that have been added to the
+    #   List of wireless device resources that have been added to the
     #   network analyzer configuration.
     #   @return [Array<String>]
     #
@@ -2140,13 +2140,17 @@ module Aws::IoTWireless
 
     # @!attribute [rw] geo_json_payload
     #   The position information of the resource, displayed as a JSON
-    #   payload. The payload uses the GeoJSON format, which a format that's
-    #   used to encode geographic data structures. For more information, see
-    #   [GeoJSON][1].
+    #   payload. The payload is of type blob and uses the [GeoJSON][1]
+    #   format, which a format that's used to encode geographic data
+    #   structures. A sample payload contains the timestamp information, the
+    #   WGS84 coordinates of the location, and the accuracy and confidence
+    #   level. For more information and examples, see [Resolve device
+    #   location (console)][2].
     #
     #
     #
     #   [1]: https://geojson.org/
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/location-resolve-console.html
     #   @return [String]
     #
     class GetPositionEstimateResponse < Struct.new(
@@ -3890,7 +3894,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] max_duty_cycle
-    #   The MaxDutyCycle value.
+    #   The MaxDutyCycle value. It ranges from 0 to 15.
     #   @return [Integer]
     #
     # @!attribute [rw] rf_region
@@ -4654,6 +4658,10 @@ module Aws::IoTWireless
     #   The AppEUI value.
     #   @return [String]
     #
+    # @!attribute [rw] join_eui
+    #   The JoinEUI value.
+    #   @return [String]
+    #
     # @!attribute [rw] gen_app_key
     #   The GenAppKey value.
     #   @return [String]
@@ -4661,6 +4669,7 @@ module Aws::IoTWireless
     class OtaaV1_0_x < Struct.new(
       :app_key,
       :app_eui,
+      :join_eui,
       :gen_app_key)
       SENSITIVE = []
       include Aws::Structure
@@ -5808,7 +5817,8 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # Trace content for your wireless gateway and wireless device resources.
+    # Trace content for your wireless devices, gateways, and multicast
+    # groups.
     #
     # @!attribute [rw] wireless_device_frame_info
     #   `FrameInfo` of your wireless device resources for the trace content.
@@ -5825,7 +5835,7 @@ module Aws::IoTWireless
     # @!attribute [rw] multicast_frame_info
     #   `FrameInfo` of your multicast group resources for the trace content.
     #   Use FrameInfo to debug the multicast communication between your
-    #   LoRaWAN end devices and the network server.
+    #   multicast groups and the network server.
     #   @return [String]
     #
     class TraceContent < Struct.new(
@@ -6086,8 +6096,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] trace_content
-    #   Trace content for your wireless gateway and wireless device
-    #   resources.
+    #   Trace content for your wireless devices, gateways, and multicast
+    #   groups.
     #   @return [Types::TraceContent]
     #
     # @!attribute [rw] wireless_devices_to_add
@@ -6126,7 +6136,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] multicast_groups_to_remove
     #   Multicast group resources to remove from the network analyzer
-    #   configuration. Provide the `MulticastGroupId` of the resource to
+    #   configuration. Provide the `MulticastGroupId` of the resources to
     #   remove in the input array.
     #   @return [Array<String>]
     #

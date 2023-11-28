@@ -1167,9 +1167,15 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Settings to configure your translation output, including the option
-    #   to set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: not supported.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StartTextTranslationJobRequest AWS API Documentation
@@ -1709,14 +1715,24 @@ module Aws::Translate
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_language_code
-    #   The language code for the language of the source text. Do not use
-    #   `auto`, because `TranslateDocument` does not support language
-    #   auto-detection. For a list of supported language codes, see
-    #   [Supported languages][1].
+    #   The language code for the language of the source text. For a list of
+    #   supported language codes, see [Supported languages][1].
+    #
+    #   To have Amazon Translate determine the source language of your text,
+    #   you can specify `auto` in the `SourceLanguageCode` field. If you
+    #   specify `auto`, Amazon Translate will call [Amazon Comprehend][2] to
+    #   determine the source language.
+    #
+    #   <note markdown="1"> If you specify `auto`, you must send the `TranslateDocument` request
+    #   in a region that supports Amazon Comprehend. Otherwise, the request
+    #   returns an error indicating that autodetect is not supported.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #   @return [String]
     #
     # @!attribute [rw] target_language_code
@@ -1729,9 +1745,15 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Settings to configure your translation output, including the option
-    #   to set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: not supported.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocumentRequest AWS API Documentation
@@ -1765,9 +1787,16 @@ module Aws::Translate
     #   @return [Array<Types::AppliedTerminology>]
     #
     # @!attribute [rw] applied_settings
-    #   Settings to configure your translation output, including the option
-    #   to set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: reduces the length of the translation output for most
+    #     translations. Available for `TranslateText` only.
+    #
+    #   * Formality: sets the formality level of the translation output.
+    #
+    #   * Profanity: masks profane words and phrases in the translation
+    #     output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocumentResponse AWS API Documentation
@@ -1836,9 +1865,16 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Settings to configure your translation output, including the option
-    #   to set the formality level of the output text and the option to mask
-    #   profane words and phrases.
+    #   Settings to configure your translation output. You can configure the
+    #   following options:
+    #
+    #   * Brevity: reduces the length of the translated output for most
+    #     translations.
+    #
+    #   * Formality: sets the formality level of the output text.
+    #
+    #   * Profanity: masks profane words and phrases in your translation
+    #     output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateTextRequest AWS API Documentation
@@ -1900,18 +1936,25 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # Settings to configure your translation output, including the option to
-    # set the formality level of the output text and the option to mask
-    # profane words and phrases.
+    # Settings to configure your translation output. You can configure the
+    # following options:
+    #
+    # * Brevity: reduces the length of the translation output for most
+    #   translations. Available for `TranslateText` only.
+    #
+    # * Formality: sets the formality level of the translation output.
+    #
+    # * Profanity: masks profane words and phrases in the translation
+    #   output.
     #
     # @!attribute [rw] formality
-    #   You can optionally specify the desired level of formality for
-    #   translations to supported target languages. The formality setting
-    #   controls the level of formal language usage (also known as
-    #   [register][1]) in the translation output. You can set the value to
-    #   informal or formal. If you don't specify a value for formality, or
-    #   if the target language doesn't support formality, the translation
-    #   will ignore the formality setting.
+    #   You can specify the desired level of formality for translations to
+    #   supported target languages. The formality setting controls the level
+    #   of formal language usage (also known as [register][1]) in the
+    #   translation output. You can set the value to informal or formal. If
+    #   you don't specify a value for formality, or if the target language
+    #   doesn't support formality, the translation will ignore the
+    #   formality setting.
     #
     #   If you specify multiple target languages for the job, translate
     #   ignores the formality setting for any unsupported target language.
@@ -1926,8 +1969,8 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] profanity
-    #   Enable the profanity setting if you want Amazon Translate to mask
-    #   profane words and phrases in your translation output.
+    #   You can enable the profanity setting if you want to mask profane
+    #   words and phrases in your translation output.
     #
     #   To mask profane words and phrases, Amazon Translate replaces them
     #   with the grawlix string “?$#@$“. This 5-character sequence is used
@@ -1949,11 +1992,30 @@ module Aws::Translate
     #   [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages
     #   @return [String]
     #
+    # @!attribute [rw] brevity
+    #   When you turn on brevity, Amazon Translate reduces the length of the
+    #   translation output for most translations (when compared with the
+    #   same translation with brevity turned off). By default, brevity is
+    #   turned off.
+    #
+    #   If you turn on brevity for a translation request with an unsupported
+    #   language pair, the translation proceeds with the brevity setting
+    #   turned off.
+    #
+    #   For the language pairs that brevity supports, see [Using brevity][1]
+    #   in the Amazon Translate Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-brevity
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslationSettings AWS API Documentation
     #
     class TranslationSettings < Struct.new(
       :formality,
-      :profanity)
+      :profanity,
+      :brevity)
       SENSITIVE = []
       include Aws::Structure
     end

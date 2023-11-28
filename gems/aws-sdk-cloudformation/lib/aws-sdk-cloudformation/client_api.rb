@@ -69,6 +69,7 @@ module Aws::CloudFormation
     Changes = Shapes::ListShape.new(name: 'Changes')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConcurrencyMode = Shapes::StringShape.new(name: 'ConcurrencyMode')
     ConfigurationSchema = Shapes::StringShape.new(name: 'ConfigurationSchema')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     ContinueUpdateRollbackInput = Shapes::StructureShape.new(name: 'ContinueUpdateRollbackInput')
@@ -178,6 +179,7 @@ module Aws::CloudFormation
     HookTypeName = Shapes::StringShape.new(name: 'HookTypeName')
     HookTypeVersionId = Shapes::StringShape.new(name: 'HookTypeVersionId')
     IdentityProvider = Shapes::StringShape.new(name: 'IdentityProvider')
+    ImportExistingResources = Shapes::BooleanShape.new(name: 'ImportExistingResources')
     ImportStacksToStackSetInput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetInput')
     ImportStacksToStackSetOutput = Shapes::StructureShape.new(name: 'ImportStacksToStackSetOutput')
     Imports = Shapes::ListShape.new(name: 'Imports')
@@ -598,6 +600,7 @@ module Aws::CloudFormation
     ChangeSetSummary.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     ChangeSetSummary.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
     ChangeSetSummary.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
+    ChangeSetSummary.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
     ChangeSetSummary.struct_class = Types::ChangeSetSummary
 
     Changes.member = Shapes::ShapeRef.new(shape: Change)
@@ -628,6 +631,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:resources_to_import, Shapes::ShapeRef.new(shape: ResourcesToImport, location_name: "ResourcesToImport"))
     CreateChangeSetInput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     CreateChangeSetInput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
+    CreateChangeSetInput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -795,6 +799,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
     DescribeChangeSetOutput.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
     DescribeChangeSetOutput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
+    DescribeChangeSetOutput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
 
     DescribeOrganizationsAccessInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
@@ -1632,6 +1637,7 @@ module Aws::CloudFormation
     StackSetOperationPreferences.add_member(:failure_tolerance_percentage, Shapes::ShapeRef.new(shape: FailureTolerancePercentage, location_name: "FailureTolerancePercentage"))
     StackSetOperationPreferences.add_member(:max_concurrent_count, Shapes::ShapeRef.new(shape: MaxConcurrentCount, location_name: "MaxConcurrentCount"))
     StackSetOperationPreferences.add_member(:max_concurrent_percentage, Shapes::ShapeRef.new(shape: MaxConcurrentPercentage, location_name: "MaxConcurrentPercentage"))
+    StackSetOperationPreferences.add_member(:concurrency_mode, Shapes::ShapeRef.new(shape: ConcurrencyMode, location_name: "ConcurrencyMode"))
     StackSetOperationPreferences.struct_class = Types::StackSetOperationPreferences
 
     StackSetOperationResultSummaries.member = Shapes::ShapeRef.new(shape: StackSetOperationResultSummary)

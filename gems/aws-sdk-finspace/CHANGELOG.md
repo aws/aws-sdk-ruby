@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-11-15)
+------------------
+
+* Feature - Adding deprecated trait on Dataset Browser Environment APIs
+
+1.22.0 (2023-10-30)
+------------------
+
+* Feature - Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.
+
 1.21.0 (2023-09-27)
 ------------------
 

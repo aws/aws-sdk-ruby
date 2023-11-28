@@ -22,11 +22,13 @@ module Aws::ComputeOptimizer
     AutoScalingGroupArn = Shapes::StringShape.new(name: 'AutoScalingGroupArn')
     AutoScalingGroupArns = Shapes::ListShape.new(name: 'AutoScalingGroupArns')
     AutoScalingGroupConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupConfiguration')
+    AutoScalingGroupEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'AutoScalingGroupEstimatedMonthlySavings')
     AutoScalingGroupName = Shapes::StringShape.new(name: 'AutoScalingGroupName')
     AutoScalingGroupRecommendation = Shapes::StructureShape.new(name: 'AutoScalingGroupRecommendation')
     AutoScalingGroupRecommendationOption = Shapes::StructureShape.new(name: 'AutoScalingGroupRecommendationOption')
     AutoScalingGroupRecommendationOptions = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendationOptions')
     AutoScalingGroupRecommendations = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendations')
+    AutoScalingGroupSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'AutoScalingGroupSavingsOpportunityAfterDiscounts')
     Code = Shapes::StringShape.new(name: 'Code')
     ContainerConfiguration = Shapes::StructureShape.new(name: 'ContainerConfiguration')
     ContainerConfigurations = Shapes::ListShape.new(name: 'ContainerConfigurations')
@@ -41,6 +43,10 @@ module Aws::ComputeOptimizer
     CurrentInstanceType = Shapes::StringShape.new(name: 'CurrentInstanceType')
     CurrentPerformanceRisk = Shapes::StringShape.new(name: 'CurrentPerformanceRisk')
     CurrentPerformanceRiskRatings = Shapes::StructureShape.new(name: 'CurrentPerformanceRiskRatings')
+    CustomizableMetricHeadroom = Shapes::StringShape.new(name: 'CustomizableMetricHeadroom')
+    CustomizableMetricName = Shapes::StringShape.new(name: 'CustomizableMetricName')
+    CustomizableMetricParameters = Shapes::StructureShape.new(name: 'CustomizableMetricParameters')
+    CustomizableMetricThreshold = Shapes::StringShape.new(name: 'CustomizableMetricThreshold')
     DeleteRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'DeleteRecommendationPreferencesRequest')
     DeleteRecommendationPreferencesResponse = Shapes::StructureShape.new(name: 'DeleteRecommendationPreferencesResponse')
     DescribeRecommendationExportJobsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationExportJobsRequest')
@@ -49,13 +55,23 @@ module Aws::ComputeOptimizer
     DestinationBucket = Shapes::StringShape.new(name: 'DestinationBucket')
     DestinationKey = Shapes::StringShape.new(name: 'DestinationKey')
     DestinationKeyPrefix = Shapes::StringShape.new(name: 'DestinationKeyPrefix')
+    EBSEffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'EBSEffectiveRecommendationPreferences')
+    EBSEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'EBSEstimatedMonthlySavings')
     EBSFilter = Shapes::StructureShape.new(name: 'EBSFilter')
     EBSFilterName = Shapes::StringShape.new(name: 'EBSFilterName')
     EBSFilters = Shapes::ListShape.new(name: 'EBSFilters')
     EBSFinding = Shapes::StringShape.new(name: 'EBSFinding')
     EBSMetricName = Shapes::StringShape.new(name: 'EBSMetricName')
+    EBSSavingsEstimationMode = Shapes::StructureShape.new(name: 'EBSSavingsEstimationMode')
+    EBSSavingsEstimationModeSource = Shapes::StringShape.new(name: 'EBSSavingsEstimationModeSource')
+    EBSSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'EBSSavingsOpportunityAfterDiscounts')
     EBSUtilizationMetric = Shapes::StructureShape.new(name: 'EBSUtilizationMetric')
     EBSUtilizationMetrics = Shapes::ListShape.new(name: 'EBSUtilizationMetrics')
+    ECSEffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'ECSEffectiveRecommendationPreferences')
+    ECSEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'ECSEstimatedMonthlySavings')
+    ECSSavingsEstimationMode = Shapes::StructureShape.new(name: 'ECSSavingsEstimationMode')
+    ECSSavingsEstimationModeSource = Shapes::StringShape.new(name: 'ECSSavingsEstimationModeSource')
+    ECSSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'ECSSavingsOpportunityAfterDiscounts')
     ECSServiceLaunchType = Shapes::StringShape.new(name: 'ECSServiceLaunchType')
     ECSServiceMetricName = Shapes::StringShape.new(name: 'ECSServiceMetricName')
     ECSServiceMetricStatistic = Shapes::StringShape.new(name: 'ECSServiceMetricStatistic')
@@ -77,6 +93,8 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'ECSServiceRecommendedOptionProjectedMetrics')
     ECSServiceUtilizationMetric = Shapes::StructureShape.new(name: 'ECSServiceUtilizationMetric')
     ECSServiceUtilizationMetrics = Shapes::ListShape.new(name: 'ECSServiceUtilizationMetrics')
+    EffectivePreferredResource = Shapes::StructureShape.new(name: 'EffectivePreferredResource')
+    EffectivePreferredResources = Shapes::ListShape.new(name: 'EffectivePreferredResources')
     EffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'EffectiveRecommendationPreferences')
     EnhancedInfrastructureMetrics = Shapes::StringShape.new(name: 'EnhancedInfrastructureMetrics')
     EnrollmentFilter = Shapes::StructureShape.new(name: 'EnrollmentFilter')
@@ -169,6 +187,7 @@ module Aws::ComputeOptimizer
     InferredWorkloadTypesPreference = Shapes::StringShape.new(name: 'InferredWorkloadTypesPreference')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceArns = Shapes::ListShape.new(name: 'InstanceArns')
+    InstanceEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'InstanceEstimatedMonthlySavings')
     InstanceIdle = Shapes::StringShape.new(name: 'InstanceIdle')
     InstanceName = Shapes::StringShape.new(name: 'InstanceName')
     InstanceRecommendation = Shapes::StructureShape.new(name: 'InstanceRecommendation')
@@ -176,6 +195,9 @@ module Aws::ComputeOptimizer
     InstanceRecommendationFindingReasonCodes = Shapes::ListShape.new(name: 'InstanceRecommendationFindingReasonCodes')
     InstanceRecommendationOption = Shapes::StructureShape.new(name: 'InstanceRecommendationOption')
     InstanceRecommendations = Shapes::ListShape.new(name: 'InstanceRecommendations')
+    InstanceSavingsEstimationMode = Shapes::StructureShape.new(name: 'InstanceSavingsEstimationMode')
+    InstanceSavingsEstimationModeSource = Shapes::StringShape.new(name: 'InstanceSavingsEstimationModeSource')
+    InstanceSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'InstanceSavingsOpportunityAfterDiscounts')
     InstanceState = Shapes::StringShape.new(name: 'InstanceState')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -186,6 +208,8 @@ module Aws::ComputeOptimizer
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobIds = Shapes::ListShape.new(name: 'JobIds')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    LambdaEffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'LambdaEffectiveRecommendationPreferences')
+    LambdaEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'LambdaEstimatedMonthlySavings')
     LambdaFunctionMemoryMetricName = Shapes::StringShape.new(name: 'LambdaFunctionMemoryMetricName')
     LambdaFunctionMemoryMetricStatistic = Shapes::StringShape.new(name: 'LambdaFunctionMemoryMetricStatistic')
     LambdaFunctionMemoryProjectedMetric = Shapes::StructureShape.new(name: 'LambdaFunctionMemoryProjectedMetric')
@@ -204,6 +228,9 @@ module Aws::ComputeOptimizer
     LambdaFunctionRecommendations = Shapes::ListShape.new(name: 'LambdaFunctionRecommendations')
     LambdaFunctionUtilizationMetric = Shapes::StructureShape.new(name: 'LambdaFunctionUtilizationMetric')
     LambdaFunctionUtilizationMetrics = Shapes::ListShape.new(name: 'LambdaFunctionUtilizationMetrics')
+    LambdaSavingsEstimationMode = Shapes::StructureShape.new(name: 'LambdaSavingsEstimationMode')
+    LambdaSavingsEstimationModeSource = Shapes::StringShape.new(name: 'LambdaSavingsEstimationModeSource')
+    LambdaSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'LambdaSavingsOpportunityAfterDiscounts')
     LastRefreshTimestamp = Shapes::TimestampShape.new(name: 'LastRefreshTimestamp')
     LastUpdatedTimestamp = Shapes::TimestampShape.new(name: 'LastUpdatedTimestamp')
     LicenseConfiguration = Shapes::StructureShape.new(name: 'LicenseConfiguration')
@@ -223,6 +250,7 @@ module Aws::ComputeOptimizer
     LicenseVersion = Shapes::StringShape.new(name: 'LicenseVersion')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookBackPeriodInDays = Shapes::FloatShape.new(name: 'LookBackPeriodInDays')
+    LookBackPeriodPreference = Shapes::StringShape.new(name: 'LookBackPeriodPreference')
     Low = Shapes::IntegerShape.new(name: 'Low')
     LowerBoundValue = Shapes::FloatShape.new(name: 'LowerBoundValue')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -257,6 +285,11 @@ module Aws::ComputeOptimizer
     Period = Shapes::IntegerShape.new(name: 'Period')
     PlatformDifference = Shapes::StringShape.new(name: 'PlatformDifference')
     PlatformDifferences = Shapes::ListShape.new(name: 'PlatformDifferences')
+    PreferredResource = Shapes::StructureShape.new(name: 'PreferredResource')
+    PreferredResourceName = Shapes::StringShape.new(name: 'PreferredResourceName')
+    PreferredResourceValue = Shapes::StringShape.new(name: 'PreferredResourceValue')
+    PreferredResourceValues = Shapes::ListShape.new(name: 'PreferredResourceValues')
+    PreferredResources = Shapes::ListShape.new(name: 'PreferredResources')
     ProjectedMetric = Shapes::StructureShape.new(name: 'ProjectedMetric')
     ProjectedMetrics = Shapes::ListShape.new(name: 'ProjectedMetrics')
     ProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ProjectedUtilizationMetrics')
@@ -289,6 +322,7 @@ module Aws::ComputeOptimizer
     RootVolume = Shapes::BooleanShape.new(name: 'RootVolume')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3DestinationConfig = Shapes::StructureShape.new(name: 'S3DestinationConfig')
+    SavingsEstimationMode = Shapes::StringShape.new(name: 'SavingsEstimationMode')
     SavingsOpportunity = Shapes::StructureShape.new(name: 'SavingsOpportunity')
     SavingsOpportunityPercentage = Shapes::FloatShape.new(name: 'SavingsOpportunityPercentage')
     Scope = Shapes::StructureShape.new(name: 'Scope')
@@ -316,6 +350,8 @@ module Aws::ComputeOptimizer
     UpperBoundValue = Shapes::FloatShape.new(name: 'UpperBoundValue')
     UtilizationMetric = Shapes::StructureShape.new(name: 'UtilizationMetric')
     UtilizationMetrics = Shapes::ListShape.new(name: 'UtilizationMetrics')
+    UtilizationPreference = Shapes::StructureShape.new(name: 'UtilizationPreference')
+    UtilizationPreferences = Shapes::ListShape.new(name: 'UtilizationPreferences')
     Value = Shapes::FloatShape.new(name: 'Value')
     VeryLow = Shapes::IntegerShape.new(name: 'VeryLow')
     VolumeArn = Shapes::StringShape.new(name: 'VolumeArn')
@@ -353,6 +389,10 @@ module Aws::ComputeOptimizer
     AutoScalingGroupConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     AutoScalingGroupConfiguration.struct_class = Types::AutoScalingGroupConfiguration
 
+    AutoScalingGroupEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    AutoScalingGroupEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    AutoScalingGroupEstimatedMonthlySavings.struct_class = Types::AutoScalingGroupEstimatedMonthlySavings
+
     AutoScalingGroupRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     AutoScalingGroupRecommendation.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: AutoScalingGroupArn, location_name: "autoScalingGroupArn"))
     AutoScalingGroupRecommendation.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: AutoScalingGroupName, location_name: "autoScalingGroupName"))
@@ -375,11 +415,16 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     AutoScalingGroupRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     AutoScalingGroupRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
+    AutoScalingGroupRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: AutoScalingGroupSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     AutoScalingGroupRecommendationOption.struct_class = Types::AutoScalingGroupRecommendationOption
 
     AutoScalingGroupRecommendationOptions.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOption)
 
     AutoScalingGroupRecommendations.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendation)
+
+    AutoScalingGroupSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    AutoScalingGroupSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: AutoScalingGroupEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    AutoScalingGroupSavingsOpportunityAfterDiscounts.struct_class = Types::AutoScalingGroupSavingsOpportunityAfterDiscounts
 
     ContainerConfiguration.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "containerName"))
     ContainerConfiguration.add_member(:memory_size_configuration, Shapes::ShapeRef.new(shape: MemorySizeConfiguration, location_name: "memorySizeConfiguration"))
@@ -403,6 +448,10 @@ module Aws::ComputeOptimizer
     CurrentPerformanceRiskRatings.add_member(:very_low, Shapes::ShapeRef.new(shape: VeryLow, location_name: "veryLow"))
     CurrentPerformanceRiskRatings.struct_class = Types::CurrentPerformanceRiskRatings
 
+    CustomizableMetricParameters.add_member(:threshold, Shapes::ShapeRef.new(shape: CustomizableMetricThreshold, location_name: "threshold"))
+    CustomizableMetricParameters.add_member(:headroom, Shapes::ShapeRef.new(shape: CustomizableMetricHeadroom, location_name: "headroom"))
+    CustomizableMetricParameters.struct_class = Types::CustomizableMetricParameters
+
     DeleteRecommendationPreferencesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     DeleteRecommendationPreferencesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     DeleteRecommendationPreferencesRequest.add_member(:recommendation_preference_names, Shapes::ShapeRef.new(shape: RecommendationPreferenceNames, required: true, location_name: "recommendationPreferenceNames"))
@@ -420,11 +469,25 @@ module Aws::ComputeOptimizer
     DescribeRecommendationExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeRecommendationExportJobsResponse.struct_class = Types::DescribeRecommendationExportJobsResponse
 
+    EBSEffectiveRecommendationPreferences.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: EBSSavingsEstimationMode, location_name: "savingsEstimationMode"))
+    EBSEffectiveRecommendationPreferences.struct_class = Types::EBSEffectiveRecommendationPreferences
+
+    EBSEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    EBSEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    EBSEstimatedMonthlySavings.struct_class = Types::EBSEstimatedMonthlySavings
+
     EBSFilter.add_member(:name, Shapes::ShapeRef.new(shape: EBSFilterName, location_name: "name"))
     EBSFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
     EBSFilter.struct_class = Types::EBSFilter
 
     EBSFilters.member = Shapes::ShapeRef.new(shape: EBSFilter)
+
+    EBSSavingsEstimationMode.add_member(:source, Shapes::ShapeRef.new(shape: EBSSavingsEstimationModeSource, location_name: "source"))
+    EBSSavingsEstimationMode.struct_class = Types::EBSSavingsEstimationMode
+
+    EBSSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    EBSSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: EBSEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    EBSSavingsOpportunityAfterDiscounts.struct_class = Types::EBSSavingsOpportunityAfterDiscounts
 
     EBSUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: EBSMetricName, location_name: "name"))
     EBSUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, location_name: "statistic"))
@@ -432,6 +495,20 @@ module Aws::ComputeOptimizer
     EBSUtilizationMetric.struct_class = Types::EBSUtilizationMetric
 
     EBSUtilizationMetrics.member = Shapes::ShapeRef.new(shape: EBSUtilizationMetric)
+
+    ECSEffectiveRecommendationPreferences.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: ECSSavingsEstimationMode, location_name: "savingsEstimationMode"))
+    ECSEffectiveRecommendationPreferences.struct_class = Types::ECSEffectiveRecommendationPreferences
+
+    ECSEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    ECSEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    ECSEstimatedMonthlySavings.struct_class = Types::ECSEstimatedMonthlySavings
+
+    ECSSavingsEstimationMode.add_member(:source, Shapes::ShapeRef.new(shape: ECSSavingsEstimationModeSource, location_name: "source"))
+    ECSSavingsEstimationMode.struct_class = Types::ECSSavingsEstimationMode
+
+    ECSSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    ECSSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: ECSEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    ECSSavingsOpportunityAfterDiscounts.struct_class = Types::ECSSavingsOpportunityAfterDiscounts
 
     ECSServiceProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceMetricName, location_name: "name"))
     ECSServiceProjectedMetric.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "timestamps"))
@@ -461,6 +538,7 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendation.add_member(:service_recommendation_options, Shapes::ShapeRef.new(shape: ECSServiceRecommendationOptions, location_name: "serviceRecommendationOptions"))
     ECSServiceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     ECSServiceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ECSServiceRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: ECSEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     ECSServiceRecommendation.struct_class = Types::ECSServiceRecommendation
 
     ECSServiceRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilterName, location_name: "name"))
@@ -476,6 +554,7 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     ECSServiceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ECSServiceProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
     ECSServiceRecommendationOption.add_member(:container_recommendations, Shapes::ShapeRef.new(shape: ContainerRecommendations, location_name: "containerRecommendations"))
+    ECSServiceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: ECSSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     ECSServiceRecommendationOption.struct_class = Types::ECSServiceRecommendationOption
 
     ECSServiceRecommendationOptions.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendationOption)
@@ -496,10 +575,22 @@ module Aws::ComputeOptimizer
 
     ECSServiceUtilizationMetrics.member = Shapes::ShapeRef.new(shape: ECSServiceUtilizationMetric)
 
+    EffectivePreferredResource.add_member(:name, Shapes::ShapeRef.new(shape: PreferredResourceName, location_name: "name"))
+    EffectivePreferredResource.add_member(:include_list, Shapes::ShapeRef.new(shape: PreferredResourceValues, location_name: "includeList"))
+    EffectivePreferredResource.add_member(:effective_include_list, Shapes::ShapeRef.new(shape: PreferredResourceValues, location_name: "effectiveIncludeList"))
+    EffectivePreferredResource.add_member(:exclude_list, Shapes::ShapeRef.new(shape: PreferredResourceValues, location_name: "excludeList"))
+    EffectivePreferredResource.struct_class = Types::EffectivePreferredResource
+
+    EffectivePreferredResources.member = Shapes::ShapeRef.new(shape: EffectivePreferredResource)
+
     EffectiveRecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
     EffectiveRecommendationPreferences.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     EffectiveRecommendationPreferences.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     EffectiveRecommendationPreferences.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
+    EffectiveRecommendationPreferences.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriodPreference, location_name: "lookBackPeriod"))
+    EffectiveRecommendationPreferences.add_member(:utilization_preferences, Shapes::ShapeRef.new(shape: UtilizationPreferences, location_name: "utilizationPreferences"))
+    EffectiveRecommendationPreferences.add_member(:preferred_resources, Shapes::ShapeRef.new(shape: EffectivePreferredResources, location_name: "preferredResources"))
+    EffectiveRecommendationPreferences.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: InstanceSavingsEstimationMode, location_name: "savingsEstimationMode"))
     EffectiveRecommendationPreferences.struct_class = Types::EffectiveRecommendationPreferences
 
     EnrollmentFilter.add_member(:name, Shapes::ShapeRef.new(shape: EnrollmentFilterName, location_name: "name"))
@@ -694,6 +785,9 @@ module Aws::ComputeOptimizer
 
     GetEffectiveRecommendationPreferencesResponse.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     GetEffectiveRecommendationPreferencesResponse.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
+    GetEffectiveRecommendationPreferencesResponse.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriodPreference, location_name: "lookBackPeriod"))
+    GetEffectiveRecommendationPreferencesResponse.add_member(:utilization_preferences, Shapes::ShapeRef.new(shape: UtilizationPreferences, location_name: "utilizationPreferences"))
+    GetEffectiveRecommendationPreferencesResponse.add_member(:preferred_resources, Shapes::ShapeRef.new(shape: EffectivePreferredResources, location_name: "preferredResources"))
     GetEffectiveRecommendationPreferencesResponse.struct_class = Types::GetEffectiveRecommendationPreferencesResponse
 
     GetEnrollmentStatusRequest.struct_class = Types::GetEnrollmentStatusRequest
@@ -782,6 +876,10 @@ module Aws::ComputeOptimizer
 
     InstanceArns.member = Shapes::ShapeRef.new(shape: InstanceArn)
 
+    InstanceEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    InstanceEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    InstanceEstimatedMonthlySavings.struct_class = Types::InstanceEstimatedMonthlySavings
+
     InstanceRecommendation.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
     InstanceRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     InstanceRecommendation.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
@@ -813,9 +911,17 @@ module Aws::ComputeOptimizer
     InstanceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     InstanceRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     InstanceRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
+    InstanceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: InstanceSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     InstanceRecommendationOption.struct_class = Types::InstanceRecommendationOption
 
     InstanceRecommendations.member = Shapes::ShapeRef.new(shape: InstanceRecommendation)
+
+    InstanceSavingsEstimationMode.add_member(:source, Shapes::ShapeRef.new(shape: InstanceSavingsEstimationModeSource, location_name: "source"))
+    InstanceSavingsEstimationMode.struct_class = Types::InstanceSavingsEstimationMode
+
+    InstanceSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    InstanceSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: InstanceEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    InstanceSavingsOpportunityAfterDiscounts.struct_class = Types::InstanceSavingsOpportunityAfterDiscounts
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -831,6 +937,13 @@ module Aws::ComputeOptimizer
 
     JobIds.member = Shapes::ShapeRef.new(shape: JobId)
 
+    LambdaEffectiveRecommendationPreferences.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: LambdaSavingsEstimationMode, location_name: "savingsEstimationMode"))
+    LambdaEffectiveRecommendationPreferences.struct_class = Types::LambdaEffectiveRecommendationPreferences
+
+    LambdaEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    LambdaEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    LambdaEstimatedMonthlySavings.struct_class = Types::LambdaEstimatedMonthlySavings
+
     LambdaFunctionMemoryProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryMetricName, location_name: "name"))
     LambdaFunctionMemoryProjectedMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryMetricStatistic, location_name: "statistic"))
     LambdaFunctionMemoryProjectedMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
@@ -842,6 +955,7 @@ module Aws::ComputeOptimizer
     LambdaFunctionMemoryRecommendationOption.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "memorySize"))
     LambdaFunctionMemoryRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryProjectedMetrics, location_name: "projectedUtilizationMetrics"))
     LambdaFunctionMemoryRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    LambdaFunctionMemoryRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: LambdaSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     LambdaFunctionMemoryRecommendationOption.struct_class = Types::LambdaFunctionMemoryRecommendationOption
 
     LambdaFunctionMemoryRecommendationOptions.member = Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOption)
@@ -859,6 +973,7 @@ module Aws::ComputeOptimizer
     LambdaFunctionRecommendation.add_member(:memory_size_recommendation_options, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOptions, location_name: "memorySizeRecommendationOptions"))
     LambdaFunctionRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     LambdaFunctionRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    LambdaFunctionRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: LambdaEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     LambdaFunctionRecommendation.struct_class = Types::LambdaFunctionRecommendation
 
     LambdaFunctionRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilterName, location_name: "name"))
@@ -877,6 +992,13 @@ module Aws::ComputeOptimizer
     LambdaFunctionUtilizationMetric.struct_class = Types::LambdaFunctionUtilizationMetric
 
     LambdaFunctionUtilizationMetrics.member = Shapes::ShapeRef.new(shape: LambdaFunctionUtilizationMetric)
+
+    LambdaSavingsEstimationMode.add_member(:source, Shapes::ShapeRef.new(shape: LambdaSavingsEstimationModeSource, location_name: "source"))
+    LambdaSavingsEstimationMode.struct_class = Types::LambdaSavingsEstimationMode
+
+    LambdaSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    LambdaSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: LambdaEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    LambdaSavingsOpportunityAfterDiscounts.struct_class = Types::LambdaSavingsOpportunityAfterDiscounts
 
     LicenseConfiguration.add_member(:number_of_cores, Shapes::ShapeRef.new(shape: NumberOfCores, location_name: "numberOfCores"))
     LicenseConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
@@ -941,6 +1063,15 @@ module Aws::ComputeOptimizer
 
     PlatformDifferences.member = Shapes::ShapeRef.new(shape: PlatformDifference)
 
+    PreferredResource.add_member(:name, Shapes::ShapeRef.new(shape: PreferredResourceName, location_name: "name"))
+    PreferredResource.add_member(:include_list, Shapes::ShapeRef.new(shape: PreferredResourceValues, location_name: "includeList"))
+    PreferredResource.add_member(:exclude_list, Shapes::ShapeRef.new(shape: PreferredResourceValues, location_name: "excludeList"))
+    PreferredResource.struct_class = Types::PreferredResource
+
+    PreferredResourceValues.member = Shapes::ShapeRef.new(shape: PreferredResourceValue)
+
+    PreferredResources.member = Shapes::ShapeRef.new(shape: PreferredResource)
+
     ProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, location_name: "name"))
     ProjectedMetric.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "timestamps"))
     ProjectedMetric.add_member(:values, Shapes::ShapeRef.new(shape: MetricValues, location_name: "values"))
@@ -955,6 +1086,10 @@ module Aws::ComputeOptimizer
     PutRecommendationPreferencesRequest.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     PutRecommendationPreferencesRequest.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     PutRecommendationPreferencesRequest.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
+    PutRecommendationPreferencesRequest.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriodPreference, location_name: "lookBackPeriod"))
+    PutRecommendationPreferencesRequest.add_member(:utilization_preferences, Shapes::ShapeRef.new(shape: UtilizationPreferences, location_name: "utilizationPreferences"))
+    PutRecommendationPreferencesRequest.add_member(:preferred_resources, Shapes::ShapeRef.new(shape: PreferredResources, location_name: "preferredResources"))
+    PutRecommendationPreferencesRequest.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
     PutRecommendationPreferencesRequest.struct_class = Types::PutRecommendationPreferencesRequest
 
     PutRecommendationPreferencesResponse.struct_class = Types::PutRecommendationPreferencesResponse
@@ -988,6 +1123,10 @@ module Aws::ComputeOptimizer
     RecommendationPreferencesDetail.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     RecommendationPreferencesDetail.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     RecommendationPreferencesDetail.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
+    RecommendationPreferencesDetail.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriodPreference, location_name: "lookBackPeriod"))
+    RecommendationPreferencesDetail.add_member(:utilization_preferences, Shapes::ShapeRef.new(shape: UtilizationPreferences, location_name: "utilizationPreferences"))
+    RecommendationPreferencesDetail.add_member(:preferred_resources, Shapes::ShapeRef.new(shape: EffectivePreferredResources, location_name: "preferredResources"))
+    RecommendationPreferencesDetail.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
     RecommendationPreferencesDetail.struct_class = Types::RecommendationPreferencesDetail
 
     RecommendationPreferencesDetails.member = Shapes::ShapeRef.new(shape: RecommendationPreferencesDetail)
@@ -1082,6 +1221,12 @@ module Aws::ComputeOptimizer
 
     UtilizationMetrics.member = Shapes::ShapeRef.new(shape: UtilizationMetric)
 
+    UtilizationPreference.add_member(:metric_name, Shapes::ShapeRef.new(shape: CustomizableMetricName, location_name: "metricName"))
+    UtilizationPreference.add_member(:metric_parameters, Shapes::ShapeRef.new(shape: CustomizableMetricParameters, location_name: "metricParameters"))
+    UtilizationPreference.struct_class = Types::UtilizationPreference
+
+    UtilizationPreferences.member = Shapes::ShapeRef.new(shape: UtilizationPreference)
+
     VolumeArns.member = Shapes::ShapeRef.new(shape: VolumeArn)
 
     VolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
@@ -1103,12 +1248,14 @@ module Aws::ComputeOptimizer
     VolumeRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     VolumeRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     VolumeRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    VolumeRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EBSEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     VolumeRecommendation.struct_class = Types::VolumeRecommendation
 
     VolumeRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "configuration"))
     VolumeRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     VolumeRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     VolumeRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    VolumeRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: EBSSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     VolumeRecommendationOption.struct_class = Types::VolumeRecommendationOption
 
     VolumeRecommendationOptions.member = Shapes::ShapeRef.new(shape: VolumeRecommendationOption)

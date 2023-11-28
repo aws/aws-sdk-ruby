@@ -25,16 +25,17 @@ module Aws::AppSync
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -112,6 +113,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::GetApiCache.build(context)
           when :get_data_source
             Aws::AppSync::Endpoints::GetDataSource.build(context)
+          when :get_data_source_introspection
+            Aws::AppSync::Endpoints::GetDataSourceIntrospection.build(context)
           when :get_domain_name
             Aws::AppSync::Endpoints::GetDomainName.build(context)
           when :get_function
@@ -150,6 +153,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::ListTypes.build(context)
           when :list_types_by_association
             Aws::AppSync::Endpoints::ListTypesByAssociation.build(context)
+          when :start_data_source_introspection
+            Aws::AppSync::Endpoints::StartDataSourceIntrospection.build(context)
           when :start_schema_creation
             Aws::AppSync::Endpoints::StartSchemaCreation.build(context)
           when :start_schema_merge

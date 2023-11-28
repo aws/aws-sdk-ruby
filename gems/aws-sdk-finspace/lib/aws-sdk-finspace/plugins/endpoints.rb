@@ -25,16 +25,17 @@ module Aws::Finspace
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -114,6 +115,8 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::UntagResource.build(context)
           when :update_environment
             Aws::Finspace::Endpoints::UpdateEnvironment.build(context)
+          when :update_kx_cluster_code_configuration
+            Aws::Finspace::Endpoints::UpdateKxClusterCodeConfiguration.build(context)
           when :update_kx_cluster_databases
             Aws::Finspace::Endpoints::UpdateKxClusterDatabases.build(context)
           when :update_kx_database

@@ -157,6 +157,13 @@ module Aws
 ' request with sigv4a which requires the `aws-crt` gem.'\
 ' Please install the gem or add it to your gemfile.'
         end
+
+        if @signing_algorithm == 'sigv4-s3express'.to_sym &&
+           Signer.use_crt? && Aws::Crt::GEM_VERSION <= '0.1.9'
+          raise ArgumentError,
+                'This version of aws-crt does not support S3 Express. Please
+                 update this gem to at least version 0.2.0.'
+        end
       end
 
       # @return [String]
@@ -251,7 +258,14 @@ module Aws
         sigv4_headers = {}
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
-        sigv4_headers['x-amz-security-token'] = creds.session_token if creds.session_token
+        if creds.session_token
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
+            sigv4_headers['x-amz-s3session-token'] = creds.session_token
+          else
+            sigv4_headers['x-amz-security-token'] = creds.session_token
+          end
+        end
+
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
@@ -423,8 +437,14 @@ module Aws
         params['X-Amz-Algorithm'] = 'AWS4-HMAC-SHA256'
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration).to_s
-        params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
+        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
+        if creds.session_token
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
+            params['X-Amz-S3session-Token'] = creds.session_token
+          else
+            params['X-Amz-Security-Token'] = creds.session_token
+          end
+        end
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
         params = params.map do |key, value|
@@ -722,12 +742,19 @@ module Aws
           !credentials.secret_access_key.empty?
       end
 
-      def presigned_url_expiration(options, expiration)
+      def presigned_url_expiration(options, expiration, datetime)
         expires_in = extract_expires_in(options)
         return expires_in unless expiration
 
-        expiration_seconds = (expiration - Time.now).to_i
-        [expires_in, expiration_seconds].min
+        expiration_seconds = (expiration - datetime).to_i
+        # In the static stability case, credentials may expire in the past
+        # but still be valid.  For those cases, use the user configured
+        # expires_in and ingore expiration.
+        if expiration_seconds <= 0
+          expires_in
+        else
+          [expires_in, expiration_seconds].min
+        end
       end
 
       ### CRT Code
@@ -811,7 +838,7 @@ module Aws
         headers = downcase_headers(options[:headers])
         headers['host'] ||= host(url)
 
-        datetime = headers.delete('x-amz-date')
+        datetime = Time.strptime(headers.delete('x-amz-date'), "%Y%m%dT%H%M%S%Z") if headers['x-amz-date']
         datetime ||= (options[:time] || Time.now)
 
         content_sha256 = headers.delete('x-amz-content-sha256')
@@ -832,7 +859,7 @@ module Aws
           use_double_uri_encode: @uri_escape_path,
           should_normalize_uri_path: @normalize_path,
           omit_session_token: @omit_session_token,
-          expiration_in_seconds: presigned_url_expiration(options, expiration)
+          expiration_in_seconds: presigned_url_expiration(options, expiration, datetime)
         )
         http_request = Aws::Crt::Http::Message.new(
           http_method, url.to_s, headers

@@ -436,22 +436,27 @@ module Aws::Cloud9
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
     #   path.
     #
-    #   The default Amazon Linux AMI is currently used if the parameter isn't
-    #   explicitly assigned a value in the request. Because Amazon Linux AMI
-    #   has ended standard support as of December 31, 2020, we recommend you
-    #   choose Amazon Linux 2, which includes long term support through 2023.
+    #   From December 04, 2023, you will be required to include the `imageId`
+    #   parameter for the `CreateEnvironmentEC2` action. This change will be
+    #   reflected across all direct methods of communicating with the API,
+    #   such as Amazon Web Services SDK, Amazon Web Services CLI and Amazon
+    #   Web Services CloudFormation. This change will only affect direct API
+    #   consumers, and not Cloud9 console users.
     #
-    #   From December 31, 2023, the parameter for Amazon Linux will no longer
-    #   be available when you specify an AMI for your instance. Amazon Linux 2
-    #   will then become the default AMI, which is used to launch your
-    #   instance if no parameter is explicitly defined.
+    #   From January 22, 2024, Amazon Linux (AL1) will be removed from the
+    #   list of available image IDs for Cloud9. This is necessary as AL1 will
+    #   reach the end of maintenance support in December 2023, and as a result
+    #   will no longer receive security updates. We recommend using Amazon
+    #   Linux 2 as the AMI to create your environment as it is fully
+    #   supported. This change will only affect direct API consumers, and not
+    #   Cloud9 console users.
     #
     #   Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we
     #   recommend you choose Ubuntu 22.04.
     #
     #   <b>AMI aliases </b>
     #
-    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
+    #   * Amazon Linux (default): `amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
@@ -461,9 +466,8 @@ module Aws::Cloud9
     #
     #   **SSM paths**
     #
-    #   * <b>Amazon Linux (default):
-    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
-    #     </b>
+    #   * Amazon Linux (default):
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
@@ -516,6 +520,7 @@ module Aws::Cloud9
     #     name: "my-demo-environment", 
     #     automatic_stop_time_minutes: 60, 
     #     description: "This is my demonstration environment.", 
+    #     image_id: "amazonlinux-2-x86_64", 
     #     instance_type: "t2.micro", 
     #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
     #     subnet_id: "subnet-6300cd1b", 
@@ -1261,7 +1266,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

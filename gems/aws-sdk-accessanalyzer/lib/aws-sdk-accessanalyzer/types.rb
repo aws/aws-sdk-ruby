@@ -10,6 +10,21 @@
 module Aws::AccessAnalyzer
   module Types
 
+    # Contains information about actions that define permissions to check
+    # against a policy.
+    #
+    # @!attribute [rw] actions
+    #   A list of actions for the access permissions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Access AWS API Documentation
+    #
+    class Access < Struct.new(
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -379,6 +394,32 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Contains information about the configuration of an unused access
+    # analyzer for an Amazon Web Services organization or account.
+    #
+    # @note AnalyzerConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AnalyzerConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalyzerConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] unused_access
+    #   Specifies the configuration of an unused access analyzer for an
+    #   Amazon Web Services organization or account. External access
+    #   analyzers do not support any configuration.
+    #   @return [Types::UnusedAccessConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerConfiguration AWS API Documentation
+    #
+    class AnalyzerConfiguration < Struct.new(
+      :unused_access,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UnusedAccess < AnalyzerConfiguration; end
+      class Unknown < AnalyzerConfiguration; end
+    end
+
     # Contains information about the analyzer.
     #
     # @!attribute [rw] arn
@@ -429,6 +470,11 @@ module Aws::AccessAnalyzer
     #   Web Services organization.
     #   @return [Types::StatusReason]
     #
+    # @!attribute [rw] configuration
+    #   Specifies whether the analyzer is an external access or unused
+    #   access analyzer.
+    #   @return [Types::AnalyzerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerSummary AWS API Documentation
     #
     class AnalyzerSummary < Struct.new(
@@ -440,7 +486,8 @@ module Aws::AccessAnalyzer
       :last_resource_analyzed_at,
       :tags,
       :status,
-      :status_reason)
+      :status_reason,
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -519,6 +566,119 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CancelPolicyGenerationResponse AWS API Documentation
     #
     class CancelPolicyGenerationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] policy_document
+    #   The JSON policy document to use as the content for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] access
+    #   An access object containing the permissions that shouldn't be
+    #   granted by the specified policy.
+    #   @return [Array<Types::Access>]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy. Identity policies grant permissions to IAM
+    #   principals. Identity policies include managed and inline policies
+    #   for IAM roles, users, and groups.
+    #
+    #   Resource policies grant permissions on Amazon Web Services
+    #   resources. Resource policies include trust policies for IAM roles
+    #   and bucket policies for Amazon S3 buckets. You can provide a generic
+    #   input such as identity policy or resource policy or a specific input
+    #   such as managed policy or Amazon S3 bucket policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckAccessNotGrantedRequest AWS API Documentation
+    #
+    class CheckAccessNotGrantedRequest < Struct.new(
+      :policy_document,
+      :access,
+      :policy_type)
+      SENSITIVE = [:policy_document]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The result of the check for whether the access is allowed. If the
+    #   result is `PASS`, the specified policy doesn't allow any of the
+    #   specified permissions in the access object. If the result is `FAIL`,
+    #   the specified policy might allow some or all of the permissions in
+    #   the access object.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message indicating whether the specified access is allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   A description of the reasoning of the result.
+    #   @return [Array<Types::ReasonSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckAccessNotGrantedResponse AWS API Documentation
+    #
+    class CheckAccessNotGrantedResponse < Struct.new(
+      :result,
+      :message,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] new_policy_document
+    #   The JSON policy document to use as the content for the updated
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy_document
+    #   The JSON policy document to use as the content for the existing
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy to compare. Identity policies grant permissions
+    #   to IAM principals. Identity policies include managed and inline
+    #   policies for IAM roles, users, and groups.
+    #
+    #   Resource policies grant permissions on Amazon Web Services
+    #   resources. Resource policies include trust policies for IAM roles
+    #   and bucket policies for Amazon S3 buckets. You can provide a generic
+    #   input such as identity policy or resource policy or a specific input
+    #   such as managed policy or Amazon S3 bucket policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoNewAccessRequest AWS API Documentation
+    #
+    class CheckNoNewAccessRequest < Struct.new(
+      :new_policy_document,
+      :existing_policy_document,
+      :policy_type)
+      SENSITIVE = [:new_policy_document, :existing_policy_document]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The result of the check for new access. If the result is `PASS`, no
+    #   new access is allowed by the updated policy. If the result is
+    #   `FAIL`, the updated policy might allow new access.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message indicating whether the updated policy allows new access.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   A description of the reasoning of the result.
+    #   @return [Array<Types::ReasonSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoNewAccessResponse AWS API Documentation
+    #
+    class CheckNoNewAccessResponse < Struct.new(
+      :result,
+      :message,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about CloudTrail access.
     #
@@ -628,7 +788,7 @@ module Aws::AccessAnalyzer
     #   @return [Types::SecretsManagerSecretConfiguration]
     #
     # @!attribute [rw] s3_bucket
-    #   The access control configuration is for an Amazon S3 Bucket.
+    #   The access control configuration is for an Amazon S3 bucket.
     #   @return [Types::S3BucketConfiguration]
     #
     # @!attribute [rw] sns_topic
@@ -638,6 +798,11 @@ module Aws::AccessAnalyzer
     # @!attribute [rw] sqs_queue
     #   The access control configuration is for an Amazon SQS queue.
     #   @return [Types::SqsQueueConfiguration]
+    #
+    # @!attribute [rw] s3_express_directory_bucket
+    #   The access control configuration is for an Amazon S3 directory
+    #   bucket.
+    #   @return [Types::S3ExpressDirectoryBucketConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Configuration AWS API Documentation
     #
@@ -653,6 +818,7 @@ module Aws::AccessAnalyzer
       :s3_bucket,
       :sns_topic,
       :sqs_queue,
+      :s3_express_directory_bucket,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -669,6 +835,7 @@ module Aws::AccessAnalyzer
       class S3Bucket < Configuration; end
       class SnsTopic < Configuration; end
       class SqsQueue < Configuration; end
+      class S3ExpressDirectoryBucket < Configuration; end
       class Unknown < Configuration; end
     end
 
@@ -749,10 +916,11 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of analyzer to create. Only ACCOUNT and ORGANIZATION
-    #   analyzers are supported. You can create only one analyzer per
-    #   account per Region. You can create up to 5 analyzers per
-    #   organization per Region.
+    #   The type of analyzer to create. Only `ACCOUNT`, `ORGANIZATION`,
+    #   `ACCOUNT_UNUSED_ACCESS`, and `ORGANIZTAION_UNUSED_ACCESS` analyzers
+    #   are supported. You can create only one analyzer per account per
+    #   Region. You can create up to 5 analyzers per organization per
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] archive_rules
@@ -762,7 +930,7 @@ module Aws::AccessAnalyzer
     #   @return [Array<Types::InlineArchiveRule>]
     #
     # @!attribute [rw] tags
-    #   The tags to apply to the analyzer.
+    #   An array of key-value pairs to apply to the analyzer.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -772,6 +940,13 @@ module Aws::AccessAnalyzer
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   Specifies the configuration of the analyzer. If the analyzer is an
+    #   unused access analyzer, the specified scope of unused access is used
+    #   for the configuration. If the analyzer is an external access
+    #   analyzer, this field is not used.
+    #   @return [Types::AnalyzerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateAnalyzerRequest AWS API Documentation
     #
     class CreateAnalyzerRequest < Struct.new(
@@ -779,7 +954,8 @@ module Aws::AccessAnalyzer
       :type,
       :archive_rules,
       :tags,
-      :client_token)
+      :client_token,
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1065,6 +1241,45 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Contains information about an external access finding.
+    #
+    # @!attribute [rw] action
+    #   The action in the analyzed policy statement that an external
+    #   principal has permission to use.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition
+    #   The condition in the analyzed policy statement that resulted in an
+    #   external access finding.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] is_public
+    #   Specifies whether the external access finding is public.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal
+    #   The external principal that has access to a resource within the zone
+    #   of trust.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] sources
+    #   The sources of the external access finding. This indicates how the
+    #   access that generated the finding is granted. It is populated for
+    #   Amazon S3 bucket findings.
+    #   @return [Array<Types::FindingSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ExternalAccessDetails AWS API Documentation
+    #
+    class ExternalAccessDetails < Struct.new(
+      :action,
+      :condition,
+      :is_public,
+      :principal,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a finding.
     #
     # @!attribute [rw] id
@@ -1072,8 +1287,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The external principal that access to a resource within the zone of
-    #   trust.
+    #   The external principal that has access to a resource within the zone
+    #   of trust.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] action
@@ -1148,6 +1363,56 @@ module Aws::AccessAnalyzer
       :sources)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains information about an external access or unused access
+    # finding. Only one parameter can be used in a `FindingDetails` object.
+    #
+    # @note FindingDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FindingDetails corresponding to the set member.
+    #
+    # @!attribute [rw] external_access_details
+    #   The details for an external access analyzer finding.
+    #   @return [Types::ExternalAccessDetails]
+    #
+    # @!attribute [rw] unused_permission_details
+    #   The details for an unused access analyzer finding with an unused
+    #   permission finding type.
+    #   @return [Types::UnusedPermissionDetails]
+    #
+    # @!attribute [rw] unused_iam_user_access_key_details
+    #   The details for an unused access analyzer finding with an unused IAM
+    #   user access key finding type.
+    #   @return [Types::UnusedIamUserAccessKeyDetails]
+    #
+    # @!attribute [rw] unused_iam_role_details
+    #   The details for an unused access analyzer finding with an unused IAM
+    #   role finding type.
+    #   @return [Types::UnusedIamRoleDetails]
+    #
+    # @!attribute [rw] unused_iam_user_password_details
+    #   The details for an unused access analyzer finding with an unused IAM
+    #   user password finding type.
+    #   @return [Types::UnusedIamUserPasswordDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingDetails AWS API Documentation
+    #
+    class FindingDetails < Struct.new(
+      :external_access_details,
+      :unused_permission_details,
+      :unused_iam_user_access_key_details,
+      :unused_iam_role_details,
+      :unused_iam_user_password_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalAccessDetails < FindingDetails; end
+      class UnusedPermissionDetails < FindingDetails; end
+      class UnusedIamUserAccessKeyDetails < FindingDetails; end
+      class UnusedIamRoleDetails < FindingDetails; end
+      class UnusedIamUserPasswordDetails < FindingDetails; end
+      class Unknown < FindingDetails; end
     end
 
     # The source of the finding. This indicates how the access that
@@ -1277,6 +1542,66 @@ module Aws::AccessAnalyzer
       :resource_owner_account,
       :error,
       :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a finding.
+    #
+    # @!attribute [rw] analyzed_at
+    #   The time at which the resource-based policy or IAM entity that
+    #   generated the finding was analyzed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the finding was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error
+    #   The error that resulted in an Error finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that the external principal has access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that the external principal has access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account
+    #   The Amazon Web Services account ID that owns the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the finding was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_type
+    #   The type of the external access or unused access finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSummaryV2 AWS API Documentation
+    #
+    class FindingSummaryV2 < Struct.new(
+      :analyzed_at,
+      :created_at,
+      :error,
+      :id,
+      :resource,
+      :resource_type,
+      :resource_owner_account,
+      :status,
+      :updated_at,
+      :finding_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1522,6 +1847,109 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @!attribute [rw] analyzer_arn
+    #   The [ARN of the analyzer][1] that generated the finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the finding to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingV2Request AWS API Documentation
+    #
+    class GetFindingV2Request < Struct.new(
+      :analyzer_arn,
+      :id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analyzed_at
+    #   The time at which the resource-based policy or IAM entity that
+    #   generated the finding was analyzed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the finding was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error
+    #   An error.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the finding to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that generated the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource identified in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account
+    #   Tye Amazon Web Services account ID that owns the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the finding was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_details
+    #   A localized message that explains the finding and provides guidance
+    #   on how to address it.
+    #   @return [Array<Types::FindingDetails>]
+    #
+    # @!attribute [rw] finding_type
+    #   The type of the finding. For external access analyzers, the type is
+    #   `ExternalAccess`. For unused access analyzers, the type can be
+    #   `UnusedIAMRole`, `UnusedIAMUserAccessKey`, `UnusedIAMUserPassword`,
+    #   or `UnusedPermission`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingV2Response AWS API Documentation
+    #
+    class GetFindingV2Response < Struct.new(
+      :analyzed_at,
+      :created_at,
+      :error,
+      :id,
+      :next_token,
+      :resource,
+      :resource_type,
+      :resource_owner_account,
+      :status,
+      :updated_at,
+      :finding_details,
+      :finding_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_id
     #   The `JobId` that is returned by the `StartPolicyGeneration`
     #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
@@ -1649,6 +2077,19 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternetConfiguration AWS API Documentation
     #
     class InternetConfiguration < Aws::EmptyStructure; end
+
+    # The specified parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains details about the policy generation request.
     #
@@ -2144,6 +2585,60 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @!attribute [rw] analyzer_arn
+    #   The [ARN of the analyzer][1] to retrieve findings from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to match for the findings to return.
+    #   @return [Hash<String,Types::Criterion>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   The criteria used to sort.
+    #   @return [Types::SortCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListFindingsV2Request AWS API Documentation
+    #
+    class ListFindingsV2Request < Struct.new(
+      :analyzer_arn,
+      :filter,
+      :max_results,
+      :next_token,
+      :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] findings
+    #   A list of findings retrieved from the analyzer that match the filter
+    #   criteria specified, if any.
+    #   @return [Array<Types::FindingSummaryV2>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListFindingsV2Response AWS API Documentation
+    #
+    class ListFindingsV2Response < Struct.new(
+      :findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] principal_arn
     #   The ARN of the IAM entity (user or role) for which you are
     #   generating a policy. Use this with `ListGeneratedPolicies` to filter
@@ -2566,6 +3061,31 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Contains information about the reasoning why a check for access passed
+    # or failed.
+    #
+    # @!attribute [rw] description
+    #   A description of the reasoning of a result of checking for access.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_index
+    #   The index number of the reason statement.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statement_id
+    #   The identifier for the reason statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ReasonSummary AWS API Documentation
+    #
+    class ReasonSummary < Struct.new(
+      :description,
+      :statement_index,
+      :statement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource could not be found.
     #
     # @!attribute [rw] message
@@ -2707,6 +3227,35 @@ module Aws::AccessAnalyzer
       :bucket_acl_grants,
       :bucket_public_access_block,
       :access_points)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Proposed access control configuration for an Amazon S3 directory
+    # bucket. You can propose a configuration for a new Amazon S3 directory
+    # bucket or an existing Amazon S3 directory bucket that you own by
+    # specifying the Amazon S3 bucket policy. If the configuration is for an
+    # existing Amazon S3 directory bucket and you do not specify the Amazon
+    # S3 bucket policy, the access preview uses the existing policy attached
+    # to the directory bucket. If the access preview is for a new resource
+    # and you do not specify the Amazon S3 bucket policy, the access preview
+    # assumes an directory bucket without a policy. To propose deletion of
+    # an existing bucket policy, you can specify an empty string. For more
+    # information about bucket policy limits, see [Example bucket
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
+    #
+    # @!attribute [rw] bucket_policy
+    #   The proposed bucket policy for the Amazon S3 directory bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/S3ExpressDirectoryBucketConfiguration AWS API Documentation
+    #
+    class S3ExpressDirectoryBucketConfiguration < Struct.new(
+      :bucket_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3128,6 +3677,19 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # The specified entity could not be processed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Removes a tag from the specified resource.
     #
     # @!attribute [rw] resource_arn
@@ -3152,6 +3714,153 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Contains information about an unused access analyzer.
+    #
+    # @!attribute [rw] unused_access_age
+    #   The specified access age in days for which to generate findings for
+    #   unused access. For example, if you specify 90 days, the analyzer
+    #   will generate findings for IAM entities within the accounts of the
+    #   selected organization for any access that hasn't been used in 90 or
+    #   more days since the analyzer's last scan. You can choose a value
+    #   between 1 and 180 days.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedAccessConfiguration AWS API Documentation
+    #
+    class UnusedAccessConfiguration < Struct.new(
+      :unused_access_age)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an unused access finding for an action. IAM
+    # Access Analyzer charges for unused access analysis based on the number
+    # of IAM roles and users analyzed per month. For more details on
+    # pricing, see [IAM Access Analyzer pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/iam/access-analyzer/pricing
+    #
+    # @!attribute [rw] action
+    #   The action for which the unused access finding was generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed
+    #   The time at which the action was last accessed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedAction AWS API Documentation
+    #
+    class UnusedAction < Struct.new(
+      :action,
+      :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an unused access finding for an IAM role.
+    # IAM Access Analyzer charges for unused access analysis based on the
+    # number of IAM roles and users analyzed per month. For more details on
+    # pricing, see [IAM Access Analyzer pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/iam/access-analyzer/pricing
+    #
+    # @!attribute [rw] last_accessed
+    #   The time at which the role was last accessed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedIamRoleDetails AWS API Documentation
+    #
+    class UnusedIamRoleDetails < Struct.new(
+      :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an unused access finding for an IAM user
+    # access key. IAM Access Analyzer charges for unused access analysis
+    # based on the number of IAM roles and users analyzed per month. For
+    # more details on pricing, see [IAM Access Analyzer pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/iam/access-analyzer/pricing
+    #
+    # @!attribute [rw] access_key_id
+    #   The ID of the access key for which the unused access finding was
+    #   generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed
+    #   The time at which the access key was last accessed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedIamUserAccessKeyDetails AWS API Documentation
+    #
+    class UnusedIamUserAccessKeyDetails < Struct.new(
+      :access_key_id,
+      :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an unused access finding for an IAM user
+    # password. IAM Access Analyzer charges for unused access analysis based
+    # on the number of IAM roles and users analyzed per month. For more
+    # details on pricing, see [IAM Access Analyzer pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/iam/access-analyzer/pricing
+    #
+    # @!attribute [rw] last_accessed
+    #   The time at which the password was last accessed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedIamUserPasswordDetails AWS API Documentation
+    #
+    class UnusedIamUserPasswordDetails < Struct.new(
+      :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an unused access finding for a permission.
+    # IAM Access Analyzer charges for unused access analysis based on the
+    # number of IAM roles and users analyzed per month. For more details on
+    # pricing, see [IAM Access Analyzer pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/iam/access-analyzer/pricing
+    #
+    # @!attribute [rw] actions
+    #   A list of unused actions for which the unused access finding was
+    #   generated.
+    #   @return [Array<Types::UnusedAction>]
+    #
+    # @!attribute [rw] service_namespace
+    #   The namespace of the Amazon Web Services service that contains the
+    #   unused actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed
+    #   The time at which the permission last accessed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedPermissionDetails AWS API Documentation
+    #
+    class UnusedPermissionDetails < Struct.new(
+      :actions,
+      :service_namespace,
+      :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Updates the specified archive rule.
     #
@@ -3299,15 +4008,17 @@ module Aws::AccessAnalyzer
     # @!attribute [rw] policy_type
     #   The type of policy to validate. Identity policies grant permissions
     #   to IAM principals. Identity policies include managed and inline
-    #   policies for IAM roles, users, and groups. They also include
-    #   service-control policies (SCPs) that are attached to an Amazon Web
-    #   Services organization, organizational unit (OU), or an account.
+    #   policies for IAM roles, users, and groups.
     #
     #   Resource policies grant permissions on Amazon Web Services
     #   resources. Resource policies include trust policies for IAM roles
     #   and bucket policies for Amazon S3 buckets. You can provide a generic
     #   input such as identity policy or resource policy or a specific input
     #   such as managed policy or Amazon S3 bucket policy.
+    #
+    #   Service control policies (SCPs) are a type of organization policy
+    #   attached to an Amazon Web Services organization, organizational unit
+    #   (OU), or an account.
     #   @return [String]
     #
     # @!attribute [rw] validate_policy_resource_type

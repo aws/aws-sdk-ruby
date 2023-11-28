@@ -388,9 +388,9 @@ module Aws::ManagedBlockchain
 
     # @!group API Operations
 
-    # Creates a new accessor for use with Managed Blockchain Ethereum nodes.
-    # An accessor contains information required for token based access to
-    # your Ethereum nodes.
+    # Creates a new accessor for use with Amazon Managed Blockchain service
+    # that supports token based access. The accessor contains information
+    # required for token based access.
     #
     # @option params [required, String] :client_request_token
     #   This is a unique, case-sensitive identifier that you provide to ensure
@@ -426,10 +426,28 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
     #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #
+    # @option params [String] :network_type
+    #   The blockchain network that the `Accessor` token is created for.
+    #
+    #   <note markdown="1"> We recommend using the appropriate `networkType` value for the
+    #   blockchain network that you are creating the `Accessor` token for. You
+    #   cannnot use the value `ETHEREUM_MAINNET_AND_GOERLI` to specify a
+    #   `networkType` for your Accessor token.
+    #
+    #    The default value of `ETHEREUM_MAINNET_AND_GOERLI` is only applied:
+    #
+    #    * when the `CreateAccessor` action does not set a `networkType`.
+    #
+    #   * to all existing `Accessor` tokens that were created before the
+    #     `networkType` property was introduced.
+    #
+    #    </note>
+    #
     # @return [Types::CreateAccessorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessorOutput#accessor_id #accessor_id} => String
     #   * {Types::CreateAccessorOutput#billing_token #billing_token} => String
+    #   * {Types::CreateAccessorOutput#network_type #network_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -439,12 +457,14 @@ module Aws::ManagedBlockchain
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     network_type: "ETHEREUM_GOERLI", # accepts ETHEREUM_GOERLI, ETHEREUM_MAINNET, ETHEREUM_MAINNET_AND_GOERLI, POLYGON_MAINNET, POLYGON_MUMBAI
     #   })
     #
     # @example Response structure
     #
     #   resp.accessor_id #=> String
     #   resp.billing_token #=> String
+    #   resp.network_type #=> String, one of "ETHEREUM_GOERLI", "ETHEREUM_MAINNET", "ETHEREUM_MAINNET_AND_GOERLI", "POLYGON_MAINNET", "POLYGON_MUMBAI"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessor AWS API Documentation
     #
@@ -970,6 +990,7 @@ module Aws::ManagedBlockchain
     #   resp.accessor.arn #=> String
     #   resp.accessor.tags #=> Hash
     #   resp.accessor.tags["TagKey"] #=> String
+    #   resp.accessor.network_type #=> String, one of "ETHEREUM_GOERLI", "ETHEREUM_MAINNET", "ETHEREUM_MAINNET_AND_GOERLI", "POLYGON_MAINNET", "POLYGON_MUMBAI"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetAccessor AWS API Documentation
     #
@@ -1192,6 +1213,15 @@ module Aws::ManagedBlockchain
     #   The pagination token that indicates the next set of results to
     #   retrieve.
     #
+    # @option params [String] :network_type
+    #   The blockchain network that the `Accessor` token is created for.
+    #
+    #   <note markdown="1"> Use the value `ETHEREUM_MAINNET_AND_GOERLI` for all existing
+    #   `Accessors` tokens that were created before the `networkType` property
+    #   was introduced.
+    #
+    #    </note>
+    #
     # @return [Types::ListAccessorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccessorsOutput#accessors #accessors} => Array&lt;Types::AccessorSummary&gt;
@@ -1204,6 +1234,7 @@ module Aws::ManagedBlockchain
     #   resp = client.list_accessors({
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     network_type: "ETHEREUM_GOERLI", # accepts ETHEREUM_GOERLI, ETHEREUM_MAINNET, ETHEREUM_MAINNET_AND_GOERLI, POLYGON_MAINNET, POLYGON_MUMBAI
     #   })
     #
     # @example Response structure
@@ -1214,6 +1245,7 @@ module Aws::ManagedBlockchain
     #   resp.accessors[0].status #=> String, one of "AVAILABLE", "PENDING_DELETION", "DELETED"
     #   resp.accessors[0].creation_date #=> Time
     #   resp.accessors[0].arn #=> String
+    #   resp.accessors[0].network_type #=> String, one of "ETHEREUM_GOERLI", "ETHEREUM_MAINNET", "ETHEREUM_MAINNET_AND_GOERLI", "POLYGON_MAINNET", "POLYGON_MUMBAI"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListAccessors AWS API Documentation
@@ -1886,7 +1918,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

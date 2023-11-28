@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.110.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.5'
 end

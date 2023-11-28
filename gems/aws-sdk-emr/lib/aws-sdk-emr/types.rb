@@ -776,6 +776,18 @@ module Aws::EMR
     #   Amazon Linux release is shown in the response.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_root_volume_iops
+    #   The IOPS, of the Amazon EBS root device volume of the Linux AMI that
+    #   is used for each Amazon EC2 instance. Available in Amazon EMR
+    #   releases 6.15.0 and later.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume of
+    #   the Linux AMI that is used for each Amazon EC2 instance. Available
+    #   in Amazon EMR releases 6.15.0 and later.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -809,7 +821,9 @@ module Aws::EMR
       :outpost_arn,
       :step_concurrency_level,
       :placement_groups,
-      :os_release_label)
+      :os_release_label,
+      :ebs_root_volume_iops,
+      :ebs_root_volume_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1171,6 +1185,27 @@ module Aws::EMR
     #   a maximum of 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] trusted_identity_propagation_enabled
+    #   A Boolean indicating whether to enable Trusted identity propagation
+    #   for the Studio. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idc_user_assignment
+    #   Specifies whether IAM Identity Center user assignment is `REQUIRED`
+    #   or `OPTIONAL`. If the value is set to `REQUIRED`, users must be
+    #   explicitly assigned to the Studio application to access the Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_instance_arn
+    #   The ARN of the IAM Identity Center instance to create the Studio
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioInput AWS API Documentation
     #
     class CreateStudioInput < Struct.new(
@@ -1186,7 +1221,11 @@ module Aws::EMR
       :default_s3_location,
       :idp_auth_url,
       :idp_relay_state_parameter_name,
-      :tags)
+      :tags,
+      :trusted_identity_propagation_enabled,
+      :idc_user_assignment,
+      :idc_instance_arn,
+      :encryption_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5493,6 +5532,18 @@ module Aws::EMR
     #   cluster launch.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_root_volume_iops
+    #   The IOPS, of the Amazon EBS root device volume of the Linux AMI that
+    #   is used for each Amazon EC2 instance. Available in Amazon EMR
+    #   releases 6.15.0 and later.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume of
+    #   the Linux AMI that is used for each Amazon EC2 instance. Available
+    #   in Amazon EMR releases 6.15.0 and later.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -5524,7 +5575,9 @@ module Aws::EMR
       :managed_scaling_policy,
       :placement_group_configs,
       :auto_termination_policy,
-      :os_release_label)
+      :os_release_label,
+      :ebs_root_volume_iops,
+      :ebs_root_volume_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5986,10 +6039,21 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies the strategy to use in launching Spot Instance fleets.
-    #   Currently, the only option is capacity-optimized (the default),
-    #   which launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching.
+    #   Specifies one of the following strategies to launch Spot Instance
+    #   fleets: `price-capacity-optimized`, `capacity-optimized`,
+    #   `lowest-price`, or `diversified`. For more information on the
+    #   provisioning strategies, see [Allocation strategies for Spot
+    #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> When you launch a Spot Instance fleet with the old console, it
+    #   automatically launches with the `capacity-optimized` strategy. You
+    #   can't change the allocation strategy from the old console.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation
@@ -6491,6 +6555,28 @@ module Aws::EMR
     #   A list of tags associated with the Amazon EMR Studio.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] idc_instance_arn
+    #   The ARN of the IAM Identity Center instance the Studio application
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] trusted_identity_propagation_enabled
+    #   Indicates whether the Studio has Trusted identity propagation
+    #   enabled. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idc_user_assignment
+    #   Indicates whether the Studio has `REQUIRED` or `OPTIONAL` IAM
+    #   Identity Center user assignment. If the value is set to `REQUIRED`,
+    #   users must be explicitly assigned to the Studio application to
+    #   access the Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Studio AWS API Documentation
     #
     class Studio < Struct.new(
@@ -6510,14 +6596,18 @@ module Aws::EMR
       :default_s3_location,
       :idp_auth_url,
       :idp_relay_state_parameter_name,
-      :tags)
+      :tags,
+      :idc_instance_arn,
+      :trusted_identity_propagation_enabled,
+      :idc_user_assignment,
+      :encryption_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Details for an Amazon EMR Studio, including ID, Name, VPC, and
-    # Description. The details do not include subnets, IAM roles, security
-    # groups, or tags associated with the Studio.
+    # Description. To fetch additional details such as subnets, IAM roles,
+    # security groups, and tags for the Studio, use the DescribeStudio API.
     #
     # @!attribute [rw] studio_id
     #   The ID of the Amazon EMR Studio.
@@ -6740,6 +6830,11 @@ module Aws::EMR
     #   the Amazon EMR Studio.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudioInput AWS API Documentation
     #
     class UpdateStudioInput < Struct.new(
@@ -6747,7 +6842,8 @@ module Aws::EMR
       :name,
       :description,
       :subnet_ids,
-      :default_s3_location)
+      :default_s3_location,
+      :encryption_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

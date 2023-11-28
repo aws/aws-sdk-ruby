@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2023-11-17)
+------------------
+
+* Feature - Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
+
+1.11.0 (2023-10-19)
+------------------
+
+* Feature - Improving Amazon Verified Permissions Create experience
+
 1.10.0 (2023-09-27)
 ------------------
 

@@ -472,6 +472,10 @@ module Aws::ConnectCases
     #   The unique identifier of the Cases domain.
     #   @return [String]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the creator of the related item.
+    #   @return [Types::UserUnion]
+    #
     # @!attribute [rw] type
     #   The type of a related item.
     #   @return [String]
@@ -482,6 +486,7 @@ module Aws::ConnectCases
       :case_id,
       :content,
       :domain_id,
+      :performed_by,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -1926,6 +1931,10 @@ module Aws::ConnectCases
     #   Represents the content of a particular type of related item.
     #   @return [Types::RelatedItemContent]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the creator of the related item.
+    #   @return [Types::UserUnion]
+    #
     # @!attribute [rw] related_item_id
     #   Unique identifier of a related item.
     #   @return [String]
@@ -1944,6 +1953,7 @@ module Aws::ConnectCases
     class SearchRelatedItemsResponseItem < Struct.new(
       :association_time,
       :content,
+      :performed_by,
       :related_item_id,
       :tags,
       :type)
@@ -2151,7 +2161,7 @@ module Aws::ConnectCases
 
     # @!attribute [rw] content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #   @return [Types::LayoutContent]
     #
     # @!attribute [rw] domain_id
@@ -2227,6 +2237,29 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateTemplateResponse AWS API Documentation
     #
     class UpdateTemplateResponse < Aws::EmptyStructure; end
+
+    # Represents the identity of the person who performed the action.
+    #
+    # @note UserUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note UserUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserUnion corresponding to the set member.
+    #
+    # @!attribute [rw] user_arn
+    #   Represents the Amazon Connect ARN of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UserUnion AWS API Documentation
+    #
+    class UserUnion < Struct.new(
+      :user_arn,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserArn < UserUnion; end
+      class Unknown < UserUnion; end
+    end
 
     # The request isn't valid. Check the syntax and try again.
     #

@@ -27,6 +27,10 @@ module Aws::CostandUsageReportService
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
+    LastDelivery = Shapes::StringShape.new(name: 'LastDelivery')
+    LastStatus = Shapes::StringShape.new(name: 'LastStatus')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     ModifyReportDefinitionRequest = Shapes::StructureShape.new(name: 'ModifyReportDefinitionRequest')
     ModifyReportDefinitionResponse = Shapes::StructureShape.new(name: 'ModifyReportDefinitionResponse')
@@ -38,17 +42,28 @@ module Aws::CostandUsageReportService
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportLimitReachedException = Shapes::StructureShape.new(name: 'ReportLimitReachedException')
     ReportName = Shapes::StringShape.new(name: 'ReportName')
+    ReportStatus = Shapes::StructureShape.new(name: 'ReportStatus')
     ReportVersioning = Shapes::StringShape.new(name: 'ReportVersioning')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     SchemaElement = Shapes::StringShape.new(name: 'SchemaElement')
     SchemaElementList = Shapes::ListShape.new(name: 'SchemaElementList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AdditionalArtifactList.member = Shapes::ShapeRef.new(shape: AdditionalArtifact)
 
-    DeleteReportDefinitionRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
+    DeleteReportDefinitionRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
     DeleteReportDefinitionRequest.struct_class = Types::DeleteReportDefinitionRequest
 
     DeleteReportDefinitionResponse.add_member(:response_message, Shapes::ShapeRef.new(shape: DeleteResponseMessage, location_name: "ResponseMessage"))
@@ -68,6 +83,12 @@ module Aws::CostandUsageReportService
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalErrorException.struct_class = Types::InternalErrorException
 
+    ListTagsForResourceRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ModifyReportDefinitionRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
     ModifyReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
     ModifyReportDefinitionRequest.struct_class = Types::ModifyReportDefinitionRequest
@@ -75,6 +96,7 @@ module Aws::CostandUsageReportService
     ModifyReportDefinitionResponse.struct_class = Types::ModifyReportDefinitionResponse
 
     PutReportDefinitionRequest.add_member(:report_definition, Shapes::ShapeRef.new(shape: ReportDefinition, required: true, location_name: "ReportDefinition"))
+    PutReportDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutReportDefinitionRequest.struct_class = Types::PutReportDefinitionRequest
 
     PutReportDefinitionResponse.struct_class = Types::PutReportDefinitionResponse
@@ -91,6 +113,7 @@ module Aws::CostandUsageReportService
     ReportDefinition.add_member(:refresh_closed_reports, Shapes::ShapeRef.new(shape: RefreshClosedReports, location_name: "RefreshClosedReports"))
     ReportDefinition.add_member(:report_versioning, Shapes::ShapeRef.new(shape: ReportVersioning, location_name: "ReportVersioning"))
     ReportDefinition.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
+    ReportDefinition.add_member(:report_status, Shapes::ShapeRef.new(shape: ReportStatus, location_name: "ReportStatus"))
     ReportDefinition.struct_class = Types::ReportDefinition
 
     ReportDefinitionList.member = Shapes::ShapeRef.new(shape: ReportDefinition)
@@ -98,7 +121,34 @@ module Aws::CostandUsageReportService
     ReportLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ReportLimitReachedException.struct_class = Types::ReportLimitReachedException
 
+    ReportStatus.add_member(:last_delivery, Shapes::ShapeRef.new(shape: LastDelivery, location_name: "lastDelivery"))
+    ReportStatus.add_member(:last_status, Shapes::ShapeRef.new(shape: LastStatus, location_name: "lastStatus"))
+    ReportStatus.struct_class = Types::ReportStatus
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SchemaElementList.member = Shapes::ShapeRef.new(shape: SchemaElement)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, required: true, location_name: "ReportName"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -147,6 +197,17 @@ module Aws::CostandUsageReportService
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:modify_report_definition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyReportDefinition"
         o.http_method = "POST"
@@ -165,6 +226,29 @@ module Aws::CostandUsageReportService
         o.output = Shapes::ShapeRef.new(shape: PutReportDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateReportNameException)
         o.errors << Shapes::ShapeRef.new(shape: ReportLimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

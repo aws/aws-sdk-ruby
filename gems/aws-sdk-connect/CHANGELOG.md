@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2023-11-28)
+------------------
+
+* Feature - Added support for following capabilities: Amazon Connect's in-app, web, and video calling. Two-way SMS integrations. Contact Lens real-time chat analytics feature. Amazon Connect Analytics Datalake capability. Capability to configure real time chat rules.
+
+1.140.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2023-11-17)
+------------------
+
+* Feature - This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+
+1.138.0 (2023-11-14)
+------------------
+
+* Feature - Introducing SegmentAttributes parameter for StartChatContact API
+
+1.137.0 (2023-11-09)
+------------------
+
+* Feature - This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.
+
+1.136.0 (2023-11-08)
+------------------
+
+* Feature - This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+
+1.135.0 (2023-11-06)
+------------------
+
+* Feature - Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+
+1.134.0 (2023-11-03)
+------------------
+
+* Feature - Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+
+1.133.0 (2023-11-02)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include new metrics PERCENT_NON_TALK_TIME, PERCENT_TALK_TIME, PERCENT_TALK_TIME_AGENT, PERCENT_TALK_TIME_CUSTOMER
+
+1.132.0 (2023-11-01)
+------------------
+
+* Feature - Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.
+
+1.131.0 (2023-10-30)
+------------------
+
+* Feature - This release adds InstanceId field for phone number APIs.
+
+1.130.0 (2023-10-20)
+------------------
+
+* Feature - This release adds support for updating phone number metadata, such as phone number description.
+
 1.129.0 (2023-10-03)
 ------------------
 

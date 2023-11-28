@@ -52,6 +52,6 @@ require_relative 'aws-sdk-locationservice/customizations'
 # @!group service
 module Aws::LocationService
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.42.0'
 
 end

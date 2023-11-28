@@ -404,6 +404,10 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] customer_action_status
+    #   Determines if there is an action required from the customer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterInfo AWS API Documentation
     #
     class ClusterInfo < Struct.new(
@@ -425,7 +429,8 @@ module Aws::Kafka
       :tags,
       :zookeeper_connect_string,
       :zookeeper_connect_string_tls,
-      :storage_mode)
+      :storage_mode,
+      :customer_action_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2683,6 +2688,10 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] customer_action_status
+    #   Determines if there is an action required from the customer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Provisioned AWS API Documentation
     #
     class Provisioned < Struct.new(
@@ -2696,7 +2705,8 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :zookeeper_connect_string,
       :zookeeper_connect_string_tls,
-      :storage_mode)
+      :storage_mode,
+      :customer_action_status)
       SENSITIVE = []
       include Aws::Structure
     end

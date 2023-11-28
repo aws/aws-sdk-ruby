@@ -14,13 +14,13 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('jmespath', '~> 1', '>= 1.6.1') # necessary for secure jmespath JSON parsing
   spec.add_dependency('aws-partitions', '~> 1', '>= 1.823.0') # necessary for new endpoint metadata
-  spec.add_dependency('aws-sigv4', '~> 1.5') # necessary for making Aws::STS, SSO, SSOOIDC API calls
-  spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # necessary for binary eventstream
+  spec.add_dependency('aws-sigv4', '~> 1.8') # necessary for s3 express auth
+  spec.add_dependency('aws-eventstream', '~> 1', '>= 1.3.0') # necessary for binary eventstream
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core',
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core/CHANGELOG.md'
   }
 
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.5'
 end

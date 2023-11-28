@@ -30,7 +30,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -60,7 +60,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -121,6 +121,10 @@ module Aws::ResilienceHub
     #   Identifier of the alarm recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_status
+    #   Status of the recommended Amazon CloudWatch alarm.
+    #   @return [String]
+    #
     # @!attribute [rw] reference_id
     #   Reference identifier of the alarm recommendation.
     #   @return [String]
@@ -139,6 +143,7 @@ module Aws::ResilienceHub
       :name,
       :prerequisite,
       :recommendation_id,
+      :recommendation_status,
       :reference_id,
       :type)
       SENSITIVE = []
@@ -152,7 +157,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -168,7 +173,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   Timestamp for when the app was created.
+    #   Date and time when the app was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -187,7 +192,7 @@ module Aws::ResilienceHub
     #   @return [Array<Types::EventSubscription>]
     #
     # @!attribute [rw] last_app_compliance_evaluation_time
-    #   Timestamp for the most recent compliance evaluation.
+    #   Date and time the most recent compliance evaluation.
     #   @return [Time]
     #
     # @!attribute [rw] last_drift_evaluation_time
@@ -195,7 +200,7 @@ module Aws::ResilienceHub
     #   @return [Time]
     #
     # @!attribute [rw] last_resiliency_score_evaluation_time
-    #   Timestamp for the most recent resiliency score evaluation.
+    #   Date and time the most recent resiliency score evaluation.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -213,7 +218,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -223,6 +228,14 @@ module Aws::ResilienceHub
     # @!attribute [rw] resiliency_score
     #   Current resiliency score for the application.
     #   @return [Float]
+    #
+    # @!attribute [rw] rpo_in_secs
+    #   Recovery Point Objective (RPO) in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rto_in_secs
+    #   Recovery Time Objective (RTO) in seconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] status
     #   Status of the application.
@@ -251,6 +264,8 @@ module Aws::ResilienceHub
       :permission_model,
       :policy_arn,
       :resiliency_score,
+      :rpo_in_secs,
+      :rto_in_secs,
       :status,
       :tags)
       SENSITIVE = [:tags]
@@ -264,7 +279,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -280,7 +295,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -383,7 +398,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -399,7 +414,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -576,7 +591,7 @@ module Aws::ResilienceHub
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) of the input source. For more
     #   information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference* guide.
+    #   the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -611,7 +626,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -627,7 +642,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp for when the app was created.
+    #   Date and time when the app was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -639,6 +654,10 @@ module Aws::ResilienceHub
     #   running an assessment for your application.
     #   @return [String]
     #
+    # @!attribute [rw] last_app_compliance_evaluation_time
+    #   Date and time of the most recent compliance evaluation.
+    #   @return [Time]
+    #
     # @!attribute [rw] name
     #   The name of the application.
     #   @return [String]
@@ -646,6 +665,14 @@ module Aws::ResilienceHub
     # @!attribute [rw] resiliency_score
     #   The current resiliency score for the application.
     #   @return [Float]
+    #
+    # @!attribute [rw] rpo_in_secs
+    #   Recovery Point Objective (RPO) in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rto_in_secs
+    #   Recovery Time Objective (RTO) in seconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] status
     #   Status of the application.
@@ -660,8 +687,11 @@ module Aws::ResilienceHub
       :creation_time,
       :description,
       :drift_status,
+      :last_app_compliance_evaluation_time,
       :name,
       :resiliency_score,
+      :rpo_in_secs,
+      :rto_in_secs,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -728,7 +758,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -754,7 +784,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1069,7 +1099,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1121,7 +1151,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1173,7 +1203,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1208,7 +1238,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1276,7 +1306,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1308,7 +1338,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1473,7 +1503,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1503,7 +1533,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1528,7 +1558,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1552,8 +1582,8 @@ module Aws::ResilienceHub
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) of the imported resource you want to
     #   remove from the Resilience Hub application. For more information
-    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *AWS
-    #   General Reference* guide.
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
     #
     #
     #
@@ -1582,7 +1612,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1608,7 +1638,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1644,7 +1674,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1664,7 +1694,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1699,7 +1729,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1729,7 +1759,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1784,7 +1814,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1864,7 +1894,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1885,7 +1915,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1905,7 +1935,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1940,7 +1970,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -1974,7 +2004,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2004,7 +2034,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2034,7 +2064,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2059,7 +2089,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2109,7 +2139,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2141,7 +2171,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2171,7 +2201,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2226,7 +2256,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2252,7 +2282,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2277,7 +2307,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2544,7 +2574,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2564,7 +2594,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2584,7 +2614,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] status_change_time
-    #   The timestamp for when the status last changed.
+    #   The time when the status last changed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeDraftAppVersionResourcesImportStatusResponse AWS API Documentation
@@ -2604,7 +2634,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2701,7 +2731,7 @@ module Aws::ResilienceHub
     #   cluster. The format for this ARN is:
     #   arn:`aws`:eks:`region`:`account-id`:cluster/`cluster-name`. For more
     #   information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference* guide.
+    #   the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2730,7 +2760,7 @@ module Aws::ResilienceHub
     #   cluster. The format for this ARN is:
     #   arn:`aws`:eks:`region`:`account-id`:cluster/`cluster-name`. For more
     #   information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
-    #   the *AWS General Reference* guide.
+    #   the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2769,9 +2799,9 @@ module Aws::ResilienceHub
     # @!attribute [rw] sns_topic_arn
     #   Amazon Resource Name (ARN) of the Amazon Simple Notification Service
     #   topic. The format for this ARN is:
-    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
-    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   `arn:partition:sns:region:account:topic-name`. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
     #
     #
     #
@@ -2791,11 +2821,11 @@ module Aws::ResilienceHub
     # Defines a failure policy.
     #
     # @!attribute [rw] rpo_in_secs
-    #   The Recovery Point Objective (RPO), in seconds.
+    #   Recovery Point Objective (RPO) in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] rto_in_secs
-    #   The Recovery Time Objective (RTO), in seconds.
+    #   Recovery Time Objective (RTO) in seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/FailurePolicy AWS API Documentation
@@ -2812,7 +2842,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2854,7 +2884,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2915,7 +2945,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -2970,7 +3000,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3021,7 +3051,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3103,7 +3133,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3158,7 +3188,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3213,7 +3243,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3268,7 +3298,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3305,7 +3335,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3341,7 +3371,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3403,7 +3433,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3470,7 +3500,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3532,12 +3562,17 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @!attribute [rw] from_last_assessment_time
+    #   Indicates the lower limit of the range that is used to filter
+    #   applications based on their last assessment times.
+    #   @return [Time]
     #
     # @!attribute [rw] max_results
     #   Maximum number of results to include in the response. If more
@@ -3555,13 +3590,28 @@ module Aws::ResilienceHub
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] reverse_order
+    #   The application list is sorted based on the values of
+    #   `lastAppComplianceEvaluationTime` field. By default, application
+    #   list is sorted in ascending order. To sort the appliation list in
+    #   descending order, set this field to `True`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] to_last_assessment_time
+    #   Indicates the upper limit of the range that is used to filter the
+    #   applications based on their last assessment times.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppsRequest AWS API Documentation
     #
     class ListAppsRequest < Struct.new(
       :app_arn,
+      :from_last_assessment_time,
       :max_results,
       :name,
-      :next_token)
+      :next_token,
+      :reverse_order,
+      :to_last_assessment_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3589,7 +3639,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3706,7 +3756,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3826,7 +3876,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -3878,7 +3928,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4004,8 +4054,11 @@ module Aws::ResilienceHub
     #   Principle to obtain a read-only access to your application resources
     #   while running an assessment.
     #
-    #   <note markdown="1"> You must have `iam:passRole` permission for this role while creating
-    #   or updating the application.
+    #   <note markdown="1"> * You must have `iam:passRole` permission for this role while
+    #     creating or updating the application.
+    #
+    #   * Currently, `invokerRoleName` accepts only `[A-Za-z0-9_+=,.@-]`
+    #     characters.
     #
     #    </note>
     #   @return [String]
@@ -4192,7 +4245,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4217,7 +4270,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4252,7 +4305,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4514,7 +4567,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4620,7 +4673,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4632,7 +4685,7 @@ module Aws::ResilienceHub
     #   ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4737,7 +4790,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4797,7 +4850,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4819,8 +4872,18 @@ module Aws::ResilienceHub
 
     # Defines a resiliency policy.
     #
+    # <note markdown="1"> Resilience Hub allows you to provide a value of zero for `rtoInSecs`
+    # and `rpoInSecs` of your resiliency policy. But, while assessing your
+    # application, the lowest possible assessment result is near zero.
+    # Hence, if you provide value zero for `rtoInSecs` and `rpoInSecs`, the
+    # estimated workload RTO and estimated workload RPO result will be near
+    # zero and the **Compliance status** for your application will be set to
+    # **Policy breached**.
+    #
+    #  </note>
+    #
     # @!attribute [rw] creation_time
-    #   The timestamp for when the resiliency policy was created.
+    #   Date and time when the resiliency policy was created.
     #   @return [Time]
     #
     # @!attribute [rw] data_location_constraint
@@ -4841,7 +4904,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4886,6 +4949,15 @@ module Aws::ResilienceHub
     # The overall resiliency score, returned as an object that includes the
     # disruption score and outage score.
     #
+    # @!attribute [rw] component_score
+    #   The score generated by Resilience Hub for the scoring component
+    #   after running an assessment.
+    #
+    #   For example, if the `score` is 25 points, it indicates the overall
+    #   score of your application generated by Resilience Hub after running
+    #   an assessment.
+    #   @return [Hash<String,Types::ScoringComponentResiliencyScore>]
+    #
     # @!attribute [rw] disruption_score
     #   The disruption score for a valid key.
     #   @return [Hash<String,Float>]
@@ -4897,6 +4969,7 @@ module Aws::ResilienceHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ResiliencyScore AWS API Documentation
     #
     class ResiliencyScore < Struct.new(
+      :component_score,
       :disruption_score,
       :score)
       SENSITIVE = []
@@ -4908,7 +4981,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -4933,7 +5006,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5124,6 +5197,57 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
+    # Resiliency score of each scoring component. For more information about
+    # scoring component, see [Calculating resiliency score][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/calculate-score.html
+    #
+    # @!attribute [rw] excluded_count
+    #   Number of recommendations that were excluded from the assessment.
+    #
+    #   For example, if the `Excluded count` for Resilience Hub recommended
+    #   Amazon CloudWatch alarms is 7, it indicates that 7 Amazon CloudWatch
+    #   alarms are excluded from the assessment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outstanding_count
+    #   Number of issues that must be resolved to obtain the maximum
+    #   possible score for the scoring component. For SOPs, alarms, and FIS
+    #   experiments, these are the number of recommendations that must be
+    #   implemented. For compliance, it is the number of Application
+    #   Components that has breached the resiliency policy.
+    #
+    #   For example, if the `Outstanding count` for Resilience Hub
+    #   recommended Amazon CloudWatch alarms is 5, it indicates that 5
+    #   Amazon CloudWatch alarms must be fixed to achieve the maximum
+    #   possible score.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] possible_score
+    #   Maximum possible score that can be obtained for the scoring
+    #   component. If the `Possible score` is 20 points, it indicates the
+    #   maximum possible score you can achieve for your application when you
+    #   run a new assessment after implementing all the Resilience Hub
+    #   recommendations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] score
+    #   Resiliency score of your application.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ScoringComponentResiliencyScore AWS API Documentation
+    #
+    class ScoringComponentResiliencyScore < Struct.new(
+      :excluded_count,
+      :outstanding_count,
+      :possible_score,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception occurs when you have exceeded your service quota. To
     # perform the requested action, remove some of the relevant resources,
     # or use Service Quotas to request a service quota increase.
@@ -5165,6 +5289,10 @@ module Aws::ResilienceHub
     #   Identifier for the SOP recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_status
+    #   Status of the recommended standard operating procedure.
+    #   @return [String]
+    #
     # @!attribute [rw] reference_id
     #   Reference identifier for the SOP recommendation.
     #   @return [String]
@@ -5182,6 +5310,7 @@ module Aws::ResilienceHub
       :name,
       :prerequisite,
       :recommendation_id,
+      :recommendation_status,
       :reference_id,
       :service_type)
       SENSITIVE = []
@@ -5193,7 +5322,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5318,6 +5447,10 @@ module Aws::ResilienceHub
     #   Identifier for the test recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_status
+    #   Status of the recommended test.
+    #   @return [String]
+    #
     # @!attribute [rw] reference_id
     #   Reference identifier for the test recommendation.
     #   @return [String]
@@ -5341,6 +5474,7 @@ module Aws::ResilienceHub
       :name,
       :prerequisite,
       :recommendation_id,
+      :recommendation_status,
       :reference_id,
       :risk,
       :type)
@@ -5422,7 +5556,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5458,7 +5592,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5503,7 +5637,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5545,7 +5679,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5596,7 +5730,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5622,7 +5756,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5691,7 +5825,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5738,7 +5872,7 @@ module Aws::ResilienceHub
     #   format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference* guide.
+    #   in the *Amazon Web Services General Reference* guide.
     #
     #
     #
@@ -5841,7 +5975,7 @@ module Aws::ResilienceHub
     #   this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:resiliency-policy/`policy-id`.
     #   For more information about ARNs, see [ Amazon Resource Names
-    #   (ARNs)][1] in the *AWS General Reference* guide.
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
     #
     #
     #

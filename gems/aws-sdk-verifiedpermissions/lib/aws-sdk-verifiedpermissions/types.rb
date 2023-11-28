@@ -26,15 +26,17 @@ module Aws::VerifiedPermissions
     # Contains information about an action for a request for which an
     # authorization decision is made.
     #
-    # This data type is used as an request parameter to the
-    # [IsAuthorized][1] and [IsAuthorizedWithToken][2] operations.
+    # This data type is used as a request parameter to the
+    # [IsAuthorized][1], [BatchIsAuthorized][2], and
+    # [IsAuthorizedWithToken][3] operations.
     #
     # Example: `\{ "actionId": "<action name>", "actionType": "Action" \}`
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @!attribute [rw] action_type
     #   The type of an action.
@@ -60,15 +62,19 @@ module Aws::VerifiedPermissions
     #
     # This data type is used as a member of the [ContextDefinition][1]
     # structure which is uses as a request parameter for the
-    # [IsAuthorized][2] and [IsAuthorizedWithToken][3] operations.
+    # [IsAuthorized][2], [BatchIsAuthorized][3], and
+    # [IsAuthorizedWithToken][4] operations.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html
     # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
-    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [4]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @note AttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AttributeValue corresponding to the set member.
     #
     # @!attribute [rw] boolean
     #   An attribute value of [Boolean][1] type.
@@ -77,7 +83,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#boolean
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] entity_identifier
@@ -98,7 +104,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#long
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long
     #   @return [Integer]
     #
     # @!attribute [rw] string
@@ -108,7 +114,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#string
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string
     #   @return [String]
     #
     # @!attribute [rw] set
@@ -118,7 +124,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#set
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] record
@@ -128,7 +134,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#record
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/AttributeValue AWS API Documentation
@@ -152,6 +158,124 @@ module Aws::VerifiedPermissions
       class Set < AttributeValue; end
       class Record < AttributeValue; end
       class Unknown < AttributeValue; end
+    end
+
+    # @!attribute [rw] policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make the authorization decisions for the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in
+    #   the schema.
+    #
+    #    </note>
+    #   @return [Types::EntitiesDefinition]
+    #
+    # @!attribute [rw] requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #   @return [Array<Types::BatchIsAuthorizedInputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedInput AWS API Documentation
+    #
+    class BatchIsAuthorizedInput < Struct.new(
+      :policy_store_id,
+      :entities,
+      :requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An authorization request that you include in a `BatchIsAuthorized` API
+    # request.
+    #
+    # @!attribute [rw] principal
+    #   Specifies the principal for which the authorization decision is to
+    #   be made.
+    #   @return [Types::EntityIdentifier]
+    #
+    # @!attribute [rw] action
+    #   Specifies the requested action to be authorized. For example, is the
+    #   principal authorized to perform this action on the resource?
+    #   @return [Types::ActionIdentifier]
+    #
+    # @!attribute [rw] resource
+    #   Specifies the resource for which the authorization decision is to be
+    #   made.
+    #   @return [Types::EntityIdentifier]
+    #
+    # @!attribute [rw] context
+    #   Specifies additional context that can be used to make more granular
+    #   authorization decisions.
+    #   @return [Types::ContextDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedInputItem AWS API Documentation
+    #
+    class BatchIsAuthorizedInputItem < Struct.new(
+      :principal,
+      :action,
+      :resource,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A series of `Allow` or `Deny` decisions for each request, and the
+    #   policies that produced them.
+    #   @return [Array<Types::BatchIsAuthorizedOutputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedOutput AWS API Documentation
+    #
+    class BatchIsAuthorizedOutput < Struct.new(
+      :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The decision, based on policy evaluation, from an individual
+    # authorization request in a `BatchIsAuthorized` API request.
+    #
+    # @!attribute [rw] request
+    #   The authorization request that initiated the decision.
+    #   @return [Types::BatchIsAuthorizedInputItem]
+    #
+    # @!attribute [rw] decision
+    #   An authorization decision that indicates if the authorization
+    #   request should be allowed or denied.
+    #   @return [String]
+    #
+    # @!attribute [rw] determining_policies
+    #   The list of determining policies used to make the authorization
+    #   decision. For example, if there are two matching policies, where one
+    #   is a forbid and the other is a permit, then the forbid policy will
+    #   be the determining policy. In the case of multiple matching permit
+    #   policies then there would be multiple determining policies. In the
+    #   case that no policies match, and hence the response is DENY, there
+    #   would be no determining policies.
+    #   @return [Array<Types::DeterminingPolicyItem>]
+    #
+    # @!attribute [rw] errors
+    #   Errors that occurred while making an authorization decision, for
+    #   example, a policy references an Entity or entity Attribute that does
+    #   not exist in the slice.
+    #   @return [Array<Types::EvaluationErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedOutputItem AWS API Documentation
+    #
+    class BatchIsAuthorizedOutputItem < Struct.new(
+      :request,
+      :decision,
+      :determining_policies,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configuration for an identity source that represents a connection
@@ -268,17 +392,21 @@ module Aws::VerifiedPermissions
     # part of the `when` and `unless` clauses in a policy.
     #
     # This data type is used as a request parameter for the
-    # [IsAuthorized][1] and [IsAuthorizedWithToken][2] operations.
+    # [IsAuthorized][1], [BatchIsAuthorized][2], and
+    # [IsAuthorizedWithToken][3] operations.
     #
     # Example:
-    # `"context":\{"Context":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}\}`
+    # `"context":\{"contextMap":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}\}`
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @note ContextDefinition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ContextDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContextDefinition corresponding to the set member.
     #
     # @!attribute [rw] context_map
     #   An list of attributes that are needed to successfully evaluate an
@@ -286,7 +414,7 @@ module Aws::VerifiedPermissions
     #   map of a data type and its value.
     #
     #   Example:
-    #   `"Context":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}`
+    #   `"contextMap":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ContextDefinition AWS API Documentation
@@ -714,7 +842,8 @@ module Aws::VerifiedPermissions
     # authorization decision.
     #
     # This data type is used as an element in a response parameter for the
-    # [IsAuthorized][1] and [IsAuthorizedWithToken][2] operations.
+    # [IsAuthorized][1], [BatchIsAuthorized][2], and
+    # [IsAuthorizedWithToken][3] operations.
     #
     # Example:
     # `"determiningPolicies":[\{"policyId":"SPEXAMPLEabcdefg111111"\}]`
@@ -722,7 +851,8 @@ module Aws::VerifiedPermissions
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @!attribute [rw] policy_id
     #   The Id of a policy that determined to an authorization decision.
@@ -885,13 +1015,14 @@ module Aws::VerifiedPermissions
 
     # Contains a description of an evaluation error.
     #
-    # This data type is used as a request parameter in the [IsAuthorized][1]
-    # and [IsAuthorizedWithToken][2] operations.
+    # This data type is a response parameter of the [IsAuthorized][1],
+    # [BatchIsAuthorized][2], and [IsAuthorizedWithToken][3] operations.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @!attribute [rw] error_description
     #   The error description.
@@ -2913,7 +3044,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    # [1]: https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test
+    # [1]: https://docs.cedarpolicy.com/policies/syntax-operators.html#has-presence-of-attribute-test
     #
     # @!attribute [rw] message
     #   @return [String]

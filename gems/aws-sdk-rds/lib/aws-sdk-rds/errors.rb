@@ -80,6 +80,7 @@ module Aws::RDS
   # * {DBSecurityGroupQuotaExceededFault}
   # * {DBSnapshotAlreadyExistsFault}
   # * {DBSnapshotNotFoundFault}
+  # * {DBSnapshotTenantDatabaseNotFoundFault}
   # * {DBSubnetGroupAlreadyExistsFault}
   # * {DBSubnetGroupDoesNotCoverEnoughAZs}
   # * {DBSubnetGroupNotAllowedFault}
@@ -102,6 +103,10 @@ module Aws::RDS
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
   # * {InsufficientStorageClusterCapacityFault}
+  # * {IntegrationAlreadyExistsFault}
+  # * {IntegrationConflictOperationFault}
+  # * {IntegrationNotFoundFault}
+  # * {IntegrationQuotaExceededFault}
   # * {InvalidBlueGreenDeploymentStateFault}
   # * {InvalidCustomDBEngineVersionStateFault}
   # * {InvalidDBClusterAutomatedBackupStateFault}
@@ -124,6 +129,7 @@ module Aws::RDS
   # * {InvalidExportSourceStateFault}
   # * {InvalidExportTaskStateFault}
   # * {InvalidGlobalClusterStateFault}
+  # * {InvalidIntegrationStateFault}
   # * {InvalidOptionGroupStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidS3BucketFault}
@@ -156,6 +162,9 @@ module Aws::RDS
   # * {SubscriptionAlreadyExistFault}
   # * {SubscriptionCategoryNotFoundFault}
   # * {SubscriptionNotFoundFault}
+  # * {TenantDatabaseAlreadyExistsFault}
+  # * {TenantDatabaseNotFoundFault}
+  # * {TenantDatabaseQuotaExceededFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -693,6 +702,16 @@ module Aws::RDS
       end
     end
 
+    class DBSnapshotTenantDatabaseNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBSnapshotTenantDatabaseNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class DBSubnetGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -913,6 +932,46 @@ module Aws::RDS
       end
     end
 
+    class IntegrationAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::IntegrationAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IntegrationConflictOperationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::IntegrationConflictOperationFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IntegrationNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::IntegrationNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IntegrationQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::IntegrationQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidBlueGreenDeploymentStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1128,6 +1187,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidGlobalClusterStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidIntegrationStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidIntegrationStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1448,6 +1517,36 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::SubscriptionNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TenantDatabaseQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::TenantDatabaseQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

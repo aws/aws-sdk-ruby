@@ -27,6 +27,35 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # An object that represents the custom domain name association.
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Association AWS API Documentation
+    #
+    class Association < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An array of key-value pairs to set for advanced control over Amazon
     # Redshift Serverless.
     #
@@ -109,6 +138,55 @@ module Aws::RedshiftServerless
     #
     class ConvertRecoveryPointToSnapshotResponse < Struct.new(
       :snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociationRequest AWS API Documentation
+    #
+    class CreateCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociationResponse AWS API Documentation
+    #
+    class CreateCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -211,6 +289,11 @@ module Aws::RedshiftServerless
     #   The name of the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
@@ -228,6 +311,7 @@ module Aws::RedshiftServerless
       :log_exports,
       :manage_admin_password,
       :namespace_name,
+      :redshift_idc_application_arn,
       :tags)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure
@@ -365,6 +449,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC instead of over the internet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to associate with the workgroup.
     #   @return [String]
@@ -401,6 +490,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
       :port,
       :publicly_accessible,
@@ -423,6 +513,27 @@ module Aws::RedshiftServerless
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociationRequest AWS API Documentation
+    #
+    class DeleteCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociationResponse AWS API Documentation
+    #
+    class DeleteCustomDomainAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to delete.
@@ -657,6 +768,11 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup. The custom
+    #   domain name or the workgroup name must be included in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] db_name
     #   The name of the database to get temporary authorization to log on
     #   to.
@@ -693,6 +809,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCredentialsRequest AWS API Documentation
     #
     class GetCredentialsRequest < Struct.new(
+      :custom_domain_name,
       :db_name,
       :duration_seconds,
       :workgroup_name)
@@ -730,6 +847,50 @@ module Aws::RedshiftServerless
       :expiration,
       :next_refresh_time)
       SENSITIVE = [:db_password, :db_user]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociationRequest AWS API Documentation
+    #
+    class GetCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociationResponse AWS API Documentation
+    #
+    class GetCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -975,6 +1136,58 @@ module Aws::RedshiftServerless
     #
     class InvalidPaginationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociationsRequest AWS API Documentation
+    #
+    class ListCustomDomainAssociationsRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associations
+    #   A list of Association objects.
+    #   @return [Array<Types::Association>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociationsResponse AWS API Documentation
+    #
+    class ListCustomDomainAssociationsResponse < Struct.new(
+      :associations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2127,6 +2340,56 @@ module Aws::RedshiftServerless
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   This is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociationRequest AWS API Documentation
+    #
+    class UpdateCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociationResponse AWS API Documentation
+    #
+    class UpdateCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to update.
     #   @return [String]
@@ -2332,6 +2595,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] port
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
@@ -2361,6 +2629,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2519,6 +2788,18 @@ module Aws::RedshiftServerless
     #   The creation date of the workgroup.
     #   @return [Time]
     #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint
     #   The endpoint that is created from the workgroup.
     #   @return [Types::Endpoint]
@@ -2529,8 +2810,23 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] namespace_name
     #   The namespace the workgroup is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_version
+    #   The patch version of your Amazon Redshift Serverless workgroup. For
+    #   more information about patch versions, see [Cluster versions for
+    #   Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2567,15 +2863,30 @@ module Aws::RedshiftServerless
     #   The name of the workgroup.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_version
+    #   The Amazon Redshift Serverless version of your workgroup. For more
+    #   information about Amazon Redshift Serverless versions, see[Cluster
+    #   versions for Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Workgroup AWS API Documentation
     #
     class Workgroup < Struct.new(
       :base_capacity,
       :config_parameters,
       :creation_date,
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
       :endpoint,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
+      :patch_version,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2583,7 +2894,8 @@ module Aws::RedshiftServerless
       :subnet_ids,
       :workgroup_arn,
       :workgroup_id,
-      :workgroup_name)
+      :workgroup_name,
+      :workgroup_version)
       SENSITIVE = []
       include Aws::Structure
     end

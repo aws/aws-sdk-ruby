@@ -1,6 +1,139 @@
 Unreleased Changes
 ------------------
 
+1.860.0 (2023-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::QConnect`.
+
+* Feature - Added support for enumerating regions for `Aws::QBusiness`.
+
+* Feature - Added support for enumerating regions for `Aws::BedrockAgentRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::BedrockAgent`.
+
+1.859.0 (2023-11-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.858.0 (2023-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::B2bi`.
+
+1.857.0 (2023-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkSpacesThinClient`.
+
+* Feature - Added support for enumerating regions for `Aws::Repostspace`.
+
+* Feature - Added support for enumerating regions for `Aws::FreeTier`.
+
+* Feature - Added support for enumerating regions for `Aws::EKSAuth`.
+
+* Feature - Added support for enumerating regions for `Aws::CostOptimizationHub`.
+
+* Feature - Added support for enumerating regions for `Aws::BCMDataExports`.
+
+1.856.0 (2023-11-22)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
+
+1.855.0 (2023-11-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::InspectorScan`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudFrontKeyValueStore`.
+
+1.854.0 (2023-11-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.853.0 (2023-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TrustedAdvisor`.
+
+1.852.0 (2023-11-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.851.0 (2023-11-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.850.0 (2023-11-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.849.0 (2023-11-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.848.0 (2023-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.847.0 (2023-11-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.846.0 (2023-11-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.845.0 (2023-11-03)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LaunchWizard`.
+
+1.844.0 (2023-11-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.843.0 (2023-10-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.842.0 (2023-10-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.841.0 (2023-10-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.840.0 (2023-10-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.839.0 (2023-10-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.838.0 (2023-10-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.837.0 (2023-10-17)
 ------------------
 

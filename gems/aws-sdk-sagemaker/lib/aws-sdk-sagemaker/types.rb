@@ -2140,6 +2140,10 @@ module Aws::SageMaker
     #   * For time-series forecasting: `text/csv;header=present` or
     #     `x-application/vnd.amazon+parquet`. The default value is
     #     `text/csv;header=present`.
+    #
+    #   * For text generation (LLMs fine-tuning): `text/csv;header=present`
+    #     or `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -2170,9 +2174,9 @@ module Aws::SageMaker
     # @!attribute [rw] max_candidates
     #   The maximum number of times a training job is allowed to run.
     #
-    #   For text and image classification, as well as time-series
-    #   forecasting problem types, the supported value is 1. For tabular
-    #   problem types, the maximum value is 750.
+    #   For text and image classification, time-series forecasting, as well
+    #   as text generation (LLMs fine-tuning) problem types, the supported
+    #   value is 1. For tabular problem types, the maximum value is 750.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
@@ -2275,7 +2279,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a metric to minimize or maximize as the objective of a job.
+    # Specifies a metric to minimize or maximize as the objective of an
+    # AutoML job.
     #
     # @!attribute [rw] metric_name
     #   The name of the objective metric used to measure the predictive
@@ -2284,28 +2289,70 @@ module Aws::SageMaker
     #   on the feedback provided by the objective metric when evaluating the
     #   model on the validation dataset.
     #
-    #   For the list of all available metrics supported by Autopilot, see
-    #   [Autopilot metrics][1].
-    #
-    #   If you do not specify a metric explicitly, the default behavior is
-    #   to automatically use:
+    #   The list of available metrics supported by Autopilot and the default
+    #   metric applied when you do not specify a metric name explicitly
+    #   depend on the problem type.
     #
     #   * For tabular problem types:
     #
-    #     * Regression: `MSE`.
+    #     * List of available metrics:
     #
-    #     * Binary classification: `F1`.
+    #       * Regression: `InferenceLatency`, `MAE`, `MSE`, `R2`, `RMSE`
     #
-    #     * Multiclass classification: `Accuracy`.
+    #       * Binary classification: `Accuracy`, `AUC`, `BalancedAccuracy`,
+    #         `F1`, `InferenceLatency`, `LogLoss`, `Precision`, `Recall`
     #
-    #   * For image or text classification problem types: `Accuracy`
+    #       * Multiclass classification: `Accuracy`, `BalancedAccuracy`,
+    #         `F1macro`, `InferenceLatency`, `LogLoss`, `PrecisionMacro`,
+    #         `RecallMacro`
+    #
+    #       For a description of each metric, see [Autopilot metrics for
+    #       classification and regression][1].
+    #
+    #     * Default objective metrics:
+    #
+    #       * Regression: `MSE`.
+    #
+    #       * Binary classification: `F1`.
+    #
+    #       * Multiclass classification: `Accuracy`.
+    #
+    #   * For image or text classification problem types:
+    #
+    #     * List of available metrics: `Accuracy`
+    #
+    #       For a description of each metric, see [Autopilot metrics for
+    #       text and image classification][2].
+    #
+    #     * Default objective metrics: `Accuracy`
     #
     #   * For time-series forecasting problem types:
-    #     `AverageWeightedQuantileLoss`
+    #
+    #     * List of available metrics: `RMSE`, `wQL`, `Average wQL`, `MASE`,
+    #       `MAPE`, `WAPE`
+    #
+    #       For a description of each metric, see [Autopilot metrics for
+    #       time-series forecasting][3].
+    #
+    #     * Default objective metrics: `AverageWeightedQuantileLoss`
+    #
+    #   * For text generation problem types (LLMs fine-tuning): Fine-tuning
+    #     language models in Autopilot does not require setting the
+    #     `AutoMLJobObjective` field. Autopilot fine-tunes LLMs without
+    #     requiring multiple candidates to be trained and evaluated.
+    #     Instead, using your dataset, Autopilot directly fine-tunes your
+    #     target model to enhance a default objective metric, the
+    #     cross-entropy loss. After fine-tuning a language model, you can
+    #     evaluate the quality of its generated text using different
+    #     metrics. For a list of the available metrics, see [Metrics for
+    #     fine-tuning LLMs in Autopilot][4].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobObjective AWS API Documentation
@@ -2437,14 +2484,30 @@ module Aws::SageMaker
     #   @return [Types::TextClassificationJobConfig]
     #
     # @!attribute [rw] tabular_job_config
-    #   Settings used to configure an AutoML job V2 for a tabular problem
+    #   Settings used to configure an AutoML job V2 for the tabular problem
     #   type (regression, classification).
     #   @return [Types::TabularJobConfig]
     #
     # @!attribute [rw] time_series_forecasting_job_config
-    #   Settings used to configure an AutoML job V2 for a time-series
+    #   Settings used to configure an AutoML job V2 for the time-series
     #   forecasting problem type.
     #   @return [Types::TimeSeriesForecastingJobConfig]
+    #
+    # @!attribute [rw] text_generation_job_config
+    #   Settings used to configure an AutoML job V2 for the text generation
+    #   (LLMs fine-tuning) problem type.
+    #
+    #   <note markdown="1"> The text generation models that support fine-tuning in Autopilot are
+    #   currently accessible exclusively in regions supported by Canvas.
+    #   Refer to the documentation of Canvas for the [full list of its
+    #   supported Regions][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html
+    #   @return [Types::TextGenerationJobConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeConfig AWS API Documentation
     #
@@ -2453,6 +2516,7 @@ module Aws::SageMaker
       :text_classification_job_config,
       :tabular_job_config,
       :time_series_forecasting_job_config,
+      :text_generation_job_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2462,36 +2526,43 @@ module Aws::SageMaker
       class TextClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TabularJobConfig < AutoMLProblemTypeConfig; end
       class TimeSeriesForecastingJobConfig < AutoMLProblemTypeConfig; end
+      class TextGenerationJobConfig < AutoMLProblemTypeConfig; end
       class Unknown < AutoMLProblemTypeConfig; end
     end
 
-    # The resolved attributes specific to the problem type of an AutoML job
-    # V2.
+    # Stores resolved attributes specific to the problem type of an AutoML
+    # job V2.
     #
     # @note AutoMLProblemTypeResolvedAttributes is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutoMLProblemTypeResolvedAttributes corresponding to the set member.
     #
     # @!attribute [rw] tabular_resolved_attributes
-    #   Defines the resolved attributes for the `TABULAR` problem type.
+    #   The resolved attributes for the tabular problem type.
     #   @return [Types::TabularResolvedAttributes]
+    #
+    # @!attribute [rw] text_generation_resolved_attributes
+    #   The resolved attributes for the text generation problem type.
+    #   @return [Types::TextGenerationResolvedAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeResolvedAttributes AWS API Documentation
     #
     class AutoMLProblemTypeResolvedAttributes < Struct.new(
       :tabular_resolved_attributes,
+      :text_generation_resolved_attributes,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class TabularResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
+      class TextGenerationResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
       class Unknown < AutoMLProblemTypeResolvedAttributes; end
     end
 
     # The resolved attributes used to configure an AutoML job V2.
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Specifies a metric to minimize or maximize as the objective of a
-    #   job.
+    #   Specifies a metric to minimize or maximize as the objective of an
+    #   AutoML job.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] completion_criteria
@@ -4842,6 +4913,8 @@ module Aws::SageMaker
     #
     #   * For time-series forecasting: `S3Prefix`.
     #
+    #   * For text generation (LLMs fine-tuning): `S3Prefix`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
@@ -4883,16 +4956,28 @@ module Aws::SageMaker
     #   problem type. For the list of default values per problem type, see
     #   [AutoMLJobObjective][1].
     #
-    #   <note markdown="1"> For tabular problem types, you must either provide both the
-    #   `AutoMLJobObjective` and indicate the type of supervised learning
-    #   problem in `AutoMLProblemTypeConfig`
-    #   (`TabularJobConfig.ProblemType`), or none at all.
+    #   <note markdown="1"> * For tabular problem types: You must either provide both the
+    #     `AutoMLJobObjective` and indicate the type of supervised learning
+    #     problem in `AutoMLProblemTypeConfig`
+    #     (`TabularJobConfig.ProblemType`), or none at all.
+    #
+    #   * For text generation problem types (LLMs fine-tuning): Fine-tuning
+    #     language models in Autopilot does not require setting the
+    #     `AutoMLJobObjective` field. Autopilot fine-tunes LLMs without
+    #     requiring multiple candidates to be trained and evaluated.
+    #     Instead, using your dataset, Autopilot directly fine-tunes your
+    #     target model to enhance a default objective metric, the
+    #     cross-entropy loss. After fine-tuning a language model, you can
+    #     evaluate the quality of its generated text using different
+    #     metrics. For a list of the available metrics, see [Metrics for
+    #     fine-tuning LLMs in Autopilot][2].
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] model_deploy_config
@@ -11642,6 +11727,12 @@ module Aws::SageMaker
     #   The IAM Identity Center managed application instance ID.
     #   @return [String]
     #
+    # @!attribute [rw] single_sign_on_application_arn
+    #   The ARN of the application managed by SageMaker in IAM Identity
+    #   Center. This value is only returned for domains created after
+    #   September 19, 2023.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status.
     #   @return [String]
@@ -11729,6 +11820,7 @@ module Aws::SageMaker
       :domain_name,
       :home_efs_file_system_id,
       :single_sign_on_managed_application_instance_id,
+      :single_sign_on_application_arn,
       :status,
       :creation_time,
       :last_modified_time,
@@ -20226,7 +20318,13 @@ module Aws::SageMaker
     #   Hyperparameter tuning uses the value of this metric to evaluate the
     #   training jobs it launches, and returns the training job that results
     #   in either the highest or lowest value for this metric, depending on
-    #   the value you specify for the `Type` parameter.
+    #   the value you specify for the `Type` parameter. If you want to
+    #   define a custom objective metric, see [Define metrics and
+    #   environment variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html
     #   @return [Types::HyperParameterTuningJobObjective]
     #
     # @!attribute [rw] hyper_parameter_ranges
@@ -20695,7 +20793,13 @@ module Aws::SageMaker
     # Hyperparameter tuning uses the value of this metric to evaluate the
     # training jobs it launches, and returns the training job that results
     # in either the highest or lowest value for this metric, depending on
-    # the value you specify for the `Type` parameter.
+    # the value you specify for the `Type` parameter. If you want to define
+    # a custom objective metric, see [Define metrics and environment
+    # variables][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html
     #
     # @!attribute [rw] type
     #   Whether to minimize or maximize the objective metric.
@@ -21311,8 +21415,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Stores the configuration information for the image classification
-    # problem of an AutoML job V2.
+    # The collection of settings used by an AutoML job V2 for the image
+    # classification problem type.
     #
     # @!attribute [rw] completion_criteria
     #   How long a job is allowed to run, or how many candidates a job is
@@ -28365,6 +28469,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The access configuration file for the ML model. You can explicitly
+    # accept the model end-user license agreement (EULA) within the
+    # `ModelAccessConfig`. For more information, see [End-user license
+    # agreements][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies agreement to the model end-user license agreement (EULA).
+    #   The `AcceptEula` value must be explicitly defined as `True` in order
+    #   to accept the EULA that this model requires. You are responsible for
+    #   reviewing and complying with any applicable license terms and making
+    #   sure they are acceptable for your use case before downloading or
+    #   using a model.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelAccessConfig AWS API Documentation
+    #
+    class ModelAccessConfig < Struct.new(
+      :accept_eula)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the location that is configured for storing
     # model artifacts.
     #
@@ -29011,6 +29141,10 @@ module Aws::SageMaker
     #   Summary of information about the last monitoring job to run.
     #   @return [Types::MonitoringExecutionSummary]
     #
+    # @!attribute [rw] batch_transform_input
+    #   Input object for the batch transform job.
+    #   @return [Types::BatchTransformInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDashboardMonitoringSchedule AWS API Documentation
     #
     class ModelDashboardMonitoringSchedule < Struct.new(
@@ -29024,7 +29158,8 @@ module Aws::SageMaker
       :monitoring_schedule_config,
       :endpoint_name,
       :monitoring_alert_summaries,
-      :last_monitoring_execution_summary)
+      :last_monitoring_execution_summary,
+      :batch_transform_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35238,8 +35373,8 @@ module Aws::SageMaker
     # The resolved attributes.
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Specifies a metric to minimize or maximize as the objective of a
-    #   job.
+    #   Specifies a metric to minimize or maximize as the objective of an
+    #   AutoML job.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] problem_type
@@ -35873,12 +36008,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
     #   @return [String]
     #
+    # @!attribute [rw] model_access_config
+    #   Specifies the access configuration file for the ML model. You can
+    #   explicitly accept the model end-user license agreement (EULA) within
+    #   the `ModelAccessConfig`. You are responsible for reviewing and
+    #   complying with any applicable license terms and making sure they are
+    #   acceptable for your use case before downloading or using a model.
+    #   @return [Types::ModelAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
     #
     class S3ModelDataSource < Struct.new(
       :s3_uri,
       :s3_data_type,
-      :compression_type)
+      :compression_type,
+      :model_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37379,11 +37523,17 @@ module Aws::SageMaker
     #   attempts in total, not each individual attempt.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_pending_time_in_seconds
+    #   The maximum length of time, in seconds, that a training or
+    #   compilation job can be pending before it is stopped.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
     #
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
-      :max_wait_time_in_seconds)
+      :max_wait_time_in_seconds,
+      :max_pending_time_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37479,7 +37629,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The collection of settings used by an AutoML job V2 for the `TABULAR`
+    # The collection of settings used by an AutoML job V2 for the tabular
     # problem type.
     #
     # @!attribute [rw] candidate_generation_config
@@ -37620,7 +37770,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The resolved attributes specific to the `TABULAR` problem type.
+    # The resolved attributes specific to the tabular problem type.
     #
     # @!attribute [rw] problem_type
     #   The type of supervised learning problem available for the model
@@ -37794,8 +37944,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Stores the configuration information for the text classification
-    # problem of an AutoML job V2.
+    # The collection of settings used by an AutoML job V2 for the text
+    # classification problem type.
     #
     # @!attribute [rw] completion_criteria
     #   How long a job is allowed to run, or how many candidates a job is
@@ -37818,6 +37968,60 @@ module Aws::SageMaker
       :completion_criteria,
       :content_column,
       :target_label_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The collection of settings used by an AutoML job V2 for the text
+    # generation problem type.
+    #
+    # <note markdown="1"> The text generation models that support fine-tuning in Autopilot are
+    # currently accessible exclusively in regions supported by Canvas. Refer
+    # to the documentation of Canvas for the [full list of its supported
+    # Regions][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html
+    #
+    # @!attribute [rw] completion_criteria
+    #   How long a job is allowed to run, or how many candidates a job is
+    #   allowed to generate.
+    #   @return [Types::AutoMLJobCompletionCriteria]
+    #
+    # @!attribute [rw] base_model_name
+    #   The name of the base model to fine-tune. Autopilot supports
+    #   fine-tuning a variety of large language models. For information on
+    #   the list of supported models, see [Text generation models supporting
+    #   fine-tuning in Autopilot][1]. If no `BaseModelName` is provided, the
+    #   default model used is Falcon-7B-Instruct.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-models.html#autopilot-llms-finetuning-supported-llms
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextGenerationJobConfig AWS API Documentation
+    #
+    class TextGenerationJobConfig < Struct.new(
+      :completion_criteria,
+      :base_model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved attributes specific to the text generation problem type.
+    #
+    # @!attribute [rw] base_model_name
+    #   The name of the base model to fine-tune.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextGenerationResolvedAttributes AWS API Documentation
+    #
+    class TextGenerationResolvedAttributes < Struct.new(
+      :base_model_name)
       SENSITIVE = []
       include Aws::Structure
     end

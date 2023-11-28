@@ -1060,7 +1060,8 @@ module Aws::TranscribeStreamingService
     #
     # The following parameters are required:
     #
-    # * `language-code` or `identify-language`
+    # * `language-code` or `identify-language` or
+    #   `identify-multiple-language`
     #
     # * `media-encoding`
     #
@@ -1306,7 +1307,8 @@ module Aws::TranscribeStreamingService
     #   channel.
     #
     #   Note that you must include either `LanguageCode` or `IdentifyLanguage`
-    #   in your request. If you include both parameters, your request fails.
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
     #
     #   Streaming language identification can't be combined with custom
     #   language models or redaction.
@@ -1339,6 +1341,26 @@ module Aws::TranscribeStreamingService
     #
     #   You can only use this parameter if you've included `IdentifyLanguage`
     #   and `LanguageOptions` in your request.
+    #
+    # @option params [Boolean] :identify_multiple_languages
+    #   Enables automatic multi-language identification in your transcription
+    #   job request. Use this parameter if your stream contains more than one
+    #   language. If your stream contains only one language, use
+    #   IdentifyLanguage instead.
+    #
+    #   If you include `IdentifyMultipleLanguages`, you can optionally include
+    #   a list of language codes, using `LanguageOptions`, that you think may
+    #   be present in your stream. Including `LanguageOptions` restricts
+    #   `IdentifyMultipleLanguages` to only the language options that you
+    #   specify, which can improve transcription accuracy.
+    #
+    #   If you want to apply a custom vocabulary or a custom vocabulary filter
+    #   to your automatic multiple language identification request, include
+    #   `VocabularyNames` or `VocabularyFilterNames`.
+    #
+    #   Note that you must include one of `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
     #
     # @option params [String] :vocabulary_names
     #   Specify the names of the custom vocabularies that you want to use when
@@ -1403,6 +1425,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#identify_language #identify_language} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#language_options #language_options} => String
     #   * {Types::StartStreamTranscriptionResponse#preferred_language #preferred_language} => String
+    #   * {Types::StartStreamTranscriptionResponse#identify_multiple_languages #identify_multiple_languages} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #
@@ -1522,6 +1545,7 @@ module Aws::TranscribeStreamingService
     #     identify_language: false,
     #     language_options: "LanguageOptions",
     #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
+    #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
     #   })
@@ -1601,6 +1625,7 @@ module Aws::TranscribeStreamingService
     #   resp.identify_language #=> Boolean
     #   resp.language_options #=> String
     #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
+    #   resp.identify_multiple_languages #=> Boolean
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
     #
@@ -1647,7 +1672,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

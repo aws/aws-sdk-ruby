@@ -974,8 +974,8 @@ module Aws::ECS
     #
     # @option params [String] :client_token
     #   An identifier that you provide to ensure the idempotency of the
-    #   request. It must be unique and is case sensitive. Up to 32 ASCII
-    #   characters are allowed.
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #
     # @option params [String] :launch_type
     #   The infrastructure that you run your service on. For more information,
@@ -1704,9 +1704,9 @@ module Aws::ECS
     #   and keep running in the task set.
     #
     # @option params [String] :client_token
-    #   The identifier that you provide to ensure the idempotency of the
-    #   request. It's case sensitive and must be unique. It can be up to 32
-    #   ASCII characters are allowed.
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task set to help you categorize and
@@ -1913,15 +1913,16 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSetting AWS API Documentation
     #
@@ -4579,7 +4580,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -4590,9 +4591,10 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
+    #   resp.settings[0].type #=> String, one of "user", "aws_managed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAccountSettings AWS API Documentation
@@ -5499,6 +5501,13 @@ module Aws::ECS
     # see [Amazon Web Services Fargate task maintenance][5] in the *Amazon
     # ECS Developer Guide*.
     #
+    # The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    # indicates whether Amazon ECS Runtime Monitoring is enabled or disabled
+    # by your security administrator in your Amazon ECS account. Amazon
+    # GuardDuty controls this account setting on your behalf. For more
+    # information, see [Protecting Amazon ECS workloads with Amazon ECS
+    # Runtime Monitoring][6].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
@@ -5506,6 +5515,7 @@ module Aws::ECS
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
     # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
     # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :name
     #   The Amazon ECS resource name for which to modify the account setting.
@@ -5525,9 +5535,17 @@ module Aws::ECS
     #   Developer Guide*. If you specify `fargateTaskRetirementWaitPeriod`,
     #   the wait time to retire a Fargate task is affected.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or disabled
+    #   by your security administrator in your Amazon ECS account. Amazon
+    #   GuardDuty controls this account setting on your behalf. For more
+    #   information, see [Protecting Amazon ECS workloads with Amazon ECS
+    #   Runtime Monitoring][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5609,16 +5627,17 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSetting AWS API Documentation
     #
@@ -5665,11 +5684,19 @@ module Aws::ECS
     #   maintenance, see [Amazon Web Services Fargate task maintenance][3] in
     #   the *Amazon ECS Developer Guide*.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or disabled
+    #   by your security administrator in your Amazon ECS account. Amazon
+    #   GuardDuty controls this account setting on your behalf. For more
+    #   information, see [Protecting Amazon ECS workloads with Amazon ECS
+    #   Runtime Monitoring][4].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5715,15 +5742,16 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefault AWS API Documentation
     #
@@ -7144,7 +7172,7 @@ module Aws::ECS
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
     #   that job by filtering the results of a ListTasks call with the
-    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
+    #   `startedBy` value. Up to 128 letters (uppercase and lowercase),
     #   numbers, hyphens (-), and underscores (\_) are allowed.
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
@@ -7211,6 +7239,20 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
+    #
+    # @option params [String] :client_token
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 64 characters
+    #   are allowed. The valid characters are characters in the range of
+    #   33-126, inclusive. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7343,6 +7385,7 @@ module Aws::ECS
     #       },
     #     ],
     #     task_definition: "String", # required
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -9808,7 +9851,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -80,6 +80,7 @@ module Aws::ElastiCache
     CacheSubnetGroupQuotaExceededFault = Shapes::StructureShape.new(name: 'CacheSubnetGroupQuotaExceededFault')
     CacheSubnetGroups = Shapes::ListShape.new(name: 'CacheSubnetGroups')
     CacheSubnetQuotaExceededFault = Shapes::StructureShape.new(name: 'CacheSubnetQuotaExceededFault')
+    CacheUsageLimits = Shapes::StructureShape.new(name: 'CacheUsageLimits')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     CloudWatchLogsDestinationDetails = Shapes::StructureShape.new(name: 'CloudWatchLogsDestinationDetails')
     ClusterIdList = Shapes::ListShape.new(name: 'ClusterIdList')
@@ -88,6 +89,8 @@ module Aws::ElastiCache
     CompleteMigrationMessage = Shapes::StructureShape.new(name: 'CompleteMigrationMessage')
     CompleteMigrationResponse = Shapes::StructureShape.new(name: 'CompleteMigrationResponse')
     ConfigureShard = Shapes::StructureShape.new(name: 'ConfigureShard')
+    CopyServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotRequest')
+    CopyServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotResponse')
     CopySnapshotMessage = Shapes::StructureShape.new(name: 'CopySnapshotMessage')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CreateCacheClusterMessage = Shapes::StructureShape.new(name: 'CreateCacheClusterMessage')
@@ -102,12 +105,18 @@ module Aws::ElastiCache
     CreateGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateGlobalReplicationGroupResult')
     CreateReplicationGroupMessage = Shapes::StructureShape.new(name: 'CreateReplicationGroupMessage')
     CreateReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateReplicationGroupResult')
+    CreateServerlessCacheRequest = Shapes::StructureShape.new(name: 'CreateServerlessCacheRequest')
+    CreateServerlessCacheResponse = Shapes::StructureShape.new(name: 'CreateServerlessCacheResponse')
+    CreateServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'CreateServerlessCacheSnapshotRequest')
+    CreateServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'CreateServerlessCacheSnapshotResponse')
     CreateSnapshotMessage = Shapes::StructureShape.new(name: 'CreateSnapshotMessage')
     CreateSnapshotResult = Shapes::StructureShape.new(name: 'CreateSnapshotResult')
     CreateUserGroupMessage = Shapes::StructureShape.new(name: 'CreateUserGroupMessage')
     CreateUserMessage = Shapes::StructureShape.new(name: 'CreateUserMessage')
     CustomerNodeEndpoint = Shapes::StructureShape.new(name: 'CustomerNodeEndpoint')
     CustomerNodeEndpointList = Shapes::ListShape.new(name: 'CustomerNodeEndpointList')
+    DataStorage = Shapes::StructureShape.new(name: 'DataStorage')
+    DataStorageUnit = Shapes::StringShape.new(name: 'DataStorageUnit')
     DataTieringStatus = Shapes::StringShape.new(name: 'DataTieringStatus')
     DecreaseNodeGroupsInGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupMessage')
     DecreaseNodeGroupsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupResult')
@@ -124,6 +133,10 @@ module Aws::ElastiCache
     DeleteGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DeleteGlobalReplicationGroupResult')
     DeleteReplicationGroupMessage = Shapes::StructureShape.new(name: 'DeleteReplicationGroupMessage')
     DeleteReplicationGroupResult = Shapes::StructureShape.new(name: 'DeleteReplicationGroupResult')
+    DeleteServerlessCacheRequest = Shapes::StructureShape.new(name: 'DeleteServerlessCacheRequest')
+    DeleteServerlessCacheResponse = Shapes::StructureShape.new(name: 'DeleteServerlessCacheResponse')
+    DeleteServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteServerlessCacheSnapshotRequest')
+    DeleteServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteServerlessCacheSnapshotResponse')
     DeleteSnapshotMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotMessage')
     DeleteSnapshotResult = Shapes::StructureShape.new(name: 'DeleteSnapshotResult')
     DeleteUserGroupMessage = Shapes::StructureShape.new(name: 'DeleteUserGroupMessage')
@@ -142,6 +155,10 @@ module Aws::ElastiCache
     DescribeReplicationGroupsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationGroupsMessage')
     DescribeReservedCacheNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedCacheNodesMessage')
     DescribeReservedCacheNodesOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedCacheNodesOfferingsMessage')
+    DescribeServerlessCacheSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeServerlessCacheSnapshotsRequest')
+    DescribeServerlessCacheSnapshotsResponse = Shapes::StructureShape.new(name: 'DescribeServerlessCacheSnapshotsResponse')
+    DescribeServerlessCachesRequest = Shapes::StructureShape.new(name: 'DescribeServerlessCachesRequest')
+    DescribeServerlessCachesResponse = Shapes::StructureShape.new(name: 'DescribeServerlessCachesResponse')
     DescribeServiceUpdatesMessage = Shapes::StructureShape.new(name: 'DescribeServiceUpdatesMessage')
     DescribeSnapshotsListMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotsListMessage')
     DescribeSnapshotsMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotsMessage')
@@ -158,12 +175,15 @@ module Aws::ElastiCache
     DuplicateUserNameFault = Shapes::StructureShape.new(name: 'DuplicateUserNameFault')
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
+    ECPUPerSecond = Shapes::StructureShape.new(name: 'ECPUPerSecond')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    ExportServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'ExportServerlessCacheSnapshotRequest')
+    ExportServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'ExportServerlessCacheSnapshotResponse')
     FailoverGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'FailoverGlobalReplicationGroupMessage')
     FailoverGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'FailoverGlobalReplicationGroupResult')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -193,11 +213,14 @@ module Aws::ElastiCache
     InvalidCacheClusterStateFault = Shapes::StructureShape.new(name: 'InvalidCacheClusterStateFault')
     InvalidCacheParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheParameterGroupStateFault')
     InvalidCacheSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheSecurityGroupStateFault')
+    InvalidCredentialsException = Shapes::StructureShape.new(name: 'InvalidCredentialsException')
     InvalidGlobalReplicationGroupStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalReplicationGroupStateFault')
     InvalidKMSKeyFault = Shapes::StructureShape.new(name: 'InvalidKMSKeyFault')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidReplicationGroupStateFault = Shapes::StructureShape.new(name: 'InvalidReplicationGroupStateFault')
+    InvalidServerlessCacheSnapshotStateFault = Shapes::StructureShape.new(name: 'InvalidServerlessCacheSnapshotStateFault')
+    InvalidServerlessCacheStateFault = Shapes::StructureShape.new(name: 'InvalidServerlessCacheStateFault')
     InvalidSnapshotStateFault = Shapes::StructureShape.new(name: 'InvalidSnapshotStateFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InvalidUserGroupStateFault = Shapes::StructureShape.new(name: 'InvalidUserGroupStateFault')
@@ -226,6 +249,8 @@ module Aws::ElastiCache
     ModifyReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupResult')
     ModifyReplicationGroupShardConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationMessage')
     ModifyReplicationGroupShardConfigurationResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationResult')
+    ModifyServerlessCacheRequest = Shapes::StructureShape.new(name: 'ModifyServerlessCacheRequest')
+    ModifyServerlessCacheResponse = Shapes::StructureShape.new(name: 'ModifyServerlessCacheResponse')
     ModifyUserGroupMessage = Shapes::StructureShape.new(name: 'ModifyUserGroupMessage')
     ModifyUserMessage = Shapes::StructureShape.new(name: 'ModifyUserMessage')
     MultiAZStatus = Shapes::StringShape.new(name: 'MultiAZStatus')
@@ -311,6 +336,17 @@ module Aws::ElastiCache
     SecurityGroupIdsList = Shapes::ListShape.new(name: 'SecurityGroupIdsList')
     SecurityGroupMembership = Shapes::StructureShape.new(name: 'SecurityGroupMembership')
     SecurityGroupMembershipList = Shapes::ListShape.new(name: 'SecurityGroupMembershipList')
+    ServerlessCache = Shapes::StructureShape.new(name: 'ServerlessCache')
+    ServerlessCacheAlreadyExistsFault = Shapes::StructureShape.new(name: 'ServerlessCacheAlreadyExistsFault')
+    ServerlessCacheConfiguration = Shapes::StructureShape.new(name: 'ServerlessCacheConfiguration')
+    ServerlessCacheList = Shapes::ListShape.new(name: 'ServerlessCacheList')
+    ServerlessCacheNotFoundFault = Shapes::StructureShape.new(name: 'ServerlessCacheNotFoundFault')
+    ServerlessCacheQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'ServerlessCacheQuotaForCustomerExceededFault')
+    ServerlessCacheSnapshot = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshot')
+    ServerlessCacheSnapshotAlreadyExistsFault = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshotAlreadyExistsFault')
+    ServerlessCacheSnapshotList = Shapes::ListShape.new(name: 'ServerlessCacheSnapshotList')
+    ServerlessCacheSnapshotNotFoundFault = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshotNotFoundFault')
+    ServerlessCacheSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshotQuotaExceededFault')
     ServiceLinkedRoleNotFoundFault = Shapes::StructureShape.new(name: 'ServiceLinkedRoleNotFoundFault')
     ServiceUpdate = Shapes::StructureShape.new(name: 'ServiceUpdate')
     ServiceUpdateList = Shapes::ListShape.new(name: 'ServiceUpdateList')
@@ -335,6 +371,7 @@ module Aws::ElastiCache
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetIdentifierList = Shapes::ListShape.new(name: 'SubnetIdentifierList')
+    SubnetIdsList = Shapes::ListShape.new(name: 'SubnetIdsList')
     SubnetInUse = Shapes::StructureShape.new(name: 'SubnetInUse')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SubnetNotAllowedFault = Shapes::StructureShape.new(name: 'SubnetNotAllowedFault')
@@ -353,6 +390,7 @@ module Aws::ElastiCache
     TimeRangeFilter = Shapes::StructureShape.new(name: 'TimeRangeFilter')
     TransitEncryptionMode = Shapes::StringShape.new(name: 'TransitEncryptionMode')
     UGReplicationGroupIdList = Shapes::ListShape.new(name: 'UGReplicationGroupIdList')
+    UGServerlessCacheIdList = Shapes::ListShape.new(name: 'UGServerlessCacheIdList')
     UnprocessedUpdateAction = Shapes::StructureShape.new(name: 'UnprocessedUpdateAction')
     UnprocessedUpdateActionList = Shapes::ListShape.new(name: 'UnprocessedUpdateActionList')
     UpdateAction = Shapes::StructureShape.new(name: 'UpdateAction')
@@ -614,6 +652,10 @@ module Aws::ElastiCache
 
     CacheSubnetQuotaExceededFault.struct_class = Types::CacheSubnetQuotaExceededFault
 
+    CacheUsageLimits.add_member(:data_storage, Shapes::ShapeRef.new(shape: DataStorage, location_name: "DataStorage"))
+    CacheUsageLimits.add_member(:ecpu_per_second, Shapes::ShapeRef.new(shape: ECPUPerSecond, location_name: "ECPUPerSecond"))
+    CacheUsageLimits.struct_class = Types::CacheUsageLimits
+
     CloudWatchLogsDestinationDetails.add_member(:log_group, Shapes::ShapeRef.new(shape: String, location_name: "LogGroup"))
     CloudWatchLogsDestinationDetails.struct_class = Types::CloudWatchLogsDestinationDetails
 
@@ -633,6 +675,15 @@ module Aws::ElastiCache
     ConfigureShard.add_member(:preferred_availability_zones, Shapes::ShapeRef.new(shape: PreferredAvailabilityZoneList, location_name: "PreferredAvailabilityZones"))
     ConfigureShard.add_member(:preferred_outpost_arns, Shapes::ShapeRef.new(shape: PreferredOutpostArnList, location_name: "PreferredOutpostArns"))
     ConfigureShard.struct_class = Types::ConfigureShard
+
+    CopyServerlessCacheSnapshotRequest.add_member(:source_serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceServerlessCacheSnapshotName"))
+    CopyServerlessCacheSnapshotRequest.add_member(:target_serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetServerlessCacheSnapshotName"))
+    CopyServerlessCacheSnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CopyServerlessCacheSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CopyServerlessCacheSnapshotRequest.struct_class = Types::CopyServerlessCacheSnapshotRequest
+
+    CopyServerlessCacheSnapshotResponse.add_member(:serverless_cache_snapshot, Shapes::ShapeRef.new(shape: ServerlessCacheSnapshot, location_name: "ServerlessCacheSnapshot"))
+    CopyServerlessCacheSnapshotResponse.struct_class = Types::CopyServerlessCacheSnapshotResponse
 
     CopySnapshotMessage.add_member(:source_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotName"))
     CopySnapshotMessage.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetSnapshotName"))
@@ -751,10 +802,38 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     CreateReplicationGroupMessage.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     CreateReplicationGroupMessage.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
+    CreateReplicationGroupMessage.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheSnapshotName"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     CreateReplicationGroupResult.struct_class = Types::CreateReplicationGroupResult
+
+    CreateServerlessCacheRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    CreateServerlessCacheRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateServerlessCacheRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
+    CreateServerlessCacheRequest.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
+    CreateServerlessCacheRequest.add_member(:cache_usage_limits, Shapes::ShapeRef.new(shape: CacheUsageLimits, location_name: "CacheUsageLimits"))
+    CreateServerlessCacheRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateServerlessCacheRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
+    CreateServerlessCacheRequest.add_member(:snapshot_arns_to_restore, Shapes::ShapeRef.new(shape: SnapshotArnsList, location_name: "SnapshotArnsToRestore"))
+    CreateServerlessCacheRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateServerlessCacheRequest.add_member(:user_group_id, Shapes::ShapeRef.new(shape: String, location_name: "UserGroupId"))
+    CreateServerlessCacheRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdsList, location_name: "SubnetIds"))
+    CreateServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    CreateServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    CreateServerlessCacheRequest.struct_class = Types::CreateServerlessCacheRequest
+
+    CreateServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
+    CreateServerlessCacheResponse.struct_class = Types::CreateServerlessCacheResponse
+
+    CreateServerlessCacheSnapshotRequest.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheSnapshotName"))
+    CreateServerlessCacheSnapshotRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    CreateServerlessCacheSnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateServerlessCacheSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateServerlessCacheSnapshotRequest.struct_class = Types::CreateServerlessCacheSnapshotRequest
+
+    CreateServerlessCacheSnapshotResponse.add_member(:serverless_cache_snapshot, Shapes::ShapeRef.new(shape: ServerlessCacheSnapshot, location_name: "ServerlessCacheSnapshot"))
+    CreateServerlessCacheSnapshotResponse.struct_class = Types::CreateServerlessCacheSnapshotResponse
 
     CreateSnapshotMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     CreateSnapshotMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
@@ -787,6 +866,10 @@ module Aws::ElastiCache
     CustomerNodeEndpoint.struct_class = Types::CustomerNodeEndpoint
 
     CustomerNodeEndpointList.member = Shapes::ShapeRef.new(shape: CustomerNodeEndpoint)
+
+    DataStorage.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "Maximum"))
+    DataStorage.add_member(:unit, Shapes::ShapeRef.new(shape: DataStorageUnit, required: true, location_name: "Unit"))
+    DataStorage.struct_class = Types::DataStorage
 
     DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
     DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:node_group_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NodeGroupCount"))
@@ -842,6 +925,19 @@ module Aws::ElastiCache
 
     DeleteReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     DeleteReplicationGroupResult.struct_class = Types::DeleteReplicationGroupResult
+
+    DeleteServerlessCacheRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    DeleteServerlessCacheRequest.add_member(:final_snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "FinalSnapshotName"))
+    DeleteServerlessCacheRequest.struct_class = Types::DeleteServerlessCacheRequest
+
+    DeleteServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
+    DeleteServerlessCacheResponse.struct_class = Types::DeleteServerlessCacheResponse
+
+    DeleteServerlessCacheSnapshotRequest.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheSnapshotName"))
+    DeleteServerlessCacheSnapshotRequest.struct_class = Types::DeleteServerlessCacheSnapshotRequest
+
+    DeleteServerlessCacheSnapshotResponse.add_member(:serverless_cache_snapshot, Shapes::ShapeRef.new(shape: ServerlessCacheSnapshot, location_name: "ServerlessCacheSnapshot"))
+    DeleteServerlessCacheSnapshotResponse.struct_class = Types::DeleteServerlessCacheSnapshotResponse
 
     DeleteSnapshotMessage.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotName"))
     DeleteSnapshotMessage.struct_class = Types::DeleteSnapshotMessage
@@ -942,6 +1038,26 @@ module Aws::ElastiCache
     DescribeReservedCacheNodesOfferingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeReservedCacheNodesOfferingsMessage.struct_class = Types::DescribeReservedCacheNodesOfferingsMessage
 
+    DescribeServerlessCacheSnapshotsRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
+    DescribeServerlessCacheSnapshotsRequest.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheSnapshotName"))
+    DescribeServerlessCacheSnapshotsRequest.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
+    DescribeServerlessCacheSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServerlessCacheSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
+    DescribeServerlessCacheSnapshotsRequest.struct_class = Types::DescribeServerlessCacheSnapshotsRequest
+
+    DescribeServerlessCacheSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServerlessCacheSnapshotsResponse.add_member(:serverless_cache_snapshots, Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotList, location_name: "ServerlessCacheSnapshots"))
+    DescribeServerlessCacheSnapshotsResponse.struct_class = Types::DescribeServerlessCacheSnapshotsResponse
+
+    DescribeServerlessCachesRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
+    DescribeServerlessCachesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
+    DescribeServerlessCachesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServerlessCachesRequest.struct_class = Types::DescribeServerlessCachesRequest
+
+    DescribeServerlessCachesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeServerlessCachesResponse.add_member(:serverless_caches, Shapes::ShapeRef.new(shape: ServerlessCacheList, location_name: "ServerlessCaches"))
+    DescribeServerlessCachesResponse.struct_class = Types::DescribeServerlessCachesResponse
+
     DescribeServiceUpdatesMessage.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     DescribeServiceUpdatesMessage.add_member(:service_update_status, Shapes::ShapeRef.new(shape: ServiceUpdateStatusList, location_name: "ServiceUpdateStatus"))
     DescribeServiceUpdatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1014,6 +1130,9 @@ module Aws::ElastiCache
 
     EC2SecurityGroupList.member = Shapes::ShapeRef.new(shape: EC2SecurityGroup, location_name: "EC2SecurityGroup")
 
+    ECPUPerSecond.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "Maximum"))
+    ECPUPerSecond.struct_class = Types::ECPUPerSecond
+
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
     Endpoint.struct_class = Types::Endpoint
@@ -1035,6 +1154,13 @@ module Aws::ElastiCache
     EventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
+
+    ExportServerlessCacheSnapshotRequest.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheSnapshotName"))
+    ExportServerlessCacheSnapshotRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
+    ExportServerlessCacheSnapshotRequest.struct_class = Types::ExportServerlessCacheSnapshotRequest
+
+    ExportServerlessCacheSnapshotResponse.add_member(:serverless_cache_snapshot, Shapes::ShapeRef.new(shape: ServerlessCacheSnapshot, location_name: "ServerlessCacheSnapshot"))
+    ExportServerlessCacheSnapshotResponse.struct_class = Types::ExportServerlessCacheSnapshotResponse
 
     FailoverGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
     FailoverGlobalReplicationGroupMessage.add_member(:primary_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryRegion"))
@@ -1122,6 +1248,8 @@ module Aws::ElastiCache
 
     InvalidCacheSecurityGroupStateFault.struct_class = Types::InvalidCacheSecurityGroupStateFault
 
+    InvalidCredentialsException.struct_class = Types::InvalidCredentialsException
+
     InvalidGlobalReplicationGroupStateFault.struct_class = Types::InvalidGlobalReplicationGroupStateFault
 
     InvalidKMSKeyFault.struct_class = Types::InvalidKMSKeyFault
@@ -1133,6 +1261,10 @@ module Aws::ElastiCache
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
 
     InvalidReplicationGroupStateFault.struct_class = Types::InvalidReplicationGroupStateFault
+
+    InvalidServerlessCacheSnapshotStateFault.struct_class = Types::InvalidServerlessCacheSnapshotStateFault
+
+    InvalidServerlessCacheStateFault.struct_class = Types::InvalidServerlessCacheStateFault
 
     InvalidSnapshotStateFault.struct_class = Types::InvalidSnapshotStateFault
 
@@ -1269,6 +1401,19 @@ module Aws::ElastiCache
 
     ModifyReplicationGroupShardConfigurationResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     ModifyReplicationGroupShardConfigurationResult.struct_class = Types::ModifyReplicationGroupShardConfigurationResult
+
+    ModifyServerlessCacheRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    ModifyServerlessCacheRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyServerlessCacheRequest.add_member(:cache_usage_limits, Shapes::ShapeRef.new(shape: CacheUsageLimits, location_name: "CacheUsageLimits"))
+    ModifyServerlessCacheRequest.add_member(:remove_user_group, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RemoveUserGroup"))
+    ModifyServerlessCacheRequest.add_member(:user_group_id, Shapes::ShapeRef.new(shape: String, location_name: "UserGroupId"))
+    ModifyServerlessCacheRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
+    ModifyServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    ModifyServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    ModifyServerlessCacheRequest.struct_class = Types::ModifyServerlessCacheRequest
+
+    ModifyServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
+    ModifyServerlessCacheResponse.struct_class = Types::ModifyServerlessCacheResponse
 
     ModifyUserGroupMessage.add_member(:user_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserGroupId"))
     ModifyUserGroupMessage.add_member(:user_ids_to_add, Shapes::ShapeRef.new(shape: UserIdListInput, location_name: "UserIdsToAdd"))
@@ -1600,6 +1745,57 @@ module Aws::ElastiCache
 
     SecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: SecurityGroupMembership)
 
+    ServerlessCache.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
+    ServerlessCache.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ServerlessCache.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    ServerlessCache.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServerlessCache.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ServerlessCache.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
+    ServerlessCache.add_member(:full_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "FullEngineVersion"))
+    ServerlessCache.add_member(:cache_usage_limits, Shapes::ShapeRef.new(shape: CacheUsageLimits, location_name: "CacheUsageLimits"))
+    ServerlessCache.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ServerlessCache.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
+    ServerlessCache.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    ServerlessCache.add_member(:reader_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ReaderEndpoint"))
+    ServerlessCache.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ServerlessCache.add_member(:user_group_id, Shapes::ShapeRef.new(shape: String, location_name: "UserGroupId"))
+    ServerlessCache.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdsList, location_name: "SubnetIds"))
+    ServerlessCache.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+    ServerlessCache.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    ServerlessCache.struct_class = Types::ServerlessCache
+
+    ServerlessCacheAlreadyExistsFault.struct_class = Types::ServerlessCacheAlreadyExistsFault
+
+    ServerlessCacheConfiguration.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
+    ServerlessCacheConfiguration.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ServerlessCacheConfiguration.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
+    ServerlessCacheConfiguration.struct_class = Types::ServerlessCacheConfiguration
+
+    ServerlessCacheList.member = Shapes::ShapeRef.new(shape: ServerlessCache)
+
+    ServerlessCacheNotFoundFault.struct_class = Types::ServerlessCacheNotFoundFault
+
+    ServerlessCacheQuotaForCustomerExceededFault.struct_class = Types::ServerlessCacheQuotaForCustomerExceededFault
+
+    ServerlessCacheSnapshot.add_member(:serverless_cache_snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheSnapshotName"))
+    ServerlessCacheSnapshot.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ServerlessCacheSnapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ServerlessCacheSnapshot.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
+    ServerlessCacheSnapshot.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServerlessCacheSnapshot.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    ServerlessCacheSnapshot.add_member(:expiry_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ExpiryTime"))
+    ServerlessCacheSnapshot.add_member(:bytes_used_for_cache, Shapes::ShapeRef.new(shape: String, location_name: "BytesUsedForCache"))
+    ServerlessCacheSnapshot.add_member(:serverless_cache_configuration, Shapes::ShapeRef.new(shape: ServerlessCacheConfiguration, location_name: "ServerlessCacheConfiguration"))
+    ServerlessCacheSnapshot.struct_class = Types::ServerlessCacheSnapshot
+
+    ServerlessCacheSnapshotAlreadyExistsFault.struct_class = Types::ServerlessCacheSnapshotAlreadyExistsFault
+
+    ServerlessCacheSnapshotList.member = Shapes::ShapeRef.new(shape: ServerlessCacheSnapshot, location_name: "ServerlessCacheSnapshot")
+
+    ServerlessCacheSnapshotNotFoundFault.struct_class = Types::ServerlessCacheSnapshotNotFoundFault
+
+    ServerlessCacheSnapshotQuotaExceededFault.struct_class = Types::ServerlessCacheSnapshotQuotaExceededFault
+
     ServiceLinkedRoleNotFoundFault.struct_class = Types::ServiceLinkedRoleNotFoundFault
 
     ServiceUpdate.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
@@ -1686,6 +1882,8 @@ module Aws::ElastiCache
 
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
+    SubnetIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetId")
+
     SubnetInUse.struct_class = Types::SubnetInUse
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
@@ -1729,6 +1927,8 @@ module Aws::ElastiCache
     TimeRangeFilter.struct_class = Types::TimeRangeFilter
 
     UGReplicationGroupIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    UGServerlessCacheIdList.member = Shapes::ShapeRef.new(shape: String)
 
     UnprocessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     UnprocessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
@@ -1790,6 +1990,7 @@ module Aws::ElastiCache
     UserGroup.add_member(:minimum_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
     UserGroup.add_member(:pending_changes, Shapes::ShapeRef.new(shape: UserGroupPendingChanges, location_name: "PendingChanges"))
     UserGroup.add_member(:replication_groups, Shapes::ShapeRef.new(shape: UGReplicationGroupIdList, location_name: "ReplicationGroups"))
+    UserGroup.add_member(:serverless_caches, Shapes::ShapeRef.new(shape: UGServerlessCacheIdList, location_name: "ServerlessCaches"))
     UserGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     UserGroup.struct_class = Types::UserGroup
 
@@ -1856,6 +2057,10 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
       end)
@@ -1902,6 +2107,22 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotUnderMigrationFault)
+      end)
+
+      api.add_operation(:copy_serverless_cache_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyServerlessCacheSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyServerlessCacheSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyServerlessCacheSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:copy_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2018,6 +2239,41 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:create_serverless_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServerlessCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServerlessCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServerlessCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCredentialsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUserGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+      end)
+
+      api.add_operation(:create_serverless_cache_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServerlessCacheSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServerlessCacheSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServerlessCacheSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -2176,6 +2432,33 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:delete_serverless_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServerlessCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServerlessCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteServerlessCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCredentialsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+      end)
+
+      api.add_operation(:delete_serverless_cache_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServerlessCacheSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServerlessCacheSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteServerlessCacheSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:delete_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2412,6 +2695,41 @@ module Aws::ElastiCache
         )
       end)
 
+      api.add_operation(:describe_serverless_cache_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServerlessCacheSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServerlessCacheSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServerlessCacheSnapshotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_serverless_caches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServerlessCaches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServerlessCachesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServerlessCachesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_service_updates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeServiceUpdates"
         o.http_method = "POST"
@@ -2509,6 +2827,18 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:export_serverless_cache_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportServerlessCacheSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportServerlessCacheSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportServerlessCacheSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:failover_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "FailoverGlobalReplicationGroup"
         o.http_method = "POST"
@@ -2580,6 +2910,10 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
       end)
 
@@ -2681,6 +3015,22 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:modify_serverless_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyServerlessCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyServerlessCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyServerlessCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCredentialsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUserGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+      end)
+
       api.add_operation(:modify_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyUser"
         o.http_method = "POST"
@@ -2761,6 +3111,10 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: TagNotFoundFault)
       end)

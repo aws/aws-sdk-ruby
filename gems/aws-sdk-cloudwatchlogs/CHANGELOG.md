@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2023-11-27)
+------------------
+
+* Feature - Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-11-09)
+------------------
+
+* Feature - Update to support new APIs for delivery of logs from AWS services.
+
 1.71.0 (2023-09-27)
 ------------------
 

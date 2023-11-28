@@ -435,6 +435,48 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Cancel a specific image lifecycle policy runtime instance.
+    #
+    # @option params [required, String] :lifecycle_execution_id
+    #   Identifies the specific runtime instance of the image lifecycle to
+    #   cancel.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CancelLifecycleExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelLifecycleExecutionResponse#lifecycle_execution_id #lifecycle_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_lifecycle_execution({
+    #     lifecycle_execution_id: "LifecycleExecutionId", # required
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CancelLifecycleExecution AWS API Documentation
+    #
+    # @overload cancel_lifecycle_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_lifecycle_execution(params = {}, options = {})
+      req = build_request(:cancel_lifecycle_execution, params)
+      req.send_request(options)
+    end
+
     # Creates a new component that can be used to build, validate, test, and
     # assess your image. The component is based on a YAML document that you
     # specify using exactly one of the following methods:
@@ -504,10 +546,16 @@ module Aws::Imagebuilder
     #   The tags that apply to the component.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token of the component.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -620,10 +668,16 @@ module Aws::Imagebuilder
     #   Identifies which KMS key is used to encrypt the container image.
     #
     # @option params [required, String] :client_token
-    #   The client token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -717,10 +771,16 @@ module Aws::Imagebuilder
     #   The tags of the distribution configuration.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token of the distribution configuration.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateDistributionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -846,10 +906,16 @@ module Aws::Imagebuilder
     #   The tags of the image.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
@@ -945,10 +1011,16 @@ module Aws::Imagebuilder
     #   The tags of the image pipeline.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
@@ -1063,10 +1135,16 @@ module Aws::Imagebuilder
     #   instances.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateImageRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1199,10 +1277,16 @@ module Aws::Imagebuilder
     #   The tags of the infrastructure configuration.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1253,6 +1337,126 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def create_infrastructure_configuration(params = {}, options = {})
       req = build_request(:create_infrastructure_configuration, params)
+      req.send_request(options)
+    end
+
+    # Create a lifecycle policy resource.
+    #
+    # @option params [required, String] :name
+    #   The name of the lifecycle policy to create.
+    #
+    # @option params [String] :description
+    #   Optional description for the lifecycle policy.
+    #
+    # @option params [String] :status
+    #   Indicates whether the lifecycle policy resource is enabled.
+    #
+    # @option params [required, String] :execution_role
+    #   The role name or Amazon Resource Name (ARN) for the IAM role that
+    #   grants Image Builder access to run lifecycle actions.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of Image Builder resource that the lifecycle policy applies
+    #   to.
+    #
+    # @option params [required, Array<Types::LifecyclePolicyDetail>] :policy_details
+    #   Configuration details for the lifecycle policy rules.
+    #
+    # @option params [required, Types::LifecyclePolicyResourceSelection] :resource_selection
+    #   Selection criteria for the resources that the lifecycle policy applies
+    #   to.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to apply to the lifecycle policy resource.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLifecyclePolicyResponse#client_token #client_token} => String
+    #   * {Types::CreateLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lifecycle_policy({
+    #     name: "ResourceName", # required
+    #     description: "NonEmptyString",
+    #     status: "DISABLED", # accepts DISABLED, ENABLED
+    #     execution_role: "RoleNameOrArn", # required
+    #     resource_type: "AMI_IMAGE", # required, accepts AMI_IMAGE, CONTAINER_IMAGE
+    #     policy_details: [ # required
+    #       {
+    #         action: { # required
+    #           type: "DELETE", # required, accepts DELETE, DEPRECATE, DISABLE
+    #           include_resources: {
+    #             amis: false,
+    #             snapshots: false,
+    #             containers: false,
+    #           },
+    #         },
+    #         filter: { # required
+    #           type: "AGE", # required, accepts AGE, COUNT
+    #           value: 1, # required
+    #           unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #           retain_at_least: 1,
+    #         },
+    #         exclusion_rules: {
+    #           tag_map: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #           amis: {
+    #             is_public: false,
+    #             regions: ["NonEmptyString"],
+    #             shared_accounts: ["AccountId"],
+    #             last_launched: {
+    #               value: 1, # required
+    #               unit: "DAYS", # required, accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #             tag_map: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     resource_selection: { # required
+    #       recipes: [
+    #         {
+    #           name: "ResourceName", # required
+    #           semantic_version: "VersionNumber", # required
+    #         },
+    #       ],
+    #       tag_map: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.lifecycle_policy_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateLifecyclePolicy AWS API Documentation
+    #
+    # @overload create_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def create_lifecycle_policy(params = {}, options = {})
+      req = build_request(:create_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -1485,6 +1689,35 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def delete_infrastructure_configuration(params = {}, options = {})
       req = build_request(:delete_infrastructure_configuration, params)
+      req.send_request(options)
+    end
+
+    # Delete the specified lifecycle policy resource.
+    #
+    # @option params [required, String] :lifecycle_policy_arn
+    #   The Amazon Resource Name (ARN) of the lifecycle policy resource to
+    #   delete.
+    #
+    # @return [Types::DeleteLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     lifecycle_policy_arn: "LifecyclePolicyArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteLifecyclePolicy AWS API Documentation
+    #
+    # @overload delete_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_lifecycle_policy(params = {}, options = {})
+      req = build_request(:delete_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -1775,7 +2008,7 @@ module Aws::Imagebuilder
     #   resp.image.platform #=> String, one of "Windows", "Linux"
     #   resp.image.enhanced_image_metadata_enabled #=> Boolean
     #   resp.image.os_version #=> String
-    #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image.state.reason #=> String
     #   resp.image.image_recipe.arn #=> String
     #   resp.image.image_recipe.type #=> String, one of "AMI", "DOCKER"
@@ -1925,7 +2158,7 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.amis[0].image #=> String
     #   resp.image.output_resources.amis[0].name #=> String
     #   resp.image.output_resources.amis[0].description #=> String
-    #   resp.image.output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image.output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image.output_resources.amis[0].state.reason #=> String
     #   resp.image.output_resources.amis[0].account_id #=> String
     #   resp.image.output_resources.containers #=> Array
@@ -1942,6 +2175,8 @@ module Aws::Imagebuilder
     #   resp.image.image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image.image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image.deprecation_time #=> Time
+    #   resp.image.lifecycle_execution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -2184,6 +2419,106 @@ module Aws::Imagebuilder
     end
 
     # Get the runtime information that was logged for a specific runtime
+    # instance of the lifecycle policy.
+    #
+    # @option params [required, String] :lifecycle_execution_id
+    #   Use the unique identifier for a runtime instance of the lifecycle
+    #   policy to get runtime details.
+    #
+    # @return [Types::GetLifecycleExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecycleExecutionResponse#lifecycle_execution #lifecycle_execution} => Types::LifecycleExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_execution({
+    #     lifecycle_execution_id: "LifecycleExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_execution.lifecycle_execution_id #=> String
+    #   resp.lifecycle_execution.lifecycle_policy_arn #=> String
+    #   resp.lifecycle_execution.resources_impacted_summary.has_impacted_resources #=> Boolean
+    #   resp.lifecycle_execution.state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_execution.state.reason #=> String
+    #   resp.lifecycle_execution.start_time #=> Time
+    #   resp.lifecycle_execution.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetLifecycleExecution AWS API Documentation
+    #
+    # @overload get_lifecycle_execution(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_execution(params = {}, options = {})
+      req = build_request(:get_lifecycle_execution, params)
+      req.send_request(options)
+    end
+
+    # Get details for the specified image lifecycle policy.
+    #
+    # @option params [required, String] :lifecycle_policy_arn
+    #   Specifies the Amazon Resource Name (ARN) of the image lifecycle policy
+    #   resource to get.
+    #
+    # @return [Types::GetLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecyclePolicyResponse#lifecycle_policy #lifecycle_policy} => Types::LifecyclePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_policy({
+    #     lifecycle_policy_arn: "LifecyclePolicyArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy.arn #=> String
+    #   resp.lifecycle_policy.name #=> String
+    #   resp.lifecycle_policy.description #=> String
+    #   resp.lifecycle_policy.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.lifecycle_policy.execution_role #=> String
+    #   resp.lifecycle_policy.resource_type #=> String, one of "AMI_IMAGE", "CONTAINER_IMAGE"
+    #   resp.lifecycle_policy.policy_details #=> Array
+    #   resp.lifecycle_policy.policy_details[0].action.type #=> String, one of "DELETE", "DEPRECATE", "DISABLE"
+    #   resp.lifecycle_policy.policy_details[0].action.include_resources.amis #=> Boolean
+    #   resp.lifecycle_policy.policy_details[0].action.include_resources.snapshots #=> Boolean
+    #   resp.lifecycle_policy.policy_details[0].action.include_resources.containers #=> Boolean
+    #   resp.lifecycle_policy.policy_details[0].filter.type #=> String, one of "AGE", "COUNT"
+    #   resp.lifecycle_policy.policy_details[0].filter.value #=> Integer
+    #   resp.lifecycle_policy.policy_details[0].filter.unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.lifecycle_policy.policy_details[0].filter.retain_at_least #=> Integer
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.tag_map #=> Hash
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.tag_map["TagKey"] #=> String
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.is_public #=> Boolean
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.regions #=> Array
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.regions[0] #=> String
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.shared_accounts #=> Array
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.shared_accounts[0] #=> String
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.last_launched.value #=> Integer
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.last_launched.unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.tag_map #=> Hash
+    #   resp.lifecycle_policy.policy_details[0].exclusion_rules.amis.tag_map["TagKey"] #=> String
+    #   resp.lifecycle_policy.resource_selection.recipes #=> Array
+    #   resp.lifecycle_policy.resource_selection.recipes[0].name #=> String
+    #   resp.lifecycle_policy.resource_selection.recipes[0].semantic_version #=> String
+    #   resp.lifecycle_policy.resource_selection.tag_map #=> Hash
+    #   resp.lifecycle_policy.resource_selection.tag_map["TagKey"] #=> String
+    #   resp.lifecycle_policy.date_created #=> Time
+    #   resp.lifecycle_policy.date_updated #=> Time
+    #   resp.lifecycle_policy.date_last_run #=> Time
+    #   resp.lifecycle_policy.tags #=> Hash
+    #   resp.lifecycle_policy.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetLifecyclePolicy AWS API Documentation
+    #
+    # @overload get_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_policy(params = {}, options = {})
+      req = build_request(:get_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Get the runtime information that was logged for a specific runtime
     # instance of the workflow.
     #
     # @option params [required, String] :workflow_execution_id
@@ -2356,10 +2691,16 @@ module Aws::Imagebuilder
     #   The tags of the component.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token of the component.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::ImportComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2531,7 +2872,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListComponentBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2628,7 +2969,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2701,7 +3042,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListContainerRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2759,7 +3100,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListDistributionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2830,7 +3171,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImageBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2865,7 +3206,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_summary_list[0].os_version #=> String
-    #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
     #   resp.image_summary_list[0].owner #=> String
     #   resp.image_summary_list[0].date_created #=> String
@@ -2874,7 +3215,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].image #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].name #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
-    #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].output_resources.containers #=> Array
@@ -2885,6 +3226,8 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
+    #   resp.image_summary_list[0].deprecation_time #=> Time
+    #   resp.image_summary_list[0].lifecycle_execution_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersions AWS API Documentation
@@ -2908,7 +3251,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImagePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2961,7 +3304,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImagePipelineImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2996,7 +3339,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_summary_list[0].os_version #=> String
-    #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
     #   resp.image_summary_list[0].owner #=> String
     #   resp.image_summary_list[0].date_created #=> String
@@ -3005,7 +3348,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].image #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].name #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
-    #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].output_resources.containers #=> Array
@@ -3016,6 +3359,8 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
+    #   resp.image_summary_list[0].deprecation_time #=> Time
+    #   resp.image_summary_list[0].lifecycle_execution_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImages AWS API Documentation
@@ -3048,7 +3393,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImagePipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3134,7 +3479,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImageRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3207,7 +3552,7 @@ module Aws::Imagebuilder
     #   IDs.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImageScanFindingAggregationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3286,7 +3631,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListImageScanFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3403,7 +3748,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @option params [Boolean] :include_deprecated
@@ -3467,7 +3812,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @return [Types::ListInfrastructureConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3518,6 +3863,185 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # List resources that the runtime instance of the image lifecycle
+    # identified for lifecycle actions.
+    #
+    # @option params [required, String] :lifecycle_execution_id
+    #   Use the unique identifier for a runtime instance of the lifecycle
+    #   policy to get runtime details.
+    #
+    # @option params [String] :parent_resource_id
+    #   You can leave this empty to get a list of Image Builder resources that
+    #   were identified for lifecycle actions.
+    #
+    #   To get a list of associated resources that are impacted for an
+    #   individual resource (the parent), specify its Amazon Resource Name
+    #   (ARN). Associated resources are produced from your image and
+    #   distributed when you run a build, such as AMIs or container images
+    #   stored in ECR repositories.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListLifecycleExecutionResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLifecycleExecutionResourcesResponse#lifecycle_execution_id #lifecycle_execution_id} => String
+    #   * {Types::ListLifecycleExecutionResourcesResponse#lifecycle_execution_state #lifecycle_execution_state} => Types::LifecycleExecutionState
+    #   * {Types::ListLifecycleExecutionResourcesResponse#resources #resources} => Array&lt;Types::LifecycleExecutionResource&gt;
+    #   * {Types::ListLifecycleExecutionResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lifecycle_execution_resources({
+    #     lifecycle_execution_id: "LifecycleExecutionId", # required
+    #     parent_resource_id: "NonEmptyString",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_execution_id #=> String
+    #   resp.lifecycle_execution_state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_execution_state.reason #=> String
+    #   resp.resources #=> Array
+    #   resp.resources[0].account_id #=> String
+    #   resp.resources[0].resource_id #=> String
+    #   resp.resources[0].state.status #=> String, one of "FAILED", "IN_PROGRESS", "SKIPPED", "SUCCESS"
+    #   resp.resources[0].state.reason #=> String
+    #   resp.resources[0].action.name #=> String, one of "AVAILABLE", "DELETE", "DEPRECATE", "DISABLE"
+    #   resp.resources[0].action.reason #=> String
+    #   resp.resources[0].region #=> String
+    #   resp.resources[0].snapshots #=> Array
+    #   resp.resources[0].snapshots[0].snapshot_id #=> String
+    #   resp.resources[0].snapshots[0].state.status #=> String, one of "FAILED", "IN_PROGRESS", "SKIPPED", "SUCCESS"
+    #   resp.resources[0].snapshots[0].state.reason #=> String
+    #   resp.resources[0].image_uris #=> Array
+    #   resp.resources[0].image_uris[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecycleExecutionResources AWS API Documentation
+    #
+    # @overload list_lifecycle_execution_resources(params = {})
+    # @param [Hash] params ({})
+    def list_lifecycle_execution_resources(params = {}, options = {})
+      req = build_request(:list_lifecycle_execution_resources, params)
+      req.send_request(options)
+    end
+
+    # Get the lifecycle runtime history for the specified resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to get a list
+    #   of lifecycle runtime instances.
+    #
+    # @return [Types::ListLifecycleExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLifecycleExecutionsResponse#lifecycle_executions #lifecycle_executions} => Array&lt;Types::LifecycleExecution&gt;
+    #   * {Types::ListLifecycleExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lifecycle_executions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     resource_arn: "ImageBuilderArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_executions #=> Array
+    #   resp.lifecycle_executions[0].lifecycle_execution_id #=> String
+    #   resp.lifecycle_executions[0].lifecycle_policy_arn #=> String
+    #   resp.lifecycle_executions[0].resources_impacted_summary.has_impacted_resources #=> Boolean
+    #   resp.lifecycle_executions[0].state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_executions[0].state.reason #=> String
+    #   resp.lifecycle_executions[0].start_time #=> Time
+    #   resp.lifecycle_executions[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecycleExecutions AWS API Documentation
+    #
+    # @overload list_lifecycle_executions(params = {})
+    # @param [Hash] params ({})
+    def list_lifecycle_executions(params = {}, options = {})
+      req = build_request(:list_lifecycle_executions, params)
+      req.send_request(options)
+    end
+
+    # Get a list of lifecycle policies in your Amazon Web Services account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Streamline results based on one of the following values: `Name`,
+    #   `Status`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLifecyclePoliciesResponse#lifecycle_policy_summary_list #lifecycle_policy_summary_list} => Array&lt;Types::LifecyclePolicySummary&gt;
+    #   * {Types::ListLifecyclePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lifecycle_policies({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_summary_list #=> Array
+    #   resp.lifecycle_policy_summary_list[0].arn #=> String
+    #   resp.lifecycle_policy_summary_list[0].name #=> String
+    #   resp.lifecycle_policy_summary_list[0].description #=> String
+    #   resp.lifecycle_policy_summary_list[0].status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.lifecycle_policy_summary_list[0].execution_role #=> String
+    #   resp.lifecycle_policy_summary_list[0].resource_type #=> String, one of "AMI_IMAGE", "CONTAINER_IMAGE"
+    #   resp.lifecycle_policy_summary_list[0].date_created #=> Time
+    #   resp.lifecycle_policy_summary_list[0].date_updated #=> Time
+    #   resp.lifecycle_policy_summary_list[0].date_last_run #=> Time
+    #   resp.lifecycle_policy_summary_list[0].tags #=> Hash
+    #   resp.lifecycle_policy_summary_list[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecyclePolicies AWS API Documentation
+    #
+    # @overload list_lifecycle_policies(params = {})
+    # @param [Hash] params ({})
+    def list_lifecycle_policies(params = {}, options = {})
+      req = build_request(:list_lifecycle_policies, params)
+      req.send_request(options)
+    end
+
     # Returns the list of tags for the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -3555,7 +4079,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @option params [required, String] :image_build_version_arn
@@ -3615,7 +4139,7 @@ module Aws::Imagebuilder
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the NextToken
+    #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #
     # @option params [required, String] :workflow_execution_id
@@ -3855,10 +4379,16 @@ module Aws::Imagebuilder
     #   manually invoke.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::StartImagePipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3885,6 +4415,93 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def start_image_pipeline_execution(params = {}, options = {})
       req = build_request(:start_image_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Begin asynchronous resource state update for lifecycle changes to the
+    # specified image resources.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Image Builder resource that is updated. The state
+    #   update might also impact associated resources.
+    #
+    # @option params [required, Types::ResourceState] :state
+    #   Indicates the lifecycle action to take for this request.
+    #
+    # @option params [String] :execution_role
+    #   The name or Amazon Resource Name (ARN) of the IAM role that’s used to
+    #   update image state.
+    #
+    # @option params [Types::ResourceStateUpdateIncludeResources] :include_resources
+    #   A list of image resources to update state for.
+    #
+    # @option params [Types::ResourceStateUpdateExclusionRules] :exclusion_rules
+    #   Skip action on the image resource and associated resources if
+    #   specified exclusion rules are met.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :update_at
+    #   The timestamp that indicates when resources are updated by a lifecycle
+    #   action.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::StartResourceStateUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartResourceStateUpdateResponse#lifecycle_execution_id #lifecycle_execution_id} => String
+    #   * {Types::StartResourceStateUpdateResponse#resource_arn #resource_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_resource_state_update({
+    #     resource_arn: "ImageBuildVersionArn", # required
+    #     state: { # required
+    #       status: "AVAILABLE", # accepts AVAILABLE, DELETED, DEPRECATED, DISABLED
+    #     },
+    #     execution_role: "RoleNameOrArn",
+    #     include_resources: {
+    #       amis: false,
+    #       snapshots: false,
+    #       containers: false,
+    #     },
+    #     exclusion_rules: {
+    #       amis: {
+    #         is_public: false,
+    #         regions: ["NonEmptyString"],
+    #         shared_accounts: ["AccountId"],
+    #         last_launched: {
+    #           value: 1, # required
+    #           unit: "DAYS", # required, accepts DAYS, WEEKS, MONTHS, YEARS
+    #         },
+    #         tag_map: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       },
+    #     },
+    #     update_at: Time.now,
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_execution_id #=> String
+    #   resp.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/StartResourceStateUpdate AWS API Documentation
+    #
+    # @overload start_resource_state_update(params = {})
+    # @param [Hash] params ({})
+    def start_resource_state_update(params = {}, options = {})
+      req = build_request(:start_resource_state_update, params)
       req.send_request(options)
     end
 
@@ -3956,10 +4573,16 @@ module Aws::Imagebuilder
     #   The distributions of the distribution configuration.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token of the distribution configuration.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::UpdateDistributionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4096,10 +4719,16 @@ module Aws::Imagebuilder
     #   The status of the image pipeline.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
@@ -4208,10 +4837,16 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Hash<String,String>] :resource_tags
     #   The tags attached to the resource created by Image Builder.
@@ -4282,6 +4917,116 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Update the specified lifecycle policy.
+    #
+    # @option params [required, String] :lifecycle_policy_arn
+    #   The Amazon Resource Name (ARN) of the lifecycle policy resource.
+    #
+    # @option params [String] :description
+    #   Optional description for the lifecycle policy.
+    #
+    # @option params [String] :status
+    #   Indicates whether the lifecycle policy resource is enabled.
+    #
+    # @option params [required, String] :execution_role
+    #   The name of the IAM role that Image Builder should use to update the
+    #   lifecycle policy.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of image resource that the lifecycle policy applies to.
+    #
+    # @option params [required, Array<Types::LifecyclePolicyDetail>] :policy_details
+    #   The configuration details for a lifecycle policy resource.
+    #
+    # @option params [required, Types::LifecyclePolicyResourceSelection] :resource_selection
+    #   Selection criteria for resources that the lifecycle policy applies to.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::UpdateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lifecycle_policy({
+    #     lifecycle_policy_arn: "LifecyclePolicyArn", # required
+    #     description: "NonEmptyString",
+    #     status: "DISABLED", # accepts DISABLED, ENABLED
+    #     execution_role: "RoleNameOrArn", # required
+    #     resource_type: "AMI_IMAGE", # required, accepts AMI_IMAGE, CONTAINER_IMAGE
+    #     policy_details: [ # required
+    #       {
+    #         action: { # required
+    #           type: "DELETE", # required, accepts DELETE, DEPRECATE, DISABLE
+    #           include_resources: {
+    #             amis: false,
+    #             snapshots: false,
+    #             containers: false,
+    #           },
+    #         },
+    #         filter: { # required
+    #           type: "AGE", # required, accepts AGE, COUNT
+    #           value: 1, # required
+    #           unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #           retain_at_least: 1,
+    #         },
+    #         exclusion_rules: {
+    #           tag_map: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #           amis: {
+    #             is_public: false,
+    #             regions: ["NonEmptyString"],
+    #             shared_accounts: ["AccountId"],
+    #             last_launched: {
+    #               value: 1, # required
+    #               unit: "DAYS", # required, accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #             tag_map: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     resource_selection: { # required
+    #       recipes: [
+    #         {
+    #           name: "ResourceName", # required
+    #           semantic_version: "VersionNumber", # required
+    #         },
+    #       ],
+    #       tag_map: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateLifecyclePolicy AWS API Documentation
+    #
+    # @overload update_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def update_lifecycle_policy(params = {}, options = {})
+      req = build_request(:update_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4295,7 +5040,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

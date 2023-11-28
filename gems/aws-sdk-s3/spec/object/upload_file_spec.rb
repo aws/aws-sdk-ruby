@@ -169,6 +169,9 @@ module Aws
           end
 
           it 'reports progress for multipart uploads' do
+            thread = double(value: nil)
+            allow(Thread).to receive(:new).and_yield.and_return(thread)
+
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             expect(client).to receive(:upload_part).exactly(24).times do |args|

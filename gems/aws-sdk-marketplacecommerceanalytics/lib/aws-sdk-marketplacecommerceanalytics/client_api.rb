@@ -94,6 +94,7 @@ module Aws::MarketplaceCommerceAnalytics
         o.name = "StartSupportDataExport"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartSupportDataExportRequest)
         o.output = Shapes::ShapeRef.new(shape: StartSupportDataExportResult)
         o.errors << Shapes::ShapeRef.new(shape: MarketplaceCommerceAnalyticsException)

@@ -830,15 +830,8 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
-    # This API is related to [WebRTC Ingestion][1] and is only available in
-    # the `us-west-2` region.
-    #
     # Returns the most current information about the channel. Specify the
     # `ChannelName` or `ChannelARN` in the input.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html
     #
     # @option params [String] :channel_name
     #   The name of the channel.
@@ -1625,10 +1618,6 @@ module Aws::KinesisVideo
     # in the request body. In the request, you must specify either the
     # `StreamName` or the `StreamARN`.
     #
-    # <note markdown="1"> The retention period that you specify replaces the current value.
-    #
-    #  </note>
-    #
     # This operation requires permission for the
     # `KinesisVideo:UpdateDataRetention` action.
     #
@@ -1663,9 +1652,12 @@ module Aws::KinesisVideo
     #   period.
     #
     # @option params [required, Integer] :data_retention_change_in_hours
-    #   The retention period, in hours. The value you specify replaces the
-    #   current value. The maximum value for this parameter is 87600 (ten
-    #   years).
+    #   The number of hours to adjust the current retention by. The value you
+    #   specify is added to or subtracted from the current value, depending on
+    #   the `operation`.
+    #
+    #   The minimum value for data retention is 0 and the maximum value is
+    #   87600 (ten years).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1738,27 +1730,21 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
-    # This API is related to [WebRTC Ingestion][1] and is only available in
-    # the `us-west-2` region.
-    #
     # Associates a `SignalingChannel` to a stream to store the media. There
-    # are two signaling modes that can specified :
+    # are two signaling modes that you can specify :
     #
-    # * If the `StorageStatus` is disabled, no data will be stored, and the
+    # * If `StorageStatus` is enabled, the data will be stored in the
+    #   `StreamARN` provided. In order for WebRTC Ingestion to work, the
+    #   stream must have data retention enabled.
+    #
+    # * If `StorageStatus` is disabled, no data will be stored, and the
     #   `StreamARN` parameter will not be needed.
-    #
-    # * If the `StorageStatus` is enabled, the data will be stored in the
-    #   `StreamARN` provided.
     #
     # If `StorageStatus` is enabled, direct peer-to-peer (master-viewer)
     # connections no longer occur. Peers connect directly to the storage
     # session. You must call the `JoinStorageSession` API to trigger an SDP
     # offer send and establish a connection between a peer and the storage
     # session.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html
     #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the channel.
@@ -1952,7 +1938,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

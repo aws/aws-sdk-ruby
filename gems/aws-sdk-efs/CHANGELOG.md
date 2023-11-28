@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-11-27)
+------------------
+
+* Feature - Adding support for EFS Replication to existing file system.
+
+1.69.0 (2023-11-27)
+------------------
+
+* Feature - Adding support for EFS Archive lifecycle configuration.
+
+1.68.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2023-09-27)
 ------------------
 

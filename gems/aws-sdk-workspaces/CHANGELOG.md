@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-11-27)
+------------------
+
+* Feature - The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.
+
+1.92.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-10-19)
+------------------
+
+* Feature - Documentation updates for WorkSpaces
+
 1.90.0 (2023-10-12)
 ------------------
 

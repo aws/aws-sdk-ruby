@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-11-08)
+------------------
+
+* Feature - This change allows for 0 length access keys and secret keys for object storage locations. Users can now pass in empty string credentials.
+
+1.68.0 (2023-10-30)
+------------------
+
+* Feature - Platform version changes to support AL1 deprecation initiative.
+
 1.67.0 (2023-09-27)
 ------------------
 

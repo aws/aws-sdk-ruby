@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2023-11-16)
+------------------
+
+* Feature - This release introduces server side composition and recording for stages.
+
 1.11.0 (2023-10-12)
 ------------------
 

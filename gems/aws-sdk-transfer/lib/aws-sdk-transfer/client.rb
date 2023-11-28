@@ -540,6 +540,7 @@ module Aws::Transfer
     #       {
     #         entry: "MapEntry", # required
     #         target: "MapTarget", # required
+    #         type: "FILE", # accepts FILE, DIRECTORY
     #       },
     #     ],
     #     policy: "Policy",
@@ -1130,6 +1131,15 @@ module Aws::Transfer
     #   `update-server --server-id s-1234567890abcdef0
     #   --structured-log-destinations`
     #
+    # @option params [Types::S3StorageOptions] :s3_storage_options
+    #   Specifies whether or not performance for your Amazon S3 directories is
+    #   optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have
+    #   a file target.
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1156,7 +1166,7 @@ module Aws::Transfer
     #       sftp_authentication_methods: "PASSWORD", # accepts PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD, PUBLIC_KEY_AND_PASSWORD
     #     },
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
-    #     logging_role: "Role",
+    #     logging_role: "NullableRole",
     #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
     #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS, AS2
@@ -1188,6 +1198,9 @@ module Aws::Transfer
     #       ],
     #     },
     #     structured_log_destinations: ["Arn"],
+    #     s3_storage_options: {
+    #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1356,6 +1369,7 @@ module Aws::Transfer
     #       {
     #         entry: "MapEntry", # required
     #         target: "MapTarget", # required
+    #         type: "FILE", # accepts FILE, DIRECTORY
     #       },
     #     ],
     #     policy: "Policy",
@@ -1909,6 +1923,7 @@ module Aws::Transfer
     #   resp.access.home_directory_mappings #=> Array
     #   resp.access.home_directory_mappings[0].entry #=> String
     #   resp.access.home_directory_mappings[0].target #=> String
+    #   resp.access.home_directory_mappings[0].type #=> String, one of "FILE", "DIRECTORY"
     #   resp.access.home_directory_type #=> String, one of "PATH", "LOGICAL"
     #   resp.access.policy #=> String
     #   resp.access.posix_profile.uid #=> Integer
@@ -2322,6 +2337,7 @@ module Aws::Transfer
     #   resp.server.workflow_details.on_partial_upload[0].execution_role #=> String
     #   resp.server.structured_log_destinations #=> Array
     #   resp.server.structured_log_destinations[0] #=> String
+    #   resp.server.s3_storage_options.directory_listing_optimization #=> String, one of "ENABLED", "DISABLED"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2373,6 +2389,7 @@ module Aws::Transfer
     #   resp.user.home_directory_mappings #=> Array
     #   resp.user.home_directory_mappings[0].entry #=> String
     #   resp.user.home_directory_mappings[0].target #=> String
+    #   resp.user.home_directory_mappings[0].type #=> String, one of "FILE", "DIRECTORY"
     #   resp.user.home_directory_type #=> String, one of "PATH", "LOGICAL"
     #   resp.user.policy #=> String
     #   resp.user.posix_profile.uid #=> Integer
@@ -3803,6 +3820,7 @@ module Aws::Transfer
     #       {
     #         entry: "MapEntry", # required
     #         target: "MapTarget", # required
+    #         type: "FILE", # accepts FILE, DIRECTORY
     #       },
     #     ],
     #     policy: "Policy",
@@ -4393,6 +4411,15 @@ module Aws::Transfer
     #   `update-server --server-id s-1234567890abcdef0
     #   --structured-log-destinations`
     #
+    # @option params [Types::S3StorageOptions] :s3_storage_options
+    #   Specifies whether or not performance for your Amazon S3 directories is
+    #   optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have
+    #   a file target.
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -4444,6 +4471,9 @@ module Aws::Transfer
     #       ],
     #     },
     #     structured_log_destinations: ["Arn"],
+    #     s3_storage_options: {
+    #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -4590,6 +4620,7 @@ module Aws::Transfer
     #       {
     #         entry: "MapEntry", # required
     #         target: "MapTarget", # required
+    #         type: "FILE", # accepts FILE, DIRECTORY
     #       },
     #     ],
     #     policy: "Policy",
@@ -4630,7 +4661,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

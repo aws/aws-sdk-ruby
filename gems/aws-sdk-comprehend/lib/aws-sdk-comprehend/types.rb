@@ -778,18 +778,29 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
-    #   The Amazon Resource Number (ARN) of the endpoint. For information
-    #   about endpoints, see [Managing endpoints][1].
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #
+    #   For prompt classification, Amazon Comprehend provides the endpoint
+    #   ARN: `zzz`.
+    #
+    #   For custom classification, you create an endpoint for your custom
+    #   model. For more information, see [Using Amazon Comprehend
+    #   endpoints][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
     #   @return [String]
     #
     # @!attribute [rw] bytes
     #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
-    #   You can also use the `Bytes` parameter to input an Amazon Textract
+    #
+    #   When you classify a document using a custom model, you can also use
+    #   the `Bytes` parameter to input an Amazon Textract
     #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   To classify a document using the prompt classifier, use the `Text`
+    #   parameter for input.
     #
     #   Provide the input document as a sequence of base64-encoded bytes. If
     #   your code uses an Amazon Web Services SDK to classify documents, the
@@ -828,6 +839,11 @@ module Aws::Comprehend
     #   exclusive and each document is expected to have only a single class
     #   assigned to it. For example, an animal can be a dog or a cat, but
     #   not both at the same time.
+    #
+    #   For prompt classification, the response includes a single class
+    #   (`UNDESIRED_PROMPT`), along with a confidence score. A higher
+    #   confidence score indicates that the input prompt is undesired in
+    #   nature.
     #   @return [Array<Types::DocumentClass>]
     #
     # @!attribute [rw] labels
@@ -1017,7 +1033,7 @@ module Aws::Comprehend
     # @!attribute [rw] output_data_config
     #   Specifies the location for the output files from a custom classifier
     #   job. This parameter is required for a request that creates a native
-    #   classifier model.
+    #   document model.
     #   @return [Types::DocumentClassifierOutputDataConfig]
     #
     # @!attribute [rw] client_request_token
@@ -1342,7 +1358,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] active_model_arn
     #   To associate an existing model with the flywheel, specify the Amazon
-    #   Resource Number (ARN) of the model version.
+    #   Resource Number (ARN) of the model version. Do not set `TaskConfig`
+    #   or `ModelType` if you specify an `ActiveModelArn`.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -1352,12 +1369,13 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] task_config
-    #   Configuration about the custom classifier associated with the
-    #   flywheel.
+    #   Configuration about the model associated with the flywheel. You need
+    #   to set `TaskConfig` if you are creating a flywheel for a new model.
     #   @return [Types::TaskConfig]
     #
     # @!attribute [rw] model_type
-    #   The model type.
+    #   The model type. You need to set `ModelType` if you are creating a
+    #   flywheel for a new model.
     #   @return [String]
     #
     # @!attribute [rw] data_lake_s3_uri
@@ -2650,6 +2668,41 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @!attribute [rw] text_segments
+    #   A list of up to 10 text strings. The maximum size for the list is 10
+    #   KB.
+    #   @return [Array<Types::TextSegment>]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input text. Currently, English is the only
+    #   supported language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectToxicContentRequest AWS API Documentation
+    #
+    class DetectToxicContentRequest < Struct.new(
+      :text_segments,
+      :language_code)
+      SENSITIVE = [:text_segments]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_list
+    #   Results of the content moderation analysis. Each entry in the
+    #   results list contains a list of toxic content types identified in
+    #   the text, along with a confidence score for each content type. The
+    #   results list also includes a toxicity score for each entry in the
+    #   results list.
+    #   @return [Array<Types::ToxicLabels>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectToxicContentResponse AWS API Documentation
+    #
+    class DetectToxicContentResponse < Struct.new(
+      :result_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the class that categorizes the document being analyzed
     #
     # @!attribute [rw] name
@@ -2676,7 +2729,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Configuration required for a custom classification model.
+    # Configuration required for a document classification model.
     #
     # @!attribute [rw] mode
     #   Classification mode indicates whether the documents are
@@ -2814,7 +2867,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] flywheel_arn
@@ -2843,7 +2896,7 @@ module Aws::Comprehend
     end
 
     # The location of the training documents. This parameter is required in
-    # a request to create a native classifier model.
+    # a request to create a semi-structured document classification model.
     #
     # @!attribute [rw] s3_uri
     #   The S3 URI location of the training documents specified in the S3Uri
@@ -2947,9 +3000,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] test_s3_uri
-    #   This specifies the Amazon S3 location where the test annotations for
-    #   an entity recognizer are located. The URI must be in the same Amazon
-    #   Web Services Region as the API endpoint that you are calling.
+    #   This specifies the Amazon S3 location that contains the test
+    #   annotations for the document classifier. The URI must be in the same
+    #   Amazon Web Services Region as the API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] label_delimiter
@@ -2974,12 +3027,12 @@ module Aws::Comprehend
     # @!attribute [rw] document_type
     #   The type of input documents for training the model. Provide
     #   plain-text documents to create a plain-text model, and provide
-    #   semi-structured documents to create a native model.
+    #   semi-structured documents to create a native document model.
     #   @return [String]
     #
     # @!attribute [rw] documents
     #   The S3 location of the training documents. This parameter is
-    #   required in a request to create a native classifier model.
+    #   required in a request to create a native document model.
     #   @return [Types::DocumentClassifierDocuments]
     #
     # @!attribute [rw] document_reader_config
@@ -3026,7 +3079,7 @@ module Aws::Comprehend
     end
 
     # Provide the location for output data from a custom classifier job.
-    # This field is mandatory if you are training a native classifier model.
+    # This field is mandatory if you are training a native document model.
     #
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object while creating a custom
@@ -3161,7 +3214,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] mode
@@ -4769,8 +4822,7 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] task_config
-    #   Configuration about the custom classifier associated with the
-    #   flywheel.
+    #   Configuration about the model associated with a flywheel.
     #   @return [Types::TaskConfig]
     #
     # @!attribute [rw] data_lake_s3_uri
@@ -6046,7 +6098,7 @@ module Aws::Comprehend
     # entity.
     #
     # For more information about targeted sentiment, see [Targeted
-    # sentiment][1].
+    # sentiment][1] in the *Amazon Comprehend Developer Guide*.
     #
     #
     #
@@ -6092,7 +6144,10 @@ module Aws::Comprehend
     # @!attribute [rw] kms_key_id
     #   ID for the Amazon Web Services Key Management Service (KMS) key that
     #   Amazon Comprehend uses to encrypt the output results from an
-    #   analysis job. The KmsKeyId can be one of the following formats:
+    #   analysis job. Specify the Key Id of a symmetric key, because you
+    #   cannot use an asymmetric key for uploading data to S3.
+    #
+    #   The KmsKeyId can be one of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -7565,7 +7620,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -8289,7 +8344,7 @@ module Aws::Comprehend
     # analysis.
     #
     # For more information about targeted sentiment, see [Targeted
-    # sentiment][1].
+    # sentiment][1] in the *Amazon Comprehend Developer Guide*.
     #
     #
     #
@@ -8324,7 +8379,7 @@ module Aws::Comprehend
     # the mention.
     #
     # For more information about targeted sentiment, see [Targeted
-    # sentiment][1].
+    # sentiment][1] in the *Amazon Comprehend Developer Guide*.
     #
     #
     #
@@ -8379,15 +8434,14 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Configuration about the custom classifier associated with the
-    # flywheel.
+    # Configuration about the model associated with a flywheel.
     #
     # @!attribute [rw] language_code
     #   Language code for the language that the model supports.
     #   @return [String]
     #
     # @!attribute [rw] document_classification_config
-    #   Configuration required for a classification model.
+    #   Configuration required for a document classification model.
     #   @return [Types::DocumentClassificationConfig]
     #
     # @!attribute [rw] entity_recognition_config
@@ -8401,6 +8455,20 @@ module Aws::Comprehend
       :document_classification_config,
       :entity_recognition_config)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One of the of text strings. Each string has a size limit of 1KB.
+    #
+    # @!attribute [rw] text
+    #   The text content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TextSegment AWS API Documentation
+    #
+    class TextSegment < Struct.new(
+      :text)
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -8594,6 +8662,57 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Toxic content analysis result for one string. For more information
+    # about toxicity detection, see [Toxicity detection][1] in the *Amazon
+    # Comprehend Developer Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html
+    #
+    # @!attribute [rw] name
+    #   The name of the toxic content type.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   Model confidence in the detected content type. Value range is zero
+    #   to one, where one is highest confidence.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ToxicContent AWS API Documentation
+    #
+    class ToxicContent < Struct.new(
+      :name,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Toxicity analysis result for one string. For more information about
+    # toxicity detection, see [Toxicity detection][1] in the *Amazon
+    # Comprehend Developer Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html
+    #
+    # @!attribute [rw] labels
+    #   Array of toxic content types identified in the string.
+    #   @return [Array<Types::ToxicContent>]
+    #
+    # @!attribute [rw] toxicity
+    #   Overall toxicity score for the string.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ToxicLabels AWS API Documentation
+    #
+    class ToxicLabels < Struct.new(
+      :labels,
+      :toxicity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8817,7 +8936,7 @@ module Aws::Comprehend
     # the input document:
     #
     # * The document to classify is plain text, but the classifier is a
-    #   native model.
+    #   native document model.
     #
     # * The document to classify is semi-structured, but the classifier is a
     #   plain-text model.

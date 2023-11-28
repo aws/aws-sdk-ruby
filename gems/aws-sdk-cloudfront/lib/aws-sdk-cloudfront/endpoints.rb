@@ -180,6 +180,20 @@ module Aws::CloudFront
       end
     end
 
+    class CreateKeyValueStore
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFront::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateMonitoringSubscription
       def self.build(context)
         unless context.config.regional_endpoint
@@ -404,6 +418,20 @@ module Aws::CloudFront
       end
     end
 
+    class DeleteKeyValueStore
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFront::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteMonitoringSubscription
       def self.build(context)
         unless context.config.regional_endpoint
@@ -503,6 +531,20 @@ module Aws::CloudFront
     end
 
     class DescribeFunction
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFront::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeKeyValueStore
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1132,6 +1174,20 @@ module Aws::CloudFront
       end
     end
 
+    class ListKeyValueStores
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFront::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListOriginAccessControls
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1399,6 +1455,20 @@ module Aws::CloudFront
     end
 
     class UpdateKeyGroup
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFront::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateKeyValueStore
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

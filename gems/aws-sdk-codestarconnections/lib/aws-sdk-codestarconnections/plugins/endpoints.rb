@@ -25,16 +25,17 @@ module Aws::CodeStarconnections
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,18 +61,42 @@ module Aws::CodeStarconnections
             Aws::CodeStarconnections::Endpoints::CreateConnection.build(context)
           when :create_host
             Aws::CodeStarconnections::Endpoints::CreateHost.build(context)
+          when :create_repository_link
+            Aws::CodeStarconnections::Endpoints::CreateRepositoryLink.build(context)
+          when :create_sync_configuration
+            Aws::CodeStarconnections::Endpoints::CreateSyncConfiguration.build(context)
           when :delete_connection
             Aws::CodeStarconnections::Endpoints::DeleteConnection.build(context)
           when :delete_host
             Aws::CodeStarconnections::Endpoints::DeleteHost.build(context)
+          when :delete_repository_link
+            Aws::CodeStarconnections::Endpoints::DeleteRepositoryLink.build(context)
+          when :delete_sync_configuration
+            Aws::CodeStarconnections::Endpoints::DeleteSyncConfiguration.build(context)
           when :get_connection
             Aws::CodeStarconnections::Endpoints::GetConnection.build(context)
           when :get_host
             Aws::CodeStarconnections::Endpoints::GetHost.build(context)
+          when :get_repository_link
+            Aws::CodeStarconnections::Endpoints::GetRepositoryLink.build(context)
+          when :get_repository_sync_status
+            Aws::CodeStarconnections::Endpoints::GetRepositorySyncStatus.build(context)
+          when :get_resource_sync_status
+            Aws::CodeStarconnections::Endpoints::GetResourceSyncStatus.build(context)
+          when :get_sync_blocker_summary
+            Aws::CodeStarconnections::Endpoints::GetSyncBlockerSummary.build(context)
+          when :get_sync_configuration
+            Aws::CodeStarconnections::Endpoints::GetSyncConfiguration.build(context)
           when :list_connections
             Aws::CodeStarconnections::Endpoints::ListConnections.build(context)
           when :list_hosts
             Aws::CodeStarconnections::Endpoints::ListHosts.build(context)
+          when :list_repository_links
+            Aws::CodeStarconnections::Endpoints::ListRepositoryLinks.build(context)
+          when :list_repository_sync_definitions
+            Aws::CodeStarconnections::Endpoints::ListRepositorySyncDefinitions.build(context)
+          when :list_sync_configurations
+            Aws::CodeStarconnections::Endpoints::ListSyncConfigurations.build(context)
           when :list_tags_for_resource
             Aws::CodeStarconnections::Endpoints::ListTagsForResource.build(context)
           when :tag_resource
@@ -80,6 +105,12 @@ module Aws::CodeStarconnections
             Aws::CodeStarconnections::Endpoints::UntagResource.build(context)
           when :update_host
             Aws::CodeStarconnections::Endpoints::UpdateHost.build(context)
+          when :update_repository_link
+            Aws::CodeStarconnections::Endpoints::UpdateRepositoryLink.build(context)
+          when :update_sync_blocker
+            Aws::CodeStarconnections::Endpoints::UpdateSyncBlocker.build(context)
+          when :update_sync_configuration
+            Aws::CodeStarconnections::Endpoints::UpdateSyncConfiguration.build(context)
           end
         end
       end

@@ -25,16 +25,17 @@ module Aws::SSMIncidents
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -56,6 +57,8 @@ module Aws::SSMIncidents
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_incident_findings
+            Aws::SSMIncidents::Endpoints::BatchGetIncidentFindings.build(context)
           when :create_replication_set
             Aws::SSMIncidents::Endpoints::CreateReplicationSet.build(context)
           when :create_response_plan
@@ -82,6 +85,8 @@ module Aws::SSMIncidents
             Aws::SSMIncidents::Endpoints::GetResponsePlan.build(context)
           when :get_timeline_event
             Aws::SSMIncidents::Endpoints::GetTimelineEvent.build(context)
+          when :list_incident_findings
+            Aws::SSMIncidents::Endpoints::ListIncidentFindings.build(context)
           when :list_incident_records
             Aws::SSMIncidents::Endpoints::ListIncidentRecords.build(context)
           when :list_related_items

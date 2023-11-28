@@ -45,6 +45,11 @@ module Aws::Kinesis
   #
   #   @return [String]
   #
+  # @!attribute resource_arn
+  #   The ARN of the Kinesis resource
+  #
+  #   @return [String]
+  #
   EndpointParameters = Struct.new(
     :region,
     :use_dual_stack,
@@ -53,6 +58,7 @@ module Aws::Kinesis
     :stream_arn,
     :operation_type,
     :consumer_arn,
+    :resource_arn,
   ) do
     include Aws::Structure
 
@@ -66,6 +72,7 @@ module Aws::Kinesis
         'StreamARN' => :stream_arn,
         'OperationType' => :operation_type,
         'ConsumerARN' => :consumer_arn,
+        'ResourceARN' => :resource_arn,
       }.freeze
     end
 
@@ -85,6 +92,7 @@ module Aws::Kinesis
       self[:stream_arn] = options[:stream_arn]
       self[:operation_type] = options[:operation_type]
       self[:consumer_arn] = options[:consumer_arn]
+      self[:resource_arn] = options[:resource_arn]
     end
   end
 end

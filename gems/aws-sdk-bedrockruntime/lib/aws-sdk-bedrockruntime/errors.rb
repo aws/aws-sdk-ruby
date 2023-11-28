@@ -129,13 +129,13 @@ module Aws::BedrockRuntime
       end
 
       # @return [String]
-      def original_message
-        @data[:original_message]
+      def original_status_code
+        @data[:original_status_code]
       end
 
       # @return [String]
-      def original_status_code
-        @data[:original_status_code]
+      def original_message
+        @data[:original_message]
       end
     end
 

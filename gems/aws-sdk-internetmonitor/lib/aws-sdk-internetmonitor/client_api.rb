@@ -23,10 +23,17 @@ module Aws::InternetMonitor
     DeleteMonitorInput = Shapes::StructureShape.new(name: 'DeleteMonitorInput')
     DeleteMonitorOutput = Shapes::StructureShape.new(name: 'DeleteMonitorOutput')
     Double = Shapes::FloatShape.new(name: 'Double')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterParameter = Shapes::StructureShape.new(name: 'FilterParameter')
+    FilterParameters = Shapes::ListShape.new(name: 'FilterParameters')
     GetHealthEventInput = Shapes::StructureShape.new(name: 'GetHealthEventInput')
     GetHealthEventOutput = Shapes::StructureShape.new(name: 'GetHealthEventOutput')
     GetMonitorInput = Shapes::StructureShape.new(name: 'GetMonitorInput')
     GetMonitorOutput = Shapes::StructureShape.new(name: 'GetMonitorOutput')
+    GetQueryResultsInput = Shapes::StructureShape.new(name: 'GetQueryResultsInput')
+    GetQueryResultsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsOutput')
+    GetQueryStatusInput = Shapes::StructureShape.new(name: 'GetQueryStatusInput')
+    GetQueryStatusOutput = Shapes::StructureShape.new(name: 'GetQueryStatusOutput')
     HealthEvent = Shapes::StructureShape.new(name: 'HealthEvent')
     HealthEventImpactType = Shapes::StringShape.new(name: 'HealthEventImpactType')
     HealthEventList = Shapes::ListShape.new(name: 'HealthEventList')
@@ -61,14 +68,26 @@ module Aws::InternetMonitor
     NetworkImpairment = Shapes::StructureShape.new(name: 'NetworkImpairment')
     NetworkList = Shapes::ListShape.new(name: 'NetworkList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Operator = Shapes::StringShape.new(name: 'Operator')
     Percentage = Shapes::FloatShape.new(name: 'Percentage')
     PerformanceMeasurement = Shapes::StructureShape.new(name: 'PerformanceMeasurement')
+    QueryData = Shapes::ListShape.new(name: 'QueryData')
+    QueryField = Shapes::StructureShape.new(name: 'QueryField')
+    QueryFields = Shapes::ListShape.new(name: 'QueryFields')
+    QueryMaxResults = Shapes::IntegerShape.new(name: 'QueryMaxResults')
+    QueryRow = Shapes::ListShape.new(name: 'QueryRow')
+    QueryStatus = Shapes::StringShape.new(name: 'QueryStatus')
+    QueryType = Shapes::StringShape.new(name: 'QueryType')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoundTripTime = Shapes::StructureShape.new(name: 'RoundTripTime')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     S3ConfigBucketNameString = Shapes::StringShape.new(name: 'S3ConfigBucketNameString')
     SetOfARNs = Shapes::ListShape.new(name: 'SetOfARNs')
+    StartQueryInput = Shapes::StructureShape.new(name: 'StartQueryInput')
+    StartQueryOutput = Shapes::StructureShape.new(name: 'StartQueryOutput')
+    StopQueryInput = Shapes::StructureShape.new(name: 'StopQueryInput')
+    StopQueryOutput = Shapes::StructureShape.new(name: 'StopQueryOutput')
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -120,6 +139,15 @@ module Aws::InternetMonitor
 
     DeleteMonitorOutput.struct_class = Types::DeleteMonitorOutput
 
+    FilterList.member = Shapes::ShapeRef.new(shape: String)
+
+    FilterParameter.add_member(:field, Shapes::ShapeRef.new(shape: String, location_name: "Field"))
+    FilterParameter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
+    FilterParameter.add_member(:values, Shapes::ShapeRef.new(shape: FilterList, location_name: "Values"))
+    FilterParameter.struct_class = Types::FilterParameter
+
+    FilterParameters.member = Shapes::ShapeRef.new(shape: FilterParameter)
+
     GetHealthEventInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
     GetHealthEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: HealthEventName, required: true, location: "uri", location_name: "EventId"))
     GetHealthEventInput.struct_class = Types::GetHealthEventInput
@@ -154,6 +182,24 @@ module Aws::InternetMonitor
     GetMonitorOutput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
     GetMonitorOutput.add_member(:health_events_config, Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
     GetMonitorOutput.struct_class = Types::GetMonitorOutput
+
+    GetQueryResultsInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    GetQueryResultsInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "QueryId"))
+    GetQueryResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    GetQueryResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryMaxResults, location: "querystring", location_name: "MaxResults"))
+    GetQueryResultsInput.struct_class = Types::GetQueryResultsInput
+
+    GetQueryResultsOutput.add_member(:fields, Shapes::ShapeRef.new(shape: QueryFields, required: true, location_name: "Fields"))
+    GetQueryResultsOutput.add_member(:data, Shapes::ShapeRef.new(shape: QueryData, required: true, location_name: "Data"))
+    GetQueryResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetQueryResultsOutput.struct_class = Types::GetQueryResultsOutput
+
+    GetQueryStatusInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    GetQueryStatusInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "QueryId"))
+    GetQueryStatusInput.struct_class = Types::GetQueryStatusInput
+
+    GetQueryStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, required: true, location_name: "Status"))
+    GetQueryStatusOutput.struct_class = Types::GetQueryStatusOutput
 
     HealthEvent.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
     HealthEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: HealthEventName, required: true, location_name: "EventId"))
@@ -270,6 +316,16 @@ module Aws::InternetMonitor
     PerformanceMeasurement.add_member(:round_trip_time, Shapes::ShapeRef.new(shape: RoundTripTime, location_name: "RoundTripTime"))
     PerformanceMeasurement.struct_class = Types::PerformanceMeasurement
 
+    QueryData.member = Shapes::ShapeRef.new(shape: QueryRow)
+
+    QueryField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    QueryField.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    QueryField.struct_class = Types::QueryField
+
+    QueryFields.member = Shapes::ShapeRef.new(shape: QueryField)
+
+    QueryRow.member = Shapes::ShapeRef.new(shape: String)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -284,6 +340,22 @@ module Aws::InternetMonitor
     S3Config.struct_class = Types::S3Config
 
     SetOfARNs.member = Shapes::ShapeRef.new(shape: Arn)
+
+    StartQueryInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    StartQueryInput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "StartTime"))
+    StartQueryInput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "EndTime"))
+    StartQueryInput.add_member(:query_type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "QueryType"))
+    StartQueryInput.add_member(:filter_parameters, Shapes::ShapeRef.new(shape: FilterParameters, location_name: "FilterParameters"))
+    StartQueryInput.struct_class = Types::StartQueryInput
+
+    StartQueryOutput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueryId"))
+    StartQueryOutput.struct_class = Types::StartQueryOutput
+
+    StopQueryInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    StopQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "QueryId"))
+    StopQueryInput.struct_class = Types::StopQueryInput
+
+    StopQueryOutput.struct_class = Types::StopQueryOutput
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -394,6 +466,38 @@ module Aws::InternetMonitor
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_query_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryResults"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryResultsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryResultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_query_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:list_health_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHealthEvents"
         o.http_method = "GET"
@@ -441,6 +545,32 @@ module Aws::InternetMonitor
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:start_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20210603/Monitors/{MonitorName}/Queries"
+        o.input = Shapes::ShapeRef.new(shape: StartQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: StartQueryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:stop_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopQuery"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}"
+        o.input = Shapes::ShapeRef.new(shape: StopQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: StopQueryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

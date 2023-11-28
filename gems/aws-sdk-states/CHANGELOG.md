@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-11-27)
+------------------
+
+* Feature - Adds new TestState operation which accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine.
+
+1.61.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2023-11-14)
+------------------
+
+* Feature - This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.
+
 1.59.0 (2023-09-27)
 ------------------
 

@@ -385,6 +385,38 @@ module Aws::Pipes
       include Aws::Structure
     end
 
+    # The Amazon CloudWatch Logs logging configuration settings for the
+    # pipe.
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Web Services Resource Name (ARN) for the CloudWatch log
+    #   group to which EventBridge sends the log records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CloudwatchLogsLogDestination AWS API Documentation
+    #
+    class CloudwatchLogsLogDestination < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon CloudWatch Logs logging configuration settings for the
+    # pipe.
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Web Services Resource Name (ARN) for the CloudWatch log
+    #   group to which EventBridge sends the log records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CloudwatchLogsLogDestinationParameters AWS API Documentation
+    #
+    class CloudwatchLogsLogDestinationParameters < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An action you attempted resulted in an exception.
     #
     # @!attribute [rw] message
@@ -424,6 +456,10 @@ module Aws::Pipes
     #   The parameters required to set up enrichment on your pipe.
     #   @return [Types::PipeEnrichmentParameters]
     #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfigurationParameters]
+    #
     # @!attribute [rw] name
     #   The name of the pipe.
     #   @return [String]
@@ -450,6 +486,14 @@ module Aws::Pipes
     #
     # @!attribute [rw] target_parameters
     #   The parameters required to set up a target for your pipe.
+    #
+    #   For more information about pipe target parameters, including how to
+    #   use dynamic path parameters, see [Target parameters][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CreatePipeRequest AWS API Documentation
@@ -459,6 +503,7 @@ module Aws::Pipes
       :desired_state,
       :enrichment,
       :enrichment_parameters,
+      :log_configuration,
       :name,
       :role_arn,
       :source,
@@ -516,8 +561,10 @@ module Aws::Pipes
     # dead-letter queue configuration.
     #
     # @!attribute [rw] arn
-    #   The ARN of the Amazon SQS queue specified as the target for the
-    #   dead-letter queue.
+    #   The ARN of the specified target for the dead-letter queue.
+    #
+    #   For Amazon Kinesis stream and Amazon DynamoDB stream sources,
+    #   specify either an Amazon SNS topic or Amazon SQS queue ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DeadLetterConfig AWS API Documentation
@@ -631,6 +678,10 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfiguration]
+    #
     # @!attribute [rw] name
     #   The name of the pipe.
     #   @return [String]
@@ -661,6 +712,14 @@ module Aws::Pipes
     #
     # @!attribute [rw] target_parameters
     #   The parameters required to set up a target for your pipe.
+    #
+    #   For more information about pipe target parameters, including how to
+    #   use dynamic path parameters, see [Target parameters][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DescribePipeResponse AWS API Documentation
@@ -674,6 +733,7 @@ module Aws::Pipes
       :enrichment,
       :enrichment_parameters,
       :last_modified_time,
+      :log_configuration,
       :name,
       :role_arn,
       :source,
@@ -1011,9 +1071,13 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # The collection of event patterns used to filter events. For more
-    # information, see [Events and Event Patterns][1] in the *Amazon
-    # EventBridge User Guide*.
+    # The collection of event patterns used to filter events.
+    #
+    # To remove a filter, specify a `FilterCriteria` object with an empty
+    # array of `Filter` objects.
+    #
+    # For more information, see [Events and Event Patterns][1] in the
+    # *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -1027,6 +1091,39 @@ module Aws::Pipes
     #
     class FilterCriteria < Struct.new(
       :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Kinesis Data Firehose logging configuration settings for
+    # the pipe.
+    #
+    # @!attribute [rw] delivery_stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery
+    #   stream to which EventBridge delivers the pipe log records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/FirehoseLogDestination AWS API Documentation
+    #
+    class FirehoseLogDestination < Struct.new(
+      :delivery_stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Kinesis Data Firehose logging configuration settings for
+    # the pipe.
+    #
+    # @!attribute [rw] delivery_stream_arn
+    #   Specifies the Amazon Resource Name (ARN) of the Kinesis Data
+    #   Firehose delivery stream to which EventBridge delivers the pipe log
+    #   records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/FirehoseLogDestinationParameters AWS API Documentation
+    #
+    class FirehoseLogDestinationParameters < Struct.new(
+      :delivery_stream_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1345,6 +1442,8 @@ module Aws::Pipes
     #   see [The JavaScript Object Notation (JSON) Data Interchange
     #   Format][1].
     #
+    #   To remove an input template, specify an empty string.
+    #
     #
     #
     #   [1]: http://www.rfc-editor.org/rfc/rfc7159.txt
@@ -1356,6 +1455,132 @@ module Aws::Pipes
       :http_parameters,
       :input_template)
       SENSITIVE = [:input_template]
+      include Aws::Structure
+    end
+
+    # The logging configuration settings for the pipe.
+    #
+    # @!attribute [rw] cloudwatch_logs_log_destination
+    #   The Amazon CloudWatch Logs logging configuration settings for the
+    #   pipe.
+    #   @return [Types::CloudwatchLogsLogDestination]
+    #
+    # @!attribute [rw] firehose_log_destination
+    #   The Amazon Kinesis Data Firehose logging configuration settings for
+    #   the pipe.
+    #   @return [Types::FirehoseLogDestination]
+    #
+    # @!attribute [rw] include_execution_data
+    #   Whether the execution data (specifically, the `payload`,
+    #   `awsRequest`, and `awsResponse` fields) is included in the log
+    #   messages for this pipe.
+    #
+    #   This applies to all log destinations for the pipe.
+    #
+    #   For more information, see [Including execution data in logs][1] in
+    #   the *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] level
+    #   The level of logging detail to include. This applies to all log
+    #   destinations for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_log_destination
+    #   The Amazon S3 logging configuration settings for the pipe.
+    #   @return [Types::S3LogDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeLogConfiguration AWS API Documentation
+    #
+    class PipeLogConfiguration < Struct.new(
+      :cloudwatch_logs_log_destination,
+      :firehose_log_destination,
+      :include_execution_data,
+      :level,
+      :s3_log_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the logging configuration settings for the pipe.
+    #
+    # When you call `UpdatePipe`, EventBridge updates the fields in the
+    # `PipeLogConfigurationParameters` object atomically as one and
+    # overrides existing values. This is by design. If you don't specify an
+    # optional field in any of the Amazon Web Services service parameters
+    # objects (`CloudwatchLogsLogDestinationParameters`,
+    # `FirehoseLogDestinationParameters`, or `S3LogDestinationParameters`),
+    # EventBridge sets that field to its system-default value during the
+    # update.
+    #
+    # For example, suppose when you created the pipe you specified a Kinesis
+    # Data Firehose stream log destination. You then update the pipe to add
+    # an Amazon S3 log destination. In addition to specifying the
+    # `S3LogDestinationParameters` for the new log destination, you must
+    # also specify the fields in the `FirehoseLogDestinationParameters`
+    # object in order to retain the Kinesis Data Firehose stream log
+    # destination.
+    #
+    # For more information on generating pipe log records, see [Log
+    # EventBridge Pipes](eventbridge/latest/userguide/eb-pipes-logs.html) in
+    # the *Amazon EventBridge User Guide*.
+    #
+    # @!attribute [rw] cloudwatch_logs_log_destination
+    #   The Amazon CloudWatch Logs logging configuration settings for the
+    #   pipe.
+    #   @return [Types::CloudwatchLogsLogDestinationParameters]
+    #
+    # @!attribute [rw] firehose_log_destination
+    #   The Amazon Kinesis Data Firehose logging configuration settings for
+    #   the pipe.
+    #   @return [Types::FirehoseLogDestinationParameters]
+    #
+    # @!attribute [rw] include_execution_data
+    #   Specify `ON` to include the execution data (specifically, the
+    #   `payload` and `awsRequest` fields) in the log messages for this
+    #   pipe.
+    #
+    #   This applies to all log destinations for the pipe.
+    #
+    #   For more information, see [Including execution data in logs][1] in
+    #   the *Amazon EventBridge User Guide*.
+    #
+    #   The default is `OFF`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] level
+    #   The level of logging detail to include. This applies to all log
+    #   destinations for the pipe.
+    #
+    #   For more information, see [Specifying EventBridge Pipes log
+    #   level][1] in the *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_log_destination
+    #   The Amazon S3 logging configuration settings for the pipe.
+    #   @return [Types::S3LogDestinationParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeLogConfigurationParameters AWS API Documentation
+    #
+    class PipeLogConfigurationParameters < Struct.new(
+      :cloudwatch_logs_log_destination,
+      :firehose_log_destination,
+      :include_execution_data,
+      :level,
+      :s3_log_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1564,9 +1789,13 @@ module Aws::Pipes
     #   @return [Types::PipeSourceDynamoDBStreamParameters]
     #
     # @!attribute [rw] filter_criteria
-    #   The collection of event patterns used to filter events. For more
-    #   information, see [Events and Event Patterns][1] in the *Amazon
-    #   EventBridge User Guide*.
+    #   The collection of event patterns used to filter events.
+    #
+    #   To remove a filter, specify a `FilterCriteria` object with an empty
+    #   array of `Filter` objects.
+    #
+    #   For more information, see [Events and Event Patterns][1] in the
+    #   *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -1953,8 +2182,6 @@ module Aws::Pipes
     #   The URL subdomain of the endpoint. For example, if the URL for
     #   Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then
     #   the EndpointId is `abcde.veo`.
-    #
-    #   When using Java, you must include `auth-crt` on the class path.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -2017,7 +2244,7 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # The parameters for using a Kinesis stream as a source.
+    # The parameters for using a Kinesis stream as a target.
     #
     # @!attribute [rw] partition_key
     #   Determines which shard in the stream the data record is assigned to.
@@ -2042,19 +2269,24 @@ module Aws::Pipes
     # The parameters for using a Lambda function as a target.
     #
     # @!attribute [rw] invocation_type
-    #   Choose from the following options.
+    #   Specify whether to invoke the function synchronously or
+    #   asynchronously.
     #
-    #   * `RequestResponse` (default) - Invoke the function synchronously.
-    #     Keep the connection open until the function returns a response or
-    #     times out. The API response includes the function response and
-    #     additional data.
+    #   * `REQUEST_RESPONSE` (default) - Invoke synchronously. This
+    #     corresponds to the `RequestResponse` option in the
+    #     `InvocationType` parameter for the Lambda [Invoke][1] API.
     #
-    #   * `Event` - Invoke the function asynchronously. Send events that
-    #     fail multiple times to the function's dead-letter queue (if it's
-    #     configured). The API response only includes a status code.
+    #   * `FIRE_AND_FORGET` - Invoke asynchronously. This corresponds to the
+    #     `Event` option in the `InvocationType` parameter for the Lambda
+    #     [Invoke][1] API.
     #
-    #   * `DryRun` - Validate parameter values and verify that the user or
-    #     role has permission to invoke the function.
+    #   For more information, see [Invocation types][2] in the *Amazon
+    #   EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetLambdaFunctionParameters AWS API Documentation
@@ -2066,6 +2298,14 @@ module Aws::Pipes
     end
 
     # The parameters required to set up a target for your pipe.
+    #
+    # For more information about pipe target parameters, including how to
+    # use dynamic path parameters, see [Target parameters][1] in the *Amazon
+    # EventBridge User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
     # @!attribute [rw] batch_job_parameters
     #   The parameters for using an Batch job as a target.
@@ -2093,13 +2333,15 @@ module Aws::Pipes
     #   event itself is passed to the target. For more information, see [The
     #   JavaScript Object Notation (JSON) Data Interchange Format][1].
     #
+    #   To remove an input template, specify an empty string.
+    #
     #
     #
     #   [1]: http://www.rfc-editor.org/rfc/rfc7159.txt
     #   @return [String]
     #
     # @!attribute [rw] kinesis_stream_parameters
-    #   The parameters for using a Kinesis stream as a source.
+    #   The parameters for using a Kinesis stream as a target.
     #   @return [Types::PipeTargetKinesisStreamParameters]
     #
     # @!attribute [rw] lambda_function_parameters
@@ -2109,7 +2351,7 @@ module Aws::Pipes
     # @!attribute [rw] redshift_data_parameters
     #   These are custom parameters to be used when the target is a Amazon
     #   Redshift cluster to invoke the Amazon Redshift Data API
-    #   ExecuteStatement.
+    #   BatchExecuteStatement.
     #   @return [Types::PipeTargetRedshiftDataParameters]
     #
     # @!attribute [rw] sage_maker_pipeline_parameters
@@ -2117,7 +2359,7 @@ module Aws::Pipes
     #   @return [Types::PipeTargetSageMakerPipelineParameters]
     #
     # @!attribute [rw] sqs_queue_parameters
-    #   The parameters for using a Amazon SQS stream as a source.
+    #   The parameters for using a Amazon SQS stream as a target.
     #   @return [Types::PipeTargetSqsQueueParameters]
     #
     # @!attribute [rw] step_function_state_machine_parameters
@@ -2145,7 +2387,7 @@ module Aws::Pipes
 
     # These are custom parameters to be used when the target is a Amazon
     # Redshift cluster to invoke the Amazon Redshift Data API
-    # ExecuteStatement.
+    # BatchExecuteStatement.
     #
     # @!attribute [rw] database
     #   The name of the database. Required when authenticating using
@@ -2159,7 +2401,7 @@ module Aws::Pipes
     #
     # @!attribute [rw] secret_manager_arn
     #   The name or ARN of the secret that enables access to the database.
-    #   Required when authenticating using SageMaker.
+    #   Required when authenticating using Secrets Manager.
     #   @return [String]
     #
     # @!attribute [rw] sqls
@@ -2204,7 +2446,7 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # The parameters for using a Amazon SQS stream as a source.
+    # The parameters for using a Amazon SQS stream as a target.
     #
     # @!attribute [rw] message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) queues.
@@ -2228,7 +2470,29 @@ module Aws::Pipes
     # The parameters for using a Step Functions state machine as a target.
     #
     # @!attribute [rw] invocation_type
-    #   Specify whether to wait for the state machine to finish or not.
+    #   Specify whether to invoke the Step Functions state machine
+    #   synchronously or asynchronously.
+    #
+    #   * `REQUEST_RESPONSE` (default) - Invoke synchronously. For more
+    #     information, see [StartSyncExecution][1] in the *Step Functions
+    #     API Reference*.
+    #
+    #     <note markdown="1"> `REQUEST_RESPONSE` is not supported for `STANDARD` state machine
+    #     workflows.
+    #
+    #      </note>
+    #
+    #   * `FIRE_AND_FORGET` - Invoke asynchronously. For more information,
+    #     see [StartExecution][2] in the *Step Functions API Reference*.
+    #
+    #   For more information, see [Invocation types][3] in the *Amazon
+    #   EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html
+    #   [2]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html
+    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetStateMachineParameters AWS API Documentation
@@ -2309,6 +2573,107 @@ module Aws::Pipes
       :field,
       :type)
       SENSITIVE = [:field]
+      include Aws::Structure
+    end
+
+    # The Amazon S3 logging configuration settings for the pipe.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the Amazon S3 bucket to which EventBridge delivers the
+    #   log records for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner
+    #   The Amazon Web Services account that owns the Amazon S3 bucket to
+    #   which EventBridge delivers the log records for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format EventBridge uses for the log records.
+    #
+    #   * `json`: JSON
+    #
+    #   * `plain`: Plain text
+    #
+    #   * `w3c`: [W3C extended logging file format][1]
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/WD-logfile
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix text with which to begin Amazon S3 log object names.
+    #
+    #   For more information, see [Organizing objects using prefixes][1] in
+    #   the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/S3LogDestination AWS API Documentation
+    #
+    class S3LogDestination < Struct.new(
+      :bucket_name,
+      :bucket_owner,
+      :output_format,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 logging configuration settings for the pipe.
+    #
+    # @!attribute [rw] bucket_name
+    #   Specifies the name of the Amazon S3 bucket to which EventBridge
+    #   delivers the log records for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner
+    #   Specifies the Amazon Web Services account that owns the Amazon S3
+    #   bucket to which EventBridge delivers the log records for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   How EventBridge should format the log records.
+    #
+    #   * `json`: JSON
+    #
+    #   * `plain`: Plain text
+    #
+    #   * `w3c`: [W3C extended logging file format][1]
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/WD-logfile
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   Specifies any prefix text with which to begin Amazon S3 log object
+    #   names.
+    #
+    #   You can use prefixes to organize the data that you store in Amazon
+    #   S3 buckets. A prefix is a string of characters at the beginning of
+    #   the object key name. A prefix can be any length, subject to the
+    #   maximum length of the object key name (1,024 bytes). For more
+    #   information, see [Organizing objects using prefixes][1] in the
+    #   *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/S3LogDestinationParameters AWS API Documentation
+    #
+    class S3LogDestinationParameters < Struct.new(
+      :bucket_name,
+      :bucket_owner,
+      :output_format,
+      :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2648,6 +3013,10 @@ module Aws::Pipes
     #   The parameters required to set up enrichment on your pipe.
     #   @return [Types::PipeEnrichmentParameters]
     #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfigurationParameters]
+    #
     # @!attribute [rw] name
     #   The name of the pipe.
     #   @return [String]
@@ -2666,6 +3035,14 @@ module Aws::Pipes
     #
     # @!attribute [rw] target_parameters
     #   The parameters required to set up a target for your pipe.
+    #
+    #   For more information about pipe target parameters, including how to
+    #   use dynamic path parameters, see [Target parameters][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeRequest AWS API Documentation
@@ -2675,6 +3052,7 @@ module Aws::Pipes
       :desired_state,
       :enrichment,
       :enrichment_parameters,
+      :log_configuration,
       :name,
       :role_arn,
       :source_parameters,
@@ -2895,9 +3273,13 @@ module Aws::Pipes
     #   @return [Types::UpdatePipeSourceDynamoDBStreamParameters]
     #
     # @!attribute [rw] filter_criteria
-    #   The collection of event patterns used to filter events. For more
-    #   information, see [Events and Event Patterns][1] in the *Amazon
-    #   EventBridge User Guide*.
+    #   The collection of event patterns used to filter events.
+    #
+    #   To remove a filter, specify a `FilterCriteria` object with an empty
+    #   array of `Filter` objects.
+    #
+    #   For more information, see [Events and Event Patterns][1] in the
+    #   *Amazon EventBridge User Guide*.
     #
     #
     #

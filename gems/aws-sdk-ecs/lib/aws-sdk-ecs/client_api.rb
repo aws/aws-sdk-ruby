@@ -60,6 +60,7 @@ module Aws::ECS
     Clusters = Shapes::ListShape.new(name: 'Clusters')
     Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     CompatibilityList = Shapes::ListShape.new(name: 'CompatibilityList')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Connectivity = Shapes::StringShape.new(name: 'Connectivity')
     Container = Shapes::StructureShape.new(name: 'Container')
     ContainerCondition = Shapes::StringShape.new(name: 'ContainerCondition')
@@ -266,6 +267,7 @@ module Aws::ECS
     RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
     RequiresAttributes = Shapes::ListShape.new(name: 'RequiresAttributes')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceIds = Shapes::ListShape.new(name: 'ResourceIds')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
@@ -303,6 +305,7 @@ module Aws::ECS
     Session = Shapes::StructureShape.new(name: 'Session')
     Setting = Shapes::StructureShape.new(name: 'Setting')
     SettingName = Shapes::StringShape.new(name: 'SettingName')
+    SettingType = Shapes::StringShape.new(name: 'SettingType')
     Settings = Shapes::ListShape.new(name: 'Settings')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StabilityStatus = Shapes::StringShape.new(name: 'StabilityStatus')
@@ -500,6 +503,9 @@ module Aws::ECS
     Clusters.member = Shapes::ShapeRef.new(shape: Cluster)
 
     CompatibilityList.member = Shapes::ShapeRef.new(shape: Compatibility)
+
+    ConflictException.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIds, location_name: "resourceIds"))
+    ConflictException.struct_class = Types::ConflictException
 
     Container.add_member(:container_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerArn"))
     Container.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
@@ -1327,6 +1333,8 @@ module Aws::ECS
     Resource.add_member(:string_set_value, Shapes::ShapeRef.new(shape: StringList, location_name: "stringSetValue"))
     Resource.struct_class = Types::Resource
 
+    ResourceIds.member = Shapes::ShapeRef.new(shape: String)
+
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1356,6 +1364,7 @@ module Aws::ECS
     RunTaskRequest.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     RunTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RunTaskRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
+    RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     RunTaskRequest.struct_class = Types::RunTaskRequest
 
     RunTaskResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, location_name: "tasks"))
@@ -1469,6 +1478,7 @@ module Aws::ECS
     Setting.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, location_name: "name"))
     Setting.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Setting.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
+    Setting.add_member(:type, Shapes::ShapeRef.new(shape: SettingType, location_name: "type"))
     Setting.struct_class = Types::Setting
 
     Settings.member = Shapes::ShapeRef.new(shape: Setting)
@@ -2389,6 +2399,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BlockedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:start_task, Seahorse::Model::Operation.new.tap do |o|

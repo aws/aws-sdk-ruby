@@ -69,12 +69,12 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Bedrock can
-    #   assume to perform tasks on your behalf. For example, during model
-    #   training, Bedrock needs your permission to read input data from an
-    #   S3 bucket, write model artifacts to an S3 bucket. To pass this role
-    #   to Bedrock, the caller of this API must have the `iam:PassRole`
-    #   permission.
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock
+    #   can assume to perform tasks on your behalf. For example, during
+    #   model training, Amazon Bedrock needs your permission to read input
+    #   data from an S3 bucket, write model artifacts to an S3 bucket. To
+    #   pass this role to Amazon Bedrock, the caller of this API must have
+    #   the `iam:PassRole` permission.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -87,6 +87,10 @@ module Aws::Bedrock
     #
     # @!attribute [rw] base_model_identifier
     #   Name of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] customization_type
+    #   The customization type.
     #   @return [String]
     #
     # @!attribute [rw] custom_model_kms_key_id
@@ -131,6 +135,7 @@ module Aws::Bedrock
       :role_arn,
       :client_request_token,
       :base_model_identifier,
+      :customization_type,
       :custom_model_kms_key_id,
       :job_tags,
       :custom_model_tags,
@@ -157,8 +162,8 @@ module Aws::Bedrock
 
     # @!attribute [rw] client_request_token
     #   Unique token value that you can provide. If this token matches a
-    #   previous request, Bedrock ignores the request, but does not return
-    #   an error.
+    #   previous request, Amazon Bedrock ignores the request, but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -232,6 +237,16 @@ module Aws::Bedrock
     #   The base model name.
     #   @return [String]
     #
+    # @!attribute [rw] customization_type
+    #   Specifies whether to carry out continued pre-training of a model or
+    #   whether to fine-tune it. For more information, see [Custom
+    #   models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelSummary AWS API Documentation
     #
     class CustomModelSummary < Struct.new(
@@ -239,7 +254,8 @@ module Aws::Bedrock
       :model_name,
       :creation_time,
       :base_model_arn,
-      :base_model_name)
+      :base_model_name,
+      :customization_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -324,6 +340,11 @@ module Aws::Bedrock
     #   The inference types that the model supports.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] model_lifecycle
+    #   Contains details about whether a model version is available or
+    #   deprecated
+    #   @return [Types::FoundationModelLifecycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelDetails AWS API Documentation
     #
     class FoundationModelDetails < Struct.new(
@@ -335,7 +356,23 @@ module Aws::Bedrock
       :output_modalities,
       :response_streaming_supported,
       :customizations_supported,
-      :inference_types_supported)
+      :inference_types_supported,
+      :model_lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about whether a model version is available or deprecated.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether a model version is available (`ACTIVE`) or
+    #   deprecated (`LEGACY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelLifecycle AWS API Documentation
+    #
+    class FoundationModelLifecycle < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -378,6 +415,11 @@ module Aws::Bedrock
     #   The inference types that the model supports.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] model_lifecycle
+    #   Contains details about whether a model version is available or
+    #   deprecated.
+    #   @return [Types::FoundationModelLifecycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelSummary AWS API Documentation
     #
     class FoundationModelSummary < Struct.new(
@@ -389,7 +431,8 @@ module Aws::Bedrock
       :output_modalities,
       :response_streaming_supported,
       :customizations_supported,
-      :inference_types_supported)
+      :inference_types_supported,
+      :model_lifecycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -424,6 +467,10 @@ module Aws::Bedrock
     #
     # @!attribute [rw] base_model_arn
     #   ARN of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] customization_type
+    #   The type of model customization.
     #   @return [String]
     #
     # @!attribute [rw] model_kms_key_arn
@@ -466,6 +513,7 @@ module Aws::Bedrock
       :job_name,
       :job_arn,
       :base_model_arn,
+      :customization_type,
       :model_kms_key_arn,
       :hyper_parameters,
       :training_data_config,
@@ -566,7 +614,13 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
-    #   The hyperparameter values for the job.
+    #   The hyperparameter values for the job. For information about
+    #   hyperparameters for specific models, see [Guidelines for model
+    #   customization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-guidelines.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] training_data_config
@@ -580,6 +634,10 @@ module Aws::Bedrock
     # @!attribute [rw] output_data_config
     #   Output data configuration
     #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] customization_type
+    #   The type of model customization.
+    #   @return [String]
     #
     # @!attribute [rw] output_model_kms_key_arn
     #   The custom model is encrypted at rest using this key.
@@ -617,6 +675,7 @@ module Aws::Bedrock
       :training_data_config,
       :validation_data_config,
       :output_data_config,
+      :customization_type,
       :output_model_kms_key_arn,
       :training_metrics,
       :validation_metrics,
@@ -772,8 +831,8 @@ module Aws::Bedrock
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Continuation token from the previous response, for Bedrock to list
-    #   the next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -819,7 +878,7 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] by_provider
-    #   A Bedrock model provider.
+    #   A Amazon Bedrock model provider.
     #   @return [String]
     #
     # @!attribute [rw] by_customization_type
@@ -846,7 +905,7 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] model_summaries
-    #   A list of bedrock foundation models.
+    #   A list of Amazon Bedrock foundation models.
     #   @return [Array<Types::FoundationModelSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelsResponse AWS API Documentation
@@ -879,8 +938,8 @@ module Aws::Bedrock
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Continuation token from the previous response, for Bedrock to list
-    #   the next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -951,8 +1010,8 @@ module Aws::Bedrock
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Continuation token from the previous response, for Bedrock to list
-    #   the next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -1094,6 +1153,16 @@ module Aws::Bedrock
     #   Name of the custom model.
     #   @return [String]
     #
+    # @!attribute [rw] customization_type
+    #   Specifies whether to carry out continued pre-training of a model or
+    #   whether to fine-tune it. For more information, see [Custom
+    #   models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelCustomizationJobSummary AWS API Documentation
     #
     class ModelCustomizationJobSummary < Struct.new(
@@ -1105,7 +1174,8 @@ module Aws::Bedrock
       :creation_time,
       :end_time,
       :custom_model_arn,
-      :custom_model_name)
+      :custom_model_name,
+      :customization_type)
       SENSITIVE = []
       include Aws::Structure
     end

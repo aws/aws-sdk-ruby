@@ -606,6 +606,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -959,6 +960,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -1499,7 +1502,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -1621,6 +1624,7 @@ module Aws::MediaConvert
     #         {
     #           audio_channel_tagging_settings: {
     #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
+    #             channel_tags: ["L"], # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
     #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
@@ -2282,7 +2286,7 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
-    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
+    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT, FIT, FIT_NO_UPSCALE, FILL
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         video_preprocessors: {
@@ -2402,6 +2406,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -2931,7 +2937,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -3302,6 +3308,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -3655,6 +3662,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -4195,7 +4204,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -4328,6 +4337,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -4857,7 +4868,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -5046,6 +5057,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_templates[0].settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_templates[0].settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_templates[0].settings.follow_source #=> Integer
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -5399,6 +5411,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -5939,7 +5953,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -6135,6 +6149,8 @@ module Aws::MediaConvert
     #   resp.presets[0].name #=> String
     #   resp.presets[0].settings.audio_descriptions #=> Array
     #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -6664,7 +6680,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.position.x #=> Integer
     #   resp.presets[0].settings.video_description.position.y #=> Integer
     #   resp.presets[0].settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.presets[0].settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.presets[0].settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.presets[0].settings.video_description.sharpness #=> Integer
     #   resp.presets[0].settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -7009,6 +7025,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -7362,6 +7379,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -7902,7 +7921,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -8018,6 +8037,7 @@ module Aws::MediaConvert
     #         {
     #           audio_channel_tagging_settings: {
     #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
+    #             channel_tags: ["L"], # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
     #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
@@ -8679,7 +8699,7 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
-    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
+    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT, FIT, FIT_NO_UPSCALE, FILL
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         video_preprocessors: {
@@ -8796,6 +8816,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -9325,7 +9347,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -9484,7 +9506,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

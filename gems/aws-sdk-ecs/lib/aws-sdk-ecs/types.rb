@@ -419,7 +419,7 @@ module Aws::ECS
 
     # These errors are usually caused by a client action. This client action
     # might be using an action or resource on behalf of a user that doesn't
-    # have permissions to use the action or resource,. Or, it might be
+    # have permissions to use the action or resource. Or, it might be
     # specifying an identifier that isn't valid.
     #
     # @!attribute [rw] message
@@ -813,6 +813,31 @@ module Aws::ECS
     class ClusterSetting < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `RunTask` request could not be processed due to conflicts. The
+    # provided `clientToken` is already in use with a different `RunTask`
+    # request. The `resourceIds` are the existing task ARNs which are
+    # already associated with the `clientToken`.
+    #
+    # To fix this issue:
+    #
+    # * Run `RunTask` with a unique `clientToken`.
+    #
+    # * Run `RunTask` with the `clientToken` and the original set of
+    #   parameters
+    #
+    # @!attribute [rw] resource_ids
+    #   The existing task ARNs which are already associated with the
+    #   `clientToken`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :resource_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2677,8 +2702,8 @@ module Aws::ECS
     #
     # @!attribute [rw] client_token
     #   An identifier that you provide to ensure the idempotency of the
-    #   request. It must be unique and is case sensitive. Up to 32 ASCII
-    #   characters are allowed.
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #   @return [String]
     #
     # @!attribute [rw] launch_type
@@ -3099,9 +3124,9 @@ module Aws::ECS
     #   @return [Types::Scale]
     #
     # @!attribute [rw] client_token
-    #   The identifier that you provide to ensure the idempotency of the
-    #   request. It's case sensitive and must be unique. It can be up to 32
-    #   ASCII characters are allowed.
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7071,7 +7096,9 @@ module Aws::ECS
     #
     # @!attribute [rw] protocol
     #   The protocol used for the port mapping. Valid values are `tcp` and
-    #   `udp`. The default is `tcp`.
+    #   `udp`. The default is `tcp`. `protocol` is immutable in a Service
+    #   Connect service. Updating this field requires a service deletion and
+    #   redeployment.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7102,6 +7129,9 @@ module Aws::ECS
     #   If you don't set a value for this parameter, then TCP is used.
     #   However, Amazon ECS doesn't add protocol-specific telemetry for
     #   TCP.
+    #
+    #   `appProtocol` is immutable in a Service Connect service. Updating
+    #   this field requires a service deletion and redeployment.
     #
     #   Tasks that run in a namespace can use short names to connect to
     #   services in the namespace. Tasks can connect to services across all
@@ -7317,11 +7347,19 @@ module Aws::ECS
     #   the Fargate tasks maintenance, see [Amazon Web Services Fargate task
     #   maintenance][3] in the *Amazon ECS Developer Guide*.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or
+    #   disabled by your security administrator in your Amazon ECS account.
+    #   Amazon GuardDuty controls this account setting on your behalf. For
+    #   more information, see [Protecting Amazon ECS workloads with Amazon
+    #   ECS Runtime Monitoring][4].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7381,9 +7419,17 @@ module Aws::ECS
     #   `fargateTaskRetirementWaitPeriod`, the wait time to retire a Fargate
     #   task is affected.
     #
+    #   The `guardDutyActivate` parameter is read-only in Amazon ECS and
+    #   indicates whether Amazon ECS Runtime Monitoring is enabled or
+    #   disabled by your security administrator in your Amazon ECS account.
+    #   Amazon GuardDuty controls this account setting on your behalf. For
+    #   more information, see [Protecting Amazon ECS workloads with Amazon
+    #   ECS Runtime Monitoring][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -8328,7 +8374,7 @@ module Aws::ECS
     #   could apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
     #   that job by filtering the results of a ListTasks call with the
-    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
+    #   `startedBy` value. Up to 128 letters (uppercase and lowercase),
     #   numbers, hyphens (-), and underscores (\_) are allowed.
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
@@ -8399,6 +8445,21 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 64
+    #   characters are allowed. The valid characters are characters in the
+    #   range of 33-126, inclusive. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
     #
     class RunTaskRequest < Struct.new(
@@ -8418,7 +8479,8 @@ module Aws::ECS
       :reference_id,
       :started_by,
       :tags,
-      :task_definition)
+      :task_definition,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9269,12 +9331,23 @@ module Aws::ECS
     #   If this field is omitted, the authenticated user is assumed.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Indicates whether Amazon Web Services manages the account setting,
+    #   or if the user manages it.
+    #
+    #   `aws_managed` account settings are read-only, as Amazon Web Services
+    #   manages such on the customer's behalf. Currently, the
+    #   `guardDutyActivate` account setting is the only one Amazon Web
+    #   Services manages.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Setting AWS API Documentation
     #
     class Setting < Struct.new(
       :name,
       :value,
-      :principal_arn)
+      :principal_arn,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

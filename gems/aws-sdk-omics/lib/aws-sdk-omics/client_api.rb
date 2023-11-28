@@ -106,6 +106,7 @@ module Aws::Omics
     ETagAlgorithm = Shapes::StringShape.new(name: 'ETagAlgorithm')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EngineLogStream = Shapes::StringShape.new(name: 'EngineLogStream')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
     EscapeQuotes = Shapes::BooleanShape.new(name: 'EscapeQuotes')
     ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
@@ -312,6 +313,7 @@ module Aws::Omics
     ReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartNumberInteger')
     ReadSetUploadPartListItemPartSizeLong = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartSizeLong')
     ReferenceArn = Shapes::StringShape.new(name: 'ReferenceArn')
+    ReferenceArnFilter = Shapes::StringShape.new(name: 'ReferenceArnFilter')
     ReferenceDescription = Shapes::StringShape.new(name: 'ReferenceDescription')
     ReferenceFile = Shapes::StringShape.new(name: 'ReferenceFile')
     ReferenceFiles = Shapes::StructureShape.new(name: 'ReferenceFiles')
@@ -341,6 +343,7 @@ module Aws::Omics
     RunArn = Shapes::StringShape.new(name: 'RunArn')
     RunExport = Shapes::StringShape.new(name: 'RunExport')
     RunExportList = Shapes::ListShape.new(name: 'RunExportList')
+    RunFailureReason = Shapes::StringShape.new(name: 'RunFailureReason')
     RunGroupArn = Shapes::StringShape.new(name: 'RunGroupArn')
     RunGroupId = Shapes::StringShape.new(name: 'RunGroupId')
     RunGroupList = Shapes::ListShape.new(name: 'RunGroupList')
@@ -361,6 +364,8 @@ module Aws::Omics
     RunListItemStorageCapacityInteger = Shapes::IntegerShape.new(name: 'RunListItemStorageCapacityInteger')
     RunListToken = Shapes::StringShape.new(name: 'RunListToken')
     RunLogLevel = Shapes::StringShape.new(name: 'RunLogLevel')
+    RunLogLocation = Shapes::StructureShape.new(name: 'RunLogLocation')
+    RunLogStream = Shapes::StringShape.new(name: 'RunLogStream')
     RunName = Shapes::StringShape.new(name: 'RunName')
     RunOutputUri = Shapes::StringShape.new(name: 'RunOutputUri')
     RunParameters = Shapes::DocumentShape.new(name: 'RunParameters', document: true)
@@ -374,6 +379,7 @@ module Aws::Omics
     RunStatus = Shapes::StringShape.new(name: 'RunStatus')
     RunStatusMessage = Shapes::StringShape.new(name: 'RunStatusMessage')
     RunTimestamp = Shapes::TimestampShape.new(name: 'RunTimestamp', timestampFormat: "iso8601")
+    RunUuid = Shapes::StringShape.new(name: 'RunUuid')
     S3Destination = Shapes::StringShape.new(name: 'S3Destination')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
@@ -437,6 +443,7 @@ module Aws::Omics
     TagResourceRequestTagsMap = Shapes::MapShape.new(name: 'TagResourceRequestTagsMap')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaskFailureReason = Shapes::StringShape.new(name: 'TaskFailureReason')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskInstanceType = Shapes::StringShape.new(name: 'TaskInstanceType')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
@@ -694,7 +701,7 @@ module Aws::Omics
     CreateMultipartReadSetUploadRequest.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectId, required: true, location_name: "subjectId"))
     CreateMultipartReadSetUploadRequest.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, required: true, location_name: "sampleId"))
     CreateMultipartReadSetUploadRequest.add_member(:generated_from, Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, required: true, location_name: "referenceArn"))
+    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
     CreateMultipartReadSetUploadRequest.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, required: true, location_name: "name"))
     CreateMultipartReadSetUploadRequest.add_member(:description, Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
     CreateMultipartReadSetUploadRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1132,6 +1139,10 @@ module Aws::Omics
     GetRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetRunResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
+    GetRunResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RunFailureReason, location_name: "failureReason"))
+    GetRunResponse.add_member(:log_location, Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
+    GetRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    GetRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1150,6 +1161,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:log_stream, Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
     GetRunTaskResponse.add_member(:gpus, Shapes::ShapeRef.new(shape: GetRunTaskResponseGpusInteger, location_name: "gpus"))
     GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
+    GetRunTaskResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: TaskFailureReason, location_name: "failureReason"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1561,7 +1573,7 @@ module Aws::Omics
 
     ReadSetFilter.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
     ReadSetFilter.add_member(:status, Shapes::ShapeRef.new(shape: ReadSetStatus, location_name: "status"))
-    ReadSetFilter.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
+    ReadSetFilter.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArnFilter, location_name: "referenceArn"))
     ReadSetFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAfter"))
     ReadSetFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdBefore"))
     ReadSetFilter.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
@@ -1683,6 +1695,10 @@ module Aws::Omics
     RunListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
     RunListItem.struct_class = Types::RunListItem
 
+    RunLogLocation.add_member(:engine_log_stream, Shapes::ShapeRef.new(shape: EngineLogStream, location_name: "engineLogStream"))
+    RunLogLocation.add_member(:run_log_stream, Shapes::ShapeRef.new(shape: RunLogStream, location_name: "runLogStream"))
+    RunLogLocation.struct_class = Types::RunLogLocation
+
     RunResourceDigests.key = Shapes::ShapeRef.new(shape: RunResourceDigestKey)
     RunResourceDigests.value = Shapes::ShapeRef.new(shape: RunResourceDigest)
 
@@ -1799,7 +1815,7 @@ module Aws::Omics
     StartReadSetImportJobSourceItem.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectId, required: true, location_name: "subjectId"))
     StartReadSetImportJobSourceItem.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, required: true, location_name: "sampleId"))
     StartReadSetImportJobSourceItem.add_member(:generated_from, Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    StartReadSetImportJobSourceItem.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, required: true, location_name: "referenceArn"))
+    StartReadSetImportJobSourceItem.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
     StartReadSetImportJobSourceItem.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
     StartReadSetImportJobSourceItem.add_member(:description, Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
     StartReadSetImportJobSourceItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1846,6 +1862,8 @@ module Aws::Omics
     StartRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
     StartRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
     StartRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    StartRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
     StartRunResponse.struct_class = Types::StartRunResponse
 
     StartVariantImportRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "destinationName"))

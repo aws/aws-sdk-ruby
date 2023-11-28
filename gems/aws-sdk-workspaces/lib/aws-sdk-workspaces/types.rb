@@ -944,6 +944,27 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the data replication settings.
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DataReplicationSettings AWS API Documentation
+    #
+    class DataReplicationSettings < Struct.new(
+      :data_replication,
+      :recovery_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns default client branding attributes that were imported. These
     # attributes display on the client login screen.
     #
@@ -3093,11 +3114,16 @@ module Aws::WorkSpaces
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates the data replication status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesRequest AWS API Documentation
     #
     class ModifyWorkspacePropertiesRequest < Struct.new(
       :workspace_id,
-      :workspace_properties)
+      :workspace_properties,
+      :data_replication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3680,13 +3706,45 @@ module Aws::WorkSpaces
     #   The tags associated with the standby WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspace AWS API Documentation
     #
     class StandbyWorkspace < Struct.new(
       :primary_workspace_id,
       :volume_encryption_key,
       :directory_id,
-      :tags)
+      :tags,
+      :data_replication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the properties of the related standby WorkSpaces.
+    #
+    # @!attribute [rw] standby_workspace_id
+    #   The identifier of the standby WorkSpace
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspacesProperties AWS API Documentation
+    #
+    class StandbyWorkspacesProperties < Struct.new(
+      :standby_workspace_id,
+      :data_replication,
+      :recovery_snapshot_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4188,6 +4246,14 @@ module Aws::WorkSpaces
     #   WorkSpace.
     #   @return [Array<Types::RelatedWorkspaceProperties>]
     #
+    # @!attribute [rw] data_replication_settings
+    #   Indicates the settings of the data replication.
+    #   @return [Types::DataReplicationSettings]
+    #
+    # @!attribute [rw] standby_workspaces_properties
+    #   The properties of the standby WorkSpace
+    #   @return [Array<Types::StandbyWorkspacesProperties>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
     #
     class Workspace < Struct.new(
@@ -4206,7 +4272,9 @@ module Aws::WorkSpaces
       :root_volume_encryption_enabled,
       :workspace_properties,
       :modification_states,
-      :related_workspaces)
+      :related_workspaces,
+      :data_replication_settings,
+      :standby_workspaces_properties)
       SENSITIVE = []
       include Aws::Structure
     end

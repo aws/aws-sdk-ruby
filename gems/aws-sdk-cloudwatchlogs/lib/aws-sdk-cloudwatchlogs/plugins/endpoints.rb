@@ -25,16 +25,17 @@ module Aws::CloudWatchLogs
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,8 +61,12 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::AssociateKmsKey.build(context)
           when :cancel_export_task
             Aws::CloudWatchLogs::Endpoints::CancelExportTask.build(context)
+          when :create_delivery
+            Aws::CloudWatchLogs::Endpoints::CreateDelivery.build(context)
           when :create_export_task
             Aws::CloudWatchLogs::Endpoints::CreateExportTask.build(context)
+          when :create_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::CreateLogAnomalyDetector.build(context)
           when :create_log_group
             Aws::CloudWatchLogs::Endpoints::CreateLogGroup.build(context)
           when :create_log_stream
@@ -70,8 +75,18 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteAccountPolicy.build(context)
           when :delete_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::DeleteDataProtectionPolicy.build(context)
+          when :delete_delivery
+            Aws::CloudWatchLogs::Endpoints::DeleteDelivery.build(context)
+          when :delete_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliveryDestination.build(context)
+          when :delete_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliveryDestinationPolicy.build(context)
+          when :delete_delivery_source
+            Aws::CloudWatchLogs::Endpoints::DeleteDeliverySource.build(context)
           when :delete_destination
             Aws::CloudWatchLogs::Endpoints::DeleteDestination.build(context)
+          when :delete_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::DeleteLogAnomalyDetector.build(context)
           when :delete_log_group
             Aws::CloudWatchLogs::Endpoints::DeleteLogGroup.build(context)
           when :delete_log_stream
@@ -88,6 +103,12 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteSubscriptionFilter.build(context)
           when :describe_account_policies
             Aws::CloudWatchLogs::Endpoints::DescribeAccountPolicies.build(context)
+          when :describe_deliveries
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliveries.build(context)
+          when :describe_delivery_destinations
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliveryDestinations.build(context)
+          when :describe_delivery_sources
+            Aws::CloudWatchLogs::Endpoints::DescribeDeliverySources.build(context)
           when :describe_destinations
             Aws::CloudWatchLogs::Endpoints::DescribeDestinations.build(context)
           when :describe_export_tasks
@@ -112,6 +133,16 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::FilterLogEvents.build(context)
           when :get_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::GetDataProtectionPolicy.build(context)
+          when :get_delivery
+            Aws::CloudWatchLogs::Endpoints::GetDelivery.build(context)
+          when :get_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::GetDeliveryDestination.build(context)
+          when :get_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::GetDeliveryDestinationPolicy.build(context)
+          when :get_delivery_source
+            Aws::CloudWatchLogs::Endpoints::GetDeliverySource.build(context)
+          when :get_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::GetLogAnomalyDetector.build(context)
           when :get_log_events
             Aws::CloudWatchLogs::Endpoints::GetLogEvents.build(context)
           when :get_log_group_fields
@@ -120,6 +151,10 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::GetLogRecord.build(context)
           when :get_query_results
             Aws::CloudWatchLogs::Endpoints::GetQueryResults.build(context)
+          when :list_anomalies
+            Aws::CloudWatchLogs::Endpoints::ListAnomalies.build(context)
+          when :list_log_anomaly_detectors
+            Aws::CloudWatchLogs::Endpoints::ListLogAnomalyDetectors.build(context)
           when :list_tags_for_resource
             Aws::CloudWatchLogs::Endpoints::ListTagsForResource.build(context)
           when :list_tags_log_group
@@ -128,6 +163,12 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::PutAccountPolicy.build(context)
           when :put_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::PutDataProtectionPolicy.build(context)
+          when :put_delivery_destination
+            Aws::CloudWatchLogs::Endpoints::PutDeliveryDestination.build(context)
+          when :put_delivery_destination_policy
+            Aws::CloudWatchLogs::Endpoints::PutDeliveryDestinationPolicy.build(context)
+          when :put_delivery_source
+            Aws::CloudWatchLogs::Endpoints::PutDeliverySource.build(context)
           when :put_destination
             Aws::CloudWatchLogs::Endpoints::PutDestination.build(context)
           when :put_destination_policy
@@ -158,6 +199,10 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::UntagLogGroup.build(context)
           when :untag_resource
             Aws::CloudWatchLogs::Endpoints::UntagResource.build(context)
+          when :update_anomaly
+            Aws::CloudWatchLogs::Endpoints::UpdateAnomaly.build(context)
+          when :update_log_anomaly_detector
+            Aws::CloudWatchLogs::Endpoints::UpdateLogAnomalyDetector.build(context)
           end
         end
       end

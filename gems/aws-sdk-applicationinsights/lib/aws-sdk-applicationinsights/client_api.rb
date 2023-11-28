@@ -23,6 +23,7 @@ module Aws::ApplicationInsights
     ApplicationComponentList = Shapes::ListShape.new(name: 'ApplicationComponentList')
     ApplicationInfo = Shapes::StructureShape.new(name: 'ApplicationInfo')
     ApplicationInfoList = Shapes::ListShape.new(name: 'ApplicationInfoList')
+    AttachMissingPermission = Shapes::BooleanShape.new(name: 'AttachMissingPermission')
     AutoConfigEnabled = Shapes::BooleanShape.new(name: 'AutoConfigEnabled')
     AutoCreate = Shapes::BooleanShape.new(name: 'AutoCreate')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -244,6 +245,7 @@ module Aws::ApplicationInsights
     ApplicationInfo.add_member(:remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "Remarks"))
     ApplicationInfo.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     ApplicationInfo.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, location_name: "DiscoveryType"))
+    ApplicationInfo.add_member(:attach_missing_permission, Shapes::ShapeRef.new(shape: AttachMissingPermission, location_name: "AttachMissingPermission"))
     ApplicationInfo.struct_class = Types::ApplicationInfo
 
     ApplicationInfoList.member = Shapes::ShapeRef.new(shape: ApplicationInfo)
@@ -271,6 +273,7 @@ module Aws::ApplicationInsights
     CreateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     CreateApplicationRequest.add_member(:auto_create, Shapes::ShapeRef.new(shape: AutoCreate, location_name: "AutoCreate"))
     CreateApplicationRequest.add_member(:grouping_type, Shapes::ShapeRef.new(shape: GroupingType, location_name: "GroupingType"))
+    CreateApplicationRequest.add_member(:attach_missing_permission, Shapes::ShapeRef.new(shape: AttachMissingPermission, location_name: "AttachMissingPermission"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -322,6 +325,7 @@ module Aws::ApplicationInsights
     DescribeComponentConfigurationRecommendationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     DescribeComponentConfigurationRecommendationRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, required: true, location_name: "ComponentName"))
     DescribeComponentConfigurationRecommendationRequest.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, required: true, location_name: "Tier"))
+    DescribeComponentConfigurationRecommendationRequest.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))
     DescribeComponentConfigurationRecommendationRequest.add_member(:recommendation_type, Shapes::ShapeRef.new(shape: RecommendationType, location_name: "RecommendationType"))
     DescribeComponentConfigurationRecommendationRequest.struct_class = Types::DescribeComponentConfigurationRecommendationRequest
 
@@ -618,6 +622,7 @@ module Aws::ApplicationInsights
     UpdateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
     UpdateApplicationRequest.add_member(:remove_sns_topic, Shapes::ShapeRef.new(shape: RemoveSNSTopic, location_name: "RemoveSNSTopic"))
     UpdateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
+    UpdateApplicationRequest.add_member(:attach_missing_permission, Shapes::ShapeRef.new(shape: AttachMissingPermission, location_name: "AttachMissingPermission"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -1085,6 +1090,7 @@ module Aws::ApplicationInsights
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_log_pattern, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.207.0 (2023-11-27)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for RDS for Db2.
+
+1.206.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.205.0 (2023-11-17)
+------------------
+
+* Feature - This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+
+1.204.0 (2023-11-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+
+1.203.0 (2023-11-10)
+------------------
+
+* Feature - Updates Amazon RDS documentation for zero-ETL integrations.
+
+1.202.0 (2023-11-08)
+------------------
+
+* Feature - This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.
+
+1.201.0 (2023-11-07)
+------------------
+
+* Feature - This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).
+
+1.200.0 (2023-11-01)
+------------------
+
+* Feature - This release adds support for customized networking resources to Amazon RDS Custom.
+
+1.199.0 (2023-10-30)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+
+1.198.0 (2023-10-18)
+------------------
+
+* Feature - This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+
 1.197.0 (2023-10-12)
 ------------------
 

@@ -30,6 +30,7 @@ module Aws::Bedrock
     CustomModelName = Shapes::StringShape.new(name: 'CustomModelName')
     CustomModelSummary = Shapes::StructureShape.new(name: 'CustomModelSummary')
     CustomModelSummaryList = Shapes::ListShape.new(name: 'CustomModelSummaryList')
+    CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
     DeleteCustomModelResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelResponse')
     DeleteModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationRequest')
@@ -40,6 +41,8 @@ module Aws::Bedrock
     FineTuningJobStatus = Shapes::StringShape.new(name: 'FineTuningJobStatus')
     FoundationModelArn = Shapes::StringShape.new(name: 'FoundationModelArn')
     FoundationModelDetails = Shapes::StructureShape.new(name: 'FoundationModelDetails')
+    FoundationModelLifecycle = Shapes::StructureShape.new(name: 'FoundationModelLifecycle')
+    FoundationModelLifecycleStatus = Shapes::StringShape.new(name: 'FoundationModelLifecycleStatus')
     FoundationModelSummary = Shapes::StructureShape.new(name: 'FoundationModelSummary')
     FoundationModelSummaryList = Shapes::ListShape.new(name: 'FoundationModelSummaryList')
     GetCustomModelRequest = Shapes::StructureShape.new(name: 'GetCustomModelRequest')
@@ -157,6 +160,7 @@ module Aws::Bedrock
     CreateModelCustomizationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateModelCustomizationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateModelCustomizationJobRequest.add_member(:base_model_identifier, Shapes::ShapeRef.new(shape: BaseModelIdentifier, required: true, location_name: "baseModelIdentifier"))
+    CreateModelCustomizationJobRequest.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     CreateModelCustomizationJobRequest.add_member(:custom_model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "customModelKmsKeyId"))
     CreateModelCustomizationJobRequest.add_member(:job_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "jobTags"))
     CreateModelCustomizationJobRequest.add_member(:custom_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "customModelTags"))
@@ -186,6 +190,7 @@ module Aws::Bedrock
     CustomModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     CustomModelSummary.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
     CustomModelSummary.add_member(:base_model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "baseModelName"))
+    CustomModelSummary.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     CustomModelSummary.struct_class = Types::CustomModelSummary
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
@@ -213,7 +218,11 @@ module Aws::Bedrock
     FoundationModelDetails.add_member(:response_streaming_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "responseStreamingSupported"))
     FoundationModelDetails.add_member(:customizations_supported, Shapes::ShapeRef.new(shape: ModelCustomizationList, location_name: "customizationsSupported"))
     FoundationModelDetails.add_member(:inference_types_supported, Shapes::ShapeRef.new(shape: InferenceTypeList, location_name: "inferenceTypesSupported"))
+    FoundationModelDetails.add_member(:model_lifecycle, Shapes::ShapeRef.new(shape: FoundationModelLifecycle, location_name: "modelLifecycle"))
     FoundationModelDetails.struct_class = Types::FoundationModelDetails
+
+    FoundationModelLifecycle.add_member(:status, Shapes::ShapeRef.new(shape: FoundationModelLifecycleStatus, required: true, location_name: "status"))
+    FoundationModelLifecycle.struct_class = Types::FoundationModelLifecycle
 
     FoundationModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: FoundationModelArn, required: true, location_name: "modelArn"))
     FoundationModelSummary.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
@@ -224,6 +233,7 @@ module Aws::Bedrock
     FoundationModelSummary.add_member(:response_streaming_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "responseStreamingSupported"))
     FoundationModelSummary.add_member(:customizations_supported, Shapes::ShapeRef.new(shape: ModelCustomizationList, location_name: "customizationsSupported"))
     FoundationModelSummary.add_member(:inference_types_supported, Shapes::ShapeRef.new(shape: InferenceTypeList, location_name: "inferenceTypesSupported"))
+    FoundationModelSummary.add_member(:model_lifecycle, Shapes::ShapeRef.new(shape: FoundationModelLifecycle, location_name: "modelLifecycle"))
     FoundationModelSummary.struct_class = Types::FoundationModelSummary
 
     FoundationModelSummaryList.member = Shapes::ShapeRef.new(shape: FoundationModelSummary)
@@ -236,6 +246,7 @@ module Aws::Bedrock
     GetCustomModelResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
     GetCustomModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, required: true, location_name: "jobArn"))
     GetCustomModelResponse.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
+    GetCustomModelResponse.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     GetCustomModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetCustomModelResponse.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: ModelCustomizationHyperParameters, location_name: "hyperParameters"))
     GetCustomModelResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, required: true, location_name: "trainingDataConfig"))
@@ -271,6 +282,7 @@ module Aws::Bedrock
     GetModelCustomizationJobResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, required: true, location_name: "trainingDataConfig"))
     GetModelCustomizationJobResponse.add_member(:validation_data_config, Shapes::ShapeRef.new(shape: ValidationDataConfig, required: true, location_name: "validationDataConfig"))
     GetModelCustomizationJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetModelCustomizationJobResponse.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     GetModelCustomizationJobResponse.add_member(:output_model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "outputModelKmsKeyArn"))
     GetModelCustomizationJobResponse.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetrics, location_name: "trainingMetrics"))
     GetModelCustomizationJobResponse.add_member(:validation_metrics, Shapes::ShapeRef.new(shape: ValidationMetrics, location_name: "validationMetrics"))
@@ -385,6 +397,7 @@ module Aws::Bedrock
     ModelCustomizationJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ModelCustomizationJobSummary.add_member(:custom_model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, location_name: "customModelArn"))
     ModelCustomizationJobSummary.add_member(:custom_model_name, Shapes::ShapeRef.new(shape: CustomModelName, location_name: "customModelName"))
+    ModelCustomizationJobSummary.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     ModelCustomizationJobSummary.struct_class = Types::ModelCustomizationJobSummary
 
     ModelCustomizationList.member = Shapes::ShapeRef.new(shape: ModelCustomization)

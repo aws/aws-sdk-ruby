@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.222.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.221.0 (2023-11-22)
+------------------
+
+* Feature - This feature adds the end user license agreement status as a model access configuration parameter.
+
+1.220.0 (2023-11-16)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.
+
+1.219.0 (2023-11-14)
+------------------
+
+* Feature - This release makes Model Registry Inference Specification fields as not required.
+
+1.218.0 (2023-11-01)
+------------------
+
+* Feature - Support for batch transform input in Model dashboard
+
+1.217.0 (2023-10-26)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot now supports Text Generation jobs.
+
 1.216.0 (2023-10-12)
 ------------------
 

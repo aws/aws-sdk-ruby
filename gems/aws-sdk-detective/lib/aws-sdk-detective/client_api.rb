@@ -13,6 +13,9 @@ module Aws::Detective
 
     include Seahorse::Model
 
+    APIFailureCount = Shapes::IntegerShape.new(name: 'APIFailureCount')
+    APIName = Shapes::StringShape.new(name: 'APIName')
+    APISuccessCount = Shapes::IntegerShape.new(name: 'APISuccessCount')
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Account = Shapes::StructureShape.new(name: 'Account')
@@ -22,6 +25,8 @@ module Aws::Detective
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     Administrator = Shapes::StructureShape.new(name: 'Administrator')
     AdministratorList = Shapes::ListShape.new(name: 'AdministratorList')
+    AiPaginationToken = Shapes::StringShape.new(name: 'AiPaginationToken')
+    Aso = Shapes::StringShape.new(name: 'Aso')
     BatchGetGraphMemberDatasourcesRequest = Shapes::StructureShape.new(name: 'BatchGetGraphMemberDatasourcesRequest')
     BatchGetGraphMemberDatasourcesResponse = Shapes::StructureShape.new(name: 'BatchGetGraphMemberDatasourcesResponse')
     BatchGetMembershipDatasourcesRequest = Shapes::StructureShape.new(name: 'BatchGetMembershipDatasourcesRequest')
@@ -41,6 +46,7 @@ module Aws::Detective
     DatasourcePackageIngestStates = Shapes::MapShape.new(name: 'DatasourcePackageIngestStates')
     DatasourcePackageList = Shapes::ListShape.new(name: 'DatasourcePackageList')
     DatasourcePackageUsageInfo = Shapes::StructureShape.new(name: 'DatasourcePackageUsageInfo')
+    DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
     DeleteGraphRequest = Shapes::StructureShape.new(name: 'DeleteGraphRequest')
     DeleteMembersRequest = Shapes::StructureShape.new(name: 'DeleteMembersRequest')
     DeleteMembersResponse = Shapes::StructureShape.new(name: 'DeleteMembersResponse')
@@ -50,22 +56,45 @@ module Aws::Detective
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailMessage = Shapes::StringShape.new(name: 'EmailMessage')
     EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
+    EntityArn = Shapes::StringShape.new(name: 'EntityArn')
+    EntityType = Shapes::StringShape.new(name: 'EntityType')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorCodeReason = Shapes::StringShape.new(name: 'ErrorCodeReason')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    Field = Shapes::StringShape.new(name: 'Field')
+    FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
+    FlaggedIpAddressDetail = Shapes::StructureShape.new(name: 'FlaggedIpAddressDetail')
+    GetInvestigationRequest = Shapes::StructureShape.new(name: 'GetInvestigationRequest')
+    GetInvestigationResponse = Shapes::StructureShape.new(name: 'GetInvestigationResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
     Graph = Shapes::StructureShape.new(name: 'Graph')
     GraphArn = Shapes::StringShape.new(name: 'GraphArn')
     GraphArnList = Shapes::ListShape.new(name: 'GraphArnList')
     GraphList = Shapes::ListShape.new(name: 'GraphList')
+    HourlyTimeDelta = Shapes::IntegerShape.new(name: 'HourlyTimeDelta')
+    Id = Shapes::StringShape.new(name: 'Id')
+    ImpossibleTravelDetail = Shapes::StructureShape.new(name: 'ImpossibleTravelDetail')
+    Indicator = Shapes::StructureShape.new(name: 'Indicator')
+    IndicatorDetail = Shapes::StructureShape.new(name: 'IndicatorDetail')
+    IndicatorType = Shapes::StringShape.new(name: 'IndicatorType')
+    Indicators = Shapes::ListShape.new(name: 'Indicators')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvestigationDetail = Shapes::StructureShape.new(name: 'InvestigationDetail')
+    InvestigationDetails = Shapes::ListShape.new(name: 'InvestigationDetails')
+    InvestigationId = Shapes::StringShape.new(name: 'InvestigationId')
     InvitationType = Shapes::StringShape.new(name: 'InvitationType')
+    IpAddress = Shapes::StringShape.new(name: 'IpAddress')
+    IsNewForEntireAccount = Shapes::BooleanShape.new(name: 'IsNewForEntireAccount')
     LastIngestStateChangeDates = Shapes::MapShape.new(name: 'LastIngestStateChangeDates')
     ListDatasourcePackagesRequest = Shapes::StructureShape.new(name: 'ListDatasourcePackagesRequest')
     ListDatasourcePackagesResponse = Shapes::StructureShape.new(name: 'ListDatasourcePackagesResponse')
     ListGraphsRequest = Shapes::StructureShape.new(name: 'ListGraphsRequest')
     ListGraphsResponse = Shapes::StructureShape.new(name: 'ListGraphsResponse')
+    ListIndicatorsRequest = Shapes::StructureShape.new(name: 'ListIndicatorsRequest')
+    ListIndicatorsResponse = Shapes::StructureShape.new(name: 'ListIndicatorsResponse')
+    ListInvestigationsRequest = Shapes::StructureShape.new(name: 'ListInvestigationsRequest')
+    ListInvestigationsResponse = Shapes::StructureShape.new(name: 'ListInvestigationsResponse')
     ListInvitationsRequest = Shapes::StructureShape.new(name: 'ListInvitationsRequest')
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
@@ -74,6 +103,8 @@ module Aws::Detective
     ListOrganizationAdminAccountsResponse = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Location = Shapes::StringShape.new(name: 'Location')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberDetail = Shapes::StructureShape.new(name: 'MemberDetail')
     MemberDetailList = Shapes::ListShape.new(name: 'MemberDetailList')
     MemberDisabledReason = Shapes::StringShape.new(name: 'MemberDisabledReason')
@@ -81,23 +112,42 @@ module Aws::Detective
     MemberStatus = Shapes::StringShape.new(name: 'MemberStatus')
     MembershipDatasources = Shapes::StructureShape.new(name: 'MembershipDatasources')
     MembershipDatasourcesList = Shapes::ListShape.new(name: 'MembershipDatasourcesList')
+    NewAsoDetail = Shapes::StructureShape.new(name: 'NewAsoDetail')
+    NewGeolocationDetail = Shapes::StructureShape.new(name: 'NewGeolocationDetail')
+    NewUserAgentDetail = Shapes::StructureShape.new(name: 'NewUserAgentDetail')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Percentage = Shapes::FloatShape.new(name: 'Percentage')
+    Procedure = Shapes::StringShape.new(name: 'Procedure')
+    Reason = Shapes::StringShape.new(name: 'Reason')
     RejectInvitationRequest = Shapes::StructureShape.new(name: 'RejectInvitationRequest')
+    RelatedFindingDetail = Shapes::StructureShape.new(name: 'RelatedFindingDetail')
+    RelatedFindingGroupDetail = Shapes::StructureShape.new(name: 'RelatedFindingGroupDetail')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Severity = Shapes::StringShape.new(name: 'Severity')
+    SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartInvestigationRequest = Shapes::StructureShape.new(name: 'StartInvestigationRequest')
+    StartInvestigationResponse = Shapes::StructureShape.new(name: 'StartInvestigationResponse')
     StartMonitoringMemberRequest = Shapes::StructureShape.new(name: 'StartMonitoringMemberRequest')
+    State = Shapes::StringShape.new(name: 'State')
+    Status = Shapes::StringShape.new(name: 'Status')
+    StringFilter = Shapes::StructureShape.new(name: 'StringFilter')
+    TTPsObservedDetail = Shapes::StructureShape.new(name: 'TTPsObservedDetail')
+    Tactic = Shapes::StringShape.new(name: 'Tactic')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Technique = Shapes::StringShape.new(name: 'Technique')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TimestampForCollection = Shapes::StructureShape.new(name: 'TimestampForCollection')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    Type = Shapes::StringShape.new(name: 'Type')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UnprocessedAccountList = Shapes::ListShape.new(name: 'UnprocessedAccountList')
     UnprocessedGraph = Shapes::StructureShape.new(name: 'UnprocessedGraph')
@@ -106,8 +156,11 @@ module Aws::Detective
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDatasourcePackagesRequest = Shapes::StructureShape.new(name: 'UpdateDatasourcePackagesRequest')
+    UpdateInvestigationStateRequest = Shapes::StructureShape.new(name: 'UpdateInvestigationStateRequest')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
+    UserAgent = Shapes::StringShape.new(name: 'UserAgent')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    Value = Shapes::StringShape.new(name: 'Value')
     VolumeUsageByDatasourcePackage = Shapes::MapShape.new(name: 'VolumeUsageByDatasourcePackage')
 
     AcceptInvitationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
@@ -190,6 +243,10 @@ module Aws::Detective
     DatasourcePackageUsageInfo.add_member(:volume_usage_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "VolumeUsageUpdateTime"))
     DatasourcePackageUsageInfo.struct_class = Types::DatasourcePackageUsageInfo
 
+    DateFilter.add_member(:start_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartInclusive"))
+    DateFilter.add_member(:end_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndInclusive"))
+    DateFilter.struct_class = Types::DateFilter
+
     DeleteGraphRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     DeleteGraphRequest.struct_class = Types::DeleteGraphRequest
 
@@ -213,6 +270,33 @@ module Aws::Detective
     EnableOrganizationAdminAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     EnableOrganizationAdminAccountRequest.struct_class = Types::EnableOrganizationAdminAccountRequest
 
+    FilterCriteria.add_member(:severity, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Severity"))
+    FilterCriteria.add_member(:status, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Status"))
+    FilterCriteria.add_member(:state, Shapes::ShapeRef.new(shape: StringFilter, location_name: "State"))
+    FilterCriteria.add_member(:entity_arn, Shapes::ShapeRef.new(shape: StringFilter, location_name: "EntityArn"))
+    FilterCriteria.add_member(:created_time, Shapes::ShapeRef.new(shape: DateFilter, location_name: "CreatedTime"))
+    FilterCriteria.struct_class = Types::FilterCriteria
+
+    FlaggedIpAddressDetail.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    FlaggedIpAddressDetail.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "Reason"))
+    FlaggedIpAddressDetail.struct_class = Types::FlaggedIpAddressDetail
+
+    GetInvestigationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    GetInvestigationRequest.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, required: true, location_name: "InvestigationId"))
+    GetInvestigationRequest.struct_class = Types::GetInvestigationRequest
+
+    GetInvestigationResponse.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
+    GetInvestigationResponse.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, location_name: "InvestigationId"))
+    GetInvestigationResponse.add_member(:entity_arn, Shapes::ShapeRef.new(shape: EntityArn, location_name: "EntityArn"))
+    GetInvestigationResponse.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
+    GetInvestigationResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    GetInvestigationResponse.add_member(:scope_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ScopeStartTime"))
+    GetInvestigationResponse.add_member(:scope_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ScopeEndTime"))
+    GetInvestigationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    GetInvestigationResponse.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
+    GetInvestigationResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
+    GetInvestigationResponse.struct_class = Types::GetInvestigationResponse
+
     GetMembersRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     GetMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
     GetMembersRequest.struct_class = Types::GetMembersRequest
@@ -229,8 +313,42 @@ module Aws::Detective
 
     GraphList.member = Shapes::ShapeRef.new(shape: Graph)
 
+    ImpossibleTravelDetail.add_member(:starting_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "StartingIpAddress"))
+    ImpossibleTravelDetail.add_member(:ending_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndingIpAddress"))
+    ImpossibleTravelDetail.add_member(:starting_location, Shapes::ShapeRef.new(shape: Location, location_name: "StartingLocation"))
+    ImpossibleTravelDetail.add_member(:ending_location, Shapes::ShapeRef.new(shape: Location, location_name: "EndingLocation"))
+    ImpossibleTravelDetail.add_member(:hourly_time_delta, Shapes::ShapeRef.new(shape: HourlyTimeDelta, location_name: "HourlyTimeDelta"))
+    ImpossibleTravelDetail.struct_class = Types::ImpossibleTravelDetail
+
+    Indicator.add_member(:indicator_type, Shapes::ShapeRef.new(shape: IndicatorType, location_name: "IndicatorType"))
+    Indicator.add_member(:indicator_detail, Shapes::ShapeRef.new(shape: IndicatorDetail, location_name: "IndicatorDetail"))
+    Indicator.struct_class = Types::Indicator
+
+    IndicatorDetail.add_member(:tt_ps_observed_detail, Shapes::ShapeRef.new(shape: TTPsObservedDetail, location_name: "TTPsObservedDetail"))
+    IndicatorDetail.add_member(:impossible_travel_detail, Shapes::ShapeRef.new(shape: ImpossibleTravelDetail, location_name: "ImpossibleTravelDetail"))
+    IndicatorDetail.add_member(:flagged_ip_address_detail, Shapes::ShapeRef.new(shape: FlaggedIpAddressDetail, location_name: "FlaggedIpAddressDetail"))
+    IndicatorDetail.add_member(:new_geolocation_detail, Shapes::ShapeRef.new(shape: NewGeolocationDetail, location_name: "NewGeolocationDetail"))
+    IndicatorDetail.add_member(:new_aso_detail, Shapes::ShapeRef.new(shape: NewAsoDetail, location_name: "NewAsoDetail"))
+    IndicatorDetail.add_member(:new_user_agent_detail, Shapes::ShapeRef.new(shape: NewUserAgentDetail, location_name: "NewUserAgentDetail"))
+    IndicatorDetail.add_member(:related_finding_detail, Shapes::ShapeRef.new(shape: RelatedFindingDetail, location_name: "RelatedFindingDetail"))
+    IndicatorDetail.add_member(:related_finding_group_detail, Shapes::ShapeRef.new(shape: RelatedFindingGroupDetail, location_name: "RelatedFindingGroupDetail"))
+    IndicatorDetail.struct_class = Types::IndicatorDetail
+
+    Indicators.member = Shapes::ShapeRef.new(shape: Indicator)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvestigationDetail.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, location_name: "InvestigationId"))
+    InvestigationDetail.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
+    InvestigationDetail.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    InvestigationDetail.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
+    InvestigationDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    InvestigationDetail.add_member(:entity_arn, Shapes::ShapeRef.new(shape: EntityArn, location_name: "EntityArn"))
+    InvestigationDetail.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
+    InvestigationDetail.struct_class = Types::InvestigationDetail
+
+    InvestigationDetails.member = Shapes::ShapeRef.new(shape: InvestigationDetail)
 
     LastIngestStateChangeDates.key = Shapes::ShapeRef.new(shape: DatasourcePackageIngestState)
     LastIngestStateChangeDates.value = Shapes::ShapeRef.new(shape: TimestampForCollection)
@@ -251,6 +369,30 @@ module Aws::Detective
     ListGraphsResponse.add_member(:graph_list, Shapes::ShapeRef.new(shape: GraphList, location_name: "GraphList"))
     ListGraphsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListGraphsResponse.struct_class = Types::ListGraphsResponse
+
+    ListIndicatorsRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    ListIndicatorsRequest.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, required: true, location_name: "InvestigationId"))
+    ListIndicatorsRequest.add_member(:indicator_type, Shapes::ShapeRef.new(shape: IndicatorType, location_name: "IndicatorType"))
+    ListIndicatorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: AiPaginationToken, location_name: "NextToken"))
+    ListIndicatorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListIndicatorsRequest.struct_class = Types::ListIndicatorsRequest
+
+    ListIndicatorsResponse.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
+    ListIndicatorsResponse.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, location_name: "InvestigationId"))
+    ListIndicatorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: AiPaginationToken, location_name: "NextToken"))
+    ListIndicatorsResponse.add_member(:indicators, Shapes::ShapeRef.new(shape: Indicators, location_name: "Indicators"))
+    ListIndicatorsResponse.struct_class = Types::ListIndicatorsResponse
+
+    ListInvestigationsRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    ListInvestigationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: AiPaginationToken, location_name: "NextToken"))
+    ListInvestigationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInvestigationsRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
+    ListInvestigationsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    ListInvestigationsRequest.struct_class = Types::ListInvestigationsRequest
+
+    ListInvestigationsResponse.add_member(:investigation_details, Shapes::ShapeRef.new(shape: InvestigationDetails, location_name: "InvestigationDetails"))
+    ListInvestigationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: AiPaginationToken, location_name: "NextToken"))
+    ListInvestigationsResponse.struct_class = Types::ListInvestigationsResponse
 
     ListInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MemberResultsLimit, location_name: "MaxResults"))
@@ -310,8 +452,29 @@ module Aws::Detective
 
     MembershipDatasourcesList.member = Shapes::ShapeRef.new(shape: MembershipDatasources)
 
+    NewAsoDetail.add_member(:aso, Shapes::ShapeRef.new(shape: Aso, location_name: "Aso"))
+    NewAsoDetail.add_member(:is_new_for_entire_account, Shapes::ShapeRef.new(shape: IsNewForEntireAccount, location_name: "IsNewForEntireAccount"))
+    NewAsoDetail.struct_class = Types::NewAsoDetail
+
+    NewGeolocationDetail.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "Location"))
+    NewGeolocationDetail.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    NewGeolocationDetail.add_member(:is_new_for_entire_account, Shapes::ShapeRef.new(shape: IsNewForEntireAccount, location_name: "IsNewForEntireAccount"))
+    NewGeolocationDetail.struct_class = Types::NewGeolocationDetail
+
+    NewUserAgentDetail.add_member(:user_agent, Shapes::ShapeRef.new(shape: UserAgent, location_name: "UserAgent"))
+    NewUserAgentDetail.add_member(:is_new_for_entire_account, Shapes::ShapeRef.new(shape: IsNewForEntireAccount, location_name: "IsNewForEntireAccount"))
+    NewUserAgentDetail.struct_class = Types::NewUserAgentDetail
+
     RejectInvitationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     RejectInvitationRequest.struct_class = Types::RejectInvitationRequest
+
+    RelatedFindingDetail.add_member(:arn, Shapes::ShapeRef.new(shape: EntityArn, location_name: "Arn"))
+    RelatedFindingDetail.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    RelatedFindingDetail.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    RelatedFindingDetail.struct_class = Types::RelatedFindingDetail
+
+    RelatedFindingGroupDetail.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    RelatedFindingGroupDetail.struct_class = Types::RelatedFindingGroupDetail
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
@@ -322,9 +485,34 @@ module Aws::Detective
     ServiceQuotaExceededException.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resources"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SortCriteria.add_member(:field, Shapes::ShapeRef.new(shape: Field, location_name: "Field"))
+    SortCriteria.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    SortCriteria.struct_class = Types::SortCriteria
+
+    StartInvestigationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    StartInvestigationRequest.add_member(:entity_arn, Shapes::ShapeRef.new(shape: EntityArn, required: true, location_name: "EntityArn"))
+    StartInvestigationRequest.add_member(:scope_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ScopeStartTime"))
+    StartInvestigationRequest.add_member(:scope_end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ScopeEndTime"))
+    StartInvestigationRequest.struct_class = Types::StartInvestigationRequest
+
+    StartInvestigationResponse.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, location_name: "InvestigationId"))
+    StartInvestigationResponse.struct_class = Types::StartInvestigationResponse
+
     StartMonitoringMemberRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     StartMonitoringMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     StartMonitoringMemberRequest.struct_class = Types::StartMonitoringMemberRequest
+
+    StringFilter.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
+    StringFilter.struct_class = Types::StringFilter
+
+    TTPsObservedDetail.add_member(:tactic, Shapes::ShapeRef.new(shape: Tactic, location_name: "Tactic"))
+    TTPsObservedDetail.add_member(:technique, Shapes::ShapeRef.new(shape: Technique, location_name: "Technique"))
+    TTPsObservedDetail.add_member(:procedure, Shapes::ShapeRef.new(shape: Procedure, location_name: "Procedure"))
+    TTPsObservedDetail.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    TTPsObservedDetail.add_member(:api_name, Shapes::ShapeRef.new(shape: APIName, location_name: "APIName"))
+    TTPsObservedDetail.add_member(:api_success_count, Shapes::ShapeRef.new(shape: APISuccessCount, location_name: "APISuccessCount"))
+    TTPsObservedDetail.add_member(:api_failure_count, Shapes::ShapeRef.new(shape: APIFailureCount, location_name: "APIFailureCount"))
+    TTPsObservedDetail.struct_class = Types::TTPsObservedDetail
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -364,6 +552,11 @@ module Aws::Detective
     UpdateDatasourcePackagesRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     UpdateDatasourcePackagesRequest.add_member(:datasource_packages, Shapes::ShapeRef.new(shape: DatasourcePackageList, required: true, location_name: "DatasourcePackages"))
     UpdateDatasourcePackagesRequest.struct_class = Types::UpdateDatasourcePackagesRequest
+
+    UpdateInvestigationStateRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    UpdateInvestigationStateRequest.add_member(:investigation_id, Shapes::ShapeRef.new(shape: InvestigationId, required: true, location_name: "InvestigationId"))
+    UpdateInvestigationStateRequest.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    UpdateInvestigationStateRequest.struct_class = Types::UpdateInvestigationStateRequest
 
     UpdateOrganizationConfigurationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoEnable"))
@@ -531,6 +724,19 @@ module Aws::Detective
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_investigation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInvestigation"
+        o.http_method = "POST"
+        o.http_request_uri = "/investigations/getInvestigation"
+        o.input = Shapes::ShapeRef.new(shape: GetInvestigationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInvestigationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_members, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMembers"
         o.http_method = "POST"
@@ -576,6 +782,32 @@ module Aws::Detective
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_indicators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIndicators"
+        o.http_method = "POST"
+        o.http_request_uri = "/investigations/listIndicators"
+        o.input = Shapes::ShapeRef.new(shape: ListIndicatorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIndicatorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_investigations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInvestigations"
+        o.http_method = "POST"
+        o.http_request_uri = "/investigations/listInvestigations"
+        o.input = Shapes::ShapeRef.new(shape: ListInvestigationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInvestigationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:list_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -656,6 +888,19 @@ module Aws::Detective
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:start_investigation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartInvestigation"
+        o.http_method = "POST"
+        o.http_request_uri = "/investigations/startInvestigation"
+        o.input = Shapes::ShapeRef.new(shape: StartInvestigationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartInvestigationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_monitoring_member, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMonitoringMember"
         o.http_method = "POST"
@@ -705,6 +950,19 @@ module Aws::Detective
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_investigation_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInvestigationState"
+        o.http_method = "POST"
+        o.http_request_uri = "/investigations/updateInvestigationState"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInvestigationStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_organization_configuration, Seahorse::Model::Operation.new.tap do |o|

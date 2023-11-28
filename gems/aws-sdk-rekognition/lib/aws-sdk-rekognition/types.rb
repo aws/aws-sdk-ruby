@@ -3820,6 +3820,84 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_id
+    #   Unique identifier for the media analysis job for which you want to
+    #   retrieve results.
+    #   @return [String]
+    #
+    class GetMediaAnalysisJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the media analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the media analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] operations_config
+    #   Operation configurations that were provided during job creation.
+    #   @return [Types::MediaAnalysisOperationsConfig]
+    #
+    # @!attribute [rw] status
+    #   The current status of the media analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   Details about the error that resulted in failure of the job.
+    #   @return [Types::MediaAnalysisJobFailureDetails]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix date and time when the job was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_timestamp
+    #   The Unix date and time when the job finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input
+    #   Reference to the input manifest that was provided in the job
+    #   creation request.
+    #   @return [Types::MediaAnalysisInput]
+    #
+    # @!attribute [rw] output_config
+    #   Output configuration that was provided in the creation request.
+    #   @return [Types::MediaAnalysisOutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   KMS Key that was provided in the creation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   Output manifest that contains prediction results.
+    #   @return [Types::MediaAnalysisResults]
+    #
+    # @!attribute [rw] manifest_summary
+    #   The summary manifest provides statistics on input manifest and
+    #   errors identified in the input manifest.
+    #   @return [Types::MediaAnalysisManifestSummary]
+    #
+    class GetMediaAnalysisJobResponse < Struct.new(
+      :job_id,
+      :job_name,
+      :operations_config,
+      :status,
+      :failure_details,
+      :creation_timestamp,
+      :completion_timestamp,
+      :input,
+      :output_config,
+      :kms_key_id,
+      :results,
+      :manifest_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
     #   The identifier for a job that tracks persons in a video. You get the
     #   `JobId` from a call to `StartPersonTracking`.
     #   @return [String]
@@ -4474,6 +4552,11 @@ module Aws::Rekognition
     #
     class InvalidImageFormatException < Aws::EmptyStructure; end
 
+    # Indicates that a provided manifest file is empty or larger than the
+    # allowed limit.
+    #
+    class InvalidManifestException < Aws::EmptyStructure; end
+
     # Pagination token in the request is not valid.
     #
     class InvalidPaginationTokenException < Aws::EmptyStructure; end
@@ -4941,6 +5024,39 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   Pagination token, if the previous response was incomplete.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value user can specify is 100. If user specifies a value
+    #   greater than 100, an `InvalidParameterException` error occurs. The
+    #   default value is 100.
+    #   @return [Integer]
+    #
+    class ListMediaAnalysisJobsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Pagination token, if the previous response was incomplete.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_analysis_jobs
+    #   Contains a list of all media analysis jobs.
+    #   @return [Array<Types::MediaAnalysisJobDescription>]
+    #
+    class ListMediaAnalysisJobsResponse < Struct.new(
+      :next_token,
+      :media_analysis_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] project_arn
     #   The ARN of the project for which you want to list the project
     #   policies.
@@ -5118,6 +5234,206 @@ module Aws::Rekognition
     class MatchedUser < Struct.new(
       :user_id,
       :user_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for Moderation Labels Detection.
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence level for the moderation labels to
+    #   return. Amazon Rekognition doesn't return any labels with a
+    #   confidence level lower than this specified value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] project_version
+    #   Specifies the custom moderation model to be used during the label
+    #   detection job. If not provided the pre-trained model is used.
+    #   @return [String]
+    #
+    class MediaAnalysisDetectModerationLabelsConfig < Struct.new(
+      :min_confidence,
+      :project_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains input information for a media analysis job.
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class MediaAnalysisInput < Struct.new(
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Description for a media analysis job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier for a media analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of a media analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] operations_config
+    #   Operation configurations that were provided during job creation.
+    #   @return [Types::MediaAnalysisOperationsConfig]
+    #
+    # @!attribute [rw] status
+    #   The status of the media analysis job being retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   Details about the error that resulted in failure of the job.
+    #   @return [Types::MediaAnalysisJobFailureDetails]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix date and time when the job was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_timestamp
+    #   The Unix date and time when the job finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input
+    #   Reference to the input manifest that was provided in the job
+    #   creation request.
+    #   @return [Types::MediaAnalysisInput]
+    #
+    # @!attribute [rw] output_config
+    #   Output configuration that was provided in the creation request.
+    #   @return [Types::MediaAnalysisOutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   KMS Key that was provided in the creation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   Output manifest that contains prediction results.
+    #   @return [Types::MediaAnalysisResults]
+    #
+    # @!attribute [rw] manifest_summary
+    #   Provides statistics on input manifest and errors identified in the
+    #   input manifest.
+    #   @return [Types::MediaAnalysisManifestSummary]
+    #
+    class MediaAnalysisJobDescription < Struct.new(
+      :job_id,
+      :job_name,
+      :operations_config,
+      :status,
+      :failure_details,
+      :creation_timestamp,
+      :completion_timestamp,
+      :input,
+      :output_config,
+      :kms_key_id,
+      :results,
+      :manifest_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the error that resulted in failure of the job.
+    #
+    # @!attribute [rw] code
+    #   Error code for the failed job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Human readable error message.
+    #   @return [String]
+    #
+    class MediaAnalysisJobFailureDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary that provides statistics on input manifest and errors
+    # identified in the input manifest.
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class MediaAnalysisManifestSummary < Struct.new(
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for a media analysis job. Configuration is
+    # operation-specific.
+    #
+    # @!attribute [rw] detect_moderation_labels
+    #   Contains configuration options for a DetectModerationLabels job.
+    #   @return [Types::MediaAnalysisDetectModerationLabelsConfig]
+    #
+    class MediaAnalysisOperationsConfig < Struct.new(
+      :detect_moderation_labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output configuration provided in the job creation request.
+    #
+    # @!attribute [rw] s3_bucket
+    #   Specifies the Amazon S3 bucket to contain the output of the media
+    #   analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   Specifies the Amazon S3 key prefix that comes after the name of the
+    #   bucket you have designated for storage.
+    #   @return [String]
+    #
+    class MediaAnalysisOutputConfig < Struct.new(
+      :s3_bucket,
+      :s3_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results for a media analysis job created with
+    # StartMediaAnalysisJob.
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class MediaAnalysisResults < Struct.new(
+      :s3_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6722,6 +7038,61 @@ module Aws::Rekognition
     #   @return [String]
     #
     class StartLabelDetectionResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   Idempotency token used to prevent the accidental creation of
+    #   duplicate versions. If you use the same token with multiple
+    #   `StartMediaAnalysisJobRequest` requests, the same response is
+    #   returned. Use `ClientRequestToken` to prevent the same request from
+    #   being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job. Does not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] operations_config
+    #   Configuration options for the media analysis job to be created.
+    #   @return [Types::MediaAnalysisOperationsConfig]
+    #
+    # @!attribute [rw] input
+    #   Input data to be analyzed by the job.
+    #   @return [Types::MediaAnalysisInput]
+    #
+    # @!attribute [rw] output_config
+    #   The Amazon S3 bucket location to store the results.
+    #   @return [Types::MediaAnalysisOutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of customer managed AWS KMS key (name or ARN). The
+    #   key is used to encrypt images copied into the service. The key is
+    #   also used to encrypt results and manifest files written to the
+    #   output Amazon S3 bucket.
+    #   @return [String]
+    #
+    class StartMediaAnalysisJobRequest < Struct.new(
+      :client_request_token,
+      :job_name,
+      :operations_config,
+      :input,
+      :output_config,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Identifier for the created job.
+    #   @return [String]
+    #
+    class StartMediaAnalysisJobResponse < Struct.new(
       :job_id)
       SENSITIVE = []
       include Aws::Structure

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2023-11-27)
+------------------
+
+* Feature - Support Periodic Recording for Configuration Recorder
+
+1.101.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2023-11-03)
+------------------
+
+* Feature - Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+
 1.99.0 (2023-10-12)
 ------------------
 

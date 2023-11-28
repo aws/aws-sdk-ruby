@@ -539,7 +539,7 @@ module Aws::ResourceExplorer2
     #   This value helps ensure idempotency. Resource Explorer uses this value
     #   to prevent the accidental creation of duplicate versions. We recommend
     #   that you generate a [UUID-type value][1] to ensure the uniqueness of
-    #   your views.
+    #   your index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -643,6 +643,10 @@ module Aws::ResourceExplorer2
     #   The default is an empty list, with no optional fields included in the
     #   results.
     #
+    # @option params [String] :scope
+    #   The root ARN of the account, an organizational unit (OU), or an
+    #   organization ARN. If left empty, the default is account.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tag key and value pairs that are attached to the view.
     #
@@ -670,6 +674,7 @@ module Aws::ResourceExplorer2
     #         name: "IncludedPropertyNameString", # required
     #       },
     #     ],
+    #     scope: "CreateViewInputScopeString",
     #     tags: {
     #       "String" => "String",
     #     },
@@ -804,6 +809,30 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Retrieves the status of your account's Amazon Web Services service
+    # access, and validates the service linked role required to access the
+    # multi-account search feature. Only the management account or a
+    # delegated administrator with service access enabled can invoke this
+    # API call.
+    #
+    # @return [Types::GetAccountLevelServiceConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLevelServiceConfigurationOutput#org_configuration #org_configuration} => Types::OrgConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.org_configuration.aws_service_access_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.org_configuration.service_linked_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetAccountLevelServiceConfiguration AWS API Documentation
+    #
+    # @overload get_account_level_service_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_account_level_service_configuration(params = {}, options = {})
+      req = build_request(:get_account_level_service_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves the Amazon Resource Name (ARN) of the view that is the
     # default for the Amazon Web Services Region in which you call this
     # operation. You can then call GetView to retrieve the details of that
@@ -930,7 +959,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @option params [Array<String>] :regions
     #   If specified, limits the response to only information about the index
@@ -975,6 +1005,72 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Retrieves a list of a member's indexes in all Amazon Web Services
+    # Regions that are currently collecting resource information for Amazon
+    # Web Services Resource Explorer. Only the management account or a
+    # delegated administrator with service access enabled can invoke this
+    # API call.
+    #
+    # @option params [required, Array<String>] :account_id_list
+    #   The account IDs will limit the output to only indexes from these
+    #   accounts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
+    # @return [Types::ListIndexesForMembersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIndexesForMembersOutput#indexes #indexes} => Array&lt;Types::MemberIndex&gt;
+    #   * {Types::ListIndexesForMembersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_indexes_for_members({
+    #     account_id_list: ["AccountId"], # required
+    #     max_results: 1,
+    #     next_token: "ListIndexesForMembersInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.indexes #=> Array
+    #   resp.indexes[0].account_id #=> String
+    #   resp.indexes[0].arn #=> String
+    #   resp.indexes[0].region #=> String
+    #   resp.indexes[0].type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListIndexesForMembers AWS API Documentation
+    #
+    # @overload list_indexes_for_members(params = {})
+    # @param [Hash] params ({})
+    def list_indexes_for_members(params = {}, options = {})
+      req = build_request(:list_indexes_for_members, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all resource types currently supported by Amazon
     # Web Services Resource Explorer.
     #
@@ -998,7 +1094,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @return [Types::ListSupportedResourceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1099,7 +1196,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @return [Types::ListViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1172,7 +1270,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @option params [required, String] :query_string
     #   A string that includes keywords and filters that specify the resources
@@ -1512,7 +1611,7 @@ module Aws::ResourceExplorer2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

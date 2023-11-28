@@ -138,11 +138,59 @@ module Aws::ElasticLoadBalancingV2
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_contents
+    #   The revocation file to add.
+    #   @return [Array<Types::RevocationContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTrustStoreRevocationsInput AWS API Documentation
+    #
+    class AddTrustStoreRevocationsInput < Struct.new(
+      :trust_store_arn,
+      :revocation_contents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_revocations
+    #   Information about the revocation file added to the trust store.
+    #   @return [Array<Types::TrustStoreRevocation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTrustStoreRevocationsOutput AWS API Documentation
+    #
+    class AddTrustStoreRevocationsOutput < Struct.new(
+      :trust_store_revocations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified allocation ID does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AllocationIdNotFoundException AWS API Documentation
     #
     class AllocationIdNotFoundException < Aws::EmptyStructure; end
+
+    # Information about anomaly detection and mitigation.
+    #
+    # @!attribute [rw] result
+    #   The latest anomaly detection result.
+    #   @return [String]
+    #
+    # @!attribute [rw] mitigation_in_effect
+    #   Indicates whether anomaly mitigation is in progress.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AnomalyDetection AWS API Documentation
+    #
+    class AnomalyDetection < Struct.new(
+      :result,
+      :mitigation_in_effect)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Request parameters to use when integrating with Amazon Cognito to
     # authenticate users.
@@ -343,6 +391,12 @@ module Aws::ElasticLoadBalancingV2
     #
     class AvailabilityZoneNotSupportedException < Aws::EmptyStructure; end
 
+    # The specified ca certificate bundle does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CaCertificatesBundleNotFoundException AWS API Documentation
+    #
+    class CaCertificatesBundleNotFoundException < Aws::EmptyStructure; end
+
     # Information about an SSL server certificate.
     #
     # @!attribute [rw] certificate_arn
@@ -459,6 +513,10 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the listener.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] mutual_authentication
+    #   The mutual authentication configuration information.
+    #   @return [Types::MutualAuthenticationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
     #
     class CreateListenerInput < Struct.new(
@@ -469,7 +527,8 @@ module Aws::ElasticLoadBalancingV2
       :certificates,
       :default_actions,
       :alpn_policy,
-      :tags)
+      :tags,
+      :mutual_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -842,6 +901,54 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the trust store.
+    #
+    #   This name must be unique per region and cannot be changed after
+    #   creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_bucket
+    #   The Amazon S3 bucket for the ca certificates bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_key
+    #   The Amazon S3 path for the ca certificates bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_object_version
+    #   The Amazon S3 object version for the ca certificates bundle. If
+    #   undefined the current version is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the trust store.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTrustStoreInput AWS API Documentation
+    #
+    class CreateTrustStoreInput < Struct.new(
+      :name,
+      :ca_certificates_bundle_s3_bucket,
+      :ca_certificates_bundle_s3_key,
+      :ca_certificates_bundle_s3_object_version,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_stores
+    #   Information about the trust store created.
+    #   @return [Array<Types::TrustStore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTrustStoreOutput AWS API Documentation
+    #
+    class CreateTrustStoreOutput < Struct.new(
+      :trust_stores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -905,6 +1012,22 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroupOutput AWS API Documentation
     #
     class DeleteTargetGroupOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTrustStoreInput AWS API Documentation
+    #
+    class DeleteTrustStoreInput < Struct.new(
+      :trust_store_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTrustStoreOutput AWS API Documentation
+    #
+    class DeleteTrustStoreOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -1324,11 +1447,16 @@ module Aws::ElasticLoadBalancingV2
     #   The targets.
     #   @return [Array<Types::TargetDescription>]
     #
+    # @!attribute [rw] include
+    #   Used to inclue anomaly detection information.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealthInput AWS API Documentation
     #
     class DescribeTargetHealthInput < Struct.new(
       :target_group_arn,
-      :targets)
+      :targets,
+      :include)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1341,6 +1469,168 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoreAssociationsInput AWS API Documentation
+    #
+    class DescribeTrustStoreAssociationsInput < Struct.new(
+      :trust_store_arn,
+      :marker,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_associations
+    #   Information about the resources the trust store is associated to.
+    #   @return [Array<Types::TrustStoreAssociation>]
+    #
+    # @!attribute [rw] next_marker
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoreAssociationsOutput AWS API Documentation
+    #
+    class DescribeTrustStoreAssociationsOutput < Struct.new(
+      :trust_store_associations,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the revocations used by a trust store.
+    #
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_id
+    #   The revocation ID of a revocation file in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] revocation_type
+    #   The type of revocation file.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_revoked_entries
+    #   The number of revoked certificates.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoreRevocation AWS API Documentation
+    #
+    class DescribeTrustStoreRevocation < Struct.new(
+      :trust_store_arn,
+      :revocation_id,
+      :revocation_type,
+      :number_of_revoked_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_ids
+    #   The revocation IDs of the revocation files you want to describe.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoreRevocationsInput AWS API Documentation
+    #
+    class DescribeTrustStoreRevocationsInput < Struct.new(
+      :trust_store_arn,
+      :revocation_ids,
+      :marker,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_revocations
+    #   Information about the revocation file in the trust store.
+    #   @return [Array<Types::DescribeTrustStoreRevocation>]
+    #
+    # @!attribute [rw] next_marker
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoreRevocationsOutput AWS API Documentation
+    #
+    class DescribeTrustStoreRevocationsOutput < Struct.new(
+      :trust_store_revocations,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arns
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] names
+    #   The names of the trust stores.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoresInput AWS API Documentation
+    #
+    class DescribeTrustStoresInput < Struct.new(
+      :trust_store_arns,
+      :names,
+      :marker,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_stores
+    #   Information about the trust stores.
+    #   @return [Array<Types::TrustStore>]
+    #
+    # @!attribute [rw] next_marker
+    #   If there are additional results, this is the marker for the next set
+    #   of results. Otherwise, this is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTrustStoresOutput AWS API Documentation
+    #
+    class DescribeTrustStoresOutput < Struct.new(
+      :trust_stores,
+      :next_marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1368,6 +1658,12 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTargetGroupNameException AWS API Documentation
     #
     class DuplicateTargetGroupNameException < Aws::EmptyStructure; end
+
+    # A trust store with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTrustStoreNameException AWS API Documentation
+    #
+    class DuplicateTrustStoreNameException < Aws::EmptyStructure; end
 
     # Information about an action that returns a custom HTTP response.
     #
@@ -1412,6 +1708,59 @@ module Aws::ElasticLoadBalancingV2
     class ForwardActionConfig < Struct.new(
       :target_groups,
       :target_group_stickiness_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetTrustStoreCaCertificatesBundleInput AWS API Documentation
+    #
+    class GetTrustStoreCaCertificatesBundleInput < Struct.new(
+      :trust_store_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location
+    #   The ca certificate bundles Amazon S3 URI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetTrustStoreCaCertificatesBundleOutput AWS API Documentation
+    #
+    class GetTrustStoreCaCertificatesBundleOutput < Struct.new(
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_id
+    #   The revocation ID of the revocation file.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetTrustStoreRevocationContentInput AWS API Documentation
+    #
+    class GetTrustStoreRevocationContentInput < Struct.new(
+      :trust_store_arn,
+      :revocation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location
+    #   The revocation files Amazon S3 URI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetTrustStoreRevocationContentOutput AWS API Documentation
+    #
+    class GetTrustStoreRevocationContentOutput < Struct.new(
+      :location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1517,6 +1866,13 @@ module Aws::ElasticLoadBalancingV2
     #
     class IncompatibleProtocolsException < Aws::EmptyStructure; end
 
+    # The specified ca certificate bundle is in an invalid format, or
+    # corrupt.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidCaCertificatesBundleException AWS API Documentation
+    #
+    class InvalidCaCertificatesBundleException < Aws::EmptyStructure; end
+
     # The requested configuration is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidConfigurationRequestException AWS API Documentation
@@ -1528,6 +1884,13 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidLoadBalancerActionException AWS API Documentation
     #
     class InvalidLoadBalancerActionException < Aws::EmptyStructure; end
+
+    # The provided revocation file is an invalid format, or uses an
+    # incorrect algorithm.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidRevocationContentException AWS API Documentation
+    #
+    class InvalidRevocationContentException < Aws::EmptyStructure; end
 
     # The requested scheme is not valid.
     #
@@ -1660,6 +2023,10 @@ module Aws::ElasticLoadBalancingV2
     #   Negotiation (ALPN) policy.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] mutual_authentication
+    #   The mutual authentication configuration information.
+    #   @return [Types::MutualAuthenticationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Listener AWS API Documentation
     #
     class Listener < Struct.new(
@@ -1670,7 +2037,8 @@ module Aws::ElasticLoadBalancingV2
       :certificates,
       :ssl_policy,
       :default_actions,
-      :alpn_policy)
+      :alpn_policy,
+      :mutual_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1851,6 +2219,19 @@ module Aws::ElasticLoadBalancingV2
     #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
     #     seconds. The valid range is 1-4000 seconds. The default is 60
     #     seconds.
+    #
+    #   * `connection_logs.s3.enabled` - Indicates whether connection logs
+    #     are enabled. The value is `true` or `false`. The default is
+    #     `false`.
+    #
+    #   * `connection_logs.s3.bucket` - The name of the S3 bucket for the
+    #     connection logs. This attribute is required if connection logs are
+    #     enabled. The bucket must exist in the same region as the load
+    #     balancer and have a bucket policy that grants Elastic Load
+    #     Balancing permissions to write to the bucket.
+    #
+    #   * `connection_logs.s3.prefix` - The prefix for the location in the
+    #     S3 bucket for the connection logs.
     #
     #   * `routing.http.desync_mitigation_mode` - Determines how the load
     #     balancer handles requests that might pose a security risk to your
@@ -2068,6 +2449,10 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
     #   @return [Array<String>]
     #
+    # @!attribute [rw] mutual_authentication
+    #   The mutual authentication configuration information.
+    #   @return [Types::MutualAuthenticationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
     #
     class ModifyListenerInput < Struct.new(
@@ -2077,7 +2462,8 @@ module Aws::ElasticLoadBalancingV2
       :ssl_policy,
       :certificates,
       :default_actions,
-      :alpn_policy)
+      :alpn_policy,
+      :mutual_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2275,6 +2661,71 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_bucket
+    #   The Amazon S3 bucket for the ca certificates bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_key
+    #   The Amazon S3 path for the ca certificates bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_object_version
+    #   The Amazon S3 object version for the ca certificates bundle. If
+    #   undefined the current version is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTrustStoreInput AWS API Documentation
+    #
+    class ModifyTrustStoreInput < Struct.new(
+      :trust_store_arn,
+      :ca_certificates_bundle_s3_bucket,
+      :ca_certificates_bundle_s3_key,
+      :ca_certificates_bundle_s3_object_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_stores
+    #   Information about the modified trust store.
+    #   @return [Array<Types::TrustStore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTrustStoreOutput AWS API Documentation
+    #
+    class ModifyTrustStoreOutput < Struct.new(
+      :trust_stores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the mutual authentication attributes of a listener.
+    #
+    # @!attribute [rw] mode
+    #   The client certificate handling method. Options are `off`,
+    #   `passthrough` or `verify`. The default value is `off`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] ignore_client_certificate_expiry
+    #   Indicates whether expired client certificates are ignored.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/MutualAuthenticationAttributes AWS API Documentation
+    #
+    class MutualAuthenticationAttributes < Struct.new(
+      :mode,
+      :trust_store_arn,
+      :ignore_client_certificate_expiry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2495,11 +2946,73 @@ module Aws::ElasticLoadBalancingV2
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_ids
+    #   The revocation IDs of the revocation files you want to remove.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTrustStoreRevocationsInput AWS API Documentation
+    #
+    class RemoveTrustStoreRevocationsInput < Struct.new(
+      :trust_store_arn,
+      :revocation_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTrustStoreRevocationsOutput AWS API Documentation
+    #
+    class RemoveTrustStoreRevocationsOutput < Aws::EmptyStructure; end
+
     # A specified resource is in use.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ResourceInUseException AWS API Documentation
     #
     class ResourceInUseException < Aws::EmptyStructure; end
+
+    # Information about a revocation file.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket for the revocation file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The Amazon S3 path for the revocation file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_version
+    #   The Amazon S3 object version of the revocation file.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_type
+    #   The type of revocation file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RevocationContent AWS API Documentation
+    #
+    class RevocationContent < Struct.new(
+      :s3_bucket,
+      :s3_key,
+      :s3_object_version,
+      :revocation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified revocation file does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RevocationContentNotFoundException AWS API Documentation
+    #
+    class RevocationContentNotFoundException < Aws::EmptyStructure; end
+
+    # The specified revocation ID does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RevocationIdNotFoundException AWS API Documentation
+    #
+    class RevocationIdNotFoundException < Aws::EmptyStructure; end
 
     # Information about a rule.
     #
@@ -3252,8 +3765,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `load_balancing.algorithm.type` - The load balancing algorithm
     #     determines how the load balancer selects targets when routing
-    #     requests. The value is `round_robin` or
-    #     `least_outstanding_requests`. The default is `round_robin`.
+    #     requests. The value is `round_robin`,
+    #     `least_outstanding_requests`, or `weighted_random`. The default is
+    #     `round_robin`.
+    #
+    #   * `load_balancing.algorithm.anomaly_mitigation` - Only available
+    #     when `load_balancing.algorithm.type` is `weighted_random`.
+    #     Indicates whether anomaly mitigation is enabled. The value is `on`
+    #     or `off`. The default is `off`.
     #
     #   * `slow_start.duration_seconds` - The time period, in seconds,
     #     during which a newly registered target receives an increasing
@@ -3500,12 +4019,21 @@ module Aws::ElasticLoadBalancingV2
     #   The health information for the target.
     #   @return [Types::TargetHealth]
     #
+    # @!attribute [rw] anomaly_detection
+    #   The anomaly detection result for the target.
+    #
+    #   If no anomalies were detected, the result is `normal`.
+    #
+    #   If anomalies were detected, the result is `anomalous`.
+    #   @return [Types::AnomalyDetection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealthDescription AWS API Documentation
     #
     class TargetHealthDescription < Struct.new(
       :target,
       :health_check_port,
-      :target_health)
+      :target_health,
+      :anomaly_detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3550,7 +4078,7 @@ module Aws::ElasticLoadBalancingV2
     #
     class TooManyRulesException < Aws::EmptyStructure; end
 
-    # You've reached the limit on the number of tags per load balancer.
+    # You've reached the limit on the number of tags for this resource.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTagsException AWS API Documentation
     #
@@ -3569,6 +4097,19 @@ module Aws::ElasticLoadBalancingV2
     #
     class TooManyTargetsException < Aws::EmptyStructure; end
 
+    # The specified trust store has too many revocation entries.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTrustStoreRevocationEntriesException AWS API Documentation
+    #
+    class TooManyTrustStoreRevocationEntriesException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of trust stores for your
+    # Amazon Web Services account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTrustStoresException AWS API Documentation
+    #
+    class TooManyTrustStoresException < Aws::EmptyStructure; end
+
     # You've reached the limit on the number of unique target groups per
     # load balancer across all listeners. If a target group is used by
     # multiple actions for a load balancer, it is counted as only one use.
@@ -3576,6 +4117,101 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyUniqueTargetGroupsPerLoadBalancerException AWS API Documentation
     #
     class TooManyUniqueTargetGroupsPerLoadBalancerException < Aws::EmptyStructure; end
+
+    # Information about a trust store.
+    #
+    # @!attribute [rw] name
+    #   The name of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_ca_certificates
+    #   The number of ca certificates in the trust store.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_revoked_entries
+    #   The number of revoked certificates in the trust store.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStore AWS API Documentation
+    #
+    class TrustStore < Struct.new(
+      :name,
+      :trust_store_arn,
+      :status,
+      :number_of_ca_certificates,
+      :total_revoked_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the resources a trust store is associated with.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreAssociation AWS API Documentation
+    #
+    class TrustStoreAssociation < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified trust store is currently in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreInUseException AWS API Documentation
+    #
+    class TrustStoreInUseException < Aws::EmptyStructure; end
+
+    # The specified trust store does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreNotFoundException AWS API Documentation
+    #
+    class TrustStoreNotFoundException < Aws::EmptyStructure; end
+
+    # The specified trust store is not active.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreNotReadyException AWS API Documentation
+    #
+    class TrustStoreNotReadyException < Aws::EmptyStructure; end
+
+    # Information about a revocation file in use by a trust store.
+    #
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_id
+    #   The revocation ID of the revocation file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] revocation_type
+    #   The type of revocation file.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_revoked_entries
+    #   The number of revoked certificates.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreRevocation AWS API Documentation
+    #
+    class TrustStoreRevocation < Struct.new(
+      :trust_store_arn,
+      :revocation_id,
+      :revocation_type,
+      :number_of_revoked_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified protocol is not supported.
     #

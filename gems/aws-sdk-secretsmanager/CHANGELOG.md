@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2023-11-27)
+------------------
+
+* Feature - AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+
+1.85.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2023-10-19)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.83.0 (2023-09-27)
 ------------------
 

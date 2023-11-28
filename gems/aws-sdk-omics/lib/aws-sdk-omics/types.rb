@@ -2667,6 +2667,22 @@ module Aws::Omics
     #   The run's retention mode.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a run has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_location
+    #   The location of the run log.
+    #   @return [Types::RunLogLocation]
+    #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -2694,13 +2710,17 @@ module Aws::Omics
       :status_message,
       :tags,
       :accelerators,
-      :retention_mode)
+      :retention_mode,
+      :failure_reason,
+      :log_location,
+      :uuid,
+      :run_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] id
-    #   The task's ID.
+    #   The workflow run ID.
     #   @return [String]
     #
     # @!attribute [rw] task_id
@@ -2764,6 +2784,10 @@ module Aws::Omics
     #   The instance type for a task.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a task has failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -2778,7 +2802,8 @@ module Aws::Omics
       :status_message,
       :log_stream,
       :gpus,
-      :instance_type)
+      :instance_type,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5102,6 +5127,25 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The URI for the run log.
+    #
+    # @!attribute [rw] engine_log_stream
+    #   The log stream ARN for the engine log.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_log_stream
+    #   The log stream ARN for the run log.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RunLogLocation AWS API Documentation
+    #
+    class RunLogLocation < Struct.new(
+      :engine_log_stream,
+      :run_log_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a sequence.
     #
     # @!attribute [rw] total_read_count
@@ -5791,13 +5835,23 @@ module Aws::Omics
     #   The run's tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunResponse AWS API Documentation
     #
     class StartRunResponse < Struct.new(
       :arn,
       :id,
       :status,
-      :tags)
+      :tags,
+      :uuid,
+      :run_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3,6 +3,46 @@ Unreleased Changes
 
 * Feature - Support Credential scoped credentials using `ENV['AWS_CREDENTIAL_SCOPE']`, `aws_credential_scope` shared config, or the `credential_scope` Client configuration option.
 
+3.189.0 (2023-11-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support S3 Express authentication.
+
+3.188.0 (2023-11-22)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
+
+* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and also allow for ECS and EKS link-local http addresses.
+
+3.187.1 (2023-11-20)
+------------------
+
+* Issue - For `awsQueryCompatible` services, default an empty list or map for shapes that were previously flattened in the query protocol.
+
+3.187.0 (2023-11-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+3.186.0 (2023-11-02)
+------------------
+
+* Feature - Support disabling IMDSv1 in `InstanceProfileCredentials` using `ENV['AWS_EC2_METADATA_V1_DISABLED']`, `ec2_metadata_v1_disabled` shared config, or the `disable_imds_v1` credentials option.
+
+3.185.2 (2023-10-31)
+------------------
+
+* Issue - Fix query string support to lists of booleans, floats, integers and timestamps per rest-json protocol.
+
 3.185.1 (2023-10-05)
 ------------------
 

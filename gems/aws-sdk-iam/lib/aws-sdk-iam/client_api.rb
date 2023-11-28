@@ -2763,7 +2763,6 @@ module Aws::IAM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAccessKeyLastUsedRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessKeyLastUsedResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
       end)
 
       api.add_operation(:get_account_authorization_details, Seahorse::Model::Operation.new.tap do |o|

@@ -185,8 +185,10 @@ module Aws::CleanRooms
     Membership = Shapes::StructureShape.new(name: 'Membership')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipIdentifier = Shapes::StringShape.new(name: 'MembershipIdentifier')
+    MembershipPaymentConfiguration = Shapes::StructureShape.new(name: 'MembershipPaymentConfiguration')
     MembershipProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedQueryOutputConfiguration')
     MembershipProtectedQueryResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedQueryResultConfiguration')
+    MembershipQueryComputePaymentConfig = Shapes::StructureShape.new(name: 'MembershipQueryComputePaymentConfig')
     MembershipQueryLogStatus = Shapes::StringShape.new(name: 'MembershipQueryLogStatus')
     MembershipStatus = Shapes::StringShape.new(name: 'MembershipStatus')
     MembershipSummary = Shapes::StructureShape.new(name: 'MembershipSummary')
@@ -196,6 +198,7 @@ module Aws::CleanRooms
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    PaymentConfiguration = Shapes::StructureShape.new(name: 'PaymentConfiguration')
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
@@ -215,6 +218,7 @@ module Aws::CleanRooms
     ProtectedQuerySummary = Shapes::StructureShape.new(name: 'ProtectedQuerySummary')
     ProtectedQuerySummaryList = Shapes::ListShape.new(name: 'ProtectedQuerySummaryList')
     ProtectedQueryType = Shapes::StringShape.new(name: 'ProtectedQueryType')
+    QueryComputePaymentConfig = Shapes::StructureShape.new(name: 'QueryComputePaymentConfig')
     QueryTables = Shapes::ListShape.new(name: 'QueryTables')
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
@@ -584,6 +588,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -623,6 +628,7 @@ module Aws::CleanRooms
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    CreateMembershipInput.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, location_name: "paymentConfiguration"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
     CreateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
@@ -845,6 +851,7 @@ module Aws::CleanRooms
     MemberSpecification.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     MemberSpecification.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     MemberSpecification.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "displayName"))
+    MemberSpecification.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "paymentConfiguration"))
     MemberSpecification.struct_class = Types::MemberSpecification
 
     MemberSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -855,6 +862,7 @@ module Aws::CleanRooms
     MemberSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MemberSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, location_name: "membershipId"))
     MemberSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, location_name: "membershipArn"))
+    MemberSummary.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     MemberSummary.struct_class = Types::MemberSummary
 
     MemberSummaryList.member = Shapes::ShapeRef.new(shape: MemberSummary)
@@ -872,7 +880,11 @@ module Aws::CleanRooms
     Membership.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     Membership.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    Membership.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     Membership.struct_class = Types::Membership
+
+    MembershipPaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: MembershipQueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    MembershipPaymentConfiguration.struct_class = Types::MembershipPaymentConfiguration
 
     MembershipProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
     MembershipProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -883,6 +895,9 @@ module Aws::CleanRooms
     MembershipProtectedQueryResultConfiguration.add_member(:output_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryOutputConfiguration, required: true, location_name: "outputConfiguration"))
     MembershipProtectedQueryResultConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     MembershipProtectedQueryResultConfiguration.struct_class = Types::MembershipProtectedQueryResultConfiguration
+
+    MembershipQueryComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipQueryComputePaymentConfig.struct_class = Types::MembershipQueryComputePaymentConfig
 
     MembershipSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     MembershipSummary.add_member(:arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "arn"))
@@ -895,12 +910,16 @@ module Aws::CleanRooms
     MembershipSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MembershipSummary.add_member(:status, Shapes::ShapeRef.new(shape: MembershipStatus, required: true, location_name: "status"))
     MembershipSummary.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    MembershipSummary.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     MembershipSummary.struct_class = Types::MembershipSummary
 
     MembershipSummaryList.member = Shapes::ShapeRef.new(shape: MembershipSummary)
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    PaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: QueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    PaymentConfiguration.struct_class = Types::PaymentConfiguration
 
     ProtectedQuery.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ProtectedQuery.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
@@ -967,6 +986,9 @@ module Aws::CleanRooms
     ProtectedQuerySummary.struct_class = Types::ProtectedQuerySummary
 
     ProtectedQuerySummaryList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySummary)
+
+    QueryComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    QueryComputePaymentConfig.struct_class = Types::QueryComputePaymentConfig
 
     QueryTables.member = Shapes::ShapeRef.new(shape: TableAlias)
 

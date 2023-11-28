@@ -10,10 +10,10 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.186.0"
+    MINIMUM_CORE_VERSION = "3.189.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.186.0"
+    MINIMUM_CORE_VERSION_S3 = "3.189.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -31,6 +31,12 @@ module BuildTools
       end
     end
     alias service []
+
+    def for_service_id(service_id)
+      services.values.find do |service|
+        service.service_id == service_id
+      end
+    end
 
     def each(&block)
       services.values.each(&block)

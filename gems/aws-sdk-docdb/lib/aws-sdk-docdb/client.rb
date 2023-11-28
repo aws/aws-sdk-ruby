@@ -772,6 +772,7 @@ module Aws::DocDB
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -943,6 +944,23 @@ module Aws::DocDB
     # @option params [String] :global_cluster_identifier
     #   The cluster identifier of the new global cluster.
     #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
+    #   <note markdown="1"> When you create a DocumentDB DB cluster with the storage type set to
+    #   `iopt1`, the storage type is returned in the response. The storage
+    #   type isn't returned when you set it to `standard`.
+    #
+    #    </note>
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -979,6 +997,7 @@ module Aws::DocDB
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #     global_cluster_identifier: "GlobalClusterIdentifier",
+    #     storage_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -1027,6 +1046,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1185,6 +1205,7 @@ module Aws::DocDB
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -1289,6 +1310,19 @@ module Aws::DocDB
     #   account has a different default KMS key for each Amazon Web Services
     #   region.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   For more information, see [Updating Your Amazon DocumentDB TLS
+    #   Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    #   DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -1313,6 +1347,7 @@ module Aws::DocDB
     #     promotion_tier: 1,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -1377,6 +1412,8 @@ module Aws::DocDB
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -1759,6 +1796,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -1843,6 +1881,7 @@ module Aws::DocDB
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -1937,6 +1976,8 @@ module Aws::DocDB
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -2478,6 +2519,7 @@ module Aws::DocDB
     #   resp.db_cluster_snapshots[0].kms_key_id #=> String
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshots[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
     #
@@ -2600,6 +2642,7 @@ module Aws::DocDB
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
+    #   resp.db_clusters[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -2705,6 +2748,9 @@ module Aws::DocDB
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
     #   resp.db_engine_versions[0].exportable_log_types[0] #=> String
     #   resp.db_engine_versions[0].supports_log_exports_to_cloudwatch_logs #=> Boolean
+    #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
+    #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
+    #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -2843,6 +2889,8 @@ module Aws::DocDB
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instances[0].certificate_details.ca_identifier #=> String
+    #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3389,6 +3437,7 @@ module Aws::DocDB
     #   resp.orderable_db_instance_options[0].availability_zones #=> Array
     #   resp.orderable_db_instance_options[0].availability_zones[0].name #=> String
     #   resp.orderable_db_instance_options[0].vpc #=> Boolean
+    #   resp.orderable_db_instance_options[0].storage_type #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -3561,6 +3610,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -3752,6 +3802,17 @@ module Aws::DocDB
     #   `DeletionProtection` is disabled. `DeletionProtection` protects
     #   clusters from being accidentally deleted.
     #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -3776,6 +3837,7 @@ module Aws::DocDB
     #     engine_version: "String",
     #     allow_major_version_upgrade: false,
     #     deletion_protection: false,
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -3823,6 +3885,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4090,6 +4153,26 @@ module Aws::DocDB
     #   account has a different default KMS key for each Amazon Web Services
     #   region.
     #
+    # @option params [Boolean] :certificate_rotation_restart
+    #   Specifies whether the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your SSL/TLS
+    #   certificate. The certificate is not updated until the DB instance is
+    #   restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, see [Updating
+    #   Your Amazon DocumentDB TLS Certificates][1] and [ Encrypting Data in
+    #   Transit][2] in the *Amazon DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4108,6 +4191,7 @@ module Aws::DocDB
     #     promotion_tier: 1,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     certificate_rotation_restart: false,
     #   })
     #
     # @example Response structure
@@ -4172,6 +4256,8 @@ module Aws::DocDB
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -4469,6 +4555,8 @@ module Aws::DocDB
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -4784,6 +4872,17 @@ module Aws::DocDB
     #   letters, numbers or hyphens. Its first character must be a letter, and
     #   it cannot end with a hyphen or contain two consecutive hyphens.
     #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -4809,6 +4908,7 @@ module Aws::DocDB
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #     db_cluster_parameter_group_name: "String",
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -4856,6 +4956,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -4996,6 +5097,17 @@ module Aws::DocDB
     #   `DeletionProtection` is disabled. `DeletionProtection` protects
     #   clusters from being accidentally deleted.
     #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5020,6 +5132,7 @@ module Aws::DocDB
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -5067,6 +5180,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -5144,6 +5258,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -5221,6 +5336,7 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -5244,7 +5360,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

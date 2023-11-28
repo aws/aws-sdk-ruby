@@ -683,6 +683,30 @@ module Aws::CodePipeline
     #         },
     #       ],
     #       version: 1,
+    #       pipeline_type: "V1", # accepts V1, V2
+    #       triggers: [
+    #         {
+    #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
+    #           git_configuration: { # required
+    #             source_action_name: "ActionName", # required
+    #             push: [
+    #               {
+    #                 tags: {
+    #                   includes: ["GitTagNamePattern"],
+    #                   excludes: ["GitTagNamePattern"],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
     #     },
     #     tags: [
     #       {
@@ -727,6 +751,19 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1144,6 +1181,19 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
     #   resp.metadata.updated #=> Time
@@ -1195,6 +1245,11 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
     #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
+    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
+    #   resp.pipeline_execution.trigger.trigger_detail #=> String
+    #   resp.pipeline_execution.variables #=> Array
+    #   resp.pipeline_execution.variables[0].name #=> String
+    #   resp.pipeline_execution.variables[0].resolved_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution AWS API Documentation
     #
@@ -1544,7 +1599,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
-    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision"
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
     #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
     #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
     #   resp.next_token #=> String
@@ -1589,6 +1644,7 @@ module Aws::CodePipeline
     #   resp.pipelines #=> Array
     #   resp.pipelines[0].name #=> String
     #   resp.pipelines[0].version #=> Integer
+    #   resp.pipelines[0].pipeline_type #=> String, one of "V1", "V2"
     #   resp.pipelines[0].created #=> Time
     #   resp.pipelines[0].updated #=> Time
     #   resp.next_token #=> String
@@ -2286,12 +2342,23 @@ module Aws::CodePipeline
     # @option params [required, String] :name
     #   The name of the pipeline to start.
     #
+    # @option params [Array<Types::PipelineVariable>] :variables
+    #   A list that overrides pipeline variables for a pipeline execution
+    #   that's being started. Variable names must match `[A-Za-z0-9@\-_]+`,
+    #   and the values can be anything except an empty string.
+    #
     # @option params [String] :client_request_token
     #   The system-generated unique ID used to identify a unique execution
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Array<Types::SourceRevisionOverride>] :source_revisions
+    #   A list that allows you to specify, or override, the source revision
+    #   for a pipeline execution that's being started. A source revision is
+    #   the version with all the changes to your application code, or source
+    #   artifact, for the pipeline execution.
     #
     # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2301,7 +2368,20 @@ module Aws::CodePipeline
     #
     #   resp = client.start_pipeline_execution({
     #     name: "PipelineName", # required
+    #     variables: [
+    #       {
+    #         name: "PipelineVariableName", # required
+    #         value: "PipelineVariableValue", # required
+    #       },
+    #     ],
     #     client_request_token: "ClientRequestToken",
+    #     source_revisions: [
+    #       {
+    #         action_name: "ActionName", # required
+    #         revision_type: "COMMIT_ID", # required, accepts COMMIT_ID, IMAGE_DIGEST, S3_OBJECT_VERSION_ID
+    #         revision_value: "Revision", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2579,6 +2659,30 @@ module Aws::CodePipeline
     #         },
     #       ],
     #       version: 1,
+    #       pipeline_type: "V1", # accepts V1, V2
+    #       triggers: [
+    #         {
+    #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
+    #           git_configuration: { # required
+    #             source_action_name: "ActionName", # required
+    #             push: [
+    #               {
+    #                 tags: {
+    #                   includes: ["GitTagNamePattern"],
+    #                   excludes: ["GitTagNamePattern"],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2617,6 +2721,19 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
     #
@@ -2640,7 +2757,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

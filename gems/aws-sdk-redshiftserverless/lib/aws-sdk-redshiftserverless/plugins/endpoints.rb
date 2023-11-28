@@ -25,16 +25,17 @@ module Aws::RedshiftServerless
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,6 +59,8 @@ module Aws::RedshiftServerless
           case context.operation_name
           when :convert_recovery_point_to_snapshot
             Aws::RedshiftServerless::Endpoints::ConvertRecoveryPointToSnapshot.build(context)
+          when :create_custom_domain_association
+            Aws::RedshiftServerless::Endpoints::CreateCustomDomainAssociation.build(context)
           when :create_endpoint_access
             Aws::RedshiftServerless::Endpoints::CreateEndpointAccess.build(context)
           when :create_namespace
@@ -68,6 +71,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::CreateUsageLimit.build(context)
           when :create_workgroup
             Aws::RedshiftServerless::Endpoints::CreateWorkgroup.build(context)
+          when :delete_custom_domain_association
+            Aws::RedshiftServerless::Endpoints::DeleteCustomDomainAssociation.build(context)
           when :delete_endpoint_access
             Aws::RedshiftServerless::Endpoints::DeleteEndpointAccess.build(context)
           when :delete_namespace
@@ -82,6 +87,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::DeleteWorkgroup.build(context)
           when :get_credentials
             Aws::RedshiftServerless::Endpoints::GetCredentials.build(context)
+          when :get_custom_domain_association
+            Aws::RedshiftServerless::Endpoints::GetCustomDomainAssociation.build(context)
           when :get_endpoint_access
             Aws::RedshiftServerless::Endpoints::GetEndpointAccess.build(context)
           when :get_namespace
@@ -98,6 +105,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::GetUsageLimit.build(context)
           when :get_workgroup
             Aws::RedshiftServerless::Endpoints::GetWorkgroup.build(context)
+          when :list_custom_domain_associations
+            Aws::RedshiftServerless::Endpoints::ListCustomDomainAssociations.build(context)
           when :list_endpoint_access
             Aws::RedshiftServerless::Endpoints::ListEndpointAccess.build(context)
           when :list_namespaces
@@ -126,6 +135,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::RedshiftServerless::Endpoints::UntagResource.build(context)
+          when :update_custom_domain_association
+            Aws::RedshiftServerless::Endpoints::UpdateCustomDomainAssociation.build(context)
           when :update_endpoint_access
             Aws::RedshiftServerless::Endpoints::UpdateEndpointAccess.build(context)
           when :update_namespace

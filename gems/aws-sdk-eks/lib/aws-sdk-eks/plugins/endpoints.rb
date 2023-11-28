@@ -25,16 +25,17 @@ module Aws::EKS
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -64,18 +65,26 @@ module Aws::EKS
             Aws::EKS::Endpoints::CreateAddon.build(context)
           when :create_cluster
             Aws::EKS::Endpoints::CreateCluster.build(context)
+          when :create_eks_anywhere_subscription
+            Aws::EKS::Endpoints::CreateEksAnywhereSubscription.build(context)
           when :create_fargate_profile
             Aws::EKS::Endpoints::CreateFargateProfile.build(context)
           when :create_nodegroup
             Aws::EKS::Endpoints::CreateNodegroup.build(context)
+          when :create_pod_identity_association
+            Aws::EKS::Endpoints::CreatePodIdentityAssociation.build(context)
           when :delete_addon
             Aws::EKS::Endpoints::DeleteAddon.build(context)
           when :delete_cluster
             Aws::EKS::Endpoints::DeleteCluster.build(context)
+          when :delete_eks_anywhere_subscription
+            Aws::EKS::Endpoints::DeleteEksAnywhereSubscription.build(context)
           when :delete_fargate_profile
             Aws::EKS::Endpoints::DeleteFargateProfile.build(context)
           when :delete_nodegroup
             Aws::EKS::Endpoints::DeleteNodegroup.build(context)
+          when :delete_pod_identity_association
+            Aws::EKS::Endpoints::DeletePodIdentityAssociation.build(context)
           when :deregister_cluster
             Aws::EKS::Endpoints::DeregisterCluster.build(context)
           when :describe_addon
@@ -86,12 +95,16 @@ module Aws::EKS
             Aws::EKS::Endpoints::DescribeAddonVersions.build(context)
           when :describe_cluster
             Aws::EKS::Endpoints::DescribeCluster.build(context)
+          when :describe_eks_anywhere_subscription
+            Aws::EKS::Endpoints::DescribeEksAnywhereSubscription.build(context)
           when :describe_fargate_profile
             Aws::EKS::Endpoints::DescribeFargateProfile.build(context)
           when :describe_identity_provider_config
             Aws::EKS::Endpoints::DescribeIdentityProviderConfig.build(context)
           when :describe_nodegroup
             Aws::EKS::Endpoints::DescribeNodegroup.build(context)
+          when :describe_pod_identity_association
+            Aws::EKS::Endpoints::DescribePodIdentityAssociation.build(context)
           when :describe_update
             Aws::EKS::Endpoints::DescribeUpdate.build(context)
           when :disassociate_identity_provider_config
@@ -100,12 +113,16 @@ module Aws::EKS
             Aws::EKS::Endpoints::ListAddons.build(context)
           when :list_clusters
             Aws::EKS::Endpoints::ListClusters.build(context)
+          when :list_eks_anywhere_subscriptions
+            Aws::EKS::Endpoints::ListEksAnywhereSubscriptions.build(context)
           when :list_fargate_profiles
             Aws::EKS::Endpoints::ListFargateProfiles.build(context)
           when :list_identity_provider_configs
             Aws::EKS::Endpoints::ListIdentityProviderConfigs.build(context)
           when :list_nodegroups
             Aws::EKS::Endpoints::ListNodegroups.build(context)
+          when :list_pod_identity_associations
+            Aws::EKS::Endpoints::ListPodIdentityAssociations.build(context)
           when :list_tags_for_resource
             Aws::EKS::Endpoints::ListTagsForResource.build(context)
           when :list_updates
@@ -122,10 +139,14 @@ module Aws::EKS
             Aws::EKS::Endpoints::UpdateClusterConfig.build(context)
           when :update_cluster_version
             Aws::EKS::Endpoints::UpdateClusterVersion.build(context)
+          when :update_eks_anywhere_subscription
+            Aws::EKS::Endpoints::UpdateEksAnywhereSubscription.build(context)
           when :update_nodegroup_config
             Aws::EKS::Endpoints::UpdateNodegroupConfig.build(context)
           when :update_nodegroup_version
             Aws::EKS::Endpoints::UpdateNodegroupVersion.build(context)
+          when :update_pod_identity_association
+            Aws::EKS::Endpoints::UpdatePodIdentityAssociation.build(context)
           end
         end
       end

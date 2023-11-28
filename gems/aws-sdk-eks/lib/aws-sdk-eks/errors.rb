@@ -102,6 +102,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def subscription_id
+        @data[:subscription_id]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -137,6 +142,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def subscription_id
+        @data[:subscription_id]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -164,6 +174,11 @@ module Aws::EKS
       # @return [String]
       def addon_name
         @data[:addon_name]
+      end
+
+      # @return [String]
+      def subscription_id
+        @data[:subscription_id]
       end
 
       # @return [String]
@@ -237,6 +252,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def subscription_id
+        @data[:subscription_id]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -269,6 +289,11 @@ module Aws::EKS
       # @return [String]
       def addon_name
         @data[:addon_name]
+      end
+
+      # @return [String]
+      def subscription_id
+        @data[:subscription_id]
       end
 
       # @return [String]
@@ -314,6 +339,11 @@ module Aws::EKS
       # @return [String]
       def addon_name
         @data[:addon_name]
+      end
+
+      # @return [String]
+      def subscription_id
+        @data[:subscription_id]
       end
 
       # @return [String]

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'thread'
-
 module Aws
 
   # Base class used credential classes that can be refreshed. This
@@ -48,6 +46,14 @@ module Aws
 
     private
 
+    def sync_expiration_length
+      self.class::SYNC_EXPIRATION_LENGTH
+    end
+
+    def async_expiration_length
+      self.class::ASYNC_EXPIRATION_LENGTH
+    end
+
     # Refreshes credentials asynchronously and synchronously.
     # If we are near to expiration, block while getting new credentials.
     # Otherwise, if we're approaching expiration, use the existing credentials
@@ -56,18 +62,18 @@ module Aws
       # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
       # call, we check before doing so, and then we check within the mutex to avoid a race condition.
       # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
-      if near_expiration?(SYNC_EXPIRATION_LENGTH)
+      if near_expiration?(sync_expiration_length)
         @mutex.synchronize do
-          if near_expiration?(SYNC_EXPIRATION_LENGTH)
+          if near_expiration?(sync_expiration_length)
             @before_refresh.call(self) if @before_refresh
             refresh
           end
         end
-      elsif @async_refresh && near_expiration?(ASYNC_EXPIRATION_LENGTH)
+      elsif @async_refresh && near_expiration?(async_expiration_length)
         unless @mutex.locked?
           Thread.new do
             @mutex.synchronize do
-              if near_expiration?(ASYNC_EXPIRATION_LENGTH)
+              if near_expiration?(async_expiration_length)
                 @before_refresh.call(self) if @before_refresh
                 refresh
               end

@@ -397,20 +397,38 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html
     #
     # @option params [required, String] :asset_id
-    #   The ID of the parent asset.
+    #   The ID of the parent asset. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :hierarchy_id
-    #   The ID of a hierarchy in the parent asset's model. Hierarchies allow
-    #   different groupings of assets to be formed that all come from the same
-    #   asset model. For more information, see [Asset hierarchies][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   The ID of a hierarchy in the parent asset's model. (This can be
+    #   either the actual ID in UUID format, or else `externalId:` followed by
+    #   the external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.)
+    #   Hierarchies allow different groupings of assets to be formed that all
+    #   come from the same asset model. For more information, see [Asset
+    #   hierarchies][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #
     # @option params [required, String] :child_asset_id
-    #   The ID of the child asset to be associated.
+    #   The ID of the child asset to be associated. This can be either the
+    #   actual ID in UUID format, or else `externalId:` followed by the
+    #   external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -425,9 +443,9 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_assets({
-    #     asset_id: "ID", # required
-    #     hierarchy_id: "ID", # required
-    #     child_asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     hierarchy_id: "CustomID", # required
+    #     child_asset_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -444,10 +462,25 @@ module Aws::IoTSiteWise
     #   The alias that identifies the time series.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset in which the asset property was created.
+    #   The ID of the asset in which the asset property was created. This can
+    #   be either the actual ID in UUID format, or else `externalId:` followed
+    #   by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -463,8 +496,8 @@ module Aws::IoTSiteWise
     #
     #   resp = client.associate_time_series_to_asset_property({
     #     alias: "PropertyAlias", # required
-    #     asset_id: "ID", # required
-    #     property_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     property_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -976,7 +1009,14 @@ module Aws::IoTSiteWise
     #   A friendly name for the asset.
     #
     # @option params [required, String] :asset_model_id
-    #   The ID of the asset model from which to create the asset.
+    #   The ID of the asset model from which to create the asset. This can be
+    #   either the actual ID in UUID format, or else `externalId:` followed by
+    #   the external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -998,6 +1038,22 @@ module Aws::IoTSiteWise
     # @option params [String] :asset_description
     #   A description for the asset.
     #
+    # @option params [String] :asset_id
+    #   The ID to assign to the asset, if desired. IoT SiteWise automatically
+    #   generates a unique ID for you, so this parameter is never required.
+    #   However, if you prefer to supply your own ID instead, you can specify
+    #   it here in UUID format. If you specify your own ID, it must be
+    #   globally unique.
+    #
+    # @option params [String] :asset_external_id
+    #   An external ID to assign to the asset. The external ID must be unique
+    #   within your Amazon Web Services account. For more information, see
+    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#asset_id #asset_id} => String
@@ -1008,12 +1064,14 @@ module Aws::IoTSiteWise
     #
     #   resp = client.create_asset({
     #     asset_name: "Name", # required
-    #     asset_model_id: "ID", # required
+    #     asset_model_id: "CustomID", # required
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     asset_description: "Description",
+    #     asset_id: "ID",
+    #     asset_external_id: "ExternalId",
     #   })
     #
     # @example Response structure
@@ -1040,6 +1098,17 @@ module Aws::IoTSiteWise
     # definitions. Each asset created from a model inherits the asset
     # model's property and hierarchy definitions. For more information, see
     # [Defining asset models][1] in the *IoT SiteWise User Guide*.
+    #
+    # You can create two types of asset models, `ASSET_MODEL` or
+    # `COMPONENT_MODEL`.
+    #
+    # * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #   create assets. Can't be included as a component in another asset
+    #   model.
+    #
+    # * **COMPONENT\_MODEL** – A reusable component that you can include in
+    #   the composite models of other asset models. You can't create assets
+    #   directly from this type of asset model.
     #
     #
     #
@@ -1078,11 +1147,22 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
     # @option params [Array<Types::AssetModelCompositeModelDefinition>] :asset_model_composite_models
-    #   The composite asset models that are part of this asset model.
-    #   Composite asset models are asset models that contain specific
-    #   properties. Each composite model has a type that defines the
-    #   properties that the composite model supports. Use composite asset
-    #   models to define alarms on this asset model.
+    #   The composite models that are part of this asset model. It groups
+    #   properties (such as attributes, measurements, transforms, and metrics)
+    #   and child composite models that model parts of your industrial
+    #   equipment. Each composite model has a type that defines the properties
+    #   that the composite model supports. Use composite models to define
+    #   alarms on this asset model.
+    #
+    #   <note markdown="1"> When creating custom composite models, you need to use
+    #   [CreateAssetModelCompositeModel][1]. For more information, see
+    #   &lt;LINK&gt;.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1100,6 +1180,33 @@ module Aws::IoTSiteWise
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
+    #
+    # @option params [String] :asset_model_id
+    #   The ID to assign to the asset model, if desired. IoT SiteWise
+    #   automatically generates a unique ID for you, so this parameter is
+    #   never required. However, if you prefer to supply your own ID instead,
+    #   you can specify it here in UUID format. If you specify your own ID, it
+    #   must be globally unique.
+    #
+    # @option params [String] :asset_model_external_id
+    #   An external ID to assign to the asset model. The external ID must be
+    #   unique within your Amazon Web Services account. For more information,
+    #   see [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
+    # @option params [String] :asset_model_type
+    #   The type of asset model.
+    #
+    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #     create assets. Can't be included as a component in another asset
+    #     model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include in
+    #     the composite models of other asset models. You can't create assets
+    #     directly from this type of asset model.
     #
     # @return [Types::CreateAssetModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1135,8 +1242,14 @@ module Aws::IoTSiteWise
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
-    #                   property_id: "Macro", # required
+    #                   property_id: "Macro",
     #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             ],
@@ -1153,8 +1266,14 @@ module Aws::IoTSiteWise
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
-    #                   property_id: "Macro", # required
+    #                   property_id: "Macro",
     #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             ],
@@ -1169,12 +1288,16 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         },
+    #         id: "ID",
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     asset_model_hierarchies: [
     #       {
     #         name: "Name", # required
-    #         child_asset_model_id: "ID", # required
+    #         child_asset_model_id: "CustomID", # required
+    #         id: "ID",
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     asset_model_composite_models: [
@@ -1205,8 +1328,14 @@ module Aws::IoTSiteWise
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
-    #                       property_id: "Macro", # required
+    #                       property_id: "Macro",
     #                       hierarchy_id: "Macro",
+    #                       property_path: [
+    #                         {
+    #                           id: "ID",
+    #                           name: "Name",
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 ],
@@ -1223,8 +1352,14 @@ module Aws::IoTSiteWise
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
-    #                       property_id: "Macro", # required
+    #                       property_id: "Macro",
     #                       hierarchy_id: "Macro",
+    #                       property_path: [
+    #                         {
+    #                           id: "ID",
+    #                           name: "Name",
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 ],
@@ -1239,14 +1374,21 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             },
+    #             id: "ID",
+    #             external_id: "ExternalId",
     #           },
     #         ],
+    #         id: "ID",
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     asset_model_id: "ID",
+    #     asset_model_external_id: "ExternalId",
+    #     asset_model_type: "ASSET_MODEL", # accepts ASSET_MODEL, COMPONENT_MODEL
     #   })
     #
     # @example Response structure
@@ -1267,13 +1409,212 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Creates a custom composite model from specified property and hierarchy
+    # definitions. There are two types of custom composite models, `inline`
+    # and `component-model-based`.
+    #
+    # Use component-model-based custom composite models to define standard,
+    # reusable components. A component-model-based custom composite model
+    # consists of a name, a description, and the ID of the component model
+    # it references. A component-model-based custom composite model has no
+    # properties of its own; its referenced component model provides its
+    # associated properties to any created assets. For more information, see
+    # [Custom composite models (Components)][1] in the *IoT SiteWise User
+    # Guide*.
+    #
+    # Use inline custom composite models to organize the properties of an
+    # asset model. The properties of inline custom composite models are
+    # local to the asset model where they are included and can't be used to
+    # create multiple assets.
+    #
+    # To create a component-model-based model, specify the
+    # `composedAssetModelId` of an existing asset model with
+    # `assetModelType` of `COMPONENT_MODEL`.
+    #
+    # To create an inline model, specify the
+    # `assetModelCompositeModelProperties` and don't include an
+    # `composedAssetModelId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model this composite model is a part of.
+    #
+    # @option params [String] :parent_asset_model_composite_model_id
+    #   The ID of the parent composite model in this asset model relationship.
+    #
+    # @option params [String] :asset_model_composite_model_external_id
+    #   An external ID to assign to the composite model.
+    #
+    #   If the composite model is a derived composite model, or one nested
+    #   inside a component model, you can only set the external ID using
+    #   `UpdateAssetModelCompositeModel` and specifying the derived ID of the
+    #   model or property from the created model it's a part of.
+    #
+    # @option params [String] :asset_model_composite_model_id
+    #   The ID of the composite model. IoT SiteWise automatically generates a
+    #   unique ID for you, so this parameter is never required. However, if
+    #   you prefer to supply your own ID instead, you can specify it here in
+    #   UUID format. If you specify your own ID, it must be globally unique.
+    #
+    # @option params [String] :asset_model_composite_model_description
+    #   A description for the composite model.
+    #
+    # @option params [required, String] :asset_model_composite_model_name
+    #   A unique, friendly name for the composite model.
+    #
+    # @option params [required, String] :asset_model_composite_model_type
+    #   The composite model type. Valid values are `AWS/ALARM`, `CUSTOM`, or `
+    #   AWS/L4E_ANOMALY`.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :composed_asset_model_id
+    #   The ID of a composite model on this asset.
+    #
+    # @option params [Array<Types::AssetModelPropertyDefinition>] :asset_model_composite_model_properties
+    #   The property definitions of the composite model. For more information,
+    #   see &lt;LINK&gt;.
+    #
+    #   You can specify up to 200 properties per composite model. For more
+    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #
+    # @return [Types::CreateAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAssetModelCompositeModelResponse#asset_model_composite_model_id #asset_model_composite_model_id} => String
+    #   * {Types::CreateAssetModelCompositeModelResponse#asset_model_composite_model_path #asset_model_composite_model_path} => Array&lt;Types::AssetModelCompositeModelPathSegment&gt;
+    #   * {Types::CreateAssetModelCompositeModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_asset_model_composite_model({
+    #     asset_model_id: "CustomID", # required
+    #     parent_asset_model_composite_model_id: "CustomID",
+    #     asset_model_composite_model_external_id: "ExternalId",
+    #     asset_model_composite_model_id: "ID",
+    #     asset_model_composite_model_description: "Description",
+    #     asset_model_composite_model_name: "Name", # required
+    #     asset_model_composite_model_type: "Name", # required
+    #     client_token: "ClientToken",
+    #     composed_asset_model_id: "CustomID",
+    #     asset_model_composite_model_properties: [
+    #       {
+    #         name: "Name", # required
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
+    #         unit: "PropertyUnit",
+    #         type: { # required
+    #           attribute: {
+    #             default_value: "DefaultValue",
+    #           },
+    #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
+    #           },
+    #           transform: {
+    #             expression: "Expression", # required
+    #             variables: [ # required
+    #               {
+    #                 name: "VariableName", # required
+    #                 value: { # required
+    #                   property_id: "Macro",
+    #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
+    #           },
+    #           metric: {
+    #             expression: "Expression", # required
+    #             variables: [ # required
+    #               {
+    #                 name: "VariableName", # required
+    #                 value: { # required
+    #                   property_id: "Macro",
+    #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             window: { # required
+    #               tumbling: {
+    #                 interval: "Interval", # required
+    #                 offset: "Offset",
+    #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #             },
+    #           },
+    #         },
+    #         id: "ID",
+    #         external_id: "ExternalId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_composite_model_id #=> String
+    #   resp.asset_model_composite_model_path #=> Array
+    #   resp.asset_model_composite_model_path[0].id #=> String
+    #   resp.asset_model_composite_model_path[0].name #=> String
+    #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
+    #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
+    #
+    # @overload create_asset_model_composite_model(params = {})
+    # @param [Hash] params ({})
+    def create_asset_model_composite_model(params = {}, options = {})
+      req = build_request(:create_asset_model_composite_model, params)
+      req.send_request(options)
+    end
+
     # Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
     # information, see [Create a bulk import job (CLI)][1] in the *Amazon
     # Simple Storage Service User Guide*.
     #
-    # You must enable IoT SiteWise to export data to Amazon S3 before you
-    # create a bulk import job. For more information about how to configure
-    # storage settings, see [PutStorageConfiguration][2].
+    # Before you create a bulk import job, you must enable IoT SiteWise warm
+    # tier or IoT SiteWise cold tier. For more information about how to
+    # configure storage settings, see [PutStorageConfiguration][2].
+    #
+    #  Bulk import is designed to store historical data to IoT SiteWise. It
+    # does not trigger computations or notifications on IoT SiteWise warm or
+    # cold tier storage.
     #
     #
     #
@@ -1302,6 +1643,15 @@ module Aws::IoTSiteWise
     #   Contains the configuration information of a job, such as the file
     #   format used to save data in Amazon S3.
     #
+    # @option params [Boolean] :adaptive_ingestion
+    #   If set to true, ingest new data into IoT SiteWise storage.
+    #   Measurements with notifications, metrics and transforms are computed.
+    #   If set to false, historical data is ingested into IoT SiteWise as is.
+    #
+    # @option params [Boolean] :delete_files_after_import
+    #   If set to true, your data files is deleted from S3, after ingestion
+    #   into IoT SiteWise storage.
+    #
     # @return [Types::CreateBulkImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBulkImportJobResponse#job_id #job_id} => String
@@ -1327,10 +1677,14 @@ module Aws::IoTSiteWise
     #     job_configuration: { # required
     #       file_format: { # required
     #         csv: {
-    #           column_names: ["ALIAS"], # accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #           column_names: ["ALIAS"], # required, accepts ALIAS, ASSET_ID, PROPERTY_ID, DATA_TYPE, TIMESTAMP_SECONDS, TIMESTAMP_NANO_OFFSET, QUALITY, VALUE
+    #         },
+    #         parquet: {
     #         },
     #       },
     #     },
+    #     adaptive_ingestion: false,
+    #     delete_files_after_import: false,
     #   })
     #
     # @example Response structure
@@ -1531,13 +1885,12 @@ module Aws::IoTSiteWise
     #   The service to use to authenticate users to the portal. Choose from
     #   the following options:
     #
-    #   * `SSO` – The portal uses IAM Identity Center (successor to Single
-    #     Sign-On) to authenticate users and manage user permissions. Before
-    #     you can create a portal that uses IAM Identity Center, you must
-    #     enable IAM Identity Center. For more information, see [Enabling IAM
-    #     Identity Center][1] in the *IoT SiteWise User Guide*. This option is
-    #     only available in Amazon Web Services Regions other than the China
-    #     Regions.
+    #   * `SSO` – The portal uses IAM Identity Center to authenticate users
+    #     and manage user permissions. Before you can create a portal that
+    #     uses IAM Identity Center, you must enable IAM Identity Center. For
+    #     more information, see [Enabling IAM Identity Center][1] in the *IoT
+    #     SiteWise User Guide*. This option is only available in Amazon Web
+    #     Services Regions other than the China Regions.
     #
     #   * `IAM` – The portal uses Identity and Access Management to
     #     authenticate users and manage user permissions.
@@ -1727,7 +2080,14 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset to delete.
+    #   The ID of the asset to delete. This can be either the actual ID in
+    #   UUID format, or else `externalId:` followed by the external ID, if it
+    #   has one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1744,7 +2104,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_asset({
-    #     asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -1776,7 +2136,14 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html
     #
     # @option params [required, String] :asset_model_id
-    #   The ID of the asset model to delete.
+    #   The ID of the asset model to delete. This can be either the actual ID
+    #   in UUID format, or else `externalId:` followed by the external ID, if
+    #   it has one. For more information, see [Referencing objects with
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1793,7 +2160,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_asset_model({
-    #     asset_model_id: "ID", # required
+    #     asset_model_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -1810,6 +2177,59 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def delete_asset_model(params = {}, options = {})
       req = build_request(:delete_asset_model, params)
+      req.send_request(options)
+    end
+
+    # Deletes a composite model. This action can't be undone. You must
+    # delete all assets created from a composite model before you can delete
+    # the model. Also, you can't delete a composite model if a parent asset
+    # model exists that contains a property formula expression that depends
+    # on the asset model that you want to delete. For more information, see
+    # [Deleting assets and models][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model, in UUID format.
+    #
+    # @option params [required, String] :asset_model_composite_model_id
+    #   The ID of a composite model on this asset model.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAssetModelCompositeModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_asset_model_composite_model({
+    #     asset_model_id: "CustomID", # required
+    #     asset_model_composite_model_id: "CustomID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
+    #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
+    #
+    # @overload delete_asset_model_composite_model(params = {})
+    # @param [Hash] params ({})
+    def delete_asset_model_composite_model(params = {}, options = {})
+      req = build_request(:delete_asset_model_composite_model, params)
       req.send_request(options)
     end
 
@@ -1950,10 +2370,25 @@ module Aws::IoTSiteWise
     #   The alias that identifies the time series.
     #
     # @option params [String] :asset_id
-    #   The ID of the asset in which the asset property was created.
+    #   The ID of the asset in which the asset property was created. This can
+    #   be either the actual ID in UUID format, or else `externalId:` followed
+    #   by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1969,8 +2404,8 @@ module Aws::IoTSiteWise
     #
     #   resp = client.delete_time_series({
     #     alias: "PropertyAlias",
-    #     asset_id: "ID",
-    #     property_id: "ID",
+    #     asset_id: "CustomID",
+    #     property_id: "CustomID",
     #     client_token: "ClientToken",
     #   })
     #
@@ -2024,10 +2459,51 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves information about an action.
+    #
+    # @option params [required, String] :action_id
+    #   The ID of the action.
+    #
+    # @return [Types::DescribeActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeActionResponse#action_id #action_id} => String
+    #   * {Types::DescribeActionResponse#target_resource #target_resource} => Types::TargetResource
+    #   * {Types::DescribeActionResponse#action_definition_id #action_definition_id} => String
+    #   * {Types::DescribeActionResponse#action_payload #action_payload} => Types::ActionPayload
+    #   * {Types::DescribeActionResponse#execution_time #execution_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_action({
+    #     action_id: "ID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_id #=> String
+    #   resp.target_resource.asset_id #=> String
+    #   resp.action_definition_id #=> String
+    #   resp.action_payload.string_value #=> String
+    #   resp.execution_time #=> Time
+    #
+    # @overload describe_action(params = {})
+    # @param [Hash] params ({})
+    def describe_action(params = {}, options = {})
+      req = build_request(:describe_action, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about an asset.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset. This can be either the actual ID in UUID format,
+    #   or else `externalId:` followed by the external ID, if it has one. For
+    #   more information, see [Referencing objects with external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [Boolean] :exclude_properties
     #   Whether or not to exclude asset properties from the response.
@@ -2045,11 +2521,13 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetResponse#asset_last_update_date #asset_last_update_date} => Time
     #   * {Types::DescribeAssetResponse#asset_status #asset_status} => Types::AssetStatus
     #   * {Types::DescribeAssetResponse#asset_description #asset_description} => String
+    #   * {Types::DescribeAssetResponse#asset_composite_model_summaries #asset_composite_model_summaries} => Array&lt;Types::AssetCompositeModelSummary&gt;
+    #   * {Types::DescribeAssetResponse#asset_external_id #asset_external_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_asset({
-    #     asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
     #     exclude_properties: false,
     #   })
     #
@@ -2068,9 +2546,14 @@ module Aws::IoTSiteWise
     #   resp.asset_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.asset_properties[0].data_type_spec #=> String
     #   resp.asset_properties[0].unit #=> String
+    #   resp.asset_properties[0].path #=> Array
+    #   resp.asset_properties[0].path[0].id #=> String
+    #   resp.asset_properties[0].path[0].name #=> String
+    #   resp.asset_properties[0].external_id #=> String
     #   resp.asset_hierarchies #=> Array
     #   resp.asset_hierarchies[0].id #=> String
     #   resp.asset_hierarchies[0].name #=> String
+    #   resp.asset_hierarchies[0].external_id #=> String
     #   resp.asset_composite_models #=> Array
     #   resp.asset_composite_models[0].name #=> String
     #   resp.asset_composite_models[0].description #=> String
@@ -2084,7 +2567,12 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_models[0].properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.asset_composite_models[0].properties[0].data_type_spec #=> String
     #   resp.asset_composite_models[0].properties[0].unit #=> String
+    #   resp.asset_composite_models[0].properties[0].path #=> Array
+    #   resp.asset_composite_models[0].properties[0].path[0].id #=> String
+    #   resp.asset_composite_models[0].properties[0].path[0].name #=> String
+    #   resp.asset_composite_models[0].properties[0].external_id #=> String
     #   resp.asset_composite_models[0].id #=> String
+    #   resp.asset_composite_models[0].external_id #=> String
     #   resp.asset_creation_date #=> Time
     #   resp.asset_last_update_date #=> Time
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
@@ -2094,6 +2582,16 @@ module Aws::IoTSiteWise
     #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_status.error.details[0].message #=> String
     #   resp.asset_description #=> String
+    #   resp.asset_composite_model_summaries #=> Array
+    #   resp.asset_composite_model_summaries[0].id #=> String
+    #   resp.asset_composite_model_summaries[0].external_id #=> String
+    #   resp.asset_composite_model_summaries[0].name #=> String
+    #   resp.asset_composite_model_summaries[0].type #=> String
+    #   resp.asset_composite_model_summaries[0].description #=> String
+    #   resp.asset_composite_model_summaries[0].path #=> Array
+    #   resp.asset_composite_model_summaries[0].path[0].id #=> String
+    #   resp.asset_composite_model_summaries[0].path[0].name #=> String
+    #   resp.asset_external_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2108,10 +2606,111 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves information about an asset composite model (also known as an
+    # asset component). An `AssetCompositeModel` is an instance of an
+    # `AssetModelCompositeModel`. If you want to see information about the
+    # model this is based on, call [DescribeAssetModelCompositeModel][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModelCompositeModel.html
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the asset. This can be either the actual ID in UUID format,
+    #   or else `externalId:` followed by the external ID, if it has one. For
+    #   more information, see [Referencing objects with external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @option params [required, String] :asset_composite_model_id
+    #   The ID of a composite model on this asset. This can be either the
+    #   actual ID in UUID format, or else `externalId:` followed by the
+    #   external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @return [Types::DescribeAssetCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_id #asset_id} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_id #asset_composite_model_id} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_external_id #asset_composite_model_external_id} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_path #asset_composite_model_path} => Array&lt;Types::AssetCompositeModelPathSegment&gt;
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_name #asset_composite_model_name} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_description #asset_composite_model_description} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_type #asset_composite_model_type} => String
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_properties #asset_composite_model_properties} => Array&lt;Types::AssetProperty&gt;
+    #   * {Types::DescribeAssetCompositeModelResponse#asset_composite_model_summaries #asset_composite_model_summaries} => Array&lt;Types::AssetCompositeModelSummary&gt;
+    #   * {Types::DescribeAssetCompositeModelResponse#action_definitions #action_definitions} => Array&lt;Types::ActionDefinition&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_asset_composite_model({
+    #     asset_id: "CustomID", # required
+    #     asset_composite_model_id: "CustomID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_id #=> String
+    #   resp.asset_composite_model_id #=> String
+    #   resp.asset_composite_model_external_id #=> String
+    #   resp.asset_composite_model_path #=> Array
+    #   resp.asset_composite_model_path[0].id #=> String
+    #   resp.asset_composite_model_path[0].name #=> String
+    #   resp.asset_composite_model_name #=> String
+    #   resp.asset_composite_model_description #=> String
+    #   resp.asset_composite_model_type #=> String
+    #   resp.asset_composite_model_properties #=> Array
+    #   resp.asset_composite_model_properties[0].id #=> String
+    #   resp.asset_composite_model_properties[0].name #=> String
+    #   resp.asset_composite_model_properties[0].alias #=> String
+    #   resp.asset_composite_model_properties[0].notification.topic #=> String
+    #   resp.asset_composite_model_properties[0].notification.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.asset_composite_model_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_composite_model_properties[0].data_type_spec #=> String
+    #   resp.asset_composite_model_properties[0].unit #=> String
+    #   resp.asset_composite_model_properties[0].path #=> Array
+    #   resp.asset_composite_model_properties[0].path[0].id #=> String
+    #   resp.asset_composite_model_properties[0].path[0].name #=> String
+    #   resp.asset_composite_model_properties[0].external_id #=> String
+    #   resp.asset_composite_model_summaries #=> Array
+    #   resp.asset_composite_model_summaries[0].id #=> String
+    #   resp.asset_composite_model_summaries[0].external_id #=> String
+    #   resp.asset_composite_model_summaries[0].name #=> String
+    #   resp.asset_composite_model_summaries[0].type #=> String
+    #   resp.asset_composite_model_summaries[0].description #=> String
+    #   resp.asset_composite_model_summaries[0].path #=> Array
+    #   resp.asset_composite_model_summaries[0].path[0].id #=> String
+    #   resp.asset_composite_model_summaries[0].path[0].name #=> String
+    #   resp.action_definitions #=> Array
+    #   resp.action_definitions[0].action_definition_id #=> String
+    #   resp.action_definitions[0].action_name #=> String
+    #   resp.action_definitions[0].action_type #=> String
+    #
+    # @overload describe_asset_composite_model(params = {})
+    # @param [Hash] params ({})
+    def describe_asset_composite_model(params = {}, options = {})
+      req = build_request(:describe_asset_composite_model, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about an asset model.
     #
     # @option params [required, String] :asset_model_id
-    #   The ID of the asset model.
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [Boolean] :exclude_properties
     #   Whether or not to exclude asset model properties from the response.
@@ -2128,11 +2727,14 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetModelResponse#asset_model_creation_date #asset_model_creation_date} => Time
     #   * {Types::DescribeAssetModelResponse#asset_model_last_update_date #asset_model_last_update_date} => Time
     #   * {Types::DescribeAssetModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #   * {Types::DescribeAssetModelResponse#asset_model_type #asset_model_type} => String
+    #   * {Types::DescribeAssetModelResponse#asset_model_composite_model_summaries #asset_model_composite_model_summaries} => Array&lt;Types::AssetModelCompositeModelSummary&gt;
+    #   * {Types::DescribeAssetModelResponse#asset_model_external_id #asset_model_external_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_asset_model({
-    #     asset_model_id: "ID", # required
+    #     asset_model_id: "CustomID", # required
     #     exclude_properties: false,
     #   })
     #
@@ -2155,6 +2757,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties[0].type.transform.variables[0].name #=> String
     #   resp.asset_model_properties[0].type.transform.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_properties[0].type.transform.variables[0].value.property_path #=> Array
+    #   resp.asset_model_properties[0].type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_properties[0].type.transform.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_properties[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_properties[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_properties[0].type.metric.expression #=> String
@@ -2162,13 +2767,21 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties[0].type.metric.variables[0].name #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_properties[0].type.metric.variables[0].value.property_path #=> Array
+    #   resp.asset_model_properties[0].type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_properties[0].type.metric.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_properties[0].type.metric.window.tumbling.interval #=> String
     #   resp.asset_model_properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_properties[0].path #=> Array
+    #   resp.asset_model_properties[0].path[0].id #=> String
+    #   resp.asset_model_properties[0].path[0].name #=> String
+    #   resp.asset_model_properties[0].external_id #=> String
     #   resp.asset_model_hierarchies #=> Array
     #   resp.asset_model_hierarchies[0].id #=> String
     #   resp.asset_model_hierarchies[0].name #=> String
     #   resp.asset_model_hierarchies[0].child_asset_model_id #=> String
+    #   resp.asset_model_hierarchies[0].external_id #=> String
     #   resp.asset_model_composite_models #=> Array
     #   resp.asset_model_composite_models[0].name #=> String
     #   resp.asset_model_composite_models[0].description #=> String
@@ -2186,6 +2799,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_path #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_composite_models[0].properties[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_composite_models[0].properties[0].type.metric.expression #=> String
@@ -2193,10 +2809,18 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_path #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_composite_models[0].properties[0].path #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].path[0].id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].path[0].name #=> String
+    #   resp.asset_model_composite_models[0].properties[0].external_id #=> String
     #   resp.asset_model_composite_models[0].id #=> String
+    #   resp.asset_model_composite_models[0].external_id #=> String
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
@@ -2205,6 +2829,17 @@ module Aws::IoTSiteWise
     #   resp.asset_model_status.error.details #=> Array
     #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_model_status.error.details[0].message #=> String
+    #   resp.asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL"
+    #   resp.asset_model_composite_model_summaries #=> Array
+    #   resp.asset_model_composite_model_summaries[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].external_id #=> String
+    #   resp.asset_model_composite_model_summaries[0].name #=> String
+    #   resp.asset_model_composite_model_summaries[0].type #=> String
+    #   resp.asset_model_composite_model_summaries[0].description #=> String
+    #   resp.asset_model_composite_model_summaries[0].path #=> Array
+    #   resp.asset_model_composite_model_summaries[0].path[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].path[0].name #=> String
+    #   resp.asset_model_external_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2216,6 +2851,122 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_asset_model(params = {}, options = {})
       req = build_request(:describe_asset_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an asset model composite model (also known
+    # as an asset model component). For more information, see [Custom
+    # composite models (Components)][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @option params [required, String] :asset_model_composite_model_id
+    #   The ID of a composite model on this asset model. This can be either
+    #   the actual ID in UUID format, or else `externalId:` followed by the
+    #   external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @return [Types::DescribeAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_id #asset_model_id} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_id #asset_model_composite_model_id} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_external_id #asset_model_composite_model_external_id} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_path #asset_model_composite_model_path} => Array&lt;Types::AssetModelCompositeModelPathSegment&gt;
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_name #asset_model_composite_model_name} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_description #asset_model_composite_model_description} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_type #asset_model_composite_model_type} => String
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_properties #asset_model_composite_model_properties} => Array&lt;Types::AssetModelProperty&gt;
+    #   * {Types::DescribeAssetModelCompositeModelResponse#composition_details #composition_details} => Types::CompositionDetails
+    #   * {Types::DescribeAssetModelCompositeModelResponse#asset_model_composite_model_summaries #asset_model_composite_model_summaries} => Array&lt;Types::AssetModelCompositeModelSummary&gt;
+    #   * {Types::DescribeAssetModelCompositeModelResponse#action_definitions #action_definitions} => Array&lt;Types::ActionDefinition&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_asset_model_composite_model({
+    #     asset_model_id: "CustomID", # required
+    #     asset_model_composite_model_id: "CustomID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_id #=> String
+    #   resp.asset_model_composite_model_id #=> String
+    #   resp.asset_model_composite_model_external_id #=> String
+    #   resp.asset_model_composite_model_path #=> Array
+    #   resp.asset_model_composite_model_path[0].id #=> String
+    #   resp.asset_model_composite_model_path[0].name #=> String
+    #   resp.asset_model_composite_model_name #=> String
+    #   resp.asset_model_composite_model_description #=> String
+    #   resp.asset_model_composite_model_type #=> String
+    #   resp.asset_model_composite_model_properties #=> Array
+    #   resp.asset_model_composite_model_properties[0].id #=> String
+    #   resp.asset_model_composite_model_properties[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_model_composite_model_properties[0].data_type_spec #=> String
+    #   resp.asset_model_composite_model_properties[0].unit #=> String
+    #   resp.asset_model_composite_model_properties[0].type.attribute.default_value #=> String
+    #   resp.asset_model_composite_model_properties[0].type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.asset_model_composite_model_properties[0].type.transform.expression #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables #=> Array
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].value.property_id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].value.property_path #=> Array
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.variables[0].value.property_path[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_composite_model_properties[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.asset_model_composite_model_properties[0].type.metric.expression #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables #=> Array
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].value.property_id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].value.property_path #=> Array
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.variables[0].value.property_path[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.window.tumbling.offset #=> String
+    #   resp.asset_model_composite_model_properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_composite_model_properties[0].path #=> Array
+    #   resp.asset_model_composite_model_properties[0].path[0].id #=> String
+    #   resp.asset_model_composite_model_properties[0].path[0].name #=> String
+    #   resp.asset_model_composite_model_properties[0].external_id #=> String
+    #   resp.composition_details.composition_relationship #=> Array
+    #   resp.composition_details.composition_relationship[0].id #=> String
+    #   resp.asset_model_composite_model_summaries #=> Array
+    #   resp.asset_model_composite_model_summaries[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].external_id #=> String
+    #   resp.asset_model_composite_model_summaries[0].name #=> String
+    #   resp.asset_model_composite_model_summaries[0].type #=> String
+    #   resp.asset_model_composite_model_summaries[0].description #=> String
+    #   resp.asset_model_composite_model_summaries[0].path #=> Array
+    #   resp.asset_model_composite_model_summaries[0].path[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].path[0].name #=> String
+    #   resp.action_definitions #=> Array
+    #   resp.action_definitions[0].action_definition_id #=> String
+    #   resp.action_definitions[0].action_name #=> String
+    #   resp.action_definitions[0].action_type #=> String
+    #
+    # @overload describe_asset_model_composite_model(params = {})
+    # @param [Hash] params ({})
+    def describe_asset_model_composite_model(params = {}, options = {})
+      req = build_request(:describe_asset_model_composite_model, params)
       req.send_request(options)
     end
 
@@ -2236,10 +2987,24 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset. This can be either the actual ID in UUID format,
+    #   or else `externalId:` followed by the external ID, if it has one. For
+    #   more information, see [Referencing objects with external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @return [Types::DescribeAssetPropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2248,12 +3013,13 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetPropertyResponse#asset_model_id #asset_model_id} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_property #asset_property} => Types::Property
     #   * {Types::DescribeAssetPropertyResponse#composite_model #composite_model} => Types::CompositeModelProperty
+    #   * {Types::DescribeAssetPropertyResponse#asset_external_id #asset_external_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_asset_property({
-    #     asset_id: "ID", # required
-    #     property_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     property_id: "CustomID", # required
     #   })
     #
     # @example Response structure
@@ -2275,6 +3041,9 @@ module Aws::IoTSiteWise
     #   resp.asset_property.type.transform.variables[0].name #=> String
     #   resp.asset_property.type.transform.variables[0].value.property_id #=> String
     #   resp.asset_property.type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_property.type.transform.variables[0].value.property_path #=> Array
+    #   resp.asset_property.type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_property.type.transform.variables[0].value.property_path[0].name #=> String
     #   resp.asset_property.type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_property.type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_property.type.metric.expression #=> String
@@ -2282,9 +3051,16 @@ module Aws::IoTSiteWise
     #   resp.asset_property.type.metric.variables[0].name #=> String
     #   resp.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_property.type.metric.variables[0].value.property_path #=> Array
+    #   resp.asset_property.type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_property.type.metric.variables[0].value.property_path[0].name #=> String
     #   resp.asset_property.type.metric.window.tumbling.interval #=> String
     #   resp.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_property.path #=> Array
+    #   resp.asset_property.path[0].id #=> String
+    #   resp.asset_property.path[0].name #=> String
+    #   resp.asset_property.external_id #=> String
     #   resp.composite_model.name #=> String
     #   resp.composite_model.type #=> String
     #   resp.composite_model.asset_property.id #=> String
@@ -2301,6 +3077,9 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.type.transform.variables[0].name #=> String
     #   resp.composite_model.asset_property.type.transform.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.composite_model.asset_property.type.transform.variables[0].value.property_path #=> Array
+    #   resp.composite_model.asset_property.type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.composite_model.asset_property.type.transform.variables[0].value.property_path[0].name #=> String
     #   resp.composite_model.asset_property.type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.composite_model.asset_property.type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.composite_model.asset_property.type.metric.expression #=> String
@@ -2308,10 +3087,19 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.type.metric.variables[0].name #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.composite_model.asset_property.type.metric.variables[0].value.property_path #=> Array
+    #   resp.composite_model.asset_property.type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.composite_model.asset_property.type.metric.variables[0].value.property_path[0].name #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.composite_model.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.composite_model.asset_property.path #=> Array
+    #   resp.composite_model.asset_property.path[0].id #=> String
+    #   resp.composite_model.asset_property.path[0].name #=> String
+    #   resp.composite_model.asset_property.external_id #=> String
     #   resp.composite_model.id #=> String
+    #   resp.composite_model.external_id #=> String
+    #   resp.asset_external_id #=> String
     #
     # @overload describe_asset_property(params = {})
     # @param [Hash] params ({})
@@ -2342,6 +3130,8 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeBulkImportJobResponse#job_configuration #job_configuration} => Types::JobConfiguration
     #   * {Types::DescribeBulkImportJobResponse#job_creation_date #job_creation_date} => Time
     #   * {Types::DescribeBulkImportJobResponse#job_last_update_date #job_last_update_date} => Time
+    #   * {Types::DescribeBulkImportJobResponse#adaptive_ingestion #adaptive_ingestion} => Boolean
+    #   * {Types::DescribeBulkImportJobResponse#delete_files_after_import #delete_files_after_import} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2365,6 +3155,8 @@ module Aws::IoTSiteWise
     #   resp.job_configuration.file_format.csv.column_names[0] #=> String, one of "ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"
     #   resp.job_creation_date #=> Time
     #   resp.job_last_update_date #=> Time
+    #   resp.adaptive_ingestion #=> Boolean
+    #   resp.delete_files_after_import #=> Boolean
     #
     # @overload describe_bulk_import_job(params = {})
     # @param [Hash] params ({})
@@ -2664,6 +3456,8 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeStorageConfigurationResponse#retention_period #retention_period} => Types::RetentionPeriod
     #   * {Types::DescribeStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #   * {Types::DescribeStorageConfigurationResponse#last_update_date #last_update_date} => Time
+    #   * {Types::DescribeStorageConfigurationResponse#warm_tier #warm_tier} => String
+    #   * {Types::DescribeStorageConfigurationResponse#warm_tier_retention_period #warm_tier_retention_period} => Types::WarmTierRetentionPeriod
     #
     # @example Response structure
     #
@@ -2677,6 +3471,9 @@ module Aws::IoTSiteWise
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
     #   resp.last_update_date #=> Time
+    #   resp.warm_tier #=> String, one of "ENABLED", "DISABLED"
+    #   resp.warm_tier_retention_period.number_of_days #=> Integer
+    #   resp.warm_tier_retention_period.unlimited #=> Boolean
     #
     # @overload describe_storage_configuration(params = {})
     # @param [Hash] params ({})
@@ -2703,10 +3500,25 @@ module Aws::IoTSiteWise
     #   The alias that identifies the time series.
     #
     # @option params [String] :asset_id
-    #   The ID of the asset in which the asset property was created.
+    #   The ID of the asset in which the asset property was created. This can
+    #   be either the actual ID in UUID format, or else `externalId:` followed
+    #   by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @return [Types::DescribeTimeSeriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2724,8 +3536,8 @@ module Aws::IoTSiteWise
     #
     #   resp = client.describe_time_series({
     #     alias: "PropertyAlias",
-    #     asset_id: "ID",
-    #     property_id: "ID",
+    #     asset_id: "CustomID",
+    #     property_id: "CustomID",
     #   })
     #
     # @example Response structure
@@ -2752,20 +3564,39 @@ module Aws::IoTSiteWise
     #
     # @option params [required, String] :asset_id
     #   The ID of the parent asset from which to disassociate the child asset.
+    #   This can be either the actual ID in UUID format, or else `externalId:`
+    #   followed by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :hierarchy_id
-    #   The ID of a hierarchy in the parent asset's model. Hierarchies allow
-    #   different groupings of assets to be formed that all come from the same
-    #   asset model. You can use the hierarchy ID to identify the correct
-    #   asset to disassociate. For more information, see [Asset
-    #   hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   The ID of a hierarchy in the parent asset's model. (This can be
+    #   either the actual ID in UUID format, or else `externalId:` followed by
+    #   the external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.)
+    #   Hierarchies allow different groupings of assets to be formed that all
+    #   come from the same asset model. You can use the hierarchy ID to
+    #   identify the correct asset to disassociate. For more information, see
+    #   [Asset hierarchies][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #
     # @option params [required, String] :child_asset_id
-    #   The ID of the child asset to disassociate.
+    #   The ID of the child asset to disassociate. This can be either the
+    #   actual ID in UUID format, or else `externalId:` followed by the
+    #   external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -2780,9 +3611,9 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_assets({
-    #     asset_id: "ID", # required
-    #     hierarchy_id: "ID", # required
-    #     child_asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     hierarchy_id: "CustomID", # required
+    #     child_asset_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -2799,10 +3630,25 @@ module Aws::IoTSiteWise
     #   The alias that identifies the time series.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset in which the asset property was created.
+    #   The ID of the asset in which the asset property was created. This can
+    #   be either the actual ID in UUID format, or else `externalId:` followed
+    #   by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -2818,8 +3664,8 @@ module Aws::IoTSiteWise
     #
     #   resp = client.disassociate_time_series_from_asset_property({
     #     alias: "PropertyAlias", # required
-    #     asset_id: "ID", # required
-    #     property_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     property_id: "CustomID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -2827,6 +3673,99 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def disassociate_time_series_from_asset_property(params = {}, options = {})
       req = build_request(:disassociate_time_series_from_asset_property, params)
+      req.send_request(options)
+    end
+
+    # Executes an action on a target resource.
+    #
+    # @option params [required, Types::TargetResource] :target_resource
+    #   The resource the action will be taken on.
+    #
+    # @option params [required, String] :action_definition_id
+    #   The ID of the action definition.
+    #
+    # @option params [required, Types::ActionPayload] :action_payload
+    #   The JSON payload of the action.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    # @return [Types::ExecuteActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteActionResponse#action_id #action_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_action({
+    #     target_resource: { # required
+    #       asset_id: "CustomID", # required
+    #     },
+    #     action_definition_id: "ID", # required
+    #     action_payload: { # required
+    #       string_value: "ActionPayloadString", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_id #=> String
+    #
+    # @overload execute_action(params = {})
+    # @param [Hash] params ({})
+    def execute_action(params = {}, options = {})
+      req = build_request(:execute_action, params)
+      req.send_request(options)
+    end
+
+    # Run SQL queries to retrieve metadata and time-series data from asset
+    # models, assets, measurements, metrics, transforms, and aggregates.
+    #
+    # @option params [required, String] :query_statement
+    #   The IoT SiteWise query statement.
+    #
+    # @option params [String] :next_token
+    #   The string that specifies the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @return [Types::ExecuteQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteQueryResponse#columns #columns} => Array&lt;Types::ColumnInfo&gt;
+    #   * {Types::ExecuteQueryResponse#rows #rows} => Array&lt;Types::Row&gt;
+    #   * {Types::ExecuteQueryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_query({
+    #     query_statement: "QueryStatement", # required
+    #     next_token: "ExecuteQueryNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.columns #=> Array
+    #   resp.columns[0].name #=> String
+    #   resp.columns[0].type.scalar_type #=> String, one of "BOOLEAN", "INT", "DOUBLE", "TIMESTAMP", "STRING"
+    #   resp.rows #=> Array
+    #   resp.rows[0].data #=> Array
+    #   resp.rows[0].data[0].scalar_value #=> String
+    #   resp.rows[0].data[0].array_value #=> Types::DatumList
+    #   resp.rows[0].data[0].row_value #=> Types::Row
+    #   resp.rows[0].data[0].null_value #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload execute_query(params = {})
+    # @param [Hash] params ({})
+    def execute_query(params = {}, options = {})
+      req = build_request(:execute_query, params)
       req.send_request(options)
     end
 
@@ -2847,10 +3786,10 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     #
     # @option params [String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset, in UUID format.
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property, in UUID format.
     #
     # @option params [String] :property_alias
     #   The alias that identifies the property, such as an OPC-UA server data
@@ -2895,7 +3834,7 @@ module Aws::IoTSiteWise
     #   * The size of the result set is equal to 1 MB.
     #
     #   * The number of data points in the result set is equal to the value of
-    #     `maxResults`. The maximum value of `maxResults` is 250.
+    #     `maxResults`. The maximum value of `maxResults` is 2500.
     #
     # @return [Types::GetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2957,10 +3896,10 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     #
     # @option params [String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset, in UUID format.
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property, in UUID format.
     #
     # @option params [String] :property_alias
     #   The alias that identifies the property, such as an OPC-UA server data
@@ -3019,10 +3958,10 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     #
     # @option params [String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset, in UUID format.
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property, in UUID format.
     #
     # @option params [String] :property_alias
     #   The alias that identifies the property, such as an OPC-UA server data
@@ -3125,10 +4064,10 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     #
     # @option params [String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset, in UUID format.
     #
     # @option params [String] :property_id
-    #   The ID of the asset property.
+    #   The ID of the asset property, in UUID format.
     #
     # @option params [String] :property_alias
     #   The alias that identifies the property, such as an OPC-UA server data
@@ -3352,12 +4291,120 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of actions for a specific target resource.
+    #
+    # @option params [required, String] :target_resource_type
+    #   The type of resource.
+    #
+    # @option params [required, String] :target_resource_id
+    #   The ID of the target resource.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @return [Types::ListActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActionsResponse#action_summaries #action_summaries} => Array&lt;Types::ActionSummary&gt;
+    #   * {Types::ListActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_actions({
+    #     target_resource_type: "ASSET", # required, accepts ASSET
+    #     target_resource_id: "CustomID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_summaries #=> Array
+    #   resp.action_summaries[0].action_id #=> String
+    #   resp.action_summaries[0].action_definition_id #=> String
+    #   resp.action_summaries[0].target_resource.asset_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_actions(params = {})
+    # @param [Hash] params ({})
+    def list_actions(params = {}, options = {})
+      req = build_request(:list_actions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of composite models associated with the
+    # asset model
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    #   Default: 50
+    #
+    # @return [Types::ListAssetModelCompositeModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetModelCompositeModelsResponse#asset_model_composite_model_summaries #asset_model_composite_model_summaries} => Array&lt;Types::AssetModelCompositeModelSummary&gt;
+    #   * {Types::ListAssetModelCompositeModelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_model_composite_models({
+    #     asset_model_id: "CustomID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_composite_model_summaries #=> Array
+    #   resp.asset_model_composite_model_summaries[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].external_id #=> String
+    #   resp.asset_model_composite_model_summaries[0].name #=> String
+    #   resp.asset_model_composite_model_summaries[0].type #=> String
+    #   resp.asset_model_composite_model_summaries[0].description #=> String
+    #   resp.asset_model_composite_model_summaries[0].path #=> Array
+    #   resp.asset_model_composite_model_summaries[0].path[0].id #=> String
+    #   resp.asset_model_composite_model_summaries[0].path[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_asset_model_composite_models(params = {})
+    # @param [Hash] params ({})
+    def list_asset_model_composite_models(params = {}, options = {})
+      req = build_request(:list_asset_model_composite_models, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of properties associated with an asset
     # model. If you update properties associated with the model before you
     # finish listing all the properties, you need to start all over again.
     #
     # @option params [required, String] :asset_model_id
-    #   The ID of the asset model.
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -3388,7 +4435,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_model_properties({
-    #     asset_model_id: "ID", # required
+    #     asset_model_id: "CustomID", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: "ALL", # accepts ALL, BASE
@@ -3409,6 +4456,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_property_summaries[0].type.transform.variables[0].name #=> String
     #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.property_id #=> String
     #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.property_path #=> Array
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_property_summaries[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_property_summaries[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
     #   resp.asset_model_property_summaries[0].type.metric.expression #=> String
@@ -3416,10 +4466,17 @@ module Aws::IoTSiteWise
     #   resp.asset_model_property_summaries[0].type.metric.variables[0].name #=> String
     #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.property_path #=> Array
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.property_path[0].id #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.property_path[0].name #=> String
     #   resp.asset_model_property_summaries[0].type.metric.window.tumbling.interval #=> String
     #   resp.asset_model_property_summaries[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_property_summaries[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_property_summaries[0].asset_model_composite_model_id #=> String
+    #   resp.asset_model_property_summaries[0].path #=> Array
+    #   resp.asset_model_property_summaries[0].path[0].id #=> String
+    #   resp.asset_model_property_summaries[0].path[0].name #=> String
+    #   resp.asset_model_property_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_model_properties(params = {})
@@ -3439,6 +4496,17 @@ module Aws::IoTSiteWise
     #
     #   Default: 50
     #
+    # @option params [Array<String>] :asset_model_types
+    #   The type of asset model.
+    #
+    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #     create assets. Can't be included as a component in another asset
+    #     model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include in
+    #     the composite models of other asset models. You can't create assets
+    #     directly from this type of asset model.
+    #
     # @return [Types::ListAssetModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAssetModelsResponse#asset_model_summaries #asset_model_summaries} => Array&lt;Types::AssetModelSummary&gt;
@@ -3451,6 +4519,7 @@ module Aws::IoTSiteWise
     #   resp = client.list_asset_models({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     asset_model_types: ["ASSET_MODEL"], # accepts ASSET_MODEL, COMPONENT_MODEL
     #   })
     #
     # @example Response structure
@@ -3468,6 +4537,8 @@ module Aws::IoTSiteWise
     #   resp.asset_model_summaries[0].status.error.details #=> Array
     #   resp.asset_model_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_model_summaries[0].status.error.details[0].message #=> String
+    #   resp.asset_model_summaries[0].asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL"
+    #   resp.asset_model_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_models(params = {})
@@ -3482,7 +4553,14 @@ module Aws::IoTSiteWise
     # listing all the properties, you need to start all over again.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset. This can be either the actual ID in UUID format,
+    #   or else `externalId:` followed by the external ID, if it has one. For
+    #   more information, see [Referencing objects with external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -3513,7 +4591,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_properties({
-    #     asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: "ALL", # accepts ALL, BASE
@@ -3528,6 +4606,10 @@ module Aws::IoTSiteWise
     #   resp.asset_property_summaries[0].notification.topic #=> String
     #   resp.asset_property_summaries[0].notification.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.asset_property_summaries[0].asset_composite_model_id #=> String
+    #   resp.asset_property_summaries[0].path #=> Array
+    #   resp.asset_property_summaries[0].path[0].id #=> String
+    #   resp.asset_property_summaries[0].path[0].name #=> String
+    #   resp.asset_property_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_properties(params = {})
@@ -3542,7 +4624,14 @@ module Aws::IoTSiteWise
     # associated assets between that asset and its root.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset.
+    #   The ID of the asset. This can be either the actual ID in UUID format,
+    #   or else `externalId:` followed by the external ID, if it has one. For
+    #   more information, see [Referencing objects with external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :traversal_type
     #   The type of traversal to use to identify asset relationships. Choose
@@ -3571,7 +4660,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_relationships({
-    #     asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
     #     traversal_type: "PATH_TO_ROOT", # required, accepts PATH_TO_ROOT
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -3619,7 +4708,14 @@ module Aws::IoTSiteWise
     #
     # @option params [String] :asset_model_id
     #   The ID of the asset model by which to filter the list of assets. This
-    #   parameter is required if you choose `ALL` for `filter`.
+    #   parameter is required if you choose `ALL` for `filter`. This can be
+    #   either the actual ID in UUID format, or else `externalId:` followed by
+    #   the external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :filter
     #   The filter for the requested list of assets. Choose one of the
@@ -3645,7 +4741,7 @@ module Aws::IoTSiteWise
     #   resp = client.list_assets({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     asset_model_id: "ID",
+    #     asset_model_id: "CustomID",
     #     filter: "ALL", # accepts ALL, TOP_LEVEL
     #   })
     #
@@ -3667,7 +4763,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].hierarchies[0].external_id #=> String
     #   resp.asset_summaries[0].description #=> String
+    #   resp.asset_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_assets(params = {})
@@ -3687,22 +4785,33 @@ module Aws::IoTSiteWise
     # * List an asset's parent asset.
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset to query.
+    #   The ID of the asset to query. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :hierarchy_id
     #   The ID of the hierarchy by which child assets are associated to the
-    #   asset. To find a hierarchy ID, use the [DescribeAsset][1] or
-    #   [DescribeAssetModel][2] operations. This parameter is required if you
-    #   choose `CHILD` for `traversalDirection`.
+    #   asset. (This can be either the actual ID in UUID format, or else
+    #   `externalId:` followed by the external ID, if it has one. For more
+    #   information, see [Referencing objects with external IDs][1] in the
+    #   *IoT SiteWise User Guide*.) To find a hierarchy ID, use the
+    #   [DescribeAsset][2] or [DescribeAssetModel][3] operations. This
+    #   parameter is required if you choose `CHILD` for `traversalDirection`.
     #
-    #   For more information, see [Asset hierarchies][3] in the *IoT SiteWise
+    #   For more information, see [Asset hierarchies][4] in the *IoT SiteWise
     #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html
-    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
-    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html
+    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
+    #   [4]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #
     # @option params [String] :traversal_direction
     #   The direction to list associated assets. Choose one of the following
@@ -3734,8 +4843,8 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_associated_assets({
-    #     asset_id: "ID", # required
-    #     hierarchy_id: "ID",
+    #     asset_id: "CustomID", # required
+    #     hierarchy_id: "CustomID",
     #     traversal_direction: "PARENT", # accepts PARENT, CHILD
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -3759,7 +4868,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].hierarchies[0].external_id #=> String
     #   resp.asset_summaries[0].description #=> String
+    #   resp.asset_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_associated_assets(params = {})
@@ -3814,6 +4925,57 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def list_bulk_import_jobs(params = {}, options = {})
       req = build_request(:list_bulk_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of composition relationships for an asset
+    # model of type `COMPONENT_MODEL`.
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else `externalId:` followed by the external ID, if it has
+    #   one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    #   Default: 50
+    #
+    # @return [Types::ListCompositionRelationshipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCompositionRelationshipsResponse#composition_relationship_summaries #composition_relationship_summaries} => Array&lt;Types::CompositionRelationshipSummary&gt;
+    #   * {Types::ListCompositionRelationshipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_composition_relationships({
+    #     asset_model_id: "ID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.composition_relationship_summaries #=> Array
+    #   resp.composition_relationship_summaries[0].asset_model_id #=> String
+    #   resp.composition_relationship_summaries[0].asset_model_composite_model_id #=> String
+    #   resp.composition_relationship_summaries[0].asset_model_composite_model_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_composition_relationships(params = {})
+    # @param [Hash] params ({})
+    def list_composition_relationships(params = {}, options = {})
+      req = build_request(:list_composition_relationships, params)
       req.send_request(options)
     end
 
@@ -4082,7 +5244,15 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request.
     #
     # @option params [String] :asset_id
-    #   The ID of the asset in which the asset property was created.
+    #   The ID of the asset in which the asset property was created. This can
+    #   be either the actual ID in UUID format, or else `externalId:` followed
+    #   by the external ID, if it has one. For more information, see
+    #   [Referencing objects with external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :alias_prefix
     #   The alias prefix of the time series.
@@ -4108,7 +5278,7 @@ module Aws::IoTSiteWise
     #   resp = client.list_time_series({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     asset_id: "ID",
+    #     asset_id: "CustomID",
     #     alias_prefix: "PropertyAlias",
     #     time_series_type: "ASSOCIATED", # accepts ASSOCIATED, DISASSOCIATED
     #   })
@@ -4239,8 +5409,18 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How many days your data is kept in the hot tier. By default, your data
-    #   is kept indefinitely in the hot tier.
+    #   The number of days your data is kept in the hot tier. By default, your
+    #   data is kept indefinitely in the hot tier.
+    #
+    # @option params [String] :warm_tier
+    #   A service managed storage tier optimized for analytical queries. It
+    #   stores periodically uploaded, buffered and historical data ingested
+    #   with the CreaeBulkImportJob API.
+    #
+    # @option params [Types::WarmTierRetentionPeriod] :warm_tier_retention_period
+    #   Set this period to specify how long your data is stored in the warm
+    #   tier before it is deleted. You can set this only if cold tier is
+    #   enabled.
     #
     # @return [Types::PutStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4249,6 +5429,8 @@ module Aws::IoTSiteWise
     #   * {Types::PutStorageConfigurationResponse#disassociated_data_storage #disassociated_data_storage} => String
     #   * {Types::PutStorageConfigurationResponse#retention_period #retention_period} => Types::RetentionPeriod
     #   * {Types::PutStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
+    #   * {Types::PutStorageConfigurationResponse#warm_tier #warm_tier} => String
+    #   * {Types::PutStorageConfigurationResponse#warm_tier_retention_period #warm_tier_retention_period} => Types::WarmTierRetentionPeriod
     #
     # @example Request syntax with placeholder values
     #
@@ -4265,6 +5447,11 @@ module Aws::IoTSiteWise
     #       number_of_days: 1,
     #       unlimited: false,
     #     },
+    #     warm_tier: "ENABLED", # accepts ENABLED, DISABLED
+    #     warm_tier_retention_period: {
+    #       number_of_days: 1,
+    #       unlimited: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4278,6 +5465,9 @@ module Aws::IoTSiteWise
     #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
+    #   resp.warm_tier #=> String, one of "ENABLED", "DISABLED"
+    #   resp.warm_tier_retention_period.number_of_days #=> Integer
+    #   resp.warm_tier_retention_period.unlimited #=> Boolean
     #
     # @overload put_storage_configuration(params = {})
     # @param [Hash] params ({})
@@ -4424,7 +5614,14 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset to update.
+    #   The ID of the asset to update. This can be either the actual ID in
+    #   UUID format, or else `externalId:` followed by the external ID, if it
+    #   has one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :asset_name
     #   A friendly name for the asset.
@@ -4440,6 +5637,16 @@ module Aws::IoTSiteWise
     # @option params [String] :asset_description
     #   A description for the asset.
     #
+    # @option params [String] :asset_external_id
+    #   An external ID to assign to the asset. The asset must not already have
+    #   an external ID. The external ID must be unique within your Amazon Web
+    #   Services account. For more information, see [Using external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
     # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssetResponse#asset_status #asset_status} => Types::AssetStatus
@@ -4447,10 +5654,11 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset({
-    #     asset_id: "ID", # required
+    #     asset_id: "CustomID", # required
     #     asset_name: "Name", # required
     #     client_token: "ClientToken",
     #     asset_description: "Description",
+    #     asset_external_id: "ExternalId",
     #   })
     #
     # @example Response structure
@@ -4493,7 +5701,14 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
     #
     # @option params [required, String] :asset_model_id
-    #   The ID of the asset model to update.
+    #   The ID of the asset model to update. This can be either the actual ID
+    #   in UUID format, or else `externalId:` followed by the external ID, if
+    #   it has one. For more information, see [Referencing objects with
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :asset_model_name
     #   A unique, friendly name for the asset model.
@@ -4529,11 +5744,22 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
     # @option params [Array<Types::AssetModelCompositeModel>] :asset_model_composite_models
-    #   The composite asset models that are part of this asset model.
-    #   Composite asset models are asset models that contain specific
-    #   properties. Each composite model has a type that defines the
-    #   properties that the composite model supports. Use composite asset
-    #   models to define alarms on this asset model.
+    #   The composite models that are part of this asset model. It groups
+    #   properties (such as attributes, measurements, transforms, and metrics)
+    #   and child composite models that model parts of your industrial
+    #   equipment. Each composite model has a type that defines the properties
+    #   that the composite model supports. Use composite models to define
+    #   alarms on this asset model.
+    #
+    #   <note markdown="1"> When creating custom composite models, you need to use
+    #   [CreateAssetModelCompositeModel][1]. For more information, see
+    #   &lt;LINK&gt;.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -4543,6 +5769,16 @@ module Aws::IoTSiteWise
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :asset_model_external_id
+    #   An external ID to assign to the asset model. The asset model must not
+    #   already have an external ID. The external ID must be unique within
+    #   your Amazon Web Services account. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
     # @return [Types::UpdateAssetModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssetModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
@@ -4550,12 +5786,12 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset_model({
-    #     asset_model_id: "ID", # required
+    #     asset_model_id: "CustomID", # required
     #     asset_model_name: "Name", # required
     #     asset_model_description: "Description",
     #     asset_model_properties: [
     #       {
-    #         id: "ID",
+    #         id: "CustomID",
     #         name: "Name", # required
     #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
     #         data_type_spec: "Name",
@@ -4577,8 +5813,14 @@ module Aws::IoTSiteWise
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
-    #                   property_id: "Macro", # required
+    #                   property_id: "Macro",
     #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             ],
@@ -4595,8 +5837,14 @@ module Aws::IoTSiteWise
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
-    #                   property_id: "Macro", # required
+    #                   property_id: "Macro",
     #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             ],
@@ -4611,13 +5859,21 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         },
+    #         path: [
+    #           {
+    #             id: "ID",
+    #             name: "Name",
+    #           },
+    #         ],
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     asset_model_hierarchies: [
     #       {
-    #         id: "ID",
+    #         id: "CustomID",
     #         name: "Name", # required
-    #         child_asset_model_id: "ID", # required
+    #         child_asset_model_id: "CustomID", # required
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     asset_model_composite_models: [
@@ -4627,7 +5883,7 @@ module Aws::IoTSiteWise
     #         type: "Name", # required
     #         properties: [
     #           {
-    #             id: "ID",
+    #             id: "CustomID",
     #             name: "Name", # required
     #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
     #             data_type_spec: "Name",
@@ -4649,8 +5905,14 @@ module Aws::IoTSiteWise
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
-    #                       property_id: "Macro", # required
+    #                       property_id: "Macro",
     #                       hierarchy_id: "Macro",
+    #                       property_path: [
+    #                         {
+    #                           id: "ID",
+    #                           name: "Name",
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 ],
@@ -4667,8 +5929,14 @@ module Aws::IoTSiteWise
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
-    #                       property_id: "Macro", # required
+    #                       property_id: "Macro",
     #                       hierarchy_id: "Macro",
+    #                       property_path: [
+    #                         {
+    #                           id: "ID",
+    #                           name: "Name",
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 ],
@@ -4683,12 +5951,21 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             },
+    #             path: [
+    #               {
+    #                 id: "ID",
+    #                 name: "Name",
+    #               },
+    #             ],
+    #             external_id: "ExternalId",
     #           },
     #         ],
-    #         id: "ID",
+    #         id: "CustomID",
+    #         external_id: "ExternalId",
     #       },
     #     ],
     #     client_token: "ClientToken",
+    #     asset_model_external_id: "ExternalId",
     #   })
     #
     # @example Response structure
@@ -4707,6 +5984,182 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Updates a composite model and all of the assets that were created from
+    # the model. Each asset created from the model inherits the updated
+    # asset model's property and hierarchy definitions. For more
+    # information, see [Updating assets and models][1] in the *IoT SiteWise
+    # User Guide*.
+    #
+    # If you remove a property from a composite asset model, IoT SiteWise
+    # deletes all previous data for that property. You can’t change the type
+    # or data type of an existing property.
+    #
+    #  To replace an existing composite asset model property with a new one
+    # with the same `name`, do the following:
+    #
+    #  1.  Submit an `UpdateAssetModelCompositeModel` request with the
+    # entire
+    #     existing property removed.
+    #
+    # 2.  Submit a second `UpdateAssetModelCompositeModel` request that
+    #     includes the new property. The new asset property will have the
+    #     same `name` as the previous one and IoT SiteWise will generate a
+    #     new unique `id`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model, in UUID format.
+    #
+    # @option params [required, String] :asset_model_composite_model_id
+    #   The ID of a composite model on this asset model.
+    #
+    # @option params [String] :asset_model_composite_model_external_id
+    #   An external ID to assign to the asset model. You can only set the
+    #   external ID of the asset model if it wasn't set when it was created,
+    #   or you're setting it to the exact same thing as when it was created.
+    #
+    # @option params [String] :asset_model_composite_model_description
+    #   A description for the composite model.
+    #
+    # @option params [required, String] :asset_model_composite_model_name
+    #   A unique, friendly name for the composite model.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::AssetModelProperty>] :asset_model_composite_model_properties
+    #   The property definitions of the composite model. For more information,
+    #   see &lt;LINK&gt;.
+    #
+    #   You can specify up to 200 properties per composite model. For more
+    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #
+    # @return [Types::UpdateAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAssetModelCompositeModelResponse#asset_model_composite_model_path #asset_model_composite_model_path} => Array&lt;Types::AssetModelCompositeModelPathSegment&gt;
+    #   * {Types::UpdateAssetModelCompositeModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_asset_model_composite_model({
+    #     asset_model_id: "CustomID", # required
+    #     asset_model_composite_model_id: "CustomID", # required
+    #     asset_model_composite_model_external_id: "ExternalId",
+    #     asset_model_composite_model_description: "Description",
+    #     asset_model_composite_model_name: "Name", # required
+    #     client_token: "ClientToken",
+    #     asset_model_composite_model_properties: [
+    #       {
+    #         id: "CustomID",
+    #         name: "Name", # required
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
+    #         unit: "PropertyUnit",
+    #         type: { # required
+    #           attribute: {
+    #             default_value: "DefaultValue",
+    #           },
+    #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
+    #           },
+    #           transform: {
+    #             expression: "Expression", # required
+    #             variables: [ # required
+    #               {
+    #                 name: "VariableName", # required
+    #                 value: { # required
+    #                   property_id: "Macro",
+    #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
+    #           },
+    #           metric: {
+    #             expression: "Expression", # required
+    #             variables: [ # required
+    #               {
+    #                 name: "VariableName", # required
+    #                 value: { # required
+    #                   property_id: "Macro",
+    #                   hierarchy_id: "Macro",
+    #                   property_path: [
+    #                     {
+    #                       id: "ID",
+    #                       name: "Name",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             window: { # required
+    #               tumbling: {
+    #                 interval: "Interval", # required
+    #                 offset: "Offset",
+    #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #             },
+    #           },
+    #         },
+    #         path: [
+    #           {
+    #             id: "ID",
+    #             name: "Name",
+    #           },
+    #         ],
+    #         external_id: "ExternalId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_composite_model_path #=> Array
+    #   resp.asset_model_composite_model_path[0].id #=> String
+    #   resp.asset_model_composite_model_path[0].name #=> String
+    #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
+    #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
+    #
+    # @overload update_asset_model_composite_model(params = {})
+    # @param [Hash] params ({})
+    def update_asset_model_composite_model(params = {}, options = {})
+      req = build_request(:update_asset_model_composite_model, params)
+      req.send_request(options)
+    end
+
     # Updates an asset property's alias and notification state.
     #
     # This operation overwrites the property's existing alias and
@@ -4720,10 +6173,24 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html
     #
     # @option params [required, String] :asset_id
-    #   The ID of the asset to be updated.
+    #   The ID of the asset to be updated. This can be either the actual ID in
+    #   UUID format, or else `externalId:` followed by the external ID, if it
+    #   has one. For more information, see [Referencing objects with external
+    #   IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :property_id
-    #   The ID of the asset property to be updated.
+    #   The ID of the asset property to be updated. This can be either the
+    #   actual ID in UUID format, or else `externalId:` followed by the
+    #   external ID, if it has one. For more information, see [Referencing
+    #   objects with external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [String] :property_alias
     #   The alias that identifies the property, such as an OPC-UA server data
@@ -4770,8 +6237,8 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset_property({
-    #     asset_id: "ID", # required
-    #     property_id: "ID", # required
+    #     asset_id: "CustomID", # required
+    #     property_id: "CustomID", # required
     #     property_alias: "PropertyAlias",
     #     property_notification_state: "ENABLED", # accepts ENABLED, DISABLED
     #     client_token: "ClientToken",
@@ -5057,7 +6524,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

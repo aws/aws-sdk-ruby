@@ -443,6 +443,32 @@ module Aws::MigrationHubConfig
       req.send_request(options)
     end
 
+    # This operation deletes the home region configuration for the calling
+    # account. The operation does not delete discovery or migration tracking
+    # data in the home region.
+    #
+    # @option params [required, String] :control_id
+    #   A unique identifier that's generated for each home region control.
+    #   It's always a string that begins with "hrc-" followed by 12
+    #   lowercase letters and numbers.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_home_region_control({
+    #     control_id: "ControlId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/DeleteHomeRegionControl AWS API Documentation
+    #
+    # @overload delete_home_region_control(params = {})
+    # @param [Hash] params ({})
+    def delete_home_region_control(params = {}, options = {})
+      req = build_request(:delete_home_region_control, params)
+      req.send_request(options)
+    end
+
     # This API permits filtering on the `ControlId` and `HomeRegion` fields.
     #
     # @option params [String] :control_id
@@ -541,7 +567,7 @@ module Aws::MigrationHubConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubconfig'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,6 +10,97 @@
 module Aws::SecretsManager
   module Types
 
+    # The error Secrets Manager encountered while retrieving an individual
+    # secret as part of BatchGetSecretValue.
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN or name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error Secrets Manager encountered while retrieving an individual
+    #   secret as part of BatchGetSecretValue, for example
+    #   `ResourceNotFoundException`,`InvalidParameterException`,
+    #   `InvalidRequestException`, `DecryptionFailure`, or
+    #   `AccessDeniedException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/APIErrorType AWS API Documentation
+    #
+    class APIErrorType < Struct.new(
+      :secret_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secret_id_list
+    #   The ARN or names of the secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters to choose which secrets to retrieve. You must include
+    #   `Filters` or `SecretIdList`, but not both.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The number of results to include in the response.
+    #
+    #   If there are more results available, in the response, Secrets
+    #   Manager includes `NextToken`. To get the next results, call
+    #   `BatchGetSecretValue` again with the value from `NextToken`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where the output should continue from, if a
+    #   previous call did not show all results. To get the next results,
+    #   call `BatchGetSecretValue` again with this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/BatchGetSecretValueRequest AWS API Documentation
+    #
+    class BatchGetSecretValueRequest < Struct.new(
+      :secret_id_list,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secret_values
+    #   A list of secret values.
+    #   @return [Array<Types::SecretValueEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   Secrets Manager includes this value if there's more output
+    #   available than what is included in the current response. This can
+    #   occur even when the response includes no values at all, such as when
+    #   you ask for a filtered view of a long list. To get the next results,
+    #   call `BatchGetSecretValue` again with this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors Secrets Manager encountered while attempting to
+    #   retrieve individual secrets.
+    #   @return [Array<Types::APIErrorType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/BatchGetSecretValueResponse AWS API Documentation
+    #
+    class BatchGetSecretValueResponse < Struct.new(
+      :secret_values,
+      :next_token,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] secret_id
     #   The ARN or name of the secret.
     #
@@ -77,13 +168,13 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
     #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes it as the value for this parameter in the request. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for the new version and include the
-    #   value in the request.
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
+    #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include
+    #   it in the request.
     #
     #   This value helps ensure idempotency. Secrets Manager uses this value
     #   to prevent the accidental creation of duplicate versions if there
@@ -191,32 +282,15 @@ module Aws::SecretsManager
     #   parameter, you should use single quotes to avoid confusion with the
     #   double quotes required in the JSON text.
     #
-    #   The following restrictions apply to tags:
-    #
-    #   * Maximum number of tags per secret: 50
-    #
-    #   * Maximum key length: 127 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 255 Unicode characters in UTF-8
-    #
-    #   * Tag keys and values are case sensitive.
-    #
-    #   * Do not use the `aws:` prefix in your tag names or values because
-    #     Amazon Web Services reserves it for Amazon Web Services use. You
-    #     can't edit or delete tag names or values with this prefix. Tags
-    #     with this prefix do not count against your tags per secret limit.
-    #
-    #   * If you use your tagging schema across multiple services and
-    #     resources, other services might have restrictions on allowed
-    #     characters. Generally allowed characters: letters, spaces, and
-    #     numbers representable in UTF-8, plus the following special
-    #     characters: + - = . \_ : / @.
+    #   For tag quotas and naming restrictions, see [Service quotas for
+    #   Tagging][4] in the *Amazon Web Services General Reference guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac
     #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#auth-and-access_tags2
     #   [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/arg.html#taged-reference-quotas
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_replica_regions
@@ -1215,19 +1289,20 @@ module Aws::SecretsManager
     #
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
-    #   parameter empty because they generate a random UUID for you. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for new versions and include that
-    #   value in the request.
+    #   parameter empty. The CLI or SDK generates a random UUID for you and
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
     #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include
+    #   it in the request.
+    #
     #   This value helps ensure idempotency. Secrets Manager uses this value
     #   to prevent the accidental creation of duplicate versions if there
-    #   are failures and retries during the Lambda rotation function
-    #   processing. We recommend that you generate a [UUID-type][1] value to
-    #   ensure uniqueness within the specified secret.
+    #   are failures and retries during a rotation. We recommend that you
+    #   generate a [UUID-type][1] value to ensure uniqueness of your
+    #   versions within the specified secret.
     #
     #   * If the `ClientRequestToken` value isn't already associated with a
     #     version of the secret then a new version of the secret is created.
@@ -1542,26 +1617,27 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A unique identifier for the new version of the secret that helps
-    #   ensure idempotency. Secrets Manager uses this value to prevent the
-    #   accidental creation of duplicate versions if there are failures and
-    #   retries during rotation. This value becomes the `VersionId` of the
-    #   new version.
+    #   A unique identifier for the new version of the secret. You only need
+    #   to specify this value if you implement your own retry logic and you
+    #   want to ensure that Secrets Manager doesn't attempt to create a
+    #   secret version twice.
     #
-    #   If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this
+    #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
+    #   Services SDKs to call this operation, then you can leave this
     #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes that in the request for this parameter. If you don't use
-    #   the SDK and instead generate a raw HTTP request to the Secrets
-    #   Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for new versions and include that
-    #   value in the request.
+    #   includes it as the value for this parameter in the request.
     #
-    #   You only need to specify this value if you implement your own retry
-    #   logic and you want to ensure that Secrets Manager doesn't attempt
-    #   to create a secret version twice. We recommend that you generate a
-    #   [UUID-type][1] value to ensure uniqueness within the specified
-    #   secret.
+    #    </note>
+    #
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include
+    #   it in the request.
+    #
+    #   This value helps ensure idempotency. Secrets Manager uses this value
+    #   to prevent the accidental creation of duplicate versions if there
+    #   are failures and retries during a rotation. We recommend that you
+    #   generate a [UUID-type][1] value to ensure uniqueness of your
+    #   versions within the specified secret.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1730,10 +1806,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret. You can use forward slashes in the
-    #   name to represent a path hierarchy. For example,
-    #   `/prod/databases/dbserver1` could represent the secret for a server
-    #   named `dbserver1` in the folder `databases` in the folder `prod`.
+    #   The friendly name of the secret.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1855,6 +1928,59 @@ module Aws::SecretsManager
       :created_date,
       :primary_region)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the secret value and other details for a
+    # secret.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The unique version identifier of this version of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_binary
+    #   The decrypted secret value, if the secret value was originally
+    #   provided as binary data in the form of a byte array. The parameter
+    #   represents the binary data as a [base64-encoded][1] string.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc4648#section-4
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_string
+    #   The decrypted secret value, if the secret value was originally
+    #   provided as a string or through the Secrets Manager console.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_stages
+    #   A list of all of the staging labels currently attached to this
+    #   version of the secret.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_date
+    #   The date the secret was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretValueEntry AWS API Documentation
+    #
+    class SecretValueEntry < Struct.new(
+      :arn,
+      :name,
+      :version_id,
+      :secret_binary,
+      :secret_string,
+      :version_stages,
+      :created_date)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 
@@ -2031,18 +2157,26 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
     #   Services SDKs to call this operation, then you can leave this
     #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes it as the value for this parameter in the request. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for the new version and include the
-    #   value in the request.
+    #   includes it as the value for this parameter in the request.
     #
     #    </note>
     #
-    #   This value becomes the `VersionId` of the new version.
+    #   If you generate a raw HTTP request to the Secrets Manager service
+    #   endpoint, then you must generate a `ClientRequestToken` and include
+    #   it in the request.
+    #
+    #   This value helps ensure idempotency. Secrets Manager uses this value
+    #   to prevent the accidental creation of duplicate versions if there
+    #   are failures and retries during a rotation. We recommend that you
+    #   generate a [UUID-type][1] value to ensure uniqueness of your
+    #   versions within the specified secret.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] description

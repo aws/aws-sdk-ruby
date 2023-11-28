@@ -353,6 +353,12 @@ module Aws::MediaPackageV2
     #   HLS input, it is passed through to the HLS output.
     #   @return [Integer]
     #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateHlsManifestConfiguration AWS API Documentation
     #
     class CreateHlsManifestConfiguration < Struct.new(
@@ -360,7 +366,8 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :scte_hls,
       :manifest_window_seconds,
-      :program_date_time_interval_seconds)
+      :program_date_time_interval_seconds,
+      :filter_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -408,6 +415,12 @@ module Aws::MediaPackageV2
     #   HLS input, it is passed through to the HLS output.
     #   @return [Integer]
     #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateLowLatencyHlsManifestConfiguration AWS API Documentation
     #
     class CreateLowLatencyHlsManifestConfiguration < Struct.new(
@@ -415,7 +428,8 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :scte_hls,
       :manifest_window_seconds,
-      :program_date_time_interval_seconds)
+      :program_date_time_interval_seconds,
+      :filter_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -866,6 +880,47 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # Filter configuration includes settings for manifest filtering, start
+    # and end times, and time delay that apply to all of your egress
+    # requests for this manifest.
+    #
+    # @!attribute [rw] manifest_filter
+    #   Optionally specify one or more manifest filters for all of your
+    #   manifest egress requests. When you include a manifest filter, note
+    #   that you cannot use an identical manifest filter query parameter for
+    #   this manifest's endpoint URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] start
+    #   Optionally specify the start time for all of your manifest egress
+    #   requests. When you include start time, note that you cannot use
+    #   start time query parameters for this manifest's endpoint URL.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end
+    #   Optionally specify the end time for all of your manifest egress
+    #   requests. When you include end time, note that you cannot use end
+    #   time query parameters for this manifest's endpoint URL.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_delay_seconds
+    #   Optionally specify the time delay for all of your manifest egress
+    #   requests. Enter a value that is smaller than your endpoint's
+    #   startover window. When you include time delay, note that you cannot
+    #   use time delay query parameters for this manifest's endpoint URL.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/FilterConfiguration AWS API Documentation
+    #
+    class FilterConfiguration < Struct.new(
+      :manifest_filter,
+      :start,
+      :end,
+      :time_delay_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -1093,6 +1148,12 @@ module Aws::MediaPackageV2
     #   The SCTE configuration.
     #   @return [Types::ScteHls]
     #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetHlsManifestConfiguration AWS API Documentation
     #
     class GetHlsManifestConfiguration < Struct.new(
@@ -1101,7 +1162,8 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
-      :scte_hls)
+      :scte_hls,
+      :filter_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1153,6 +1215,12 @@ module Aws::MediaPackageV2
     #   The SCTE configuration.
     #   @return [Types::ScteHls]
     #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetLowLatencyHlsManifestConfiguration AWS API Documentation
     #
     class GetLowLatencyHlsManifestConfiguration < Struct.new(
@@ -1161,7 +1229,8 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
-      :scte_hls)
+      :scte_hls,
+      :filter_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

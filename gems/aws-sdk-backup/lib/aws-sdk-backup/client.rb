@@ -469,6 +469,7 @@ module Aws::Backup
     #           lifecycle: {
     #             move_to_cold_storage_after_days: 1,
     #             delete_after_days: 1,
+    #             opt_in_to_archive_for_supported_resources: false,
     #           },
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
@@ -478,6 +479,7 @@ module Aws::Backup
     #               lifecycle: {
     #                 move_to_cold_storage_after_days: 1,
     #                 delete_after_days: 1,
+    #                 opt_in_to_archive_for_supported_resources: false,
     #               },
     #               destination_backup_vault_arn: "ARN", # required
     #             },
@@ -857,6 +859,9 @@ module Aws::Backup
     # @option params [String] :creator_request_id
     #   This is the ID of the creation request.
     #
+    #   This parameter is optional. If used, this parameter must contain 1 to
+    #   50 alphanumeric or '-\_.' characters.
+    #
     # @option params [required, Integer] :min_retention_days
     #   This setting specifies the minimum retention period that the vault
     #   retains its recovery points. If this parameter is not specified, no
@@ -1004,6 +1009,178 @@ module Aws::Backup
     # @param [Hash] params ({})
     def create_report_plan(params = {}, options = {})
       req = build_request(:create_report_plan, params)
+      req.send_request(options)
+    end
+
+    # This is the first of two steps to create a restore testing plan; once
+    # this request is successful, finish the procedure with request
+    # CreateRestoreTestingSelection.
+    #
+    # You must include the parameter RestoreTestingPlan. You may optionally
+    # include CreatorRequestId and Tags.
+    #
+    # @option params [String] :creator_request_id
+    #   This is a unique string that identifies the request and allows failed
+    #   requests to be retriedwithout the risk of running the operation twice.
+    #   This parameter is optional. If used, this parameter must contain 1 to
+    #   50 alphanumeric or '-\_.' characters.
+    #
+    # @option params [required, Types::RestoreTestingPlanForCreate] :restore_testing_plan
+    #   A restore testing plan must contain a unique `RestoreTestingPlanName`
+    #   string you create and must contain a `ScheduleExpression` cron. You
+    #   may optionally include a `StartWindowHours` integer and a
+    #   `CreatorRequestId` string.
+    #
+    #   The `RestoreTestingPlanName` is a unique string that is the name of
+    #   the restore testing plan. This cannot be changed after creation, and
+    #   it must consist of only alphanumeric characters and underscores.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags to include. A tag is a key-value pair you can use to
+    #   manage, filter, and search for your resources. Allowed characters
+    #   include UTF-8 letters,numbers, spaces, and the following characters: +
+    #   - = . \_ : /.
+    #
+    # @return [Types::CreateRestoreTestingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRestoreTestingPlanOutput#creation_time #creation_time} => Time
+    #   * {Types::CreateRestoreTestingPlanOutput#restore_testing_plan_arn #restore_testing_plan_arn} => String
+    #   * {Types::CreateRestoreTestingPlanOutput#restore_testing_plan_name #restore_testing_plan_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_restore_testing_plan({
+    #     creator_request_id: "String",
+    #     restore_testing_plan: { # required
+    #       recovery_point_selection: { # required
+    #         algorithm: "LATEST_WITHIN_WINDOW", # accepts LATEST_WITHIN_WINDOW, RANDOM_WITHIN_WINDOW
+    #         exclude_vaults: ["string"],
+    #         include_vaults: ["string"],
+    #         recovery_point_types: ["CONTINUOUS"], # accepts CONTINUOUS, SNAPSHOT
+    #         selection_window_days: 1,
+    #       },
+    #       restore_testing_plan_name: "String", # required
+    #       schedule_expression: "String", # required
+    #       schedule_expression_timezone: "String",
+    #       start_window_hours: 1,
+    #     },
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plan_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreTestingPlan AWS API Documentation
+    #
+    # @overload create_restore_testing_plan(params = {})
+    # @param [Hash] params ({})
+    def create_restore_testing_plan(params = {}, options = {})
+      req = build_request(:create_restore_testing_plan, params)
+      req.send_request(options)
+    end
+
+    # This request can be sent after CreateRestoreTestingPlan request
+    # returns successfully. This is the second part of creating a resource
+    # testing plan, and it must be completed sequentially.
+    #
+    # This consists of `RestoreTestingSelectionName`,
+    # `ProtectedResourceType`, and one of the following:
+    #
+    # * `ProtectedResourceArns`
+    #
+    # * `ProtectedResourceConditions`
+    #
+    # Each protected resource type can have one single value.
+    #
+    # A restore testing selection can include a wildcard value ("*") for
+    # `ProtectedResourceArns` along with `ProtectedResourceConditions`.
+    # Alternatively, you can include up to 30 specific protected resource
+    # ARNs in `ProtectedResourceArns`.
+    #
+    # Cannot select by both protected resource types AND specific ARNs.
+    # Request will fail if both are included.
+    #
+    # @option params [String] :creator_request_id
+    #   This is an optional unique string that identifies the request and
+    #   allows failed requests to be retried without the risk of running the
+    #   operation twice. If used, this parameter must contain 1 to 50
+    #   alphanumeric or '-\_.' characters.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Input the restore testing plan name that was returned from the related
+    #   CreateRestoreTestingPlan request.
+    #
+    # @option params [required, Types::RestoreTestingSelectionForCreate] :restore_testing_selection
+    #   This consists of `RestoreTestingSelectionName`,
+    #   `ProtectedResourceType`, and one of the following:
+    #
+    #   * `ProtectedResourceArns`
+    #
+    #   * `ProtectedResourceConditions`
+    #
+    #   Each protected resource type can have one single value.
+    #
+    #   A restore testing selection can include a wildcard value ("*") for
+    #   `ProtectedResourceArns` along with `ProtectedResourceConditions`.
+    #   Alternatively, you can include up to 30 specific protected resource
+    #   ARNs in `ProtectedResourceArns`.
+    #
+    # @return [Types::CreateRestoreTestingSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRestoreTestingSelectionOutput#creation_time #creation_time} => Time
+    #   * {Types::CreateRestoreTestingSelectionOutput#restore_testing_plan_arn #restore_testing_plan_arn} => String
+    #   * {Types::CreateRestoreTestingSelectionOutput#restore_testing_plan_name #restore_testing_plan_name} => String
+    #   * {Types::CreateRestoreTestingSelectionOutput#restore_testing_selection_name #restore_testing_selection_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_restore_testing_selection({
+    #     creator_request_id: "String",
+    #     restore_testing_plan_name: "String", # required
+    #     restore_testing_selection: { # required
+    #       iam_role_arn: "String", # required
+    #       protected_resource_arns: ["string"],
+    #       protected_resource_conditions: {
+    #         string_equals: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         string_not_equals: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       },
+    #       protected_resource_type: "String", # required
+    #       restore_metadata_overrides: {
+    #         "String" => "String",
+    #       },
+    #       restore_testing_selection_name: "String", # required
+    #       validation_window_hours: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plan_name #=> String
+    #   resp.restore_testing_selection_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreTestingSelection AWS API Documentation
+    #
+    # @overload create_restore_testing_selection(params = {})
+    # @param [Hash] params ({})
+    def create_restore_testing_selection(params = {}, options = {})
+      req = build_request(:create_restore_testing_selection, params)
       req.send_request(options)
     end
 
@@ -1277,6 +1454,63 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request deletes the specified restore testing plan.
+    #
+    # Deletion can only successfully occur if all associated restore testing
+    # selections are deleted first.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Required unique name of the restore testing plan you wish to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_restore_testing_plan({
+    #     restore_testing_plan_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteRestoreTestingPlan AWS API Documentation
+    #
+    # @overload delete_restore_testing_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_restore_testing_plan(params = {}, options = {})
+      req = build_request(:delete_restore_testing_plan, params)
+      req.send_request(options)
+    end
+
+    # Input the Restore Testing Plan name and Restore Testing Selection
+    # name.
+    #
+    # All testing selections associated with a restore testing plan must be
+    # deleted before the restore testing plan can be deleted.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Required unique name of the restore testing plan that contains the
+    #   restore testing selection you wish to delete.
+    #
+    # @option params [required, String] :restore_testing_selection_name
+    #   Required unique name of the restore testing selection you wish to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_restore_testing_selection({
+    #     restore_testing_plan_name: "String", # required
+    #     restore_testing_selection_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteRestoreTestingSelection AWS API Documentation
+    #
+    # @overload delete_restore_testing_selection(params = {})
+    # @param [Hash] params ({})
+    def delete_restore_testing_selection(params = {}, options = {})
+      req = build_request(:delete_restore_testing_selection, params)
+      req.send_request(options)
+    end
+
     # Returns backup job details for the specified `BackupJobId`.
     #
     # @option params [required, String] :backup_job_id
@@ -1309,6 +1543,8 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#number_of_child_jobs #number_of_child_jobs} => Integer
     #   * {Types::DescribeBackupJobOutput#child_jobs_in_state #child_jobs_in_state} => Hash&lt;String,Integer&gt;
     #   * {Types::DescribeBackupJobOutput#resource_name #resource_name} => String
+    #   * {Types::DescribeBackupJobOutput#initiation_date #initiation_date} => Time
+    #   * {Types::DescribeBackupJobOutput#message_category #message_category} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1348,6 +1584,8 @@ module Aws::Backup
     #   resp.child_jobs_in_state #=> Hash
     #   resp.child_jobs_in_state["BackupJobState"] #=> Integer
     #   resp.resource_name #=> String
+    #   resp.initiation_date #=> Time
+    #   resp.message_category #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJob AWS API Documentation
     #
@@ -1455,6 +1693,7 @@ module Aws::Backup
     #   resp.copy_job.child_jobs_in_state #=> Hash
     #   resp.copy_job.child_jobs_in_state["CopyJobState"] #=> Integer
     #   resp.copy_job.resource_name #=> String
+    #   resp.copy_job.message_category #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJob AWS API Documentation
     #
@@ -1556,6 +1795,11 @@ module Aws::Backup
     #   * {Types::DescribeProtectedResourceOutput#resource_type #resource_type} => String
     #   * {Types::DescribeProtectedResourceOutput#last_backup_time #last_backup_time} => Time
     #   * {Types::DescribeProtectedResourceOutput#resource_name #resource_name} => String
+    #   * {Types::DescribeProtectedResourceOutput#last_backup_vault_arn #last_backup_vault_arn} => String
+    #   * {Types::DescribeProtectedResourceOutput#last_recovery_point_arn #last_recovery_point_arn} => String
+    #   * {Types::DescribeProtectedResourceOutput#latest_restore_execution_time_minutes #latest_restore_execution_time_minutes} => Integer
+    #   * {Types::DescribeProtectedResourceOutput#latest_restore_job_creation_date #latest_restore_job_creation_date} => Time
+    #   * {Types::DescribeProtectedResourceOutput#latest_restore_recovery_point_creation_date #latest_restore_recovery_point_creation_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1569,6 +1813,11 @@ module Aws::Backup
     #   resp.resource_type #=> String
     #   resp.last_backup_time #=> Time
     #   resp.resource_name #=> String
+    #   resp.last_backup_vault_arn #=> String
+    #   resp.last_recovery_point_arn #=> String
+    #   resp.latest_restore_execution_time_minutes #=> Integer
+    #   resp.latest_restore_job_creation_date #=> Time
+    #   resp.latest_restore_recovery_point_creation_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeProtectedResource AWS API Documentation
     #
@@ -1652,6 +1901,7 @@ module Aws::Backup
     #   resp.calculated_lifecycle.delete_at #=> Time
     #   resp.lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.lifecycle.delete_after_days #=> Integer
+    #   resp.lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.encryption_key_arn #=> String
     #   resp.is_encrypted #=> Boolean
     #   resp.storage_class #=> String, one of "WARM", "COLD", "DELETED"
@@ -1807,6 +2057,12 @@ module Aws::Backup
     #   * {Types::DescribeRestoreJobOutput#expected_completion_time_minutes #expected_completion_time_minutes} => Integer
     #   * {Types::DescribeRestoreJobOutput#created_resource_arn #created_resource_arn} => String
     #   * {Types::DescribeRestoreJobOutput#resource_type #resource_type} => String
+    #   * {Types::DescribeRestoreJobOutput#recovery_point_creation_date #recovery_point_creation_date} => Time
+    #   * {Types::DescribeRestoreJobOutput#created_by #created_by} => Types::RestoreJobCreator
+    #   * {Types::DescribeRestoreJobOutput#validation_status #validation_status} => String
+    #   * {Types::DescribeRestoreJobOutput#validation_status_message #validation_status_message} => String
+    #   * {Types::DescribeRestoreJobOutput#deletion_status #deletion_status} => String
+    #   * {Types::DescribeRestoreJobOutput#deletion_status_message #deletion_status_message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1829,6 +2085,12 @@ module Aws::Backup
     #   resp.expected_completion_time_minutes #=> Integer
     #   resp.created_resource_arn #=> String
     #   resp.resource_type #=> String
+    #   resp.recovery_point_creation_date #=> Time
+    #   resp.created_by.restore_testing_plan_arn #=> String
+    #   resp.validation_status #=> String, one of "FAILED", "SUCCESSFUL", "TIMED_OUT", "VALIDATING"
+    #   resp.validation_status_message #=> String
+    #   resp.deletion_status #=> String, one of "DELETING", "FAILED", "SUCCESSFUL"
+    #   resp.deletion_status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRestoreJob AWS API Documentation
     #
@@ -1976,12 +2238,14 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
     #   resp.backup_plan.rules[0].copy_actions #=> Array
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
@@ -2036,12 +2300,14 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
     #   resp.backup_plan.rules[0].copy_actions #=> Array
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
@@ -2085,12 +2351,14 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan_document.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan_document.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan_document.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan_document.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan_document.rules[0].rule_id #=> String
     #   resp.backup_plan_document.rules[0].copy_actions #=> Array
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan_document.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan_document.rules[0].schedule_expression_timezone #=> String
@@ -2320,6 +2588,7 @@ module Aws::Backup
     #   * {Types::GetRecoveryPointRestoreMetadataOutput#backup_vault_arn #backup_vault_arn} => String
     #   * {Types::GetRecoveryPointRestoreMetadataOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::GetRecoveryPointRestoreMetadataOutput#restore_metadata #restore_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetRecoveryPointRestoreMetadataOutput#resource_type #resource_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2335,6 +2604,7 @@ module Aws::Backup
     #   resp.recovery_point_arn #=> String
     #   resp.restore_metadata #=> Hash
     #   resp.restore_metadata["MetadataKey"] #=> String
+    #   resp.resource_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadata AWS API Documentation
     #
@@ -2342,6 +2612,177 @@ module Aws::Backup
     # @param [Hash] params ({})
     def get_recovery_point_restore_metadata(params = {}, options = {})
       req = build_request(:get_recovery_point_restore_metadata, params)
+      req.send_request(options)
+    end
+
+    # This request returns the metadata for the specified restore job.
+    #
+    # @option params [required, String] :restore_job_id
+    #   This is a unique identifier of a restore job within Backup.
+    #
+    # @return [Types::GetRestoreJobMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRestoreJobMetadataOutput#restore_job_id #restore_job_id} => String
+    #   * {Types::GetRestoreJobMetadataOutput#metadata #metadata} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_restore_job_metadata({
+    #     restore_job_id: "RestoreJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_job_id #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["MetadataKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRestoreJobMetadata AWS API Documentation
+    #
+    # @overload get_restore_job_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_restore_job_metadata(params = {}, options = {})
+      req = build_request(:get_restore_job_metadata, params)
+      req.send_request(options)
+    end
+
+    # This request returns the minimal required set of metadata needed to
+    # start a restore job with secure default settings. `BackupVaultName`
+    # and `RecoveryPointArn` are required parameters. `BackupVaultAccountId`
+    # is an optional parameter.
+    #
+    # @option params [String] :backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the account used to
+    #   create them and the Amazon Web ServicesRegion where they are created.
+    #   They consist of letters, numbers, and hyphens.
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
+    #   point; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    #
+    # @return [Types::GetRestoreTestingInferredMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRestoreTestingInferredMetadataOutput#inferred_metadata #inferred_metadata} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_restore_testing_inferred_metadata({
+    #     backup_vault_account_id: "String",
+    #     backup_vault_name: "String", # required
+    #     recovery_point_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inferred_metadata #=> Hash
+    #   resp.inferred_metadata["string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRestoreTestingInferredMetadata AWS API Documentation
+    #
+    # @overload get_restore_testing_inferred_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_restore_testing_inferred_metadata(params = {}, options = {})
+      req = build_request(:get_restore_testing_inferred_metadata, params)
+      req.send_request(options)
+    end
+
+    # Returns `RestoreTestingPlan` details for the specified
+    # `RestoreTestingPlanName`. The details are the body of a restore
+    # testing plan in JSON format, in addition to plan metadata.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Required unique name of the restore testing plan.
+    #
+    # @return [Types::GetRestoreTestingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRestoreTestingPlanOutput#restore_testing_plan #restore_testing_plan} => Types::RestoreTestingPlanForGet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_restore_testing_plan({
+    #     restore_testing_plan_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_testing_plan.creation_time #=> Time
+    #   resp.restore_testing_plan.creator_request_id #=> String
+    #   resp.restore_testing_plan.last_execution_time #=> Time
+    #   resp.restore_testing_plan.last_update_time #=> Time
+    #   resp.restore_testing_plan.recovery_point_selection.algorithm #=> String, one of "LATEST_WITHIN_WINDOW", "RANDOM_WITHIN_WINDOW"
+    #   resp.restore_testing_plan.recovery_point_selection.exclude_vaults #=> Array
+    #   resp.restore_testing_plan.recovery_point_selection.exclude_vaults[0] #=> String
+    #   resp.restore_testing_plan.recovery_point_selection.include_vaults #=> Array
+    #   resp.restore_testing_plan.recovery_point_selection.include_vaults[0] #=> String
+    #   resp.restore_testing_plan.recovery_point_selection.recovery_point_types #=> Array
+    #   resp.restore_testing_plan.recovery_point_selection.recovery_point_types[0] #=> String, one of "CONTINUOUS", "SNAPSHOT"
+    #   resp.restore_testing_plan.recovery_point_selection.selection_window_days #=> Integer
+    #   resp.restore_testing_plan.restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plan.restore_testing_plan_name #=> String
+    #   resp.restore_testing_plan.schedule_expression #=> String
+    #   resp.restore_testing_plan.schedule_expression_timezone #=> String
+    #   resp.restore_testing_plan.start_window_hours #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRestoreTestingPlan AWS API Documentation
+    #
+    # @overload get_restore_testing_plan(params = {})
+    # @param [Hash] params ({})
+    def get_restore_testing_plan(params = {}, options = {})
+      req = build_request(:get_restore_testing_plan, params)
+      req.send_request(options)
+    end
+
+    # Returns RestoreTestingSelection, which displays resources and elements
+    # of the restore testing plan.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Required unique name of the restore testing plan.
+    #
+    # @option params [required, String] :restore_testing_selection_name
+    #   Required unique name of the restore testing selection.
+    #
+    # @return [Types::GetRestoreTestingSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRestoreTestingSelectionOutput#restore_testing_selection #restore_testing_selection} => Types::RestoreTestingSelectionForGet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_restore_testing_selection({
+    #     restore_testing_plan_name: "String", # required
+    #     restore_testing_selection_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_testing_selection.creation_time #=> Time
+    #   resp.restore_testing_selection.creator_request_id #=> String
+    #   resp.restore_testing_selection.iam_role_arn #=> String
+    #   resp.restore_testing_selection.protected_resource_arns #=> Array
+    #   resp.restore_testing_selection.protected_resource_arns[0] #=> String
+    #   resp.restore_testing_selection.protected_resource_conditions.string_equals #=> Array
+    #   resp.restore_testing_selection.protected_resource_conditions.string_equals[0].key #=> String
+    #   resp.restore_testing_selection.protected_resource_conditions.string_equals[0].value #=> String
+    #   resp.restore_testing_selection.protected_resource_conditions.string_not_equals #=> Array
+    #   resp.restore_testing_selection.protected_resource_conditions.string_not_equals[0].key #=> String
+    #   resp.restore_testing_selection.protected_resource_conditions.string_not_equals[0].value #=> String
+    #   resp.restore_testing_selection.protected_resource_type #=> String
+    #   resp.restore_testing_selection.restore_metadata_overrides #=> Hash
+    #   resp.restore_testing_selection.restore_metadata_overrides["String"] #=> String
+    #   resp.restore_testing_selection.restore_testing_plan_name #=> String
+    #   resp.restore_testing_selection.restore_testing_selection_name #=> String
+    #   resp.restore_testing_selection.validation_window_hours #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRestoreTestingSelection AWS API Documentation
+    #
+    # @overload get_restore_testing_selection(params = {})
+    # @param [Hash] params ({})
+    def get_restore_testing_selection(params = {}, options = {})
+      req = build_request(:get_restore_testing_selection, params)
       req.send_request(options)
     end
 
@@ -2365,6 +2806,133 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This is a request for a summary of backup jobs created or running
+    # within the most recent 30 days. You can include parameters AccountID,
+    # State, ResourceType, MessageCategory, AggregationPeriod, MaxResults,
+    # or NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # ResourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListBackupJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupJobSummariesOutput#backup_job_summaries #backup_job_summaries} => Array&lt;Types::BackupJobSummary&gt;
+    #   * {Types::ListBackupJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListBackupJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backup_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED, PARTIAL, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     message_category: "MessageCategory",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_job_summaries #=> Array
+    #   resp.backup_job_summaries[0].region #=> String
+    #   resp.backup_job_summaries[0].account_id #=> String
+    #   resp.backup_job_summaries[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED", "PARTIAL", "AGGREGATE_ALL", "ANY"
+    #   resp.backup_job_summaries[0].resource_type #=> String
+    #   resp.backup_job_summaries[0].message_category #=> String
+    #   resp.backup_job_summaries[0].count #=> Integer
+    #   resp.backup_job_summaries[0].start_time #=> Time
+    #   resp.backup_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobSummaries AWS API Documentation
+    #
+    # @overload list_backup_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_backup_job_summaries(params = {}, options = {})
+      req = build_request(:list_backup_job_summaries, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing backup jobs for an authenticated account
     # for the last 30 days. For a longer period of time, consider using
     # these [monitoring tools][1].
@@ -2375,7 +2943,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2447,6 +3015,24 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #
+    # @option params [String] :by_message_category
+    #   This is an optional parameter that can be used to filter out jobs with
+    #   a MessageCategory which matches the value you input.
+    #
+    #   Example strings may include `AccessDenied`, `SUCCESS`,
+    #   `AGGREGATE_ALL`, and `InvalidParameters`.
+    #
+    #   View [Monitoring][1]
+    #
+    #   The wildcard () returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
@@ -2469,6 +3055,7 @@ module Aws::Backup
     #     by_complete_after: Time.now,
     #     by_complete_before: Time.now,
     #     by_parent_job_id: "string",
+    #     by_message_category: "string",
     #   })
     #
     # @example Response structure
@@ -2501,6 +3088,8 @@ module Aws::Backup
     #   resp.backup_jobs[0].parent_job_id #=> String
     #   resp.backup_jobs[0].is_parent #=> Boolean
     #   resp.backup_jobs[0].resource_name #=> String
+    #   resp.backup_jobs[0].initiation_date #=> Time
+    #   resp.backup_jobs[0].message_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobs AWS API Documentation
@@ -2517,7 +3106,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2563,7 +3152,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2618,7 +3207,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2678,7 +3267,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2731,7 +3320,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -2778,11 +3367,136 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request obtains a list of copy jobs created or running within the
+    # the most recent 30 days. You can include parameters AccountID, State,
+    # ResourceType, MessageCategory, AggregationPeriod, MaxResults, or
+    # NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # RestourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :message_category
+    #   This parameter returns the job count for the specified message
+    #   category.
+    #
+    #   Example accepted strings include `AccessDenied`, `Success`, and
+    #   `InvalidParameters`. See [Monitoring][1] for a list of accepted
+    #   MessageCategory strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListCopyJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCopyJobSummariesOutput#copy_job_summaries #copy_job_summaries} => Array&lt;Types::CopyJobSummary&gt;
+    #   * {Types::ListCopyJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListCopyJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_copy_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, RUNNING, ABORTING, ABORTED, COMPLETING, COMPLETED, FAILING, FAILED, PARTIAL, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     message_category: "MessageCategory",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_job_summaries #=> Array
+    #   resp.copy_job_summaries[0].region #=> String
+    #   resp.copy_job_summaries[0].account_id #=> String
+    #   resp.copy_job_summaries[0].state #=> String, one of "CREATED", "RUNNING", "ABORTING", "ABORTED", "COMPLETING", "COMPLETED", "FAILING", "FAILED", "PARTIAL", "AGGREGATE_ALL", "ANY"
+    #   resp.copy_job_summaries[0].resource_type #=> String
+    #   resp.copy_job_summaries[0].message_category #=> String
+    #   resp.copy_job_summaries[0].count #=> Integer
+    #   resp.copy_job_summaries[0].start_time #=> Time
+    #   resp.copy_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobSummaries AWS API Documentation
+    #
+    # @overload list_copy_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_copy_job_summaries(params = {}, options = {})
+      req = build_request(:list_copy_job_summaries, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about your copy jobs.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return maxResults number of items, NextToken
+    #   if a request is made to return MaxResults number of items, NextToken
     #   allows you to return more items in your list starting at the location
     #   pointed to by the next token.
     #
@@ -2849,6 +3563,24 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   This is a filter to list child (nested) jobs based on parent job ID.
     #
+    # @option params [String] :by_message_category
+    #   This is an optional parameter that can be used to filter out jobs with
+    #   a MessageCategory which matches the value you input.
+    #
+    #   Example strings may include `AccessDenied`, `SUCCESS`,
+    #   `AGGREGATE_ALL`, and `INVALIDPARAMETERS`.
+    #
+    #   View [Monitoring][1] for a list of accepted strings.
+    #
+    #   The the value ANY returns count of all message categories.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all message categories and
+    #   returns the sum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -2871,6 +3603,7 @@ module Aws::Backup
     #     by_complete_before: Time.now,
     #     by_complete_after: Time.now,
     #     by_parent_job_id: "string",
+    #     by_message_category: "string",
     #   })
     #
     # @example Response structure
@@ -2901,6 +3634,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].child_jobs_in_state #=> Hash
     #   resp.copy_jobs[0].child_jobs_in_state["CopyJobState"] #=> Integer
     #   resp.copy_jobs[0].resource_name #=> String
+    #   resp.copy_jobs[0].message_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobs AWS API Documentation
@@ -2962,7 +3696,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned resources. For
-    #   example, if a request is made to return `maxResults` number of
+    #   example, if a request is made to return `MaxResults` number of
     #   resources, `NextToken` allows you to return more items in your list
     #   starting at the location pointed to by the next token.
     #
@@ -3010,7 +3744,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3038,6 +3772,8 @@ module Aws::Backup
     #   resp.results[0].resource_type #=> String
     #   resp.results[0].last_backup_time #=> Time
     #   resp.results[0].resource_name #=> String
+    #   resp.results[0].last_backup_vault_arn #=> String
+    #   resp.results[0].last_recovery_point_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResources AWS API Documentation
@@ -3062,7 +3798,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3092,6 +3828,8 @@ module Aws::Backup
     #   resp.results[0].resource_type #=> String
     #   resp.results[0].last_backup_time #=> Time
     #   resp.results[0].resource_name #=> String
+    #   resp.results[0].last_backup_vault_arn #=> String
+    #   resp.results[0].last_recovery_point_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResourcesByBackupVault AWS API Documentation
@@ -3122,7 +3860,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3197,6 +3935,7 @@ module Aws::Backup
     #   resp.recovery_points[0].calculated_lifecycle.delete_at #=> Time
     #   resp.recovery_points[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.recovery_points[0].lifecycle.delete_after_days #=> Integer
+    #   resp.recovery_points[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.recovery_points[0].encryption_key_arn #=> String
     #   resp.recovery_points[0].is_encrypted #=> Boolean
     #   resp.recovery_points[0].last_restore_time #=> Time
@@ -3222,7 +3961,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   This is the next item following a partial list of returned resources.
-    #   For example, if a request is made to return `maxResults` number of
+    #   For example, if a request is made to return `MaxResults` number of
     #   resources, `NextToken` allows you to return more items in your list
     #   starting at the location pointed to by the next token.
     #
@@ -3276,7 +4015,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3461,12 +4200,120 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request obtains a summary of restore jobs created or running
+    # within the the most recent 30 days. You can include parameters
+    # AccountID, State, ResourceType, AggregationPeriod, MaxResults, or
+    # NextToken to filter results.
+    #
+    # This request returns a summary that contains Region, Account, State,
+    # RestourceType, MessageCategory, StartTime, EndTime, and Count of
+    # included jobs.
+    #
+    # @option params [String] :account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part of
+    #   Amazon Web Services Organizations, jobs within requestor's account
+    #   will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   ANY to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #
+    # @option params [String] :state
+    #   This parameter returns the job count for jobs with the specified
+    #   state.
+    #
+    #   The the value ANY returns count of all states.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
+    #   sum.
+    #
+    # @option params [String] :resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value ANY returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #
+    #   The type of Amazon Web Services resource to be backed up; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #
+    # @option params [String] :aggregation_period
+    #   This is the period that sets the boundaries for returned results.
+    #
+    #   Acceptable values include
+    #
+    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #
+    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter sets the maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @return [Types::ListRestoreJobSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreJobSummariesOutput#restore_job_summaries #restore_job_summaries} => Array&lt;Types::RestoreJobSummary&gt;
+    #   * {Types::ListRestoreJobSummariesOutput#aggregation_period #aggregation_period} => String
+    #   * {Types::ListRestoreJobSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_job_summaries({
+    #     account_id: "AccountId",
+    #     state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTED, COMPLETED, FAILED, AGGREGATE_ALL, ANY
+    #     resource_type: "ResourceType",
+    #     aggregation_period: "ONE_DAY", # accepts ONE_DAY, SEVEN_DAYS, FOURTEEN_DAYS
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_job_summaries #=> Array
+    #   resp.restore_job_summaries[0].region #=> String
+    #   resp.restore_job_summaries[0].account_id #=> String
+    #   resp.restore_job_summaries[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTED", "COMPLETED", "FAILED", "AGGREGATE_ALL", "ANY"
+    #   resp.restore_job_summaries[0].resource_type #=> String
+    #   resp.restore_job_summaries[0].count #=> Integer
+    #   resp.restore_job_summaries[0].start_time #=> Time
+    #   resp.restore_job_summaries[0].end_time #=> Time
+    #   resp.aggregation_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobSummaries AWS API Documentation
+    #
+    # @overload list_restore_job_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_restore_job_summaries(params = {}, options = {})
+      req = build_request(:list_restore_job_summaries, params)
+      req.send_request(options)
+    end
+
     # Returns a list of jobs that Backup initiated to restore a saved
     # resource, including details about the recovery process.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3494,6 +4341,10 @@ module Aws::Backup
     #   Returns only copy jobs completed after a date expressed in Unix format
     #   and Coordinated Universal Time (UTC).
     #
+    # @option params [String] :by_restore_testing_plan_arn
+    #   This returns only restore testing jobs that match the specified
+    #   resource Amazon Resource Name (ARN).
+    #
     # @return [Types::ListRestoreJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
@@ -3512,6 +4363,7 @@ module Aws::Backup
     #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
     #     by_complete_before: Time.now,
     #     by_complete_after: Time.now,
+    #     by_restore_testing_plan_arn: "ARN",
     #   })
     #
     # @example Response structure
@@ -3530,6 +4382,12 @@ module Aws::Backup
     #   resp.restore_jobs[0].expected_completion_time_minutes #=> Integer
     #   resp.restore_jobs[0].created_resource_arn #=> String
     #   resp.restore_jobs[0].resource_type #=> String
+    #   resp.restore_jobs[0].recovery_point_creation_date #=> Time
+    #   resp.restore_jobs[0].created_by.restore_testing_plan_arn #=> String
+    #   resp.restore_jobs[0].validation_status #=> String, one of "FAILED", "SUCCESSFUL", "TIMED_OUT", "VALIDATING"
+    #   resp.restore_jobs[0].validation_status_message #=> String
+    #   resp.restore_jobs[0].deletion_status #=> String, one of "DELETING", "FAILED", "SUCCESSFUL"
+    #   resp.restore_jobs[0].deletion_status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobs AWS API Documentation
@@ -3538,6 +4396,187 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_restore_jobs(params = {}, options = {})
       req = build_request(:list_restore_jobs, params)
+      req.send_request(options)
+    end
+
+    # This returns restore jobs that contain the specified protected
+    # resource.
+    #
+    # You must include `ResourceArn`. You can optionally include
+    # `NextToken`, `ByStatus`, `MaxResults`,
+    # `ByRecoveryPointCreationDateAfter` , and
+    # `ByRecoveryPointCreationDateBefore`.
+    #
+    # @option params [required, String] :resource_arn
+    #   Returns only restore jobs that match the specified resource Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [String] :by_status
+    #   Returns only restore jobs associated with the specified job status.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_recovery_point_creation_date_after
+    #   Returns only restore jobs of recovery points that were created after
+    #   the specified date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_recovery_point_creation_date_before
+    #   Returns only restore jobs of recovery points that were created before
+    #   the specified date.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request ismade to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @return [Types::ListRestoreJobsByProtectedResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreJobsByProtectedResourceOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
+    #   * {Types::ListRestoreJobsByProtectedResourceOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_jobs_by_protected_resource({
+    #     resource_arn: "ARN", # required
+    #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #     by_recovery_point_creation_date_after: Time.now,
+    #     by_recovery_point_creation_date_before: Time.now,
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_jobs #=> Array
+    #   resp.restore_jobs[0].account_id #=> String
+    #   resp.restore_jobs[0].restore_job_id #=> String
+    #   resp.restore_jobs[0].recovery_point_arn #=> String
+    #   resp.restore_jobs[0].creation_date #=> Time
+    #   resp.restore_jobs[0].completion_date #=> Time
+    #   resp.restore_jobs[0].status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "ABORTED", "FAILED"
+    #   resp.restore_jobs[0].status_message #=> String
+    #   resp.restore_jobs[0].percent_done #=> String
+    #   resp.restore_jobs[0].backup_size_in_bytes #=> Integer
+    #   resp.restore_jobs[0].iam_role_arn #=> String
+    #   resp.restore_jobs[0].expected_completion_time_minutes #=> Integer
+    #   resp.restore_jobs[0].created_resource_arn #=> String
+    #   resp.restore_jobs[0].resource_type #=> String
+    #   resp.restore_jobs[0].recovery_point_creation_date #=> Time
+    #   resp.restore_jobs[0].created_by.restore_testing_plan_arn #=> String
+    #   resp.restore_jobs[0].validation_status #=> String, one of "FAILED", "SUCCESSFUL", "TIMED_OUT", "VALIDATING"
+    #   resp.restore_jobs[0].validation_status_message #=> String
+    #   resp.restore_jobs[0].deletion_status #=> String, one of "DELETING", "FAILED", "SUCCESSFUL"
+    #   resp.restore_jobs[0].deletion_status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobsByProtectedResource AWS API Documentation
+    #
+    # @overload list_restore_jobs_by_protected_resource(params = {})
+    # @param [Hash] params ({})
+    def list_restore_jobs_by_protected_resource(params = {}, options = {})
+      req = build_request(:list_restore_jobs_by_protected_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of restore testing plans.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the nexttoken.
+    #
+    # @return [Types::ListRestoreTestingPlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreTestingPlansOutput#next_token #next_token} => String
+    #   * {Types::ListRestoreTestingPlansOutput#restore_testing_plans #restore_testing_plans} => Array&lt;Types::RestoreTestingPlanForList&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_testing_plans({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.restore_testing_plans #=> Array
+    #   resp.restore_testing_plans[0].creation_time #=> Time
+    #   resp.restore_testing_plans[0].last_execution_time #=> Time
+    #   resp.restore_testing_plans[0].last_update_time #=> Time
+    #   resp.restore_testing_plans[0].restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plans[0].restore_testing_plan_name #=> String
+    #   resp.restore_testing_plans[0].schedule_expression #=> String
+    #   resp.restore_testing_plans[0].schedule_expression_timezone #=> String
+    #   resp.restore_testing_plans[0].start_window_hours #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreTestingPlans AWS API Documentation
+    #
+    # @overload list_restore_testing_plans(params = {})
+    # @param [Hash] params ({})
+    def list_restore_testing_plans(params = {}, options = {})
+      req = build_request(:list_restore_testing_plans, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of restore testing selections. Can be filtered by
+    # `MaxResults` and `RestoreTestingPlanName`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the nexttoken.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   Returns restore testing selections by the specified restore testing
+    #   plan name.
+    #
+    # @return [Types::ListRestoreTestingSelectionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreTestingSelectionsOutput#next_token #next_token} => String
+    #   * {Types::ListRestoreTestingSelectionsOutput#restore_testing_selections #restore_testing_selections} => Array&lt;Types::RestoreTestingSelectionForList&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_testing_selections({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     restore_testing_plan_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.restore_testing_selections #=> Array
+    #   resp.restore_testing_selections[0].creation_time #=> Time
+    #   resp.restore_testing_selections[0].iam_role_arn #=> String
+    #   resp.restore_testing_selections[0].protected_resource_type #=> String
+    #   resp.restore_testing_selections[0].restore_testing_plan_name #=> String
+    #   resp.restore_testing_selections[0].restore_testing_selection_name #=> String
+    #   resp.restore_testing_selections[0].validation_window_hours #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreTestingSelections AWS API Documentation
+    #
+    # @overload list_restore_testing_selections(params = {})
+    # @param [Hash] params ({})
+    def list_restore_testing_selections(params = {}, options = {})
+      req = build_request(:list_restore_testing_selections, params)
       req.send_request(options)
     end
 
@@ -3560,7 +4599,7 @@ module Aws::Backup
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
-    #   if a request is made to return `maxResults` number of items,
+    #   if a request is made to return `MaxResults` number of items,
     #   `NextToken` allows you to return more items in your list starting at
     #   the location pointed to by the next token.
     #
@@ -3792,6 +4831,39 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request allows you to send your independent self-run restore test
+    # validation results. `RestoreJobId` and `ValidationStatus` are
+    # required. Optionally, you can input a `ValidationStatusMessage`.
+    #
+    # @option params [required, String] :restore_job_id
+    #   This is a unique identifier of a restore job within Backup.
+    #
+    # @option params [required, String] :validation_status
+    #   This is the status of your restore validation.
+    #
+    # @option params [String] :validation_status_message
+    #   This is an optional message string you can input to describe the
+    #   validation status for the restore test validation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_restore_validation_result({
+    #     restore_job_id: "RestoreJobId", # required
+    #     validation_status: "FAILED", # required, accepts FAILED, SUCCESSFUL, TIMED_OUT, VALIDATING
+    #     validation_status_message: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutRestoreValidationResult AWS API Documentation
+    #
+    # @overload put_restore_validation_result(params = {})
+    # @param [Hash] params ({})
+    def put_restore_validation_result(params = {}, options = {})
+      req = build_request(:put_restore_validation_result, params)
+      req.send_request(options)
+    end
+
     # Starts an on-demand backup job for the specified resource.
     #
     # @option params [required, String] :backup_vault_name
@@ -3896,6 +4968,7 @@ module Aws::Backup
     #     lifecycle: {
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
+    #       opt_in_to_archive_for_supported_resources: false,
     #     },
     #     recovery_point_tags: {
     #       "TagKey" => "TagValue",
@@ -3987,6 +5060,7 @@ module Aws::Backup
     #     lifecycle: {
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
+    #       opt_in_to_archive_for_supported_resources: false,
     #     },
     #   })
     #
@@ -4294,6 +5368,7 @@ module Aws::Backup
     #           lifecycle: {
     #             move_to_cold_storage_after_days: 1,
     #             delete_after_days: 1,
+    #             opt_in_to_archive_for_supported_resources: false,
     #           },
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
@@ -4303,6 +5378,7 @@ module Aws::Backup
     #               lifecycle: {
     #                 move_to_cold_storage_after_days: 1,
     #                 delete_after_days: 1,
+    #                 opt_in_to_archive_for_supported_resources: false,
     #               },
     #               destination_backup_vault_arn: "ARN", # required
     #             },
@@ -4503,6 +5579,7 @@ module Aws::Backup
     #     lifecycle: {
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
+    #       opt_in_to_archive_for_supported_resources: false,
     #     },
     #   })
     #
@@ -4512,6 +5589,7 @@ module Aws::Backup
     #   resp.recovery_point_arn #=> String
     #   resp.lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.lifecycle.delete_after_days #=> Integer
+    #   resp.lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.calculated_lifecycle.move_to_cold_storage_at #=> Time
     #   resp.calculated_lifecycle.delete_at #=> Time
     #
@@ -4648,6 +5726,144 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request will send changes to your specified restore testing plan.
+    # `RestoreTestingPlanName` cannot be updated after it is created.
+    #
+    # `RecoveryPointSelection` can contain:
+    #
+    # * `Algorithm`
+    #
+    # * `ExcludeVaults`
+    #
+    # * `IncludeVaults`
+    #
+    # * `RecoveryPointTypes`
+    #
+    # * `SelectionWindowDays`
+    #
+    # @option params [required, Types::RestoreTestingPlanForUpdate] :restore_testing_plan
+    #   Specifies the body of a restore testing plan.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   This is the restore testing plan name you wish to update.
+    #
+    # @return [Types::UpdateRestoreTestingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRestoreTestingPlanOutput#creation_time #creation_time} => Time
+    #   * {Types::UpdateRestoreTestingPlanOutput#restore_testing_plan_arn #restore_testing_plan_arn} => String
+    #   * {Types::UpdateRestoreTestingPlanOutput#restore_testing_plan_name #restore_testing_plan_name} => String
+    #   * {Types::UpdateRestoreTestingPlanOutput#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_restore_testing_plan({
+    #     restore_testing_plan: { # required
+    #       recovery_point_selection: {
+    #         algorithm: "LATEST_WITHIN_WINDOW", # accepts LATEST_WITHIN_WINDOW, RANDOM_WITHIN_WINDOW
+    #         exclude_vaults: ["string"],
+    #         include_vaults: ["string"],
+    #         recovery_point_types: ["CONTINUOUS"], # accepts CONTINUOUS, SNAPSHOT
+    #         selection_window_days: 1,
+    #       },
+    #       schedule_expression: "String",
+    #       schedule_expression_timezone: "String",
+    #       start_window_hours: 1,
+    #     },
+    #     restore_testing_plan_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plan_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRestoreTestingPlan AWS API Documentation
+    #
+    # @overload update_restore_testing_plan(params = {})
+    # @param [Hash] params ({})
+    def update_restore_testing_plan(params = {}, options = {})
+      req = build_request(:update_restore_testing_plan, params)
+      req.send_request(options)
+    end
+
+    # Most elements except the `RestoreTestingSelectionName` can be updated
+    # with this request.
+    #
+    # `RestoreTestingSelection` can use either protected resource ARNs or
+    # conditions, but not both. That is, if your selection has
+    # `ProtectedResourceArns`, requesting an update with the parameter
+    # `ProtectedResourceConditions` will be unsuccessful.
+    #
+    # @option params [required, String] :restore_testing_plan_name
+    #   The restore testing plan name is required to update the indicated
+    #   testing plan.
+    #
+    # @option params [required, Types::RestoreTestingSelectionForUpdate] :restore_testing_selection
+    #   To update your restore testing selection, you can use either protected
+    #   resource ARNs or conditions, but not both. That is, if your selection
+    #   has `ProtectedResourceArns`, requesting an update with the parameter
+    #   `ProtectedResourceConditions` will be unsuccessful.
+    #
+    # @option params [required, String] :restore_testing_selection_name
+    #   This is the required restore testing selection name of the restore
+    #   testing selection you wish to update.
+    #
+    # @return [Types::UpdateRestoreTestingSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRestoreTestingSelectionOutput#creation_time #creation_time} => Time
+    #   * {Types::UpdateRestoreTestingSelectionOutput#restore_testing_plan_arn #restore_testing_plan_arn} => String
+    #   * {Types::UpdateRestoreTestingSelectionOutput#restore_testing_plan_name #restore_testing_plan_name} => String
+    #   * {Types::UpdateRestoreTestingSelectionOutput#restore_testing_selection_name #restore_testing_selection_name} => String
+    #   * {Types::UpdateRestoreTestingSelectionOutput#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_restore_testing_selection({
+    #     restore_testing_plan_name: "String", # required
+    #     restore_testing_selection: { # required
+    #       iam_role_arn: "String",
+    #       protected_resource_arns: ["string"],
+    #       protected_resource_conditions: {
+    #         string_equals: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         string_not_equals: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       },
+    #       restore_metadata_overrides: {
+    #         "String" => "String",
+    #       },
+    #       validation_window_hours: 1,
+    #     },
+    #     restore_testing_selection_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.restore_testing_plan_arn #=> String
+    #   resp.restore_testing_plan_name #=> String
+    #   resp.restore_testing_selection_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRestoreTestingSelection AWS API Documentation
+    #
+    # @overload update_restore_testing_selection(params = {})
+    # @param [Hash] params ({})
+    def update_restore_testing_selection(params = {}, options = {})
+      req = build_request(:update_restore_testing_selection, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4661,7 +5877,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
