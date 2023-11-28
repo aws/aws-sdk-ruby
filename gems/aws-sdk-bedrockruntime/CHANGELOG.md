@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-11-28)
+------------------
+
+* Feature - This release adds support for minor versions/aliases for invoke model identifier.
+
 1.3.0 (2023-11-22)
 ------------------
 

@@ -486,6 +486,8 @@ RubyGems.org page under "LINKS" section.
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering                 | aws-sdk-marketplacemetering                 | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository     | aws-sdk-serverlessapplicationrepository     | 2017-09-08  |
 | Access Analyzer                                       | Aws::AccessAnalyzer                      | aws-sdk-accessanalyzer                      | 2019-11-01  |
+| Agents for Amazon Bedrock                             | Aws::BedrockAgent                        | aws-sdk-bedrockagent                        | 2023-06-05  |
+| Agents for Amazon Bedrock Runtime                     | Aws::BedrockAgentRuntime                 | aws-sdk-bedrockagentruntime                 | 2023-07-26  |
 | Alexa For Business                                    | Aws::AlexaForBusiness                    | aws-sdk-alexaforbusiness                    | 2017-11-09  |
 | Amazon API Gateway                                    | Aws::APIGateway                          | aws-sdk-apigateway                          | 2015-07-09  |
 | Amazon AppConfig                                      | Aws::AppConfig                           | aws-sdk-appconfig                           | 2019-10-09  |
@@ -609,6 +611,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                    | aws-sdk-pinpointsmsvoice                    | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                               | aws-sdk-polly                               | 2016-06-10  |
 | Amazon Prometheus Service                             | Aws::PrometheusService                   | aws-sdk-prometheusservice                   | 2020-08-01  |
+| Amazon Q Connect                                      | Aws::QConnect                            | aws-sdk-qconnect                            | 2020-10-19  |
 | Amazon QLDB                                           | Aws::QLDB                                | aws-sdk-qldb                                | 2019-01-02  |
 | Amazon QLDB Session                                   | Aws::QLDBSession                         | aws-sdk-qldbsession                         | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                          | aws-sdk-quicksight                          | 2018-04-01  |
@@ -685,6 +688,7 @@ RubyGems.org page under "LINKS" section.
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |
 | Payment Cryptography Data Plane                       | Aws::PaymentCryptographyData             | aws-sdk-paymentcryptographydata             | 2022-02-03  |
 | PcaConnectorAd                                        | Aws::PcaConnectorAd                      | aws-sdk-pcaconnectorad                      | 2018-05-10  |
+| QBusiness                                             | Aws::QBusiness                           | aws-sdk-qbusiness                           | 2023-11-27  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService              | aws-sdk-redshiftdataapiservice              | 2019-12-20  |
 | Redshift Serverless                                   | Aws::RedshiftServerless                  | aws-sdk-redshiftserverless                  | 2021-04-21  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster              | aws-sdk-route53recoverycluster              | 2019-12-02  |

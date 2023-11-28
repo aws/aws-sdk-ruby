@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+
 1.73.0 (2023-11-27)
 ------------------
 

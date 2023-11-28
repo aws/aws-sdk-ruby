@@ -1991,7 +1991,7 @@ module Aws::S3Control
     #   S3 on Outposts uses the `OUTPOSTS` storage class to create the
     #   object replicas.
     #
-    #   <note markdown="1"> Values other than `OUTPOSTS` are not supported by Amazon S3 on
+    #   <note markdown="1"> Values other than `OUTPOSTS` aren't supported by Amazon S3 on
     #   Outposts.
     #
     #    </note>
@@ -3726,7 +3726,12 @@ module Aws::S3Control
     #
     # @!attribute [rw] location
     #   Contains the information required to locate the specified job's
-    #   manifest.
+    #   manifest. Manifests can't be imported from directory buckets. For
+    #   more information, see [Directory buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
     #   @return [Types::JobManifestLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifest AWS API Documentation
@@ -3822,6 +3827,12 @@ module Aws::S3Control
     end
 
     # Contains the information required to locate a manifest object.
+    # Manifests can't be imported from directory buckets. For more
+    # information, see [Directory buckets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
     #
     # @!attribute [rw] object_arn
     #   The Amazon Resource Name (ARN) for a manifest object.
@@ -3899,21 +3910,37 @@ module Aws::S3Control
     # @!attribute [rw] s3_put_object_acl
     #   Directs the specified job to run a `PutObjectAcl` call on every
     #   object in the manifest.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Types::S3SetObjectAclOperation]
     #
     # @!attribute [rw] s3_put_object_tagging
     #   Directs the specified job to run a PUT Object tagging call on every
     #   object in the manifest.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Types::S3SetObjectTaggingOperation]
     #
     # @!attribute [rw] s3_delete_object_tagging
     #   Directs the specified job to execute a DELETE Object tagging call on
     #   every object in the manifest.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Types::S3DeleteObjectTaggingOperation]
     #
     # @!attribute [rw] s3_initiate_restore_object
     #   Directs the specified job to initiate restore requests for every
     #   archived object in the manifest.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Types::S3InitiateRestoreObjectOperation]
     #
     # @!attribute [rw] s3_put_object_legal_hold
@@ -3922,6 +3949,10 @@ module Aws::S3Control
     #   the underlying `PutObjectLegalHold` API operation. For more
     #   information, see [Using S3 Object Lock legal hold with S3 Batch
     #   Operations][1] in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #
     #
     #
@@ -3935,6 +3966,10 @@ module Aws::S3Control
     #   more information, see [Using S3 Object Lock retention with S3 Batch
     #   Operations][1] in the *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
@@ -3943,6 +3978,10 @@ module Aws::S3Control
     # @!attribute [rw] s3_replicate_object
     #   Directs the specified job to invoke `ReplicateObject` on every
     #   object in the job's manifest.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Types::S3ReplicateObjectOperation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation AWS API Documentation
@@ -3994,6 +4033,11 @@ module Aws::S3Control
     # @!attribute [rw] bucket
     #   The Amazon Resource Name (ARN) for the bucket where specified
     #   job-completion report will be stored.
+    #
+    #   <note markdown="1"> **Directory buckets** - Directory buckets aren't supported as a
+    #   location for Batch Operations to store job completion reports.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -4090,10 +4134,51 @@ module Aws::S3Control
     #   specified job will invoke on every object in the manifest.
     #   @return [String]
     #
+    # @!attribute [rw] invocation_schema_version
+    #   Specifies the schema version for the payload that Batch Operations
+    #   sends when invoking an Lambda function. Version `1.0` is the
+    #   default. Version `2.0` is required when you use Batch Operations to
+    #   invoke Lambda functions that act on directory buckets, or if you
+    #   need to specify `UserArguments`. For more information, see [Using
+    #   Lambda with Amazon S3 Batch Operations and Amazon S3 Express One
+    #   Zone][1] in the *Amazon Web Services Storage Blog*.
+    #
+    #   Ensure that your Lambda function code expects
+    #   `InvocationSchemaVersion` **2.0** and uses bucket name rather than
+    #   bucket ARN. If the `InvocationSchemaVersion` does not match what
+    #   your Lambda function expects, your function might not work as
+    #   expected.
+    #
+    #   <note markdown="1"> **Directory buckets** - To initiate Amazon Web Services Lambda
+    #   function to perform custom actions on objects in directory buckets,
+    #   you must specify `2.0`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arguments
+    #   Key-value pairs that are passed in the payload that Batch Operations
+    #   sends when invoking an Lambda function. You must specify
+    #   `InvocationSchemaVersion` **2.0** for `LambdaInvoke` operations that
+    #   include `UserArguments`. For more information, see [Using Lambda
+    #   with Amazon S3 Batch Operations and Amazon S3 Express One Zone][1]
+    #   in the *Amazon Web Services Storage Blog*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation AWS API Documentation
     #
     class LambdaInvokeOperation < Struct.new(
-      :function_arn)
+      :function_arn,
+      :invocation_schema_version,
+      :user_arguments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6657,15 +6742,29 @@ module Aws::S3Control
     #
     # @!attribute [rw] target_resource
     #   Specifies the destination bucket Amazon Resource Name (ARN) for the
-    #   batch copy operation. For example, to copy objects to a bucket named
-    #   `destinationBucket`, set the `TargetResource` property to
-    #   `arn:aws:s3:::destinationBucket`.
+    #   batch copy operation.
+    #
+    #   * **General purpose buckets** - For example, to copy objects to a
+    #     general purpose bucket named `destinationBucket`, set the
+    #     `TargetResource` property to `arn:aws:s3:::destinationBucket`.
+    #
+    #   * **Directory buckets** - For example, to copy objects to a
+    #     directory bucket named `destinationBucket` in the Availability
+    #     Zone; identified by the AZ ID `usw2-az2`, set the `TargetResource`
+    #     property to
+    #     `arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az2--x-s3`.
     #   @return [String]
     #
     # @!attribute [rw] canned_access_control_list
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] access_control_grants
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Array<Types::S3Grant>]
     #
     # @!attribute [rw] metadata_directive
@@ -6682,24 +6781,53 @@ module Aws::S3Control
     #   @return [Types::S3ObjectMetadata]
     #
     # @!attribute [rw] new_object_tagging
+    #   Specifies a list of tags to add to the destination objects after
+    #   they are copied. If `NewObjectTagging` is not specified, the tags of
+    #   the source objects are copied to destination objects by default.
+    #
+    #   <note markdown="1"> **Directory buckets** - Tags aren't supported by directory buckets.
+    #   If your source objects have tags and your destination bucket is a
+    #   directory bucket, specify an empty tag set in the `NewObjectTagging`
+    #   field to prevent copying the source object tags to the directory
+    #   bucket.
+    #
+    #    </note>
     #   @return [Array<Types::S3Tag>]
     #
     # @!attribute [rw] redirect_location
-    #   Specifies an optional metadata property for website redirects,
+    #   If the destination bucket is configured as a website, specifies an
+    #   optional metadata property for website redirects,
     #   `x-amz-website-redirect-location`. Allows webpage redirects if the
-    #   object is accessed through a website endpoint.
+    #   object copy is accessed through a website endpoint.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] requester_pays
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
+    #   Specify the storage class for the destination objects in a `Copy`
+    #   operation.
+    #
+    #   <note markdown="1"> <b>Directory buckets </b> - This functionality is not supported by
+    #   directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] un_modified_since_constraint
     #   @return [Time]
     #
     # @!attribute [rw] sse_aws_kms_key_id
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] target_key_prefix
@@ -6712,16 +6840,28 @@ module Aws::S3Control
     # @!attribute [rw] object_lock_legal_hold_status
     #   The legal hold status to be applied to all objects in the Batch
     #   Operations job.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
     #   The retention mode to be applied to all objects in the Batch
     #   Operations job.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
     #   The date when the applied object retention configuration expires on
     #   all objects in the Batch Operations job.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Time]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -6732,6 +6872,10 @@ module Aws::S3Control
     #
     #   Specifying this header with an *object* action doesn’t affect
     #   *bucket-level* settings for S3 Bucket Key.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] checksum_algorithm
@@ -6789,6 +6933,12 @@ module Aws::S3Control
     #
     # @!attribute [rw] location
     #   Contains the information required to locate a manifest object.
+    #   Manifests can't be imported from directory buckets. For more
+    #   information, see [Directory buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
     #   @return [Types::JobManifestLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3GeneratedManifestDescriptor AWS API Documentation
@@ -6889,16 +7039,28 @@ module Aws::S3Control
     #
     # @!attribute [rw] source_bucket
     #   The source bucket used by the ManifestGenerator.
+    #
+    #   <note markdown="1"> **Directory buckets** - Directory buckets aren't supported as the
+    #   source buckets used by `S3JobManifestGenerator` to generate the job
+    #   manifest.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] manifest_output_location
     #   Specifies the location the generated manifest will be written to.
+    #   Manifests can't be written to directory buckets. For more
+    #   information, see [Directory buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
     #   @return [Types::S3ManifestOutputLocation]
     #
     # @!attribute [rw] filter
-    #   Specifies rules the S3JobManifestGenerator should use to use to
-    #   decide whether an object in the source bucket should or should not
-    #   be included in the generated job manifest.
+    #   Specifies rules the S3JobManifestGenerator should use to decide
+    #   whether an object in the source bucket should or should not be
+    #   included in the generated job manifest.
     #   @return [Types::JobManifestGeneratorFilter]
     #
     # @!attribute [rw] enable_manifest_output
@@ -6927,6 +7089,11 @@ module Aws::S3Control
     #
     # @!attribute [rw] bucket
     #   The bucket ARN the generated manifest should be written to.
+    #
+    #   <note markdown="1"> **Directory buckets** - Directory buckets aren't supported as the
+    #   buckets to store the generated manifest.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] manifest_prefix
@@ -6987,9 +7154,11 @@ module Aws::S3Control
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] content_length
+    #   *This member has been deprecated.*
     #   @return [Integer]
     #
     # @!attribute [rw] content_md5
+    #   *This member has been deprecated.*
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -6999,9 +7168,14 @@ module Aws::S3Control
     #   @return [Time]
     #
     # @!attribute [rw] requester_charged
+    #   *This member has been deprecated.*
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_algorithm
+    #   <note markdown="1"> For directory buckets, only the server-side encryption with Amazon
+    #   S3 managed keys (SSE-S3) (`AES256`) is supported.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectMetadata AWS API Documentation
@@ -7102,6 +7276,10 @@ module Aws::S3Control
     # see [Using S3 Object Lock legal hold with S3 Batch Operations][1] in
     # the *Amazon S3 User Guide*.
     #
+    # <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
@@ -7124,6 +7302,10 @@ module Aws::S3Control
     # object to the underlying `PutObjectRetention` API operation. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
     # Operations][1] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #  </note>
     #
     #
     #

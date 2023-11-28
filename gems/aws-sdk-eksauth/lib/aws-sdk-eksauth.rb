@@ -53,6 +53,6 @@ require_relative 'aws-sdk-eksauth/customizations'
 # @!group service
 module Aws::EKSAuth
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

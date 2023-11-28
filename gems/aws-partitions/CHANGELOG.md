@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.860.0 (2023-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::QConnect`.
+
+* Feature - Added support for enumerating regions for `Aws::QBusiness`.
+
+* Feature - Added support for enumerating regions for `Aws::BedrockAgentRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::BedrockAgent`.
+
 1.859.0 (2023-11-28)
 ------------------
 

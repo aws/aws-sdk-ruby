@@ -25,16 +25,17 @@ module Aws::CustomerProfiles
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -86,6 +87,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::DeleteProfileObjectType.build(context)
           when :delete_workflow
             Aws::CustomerProfiles::Endpoints::DeleteWorkflow.build(context)
+          when :detect_profile_object_type
+            Aws::CustomerProfiles::Endpoints::DetectProfileObjectType.build(context)
           when :get_auto_merging_preview
             Aws::CustomerProfiles::Endpoints::GetAutoMergingPreview.build(context)
           when :get_calculated_attribute_definition

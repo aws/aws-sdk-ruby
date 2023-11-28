@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2023-11-28)
+------------------
+
+* Feature - Adds support for S3 Express One Zone.
+
 * Feature - Support S3 Express authentication and endpoints. Express session auth can be disabled with the `disable_s3_express_session_auth` Client option, the `AWS_S3_DISABLE_EXPRESS_SESSION_AUTH` environment variable, and the `s3_disable_express_session_auth` shared config option. A custom `express_credentials_provider` can be configured onto the Client.
 
 1.140.0 (2023-11-27)

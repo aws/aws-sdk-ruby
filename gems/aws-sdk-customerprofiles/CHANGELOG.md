@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-11-28)
+------------------
+
+* Feature - This release introduces DetectProfileObjectType API to auto generate object type mapping.
+
 1.39.0 (2023-11-22)
 ------------------
 

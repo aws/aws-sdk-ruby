@@ -52,6 +52,6 @@ require_relative 'aws-sdk-chimesdkmessaging/customizations'
 # @!group service
 module Aws::ChimeSDKMessaging
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

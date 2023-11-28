@@ -52,6 +52,6 @@ require_relative 'aws-sdk-cloudfrontkeyvaluestore/customizations'
 # @!group service
 module Aws::CloudFrontKeyValueStore
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

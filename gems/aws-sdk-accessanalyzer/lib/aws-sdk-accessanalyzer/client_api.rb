@@ -213,6 +213,8 @@ module Aws::AccessAnalyzer
     S3BucketAclGrantConfigurationsList = Shapes::ListShape.new(name: 'S3BucketAclGrantConfigurationsList')
     S3BucketConfiguration = Shapes::StructureShape.new(name: 'S3BucketConfiguration')
     S3BucketPolicy = Shapes::StringShape.new(name: 'S3BucketPolicy')
+    S3ExpressDirectoryBucketConfiguration = Shapes::StructureShape.new(name: 'S3ExpressDirectoryBucketConfiguration')
+    S3ExpressDirectoryBucketPolicy = Shapes::StringShape.new(name: 'S3ExpressDirectoryBucketPolicy')
     S3PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'S3PublicAccessBlockConfiguration')
     SecretsManagerSecretConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerSecretConfiguration')
     SecretsManagerSecretKmsId = Shapes::StringShape.new(name: 'SecretsManagerSecretKmsId')
@@ -431,6 +433,7 @@ module Aws::AccessAnalyzer
     Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "s3Bucket"))
     Configuration.add_member(:sns_topic, Shapes::ShapeRef.new(shape: SnsTopicConfiguration, location_name: "snsTopic"))
     Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
+    Configuration.add_member(:s3_express_directory_bucket, Shapes::ShapeRef.new(shape: S3ExpressDirectoryBucketConfiguration, location_name: "s3ExpressDirectoryBucket"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Configuration.add_member_subclass(:ebs_snapshot, Types::Configuration::EbsSnapshot)
     Configuration.add_member_subclass(:ecr_repository, Types::Configuration::EcrRepository)
@@ -443,6 +446,7 @@ module Aws::AccessAnalyzer
     Configuration.add_member_subclass(:s3_bucket, Types::Configuration::S3Bucket)
     Configuration.add_member_subclass(:sns_topic, Types::Configuration::SnsTopic)
     Configuration.add_member_subclass(:sqs_queue, Types::Configuration::SqsQueue)
+    Configuration.add_member_subclass(:s3_express_directory_bucket, Types::Configuration::S3ExpressDirectoryBucket)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
 
@@ -922,6 +926,9 @@ module Aws::AccessAnalyzer
     S3BucketConfiguration.add_member(:bucket_public_access_block, Shapes::ShapeRef.new(shape: S3PublicAccessBlockConfiguration, location_name: "bucketPublicAccessBlock"))
     S3BucketConfiguration.add_member(:access_points, Shapes::ShapeRef.new(shape: S3AccessPointConfigurationsMap, location_name: "accessPoints"))
     S3BucketConfiguration.struct_class = Types::S3BucketConfiguration
+
+    S3ExpressDirectoryBucketConfiguration.add_member(:bucket_policy, Shapes::ShapeRef.new(shape: S3ExpressDirectoryBucketPolicy, location_name: "bucketPolicy"))
+    S3ExpressDirectoryBucketConfiguration.struct_class = Types::S3ExpressDirectoryBucketConfiguration
 
     S3PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ignorePublicAcls"))
     S3PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "restrictPublicBuckets"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-11-28)
+------------------
+
+* Feature - This release adds support for external access findings for S3 directory buckets to help you easily identify cross-account access. Updated service API, documentation, and paginators.
+
 1.43.0 (2023-11-27)
 ------------------
 

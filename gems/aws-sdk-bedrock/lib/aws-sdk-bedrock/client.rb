@@ -395,8 +395,8 @@ module Aws::Bedrock
     # custom model resource will be ready to use. Training data contains
     # input and output text for each record in a JSONL format. Optionally,
     # you can specify validation data in the same format as the training
-    # data. Bedrock returns validation loss metrics and output generations
-    # after the job completes.
+    # data. Amazon Bedrock returns validation loss metrics and output
+    # generations after the job completes.
     #
     # Model-customization jobs are asynchronous and the completion time
     # depends on the base model and the training/validation data size. To
@@ -417,11 +417,12 @@ module Aws::Bedrock
     #   Enter a name for the custom model.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume
-    #   to perform tasks on your behalf. For example, during model training,
-    #   Bedrock needs your permission to read input data from an S3 bucket,
-    #   write model artifacts to an S3 bucket. To pass this role to Bedrock,
-    #   the caller of this API must have the `iam:PassRole` permission.
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can
+    #   assume to perform tasks on your behalf. For example, during model
+    #   training, Amazon Bedrock needs your permission to read input data from
+    #   an S3 bucket, write model artifacts to an S3 bucket. To pass this role
+    #   to Amazon Bedrock, the caller of this API must have the `iam:PassRole`
+    #   permission.
     #
     # @option params [String] :client_request_token
     #   Unique token value that you can provide. The GetModelCustomizationJob
@@ -432,6 +433,9 @@ module Aws::Bedrock
     #
     # @option params [required, String] :base_model_identifier
     #   Name of the base model.
+    #
+    # @option params [String] :customization_type
+    #   The customization type.
     #
     # @option params [String] :custom_model_kms_key_id
     #   The custom model is encrypted at rest using this key.
@@ -471,6 +475,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -531,8 +536,8 @@ module Aws::Bedrock
     #
     # @option params [String] :client_request_token
     #   Unique token value that you can provide. If this token matches a
-    #   previous request, Bedrock ignores the request, but does not return an
-    #   error.
+    #   previous request, Amazon Bedrock ignores the request, but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -653,8 +658,8 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Get the properties associated with a Bedrock custom model that you
-    # have created.For more information, see [Custom models][1] in the
+    # Get the properties associated with a Amazon Bedrock custom model that
+    # you have created.For more information, see [Custom models][1] in the
     # Bedrock User Guide.
     #
     #
@@ -671,6 +676,7 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelResponse#job_name #job_name} => String
     #   * {Types::GetCustomModelResponse#job_arn #job_arn} => String
     #   * {Types::GetCustomModelResponse#base_model_arn #base_model_arn} => String
+    #   * {Types::GetCustomModelResponse#customization_type #customization_type} => String
     #   * {Types::GetCustomModelResponse#model_kms_key_arn #model_kms_key_arn} => String
     #   * {Types::GetCustomModelResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetCustomModelResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
@@ -693,6 +699,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -714,7 +721,7 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Get details about a Bedrock foundation model.
+    # Get details about a Amazon Bedrock foundation model.
     #
     # @option params [required, String] :model_identifier
     #   The model identifier.
@@ -741,9 +748,10 @@ module Aws::Bedrock
     #   resp.model_details.output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
     #   resp.model_details.response_streaming_supported #=> Boolean
     #   resp.model_details.customizations_supported #=> Array
-    #   resp.model_details.customizations_supported[0] #=> String, one of "FINE_TUNING"
+    #   resp.model_details.customizations_supported[0] #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_details.inference_types_supported #=> Array
     #   resp.model_details.inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
+    #   resp.model_details.model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModel AWS API Documentation
     #
@@ -783,6 +791,7 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
     #   * {Types::GetModelCustomizationJobResponse#validation_data_config #validation_data_config} => Types::ValidationDataConfig
     #   * {Types::GetModelCustomizationJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
+    #   * {Types::GetModelCustomizationJobResponse#customization_type #customization_type} => String
     #   * {Types::GetModelCustomizationJobResponse#output_model_kms_key_arn #output_model_kms_key_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetModelCustomizationJobResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
@@ -814,6 +823,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -947,8 +957,8 @@ module Aws::Bedrock
     #   Maximum number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of models.
@@ -986,6 +996,7 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -996,7 +1007,7 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # List of Bedrock foundation models that you can use. For more
+    # List of Amazon Bedrock foundation models that you can use. For more
     # information, see [Foundation models][1] in the Bedrock User Guide.
     #
     #
@@ -1004,7 +1015,7 @@ module Aws::Bedrock
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
     #
     # @option params [String] :by_provider
-    #   A Bedrock model provider.
+    #   A Amazon Bedrock model provider.
     #
     # @option params [String] :by_customization_type
     #   List by customization type.
@@ -1023,7 +1034,7 @@ module Aws::Bedrock
     #
     #   resp = client.list_foundation_models({
     #     by_provider: "Provider",
-    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING
+    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING
     #     by_output_modality: "TEXT", # accepts TEXT, IMAGE, EMBEDDING
     #     by_inference_type: "ON_DEMAND", # accepts ON_DEMAND, PROVISIONED
     #   })
@@ -1041,9 +1052,10 @@ module Aws::Bedrock
     #   resp.model_summaries[0].output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
     #   resp.model_summaries[0].response_streaming_supported #=> Boolean
     #   resp.model_summaries[0].customizations_supported #=> Array
-    #   resp.model_summaries[0].customizations_supported[0] #=> String, one of "FINE_TUNING"
+    #   resp.model_summaries[0].customizations_supported[0] #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_summaries[0].inference_types_supported #=> Array
     #   resp.model_summaries[0].inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
+    #   resp.model_summaries[0].model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModels AWS API Documentation
     #
@@ -1081,8 +1093,8 @@ module Aws::Bedrock
     #   Maximum number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of jobs.
@@ -1123,6 +1135,7 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -1162,8 +1175,8 @@ module Aws::Bedrock
     #   THe maximum number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of provisioned capacities.
@@ -1436,7 +1449,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -117,6 +117,12 @@
   "Bedrock": {
     "models": "bedrock/2023-04-20"
   },
+  "BedrockAgent": {
+    "models": "bedrock-agent/2023-06-05"
+  },
+  "BedrockAgentRuntime": {
+    "models": "bedrock-agent-runtime/2023-07-26"
+  },
   "BedrockRuntime": {
     "models": "bedrock-runtime/2023-09-30"
   },
@@ -880,6 +886,12 @@
   },
   "Proton": {
     "models": "proton/2020-07-20"
+  },
+  "QBusiness": {
+    "models": "qbusiness/2023-11-27"
+  },
+  "QConnect": {
+    "models": "qconnect/2020-10-19"
   },
   "QLDB": {
     "models": "qldb/2019-01-02"

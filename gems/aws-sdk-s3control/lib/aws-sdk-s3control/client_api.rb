@@ -440,6 +440,7 @@ module Aws::S3Control
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     S3PrefixType = Shapes::StringShape.new(name: 'S3PrefixType')
     S3RegionalBucketArn = Shapes::StringShape.new(name: 'S3RegionalBucketArn')
+    S3RegionalOrS3ExpressBucketArnString = Shapes::StringShape.new(name: 'S3RegionalOrS3ExpressBucketArnString')
     S3ReplicateObjectOperation = Shapes::StructureShape.new(name: 'S3ReplicateObjectOperation')
     S3ResourceArn = Shapes::StringShape.new(name: 'S3ResourceArn')
     S3Retention = Shapes::StructureShape.new(name: 'S3Retention')
@@ -516,6 +517,7 @@ module Aws::S3Control
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
     UpdateJobStatusResult = Shapes::StructureShape.new(name: 'UpdateJobStatusResult')
     UpdateStorageLensGroupRequest = Shapes::StructureShape.new(name: 'UpdateStorageLensGroupRequest')
+    UserArguments = Shapes::MapShape.new(name: 'UserArguments')
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -1242,6 +1244,8 @@ module Aws::S3Control
     KeyNameConstraint.struct_class = Types::KeyNameConstraint
 
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, location_name: "FunctionArn"))
+    LambdaInvokeOperation.add_member(:invocation_schema_version, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location_name: "InvocationSchemaVersion"))
+    LambdaInvokeOperation.add_member(:user_arguments, Shapes::ShapeRef.new(shape: UserArguments, location_name: "UserArguments"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
 
     LifecycleConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rules"))
@@ -1711,7 +1715,7 @@ module Aws::S3Control
     S3BucketDestination.add_member(:encryption, Shapes::ShapeRef.new(shape: StorageLensDataExportEncryption, location_name: "Encryption"))
     S3BucketDestination.struct_class = Types::S3BucketDestination
 
-    S3CopyObjectOperation.add_member(:target_resource, Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "TargetResource"))
+    S3CopyObjectOperation.add_member(:target_resource, Shapes::ShapeRef.new(shape: S3RegionalOrS3ExpressBucketArnString, location_name: "TargetResource"))
     S3CopyObjectOperation.add_member(:canned_access_control_list, Shapes::ShapeRef.new(shape: S3CannedAccessControlList, location_name: "CannedAccessControlList", metadata: {"box"=>true}))
     S3CopyObjectOperation.add_member(:access_control_grants, Shapes::ShapeRef.new(shape: S3GrantList, location_name: "AccessControlGrants", metadata: {"box"=>true}))
     S3CopyObjectOperation.add_member(:metadata_directive, Shapes::ShapeRef.new(shape: S3MetadataDirective, location_name: "MetadataDirective"))
@@ -1989,6 +1993,9 @@ module Aws::S3Control
     UpdateStorageLensGroupRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     UpdateStorageLensGroupRequest.add_member(:storage_lens_group, Shapes::ShapeRef.new(shape: StorageLensGroup, required: true, location_name: "StorageLensGroup"))
     UpdateStorageLensGroupRequest.struct_class = Types::UpdateStorageLensGroupRequest
+
+    UserArguments.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
+    UserArguments.value = Shapes::ShapeRef.new(shape: MaxLength1024String)
 
     VersioningConfiguration.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADelete, location_name: "MfaDelete"))
     VersioningConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))

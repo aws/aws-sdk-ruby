@@ -52,6 +52,6 @@ require_relative 'aws-sdk-entityresolution/customizations'
 # @!group service
 module Aws::EntityResolution
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

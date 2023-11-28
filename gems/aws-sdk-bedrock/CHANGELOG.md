@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-11-28)
+------------------
+
+* Feature - This release adds support for customization types, model life cycle status and minor versions/aliases for model identifiers.
+
 1.2.0 (2023-11-22)
 ------------------
 

@@ -788,7 +788,7 @@ module Aws::AccessAnalyzer
     #   @return [Types::SecretsManagerSecretConfiguration]
     #
     # @!attribute [rw] s3_bucket
-    #   The access control configuration is for an Amazon S3 Bucket.
+    #   The access control configuration is for an Amazon S3 bucket.
     #   @return [Types::S3BucketConfiguration]
     #
     # @!attribute [rw] sns_topic
@@ -798,6 +798,11 @@ module Aws::AccessAnalyzer
     # @!attribute [rw] sqs_queue
     #   The access control configuration is for an Amazon SQS queue.
     #   @return [Types::SqsQueueConfiguration]
+    #
+    # @!attribute [rw] s3_express_directory_bucket
+    #   The access control configuration is for an Amazon S3 directory
+    #   bucket.
+    #   @return [Types::S3ExpressDirectoryBucketConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Configuration AWS API Documentation
     #
@@ -813,6 +818,7 @@ module Aws::AccessAnalyzer
       :s3_bucket,
       :sns_topic,
       :sqs_queue,
+      :s3_express_directory_bucket,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -829,6 +835,7 @@ module Aws::AccessAnalyzer
       class S3Bucket < Configuration; end
       class SnsTopic < Configuration; end
       class SqsQueue < Configuration; end
+      class S3ExpressDirectoryBucket < Configuration; end
       class Unknown < Configuration; end
     end
 
@@ -3220,6 +3227,35 @@ module Aws::AccessAnalyzer
       :bucket_acl_grants,
       :bucket_public_access_block,
       :access_points)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Proposed access control configuration for an Amazon S3 directory
+    # bucket. You can propose a configuration for a new Amazon S3 directory
+    # bucket or an existing Amazon S3 directory bucket that you own by
+    # specifying the Amazon S3 bucket policy. If the configuration is for an
+    # existing Amazon S3 directory bucket and you do not specify the Amazon
+    # S3 bucket policy, the access preview uses the existing policy attached
+    # to the directory bucket. If the access preview is for a new resource
+    # and you do not specify the Amazon S3 bucket policy, the access preview
+    # assumes an directory bucket without a policy. To propose deletion of
+    # an existing bucket policy, you can specify an empty string. For more
+    # information about bucket policy limits, see [Example bucket
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
+    #
+    # @!attribute [rw] bucket_policy
+    #   The proposed bucket policy for the Amazon S3 directory bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/S3ExpressDirectoryBucketConfiguration AWS API Documentation
+    #
+    class S3ExpressDirectoryBucketConfiguration < Struct.new(
+      :bucket_policy)
       SENSITIVE = []
       include Aws::Structure
     end

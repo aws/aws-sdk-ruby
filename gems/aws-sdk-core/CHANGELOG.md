@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.189.0 (2023-11-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Support S3 Express authentication.
 
 3.188.0 (2023-11-22)

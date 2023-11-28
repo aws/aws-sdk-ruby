@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.180.0 (2023-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-qconnect` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-qbusiness` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagentruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagent` gem.
+
 3.179.0 (2023-11-27)
 ------------------
 
