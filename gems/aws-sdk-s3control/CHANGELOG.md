@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow `AccountId` to be validated by the param validator rather than in `EndpointParameters`.
+
 1.74.0 (2023-11-28)
 ------------------
 
