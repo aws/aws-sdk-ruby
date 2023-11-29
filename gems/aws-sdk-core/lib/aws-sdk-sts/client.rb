@@ -775,7 +775,7 @@ module Aws::STS
     #   a single trusted context assertion and the ARN of the context provider
     #   from which the trusted context assertion was generated.
     #
-    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/identitycenter","ContextAssertion":"trusted-context-assertion"\}]`
+    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"\}]`
     #
     # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2352,7 +2352,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.189.0'
+      context[:gem_version] = '3.190.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

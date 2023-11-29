@@ -79,6 +79,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateAutoMLJob.build(context)
           when :create_auto_ml_job_v2
             Aws::SageMaker::Endpoints::CreateAutoMLJobV2.build(context)
+          when :create_cluster
+            Aws::SageMaker::Endpoints::CreateCluster.build(context)
           when :create_code_repository
             Aws::SageMaker::Endpoints::CreateCodeRepository.build(context)
           when :create_compilation_job
@@ -117,6 +119,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateImage.build(context)
           when :create_image_version
             Aws::SageMaker::Endpoints::CreateImageVersion.build(context)
+          when :create_inference_component
+            Aws::SageMaker::Endpoints::CreateInferenceComponent.build(context)
           when :create_inference_experiment
             Aws::SageMaker::Endpoints::CreateInferenceExperiment.build(context)
           when :create_inference_recommendations_job
@@ -185,6 +189,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteArtifact.build(context)
           when :delete_association
             Aws::SageMaker::Endpoints::DeleteAssociation.build(context)
+          when :delete_cluster
+            Aws::SageMaker::Endpoints::DeleteCluster.build(context)
           when :delete_code_repository
             Aws::SageMaker::Endpoints::DeleteCodeRepository.build(context)
           when :delete_context
@@ -219,6 +225,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteImage.build(context)
           when :delete_image_version
             Aws::SageMaker::Endpoints::DeleteImageVersion.build(context)
+          when :delete_inference_component
+            Aws::SageMaker::Endpoints::DeleteInferenceComponent.build(context)
           when :delete_inference_experiment
             Aws::SageMaker::Endpoints::DeleteInferenceExperiment.build(context)
           when :delete_model
@@ -279,6 +287,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeAutoMLJob.build(context)
           when :describe_auto_ml_job_v2
             Aws::SageMaker::Endpoints::DescribeAutoMLJobV2.build(context)
+          when :describe_cluster
+            Aws::SageMaker::Endpoints::DescribeCluster.build(context)
+          when :describe_cluster_node
+            Aws::SageMaker::Endpoints::DescribeClusterNode.build(context)
           when :describe_code_repository
             Aws::SageMaker::Endpoints::DescribeCodeRepository.build(context)
           when :describe_compilation_job
@@ -321,6 +333,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeImage.build(context)
           when :describe_image_version
             Aws::SageMaker::Endpoints::DescribeImageVersion.build(context)
+          when :describe_inference_component
+            Aws::SageMaker::Endpoints::DescribeInferenceComponent.build(context)
           when :describe_inference_experiment
             Aws::SageMaker::Endpoints::DescribeInferenceExperiment.build(context)
           when :describe_inference_recommendations_job
@@ -419,6 +433,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListAutoMLJobs.build(context)
           when :list_candidates_for_auto_ml_job
             Aws::SageMaker::Endpoints::ListCandidatesForAutoMLJob.build(context)
+          when :list_cluster_nodes
+            Aws::SageMaker::Endpoints::ListClusterNodes.build(context)
+          when :list_clusters
+            Aws::SageMaker::Endpoints::ListClusters.build(context)
           when :list_code_repositories
             Aws::SageMaker::Endpoints::ListCodeRepositories.build(context)
           when :list_compilation_jobs
@@ -461,6 +479,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListImageVersions.build(context)
           when :list_images
             Aws::SageMaker::Endpoints::ListImages.build(context)
+          when :list_inference_components
+            Aws::SageMaker::Endpoints::ListInferenceComponents.build(context)
           when :list_inference_experiments
             Aws::SageMaker::Endpoints::ListInferenceExperiments.build(context)
           when :list_inference_recommendations_job_steps
@@ -605,6 +625,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateAppImageConfig.build(context)
           when :update_artifact
             Aws::SageMaker::Endpoints::UpdateArtifact.build(context)
+          when :update_cluster
+            Aws::SageMaker::Endpoints::UpdateCluster.build(context)
           when :update_code_repository
             Aws::SageMaker::Endpoints::UpdateCodeRepository.build(context)
           when :update_context
@@ -631,6 +653,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateImage.build(context)
           when :update_image_version
             Aws::SageMaker::Endpoints::UpdateImageVersion.build(context)
+          when :update_inference_component
+            Aws::SageMaker::Endpoints::UpdateInferenceComponent.build(context)
+          when :update_inference_component_runtime_config
+            Aws::SageMaker::Endpoints::UpdateInferenceComponentRuntimeConfig.build(context)
           when :update_inference_experiment
             Aws::SageMaker::Endpoints::UpdateInferenceExperiment.build(context)
           when :update_model_card

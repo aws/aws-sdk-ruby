@@ -295,6 +295,7 @@ module Aws
             'ChimeSDKMessaging' => 'messaging-chime',
             'ChimeSDKVoice' => 'voice-chime',
             'CleanRooms' => 'cleanrooms',
+            'CleanRoomsML' => 'cleanrooms-ml',
             'Cloud9' => 'cloud9',
             'CloudControlApi' => 'cloudcontrolapi',
             'CloudDirectory' => 'clouddirectory',

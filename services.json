@@ -156,6 +156,9 @@
   "CleanRooms": {
     "models": "cleanrooms/2022-02-17"
   },
+  "CleanRoomsML": {
+    "models": "cleanroomsml/2023-09-06"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },

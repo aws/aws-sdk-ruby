@@ -66,6 +66,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-chimesdkmessaging', '~> 1')
   spec.add_dependency('aws-sdk-chimesdkvoice', '~> 1')
   spec.add_dependency('aws-sdk-cleanrooms', '~> 1')
+  spec.add_dependency('aws-sdk-cleanroomsml', '~> 1')
   spec.add_dependency('aws-sdk-cloud9', '~> 1')
   spec.add_dependency('aws-sdk-cloudcontrolapi', '~> 1')
   spec.add_dependency('aws-sdk-clouddirectory', '~> 1')

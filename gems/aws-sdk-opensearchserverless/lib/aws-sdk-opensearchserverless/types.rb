@@ -328,6 +328,10 @@ module Aws::OpenSearchServerless
     #   The name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Details about an OpenSearch Serverless collection.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the collection.
     #   @return [String]
@@ -348,6 +352,7 @@ module Aws::OpenSearchServerless
       :kms_key_arn,
       :last_modified_date,
       :name,
+      :standby_replicas,
       :status,
       :type)
       SENSITIVE = []
@@ -530,6 +535,10 @@ module Aws::OpenSearchServerless
     #   The name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Creates details about an OpenSearch Serverless collection.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the collection.
     #   @return [String]
@@ -548,6 +557,7 @@ module Aws::OpenSearchServerless
       :kms_key_arn,
       :last_modified_date,
       :name,
+      :standby_replicas,
       :status,
       :type)
       SENSITIVE = []
@@ -570,6 +580,10 @@ module Aws::OpenSearchServerless
     #   Name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Indicates whether standby replicas should be used for a collection.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   An arbitrary set of tags (key–value pairs) to associate with the
     #   OpenSearch Serverless collection.
@@ -585,6 +599,7 @@ module Aws::OpenSearchServerless
       :client_token,
       :description,
       :name,
+      :standby_replicas,
       :tags,
       :type)
       SENSITIVE = []

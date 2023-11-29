@@ -156,6 +156,7 @@ module Aws::OpenSearchServerless
     SecurityPolicySummary = Shapes::StructureShape.new(name: 'SecurityPolicySummary')
     SecurityPolicyType = Shapes::StringShape.new(name: 'SecurityPolicyType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StandbyReplicas = Shapes::StringShape.new(name: 'StandbyReplicas')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -269,6 +270,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     CollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     CollectionDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "name"))
+    CollectionDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
     CollectionDetail.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
     CollectionDetail.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
     CollectionDetail.struct_class = Types::CollectionDetail
@@ -319,6 +321,7 @@ module Aws::OpenSearchServerless
     CreateCollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     CreateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     CreateCollectionDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "name"))
+    CreateCollectionDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
     CreateCollectionDetail.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
     CreateCollectionDetail.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
     CreateCollectionDetail.struct_class = Types::CreateCollectionDetail
@@ -326,6 +329,7 @@ module Aws::OpenSearchServerless
     CreateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateCollectionRequestDescriptionString, location_name: "description"))
     CreateCollectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, required: true, location_name: "name"))
+    CreateCollectionRequest.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
     CreateCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateCollectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
     CreateCollectionRequest.struct_class = Types::CreateCollectionRequest

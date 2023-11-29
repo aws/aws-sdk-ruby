@@ -297,7 +297,7 @@ module Aws::STS
     #   context provider from which the trusted context assertion was
     #   generated.
     #
-    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/identitycenter","ContextAssertion":"trusted-context-assertion"\}]`
+    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"\}]`
     #   @return [Array<Types::ProvidedContext>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest AWS API Documentation

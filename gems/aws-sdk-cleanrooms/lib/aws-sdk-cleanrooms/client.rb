@@ -692,6 +692,85 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Provides the details necessary to create a configured audience model
+    # association.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The configured audience model is associated to the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :configured_audience_model_arn
+    #   A unique identifier for the configured audience model that you want to
+    #   associate.
+    #
+    # @option params [required, String] :configured_audience_model_association_name
+    #   The name of the configured audience model association.
+    #
+    # @option params [required, Boolean] :manage_resource_policies
+    #   When `TRUE`, indicates that the resource policy for the configured
+    #   audience model resource being associated is configured for Clean Rooms
+    #   to manage permissions related to the given collaboration. When
+    #   `FALSE`, indicates that the configured audience model resource owner
+    #   will manage permissions related to the given collaboration.
+    #
+    #   Setting this to `TRUE` requires you to have permissions to create,
+    #   update, and delete the resource policy for the `cleanrooms-ml`
+    #   resource when you call the DeleteConfiguredAudienceModelAssociation
+    #   resource. In addition, if you are the collaboration creator and
+    #   specify `TRUE`, you must have the same permissions when you call the
+    #   DeleteMember and DeleteCollaboration APIs.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
+    # @option params [String] :description
+    #   A description of the configured audience model association.
+    #
+    # @return [Types::CreateConfiguredAudienceModelAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfiguredAudienceModelAssociationOutput#configured_audience_model_association #configured_audience_model_association} => Types::ConfiguredAudienceModelAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configured_audience_model_association({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     configured_audience_model_arn: "ConfiguredAudienceModelArn", # required
+    #     configured_audience_model_association_name: "ConfiguredAudienceModelAssociationName", # required
+    #     manage_resource_policies: false, # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     description: "ResourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_audience_model_association.id #=> String
+    #   resp.configured_audience_model_association.arn #=> String
+    #   resp.configured_audience_model_association.configured_audience_model_arn #=> String
+    #   resp.configured_audience_model_association.membership_id #=> String
+    #   resp.configured_audience_model_association.membership_arn #=> String
+    #   resp.configured_audience_model_association.collaboration_id #=> String
+    #   resp.configured_audience_model_association.collaboration_arn #=> String
+    #   resp.configured_audience_model_association.name #=> String
+    #   resp.configured_audience_model_association.manage_resource_policies #=> Boolean
+    #   resp.configured_audience_model_association.description #=> String
+    #   resp.configured_audience_model_association.create_time #=> Time
+    #   resp.configured_audience_model_association.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    # @overload create_configured_audience_model_association(params = {})
+    # @param [Hash] params ({})
+    def create_configured_audience_model_association(params = {}, options = {})
+      req = build_request(:create_configured_audience_model_association, params)
+      req.send_request(options)
+    end
+
     # Creates a new configured table resource.
     #
     # @option params [required, String] :name
@@ -816,6 +895,13 @@ module Aws::CleanRooms
     #         custom: {
     #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
     #           allowed_analysis_providers: ["AccountId"],
+    #           differential_privacy: {
+    #             columns: [ # required
+    #               {
+    #                 name: "String", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
     #     },
@@ -852,6 +938,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -1023,6 +1111,84 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Creates a privacy budget template for a specified membership. Each
+    # membership can have only one privacy budget template, but it can be
+    # deleted and recreated. If you need to change the privacy budget
+    # template for a membership, use the UpdatePrivacyBudgetTemplate
+    # operation.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is created in the collaboration that this
+    #   membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :auto_refresh
+    #   How often the privacy budget refreshes.
+    #
+    #   If you plan to regularly bring new data into the collaboration, you
+    #   can use `CALENDAR_MONTH` to automatically get a new privacy budget for
+    #   the collaboration every calendar month. Choosing this option allows
+    #   arbitrary amounts of information to be revealed about rows of the data
+    #   when repeatedly queries across refreshes. Avoid choosing this if the
+    #   same rows will be repeatedly queried between privacy budget refreshes.
+    #
+    # @option params [required, String] :privacy_budget_type
+    #   Specifies the type of the privacy budget template.
+    #
+    # @option params [required, Types::PrivacyBudgetTemplateParametersInput] :parameters
+    #   Specifies your parameters for the privacy budget template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
+    # @return [Types::CreatePrivacyBudgetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePrivacyBudgetTemplateOutput#privacy_budget_template #privacy_budget_template} => Types::PrivacyBudgetTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_privacy_budget_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     auto_refresh: "CALENDAR_MONTH", # required, accepts CALENDAR_MONTH, NONE
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     parameters: { # required
+    #       differential_privacy: {
+    #         epsilon: 1, # required
+    #         users_noise_per_query: 1, # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.privacy_budget_template.id #=> String
+    #   resp.privacy_budget_template.arn #=> String
+    #   resp.privacy_budget_template.membership_id #=> String
+    #   resp.privacy_budget_template.membership_arn #=> String
+    #   resp.privacy_budget_template.collaboration_id #=> String
+    #   resp.privacy_budget_template.collaboration_arn #=> String
+    #   resp.privacy_budget_template.create_time #=> Time
+    #   resp.privacy_budget_template.update_time #=> Time
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
+    #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
+    #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreatePrivacyBudgetTemplate AWS API Documentation
+    #
+    # @overload create_privacy_budget_template(params = {})
+    # @param [Hash] params ({})
+    def create_privacy_budget_template(params = {}, options = {})
+      req = build_request(:create_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
     # Deletes an analysis template.
     #
     # @option params [required, String] :membership_identifier
@@ -1069,6 +1235,35 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def delete_collaboration(params = {}, options = {})
       req = build_request(:delete_collaboration, params)
+      req.send_request(options)
+    end
+
+    # Provides the information necessary to delete a configured audience
+    # model association.
+    #
+    # @option params [required, String] :configured_audience_model_association_identifier
+    #   A unique identifier of the configured audience model association that
+    #   you want to delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier of the membership that contains the audience model
+    #   association that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configured_audience_model_association({
+    #     configured_audience_model_association_identifier: "ConfiguredAudienceModelAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    # @overload delete_configured_audience_model_association(params = {})
+    # @param [Hash] params ({})
+    def delete_configured_audience_model_association(params = {}, options = {})
+      req = build_request(:delete_configured_audience_model_association, params)
       req.send_request(options)
     end
 
@@ -1200,6 +1395,34 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def delete_membership(params = {}, options = {})
       req = build_request(:delete_membership, params)
+      req.send_request(options)
+    end
+
+    # Deletes a privacy budget template for a specified membership.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is deleted from the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_privacy_budget_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeletePrivacyBudgetTemplate AWS API Documentation
+    #
+    # @overload delete_privacy_budget_template(params = {})
+    # @param [Hash] params ({})
+    def delete_privacy_budget_template(params = {}, options = {})
+      req = build_request(:delete_privacy_budget_template, params)
       req.send_request(options)
     end
 
@@ -1345,6 +1568,137 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Retrieves a configured audience model association within a
+    # collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for the collaboration that the configured audience
+    #   model association belongs to. Accepts a collaboration ID.
+    #
+    # @option params [required, String] :configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association that
+    #   you want to retrieve.
+    #
+    # @return [Types::GetCollaborationConfiguredAudienceModelAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationConfiguredAudienceModelAssociationOutput#collaboration_configured_audience_model_association #collaboration_configured_audience_model_association} => Types::CollaborationConfiguredAudienceModelAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_configured_audience_model_association({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     configured_audience_model_association_identifier: "ConfiguredAudienceModelAssociationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_configured_audience_model_association.id #=> String
+    #   resp.collaboration_configured_audience_model_association.arn #=> String
+    #   resp.collaboration_configured_audience_model_association.collaboration_id #=> String
+    #   resp.collaboration_configured_audience_model_association.collaboration_arn #=> String
+    #   resp.collaboration_configured_audience_model_association.configured_audience_model_arn #=> String
+    #   resp.collaboration_configured_audience_model_association.name #=> String
+    #   resp.collaboration_configured_audience_model_association.description #=> String
+    #   resp.collaboration_configured_audience_model_association.creator_account_id #=> String
+    #   resp.collaboration_configured_audience_model_association.create_time #=> Time
+    #   resp.collaboration_configured_audience_model_association.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    # @overload get_collaboration_configured_audience_model_association(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_configured_audience_model_association(params = {}, options = {})
+      req = build_request(:get_collaboration_configured_audience_model_association, params)
+      req.send_request(options)
+    end
+
+    # Returns details about a specified privacy budget template.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #
+    # @option params [required, String] :privacy_budget_template_identifier
+    #   A unique identifier for one of your privacy budget templates.
+    #
+    # @return [Types::GetCollaborationPrivacyBudgetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationPrivacyBudgetTemplateOutput#collaboration_privacy_budget_template #collaboration_privacy_budget_template} => Types::CollaborationPrivacyBudgetTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_privacy_budget_template({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_privacy_budget_template.id #=> String
+    #   resp.collaboration_privacy_budget_template.arn #=> String
+    #   resp.collaboration_privacy_budget_template.collaboration_id #=> String
+    #   resp.collaboration_privacy_budget_template.collaboration_arn #=> String
+    #   resp.collaboration_privacy_budget_template.creator_account_id #=> String
+    #   resp.collaboration_privacy_budget_template.create_time #=> Time
+    #   resp.collaboration_privacy_budget_template.update_time #=> Time
+    #   resp.collaboration_privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
+    #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
+    #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationPrivacyBudgetTemplate AWS API Documentation
+    #
+    # @overload get_collaboration_privacy_budget_template(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_privacy_budget_template(params = {}, options = {})
+      req = build_request(:get_collaboration_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a configured audience model association.
+    #
+    # @option params [required, String] :configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association that
+    #   you want to retrieve.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that contains the configured
+    #   audience model association that you want to retrieve.
+    #
+    # @return [Types::GetConfiguredAudienceModelAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfiguredAudienceModelAssociationOutput#configured_audience_model_association #configured_audience_model_association} => Types::ConfiguredAudienceModelAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configured_audience_model_association({
+    #     configured_audience_model_association_identifier: "ConfiguredAudienceModelAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_audience_model_association.id #=> String
+    #   resp.configured_audience_model_association.arn #=> String
+    #   resp.configured_audience_model_association.configured_audience_model_arn #=> String
+    #   resp.configured_audience_model_association.membership_id #=> String
+    #   resp.configured_audience_model_association.membership_arn #=> String
+    #   resp.configured_audience_model_association.collaboration_id #=> String
+    #   resp.configured_audience_model_association.collaboration_arn #=> String
+    #   resp.configured_audience_model_association.name #=> String
+    #   resp.configured_audience_model_association.manage_resource_policies #=> Boolean
+    #   resp.configured_audience_model_association.description #=> String
+    #   resp.configured_audience_model_association.create_time #=> Time
+    #   resp.configured_audience_model_association.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    # @overload get_configured_audience_model_association(params = {})
+    # @param [Hash] params ({})
+    def get_configured_audience_model_association(params = {}, options = {})
+      req = build_request(:get_configured_audience_model_association, params)
+      req.send_request(options)
+    end
+
     # Retrieves a configured table.
     #
     # @option params [required, String] :configured_table_identifier
@@ -1438,6 +1792,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -1540,6 +1896,51 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Returns details for a specified privacy budget template.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is retrieved from the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template.
+    #
+    # @return [Types::GetPrivacyBudgetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrivacyBudgetTemplateOutput#privacy_budget_template #privacy_budget_template} => Types::PrivacyBudgetTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_privacy_budget_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.privacy_budget_template.id #=> String
+    #   resp.privacy_budget_template.arn #=> String
+    #   resp.privacy_budget_template.membership_id #=> String
+    #   resp.privacy_budget_template.membership_arn #=> String
+    #   resp.privacy_budget_template.collaboration_id #=> String
+    #   resp.privacy_budget_template.collaboration_arn #=> String
+    #   resp.privacy_budget_template.create_time #=> Time
+    #   resp.privacy_budget_template.update_time #=> Time
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
+    #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
+    #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetPrivacyBudgetTemplate AWS API Documentation
+    #
+    # @overload get_privacy_budget_template(params = {})
+    # @param [Hash] params ({})
+    def get_privacy_budget_template(params = {}, options = {})
+      req = build_request(:get_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
     # Returns query processing metadata.
     #
     # @option params [required, String] :membership_identifier
@@ -1579,6 +1980,12 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedQuery AWS API Documentation
     #
@@ -1698,6 +2105,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchemaAnalysisRule AWS API Documentation
     #
@@ -1810,6 +2219,172 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Lists configured audience model associations within a collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for the collaboration that the configured audience
+    #   model association belongs to. Accepts a collaboration ID.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @return [Types::ListCollaborationConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationConfiguredAudienceModelAssociationsOutput#collaboration_configured_audience_model_association_summaries #collaboration_configured_audience_model_association_summaries} => Array&lt;Types::CollaborationConfiguredAudienceModelAssociationSummary&gt;
+    #   * {Types::ListCollaborationConfiguredAudienceModelAssociationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_configured_audience_model_associations({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_configured_audience_model_association_summaries #=> Array
+    #   resp.collaboration_configured_audience_model_association_summaries[0].arn #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].create_time #=> Time
+    #   resp.collaboration_configured_audience_model_association_summaries[0].id #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].name #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].update_time #=> Time
+    #   resp.collaboration_configured_audience_model_association_summaries[0].collaboration_arn #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].creator_account_id #=> String
+    #   resp.collaboration_configured_audience_model_association_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociations AWS API Documentation
+    #
+    # @overload list_collaboration_configured_audience_model_associations(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_configured_audience_model_associations(params = {}, options = {})
+      req = build_request(:list_collaboration_configured_audience_model_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns an array that summarizes each privacy budget template in a
+    # specified collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListCollaborationPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationPrivacyBudgetTemplatesOutput#next_token #next_token} => String
+    #   * {Types::ListCollaborationPrivacyBudgetTemplatesOutput#collaboration_privacy_budget_template_summaries #collaboration_privacy_budget_template_summaries} => Array&lt;Types::CollaborationPrivacyBudgetTemplateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_privacy_budget_templates({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_privacy_budget_template_summaries #=> Array
+    #   resp.collaboration_privacy_budget_template_summaries[0].id #=> String
+    #   resp.collaboration_privacy_budget_template_summaries[0].arn #=> String
+    #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_arn #=> String
+    #   resp.collaboration_privacy_budget_template_summaries[0].creator_account_id #=> String
+    #   resp.collaboration_privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template_summaries[0].create_time #=> Time
+    #   resp.collaboration_privacy_budget_template_summaries[0].update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplates AWS API Documentation
+    #
+    # @overload list_collaboration_privacy_budget_templates(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_privacy_budget_templates(params = {}, options = {})
+      req = build_request(:list_collaboration_privacy_budget_templates, params)
+      req.send_request(options)
+    end
+
+    # Returns an array that summarizes each privacy budget in a specified
+    # collaboration. The summary includes the collaboration ARN, creation
+    # time, creating account, and privacy budget details.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #
+    # @option params [required, String] :privacy_budget_type
+    #   Specifies the type of the privacy budget.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationPrivacyBudgetsOutput#collaboration_privacy_budget_summaries #collaboration_privacy_budget_summaries} => Array&lt;Types::CollaborationPrivacyBudgetSummary&gt;
+    #   * {Types::ListCollaborationPrivacyBudgetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_privacy_budgets({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_privacy_budget_summaries #=> Array
+    #   resp.collaboration_privacy_budget_summaries[0].id #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].privacy_budget_template_id #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].privacy_budget_template_arn #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].collaboration_arn #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].creator_account_id #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_summaries[0].create_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].update_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
+    #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgets AWS API Documentation
+    #
+    # @overload list_collaboration_privacy_budgets(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_privacy_budgets(params = {}, options = {})
+      req = build_request(:list_collaboration_privacy_budgets, params)
+      req.send_request(options)
+    end
+
     # Lists collaborations the caller owns, is active in, or has been
     # invited to.
     #
@@ -1861,6 +2436,62 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def list_collaborations(params = {}, options = {})
       req = build_request(:list_collaborations, params)
+      req.send_request(options)
+    end
+
+    # Lists information about requested configured audience model
+    # associations.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for a membership that contains the configured
+    #   audience model associations that you want to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfiguredAudienceModelAssociationsOutput#configured_audience_model_association_summaries #configured_audience_model_association_summaries} => Array&lt;Types::ConfiguredAudienceModelAssociationSummary&gt;
+    #   * {Types::ListConfiguredAudienceModelAssociationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configured_audience_model_associations({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_audience_model_association_summaries #=> Array
+    #   resp.configured_audience_model_association_summaries[0].membership_id #=> String
+    #   resp.configured_audience_model_association_summaries[0].membership_arn #=> String
+    #   resp.configured_audience_model_association_summaries[0].collaboration_arn #=> String
+    #   resp.configured_audience_model_association_summaries[0].collaboration_id #=> String
+    #   resp.configured_audience_model_association_summaries[0].create_time #=> Time
+    #   resp.configured_audience_model_association_summaries[0].update_time #=> Time
+    #   resp.configured_audience_model_association_summaries[0].id #=> String
+    #   resp.configured_audience_model_association_summaries[0].arn #=> String
+    #   resp.configured_audience_model_association_summaries[0].name #=> String
+    #   resp.configured_audience_model_association_summaries[0].configured_audience_model_arn #=> String
+    #   resp.configured_audience_model_association_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociations AWS API Documentation
+    #
+    # @overload list_configured_audience_model_associations(params = {})
+    # @param [Hash] params ({})
+    def list_configured_audience_model_associations(params = {}, options = {})
+      req = build_request(:list_configured_audience_model_associations, params)
       req.send_request(options)
     end
 
@@ -2064,6 +2695,126 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Returns detailed information about the privacy budget templates in a
+    # specified membership.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget templates are retrieved from the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPrivacyBudgetTemplatesOutput#next_token #next_token} => String
+    #   * {Types::ListPrivacyBudgetTemplatesOutput#privacy_budget_template_summaries #privacy_budget_template_summaries} => Array&lt;Types::PrivacyBudgetTemplateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_privacy_budget_templates({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.privacy_budget_template_summaries #=> Array
+    #   resp.privacy_budget_template_summaries[0].id #=> String
+    #   resp.privacy_budget_template_summaries[0].arn #=> String
+    #   resp.privacy_budget_template_summaries[0].membership_id #=> String
+    #   resp.privacy_budget_template_summaries[0].membership_arn #=> String
+    #   resp.privacy_budget_template_summaries[0].collaboration_id #=> String
+    #   resp.privacy_budget_template_summaries[0].collaboration_arn #=> String
+    #   resp.privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template_summaries[0].create_time #=> Time
+    #   resp.privacy_budget_template_summaries[0].update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplates AWS API Documentation
+    #
+    # @overload list_privacy_budget_templates(params = {})
+    # @param [Hash] params ({})
+    def list_privacy_budget_templates(params = {}, options = {})
+      req = build_request(:list_privacy_budget_templates, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information about the privacy budgets in a specified
+    # membership.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget is retrieved from the collaboration that this
+    #   membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :privacy_budget_type
+    #   The privacy budget type.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPrivacyBudgetsOutput#privacy_budget_summaries #privacy_budget_summaries} => Array&lt;Types::PrivacyBudgetSummary&gt;
+    #   * {Types::ListPrivacyBudgetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_privacy_budgets({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.privacy_budget_summaries #=> Array
+    #   resp.privacy_budget_summaries[0].id #=> String
+    #   resp.privacy_budget_summaries[0].privacy_budget_template_id #=> String
+    #   resp.privacy_budget_summaries[0].privacy_budget_template_arn #=> String
+    #   resp.privacy_budget_summaries[0].membership_id #=> String
+    #   resp.privacy_budget_summaries[0].membership_arn #=> String
+    #   resp.privacy_budget_summaries[0].collaboration_id #=> String
+    #   resp.privacy_budget_summaries[0].collaboration_arn #=> String
+    #   resp.privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_summaries[0].create_time #=> Time
+    #   resp.privacy_budget_summaries[0].update_time #=> Time
+    #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
+    #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgets AWS API Documentation
+    #
+    # @overload list_privacy_budgets(params = {})
+    # @param [Hash] params ({})
+    def list_privacy_budgets(params = {}, options = {})
+      req = build_request(:list_privacy_budgets, params)
+      req.send_request(options)
+    end
+
     # Lists protected queries, sorted by the most recent query.
     #
     # @option params [required, String] :membership_identifier
@@ -2203,6 +2954,47 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # An estimate of the number of aggregation functions that the member who
+    # can query can run given epsilon and noise parameters.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   Accepts a membership ID.
+    #
+    # @option params [required, Types::PreviewPrivacyImpactParametersInput] :parameters
+    #   Specifies the desired epsilon and noise parameters to preview.
+    #
+    # @return [Types::PreviewPrivacyImpactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PreviewPrivacyImpactOutput#privacy_impact #privacy_impact} => Types::PrivacyImpact
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.preview_privacy_impact({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     parameters: { # required
+    #       differential_privacy: {
+    #         epsilon: 1, # required
+    #         users_noise_per_query: 1, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.privacy_impact.differential_privacy.aggregations #=> Array
+    #   resp.privacy_impact.differential_privacy.aggregations[0].type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.privacy_impact.differential_privacy.aggregations[0].max_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PreviewPrivacyImpact AWS API Documentation
+    #
+    # @overload preview_privacy_impact(params = {})
+    # @param [Hash] params ({})
+    def preview_privacy_impact(params = {}, options = {})
+      req = build_request(:preview_privacy_impact, params)
+      req.send_request(options)
+    end
+
     # Creates a protected query that is started by Clean Rooms.
     #
     # @option params [required, String] :type
@@ -2265,6 +3057,12 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedQuery AWS API Documentation
     #
@@ -2437,6 +3235,60 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Provides the details necessary to update a configured audience model
+    # association.
+    #
+    # @option params [required, String] :configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association that
+    #   you want to update.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier of the membership that contains the configured
+    #   audience model association that you want to update.
+    #
+    # @option params [String] :description
+    #   A new description for the configured audience model association.
+    #
+    # @option params [String] :name
+    #   A new name for the configured audience model association.
+    #
+    # @return [Types::UpdateConfiguredAudienceModelAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConfiguredAudienceModelAssociationOutput#configured_audience_model_association #configured_audience_model_association} => Types::ConfiguredAudienceModelAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configured_audience_model_association({
+    #     configured_audience_model_association_identifier: "ConfiguredAudienceModelAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     description: "ResourceDescription",
+    #     name: "ConfiguredAudienceModelAssociationName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_audience_model_association.id #=> String
+    #   resp.configured_audience_model_association.arn #=> String
+    #   resp.configured_audience_model_association.configured_audience_model_arn #=> String
+    #   resp.configured_audience_model_association.membership_id #=> String
+    #   resp.configured_audience_model_association.membership_arn #=> String
+    #   resp.configured_audience_model_association.collaboration_id #=> String
+    #   resp.configured_audience_model_association.collaboration_arn #=> String
+    #   resp.configured_audience_model_association.name #=> String
+    #   resp.configured_audience_model_association.manage_resource_policies #=> Boolean
+    #   resp.configured_audience_model_association.description #=> String
+    #   resp.configured_audience_model_association.create_time #=> Time
+    #   resp.configured_audience_model_association.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    # @overload update_configured_audience_model_association(params = {})
+    # @param [Hash] params ({})
+    def update_configured_audience_model_association(params = {}, options = {})
+      req = build_request(:update_configured_audience_model_association, params)
+      req.send_request(options)
+    end
+
     # Updates a configured table.
     #
     # @option params [required, String] :configured_table_identifier
@@ -2539,6 +3391,13 @@ module Aws::CleanRooms
     #         custom: {
     #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
     #           allowed_analysis_providers: ["AccountId"],
+    #           differential_privacy: {
+    #             columns: [ # required
+    #               {
+    #                 name: "String", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
     #     },
@@ -2575,6 +3434,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -2705,6 +3566,66 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Updates the privacy budget template for the specified membership.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is updated in the collaboration that this
+    #   membership belongs to. Accepts a membership ID.
+    #
+    # @option params [required, String] :privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template that you want to
+    #   update.
+    #
+    # @option params [required, String] :privacy_budget_type
+    #   Specifies the type of the privacy budget template.
+    #
+    # @option params [Types::PrivacyBudgetTemplateUpdateParameters] :parameters
+    #   Specifies the epsilon and noise parameters for the privacy budget
+    #   template.
+    #
+    # @return [Types::UpdatePrivacyBudgetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePrivacyBudgetTemplateOutput#privacy_budget_template #privacy_budget_template} => Types::PrivacyBudgetTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_privacy_budget_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     parameters: {
+    #       differential_privacy: {
+    #         epsilon: 1,
+    #         users_noise_per_query: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.privacy_budget_template.id #=> String
+    #   resp.privacy_budget_template.arn #=> String
+    #   resp.privacy_budget_template.membership_id #=> String
+    #   resp.privacy_budget_template.membership_arn #=> String
+    #   resp.privacy_budget_template.collaboration_id #=> String
+    #   resp.privacy_budget_template.collaboration_arn #=> String
+    #   resp.privacy_budget_template.create_time #=> Time
+    #   resp.privacy_budget_template.update_time #=> Time
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
+    #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
+    #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdatePrivacyBudgetTemplate AWS API Documentation
+    #
+    # @overload update_privacy_budget_template(params = {})
+    # @param [Hash] params ({})
+    def update_privacy_budget_template(params = {}, options = {})
+      req = build_request(:update_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
     # Updates the processing of a currently running query.
     #
     # @option params [required, String] :membership_identifier
@@ -2749,6 +3670,12 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
+    #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedQuery AWS API Documentation
     #
@@ -2772,7 +3699,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

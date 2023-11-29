@@ -56,6 +56,7 @@ module Aws
   autoload :ChimeSDKMessaging, 'aws-sdk-chimesdkmessaging'
   autoload :ChimeSDKVoice, 'aws-sdk-chimesdkvoice'
   autoload :CleanRooms, 'aws-sdk-cleanrooms'
+  autoload :CleanRoomsML, 'aws-sdk-cleanroomsml'
   autoload :Cloud9, 'aws-sdk-cloud9'
   autoload :CloudControlApi, 'aws-sdk-cloudcontrolapi'
   autoload :CloudDirectory, 'aws-sdk-clouddirectory'

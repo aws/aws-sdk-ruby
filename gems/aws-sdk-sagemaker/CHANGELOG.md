@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.223.0 (2023-11-29)
+------------------
+
+* Feature - This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot
+
 1.222.0 (2023-11-28)
 ------------------
 

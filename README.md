@@ -696,6 +696,7 @@ RubyGems.org page under "LINKS" section.
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
 | TrustedAdvisor Public API                             | Aws::TrustedAdvisor                      | aws-sdk-trustedadvisor                      | 2022-09-15  |
+| cleanrooms-ml                                         | Aws::CleanRoomsML                        | aws-sdk-cleanroomsml                        | 2023-09-06  |
 
 ## License
 

@@ -432,6 +432,50 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Adds the data source on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @option params [required, Types::DataSourceType] :data_source_type
+    #   The type of data source.
+    #
+    # @option params [String] :description
+    #   A description of the data source.
+    #
+    # @return [Types::AddDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #     data_source_type: { # required
+    #       s3_glue_data_catalog: {
+    #         role_arn: "RoleArn",
+    #       },
+    #     },
+    #     description: "DataSourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSource AWS API Documentation
+    #
+    # @overload add_data_source(params = {})
+    # @param [Hash] params ({})
+    def add_data_source(params = {}, options = {})
+      req = build_request(:add_data_source, params)
+      req.send_request(options)
+    end
+
     # Attaches tags to an existing Amazon OpenSearch Service domain. Tags
     # are a set of case-sensitive key-value pairs. A domain can have up to
     # 10 tags. For more information, see [Tagging Amazon OpenSearch Service
@@ -1144,6 +1188,38 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def create_vpc_endpoint(params = {}, options = {})
       req = build_request(:create_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes the data source.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSource AWS API Documentation
+    #
+    # @overload delete_data_source(params = {})
+    # @param [Hash] params ({})
+    def delete_data_source(params = {}, options = {})
+      req = build_request(:delete_data_source, params)
       req.send_request(options)
     end
 
@@ -2698,6 +2774,42 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Describes the data source details.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataSourceResponse#data_source_type #data_source_type} => Types::DataSourceType
+    #   * {Types::GetDataSourceResponse#name #name} => String
+    #   * {Types::GetDataSourceResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_source_type.s3_glue_data_catalog.role_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSource AWS API Documentation
+    #
+    # @overload get_data_source(params = {})
+    # @param [Hash] params ({})
+    def get_data_source(params = {}, options = {})
+      req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
     # The status of the maintenance action.
     #
     # @option params [required, String] :domain_name
@@ -2885,6 +2997,37 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_upgrade_status(params = {}, options = {})
       req = build_request(:get_upgrade_status, params)
+      req.send_request(options)
+    end
+
+    # A list of the data source details of the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataSourcesResponse#data_sources #data_sources} => Array&lt;Types::DataSourceDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_sources({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].data_source_type.s3_glue_data_catalog.role_arn #=> String
+    #   resp.data_sources[0].name #=> String
+    #   resp.data_sources[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSources AWS API Documentation
+    #
+    # @overload list_data_sources(params = {})
+    # @param [Hash] params ({})
+    def list_data_sources(params = {}, options = {})
+      req = build_request(:list_data_sources, params)
       req.send_request(options)
     end
 
@@ -3669,6 +3812,50 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Updates the data source on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @option params [required, Types::DataSourceType] :data_source_type
+    #   The type of data source.
+    #
+    # @option params [String] :description
+    #   A description of the data source.
+    #
+    # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #     data_source_type: { # required
+    #       s3_glue_data_catalog: {
+    #         role_arn: "RoleArn",
+    #       },
+    #     },
+    #     description: "DataSourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSource AWS API Documentation
+    #
+    # @overload update_data_source(params = {})
+    # @param [Hash] params ({})
+    def update_data_source(params = {}, options = {})
+      req = build_request(:update_data_source, params)
+      req.send_request(options)
+    end
+
     # Modifies the cluster configuration of the specified Amazon OpenSearch
     # Service domain.
     #
@@ -4350,7 +4537,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

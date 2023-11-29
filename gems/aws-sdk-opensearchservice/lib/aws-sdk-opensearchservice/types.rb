@@ -96,6 +96,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `AddDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSourceRequest AWS API Documentation
+    #
+    class AddDataSourceRequest < Struct.new(
+      :domain_name,
+      :name,
+      :data_source_type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an `AddDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSourceResponse AWS API Documentation
+    #
+    class AddDataSourceResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `AddTags` operation. Specifies the
     # tags to attach to the domain.
     #
@@ -1445,6 +1488,86 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Details about the data sources.
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceDetails AWS API Documentation
+    #
+    class DataSourceDetails < Struct.new(
+      :data_source_type,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the data source.
+    #
+    # @note DataSourceType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataSourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataSourceType corresponding to the set member.
+    #
+    # @!attribute [rw] s3_glue_data_catalog
+    #   The data source for the AWS S3 Glue Data Catalog.
+    #   @return [Types::S3GlueDataCatalog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceType AWS API Documentation
+    #
+    class DataSourceType < Struct.new(
+      :s3_glue_data_catalog,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3GlueDataCatalog < DataSourceType; end
+      class Unknown < DataSourceType; end
+    end
+
+    # Container for the parameters to the `DeleteDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceRequest AWS API Documentation
+    #
+    class DeleteDataSourceRequest < Struct.new(
+      :domain_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the initiated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceResponse AWS API Documentation
+    #
+    class DeleteDataSourceResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DeleteDomain` operation.
     #
     # @!attribute [rw] domain_name
@@ -2489,15 +2612,20 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] tls_security_policy
     #   Specify the TLS security policy to apply to the HTTPS endpoint of
-    #   the domain.
-    #
-    #   Can be one of the following values:
+    #   the domain. The policy can be one of the following values:
     #
     #   * **Policy-Min-TLS-1-0-2019-07:** TLS security policy which supports
-    #     TLS version 1.0 and higher.
+    #     TLS version 1.0 to TLS version 1.2
     #
     #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy which supports
     #     only TLS version 1.2
+    #
+    #   * **Policy-Min-TLS-1-0-2023-10:** TLS security policy which supports
+    #     TLS version 1.0 to TLS version 1.3
+    #
+    #   * **Policy-Min-TLS-1-2-2023-10:** TLS security policy which supports
+    #     TLS version 1.2 to TLS version 1.3 with perfect forward secrecy
+    #     cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -3199,6 +3327,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `GetDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceRequest AWS API Documentation
+    #
+    class GetDataSourceRequest < Struct.new(
+      :domain_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetDataSource` operation.
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceResponse AWS API Documentation
+    #
+    class GetDataSourceResponse < Struct.new(
+      :data_source_type,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `GetDomainMaintenanceStatus`
     # operation.
     #
@@ -3648,6 +3819,34 @@ module Aws::OpenSearchService
       :storage_types,
       :instance_limits,
       :additional_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `ListDataSources` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSourcesRequest AWS API Documentation
+    #
+    class ListDataSourcesRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `ListDataSources` operation.
+    #
+    # @!attribute [rw] data_sources
+    #   A list of the data sources.
+    #   @return [Array<Types::DataSourceDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSourcesResponse AWS API Documentation
+    #
+    class ListDataSourcesResponse < Struct.new(
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4923,6 +5122,20 @@ module Aws::OpenSearchService
     #
     class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
 
+    # Information about the AWS S3 Glue Data Catalog.
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN for the AWS S3 Glue Data Catalog.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/S3GlueDataCatalog AWS API Documentation
+    #
+    class S3GlueDataCatalog < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SAML identity povider information.
     #
     # @!attribute [rw] metadata_content
@@ -5458,6 +5671,49 @@ module Aws::OpenSearchService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `UpdateDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceRequest AWS API Documentation
+    #
+    class UpdateDataSourceRequest < Struct.new(
+      :domain_name,
+      :name,
+      :data_source_type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an `UpdateDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceResponse AWS API Documentation
+    #
+    class UpdateDataSourceResponse < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

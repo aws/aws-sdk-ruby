@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.181.0 (2023-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cleanroomsml` gem.
+
 3.180.0 (2023-11-28)
 ------------------
 
