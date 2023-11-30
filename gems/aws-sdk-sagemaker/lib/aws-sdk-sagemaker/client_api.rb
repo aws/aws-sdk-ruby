@@ -269,6 +269,7 @@ module Aws::SageMaker
     ClusterSummaries = Shapes::ListShape.new(name: 'ClusterSummaries')
     ClusterSummary = Shapes::StructureShape.new(name: 'ClusterSummary')
     ClusterThreadsPerCore = Shapes::IntegerShape.new(name: 'ClusterThreadsPerCore')
+    CodeEditorAppSettings = Shapes::StructureShape.new(name: 'CodeEditorAppSettings')
     CodeRepositories = Shapes::ListShape.new(name: 'CodeRepositories')
     CodeRepository = Shapes::StructureShape.new(name: 'CodeRepository')
     CodeRepositoryArn = Shapes::StringShape.new(name: 'CodeRepositoryArn')
@@ -304,6 +305,7 @@ module Aws::SageMaker
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContainerArgument = Shapes::StringShape.new(name: 'ContainerArgument')
     ContainerArguments = Shapes::ListShape.new(name: 'ContainerArguments')
+    ContainerConfig = Shapes::StructureShape.new(name: 'ContainerConfig')
     ContainerDefinition = Shapes::StructureShape.new(name: 'ContainerDefinition')
     ContainerDefinitionList = Shapes::ListShape.new(name: 'ContainerDefinitionList')
     ContainerEntrypoint = Shapes::ListShape.new(name: 'ContainerEntrypoint')
@@ -439,8 +441,16 @@ module Aws::SageMaker
     CrossAccountFilterOption = Shapes::StringShape.new(name: 'CrossAccountFilterOption')
     CsvContentType = Shapes::StringShape.new(name: 'CsvContentType')
     CsvContentTypes = Shapes::ListShape.new(name: 'CsvContentTypes')
+    CustomFileSystem = Shapes::UnionShape.new(name: 'CustomFileSystem')
+    CustomFileSystemConfig = Shapes::UnionShape.new(name: 'CustomFileSystemConfig')
+    CustomFileSystemConfigs = Shapes::ListShape.new(name: 'CustomFileSystemConfigs')
+    CustomFileSystems = Shapes::ListShape.new(name: 'CustomFileSystems')
     CustomImage = Shapes::StructureShape.new(name: 'CustomImage')
+    CustomImageContainerArguments = Shapes::ListShape.new(name: 'CustomImageContainerArguments')
+    CustomImageContainerEntrypoint = Shapes::ListShape.new(name: 'CustomImageContainerEntrypoint')
+    CustomImageContainerEnvironmentVariables = Shapes::MapShape.new(name: 'CustomImageContainerEnvironmentVariables')
     CustomImages = Shapes::ListShape.new(name: 'CustomImages')
+    CustomPosixUserConfig = Shapes::StructureShape.new(name: 'CustomPosixUserConfig')
     CustomerMetadataKey = Shapes::StringShape.new(name: 'CustomerMetadataKey')
     CustomerMetadataKeyList = Shapes::ListShape.new(name: 'CustomerMetadataKeyList')
     CustomerMetadataMap = Shapes::MapShape.new(name: 'CustomerMetadataMap')
@@ -465,8 +475,10 @@ module Aws::SageMaker
     DebugRuleConfigurations = Shapes::ListShape.new(name: 'DebugRuleConfigurations')
     DebugRuleEvaluationStatus = Shapes::StructureShape.new(name: 'DebugRuleEvaluationStatus')
     DebugRuleEvaluationStatuses = Shapes::ListShape.new(name: 'DebugRuleEvaluationStatuses')
+    DefaultEbsStorageSettings = Shapes::StructureShape.new(name: 'DefaultEbsStorageSettings')
     DefaultGid = Shapes::IntegerShape.new(name: 'DefaultGid')
     DefaultSpaceSettings = Shapes::StructureShape.new(name: 'DefaultSpaceSettings')
+    DefaultSpaceStorageSettings = Shapes::StructureShape.new(name: 'DefaultSpaceStorageSettings')
     DefaultUid = Shapes::IntegerShape.new(name: 'DefaultUid')
     DeleteActionRequest = Shapes::StructureShape.new(name: 'DeleteActionRequest')
     DeleteActionResponse = Shapes::StructureShape.new(name: 'DeleteActionResponse')
@@ -724,7 +736,10 @@ module Aws::SageMaker
     DriftCheckModelDataQuality = Shapes::StructureShape.new(name: 'DriftCheckModelDataQuality')
     DriftCheckModelQuality = Shapes::StructureShape.new(name: 'DriftCheckModelQuality')
     DynamicScalingConfiguration = Shapes::StructureShape.new(name: 'DynamicScalingConfiguration')
+    EFSFileSystem = Shapes::StructureShape.new(name: 'EFSFileSystem')
+    EFSFileSystemConfig = Shapes::StructureShape.new(name: 'EFSFileSystemConfig')
     EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
+    EbsStorageSettings = Shapes::StructureShape.new(name: 'EbsStorageSettings')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeDeploymentConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentConfig')
     EdgeDeploymentModelConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentModelConfig')
@@ -838,6 +853,7 @@ module Aws::SageMaker
     FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
     FileSystemDataSource = Shapes::StructureShape.new(name: 'FileSystemDataSource')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
+    FileSystemPath = Shapes::StringShape.new(name: 'FileSystemPath')
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     FillingTransformationMap = Shapes::MapShape.new(name: 'FillingTransformationMap')
     FillingTransformationValue = Shapes::StringShape.new(name: 'FillingTransformationValue')
@@ -883,6 +899,7 @@ module Aws::SageMaker
     GetScalingConfigurationRecommendationResponse = Shapes::StructureShape.new(name: 'GetScalingConfigurationRecommendationResponse')
     GetSearchSuggestionsRequest = Shapes::StructureShape.new(name: 'GetSearchSuggestionsRequest')
     GetSearchSuggestionsResponse = Shapes::StructureShape.new(name: 'GetSearchSuggestionsResponse')
+    Gid = Shapes::IntegerShape.new(name: 'Gid')
     GitConfig = Shapes::StructureShape.new(name: 'GitConfig')
     GitConfigForUpdate = Shapes::StructureShape.new(name: 'GitConfigForUpdate')
     GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
@@ -1075,6 +1092,8 @@ module Aws::SageMaker
     JsonContentType = Shapes::StringShape.new(name: 'JsonContentType')
     JsonContentTypes = Shapes::ListShape.new(name: 'JsonContentTypes')
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
+    JupyterLabAppImageConfig = Shapes::StructureShape.new(name: 'JupyterLabAppImageConfig')
+    JupyterLabAppSettings = Shapes::StructureShape.new(name: 'JupyterLabAppSettings')
     JupyterServerAppSettings = Shapes::StructureShape.new(name: 'JupyterServerAppSettings')
     KeepAlivePeriodInSeconds = Shapes::IntegerShape.new(name: 'KeepAlivePeriodInSeconds')
     KendraSettings = Shapes::StructureShape.new(name: 'KendraSettings')
@@ -1500,6 +1519,8 @@ module Aws::SageMaker
     NetworkConfig = Shapes::StructureShape.new(name: 'NetworkConfig')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonEmptyString256 = Shapes::StringShape.new(name: 'NonEmptyString256')
+    NonEmptyString64 = Shapes::StringShape.new(name: 'NonEmptyString64')
     NotebookInstanceAcceleratorType = Shapes::StringShape.new(name: 'NotebookInstanceAcceleratorType')
     NotebookInstanceAcceleratorTypes = Shapes::ListShape.new(name: 'NotebookInstanceAcceleratorTypes')
     NotebookInstanceArn = Shapes::StringShape.new(name: 'NotebookInstanceArn')
@@ -1553,6 +1574,8 @@ module Aws::SageMaker
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     OutputParameter = Shapes::StructureShape.new(name: 'OutputParameter')
     OutputParameterList = Shapes::ListShape.new(name: 'OutputParameterList')
+    OwnershipSettings = Shapes::StructureShape.new(name: 'OwnershipSettings')
+    OwnershipSettingsSummary = Shapes::StructureShape.new(name: 'OwnershipSettingsSummary')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParallelismConfiguration = Shapes::StructureShape.new(name: 'ParallelismConfiguration')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
@@ -1845,6 +1868,7 @@ module Aws::SageMaker
     ShadowModelVariantConfig = Shapes::StructureShape.new(name: 'ShadowModelVariantConfig')
     ShadowModelVariantConfigList = Shapes::ListShape.new(name: 'ShadowModelVariantConfigList')
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
+    SharingType = Shapes::StringShape.new(name: 'SharingType')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
     SingleSignOnApplicationArn = Shapes::StringShape.new(name: 'SingleSignOnApplicationArn')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
@@ -1870,12 +1894,19 @@ module Aws::SageMaker
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SourceUri = Shapes::StringShape.new(name: 'SourceUri')
     SpaceArn = Shapes::StringShape.new(name: 'SpaceArn')
+    SpaceCodeEditorAppSettings = Shapes::StructureShape.new(name: 'SpaceCodeEditorAppSettings')
     SpaceDetails = Shapes::StructureShape.new(name: 'SpaceDetails')
+    SpaceEbsVolumeSizeInGb = Shapes::IntegerShape.new(name: 'SpaceEbsVolumeSizeInGb')
+    SpaceJupyterLabAppSettings = Shapes::StructureShape.new(name: 'SpaceJupyterLabAppSettings')
     SpaceList = Shapes::ListShape.new(name: 'SpaceList')
     SpaceName = Shapes::StringShape.new(name: 'SpaceName')
     SpaceSettings = Shapes::StructureShape.new(name: 'SpaceSettings')
+    SpaceSettingsSummary = Shapes::StructureShape.new(name: 'SpaceSettingsSummary')
+    SpaceSharingSettings = Shapes::StructureShape.new(name: 'SpaceSharingSettings')
+    SpaceSharingSettingsSummary = Shapes::StructureShape.new(name: 'SpaceSharingSettingsSummary')
     SpaceSortKey = Shapes::StringShape.new(name: 'SpaceSortKey')
     SpaceStatus = Shapes::StringShape.new(name: 'SpaceStatus')
+    SpaceStorageSettings = Shapes::StructureShape.new(name: 'SpaceStorageSettings')
     SpawnRate = Shapes::IntegerShape.new(name: 'SpawnRate')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
     StageStatus = Shapes::StringShape.new(name: 'StageStatus')
@@ -2074,6 +2105,7 @@ module Aws::SageMaker
     UiConfig = Shapes::StructureShape.new(name: 'UiConfig')
     UiTemplate = Shapes::StructureShape.new(name: 'UiTemplate')
     UiTemplateInfo = Shapes::StructureShape.new(name: 'UiTemplateInfo')
+    Uid = Shapes::IntegerShape.new(name: 'Uid')
     UpdateActionRequest = Shapes::StructureShape.new(name: 'UpdateActionRequest')
     UpdateActionResponse = Shapes::StructureShape.new(name: 'UpdateActionResponse')
     UpdateAppImageConfigRequest = Shapes::StructureShape.new(name: 'UpdateAppImageConfigRequest')
@@ -2311,6 +2343,7 @@ module Aws::SageMaker
     AppDetails.add_member(:status, Shapes::ShapeRef.new(shape: AppStatus, location_name: "Status"))
     AppDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     AppDetails.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, location_name: "SpaceName"))
+    AppDetails.add_member(:resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "ResourceSpec"))
     AppDetails.struct_class = Types::AppDetails
 
     AppImageConfigDetails.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -2318,6 +2351,7 @@ module Aws::SageMaker
     AppImageConfigDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     AppImageConfigDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     AppImageConfigDetails.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    AppImageConfigDetails.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
     AppImageConfigDetails.struct_class = Types::AppImageConfigDetails
 
     AppImageConfigList.member = Shapes::ShapeRef.new(shape: AppImageConfigDetails)
@@ -2806,6 +2840,10 @@ module Aws::SageMaker
     ClusterSummary.add_member(:cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, required: true, location_name: "ClusterStatus"))
     ClusterSummary.struct_class = Types::ClusterSummary
 
+    CodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
+    CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
+
     CodeRepositories.member = Shapes::ShapeRef.new(shape: CodeRepository)
 
     CodeRepository.add_member(:repository_url, Shapes::ShapeRef.new(shape: RepositoryUrl, required: true, location_name: "RepositoryUrl"))
@@ -2868,6 +2906,11 @@ module Aws::SageMaker
     ConflictException.struct_class = Types::ConflictException
 
     ContainerArguments.member = Shapes::ShapeRef.new(shape: ContainerArgument)
+
+    ContainerConfig.add_member(:container_arguments, Shapes::ShapeRef.new(shape: CustomImageContainerArguments, location_name: "ContainerArguments"))
+    ContainerConfig.add_member(:container_entrypoint, Shapes::ShapeRef.new(shape: CustomImageContainerEntrypoint, location_name: "ContainerEntrypoint"))
+    ContainerConfig.add_member(:container_environment_variables, Shapes::ShapeRef.new(shape: CustomImageContainerEnvironmentVariables, location_name: "ContainerEnvironmentVariables"))
+    ContainerConfig.struct_class = Types::ContainerConfig
 
     ContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
     ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "Image"))
@@ -2947,6 +2990,7 @@ module Aws::SageMaker
     CreateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
     CreateAppImageConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    CreateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
     CreateAppImageConfigRequest.struct_class = Types::CreateAppImageConfigRequest
 
     CreateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -3491,6 +3535,9 @@ module Aws::SageMaker
     CreateSpaceRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, required: true, location_name: "SpaceName"))
     CreateSpaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSpaceRequest.add_member(:space_settings, Shapes::ShapeRef.new(shape: SpaceSettings, location_name: "SpaceSettings"))
+    CreateSpaceRequest.add_member(:space_display_name, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "SpaceDisplayName"))
+    CreateSpaceRequest.add_member(:ownership_settings, Shapes::ShapeRef.new(shape: OwnershipSettings, location_name: "OwnershipSettings"))
+    CreateSpaceRequest.add_member(:space_sharing_settings, Shapes::ShapeRef.new(shape: SpaceSharingSettings, location_name: "SpaceSharingSettings"))
     CreateSpaceRequest.struct_class = Types::CreateSpaceRequest
 
     CreateSpaceResponse.add_member(:space_arn, Shapes::ShapeRef.new(shape: SpaceArn, location_name: "SpaceArn"))
@@ -3612,12 +3659,39 @@ module Aws::SageMaker
 
     CsvContentTypes.member = Shapes::ShapeRef.new(shape: CsvContentType)
 
+    CustomFileSystem.add_member(:efs_file_system, Shapes::ShapeRef.new(shape: EFSFileSystem, location_name: "EFSFileSystem"))
+    CustomFileSystem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CustomFileSystem.add_member_subclass(:efs_file_system, Types::CustomFileSystem::EfsFileSystem)
+    CustomFileSystem.add_member_subclass(:unknown, Types::CustomFileSystem::Unknown)
+    CustomFileSystem.struct_class = Types::CustomFileSystem
+
+    CustomFileSystemConfig.add_member(:efs_file_system_config, Shapes::ShapeRef.new(shape: EFSFileSystemConfig, location_name: "EFSFileSystemConfig"))
+    CustomFileSystemConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CustomFileSystemConfig.add_member_subclass(:efs_file_system_config, Types::CustomFileSystemConfig::EfsFileSystemConfig)
+    CustomFileSystemConfig.add_member_subclass(:unknown, Types::CustomFileSystemConfig::Unknown)
+    CustomFileSystemConfig.struct_class = Types::CustomFileSystemConfig
+
+    CustomFileSystemConfigs.member = Shapes::ShapeRef.new(shape: CustomFileSystemConfig)
+
+    CustomFileSystems.member = Shapes::ShapeRef.new(shape: CustomFileSystem)
+
     CustomImage.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
     CustomImage.add_member(:image_version_number, Shapes::ShapeRef.new(shape: ImageVersionNumber, location_name: "ImageVersionNumber", metadata: {"box"=>true}))
     CustomImage.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
     CustomImage.struct_class = Types::CustomImage
 
+    CustomImageContainerArguments.member = Shapes::ShapeRef.new(shape: NonEmptyString64)
+
+    CustomImageContainerEntrypoint.member = Shapes::ShapeRef.new(shape: NonEmptyString256)
+
+    CustomImageContainerEnvironmentVariables.key = Shapes::ShapeRef.new(shape: NonEmptyString256)
+    CustomImageContainerEnvironmentVariables.value = Shapes::ShapeRef.new(shape: String256)
+
     CustomImages.member = Shapes::ShapeRef.new(shape: CustomImage)
+
+    CustomPosixUserConfig.add_member(:uid, Shapes::ShapeRef.new(shape: Uid, required: true, location_name: "Uid"))
+    CustomPosixUserConfig.add_member(:gid, Shapes::ShapeRef.new(shape: Gid, required: true, location_name: "Gid"))
+    CustomPosixUserConfig.struct_class = Types::CustomPosixUserConfig
 
     CustomerMetadataKeyList.member = Shapes::ShapeRef.new(shape: CustomerMetadataKey)
 
@@ -3708,11 +3782,18 @@ module Aws::SageMaker
 
     DebugRuleEvaluationStatuses.member = Shapes::ShapeRef.new(shape: DebugRuleEvaluationStatus)
 
+    DefaultEbsStorageSettings.add_member(:default_ebs_volume_size_in_gb, Shapes::ShapeRef.new(shape: SpaceEbsVolumeSizeInGb, required: true, location_name: "DefaultEbsVolumeSizeInGb"))
+    DefaultEbsStorageSettings.add_member(:maximum_ebs_volume_size_in_gb, Shapes::ShapeRef.new(shape: SpaceEbsVolumeSizeInGb, required: true, location_name: "MaximumEbsVolumeSizeInGb"))
+    DefaultEbsStorageSettings.struct_class = Types::DefaultEbsStorageSettings
+
     DefaultSpaceSettings.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     DefaultSpaceSettings.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroups"))
     DefaultSpaceSettings.add_member(:jupyter_server_app_settings, Shapes::ShapeRef.new(shape: JupyterServerAppSettings, location_name: "JupyterServerAppSettings"))
     DefaultSpaceSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
     DefaultSpaceSettings.struct_class = Types::DefaultSpaceSettings
+
+    DefaultSpaceStorageSettings.add_member(:default_ebs_storage_settings, Shapes::ShapeRef.new(shape: DefaultEbsStorageSettings, location_name: "DefaultEbsStorageSettings"))
+    DefaultSpaceStorageSettings.struct_class = Types::DefaultSpaceStorageSettings
 
     DeleteActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ActionName"))
     DeleteActionRequest.struct_class = Types::DeleteActionRequest
@@ -3998,6 +4079,7 @@ module Aws::SageMaker
     DescribeAppImageConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeAppImageConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeAppImageConfigResponse.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    DescribeAppImageConfigResponse.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
     DescribeAppImageConfigResponse.struct_class = Types::DescribeAppImageConfigResponse
 
     DescribeAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -4862,6 +4944,9 @@ module Aws::SageMaker
     DescribeSpaceResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeSpaceResponse.add_member(:space_settings, Shapes::ShapeRef.new(shape: SpaceSettings, location_name: "SpaceSettings"))
     DescribeSpaceResponse.add_member(:url, Shapes::ShapeRef.new(shape: String1024, location_name: "Url"))
+    DescribeSpaceResponse.add_member(:space_display_name, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "SpaceDisplayName"))
+    DescribeSpaceResponse.add_member(:ownership_settings, Shapes::ShapeRef.new(shape: OwnershipSettings, location_name: "OwnershipSettings"))
+    DescribeSpaceResponse.add_member(:space_sharing_settings, Shapes::ShapeRef.new(shape: SpaceSharingSettings, location_name: "SpaceSharingSettings"))
     DescribeSpaceResponse.struct_class = Types::DescribeSpaceResponse
 
     DescribeStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, required: true, location_name: "StudioLifecycleConfigName"))
@@ -5152,11 +5237,21 @@ module Aws::SageMaker
     DynamicScalingConfiguration.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: ScalingPolicies, location_name: "ScalingPolicies"))
     DynamicScalingConfiguration.struct_class = Types::DynamicScalingConfiguration
 
+    EFSFileSystem.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    EFSFileSystem.struct_class = Types::EFSFileSystem
+
+    EFSFileSystemConfig.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    EFSFileSystemConfig.add_member(:file_system_path, Shapes::ShapeRef.new(shape: FileSystemPath, location_name: "FileSystemPath"))
+    EFSFileSystemConfig.struct_class = Types::EFSFileSystemConfig
+
     EMRStepMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String256, location_name: "ClusterId"))
     EMRStepMetadata.add_member(:step_id, Shapes::ShapeRef.new(shape: String256, location_name: "StepId"))
     EMRStepMetadata.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
     EMRStepMetadata.add_member(:log_file_path, Shapes::ShapeRef.new(shape: String1024, location_name: "LogFilePath"))
     EMRStepMetadata.struct_class = Types::EMRStepMetadata
+
+    EbsStorageSettings.add_member(:ebs_volume_size_in_gb, Shapes::ShapeRef.new(shape: SpaceEbsVolumeSizeInGb, required: true, location_name: "EbsVolumeSizeInGb"))
+    EbsStorageSettings.struct_class = Types::EbsStorageSettings
 
     Edge.add_member(:source_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "SourceArn"))
     Edge.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "DestinationArn"))
@@ -6011,6 +6106,15 @@ module Aws::SageMaker
     IntegerParameterRanges.member = Shapes::ShapeRef.new(shape: IntegerParameterRange)
 
     JsonContentTypes.member = Shapes::ShapeRef.new(shape: JsonContentType)
+
+    JupyterLabAppImageConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: ContainerConfig, location_name: "ContainerConfig"))
+    JupyterLabAppImageConfig.struct_class = Types::JupyterLabAppImageConfig
+
+    JupyterLabAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    JupyterLabAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
+    JupyterLabAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
+    JupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
+    JupyterLabAppSettings.struct_class = Types::JupyterLabAppSettings
 
     JupyterServerAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     JupyterServerAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
@@ -7878,6 +7982,12 @@ module Aws::SageMaker
 
     OutputParameterList.member = Shapes::ShapeRef.new(shape: OutputParameter)
 
+    OwnershipSettings.add_member(:owner_user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "OwnerUserProfileName"))
+    OwnershipSettings.struct_class = Types::OwnershipSettings
+
+    OwnershipSettingsSummary.add_member(:owner_user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, location_name: "OwnerUserProfileName"))
+    OwnershipSettingsSummary.struct_class = Types::OwnershipSettingsSummary
+
     ParallelismConfiguration.add_member(:max_parallel_execution_steps, Shapes::ShapeRef.new(shape: MaxParallelExecutionSteps, required: true, location_name: "MaxParallelExecutionSteps"))
     ParallelismConfiguration.struct_class = Types::ParallelismConfiguration
 
@@ -8700,18 +8810,47 @@ module Aws::SageMaker
     SourceIpConfig.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, required: true, location_name: "Cidrs"))
     SourceIpConfig.struct_class = Types::SourceIpConfig
 
+    SpaceCodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    SpaceCodeEditorAppSettings.struct_class = Types::SpaceCodeEditorAppSettings
+
     SpaceDetails.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     SpaceDetails.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, location_name: "SpaceName"))
     SpaceDetails.add_member(:status, Shapes::ShapeRef.new(shape: SpaceStatus, location_name: "Status"))
     SpaceDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     SpaceDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
+    SpaceDetails.add_member(:space_display_name, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "SpaceDisplayName"))
+    SpaceDetails.add_member(:space_settings_summary, Shapes::ShapeRef.new(shape: SpaceSettingsSummary, location_name: "SpaceSettingsSummary"))
+    SpaceDetails.add_member(:space_sharing_settings_summary, Shapes::ShapeRef.new(shape: SpaceSharingSettingsSummary, location_name: "SpaceSharingSettingsSummary"))
+    SpaceDetails.add_member(:ownership_settings_summary, Shapes::ShapeRef.new(shape: OwnershipSettingsSummary, location_name: "OwnershipSettingsSummary"))
     SpaceDetails.struct_class = Types::SpaceDetails
+
+    SpaceJupyterLabAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    SpaceJupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
+    SpaceJupyterLabAppSettings.struct_class = Types::SpaceJupyterLabAppSettings
 
     SpaceList.member = Shapes::ShapeRef.new(shape: SpaceDetails)
 
     SpaceSettings.add_member(:jupyter_server_app_settings, Shapes::ShapeRef.new(shape: JupyterServerAppSettings, location_name: "JupyterServerAppSettings"))
     SpaceSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
+    SpaceSettings.add_member(:jupyter_lab_app_settings, Shapes::ShapeRef.new(shape: SpaceJupyterLabAppSettings, location_name: "JupyterLabAppSettings"))
+    SpaceSettings.add_member(:code_editor_app_settings, Shapes::ShapeRef.new(shape: SpaceCodeEditorAppSettings, location_name: "CodeEditorAppSettings"))
+    SpaceSettings.add_member(:space_storage_settings, Shapes::ShapeRef.new(shape: SpaceStorageSettings, location_name: "SpaceStorageSettings"))
+    SpaceSettings.add_member(:app_type, Shapes::ShapeRef.new(shape: AppType, location_name: "AppType"))
+    SpaceSettings.add_member(:custom_file_systems, Shapes::ShapeRef.new(shape: CustomFileSystems, location_name: "CustomFileSystems"))
     SpaceSettings.struct_class = Types::SpaceSettings
+
+    SpaceSettingsSummary.add_member(:app_type, Shapes::ShapeRef.new(shape: AppType, location_name: "AppType"))
+    SpaceSettingsSummary.add_member(:space_storage_settings, Shapes::ShapeRef.new(shape: SpaceStorageSettings, location_name: "SpaceStorageSettings"))
+    SpaceSettingsSummary.struct_class = Types::SpaceSettingsSummary
+
+    SpaceSharingSettings.add_member(:sharing_type, Shapes::ShapeRef.new(shape: SharingType, required: true, location_name: "SharingType"))
+    SpaceSharingSettings.struct_class = Types::SpaceSharingSettings
+
+    SpaceSharingSettingsSummary.add_member(:sharing_type, Shapes::ShapeRef.new(shape: SharingType, location_name: "SharingType"))
+    SpaceSharingSettingsSummary.struct_class = Types::SpaceSharingSettingsSummary
+
+    SpaceStorageSettings.add_member(:ebs_storage_settings, Shapes::ShapeRef.new(shape: EbsStorageSettings, location_name: "EbsStorageSettings"))
+    SpaceStorageSettings.struct_class = Types::SpaceStorageSettings
 
     Stairs.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: TrafficDurationInSeconds, location_name: "DurationInSeconds"))
     Stairs.add_member(:number_of_steps, Shapes::ShapeRef.new(shape: NumberOfSteps, location_name: "NumberOfSteps"))
@@ -9248,6 +9387,7 @@ module Aws::SageMaker
 
     UpdateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
     UpdateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
+    UpdateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
     UpdateAppImageConfigRequest.struct_class = Types::UpdateAppImageConfigRequest
 
     UpdateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -9505,6 +9645,7 @@ module Aws::SageMaker
     UpdateSpaceRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     UpdateSpaceRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, required: true, location_name: "SpaceName"))
     UpdateSpaceRequest.add_member(:space_settings, Shapes::ShapeRef.new(shape: SpaceSettings, location_name: "SpaceSettings"))
+    UpdateSpaceRequest.add_member(:space_display_name, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "SpaceDisplayName"))
     UpdateSpaceRequest.struct_class = Types::UpdateSpaceRequest
 
     UpdateSpaceResponse.add_member(:space_arn, Shapes::ShapeRef.new(shape: SpaceArn, location_name: "SpaceArn"))
@@ -9592,8 +9733,13 @@ module Aws::SageMaker
     UserSettings.add_member(:r_studio_server_pro_app_settings, Shapes::ShapeRef.new(shape: RStudioServerProAppSettings, location_name: "RStudioServerProAppSettings"))
     UserSettings.add_member(:r_session_app_settings, Shapes::ShapeRef.new(shape: RSessionAppSettings, location_name: "RSessionAppSettings"))
     UserSettings.add_member(:canvas_app_settings, Shapes::ShapeRef.new(shape: CanvasAppSettings, location_name: "CanvasAppSettings"))
+    UserSettings.add_member(:jupyter_lab_app_settings, Shapes::ShapeRef.new(shape: JupyterLabAppSettings, location_name: "JupyterLabAppSettings"))
+    UserSettings.add_member(:code_editor_app_settings, Shapes::ShapeRef.new(shape: CodeEditorAppSettings, location_name: "CodeEditorAppSettings"))
+    UserSettings.add_member(:space_storage_settings, Shapes::ShapeRef.new(shape: DefaultSpaceStorageSettings, location_name: "SpaceStorageSettings"))
     UserSettings.add_member(:default_landing_uri, Shapes::ShapeRef.new(shape: LandingUri, location_name: "DefaultLandingUri"))
     UserSettings.add_member(:studio_web_portal, Shapes::ShapeRef.new(shape: StudioWebPortal, location_name: "StudioWebPortal"))
+    UserSettings.add_member(:custom_posix_user_config, Shapes::ShapeRef.new(shape: CustomPosixUserConfig, location_name: "CustomPosixUserConfig"))
+    UserSettings.add_member(:custom_file_system_configs, Shapes::ShapeRef.new(shape: CustomFileSystemConfigs, location_name: "CustomFileSystemConfigs"))
     UserSettings.struct_class = Types::UserSettings
 
     VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))

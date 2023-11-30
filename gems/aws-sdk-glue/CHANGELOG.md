@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2023-11-30)
+------------------
+
+* Feature - Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+
 1.163.0 (2023-11-28)
 ------------------
 

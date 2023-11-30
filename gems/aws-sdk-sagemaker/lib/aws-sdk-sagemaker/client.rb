@@ -1048,7 +1048,7 @@ module Aws::SageMaker
     #   resp = client.create_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway, JupyterLab, CodeEditor
     #     app_name: "AppName", # required
     #     tags: [
     #       {
@@ -1096,6 +1096,12 @@ module Aws::SageMaker
     #   image starts. Once the image runs, all kernels are visible in
     #   JupyterLab.
     #
+    # @option params [Types::JupyterLabAppImageConfig] :jupyter_lab_app_image_config
+    #   The `JupyterLabAppImageConfig`. You can only specify one image kernel
+    #   in the `AppImageConfig` API. This kernel is shown to users before the
+    #   image starts. After the image runs, all kernels are visible in
+    #   JupyterLab.
+    #
     # @return [Types::CreateAppImageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppImageConfigResponse#app_image_config_arn #app_image_config_arn} => String
@@ -1121,6 +1127,15 @@ module Aws::SageMaker
     #         mount_path: "MountPath",
     #         default_uid: 1,
     #         default_gid: 1,
+    #       },
+    #     },
+    #     jupyter_lab_app_image_config: {
+    #       container_config: {
+    #         container_arguments: ["NonEmptyString64"],
+    #         container_entrypoint: ["NonEmptyString256"],
+    #         container_environment_variables: {
+    #           "NonEmptyString256" => "String256",
+    #         },
     #       },
     #     },
     #   })
@@ -2493,8 +2508,58 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #       space_storage_settings: {
+    #         default_ebs_storage_settings: {
+    #           default_ebs_volume_size_in_gb: 1, # required
+    #           maximum_ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
     #       default_landing_uri: "LandingUri",
     #       studio_web_portal: "ENABLED", # accepts ENABLED, DISABLED
+    #       custom_posix_user_config: {
+    #         uid: 1, # required
+    #         gid: 1, # required
+    #       },
+    #       custom_file_system_configs: [
+    #         {
+    #           efs_file_system_config: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_path: "FileSystemPath",
+    #           },
+    #         },
+    #       ],
     #     },
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
@@ -7384,6 +7449,15 @@ module Aws::SageMaker
     # @option params [Types::SpaceSettings] :space_settings
     #   A collection of space settings.
     #
+    # @option params [String] :space_display_name
+    #   The name of the space that appears in the SageMaker Studio UI.
+    #
+    # @option params [Types::OwnershipSettings] :ownership_settings
+    #   A collection of ownership settings.
+    #
+    # @option params [Types::SpaceSharingSettings] :space_sharing_settings
+    #   A collection of space sharing settings.
+    #
     # @return [Types::CreateSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSpaceResponse#space_arn #space_arn} => String
@@ -7432,6 +7506,49 @@ module Aws::SageMaker
     #         ],
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       },
+    #       space_storage_settings: {
+    #         ebs_storage_settings: {
+    #           ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway, JupyterLab, CodeEditor
+    #       custom_file_systems: [
+    #         {
+    #           efs_file_system: {
+    #             file_system_id: "FileSystemId", # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     space_display_name: "NonEmptyString64",
+    #     ownership_settings: {
+    #       owner_user_profile_name: "UserProfileName", # required
+    #     },
+    #     space_sharing_settings: {
+    #       sharing_type: "Private", # required, accepts Private, Shared
     #     },
     #   })
     #
@@ -7475,7 +7592,7 @@ module Aws::SageMaker
     #   resp = client.create_studio_lifecycle_config({
     #     studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
     #     studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
-    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway
+    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, JupyterLab, CodeEditor
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -8552,8 +8669,58 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #       space_storage_settings: {
+    #         default_ebs_storage_settings: {
+    #           default_ebs_volume_size_in_gb: 1, # required
+    #           maximum_ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
     #       default_landing_uri: "LandingUri",
     #       studio_web_portal: "ENABLED", # accepts ENABLED, DISABLED
+    #       custom_posix_user_config: {
+    #         uid: 1, # required
+    #         gid: 1, # required
+    #       },
+    #       custom_file_system_configs: [
+    #         {
+    #           efs_file_system_config: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_path: "FileSystemPath",
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -8865,7 +9032,7 @@ module Aws::SageMaker
     #   resp = client.delete_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway, JupyterLab, CodeEditor
     #     app_name: "AppName", # required
     #     space_name: "SpaceName",
     #   })
@@ -10426,7 +10593,7 @@ module Aws::SageMaker
     #   resp = client.describe_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway, JupyterLab, CodeEditor
     #     app_name: "AppName", # required
     #     space_name: "SpaceName",
     #   })
@@ -10434,7 +10601,7 @@ module Aws::SageMaker
     # @example Response structure
     #
     #   resp.app_arn #=> String
-    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway"
+    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway", "JupyterLab", "CodeEditor"
     #   resp.app_name #=> String
     #   resp.domain_id #=> String
     #   resp.user_profile_name #=> String
@@ -10471,6 +10638,7 @@ module Aws::SageMaker
     #   * {Types::DescribeAppImageConfigResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeAppImageConfigResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeAppImageConfigResponse#kernel_gateway_image_config #kernel_gateway_image_config} => Types::KernelGatewayImageConfig
+    #   * {Types::DescribeAppImageConfigResponse#jupyter_lab_app_image_config #jupyter_lab_app_image_config} => Types::JupyterLabAppImageConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -10490,6 +10658,12 @@ module Aws::SageMaker
     #   resp.kernel_gateway_image_config.file_system_config.mount_path #=> String
     #   resp.kernel_gateway_image_config.file_system_config.default_uid #=> Integer
     #   resp.kernel_gateway_image_config.file_system_config.default_gid #=> Integer
+    #   resp.jupyter_lab_app_image_config.container_config.container_arguments #=> Array
+    #   resp.jupyter_lab_app_image_config.container_config.container_arguments[0] #=> String
+    #   resp.jupyter_lab_app_image_config.container_config.container_entrypoint #=> Array
+    #   resp.jupyter_lab_app_image_config.container_config.container_entrypoint[0] #=> String
+    #   resp.jupyter_lab_app_image_config.container_config.container_environment_variables #=> Hash
+    #   resp.jupyter_lab_app_image_config.container_config.container_environment_variables["NonEmptyString256"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfig AWS API Documentation
     #
@@ -11458,8 +11632,35 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.default_user_settings.jupyter_lab_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.custom_images #=> Array
+    #   resp.default_user_settings.jupyter_lab_app_settings.custom_images[0].image_name #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.default_user_settings.jupyter_lab_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.lifecycle_config_arns #=> Array
+    #   resp.default_user_settings.jupyter_lab_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.code_repositories #=> Array
+    #   resp.default_user_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.default_user_settings.code_editor_app_settings.lifecycle_config_arns #=> Array
+    #   resp.default_user_settings.code_editor_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.default_user_settings.space_storage_settings.default_ebs_storage_settings.default_ebs_volume_size_in_gb #=> Integer
+    #   resp.default_user_settings.space_storage_settings.default_ebs_storage_settings.maximum_ebs_volume_size_in_gb #=> Integer
     #   resp.default_user_settings.default_landing_uri #=> String
     #   resp.default_user_settings.studio_web_portal #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.custom_posix_user_config.uid #=> Integer
+    #   resp.default_user_settings.custom_posix_user_config.gid #=> Integer
+    #   resp.default_user_settings.custom_file_system_configs #=> Array
+    #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
+    #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14579,6 +14780,9 @@ module Aws::SageMaker
     #   * {Types::DescribeSpaceResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeSpaceResponse#space_settings #space_settings} => Types::SpaceSettings
     #   * {Types::DescribeSpaceResponse#url #url} => String
+    #   * {Types::DescribeSpaceResponse#space_display_name #space_display_name} => String
+    #   * {Types::DescribeSpaceResponse#ownership_settings #ownership_settings} => Types::OwnershipSettings
+    #   * {Types::DescribeSpaceResponse#space_sharing_settings #space_sharing_settings} => Types::SpaceSharingSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -14617,7 +14821,26 @@ module Aws::SageMaker
     #   resp.space_settings.kernel_gateway_app_settings.custom_images[0].app_image_config_name #=> String
     #   resp.space_settings.kernel_gateway_app_settings.lifecycle_config_arns #=> Array
     #   resp.space_settings.kernel_gateway_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.space_settings.jupyter_lab_app_settings.code_repositories #=> Array
+    #   resp.space_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.space_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.space_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.space_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.space_settings.code_editor_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.space_settings.code_editor_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.space_settings.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
+    #   resp.space_settings.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway", "JupyterLab", "CodeEditor"
+    #   resp.space_settings.custom_file_systems #=> Array
+    #   resp.space_settings.custom_file_systems[0].efs_file_system.file_system_id #=> String
     #   resp.url #=> String
+    #   resp.space_display_name #=> String
+    #   resp.ownership_settings.owner_user_profile_name #=> String
+    #   resp.space_sharing_settings.sharing_type #=> String, one of "Private", "Shared"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpace AWS API Documentation
     #
@@ -14656,7 +14879,7 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.studio_lifecycle_config_content #=> String
-    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway"
+    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "JupyterLab", "CodeEditor"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfig AWS API Documentation
     #
@@ -15261,8 +15484,35 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.user_settings.jupyter_lab_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.custom_images #=> Array
+    #   resp.user_settings.jupyter_lab_app_settings.custom_images[0].image_name #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.custom_images[0].image_version_number #=> Integer
+    #   resp.user_settings.jupyter_lab_app_settings.custom_images[0].app_image_config_name #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.lifecycle_config_arns #=> Array
+    #   resp.user_settings.jupyter_lab_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.code_repositories #=> Array
+    #   resp.user_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.user_settings.code_editor_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.user_settings.code_editor_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.user_settings.code_editor_app_settings.lifecycle_config_arns #=> Array
+    #   resp.user_settings.code_editor_app_settings.lifecycle_config_arns[0] #=> String
+    #   resp.user_settings.space_storage_settings.default_ebs_storage_settings.default_ebs_volume_size_in_gb #=> Integer
+    #   resp.user_settings.space_storage_settings.default_ebs_storage_settings.maximum_ebs_volume_size_in_gb #=> Integer
     #   resp.user_settings.default_landing_uri #=> String
     #   resp.user_settings.studio_web_portal #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.custom_posix_user_config.uid #=> Integer
+    #   resp.user_settings.custom_posix_user_config.gid #=> Integer
+    #   resp.user_settings.custom_file_system_configs #=> Array
+    #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
+    #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -16071,6 +16321,12 @@ module Aws::SageMaker
     #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.mount_path #=> String
     #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.default_uid #=> Integer
     #   resp.app_image_configs[0].kernel_gateway_image_config.file_system_config.default_gid #=> Integer
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_arguments #=> Array
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_arguments[0] #=> String
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_entrypoint #=> Array
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_entrypoint[0] #=> String
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_environment_variables #=> Hash
+    #   resp.app_image_configs[0].jupyter_lab_app_image_config.container_config.container_environment_variables["NonEmptyString256"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAppImageConfigs AWS API Documentation
     #
@@ -16136,11 +16392,16 @@ module Aws::SageMaker
     #   resp.apps #=> Array
     #   resp.apps[0].domain_id #=> String
     #   resp.apps[0].user_profile_name #=> String
-    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway"
+    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway", "JupyterLab", "CodeEditor"
     #   resp.apps[0].app_name #=> String
     #   resp.apps[0].status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
     #   resp.apps[0].creation_time #=> Time
     #   resp.apps[0].space_name #=> String
+    #   resp.apps[0].resource_spec.sage_maker_image_arn #=> String
+    #   resp.apps[0].resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.apps[0].resource_spec.sage_maker_image_version_alias #=> String
+    #   resp.apps[0].resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.apps[0].resource_spec.lifecycle_config_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListApps AWS API Documentation
@@ -20663,6 +20924,11 @@ module Aws::SageMaker
     #   resp.spaces[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.spaces[0].creation_time #=> Time
     #   resp.spaces[0].last_modified_time #=> Time
+    #   resp.spaces[0].space_display_name #=> String
+    #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway", "JupyterLab", "CodeEditor"
+    #   resp.spaces[0].space_settings_summary.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
+    #   resp.spaces[0].space_sharing_settings_summary.sharing_type #=> String, one of "Private", "Shared"
+    #   resp.spaces[0].ownership_settings_summary.owner_user_profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSpaces AWS API Documentation
@@ -20793,7 +21059,7 @@ module Aws::SageMaker
     #     max_results: 1,
     #     next_token: "NextToken",
     #     name_contains: "StudioLifecycleConfigName",
-    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway
+    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway, JupyterLab, CodeEditor
     #     creation_time_before: Time.now,
     #     creation_time_after: Time.now,
     #     modified_time_before: Time.now,
@@ -20810,7 +21076,7 @@ module Aws::SageMaker
     #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_name #=> String
     #   resp.studio_lifecycle_configs[0].creation_time #=> Time
     #   resp.studio_lifecycle_configs[0].last_modified_time #=> Time
-    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway"
+    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "JupyterLab", "CodeEditor"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigs AWS API Documentation
     #
@@ -22757,6 +23023,9 @@ module Aws::SageMaker
     # @option params [Types::KernelGatewayImageConfig] :kernel_gateway_image_config
     #   The new KernelGateway app to run on the image.
     #
+    # @option params [Types::JupyterLabAppImageConfig] :jupyter_lab_app_image_config
+    #   The JupyterLab app running on the image.
+    #
     # @return [Types::UpdateAppImageConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppImageConfigResponse#app_image_config_arn #app_image_config_arn} => String
@@ -22776,6 +23045,15 @@ module Aws::SageMaker
     #         mount_path: "MountPath",
     #         default_uid: 1,
     #         default_gid: 1,
+    #       },
+    #     },
+    #     jupyter_lab_app_image_config: {
+    #       container_config: {
+    #         container_arguments: ["NonEmptyString64"],
+    #         container_entrypoint: ["NonEmptyString256"],
+    #         container_environment_variables: {
+    #           "NonEmptyString256" => "String256",
+    #         },
     #       },
     #     },
     #   })
@@ -23190,8 +23468,58 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #       space_storage_settings: {
+    #         default_ebs_storage_settings: {
+    #           default_ebs_volume_size_in_gb: 1, # required
+    #           maximum_ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
     #       default_landing_uri: "LandingUri",
     #       studio_web_portal: "ENABLED", # accepts ENABLED, DISABLED
+    #       custom_posix_user_config: {
+    #         uid: 1, # required
+    #         gid: 1, # required
+    #       },
+    #       custom_file_system_configs: [
+    #         {
+    #           efs_file_system_config: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_path: "FileSystemPath",
+    #           },
+    #         },
+    #       ],
     #     },
     #     domain_settings_for_update: {
     #       r_studio_server_pro_domain_settings_for_update: {
@@ -24703,6 +25031,9 @@ module Aws::SageMaker
     # @option params [Types::SpaceSettings] :space_settings
     #   A collection of space settings.
     #
+    # @option params [String] :space_display_name
+    #   The name of the space that appears in the Amazon SageMaker Studio UI.
+    #
     # @return [Types::UpdateSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSpaceResponse#space_arn #space_arn} => String
@@ -24745,7 +25076,44 @@ module Aws::SageMaker
     #         ],
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       },
+    #       space_storage_settings: {
+    #         ebs_storage_settings: {
+    #           ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway, JupyterLab, CodeEditor
+    #       custom_file_systems: [
+    #         {
+    #           efs_file_system: {
+    #             file_system_id: "FileSystemId", # required
+    #           },
+    #         },
+    #       ],
     #     },
+    #     space_display_name: "NonEmptyString64",
     #   })
     #
     # @example Response structure
@@ -25073,8 +25441,58 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       },
+    #       jupyter_lab_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #         code_repositories: [
+    #           {
+    #             repository_url: "RepositoryUrl", # required
+    #           },
+    #         ],
+    #       },
+    #       code_editor_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           sage_maker_image_version_alias: "ImageVersionAlias",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.geospatial.interactive, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
+    #       },
+    #       space_storage_settings: {
+    #         default_ebs_storage_settings: {
+    #           default_ebs_volume_size_in_gb: 1, # required
+    #           maximum_ebs_volume_size_in_gb: 1, # required
+    #         },
+    #       },
     #       default_landing_uri: "LandingUri",
     #       studio_web_portal: "ENABLED", # accepts ENABLED, DISABLED
+    #       custom_posix_user_config: {
+    #         uid: 1, # required
+    #         gid: 1, # required
+    #       },
+    #       custom_file_system_configs: [
+    #         {
+    #           efs_file_system_config: {
+    #             file_system_id: "FileSystemId", # required
+    #             file_system_path: "FileSystemPath",
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -25331,7 +25749,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.223.0'
+      context[:gem_version] = '1.224.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -948,6 +948,21 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].analyzer_results #=> Array
+    #   resp.results[0].analyzer_results[0].name #=> String
+    #   resp.results[0].analyzer_results[0].description #=> String
+    #   resp.results[0].analyzer_results[0].evaluation_message #=> String
+    #   resp.results[0].analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].observations #=> Array
+    #   resp.results[0].observations[0].description #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.results[0].observations[0].metric_based_observation.new_rules[0] #=> String
     #   resp.results_not_found #=> Array
     #   resp.results_not_found[0] #=> String
     #
@@ -6735,6 +6750,8 @@ module Aws::Glue
     #   * {Types::GetDataQualityResultResponse#job_run_id #job_run_id} => String
     #   * {Types::GetDataQualityResultResponse#ruleset_evaluation_run_id #ruleset_evaluation_run_id} => String
     #   * {Types::GetDataQualityResultResponse#rule_results #rule_results} => Array&lt;Types::DataQualityRuleResult&gt;
+    #   * {Types::GetDataQualityResultResponse#analyzer_results #analyzer_results} => Array&lt;Types::DataQualityAnalyzerResult&gt;
+    #   * {Types::GetDataQualityResultResponse#observations #observations} => Array&lt;Types::DataQualityObservation&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6766,6 +6783,21 @@ module Aws::Glue
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.rule_results[0].evaluated_metrics #=> Hash
     #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.analyzer_results #=> Array
+    #   resp.analyzer_results[0].name #=> String
+    #   resp.analyzer_results[0].description #=> String
+    #   resp.analyzer_results[0].evaluation_message #=> String
+    #   resp.analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.observations #=> Array
+    #   resp.observations[0].description #=> String
+    #   resp.observations[0].metric_based_observation.metric_name #=> String
+    #   resp.observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.observations[0].metric_based_observation.new_rules[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
     #
@@ -16891,7 +16923,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

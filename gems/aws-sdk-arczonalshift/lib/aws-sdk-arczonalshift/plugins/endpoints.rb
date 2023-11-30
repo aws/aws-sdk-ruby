@@ -59,14 +59,24 @@ module Aws::ARCZonalShift
           case context.operation_name
           when :cancel_zonal_shift
             Aws::ARCZonalShift::Endpoints::CancelZonalShift.build(context)
+          when :create_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::CreatePracticeRunConfiguration.build(context)
+          when :delete_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::DeletePracticeRunConfiguration.build(context)
           when :get_managed_resource
             Aws::ARCZonalShift::Endpoints::GetManagedResource.build(context)
+          when :list_autoshifts
+            Aws::ARCZonalShift::Endpoints::ListAutoshifts.build(context)
           when :list_managed_resources
             Aws::ARCZonalShift::Endpoints::ListManagedResources.build(context)
           when :list_zonal_shifts
             Aws::ARCZonalShift::Endpoints::ListZonalShifts.build(context)
           when :start_zonal_shift
             Aws::ARCZonalShift::Endpoints::StartZonalShift.build(context)
+          when :update_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::UpdatePracticeRunConfiguration.build(context)
+          when :update_zonal_autoshift_configuration
+            Aws::ARCZonalShift::Endpoints::UpdateZonalAutoshiftConfiguration.build(context)
           when :update_zonal_shift
             Aws::ARCZonalShift::Endpoints::UpdateZonalShift.build(context)
           end

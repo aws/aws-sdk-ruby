@@ -6160,6 +6160,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Describes the result of the evaluation of a data quality analyzer.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_message
+    #   An evaluation message.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluated_metrics
+    #   A map of metrics associated with the evaluation of the analyzer.
+    #   @return [Hash<String,Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityAnalyzerResult AWS API Documentation
+    #
+    class DataQualityAnalyzerResult < Struct.new(
+      :name,
+      :description,
+      :evaluation_message,
+      :evaluated_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional run options you can specify for an evaluation run.
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
@@ -6175,6 +6204,60 @@ module Aws::Glue
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       :cloud_watch_metrics_enabled,
       :results_s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data quality metric value according to the analysis of
+    # historical data.
+    #
+    # @!attribute [rw] actual_value
+    #   The actual value of the data quality metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] expected_value
+    #   The expected value of the data quality metric according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lower_limit
+    #   The lower limit of the data quality metric value according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_limit
+    #   The upper limit of the data quality metric value according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityMetricValues AWS API Documentation
+    #
+    class DataQualityMetricValues < Struct.new(
+      :actual_value,
+      :expected_value,
+      :lower_limit,
+      :upper_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the observation generated after evaluating the rules and
+    # analyzers.
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_based_observation
+    #   An object of type `MetricBasedObservation` representing the
+    #   observation that is based on evaluated data quality metrics.
+    #   @return [Types::MetricBasedObservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityObservation AWS API Documentation
+    #
+    class DataQualityObservation < Struct.new(
+      :description,
+      :metric_based_observation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6231,6 +6314,16 @@ module Aws::Glue
     #   for each rule.
     #   @return [Array<Types::DataQualityRuleResult>]
     #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the
+    #   observations generated after evaluating the rules and analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResult AWS API Documentation
     #
     class DataQualityResult < Struct.new(
@@ -6244,7 +6337,9 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :ruleset_evaluation_run_id,
-      :rule_results)
+      :rule_results,
+      :analyzer_results,
+      :observations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9527,6 +9622,16 @@ module Aws::Glue
     #   for each rule.
     #   @return [Array<Types::DataQualityRuleResult>]
     #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the
+    #   observations generated after evaluating the rules and analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultResponse AWS API Documentation
     #
     class GetDataQualityResultResponse < Struct.new(
@@ -9540,7 +9645,9 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :ruleset_evaluation_run_id,
-      :rule_results)
+      :rule_results,
+      :analyzer_results,
+      :observations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15740,6 +15847,34 @@ module Aws::Glue
     class MetadataKeyValuePair < Struct.new(
       :metadata_key,
       :metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the metric based observation generated based on evaluated
+    # data quality metrics.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the data quality metric used for generating the
+    #   observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_values
+    #   An object of type `DataQualityMetricValues` representing the
+    #   analysis of the data quality metric value.
+    #   @return [Types::DataQualityMetricValues]
+    #
+    # @!attribute [rw] new_rules
+    #   A list of new data quality rules generated as part of the
+    #   observation based on the data quality metric value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MetricBasedObservation AWS API Documentation
+    #
+    class MetricBasedObservation < Struct.new(
+      :metric_name,
+      :metric_values,
+      :new_rules)
       SENSITIVE = []
       include Aws::Structure
     end

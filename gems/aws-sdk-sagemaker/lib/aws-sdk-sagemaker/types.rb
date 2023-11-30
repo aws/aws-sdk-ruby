@@ -1287,6 +1287,11 @@ module Aws::SageMaker
     #   The name of the space.
     #   @return [String]
     #
+    # @!attribute [rw] resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppDetails AWS API Documentation
     #
     class AppDetails < Struct.new(
@@ -1296,7 +1301,8 @@ module Aws::SageMaker
       :app_name,
       :status,
       :creation_time,
-      :space_name)
+      :space_name,
+      :resource_spec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1325,6 +1331,11 @@ module Aws::SageMaker
     #   image.
     #   @return [Types::KernelGatewayImageConfig]
     #
+    # @!attribute [rw] jupyter_lab_app_image_config
+    #   The configuration for the file system and the runtime, such as the
+    #   environment variables and entry point.
+    #   @return [Types::JupyterLabAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppImageConfigDetails AWS API Documentation
     #
     class AppImageConfigDetails < Struct.new(
@@ -1332,7 +1343,8 @@ module Aws::SageMaker
       :app_image_config_name,
       :creation_time,
       :last_modified_time,
-      :kernel_gateway_image_config)
+      :kernel_gateway_image_config,
+      :jupyter_lab_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4169,6 +4181,34 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The Code Editor application settings.
+    #
+    # For more information about Code Editor, see [Get started with Code
+    # Editor in Amazon SageMaker][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the Code Editor application
+    #   lifecycle configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppSettings AWS API Documentation
+    #
+    class CodeEditorAppSettings < Struct.new(
+      :default_resource_spec,
+      :lifecycle_config_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Git repository that SageMaker automatically displays to users for
     # cloning in the JupyterServer application.
     #
@@ -4423,6 +4463,31 @@ module Aws::SageMaker
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration used to run the application image container.
+    #
+    # @!attribute [rw] container_arguments
+    #   The arguments for the container when you're running the
+    #   application.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] container_entrypoint
+    #   The entrypoint used to run the application in the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] container_environment_variables
+    #   The environment variables to set in the container
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerConfig AWS API Documentation
+    #
+    class ContainerConfig < Struct.new(
+      :container_arguments,
+      :container_entrypoint,
+      :container_environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4908,12 +4973,20 @@ module Aws::SageMaker
     #   JupyterLab.
     #   @return [Types::KernelGatewayImageConfig]
     #
+    # @!attribute [rw] jupyter_lab_app_image_config
+    #   The `JupyterLabAppImageConfig`. You can only specify one image
+    #   kernel in the `AppImageConfig` API. This kernel is shown to users
+    #   before the image starts. After the image runs, all kernels are
+    #   visible in JupyterLab.
+    #   @return [Types::JupyterLabAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigRequest AWS API Documentation
     #
     class CreateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       :tags,
-      :kernel_gateway_image_config)
+      :kernel_gateway_image_config,
+      :jupyter_lab_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8541,13 +8614,28 @@ module Aws::SageMaker
     #   A collection of space settings.
     #   @return [Types::SpaceSettings]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the SageMaker Studio UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] ownership_settings
+    #   A collection of ownership settings.
+    #   @return [Types::OwnershipSettings]
+    #
+    # @!attribute [rw] space_sharing_settings
+    #   A collection of space sharing settings.
+    #   @return [Types::SpaceSharingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateSpaceRequest AWS API Documentation
     #
     class CreateSpaceRequest < Struct.new(
       :domain_id,
       :space_name,
       :tags,
-      :space_settings)
+      :space_settings,
+      :space_display_name,
+      :ownership_settings,
+      :space_sharing_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9412,6 +9500,56 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A file system, created by you, that you assign to a user profile or
+    # space for an Amazon SageMaker Domain. Permitted users can access this
+    # file system in Amazon SageMaker Studio.
+    #
+    # @note CustomFileSystem is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CustomFileSystem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomFileSystem corresponding to the set member.
+    #
+    # @!attribute [rw] efs_file_system
+    #   A custom file system in Amazon EFS.
+    #   @return [Types::EFSFileSystem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomFileSystem AWS API Documentation
+    #
+    class CustomFileSystem < Struct.new(
+      :efs_file_system,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EfsFileSystem < CustomFileSystem; end
+      class Unknown < CustomFileSystem; end
+    end
+
+    # The settings for assigning a custom file system to a user profile or
+    # space for an Amazon SageMaker Domain. Permitted users can access this
+    # file system in Amazon SageMaker Studio.
+    #
+    # @note CustomFileSystemConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CustomFileSystemConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomFileSystemConfig corresponding to the set member.
+    #
+    # @!attribute [rw] efs_file_system_config
+    #   The settings for a custom Amazon EFS file system.
+    #   @return [Types::EFSFileSystemConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomFileSystemConfig AWS API Documentation
+    #
+    class CustomFileSystemConfig < Struct.new(
+      :efs_file_system_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EfsFileSystemConfig < CustomFileSystemConfig; end
+      class Unknown < CustomFileSystemConfig; end
+    end
+
     # A custom SageMaker image. For more information, see [Bring your own
     # SageMaker image][1].
     #
@@ -9437,6 +9575,26 @@ module Aws::SageMaker
       :image_name,
       :image_version_number,
       :app_image_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the POSIX identity that is used for file system
+    # operations.
+    #
+    # @!attribute [rw] uid
+    #   The POSIX user ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gid
+    #   The POSIX group ID.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomPosixUserConfig AWS API Documentation
+    #
+    class CustomPosixUserConfig < Struct.new(
+      :uid,
+      :gid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9959,6 +10117,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A collection of default EBS storage settings that applies to private
+    # spaces created within a domain or user profile.
+    #
+    # @!attribute [rw] default_ebs_volume_size_in_gb
+    #   The default size of the EBS storage volume for a private space.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_ebs_volume_size_in_gb
+    #   The maximum size of the EBS storage volume for a private space.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultEbsStorageSettings AWS API Documentation
+    #
+    class DefaultEbsStorageSettings < Struct.new(
+      :default_ebs_volume_size_in_gb,
+      :maximum_ebs_volume_size_in_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A collection of settings that apply to spaces created in the Domain.
     #
     # @!attribute [rw] execution_role
@@ -9985,6 +10163,20 @@ module Aws::SageMaker
       :security_groups,
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default storage settings for a private space.
+    #
+    # @!attribute [rw] default_ebs_storage_settings
+    #   The default EBS storage settings for a private space.
+    #   @return [Types::DefaultEbsStorageSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceStorageSettings AWS API Documentation
+    #
+    class DefaultSpaceStorageSettings < Struct.new(
+      :default_ebs_storage_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11211,6 +11403,10 @@ module Aws::SageMaker
     #   The configuration of a KernelGateway app.
     #   @return [Types::KernelGatewayImageConfig]
     #
+    # @!attribute [rw] jupyter_lab_app_image_config
+    #   The configuration of the JupyterLab app.
+    #   @return [Types::JupyterLabAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigResponse AWS API Documentation
     #
     class DescribeAppImageConfigResponse < Struct.new(
@@ -11218,7 +11414,8 @@ module Aws::SageMaker
       :app_image_config_name,
       :creation_time,
       :last_modified_time,
-      :kernel_gateway_image_config)
+      :kernel_gateway_image_config,
+      :jupyter_lab_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15899,6 +16096,19 @@ module Aws::SageMaker
     #   * JupyterLab: `&redirect=JupyterLab`
     #   @return [String]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the Amazon SageMaker Studio
+    #   UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] ownership_settings
+    #   The collection of ownership settings for a space.
+    #   @return [Types::OwnershipSettings]
+    #
+    # @!attribute [rw] space_sharing_settings
+    #   The collection of space sharing settings for a space.
+    #   @return [Types::SpaceSharingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpaceResponse AWS API Documentation
     #
     class DescribeSpaceResponse < Struct.new(
@@ -15911,7 +16121,10 @@ module Aws::SageMaker
       :creation_time,
       :failure_reason,
       :space_settings,
-      :url)
+      :url,
+      :space_display_name,
+      :ownership_settings,
+      :space_sharing_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17480,6 +17693,44 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A file system, created by you in Amazon EFS, that you assign to a user
+    # profile or space for an Amazon SageMaker Domain. Permitted users can
+    # access this file system in Amazon SageMaker Studio.
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of your Amazon EFS file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EFSFileSystem AWS API Documentation
+    #
+    class EFSFileSystem < Struct.new(
+      :file_system_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for assigning a custom Amazon EFS file system to a user
+    # profile or space for an Amazon SageMaker Domain.
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of your Amazon EFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_path
+    #   The path to the file system directory that is accessible in Amazon
+    #   SageMaker Studio. Permitted users can access only this directory and
+    #   below.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EFSFileSystemConfig AWS API Documentation
+    #
+    class EFSFileSystemConfig < Struct.new(
+      :file_system_id,
+      :file_system_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations and outcomes of an Amazon EMR step execution.
     #
     # @!attribute [rw] cluster_id
@@ -17506,6 +17757,20 @@ module Aws::SageMaker
       :step_id,
       :step_name,
       :log_file_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of EBS storage settings that applies to private spaces.
+    #
+    # @!attribute [rw] ebs_volume_size_in_gb
+    #   The size of an EBS storage volume for a private space.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EbsStorageSettings AWS API Documentation
+    #
+    class EbsStorageSettings < Struct.new(
+      :ebs_volume_size_in_gb)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23298,6 +23563,55 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the file system and kernels in a SageMaker image
+    # running as a JupyterLab app.
+    #
+    # @!attribute [rw] container_config
+    #   The configuration used to run the application image container.
+    #   @return [Types::ContainerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterLabAppImageConfig AWS API Documentation
+    #
+    class JupyterLabAppImageConfig < Struct.new(
+      :container_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for the JupyterLab application.
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] custom_images
+    #   A list of custom SageMaker images that are configured to run as a
+    #   JupyterLab app.
+    #   @return [Array<Types::CustomImage>]
+    #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the lifecycle configurations
+    #   attached to the user profile or domain. To remove a lifecycle
+    #   config, you must set `LifecycleConfigArns` to an empty list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] code_repositories
+    #   A list of Git repositories that SageMaker automatically displays to
+    #   users for cloning in the JupyterLab application.
+    #   @return [Array<Types::CodeRepository>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterLabAppSettings AWS API Documentation
+    #
+    class JupyterLabAppSettings < Struct.new(
+      :default_resource_spec,
+      :custom_images,
+      :lifecycle_config_arns,
+      :code_repositories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33306,6 +33620,34 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The collection of ownership settings for a space.
+    #
+    # @!attribute [rw] owner_user_profile_name
+    #   The user profile who is the owner of the private space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettings AWS API Documentation
+    #
+    class OwnershipSettings < Struct.new(
+      :owner_user_profile_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies summary information about the ownership settings.
+    #
+    # @!attribute [rw] owner_user_profile_name
+    #   The user profile who is the owner of the private space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettingsSummary AWS API Documentation
+    #
+    class OwnershipSettingsSummary < Struct.new(
+      :owner_user_profile_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration that controls the parallelism of the pipeline. By
     # default, the parallelism configuration specified applies to all
     # executions of the pipeline unless overridden.
@@ -38406,6 +38748,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The application settings for a Code Editor space.
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceCodeEditorAppSettings AWS API Documentation
+    #
+    class SpaceCodeEditorAppSettings < Struct.new(
+      :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The space's details.
     #
     # @!attribute [rw] domain_id
@@ -38428,6 +38785,22 @@ module Aws::SageMaker
     #   The last modified time.
     #   @return [Time]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the Studio UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_settings_summary
+    #   Specifies summary information about the space settings.
+    #   @return [Types::SpaceSettingsSummary]
+    #
+    # @!attribute [rw] space_sharing_settings_summary
+    #   Specifies summary information about the space sharing settings.
+    #   @return [Types::SpaceSharingSettingsSummary]
+    #
+    # @!attribute [rw] ownership_settings_summary
+    #   Specifies summary information about the ownership settings.
+    #   @return [Types::OwnershipSettingsSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceDetails AWS API Documentation
     #
     class SpaceDetails < Struct.new(
@@ -38435,7 +38808,32 @@ module Aws::SageMaker
       :space_name,
       :status,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :space_display_name,
+      :space_settings_summary,
+      :space_sharing_settings_summary,
+      :ownership_settings_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for the JupyterLab application within a space.
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] code_repositories
+    #   A list of Git repositories that SageMaker automatically displays to
+    #   users for cloning in the JupyterLab application.
+    #   @return [Array<Types::CodeRepository>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceJupyterLabAppSettings AWS API Documentation
+    #
+    class SpaceJupyterLabAppSettings < Struct.new(
+      :default_resource_spec,
+      :code_repositories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38450,11 +38848,99 @@ module Aws::SageMaker
     #   The KernelGateway app settings.
     #   @return [Types::KernelGatewayAppSettings]
     #
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::SpaceJupyterLabAppSettings]
+    #
+    # @!attribute [rw] code_editor_app_settings
+    #   The Code Editor application settings.
+    #   @return [Types::SpaceCodeEditorAppSettings]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The storage settings for a private space.
+    #   @return [Types::SpaceStorageSettings]
+    #
+    # @!attribute [rw] app_type
+    #   The type of app created within the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_file_systems
+    #   A file system, created by you, that you assign to a space for an
+    #   Amazon SageMaker Domain. Permitted users can access this file system
+    #   in Amazon SageMaker Studio.
+    #   @return [Array<Types::CustomFileSystem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettings AWS API Documentation
     #
     class SpaceSettings < Struct.new(
       :jupyter_server_app_settings,
-      :kernel_gateway_app_settings)
+      :kernel_gateway_app_settings,
+      :jupyter_lab_app_settings,
+      :code_editor_app_settings,
+      :space_storage_settings,
+      :app_type,
+      :custom_file_systems)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies summary information about the space settings.
+    #
+    # @!attribute [rw] app_type
+    #   The type of app created within the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The storage settings for a private space.
+    #   @return [Types::SpaceStorageSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettingsSummary AWS API Documentation
+    #
+    class SpaceSettingsSummary < Struct.new(
+      :app_type,
+      :space_storage_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of space sharing settings.
+    #
+    # @!attribute [rw] sharing_type
+    #   Specifies the sharing type of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSharingSettings AWS API Documentation
+    #
+    class SpaceSharingSettings < Struct.new(
+      :sharing_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies summary information about the space sharing settings.
+    #
+    # @!attribute [rw] sharing_type
+    #   Specifies the sharing type of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSharingSettingsSummary AWS API Documentation
+    #
+    class SpaceSharingSettingsSummary < Struct.new(
+      :sharing_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The storage settings for a private space.
+    #
+    # @!attribute [rw] ebs_storage_settings
+    #   A collection of EBS storage settings for a private space.
+    #   @return [Types::EbsStorageSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceStorageSettings AWS API Documentation
+    #
+    class SpaceStorageSettings < Struct.new(
+      :ebs_storage_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41860,11 +42346,16 @@ module Aws::SageMaker
     #   The new KernelGateway app to run on the image.
     #   @return [Types::KernelGatewayImageConfig]
     #
+    # @!attribute [rw] jupyter_lab_app_image_config
+    #   The JupyterLab app running on the image.
+    #   @return [Types::JupyterLabAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigRequest AWS API Documentation
     #
     class UpdateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
-      :kernel_gateway_image_config)
+      :kernel_gateway_image_config,
+      :jupyter_lab_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43216,12 +43707,18 @@ module Aws::SageMaker
     #   A collection of space settings.
     #   @return [Types::SpaceSettings]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the Amazon SageMaker Studio
+    #   UI.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateSpaceRequest AWS API Documentation
     #
     class UpdateSpaceRequest < Struct.new(
       :domain_id,
       :space_name,
-      :space_settings)
+      :space_settings,
+      :space_display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43682,6 +44179,18 @@ module Aws::SageMaker
     #   The Canvas app settings.
     #   @return [Types::CanvasAppSettings]
     #
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::JupyterLabAppSettings]
+    #
+    # @!attribute [rw] code_editor_app_settings
+    #   The Code Editor application settings.
+    #   @return [Types::CodeEditorAppSettings]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The storage settings for a private space.
+    #   @return [Types::DefaultSpaceStorageSettings]
+    #
     # @!attribute [rw] default_landing_uri
     #   The default experience that the user is directed to when accessing
     #   the domain. The supported values are:
@@ -43699,6 +44208,17 @@ module Aws::SageMaker
     #   default experience for the domain.
     #   @return [String]
     #
+    # @!attribute [rw] custom_posix_user_config
+    #   Details about the POSIX identity that is used for file system
+    #   operations.
+    #   @return [Types::CustomPosixUserConfig]
+    #
+    # @!attribute [rw] custom_file_system_configs
+    #   The settings for assigning a custom file system to a user profile.
+    #   Permitted users can access this file system in Amazon SageMaker
+    #   Studio.
+    #   @return [Array<Types::CustomFileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -43711,8 +44231,13 @@ module Aws::SageMaker
       :r_studio_server_pro_app_settings,
       :r_session_app_settings,
       :canvas_app_settings,
+      :jupyter_lab_app_settings,
+      :code_editor_app_settings,
+      :space_storage_settings,
       :default_landing_uri,
-      :studio_web_portal)
+      :studio_web_portal,
+      :custom_posix_user_config,
+      :custom_file_system_configs)
       SENSITIVE = []
       include Aws::Structure
     end
