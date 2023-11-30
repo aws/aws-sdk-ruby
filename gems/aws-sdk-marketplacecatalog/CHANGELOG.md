@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2023-11-30)
+------------------
+
+* Feature - This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.
+
 1.36.0 (2023-11-28)
 ------------------
 

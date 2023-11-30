@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-11-30)
+------------------
+
+* Feature - This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.
+
 1.21.0 (2023-11-28)
 ------------------
 

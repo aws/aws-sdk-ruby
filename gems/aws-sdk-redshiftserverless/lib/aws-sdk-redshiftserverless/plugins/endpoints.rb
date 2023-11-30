@@ -65,8 +65,12 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::CreateEndpointAccess.build(context)
           when :create_namespace
             Aws::RedshiftServerless::Endpoints::CreateNamespace.build(context)
+          when :create_scheduled_action
+            Aws::RedshiftServerless::Endpoints::CreateScheduledAction.build(context)
           when :create_snapshot
             Aws::RedshiftServerless::Endpoints::CreateSnapshot.build(context)
+          when :create_snapshot_copy_configuration
+            Aws::RedshiftServerless::Endpoints::CreateSnapshotCopyConfiguration.build(context)
           when :create_usage_limit
             Aws::RedshiftServerless::Endpoints::CreateUsageLimit.build(context)
           when :create_workgroup
@@ -79,8 +83,12 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::DeleteNamespace.build(context)
           when :delete_resource_policy
             Aws::RedshiftServerless::Endpoints::DeleteResourcePolicy.build(context)
+          when :delete_scheduled_action
+            Aws::RedshiftServerless::Endpoints::DeleteScheduledAction.build(context)
           when :delete_snapshot
             Aws::RedshiftServerless::Endpoints::DeleteSnapshot.build(context)
+          when :delete_snapshot_copy_configuration
+            Aws::RedshiftServerless::Endpoints::DeleteSnapshotCopyConfiguration.build(context)
           when :delete_usage_limit
             Aws::RedshiftServerless::Endpoints::DeleteUsageLimit.build(context)
           when :delete_workgroup
@@ -97,6 +105,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::GetRecoveryPoint.build(context)
           when :get_resource_policy
             Aws::RedshiftServerless::Endpoints::GetResourcePolicy.build(context)
+          when :get_scheduled_action
+            Aws::RedshiftServerless::Endpoints::GetScheduledAction.build(context)
           when :get_snapshot
             Aws::RedshiftServerless::Endpoints::GetSnapshot.build(context)
           when :get_table_restore_status
@@ -113,6 +123,10 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::ListNamespaces.build(context)
           when :list_recovery_points
             Aws::RedshiftServerless::Endpoints::ListRecoveryPoints.build(context)
+          when :list_scheduled_actions
+            Aws::RedshiftServerless::Endpoints::ListScheduledActions.build(context)
+          when :list_snapshot_copy_configurations
+            Aws::RedshiftServerless::Endpoints::ListSnapshotCopyConfigurations.build(context)
           when :list_snapshots
             Aws::RedshiftServerless::Endpoints::ListSnapshots.build(context)
           when :list_table_restore_status
@@ -129,6 +143,8 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::RestoreFromRecoveryPoint.build(context)
           when :restore_from_snapshot
             Aws::RedshiftServerless::Endpoints::RestoreFromSnapshot.build(context)
+          when :restore_table_from_recovery_point
+            Aws::RedshiftServerless::Endpoints::RestoreTableFromRecoveryPoint.build(context)
           when :restore_table_from_snapshot
             Aws::RedshiftServerless::Endpoints::RestoreTableFromSnapshot.build(context)
           when :tag_resource
@@ -141,8 +157,12 @@ module Aws::RedshiftServerless
             Aws::RedshiftServerless::Endpoints::UpdateEndpointAccess.build(context)
           when :update_namespace
             Aws::RedshiftServerless::Endpoints::UpdateNamespace.build(context)
+          when :update_scheduled_action
+            Aws::RedshiftServerless::Endpoints::UpdateScheduledAction.build(context)
           when :update_snapshot
             Aws::RedshiftServerless::Endpoints::UpdateSnapshot.build(context)
+          when :update_snapshot_copy_configuration
+            Aws::RedshiftServerless::Endpoints::UpdateSnapshotCopyConfiguration.build(context)
           when :update_usage_limit
             Aws::RedshiftServerless::Endpoints::UpdateUsageLimit.build(context)
           when :update_workgroup

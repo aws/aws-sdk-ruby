@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.182.0 (2023-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacedeployment` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-marketplaceagreement` gem.
+
 3.181.0 (2023-11-29)
 ------------------
 

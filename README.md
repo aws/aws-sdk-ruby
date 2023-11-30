@@ -419,8 +419,10 @@ RubyGems.org page under "LINKS" section.
 | AWS License Manager                                   | Aws::LicenseManager                      | aws-sdk-licensemanager                      | 2018-08-01  |
 | AWS License Manager Linux Subscriptions               | Aws::LicenseManagerLinuxSubscriptions    | aws-sdk-licensemanagerlinuxsubscriptions    | 2018-05-10  |
 | AWS License Manager User Subscriptions                | Aws::LicenseManagerUserSubscriptions     | aws-sdk-licensemanagerusersubscriptions     | 2018-05-10  |
+| AWS Marketplace Agreement Service                     | Aws::MarketplaceAgreement                | aws-sdk-marketplaceagreement                | 2020-03-01  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog                  | aws-sdk-marketplacecatalog                  | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics        | aws-sdk-marketplacecommerceanalytics        | 2015-07-01  |
+| AWS Marketplace Deployment Service                    | Aws::MarketplaceDeployment               | aws-sdk-marketplacedeployment               | 2023-01-25  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService       | aws-sdk-marketplaceentitlementservice       | 2017-01-11  |
 | AWS MediaConnect                                      | Aws::MediaConnect                        | aws-sdk-mediaconnect                        | 2018-11-14  |
 | AWS MediaTailor                                       | Aws::MediaTailor                         | aws-sdk-mediatailor                         | 2018-04-23  |

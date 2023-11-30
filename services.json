@@ -725,11 +725,17 @@
   "ManagedGrafana": {
     "models": "grafana/2020-08-18"
   },
+  "MarketplaceAgreement": {
+    "models": "marketplace-agreement/2020-03-01"
+  },
   "MarketplaceCatalog": {
     "models": "marketplace-catalog/2018-09-17"
   },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
+  },
+  "MarketplaceDeployment": {
+    "models": "marketplace-deployment/2023-01-25"
   },
   "MarketplaceEntitlementService": {
     "models": "entitlement.marketplace/2017-01-11"

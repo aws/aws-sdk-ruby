@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.862.0 (2023-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MarketplaceDeployment`.
+
+* Feature - Added support for enumerating regions for `Aws::MarketplaceAgreement`.
+
 1.861.0 (2023-11-29)
 ------------------
 

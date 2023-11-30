@@ -662,7 +662,10 @@ module Aws::MarketplaceCatalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
     #
     # @option params [required, String] :entity_type
-    #   The type of entities to retrieve.
+    #   The type of entities to retrieve. Valid values are: `ServerProduct`,
+    #   `AmiProduct`, `ContainerProduct`, `DataProduct`, `SaaSProduct`,
+    #   `ProcurementPolicy`, `Experience`, `Audience`, `BrandingSettings`,
+    #   `Offer`, `Seller`, `ResaleAuthorization`.
     #
     # @option params [Array<Types::Filter>] :filter_list
     #   An array of filter objects. Each filter object contains two
@@ -685,6 +688,17 @@ module Aws::MarketplaceCatalog
     #   Access Manager (AWS RAM), set to `SHARED`. Entities shared through the
     #   AWS Marketplace Catalog API `PutResourcePolicy` operation can't be
     #   discovered through the `SHARED` parameter.
+    #
+    # @option params [Types::EntityTypeFilters] :entity_type_filters
+    #   A Union object containing filter shapes for all `EntityType`s. Each
+    #   `EntityTypeFilter` shape will have filters applicable for that
+    #   `EntityType` that can be used to search or filter entities.
+    #
+    # @option params [Types::EntityTypeSort] :entity_type_sort
+    #   A Union object containing `Sort` shapes for all `EntityType`s. Each
+    #   `EntityTypeSort` shape will have `SortBy` and `SortOrder` applicable
+    #   for fields on that `EntityType`. This can be used to sort the results
+    #   of the filter query.
     #
     # @return [Types::ListEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -711,6 +725,204 @@ module Aws::MarketplaceCatalog
     #     next_token: "NextToken",
     #     max_results: 1,
     #     ownership_type: "SELF", # accepts SELF, SHARED
+    #     entity_type_filters: {
+    #       data_product_filters: {
+    #         entity_id: {
+    #           value_list: ["DataProductEntityIdString"],
+    #         },
+    #         product_title: {
+    #           value_list: ["DataProductTitleString"],
+    #           wild_card_value: "DataProductTitleString",
+    #         },
+    #         visibility: {
+    #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Unavailable, Draft
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
+    #       saa_s_product_filters: {
+    #         entity_id: {
+    #           value_list: ["SaaSProductEntityIdString"],
+    #         },
+    #         product_title: {
+    #           value_list: ["SaaSProductTitleString"],
+    #           wild_card_value: "SaaSProductTitleString",
+    #         },
+    #         visibility: {
+    #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Draft
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
+    #       ami_product_filters: {
+    #         entity_id: {
+    #           value_list: ["AmiProductEntityIdString"],
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         product_title: {
+    #           value_list: ["AmiProductTitleString"],
+    #           wild_card_value: "AmiProductTitleString",
+    #         },
+    #         visibility: {
+    #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Draft
+    #         },
+    #       },
+    #       offer_filters: {
+    #         entity_id: {
+    #           value_list: ["OfferEntityIdString"],
+    #         },
+    #         name: {
+    #           value_list: ["OfferNameString"],
+    #           wild_card_value: "OfferNameString",
+    #         },
+    #         product_id: {
+    #           value_list: ["OfferProductIdString"],
+    #         },
+    #         release_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         availability_end_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         buyer_accounts: {
+    #           wild_card_value: "OfferBuyerAccountsFilterWildcard",
+    #         },
+    #         state: {
+    #           value_list: ["Draft"], # accepts Draft, Released
+    #         },
+    #         targeting: {
+    #           value_list: ["BuyerAccounts"], # accepts BuyerAccounts, ParticipatingPrograms, CountryCodes, None
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
+    #       container_product_filters: {
+    #         entity_id: {
+    #           value_list: ["ContainerProductEntityIdString"],
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         product_title: {
+    #           value_list: ["ContainerProductTitleString"],
+    #           wild_card_value: "ContainerProductTitleString",
+    #         },
+    #         visibility: {
+    #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Draft
+    #         },
+    #       },
+    #       resale_authorization_filters: {
+    #         entity_id: {
+    #           value_list: ["ResaleAuthorizationEntityIdString"],
+    #         },
+    #         name: {
+    #           value_list: ["ResaleAuthorizationNameString"],
+    #           wild_card_value: "ResaleAuthorizationNameFilterWildcard",
+    #         },
+    #         product_id: {
+    #           value_list: ["ResaleAuthorizationProductIdString"],
+    #           wild_card_value: "ResaleAuthorizationProductIdFilterWildcard",
+    #         },
+    #         created_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #           value_list: ["DateTimeISO8601"],
+    #         },
+    #         availability_end_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #           value_list: ["DateTimeISO8601"],
+    #         },
+    #         manufacturer_account_id: {
+    #           value_list: ["ResaleAuthorizationManufacturerAccountIdString"],
+    #           wild_card_value: "ResaleAuthorizationManufacturerAccountIdFilterWildcard",
+    #         },
+    #         product_name: {
+    #           value_list: ["ResaleAuthorizationProductNameString"],
+    #           wild_card_value: "ResaleAuthorizationProductNameFilterWildcard",
+    #         },
+    #         manufacturer_legal_name: {
+    #           value_list: ["ResaleAuthorizationManufacturerLegalNameString"],
+    #           wild_card_value: "ResaleAuthorizationManufacturerLegalNameFilterWildcard",
+    #         },
+    #         reseller_account_id: {
+    #           value_list: ["ResaleAuthorizationResellerAccountIDString"],
+    #           wild_card_value: "ResaleAuthorizationResellerAccountIDFilterWildcard",
+    #         },
+    #         reseller_legal_name: {
+    #           value_list: ["ResaleAuthorizationResellerLegalNameString"],
+    #           wild_card_value: "ResaleAuthorizationResellerLegalNameFilterWildcard",
+    #         },
+    #         status: {
+    #           value_list: ["Draft"], # accepts Draft, Active, Restricted
+    #         },
+    #         offer_extended_status: {
+    #           value_list: ["ResaleAuthorizationOfferExtendedStatusString"],
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     entity_type_sort: {
+    #       data_product_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, ProductTitle, Visibility, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       saa_s_product_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, ProductTitle, Visibility, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       ami_product_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       offer_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       container_product_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       resale_authorization_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ProductName, ManufacturerAccountId, ManufacturerLegalName, ResellerAccountID, ResellerLegalName, Status, OfferExtendedStatus, CreatedDate, AvailabilityEndDate, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -722,6 +934,34 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].entity_arn #=> String
     #   resp.entity_summary_list[0].last_modified_date #=> String
     #   resp.entity_summary_list[0].visibility #=> String
+    #   resp.entity_summary_list[0].ami_product_summary.product_title #=> String
+    #   resp.entity_summary_list[0].ami_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
+    #   resp.entity_summary_list[0].container_product_summary.product_title #=> String
+    #   resp.entity_summary_list[0].container_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
+    #   resp.entity_summary_list[0].data_product_summary.product_title #=> String
+    #   resp.entity_summary_list[0].data_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Unavailable", "Draft"
+    #   resp.entity_summary_list[0].saa_s_product_summary.product_title #=> String
+    #   resp.entity_summary_list[0].saa_s_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
+    #   resp.entity_summary_list[0].offer_summary.name #=> String
+    #   resp.entity_summary_list[0].offer_summary.product_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.release_date #=> String
+    #   resp.entity_summary_list[0].offer_summary.availability_end_date #=> String
+    #   resp.entity_summary_list[0].offer_summary.buyer_accounts #=> Array
+    #   resp.entity_summary_list[0].offer_summary.buyer_accounts[0] #=> String
+    #   resp.entity_summary_list[0].offer_summary.state #=> String, one of "Draft", "Released"
+    #   resp.entity_summary_list[0].offer_summary.targeting #=> Array
+    #   resp.entity_summary_list[0].offer_summary.targeting[0] #=> String, one of "BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"
+    #   resp.entity_summary_list[0].resale_authorization_summary.name #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.product_id #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.product_name #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.manufacturer_account_id #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.manufacturer_legal_name #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.reseller_account_id #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.reseller_legal_name #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.status #=> String, one of "Draft", "Active", "Restricted"
+    #   resp.entity_summary_list[0].resale_authorization_summary.offer_extended_status #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.created_date #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.availability_end_date #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities AWS API Documentation
@@ -984,7 +1224,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
