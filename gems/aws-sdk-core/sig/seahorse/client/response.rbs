@@ -1,0 +1,26 @@
+module Seahorse
+  module Client
+    # <!--
+    # RBS does not support Delegator.
+    # the behavior is mimicked `Seahorse::Client::Response` as much as possible.
+    # -->
+    module DelegatorMethodsForResponse[DATA]
+      def context: () -> untyped
+
+      def data: () -> DATA?
+      def data=: (DATA?) -> DATA?
+
+      def error: () -> ::StandardError?
+      def error=: (::StandardError?) -> ::StandardError?
+
+      def checksum_validated: () -> ::String?
+
+      def on: (Integer) { (self) -> void } -> self
+            | (Range[Integer]) { (self) -> void } -> self
+
+      def on_success: () { (self) -> void } -> self
+
+      def successful?: () -> bool
+    end
+  end
+end

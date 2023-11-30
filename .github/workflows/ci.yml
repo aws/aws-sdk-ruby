@@ -13,6 +13,32 @@ permissions:
   contents: read
 
 jobs:
+  sig:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [3.2]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build signature'
+          bundle install
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: rbs validate
+        run: bundle exec rake rbs:validate
+
   test:
     runs-on: ubuntu-latest
     strategy:
