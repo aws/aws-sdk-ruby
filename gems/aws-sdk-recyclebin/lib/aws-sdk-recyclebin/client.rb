@@ -444,6 +444,7 @@ module Aws::RecycleBin
     #   * {Types::CreateRuleResponse#status #status} => String
     #   * {Types::CreateRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
     #   * {Types::CreateRuleResponse#lock_state #lock_state} => String
+    #   * {Types::CreateRuleResponse#rule_arn #rule_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -491,6 +492,7 @@ module Aws::RecycleBin
     #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
     #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
     #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/CreateRule AWS API Documentation
     #
@@ -545,6 +547,7 @@ module Aws::RecycleBin
     #   * {Types::GetRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
     #   * {Types::GetRuleResponse#lock_state #lock_state} => String
     #   * {Types::GetRuleResponse#lock_end_time #lock_end_time} => Time
+    #   * {Types::GetRuleResponse#rule_arn #rule_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -567,6 +570,7 @@ module Aws::RecycleBin
     #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
     #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
     #   resp.lock_end_time #=> Time
+    #   resp.rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/GetRule AWS API Documentation
     #
@@ -632,6 +636,7 @@ module Aws::RecycleBin
     #   resp.rules[0].retention_period.retention_period_value #=> Integer
     #   resp.rules[0].retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.rules[0].lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.rules[0].rule_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/ListRules AWS API Documentation
@@ -692,6 +697,7 @@ module Aws::RecycleBin
     #   * {Types::LockRuleResponse#status #status} => String
     #   * {Types::LockRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
     #   * {Types::LockRuleResponse#lock_state #lock_state} => String
+    #   * {Types::LockRuleResponse#rule_arn #rule_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -719,6 +725,7 @@ module Aws::RecycleBin
     #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
     #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
     #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/LockRule AWS API Documentation
     #
@@ -777,6 +784,7 @@ module Aws::RecycleBin
     #   * {Types::UnlockRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
     #   * {Types::UnlockRuleResponse#lock_state #lock_state} => String
     #   * {Types::UnlockRuleResponse#lock_end_time #lock_end_time} => Time
+    #   * {Types::UnlockRuleResponse#rule_arn #rule_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -799,6 +807,7 @@ module Aws::RecycleBin
     #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
     #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
     #   resp.lock_end_time #=> Time
+    #   resp.rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UnlockRule AWS API Documentation
     #
@@ -891,6 +900,7 @@ module Aws::RecycleBin
     #   * {Types::UpdateRuleResponse#status #status} => String
     #   * {Types::UpdateRuleResponse#lock_state #lock_state} => String
     #   * {Types::UpdateRuleResponse#lock_end_time #lock_end_time} => Time
+    #   * {Types::UpdateRuleResponse#rule_arn #rule_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -923,6 +933,7 @@ module Aws::RecycleBin
     #   resp.status #=> String, one of "pending", "available"
     #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
     #   resp.lock_end_time #=> Time
+    #   resp.rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UpdateRule AWS API Documentation
     #
@@ -946,7 +957,7 @@ module Aws::RecycleBin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-recyclebin'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

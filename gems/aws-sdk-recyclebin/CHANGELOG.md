@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-12-01)
+------------------
+
+* Feature - Added resource identifier in the output and updated error handling.
+
 1.17.0 (2023-11-28)
 ------------------
 

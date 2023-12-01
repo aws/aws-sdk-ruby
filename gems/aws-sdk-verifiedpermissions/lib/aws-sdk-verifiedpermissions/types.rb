@@ -646,12 +646,18 @@ module Aws::VerifiedPermissions
     #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore
     #   @return [Types::ValidationSettings]
     #
+    # @!attribute [rw] description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyStoreInput AWS API Documentation
     #
     class CreatePolicyStoreInput < Struct.new(
       :client_token,
-      :validation_settings)
-      SENSITIVE = []
+      :validation_settings,
+      :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -1196,6 +1202,11 @@ module Aws::VerifiedPermissions
     #   The date and time that the policy store was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStoreOutput AWS API Documentation
     #
     class GetPolicyStoreOutput < Struct.new(
@@ -1203,8 +1214,9 @@ module Aws::VerifiedPermissions
       :arn,
       :validation_settings,
       :created_date,
-      :last_updated_date)
-      SENSITIVE = []
+      :last_updated_date,
+      :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -1294,13 +1306,18 @@ module Aws::VerifiedPermissions
     #   The date and time that the schema was most recently updated.
     #   @return [Time]
     #
+    # @!attribute [rw] namespaces
+    #   The namespaces of the entities referenced by this schema.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetSchemaOutput AWS API Documentation
     #
     class GetSchemaOutput < Struct.new(
       :policy_store_id,
       :schema,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :namespaces)
       SENSITIVE = [:schema]
       include Aws::Structure
     end
@@ -2163,13 +2180,24 @@ module Aws::VerifiedPermissions
     #   The date and time the policy was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_updated_date
+    #   The date and time the policy store was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyStoreItem AWS API Documentation
     #
     class PolicyStoreItem < Struct.new(
       :policy_store_id,
       :arn,
-      :created_date)
-      SENSITIVE = []
+      :created_date,
+      :last_updated_date,
+      :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2829,12 +2857,18 @@ module Aws::VerifiedPermissions
     #   for the policy store.
     #   @return [Types::ValidationSettings]
     #
+    # @!attribute [rw] description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicyStoreInput AWS API Documentation
     #
     class UpdatePolicyStoreInput < Struct.new(
       :policy_store_id,
-      :validation_settings)
-      SENSITIVE = []
+      :validation_settings,
+      :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

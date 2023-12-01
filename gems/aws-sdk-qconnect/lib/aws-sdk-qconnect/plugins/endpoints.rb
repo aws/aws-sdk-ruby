@@ -115,6 +115,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::ListTagsForResource.build(context)
           when :notify_recommendations_received
             Aws::QConnect::Endpoints::NotifyRecommendationsReceived.build(context)
+          when :put_feedback
+            Aws::QConnect::Endpoints::PutFeedback.build(context)
           when :query_assistant
             Aws::QConnect::Endpoints::QueryAssistant.build(context)
           when :remove_knowledge_base_template_uri

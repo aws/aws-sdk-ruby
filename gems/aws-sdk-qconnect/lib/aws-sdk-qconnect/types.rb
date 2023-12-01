@@ -239,7 +239,7 @@ module Aws::QConnect
       include Aws::Structure
     end
 
-    # The capability configuration for a Amazon Q assistant.
+    # The capability configuration for an Amazon Q assistant.
     #
     # @!attribute [rw] type
     #   The type of Amazon Q assistant capability.
@@ -576,6 +576,29 @@ module Aws::QConnect
       :text_data)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Information about the feedback.
+    #
+    # @note ContentFeedbackData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ContentFeedbackData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContentFeedbackData corresponding to the set member.
+    #
+    # @!attribute [rw] generative_content_feedback_data
+    #   Information about the feedback for a generative target type.
+    #   @return [Types::GenerativeContentFeedbackData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentFeedbackData AWS API Documentation
+    #
+    class ContentFeedbackData < Struct.new(
+      :generative_content_feedback_data,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GenerativeContentFeedbackData < ContentFeedbackData; end
+      class Unknown < ContentFeedbackData; end
     end
 
     # Reference information about the content.
@@ -1439,6 +1462,20 @@ module Aws::QConnect
       :field,
       :operator,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The feedback information for a generative target type.
+    #
+    # @!attribute [rw] relevance
+    #   The relevance of the feedback.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GenerativeContentFeedbackData AWS API Documentation
+    #
+    class GenerativeContentFeedbackData < Struct.new(
+      :relevance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2514,6 +2551,65 @@ module Aws::QConnect
     #
     class PreconditionFailedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Amazon Q assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_feedback
+    #   Information about the feedback provided.
+    #   @return [Types::ContentFeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the feedback target.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the feedback target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PutFeedbackRequest AWS API Documentation
+    #
+    class PutFeedbackRequest < Struct.new(
+      :assistant_id,
+      :content_feedback,
+      :target_id,
+      :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Q assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Amazon Q assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_feedback
+    #   Information about the feedback provided.
+    #   @return [Types::ContentFeedbackData]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the feedback target.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the feedback target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PutFeedbackResponse AWS API Documentation
+    #
+    class PutFeedbackResponse < Struct.new(
+      :assistant_arn,
+      :assistant_id,
+      :content_feedback,
+      :target_id,
+      :target_type)
       SENSITIVE = []
       include Aws::Structure
     end

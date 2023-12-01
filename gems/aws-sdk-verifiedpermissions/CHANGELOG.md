@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-12-01)
+------------------
+
+* Feature - Adds description field to PolicyStore API's and namespaces field to GetSchema.
+
 1.14.0 (2023-11-28)
 ------------------
 

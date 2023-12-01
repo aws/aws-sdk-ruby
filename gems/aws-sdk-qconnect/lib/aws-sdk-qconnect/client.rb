@@ -785,7 +785,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Creates a Amazon Q quick response.
+    # Creates an Amazon Q quick response.
     #
     # @option params [Array<String>] :channels
     #   The Amazon Connect channels this quick response applies to.
@@ -2038,6 +2038,59 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Provides feedback against the specified assistant for the specified
+    # target. This API only supports generative targets.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q assistant.
+    #
+    # @option params [required, Types::ContentFeedbackData] :content_feedback
+    #   Information about the feedback provided.
+    #
+    # @option params [required, String] :target_id
+    #   The identifier of the feedback target.
+    #
+    # @option params [required, String] :target_type
+    #   The type of the feedback target.
+    #
+    # @return [Types::PutFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFeedbackResponse#assistant_arn #assistant_arn} => String
+    #   * {Types::PutFeedbackResponse#assistant_id #assistant_id} => String
+    #   * {Types::PutFeedbackResponse#content_feedback #content_feedback} => Types::ContentFeedbackData
+    #   * {Types::PutFeedbackResponse#target_id #target_id} => String
+    #   * {Types::PutFeedbackResponse#target_type #target_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_feedback({
+    #     assistant_id: "UuidOrArn", # required
+    #     content_feedback: { # required
+    #       generative_content_feedback_data: {
+    #         relevance: "HELPFUL", # required, accepts HELPFUL, NOT_HELPFUL
+    #       },
+    #     },
+    #     target_id: "Uuid", # required
+    #     target_type: "RECOMMENDATION", # required, accepts RECOMMENDATION, RESULT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assistant_arn #=> String
+    #   resp.assistant_id #=> String
+    #   resp.content_feedback.generative_content_feedback_data.relevance #=> String, one of "HELPFUL", "NOT_HELPFUL"
+    #   resp.target_id #=> String
+    #   resp.target_type #=> String, one of "RECOMMENDATION", "RESULT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PutFeedback AWS API Documentation
+    #
+    # @overload put_feedback(params = {})
+    # @param [Hash] params ({})
+    def put_feedback(params = {}, options = {})
+      req = build_request(:put_feedback, params)
+      req.send_request(options)
+    end
+
     # Performs a manual search against the specified assistant. To retrieve
     # recommendations for an assistant, use [GetRecommendations][1].
     #
@@ -2251,7 +2304,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Searches existing Amazon Q quick responses in a Amazon Q knowledge
+    # Searches existing Amazon Q quick responses in an Amazon Q knowledge
     # base.
     #
     # @option params [Hash<String,String>] :attributes
@@ -2916,7 +2969,7 @@ module Aws::QConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

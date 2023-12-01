@@ -43,6 +43,7 @@ module Aws::QConnect
     ContactAttributes = Shapes::MapShape.new(name: 'ContactAttributes')
     ContentData = Shapes::StructureShape.new(name: 'ContentData')
     ContentDataDetails = Shapes::StructureShape.new(name: 'ContentDataDetails')
+    ContentFeedbackData = Shapes::UnionShape.new(name: 'ContentFeedbackData')
     ContentMetadata = Shapes::MapShape.new(name: 'ContentMetadata')
     ContentReference = Shapes::StructureShape.new(name: 'ContentReference')
     ContentStatus = Shapes::StringShape.new(name: 'ContentStatus')
@@ -87,6 +88,7 @@ module Aws::QConnect
     FilterField = Shapes::StringShape.new(name: 'FilterField')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
+    GenerativeContentFeedbackData = Shapes::StructureShape.new(name: 'GenerativeContentFeedbackData')
     GenerativeDataDetails = Shapes::StructureShape.new(name: 'GenerativeDataDetails')
     GenerativeReference = Shapes::StructureShape.new(name: 'GenerativeReference')
     GenericArn = Shapes::StringShape.new(name: 'GenericArn')
@@ -156,6 +158,8 @@ module Aws::QConnect
     Order = Shapes::StringShape.new(name: 'Order')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::StringShape.new(name: 'Priority')
+    PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
+    PutFeedbackResponse = Shapes::StructureShape.new(name: 'PutFeedbackResponse')
     QueryAssistantRequest = Shapes::StructureShape.new(name: 'QueryAssistantRequest')
     QueryAssistantResponse = Shapes::StructureShape.new(name: 'QueryAssistantResponse')
     QueryCondition = Shapes::UnionShape.new(name: 'QueryCondition')
@@ -203,6 +207,7 @@ module Aws::QConnect
     RecommendationTriggerList = Shapes::ListShape.new(name: 'RecommendationTriggerList')
     RecommendationTriggerType = Shapes::StringShape.new(name: 'RecommendationTriggerType')
     RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    Relevance = Shapes::StringShape.new(name: 'Relevance')
     RelevanceLevel = Shapes::StringShape.new(name: 'RelevanceLevel')
     RelevanceScore = Shapes::FloatShape.new(name: 'RelevanceScore')
     RemoveKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriRequest')
@@ -241,6 +246,7 @@ module Aws::QConnect
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetType = Shapes::StringShape.new(name: 'TargetType')
     TextData = Shapes::StructureShape.new(name: 'TextData')
     TimeToLive = Shapes::IntegerShape.new(name: 'TimeToLive')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
@@ -369,6 +375,12 @@ module Aws::QConnect
     ContentDataDetails.add_member(:ranking_data, Shapes::ShapeRef.new(shape: RankingData, required: true, location_name: "rankingData"))
     ContentDataDetails.add_member(:text_data, Shapes::ShapeRef.new(shape: TextData, required: true, location_name: "textData"))
     ContentDataDetails.struct_class = Types::ContentDataDetails
+
+    ContentFeedbackData.add_member(:generative_content_feedback_data, Shapes::ShapeRef.new(shape: GenerativeContentFeedbackData, location_name: "generativeContentFeedbackData"))
+    ContentFeedbackData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentFeedbackData.add_member_subclass(:generative_content_feedback_data, Types::ContentFeedbackData::GenerativeContentFeedbackData)
+    ContentFeedbackData.add_member_subclass(:unknown, Types::ContentFeedbackData::Unknown)
+    ContentFeedbackData.struct_class = Types::ContentFeedbackData
 
     ContentMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     ContentMetadata.value = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -545,6 +557,9 @@ module Aws::QConnect
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
+    GenerativeContentFeedbackData.add_member(:relevance, Shapes::ShapeRef.new(shape: Relevance, required: true, location_name: "relevance"))
+    GenerativeContentFeedbackData.struct_class = Types::GenerativeContentFeedbackData
 
     GenerativeDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "completion"))
     GenerativeDataDetails.add_member(:ranking_data, Shapes::ShapeRef.new(shape: RankingData, required: true, location_name: "rankingData"))
@@ -771,6 +786,19 @@ module Aws::QConnect
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    PutFeedbackRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    PutFeedbackRequest.add_member(:content_feedback, Shapes::ShapeRef.new(shape: ContentFeedbackData, required: true, location_name: "contentFeedback"))
+    PutFeedbackRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "targetId"))
+    PutFeedbackRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "targetType"))
+    PutFeedbackRequest.struct_class = Types::PutFeedbackRequest
+
+    PutFeedbackResponse.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location_name: "assistantArn"))
+    PutFeedbackResponse.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    PutFeedbackResponse.add_member(:content_feedback, Shapes::ShapeRef.new(shape: ContentFeedbackData, required: true, location_name: "contentFeedback"))
+    PutFeedbackResponse.add_member(:target_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "targetId"))
+    PutFeedbackResponse.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "targetType"))
+    PutFeedbackResponse.struct_class = Types::PutFeedbackResponse
 
     QueryAssistantRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     QueryAssistantRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -1496,6 +1524,17 @@ module Aws::QConnect
         o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}/recommendations/notify"
         o.input = Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedRequest)
         o.output = Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFeedback"
+        o.http_method = "PUT"
+        o.http_request_uri = "/assistants/{assistantId}/feedback"
+        o.input = Shapes::ShapeRef.new(shape: PutFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

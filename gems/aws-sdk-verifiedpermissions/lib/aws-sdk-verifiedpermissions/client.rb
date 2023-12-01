@@ -416,6 +416,13 @@ module Aws::VerifiedPermissions
     # 100 principals and up to 100 resources. The `requests` of a
     # `BatchIsAuthorized` API request can contain up to 30 requests.
     #
+    # <note markdown="1"> The `BatchIsAuthorized` operation doesn't have its own IAM
+    # permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission `verifiedpermissions:IsAuthorized`
+    # in their IAM policies.
+    #
+    #  </note>
+    #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
     #   will be used to make the authorization decisions for the input.
@@ -810,6 +817,10 @@ module Aws::VerifiedPermissions
     #
     #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore
     #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #
     # @return [Types::CreatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -824,6 +835,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -1161,6 +1173,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#validation_settings #validation_settings} => Types::ValidationSettings
     #   * {Types::GetPolicyStoreOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetPolicyStoreOutput#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1175,6 +1188,7 @@ module Aws::VerifiedPermissions
     #   resp.validation_settings.mode #=> String, one of "OFF", "STRICT"
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStore AWS API Documentation
     #
@@ -1242,6 +1256,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetSchemaOutput#schema #schema} => String
     #   * {Types::GetSchemaOutput#created_date #created_date} => Time
     #   * {Types::GetSchemaOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetSchemaOutput#namespaces #namespaces} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1255,6 +1270,8 @@ module Aws::VerifiedPermissions
     #   resp.schema #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.namespaces #=> Array
+    #   resp.namespaces[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetSchema AWS API Documentation
     #
@@ -1724,6 +1741,8 @@ module Aws::VerifiedPermissions
     #   resp.policy_stores[0].policy_store_id #=> String
     #   resp.policy_stores[0].arn #=> String
     #   resp.policy_stores[0].created_date #=> Time
+    #   resp.policy_stores[0].last_updated_date #=> Time
+    #   resp.policy_stores[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStores AWS API Documentation
     #
@@ -2065,6 +2084,10 @@ module Aws::VerifiedPermissions
     #   A structure that defines the validation settings that want to enable
     #   for the policy store.
     #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #
     # @return [Types::UpdatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -2079,6 +2102,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -2190,7 +2214,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

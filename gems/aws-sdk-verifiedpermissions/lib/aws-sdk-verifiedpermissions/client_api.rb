@@ -110,6 +110,7 @@ module Aws::VerifiedPermissions
     PolicyItem = Shapes::StructureShape.new(name: 'PolicyItem')
     PolicyList = Shapes::ListShape.new(name: 'PolicyList')
     PolicyStatement = Shapes::StringShape.new(name: 'PolicyStatement')
+    PolicyStoreDescription = Shapes::StringShape.new(name: 'PolicyStoreDescription')
     PolicyStoreId = Shapes::StringShape.new(name: 'PolicyStoreId')
     PolicyStoreItem = Shapes::StructureShape.new(name: 'PolicyStoreItem')
     PolicyStoreList = Shapes::ListShape.new(name: 'PolicyStoreList')
@@ -262,6 +263,7 @@ module Aws::VerifiedPermissions
 
     CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    CreatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     CreatePolicyStoreInput.struct_class = Types::CreatePolicyStoreInput
 
     CreatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -377,6 +379,7 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
     GetPolicyStoreOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyStoreOutput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     GetPolicyStoreOutput.struct_class = Types::GetPolicyStoreOutput
 
     GetPolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -398,6 +401,7 @@ module Aws::VerifiedPermissions
     GetSchemaOutput.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaJson, required: true, location_name: "schema"))
     GetSchemaOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetSchemaOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetSchemaOutput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespaceList, location_name: "namespaces"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
     IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
@@ -543,6 +547,8 @@ module Aws::VerifiedPermissions
     PolicyStoreItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     PolicyStoreItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
     PolicyStoreItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
+    PolicyStoreItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "lastUpdatedDate"))
+    PolicyStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     PolicyStoreItem.struct_class = Types::PolicyStoreItem
 
     PolicyStoreList.member = Shapes::ShapeRef.new(shape: PolicyStoreItem)
@@ -670,6 +676,7 @@ module Aws::VerifiedPermissions
 
     UpdatePolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    UpdatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     UpdatePolicyStoreInput.struct_class = Types::UpdatePolicyStoreInput
 
     UpdatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
