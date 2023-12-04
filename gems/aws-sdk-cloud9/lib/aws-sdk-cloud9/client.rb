@@ -430,7 +430,7 @@ module Aws::Cloud9
     #   The ID of the subnet in Amazon VPC that Cloud9 will use to communicate
     #   with the Amazon EC2 instance.
     #
-    # @option params [String] :image_id
+    # @option params [required, String] :image_id
     #   The identifier for the Amazon Machine Image (AMI) that's used to
     #   create the EC2 instance. To choose an AMI for the instance, you must
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
@@ -456,7 +456,7 @@ module Aws::Cloud9
     #
     #   <b>AMI aliases </b>
     #
-    #   * Amazon Linux (default): `amazonlinux-1-x86_64`
+    #   * Amazon Linux: `amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
@@ -466,7 +466,7 @@ module Aws::Cloud9
     #
     #   **SSM paths**
     #
-    #   * Amazon Linux (default):
+    #   * Amazon Linux:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2:
@@ -539,7 +539,7 @@ module Aws::Cloud9
     #     client_request_token: "ClientRequestToken",
     #     instance_type: "InstanceType", # required
     #     subnet_id: "SubnetId",
-    #     image_id: "ImageId",
+    #     image_id: "ImageId", # required
     #     automatic_stop_time_minutes: 1,
     #     owner_arn: "UserArn",
     #     tags: [
@@ -1266,7 +1266,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

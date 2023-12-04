@@ -87,7 +87,7 @@ module Aws::Cloud9
     #
     #   <b>AMI aliases </b>
     #
-    #   * Amazon Linux (default): `amazonlinux-1-x86_64`
+    #   * Amazon Linux: `amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
@@ -97,7 +97,7 @@ module Aws::Cloud9
     #
     #   **SSM paths**
     #
-    #   * Amazon Linux (default):
+    #   * Amazon Linux:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2:

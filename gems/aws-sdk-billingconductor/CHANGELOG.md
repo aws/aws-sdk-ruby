@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-12-04)
+------------------
+
+* Feature - This release adds the ability to specify a linked account of the billing group for the custom line item resource.
+
 1.17.0 (2023-11-28)
 ------------------
 

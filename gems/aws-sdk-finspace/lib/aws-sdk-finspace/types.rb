@@ -292,31 +292,52 @@ module Aws::Finspace
     #
     # @!attribute [rw] change_requests
     #   A list of change request objects that are run in order. A change
-    #   request object consists of changeType , s3Path, and a dbPath. A
+    #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
     #   changeType can has the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
     #   * DELETE – Deletes files in a database.
     #
-    #   All the change requests require a mandatory *dbPath* attribute that
-    #   defines the path within the database directory. The *s3Path*
+    #   All the change requests require a mandatory `dbPath` attribute that
+    #   defines the path within the database directory. All database paths
+    #   must start with a leading / and end with a trailing /. The `s3Path`
     #   attribute defines the s3 source file path and is required for a PUT
-    #   change type.
+    #   change type. The `s3path` must end with a trailing / if it is a
+    #   directory and must end without a trailing / if it is a file.
     #
-    #   Here is an example of how you can use the change request object:
+    #   Here are few examples of how you can use the change request object:
     #
-    #   `[ \{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
-    #   "dbPath":"/2020.01.02/"\}, \{ "changeType": "PUT",
-    #   "s3Path":"s3://bucket/db/sym", "dbPath":"/"\}, \{ "changeType":
-    #   "DELETE", "dbPath": "/2020.01.01/"\} ]`
+    #   1.  This request adds a single sym file at database root location.
     #
-    #   In this example, the first request with *PUT* change type allows you
-    #   to add files in the given s3Path under the *2020.01.02* partition of
-    #   the database. The second request with *PUT* change type allows you
-    #   to add a single sym file at database root location. The last request
-    #   with *DELETE* change type allows you to delete the files under the
-    #   *2020.01.01* partition of the database.
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/sym",
+    #       "dbPath":"/"\}`
+    #
+    #   2.  This request adds files in the given `s3Path` under the
+    #       2020.01.02 partition of the database.
+    #
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+    #       "dbPath":"/2020.01.02/"\}`
+    #
+    #   3.  This request adds files in the given `s3Path` under the *taq*
+    #       table partition of the database.
+    #
+    #       `[ \{ "changeType": "PUT",
+    #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
+    #
+    #   4.  This request deletes the 2020.01.02 partition of the database.
+    #
+    #       `[\{ "changeType": "DELETE", "dbPath": "/2020.01.02/"\} ]`
+    #
+    #   5.  The *DELETE* request allows you to delete the existing files
+    #       under the 2020.01.02 partition of the database, and the *PUT*
+    #       request adds a new taq table under it.
+    #
+    #       `[ \{"changeType": "DELETE", "dbPath":"/2020.01.02/"\},
+    #       \{"changeType": "PUT",
+    #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
     #   @return [Array<Types::ChangeRequest>]
     #
     # @!attribute [rw] client_token
@@ -434,6 +455,13 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
     #   @return [String]
     #
     # @!attribute [rw] databases
@@ -597,6 +625,13 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
     #   @return [String]
     #
     # @!attribute [rw] databases
@@ -1392,6 +1427,13 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
     #   @return [String]
     #
     # @!attribute [rw] databases
@@ -1972,6 +2014,13 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
     #   @return [String]
     #
     # @!attribute [rw] cluster_description
@@ -2049,6 +2098,14 @@ module Aws::Finspace
     #
     #   * ROLLING – This options updates the cluster by stopping the exiting
     #     q process and starting a new q process with updated configuration.
+    #
+    #   * NO\_RESTART – This option updates the cluster without stopping the
+    #     running q process. It is only available for `GP` type cluster.
+    #     This option is quicker as it reduces the turn around time to
+    #     update configuration on a cluster.
+    #
+    #     With this deployment mode, you cannot update the
+    #     `initializationScript` and `commandLineArguments` parameters.
     #
     #   * FORCE – This option updates the cluster by immediately stopping
     #     all the running processes before starting up new ones with the
@@ -2574,6 +2631,13 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3042,11 +3106,15 @@ module Aws::Finspace
     #   a relative path within *.zip* file that contains the custom code,
     #   which will be loaded on the cluster. It must include the file name
     #   itself. For example, `somedir/init.q`.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
     #   @return [String]
     #
     # @!attribute [rw] command_line_arguments
     #   Specifies the key-value pairs to make them available inside the
     #   cluster.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
     #   @return [Array<Types::KxCommandLineArgument>]
     #
     # @!attribute [rw] deployment_configuration

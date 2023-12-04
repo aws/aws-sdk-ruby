@@ -124,6 +124,9 @@ module Aws::MediaLive
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
     ClaimDeviceResponse = Shapes::StructureShape.new(name: 'ClaimDeviceResponse')
+    ColorCorrection = Shapes::StructureShape.new(name: 'ColorCorrection')
+    ColorCorrectionSettings = Shapes::StructureShape.new(name: 'ColorCorrectionSettings')
+    ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
     ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
@@ -814,6 +817,7 @@ module Aws::MediaLive
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
+    __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
@@ -1257,6 +1261,14 @@ module Aws::MediaLive
     ClaimDeviceRequest.struct_class = Types::ClaimDeviceRequest
 
     ClaimDeviceResponse.struct_class = Types::ClaimDeviceResponse
+
+    ColorCorrection.add_member(:input_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "inputColorSpace"))
+    ColorCorrection.add_member(:output_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "outputColorSpace"))
+    ColorCorrection.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
+    ColorCorrection.struct_class = Types::ColorCorrection
+
+    ColorCorrectionSettings.add_member(:global_color_corrections, Shapes::ShapeRef.new(shape: __listOfColorCorrection, required: true, location_name: "globalColorCorrections"))
+    ColorCorrectionSettings.struct_class = Types::ColorCorrectionSettings
 
     ColorSpacePassthroughSettings.struct_class = Types::ColorSpacePassthroughSettings
 
@@ -1775,6 +1787,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
     EncoderSettings.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    EncoderSettings.add_member(:color_correction_settings, Shapes::ShapeRef.new(shape: ColorCorrectionSettings, location_name: "colorCorrectionSettings"))
     EncoderSettings.struct_class = Types::EncoderSettings
 
     EpochLockingSettings.add_member(:custom_epoch, Shapes::ShapeRef.new(shape: __string, location_name: "customEpoch"))
@@ -3480,6 +3493,8 @@ module Aws::MediaLive
     __listOfChannelEgressEndpoint.member = Shapes::ShapeRef.new(shape: ChannelEgressEndpoint)
 
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
+
+    __listOfColorCorrection.member = Shapes::ShapeRef.new(shape: ColorCorrection)
 
     __listOfFailoverCondition.member = Shapes::ShapeRef.new(shape: FailoverCondition)
 

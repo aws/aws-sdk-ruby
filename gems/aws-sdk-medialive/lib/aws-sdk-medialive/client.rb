@@ -1536,6 +1536,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -2636,6 +2640,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -3628,6 +3636,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -5750,6 +5762,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -6554,6 +6570,10 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -7386,6 +7406,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -8098,6 +8122,10 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections #=> Array
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].input_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].output_color_space #=> String, one of "HDR10", "HLG_2020", "REC_601", "REC_709"
+    #   resp.channel.encoder_settings.color_correction_settings.global_color_corrections[0].uri #=> String
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -8669,7 +8697,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

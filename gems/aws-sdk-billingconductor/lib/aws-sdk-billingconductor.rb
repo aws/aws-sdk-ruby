@@ -53,6 +53,6 @@ require_relative 'aws-sdk-billingconductor/customizations'
 # @!group service
 module Aws::BillingConductor
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

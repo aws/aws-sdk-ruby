@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2023-12-04)
+------------------
+
+* Feature - Adds support for custom color correction on channels using 3D LUT files.
+
 1.112.0 (2023-11-28)
 ------------------
 

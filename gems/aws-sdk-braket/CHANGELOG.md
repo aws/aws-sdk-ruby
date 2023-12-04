@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-12-04)
+------------------
+
+* Feature - This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+
 1.31.0 (2023-11-28)
 ------------------
 

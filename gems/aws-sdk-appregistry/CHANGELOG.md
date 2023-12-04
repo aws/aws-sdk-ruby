@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2023-12-04)
+------------------
+
+* Feature - Documentation-only updates for Dawn
+
 1.30.0 (2023-11-28)
 ------------------
 

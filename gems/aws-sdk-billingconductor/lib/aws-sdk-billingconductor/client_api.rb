@@ -335,6 +335,7 @@ module Aws::BillingConductor
     CreateCustomLineItemInput.add_member(:billing_period_range, Shapes::ShapeRef.new(shape: CustomLineItemBillingPeriodRange, location_name: "BillingPeriodRange"))
     CreateCustomLineItemInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCustomLineItemInput.add_member(:charge_details, Shapes::ShapeRef.new(shape: CustomLineItemChargeDetails, required: true, location_name: "ChargeDetails"))
+    CreateCustomLineItemInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CreateCustomLineItemInput.struct_class = Types::CreateCustomLineItemInput
 
     CreateCustomLineItemOutput.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
@@ -406,6 +407,7 @@ module Aws::BillingConductor
     CustomLineItemListElement.add_member(:creation_time, Shapes::ShapeRef.new(shape: Instant, location_name: "CreationTime"))
     CustomLineItemListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     CustomLineItemListElement.add_member(:association_size, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "AssociationSize"))
+    CustomLineItemListElement.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CustomLineItemListElement.struct_class = Types::CustomLineItemListElement
 
     CustomLineItemNameList.member = Shapes::ShapeRef.new(shape: CustomLineItemName)
@@ -429,6 +431,7 @@ module Aws::BillingConductor
     CustomLineItemVersionListElement.add_member(:end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "EndBillingPeriod"))
     CustomLineItemVersionListElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
     CustomLineItemVersionListElement.add_member(:start_time, Shapes::ShapeRef.new(shape: Instant, location_name: "StartTime"))
+    CustomLineItemVersionListElement.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
 
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
@@ -570,6 +573,7 @@ module Aws::BillingConductor
     ListCustomLineItemsFilter.add_member(:names, Shapes::ShapeRef.new(shape: CustomLineItemNameList, location_name: "Names"))
     ListCustomLineItemsFilter.add_member(:billing_groups, Shapes::ShapeRef.new(shape: BillingGroupArnList, location_name: "BillingGroups"))
     ListCustomLineItemsFilter.add_member(:arns, Shapes::ShapeRef.new(shape: CustomLineItemArns, location_name: "Arns"))
+    ListCustomLineItemsFilter.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
     ListCustomLineItemsFilter.struct_class = Types::ListCustomLineItemsFilter
 
     ListCustomLineItemsInput.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))

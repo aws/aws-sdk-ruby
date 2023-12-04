@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-12-04)
+------------------
+
+* Feature - Including UPDATE_* states as a success status for CreateStack waiter.
+
 1.95.0 (2023-11-28)
 ------------------
 

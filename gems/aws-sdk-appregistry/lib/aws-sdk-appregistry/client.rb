@@ -444,7 +444,7 @@ module Aws::AppRegistry
     # see [AWSServiceCatalogAppRegistryFullAccess][1] in the AppRegistry
     # Administrator Guide.
     #
-    # * `resource-groups:DisassociateResource`
+    # * `resource-groups:AssociateResource`
     #
     # * `cloudformation:UpdateStack`
     #
@@ -1522,7 +1522,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

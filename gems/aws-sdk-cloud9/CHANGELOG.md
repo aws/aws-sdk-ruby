@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-12-04)
+------------------
+
+* Feature - This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+
 1.63.0 (2023-11-28)
 ------------------
 

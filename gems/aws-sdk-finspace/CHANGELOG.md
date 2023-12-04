@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-12-04)
+------------------
+
+* Feature - Release General Purpose type clusters
+
 1.25.0 (2023-11-28)
 ------------------
 
