@@ -1031,7 +1031,7 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #
     # @option params [Boolean] :import_existing_resources
-    #   Indicates if the stack set imports resources that already exist.
+    #   Indicates if the change set imports resources that already exist.
     #
     #   <note markdown="1"> This parameter can only import resources that have custom names in
     #   templates. For more information, see [name type][1] in the
@@ -7221,7 +7221,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

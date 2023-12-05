@@ -22,7 +22,7 @@ require_relative 'aws-sdk-cleanroomsml/endpoint_provider'
 require_relative 'aws-sdk-cleanroomsml/endpoints'
 require_relative 'aws-sdk-cleanroomsml/customizations'
 
-# This module provides support for cleanrooms-ml. This module is available in the
+# This module provides support for AWS Clean Rooms ML. This module is available in the
 # `aws-sdk-cleanroomsml` gem.
 #
 # # Client
@@ -38,13 +38,13 @@ require_relative 'aws-sdk-cleanroomsml/customizations'
 #
 # # Errors
 #
-# Errors returned from cleanrooms-ml are defined in the
+# Errors returned from AWS Clean Rooms ML are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CleanRoomsML::Errors::ServiceError
-#       # rescues all cleanrooms-ml API errors
+#       # rescues all AWS Clean Rooms ML API errors
 #     end
 #
 # See {Errors} for more information.
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-cleanroomsml/customizations'
 # @!group service
 module Aws::CleanRoomsML
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

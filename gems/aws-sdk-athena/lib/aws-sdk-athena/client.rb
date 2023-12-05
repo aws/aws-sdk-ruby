@@ -553,6 +553,9 @@ module Aws::Athena
     #   resp.query_executions[0].execution_parameters #=> Array
     #   resp.query_executions[0].execution_parameters[0] #=> String
     #   resp.query_executions[0].substatement_type #=> String
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -959,6 +962,15 @@ module Aws::Athena
     #         kms_key: "KmsKey", # required
     #       },
     #       enable_minimum_encryption_configuration: false,
+    #       identity_center_configuration: {
+    #         enable_identity_center: false,
+    #         identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       },
+    #       query_results_s3_access_grants_configuration: {
+    #         enable_s3_access_grants: false, # required
+    #         create_user_level_prefix: false,
+    #         authentication_type: "DIRECTORY_IDENTITY", # required, accepts DIRECTORY_IDENTITY
+    #       },
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -1350,6 +1362,10 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the data catalog to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #
     # @return [Types::GetDataCatalogOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataCatalogOutput#data_catalog #data_catalog} => Types::DataCatalog
@@ -1358,6 +1374,7 @@ module Aws::Athena
     #
     #   resp = client.get_data_catalog({
     #     name: "CatalogNameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1385,6 +1402,11 @@ module Aws::Athena
     # @option params [required, String] :database_name
     #   The name of the database to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::GetDatabaseOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDatabaseOutput#database #database} => Types::Database
@@ -1394,6 +1416,7 @@ module Aws::Athena
     #   resp = client.get_database({
     #     catalog_name: "CatalogNameString", # required
     #     database_name: "NameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1571,6 +1594,9 @@ module Aws::Athena
     #   resp.query_execution.execution_parameters #=> Array
     #   resp.query_execution.execution_parameters[0] #=> String
     #   resp.query_execution.substatement_type #=> String
+    #   resp.query_execution.query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.query_execution.query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.query_execution.query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -1823,6 +1849,11 @@ module Aws::Athena
     # @option params [required, String] :table_name
     #   The name of the table for which metadata is returned.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::GetTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableMetadataOutput#table_metadata #table_metadata} => Types::TableMetadata
@@ -1833,6 +1864,7 @@ module Aws::Athena
     #     catalog_name: "CatalogNameString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1895,8 +1927,14 @@ module Aws::Athena
     #   resp.work_group.configuration.execution_role #=> String
     #   resp.work_group.configuration.customer_content_encryption_configuration.kms_key #=> String
     #   resp.work_group.configuration.enable_minimum_encryption_configuration #=> Boolean
+    #   resp.work_group.configuration.identity_center_configuration.enable_identity_center #=> Boolean
+    #   resp.work_group.configuration.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
+    #   resp.work_group.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroup AWS API Documentation
     #
@@ -2139,6 +2177,10 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of data catalogs to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #
     # @return [Types::ListDataCatalogsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDataCatalogsOutput#data_catalogs_summary #data_catalogs_summary} => Array&lt;Types::DataCatalogSummary&gt;
@@ -2151,6 +2193,7 @@ module Aws::Athena
     #   resp = client.list_data_catalogs({
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2183,6 +2226,11 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::ListDatabasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDatabasesOutput#database_list #database_list} => Array&lt;Types::Database&gt;
@@ -2196,6 +2244,7 @@ module Aws::Athena
     #     catalog_name: "CatalogNameString", # required
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2675,6 +2724,11 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::ListTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTableMetadataOutput#table_metadata_list #table_metadata_list} => Array&lt;Types::TableMetadata&gt;
@@ -2690,6 +2744,7 @@ module Aws::Athena
     #     expression: "ExpressionString",
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2799,6 +2854,7 @@ module Aws::Athena
     #   resp.work_groups[0].creation_time #=> Time
     #   resp.work_groups[0].engine_version.selected_engine_version #=> String
     #   resp.work_groups[0].engine_version.effective_engine_version #=> String
+    #   resp.work_groups[0].identity_center_application_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroups AWS API Documentation
@@ -2930,8 +2986,11 @@ module Aws::Athena
     #   A unique case-sensitive string used to ensure the request to create
     #   the query is idempotent (executes only once). If another
     #   `StartQueryExecution` request is received, the same response is
-    #   returned and another query is not created. If a parameter has changed,
-    #   for example, the `QueryString`, an error is returned.
+    #   returned and another query is not created. An error is returned if a
+    #   parameter, such as `QueryString`, has changed. A call to
+    #   `StartQueryExecution` that uses a previous client request token
+    #   returns the same `QueryExecutionId` even if the requester doesn't
+    #   have permission on the tables specified in `QueryString`.
     #
     #   This token is listed as not required because Amazon Web Services SDKs
     #   (for example the Amazon Web Services SDK for Java) auto-generate the
@@ -3560,6 +3619,11 @@ module Aws::Athena
     #         kms_key: "KmsKey", # required
     #       },
     #       enable_minimum_encryption_configuration: false,
+    #       query_results_s3_access_grants_configuration: {
+    #         enable_s3_access_grants: false, # required
+    #         create_user_level_prefix: false,
+    #         authentication_type: "DIRECTORY_IDENTITY", # required, accepts DIRECTORY_IDENTITY
+    #       },
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -3586,7 +3650,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

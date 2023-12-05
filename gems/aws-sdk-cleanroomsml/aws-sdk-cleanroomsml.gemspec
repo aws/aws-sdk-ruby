@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-cleanroomsml'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - cleanrooms-ml'
-  spec.description   = 'Official AWS Ruby gem for cleanrooms-ml. This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - AWS Clean Rooms ML'
+  spec.description   = 'Official AWS Ruby gem for AWS Clean Rooms ML. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

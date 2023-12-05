@@ -581,7 +581,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] import_existing_resources
-    #   Indicates if the stack set imports resources that already exist.
+    #   Indicates if the change set imports resources that already exist.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
@@ -974,7 +974,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] import_existing_resources
-    #   Indicates if the stack set imports resources that already exist.
+    #   Indicates if the change set imports resources that already exist.
     #
     #   <note markdown="1"> This parameter can only import resources that have custom names in
     #   templates. For more information, see [name type][1] in the
@@ -2446,7 +2446,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] import_existing_resources
-    #   Indicates if the stack set imports resources that already exist.
+    #   Indicates if the change set imports resources that already exist.
     #
     #   <note markdown="1"> This parameter can only import resources that have [custom names][1]
     #   in templates. To import resources that do not accept custom names,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-12-05)
+------------------
+
+* Feature - Adding IdentityCenter enabled request for interactive query
+
 1.78.0 (2023-11-28)
 ------------------
 

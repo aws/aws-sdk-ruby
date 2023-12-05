@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.428.0 (2023-12-05)
+------------------
+
+* Feature - Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection
+
 1.427.0 (2023-11-28)
 ------------------
 

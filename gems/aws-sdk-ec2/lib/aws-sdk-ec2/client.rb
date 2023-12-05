@@ -6391,8 +6391,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -6479,9 +6479,9 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -6534,9 +6534,9 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -8374,8 +8374,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -8770,8 +8770,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -8938,9 +8938,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -22198,9 +22198,9 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -22278,9 +22278,9 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -22333,9 +22333,9 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
-    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -26889,9 +26889,9 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -32642,9 +32642,9 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -32693,9 +32693,9 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -41348,8 +41348,8 @@ module Aws::EC2
     #         min: 1,
     #         max: 1,
     #       },
-    #       accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #       accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #       accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #       accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #       accelerator_total_memory_mi_b: {
     #         min: 1,
     #         max: 1,
@@ -42242,9 +42242,9 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
-    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx"
+    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.launch_template_data.instance_requirements.accelerator_names #=> Array
-    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100"
+    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -43310,8 +43310,8 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
-    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #         accelerator_total_memory_mi_b: {
     #           min: 1,
     #           max: 1,
@@ -45896,8 +45896,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -48516,8 +48516,8 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
-    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #               accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #               accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #               accelerator_total_memory_mi_b: {
     #                 min: 1,
     #                 max: 1,
@@ -53758,8 +53758,8 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
-    #             accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #             accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #             accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #             accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #             accelerator_total_memory_mi_b: {
     #               min: 1,
     #               max: 1,
@@ -53827,8 +53827,8 @@ module Aws::EC2
     #                   min: 1,
     #                   max: 1,
     #                 },
-    #                 accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx
-    #                 accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100
+    #                 accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #                 accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
     #                 accelerator_total_memory_mi_b: {
     #                   min: 1,
     #                   max: 1,
@@ -58616,7 +58616,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.427.0'
+      context[:gem_version] = '1.428.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

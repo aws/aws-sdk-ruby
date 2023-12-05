@@ -503,6 +503,10 @@ module Aws::CleanRoomsML
     #   model, by default. Tags in the StartAudienceGenerationJob will
     #   override the default.
     #
+    #   When the client is in a different account than the configured audience
+    #   model, the tags from the client are never applied to a resource in the
+    #   caller's account.
+    #
     # @option params [String] :description
     #   The description of the configured audience model.
     #
@@ -1705,7 +1709,7 @@ module Aws::CleanRoomsML
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

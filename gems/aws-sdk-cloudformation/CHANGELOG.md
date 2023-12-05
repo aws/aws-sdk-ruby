@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-12-05)
+------------------
+
+* Feature - Documentation update, December 2023
+
 1.96.0 (2023-12-04)
 ------------------
 

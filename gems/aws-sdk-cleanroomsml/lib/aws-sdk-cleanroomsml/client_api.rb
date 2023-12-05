@@ -531,7 +531,7 @@ module Aws::CleanRoomsML
         "endpointPrefix" => "cleanrooms-ml",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "serviceFullName" => "cleanrooms-ml",
+        "serviceFullName" => "AWS Clean Rooms ML",
         "serviceId" => "CleanRoomsML",
         "signatureVersion" => "v4",
         "signingName" => "cleanrooms-ml",
