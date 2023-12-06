@@ -3185,6 +3185,11 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   This is the type of vault in which the described recovery point is
+    #   stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointOutput AWS API Documentation
     #
     class DescribeRecoveryPointOutput < Struct.new(
@@ -3210,7 +3215,8 @@ module Aws::Backup
       :parent_recovery_point_arn,
       :composite_member_identifier,
       :is_parent,
-      :resource_name)
+      :resource_name,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4572,6 +4578,8 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
     #   * `DynamoDB` for Amazon DynamoDB
@@ -4586,11 +4594,17 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
     #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #   @return [String]
@@ -5070,6 +5084,8 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
     #   * `DynamoDB` for Amazon DynamoDB
@@ -5084,11 +5100,17 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
     #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #   @return [String]
@@ -5387,7 +5409,40 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] by_resource_type
-    #   Returns only recovery points that match the specified resource type.
+    #   Returns only recovery points that match the specified resource
+    #   type(s):
+    #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `CloudFormation` for CloudFormation
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #
+    #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
+    #
+    #   * `VirtualMachine` for virtual machines
     #   @return [String]
     #
     # @!attribute [rw] by_backup_plan_id
@@ -5849,6 +5904,43 @@ module Aws::Backup
     #   associated with the specified account ID.
     #   @return [String]
     #
+    # @!attribute [rw] by_resource_type
+    #   Include this parameter to return only restore jobs for the specified
+    #   resources:
+    #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `CloudFormation` for CloudFormation
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #
+    #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
+    #
+    #   * `VirtualMachine` for virtual machines
+    #   @return [String]
+    #
     # @!attribute [rw] by_created_before
     #   Returns only restore jobs that were created before the specified
     #   date.
@@ -5884,6 +5976,7 @@ module Aws::Backup
       :next_token,
       :max_results,
       :by_account_id,
+      :by_resource_type,
       :by_created_before,
       :by_created_after,
       :by_status,
@@ -6479,6 +6572,11 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   This is the type of vault in which the described recovery point is
+    #   stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByBackupVault AWS API Documentation
     #
     class RecoveryPointByBackupVault < Struct.new(
@@ -6503,7 +6601,8 @@ module Aws::Backup
       :parent_recovery_point_arn,
       :composite_member_identifier,
       :is_parent,
-      :resource_name)
+      :resource_name,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8442,6 +8541,15 @@ module Aws::Backup
     # @!attribute [rw] resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for
     #   the Region.
+    #
+    #   If resource assignments are only based on tags, then service opt-in
+    #   settings are applied. If a resource type is explicitly assigned to a
+    #   backup plan, such as Amazon S3, Amazon EC2, or Amazon RDS, it will
+    #   be included in the backup even if the opt-in is not enabled for that
+    #   particular service. If both a resource type and tags are specified
+    #   in a resource assignment, the resource type specified in the backup
+    #   plan takes priority over the tag condition. Service opt-in settings
+    #   are disregarded in this situation.
     #   @return [Hash<String,Boolean>]
     #
     # @!attribute [rw] resource_type_management_preference

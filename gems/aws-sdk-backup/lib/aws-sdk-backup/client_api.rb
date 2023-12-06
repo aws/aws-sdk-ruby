@@ -875,6 +875,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
     DescribeRecoveryPointOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     DescribeRecoveryPointOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    DescribeRecoveryPointOutput.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     DescribeRecoveryPointOutput.struct_class = Types::DescribeRecoveryPointOutput
 
     DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
@@ -1342,6 +1343,7 @@ module Aws::Backup
     ListRestoreJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRestoreJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListRestoreJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
+    ListRestoreJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
     ListRestoreJobsInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
     ListRestoreJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
     ListRestoreJobsInput.add_member(:by_status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location: "querystring", location_name: "status"))
@@ -1445,6 +1447,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
     RecoveryPointByBackupVault.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     RecoveryPointByBackupVault.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    RecoveryPointByBackupVault.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     RecoveryPointByBackupVault.struct_class = Types::RecoveryPointByBackupVault
 
     RecoveryPointByBackupVaultList.member = Shapes::ShapeRef.new(shape: RecoveryPointByBackupVault)

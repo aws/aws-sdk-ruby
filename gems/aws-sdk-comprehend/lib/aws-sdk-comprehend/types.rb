@@ -780,16 +780,19 @@ module Aws::Comprehend
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint.
     #
-    #   For prompt classification, Amazon Comprehend provides the endpoint
-    #   ARN: `zzz`.
+    #   For prompt safety classification, Amazon Comprehend provides the
+    #   endpoint ARN. For more information about prompt safety classifiers,
+    #   see [Prompt safety classification][1] in the *Amazon Comprehend
+    #   Developer Guide*
     #
     #   For custom classification, you create an endpoint for your custom
     #   model. For more information, see [Using Amazon Comprehend
-    #   endpoints][1].
+    #   endpoints][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
     #   @return [String]
     #
     # @!attribute [rw] bytes
@@ -799,8 +802,8 @@ module Aws::Comprehend
     #   the `Bytes` parameter to input an Amazon Textract
     #   `DetectDocumentText` or `AnalyzeDocument` output file.
     #
-    #   To classify a document using the prompt classifier, use the `Text`
-    #   parameter for input.
+    #   To classify a document using the prompt safety classifier, use the
+    #   `Text` parameter for input.
     #
     #   Provide the input document as a sequence of base64-encoded bytes. If
     #   your code uses an Amazon Web Services SDK to classify documents, the
@@ -835,19 +838,19 @@ module Aws::Comprehend
 
     # @!attribute [rw] classes
     #   The classes used by the document being analyzed. These are used for
-    #   multi-class trained models. Individual classes are mutually
+    #   models trained in multi-class mode. Individual classes are mutually
     #   exclusive and each document is expected to have only a single class
     #   assigned to it. For example, an animal can be a dog or a cat, but
     #   not both at the same time.
     #
-    #   For prompt classification, the response includes a single class
-    #   (`UNDESIRED_PROMPT`), along with a confidence score. A higher
-    #   confidence score indicates that the input prompt is undesired in
-    #   nature.
+    #   For prompt safety classification, the response includes only two
+    #   classes (SAFE\_PROMPT and UNSAFE\_PROMPT), along with a confidence
+    #   score for each class. The value range of the score is zero to one,
+    #   where one is the highest confidence.
     #   @return [Array<Types::DocumentClass>]
     #
     # @!attribute [rw] labels
-    #   The labels used the document being analyzed. These are used for
+    #   The labels used in the document being analyzed. These are used for
     #   multi-label trained models. Individual labels represent different
     #   categories that are related in some manner and are not mutually
     #   exclusive. For example, a movie can be just an action movie, or it
@@ -1074,11 +1077,12 @@ module Aws::Comprehend
     #
     # @!attribute [rw] mode
     #   Indicates the mode in which the classifier will be trained. The
-    #   classifier can be trained in multi-class mode, which identifies one
-    #   and only one class for each document, or multi-label mode, which
-    #   identifies one or more labels for each document. In multi-label
-    #   mode, multiple labels for an individual document are separated by a
-    #   delimiter. The default delimiter between labels is a pipe (\|).
+    #   classifier can be trained in multi-class (single-label) mode or
+    #   multi-label mode. Multi-class mode identifies a single class label
+    #   for each document and multi-label mode identifies one or more class
+    #   labels for each document. Multiple labels for an individual document
+    #   are separated by a delimiter. The default delimiter between labels
+    #   is a pipe (\|).
     #   @return [String]
     #
     # @!attribute [rw] model_kms_key_id
@@ -2669,8 +2673,8 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] text_segments
-    #   A list of up to 10 text strings. The maximum size for the list is 10
-    #   KB.
+    #   A list of up to 10 text strings. Each string has a maximum size of 1
+    #   KB, and the maximum size of the list is 10 KB.
     #   @return [Array<Types::TextSegment>]
     #
     # @!attribute [rw] language_code
@@ -3411,10 +3415,10 @@ module Aws::Comprehend
     #   chose `TEXTRACT_ANALYZE_DOCUMENT` as the read action, you must
     #   specify one or both of the following values:
     #
-    #   * `TABLES` - Returns information about any tables that are detected
-    #     in the input document.
+    #   * `TABLES` - Returns additional information about any tables that
+    #     are detected in the input document.
     #
-    #   * `FORMS` - Returns information and the data from any forms that are
+    #   * `FORMS` - Returns additional information about any forms that are
     #     detected in the input document.
     #   @return [Array<String>]
     #
@@ -4470,8 +4474,8 @@ module Aws::Comprehend
     #
     #   Entity types must not contain the following invalid characters: \\n
     #   (line break), \\\\n (escaped line break, \\r (carriage return),
-    #   \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab),
-    #   space, and , (comma).
+    #   \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab), and
+    #   , (comma).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesListItem AWS API Documentation
@@ -5094,23 +5098,32 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Provides additional detail about why the request failed:
-    #
-    # * Document size is too large - Check the size of your file and
-    #   resubmit the request.
-    #
-    # * Document type is not supported - Check the file type and resubmit
-    #   the request.
-    #
-    # * Too many pages in the document - Check the number of pages in your
-    #   file and resubmit the request.
-    #
-    # * Access denied to Amazon Textract - Verify that your account has
-    #   permission to use Amazon Textract API operations and resubmit the
-    #   request.
+    # Provides additional detail about why the request failed.
     #
     # @!attribute [rw] reason
-    #   Reason code is `INVALID_DOCUMENT`.
+    #   Reason codes include the following values:
+    #
+    #   * DOCUMENT\_SIZE\_EXCEEDED - Document size is too large. Check the
+    #     size of your file and resubmit the request.
+    #
+    #   * UNSUPPORTED\_DOC\_TYPE - Document type is not supported. Check the
+    #     file type and resubmit the request.
+    #
+    #   * PAGE\_LIMIT\_EXCEEDED - Too many pages in the document. Check the
+    #     number of pages in your file and resubmit the request.
+    #
+    #   * TEXTRACT\_ACCESS\_DENIED - Access denied to Amazon Textract.
+    #     Verify that your account has permission to use Amazon Textract API
+    #     operations and resubmit the request.
+    #
+    #   * NOT\_TEXTRACT\_JSON - Document is not Amazon Textract JSON format.
+    #     Verify the format and resubmit the request.
+    #
+    #   * MISMATCHED\_TOTAL\_PAGE\_COUNT - Check the number of pages in your
+    #     file and resubmit the request.
+    #
+    #   * INVALID\_DOCUMENT - Invalid document. Check the file and resubmit
+    #     the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestDetail AWS API Documentation
@@ -5130,20 +5143,7 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   Provides additional detail about why the request failed:
-    #
-    #   * Document size is too large - Check the size of your file and
-    #     resubmit the request.
-    #
-    #   * Document type is not supported - Check the file type and resubmit
-    #     the request.
-    #
-    #   * Too many pages in the document - Check the number of pages in your
-    #     file and resubmit the request.
-    #
-    #   * Access denied to Amazon Textract - Verify that your account has
-    #     permission to use Amazon Textract API operations and resubmit the
-    #     request.
+    #   Provides additional detail about why the request failed.
     #   @return [Types::InvalidRequestDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InvalidRequestException AWS API Documentation
@@ -8694,7 +8694,7 @@ module Aws::Comprehend
 
     # Toxicity analysis result for one string. For more information about
     # toxicity detection, see [Toxicity detection][1] in the *Amazon
-    # Comprehend Developer Guide*
+    # Comprehend Developer Guide*.
     #
     #
     #
@@ -8705,7 +8705,8 @@ module Aws::Comprehend
     #   @return [Array<Types::ToxicContent>]
     #
     # @!attribute [rw] toxicity
-    #   Overall toxicity score for the string.
+    #   Overall toxicity score for the string. Value range is zero to one,
+    #   where one is the highest confidence.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ToxicLabels AWS API Documentation
@@ -8717,10 +8718,9 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Amazon Comprehend can't process the language of the input text. For
-    # custom entity recognition APIs, only English, Spanish, French,
-    # Italian, German, or Portuguese are accepted. For a list of supported
-    # languages, [Supported languages][1] in the Comprehend Developer Guide.
+    # Amazon Comprehend can't process the language of the input text. For a
+    # list of supported languages, [Supported languages][1] in the
+    # Comprehend Developer Guide.
     #
     #
     #

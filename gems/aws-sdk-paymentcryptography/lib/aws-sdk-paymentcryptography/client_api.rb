@@ -29,6 +29,8 @@ module Aws::PaymentCryptography
     DeleteKeyInput = Shapes::StructureShape.new(name: 'DeleteKeyInput')
     DeleteKeyInputDeleteKeyInDaysInteger = Shapes::IntegerShape.new(name: 'DeleteKeyInputDeleteKeyInDaysInteger')
     DeleteKeyOutput = Shapes::StructureShape.new(name: 'DeleteKeyOutput')
+    ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
+    ExportDukptInitialKey = Shapes::StructureShape.new(name: 'ExportDukptInitialKey')
     ExportKeyInput = Shapes::StructureShape.new(name: 'ExportKeyInput')
     ExportKeyMaterial = Shapes::UnionShape.new(name: 'ExportKeyMaterial')
     ExportKeyOutput = Shapes::StructureShape.new(name: 'ExportKeyOutput')
@@ -46,6 +48,7 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateInput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateInput')
     GetPublicKeyCertificateOutput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateOutput')
     HexLength16 = Shapes::StringShape.new(name: 'HexLength16')
+    HexLength20Or24 = Shapes::StringShape.new(name: 'HexLength20Or24')
     ImportKeyInput = Shapes::StructureShape.new(name: 'ImportKeyInput')
     ImportKeyMaterial = Shapes::UnionShape.new(name: 'ImportKeyMaterial')
     ImportKeyOutput = Shapes::StructureShape.new(name: 'ImportKeyOutput')
@@ -152,6 +155,14 @@ module Aws::PaymentCryptography
     DeleteKeyOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     DeleteKeyOutput.struct_class = Types::DeleteKeyOutput
 
+    ExportAttributes.add_member(:export_dukpt_initial_key, Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
+    ExportAttributes.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    ExportAttributes.struct_class = Types::ExportAttributes
+
+    ExportDukptInitialKey.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength20Or24, required: true, location_name: "KeySerialNumber"))
+    ExportDukptInitialKey.struct_class = Types::ExportDukptInitialKey
+
+    ExportKeyInput.add_member(:export_attributes, Shapes::ShapeRef.new(shape: ExportAttributes, location_name: "ExportAttributes"))
     ExportKeyInput.add_member(:export_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "ExportKeyIdentifier"))
     ExportKeyInput.add_member(:key_material, Shapes::ShapeRef.new(shape: ExportKeyMaterial, required: true, location_name: "KeyMaterial"))
     ExportKeyInput.struct_class = Types::ExportKeyInput
@@ -391,6 +402,8 @@ module Aws::PaymentCryptography
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
+    WrappedKey.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
+    WrappedKey.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     WrappedKey.add_member(:key_material, Shapes::ShapeRef.new(shape: KeyMaterial, required: true, location_name: "KeyMaterial"))
     WrappedKey.add_member(:wrapped_key_material_format, Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, required: true, location_name: "WrappedKeyMaterialFormat"))
     WrappedKey.add_member(:wrapping_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "WrappingKeyArn"))

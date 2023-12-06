@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2023-12-06)
+------------------
+
+* Feature - Releasing Tagging Support for Instance Management APIS
+
 1.141.0 (2023-11-28)
 ------------------
 

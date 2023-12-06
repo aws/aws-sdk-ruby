@@ -1870,6 +1870,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#composite_member_identifier #composite_member_identifier} => String
     #   * {Types::DescribeRecoveryPointOutput#is_parent #is_parent} => Boolean
     #   * {Types::DescribeRecoveryPointOutput#resource_name #resource_name} => String
+    #   * {Types::DescribeRecoveryPointOutput#vault_type #vault_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1910,6 +1911,7 @@ module Aws::Backup
     #   resp.composite_member_identifier #=> String
     #   resp.is_parent #=> Boolean
     #   resp.resource_name #=> String
+    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPoint AWS API Documentation
     #
@@ -2975,6 +2977,8 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
     #   * `DynamoDB` for Amazon DynamoDB
@@ -2989,11 +2993,17 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
     #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #
@@ -3521,6 +3531,8 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
     #   * `DynamoDB` for Amazon DynamoDB
@@ -3535,11 +3547,17 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
     #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #
@@ -3872,7 +3890,40 @@ module Aws::Backup
     #   Resource Name (ARN).
     #
     # @option params [String] :by_resource_type
-    #   Returns only recovery points that match the specified resource type.
+    #   Returns only recovery points that match the specified resource
+    #   type(s):
+    #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `CloudFormation` for CloudFormation
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #
+    #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
+    #
+    #   * `VirtualMachine` for virtual machines
     #
     # @option params [String] :by_backup_plan_id
     #   Returns only recovery points that match the specified backup plan ID.
@@ -3943,6 +3994,7 @@ module Aws::Backup
     #   resp.recovery_points[0].composite_member_identifier #=> String
     #   resp.recovery_points[0].is_parent #=> Boolean
     #   resp.recovery_points[0].resource_name #=> String
+    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVault AWS API Documentation
     #
@@ -4324,6 +4376,42 @@ module Aws::Backup
     #   The account ID to list the jobs from. Returns only restore jobs
     #   associated with the specified account ID.
     #
+    # @option params [String] :by_resource_type
+    #   Include this parameter to return only restore jobs for the specified
+    #   resources:
+    #
+    #   * `Aurora` for Amazon Aurora
+    #
+    #   * `CloudFormation` for CloudFormation
+    #
+    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `FSx` for Amazon FSx
+    #
+    #   * `Neptune` for Amazon Neptune
+    #
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #
+    #   * `Storage Gateway` for Storage Gateway
+    #
+    #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
+    #
+    #   * `VirtualMachine` for virtual machines
+    #
     # @option params [Time,DateTime,Date,Integer,String] :by_created_before
     #   Returns only restore jobs that were created before the specified date.
     #
@@ -4358,6 +4446,7 @@ module Aws::Backup
     #     next_token: "string",
     #     max_results: 1,
     #     by_account_id: "AccountId",
+    #     by_resource_type: "ResourceType",
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
@@ -5602,17 +5691,23 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current service opt-in settings for the Region. If
-    # service-opt-in is enabled for a service, Backup tries to protect that
-    # service's resources in this Region, when the resource is included in
-    # an on-demand backup or scheduled backup plan. Otherwise, Backup does
-    # not try to protect that service's resources in this Region. Use the
-    # `DescribeRegionSettings` API to determine the resource types that are
-    # supported.
+    # Updates the current service opt-in settings for the Region.
+    #
+    # Use the `DescribeRegionSettings` API to determine the resource types
+    # that are supported.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
     #   Region.
+    #
+    #   If resource assignments are only based on tags, then service opt-in
+    #   settings are applied. If a resource type is explicitly assigned to a
+    #   backup plan, such as Amazon S3, Amazon EC2, or Amazon RDS, it will be
+    #   included in the backup even if the opt-in is not enabled for that
+    #   particular service. If both a resource type and tags are specified in
+    #   a resource assignment, the resource type specified in the backup plan
+    #   takes priority over the tag condition. Service opt-in settings are
+    #   disregarded in this situation.
     #
     # @option params [Hash<String,Boolean>] :resource_type_management_preference
     #   Enables or disables full Backup management of backups for a resource
@@ -5877,7 +5972,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

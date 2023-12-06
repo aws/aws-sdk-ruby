@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-12-06)
+------------------
+
+* Feature - AWS Payment Cryptography IPEK feature release
+
 1.8.0 (2023-11-28)
 ------------------
 

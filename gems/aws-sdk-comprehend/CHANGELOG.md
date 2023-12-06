@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-12-06)
+------------------
+
+* Feature - Documentation updates for Trust and Safety features.
+
 1.77.0 (2023-11-28)
 ------------------
 

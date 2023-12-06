@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.429.0 (2023-12-06)
+------------------
+
+* Feature - Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.
+
 1.428.0 (2023-12-05)
 ------------------
 

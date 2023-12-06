@@ -24952,6 +24952,7 @@ module Aws::EC2
     #   resp.instance_types[0].processor_info.sustained_clock_speed_in_ghz #=> Float
     #   resp.instance_types[0].processor_info.supported_features #=> Array
     #   resp.instance_types[0].processor_info.supported_features[0] #=> String, one of "amd-sev-snp"
+    #   resp.instance_types[0].processor_info.manufacturer #=> String
     #   resp.instance_types[0].v_cpu_info.default_v_cpus #=> Integer
     #   resp.instance_types[0].v_cpu_info.default_cores #=> Integer
     #   resp.instance_types[0].v_cpu_info.default_threads_per_core #=> Integer
@@ -58616,7 +58617,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.428.0'
+      context[:gem_version] = '1.429.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

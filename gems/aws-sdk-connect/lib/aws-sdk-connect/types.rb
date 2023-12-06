@@ -2248,6 +2248,12 @@ module Aws::Connect
     #   Your contact center allows outbound calls.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `\{ "tags": \{"key1":"value1",
+    #   "key2":"value2"\} \}`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceRequest AWS API Documentation
     #
     class CreateInstanceRequest < Struct.new(
@@ -2256,7 +2262,8 @@ module Aws::Connect
       :instance_alias,
       :directory_id,
       :inbound_calls_enabled,
-      :outbound_calls_enabled)
+      :outbound_calls_enabled,
+      :tags)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end
@@ -8953,6 +8960,10 @@ module Aws::Connect
     #   admin website.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags of an instance.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -8966,7 +8977,8 @@ module Aws::Connect
       :status_reason,
       :inbound_calls_enabled,
       :outbound_calls_enabled,
-      :instance_access_url)
+      :instance_access_url,
+      :tags)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end

@@ -728,19 +728,20 @@ module Aws::Comprehend
     #
     # * Custom classifier - a custom model that you have created and
     #   trained. For input, you can provide plain text, a single-page
-    #   document (PDF, Word, or image), or Textract API output. For more
-    #   information, see [Custom classification][1] in the *Amazon
+    #   document (PDF, Word, or image), or Amazon Textract API output. For
+    #   more information, see [Custom classification][1] in the *Amazon
     #   Comprehend Developer Guide*.
     #
-    # * Prompt classifier - Amazon Comprehend provides a model for
-    #   classifying prompts. For input, you provide English plain text
-    #   input. For prompt classification, the response includes only the
-    #   `Classes` field. For more information about prompt classifiers, see
-    #   [Prompt classifiers][2] in the *Amazon Comprehend Developer Guide*.
+    # * Prompt safety classifier - Amazon Comprehend provides a pre-trained
+    #   model for classifying input prompts for generative AI applications.
+    #   For input, you provide English plain text input. For prompt safety
+    #   classification, the response includes only the `Classes` field. For
+    #   more information about prompt safety classifiers, see [Prompt safety
+    #   classification][2] in the *Amazon Comprehend Developer Guide*.
     #
     # If the system detects errors while processing a page in the input
-    # document, the API response includes an entry in `Errors` that
-    # describes the errors.
+    # document, the API response includes an `Errors` field that describes
+    # the errors.
     #
     # If the system detects a document-level error in your input document,
     # the API returns an `InvalidRequestException` error response. For
@@ -750,7 +751,7 @@ module Aws::Comprehend
     #
     #
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html
-    # [2]: https://docs.aws.amazon.com/comprehend/latest/dg/prompt-classification.html
+    # [2]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
     # [3]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
     #
     # @option params [String] :text
@@ -760,16 +761,19 @@ module Aws::Comprehend
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint.
     #
-    #   For prompt classification, Amazon Comprehend provides the endpoint
-    #   ARN: `zzz`.
+    #   For prompt safety classification, Amazon Comprehend provides the
+    #   endpoint ARN. For more information about prompt safety classifiers,
+    #   see [Prompt safety classification][1] in the *Amazon Comprehend
+    #   Developer Guide*
     #
     #   For custom classification, you create an endpoint for your custom
     #   model. For more information, see [Using Amazon Comprehend
-    #   endpoints][1].
+    #   endpoints][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
     #
     # @option params [String, StringIO, File] :bytes
     #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
@@ -778,8 +782,8 @@ module Aws::Comprehend
     #   the `Bytes` parameter to input an Amazon Textract `DetectDocumentText`
     #   or `AnalyzeDocument` output file.
     #
-    #   To classify a document using the prompt classifier, use the `Text`
-    #   parameter for input.
+    #   To classify a document using the prompt safety classifier, use the
+    #   `Text` parameter for input.
     #
     #   Provide the input document as a sequence of base64-encoded bytes. If
     #   your code uses an Amazon Web Services SDK to classify documents, the
@@ -1063,11 +1067,12 @@ module Aws::Comprehend
     #
     # @option params [String] :mode
     #   Indicates the mode in which the classifier will be trained. The
-    #   classifier can be trained in multi-class mode, which identifies one
-    #   and only one class for each document, or multi-label mode, which
-    #   identifies one or more labels for each document. In multi-label mode,
-    #   multiple labels for an individual document are separated by a
-    #   delimiter. The default delimiter between labels is a pipe (\|).
+    #   classifier can be trained in multi-class (single-label) mode or
+    #   multi-label mode. Multi-class mode identifies a single class label for
+    #   each document and multi-label mode identifies one or more class labels
+    #   for each document. Multiple labels for an individual document are
+    #   separated by a delimiter. The default delimiter between labels is a
+    #   pipe (\|).
     #
     # @option params [String] :model_kms_key_id
     #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
@@ -2950,19 +2955,18 @@ module Aws::Comprehend
     end
 
     # Performs toxicity analysis on the list of text strings that you
-    # provide as input. The analysis uses the order of strings in the list
-    # to determine context when predicting toxicity. The API response
-    # contains a results list that matches the size of the input list. For
-    # more information about toxicity detection, see [Toxicity detection][1]
-    # in the *Amazon Comprehend Developer Guide*
+    # provide as input. The API response contains a results list that
+    # matches the size of the input list. For more information about
+    # toxicity detection, see [Toxicity detection][1] in the *Amazon
+    # Comprehend Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html
     #
     # @option params [required, Array<Types::TextSegment>] :text_segments
-    #   A list of up to 10 text strings. The maximum size for the list is 10
-    #   KB.
+    #   A list of up to 10 text strings. Each string has a maximum size of 1
+    #   KB, and the maximum size of the list is 10 KB.
     #
     # @option params [required, String] :language_code
     #   The language of the input text. Currently, English is the only
@@ -4340,9 +4344,9 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Starts an asynchronous document classification job. Use the
-    # `DescribeDocumentClassificationJob` operation to track the progress of
-    # the job.
+    # Starts an asynchronous document classification job using a custom
+    # classification model. Use the `DescribeDocumentClassificationJob`
+    # operation to track the progress of the job.
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -5909,7 +5913,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

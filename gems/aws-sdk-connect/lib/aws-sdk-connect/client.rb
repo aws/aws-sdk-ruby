@@ -1827,6 +1827,10 @@ module Aws::Connect
     # @option params [required, Boolean] :outbound_calls_enabled
     #   Your contact center allows outbound calls.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `\{ "tags": \{"key1":"value1", "key2":"value2"\} \}`.
+    #
     # @return [Types::CreateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInstanceResponse#id #id} => String
@@ -1841,6 +1845,9 @@ module Aws::Connect
     #     directory_id: "DirectoryId",
     #     inbound_calls_enabled: false, # required
     #     outbound_calls_enabled: false, # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4560,6 +4567,8 @@ module Aws::Connect
     #   resp.instance.inbound_calls_enabled #=> Boolean
     #   resp.instance.outbound_calls_enabled #=> Boolean
     #   resp.instance.instance_access_url #=> String
+    #   resp.instance.tags #=> Hash
+    #   resp.instance.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstance AWS API Documentation
     #
@@ -15314,7 +15323,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

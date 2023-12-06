@@ -396,6 +396,7 @@ module Aws::EC2
     CoreCountList = Shapes::ListShape.new(name: 'CoreCountList')
     CoreNetworkArn = Shapes::StringShape.new(name: 'CoreNetworkArn')
     CpuManufacturer = Shapes::StringShape.new(name: 'CpuManufacturer')
+    CpuManufacturerName = Shapes::StringShape.new(name: 'CpuManufacturerName')
     CpuManufacturerSet = Shapes::ListShape.new(name: 'CpuManufacturerSet')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
@@ -12595,6 +12596,7 @@ module Aws::EC2
     ProcessorInfo.add_member(:supported_architectures, Shapes::ShapeRef.new(shape: ArchitectureTypeList, location_name: "supportedArchitectures"))
     ProcessorInfo.add_member(:sustained_clock_speed_in_ghz, Shapes::ShapeRef.new(shape: ProcessorSustainedClockSpeed, location_name: "sustainedClockSpeedInGhz"))
     ProcessorInfo.add_member(:supported_features, Shapes::ShapeRef.new(shape: SupportedAdditionalProcessorFeatureList, location_name: "supportedFeatures"))
+    ProcessorInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: CpuManufacturerName, location_name: "manufacturer"))
     ProcessorInfo.struct_class = Types::ProcessorInfo
 
     ProductCode.add_member(:product_code_id, Shapes::ShapeRef.new(shape: String, location_name: "productCode"))

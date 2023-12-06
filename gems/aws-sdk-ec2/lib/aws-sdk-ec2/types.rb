@@ -53314,12 +53314,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manufacturer
+    #   The manufacturer of the processor.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProcessorInfo AWS API Documentation
     #
     class ProcessorInfo < Struct.new(
       :supported_architectures,
       :sustained_clock_speed_in_ghz,
-      :supported_features)
+      :supported_features,
+      :manufacturer)
       SENSITIVE = []
       include Aws::Structure
     end
