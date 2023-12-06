@@ -22,10 +22,9 @@ Feature: S3 Presigned Operations
   Scenario: Presigning a put object request
     When I create a presigned url for "put_object" with:
     | key | test        |
-    | acl | public-read |
     And I send an HTTP put request for the presigned url with body "hello"
-    Then I make an unauthenticated HTTPS GET request for key "test"
-    And the response should be "hello"
+    Then I get the object with the key "test"
+    And the body #read method should return "hello"
 
   Scenario: Presigned GET with virtual-hosted bucket
     Given I have a bucket configured with a virtual hosted CNAME
@@ -39,17 +38,15 @@ Feature: S3 Presigned Operations
   Scenario: Presigning a put object request with x-amz-*
     When I create a presigned url for "put_object" with:
     | key           | test               |
-    | acl           | public-read        |
     | storage_class | REDUCED_REDUNDANCY |
     And I send an HTTP put request for the presigned url with body "hello"
     Then the object "test" should have a "REDUCED_REDUNDANCY" storage class
-    Then I make an unauthenticated HTTPS GET request for key "test"
-    And the response should be "hello"
+    And I get the object with the key "test"
+    And the body #read method should return "hello"
 
   Scenario: Presigned PUT with content-type
     When I create a presigned url for "put_object" with:
     | key          | test        |
-    | acl          | public-read |
     | content_type | text/plain  |
     When I send an HTTP put request with the content type as "text/plain"
     Then the response should have a 200 status code

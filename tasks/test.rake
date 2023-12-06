@@ -47,7 +47,10 @@ end
 
 rule /^test:features:.+$/ do |task|
   dir = "gems/#{task.name.split(':').last}/features"
-  tags = "-t 'not @veryslow'"
+  # Exclude support smoke tests as these require account settings
+  # the logical or with not results in skipping tests marked with
+  # @support AND @smoke only.
+  tags = "-t 'not @veryslow' -t 'not @support or not @smoke'"
   sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
 end
 
@@ -55,7 +58,7 @@ desc 'Executes integration tests.'
 task 'test:features' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
-    tags = "-t 'not @veryslow'"
+    tags = "-t 'not @veryslow' -t 'not @support or not @smoke'"
     sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
     end
