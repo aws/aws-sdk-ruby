@@ -22,7 +22,6 @@ When(/I call the operation '(.*?)' with params:/) do |operation, params|
     @regional_client.send(operation.to_sym, opts)
     @operation_raised_error = false
   rescue StandardError => e
-    puts "Got an error: #{e}"
     @operation_raised_error = true
   end
 end
