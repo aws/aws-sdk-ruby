@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-12-08)
+------------------
+
+* Feature - Releasing Scaling Group, Dataview, and Volume APIs
+
 1.26.0 (2023-12-04)
 ------------------
 

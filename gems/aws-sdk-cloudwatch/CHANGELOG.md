@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-12-08)
+------------------
+
+* Feature - Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.
+
 1.83.0 (2023-11-28)
 ------------------
 

@@ -65,20 +65,32 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::CreateKxCluster.build(context)
           when :create_kx_database
             Aws::Finspace::Endpoints::CreateKxDatabase.build(context)
+          when :create_kx_dataview
+            Aws::Finspace::Endpoints::CreateKxDataview.build(context)
           when :create_kx_environment
             Aws::Finspace::Endpoints::CreateKxEnvironment.build(context)
+          when :create_kx_scaling_group
+            Aws::Finspace::Endpoints::CreateKxScalingGroup.build(context)
           when :create_kx_user
             Aws::Finspace::Endpoints::CreateKxUser.build(context)
+          when :create_kx_volume
+            Aws::Finspace::Endpoints::CreateKxVolume.build(context)
           when :delete_environment
             Aws::Finspace::Endpoints::DeleteEnvironment.build(context)
           when :delete_kx_cluster
             Aws::Finspace::Endpoints::DeleteKxCluster.build(context)
           when :delete_kx_database
             Aws::Finspace::Endpoints::DeleteKxDatabase.build(context)
+          when :delete_kx_dataview
+            Aws::Finspace::Endpoints::DeleteKxDataview.build(context)
           when :delete_kx_environment
             Aws::Finspace::Endpoints::DeleteKxEnvironment.build(context)
+          when :delete_kx_scaling_group
+            Aws::Finspace::Endpoints::DeleteKxScalingGroup.build(context)
           when :delete_kx_user
             Aws::Finspace::Endpoints::DeleteKxUser.build(context)
+          when :delete_kx_volume
+            Aws::Finspace::Endpoints::DeleteKxVolume.build(context)
           when :get_environment
             Aws::Finspace::Endpoints::GetEnvironment.build(context)
           when :get_kx_changeset
@@ -89,10 +101,16 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::GetKxConnectionString.build(context)
           when :get_kx_database
             Aws::Finspace::Endpoints::GetKxDatabase.build(context)
+          when :get_kx_dataview
+            Aws::Finspace::Endpoints::GetKxDataview.build(context)
           when :get_kx_environment
             Aws::Finspace::Endpoints::GetKxEnvironment.build(context)
+          when :get_kx_scaling_group
+            Aws::Finspace::Endpoints::GetKxScalingGroup.build(context)
           when :get_kx_user
             Aws::Finspace::Endpoints::GetKxUser.build(context)
+          when :get_kx_volume
+            Aws::Finspace::Endpoints::GetKxVolume.build(context)
           when :list_environments
             Aws::Finspace::Endpoints::ListEnvironments.build(context)
           when :list_kx_changesets
@@ -103,10 +121,16 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::ListKxClusters.build(context)
           when :list_kx_databases
             Aws::Finspace::Endpoints::ListKxDatabases.build(context)
+          when :list_kx_dataviews
+            Aws::Finspace::Endpoints::ListKxDataviews.build(context)
           when :list_kx_environments
             Aws::Finspace::Endpoints::ListKxEnvironments.build(context)
+          when :list_kx_scaling_groups
+            Aws::Finspace::Endpoints::ListKxScalingGroups.build(context)
           when :list_kx_users
             Aws::Finspace::Endpoints::ListKxUsers.build(context)
+          when :list_kx_volumes
+            Aws::Finspace::Endpoints::ListKxVolumes.build(context)
           when :list_tags_for_resource
             Aws::Finspace::Endpoints::ListTagsForResource.build(context)
           when :tag_resource
@@ -121,12 +145,16 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::UpdateKxClusterDatabases.build(context)
           when :update_kx_database
             Aws::Finspace::Endpoints::UpdateKxDatabase.build(context)
+          when :update_kx_dataview
+            Aws::Finspace::Endpoints::UpdateKxDataview.build(context)
           when :update_kx_environment
             Aws::Finspace::Endpoints::UpdateKxEnvironment.build(context)
           when :update_kx_environment_network
             Aws::Finspace::Endpoints::UpdateKxEnvironmentNetwork.build(context)
           when :update_kx_user
             Aws::Finspace::Endpoints::UpdateKxUser.build(context)
+          when :update_kx_volume
+            Aws::Finspace::Endpoints::UpdateKxVolume.build(context)
           end
         end
       end
