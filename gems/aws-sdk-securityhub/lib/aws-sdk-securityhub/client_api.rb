@@ -196,6 +196,16 @@ module Aws::SecurityHub
     AwsDynamoDbTableRestoreSummary = Shapes::StructureShape.new(name: 'AwsDynamoDbTableRestoreSummary')
     AwsDynamoDbTableSseDescription = Shapes::StructureShape.new(name: 'AwsDynamoDbTableSseDescription')
     AwsDynamoDbTableStreamSpecification = Shapes::StructureShape.new(name: 'AwsDynamoDbTableStreamSpecification')
+    AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails')
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointAuthenticationOptionsDetails')
+    AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails')
+    AwsEc2ClientVpnEndpointAuthenticationOptionsList = Shapes::ListShape.new(name: 'AwsEc2ClientVpnEndpointAuthenticationOptionsList')
+    AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails')
+    AwsEc2ClientVpnEndpointClientConnectOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointClientConnectOptionsDetails')
+    AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails')
+    AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails')
+    AwsEc2ClientVpnEndpointConnectionLogOptionsDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointConnectionLogOptionsDetails')
+    AwsEc2ClientVpnEndpointDetails = Shapes::StructureShape.new(name: 'AwsEc2ClientVpnEndpointDetails')
     AwsEc2EipDetails = Shapes::StructureShape.new(name: 'AwsEc2EipDetails')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
     AwsEc2InstanceMetadataOptions = Shapes::StructureShape.new(name: 'AwsEc2InstanceMetadataOptions')
@@ -586,6 +596,8 @@ module Aws::SecurityHub
     AwsRoute53HostedZoneVpcDetails = Shapes::StructureShape.new(name: 'AwsRoute53HostedZoneVpcDetails')
     AwsRoute53HostedZoneVpcsList = Shapes::ListShape.new(name: 'AwsRoute53HostedZoneVpcsList')
     AwsRoute53QueryLoggingConfigDetails = Shapes::StructureShape.new(name: 'AwsRoute53QueryLoggingConfigDetails')
+    AwsS3AccessPointDetails = Shapes::StructureShape.new(name: 'AwsS3AccessPointDetails')
+    AwsS3AccessPointVpcConfigurationDetails = Shapes::StructureShape.new(name: 'AwsS3AccessPointVpcConfigurationDetails')
     AwsS3AccountPublicAccessBlockDetails = Shapes::StructureShape.new(name: 'AwsS3AccountPublicAccessBlockDetails')
     AwsS3BucketBucketLifecycleConfigurationDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationDetails')
     AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails')
@@ -2135,6 +2147,7 @@ module Aws::SecurityHub
     AwsDynamoDbTableDetails.add_member(:table_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TableName"))
     AwsDynamoDbTableDetails.add_member(:table_size_bytes, Shapes::ShapeRef.new(shape: SizeBytes, location_name: "TableSizeBytes"))
     AwsDynamoDbTableDetails.add_member(:table_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TableStatus"))
+    AwsDynamoDbTableDetails.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     AwsDynamoDbTableDetails.struct_class = Types::AwsDynamoDbTableDetails
 
     AwsDynamoDbTableGlobalSecondaryIndex.add_member(:backfilling, Shapes::ShapeRef.new(shape: Boolean, location_name: "Backfilling"))
@@ -2209,6 +2222,60 @@ module Aws::SecurityHub
     AwsDynamoDbTableStreamSpecification.add_member(:stream_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "StreamEnabled"))
     AwsDynamoDbTableStreamSpecification.add_member(:stream_view_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StreamViewType"))
     AwsDynamoDbTableStreamSpecification.struct_class = Types::AwsDynamoDbTableStreamSpecification
+
+    AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails.add_member(:directory_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DirectoryId"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails.struct_class = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails
+
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails.add_member(:active_directory, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails, location_name: "ActiveDirectory"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails, location_name: "MutualAuthentication"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails.add_member(:federated_authentication, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails, location_name: "FederatedAuthentication"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsDetails.struct_class = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsDetails
+
+    AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SamlProviderArn"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.add_member(:self_service_saml_provider_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SelfServiceSamlProviderArn"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.struct_class = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails
+
+    AwsEc2ClientVpnEndpointAuthenticationOptionsList.member = Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointAuthenticationOptionsDetails)
+
+    AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails.add_member(:client_root_certificate_chain, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientRootCertificateChain"))
+    AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails.struct_class = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails
+
+    AwsEc2ClientVpnEndpointClientConnectOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsEc2ClientVpnEndpointClientConnectOptionsDetails.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LambdaFunctionArn"))
+    AwsEc2ClientVpnEndpointClientConnectOptionsDetails.add_member(:status, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails, location_name: "Status"))
+    AwsEc2ClientVpnEndpointClientConnectOptionsDetails.struct_class = Types::AwsEc2ClientVpnEndpointClientConnectOptionsDetails
+
+    AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails.struct_class = Types::AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails
+
+    AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails.add_member(:banner_text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BannerText"))
+    AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails.struct_class = Types::AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails
+
+    AwsEc2ClientVpnEndpointConnectionLogOptionsDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsEc2ClientVpnEndpointConnectionLogOptionsDetails.add_member(:cloudwatch_log_group, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudwatchLogGroup"))
+    AwsEc2ClientVpnEndpointConnectionLogOptionsDetails.add_member(:cloudwatch_log_stream, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudwatchLogStream"))
+    AwsEc2ClientVpnEndpointConnectionLogOptionsDetails.struct_class = Types::AwsEc2ClientVpnEndpointConnectionLogOptionsDetails
+
+    AwsEc2ClientVpnEndpointDetails.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientVpnEndpointId"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientCidrBlock"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:dns_server, Shapes::ShapeRef.new(shape: StringList, location_name: "DnsServer"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "SplitTunnel"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TransportProtocol"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:vpn_port, Shapes::ShapeRef.new(shape: Integer, location_name: "VpnPort"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServerCertificateArn"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:authentication_options, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointAuthenticationOptionsList, location_name: "AuthenticationOptions"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointConnectionLogOptionsDetails, location_name: "ConnectionLogOptions"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:security_group_id_set, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIdSet"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:self_service_portal_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SelfServicePortalUrl"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointClientConnectOptionsDetails, location_name: "ClientConnectOptions"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:session_timeout_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "SessionTimeoutHours"))
+    AwsEc2ClientVpnEndpointDetails.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails, location_name: "ClientLoginBannerOptions"))
+    AwsEc2ClientVpnEndpointDetails.struct_class = Types::AwsEc2ClientVpnEndpointDetails
 
     AwsEc2EipDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceId"))
     AwsEc2EipDetails.add_member(:public_ip, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PublicIp"))
@@ -3745,6 +3812,7 @@ module Aws::SecurityHub
     AwsMskClusterClusterInfoDetails.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfBrokerNodes"))
     AwsMskClusterClusterInfoDetails.add_member(:cluster_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterName"))
     AwsMskClusterClusterInfoDetails.add_member(:client_authentication, Shapes::ShapeRef.new(shape: AwsMskClusterClusterInfoClientAuthenticationDetails, location_name: "ClientAuthentication"))
+    AwsMskClusterClusterInfoDetails.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EnhancedMonitoring"))
     AwsMskClusterClusterInfoDetails.struct_class = Types::AwsMskClusterClusterInfoDetails
 
     AwsMskClusterClusterInfoEncryptionInfoDetails.add_member(:encryption_in_transit, Shapes::ShapeRef.new(shape: AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails, location_name: "EncryptionInTransit"))
@@ -4343,6 +4411,19 @@ module Aws::SecurityHub
     AwsRoute53QueryLoggingConfigDetails.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArnConfigDetails, location_name: "CloudWatchLogsLogGroupArn"))
     AwsRoute53QueryLoggingConfigDetails.struct_class = Types::AwsRoute53QueryLoggingConfigDetails
 
+    AwsS3AccessPointDetails.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccessPointArn"))
+    AwsS3AccessPointDetails.add_member(:alias, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Alias"))
+    AwsS3AccessPointDetails.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Bucket"))
+    AwsS3AccessPointDetails.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BucketAccountId"))
+    AwsS3AccessPointDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsS3AccessPointDetails.add_member(:network_origin, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkOrigin"))
+    AwsS3AccessPointDetails.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: AwsS3AccountPublicAccessBlockDetails, location_name: "PublicAccessBlockConfiguration"))
+    AwsS3AccessPointDetails.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: AwsS3AccessPointVpcConfigurationDetails, location_name: "VpcConfiguration"))
+    AwsS3AccessPointDetails.struct_class = Types::AwsS3AccessPointDetails
+
+    AwsS3AccessPointVpcConfigurationDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsS3AccessPointVpcConfigurationDetails.struct_class = Types::AwsS3AccessPointVpcConfigurationDetails
+
     AwsS3AccountPublicAccessBlockDetails.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "BlockPublicAcls"))
     AwsS3AccountPublicAccessBlockDetails.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "BlockPublicPolicy"))
     AwsS3AccountPublicAccessBlockDetails.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "IgnorePublicAcls"))
@@ -4424,6 +4505,7 @@ module Aws::SecurityHub
     AwsS3BucketDetails.add_member(:bucket_notification_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketNotificationConfiguration, location_name: "BucketNotificationConfiguration"))
     AwsS3BucketDetails.add_member(:bucket_versioning_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketBucketVersioningConfiguration, location_name: "BucketVersioningConfiguration"))
     AwsS3BucketDetails.add_member(:object_lock_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketObjectLockConfiguration, location_name: "ObjectLockConfiguration"))
+    AwsS3BucketDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     AwsS3BucketDetails.struct_class = Types::AwsS3BucketDetails
 
     AwsS3BucketLoggingConfiguration.add_member(:destination_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationBucketName"))
@@ -6199,6 +6281,8 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_dms_replication_instance, Shapes::ShapeRef.new(shape: AwsDmsReplicationInstanceDetails, location_name: "AwsDmsReplicationInstance"))
     ResourceDetails.add_member(:aws_route_53_hosted_zone, Shapes::ShapeRef.new(shape: AwsRoute53HostedZoneDetails, location_name: "AwsRoute53HostedZone"))
     ResourceDetails.add_member(:aws_msk_cluster, Shapes::ShapeRef.new(shape: AwsMskClusterDetails, location_name: "AwsMskCluster"))
+    ResourceDetails.add_member(:aws_s3_access_point, Shapes::ShapeRef.new(shape: AwsS3AccessPointDetails, location_name: "AwsS3AccessPoint"))
+    ResourceDetails.add_member(:aws_ec2_client_vpn_endpoint, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointDetails, location_name: "AwsEc2ClientVpnEndpoint"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
@@ -7937,6 +8021,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_security_hub_configuration, Seahorse::Model::Operation.new.tap do |o|

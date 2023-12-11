@@ -5600,6 +5600,11 @@ module Aws::SecurityHub
     #   * `UPDATING`
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableDetails AWS API Documentation
     #
     class AwsDynamoDbTableDetails < Struct.new(
@@ -5621,7 +5626,8 @@ module Aws::SecurityHub
       :table_id,
       :table_name,
       :table_size_bytes,
-      :table_status)
+      :table_status,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6002,6 +6008,281 @@ module Aws::SecurityHub
     class AwsDynamoDbTableStreamSpecification < Struct.new(
       :stream_enabled,
       :stream_view_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Active Directory that’s used to authenticate
+    # an Client VPN endpoint.
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the authentication method used by the Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] type
+    #   The authentication type used.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory
+    #   Information about the Active Directory, if applicable. With Active
+    #   Directory authentication, clients are authenticated against existing
+    #   Active Directory groups.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails]
+    #
+    # @!attribute [rw] mutual_authentication
+    #   Information about the authentication certificates, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails]
+    #
+    # @!attribute [rw] federated_authentication
+    #   Information about the IAM SAML identity provider, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsDetails < Struct.new(
+      :type,
+      :active_directory,
+      :mutual_authentication,
+      :federated_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the IAM SAML identity providers used for federated
+    # authentication.
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider for
+    #   the self-service portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails < Struct.new(
+      :saml_provider_arn,
+      :self_service_saml_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client certificate used for authentication.
+    #
+    # @!attribute [rw] client_root_certificate_chain
+    #   The Amazon Resource Name (ARN) of the client certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
+      :client_root_certificate_chain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of any updates to the client connect options.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsDetails < Struct.new(
+      :enabled,
+      :lambda_function_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of the Client VPN endpoint attribute.
+    #
+    # @!attribute [rw] code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for enabling a customizable text banner that will be displayed
+    # on Amazon Web Services provided clients when a VPN session is
+    # established.
+    #
+    # @!attribute [rw] enabled
+    #   Current state of text banner feature.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] banner_text
+    #   Customizable text that will be displayed in a banner on Amazon Web
+    #   Services provided clients when a VPN session is established.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails < Struct.new(
+      :enabled,
+      :banner_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client connection logging options for the Client
+    # VPN endpoint.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connection logging is enabled for the
+    #   Client VPN endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloudwatch_log_group
+    #   The name of the Amazon CloudWatch Logs log group to which connection
+    #   logging data is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloudwatch_log_stream
+    #   The name of the Amazon CloudWatch Logs log stream to which
+    #   connection logging data is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointConnectionLogOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointConnectionLogOptionsDetails < Struct.new(
+      :enabled,
+      :cloudwatch_log_group,
+      :cloudwatch_log_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Client VPN endpoint. A Client VPN endpoint is the
+    # resource that you create and configure to enable and manage client VPN
+    # sessions. It's the termination point for all client VPN sessions.
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which client IP
+    #   addresses are assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_server
+    #   Information about the DNS servers to be used for DNS resolution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether split-tunnel is enabled in the Client VPN
+    #   endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transport_protocol
+    #   The transport protocol used by the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_port
+    #   The port number for the Client VPN endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The Amazon Resource Name (ARN) of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_options
+    #   Information about the authentication method used by the Client VPN
+    #   endpoint.
+    #   @return [Array<Types::AwsEc2ClientVpnEndpointAuthenticationOptionsDetails>]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options for the
+    #   Client VPN endpoint.
+    #   @return [Types::AwsEc2ClientVpnEndpointConnectionLogOptionsDetails]
+    #
+    # @!attribute [rw] security_group_id_set
+    #   The IDs of the security groups for the target network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_portal_url
+    #   The URL of the self-service portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsDetails]
+    #
+    # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointDetails < Struct.new(
+      :client_vpn_endpoint_id,
+      :description,
+      :client_cidr_block,
+      :dns_server,
+      :split_tunnel,
+      :transport_protocol,
+      :vpn_port,
+      :server_certificate_arn,
+      :authentication_options,
+      :connection_log_options,
+      :security_group_id_set,
+      :vpc_id,
+      :self_service_portal_url,
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14031,7 +14312,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provide details about an Amazon MSK cluster.
+    # Provide details about an Amazon Managed Streaming for Apache Kafka
+    # (Amazon MSK) cluster.
     #
     # @!attribute [rw] encryption_info
     #   Includes encryption-related information, such as the KMS key used
@@ -14040,7 +14322,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoDetails]
     #
     # @!attribute [rw] current_version
-    #   The current version of the MSK cluster.
+    #   The current version of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] number_of_broker_nodes
@@ -14055,6 +14337,10 @@ module Aws::SecurityHub
     #   Provides information for different modes of client authentication.
     #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationDetails]
     #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies the level of monitoring for the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoDetails AWS API Documentation
     #
     class AwsMskClusterClusterInfoDetails < Struct.new(
@@ -14062,7 +14348,8 @@ module Aws::SecurityHub
       :current_version,
       :number_of_broker_nodes,
       :cluster_name,
-      :client_authentication)
+      :client_authentication,
+      :enhanced_monitoring)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17307,6 +17594,78 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Returns configuration information about the specified Amazon S3 access
+    # point. S3 access points are named network endpoints that are attached
+    # to buckets that you can use to perform S3 object operations.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket associated with the specified access
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_origin
+    #   Indicates whether this access point allows access from the public
+    #   internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   provides information about the Amazon S3 Public Access Block
+    #   configuration for accounts.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Contains the virtual private cloud (VPC) configuration for the
+    #   specified access point.
+    #   @return [Types::AwsS3AccessPointVpcConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointDetails AWS API Documentation
+    #
+    class AwsS3AccessPointDetails < Struct.new(
+      :access_point_arn,
+      :alias,
+      :bucket,
+      :bucket_account_id,
+      :name,
+      :network_origin,
+      :public_access_block_configuration,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The virtual private cloud (VPC) configuration for an Amazon S3 access
+    # point.
+    #
+    # @!attribute [rw] vpc_id
+    #   If this field is specified, this access point will only allow
+    #   connections from the specified VPC ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointVpcConfigurationDetails AWS API Documentation
+    #
+    class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # provides information about the Amazon S3 Public Access Block
     # configuration for accounts.
     #
@@ -17657,7 +18016,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an Amazon S3 bucket.
+    # The details of an Amazon Simple Storage Service (Amazon S3) bucket.
     #
     # @!attribute [rw] owner_id
     #   The canonical user ID of the owner of the S3 bucket.
@@ -17690,7 +18049,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] bucket_lifecycle_configuration
-    #   The lifecycle configuration for objects in the S3 bucket.
+    #   The lifecycle configuration for objects in the specified bucket.
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationDetails]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -17720,8 +18079,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] object_lock_configuration
     #   Specifies which rule Amazon S3 applies by default to every new
-    #   object placed in the specified bucket.
+    #   object placed in the bucket.
     #   @return [Types::AwsS3BucketObjectLockConfiguration]
+    #
+    # @!attribute [rw] name
+    #   The name of the bucket.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
@@ -17738,7 +18101,8 @@ module Aws::SecurityHub
       :bucket_website_configuration,
       :bucket_notification_configuration,
       :bucket_versioning_configuration,
-      :object_lock_configuration)
+      :object_lock_configuration,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22025,7 +22389,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -22246,7 +22611,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -25861,7 +26227,16 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] value_type
     #   Identifies whether a control parameter uses a custom user-defined
-    #   value or the Security Hub default value.
+    #   value or subscribes to the default Security Hub behavior.
+    #
+    #   When `ValueType` is set equal to `DEFAULT`, the default behavior can
+    #   be a specific Security Hub default value, or the default behavior
+    #   can be to ignore a specific parameter. When `ValueType` is set equal
+    #   to `DEFAULT`, Security Hub ignores user-provided input for the
+    #   `Value` field.
+    #
+    #   When `ValueType` is set equal to `CUSTOM`, the `Value` field can't
+    #   be empty.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -26972,6 +27347,20 @@ module Aws::SecurityHub
     #   (Amazon MSK) cluster.
     #   @return [Types::AwsMskClusterDetails]
     #
+    # @!attribute [rw] aws_s3_access_point
+    #   Provides details about an Amazon Simple Storage Service (Amazon S3)
+    #   access point. S3 access points are named network endpoints that are
+    #   attached to S3 buckets that you can use to perform S3 object
+    #   operations.
+    #   @return [Types::AwsS3AccessPointDetails]
+    #
+    # @!attribute [rw] aws_ec2_client_vpn_endpoint
+    #   Provides details about an Client VPN endpoint. A Client VPN endpoint
+    #   is the resource that you create and configure to enable and manage
+    #   client VPN sessions. It's the termination point for all client VPN
+    #   sessions.
+    #   @return [Types::AwsEc2ClientVpnEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -27071,7 +27460,9 @@ module Aws::SecurityHub
       :aws_dms_replication_task,
       :aws_dms_replication_instance,
       :aws_route_53_hosted_zone,
-      :aws_msk_cluster)
+      :aws_msk_cluster,
+      :aws_s3_access_point,
+      :aws_ec2_client_vpn_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29373,7 +29764,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
     #   @return [String]
     #
     # @!attribute [rw] description

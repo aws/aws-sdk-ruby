@@ -2599,7 +2599,8 @@ module Aws::SecurityHub
     # from the home Region.
     #
     # @option params [required, String] :name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
     #
     # @option params [String] :description
     #   The description of the configuration policy.
@@ -8306,7 +8307,8 @@ module Aws::SecurityHub
     #   of the configuration policy.
     #
     # @option params [String] :name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
     #
     # @option params [String] :description
     #   The description of the configuration policy.
@@ -10346,7 +10348,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

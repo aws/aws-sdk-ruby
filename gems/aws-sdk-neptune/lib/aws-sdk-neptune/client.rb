@@ -778,6 +778,7 @@ module Aws::Neptune
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -1056,8 +1057,14 @@ module Aws::Neptune
     #   Default: `false`.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   A list of the log types that this DB cluster should export to
+    #   CloudWatch Logs. Valid log types are: `audit` (to publish audit logs)
+    #   and `slowquery` (to publish slow-query logs). See [Publishing Neptune
+    #   logs to Amazon CloudWatch logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB cluster has deletion protection
@@ -1077,6 +1084,27 @@ module Aws::Neptune
     # @option params [String] :global_cluster_identifier
     #   The ID of the Neptune global database to which this new DB cluster
     #   should be added.
+    #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `standard | iopt1`
+    #
+    #   ^
+    #
+    #   Default:
+    #
+    #   * `standard`
+    #
+    #   ^
+    #
+    #   <note markdown="1"> When you create a Neptune cluster with the storage type set to
+    #   `iopt1`, the storage type is returned in the response. The storage
+    #   type isn't returned when you set it to `standard`.
+    #
+    #    </note>
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1124,6 +1152,7 @@ module Aws::Neptune
     #       max_capacity: 1.0,
     #     },
     #     global_cluster_identifier: "GlobalClusterIdentifier",
+    #     storage_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -1188,6 +1217,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -1196,6 +1226,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1449,6 +1481,7 @@ module Aws::Neptune
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -2365,6 +2398,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -2373,6 +2407,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2512,6 +2548,7 @@ module Aws::Neptune
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -3299,6 +3336,7 @@ module Aws::Neptune
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_snapshots[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
     #
@@ -3443,6 +3481,7 @@ module Aws::Neptune
     #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
     #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
     #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].deletion_protection #=> Boolean
@@ -3451,6 +3490,8 @@ module Aws::Neptune
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_clusters[0].global_cluster_identifier #=> String
+    #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_clusters[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -4781,6 +4822,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -4789,6 +4831,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -5025,7 +5069,12 @@ module Aws::Neptune
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB cluster.
+    #   to CloudWatch Logs for a specific DB cluster. See [Using the CLI to
+    #   publish Neptune audit logs to CloudWatch Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html#cloudwatch-logs-cli
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
@@ -5087,6 +5136,21 @@ module Aws::Neptune
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #
+    # @option params [String] :storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `standard | iopt1`
+    #
+    #   ^
+    #
+    #   Default:
+    #
+    #   * `standard`
+    #
+    #   ^
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5119,6 +5183,7 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -5182,6 +5247,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -5190,6 +5256,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -6243,6 +6311,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -6251,6 +6320,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -6845,6 +6916,13 @@ module Aws::Neptune
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #
+    # @option params [String] :storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `standard`, `iopt1`
+    #
+    #   Default: `standard`
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6878,6 +6956,7 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -6941,6 +7020,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -6949,6 +7029,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -7124,6 +7206,13 @@ module Aws::Neptune
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #
+    # @option params [String] :storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `standard`, `iopt1`
+    #
+    #   Default: `standard`
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -7155,6 +7244,7 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #     },
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -7218,6 +7308,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -7226,6 +7317,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -7315,6 +7408,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -7323,6 +7417,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -7415,6 +7511,7 @@ module Aws::Neptune
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
@@ -7423,6 +7520,8 @@ module Aws::Neptune
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.global_cluster_identifier #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -7446,7 +7545,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

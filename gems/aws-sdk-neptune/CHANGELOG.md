@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-12-11)
+------------------
+
+* Feature - This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.
+
 1.60.0 (2023-11-28)
 ------------------
 

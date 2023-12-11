@@ -213,6 +213,14 @@ module Aws::Neptune
     # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
     # will be exported (or not exported) to CloudWatch Logs.
     #
+    # Valid log types are: `audit` (to publish audit logs) and `slowquery`
+    # (to publish slow-query logs). See [Publishing Neptune logs to Amazon
+    # CloudWatch logs][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
+    #
     # @!attribute [rw] enable_log_types
     #   The list of log types to enable.
     #   @return [Array<String>]
@@ -257,6 +265,10 @@ module Aws::Neptune
     #   The number of days for which automatic DB snapshots are retained.
     #   @return [Integer]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type for the DB cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] allocated_storage
     #   The allocated storage size in gibibytes (GiB) for database engines.
     #   For Neptune, `AllocatedStorage` always returns 1, because Neptune DB
@@ -277,6 +289,7 @@ module Aws::Neptune
       :iam_database_authentication_enabled,
       :engine_version,
       :backup_retention_period,
+      :storage_type,
       :allocated_storage,
       :iops)
       SENSITIVE = []
@@ -857,8 +870,14 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
-    #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs.
+    #   A list of the log types that this DB cluster should export to
+    #   CloudWatch Logs. Valid log types are: `audit` (to publish audit
+    #   logs) and `slowquery` (to publish slow-query logs). See [Publishing
+    #   Neptune logs to Amazon CloudWatch logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -882,6 +901,28 @@ module Aws::Neptune
     # @!attribute [rw] global_cluster_identifier
     #   The ID of the Neptune global database to which this new DB cluster
     #   should be added.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `standard | iopt1`
+    #
+    #   ^
+    #
+    #   Default:
+    #
+    #   * `standard`
+    #
+    #   ^
+    #
+    #   <note markdown="1"> When you create a Neptune cluster with the storage type set to
+    #   `iopt1`, the storage type is returned in the response. The storage
+    #   type isn't returned when you set it to `standard`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] source_region
@@ -919,6 +960,7 @@ module Aws::Neptune
       :deletion_protection,
       :serverless_v2_scaling_configuration,
       :global_cluster_identifier,
+      :storage_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1885,8 +1927,15 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] enabled_cloudwatch_logs_exports
-    #   A list of log types that this DB cluster is configured to export to
-    #   CloudWatch Logs.
+    #   A list of the log types that this DB cluster is configured to export
+    #   to CloudWatch Logs. Valid log types are: `audit` (to publish audit
+    #   logs to CloudWatch) and slowquery (to publish slow-query logs to
+    #   CloudWatch). See [Publishing Neptune logs to Amazon CloudWatch
+    #   logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] pending_modified_values
@@ -1923,6 +1972,15 @@ module Aws::Neptune
     # @!attribute [rw] global_cluster_identifier
     #   Contains a user-supplied global database cluster identifier. This
     #   identifier is the unique key that identifies a global database.
+    #   @return [String]
+    #
+    # @!attribute [rw] io_optimized_next_allowed_modification_time
+    #   The next time you can modify the DB cluster to use the `iopt1`
+    #   storage type.
+    #   @return [Time]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type associated with the DB cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
@@ -1970,7 +2028,9 @@ module Aws::Neptune
       :cross_account_clone,
       :automatic_restart_time,
       :serverless_v2_scaling_configuration,
-      :global_cluster_identifier)
+      :global_cluster_identifier,
+      :io_optimized_next_allowed_modification_time,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2464,6 +2524,10 @@ module Aws::Neptune
     #   accounts to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type associated with the DB cluster snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -2486,7 +2550,8 @@ module Aws::Neptune
       :kms_key_id,
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5712,7 +5777,12 @@ module Aws::Neptune
     #
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB cluster.
+    #   to CloudWatch Logs for a specific DB cluster. See [Using the CLI to
+    #   publish Neptune audit logs to CloudWatch Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html#cloudwatch-logs-cli
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
     # @!attribute [rw] engine_version
@@ -5783,6 +5853,22 @@ module Aws::Neptune
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `standard | iopt1`
+    #
+    #   ^
+    #
+    #   Default:
+    #
+    #   * `standard`
+    #
+    #   ^
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -5804,7 +5890,8 @@ module Aws::Neptune
       :db_instance_parameter_group_name,
       :deletion_protection,
       :copy_tags_to_snapshot,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6744,6 +6831,14 @@ module Aws::Neptune
     # words, these log types are in the process of being activated or
     # deactivated.
     #
+    # Valid log types are: `audit` (to publish audit logs) and `slowquery`
+    # (to publish slow-query logs). See [Publishing Neptune logs to Amazon
+    # CloudWatch logs][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
+    #
     # @!attribute [rw] log_types_to_enable
     #   Log types that are in the process of being deactivated. After they
     #   are deactivated, these log types aren't exported to CloudWatch
@@ -7386,6 +7481,14 @@ module Aws::Neptune
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `standard`, `iopt1`
+    #
+    #   Default: `standard`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -7406,7 +7509,8 @@ module Aws::Neptune
       :db_cluster_parameter_group_name,
       :deletion_protection,
       :copy_tags_to_snapshot,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7592,6 +7696,14 @@ module Aws::Neptune
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #   @return [Types::ServerlessV2ScalingConfiguration]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `standard`, `iopt1`
+    #
+    #   Default: `standard`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -7610,7 +7722,8 @@ module Aws::Neptune
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :serverless_v2_scaling_configuration)
+      :serverless_v2_scaling_configuration,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
