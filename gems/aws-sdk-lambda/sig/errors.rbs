@@ -1,0 +1,171 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lambda
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CodeSigningConfigNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class CodeStorageExceededException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class CodeVerificationFailedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EC2AccessDeniedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EC2ThrottledException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EC2UnexpectedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+        def ec2_error_code: () -> Types::tString
+      end
+      class EFSIOException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EFSMountConnectivityException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EFSMountFailureException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class EFSMountTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ENILimitReachedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidCodeSignatureException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidRequestContentException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidRuntimeException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidSecurityGroupIDException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidSubnetIDException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class InvalidZipFileException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class KMSAccessDeniedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class KMSDisabledException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class KMSInvalidStateException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class KMSNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class PolicyLengthExceededException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class PreconditionFailedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ProvisionedConcurrencyConfigNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class RecursiveInvocationException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class RequestTooLargeException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class SnapStartException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class SnapStartNotReadyException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class SnapStartTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class SubnetIPAddressLimitReachedException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def retry_after_seconds: () -> Types::tString
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+        def reason: () -> Types::tThrottleReason
+      end
+      class UnsupportedMediaTypeException < ::Aws::Errors::ServiceError
+        def type: () -> Types::tString
+        def message: () -> Types::tString
+      end
+    end
+  end
+end
