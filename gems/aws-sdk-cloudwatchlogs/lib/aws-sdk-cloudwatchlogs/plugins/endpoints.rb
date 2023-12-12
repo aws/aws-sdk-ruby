@@ -185,6 +185,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::PutRetentionPolicy.build(context)
           when :put_subscription_filter
             Aws::CloudWatchLogs::Endpoints::PutSubscriptionFilter.build(context)
+          when :start_live_tail
+            Aws::CloudWatchLogs::Endpoints::StartLiveTail.build(context)
           when :start_query
             Aws::CloudWatchLogs::Endpoints::StartQuery.build(context)
           when :stop_query

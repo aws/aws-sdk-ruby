@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-12-12)
+------------------
+
+* Feature - This release introduces the StartLiveTail API to tail ingested logs in near real time.
+
 1.75.0 (2023-11-28)
 ------------------
 

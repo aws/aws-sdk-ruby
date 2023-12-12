@@ -77,6 +77,8 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::CreateInfrastructureConfiguration.build(context)
           when :create_lifecycle_policy
             Aws::Imagebuilder::Endpoints::CreateLifecyclePolicy.build(context)
+          when :create_workflow
+            Aws::Imagebuilder::Endpoints::CreateWorkflow.build(context)
           when :delete_component
             Aws::Imagebuilder::Endpoints::DeleteComponent.build(context)
           when :delete_container_recipe
@@ -93,6 +95,8 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::DeleteInfrastructureConfiguration.build(context)
           when :delete_lifecycle_policy
             Aws::Imagebuilder::Endpoints::DeleteLifecyclePolicy.build(context)
+          when :delete_workflow
+            Aws::Imagebuilder::Endpoints::DeleteWorkflow.build(context)
           when :get_component
             Aws::Imagebuilder::Endpoints::GetComponent.build(context)
           when :get_component_policy
@@ -119,6 +123,8 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::GetLifecycleExecution.build(context)
           when :get_lifecycle_policy
             Aws::Imagebuilder::Endpoints::GetLifecyclePolicy.build(context)
+          when :get_workflow
+            Aws::Imagebuilder::Endpoints::GetWorkflow.build(context)
           when :get_workflow_execution
             Aws::Imagebuilder::Endpoints::GetWorkflowExecution.build(context)
           when :get_workflow_step_execution
@@ -161,10 +167,16 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::ListLifecyclePolicies.build(context)
           when :list_tags_for_resource
             Aws::Imagebuilder::Endpoints::ListTagsForResource.build(context)
+          when :list_waiting_workflow_steps
+            Aws::Imagebuilder::Endpoints::ListWaitingWorkflowSteps.build(context)
+          when :list_workflow_build_versions
+            Aws::Imagebuilder::Endpoints::ListWorkflowBuildVersions.build(context)
           when :list_workflow_executions
             Aws::Imagebuilder::Endpoints::ListWorkflowExecutions.build(context)
           when :list_workflow_step_executions
             Aws::Imagebuilder::Endpoints::ListWorkflowStepExecutions.build(context)
+          when :list_workflows
+            Aws::Imagebuilder::Endpoints::ListWorkflows.build(context)
           when :put_component_policy
             Aws::Imagebuilder::Endpoints::PutComponentPolicy.build(context)
           when :put_container_recipe_policy
@@ -173,6 +185,8 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::PutImagePolicy.build(context)
           when :put_image_recipe_policy
             Aws::Imagebuilder::Endpoints::PutImageRecipePolicy.build(context)
+          when :send_workflow_step_action
+            Aws::Imagebuilder::Endpoints::SendWorkflowStepAction.build(context)
           when :start_image_pipeline_execution
             Aws::Imagebuilder::Endpoints::StartImagePipelineExecution.build(context)
           when :start_resource_state_update

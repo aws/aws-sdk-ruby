@@ -303,7 +303,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] change_description
-    #   The change description of the component.
+    #   Describes what change has been made in this version of the
+    #   component, or what makes this version different from other versions
+    #   of the component.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -461,8 +463,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A group of fields that describe the current status of components that
-    # are no longer active.
+    # A group of fields that describe the current status of components.
     #
     # @!attribute [rw] status
     #   The current state of the component.
@@ -928,7 +929,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] change_description
     #   The change description of the component. Describes what change has
     #   been made in this version, or what makes this version different from
-    #   other versions of this component.
+    #   other versions of the component.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -1295,6 +1296,15 @@ module Aws::Imagebuilder
     #   Contains settings for vulnerability scans.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] workflows
+    #   Contains an array of workflow configuration objects.
+    #   @return [Array<Types::WorkflowConfiguration>]
+    #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImagePipelineRequest AWS API Documentation
     #
     class CreateImagePipelineRequest < Struct.new(
@@ -1310,7 +1320,9 @@ module Aws::Imagebuilder
       :status,
       :tags,
       :client_token,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :workflows,
+      :execution_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1505,6 +1517,15 @@ module Aws::Imagebuilder
     #   Contains settings for vulnerability scans.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] workflows
+    #   Contains an array of workflow configuration objects.
+    #   @return [Array<Types::WorkflowConfiguration>]
+    #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageRequest AWS API Documentation
     #
     class CreateImageRequest < Struct.new(
@@ -1516,7 +1537,9 @@ module Aws::Imagebuilder
       :enhanced_image_metadata_enabled,
       :tags,
       :client_token,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :workflows,
+      :execution_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1684,8 +1707,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   The role name or Amazon Resource Name (ARN) for the IAM role that
-    #   grants Image Builder access to run lifecycle actions.
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to run lifecycle actions.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1749,6 +1772,119 @@ module Aws::Imagebuilder
     class CreateLifecyclePolicyResponse < Struct.new(
       :client_token,
       :lifecycle_policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the workflow to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version of this workflow resource. The semantic version
+    #   syntax adheres to the following rules.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number to the fourth node.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Describes the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_description
+    #   Describes what change has been made in this version of the workflow,
+    #   or what makes this version different from other versions of the
+    #   workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Contains the UTF-8 encoded YAML document content for the workflow.
+    #   Alternatively, you can specify the `uri` of a YAML document file
+    #   stored in Amazon S3. However, you cannot specify both properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The `uri` of a YAML component document file. This must be an S3 URL
+    #   (`s3://bucket/key`), and the requester must have permission to
+    #   access the S3 bucket it points to. If you use Amazon S3, you can
+    #   specify component content up to your service quota.
+    #
+    #   Alternatively, you can specify the YAML document inline, using the
+    #   component `data` property. You cannot specify both properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key that is used to encrypt this workflow
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that apply to the workflow resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The phase in the image build process for which the workflow resource
+    #   is responsible.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateWorkflowRequest AWS API Documentation
+    #
+    class CreateWorkflowRequest < Struct.new(
+      :name,
+      :semantic_version,
+      :description,
+      :change_description,
+      :data,
+      :uri,
+      :kms_key_id,
+      :tags,
+      :client_token,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   The client token that uniquely identifies the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource that the
+    #   request created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateWorkflowResponse AWS API Documentation
+    #
+    class CreateWorkflowResponse < Struct.new(
+      :client_token,
+      :workflow_build_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2087,6 +2223,30 @@ module Aws::Imagebuilder
     #
     class DeleteLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteWorkflowRequest AWS API Documentation
+    #
+    class DeleteWorkflowRequest < Struct.new(
+      :workflow_build_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_build_version_arn
+    #   The ARN of the workflow resource that this request deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteWorkflowResponse AWS API Documentation
+    #
+    class DeleteWorkflowResponse < Struct.new(
+      :workflow_build_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2486,7 +2646,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] component
-    #   The component object associated with the specified ARN.
+    #   The component object specified in the request.
     #   @return [Types::Component]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponentResponse AWS API Documentation
@@ -2900,6 +3060,11 @@ module Aws::Imagebuilder
     #   finished.
     #   @return [String]
     #
+    # @!attribute [rw] parallel_group
+    #   Test workflows are defined within named runtime groups. The parallel
+    #   group is a named group that contains one or more test workflows.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowExecutionResponse AWS API Documentation
     #
     class GetWorkflowExecutionResponse < Struct.new(
@@ -2915,7 +3080,33 @@ module Aws::Imagebuilder
       :total_steps_failed,
       :total_steps_skipped,
       :start_time,
-      :end_time)
+      :end_time,
+      :parallel_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource that you
+    #   want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowRequest AWS API Documentation
+    #
+    class GetWorkflowRequest < Struct.new(
+      :workflow_build_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow
+    #   The workflow resource specified in the request.
+    #   @return [Types::Workflow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowResponse AWS API Documentation
+    #
+    class GetWorkflowResponse < Struct.new(
+      :workflow)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3213,6 +3404,16 @@ module Aws::Imagebuilder
     #   action on the image.
     #   @return [String]
     #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflows
+    #   Contains the build and test workflows that are associated with the
+    #   image.
+    #   @return [Array<Types::WorkflowConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -3239,7 +3440,9 @@ module Aws::Imagebuilder
       :scan_state,
       :image_scanning_configuration,
       :deprecation_time,
-      :lifecycle_execution_id)
+      :lifecycle_execution_id,
+      :execution_role,
+      :workflows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3368,6 +3571,15 @@ module Aws::Imagebuilder
     #   Contains settings for vulnerability scans.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflows
+    #   Contains the workflows that run for the image pipeline.
+    #   @return [Array<Types::WorkflowConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImagePipeline AWS API Documentation
     #
     class ImagePipeline < Struct.new(
@@ -3388,7 +3600,9 @@ module Aws::Imagebuilder
       :date_last_run,
       :date_next_run,
       :tags,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :execution_role,
+      :workflows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4018,7 +4232,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] change_description
     #   The change description of the component. This description indicates
     #   the change that has been made in this version, or what makes this
-    #   version different from other versions of this component.
+    #   version different from other versions of the component.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4849,8 +5063,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   The name of the IAM role that Image Builder uses to run the
-    #   lifecycle policy. This is a custom role that you create.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
+    #   Builder uses to run the lifecycle policy. This is a custom role that
+    #   you create.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -4981,7 +5196,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] tag_map
     #   Contains a list of tags that Image Builder uses to skip lifecycle
-    #   actions for AMIs that have them.
+    #   actions for resources that have them.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] amis
@@ -5006,18 +5221,18 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] regions
+    #   Configures Amazon Web Services Regions that are excluded from the
+    #   lifecycle action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] shared_accounts
     #   Specifies Amazon Web Services accounts whose resources are excluded
     #   from the lifecycle action.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] shared_accounts
+    # @!attribute [rw] last_launched
     #   Specifies configuration details for Image Builder to exclude the
     #   most recent resources from lifecycle actions.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] last_launched
-    #   Configures Amazon Web Services Regions that are excluded from the
-    #   lifecycle action.
     #   @return [Types::LifecyclePolicyDetailExclusionRulesAmisLastLaunched]
     #
     # @!attribute [rw] tag_map
@@ -5165,8 +5380,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   The name of the IAM role that Image Builder uses to run the
-    #   lifecycle policy.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
+    #   Builder uses to run the lifecycle policy.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -6202,6 +6417,90 @@ module Aws::Imagebuilder
     #   from a previously truncated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWaitingWorkflowStepsRequest AWS API Documentation
+    #
+    class ListWaitingWorkflowStepsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] steps
+    #   An array of the workflow steps that are waiting for action in your
+    #   Amazon Web Services account.
+    #   @return [Array<Types::WorkflowStepExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWaitingWorkflowStepsResponse AWS API Documentation
+    #
+    class ListWaitingWorkflowStepsResponse < Struct.new(
+      :steps,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource for which to
+    #   get a list of build versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowBuildVersionsRequest AWS API Documentation
+    #
+    class ListWorkflowBuildVersionsRequest < Struct.new(
+      :workflow_version_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_summary_list
+    #   A list that contains metadata for the workflow builds that have run
+    #   for the workflow resource specified in the request.
+    #   @return [Array<Types::WorkflowSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowBuildVersionsResponse AWS API Documentation
+    #
+    class ListWorkflowBuildVersionsResponse < Struct.new(
+      :workflow_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
     # @!attribute [rw] image_build_version_arn
     #   List all workflow runtime instances for the specified image build
     #   version resource ARN.
@@ -6322,6 +6621,60 @@ module Aws::Imagebuilder
       :workflow_execution_id,
       :image_build_version_arn,
       :message,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] owner
+    #   Used to get a list of workflow build version filtered by the
+    #   identity of the creator.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Used to streamline search results.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] by_name
+    #   Specify all or part of the workflow name to streamline results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowsRequest AWS API Documentation
+    #
+    class ListWorkflowsRequest < Struct.new(
+      :owner,
+      :filters,
+      :by_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_version_list
+    #   A list of workflow build versions that match the request criteria.
+    #   @return [Array<Types::WorkflowVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowsResponse AWS API Documentation
+    #
+    class ListWorkflowsResponse < Struct.new(
+      :workflow_version_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6778,7 +7131,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A schedule configures how often and when a pipeline will automatically
+    # A schedule configures when and how often a pipeline will automatically
     # create a new image.
     #
     # @!attribute [rw] schedule_expression
@@ -6827,6 +7180,72 @@ module Aws::Imagebuilder
       :schedule_expression,
       :timezone,
       :pipeline_execution_start_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_execution_id
+    #   Uniquely identifies the workflow step that sent the step action.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image build version to send
+    #   action for.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action for the image creation process to take while a workflow
+    #   `WaitForAction` step waits for an asynchronous action to complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why this action is sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SendWorkflowStepActionRequest AWS API Documentation
+    #
+    class SendWorkflowStepActionRequest < Struct.new(
+      :step_execution_id,
+      :image_build_version_arn,
+      :action,
+      :reason,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_execution_id
+    #   The workflow step that sent the step action.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image build version that
+    #   received the action request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token that uniquely identifies the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SendWorkflowStepActionResponse AWS API Documentation
+    #
+    class SendWorkflowStepActionResponse < Struct.new(
+      :step_execution_id,
+      :image_build_version_arn,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7241,6 +7660,15 @@ module Aws::Imagebuilder
     #   Contains settings for vulnerability scans.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] workflows
+    #   Contains the workflows to run for the pipeline.
+    #   @return [Array<Types::WorkflowConfiguration>]
+    #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateImagePipelineRequest AWS API Documentation
     #
     class UpdateImagePipelineRequest < Struct.new(
@@ -7255,7 +7683,9 @@ module Aws::Imagebuilder
       :schedule,
       :status,
       :client_token,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :workflows,
+      :execution_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7432,8 +7862,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   The name of the IAM role that Image Builder should use to update the
-    #   lifecycle policy.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
+    #   Builder uses to update the lifecycle policy.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -7572,6 +8002,124 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Defines a process that Image Builder uses to build and test images
+    # during the image creation process.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The workflow resource version. Workflow resources are immutable. To
+    #   make a change, you can clone a workflow or create a new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_description
+    #   Describes what change has been made in this version of the workflow,
+    #   or what makes this version different from other versions of the
+    #   workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the image creation stage that the workflow applies to.
+    #   Image Builder currently supports build and test workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Describes the current status of the workflow and the reason for that
+    #   status.
+    #   @return [Types::WorkflowState]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Contains the YAML document content for the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier used to encrypt the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The timestamp when Image Builder created the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that apply to the workflow resource
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   An array of input parameters that that the image workflow uses to
+    #   control actions or configure settings.
+    #   @return [Array<Types::WorkflowParameterDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Workflow AWS API Documentation
+    #
+    class Workflow < Struct.new(
+      :arn,
+      :name,
+      :version,
+      :description,
+      :change_description,
+      :type,
+      :state,
+      :owner,
+      :data,
+      :kms_key_id,
+      :date_created,
+      :tags,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains control settings and configurable inputs for a workflow
+    # resource.
+    #
+    # @!attribute [rw] workflow_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Contains parameter values for each of the parameters that the
+    #   workflow document defined for the workflow resource.
+    #   @return [Array<Types::WorkflowParameter>]
+    #
+    # @!attribute [rw] parallel_group
+    #   Test workflows are defined within named runtime groups called
+    #   parallel groups. The parallel group is the named group that contains
+    #   this test workflow. Test workflows within a parallel group can run
+    #   at the same time. Image Builder starts up to five test workflows in
+    #   the group at the same time, and starts additional workflows as
+    #   others complete, until all workflows in the group have completed.
+    #   This field only applies for test workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_failure
+    #   The action to take if the workflow fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowConfiguration AWS API Documentation
+    #
+    class WorkflowConfiguration < Struct.new(
+      :workflow_arn,
+      :parameters,
+      :parallel_group,
+      :on_failure)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata that includes details and status from this runtime instance
     # of the workflow.
     #
@@ -7626,6 +8174,11 @@ module Aws::Imagebuilder
     #   The timestamp when this runtime instance of the workflow finished.
     #   @return [String]
     #
+    # @!attribute [rw] parallel_group
+    #   The name of the test group that included the test workflow resource
+    #   at runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowExecutionMetadata AWS API Documentation
     #
     class WorkflowExecutionMetadata < Struct.new(
@@ -7639,7 +8192,126 @@ module Aws::Imagebuilder
       :total_steps_failed,
       :total_steps_skipped,
       :start_time,
-      :end_time)
+      :end_time,
+      :parallel_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a key/value pair that sets the named workflow parameter.
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow parameter to set.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Sets the value for the named workflow parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowParameter AWS API Documentation
+    #
+    class WorkflowParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a parameter that's used to provide configuration details for
+    # the workflow.
+    #
+    # @!attribute [rw] name
+    #   The name of this input parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of input this parameter provides. The currently supported
+    #   value is "string".
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of this parameter if no input is provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   Describes this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowParameterDetail AWS API Documentation
+    #
+    class WorkflowParameterDetail < Struct.new(
+      :name,
+      :type,
+      :default_value,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group of fields that describe the current status of workflow.
+    #
+    # @!attribute [rw] status
+    #   The current state of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Describes how or why the workflow changed state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowState AWS API Documentation
+    #
+    class WorkflowState < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains runtime details for an instance of a workflow that ran for
+    # the associated image build version.
+    #
+    # @!attribute [rw] step_execution_id
+    #   Uniquely identifies the workflow step that ran for the associated
+    #   image build version.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image build version that ran
+    #   the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   Uniquely identifies the runtime instance of the workflow that
+    #   contains the workflow step that ran for the associated image build
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The ARN of the workflow resource that ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the step action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the workflow step started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowStepExecution AWS API Documentation
+    #
+    class WorkflowStepExecution < Struct.new(
+      :step_execution_id,
+      :image_build_version_arn,
+      :workflow_execution_id,
+      :workflow_build_version_arn,
+      :name,
+      :action,
+      :start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7705,6 +8377,113 @@ module Aws::Imagebuilder
       :outputs,
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about the workflow resource.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Describes the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_description
+    #   The change description for the current version of the workflow
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The image creation stage that this workflow applies to. Image
+    #   Builder currently supports build and test stage workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Describes the current state of the workflow resource.
+    #   @return [Types::WorkflowState]
+    #
+    # @!attribute [rw] date_created
+    #   The original creation date of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Contains a list of tags that are defined for the workflow.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowSummary AWS API Documentation
+    #
+    class WorkflowSummary < Struct.new(
+      :arn,
+      :name,
+      :version,
+      :description,
+      :change_description,
+      :type,
+      :owner,
+      :state,
+      :date_created,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about this version of the workflow.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The semantic version of the workflow resource. The format includes
+    #   three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Describes the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The image creation stage that this workflow applies to. Image
+    #   Builder currently supports build and test stage workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the workflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The timestamp when Image Builder created the workflow version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowVersion AWS API Documentation
+    #
+    class WorkflowVersion < Struct.new(
+      :arn,
+      :name,
+      :version,
+      :description,
+      :type,
+      :owner,
+      :date_created)
       SENSITIVE = []
       include Aws::Structure
     end

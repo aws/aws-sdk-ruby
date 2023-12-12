@@ -178,6 +178,7 @@ module Aws::CloudWatchLogs
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidSequenceTokenException = Shapes::StructureShape.new(name: 'InvalidSequenceTokenException')
+    IsSampled = Shapes::BooleanShape.new(name: 'IsSampled')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAnomaliesLimit = Shapes::IntegerShape.new(name: 'ListAnomaliesLimit')
@@ -190,6 +191,11 @@ module Aws::CloudWatchLogs
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
     ListTagsLogGroupResponse = Shapes::StructureShape.new(name: 'ListTagsLogGroupResponse')
+    LiveTailSessionLogEvent = Shapes::StructureShape.new(name: 'LiveTailSessionLogEvent')
+    LiveTailSessionMetadata = Shapes::StructureShape.new(name: 'LiveTailSessionMetadata')
+    LiveTailSessionResults = Shapes::ListShape.new(name: 'LiveTailSessionResults')
+    LiveTailSessionStart = Shapes::StructureShape.new(name: 'LiveTailSessionStart')
+    LiveTailSessionUpdate = Shapes::StructureShape.new(name: 'LiveTailSessionUpdate')
     LogEvent = Shapes::StringShape.new(name: 'LogEvent')
     LogEventIndex = Shapes::IntegerShape.new(name: 'LogEventIndex')
     LogGroup = Shapes::StructureShape.new(name: 'LogGroup')
@@ -278,6 +284,7 @@ module Aws::CloudWatchLogs
     QueryStatus = Shapes::StringShape.new(name: 'QueryStatus')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     RejectedLogEventsInfo = Shapes::StructureShape.new(name: 'RejectedLogEventsInfo')
+    RequestId = Shapes::StringShape.new(name: 'RequestId')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
@@ -294,8 +301,15 @@ module Aws::CloudWatchLogs
     Service = Shapes::StringShape.new(name: 'Service')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionStreamingException = Shapes::StructureShape.new(name: 'SessionStreamingException')
+    SessionTimeoutException = Shapes::StructureShape.new(name: 'SessionTimeoutException')
     StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
     StartFromHead = Shapes::BooleanShape.new(name: 'StartFromHead')
+    StartLiveTailLogGroupIdentifiers = Shapes::ListShape.new(name: 'StartLiveTailLogGroupIdentifiers')
+    StartLiveTailRequest = Shapes::StructureShape.new(name: 'StartLiveTailRequest')
+    StartLiveTailResponse = Shapes::StructureShape.new(name: 'StartLiveTailResponse')
+    StartLiveTailResponseStream = Shapes::StructureShape.new(name: 'StartLiveTailResponseStream')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
     State = Shapes::StringShape.new(name: 'State')
@@ -864,6 +878,30 @@ module Aws::CloudWatchLogs
     ListTagsLogGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsLogGroupResponse.struct_class = Types::ListTagsLogGroupResponse
 
+    LiveTailSessionLogEvent.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
+    LiveTailSessionLogEvent.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, location_name: "logGroupIdentifier"))
+    LiveTailSessionLogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, location_name: "message"))
+    LiveTailSessionLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
+    LiveTailSessionLogEvent.add_member(:ingestion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ingestionTime"))
+    LiveTailSessionLogEvent.struct_class = Types::LiveTailSessionLogEvent
+
+    LiveTailSessionMetadata.add_member(:sampled, Shapes::ShapeRef.new(shape: IsSampled, location_name: "sampled"))
+    LiveTailSessionMetadata.struct_class = Types::LiveTailSessionMetadata
+
+    LiveTailSessionResults.member = Shapes::ShapeRef.new(shape: LiveTailSessionLogEvent)
+
+    LiveTailSessionStart.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    LiveTailSessionStart.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
+    LiveTailSessionStart.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: StartLiveTailLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
+    LiveTailSessionStart.add_member(:log_stream_names, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNames"))
+    LiveTailSessionStart.add_member(:log_stream_name_prefixes, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNamePrefixes"))
+    LiveTailSessionStart.add_member(:log_event_filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "logEventFilterPattern"))
+    LiveTailSessionStart.struct_class = Types::LiveTailSessionStart
+
+    LiveTailSessionUpdate.add_member(:session_metadata, Shapes::ShapeRef.new(shape: LiveTailSessionMetadata, location_name: "sessionMetadata"))
+    LiveTailSessionUpdate.add_member(:session_results, Shapes::ShapeRef.new(shape: LiveTailSessionResults, location_name: "sessionResults"))
+    LiveTailSessionUpdate.struct_class = Types::LiveTailSessionUpdate
+
     LogGroup.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     LogGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     LogGroup.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Days, location_name: "retentionInDays"))
@@ -1124,6 +1162,29 @@ module Aws::CloudWatchLogs
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    SessionStreamingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SessionStreamingException.struct_class = Types::SessionStreamingException
+
+    SessionTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    SessionTimeoutException.struct_class = Types::SessionTimeoutException
+
+    StartLiveTailLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
+
+    StartLiveTailRequest.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: StartLiveTailLogGroupIdentifiers, required: true, location_name: "logGroupIdentifiers"))
+    StartLiveTailRequest.add_member(:log_stream_names, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNames"))
+    StartLiveTailRequest.add_member(:log_stream_name_prefixes, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNamePrefixes"))
+    StartLiveTailRequest.add_member(:log_event_filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "logEventFilterPattern"))
+    StartLiveTailRequest.struct_class = Types::StartLiveTailRequest
+
+    StartLiveTailResponse.add_member(:response_stream, Shapes::ShapeRef.new(shape: StartLiveTailResponseStream, eventstream: true, location_name: "responseStream"))
+    StartLiveTailResponse.struct_class = Types::StartLiveTailResponse
+
+    StartLiveTailResponseStream.add_member(:session_start, Shapes::ShapeRef.new(shape: LiveTailSessionStart, event: true, location_name: "sessionStart"))
+    StartLiveTailResponseStream.add_member(:session_update, Shapes::ShapeRef.new(shape: LiveTailSessionUpdate, event: true, location_name: "sessionUpdate"))
+    StartLiveTailResponseStream.add_member(:session_timeout_exception, Shapes::ShapeRef.new(shape: SessionTimeoutException, location_name: "SessionTimeoutException"))
+    StartLiveTailResponseStream.add_member(:session_streaming_exception, Shapes::ShapeRef.new(shape: SessionStreamingException, location_name: "SessionStreamingException"))
+    StartLiveTailResponseStream.struct_class = Types::StartLiveTailResponseStream
 
     StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     StartQueryRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
@@ -2070,6 +2131,22 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:start_live_tail, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartLiveTail"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "streaming-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: StartLiveTailRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartLiveTailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:start_query, Seahorse::Model::Operation.new.tap do |o|

@@ -812,6 +812,15 @@ module Aws::LocationService
     # [3]: https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html
     # [4]: https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html
     #
+    # @option params [Time,DateTime,Date,Integer,String] :arrival_time
+    #   Specifies the desired time of arrival. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
+    #
+    #   <note markdown="1"> ArrivalTime is not supported Esri.
+    #
+    #    </note>
+    #
     # @option params [required, String] :calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
@@ -857,11 +866,6 @@ module Aws::LocationService
     #   Specifies the desired time of departure. Uses the given time to
     #   calculate the route. Otherwise, the best time of day to travel with
     #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
     #
     #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
     #     `2020–07-2T12:15:20.000Z+01:00`
@@ -911,6 +915,9 @@ module Aws::LocationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
+    # @option params [String] :optimize_for
+    #   Specifies the distance to optimize for when calculating a route.
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
@@ -986,6 +993,7 @@ module Aws::LocationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.calculate_route({
+    #     arrival_time: Time.now,
     #     calculator_name: "ResourceName", # required
     #     car_mode_options: {
     #       avoid_ferries: false,
@@ -998,6 +1006,7 @@ module Aws::LocationService
     #     distance_unit: "Kilometers", # accepts Kilometers, Miles
     #     include_leg_geometry: false,
     #     key: "ApiKey",
+    #     optimize_for: "FastestRoute", # accepts FastestRoute, ShortestRoute
     #     travel_mode: "Car", # accepts Car, Truck, Walking, Bicycle, Motorcycle
     #     truck_mode_options: {
     #       avoid_ferries: false,
@@ -3066,6 +3075,7 @@ module Aws::LocationService
     #   resp.place.postal_code #=> String
     #   resp.place.region #=> String
     #   resp.place.street #=> String
+    #   resp.place.sub_municipality #=> String
     #   resp.place.sub_region #=> String
     #   resp.place.supplemental_categories #=> Array
     #   resp.place.supplemental_categories[0] #=> String
@@ -3086,7 +3096,7 @@ module Aws::LocationService
     # A batch request to retrieve all device positions.
     #
     # @option params [Types::TrackingFilterGeometry] :filter_geometry
-    #   The geomerty used to filter device positions.
+    #   The geometry used to filter device positions.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of entries returned in a single call.
@@ -3745,6 +3755,7 @@ module Aws::LocationService
     #   resp.results[0].place.postal_code #=> String
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
+    #   resp.results[0].place.sub_municipality #=> String
     #   resp.results[0].place.sub_region #=> String
     #   resp.results[0].place.supplemental_categories #=> Array
     #   resp.results[0].place.supplemental_categories[0] #=> String
@@ -4095,6 +4106,7 @@ module Aws::LocationService
     #   resp.results[0].place.postal_code #=> String
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
+    #   resp.results[0].place.sub_municipality #=> String
     #   resp.results[0].place.sub_region #=> String
     #   resp.results[0].place.supplemental_categories #=> Array
     #   resp.results[0].place.supplemental_categories[0] #=> String
@@ -4590,7 +4602,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
