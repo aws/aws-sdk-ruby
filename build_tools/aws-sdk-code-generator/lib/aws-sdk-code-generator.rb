@@ -76,6 +76,24 @@ require_relative 'aws-sdk-code-generator/yard_option_tag'
 require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
 
+# RBS
+require_relative 'aws-sdk-code-generator/rbs/dynamic_error_list'
+require_relative 'aws-sdk-code-generator/rbs/error_list'
+require_relative 'aws-sdk-code-generator/rbs/method_signature'
+require_relative 'aws-sdk-code-generator/rbs/resource_action'
+require_relative 'aws-sdk-code-generator/rbs/resource_association'
+require_relative 'aws-sdk-code-generator/rbs/resource_batch_action'
+require_relative 'aws-sdk-code-generator/rbs/resource_client_request'
+require_relative 'aws-sdk-code-generator/rbs/shape_dictionary'
+require_relative 'aws-sdk-code-generator/rbs/shape_dictionary/shape'
+require_relative 'aws-sdk-code-generator/rbs/waiter'
+require_relative 'aws-sdk-code-generator/views/rbs/client_class'
+require_relative 'aws-sdk-code-generator/views/rbs/errors_module'
+require_relative 'aws-sdk-code-generator/views/rbs/resource_class'
+require_relative 'aws-sdk-code-generator/views/rbs/root_resource_class'
+require_relative 'aws-sdk-code-generator/views/rbs/types_module'
+require_relative 'aws-sdk-code-generator/views/rbs/waiters_module'
+
 module AwsSdkCodeGenerator
 
   GENERATED_SRC_WARNING = <<-WARNING_TXT

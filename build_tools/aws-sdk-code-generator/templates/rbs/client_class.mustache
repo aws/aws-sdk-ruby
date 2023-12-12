@@ -1,0 +1,31 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Client.html#initialize-instance_method
+      def self.new: ({{{client_option}}}) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+      {{#operations}}
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Client.html#{{method_name}}-instance_method
+      {{{signature}}}
+      {{/operations}}
+      {{#waiters?}}
+
+      {{#waiters_first}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Client.html#wait_until-instance_method
+      def wait_until: {{{client_overlod_keyword_argument}}}
+                    | {{{client_overlod_positional_argument}}}
+      {{/waiters_first}}
+      {{#waiters_others}}
+                    | {{{client_overlod_keyword_argument}}}
+                    | {{{client_overlod_positional_argument}}}
+      {{/waiters_others}}
+      {{/waiters?}}
+    end
+  end
+end
+

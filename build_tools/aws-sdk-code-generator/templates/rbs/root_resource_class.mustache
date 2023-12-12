@@ -1,0 +1,21 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    class Resource
+      def initialize: (?client: Client, {{{client_option}}}) -> void
+                    | (?Hash[Symbol, untyped]) -> void
+
+      def client: () -> Client
+
+      {{#actions}}
+
+      {{{signature}}}
+      {{/actions}}
+
+      {{#associations}}
+
+      {{{signature}}}
+      {{/associations}}
+    end
+  end
+end

@@ -1,0 +1,27 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      {{#errors}}
+      class {{name}} < ::Aws::Errors::ServiceError
+        {{#members}}
+        {{{signature}}}
+        {{/members}}
+      end
+      {{/errors}}
+      {{#dynamic_errors?}}
+
+      # Dynamic errors
+      # source: {{dynamic_errors_source}}
+      {{#dynamic_errors}}
+
+      class {{name}} < ::Aws::Errors::ServiceError
+      end
+      {{/dynamic_errors}}
+      {{/dynamic_errors?}}
+    end
+  end
+end

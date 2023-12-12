@@ -43,7 +43,9 @@ module AwsSdkCodeGenerator
       end
 
       def files
-        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
+        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb'].tap do |array|
+          array << 'sig/**/*.rbs' if @service.support_rbs?
+        end
       end
 
       # @return [String]

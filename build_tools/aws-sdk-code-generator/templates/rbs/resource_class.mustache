@@ -1,0 +1,59 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    class {{class_name}}
+      {{{initialize_signature}}}
+      {{#identifiers}}
+
+      def {{name}}: () -> {{type}}
+      {{#alias}}
+      alias {{alias}} {{name}}
+      {{/alias}}
+      {{/identifiers}}
+      {{#data_attributes}}
+
+      {{{signature}}}
+      {{/data_attributes}}
+
+      def client: () -> Client
+
+      {{#load?}}
+      def load: () -> self
+      alias reload load
+      {{/load?}}
+
+      {{#load_or_shape?}}
+      def data: () -> Types::{{shape}}
+      {{/load_or_shape?}}
+      {{^load_or_shape?}}
+      def data: () -> EmptyStructure
+      {{/load_or_shape?}}
+
+      def data_loaded?: () -> bool
+
+      {{#exists_waiters}}
+      def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
+                 | (?Hash[Symbol, untyped]) -> bool
+      {{/exists_waiters}}
+      {{#waiters}}
+
+      {{{signature}}}
+      {{/waiters}}
+      {{#actions}}
+
+      {{{signature}}}
+      {{/actions}}
+      {{#associations}}
+
+      {{{signature}}}
+      {{/associations}}
+
+      class Collection < ::Aws::Resources::Collection[{{class_name}}]
+        {{#batch_actions}}
+
+        {{{signature}}}
+        {{/batch_actions}}
+      end
+    end
+  end
+end

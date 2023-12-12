@@ -109,6 +109,29 @@ module AwsSdkCodeGenerator
       end
     end
 
+    # @return [Enumerable<String<path>, String<code>>]
+    def rbs_files(options = {})
+      Enumerator.new do |y|
+        if @service.support_rbs?
+          prefix = options.fetch(:prefix, '')
+          shape_dictionary = RBS::ShapeDictionary.new(service: @service)
+          client_class = Views::RBS::ClientClass.new(shape_dictionary: shape_dictionary)
+          y.yield("#{prefix}/client.rbs", client_class.render)
+          y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(shape_dictionary: shape_dictionary).render)
+          y.yield("#{prefix}/resource.rbs", Views::RBS::RootResourceClass.new(client_class: client_class).render)
+          y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(shape_dictionary: shape_dictionary).render)
+          y.yield("#{prefix}/types.rbs", Views::RBS::TypesModule.new(shape_dictionary: shape_dictionary).render)
+          if @resources
+            @resources['resources'].keys.sort.each do |class_name|
+              path = "#{prefix}/#{Underscore.underscore(class_name)}.rbs"
+              code = Views::RBS::ResourceClass.new(shape_dictionary:, class_name: class_name, resource: @resources['resources'][class_name]).render
+              y.yield(path, code)
+            end
+          end
+        end
+      end
+    end
+
     private
 
     def service_module(prefix, codegenerated_plugins)

@@ -1,0 +1,59 @@
+{
+  "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/CommonErrors.html",
+  "errors": [
+    {
+      "name": "AccessDeniedException"
+    },
+    {
+      "name": "IncompleteSignature"
+    },
+    {
+      "name": "InternalFailure"
+    },
+    {
+      "name": "InvalidAction"
+    },
+    {
+      "name": "InvalidClientTokenId"
+    },
+    {
+      "name": "InvalidParameterCombination"
+    },
+    {
+      "name": "InvalidParameterValue"
+    },
+    {
+      "name": "InvalidQueryParameter"
+    },
+    {
+      "name": "MalformedQueryString"
+    },
+    {
+      "name": "MissingAction"
+    },
+    {
+      "name": "MissingAuthenticationToken"
+    },
+    {
+      "name": "MissingParameter"
+    },
+    {
+      "name": "NotAuthorized"
+    },
+    {
+      "name": "OptInRequired"
+    },
+    {
+      "name": "RequestExpired"
+    },
+    {
+      "name": "ServiceUnavailable"
+    },
+    {
+      "name": "ThrottlingException"
+    },
+    {
+      "name": "ValidationError"
+    }
+  ]
+}

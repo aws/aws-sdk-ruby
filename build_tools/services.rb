@@ -79,7 +79,8 @@ module BuildTools
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || [],
-        deprecated: config['deprecated']
+        deprecated: config['deprecated'],
+        support_rbs: support_rbs?(svc_name.downcase),
       )
     end
 
@@ -175,6 +176,10 @@ module BuildTools
         return true if ref['eventstream'] || ref['event']
       end
       false
+    end
+
+    def support_rbs?(identifier)
+      %w[ lambda ].include?(identifier)
     end
 
   end
