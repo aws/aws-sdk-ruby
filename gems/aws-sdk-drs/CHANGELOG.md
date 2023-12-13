@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-12-13)
+------------------
+
+* Feature - Adding AgentVersion to SourceServer and RecoveryInstance structures
+
 1.25.0 (2023-11-28)
 ------------------
 

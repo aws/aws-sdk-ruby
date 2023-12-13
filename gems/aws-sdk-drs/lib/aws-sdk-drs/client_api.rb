@@ -19,6 +19,7 @@ module Aws::Drs
     AccountID = Shapes::StringShape.new(name: 'AccountID')
     AccountIDs = Shapes::ListShape.new(name: 'AccountIDs')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
+    AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
     AssociateSourceNetworkStackRequest = Shapes::StructureShape.new(name: 'AssociateSourceNetworkStackRequest')
     AssociateSourceNetworkStackResponse = Shapes::StructureShape.new(name: 'AssociateSourceNetworkStackResponse')
     AwsAvailabilityZone = Shapes::StringShape.new(name: 'AwsAvailabilityZone')
@@ -833,6 +834,7 @@ module Aws::Drs
     PutLaunchActionResponse.add_member(:type, Shapes::ShapeRef.new(shape: LaunchActionType, location_name: "type"))
     PutLaunchActionResponse.struct_class = Types::PutLaunchActionResponse
 
+    RecoveryInstance.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
     RecoveryInstance.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     RecoveryInstance.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: RecoveryInstanceDataReplicationInfo, location_name: "dataReplicationInfo"))
     RecoveryInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "ec2InstanceID"))
@@ -1041,6 +1043,7 @@ module Aws::Drs
     SourceProperties.add_member(:supports_nitro_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "supportsNitroInstances"))
     SourceProperties.struct_class = Types::SourceProperties
 
+    SourceServer.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     SourceServer.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: DataReplicationInfo, location_name: "dataReplicationInfo"))
     SourceServer.add_member(:last_launch_result, Shapes::ShapeRef.new(shape: LastLaunchResult, location_name: "lastLaunchResult"))
