@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-12-06)
+------------------
+
+* Feature - Documentation updates for Trust and Safety features.
+
+1.77.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2023-11-09)
+------------------
+
+* Feature - This release adds support for toxicity detection and prompt safety classification.
+
 1.74.0 (2023-09-27)
 ------------------
 

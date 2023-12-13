@@ -132,6 +132,72 @@ module Aws
         expect { parse('{"abc') }.to raise_error(StandardError)
       end
 
+      describe 'AwsQueryCompatible' do
+        AwsQueryCompatibleClient = ApiHelper.sample_service(
+          api: {
+            'metadata' => {
+              'apiVersion' => '2018-11-07',
+              'awsQueryCompatible' => {},
+              'protocol' => 'json',
+              'endpointPrefix' => 'svc',
+              'signatureVersion' => 'v4',
+              'errorPrefix' => 'Prefix' # service customization needs to set this
+            },
+            'operations' => {
+              'Foo' => {
+                'name' => 'Foo',
+                'http' => { 'method' => 'POST', 'requestUri' => '/' },
+                'output' => { 'shape' => 'FooOutput'}
+              }
+            },
+            'shapes' => {
+              'FooOutput' => {
+                'type' => 'structure',
+                'members' => {
+                  'FlattenedList' => { 'shape' => 'FlattenedList' },
+                  'FlattenedMap' => { 'shape' => 'FlattenedMap' }
+                }
+              },
+              'FlattenedList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'String' },
+                'flattened' => true
+              },
+              'FlattenedMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'String' },
+                'value' => { 'shape' => 'String' },
+                'flattened' => true
+              },
+              'String' => { 'type' => 'string' }
+            }
+          }
+        ).const_get(:Client)
+
+        let(:client_aws_query_compatible) do
+          AwsQueryCompatibleClient.new(
+            region: 'us-west-2',
+            retry_limit: 0,
+            credentials: Aws::Credentials.new('akid', 'secret'),
+            stub_responses: true
+          )
+        end
+
+        before do
+          # nil values for flattened members need to be parsed as empty arrays
+          # and hashes to preserve backwards compatibility with Query/XML
+          client_aws_query_compatible.stub_responses(:foo, {})
+        end
+
+        it 'defaults flattened list to empty array' do
+          expect(client_aws_query_compatible.foo.flattened_list).to be_a(Array)
+        end
+
+        it 'defaults flattened map to empty hash' do
+          expect(client_aws_query_compatible.foo.flattened_map).to be_a(Hash)
+        end
+      end
+
     end
   end
 end

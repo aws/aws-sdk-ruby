@@ -38,10 +38,9 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] billing_token
-    #   The billing token is a property of the accessor. Use this token to
-    #   make Ethereum API calls to your Ethereum node. The billing token is
-    #   used to track your accessor object for billing Ethereum API requests
-    #   made to your Ethereum nodes.
+    #   The billing token is a property of the Accessor. Use this token to
+    #   when making calls to the blockchain network. The billing token is
+    #   used to track your accessor token for billing requests.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -76,6 +75,10 @@ module Aws::ManagedBlockchain
     #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] network_type
+    #   The blockchain network that the Accessor token is created for.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Accessor AWS API Documentation
     #
     class Accessor < Struct.new(
@@ -85,7 +88,8 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :arn,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -122,6 +126,10 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The blockchain network that the Accessor token is created for.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/AccessorSummary AWS API Documentation
     #
     class AccessorSummary < Struct.new(
@@ -129,7 +137,8 @@ module Aws::ManagedBlockchain
       :type,
       :status,
       :creation_date,
-      :arn)
+      :arn,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -163,7 +172,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] threshold_comparator
     #   Determines whether the vote percentage must be greater than the
     #   `ThresholdPercentage` or must be greater than or equal to the
-    #   `ThreholdPercentage` to be approved.
+    #   `ThresholdPercentage` to be approved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ApprovalThresholdPolicy AWS API Documentation
@@ -214,12 +223,31 @@ module Aws::ManagedBlockchain
     #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] network_type
+    #   The blockchain network that the `Accessor` token is created for.
+    #
+    #   <note markdown="1"> We recommend using the appropriate `networkType` value for the
+    #   blockchain network that you are creating the `Accessor` token for.
+    #   You cannnot use the value `ETHEREUM_MAINNET_AND_GOERLI` to specify a
+    #   `networkType` for your Accessor token.
+    #
+    #    The default value of `ETHEREUM_MAINNET_AND_GOERLI` is only applied:
+    #
+    #    * when the `CreateAccessor` action does not set a `networkType`.
+    #
+    #   * to all existing `Accessor` tokens that were created before the
+    #     `networkType` property was introduced.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessorInput AWS API Documentation
     #
     class CreateAccessorInput < Struct.new(
       :client_request_token,
       :accessor_type,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -230,16 +258,20 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] billing_token
     #   The billing token is a property of the Accessor. Use this token to
-    #   make Ethereum API calls to your Ethereum node. The billing token is
-    #   used to track your accessor object for billing Ethereum API requests
-    #   made to your Ethereum nodes.
+    #   when making calls to the blockchain network. The billing token is
+    #   used to track your accessor token for billing requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The blockchain network that the accessor token is created for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateAccessorOutput AWS API Documentation
     #
     class CreateAccessorOutput < Struct.new(
       :accessor_id,
-      :billing_token)
+      :billing_token,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -875,11 +907,22 @@ module Aws::ManagedBlockchain
     #   retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The blockchain network that the `Accessor` token is created for.
+    #
+    #   <note markdown="1"> Use the value `ETHEREUM_MAINNET_AND_GOERLI` for all existing
+    #   `Accessors` tokens that were created before the `networkType`
+    #   property was introduced.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListAccessorsInput AWS API Documentation
     #
     class ListAccessorsInput < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -25,8 +25,8 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-marketplacecommerceanalytics/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.184.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.188.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.5'
 end

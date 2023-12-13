@@ -606,7 +606,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
-    #   resp.job_template.settings.follow_input_index #=> Integer
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -695,6 +695,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.file_input #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].start_timecode #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -951,6 +960,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -1281,6 +1292,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -1327,6 +1339,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -1489,7 +1502,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -1611,6 +1624,7 @@ module Aws::MediaConvert
     #         {
     #           audio_channel_tagging_settings: {
     #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
+    #             channel_tags: ["L"], # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
     #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
@@ -2026,6 +2040,7 @@ module Aws::MediaConvert
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
+    #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -2078,6 +2093,7 @@ module Aws::MediaConvert
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
+    #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -2270,7 +2286,7 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
-    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
+    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT, FIT, FIT_NO_UPSCALE, FILL
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         video_preprocessors: {
@@ -2390,6 +2406,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -2709,6 +2727,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2755,6 +2774,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -2917,7 +2937,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -3288,7 +3308,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
-    #   resp.job_template.settings.follow_input_index #=> Integer
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -3377,6 +3397,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.file_input #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].start_timecode #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -3633,6 +3662,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -3963,6 +3994,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4009,6 +4041,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -4171,7 +4204,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -4304,6 +4337,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -4623,6 +4658,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4669,6 +4705,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -4831,7 +4868,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -5020,7 +5057,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_templates[0].settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_templates[0].settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
-    #   resp.job_templates[0].settings.follow_input_index #=> Integer
+    #   resp.job_templates[0].settings.follow_source #=> Integer
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -5109,6 +5146,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_templates[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_templates[0].settings.inputs[0].timecode_start #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays #=> Array
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].end_timecode #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.file_input #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.input_clippings #=> Array
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.input_clippings[0].end_timecode #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.input_clippings[0].start_timecode #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].input.timecode_start #=> String
+    #   resp.job_templates[0].settings.inputs[0].video_overlays[0].start_timecode #=> String
     #   resp.job_templates[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -5365,6 +5411,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -5695,6 +5743,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5741,6 +5790,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -5903,7 +5953,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -6099,6 +6149,8 @@ module Aws::MediaConvert
     #   resp.presets[0].name #=> String
     #   resp.presets[0].settings.audio_descriptions #=> Array
     #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.presets[0].settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.presets[0].settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -6418,6 +6470,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6464,6 +6517,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -6626,7 +6680,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.position.x #=> Integer
     #   resp.presets[0].settings.video_description.position.y #=> Integer
     #   resp.presets[0].settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.presets[0].settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.presets[0].settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.presets[0].settings.video_description.sharpness #=> Integer
     #   resp.presets[0].settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.presets[0].settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -6971,7 +7025,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
-    #   resp.job_template.settings.follow_input_index #=> Integer
+    #   resp.job_template.settings.follow_source #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -7060,6 +7114,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
     #   resp.job_template.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job_template.settings.inputs[0].timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.file_input #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings #=> Array
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].end_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.input_clippings[0].start_timecode #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
+    #   resp.job_template.settings.inputs[0].video_overlays[0].input.timecode_start #=> String
+    #   resp.job_template.settings.inputs[0].video_overlays[0].start_timecode #=> String
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -7316,6 +7379,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -7646,6 +7711,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -7692,6 +7758,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -7854,7 +7921,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.x #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.position.y #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.sharpness #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -7970,6 +8037,7 @@ module Aws::MediaConvert
     #         {
     #           audio_channel_tagging_settings: {
     #             channel_tag: "L", # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
+    #             channel_tags: ["L"], # accepts L, R, C, LFE, LS, RS, LC, RC, CS, LSD, RSD, TCS, VHL, VHC, VHR, TBL, TBC, TBR, RSL, RSR, LW, RW, LFE2, LT, RT, HI, NAR, M
     #           },
     #           audio_normalization_settings: {
     #             algorithm: "ITU_BS_1770_1", # accepts ITU_BS_1770_1, ITU_BS_1770_2, ITU_BS_1770_3, ITU_BS_1770_4
@@ -8385,6 +8453,7 @@ module Aws::MediaConvert
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
+    #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -8437,6 +8506,7 @@ module Aws::MediaConvert
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
+    #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -8629,7 +8699,7 @@ module Aws::MediaConvert
     #           y: 1,
     #         },
     #         respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
-    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
+    #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT, FIT, FIT_NO_UPSCALE, FILL
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         video_preprocessors: {
@@ -8746,6 +8816,8 @@ module Aws::MediaConvert
     #   resp.preset.name #=> String
     #   resp.preset.settings.audio_descriptions #=> Array
     #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tag #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags #=> Array
+    #   resp.preset.settings.audio_descriptions[0].audio_channel_tagging_settings.channel_tags[0] #=> String, one of "L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm #=> String, one of "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.algorithm_control #=> String, one of "CORRECT_AUDIO", "MEASURE_ONLY"
     #   resp.preset.settings.audio_descriptions[0].audio_normalization_settings.correction_gate_level #=> Integer
@@ -9065,6 +9137,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -9111,6 +9184,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -9273,7 +9347,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.position.x #=> Integer
     #   resp.preset.settings.video_description.position.y #=> Integer
     #   resp.preset.settings.video_description.respond_to_afd #=> String, one of "NONE", "RESPOND", "PASSTHROUGH"
-    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.preset.settings.video_description.scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"
     #   resp.preset.settings.video_description.sharpness #=> Integer
     #   resp.preset.settings.video_description.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
     #   resp.preset.settings.video_description.video_preprocessors.color_corrector.brightness #=> Integer
@@ -9432,7 +9506,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

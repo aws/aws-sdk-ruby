@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.
+
+1.159.0 (2023-10-20)
+------------------
+
+* Feature - This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
+
 1.158.0 (2023-09-27)
 ------------------
 

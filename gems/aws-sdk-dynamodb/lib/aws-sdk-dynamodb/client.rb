@@ -3467,9 +3467,9 @@ module Aws::DynamoDB
     #
     # @option params [String] :export_type
     #   Choice of whether to execute as a full export or incremental export.
-    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
-    #   `INCREMENTAL_EXPORT` is provided, the `IncrementalExportSpecification`
-    #   must also be used.
+    #   Valid values are FULL\_EXPORT or INCREMENTAL\_EXPORT. The default
+    #   value is FULL\_EXPORT. If INCREMENTAL\_EXPORT is provided, the
+    #   IncrementalExportSpecification must also be used.
     #
     # @option params [Types::IncrementalExportSpecification] :incremental_export_specification
     #   Optional object containing the parameters specific to an incremental
@@ -5839,7 +5839,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -7861,7 +7861,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

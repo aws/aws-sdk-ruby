@@ -1227,7 +1227,138 @@ module Aws::AutoScaling
     #   group: Classic Load Balancer, Application Load Balancer, Gateway Load
     #   Balancer, Network Load Balancer, and VPC Lattice.
     #
+    # @option params [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create an Auto Scaling group
+    #
+    #   # This example creates an Auto Scaling group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     default_instance_warmup: 120, 
+    #     launch_template: {
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "$Default", 
+    #     }, 
+    #     max_instance_lifetime: 2592000, 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with an attached target group
+    #
+    #   # This example creates an Auto Scaling group and attaches the specified target group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     health_check_grace_period: 300, 
+    #     health_check_type: "ELB", 
+    #     launch_template: {
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "$Default", 
+    #     }, 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with a mixed instances policy
+    #
+    #   # This example creates an Auto Scaling group with a mixed instances policy. It specifies the c5.large, c5a.large, and
+    #   # c6g.large instance types and defines a different launch template for the c6g.large instance type.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     desired_capacity: 3, 
+    #     max_size: 5, 
+    #     min_size: 1, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         on_demand_base_capacity: 1, 
+    #         on_demand_percentage_above_base_capacity: 50, 
+    #         spot_allocation_strategy: "price-capacity-optimized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-launch-template-for-x86", 
+    #           version: "$Default", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_type: "c6g.large", 
+    #             launch_template_specification: {
+    #               launch_template_name: "my-launch-template-for-arm", 
+    #               version: "$Default", 
+    #             }, 
+    #           }, 
+    #           {
+    #             instance_type: "c5.large", 
+    #           }, 
+    #           {
+    #             instance_type: "c5a.large", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group using attribute-based instance type selection
+    #
+    #   # This example creates an Auto Scaling group using attribute-based instance type selection. It requires the instance types
+    #   # to have a minimum of four vCPUs and a maximum of eight vCPUs, a minimum of 16,384 MiB of memory, and an Intel
+    #   # manufactured CPU.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     desired_capacity: 4, 
+    #     desired_capacity_type: "units", 
+    #     max_size: 100, 
+    #     min_size: 0, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         on_demand_percentage_above_base_capacity: 50, 
+    #         spot_allocation_strategy: "price-capacity-optimized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-template-for-auto-scaling", 
+    #           version: "$Default", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_requirements: {
+    #               cpu_manufacturers: [
+    #                 "intel", 
+    #               ], 
+    #               memory_mi_b: {
+    #                 min: 16384, 
+    #               }, 
+    #               v_cpu_count: {
+    #                 max: 8, 
+    #                 min: 4, 
+    #               }, 
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1338,7 +1469,7 @@ module Aws::AutoScaling
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
     #         lifecycle_transition: "LifecycleTransition", # required
-    #         notification_metadata: "XmlStringMaxLen1023",
+    #         notification_metadata: "AnyPrintableAsciiStringMaxLen4000",
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
     #         notification_target_arn: "NotificationTargetResourceName",
@@ -1365,6 +1496,10 @@ module Aws::AutoScaling
     #         type: "XmlStringMaxLen511",
     #       },
     #     ],
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -2468,6 +2603,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].traffic_sources #=> Array
     #   resp.auto_scaling_groups[0].traffic_sources[0].identifier #=> String
     #   resp.auto_scaling_groups[0].traffic_sources[0].type #=> String
+    #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
+    #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -2651,6 +2788,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeInstanceRefreshesAnswer#instance_refreshes #instance_refreshes} => Array&lt;Types::InstanceRefresh&gt;
     #   * {Types::DescribeInstanceRefreshesAnswer#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list instance refreshes
     #
@@ -2676,6 +2815,7 @@ module Aws::AutoScaling
     #           }, 
     #           auto_rollback: true, 
     #           instance_warmup: 200, 
+    #           max_healthy_percentage: 120, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2699,6 +2839,7 @@ module Aws::AutoScaling
     #           }, 
     #           auto_rollback: true, 
     #           instance_warmup: 200, 
+    #           max_healthy_percentage: 120, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2745,6 +2886,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].preferences.standby_instances #=> String, one of "Terminate", "Ignore", "Wait"
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms #=> Array
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms[0] #=> String
+    #   resp.instance_refreshes[0].preferences.max_healthy_percentage #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
@@ -3109,6 +3251,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #load_balancer_target_groups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the target groups for an Auto Scaling group
     #
@@ -3212,6 +3356,8 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeLoadBalancersResponse#load_balancers #load_balancers} => Array&lt;Types::LoadBalancerState&gt;
     #   * {Types::DescribeLoadBalancersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the load balancers for an Auto Scaling group
@@ -5122,7 +5268,7 @@ module Aws::AutoScaling
     #     lifecycle_transition: "LifecycleTransition",
     #     role_arn: "XmlStringMaxLen255",
     #     notification_target_arn: "NotificationTargetResourceName",
-    #     notification_metadata: "XmlStringMaxLen1023",
+    #     notification_metadata: "AnyPrintableAsciiStringMaxLen4000",
     #     heartbeat_timeout: 1,
     #     default_result: "LifecycleActionResult",
     #   })
@@ -6219,11 +6365,7 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Starts an instance refresh. During an instance refresh, Amazon EC2
-    # Auto Scaling performs a rolling update of instances in an Auto Scaling
-    # group. Instances are terminated first and then replaced, which
-    # temporarily reduces the capacity available within your Auto Scaling
-    # group.
+    # Starts an instance refresh.
     #
     # This operation is part of the [instance refresh feature][1] in Amazon
     # EC2 Auto Scaling, which helps you update instances in your Auto
@@ -6286,10 +6428,10 @@ module Aws::AutoScaling
     # @option params [Types::RefreshPreferences] :preferences
     #   Sets your preferences for the instance refresh so that it performs as
     #   expected when you start it. Includes the instance warmup time, the
-    #   minimum healthy percentage, and the behaviors that you want Amazon EC2
-    #   Auto Scaling to use if instances that are in `Standby` state or
-    #   protected from scale in are found. You can also choose to enable
-    #   additional features, such as the following:
+    #   minimum and maximum healthy percentages, and the behaviors that you
+    #   want Amazon EC2 Auto Scaling to use if instances that are in `Standby`
+    #   state or protected from scale in are found. You can also choose to
+    #   enable additional features, such as the following:
     #
     #   * Auto rollback
     #
@@ -6324,6 +6466,7 @@ module Aws::AutoScaling
     #       }, 
     #       auto_rollback: true, 
     #       instance_warmup: 200, 
+    #       max_healthy_percentage: 120, 
     #       min_healthy_percentage: 90, 
     #     }, 
     #   })
@@ -6437,6 +6580,7 @@ module Aws::AutoScaling
     #       alarm_specification: {
     #         alarms: ["XmlStringMaxLen255"],
     #       },
+    #       max_healthy_percentage: 1,
     #     },
     #   })
     #
@@ -6858,6 +7002,15 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     #
+    # @option params [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -6983,6 +7136,10 @@ module Aws::AutoScaling
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
     #     default_instance_warmup: 1,
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -7007,7 +7164,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

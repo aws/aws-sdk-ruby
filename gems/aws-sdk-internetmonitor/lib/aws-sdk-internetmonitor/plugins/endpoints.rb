@@ -25,16 +25,17 @@ module Aws::InternetMonitor
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -64,12 +65,20 @@ module Aws::InternetMonitor
             Aws::InternetMonitor::Endpoints::GetHealthEvent.build(context)
           when :get_monitor
             Aws::InternetMonitor::Endpoints::GetMonitor.build(context)
+          when :get_query_results
+            Aws::InternetMonitor::Endpoints::GetQueryResults.build(context)
+          when :get_query_status
+            Aws::InternetMonitor::Endpoints::GetQueryStatus.build(context)
           when :list_health_events
             Aws::InternetMonitor::Endpoints::ListHealthEvents.build(context)
           when :list_monitors
             Aws::InternetMonitor::Endpoints::ListMonitors.build(context)
           when :list_tags_for_resource
             Aws::InternetMonitor::Endpoints::ListTagsForResource.build(context)
+          when :start_query
+            Aws::InternetMonitor::Endpoints::StartQuery.build(context)
+          when :stop_query
+            Aws::InternetMonitor::Endpoints::StopQuery.build(context)
           when :tag_resource
             Aws::InternetMonitor::Endpoints::TagResource.build(context)
           when :untag_resource

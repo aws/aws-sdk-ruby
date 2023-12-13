@@ -498,7 +498,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     attribute_details: { # required
     #       attributes: [ # required
     #         {
@@ -1390,6 +1390,50 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def delete_workflow(params = {}, options = {})
       req = build_request(:delete_workflow, params)
+      req.send_request(options)
+    end
+
+    # The process of detecting profile object type mapping by using given
+    # objects.
+    #
+    # @option params [required, Array<String>] :objects
+    #   A string that is serialized from a JSON object.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DetectProfileObjectTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectProfileObjectTypeResponse#detected_profile_object_types #detected_profile_object_types} => Array&lt;Types::DetectedProfileObjectType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_profile_object_type({
+    #     objects: ["stringifiedJson"], # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.detected_profile_object_types #=> Array
+    #   resp.detected_profile_object_types[0].source_last_updated_timestamp_format #=> String
+    #   resp.detected_profile_object_types[0].fields #=> Hash
+    #   resp.detected_profile_object_types[0].fields["name"].source #=> String
+    #   resp.detected_profile_object_types[0].fields["name"].target #=> String
+    #   resp.detected_profile_object_types[0].fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.detected_profile_object_types[0].keys #=> Hash
+    #   resp.detected_profile_object_types[0].keys["name"] #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DetectProfileObjectType AWS API Documentation
+    #
+    # @overload detect_profile_object_type(params = {})
+    # @param [Hash] params ({})
+    def detect_profile_object_type(params = {}, options = {})
+      req = build_request(:detect_profile_object_type, params)
       req.send_request(options)
     end
 
@@ -3514,7 +3558,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     conditions: {
     #       range: {
     #         value: 1, # required
@@ -3944,7 +3988,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

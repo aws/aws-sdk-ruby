@@ -25,16 +25,17 @@ module Aws::Textract
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,8 +63,20 @@ module Aws::Textract
             Aws::Textract::Endpoints::AnalyzeExpense.build(context)
           when :analyze_id
             Aws::Textract::Endpoints::AnalyzeID.build(context)
+          when :create_adapter
+            Aws::Textract::Endpoints::CreateAdapter.build(context)
+          when :create_adapter_version
+            Aws::Textract::Endpoints::CreateAdapterVersion.build(context)
+          when :delete_adapter
+            Aws::Textract::Endpoints::DeleteAdapter.build(context)
+          when :delete_adapter_version
+            Aws::Textract::Endpoints::DeleteAdapterVersion.build(context)
           when :detect_document_text
             Aws::Textract::Endpoints::DetectDocumentText.build(context)
+          when :get_adapter
+            Aws::Textract::Endpoints::GetAdapter.build(context)
+          when :get_adapter_version
+            Aws::Textract::Endpoints::GetAdapterVersion.build(context)
           when :get_document_analysis
             Aws::Textract::Endpoints::GetDocumentAnalysis.build(context)
           when :get_document_text_detection
@@ -74,6 +87,12 @@ module Aws::Textract
             Aws::Textract::Endpoints::GetLendingAnalysis.build(context)
           when :get_lending_analysis_summary
             Aws::Textract::Endpoints::GetLendingAnalysisSummary.build(context)
+          when :list_adapter_versions
+            Aws::Textract::Endpoints::ListAdapterVersions.build(context)
+          when :list_adapters
+            Aws::Textract::Endpoints::ListAdapters.build(context)
+          when :list_tags_for_resource
+            Aws::Textract::Endpoints::ListTagsForResource.build(context)
           when :start_document_analysis
             Aws::Textract::Endpoints::StartDocumentAnalysis.build(context)
           when :start_document_text_detection
@@ -82,6 +101,12 @@ module Aws::Textract
             Aws::Textract::Endpoints::StartExpenseAnalysis.build(context)
           when :start_lending_analysis
             Aws::Textract::Endpoints::StartLendingAnalysis.build(context)
+          when :tag_resource
+            Aws::Textract::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::Textract::Endpoints::UntagResource.build(context)
+          when :update_adapter
+            Aws::Textract::Endpoints::UpdateAdapter.build(context)
           end
         end
       end

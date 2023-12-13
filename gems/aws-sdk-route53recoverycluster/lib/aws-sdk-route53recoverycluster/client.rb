@@ -400,8 +400,8 @@ module Aws::Route53RecoveryCluster
 
     # Get the state for a routing control. A routing control is a simple
     # on/off switch that you can use to route traffic to cells. When a
-    # routing control state is On, traffic flows to a cell. When the state
-    # is Off, traffic does not flow.
+    # routing control state is set to ON, traffic flows to a cell. When the
+    # state is set to OFF, traffic does not flow.
     #
     # Before you can create a routing control, you must first create a
     # cluster, and then host the control in a control panel on the cluster.
@@ -472,8 +472,9 @@ module Aws::Route53RecoveryCluster
     # the cluster.
     #
     # A routing control is a simple on/off switch in Route 53 ARC that you
-    # can use to route traffic to cells. When a routing control state is On,
-    # traffic flows to a cell. When the state is Off, traffic does not flow.
+    # can use to route traffic to cells. When a routing control state is set
+    # to ON, traffic flows to a cell. When the state is set to OFF, traffic
+    # does not flow.
     #
     # Before you can create a routing control, you must first create a
     # cluster, and then host the control in a control panel on the cluster.
@@ -535,6 +536,7 @@ module Aws::Route53RecoveryCluster
     #   resp.routing_controls[0].routing_control_arn #=> String
     #   resp.routing_controls[0].routing_control_name #=> String
     #   resp.routing_controls[0].routing_control_state #=> String, one of "On", "Off"
+    #   resp.routing_controls[0].owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/ListRoutingControls AWS API Documentation
@@ -547,8 +549,8 @@ module Aws::Route53RecoveryCluster
     end
 
     # Set the state of the routing control to reroute traffic. You can set
-    # the value to be On or Off. When the state is On, traffic flows to a
-    # cell. When the state is Off, traffic does not flow.
+    # the value to ON or OFF. When the state is ON, traffic flows to a cell.
+    # When the state is OFF, traffic does not flow.
     #
     # With Route 53 ARC, you can add safety rules for routing controls,
     # which are safeguards for routing control state updates that help
@@ -591,8 +593,7 @@ module Aws::Route53RecoveryCluster
     #   to update the state for.
     #
     # @option params [required, String] :routing_control_state
-    #   The state of the routing control. You can set the value to be On or
-    #   Off.
+    #   The state of the routing control. You can set the value to ON or OFF.
     #
     # @option params [Array<String>] :safety_rules_to_override
     #   The Amazon Resource Names (ARNs) for the safety rules that you want to
@@ -628,8 +629,8 @@ module Aws::Route53RecoveryCluster
     end
 
     # Set multiple routing control states. You can set the value for each
-    # state to be On or Off. When the state is On, traffic flows to a cell.
-    # When it's Off, traffic does not flow.
+    # state to be ON or OFF. When the state is ON, traffic flows to a cell.
+    # When it's OFF, traffic does not flow.
     #
     # With Route 53 ARC, you can add safety rules for routing controls,
     # which are safeguards for routing control state updates that help
@@ -720,7 +721,7 @@ module Aws::Route53RecoveryCluster
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycluster'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

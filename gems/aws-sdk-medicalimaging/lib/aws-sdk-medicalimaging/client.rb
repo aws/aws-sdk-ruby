@@ -463,8 +463,8 @@ module Aws::MedicalImaging
     #   The tags provided when creating a data store.
     #
     # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) assigned to the AWS Key Management
-    #   Service (AWS KMS) key for accessing encrypted data.
+    #   The Amazon Resource Name (ARN) assigned to the Key Management Service
+    #   (KMS) key for accessing encrypted data.
     #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -779,8 +779,7 @@ module Aws::MedicalImaging
       req.send_request(options, &block)
     end
 
-    # List import jobs created by this AWS account for a specific data
-    # store.
+    # List import jobs created for a specific data store.
     #
     # @option params [required, String] :datastore_id
     #   The data store identifier.
@@ -833,7 +832,7 @@ module Aws::MedicalImaging
       req.send_request(options)
     end
 
-    # List data stores created by this AWS account.
+    # List data stores.
     #
     # @option params [String] :datastore_status
     #   The data store status.
@@ -964,6 +963,16 @@ module Aws::MedicalImaging
     end
 
     # Search image sets based on defined input attributes.
+    #
+    # <note markdown="1"> `SearchImageSets` accepts a single search query parameter and returns
+    # a paginated response of all image sets that have the matching
+    # criteria. All range queries must be input as `(lowerBound,
+    # upperBound)`.
+    #
+    #  `SearchImageSets` uses the `updatedAt` field for sorting in decreasing
+    # order from latest to oldest.
+    #
+    #  </note>
     #
     # @option params [required, String] :datastore_id
     #   The identifier of the data store where the image sets reside.
@@ -1237,7 +1246,7 @@ module Aws::MedicalImaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

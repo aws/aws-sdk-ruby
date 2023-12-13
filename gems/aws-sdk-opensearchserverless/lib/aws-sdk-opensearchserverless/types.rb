@@ -91,7 +91,7 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of access policy. Currently the only available type is
+    #   The type of access policy. Currently, the only available type is
     #   `data`.
     #   @return [String]
     #
@@ -167,6 +167,67 @@ module Aws::OpenSearchServerless
     class BatchGetCollectionResponse < Struct.new(
       :collection_details,
       :collection_error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_identifiers
+    #   The unique identifiers of policy types and resource names.
+    #   @return [Array<Types::LifecyclePolicyResourceIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetEffectiveLifecyclePolicyRequest AWS API Documentation
+    #
+    class BatchGetEffectiveLifecyclePolicyRequest < Struct.new(
+      :resource_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effective_lifecycle_policy_details
+    #   A list of lifecycle policies applied to the OpenSearch Serverless
+    #   indexes.
+    #   @return [Array<Types::EffectiveLifecyclePolicyDetail>]
+    #
+    # @!attribute [rw] effective_lifecycle_policy_error_details
+    #   A list of resources for which retrieval failed.
+    #   @return [Array<Types::EffectiveLifecyclePolicyErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetEffectiveLifecyclePolicyResponse AWS API Documentation
+    #
+    class BatchGetEffectiveLifecyclePolicyResponse < Struct.new(
+      :effective_lifecycle_policy_details,
+      :effective_lifecycle_policy_error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifiers
+    #   The unique identifiers of policy types and policy names.
+    #   @return [Array<Types::LifecyclePolicyIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetLifecyclePolicyRequest AWS API Documentation
+    #
+    class BatchGetLifecyclePolicyRequest < Struct.new(
+      :identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policy_details
+    #   A list of lifecycle policies matched to the input policy name and
+    #   policy type.
+    #   @return [Array<Types::LifecyclePolicyDetail>]
+    #
+    # @!attribute [rw] lifecycle_policy_error_details
+    #   A list of lifecycle policy names and policy types for which
+    #   retrieval failed.
+    #   @return [Array<Types::LifecyclePolicyErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetLifecyclePolicyResponse AWS API Documentation
+    #
+    class BatchGetLifecyclePolicyResponse < Struct.new(
+      :lifecycle_policy_details,
+      :lifecycle_policy_error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -267,6 +328,10 @@ module Aws::OpenSearchServerless
     #   The name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Details about an OpenSearch Serverless collection.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the collection.
     #   @return [String]
@@ -287,6 +352,7 @@ module Aws::OpenSearchServerless
       :kms_key_arn,
       :last_modified_date,
       :name,
+      :standby_replicas,
       :status,
       :type)
       SENSITIVE = []
@@ -325,7 +391,7 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # List of filter keys that you can use for LIST, UPDATE, and DELETE
+    # A list of filter keys that you can use for LIST, UPDATE, and DELETE
     # requests to OpenSearch Serverless collections.
     #
     # @!attribute [rw] name
@@ -469,6 +535,10 @@ module Aws::OpenSearchServerless
     #   The name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Creates details about an OpenSearch Serverless collection.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the collection.
     #   @return [String]
@@ -487,6 +557,7 @@ module Aws::OpenSearchServerless
       :kms_key_arn,
       :last_modified_date,
       :name,
+      :standby_replicas,
       :status,
       :type)
       SENSITIVE = []
@@ -509,6 +580,10 @@ module Aws::OpenSearchServerless
     #   Name of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] standby_replicas
+    #   Indicates whether standby replicas should be used for a collection.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   An arbitrary set of tags (key–value pairs) to associate with the
     #   OpenSearch Serverless collection.
@@ -524,6 +599,7 @@ module Aws::OpenSearchServerless
       :client_token,
       :description,
       :name,
+      :standby_replicas,
       :tags,
       :type)
       SENSITIVE = []
@@ -538,6 +614,55 @@ module Aws::OpenSearchServerless
     #
     class CreateCollectionResponse < Struct.new(
       :create_collection_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateLifecyclePolicyRequest AWS API Documentation
+    #
+    class CreateLifecyclePolicyRequest < Struct.new(
+      :client_token,
+      :description,
+      :name,
+      :policy,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policy_detail
+    #   Details about the created lifecycle policy.
+    #   @return [Types::LifecyclePolicyDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateLifecyclePolicyResponse AWS API Documentation
+    #
+    class CreateLifecyclePolicyResponse < Struct.new(
+      :lifecycle_policy_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -822,6 +947,36 @@ module Aws::OpenSearchServerless
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the policy to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteLifecyclePolicyRequest AWS API Documentation
+    #
+    class DeleteLifecyclePolicyRequest < Struct.new(
+      :client_token,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteLifecyclePolicyResponse AWS API Documentation
+    #
+    class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The security configuration identifier. For SAML the ID will be
     #   `saml/<accountId>/<idpProviderName>`. For example,
@@ -929,12 +1084,85 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Error information for an OpenSearch Serverless request.
+    #
+    # @!attribute [rw] no_min_retention_period
+    #   The minimum number of index retention days set. That is an optional
+    #   param that will return as `true` if the minimum number of days or
+    #   hours is not set to a index resource.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The name of the OpenSearch Serverless index resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of OpenSearch Serverless resource. Currently, the only
+    #   supported resource is `index`.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   The minimum number of index retention in days or hours. This is an
+    #   optional parameter that will return only if it’s set.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/EffectiveLifecyclePolicyDetail AWS API Documentation
+    #
+    class EffectiveLifecyclePolicyDetail < Struct.new(
+      :no_min_retention_period,
+      :policy_name,
+      :resource,
+      :resource_type,
+      :retention_period,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error information for an OpenSearch Serverless request.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the error. For example, `The specified Index
+    #   resource is not found`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The name of OpenSearch Serverless index resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/EffectiveLifecyclePolicyErrorDetail AWS API Documentation
+    #
+    class EffectiveLifecyclePolicyErrorDetail < Struct.new(
+      :error_code,
+      :error_message,
+      :resource,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the access policy.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Tye type of policy. Currently the only supported value is `data`.
+    #   Tye type of policy. Currently, the only supported value is `data`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetAccessPolicyRequest AWS API Documentation
@@ -986,6 +1214,10 @@ module Aws::OpenSearchServerless
     #   Information about the data access policies in your account.
     #   @return [Types::AccessPolicyStats]
     #
+    # @!attribute [rw] lifecycle_policy_stats
+    #   Information about the lifecycle policies in your account.
+    #   @return [Types::LifecyclePolicyStats]
+    #
     # @!attribute [rw] security_config_stats
     #   Information about the security configurations in your account.
     #   @return [Types::SecurityConfigStats]
@@ -1003,6 +1235,7 @@ module Aws::OpenSearchServerless
     #
     class GetPoliciesStatsResponse < Struct.new(
       :access_policy_stats,
+      :lifecycle_policy_stats,
       :security_config_stats,
       :security_policy_stats,
       :total_policy_count)
@@ -1077,6 +1310,171 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Details about an OpenSearch Serverless lifecycle policy.
+    #
+    # @!attribute [rw] created_date
+    #   The date the lifecycle policy was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The timestamp of when the lifecycle policy was last modified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The JSON policy document without any whitespaces.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] policy_version
+    #   The version of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicyDetail AWS API Documentation
+    #
+    class LifecyclePolicyDetail < Struct.new(
+      :created_date,
+      :description,
+      :last_modified_date,
+      :name,
+      :policy,
+      :policy_version,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error information for an OpenSearch Serverless request.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the request. For example, `NOT_FOUND`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the error. For example, `The specified Lifecycle
+    #   Policy is not found`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicyErrorDetail AWS API Documentation
+    #
+    class LifecyclePolicyErrorDetail < Struct.new(
+      :error_code,
+      :error_message,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique identifiers of policy types and policy names.
+    #
+    # @!attribute [rw] name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicyIdentifier AWS API Documentation
+    #
+    class LifecyclePolicyIdentifier < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique identifiers of policy types and resource names.
+    #
+    # @!attribute [rw] resource
+    #   The name of the OpenSearch Serverless ilndex resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicyResourceIdentifier AWS API Documentation
+    #
+    class LifecyclePolicyResourceIdentifier < Struct.new(
+      :resource,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics for an OpenSearch Serverless lifecycle policy.
+    #
+    # @!attribute [rw] retention_policy_count
+    #   The number of retention lifecycle policies in the current account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicyStats AWS API Documentation
+    #
+    class LifecyclePolicyStats < Struct.new(
+      :retention_policy_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the lifecycle policy.
+    #
+    # @!attribute [rw] created_date
+    #   The Epoch time when the lifecycle policy was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the lifecycle policy was last modified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version
+    #   The version of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/LifecyclePolicySummary AWS API Documentation
+    #
+    class LifecyclePolicySummary < Struct.new(
+      :created_date,
+      :description,
+      :last_modified_date,
+      :name,
+      :policy_version,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to get the next page of results.
@@ -1131,7 +1529,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute [rw] collection_filters
-    #   List of filter names and values that you can use for requests.
+    #   A list of filter names and values that you can use for requests.
     #   @return [Types::CollectionFilters]
     #
     # @!attribute [rw] max_results
@@ -1171,6 +1569,59 @@ module Aws::OpenSearchServerless
     #
     class ListCollectionsResponse < Struct.new(
       :collection_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use use `nextToken` to get the next page of
+    #   results. The default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListLifecyclePolicies` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListLifecyclePolicies` operations, which returns results in the
+    #   next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   Resource filters that policies can apply to. Currently, the only
+    #   supported resource type is `index`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListLifecyclePoliciesRequest AWS API Documentation
+    #
+    class ListLifecyclePoliciesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resources,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policy_summaries
+    #   Details about the requested lifecycle policies.
+    #   @return [Array<Types::LifecyclePolicySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListLifecyclePoliciesResponse AWS API Documentation
+    #
+    class ListLifecyclePoliciesResponse < Struct.new(
+      :lifecycle_policy_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1883,6 +2334,60 @@ module Aws::OpenSearchServerless
     #
     class UpdateCollectionResponse < Struct.new(
       :update_collection_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the lifecycle policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version
+    #   The version of the policy being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateLifecyclePolicyRequest AWS API Documentation
+    #
+    class UpdateLifecyclePolicyRequest < Struct.new(
+      :client_token,
+      :description,
+      :name,
+      :policy,
+      :policy_version,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policy_detail
+    #   Details about the updated lifecycle policy.
+    #   @return [Types::LifecyclePolicyDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateLifecyclePolicyResponse AWS API Documentation
+    #
+    class UpdateLifecyclePolicyResponse < Struct.new(
+      :lifecycle_policy_detail)
       SENSITIVE = []
       include Aws::Structure
     end

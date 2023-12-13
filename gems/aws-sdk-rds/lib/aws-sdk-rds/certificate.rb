@@ -65,7 +65,8 @@ module Aws::RDS
       data[:certificate_arn]
     end
 
-    # Whether there is an override for the default certificate identifier.
+    # Indicates whether there is an override for the default certificate
+    # identifier.
     # @return [Boolean]
     def customer_override
       data[:customer_override]

@@ -25,16 +25,17 @@ module Aws::CloudFront
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -80,6 +81,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::CreateInvalidation.build(context)
           when :create_key_group
             Aws::CloudFront::Endpoints::CreateKeyGroup.build(context)
+          when :create_key_value_store
+            Aws::CloudFront::Endpoints::CreateKeyValueStore.build(context)
           when :create_monitoring_subscription
             Aws::CloudFront::Endpoints::CreateMonitoringSubscription.build(context)
           when :create_origin_access_control
@@ -112,6 +115,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::DeleteFunction.build(context)
           when :delete_key_group
             Aws::CloudFront::Endpoints::DeleteKeyGroup.build(context)
+          when :delete_key_value_store
+            Aws::CloudFront::Endpoints::DeleteKeyValueStore.build(context)
           when :delete_monitoring_subscription
             Aws::CloudFront::Endpoints::DeleteMonitoringSubscription.build(context)
           when :delete_origin_access_control
@@ -128,6 +133,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::DeleteStreamingDistribution.build(context)
           when :describe_function
             Aws::CloudFront::Endpoints::DescribeFunction.build(context)
+          when :describe_key_value_store
+            Aws::CloudFront::Endpoints::DescribeKeyValueStore.build(context)
           when :get_cache_policy
             Aws::CloudFront::Endpoints::GetCachePolicy.build(context)
           when :get_cache_policy_config
@@ -216,6 +223,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::ListInvalidations.build(context)
           when :list_key_groups
             Aws::CloudFront::Endpoints::ListKeyGroups.build(context)
+          when :list_key_value_stores
+            Aws::CloudFront::Endpoints::ListKeyValueStores.build(context)
           when :list_origin_access_controls
             Aws::CloudFront::Endpoints::ListOriginAccessControls.build(context)
           when :list_origin_request_policies
@@ -256,6 +265,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::UpdateFunction.build(context)
           when :update_key_group
             Aws::CloudFront::Endpoints::UpdateKeyGroup.build(context)
+          when :update_key_value_store
+            Aws::CloudFront::Endpoints::UpdateKeyValueStore.build(context)
           when :update_origin_access_control
             Aws::CloudFront::Endpoints::UpdateOriginAccessControl.build(context)
           when :update_origin_request_policy

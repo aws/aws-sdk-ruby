@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-11-30)
+------------------
+
+* Feature - This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.
+
+1.21.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2023-11-17)
+------------------
+
+* Feature - Updated SDK for Amazon Redshift Serverless, which provides the ability to configure a connection with IAM Identity Center to manage user and group access to databases.
+
+1.18.0 (2023-11-08)
+------------------
+
+* Feature - Added a new parameter in the workgroup that helps you control your cost for compute resources. This feature provides a ceiling for RPUs that Amazon Redshift Serverless can scale up to. When automatic compute scaling is required, having a higher value for MaxRPU can enhance query throughput.
+
+1.17.0 (2023-10-30)
+------------------
+
+* Feature - Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
+1.16.0 (2023-10-23)
+------------------
+
+* Feature - This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+
+1.15.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+
 1.14.0 (2023-09-27)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2023-11-08)
+------------------
+
+* Feature - This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
+1.14.0 (2023-10-25)
+------------------
+
+* Feature - Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+
 1.13.0 (2023-09-27)
 ------------------
 

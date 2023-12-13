@@ -45,9 +45,19 @@ module Aws::ConnectWisdomService
     #     including at least `id`, `title`, `updated_at`, and `draft` as
     #     source fields.
     #
-    #   * For [ SharePoint][4], your AppIntegrations DataIntegration must
+    #   * For [SharePoint][4], your AppIntegrations DataIntegration must
     #     have a FileConfiguration, including only file extensions that are
     #     among `docx`, `pdf`, `html`, `htm`, and `txt`.
+    #
+    #   * For [Amazon S3][5], the ObjectConfiguration and FileConfiguration
+    #     of your AppIntegrations DataIntegration must be null. The
+    #     `SourceURI` of your DataIntegration must use the following format:
+    #     `s3://your_s3_bucket_name`.
+    #
+    #     The bucket policy of the corresponding S3 bucket must allow the
+    #     Amazon Web Services principal `app-integrations.amazonaws.com` to
+    #     perform `s3:ListBucket`, `s3:GetObject`, and
+    #     `s3:GetBucketLocation` against the bucket.
     #
     #
     #
@@ -55,6 +65,7 @@ module Aws::ConnectWisdomService
     #   [2]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
     #   [3]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
     #   [4]: https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index
+    #   [5]: https://aws.amazon.com/s3/
     #   @return [String]
     #
     # @!attribute [rw] object_fields
@@ -144,7 +155,9 @@ module Aws::ConnectWisdomService
     # @note AssistantAssociationInputData is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/AssistantAssociationInputData AWS API Documentation
@@ -249,7 +262,22 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, and `kms:Decrypt/kms:GenerateDataKey` permissions
+    #   to the IAM identity using the key to invoke Wisdom. To use Wisdom
+    #   with chat, the key policy must also allow `kms:Decrypt`,
+    #   `kms:GenerateDataKey*`, and `kms:DescribeKey` permissions to the
+    #   `connect.amazonaws.com` service principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -319,7 +347,22 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, and `kms:Decrypt/kms:GenerateDataKey` permissions
+    #   to the IAM identity using the key to invoke Wisdom. To use Wisdom
+    #   with chat, the key policy must also allow `kms:Decrypt`,
+    #   `kms:GenerateDataKey*`, and `kms:DescribeKey` permissions to the
+    #   `connect.amazonaws.com` service principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -351,6 +394,29 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # The configuration information of the external data source.
+    #
+    # @note Configuration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
+    #
+    # @!attribute [rw] connect_configuration
+    #   The configuration information of the Amazon Connect data source.
+    #   @return [Types::ConnectConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/Configuration AWS API Documentation
+    #
+    class Configuration < Struct.new(
+      :connect_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ConnectConfiguration < Configuration; end
+      class Unknown < Configuration; end
+    end
+
     # The request could not be processed because of conflict in the current
     # state of the resource. For example, if you're using a `Create` API
     # (such as `CreateAssistant`) that accepts name, a conflicting resource
@@ -363,6 +429,21 @@ module Aws::ConnectWisdomService
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information of the Amazon Connect data source.
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ConnectConfiguration AWS API Documentation
+    #
+    class ConnectConfiguration < Struct.new(
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -386,7 +467,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @!attribute [rw] link_out_uri
@@ -465,7 +548,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ContentReference AWS API Documentation
@@ -498,7 +583,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -626,7 +713,23 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   The customer managed key must have a policy that allows
+    #   `kms:CreateGrant`, ` kms:DescribeKey`, and
+    #   `kms:Decrypt/kms:GenerateDataKey` permissions to the IAM identity
+    #   using the key to invoke Wisdom. To use Wisdom with chat, the key
+    #   policy must also allow `kms:Decrypt`, `kms:GenerateDataKey*`, and
+    #   `kms:DescribeKey` permissions to the `connect.amazonaws.com` service
+    #   principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] tags
@@ -678,8 +781,10 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -786,7 +891,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, and `kms:Decrypt/kms:GenerateDataKey` permissions
+    #   to the IAM identity using the key to invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -822,6 +939,110 @@ module Aws::ConnectWisdomService
     #
     class CreateKnowledgeBaseResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The Amazon Connect channels this quick response applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the quick response.
+    #   @return [Types::QuickResponseDataProvider]
+    #
+    # @!attribute [rw] content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for a quick
+    #     response written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for a quick
+    #     response written in richtext.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the user groups that the quick
+    #   response is accessible to.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the quick response is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/CreateQuickResponseRequest AWS API Documentation
+    #
+    class CreateQuickResponseRequest < Struct.new(
+      :channels,
+      :client_token,
+      :content,
+      :content_type,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_id,
+      :language,
+      :name,
+      :shortcut_key,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_response
+    #   The quick response.
+    #   @return [Types::QuickResponseData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/CreateQuickResponseResponse AWS API Documentation
+    #
+    class CreateQuickResponseResponse < Struct.new(
+      :quick_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,8 +1149,10 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteContentRequest AWS API Documentation
@@ -944,6 +1167,29 @@ module Aws::ConnectWisdomService
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteContentResponse AWS API Documentation
     #
     class DeleteContentResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] import_job_id
+    #   The identifier of the import job to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteImportJobRequest AWS API Documentation
+    #
+    class DeleteImportJobRequest < Struct.new(
+      :import_job_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteImportJobResponse AWS API Documentation
+    #
+    class DeleteImportJobResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] knowledge_base_id
     #   The knowledge base to delete content from. Can be either the ID or
@@ -961,6 +1207,30 @@ module Aws::ConnectWisdomService
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteKnowledgeBaseResponse AWS API Documentation
     #
     class DeleteKnowledgeBaseResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The knowledge base from which the quick response is deleted. The
+    #   identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteQuickResponseRequest AWS API Documentation
+    #
+    class DeleteQuickResponseRequest < Struct.new(
+      :knowledge_base_id,
+      :quick_response_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteQuickResponseResponse AWS API Documentation
+    #
+    class DeleteQuickResponseResponse < Aws::EmptyStructure; end
 
     # The document.
     #
@@ -1002,6 +1272,25 @@ module Aws::ConnectWisdomService
       :highlights,
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # The configuration information of the external data source.
+    #
+    # @!attribute [rw] configuration
+    #   The configuration information of the external data source.
+    #   @return [Types::Configuration]
+    #
+    # @!attribute [rw] source
+    #   The type of the external data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ExternalSourceConfiguration AWS API Documentation
+    #
+    class ExternalSourceConfiguration < Struct.new(
+      :configuration,
+      :source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1092,8 +1381,10 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetContentRequest AWS API Documentation
@@ -1123,8 +1414,10 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetContentSummaryRequest AWS API Documentation
@@ -1148,9 +1441,40 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # @!attribute [rw] import_job_id
+    #   The identifier of the import job to retrieve.
+    #   @return [String]
+    #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base that the import job belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetImportJobRequest AWS API Documentation
+    #
+    class GetImportJobRequest < Struct.new(
+      :import_job_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_job
+    #   The import job.
+    #   @return [Types::ImportJobData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetImportJobResponse AWS API Documentation
+    #
+    class GetImportJobResponse < Struct.new(
+      :import_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetKnowledgeBaseRequest AWS API Documentation
@@ -1169,6 +1493,36 @@ module Aws::ConnectWisdomService
     #
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should be a
+    #   QUICK\_RESPONSES type knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetQuickResponseRequest AWS API Documentation
+    #
+    class GetQuickResponseRequest < Struct.new(
+      :knowledge_base_id,
+      :quick_response_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_response
+    #   The quick response.
+    #   @return [Types::QuickResponseData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetQuickResponseResponse AWS API Documentation
+    #
+    class GetQuickResponseResponse < Struct.new(
+      :quick_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1254,6 +1608,50 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # The configuration information of the grouping of Wisdom users.
+    #
+    # @!attribute [rw] criteria
+    #   The criteria used for grouping Wisdom users.
+    #
+    #   The following is the list of supported criteria values.
+    #
+    #   * `RoutingProfileArn`: Grouping the users by their [Amazon Connect
+    #     routing profile ARN][1]. User should have
+    #     [SearchRoutingProfile][2] and [DescribeRoutingProfile][3]
+    #     permissions when setting criteria to this value.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of values that define different groups of Wisdom users.
+    #
+    #   * When setting `criteria` to `RoutingProfileArn`, you need to
+    #     provide a list of ARNs of [Amazon Connect routing profiles][1] as
+    #     values of this parameter.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GroupingConfiguration AWS API Documentation
+    #
+    class GroupingConfiguration < Struct.new(
+      :criteria,
+      :values)
+      SENSITIVE = [:criteria]
+      include Aws::Structure
+    end
+
     # Offset specification to describe highlighting of document excerpts for
     # rendering search results and recommendations.
     #
@@ -1274,6 +1672,156 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # Summary information about the import job.
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] external_source_configuration
+    #   The configuration information of the external data source.
+    #   @return [Types::ExternalSourceConfiguration]
+    #
+    # @!attribute [rw] failed_record_report
+    #   The link to donwload the information of resource data that failed to
+    #   be imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_job_id
+    #   The identifier of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_job_type
+    #   The type of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the import job data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata fields of the imported Wisdom resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_id
+    #   A pointer to the uploaded asset. This value is returned by
+    #   [StartContentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The download link to the resource file that is uploaded to the
+    #   import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the URL as an epoch timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ImportJobData AWS API Documentation
+    #
+    class ImportJobData < Struct.new(
+      :created_time,
+      :external_source_configuration,
+      :failed_record_report,
+      :import_job_id,
+      :import_job_type,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :last_modified_time,
+      :metadata,
+      :status,
+      :upload_id,
+      :url,
+      :url_expiry)
+      SENSITIVE = [:failed_record_report, :url]
+      include Aws::Structure
+    end
+
+    # Summary information about the import job.
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] external_source_configuration
+    #   The configuration information of the external source that the
+    #   resource data are imported from.
+    #   @return [Types::ExternalSourceConfiguration]
+    #
+    # @!attribute [rw] import_job_id
+    #   The identifier of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_job_type
+    #   The type of import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the import job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata fields of the imported Wisdom resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_id
+    #   A pointer to the uploaded asset. This value is returned by
+    #   [StartContentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ImportJobSummary AWS API Documentation
+    #
+    class ImportJobSummary < Struct.new(
+      :created_time,
+      :external_source_configuration,
+      :import_job_id,
+      :import_job_type,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :last_modified_time,
+      :metadata,
+      :status,
+      :upload_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Association information about the knowledge base.
     #
     # @!attribute [rw] knowledge_base_arn
@@ -1281,7 +1829,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/KnowledgeBaseAssociationData AWS API Documentation
@@ -1304,7 +1854,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_type
@@ -1326,7 +1878,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, and `kms:Decrypt/kms:GenerateDataKey` permissions
+    #   to the IAM identity using the key to invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -1371,7 +1935,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_type
@@ -1387,7 +1953,19 @@ module Aws::ConnectWisdomService
     #   @return [Types::RenderingConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, `kms:Decrypt/kms:GenerateDataKey` permissions to
+    #   the IAM identity using the key to invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] source_configuration
@@ -1501,8 +2079,10 @@ module Aws::ConnectWisdomService
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1543,6 +2123,52 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListImportJobsRequest AWS API Documentation
+    #
+    class ListImportJobsRequest < Struct.new(
+      :knowledge_base_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_job_summaries
+    #   Summary information about the import jobs.
+    #   @return [Array<Types::ImportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListImportJobsResponse AWS API Documentation
+    #
+    class ListImportJobsResponse < Struct.new(
+      :import_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -1576,6 +2202,52 @@ module Aws::ConnectWisdomService
     class ListKnowledgeBasesResponse < Struct.new(
       :knowledge_base_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListQuickResponsesRequest AWS API Documentation
+    #
+    class ListQuickResponsesRequest < Struct.new(
+      :knowledge_base_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_summaries
+    #   Summary information about the quick responses.
+    #   @return [Array<Types::QuickResponseSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListQuickResponsesResponse AWS API Documentation
+    #
+    class ListQuickResponsesResponse < Struct.new(
+      :next_token,
+      :quick_response_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1741,6 +2413,576 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # The container quick response content.
+    #
+    # @note QuickResponseContentProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of QuickResponseContentProvider corresponding to the set member.
+    #
+    # @!attribute [rw] content
+    #   The content of the quick response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseContentProvider AWS API Documentation
+    #
+    class QuickResponseContentProvider < Struct.new(
+      :content,
+      :unknown)
+      SENSITIVE = [:content]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Content < QuickResponseContentProvider; end
+      class Unknown < QuickResponseContentProvider; end
+    end
+
+    # The content of the quick response stored in different media types.
+    #
+    # @!attribute [rw] markdown
+    #   The container quick response content.
+    #   @return [Types::QuickResponseContentProvider]
+    #
+    # @!attribute [rw] plain_text
+    #   The container quick response content.
+    #   @return [Types::QuickResponseContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseContents AWS API Documentation
+    #
+    class QuickResponseContents < Struct.new(
+      :markdown,
+      :plain_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the quick response.
+    #
+    # @!attribute [rw] channels
+    #   The Amazon Connect contact channels this quick response applies to.
+    #   The supported contact channel types include `Chat`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for quick
+    #     response written in richtext.
+    #   @return [String]
+    #
+    # @!attribute [rw] contents
+    #   The contents of the quick response.
+    #   @return [Types::QuickResponseContents]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the quick response was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the user groups that the quick
+    #   response is accessible to.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the quick response is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   quick response data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the quick response data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_arn
+    #   The Amazon Resource Name (ARN) of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the quick response data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseData AWS API Documentation
+    #
+    class QuickResponseData < Struct.new(
+      :channels,
+      :content_type,
+      :contents,
+      :created_time,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :language,
+      :last_modified_by,
+      :last_modified_time,
+      :name,
+      :quick_response_arn,
+      :quick_response_id,
+      :shortcut_key,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container of quick response data.
+    #
+    # @note QuickResponseDataProvider is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] content
+    #   The content of the quick response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseDataProvider AWS API Documentation
+    #
+    class QuickResponseDataProvider < Struct.new(
+      :content,
+      :unknown)
+      SENSITIVE = [:content]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Content < QuickResponseDataProvider; end
+      class Unknown < QuickResponseDataProvider; end
+    end
+
+    # The quick response fields to filter the quick response query results
+    # by.
+    #
+    # The following is the list of supported field names.
+    #
+    # * name
+    #
+    # * description
+    #
+    # * shortcutKey
+    #
+    # * isActive
+    #
+    # * channels
+    #
+    # * language
+    #
+    # * contentType
+    #
+    # * createdTime
+    #
+    # * lastModifiedTime
+    #
+    # * lastModifiedBy
+    #
+    # * groupingConfiguration.criteria
+    #
+    # * groupingConfiguration.values
+    #
+    # @!attribute [rw] include_no_existence
+    #   Whether to treat null value as a match for the attribute field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute field to filter the quick responses by.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of attribute field to filter the quick response by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseFilterField AWS API Documentation
+    #
+    class QuickResponseFilterField < Struct.new(
+      :include_no_existence,
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The quick response fields to order the quick response query results
+    # by.
+    #
+    # The following is the list of supported field names.
+    #
+    # * name
+    #
+    # * description
+    #
+    # * shortcutKey
+    #
+    # * isActive
+    #
+    # * channels
+    #
+    # * language
+    #
+    # * contentType
+    #
+    # * createdTime
+    #
+    # * lastModifiedTime
+    #
+    # * lastModifiedBy
+    #
+    # * groupingConfiguration.criteria
+    #
+    # * groupingConfiguration.values
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to order the quick response query results
+    #   by.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order at which the quick responses are sorted by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseOrderField AWS API Documentation
+    #
+    class QuickResponseOrderField < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The quick response fields to query quick responses by.
+    #
+    # The following is the list of supported field names.
+    #
+    # * content
+    #
+    # * name
+    #
+    # * description
+    #
+    # * shortcutKey
+    #
+    # @!attribute [rw] allow_fuzziness
+    #   Whether the query expects only exact matches on the attribute field
+    #   values. The results of the query will only include exact matches if
+    #   this parameter is set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to query the quick responses by.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for matching attribute field values in the
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The importance of the attribute field when calculating query result
+    #   relevancy scores. The value set for this parameter affects the
+    #   ordering of search results.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the attribute to query the quick responses by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseQueryField AWS API Documentation
+    #
+    class QuickResponseQueryField < Struct.new(
+      :allow_fuzziness,
+      :name,
+      :operator,
+      :priority,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the import job.
+    #
+    # @!attribute [rw] filters
+    #   The configuration of filtering rules applied to quick response query
+    #   results.
+    #   @return [Array<Types::QuickResponseFilterField>]
+    #
+    # @!attribute [rw] order_on_field
+    #   The quick response attribute fields on which the query results are
+    #   ordered.
+    #   @return [Types::QuickResponseOrderField]
+    #
+    # @!attribute [rw] queries
+    #   The quick response query expressions.
+    #   @return [Array<Types::QuickResponseQueryField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseSearchExpression AWS API Documentation
+    #
+    class QuickResponseSearchExpression < Struct.new(
+      :filters,
+      :order_on_field,
+      :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of quick response search.
+    #
+    # @!attribute [rw] attributes_interpolated
+    #   The user defined contact attributes that are resolved when the
+    #   search result is returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attributes_not_interpolated
+    #   The user defined contact attributes that are not resolved when the
+    #   search result is returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channels
+    #   The Amazon Connect contact channels this quick response applies to.
+    #   The supported contact channel types include `Chat`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for quick
+    #     response written in richtext.
+    #   @return [String]
+    #
+    # @!attribute [rw] contents
+    #   The contents of the quick response.
+    #   @return [Types::QuickResponseContents]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the quick response was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the user groups that the quick
+    #   response is accessible to.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the quick response is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   quick response search result data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the quick response search result data was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_arn
+    #   The Amazon Resource Name (ARN) of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The resource status of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseSearchResultData AWS API Documentation
+    #
+    class QuickResponseSearchResultData < Struct.new(
+      :attributes_interpolated,
+      :attributes_not_interpolated,
+      :channels,
+      :content_type,
+      :contents,
+      :created_time,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :language,
+      :last_modified_by,
+      :last_modified_time,
+      :name,
+      :quick_response_arn,
+      :quick_response_id,
+      :shortcut_key,
+      :status,
+      :tags)
+      SENSITIVE = [:attributes_interpolated, :attributes_not_interpolated]
+      include Aws::Structure
+    end
+
+    # The summary information about the quick response.
+    #
+    # @!attribute [rw] channels
+    #   The Amazon Connect contact channels this quick response applies to.
+    #   The supported contact channel types include `Chat`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for quick
+    #     response written in richtext.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the quick response was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the quick response is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   quick response data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the quick response summary was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_arn
+    #   The Amazon Resource Name (ARN) of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The resource status of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/QuickResponseSummary AWS API Documentation
+    #
+    class QuickResponseSummary < Struct.new(
+      :channels,
+      :content_type,
+      :created_time,
+      :description,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :last_modified_by,
+      :last_modified_time,
+      :name,
+      :quick_response_arn,
+      :quick_response_id,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the recommendation.
     #
     # @!attribute [rw] document
@@ -1839,8 +3081,10 @@ module Aws::ConnectWisdomService
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RemoveKnowledgeBaseTemplateUriRequest AWS API Documentation
@@ -1883,6 +3127,22 @@ module Aws::ConnectWisdomService
     #
     class RenderingConfiguration < Struct.new(
       :template_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request reached the service more than 15 minutes after the date
+    # stamp on the request or more than 15 minutes after the request
+    # expiration date (such as for pre-signed URLs), or the date stamp on
+    # the request is more than 15 minutes in the future.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/RequestTimeoutException AWS API Documentation
+    #
+    class RequestTimeoutException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1930,8 +3190,10 @@ module Aws::ConnectWisdomService
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1991,6 +3253,66 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
+    # @!attribute [rw] attributes
+    #   The [user-defined Amazon Connect contact attributes][1] to be
+    #   resolved when search results are returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should be a
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_expression
+    #   The search expression for querying the quick response.
+    #   @return [Types::QuickResponseSearchExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/SearchQuickResponsesRequest AWS API Documentation
+    #
+    class SearchQuickResponsesRequest < Struct.new(
+      :attributes,
+      :knowledge_base_id,
+      :max_results,
+      :next_token,
+      :search_expression)
+      SENSITIVE = [:attributes]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results of the quick response search.
+    #   @return [Array<Types::QuickResponseSearchResultData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/SearchQuickResponsesResponse AWS API Documentation
+    #
+    class SearchQuickResponsesResponse < Struct.new(
+      :next_token,
+      :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] assistant_id
     #   The identifier of the Wisdom assistant. Can be either the ID or the
     #   ARN. URLs cannot contain the ARN.
@@ -2039,15 +3361,19 @@ module Aws::ConnectWisdomService
       include Aws::Structure
     end
 
-    # The KMS key used for encryption.
+    # The configuration information for the customer managed key used for
+    # encryption.
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key. For information about valid ID values, see [Key
-    #   identifiers (KeyId)][1].
+    #   The customer managed key used for encryption. For more information
+    #   about setting up a customer managed key for Wisdom, see [Enable
+    #   Amazon Connect Wisdom for your instance][1]. For information about
+    #   valid ID values, see [Key identifiers (KeyId)][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ServerSideEncryptionConfiguration AWS API Documentation
@@ -2186,15 +3512,23 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
+    #
+    # @!attribute [rw] presigned_url_time_to_live
+    #   The expected expiration time of the generated presigned URL,
+    #   specified in minutes.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/StartContentUploadRequest AWS API Documentation
     #
     class StartContentUploadRequest < Struct.new(
       :content_type,
-      :knowledge_base_id)
+      :knowledge_base_id,
+      :presigned_url_time_to_live)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2223,6 +3557,78 @@ module Aws::ConnectWisdomService
       :url,
       :url_expiry)
       SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_source_configuration
+    #   The configuration information of the external source that the
+    #   resource data are imported from.
+    #   @return [Types::ExternalSourceConfiguration]
+    #
+    # @!attribute [rw] import_job_type
+    #   The type of the import job.
+    #
+    #   * For importing quick response resource, set the value to
+    #     `QUICK_RESPONSES`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #
+    #   * For importing Wisdom quick responses, this should be a
+    #     `QUICK_RESPONSES` type knowledge base.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata fields of the imported Wisdom resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] upload_id
+    #   A pointer to the uploaded asset. This value is returned by
+    #   [StartContentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/StartImportJobRequest AWS API Documentation
+    #
+    class StartImportJobRequest < Struct.new(
+      :client_token,
+      :external_source_configuration,
+      :import_job_type,
+      :knowledge_base_id,
+      :metadata,
+      :upload_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_job
+    #   The import job.
+    #   @return [Types::ImportJobData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/StartImportJobResponse AWS API Documentation
+    #
+    class StartImportJobResponse < Struct.new(
+      :import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2294,8 +3700,9 @@ module Aws::ConnectWisdomService
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -2366,8 +3773,10 @@ module Aws::ConnectWisdomService
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
     #   @return [String]
     #
     # @!attribute [rw] template_uri
@@ -2391,6 +3800,109 @@ module Aws::ConnectWisdomService
     #
     class UpdateKnowledgeBaseTemplateUriResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The Amazon Connect contact channels this quick response applies to.
+    #   The supported contact channel types include `Chat`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content
+    #   The updated content of the quick response.
+    #   @return [Types::QuickResponseDataProvider]
+    #
+    # @!attribute [rw] content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for quick
+    #     response written in richtext.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The updated grouping configuration of the quick response.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the quick response is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom
+    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_response_id
+    #   The identifier of the quick response.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_description
+    #   Whether to remove the description from the quick response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remove_grouping_configuration
+    #   Whether to remove the grouping configuration of the quick response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remove_shortcut_key
+    #   Whether to remove the shortcut key of the quick response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/UpdateQuickResponseRequest AWS API Documentation
+    #
+    class UpdateQuickResponseRequest < Struct.new(
+      :channels,
+      :content,
+      :content_type,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_id,
+      :language,
+      :name,
+      :quick_response_id,
+      :remove_description,
+      :remove_grouping_configuration,
+      :remove_shortcut_key,
+      :shortcut_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_response
+    #   The quick response.
+    #   @return [Types::QuickResponseData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/UpdateQuickResponseResponse AWS API Documentation
+    #
+    class UpdateQuickResponseResponse < Struct.new(
+      :quick_response)
       SENSITIVE = []
       include Aws::Structure
     end

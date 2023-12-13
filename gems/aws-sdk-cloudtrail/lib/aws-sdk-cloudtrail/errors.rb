@@ -27,6 +27,7 @@ module Aws::CloudTrail
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {AccountHasOngoingImportException}
   # * {AccountNotFoundException}
   # * {AccountNotRegisteredException}
@@ -41,10 +42,12 @@ module Aws::CloudTrail
   # * {CloudTrailAccessNotEnabledException}
   # * {CloudTrailInvalidClientTokenIdException}
   # * {CloudWatchLogsDeliveryUnavailableException}
+  # * {ConcurrentModificationException}
   # * {ConflictException}
   # * {DelegatedAdminAccountLimitExceededException}
   # * {EventDataStoreARNInvalidException}
   # * {EventDataStoreAlreadyExistsException}
+  # * {EventDataStoreFederationEnabledException}
   # * {EventDataStoreHasOngoingImportException}
   # * {EventDataStoreMaxLimitExceededException}
   # * {EventDataStoreNotFoundException}
@@ -113,6 +116,16 @@ module Aws::CloudTrail
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class AccountHasOngoingImportException < ServiceError
 
@@ -254,6 +267,16 @@ module Aws::CloudTrail
       end
     end
 
+    class ConcurrentModificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ConflictException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -289,6 +312,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::EventDataStoreAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EventDataStoreFederationEnabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::EventDataStoreFederationEnabledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

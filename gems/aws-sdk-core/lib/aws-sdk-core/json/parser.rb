@@ -10,8 +10,9 @@ module Aws
       include Seahorse::Model::Shapes
 
       # @param [Seahorse::Model::ShapeRef] rules
-      def initialize(rules)
+      def initialize(rules, query_compatible: false)
         @rules = rules
+        @query_compatible = query_compatible
       end
 
       # @param [String<JSON>] json
@@ -28,10 +29,26 @@ module Aws
           member_name, member_ref = shape.member_by_location_name(key)
           if member_ref
             target[member_name] = parse_ref(member_ref, value)
-          elsif shape.union
+          elsif shape.union && key != '__type'
             target[:unknown] = { 'name' => key, 'value' => value }
           end
         end
+        # In services that were previously Query/XML, members that were
+        # "flattened" defaulted to empty lists. In JSON, these values are nil,
+        # which is backwards incompatible. To preserve backwards compatibility,
+        # we set a default value of [] for these members.
+        if @query_compatible
+          ref.shape.members.each do |member_name, member_target|
+            next unless target[member_name].nil?
+
+            if flattened_list?(member_target.shape)
+              target[member_name] = []
+            elsif flattened_map?(member_target.shape)
+              target[member_name] = {}
+            end
+          end
+        end
+
         if shape.union
           # convert to subclass
           member_subclass = shape.member_subclass(target.member).new
@@ -77,6 +94,14 @@ module Aws
       # @return [Time]
       def time(value)
         value.is_a?(Numeric) ? Time.at(value) : Time.parse(value)
+      end
+
+      def flattened_list?(shape)
+        shape.is_a?(ListShape) && shape.flattened
+      end
+
+      def flattened_map?(shape)
+        shape.is_a?(MapShape) && shape.flattened
       end
 
     end

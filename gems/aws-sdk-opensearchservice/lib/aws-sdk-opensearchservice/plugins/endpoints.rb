@@ -25,16 +25,17 @@ module Aws::OpenSearchService
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,6 +59,8 @@ module Aws::OpenSearchService
           case context.operation_name
           when :accept_inbound_connection
             Aws::OpenSearchService::Endpoints::AcceptInboundConnection.build(context)
+          when :add_data_source
+            Aws::OpenSearchService::Endpoints::AddDataSource.build(context)
           when :add_tags
             Aws::OpenSearchService::Endpoints::AddTags.build(context)
           when :associate_package
@@ -74,6 +77,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::CreatePackage.build(context)
           when :create_vpc_endpoint
             Aws::OpenSearchService::Endpoints::CreateVpcEndpoint.build(context)
+          when :delete_data_source
+            Aws::OpenSearchService::Endpoints::DeleteDataSource.build(context)
           when :delete_domain
             Aws::OpenSearchService::Endpoints::DeleteDomain.build(context)
           when :delete_inbound_connection
@@ -118,12 +123,20 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DissociatePackage.build(context)
           when :get_compatible_versions
             Aws::OpenSearchService::Endpoints::GetCompatibleVersions.build(context)
+          when :get_data_source
+            Aws::OpenSearchService::Endpoints::GetDataSource.build(context)
+          when :get_domain_maintenance_status
+            Aws::OpenSearchService::Endpoints::GetDomainMaintenanceStatus.build(context)
           when :get_package_version_history
             Aws::OpenSearchService::Endpoints::GetPackageVersionHistory.build(context)
           when :get_upgrade_history
             Aws::OpenSearchService::Endpoints::GetUpgradeHistory.build(context)
           when :get_upgrade_status
             Aws::OpenSearchService::Endpoints::GetUpgradeStatus.build(context)
+          when :list_data_sources
+            Aws::OpenSearchService::Endpoints::ListDataSources.build(context)
+          when :list_domain_maintenances
+            Aws::OpenSearchService::Endpoints::ListDomainMaintenances.build(context)
           when :list_domain_names
             Aws::OpenSearchService::Endpoints::ListDomainNames.build(context)
           when :list_domains_for_package
@@ -152,8 +165,12 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::RemoveTags.build(context)
           when :revoke_vpc_endpoint_access
             Aws::OpenSearchService::Endpoints::RevokeVpcEndpointAccess.build(context)
+          when :start_domain_maintenance
+            Aws::OpenSearchService::Endpoints::StartDomainMaintenance.build(context)
           when :start_service_software_update
             Aws::OpenSearchService::Endpoints::StartServiceSoftwareUpdate.build(context)
+          when :update_data_source
+            Aws::OpenSearchService::Endpoints::UpdateDataSource.build(context)
           when :update_domain_config
             Aws::OpenSearchService::Endpoints::UpdateDomainConfig.build(context)
           when :update_package

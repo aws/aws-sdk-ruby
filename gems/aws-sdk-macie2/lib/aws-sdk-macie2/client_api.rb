@@ -275,6 +275,8 @@ module Aws::Macie2
     ResourceProfileArtifact = Shapes::StructureShape.new(name: 'ResourceProfileArtifact')
     ResourceStatistics = Shapes::StructureShape.new(name: 'ResourceStatistics')
     ResourcesAffected = Shapes::StructureShape.new(name: 'ResourcesAffected')
+    RetrievalConfiguration = Shapes::StructureShape.new(name: 'RetrievalConfiguration')
+    RetrievalMode = Shapes::StringShape.new(name: 'RetrievalMode')
     RevealConfiguration = Shapes::StructureShape.new(name: 'RevealConfiguration')
     RevealRequestStatus = Shapes::StringShape.new(name: 'RevealRequestStatus')
     RevealStatus = Shapes::StringShape.new(name: 'RevealStatus')
@@ -373,6 +375,7 @@ module Aws::Macie2
     UpdateResourceProfileDetectionsResponse = Shapes::StructureShape.new(name: 'UpdateResourceProfileDetectionsResponse')
     UpdateResourceProfileRequest = Shapes::StructureShape.new(name: 'UpdateResourceProfileRequest')
     UpdateResourceProfileResponse = Shapes::StructureShape.new(name: 'UpdateResourceProfileResponse')
+    UpdateRetrievalConfiguration = Shapes::StructureShape.new(name: 'UpdateRetrievalConfiguration')
     UpdateRevealConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationRequest')
     UpdateRevealConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationResponse')
     UpdateSensitivityInspectionTemplateRequest = Shapes::StructureShape.new(name: 'UpdateSensitivityInspectionTemplateRequest')
@@ -439,6 +442,7 @@ module Aws::Macie2
     __stringMin1Max128Pattern = Shapes::StringShape.new(name: '__stringMin1Max128Pattern')
     __stringMin1Max2048 = Shapes::StringShape.new(name: '__stringMin1Max2048')
     __stringMin1Max512PatternSS = Shapes::StringShape.new(name: '__stringMin1Max512PatternSS')
+    __stringMin1Max64PatternW = Shapes::StringShape.new(name: '__stringMin1Max64PatternW')
     __stringMin22Max22PatternAZ0922 = Shapes::StringShape.new(name: '__stringMin22Max22PatternAZ0922')
     __stringMin3Max255PatternAZaZ093255 = Shapes::StringShape.new(name: '__stringMin3Max255PatternAZaZ093255')
     __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922 = Shapes::StringShape.new(name: '__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922')
@@ -1115,6 +1119,7 @@ module Aws::Macie2
     GetRevealConfigurationRequest.struct_class = Types::GetRevealConfigurationRequest
 
     GetRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    GetRevealConfigurationResponse.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: RetrievalConfiguration, location_name: "retrievalConfiguration"))
     GetRevealConfigurationResponse.struct_class = Types::GetRevealConfigurationResponse
 
     GetSensitiveDataOccurrencesAvailabilityRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "findingId"))
@@ -1491,6 +1496,11 @@ module Aws::Macie2
     ResourcesAffected.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     ResourcesAffected.struct_class = Types::ResourcesAffected
 
+    RetrievalConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "externalId"))
+    RetrievalConfiguration.add_member(:retrieval_mode, Shapes::ShapeRef.new(shape: RetrievalMode, required: true, location_name: "retrievalMode"))
+    RetrievalConfiguration.add_member(:role_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternW, location_name: "roleName"))
+    RetrievalConfiguration.struct_class = Types::RetrievalConfiguration
+
     RevealConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "kmsKeyId"))
     RevealConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: RevealStatus, required: true, location_name: "status"))
     RevealConfiguration.struct_class = Types::RevealConfiguration
@@ -1814,10 +1824,16 @@ module Aws::Macie2
 
     UpdateResourceProfileResponse.struct_class = Types::UpdateResourceProfileResponse
 
+    UpdateRetrievalConfiguration.add_member(:retrieval_mode, Shapes::ShapeRef.new(shape: RetrievalMode, required: true, location_name: "retrievalMode"))
+    UpdateRetrievalConfiguration.add_member(:role_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternW, location_name: "roleName"))
+    UpdateRetrievalConfiguration.struct_class = Types::UpdateRetrievalConfiguration
+
     UpdateRevealConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, required: true, location_name: "configuration"))
+    UpdateRevealConfigurationRequest.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: UpdateRetrievalConfiguration, location_name: "retrievalConfiguration"))
     UpdateRevealConfigurationRequest.struct_class = Types::UpdateRevealConfigurationRequest
 
     UpdateRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    UpdateRevealConfigurationResponse.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: RetrievalConfiguration, location_name: "retrievalConfiguration"))
     UpdateRevealConfigurationResponse.struct_class = Types::UpdateRevealConfigurationResponse
 
     UpdateSensitivityInspectionTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))

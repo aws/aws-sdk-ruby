@@ -793,7 +793,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     vocabulary_file_uri: "Uri", # required
     #     tags: [
     #       {
@@ -806,7 +806,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -936,7 +936,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #     tags: [
@@ -951,7 +951,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1078,7 +1078,7 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary_filter({
     #     vocabulary_filter_name: "VocabularyFilterName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
     #     tags: [
@@ -1093,7 +1093,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilter AWS API Documentation
@@ -1177,6 +1177,31 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def delete_language_model(params = {}, options = {})
       req = build_request(:delete_language_model, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Medical Scribe job. To use this operation, specify the name
+    # of the job you want to delete using `MedicalScribeJobName`. Job names
+    # are case sensitive.
+    #
+    # @option params [required, String] :medical_scribe_job_name
+    #   The name of the Medical Scribe job you want to delete. Job names are
+    #   case sensitive.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_medical_scribe_job({
+    #     medical_scribe_job_name: "TranscriptionJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalScribeJob AWS API Documentation
+    #
+    # @overload delete_medical_scribe_job(params = {})
+    # @param [Hash] params ({})
+    def delete_medical_scribe_job(params = {}, options = {})
+      req = build_request(:delete_medical_scribe_job, params)
       req.send_request(options)
     end
 
@@ -1471,9 +1496,9 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
-    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.call_analytics_job.media.media_file_uri #=> String
     #   resp.call_analytics_job.media.redacted_media_file_uri #=> String
     #   resp.call_analytics_job.transcript.transcript_file_uri #=> String
@@ -1493,11 +1518,12 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
-    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].language_model_name #=> String
+    #   resp.call_analytics_job.settings.summarization.generate_abstractive_summary #=> Boolean
     #   resp.call_analytics_job.channel_definitions #=> Array
     #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
     #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
@@ -1508,6 +1534,66 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def get_call_analytics_job(params = {}, options = {})
       req = build_request(:get_call_analytics_job, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the specified Medical Scribe job.
+    #
+    # To view the status of the specified medical transcription job, check
+    # the `MedicalScribeJobStatus` field. If the status is `COMPLETED`, the
+    # job is finished. You can find the results at the location specified in
+    # `MedicalScribeOutput`. If the status is `FAILED`, `FailureReason`
+    # provides details on why your Medical Scribe job failed.
+    #
+    # To get a list of your Medical Scribe jobs, use the operation.
+    #
+    # @option params [required, String] :medical_scribe_job_name
+    #   The name of the Medical Scribe job you want information about. Job
+    #   names are case sensitive.
+    #
+    # @return [Types::GetMedicalScribeJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMedicalScribeJobResponse#medical_scribe_job #medical_scribe_job} => Types::MedicalScribeJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_medical_scribe_job({
+    #     medical_scribe_job_name: "TranscriptionJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.medical_scribe_job.medical_scribe_job_name #=> String
+    #   resp.medical_scribe_job.medical_scribe_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_job.language_code #=> String, one of "en-US"
+    #   resp.medical_scribe_job.media.media_file_uri #=> String
+    #   resp.medical_scribe_job.media.redacted_media_file_uri #=> String
+    #   resp.medical_scribe_job.medical_scribe_output.transcript_file_uri #=> String
+    #   resp.medical_scribe_job.medical_scribe_output.clinical_document_uri #=> String
+    #   resp.medical_scribe_job.start_time #=> Time
+    #   resp.medical_scribe_job.creation_time #=> Time
+    #   resp.medical_scribe_job.completion_time #=> Time
+    #   resp.medical_scribe_job.failure_reason #=> String
+    #   resp.medical_scribe_job.settings.show_speaker_labels #=> Boolean
+    #   resp.medical_scribe_job.settings.max_speaker_labels #=> Integer
+    #   resp.medical_scribe_job.settings.channel_identification #=> Boolean
+    #   resp.medical_scribe_job.settings.vocabulary_name #=> String
+    #   resp.medical_scribe_job.settings.vocabulary_filter_name #=> String
+    #   resp.medical_scribe_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.medical_scribe_job.data_access_role_arn #=> String
+    #   resp.medical_scribe_job.channel_definitions #=> Array
+    #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
+    #   resp.medical_scribe_job.channel_definitions[0].participant_role #=> String, one of "PATIENT", "CLINICIAN"
+    #   resp.medical_scribe_job.tags #=> Array
+    #   resp.medical_scribe_job.tags[0].key #=> String
+    #   resp.medical_scribe_job.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalScribeJob AWS API Documentation
+    #
+    # @overload get_medical_scribe_job(params = {})
+    # @param [Hash] params ({})
+    def get_medical_scribe_job(params = {}, options = {})
+      req = build_request(:get_medical_scribe_job, params)
       req.send_request(options)
     end
 
@@ -1539,9 +1625,9 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
     #   resp.medical_transcription_job.media.redacted_media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
@@ -1602,7 +1688,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1648,9 +1734,9 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.media.redacted_media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
@@ -1677,10 +1763,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.identified_language_score #=> Float
     #   resp.transcription_job.language_codes #=> Array
-    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.language_codes[0].duration_in_seconds #=> Float
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
@@ -1738,7 +1824,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1777,7 +1863,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #   resp.download_uri #=> String
     #
@@ -1806,7 +1892,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of Call Analytics categories to return in each page
     #   of results. If there are fewer results than the value that you
-    #   specify, only the actual results are returned. If you don't specify a
+    #   specify, only the actual results are returned. If you do not specify a
     #   value, a default of 5 is used.
     #
     # @return [Types::ListCallAnalyticsCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1897,7 +1983,7 @@ module Aws::TranscribeService
     #
     # @option params [String] :status
     #   Returns only Call Analytics jobs with the specified status. Jobs are
-    #   ordered by creation date, with the newest job first. If you don't
+    #   ordered by creation date, with the newest job first. If you do not
     #   include `Status`, all Call Analytics jobs are returned.
     #
     # @option params [String] :job_name_contains
@@ -1914,7 +2000,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of Call Analytics jobs to return in each page of
     #   results. If there are fewer results than the value that you specify,
-    #   only the actual results are returned. If you don't specify a value, a
+    #   only the actual results are returned. If you do not specify a value, a
     #   default of 5 is used.
     #
     # @return [Types::ListCallAnalyticsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1943,7 +2029,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job_summaries[0].creation_time #=> Time
     #   resp.call_analytics_job_summaries[0].start_time #=> Time
     #   resp.call_analytics_job_summaries[0].completion_time #=> Time
-    #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job_summaries[0].call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.call_analytics_job_summaries[0].failure_reason #=> String
     #
@@ -1966,7 +2052,7 @@ module Aws::TranscribeService
     # @option params [String] :status_equals
     #   Returns only custom language models with the specified status.
     #   Language models are ordered by creation date, with the newest model
-    #   first. If you don't include `StatusEquals`, all custom language
+    #   first. If you do not include `StatusEquals`, all custom language
     #   models are returned.
     #
     # @option params [String] :name_contains
@@ -1983,7 +2069,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of custom language models to return in each page of
     #   results. If there are fewer results than the value that you specify,
-    #   only the actual results are returned. If you don't specify a value, a
+    #   only the actual results are returned. If you do not specify a value, a
     #   default of 5 is used.
     #
     # @return [Types::ListLanguageModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2027,6 +2113,74 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Provides a list of Medical Scribe jobs that match the specified
+    # criteria. If no criteria are specified, all Medical Scribe jobs are
+    # returned.
+    #
+    # To get detailed information about a specific Medical Scribe job, use
+    # the operation.
+    #
+    # @option params [String] :status
+    #   Returns only Medical Scribe jobs with the specified status. Jobs are
+    #   ordered by creation date, with the newest job first. If you do not
+    #   include `Status`, all Medical Scribe jobs are returned.
+    #
+    # @option params [String] :job_name_contains
+    #   Returns only the Medical Scribe jobs that contain the specified
+    #   string. The search is not case sensitive.
+    #
+    # @option params [String] :next_token
+    #   If your `ListMedicalScribeJobs` request returns more results than can
+    #   be displayed, `NextToken` is displayed in the response with an
+    #   associated string. To get the next page of results, copy this string
+    #   and repeat your request, including `NextToken` with the value of the
+    #   copied string. Repeat as needed to view all your results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Medical Scribe jobs to return in each page of
+    #   results. If there are fewer results than the value that you specify,
+    #   only the actual results are returned. If you do not specify a value, a
+    #   default of 5 is used.
+    #
+    # @return [Types::ListMedicalScribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMedicalScribeJobsResponse#status #status} => String
+    #   * {Types::ListMedicalScribeJobsResponse#next_token #next_token} => String
+    #   * {Types::ListMedicalScribeJobsResponse#medical_scribe_job_summaries #medical_scribe_job_summaries} => Array&lt;Types::MedicalScribeJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_medical_scribe_jobs({
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
+    #     job_name_contains: "TranscriptionJobName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.next_token #=> String
+    #   resp.medical_scribe_job_summaries #=> Array
+    #   resp.medical_scribe_job_summaries[0].medical_scribe_job_name #=> String
+    #   resp.medical_scribe_job_summaries[0].creation_time #=> Time
+    #   resp.medical_scribe_job_summaries[0].start_time #=> Time
+    #   resp.medical_scribe_job_summaries[0].completion_time #=> Time
+    #   resp.medical_scribe_job_summaries[0].language_code #=> String, one of "en-US"
+    #   resp.medical_scribe_job_summaries[0].medical_scribe_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_job_summaries[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalScribeJobs AWS API Documentation
+    #
+    # @overload list_medical_scribe_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_medical_scribe_jobs(params = {}, options = {})
+      req = build_request(:list_medical_scribe_jobs, params)
+      req.send_request(options)
+    end
+
     # Provides a list of medical transcription jobs that match the specified
     # criteria. If no criteria are specified, all medical transcription jobs
     # are returned.
@@ -2037,7 +2191,7 @@ module Aws::TranscribeService
     # @option params [String] :status
     #   Returns only medical transcription jobs with the specified status.
     #   Jobs are ordered by creation date, with the newest job first. If you
-    #   don't include `Status`, all medical transcription jobs are returned.
+    #   do not include `Status`, all medical transcription jobs are returned.
     #
     # @option params [String] :job_name_contains
     #   Returns only the medical transcription jobs that contain the specified
@@ -2053,7 +2207,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of medical transcription jobs to return in each
     #   page of results. If there are fewer results than the value that you
-    #   specify, only the actual results are returned. If you don't specify a
+    #   specify, only the actual results are returned. If you do not specify a
     #   value, a default of 5 is used.
     #
     # @return [Types::ListMedicalTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2082,7 +2236,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job_summaries[0].creation_time #=> Time
     #   resp.medical_transcription_job_summaries[0].start_time #=> Time
     #   resp.medical_transcription_job_summaries[0].completion_time #=> Time
-    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.medical_transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job_summaries[0].failure_reason #=> String
     #   resp.medical_transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -2116,13 +2270,13 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of custom medical vocabularies to return in each
     #   page of results. If there are fewer results than the value that you
-    #   specify, only the actual results are returned. If you don't specify a
+    #   specify, only the actual results are returned. If you do not specify a
     #   value, a default of 5 is used.
     #
     # @option params [String] :state_equals
     #   Returns only custom medical vocabularies with the specified state.
     #   Custom vocabularies are ordered by creation date, with the newest
-    #   vocabulary first. If you don't include `StateEquals`, all custom
+    #   vocabulary first. If you do not include `StateEquals`, all custom
     #   medical vocabularies are returned.
     #
     # @option params [String] :name_contains
@@ -2152,7 +2306,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -2223,7 +2377,7 @@ module Aws::TranscribeService
     #
     # @option params [String] :status
     #   Returns only transcription jobs with the specified status. Jobs are
-    #   ordered by creation date, with the newest job first. If you don't
+    #   ordered by creation date, with the newest job first. If you do not
     #   include `Status`, all transcription jobs are returned.
     #
     # @option params [String] :job_name_contains
@@ -2240,7 +2394,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of transcription jobs to return in each page of
     #   results. If there are fewer results than the value that you specify,
-    #   only the actual results are returned. If you don't specify a value, a
+    #   only the actual results are returned. If you do not specify a value, a
     #   default of 5 is used.
     #
     # @return [Types::ListTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2269,7 +2423,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].start_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -2282,7 +2436,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].identify_multiple_languages #=> Boolean
     #   resp.transcription_job_summaries[0].identified_language_score #=> Float
     #   resp.transcription_job_summaries[0].language_codes #=> Array
-    #   resp.transcription_job_summaries[0].language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job_summaries[0].language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job_summaries[0].language_codes[0].duration_in_seconds #=> Float
     #   resp.transcription_job_summaries[0].toxicity_detection #=> Array
     #   resp.transcription_job_summaries[0].toxicity_detection[0].toxicity_categories #=> Array
@@ -2314,13 +2468,13 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of custom vocabularies to return in each page of
     #   results. If there are fewer results than the value that you specify,
-    #   only the actual results are returned. If you don't specify a value, a
+    #   only the actual results are returned. If you do not specify a value, a
     #   default of 5 is used.
     #
     # @option params [String] :state_equals
     #   Returns only custom vocabularies with the specified state.
     #   Vocabularies are ordered by creation date, with the newest vocabulary
-    #   first. If you don't include `StateEquals`, all custom medical
+    #   first. If you do not include `StateEquals`, all custom medical
     #   vocabularies are returned.
     #
     # @option params [String] :name_contains
@@ -2350,7 +2504,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -2380,7 +2534,7 @@ module Aws::TranscribeService
     # @option params [Integer] :max_results
     #   The maximum number of custom vocabulary filters to return in each page
     #   of results. If there are fewer results than the value that you
-    #   specify, only the actual results are returned. If you don't specify a
+    #   specify, only the actual results are returned. If you do not specify a
     #   value, a default of 5 is used.
     #
     # @option params [String] :name_contains
@@ -2407,7 +2561,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabulary_filters #=> Array
     #   resp.vocabulary_filters[0].vocabulary_filter_name #=> String
-    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.vocabulary_filters[0].last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFilters AWS API Documentation
@@ -2504,11 +2658,11 @@ module Aws::TranscribeService
     #   transcription job using the `CallAnalyticsJobName` parameter.
     #
     #   You can specify a KMS key to encrypt your output using the
-    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
+    #   `OutputEncryptionKMSKeyId` parameter. If you do not specify a KMS key,
     #   Amazon Transcribe uses the default Amazon S3 key for server-side
     #   encryption.
     #
-    #   If you don't specify `OutputLocation`, your transcript is placed in a
+    #   If you do not specify `OutputLocation`, your transcript is placed in a
     #   service-managed Amazon S3 bucket and you are provided with a URI to
     #   access your transcript.
     #
@@ -2541,7 +2695,7 @@ module Aws::TranscribeService
     #   2.  Use the ARN for the KMS key alias. For example,
     #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   If you don't specify an encryption key, your output is encrypted with
+    #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
@@ -2604,13 +2758,16 @@ module Aws::TranscribeService
     #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #       },
-    #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #       language_id_settings: {
     #         "af-ZA" => {
     #           vocabulary_name: "VocabularyName",
     #           vocabulary_filter_name: "VocabularyFilterName",
     #           language_model_name: "ModelName",
     #         },
+    #       },
+    #       summarization: {
+    #         generate_abstractive_summary: false, # required
     #       },
     #     },
     #     channel_definitions: [
@@ -2625,9 +2782,9 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
-    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.call_analytics_job.media.media_file_uri #=> String
     #   resp.call_analytics_job.media.redacted_media_file_uri #=> String
     #   resp.call_analytics_job.transcript.transcript_file_uri #=> String
@@ -2647,11 +2804,12 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
-    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
     #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].language_model_name #=> String
+    #   resp.call_analytics_job.settings.summarization.generate_abstractive_summary #=> Boolean
     #   resp.call_analytics_job.channel_definitions #=> Array
     #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
     #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
@@ -2662,6 +2820,257 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def start_call_analytics_job(params = {}, options = {})
       req = build_request(:start_call_analytics_job, params)
+      req.send_request(options)
+    end
+
+    # Transcribes patient-clinician conversations and generates clinical
+    # notes.
+    #
+    # Amazon Web Services HealthScribe automatically provides rich
+    # conversation transcripts, identifies speaker roles, classifies
+    # dialogues, extracts medical terms, and generates preliminary clinical
+    # notes. To learn more about these features, refer to [Amazon Web
+    # Services HealthScribe][1].
+    #
+    # To make a `StartMedicalScribeJob` request, you must first upload your
+    # media file into an Amazon S3 bucket; you can then specify the Amazon
+    # S3 location of the file using the `Media` parameter.
+    #
+    # You must include the following parameters in your
+    # `StartMedicalTranscriptionJob` request:
+    #
+    # * `DataAccessRoleArn`: The ARN of an IAM role with the these minimum
+    #   permissions: read permission on input file Amazon S3 bucket
+    #   specified in `Media`, write permission on the Amazon S3 bucket
+    #   specified in `OutputBucketName`, and full permissions on the KMS key
+    #   specified in `OutputEncryptionKMSKeyId` (if set). The role should
+    #   also allow `transcribe.amazonaws.com` to assume it.
+    #
+    # * `Media` (`MediaFileUri`): The Amazon S3 location of your media file.
+    #
+    # * `MedicalScribeJobName`: A custom name you create for your
+    #   MedicalScribe job that is unique within your Amazon Web Services
+    #   account.
+    #
+    # * `OutputBucketName`: The Amazon S3 bucket where you want your output
+    #   files stored.
+    #
+    # * `Settings`: A `MedicalScribeSettings` obect that must set exactly
+    #   one of `ShowSpeakerLabels` or `ChannelIdentification` to true. If
+    #   `ShowSpeakerLabels` is true, `MaxSpeakerLabels` must also be set.
+    #
+    # * `ChannelDefinitions`: A `MedicalScribeChannelDefinitions` array
+    #   should be set if and only if the `ChannelIdentification` value of
+    #   `Settings` is set to true.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe.html
+    #
+    # @option params [required, String] :medical_scribe_job_name
+    #   A unique name, chosen by you, for your Medical Scribe job.
+    #
+    #   This name is case sensitive, cannot contain spaces, and must be unique
+    #   within an Amazon Web Services account. If you try to create a new job
+    #   with the same name as an existing job, you get a `ConflictException`
+    #   error.
+    #
+    # @option params [required, Types::Media] :media
+    #   Describes the Amazon S3 location of the media file you want to use in
+    #   your request.
+    #
+    #   For information on supported media formats, refer to the `MediaFormat`
+    #   parameter or the [Media formats][1] section in the Amazon S3 Developer
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #
+    # @option params [required, String] :output_bucket_name
+    #   The name of the Amazon S3 bucket where you want your Medical Scribe
+    #   output stored. Do not include the `S3://` prefix of the specified
+    #   bucket.
+    #
+    #   Note that the role specified in the `DataAccessRoleArn` request
+    #   parameter must have permission to use the specified location. You can
+    #   change Amazon S3 permissions using the [Amazon Web Services Management
+    #   Console][1]. See also [Permissions Required for IAM User Roles][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/s3
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #
+    # @option params [String] :output_encryption_kms_key_id
+    #   The KMS key you want to use to encrypt your Medical Scribe output.
+    #
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If you do not specify an encryption key, your output is encrypted with
+    #   the default Amazon S3 key (SSE-S3).
+    #
+    #   Note that the role specified in the `DataAccessRoleArn` request
+    #   parameter must have permission to use the specified KMS key.
+    #
+    # @option params [Hash<String,String>] :kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your data.
+    #   For more information, see [KMS encryption context][1] and [Asymmetric
+    #   keys in KMS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
+    #   access the Amazon S3 bucket that contains your input files, write to
+    #   the output bucket, and use your KMS key if supplied. If the role that
+    #   you specify doesn’t have the appropriate permissions your request
+    #   fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [required, Types::MedicalScribeSettings] :settings
+    #   Makes it possible to control how your Medical Scribe job is processed
+    #   using a `MedicalScribeSettings` object. Specify
+    #   `ChannelIdentification` if `ChannelDefinitions` are set. Enabled
+    #   `ShowSpeakerLabels` if `ChannelIdentification` and
+    #   `ChannelDefinitions` are not set. One and only one of
+    #   `ChannelIdentification` and `ShowSpeakerLabels` must be set. If
+    #   `ShowSpeakerLabels` is set, `MaxSpeakerLabels` must also be set. Use
+    #   `Settings` to specify a vocabulary or vocabulary filter or both using
+    #   `VocabularyName`, `VocabularyFilterName`. `VocabularyFilterMethod`
+    #   must be specified if `VocabularyFilterName` is set.
+    #
+    # @option params [Array<Types::MedicalScribeChannelDefinition>] :channel_definitions
+    #   Makes it possible to specify which speaker is on which channel. For
+    #   example, if the clinician is the first participant to speak, you would
+    #   set `ChannelId` of the first `ChannelDefinition` in the list to `0`
+    #   (to indicate the first channel) and `ParticipantRole` to `CLINICIAN`
+    #   (to indicate that it's the clinician speaking). Then you would set
+    #   the `ChannelId` of the second `ChannelDefinition` in the list to `1`
+    #   (to indicate the second channel) and `ParticipantRole` to `PATIENT`
+    #   (to indicate that it's the patient speaking).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more custom tags, each in the form of a key:value pair, to
+    #   the Medica Scribe job.
+    #
+    #   To learn more about using tags with Amazon Transcribe, refer to
+    #   [Tagging resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
+    #
+    # @return [Types::StartMedicalScribeJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMedicalScribeJobResponse#medical_scribe_job #medical_scribe_job} => Types::MedicalScribeJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_medical_scribe_job({
+    #     medical_scribe_job_name: "TranscriptionJobName", # required
+    #     media: { # required
+    #       media_file_uri: "Uri",
+    #       redacted_media_file_uri: "Uri",
+    #     },
+    #     output_bucket_name: "OutputBucketName", # required
+    #     output_encryption_kms_key_id: "KMSKeyId",
+    #     kms_encryption_context: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
+    #     data_access_role_arn: "DataAccessRoleArn", # required
+    #     settings: { # required
+    #       show_speaker_labels: false,
+    #       max_speaker_labels: 1,
+    #       channel_identification: false,
+    #       vocabulary_name: "VocabularyName",
+    #       vocabulary_filter_name: "VocabularyFilterName",
+    #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #     },
+    #     channel_definitions: [
+    #       {
+    #         channel_id: 1, # required
+    #         participant_role: "PATIENT", # required, accepts PATIENT, CLINICIAN
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.medical_scribe_job.medical_scribe_job_name #=> String
+    #   resp.medical_scribe_job.medical_scribe_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_job.language_code #=> String, one of "en-US"
+    #   resp.medical_scribe_job.media.media_file_uri #=> String
+    #   resp.medical_scribe_job.media.redacted_media_file_uri #=> String
+    #   resp.medical_scribe_job.medical_scribe_output.transcript_file_uri #=> String
+    #   resp.medical_scribe_job.medical_scribe_output.clinical_document_uri #=> String
+    #   resp.medical_scribe_job.start_time #=> Time
+    #   resp.medical_scribe_job.creation_time #=> Time
+    #   resp.medical_scribe_job.completion_time #=> Time
+    #   resp.medical_scribe_job.failure_reason #=> String
+    #   resp.medical_scribe_job.settings.show_speaker_labels #=> Boolean
+    #   resp.medical_scribe_job.settings.max_speaker_labels #=> Integer
+    #   resp.medical_scribe_job.settings.channel_identification #=> Boolean
+    #   resp.medical_scribe_job.settings.vocabulary_name #=> String
+    #   resp.medical_scribe_job.settings.vocabulary_filter_name #=> String
+    #   resp.medical_scribe_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.medical_scribe_job.data_access_role_arn #=> String
+    #   resp.medical_scribe_job.channel_definitions #=> Array
+    #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
+    #   resp.medical_scribe_job.channel_definitions[0].participant_role #=> String, one of "PATIENT", "CLINICIAN"
+    #   resp.medical_scribe_job.tags #=> Array
+    #   resp.medical_scribe_job.tags[0].key #=> String
+    #   resp.medical_scribe_job.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalScribeJob AWS API Documentation
+    #
+    # @overload start_medical_scribe_job(params = {})
+    # @param [Hash] params ({})
+    def start_medical_scribe_job(params = {}, options = {})
+      req = build_request(:start_medical_scribe_job, params)
       req.send_request(options)
     end
 
@@ -2677,7 +3086,7 @@ module Aws::TranscribeService
     #
     # To make a `StartMedicalTranscriptionJob` request, you must first
     # upload your media file into an Amazon S3 bucket; you can then specify
-    # the S3 location of the file using the `Media` parameter.
+    # the Amazon S3 location of the file using the `Media` parameter.
     #
     # You must include the following parameters in your
     # `StartMedicalTranscriptionJob` request:
@@ -2729,7 +3138,7 @@ module Aws::TranscribeService
     #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #
-    #   If you don't specify the media sample rate, Amazon Transcribe Medical
+    #   If you do not specify the media sample rate, Amazon Transcribe Medical
     #   determines it for you. If you specify the sample rate, it must match
     #   the rate detected by Amazon Transcribe Medical; if there's a mismatch
     #   between the value that you specify and the value detected, your job
@@ -2744,14 +3153,13 @@ module Aws::TranscribeService
     #   Describes the Amazon S3 location of the media file you want to use in
     #   your request.
     #
-    #   For information on supported media formats, refer to the
-    #   [MediaFormat][1] parameter or the [Media formats][2] section in the
-    #   Amazon S3 Developer Guide.
+    #   For information on supported media formats, refer to the `MediaFormat`
+    #   parameter or the [Media formats][1] section in the Amazon S3 Developer
+    #   Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
     #
     # @option params [required, String] :output_bucket_name
     #   The name of the Amazon S3 bucket where you want your medical
@@ -2841,7 +3249,7 @@ module Aws::TranscribeService
     #   2.  Use the ARN for the KMS key alias. For example,
     #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   If you don't specify an encryption key, your output is encrypted with
+    #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
@@ -2910,9 +3318,9 @@ module Aws::TranscribeService
     #
     #   resp = client.start_medical_transcription_job({
     #     medical_transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm, m4a
     #     media: { # required
     #       media_file_uri: "Uri",
     #       redacted_media_file_uri: "Uri",
@@ -2946,9 +3354,9 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
     #   resp.medical_transcription_job.media.redacted_media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
@@ -3003,7 +3411,7 @@ module Aws::TranscribeService
     #   `IdentifyMultipleLanguages`: If you know the language of your media
     #   file, specify it using the `LanguageCode` parameter; you can find
     #   all valid language codes in the [Supported languages][2] table. If
-    #   you don't know the languages spoken in your media, use either
+    #   you do not know the languages spoken in your media, use either
     #   `IdentifyLanguage` or `IdentifyMultipleLanguages` and let Amazon
     #   Transcribe identify the languages for you.
     #
@@ -3051,7 +3459,7 @@ module Aws::TranscribeService
     #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #
-    #   If you don't specify the media sample rate, Amazon Transcribe
+    #   If you do not specify the media sample rate, Amazon Transcribe
     #   determines it for you. If you specify the sample rate, it must match
     #   the rate detected by Amazon Transcribe. If there's a mismatch between
     #   the value that you specify and the value detected, your job fails. In
@@ -3085,7 +3493,7 @@ module Aws::TranscribeService
     #   Services Management Console][1]. See also [Permissions Required for
     #   IAM User Roles][2].
     #
-    #   If you don't specify `OutputBucketName`, your transcript is placed in
+    #   If you do not specify `OutputBucketName`, your transcript is placed in
     #   a service-managed Amazon S3 bucket and you are provided with a URI to
     #   access your transcript.
     #
@@ -3156,7 +3564,7 @@ module Aws::TranscribeService
     #   2.  Use the ARN for the KMS key alias. For example,
     #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   If you don't specify an encryption key, your output is encrypted with
+    #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
     #   If you specify a KMS key to encrypt your output, you must also specify
@@ -3218,8 +3626,10 @@ module Aws::TranscribeService
     # @option params [Types::ContentRedaction] :content_redaction
     #   Makes it possible to redact or flag specified personally identifiable
     #   information (PII) in your transcript. If you use `ContentRedaction`,
-    #   you must also include the sub-parameters: `PiiEntityTypes`,
-    #   `RedactionOutput`, and `RedactionType`.
+    #   you must also include the sub-parameters: `RedactionOutput` and
+    #   `RedactionType`. You can optionally include `PiiEntityTypes` to choose
+    #   which types of PII you want to redact. If you do not include
+    #   `PiiEntityTypes` in your request, all PII is redacted.
     #
     # @option params [Boolean] :identify_language
     #   Enables automatic language identification in your transcription job
@@ -3351,9 +3761,9 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     media_sample_rate_hertz: 1,
-    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
+    #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm, m4a
     #     media: { # required
     #       media_file_uri: "Uri",
     #       redacted_media_file_uri: "Uri",
@@ -3388,7 +3798,7 @@ module Aws::TranscribeService
     #     },
     #     identify_language: false,
     #     identify_multiple_languages: false,
-    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     subtitles: {
     #       formats: ["vtt"], # accepts vtt, srt
     #       output_start_index: 1,
@@ -3417,9 +3827,9 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
-    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.media.redacted_media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
@@ -3446,10 +3856,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.identified_language_score #=> Float
     #   resp.transcription_job.language_codes #=> Array
-    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.transcription_job.language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.transcription_job.language_codes[0].duration_in_seconds #=> Float
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
@@ -3773,14 +4183,14 @@ module Aws::TranscribeService
     #
     #   resp = client.update_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     vocabulary_file_uri: "Uri", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -3877,7 +4287,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zu-ZA
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #     data_access_role_arn: "DataAccessRoleArn",
@@ -3886,7 +4296,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -3973,7 +4383,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilter AWS API Documentation
@@ -3998,7 +4408,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,7 +32,7 @@ require_relative 'aws-sdk-ivsrealtime/customizations'
 # structure.
 #
 #     ivs_real_time = Aws::IVSRealTime::Client.new
-#     resp = ivs_real_time.create_participant_token(params)
+#     resp = ivs_real_time.create_encoder_configuration(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-ivsrealtime/customizations'
 # @!group service
 module Aws::IVSRealTime
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.14.0'
 
 end

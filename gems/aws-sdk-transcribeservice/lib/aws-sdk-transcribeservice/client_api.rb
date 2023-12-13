@@ -49,6 +49,7 @@ module Aws::TranscribeService
     DeleteCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsJobRequest')
     DeleteCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsJobResponse')
     DeleteLanguageModelRequest = Shapes::StructureShape.new(name: 'DeleteLanguageModelRequest')
+    DeleteMedicalScribeJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalScribeJobRequest')
     DeleteMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalTranscriptionJobRequest')
     DeleteMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteMedicalVocabularyRequest')
     DeleteTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteTranscriptionJobRequest')
@@ -62,6 +63,8 @@ module Aws::TranscribeService
     GetCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'GetCallAnalyticsCategoryResponse')
     GetCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'GetCallAnalyticsJobRequest')
     GetCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'GetCallAnalyticsJobResponse')
+    GetMedicalScribeJobRequest = Shapes::StructureShape.new(name: 'GetMedicalScribeJobRequest')
+    GetMedicalScribeJobResponse = Shapes::StructureShape.new(name: 'GetMedicalScribeJobResponse')
     GetMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobRequest')
     GetMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobResponse')
     GetMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'GetMedicalVocabularyRequest')
@@ -94,6 +97,8 @@ module Aws::TranscribeService
     ListCallAnalyticsJobsResponse = Shapes::StructureShape.new(name: 'ListCallAnalyticsJobsResponse')
     ListLanguageModelsRequest = Shapes::StructureShape.new(name: 'ListLanguageModelsRequest')
     ListLanguageModelsResponse = Shapes::StructureShape.new(name: 'ListLanguageModelsResponse')
+    ListMedicalScribeJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalScribeJobsRequest')
+    ListMedicalScribeJobsResponse = Shapes::StructureShape.new(name: 'ListMedicalScribeJobsResponse')
     ListMedicalTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsRequest')
     ListMedicalTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsResponse')
     ListMedicalVocabulariesRequest = Shapes::StructureShape.new(name: 'ListMedicalVocabulariesRequest')
@@ -114,6 +119,17 @@ module Aws::TranscribeService
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
     MedicalContentIdentificationType = Shapes::StringShape.new(name: 'MedicalContentIdentificationType')
     MedicalMediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MedicalMediaSampleRateHertz')
+    MedicalScribeChannelDefinition = Shapes::StructureShape.new(name: 'MedicalScribeChannelDefinition')
+    MedicalScribeChannelDefinitions = Shapes::ListShape.new(name: 'MedicalScribeChannelDefinitions')
+    MedicalScribeChannelId = Shapes::IntegerShape.new(name: 'MedicalScribeChannelId')
+    MedicalScribeJob = Shapes::StructureShape.new(name: 'MedicalScribeJob')
+    MedicalScribeJobStatus = Shapes::StringShape.new(name: 'MedicalScribeJobStatus')
+    MedicalScribeJobSummaries = Shapes::ListShape.new(name: 'MedicalScribeJobSummaries')
+    MedicalScribeJobSummary = Shapes::StructureShape.new(name: 'MedicalScribeJobSummary')
+    MedicalScribeLanguageCode = Shapes::StringShape.new(name: 'MedicalScribeLanguageCode')
+    MedicalScribeOutput = Shapes::StructureShape.new(name: 'MedicalScribeOutput')
+    MedicalScribeParticipantRole = Shapes::StringShape.new(name: 'MedicalScribeParticipantRole')
+    MedicalScribeSettings = Shapes::StructureShape.new(name: 'MedicalScribeSettings')
     MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
     MedicalTranscriptionJob = Shapes::StructureShape.new(name: 'MedicalTranscriptionJob')
     MedicalTranscriptionJobSummaries = Shapes::ListShape.new(name: 'MedicalTranscriptionJobSummaries')
@@ -148,6 +164,8 @@ module Aws::TranscribeService
     Specialty = Shapes::StringShape.new(name: 'Specialty')
     StartCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'StartCallAnalyticsJobRequest')
     StartCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'StartCallAnalyticsJobResponse')
+    StartMedicalScribeJobRequest = Shapes::StructureShape.new(name: 'StartMedicalScribeJobRequest')
+    StartMedicalScribeJobResponse = Shapes::StructureShape.new(name: 'StartMedicalScribeJobResponse')
     StartMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobRequest')
     StartMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobResponse')
     StartTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartTranscriptionJobRequest')
@@ -160,6 +178,7 @@ module Aws::TranscribeService
     SubtitleOutputStartIndex = Shapes::IntegerShape.new(name: 'SubtitleOutputStartIndex')
     Subtitles = Shapes::StructureShape.new(name: 'Subtitles')
     SubtitlesOutput = Shapes::StructureShape.new(name: 'SubtitlesOutput')
+    Summarization = Shapes::StructureShape.new(name: 'Summarization')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -237,6 +256,7 @@ module Aws::TranscribeService
     CallAnalyticsJobSettings.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     CallAnalyticsJobSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     CallAnalyticsJobSettings.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
+    CallAnalyticsJobSettings.add_member(:summarization, Shapes::ShapeRef.new(shape: Summarization, location_name: "Summarization"))
     CallAnalyticsJobSettings.struct_class = Types::CallAnalyticsJobSettings
 
     CallAnalyticsJobSummaries.member = Shapes::ShapeRef.new(shape: CallAnalyticsJobSummary)
@@ -349,6 +369,9 @@ module Aws::TranscribeService
     DeleteLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DeleteLanguageModelRequest.struct_class = Types::DeleteLanguageModelRequest
 
+    DeleteMedicalScribeJobRequest.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalScribeJobName"))
+    DeleteMedicalScribeJobRequest.struct_class = Types::DeleteMedicalScribeJobRequest
+
     DeleteMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     DeleteMedicalTranscriptionJobRequest.struct_class = Types::DeleteMedicalTranscriptionJobRequest
 
@@ -381,6 +404,12 @@ module Aws::TranscribeService
 
     GetCallAnalyticsJobResponse.add_member(:call_analytics_job, Shapes::ShapeRef.new(shape: CallAnalyticsJob, location_name: "CallAnalyticsJob"))
     GetCallAnalyticsJobResponse.struct_class = Types::GetCallAnalyticsJobResponse
+
+    GetMedicalScribeJobRequest.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalScribeJobName"))
+    GetMedicalScribeJobRequest.struct_class = Types::GetMedicalScribeJobRequest
+
+    GetMedicalScribeJobResponse.add_member(:medical_scribe_job, Shapes::ShapeRef.new(shape: MedicalScribeJob, location_name: "MedicalScribeJob"))
+    GetMedicalScribeJobResponse.struct_class = Types::GetMedicalScribeJobResponse
 
     GetMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     GetMedicalTranscriptionJobRequest.struct_class = Types::GetMedicalTranscriptionJobRequest
@@ -506,6 +535,17 @@ module Aws::TranscribeService
     ListLanguageModelsResponse.add_member(:models, Shapes::ShapeRef.new(shape: Models, location_name: "Models"))
     ListLanguageModelsResponse.struct_class = Types::ListLanguageModelsResponse
 
+    ListMedicalScribeJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: MedicalScribeJobStatus, location_name: "Status"))
+    ListMedicalScribeJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
+    ListMedicalScribeJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalScribeJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMedicalScribeJobsRequest.struct_class = Types::ListMedicalScribeJobsRequest
+
+    ListMedicalScribeJobsResponse.add_member(:status, Shapes::ShapeRef.new(shape: MedicalScribeJobStatus, location_name: "Status"))
+    ListMedicalScribeJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalScribeJobsResponse.add_member(:medical_scribe_job_summaries, Shapes::ShapeRef.new(shape: MedicalScribeJobSummaries, location_name: "MedicalScribeJobSummaries"))
+    ListMedicalScribeJobsResponse.struct_class = Types::ListMedicalScribeJobsResponse
+
     ListMedicalTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListMedicalTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
     ListMedicalTranscriptionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -569,6 +609,50 @@ module Aws::TranscribeService
     Media.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
     Media.add_member(:redacted_media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "RedactedMediaFileUri"))
     Media.struct_class = Types::Media
+
+    MedicalScribeChannelDefinition.add_member(:channel_id, Shapes::ShapeRef.new(shape: MedicalScribeChannelId, required: true, location_name: "ChannelId"))
+    MedicalScribeChannelDefinition.add_member(:participant_role, Shapes::ShapeRef.new(shape: MedicalScribeParticipantRole, required: true, location_name: "ParticipantRole"))
+    MedicalScribeChannelDefinition.struct_class = Types::MedicalScribeChannelDefinition
+
+    MedicalScribeChannelDefinitions.member = Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinition)
+
+    MedicalScribeJob.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "MedicalScribeJobName"))
+    MedicalScribeJob.add_member(:medical_scribe_job_status, Shapes::ShapeRef.new(shape: MedicalScribeJobStatus, location_name: "MedicalScribeJobStatus"))
+    MedicalScribeJob.add_member(:language_code, Shapes::ShapeRef.new(shape: MedicalScribeLanguageCode, location_name: "LanguageCode"))
+    MedicalScribeJob.add_member(:media, Shapes::ShapeRef.new(shape: Media, location_name: "Media"))
+    MedicalScribeJob.add_member(:medical_scribe_output, Shapes::ShapeRef.new(shape: MedicalScribeOutput, location_name: "MedicalScribeOutput"))
+    MedicalScribeJob.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    MedicalScribeJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    MedicalScribeJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
+    MedicalScribeJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    MedicalScribeJob.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalScribeSettings, location_name: "Settings"))
+    MedicalScribeJob.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    MedicalScribeJob.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "ChannelDefinitions"))
+    MedicalScribeJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    MedicalScribeJob.struct_class = Types::MedicalScribeJob
+
+    MedicalScribeJobSummaries.member = Shapes::ShapeRef.new(shape: MedicalScribeJobSummary)
+
+    MedicalScribeJobSummary.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "MedicalScribeJobName"))
+    MedicalScribeJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    MedicalScribeJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    MedicalScribeJobSummary.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
+    MedicalScribeJobSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: MedicalScribeLanguageCode, location_name: "LanguageCode"))
+    MedicalScribeJobSummary.add_member(:medical_scribe_job_status, Shapes::ShapeRef.new(shape: MedicalScribeJobStatus, location_name: "MedicalScribeJobStatus"))
+    MedicalScribeJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    MedicalScribeJobSummary.struct_class = Types::MedicalScribeJobSummary
+
+    MedicalScribeOutput.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "TranscriptFileUri"))
+    MedicalScribeOutput.add_member(:clinical_document_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "ClinicalDocumentUri"))
+    MedicalScribeOutput.struct_class = Types::MedicalScribeOutput
+
+    MedicalScribeSettings.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
+    MedicalScribeSettings.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
+    MedicalScribeSettings.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
+    MedicalScribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    MedicalScribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
+    MedicalScribeSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
+    MedicalScribeSettings.struct_class = Types::MedicalScribeSettings
 
     MedicalTranscript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
     MedicalTranscript.struct_class = Types::MedicalTranscript
@@ -683,6 +767,20 @@ module Aws::TranscribeService
     StartCallAnalyticsJobResponse.add_member(:call_analytics_job, Shapes::ShapeRef.new(shape: CallAnalyticsJob, location_name: "CallAnalyticsJob"))
     StartCallAnalyticsJobResponse.struct_class = Types::StartCallAnalyticsJobResponse
 
+    StartMedicalScribeJobRequest.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalScribeJobName"))
+    StartMedicalScribeJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
+    StartMedicalScribeJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, required: true, location_name: "OutputBucketName"))
+    StartMedicalScribeJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
+    StartMedicalScribeJobRequest.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KMSEncryptionContextMap, location_name: "KMSEncryptionContext"))
+    StartMedicalScribeJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartMedicalScribeJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalScribeSettings, required: true, location_name: "Settings"))
+    StartMedicalScribeJobRequest.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "ChannelDefinitions"))
+    StartMedicalScribeJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartMedicalScribeJobRequest.struct_class = Types::StartMedicalScribeJobRequest
+
+    StartMedicalScribeJobResponse.add_member(:medical_scribe_job, Shapes::ShapeRef.new(shape: MedicalScribeJob, location_name: "MedicalScribeJob"))
+    StartMedicalScribeJobResponse.struct_class = Types::StartMedicalScribeJobResponse
+
     StartMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     StartMedicalTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartMedicalTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MedicalMediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
@@ -741,6 +839,9 @@ module Aws::TranscribeService
     SubtitlesOutput.add_member(:subtitle_file_uris, Shapes::ShapeRef.new(shape: SubtitleFileUris, location_name: "SubtitleFileUris"))
     SubtitlesOutput.add_member(:output_start_index, Shapes::ShapeRef.new(shape: SubtitleOutputStartIndex, location_name: "OutputStartIndex"))
     SubtitlesOutput.struct_class = Types::SubtitlesOutput
+
+    Summarization.add_member(:generate_abstractive_summary, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "GenerateAbstractiveSummary"))
+    Summarization.struct_class = Types::Summarization
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -999,6 +1100,17 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_medical_scribe_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMedicalScribeJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMedicalScribeJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMedicalTranscriptionJob"
         o.http_method = "POST"
@@ -1087,6 +1199,18 @@ module Aws::TranscribeService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetCallAnalyticsJobRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCallAnalyticsJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_medical_scribe_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMedicalScribeJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMedicalScribeJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMedicalScribeJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -1204,6 +1328,23 @@ module Aws::TranscribeService
         )
       end)
 
+      api.add_operation(:list_medical_scribe_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMedicalScribeJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMedicalScribeJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMedicalScribeJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_medical_transcription_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMedicalTranscriptionJobs"
         o.http_method = "POST"
@@ -1307,6 +1448,18 @@ module Aws::TranscribeService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartCallAnalyticsJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartCallAnalyticsJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_medical_scribe_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMedicalScribeJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMedicalScribeJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMedicalScribeJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)

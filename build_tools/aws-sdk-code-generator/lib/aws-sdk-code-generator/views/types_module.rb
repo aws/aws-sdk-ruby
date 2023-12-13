@@ -28,14 +28,13 @@ module AwsSdkCodeGenerator
 
       # @return [Array<StructClass>]
       def structures
-        unless @service.protocol_settings.empty?
-          if @service.protocol_settings['h2'] == 'eventstream'
-            @service.api['shapes'].each do |_, shape|
-              if shape['eventstream']
-                # add event trait to all members if not exists
-                shape['members'].each do |name, ref|
-                  @service.api['shapes'][ref['shape']]['event'] = true
-                end
+        @service.api['shapes'].each do |_, shape|
+          if shape['eventstream']
+            # add internal exception_event ctrait to all exceptions
+            # exceptions will not have the event trait.
+            shape['members'].each do |name, ref|
+              if !!@service.api['shapes'][ref['shape']]['exception']
+                @service.api['shapes'][ref['shape']]['exception_event'] = true
               end
             end
           end
@@ -93,7 +92,7 @@ module AwsSdkCodeGenerator
             sensitive: sensitive
           )
         end
-        if shape['event']
+        if shape['event'] || shape['exception_event']
           members << StructMember.new(member_name: 'event_type')
         end
         members

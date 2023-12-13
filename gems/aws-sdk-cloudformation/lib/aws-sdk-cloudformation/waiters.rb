@@ -155,6 +155,54 @@ module Aws::CloudFormation
               },
               {
                 "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_COMPLETE",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_IN_PROGRESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_FAILED",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_FAILED",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_COMPLETE",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
                 "expected" => "CREATE_FAILED",
                 "matcher" => "pathAny",
                 "state" => "failure"

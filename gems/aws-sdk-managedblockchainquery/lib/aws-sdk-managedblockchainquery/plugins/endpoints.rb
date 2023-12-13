@@ -25,16 +25,17 @@ module Aws::ManagedBlockchainQuery
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,10 +59,14 @@ module Aws::ManagedBlockchainQuery
           case context.operation_name
           when :batch_get_token_balance
             Aws::ManagedBlockchainQuery::Endpoints::BatchGetTokenBalance.build(context)
+          when :get_asset_contract
+            Aws::ManagedBlockchainQuery::Endpoints::GetAssetContract.build(context)
           when :get_token_balance
             Aws::ManagedBlockchainQuery::Endpoints::GetTokenBalance.build(context)
           when :get_transaction
             Aws::ManagedBlockchainQuery::Endpoints::GetTransaction.build(context)
+          when :list_asset_contracts
+            Aws::ManagedBlockchainQuery::Endpoints::ListAssetContracts.build(context)
           when :list_token_balances
             Aws::ManagedBlockchainQuery::Endpoints::ListTokenBalances.build(context)
           when :list_transaction_events

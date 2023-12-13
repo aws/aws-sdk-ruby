@@ -19,6 +19,7 @@ module Aws::Drs
     AccountID = Shapes::StringShape.new(name: 'AccountID')
     AccountIDs = Shapes::ListShape.new(name: 'AccountIDs')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
+    AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
     AssociateSourceNetworkStackRequest = Shapes::StructureShape.new(name: 'AssociateSourceNetworkStackRequest')
     AssociateSourceNetworkStackResponse = Shapes::StructureShape.new(name: 'AssociateSourceNetworkStackResponse')
     AwsAvailabilityZone = Shapes::StringShape.new(name: 'AwsAvailabilityZone')
@@ -157,6 +158,7 @@ module Aws::Drs
     LaunchConfigurationTemplateIDs = Shapes::ListShape.new(name: 'LaunchConfigurationTemplateIDs')
     LaunchConfigurationTemplates = Shapes::ListShape.new(name: 'LaunchConfigurationTemplates')
     LaunchDisposition = Shapes::StringShape.new(name: 'LaunchDisposition')
+    LaunchIntoInstanceProperties = Shapes::StructureShape.new(name: 'LaunchIntoInstanceProperties')
     LaunchStatus = Shapes::StringShape.new(name: 'LaunchStatus')
     Licensing = Shapes::StructureShape.new(name: 'Licensing')
     LifeCycle = Shapes::StructureShape.new(name: 'LifeCycle')
@@ -349,6 +351,7 @@ module Aws::Drs
     CreateLaunchConfigurationTemplateRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
     CreateLaunchConfigurationTemplateRequest.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     CreateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
     CreateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     CreateLaunchConfigurationTemplateRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     CreateLaunchConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -685,6 +688,7 @@ module Aws::Drs
     LaunchConfiguration.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
     LaunchConfiguration.add_member(:ec2_launch_template_id, Shapes::ShapeRef.new(shape: BoundedString, location_name: "ec2LaunchTemplateID"))
     LaunchConfiguration.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    LaunchConfiguration.add_member(:launch_into_instance_properties, Shapes::ShapeRef.new(shape: LaunchIntoInstanceProperties, location_name: "launchIntoInstanceProperties"))
     LaunchConfiguration.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     LaunchConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     LaunchConfiguration.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
@@ -698,6 +702,7 @@ module Aws::Drs
     LaunchConfigurationTemplate.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, location_name: "launchConfigurationTemplateID"))
     LaunchConfigurationTemplate.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    LaunchConfigurationTemplate.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
     LaunchConfigurationTemplate.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     LaunchConfigurationTemplate.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     LaunchConfigurationTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -707,6 +712,9 @@ module Aws::Drs
     LaunchConfigurationTemplateIDs.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID)
 
     LaunchConfigurationTemplates.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate)
+
+    LaunchIntoInstanceProperties.add_member(:launch_into_ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "launchIntoEC2InstanceID"))
+    LaunchIntoInstanceProperties.struct_class = Types::LaunchIntoInstanceProperties
 
     Licensing.add_member(:os_byol, Shapes::ShapeRef.new(shape: Boolean, location_name: "osByol"))
     Licensing.struct_class = Types::Licensing
@@ -804,7 +812,7 @@ module Aws::Drs
     PutLaunchActionRequest.add_member(:action_version, Shapes::ShapeRef.new(shape: LaunchActionVersion, required: true, location_name: "actionVersion"))
     PutLaunchActionRequest.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "active"))
     PutLaunchActionRequest.add_member(:category, Shapes::ShapeRef.new(shape: LaunchActionCategory, required: true, location_name: "category"))
-    PutLaunchActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: LaunchActionDescription, location_name: "description"))
+    PutLaunchActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: LaunchActionDescription, required: true, location_name: "description"))
     PutLaunchActionRequest.add_member(:name, Shapes::ShapeRef.new(shape: LaunchActionName, required: true, location_name: "name"))
     PutLaunchActionRequest.add_member(:optional, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "optional"))
     PutLaunchActionRequest.add_member(:order, Shapes::ShapeRef.new(shape: LaunchActionOrder, required: true, location_name: "order"))
@@ -826,6 +834,7 @@ module Aws::Drs
     PutLaunchActionResponse.add_member(:type, Shapes::ShapeRef.new(shape: LaunchActionType, location_name: "type"))
     PutLaunchActionResponse.struct_class = Types::PutLaunchActionResponse
 
+    RecoveryInstance.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
     RecoveryInstance.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     RecoveryInstance.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: RecoveryInstanceDataReplicationInfo, location_name: "dataReplicationInfo"))
     RecoveryInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "ec2InstanceID"))
@@ -1034,6 +1043,7 @@ module Aws::Drs
     SourceProperties.add_member(:supports_nitro_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "supportsNitroInstances"))
     SourceProperties.struct_class = Types::SourceProperties
 
+    SourceServer.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     SourceServer.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: DataReplicationInfo, location_name: "dataReplicationInfo"))
     SourceServer.add_member(:last_launch_result, Shapes::ShapeRef.new(shape: LastLaunchResult, location_name: "lastLaunchResult"))
@@ -1168,6 +1178,7 @@ module Aws::Drs
     UpdateLaunchConfigurationRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
     UpdateLaunchConfigurationRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
     UpdateLaunchConfigurationRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    UpdateLaunchConfigurationRequest.add_member(:launch_into_instance_properties, Shapes::ShapeRef.new(shape: LaunchIntoInstanceProperties, location_name: "launchIntoInstanceProperties"))
     UpdateLaunchConfigurationRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     UpdateLaunchConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     UpdateLaunchConfigurationRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
@@ -1180,6 +1191,7 @@ module Aws::Drs
     UpdateLaunchConfigurationTemplateRequest.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))

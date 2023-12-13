@@ -27,17 +27,45 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # An object that represents the custom domain name association.
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Association AWS API Documentation
+    #
+    class Association < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An array of key-value pairs to set for advanced control over Amazon
     # Redshift Serverless.
     #
     # @!attribute [rw] parameter_key
     #   The key of the parameter. The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`,
-    #   `enable_user_activity_logging`, `query_group`, `search_path`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [Query monitoring
+    #   metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -113,11 +141,65 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociationRequest AWS API Documentation
+    #
+    class CreateCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociationResponse AWS API Documentation
+    #
+    class CreateCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint. An endpoint name must contain 1-30
     #   characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The
     #   first character must be a letter. The name can't contain two
     #   consecutive hyphens or end with a hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -139,6 +221,7 @@ module Aws::RedshiftServerless
     #
     class CreateEndpointAccessRequest < Struct.new(
       :endpoint_name,
+      :owner_account,
       :subnet_ids,
       :vpc_security_group_ids,
       :workgroup_name)
@@ -158,9 +241,17 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use
+    #   this parameter if `manageAdminPassword` is true.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #   @return [String]
     #
     # @!attribute [rw] admin_username
@@ -191,8 +282,21 @@ module Aws::RedshiftServerless
     #   are `userlog`, `connectionlog`, and `useractivitylog`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword`
+    #   if `manageAdminPassword` is true. If `manageAdminPassword` is false
+    #   or not set, Amazon Redshift uses `adminUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -202,6 +306,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespaceRequest AWS API Documentation
     #
     class CreateNamespaceRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
       :admin_user_password,
       :admin_username,
       :db_name,
@@ -209,7 +314,9 @@ module Aws::RedshiftServerless
       :iam_roles,
       :kms_key_id,
       :log_exports,
+      :manage_admin_password,
       :namespace_name,
+      :redshift_idc_application_arn,
       :tags)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure
@@ -223,6 +330,152 @@ module Aws::RedshiftServerless
     #
     class CreateNamespaceResponse < Struct.new(
       :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
+    #   Indicates whether the schedule is enabled. If false, the scheduled
+    #   action does not trigger. For more information about `state` of the
+    #   scheduled action, see [ScheduledAction][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_time
+    #   The end time in UTC when the schedule is no longer active. After
+    #   this time, the scheduled action does not trigger.
+    #   @return [Time]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace for which to create a scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to assume to run the scheduled action. This
+    #   IAM role must have permission to run the Amazon Redshift Serverless
+    #   API operation in the scheduled action. This IAM role must allow the
+    #   Amazon Redshift scheduler to schedule creating snapshots. (Principal
+    #   scheduler.redshift.amazonaws.com) to assume permissions on your
+    #   behalf. For more information about the IAM role to use with the
+    #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
+    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
+    #   Month Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`".
+    #   For more information, see [Cron Expressions][1] in the *Amazon
+    #   CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   The description of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC when the schedule is active. Before this time,
+    #   the scheduled action does not trigger.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_action
+    #   A JSON format string of the Amazon Redshift Serverless API operation
+    #   with input parameters. The following is an example of a target
+    #   action.
+    #
+    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   "sampleNamespace","SnapshotName": "sampleSnapshot",
+    #   "retentionPeriod": "1"\}\}"`
+    #   @return [Types::TargetAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateScheduledActionRequest AWS API Documentation
+    #
+    class CreateScheduledActionRequest < Struct.new(
+      :enabled,
+      :end_time,
+      :namespace_name,
+      :role_arn,
+      :schedule,
+      :scheduled_action_description,
+      :scheduled_action_name,
+      :start_time,
+      :target_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action
+    #   The returned `ScheduledAction` object that describes the properties
+    #   of a scheduled action.
+    #   @return [Types::ScheduledActionResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateScheduledActionResponse AWS API Documentation
+    #
+    class CreateScheduledActionResponse < Struct.new(
+      :scheduled_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_kms_key_id
+    #   The KMS key to use to encrypt your snapshots in the destination
+    #   Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The destination Amazon Web Services Region that you want to copy
+    #   snapshots to.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace to copy snapshots from.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_retention_period
+    #   The retention period of the snapshots that you copy to the
+    #   destination Amazon Web Services Region.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotCopyConfigurationRequest AWS API Documentation
+    #
+    class CreateSnapshotCopyConfigurationRequest < Struct.new(
+      :destination_kms_key_id,
+      :destination_region,
+      :namespace_name,
+      :snapshot_retention_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_copy_configuration
+    #   The snapshot copy configuration object that is returned.
+    #   @return [Types::SnapshotCopyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotCopyConfigurationResponse AWS API Documentation
+    #
+    class CreateSnapshotCopyConfigurationResponse < Struct.new(
+      :snapshot_copy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -266,6 +519,50 @@ module Aws::RedshiftServerless
     #
     class CreateSnapshotResponse < Struct.new(
       :snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that you can use to configure a [scheduled action][1]
+    # to create a snapshot. For more information about creating a scheduled
+    # action, see [CreateScheduledAction][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace for which you want to configure a
+    #   scheduled action to create a snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period of the snapshot created by the scheduled
+    #   action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_name_prefix
+    #   A string prefix that is attached to the name of the snapshot created
+    #   by the scheduled action. The final name of the snapshot is the
+    #   string prefix appended by the date and time of when the snapshot was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of [Tag objects][1] to associate with the snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotScheduleActionParameters AWS API Documentation
+    #
+    class CreateSnapshotScheduleActionParameters < Struct.new(
+      :namespace_name,
+      :retention_period,
+      :snapshot_name_prefix,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -329,12 +626,11 @@ module Aws::RedshiftServerless
     # @!attribute [rw] config_parameters
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`,
-    #   `enable_user_activity_logging`, `query_group`, `search_path`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [ Query monitoring
+    #   metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -346,6 +642,11 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to
     #   route traffic through your VPC instead of over the internet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
     #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to associate with the workgroup.
@@ -383,6 +684,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
       :port,
       :publicly_accessible,
@@ -405,6 +707,27 @@ module Aws::RedshiftServerless
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociationRequest AWS API Documentation
+    #
+    class DeleteCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociationResponse AWS API Documentation
+    #
+    class DeleteCustomDomainAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to delete.
@@ -480,6 +803,54 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteResourcePolicyResponse AWS API Documentation
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteScheduledActionRequest AWS API Documentation
+    #
+    class DeleteScheduledActionRequest < Struct.new(
+      :scheduled_action_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action
+    #   The deleted scheduled action object.
+    #   @return [Types::ScheduledActionResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteScheduledActionResponse AWS API Documentation
+    #
+    class DeleteScheduledActionResponse < Struct.new(
+      :scheduled_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_copy_configuration_id
+    #   The ID of the snapshot copy configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshotCopyConfigurationRequest AWS API Documentation
+    #
+    class DeleteSnapshotCopyConfigurationRequest < Struct.new(
+      :snapshot_copy_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_copy_configuration
+    #   The deleted snapshot copy configuration object.
+    #   @return [Types::SnapshotCopyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshotCopyConfigurationResponse AWS API Documentation
+    #
+    class DeleteSnapshotCopyConfigurationResponse < Struct.new(
+      :snapshot_copy_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] snapshot_name
     #   The name of the snapshot to be deleted.
@@ -639,6 +1010,11 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup. The custom
+    #   domain name or the workgroup name must be included in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] db_name
     #   The name of the database to get temporary authorization to log on
     #   to.
@@ -675,6 +1051,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCredentialsRequest AWS API Documentation
     #
     class GetCredentialsRequest < Struct.new(
+      :custom_domain_name,
       :db_name,
       :duration_seconds,
       :workgroup_name)
@@ -712,6 +1089,50 @@ module Aws::RedshiftServerless
       :expiration,
       :next_refresh_time)
       SENSITIVE = [:db_password, :db_user]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociationRequest AWS API Documentation
+    #
+    class GetCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociationResponse AWS API Documentation
+    #
+    class GetCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -808,6 +1229,30 @@ module Aws::RedshiftServerless
     #
     class GetResourcePolicyResponse < Struct.new(
       :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetScheduledActionRequest AWS API Documentation
+    #
+    class GetScheduledActionRequest < Struct.new(
+      :scheduled_action_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action
+    #   The returned scheduled action object.
+    #   @return [Types::ScheduledActionResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetScheduledActionResponse AWS API Documentation
+    #
+    class GetScheduledActionResponse < Struct.new(
+      :scheduled_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -961,6 +1406,58 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociationsRequest AWS API Documentation
+    #
+    class ListCustomDomainAssociationsRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associations
+    #   A list of Association objects.
+    #   @return [Array<Types::Association>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociationsResponse AWS API Documentation
+    #
+    class ListCustomDomainAssociationsResponse < Struct.new(
+      :associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use `nextToken` to display the next page of
@@ -972,6 +1469,11 @@ module Aws::RedshiftServerless
     #   `nextToken`, you can include the returned `nextToken` in following
     #   `ListEndpointAccess` operations, which returns results in the next
     #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -989,6 +1491,7 @@ module Aws::RedshiftServerless
     class ListEndpointAccessRequest < Struct.new(
       :max_results,
       :next_token,
+      :owner_account,
       :vpc_id,
       :workgroup_name)
       SENSITIVE = []
@@ -1115,6 +1618,99 @@ module Aws::RedshiftServerless
     class ListRecoveryPointsResponse < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. Use `nextToken` to display the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of namespace associated with the scheduled action to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListScheduledActionsRequest AWS API Documentation
+    #
+    class ListScheduledActionsRequest < Struct.new(
+      :max_results,
+      :namespace_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_actions
+    #   All of the returned scheduled action objects.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListScheduledActionsResponse AWS API Documentation
+    #
+    class ListScheduledActionsResponse < Struct.new(
+      :next_token,
+      :scheduled_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to display the next page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace_name
+    #   The namespace from which to list all snapshot copy configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshotCopyConfigurationsRequest AWS API Documentation
+    #
+    class ListSnapshotCopyConfigurationsRequest < Struct.new(
+      :max_results,
+      :namespace_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_copy_configurations
+    #   All of the returned snapshot copy configurations.
+    #   @return [Array<Types::SnapshotCopyConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshotCopyConfigurationsResponse AWS API Documentation
+    #
+    class ListSnapshotCopyConfigurationsResponse < Struct.new(
+      :next_token,
+      :snapshot_copy_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1330,11 +1926,17 @@ module Aws::RedshiftServerless
     #   operations, which returns results in the next page.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroupsRequest AWS API Documentation
     #
     class ListWorkgroupsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1360,6 +1962,16 @@ module Aws::RedshiftServerless
     end
 
     # A collection of database objects and users.
+    #
+    # @!attribute [rw] admin_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the namespace's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
     #
     # @!attribute [rw] admin_username
     #   The username of the administrator for the first database created in
@@ -1419,6 +2031,8 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Namespace AWS API Documentation
     #
     class Namespace < Struct.new(
+      :admin_password_secret_arn,
+      :admin_password_secret_kms_key_id,
       :admin_username,
       :creation_date,
       :db_name,
@@ -1619,6 +2233,18 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   restored snapshot's admin credentials. If `MmanageAdminPassword` is
+    #   false or not set, Amazon Redshift uses the admin credentials that
+    #   the namespace or cluster had at the time the snapshot was taken.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to restore the snapshot to.
     #   @return [String]
@@ -1649,6 +2275,8 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromSnapshotRequest AWS API Documentation
     #
     class RestoreFromSnapshotRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
+      :manage_admin_password,
       :namespace_name,
       :owner_account,
       :snapshot_arn,
@@ -1677,6 +2305,79 @@ module Aws::RedshiftServerless
       :namespace,
       :owner_account,
       :snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] activate_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table
+    #   are case sensitive. If true, the names are case sensitive. If false,
+    #   the names are not case sensitive. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] namespace_name
+    #   Namespace of the recovery point to restore from.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_table_name
+    #   The name of the table to create from the restore operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_id
+    #   The ID of the recovery point to restore the table from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_database_name
+    #   The name of the source database that contains the table being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_schema_name
+    #   The name of the source schema that contains the table being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_name
+    #   The name of the source table being restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_database_name
+    #   The name of the database to restore the table to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_schema_name
+    #   The name of the schema to restore the table to.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The workgroup to restore the table to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromRecoveryPointRequest AWS API Documentation
+    #
+    class RestoreTableFromRecoveryPointRequest < Struct.new(
+      :activate_case_sensitive_identifier,
+      :namespace_name,
+      :new_table_name,
+      :recovery_point_id,
+      :source_database_name,
+      :source_schema_name,
+      :source_table_name,
+      :target_database_name,
+      :target_schema_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_restore_status
+    #   Contains information about a table restore request.
+    #   @return [Types::TableRestoreStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromRecoveryPointResponse AWS API Documentation
+    #
+    class RestoreTableFromRecoveryPointResponse < Struct.new(
+      :table_restore_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1755,6 +2456,147 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # The schedule of when Amazon Redshift Serverless should run the
+    # scheduled action.
+    #
+    # @note Schedule is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Schedule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Schedule corresponding to the set member.
+    #
+    # @!attribute [rw] at
+    #   The timestamp of when Amazon Redshift Serverless should run the
+    #   scheduled action. Format of at expressions is
+    #   "`at(yyyy-mm-ddThh:mm:ss)`". For example,
+    #   "`at(2016-03-04T17:27:00)`".
+    #   @return [Time]
+    #
+    # @!attribute [rw] cron
+    #   The cron expression to use to schedule a recurring scheduled action.
+    #   Schedule invocations must be separated by at least one hour.
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
+    #   Month Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`".
+    #   For more information, see [Cron Expressions][1] in the *Amazon
+    #   CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Schedule AWS API Documentation
+    #
+    class Schedule < Struct.new(
+      :at,
+      :cron,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class At < Schedule; end
+      class Cron < Schedule; end
+      class Unknown < Schedule; end
+    end
+
+    # The returned scheduled action object.
+    #
+    # @!attribute [rw] end_time
+    #   The end time of
+    #   @return [Time]
+    #
+    # @!attribute [rw] namespace_name
+    #   The end time in UTC when the schedule is no longer active. After
+    #   this time, the scheduled action does not trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_invocations
+    #   An array of timestamps of when the next scheduled actions will
+    #   trigger.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to assume to run the scheduled action. This
+    #   IAM role must have permission to run the Amazon Redshift Serverless
+    #   API operation in the scheduled action. This IAM role must allow the
+    #   Amazon Redshift scheduler to schedule creating snapshots. (Principal
+    #   scheduler.redshift.amazonaws.com) to assume permissions on your
+    #   behalf. For more information about the IAM role to use with the
+    #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
+    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
+    #   Month Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`".
+    #   For more information, see [Cron Expressions][1] in the *Amazon
+    #   CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   The description of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_uuid
+    #   The uuid of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC when the schedule is active. Before this time,
+    #   the scheduled action does not trigger.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_action
+    #   A JSON format string of the Amazon Redshift Serverless API operation
+    #   with input parameters. The following is an example of a target
+    #   action.
+    #
+    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   "sampleNamespace","SnapshotName": "sampleSnapshot",
+    #   "retentionPeriod": "1"\}\}"`
+    #   @return [Types::TargetAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ScheduledActionResponse AWS API Documentation
+    #
+    class ScheduledActionResponse < Struct.new(
+      :end_time,
+      :namespace_name,
+      :next_invocations,
+      :role_arn,
+      :schedule,
+      :scheduled_action_description,
+      :scheduled_action_name,
+      :scheduled_action_uuid,
+      :start_time,
+      :state,
+      :target_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service limit was exceeded.
     #
     # @!attribute [rw] message
@@ -1783,6 +2625,16 @@ module Aws::RedshiftServerless
     # @!attribute [rw] actual_incremental_backup_size_in_mega_bytes
     #   The size of the incremental backup in megabytes.
     #   @return [Float]
+    #
+    # @!attribute [rw] admin_password_secret_arn
+    #   The Amazon Resource Name (ARN) for the namespace's admin user
+    #   credentials secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #   @return [String]
     #
     # @!attribute [rw] admin_username
     #   The username of the database within a snapshot.
@@ -1862,6 +2714,8 @@ module Aws::RedshiftServerless
       :accounts_with_provisioned_restore_access,
       :accounts_with_restore_access,
       :actual_incremental_backup_size_in_mega_bytes,
+      :admin_password_secret_arn,
+      :admin_password_secret_kms_key_id,
       :admin_username,
       :backup_progress_in_mega_bytes,
       :current_backup_rate_in_mega_bytes_per_second,
@@ -1883,12 +2737,55 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # The object that you configure to copy snapshots from one namespace to
+    # a namespace in another Amazon Web Services Region.
+    #
+    # @!attribute [rw] destination_kms_key_id
+    #   The ID of the KMS key to use to encrypt your snapshots in the
+    #   destination Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The destination Amazon Web Services Region to copy snapshots to.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace to copy snapshots from in the source
+    #   Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_copy_configuration_arn
+    #   The ARN of the snapshot copy configuration object.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_copy_configuration_id
+    #   The ID of the snapshot copy configuration object.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_retention_period
+    #   The retention period of snapshots that are copied to the destination
+    #   Amazon Web Services Region.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/SnapshotCopyConfiguration AWS API Documentation
+    #
+    class SnapshotCopyConfiguration < Struct.new(
+      :destination_kms_key_id,
+      :destination_region,
+      :namespace_name,
+      :snapshot_copy_configuration_arn,
+      :snapshot_copy_configuration_id,
+      :snapshot_retention_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a table restore request.
     #
     # @!attribute [rw] message
-    #   A description of the status of the table restore request. Status
-    #   values include `SUCCEEDED`, `FAILED`, `CANCELED`, `PENDING`,
-    #   `IN_PROGRESS`.
+    #   A message that explains the returned status. For example, if the
+    #   status of the operation is `FAILED`, the message explains why the
+    #   operation failed.
     #   @return [String]
     #
     # @!attribute [rw] namespace_name
@@ -1903,6 +2800,10 @@ module Aws::RedshiftServerless
     #   The amount of data restored to the new table so far, in megabytes
     #   (MB).
     #   @return [Integer]
+    #
+    # @!attribute [rw] recovery_point_id
+    #   The ID of the recovery point being restored from.
+    #   @return [String]
     #
     # @!attribute [rw] request_time
     #   The time that the table restore request was made, in Universal
@@ -1927,8 +2828,8 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] status
     #   A value that describes the current state of the table restore
-    #   request. Possible values include `SUCCEEDED`, `FAILED`, `CANCELED`,
-    #   `PENDING`, `IN_PROGRESS`.
+    #   request. Possible values are `SUCCEEDED`, `FAILED`, `CANCELED`,
+    #   `PENDING`, and `IN_PROGRESS`.
     #   @return [String]
     #
     # @!attribute [rw] table_restore_request_id
@@ -1959,6 +2860,7 @@ module Aws::RedshiftServerless
       :namespace_name,
       :new_table_name,
       :progress_in_mega_bytes,
+      :recovery_point_id,
       :request_time,
       :snapshot_name,
       :source_database_name,
@@ -2013,6 +2915,40 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # A JSON format string of the Amazon Redshift Serverless API operation
+    # with input parameters. The following is an example of a target action.
+    #
+    # `"\{"CreateSnapshot": \{"NamespaceName":
+    # "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
+    # "1"\}\}"`
+    #
+    # @note TargetAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TargetAction is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TargetAction corresponding to the set member.
+    #
+    # @!attribute [rw] create_snapshot
+    #   The parameters that you can use to configure a [scheduled action][1]
+    #   to create a snapshot. For more information about creating a
+    #   scheduled action, see [CreateScheduledAction][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html
+    #   @return [Types::CreateSnapshotScheduleActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/TargetAction AWS API Documentation
+    #
+    class TargetAction < Struct.new(
+      :create_snapshot,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CreateSnapshot < TargetAction; end
+      class Unknown < TargetAction; end
+    end
 
     # The request was denied due to request throttling.
     #
@@ -2071,6 +3007,56 @@ module Aws::RedshiftServerless
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   This is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociationRequest AWS API Documentation
+    #
+    class UpdateCustomDomainAssociationRequest < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of the workgroup associated with the database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociationResponse AWS API Documentation
+    #
+    class UpdateCustomDomainAssociationResponse < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
+      :workgroup_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_name
     #   The name of the VPC endpoint to update.
     #   @return [String]
@@ -2101,10 +3087,18 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use
+    #   this parameter if `manageAdminPassword` is true.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
     #   `adminUsername`.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #   @return [String]
     #
     # @!attribute [rw] admin_username
@@ -2134,6 +3128,14 @@ module Aws::RedshiftServerless
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword`
+    #   if `manageAdminPassword` is true. If `manageAdminPassword` is false
+    #   or not set, Amazon Redshift uses `adminUserPassword` for the admin
+    #   user account's password.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
@@ -2142,12 +3144,14 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
     #
     class UpdateNamespaceRequest < Struct.new(
+      :admin_password_secret_kms_key_id,
       :admin_user_password,
       :admin_username,
       :default_iam_role_arn,
       :iam_roles,
       :kms_key_id,
       :log_exports,
+      :manage_admin_password,
       :namespace_name)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure
@@ -2161,6 +3165,126 @@ module Aws::RedshiftServerless
     #
     class UpdateNamespaceResponse < Struct.new(
       :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
+    #   Specifies whether to enable the scheduled action.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_time
+    #   The end time in UTC of the scheduled action to update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to assume to run the scheduled action. This
+    #   IAM role must have permission to run the Amazon Redshift Serverless
+    #   API operation in the scheduled action. This IAM role must allow the
+    #   Amazon Redshift scheduler to schedule creating snapshots (Principal
+    #   scheduler.redshift.amazonaws.com) to assume permissions on your
+    #   behalf. For more information about the IAM role to use with the
+    #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
+    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
+    #   Month Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`".
+    #   For more information, see [Cron Expressions][1] in the *Amazon
+    #   CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   The descripion of the scheduled action to update to.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action to update to.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC of the scheduled action to update to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_action
+    #   A JSON format string of the Amazon Redshift Serverless API operation
+    #   with input parameters. The following is an example of a target
+    #   action.
+    #
+    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   "sampleNamespace","SnapshotName": "sampleSnapshot",
+    #   "retentionPeriod": "1"\}\}"`
+    #   @return [Types::TargetAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateScheduledActionRequest AWS API Documentation
+    #
+    class UpdateScheduledActionRequest < Struct.new(
+      :enabled,
+      :end_time,
+      :role_arn,
+      :schedule,
+      :scheduled_action_description,
+      :scheduled_action_name,
+      :start_time,
+      :target_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_action
+    #   The ScheduledAction object that was updated.
+    #   @return [Types::ScheduledActionResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateScheduledActionResponse AWS API Documentation
+    #
+    class UpdateScheduledActionResponse < Struct.new(
+      :scheduled_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_copy_configuration_id
+    #   The ID of the snapshot copy configuration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_retention_period
+    #   The new retention period of how long to keep a snapshot in the
+    #   destination Amazon Web Services Region.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshotCopyConfigurationRequest AWS API Documentation
+    #
+    class UpdateSnapshotCopyConfigurationRequest < Struct.new(
+      :snapshot_copy_configuration_id,
+      :snapshot_retention_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_copy_configuration
+    #   The updated snapshot copy configuration object.
+    #   @return [Types::SnapshotCopyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshotCopyConfigurationResponse AWS API Documentation
+    #
+    class UpdateSnapshotCopyConfigurationResponse < Struct.new(
+      :snapshot_copy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2240,12 +3364,11 @@ module Aws::RedshiftServerless
     # @!attribute [rw] config_parameters
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`,
-    #   `enable_user_activity_logging`, `query_group`, `search_path`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [ Query monitoring
+    #   metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -2257,6 +3380,11 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to
     #   route traffic through your VPC.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
     #
     # @!attribute [rw] port
     #   The custom port to use when connecting to a workgroup. Valid port
@@ -2287,6 +3415,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :max_capacity,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2429,12 +3558,11 @@ module Aws::RedshiftServerless
     # @!attribute [rw] config_parameters
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`,
-    #   `enable_user_activity_logging`, `query_group`, , `search_path`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
+    #   `query_group`, `search_path`, and query monitoring metrics that let
+    #   you define performance boundaries. For more information about query
+    #   monitoring rules and available metrics, see [ Query monitoring
+    #   metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -2444,6 +3572,24 @@ module Aws::RedshiftServerless
     # @!attribute [rw] creation_date
     #   The creation date of the workgroup.
     #   @return [Time]
+    #
+    # @!attribute [rw] cross_account_vpcs
+    #   A list of VPCs. Each entry is the unique identifier of a virtual
+    #   private cloud with access to Amazon Redshift Serverless. If all of
+    #   the VPCs for the grantee are allowed, it shows an asterisk.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_time
+    #   The expiration time for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #   @return [String]
     #
     # @!attribute [rw] endpoint
     #   The endpoint that is created from the workgroup.
@@ -2455,8 +3601,23 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
+    #   to serve queries. The max capacity is specified in RPUs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] namespace_name
     #   The namespace the workgroup is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_version
+    #   The patch version of your Amazon Redshift Serverless workgroup. For
+    #   more information about patch versions, see [Cluster versions for
+    #   Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2493,15 +3654,31 @@ module Aws::RedshiftServerless
     #   The name of the workgroup.
     #   @return [String]
     #
+    # @!attribute [rw] workgroup_version
+    #   The Amazon Redshift Serverless version of your workgroup. For more
+    #   information about Amazon Redshift Serverless versions, see[Cluster
+    #   versions for Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Workgroup AWS API Documentation
     #
     class Workgroup < Struct.new(
       :base_capacity,
       :config_parameters,
       :creation_date,
+      :cross_account_vpcs,
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_time,
+      :custom_domain_name,
       :endpoint,
       :enhanced_vpc_routing,
+      :max_capacity,
       :namespace_name,
+      :patch_version,
       :port,
       :publicly_accessible,
       :security_group_ids,
@@ -2509,7 +3686,8 @@ module Aws::RedshiftServerless
       :subnet_ids,
       :workgroup_arn,
       :workgroup_id,
-      :workgroup_name)
+      :workgroup_name,
+      :workgroup_version)
       SENSITIVE = []
       include Aws::Structure
     end

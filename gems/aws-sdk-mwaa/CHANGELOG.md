@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2023-11-15)
+------------------
+
+* Feature - This Amazon MWAA release adds support for customer-managed VPC endpoints. This lets you choose whether to create, and manage your environment's VPC endpoints, or to have Amazon MWAA create, and manage them for you.
+
+1.28.0 (2023-11-06)
+------------------
+
+* Feature - This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.
+
 1.27.0 (2023-09-27)
 ------------------
 

@@ -1059,6 +1059,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #   @return [Types::SnapStart]
     #
+    # @!attribute [rw] logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
+    #   @return [Types::LoggingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -1084,7 +1088,8 @@ module Aws::Lambda
       :code_signing_config_arn,
       :architectures,
       :ephemeral_storage,
-      :snap_start)
+      :snap_start,
+      :logging_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,6 +2318,10 @@ module Aws::Lambda
     #   The ARN of the runtime and any errors that occured.
     #   @return [Types::RuntimeVersionConfig]
     #
+    # @!attribute [rw] logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
+    #   @return [Types::LoggingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2350,7 +2359,8 @@ module Aws::Lambda
       :architectures,
       :ephemeral_storage,
       :snap_start,
-      :runtime_version_config)
+      :runtime_version_config,
+      :logging_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4582,6 +4592,44 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The function's Amazon CloudWatch Logs configuration settings.
+    #
+    # @!attribute [rw] log_format
+    #   The format in which Lambda sends your function's application and
+    #   system logs to CloudWatch. Select between plain text and structured
+    #   JSON.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_log_level
+    #   Set this property to filter the application logs for your function
+    #   that Lambda sends to CloudWatch. Lambda only sends application logs
+    #   at the selected level and lower.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_log_level
+    #   Set this property to filter the system logs for your function that
+    #   Lambda sends to CloudWatch. Lambda only sends system logs at the
+    #   selected level and lower.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group
+    #   The name of the Amazon CloudWatch log group the function sends logs
+    #   to. By default, Lambda functions send logs to a default log group
+    #   named `/aws/lambda/<function name>`. To use a different log group,
+    #   enter an existing log group or enter a new log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LoggingConfig AWS API Documentation
+    #
+    class LoggingConfig < Struct.new(
+      :log_format,
+      :application_log_level,
+      :system_log_level,
+      :log_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A destination for events that failed processing.
     #
     # @!attribute [rw] destination
@@ -6342,6 +6390,10 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #   @return [Types::SnapStart]
     #
+    # @!attribute [rw] logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
+    #   @return [Types::LoggingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -6362,7 +6414,8 @@ module Aws::Lambda
       :file_system_configs,
       :image_config,
       :ephemeral_storage,
-      :snap_start)
+      :snap_start,
+      :logging_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6595,11 +6648,17 @@ module Aws::Lambda
     #   A list of VPC security group IDs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv_6_allowed_for_dual_stack
+    #   Allows outbound IPv6 traffic on VPC functions that are connected to
+    #   dual-stack subnets.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :ipv_6_allowed_for_dual_stack)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6619,12 +6678,18 @@ module Aws::Lambda
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_allowed_for_dual_stack
+    #   Allows outbound IPv6 traffic on VPC functions that are connected to
+    #   dual-stack subnets.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :ipv_6_allowed_for_dual_stack)
       SENSITIVE = []
       include Aws::Structure
     end

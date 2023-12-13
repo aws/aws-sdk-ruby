@@ -36,6 +36,7 @@ module Aws::AutoScaling
     AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
     AllowedInstanceTypes = Shapes::ListShape.new(name: 'AllowedInstanceTypes')
     AlreadyExistsFault = Shapes::StructureShape.new(name: 'AlreadyExistsFault')
+    AnyPrintableAsciiStringMaxLen4000 = Shapes::StringShape.new(name: 'AnyPrintableAsciiStringMaxLen4000')
     AsciiStringMaxLen255 = Shapes::StringShape.new(name: 'AsciiStringMaxLen255')
     AssociatePublicIpAddress = Shapes::BooleanShape.new(name: 'AssociatePublicIpAddress')
     AttachInstancesQuery = Shapes::StructureShape.new(name: 'AttachInstancesQuery')
@@ -168,6 +169,7 @@ module Aws::AutoScaling
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
     InstanceGenerations = Shapes::ListShape.new(name: 'InstanceGenerations')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
+    InstanceMaintenancePolicy = Shapes::StructureShape.new(name: 'InstanceMaintenancePolicy')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
     InstanceMetadataHttpPutResponseHopLimit = Shapes::IntegerShape.new(name: 'InstanceMetadataHttpPutResponseHopLimit')
     InstanceMetadataHttpTokensState = Shapes::StringShape.new(name: 'InstanceMetadataHttpTokensState')
@@ -188,6 +190,9 @@ module Aws::AutoScaling
     InstancesDistribution = Shapes::StructureShape.new(name: 'InstancesDistribution')
     InstancesToUpdate = Shapes::IntegerShape.new(name: 'InstancesToUpdate')
     IntPercent = Shapes::IntegerShape.new(name: 'IntPercent')
+    IntPercent100To200 = Shapes::IntegerShape.new(name: 'IntPercent100To200')
+    IntPercent100To200Resettable = Shapes::IntegerShape.new(name: 'IntPercent100To200Resettable')
+    IntPercentResettable = Shapes::IntegerShape.new(name: 'IntPercentResettable')
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
     IrreversibleInstanceRefreshFault = Shapes::StructureShape.new(name: 'IrreversibleInstanceRefreshFault')
     LaunchConfiguration = Shapes::StructureShape.new(name: 'LaunchConfiguration')
@@ -508,6 +513,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
     AutoScalingGroup.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     AutoScalingGroup.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
+    AutoScalingGroup.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -624,6 +630,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
     CreateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     CreateAutoScalingGroupType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
+    CreateAutoScalingGroupType.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -924,6 +931,10 @@ module Aws::AutoScaling
 
     InstanceIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen19)
 
+    InstanceMaintenancePolicy.add_member(:min_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercentResettable, location_name: "MinHealthyPercentage"))
+    InstanceMaintenancePolicy.add_member(:max_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercent100To200Resettable, location_name: "MaxHealthyPercentage"))
+    InstanceMaintenancePolicy.struct_class = Types::InstanceMaintenancePolicy
+
     InstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: InstanceMetadataHttpTokensState, location_name: "HttpTokens"))
     InstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: InstanceMetadataHttpPutResponseHopLimit, location_name: "HttpPutResponseHopLimit"))
     InstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
@@ -1067,7 +1078,7 @@ module Aws::AutoScaling
     LifecycleHook.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, location_name: "LifecycleTransition"))
     LifecycleHook.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
     LifecycleHook.add_member(:role_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "RoleARN"))
-    LifecycleHook.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    LifecycleHook.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     LifecycleHook.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     LifecycleHook.add_member(:global_timeout, Shapes::ShapeRef.new(shape: GlobalTimeout, location_name: "GlobalTimeout"))
     LifecycleHook.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
@@ -1077,7 +1088,7 @@ module Aws::AutoScaling
 
     LifecycleHookSpecification.add_member(:lifecycle_hook_name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "LifecycleHookName"))
     LifecycleHookSpecification.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, required: true, location_name: "LifecycleTransition"))
-    LifecycleHookSpecification.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    LifecycleHookSpecification.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     LifecycleHookSpecification.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     LifecycleHookSpecification.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
     LifecycleHookSpecification.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
@@ -1256,7 +1267,7 @@ module Aws::AutoScaling
     PutLifecycleHookType.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, location_name: "LifecycleTransition"))
     PutLifecycleHookType.add_member(:role_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "RoleARN"))
     PutLifecycleHookType.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
-    PutLifecycleHookType.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    PutLifecycleHookType.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: AnyPrintableAsciiStringMaxLen4000, location_name: "NotificationMetadata"))
     PutLifecycleHookType.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
     PutLifecycleHookType.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
     PutLifecycleHookType.struct_class = Types::PutLifecycleHookType
@@ -1320,6 +1331,7 @@ module Aws::AutoScaling
     RefreshPreferences.add_member(:scale_in_protected_instances, Shapes::ShapeRef.new(shape: ScaleInProtectedInstances, location_name: "ScaleInProtectedInstances"))
     RefreshPreferences.add_member(:standby_instances, Shapes::ShapeRef.new(shape: StandbyInstances, location_name: "StandbyInstances"))
     RefreshPreferences.add_member(:alarm_specification, Shapes::ShapeRef.new(shape: AlarmSpecification, location_name: "AlarmSpecification"))
+    RefreshPreferences.add_member(:max_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercent100To200, location_name: "MaxHealthyPercentage"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
@@ -1534,6 +1546,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     UpdateAutoScalingGroupType.add_member(:desired_capacity_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "DesiredCapacityType"))
     UpdateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
+    UpdateAutoScalingGroupType.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     VCpuCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, required: true, location_name: "Min"))
@@ -1828,6 +1841,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceRefreshesAnswer)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_launch_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -1872,6 +1891,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -1882,6 +1907,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_metric_collection_types, Seahorse::Model::Operation.new.tap do |o|

@@ -25,16 +25,17 @@ module Aws::Redshift
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -100,6 +101,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::CreateHsmClientCertificate.build(context)
           when :create_hsm_configuration
             Aws::Redshift::Endpoints::CreateHsmConfiguration.build(context)
+          when :create_redshift_idc_application
+            Aws::Redshift::Endpoints::CreateRedshiftIdcApplication.build(context)
           when :create_scheduled_action
             Aws::Redshift::Endpoints::CreateScheduledAction.build(context)
           when :create_snapshot_copy_grant
@@ -136,6 +139,10 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DeleteHsmConfiguration.build(context)
           when :delete_partner
             Aws::Redshift::Endpoints::DeletePartner.build(context)
+          when :delete_redshift_idc_application
+            Aws::Redshift::Endpoints::DeleteRedshiftIdcApplication.build(context)
+          when :delete_resource_policy
+            Aws::Redshift::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_scheduled_action
             Aws::Redshift::Endpoints::DeleteScheduledAction.build(context)
           when :delete_snapshot_copy_grant
@@ -192,6 +199,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DescribeHsmClientCertificates.build(context)
           when :describe_hsm_configurations
             Aws::Redshift::Endpoints::DescribeHsmConfigurations.build(context)
+          when :describe_inbound_integrations
+            Aws::Redshift::Endpoints::DescribeInboundIntegrations.build(context)
           when :describe_logging_status
             Aws::Redshift::Endpoints::DescribeLoggingStatus.build(context)
           when :describe_node_configuration_options
@@ -200,6 +209,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DescribeOrderableClusterOptions.build(context)
           when :describe_partners
             Aws::Redshift::Endpoints::DescribePartners.build(context)
+          when :describe_redshift_idc_applications
+            Aws::Redshift::Endpoints::DescribeRedshiftIdcApplications.build(context)
           when :describe_reserved_node_exchange_status
             Aws::Redshift::Endpoints::DescribeReservedNodeExchangeStatus.build(context)
           when :describe_reserved_node_offerings
@@ -232,6 +243,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::EnableLogging.build(context)
           when :enable_snapshot_copy
             Aws::Redshift::Endpoints::EnableSnapshotCopy.build(context)
+          when :failover_primary_compute
+            Aws::Redshift::Endpoints::FailoverPrimaryCompute.build(context)
           when :get_cluster_credentials
             Aws::Redshift::Endpoints::GetClusterCredentials.build(context)
           when :get_cluster_credentials_with_iam
@@ -240,6 +253,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::GetReservedNodeExchangeConfigurationOptions.build(context)
           when :get_reserved_node_exchange_offerings
             Aws::Redshift::Endpoints::GetReservedNodeExchangeOfferings.build(context)
+          when :get_resource_policy
+            Aws::Redshift::Endpoints::GetResourcePolicy.build(context)
           when :modify_aqua_configuration
             Aws::Redshift::Endpoints::ModifyAquaConfiguration.build(context)
           when :modify_authentication_profile
@@ -266,6 +281,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::ModifyEndpointAccess.build(context)
           when :modify_event_subscription
             Aws::Redshift::Endpoints::ModifyEventSubscription.build(context)
+          when :modify_redshift_idc_application
+            Aws::Redshift::Endpoints::ModifyRedshiftIdcApplication.build(context)
           when :modify_scheduled_action
             Aws::Redshift::Endpoints::ModifyScheduledAction.build(context)
           when :modify_snapshot_copy_retention_period
@@ -278,6 +295,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::PauseCluster.build(context)
           when :purchase_reserved_node_offering
             Aws::Redshift::Endpoints::PurchaseReservedNodeOffering.build(context)
+          when :put_resource_policy
+            Aws::Redshift::Endpoints::PutResourcePolicy.build(context)
           when :reboot_cluster
             Aws::Redshift::Endpoints::RebootCluster.build(context)
           when :reject_data_share

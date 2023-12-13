@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-12-11)
+------------------
+
+* Feature - This release includes Amazon Pinpoint API documentation updates pertaining to campaign message sending rate limits.
+
+1.84.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-10-27)
+------------------
+
+* Feature - Updated documentation to describe the case insensitivity for EndpointIds.
+
 1.81.0 (2023-09-27)
 ------------------
 

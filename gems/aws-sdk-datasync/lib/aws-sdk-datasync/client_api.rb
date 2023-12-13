@@ -21,6 +21,7 @@ module Aws::DataSync
     AgentList = Shapes::ListShape.new(name: 'AgentList')
     AgentListEntry = Shapes::StructureShape.new(name: 'AgentListEntry')
     AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
+    AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
     Atime = Shapes::StringShape.new(name: 'Atime')
     AzureAccessTier = Shapes::StringShape.new(name: 'AzureAccessTier')
     AzureBlobAuthenticationType = Shapes::StringShape.new(name: 'AzureBlobAuthenticationType')
@@ -228,6 +229,7 @@ module Aws::DataSync
     PLSecurityGroupArnList = Shapes::ListShape.new(name: 'PLSecurityGroupArnList')
     PLSubnetArnList = Shapes::ListShape.new(name: 'PLSubnetArnList')
     PhaseStatus = Shapes::StringShape.new(name: 'PhaseStatus')
+    Platform = Shapes::StructureShape.new(name: 'Platform')
     PosixPermissions = Shapes::StringShape.new(name: 'PosixPermissions')
     PreserveDeletedFiles = Shapes::StringShape.new(name: 'PreserveDeletedFiles')
     PreserveDevices = Shapes::StringShape.new(name: 'PreserveDevices')
@@ -356,6 +358,7 @@ module Aws::DataSync
     AgentListEntry.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
     AgentListEntry.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
     AgentListEntry.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
+    AgentListEntry.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "Platform"))
     AgentListEntry.struct_class = Types::AgentListEntry
 
     AzureBlobSasConfiguration.add_member(:token, Shapes::ShapeRef.new(shape: AzureBlobSasToken, required: true, location_name: "Token"))
@@ -560,6 +563,7 @@ module Aws::DataSync
     DescribeAgentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeAgentResponse.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribeAgentResponse.add_member(:private_link_config, Shapes::ShapeRef.new(shape: PrivateLinkConfig, location_name: "PrivateLinkConfig"))
+    DescribeAgentResponse.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "Platform"))
     DescribeAgentResponse.struct_class = Types::DescribeAgentResponse
 
     DescribeDiscoveryJobRequest.add_member(:discovery_job_arn, Shapes::ShapeRef.new(shape: DiscoveryJobArn, required: true, location_name: "DiscoveryJobArn"))
@@ -1043,6 +1047,9 @@ module Aws::DataSync
     PLSecurityGroupArnList.member = Shapes::ShapeRef.new(shape: Ec2SecurityGroupArn)
 
     PLSubnetArnList.member = Shapes::ShapeRef.new(shape: Ec2SubnetArn)
+
+    Platform.add_member(:version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "Version"))
+    Platform.struct_class = Types::Platform
 
     PrivateLinkConfig.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     PrivateLinkConfig.add_member(:private_link_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrivateLinkEndpoint"))

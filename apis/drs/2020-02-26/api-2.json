@@ -924,6 +924,10 @@
       "max":50,
       "min":0
     },
+    "AgentVersion":{
+      "type":"string",
+      "pattern":"^[0-9]{1,5}.[0-9]{1,5}.[0-9]{1,5}(.[0-9]{4}.[0-9]{3}.[0-9]{4})?$"
+    },
     "AssociateSourceNetworkStackRequest":{
       "type":"structure",
       "required":[
@@ -1032,6 +1036,7 @@
         "copyTags":{"shape":"Boolean"},
         "exportBucketArn":{"shape":"ARN"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "tags":{"shape":"TagsMap"},
@@ -1992,6 +1997,7 @@
         "copyTags":{"shape":"Boolean"},
         "ec2LaunchTemplateID":{"shape":"BoundedString"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoInstanceProperties":{"shape":"LaunchIntoInstanceProperties"},
         "licensing":{"shape":"Licensing"},
         "name":{"shape":"SmallBoundedString"},
         "postLaunchEnabled":{"shape":"Boolean"},
@@ -2008,6 +2014,7 @@
         "exportBucketArn":{"shape":"ARN"},
         "launchConfigurationTemplateID":{"shape":"LaunchConfigurationTemplateID"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "tags":{"shape":"TagsMap"},
@@ -2038,6 +2045,12 @@
         "STOPPED",
         "STARTED"
       ]
+    },
+    "LaunchIntoInstanceProperties":{
+      "type":"structure",
+      "members":{
+        "launchIntoEC2InstanceID":{"shape":"EC2InstanceID"}
+      }
     },
     "LaunchStatus":{
       "type":"string",
@@ -2272,6 +2285,7 @@
         "actionVersion",
         "active",
         "category",
+        "description",
         "name",
         "optional",
         "order",
@@ -2311,6 +2325,7 @@
     "RecoveryInstance":{
       "type":"structure",
       "members":{
+        "agentVersion":{"shape":"AgentVersion"},
         "arn":{"shape":"ARN"},
         "dataReplicationInfo":{"shape":"RecoveryInstanceDataReplicationInfo"},
         "ec2InstanceID":{"shape":"EC2InstanceID"},
@@ -2806,6 +2821,7 @@
     "SourceServer":{
       "type":"structure",
       "members":{
+        "agentVersion":{"shape":"AgentVersion"},
         "arn":{"shape":"ARN"},
         "dataReplicationInfo":{"shape":"DataReplicationInfo"},
         "lastLaunchResult":{"shape":"LastLaunchResult"},
@@ -2845,7 +2861,7 @@
       "type":"string",
       "max":1011,
       "min":1,
-      "pattern":"^([A-Za-z0-9-])+$"
+      "pattern":"^([A-Za-z0-9-/:])+$"
     },
     "StagingArea":{
       "type":"structure",
@@ -3143,6 +3159,7 @@
         "copyPrivateIp":{"shape":"Boolean"},
         "copyTags":{"shape":"Boolean"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoInstanceProperties":{"shape":"LaunchIntoInstanceProperties"},
         "licensing":{"shape":"Licensing"},
         "name":{"shape":"SmallBoundedString"},
         "postLaunchEnabled":{"shape":"Boolean"},
@@ -3159,6 +3176,7 @@
         "exportBucketArn":{"shape":"ARN"},
         "launchConfigurationTemplateID":{"shape":"LaunchConfigurationTemplateID"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "targetInstanceTypeRightSizingMethod":{"shape":"TargetInstanceTypeRightSizingMethod"}

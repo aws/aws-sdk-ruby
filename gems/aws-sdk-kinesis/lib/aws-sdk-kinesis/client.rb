@@ -412,8 +412,9 @@ module Aws::Kinesis
     # Adds or updates tags for the specified Kinesis data stream. You can
     # assign up to 50 tags to a data stream.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -551,8 +552,9 @@ module Aws::Kinesis
     # length of time data records are accessible after they are added to the
     # stream. The minimum value of a stream's retention period is 24 hours.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -589,13 +591,42 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Delete a policy for the specified data stream or consumer. Request
+    # patterns can be one of the following:
+    #
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    #
+    # * Consumer pattern:
+    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a Kinesis data stream and all its shards and data. You must
     # shut down any applications that are operating on the stream before you
     # delete the stream. If an application attempts to operate on a deleted
     # stream, it receives the exception `ResourceNotFoundException`.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -735,8 +766,9 @@ module Aws::Kinesis
     #
     #  </note>
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -849,6 +881,11 @@ module Aws::Kinesis
     #
     # This operation has a limit of 20 transactions per second per stream.
     #
+    # <note markdown="1"> When making a cross-account call with `DescribeStreamConsumer`, make
+    # sure to provide the ARN of the consumer.
+    #
+    #  </note>
+    #
     # @option params [String] :stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
     #   with. For more information, see [Amazon Resource Names (ARNs) and
@@ -897,8 +934,9 @@ module Aws::Kinesis
     # Provides a summarized description of the specified Kinesis data stream
     # without the shard list.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -953,8 +991,9 @@ module Aws::Kinesis
 
     # Disables enhanced monitoring.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1031,8 +1070,9 @@ module Aws::Kinesis
     # Enables enhanced Kinesis data stream monitoring for shard-level
     # metrics.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1107,8 +1147,9 @@ module Aws::Kinesis
 
     # Gets data records from a Kinesis data stream's shard.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter in addition to the `ShardIterator` parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1233,11 +1274,46 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Returns a policy attached to the specified data stream or consumer.
+    # Request patterns can be one of the following:
+    #
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    #
+    # * Consumer pattern:
+    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #
+    # @return [Types::GetResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyOutput#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon Kinesis shard iterator. A shard iterator expires 5
     # minutes after it is returned to the requester.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1366,8 +1442,9 @@ module Aws::Kinesis
     # stream. The maximum value of a stream's retention period is 8760
     # hours (365 days).
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1413,8 +1490,9 @@ module Aws::Kinesis
     # shard. This operation has a limit of 1000 transactions per second per
     # data stream.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1724,8 +1802,9 @@ module Aws::Kinesis
     # Lists the tags for the specified Kinesis data stream. This operation
     # has a limit of five transactions per second per account.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1788,8 +1867,9 @@ module Aws::Kinesis
     # single child shard receives data for all hash key values covered by
     # the two parent shards.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1867,8 +1947,9 @@ module Aws::Kinesis
     # writes up to 1,000 records per second, up to a maximum data write
     # total of 1 MiB per second.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -1991,8 +2072,9 @@ module Aws::Kinesis
     # call (also referred to as a `PutRecords` request). Use this operation
     # to send data into the stream for data ingestion and processing.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -2121,6 +2203,57 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Attaches a resource-based policy to a data stream or registered
+    # consumer. If you are using an identity other than the root user of the
+    # Amazon Web Services account that owns the resource, the calling
+    # identity must have the `PutResourcePolicy` permissions on the
+    # specified Kinesis Data Streams resource and belong to the owner's
+    # account in order to use this operation. If you don't have
+    # `PutResourcePolicy` permissions, Amazon Kinesis Data Streams returns a
+    # `403 Access Denied error`. If you receive a
+    # `ResourceNotFoundException`, check to see if you passed a valid stream
+    # or consumer resource.
+    #
+    # Request patterns can be one of the following:
+    #
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    #
+    # * Consumer pattern:
+    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #
+    # For more information, see [Controlling Access to Amazon Kinesis Data
+    # Streams Resources Using IAM][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #
+    # @option params [required, String] :policy
+    #   Details of the resource policy. It must include the identity of the
+    #   principal and the actions allowed on this resource. This is formatted
+    #   as a JSON string.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Registers a consumer with a Kinesis data stream. When you use this
     # operation, the consumer you register can then call SubscribeToShard to
     # receive data from the stream using enhanced fan-out, at a rate of up
@@ -2186,8 +2319,9 @@ module Aws::Kinesis
     # deleted and cannot be recovered after this operation successfully
     # completes.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -2231,8 +2365,9 @@ module Aws::Kinesis
     # data records being ingested. This API is only supported for the data
     # streams with the provisioned capacity mode.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -2330,6 +2465,12 @@ module Aws::Kinesis
     # Enables or updates server-side encryption using an Amazon Web Services
     # KMS key for a specified stream.
     #
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
+    #
+    #  </note>
+    #
     # Starting encryption is an asynchronous operation. Upon receiving the
     # request, Kinesis Data Streams returns immediately and sets the status
     # of the stream to `UPDATING`. After the update is complete, Kinesis
@@ -2346,11 +2487,6 @@ module Aws::Kinesis
     # status before all records written to the stream are encrypted. After
     # you enable encryption, you can verify that encryption is applied by
     # inspecting the API response from `PutRecord` or `PutRecords`.
-    #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
-    #
-    #  </note>
     #
     # @option params [String] :stream_name
     #   The name of the stream for which to start encrypting records.
@@ -2404,8 +2540,9 @@ module Aws::Kinesis
 
     # Disables server-side encryption for a specified stream.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -2482,8 +2619,9 @@ module Aws::Kinesis
     # number of shards. This API is only supported for the data streams with
     # the provisioned capacity mode.
     #
-    # <note markdown="1"> When invoking this API, it is recommended you use the `StreamARN`
-    # input parameter rather than the `StreamName` input parameter.
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
     #
     #  </note>
     #
@@ -2521,6 +2659,9 @@ module Aws::Kinesis
     #   less than 10000 shards
     #
     # * Scale up to more than the shard limit for your account
+    #
+    # * Make over 10 TPS. TPS over 10 will trigger the
+    #   LimitExceededException
     #
     # For the default limits for an Amazon Web Services account, see
     # [Streams Limits][1] in the *Amazon Kinesis Data Streams Developer
@@ -2636,7 +2777,7 @@ module Aws::Kinesis
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

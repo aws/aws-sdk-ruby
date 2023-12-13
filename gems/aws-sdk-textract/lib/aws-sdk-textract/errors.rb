@@ -29,6 +29,7 @@ module Aws::Textract
   # ## Error Classes
   # * {AccessDeniedException}
   # * {BadDocumentException}
+  # * {ConflictException}
   # * {DocumentTooLargeException}
   # * {HumanLoopQuotaExceededException}
   # * {IdempotentParameterMismatchException}
@@ -39,8 +40,11 @@ module Aws::Textract
   # * {InvalidS3ObjectException}
   # * {LimitExceededException}
   # * {ProvisionedThroughputExceededException}
+  # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {UnsupportedDocumentException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -63,6 +67,16 @@ module Aws::Textract
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Textract::Types::BadDocumentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Textract::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -183,6 +197,26 @@ module Aws::Textract
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Textract::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Textract::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ThrottlingException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -198,6 +232,16 @@ module Aws::Textract
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Textract::Types::UnsupportedDocumentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Textract::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -68,7 +68,7 @@ module Aws
           )
           expect(token).to match(/#{endpoint}\/\?Action=connect/)
           expect(token).to match(/DBUser=#{user_name}/)
-          expect(token).to match(/X-Amz-Credential=akid%2F#{now.strftime('%Y%m%d')}%2F#{region}%2Frds-db%2Faws4_request/)
+          expect(token).to match(/X-Amz-Credential=akid%2F#{now.utc.strftime('%Y%m%d')}%2F#{region}%2Frds-db%2Faws4_request/)
         end
 
       end

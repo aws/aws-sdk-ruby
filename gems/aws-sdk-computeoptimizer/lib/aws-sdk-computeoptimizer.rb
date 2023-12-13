@@ -52,6 +52,6 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # @!group service
 module Aws::ComputeOptimizer
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.52.0'
 
 end

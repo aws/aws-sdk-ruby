@@ -1363,6 +1363,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1400,12 +1403,13 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     role: "RoleArn", # required
     #     handler: "Handler",
     #     code: { # required
@@ -1422,6 +1426,7 @@ module Aws::Lambda
     #     vpc_config: {
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
+    #       ipv_6_allowed_for_dual_stack: false,
     #     },
     #     package_type: "Zip", # accepts Zip, Image
     #     dead_letter_config: {
@@ -1459,13 +1464,19 @@ module Aws::Lambda
     #     snap_start: {
     #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
     #     },
+    #     logging_config: {
+    #       log_format: "JSON", # accepts JSON, Text
+    #       application_log_level: "TRACE", # accepts TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #       log_group: "LogGroup",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1480,6 +1491,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -1521,6 +1533,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -2338,7 +2354,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -2353,6 +2369,7 @@ module Aws::Lambda
     #   resp.configuration.vpc_config.security_group_ids #=> Array
     #   resp.configuration.vpc_config.security_group_ids[0] #=> String
     #   resp.configuration.vpc_config.vpc_id #=> String
+    #   resp.configuration.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.configuration.dead_letter_config.target_arn #=> String
     #   resp.configuration.environment.variables #=> Hash
     #   resp.configuration.environment.variables["EnvironmentVariableName"] #=> String
@@ -2394,6 +2411,10 @@ module Aws::Lambda
     #   resp.configuration.runtime_version_config.runtime_version_arn #=> String
     #   resp.configuration.runtime_version_config.error.error_code #=> String
     #   resp.configuration.runtime_version_config.error.message #=> String
+    #   resp.configuration.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.configuration.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.configuration.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.configuration.logging_config.log_group #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2567,6 +2588,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2579,7 +2601,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2594,6 +2616,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -2635,6 +2658,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2821,7 +2848,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2876,7 +2903,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -3097,8 +3124,11 @@ module Aws::Lambda
     end
 
     # Invokes a Lambda function. You can invoke a function synchronously
-    # (and wait for the response), or asynchronously. To invoke a function
-    # asynchronously, set `InvocationType` to `Event`.
+    # (and wait for the response), or asynchronously. By default, Lambda
+    # invokes your function synchronously (i.e. the`InvocationType` is
+    # `RequestResponse`). To invoke a function asynchronously, set
+    # `InvocationType` to `Event`. Lambda passes the `ClientContext` object
+    # to your function for synchronous invocations only.
     #
     # For [synchronous invocation][1], details about the function response,
     # including errors, are included in the response body and headers. For
@@ -3919,7 +3949,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -3934,6 +3964,7 @@ module Aws::Lambda
     #   resp.functions[0].vpc_config.security_group_ids #=> Array
     #   resp.functions[0].vpc_config.security_group_ids[0] #=> String
     #   resp.functions[0].vpc_config.vpc_id #=> String
+    #   resp.functions[0].vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.functions[0].dead_letter_config.target_arn #=> String
     #   resp.functions[0].environment.variables #=> Hash
     #   resp.functions[0].environment.variables["EnvironmentVariableName"] #=> String
@@ -3975,6 +4006,10 @@ module Aws::Lambda
     #   resp.functions[0].runtime_version_config.runtime_version_arn #=> String
     #   resp.functions[0].runtime_version_config.error.error_code #=> String
     #   resp.functions[0].runtime_version_config.error.message #=> String
+    #   resp.functions[0].logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.functions[0].logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.functions[0].logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.functions[0].logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -4076,7 +4111,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -4092,7 +4127,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.layer_versions[0].license_info #=> String
     #   resp.layer_versions[0].compatible_architectures #=> Array
     #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4151,7 +4186,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     marker: "String",
     #     max_items: 1,
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -4168,7 +4203,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
     #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4330,7 +4365,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -4345,6 +4380,7 @@ module Aws::Lambda
     #   resp.versions[0].vpc_config.security_group_ids #=> Array
     #   resp.versions[0].vpc_config.security_group_ids[0] #=> String
     #   resp.versions[0].vpc_config.vpc_id #=> String
+    #   resp.versions[0].vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.versions[0].dead_letter_config.target_arn #=> String
     #   resp.versions[0].environment.variables #=> Hash
     #   resp.versions[0].environment.variables["EnvironmentVariableName"] #=> String
@@ -4386,6 +4422,10 @@ module Aws::Lambda
     #   resp.versions[0].runtime_version_config.runtime_version_arn #=> String
     #   resp.versions[0].runtime_version_config.error.error_code #=> String
     #   resp.versions[0].runtime_version_config.error.message #=> String
+    #   resp.versions[0].logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.versions[0].logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.versions[0].logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.versions[0].logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -4472,7 +4512,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     license_info: "LicenseInfo",
     #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
@@ -4490,7 +4530,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4588,6 +4628,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4602,7 +4643,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4617,6 +4658,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -4658,6 +4700,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -5782,6 +5828,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5802,7 +5849,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5817,6 +5864,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -5858,6 +5906,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -6038,6 +6090,9 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   The function's Amazon CloudWatch Logs configuration settings.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -6075,6 +6130,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #   * {Types::FunctionConfiguration#runtime_version_config #runtime_version_config} => Types::RuntimeVersionConfig
+    #   * {Types::FunctionConfiguration#logging_config #logging_config} => Types::LoggingConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6088,13 +6144,14 @@ module Aws::Lambda
     #     vpc_config: {
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
+    #       ipv_6_allowed_for_dual_stack: false,
     #     },
     #     environment: {
     #       variables: {
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -6121,13 +6178,19 @@ module Aws::Lambda
     #     snap_start: {
     #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
     #     },
+    #     logging_config: {
+    #       log_format: "JSON", # accepts JSON, Text
+    #       application_log_level: "TRACE", # accepts TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #       log_group: "LogGroup",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -6142,6 +6205,7 @@ module Aws::Lambda
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.ipv_6_allowed_for_dual_stack #=> Boolean
     #   resp.dead_letter_config.target_arn #=> String
     #   resp.environment.variables #=> Hash
     #   resp.environment.variables["EnvironmentVariableName"] #=> String
@@ -6183,6 +6247,10 @@ module Aws::Lambda
     #   resp.runtime_version_config.runtime_version_arn #=> String
     #   resp.runtime_version_config.error.error_code #=> String
     #   resp.runtime_version_config.error.message #=> String
+    #   resp.logging_config.log_format #=> String, one of "JSON", "Text"
+    #   resp.logging_config.application_log_level #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -6409,7 +6477,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

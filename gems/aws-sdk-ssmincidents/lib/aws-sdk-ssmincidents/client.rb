@@ -388,6 +388,58 @@ module Aws::SSMIncidents
 
     # @!group API Operations
 
+    # Retrieves details about all specified findings for an incident,
+    # including descriptive details about each finding. A finding represents
+    # a recent application environment change made by an CodeDeploy
+    # deployment or an CloudFormation stack creation or update that can be
+    # investigated as a potential cause of the incident.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   A list of IDs of findings for which you want to view details.
+    #
+    # @option params [required, String] :incident_record_arn
+    #   The Amazon Resource Name (ARN) of the incident for which you want to
+    #   view finding details.
+    #
+    # @return [Types::BatchGetIncidentFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetIncidentFindingsOutput#errors #errors} => Array&lt;Types::BatchGetIncidentFindingsError&gt;
+    #   * {Types::BatchGetIncidentFindingsOutput#findings #findings} => Array&lt;Types::Finding&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_incident_findings({
+    #     finding_ids: ["FindingId"], # required
+    #     incident_record_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].finding_id #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.findings #=> Array
+    #   resp.findings[0].creation_time #=> Time
+    #   resp.findings[0].details.cloud_formation_stack_update.end_time #=> Time
+    #   resp.findings[0].details.cloud_formation_stack_update.stack_arn #=> String
+    #   resp.findings[0].details.cloud_formation_stack_update.start_time #=> Time
+    #   resp.findings[0].details.code_deploy_deployment.deployment_group_arn #=> String
+    #   resp.findings[0].details.code_deploy_deployment.deployment_id #=> String
+    #   resp.findings[0].details.code_deploy_deployment.end_time #=> Time
+    #   resp.findings[0].details.code_deploy_deployment.start_time #=> Time
+    #   resp.findings[0].id #=> String
+    #   resp.findings[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/BatchGetIncidentFindings AWS API Documentation
+    #
+    # @overload batch_get_incident_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_get_incident_findings(params = {}, options = {})
+      req = build_request(:batch_get_incident_findings, params)
+      req.send_request(options)
+    end
+
     # A replication set replicates and encrypts your data to the provided
     # Regions with the provided KMS key.
     #
@@ -578,11 +630,15 @@ module Aws::SSMIncidents
     #   associated with the DynamoDB table as a related item.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #
     # @option params [required, String] :event_type
     #   The type of event. You can create timeline events of type `Custom
-    #   Event`.
+    #   Event` and `Note`.
+    #
+    #   To make a Note-type event appear on the *Incident notes* panel in the
+    #   console, specify `eventType` as `Note`and enter the Amazon Resource
+    #   Name (ARN) of the incident as the value for `eventReference`.
     #
     # @option params [required, String] :incident_record_arn
     #   The Amazon Resource Name (ARN) of the incident record that the action
@@ -851,7 +907,8 @@ module Aws::SSMIncidents
     #   results.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the response plan with the attached
@@ -994,6 +1051,54 @@ module Aws::SSMIncidents
       req.send_request(options)
     end
 
+    # Retrieves a list of the IDs of findings, plus their last modified
+    # times, that have been identified for a specified incident. A finding
+    # represents a recent application environment change made by an
+    # CloudFormation stack creation or update or an CodeDeploy deployment
+    # that can be investigated as a potential cause of the incident.
+    #
+    # @option params [required, String] :incident_record_arn
+    #   The Amazon Resource Name (ARN) of the incident for which you want to
+    #   view associated findings.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of findings to retrieve per call.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
+    #
+    # @return [Types::ListIncidentFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIncidentFindingsOutput#findings #findings} => Array&lt;Types::FindingSummary&gt;
+    #   * {Types::ListIncidentFindingsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_incident_findings({
+    #     incident_record_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings #=> Array
+    #   resp.findings[0].id #=> String
+    #   resp.findings[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentFindings AWS API Documentation
+    #
+    # @overload list_incident_findings(params = {})
+    # @param [Hash] params ({})
+    def list_incident_findings(params = {}, options = {})
+      req = build_request(:list_incident_findings, params)
+      req.send_request(options)
+    end
+
     # Lists all incident records in your account. Use this command to
     # retrieve the Amazon Resource Name (ARN) of the incident record you
     # want to update.
@@ -1025,7 +1130,8 @@ module Aws::SSMIncidents
     #   The maximum number of results per page.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @return [Types::ListIncidentRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1088,7 +1194,8 @@ module Aws::SSMIncidents
     #   The maximum number of related items per page.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @return [Types::ListRelatedItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1134,7 +1241,8 @@ module Aws::SSMIncidents
     #   The maximum number of results per page.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @return [Types::ListReplicationSetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1171,7 +1279,8 @@ module Aws::SSMIncidents
     #   The maximum number of response plans per page.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @return [Types::ListResponsePlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1204,10 +1313,11 @@ module Aws::SSMIncidents
       req.send_request(options)
     end
 
-    # Lists the tags that are attached to the specified response plan.
+    # Lists the tags that are attached to the specified response plan or
+    # incident.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the response plan.
+    #   The Amazon Resource Name (ARN) of the response plan or incident.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1239,6 +1349,8 @@ module Aws::SSMIncidents
     #   Filters the timeline events based on the provided conditional values.
     #   You can filter timeline events with the following keys:
     #
+    #   * `eventReference`
+    #
     #   * `eventTime`
     #
     #   * `eventType`
@@ -1262,7 +1374,8 @@ module Aws::SSMIncidents
     #   The maximum number of results per page.
     #
     # @option params [String] :next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #
     # @option params [String] :sort_by
     #   Sort timeline events by the specified key value pair.
@@ -1377,22 +1490,17 @@ module Aws::SSMIncidents
     #   Defines the impact to the customers. Providing an impact overwrites
     #   the impact provided by a response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `1` - Critical impact, this typically relates to full application
-    #     failure that impacts many to all customers.
+    #   * `1` - Critical
     #
-    #   * `2` - High impact, partial application failure with impact to many
-    #     customers.
+    #   * `2` - High
     #
-    #   * `3` - Medium impact, the application is providing reduced service to
-    #     customers.
+    #   * `3` - Medium
     #
-    #   * `4` - Low impact, customer might aren't impacted by the problem
-    #     yet.
+    #   * `4` - Low
     #
-    #   * `5` - No impact, customers aren't currently impacted but urgent
-    #     action is needed to avoid impact.
+    #   * `5` - No Impact
     #
     # @option params [Array<Types::RelatedItem>] :related_items
     #   Add related items to the incident for other responders to use. Related
@@ -1581,21 +1689,17 @@ module Aws::SSMIncidents
     #   you provide an impact for an incident, it overwrites the impact
     #   provided by the response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `1` - Critical impact, full application failure that impacts many to
-    #     all customers.
+    #   * `1` - Critical
     #
-    #   * `2` - High impact, partial application failure with impact to many
-    #     customers.
+    #   * `2` - High
     #
-    #   * `3` - Medium impact, the application is providing reduced service to
-    #     customers.
+    #   * `3` - Medium
     #
-    #   * `4` - Low impact, customer aren't impacted by the problem yet.
+    #   * `4` - Low
     #
-    #   * `5` - No impact, customers aren't currently impacted but urgent
-    #     action is needed to avoid impact.
+    #   * `5` - No Impact
     #
     # @option params [Array<Types::NotificationTargetItem>] :notification_targets
     #   The Amazon SNS targets that Incident Manager notifies when a client
@@ -1797,17 +1901,17 @@ module Aws::SSMIncidents
     #   Defines the impact to the customers. Providing an impact overwrites
     #   the impact provided by a response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `5` - Severe impact
+    #   * `1` - Critical
     #
-    #   * `4` - High impact
+    #   * `2` - High
     #
-    #   * `3` - Medium impact
+    #   * `3` - Medium
     #
-    #   * `2` - Low impact
+    #   * `4` - Low
     #
-    #   * `1` - No impact
+    #   * `5` - No Impact
     #
     # @option params [Array<Types::NotificationTargetItem>] :incident_template_notification_targets
     #   The Amazon SNS targets that are notified when updates are made to an
@@ -1929,10 +2033,11 @@ module Aws::SSMIncidents
     #   new references.
     #
     # @option params [Time,DateTime,Date,Integer,String] :event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #
     # @option params [String] :event_type
-    #   The type of event. You can update events of type `Custom Event`.
+    #   The type of event. You can update events of type `Custom Event` and
+    #   `Note`.
     #
     # @option params [required, String] :incident_record_arn
     #   The Amazon Resource Name (ARN) of the incident that includes the
@@ -1979,7 +2084,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

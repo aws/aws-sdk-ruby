@@ -96,6 +96,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `AddDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSourceRequest AWS API Documentation
+    #
+    class AddDataSourceRequest < Struct.new(
+      :domain_name,
+      :name,
+      :data_source_type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an `AddDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSourceResponse AWS API Documentation
+    #
+    class AddDataSourceResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `AddTags` operation. Specifies the
     # tags to attach to the domain.
     #
@@ -861,8 +904,8 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   Number of dedicated master nodes in the cluster. This number must be
-    #   greater than 1, otherwise you receive a validation exception.
+    #   Number of data nodes in the cluster. This number must be greater
+    #   than 1, otherwise you receive a validation exception.
     #   @return [Integer]
     #
     # @!attribute [rw] dedicated_master_enabled
@@ -1121,6 +1164,10 @@ module Aws::OpenSearchService
     #   access policies for the new domain.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_options
     #   DEPRECATED. Container for the parameters required to configure
     #   automated snapshots of domain indexes.
@@ -1231,6 +1278,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -1423,16 +1471,99 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Cross cluster search specific connection properties.
+    # Cross-cluster search specific connection properties.
     #
     # @!attribute [rw] skip_unavailable
-    #   Status of SkipUnavailable param for outbound connection.
+    #   The status of the `SkipUnavailable` setting for the outbound
+    #   connection. This feature allows you to specify some clusters as
+    #   optional and ensure that your cross-cluster queries return partial
+    #   results despite failures on one or more remote clusters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CrossClusterSearchConnectionProperties AWS API Documentation
     #
     class CrossClusterSearchConnectionProperties < Struct.new(
       :skip_unavailable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the data sources.
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceDetails AWS API Documentation
+    #
+    class DataSourceDetails < Struct.new(
+      :data_source_type,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the data source.
+    #
+    # @note DataSourceType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataSourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataSourceType corresponding to the set member.
+    #
+    # @!attribute [rw] s3_glue_data_catalog
+    #   The data source for the AWS S3 Glue Data Catalog.
+    #   @return [Types::S3GlueDataCatalog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceType AWS API Documentation
+    #
+    class DataSourceType < Struct.new(
+      :s3_glue_data_catalog,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3GlueDataCatalog < DataSourceType; end
+      class Unknown < DataSourceType; end
+    end
+
+    # Container for the parameters to the `DeleteDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceRequest AWS API Documentation
+    #
+    class DeleteDataSourceRequest < Struct.new(
+      :domain_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the initiated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceResponse AWS API Documentation
+    #
+    class DeleteDataSourceResponse < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1892,8 +2023,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] domain_names
     #   Array of OpenSearch Service domain names that you want information
-    #   about. If you don't specify any domains, OpenSearch Service returns
-    #   information about all domains owned by the account.
+    #   about. You must specify at least one domain name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainsRequest AWS API Documentation
@@ -2383,6 +2513,10 @@ module Aws::OpenSearchService
     #   Specifies the access policies for the domain.
     #   @return [Types::AccessPoliciesStatus]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [Types::IPAddressTypeStatus]
+    #
     # @!attribute [rw] snapshot_options
     #   DEPRECATED. Container for parameters required to configure automated
     #   snapshots of domain indexes.
@@ -2451,6 +2585,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -2477,15 +2612,20 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] tls_security_policy
     #   Specify the TLS security policy to apply to the HTTPS endpoint of
-    #   the domain.
-    #
-    #   Can be one of the following values:
+    #   the domain. The policy can be one of the following values:
     #
     #   * **Policy-Min-TLS-1-0-2019-07:** TLS security policy which supports
-    #     TLS version 1.0 and higher.
+    #     TLS version 1.0 to TLS version 1.2
     #
     #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy which supports
     #     only TLS version 1.2
+    #
+    #   * **Policy-Min-TLS-1-0-2023-10:** TLS security policy which supports
+    #     TLS version 1.0 to TLS version 1.3
+    #
+    #   * **Policy-Min-TLS-1-2-2023-10:** TLS security policy which supports
+    #     TLS version 1.2 to TLS version 1.3 with perfect forward secrecy
+    #     cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2563,6 +2703,55 @@ module Aws::OpenSearchService
     #
     class DomainInformationContainer < Struct.new(
       :aws_domain_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the domain maintenance details.
+    #
+    # @!attribute [rw] maintenance_id
+    #   The ID of the requested action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the data node.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the action was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the action was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainMaintenanceDetails AWS API Documentation
+    #
+    class DomainMaintenanceDetails < Struct.new(
+      :maintenance_id,
+      :domain_name,
+      :action,
+      :node_id,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2717,6 +2906,13 @@ module Aws::OpenSearchService
     #   upload requests to the domain.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_v2
+    #   The domain endpoint to which index and search requests are
+    #   submitted. For example,
+    #   `search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com` or
+    #   `doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com`.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
     #   VPC endpoints.. Example `key, value`:
@@ -2751,6 +2947,10 @@ module Aws::OpenSearchService
     # @!attribute [rw] access_policies
     #   Identity and Access Management (IAM) policy document specifying the
     #   access policies for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
@@ -2822,6 +3022,7 @@ module Aws::OpenSearchService
       :created,
       :deleted,
       :endpoint,
+      :endpoint_v2,
       :endpoints,
       :processing,
       :upgrade_processing,
@@ -2829,6 +3030,7 @@ module Aws::OpenSearchService
       :cluster_config,
       :ebs_options,
       :access_policies,
+      :ip_address_type,
       :snapshot_options,
       :vpc_options,
       :cognito_options,
@@ -3125,6 +3327,109 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `GetDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceRequest AWS API Documentation
+    #
+    class GetDataSourceRequest < Struct.new(
+      :domain_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetDataSource` operation.
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceResponse AWS API Documentation
+    #
+    class GetDataSourceResponse < Struct.new(
+      :data_source_type,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `GetDomainMaintenanceStatus`
+    # operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_id
+    #   The request ID of the maintenance action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatusRequest AWS API Documentation
+    #
+    class GetDomainMaintenanceStatusRequest < Struct.new(
+      :domain_name,
+      :maintenance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetDomainMaintenanceStatus` request that information
+    # about the requested action.
+    #
+    # @!attribute [rw] status
+    #   The status of the maintenance action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message of the maintenance action.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The node ID of the maintenance action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the action was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the action was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatusResponse AWS API Documentation
+    #
+    class GetDomainMaintenanceStatusResponse < Struct.new(
+      :status,
+      :status_message,
+      :node_id,
+      :action,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the `GetPackageVersionHistory`
     # operation.
     #
@@ -3273,6 +3578,25 @@ module Aws::OpenSearchService
       :upgrade_step,
       :step_status,
       :upgrade_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The IP address type status for the domain.
+    #
+    # @!attribute [rw] options
+    #   The IP address options for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides the current status of an entity.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IPAddressTypeStatus AWS API Documentation
+    #
+    class IPAddressTypeStatus < Struct.new(
+      :options,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3495,6 +3819,96 @@ module Aws::OpenSearchService
       :storage_types,
       :instance_limits,
       :additional_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `ListDataSources` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSourcesRequest AWS API Documentation
+    #
+    class ListDataSourcesRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `ListDataSources` operation.
+    #
+    # @!attribute [rw] data_sources
+    #   A list of the data sources.
+    #   @return [Array<Types::DataSourceDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSourcesResponse AWS API Documentation
+    #
+    class ListDataSourcesResponse < Struct.new(
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `ListDomainMaintenances`
+    # operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListDomainMaintenances` operation returns a
+    #   `nextToken`, include the returned `nextToken` in subsequent
+    #   `ListDomainMaintenances` operations, which returns results in the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainMaintenancesRequest AWS API Documentation
+    #
+    class ListDomainMaintenancesRequest < Struct.new(
+      :domain_name,
+      :action,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `ListDomainMaintenances` request that contains
+    # information about the requested actions.
+    #
+    # @!attribute [rw] domain_maintenances
+    #   A list of the submitted maintenance actions.
+    #   @return [Array<Types::DomainMaintenanceDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainMaintenancesResponse AWS API Documentation
+    #
+    class ListDomainMaintenancesResponse < Struct.new(
+      :domain_maintenances,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4311,6 +4725,17 @@ module Aws::OpenSearchService
     #   otherwise.
     #   @return [Types::ErrorDetails]
     #
+    # @!attribute [rw] engine_version
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
+    #   version of OpenSearch.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_plugin_properties
+    #   If the package is a `ZIP-PLUGIN` package, additional information
+    #   about plugin properties.
+    #   @return [Types::PluginProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageDetails AWS API Documentation
     #
     class PackageDetails < Struct.new(
@@ -4322,7 +4747,9 @@ module Aws::OpenSearchService
       :created_at,
       :last_updated_at,
       :available_package_version,
-      :error_details)
+      :error_details,
+      :engine_version,
+      :available_plugin_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4360,12 +4787,52 @@ module Aws::OpenSearchService
     #   The date and time when the package was created.
     #   @return [Time]
     #
+    # @!attribute [rw] plugin_properties
+    #   Additional information about plugin properties if the package is a
+    #   `ZIP-PLUGIN` package.
+    #   @return [Types::PluginProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageVersionHistory AWS API Documentation
     #
     class PackageVersionHistory < Struct.new(
       :package_version,
       :commit_message,
-      :created_at)
+      :created_at,
+      :plugin_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Basic information about the plugin.
+    #
+    # @!attribute [rw] name
+    #   The name of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] class_name
+    #   The name of the class to load.
+    #   @return [String]
+    #
+    # @!attribute [rw] uncompressed_size_in_bytes
+    #   The uncompressed size of the plugin.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PluginProperties AWS API Documentation
+    #
+    class PluginProperties < Struct.new(
+      :name,
+      :description,
+      :version,
+      :class_name,
+      :uncompressed_size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4654,6 +5121,20 @@ module Aws::OpenSearchService
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccessResponse AWS API Documentation
     #
     class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
+
+    # Information about the AWS S3 Glue Data Catalog.
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN for the AWS S3 Glue Data Catalog.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/S3GlueDataCatalog AWS API Documentation
+    #
+    class S3GlueDataCatalog < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The SAML identity povider information.
     #
@@ -5006,6 +5487,46 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `StartDomainMaintenance`
+    # operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the data node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenanceRequest AWS API Documentation
+    #
+    class StartDomainMaintenanceRequest < Struct.new(
+      :domain_name,
+      :action,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `StartDomainMaintenance` request that information
+    # about the requested action.
+    #
+    # @!attribute [rw] maintenance_id
+    #   The request ID of requested action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenanceResponse AWS API Documentation
+    #
+    class StartDomainMaintenanceResponse < Struct.new(
+      :maintenance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the
     # `StartServiceSoftwareUpdate` operation.
     #
@@ -5154,6 +5675,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `UpdateDataSource` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of data source.
+    #   @return [Types::DataSourceType]
+    #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceRequest AWS API Documentation
+    #
+    class UpdateDataSourceRequest < Struct.new(
+      :domain_name,
+      :name,
+      :data_source_type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an `UpdateDataSource` operation.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceResponse AWS API Documentation
+    #
+    class UpdateDataSourceResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the `UpdateDomain` operation.
     #
     # @!attribute [rw] domain_name
@@ -5223,6 +5787,10 @@ module Aws::OpenSearchService
     #   JSON-formatted string.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #   @return [Hash<String,Types::LogPublishingOption>]
@@ -5288,6 +5856,7 @@ module Aws::OpenSearchService
       :cognito_options,
       :advanced_options,
       :access_policies,
+      :ip_address_type,
       :log_publishing_options,
       :encryption_at_rest_options,
       :domain_endpoint_options,

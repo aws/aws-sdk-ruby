@@ -34,6 +34,7 @@ module Aws::States
   # * {ExecutionAlreadyExists}
   # * {ExecutionDoesNotExist}
   # * {ExecutionLimitExceeded}
+  # * {ExecutionNotRedrivable}
   # * {InvalidArn}
   # * {InvalidDefinition}
   # * {InvalidExecutionInput}
@@ -156,6 +157,21 @@ module Aws::States
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::States::Types::ExecutionLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ExecutionNotRedrivable < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::ExecutionNotRedrivable] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -23,6 +23,8 @@ module Aws::OpenSearchService
     ActionSeverity = Shapes::StringShape.new(name: 'ActionSeverity')
     ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    AddDataSourceRequest = Shapes::StructureShape.new(name: 'AddDataSourceRequest')
+    AddDataSourceResponse = Shapes::StructureShape.new(name: 'AddDataSourceResponse')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AdditionalLimit = Shapes::StructureShape.new(name: 'AdditionalLimit')
     AdditionalLimitList = Shapes::ListShape.new(name: 'AdditionalLimitList')
@@ -92,6 +94,13 @@ module Aws::OpenSearchService
     CreateVpcEndpointResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     CrossClusterSearchConnectionProperties = Shapes::StructureShape.new(name: 'CrossClusterSearchConnectionProperties')
+    DataSourceDescription = Shapes::StringShape.new(name: 'DataSourceDescription')
+    DataSourceDetails = Shapes::StructureShape.new(name: 'DataSourceDetails')
+    DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
+    DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
+    DataSourceType = Shapes::UnionShape.new(name: 'DataSourceType')
+    DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
+    DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteInboundConnectionRequest = Shapes::StructureShape.new(name: 'DeleteInboundConnectionRequest')
@@ -155,6 +164,8 @@ module Aws::OpenSearchService
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
     DomainInformationContainer = Shapes::StructureShape.new(name: 'DomainInformationContainer')
+    DomainMaintenanceDetails = Shapes::StructureShape.new(name: 'DomainMaintenanceDetails')
+    DomainMaintenanceList = Shapes::ListShape.new(name: 'DomainMaintenanceList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameFqdn = Shapes::StringShape.new(name: 'DomainNameFqdn')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
@@ -180,6 +191,7 @@ module Aws::OpenSearchService
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
+    EngineVersion = Shapes::StringShape.new(name: 'EngineVersion')
     EnvironmentInfo = Shapes::StructureShape.new(name: 'EnvironmentInfo')
     EnvironmentInfoList = Shapes::ListShape.new(name: 'EnvironmentInfoList')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
@@ -190,12 +202,18 @@ module Aws::OpenSearchService
     GUID = Shapes::StringShape.new(name: 'GUID')
     GetCompatibleVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleVersionsRequest')
     GetCompatibleVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleVersionsResponse')
+    GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
+    GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
+    GetDomainMaintenanceStatusRequest = Shapes::StructureShape.new(name: 'GetDomainMaintenanceStatusRequest')
+    GetDomainMaintenanceStatusResponse = Shapes::StructureShape.new(name: 'GetDomainMaintenanceStatusResponse')
     GetPackageVersionHistoryRequest = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryRequest')
     GetPackageVersionHistoryResponse = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryResponse')
     GetUpgradeHistoryRequest = Shapes::StructureShape.new(name: 'GetUpgradeHistoryRequest')
     GetUpgradeHistoryResponse = Shapes::StructureShape.new(name: 'GetUpgradeHistoryResponse')
     GetUpgradeStatusRequest = Shapes::StructureShape.new(name: 'GetUpgradeStatusRequest')
     GetUpgradeStatusResponse = Shapes::StructureShape.new(name: 'GetUpgradeStatusResponse')
+    IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
+    IPAddressTypeStatus = Shapes::StructureShape.new(name: 'IPAddressTypeStatus')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
     InboundConnection = Shapes::StructureShape.new(name: 'InboundConnection')
     InboundConnectionStatus = Shapes::StructureShape.new(name: 'InboundConnectionStatus')
@@ -224,6 +242,10 @@ module Aws::OpenSearchService
     LimitValueList = Shapes::ListShape.new(name: 'LimitValueList')
     Limits = Shapes::StructureShape.new(name: 'Limits')
     LimitsByRole = Shapes::MapShape.new(name: 'LimitsByRole')
+    ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
+    ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
+    ListDomainMaintenancesRequest = Shapes::StructureShape.new(name: 'ListDomainMaintenancesRequest')
+    ListDomainMaintenancesResponse = Shapes::StructureShape.new(name: 'ListDomainMaintenancesResponse')
     ListDomainNamesRequest = Shapes::StructureShape.new(name: 'ListDomainNamesRequest')
     ListDomainNamesResponse = Shapes::StructureShape.new(name: 'ListDomainNamesResponse')
     ListDomainsForPackageRequest = Shapes::StructureShape.new(name: 'ListDomainsForPackageRequest')
@@ -249,6 +271,9 @@ module Aws::OpenSearchService
     LogPublishingOptionsStatus = Shapes::StructureShape.new(name: 'LogPublishingOptionsStatus')
     LogType = Shapes::StringShape.new(name: 'LogType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaintenanceStatus = Shapes::StringShape.new(name: 'MaintenanceStatus')
+    MaintenanceStatusMessage = Shapes::StringShape.new(name: 'MaintenanceStatusMessage')
+    MaintenanceType = Shapes::StringShape.new(name: 'MaintenanceType')
     MasterNodeStatus = Shapes::StringShape.new(name: 'MasterNodeStatus')
     MasterUserOptions = Shapes::StructureShape.new(name: 'MasterUserOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -290,6 +315,11 @@ module Aws::OpenSearchService
     PackageVersionHistory = Shapes::StructureShape.new(name: 'PackageVersionHistory')
     PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
     Password = Shapes::StringShape.new(name: 'Password')
+    PluginClassName = Shapes::StringShape.new(name: 'PluginClassName')
+    PluginDescription = Shapes::StringShape.new(name: 'PluginDescription')
+    PluginName = Shapes::StringShape.new(name: 'PluginName')
+    PluginProperties = Shapes::StructureShape.new(name: 'PluginProperties')
+    PluginVersion = Shapes::StringShape.new(name: 'PluginVersion')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PurchaseReservedInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingRequest')
@@ -301,6 +331,7 @@ module Aws::OpenSearchService
     RejectInboundConnectionRequest = Shapes::StructureShape.new(name: 'RejectInboundConnectionRequest')
     RejectInboundConnectionResponse = Shapes::StructureShape.new(name: 'RejectInboundConnectionResponse')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
+    RequestId = Shapes::StringShape.new(name: 'RequestId')
     ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
     ReservedInstance = Shapes::StructureShape.new(name: 'ReservedInstance')
     ReservedInstanceList = Shapes::ListShape.new(name: 'ReservedInstanceList')
@@ -314,6 +345,7 @@ module Aws::OpenSearchService
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3GlueDataCatalog = Shapes::StructureShape.new(name: 'S3GlueDataCatalog')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
     SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
@@ -338,6 +370,8 @@ module Aws::OpenSearchService
     SoftwareUpdateOptions = Shapes::StructureShape.new(name: 'SoftwareUpdateOptions')
     SoftwareUpdateOptionsStatus = Shapes::StructureShape.new(name: 'SoftwareUpdateOptionsStatus')
     StartAt = Shapes::TimestampShape.new(name: 'StartAt')
+    StartDomainMaintenanceRequest = Shapes::StructureShape.new(name: 'StartDomainMaintenanceRequest')
+    StartDomainMaintenanceResponse = Shapes::StructureShape.new(name: 'StartDomainMaintenanceResponse')
     StartServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateRequest')
     StartServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateResponse')
     StartTimeHours = Shapes::IntegerShape.new(name: 'StartTimeHours')
@@ -359,6 +393,9 @@ module Aws::OpenSearchService
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
+    UncompressedPluginSizeInBytes = Shapes::IntegerShape.new(name: 'UncompressedPluginSizeInBytes')
+    UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
+    UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
     UpdateDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateDomainConfigRequest')
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
@@ -421,6 +458,15 @@ module Aws::OpenSearchService
     AccessPoliciesStatus.add_member(:options, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "Options"))
     AccessPoliciesStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AccessPoliciesStatus.struct_class = Types::AccessPoliciesStatus
+
+    AddDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    AddDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "Name"))
+    AddDataSourceRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "DataSourceType"))
+    AddDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    AddDataSourceRequest.struct_class = Types::AddDataSourceRequest
+
+    AddDataSourceResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AddDataSourceResponse.struct_class = Types::AddDataSourceResponse
 
     AddTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     AddTagsRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
@@ -611,6 +657,7 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfig, location_name: "ClusterConfig"))
     CreateDomainRequest.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
     CreateDomainRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
+    CreateDomainRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     CreateDomainRequest.add_member(:snapshot_options, Shapes::ShapeRef.new(shape: SnapshotOptions, location_name: "SnapshotOptions"))
     CreateDomainRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCOptions, location_name: "VPCOptions"))
     CreateDomainRequest.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptions, location_name: "CognitoOptions"))
@@ -664,6 +711,26 @@ module Aws::OpenSearchService
 
     CrossClusterSearchConnectionProperties.add_member(:skip_unavailable, Shapes::ShapeRef.new(shape: SkipUnavailableStatus, location_name: "SkipUnavailable"))
     CrossClusterSearchConnectionProperties.struct_class = Types::CrossClusterSearchConnectionProperties
+
+    DataSourceDetails.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
+    DataSourceDetails.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
+    DataSourceDetails.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    DataSourceDetails.struct_class = Types::DataSourceDetails
+
+    DataSourceList.member = Shapes::ShapeRef.new(shape: DataSourceDetails)
+
+    DataSourceType.add_member(:s3_glue_data_catalog, Shapes::ShapeRef.new(shape: S3GlueDataCatalog, location_name: "S3GlueDataCatalog"))
+    DataSourceType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DataSourceType.add_member_subclass(:s3_glue_data_catalog, Types::DataSourceType::S3GlueDataCatalog)
+    DataSourceType.add_member_subclass(:unknown, Types::DataSourceType::Unknown)
+    DataSourceType.struct_class = Types::DataSourceType
+
+    DeleteDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DeleteDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
+    DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
+
+    DeleteDataSourceResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DeleteDataSourceResponse.struct_class = Types::DeleteDataSourceResponse
 
     DeleteDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
@@ -846,6 +913,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfigStatus, location_name: "ClusterConfig"))
     DomainConfig.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptionsStatus, location_name: "EBSOptions"))
     DomainConfig.add_member(:access_policies, Shapes::ShapeRef.new(shape: AccessPoliciesStatus, location_name: "AccessPolicies"))
+    DomainConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressTypeStatus, location_name: "IPAddressType"))
     DomainConfig.add_member(:snapshot_options, Shapes::ShapeRef.new(shape: SnapshotOptionsStatus, location_name: "SnapshotOptions"))
     DomainConfig.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCDerivedInfoStatus, location_name: "VPCOptions"))
     DomainConfig.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptionsStatus, location_name: "CognitoOptions"))
@@ -881,6 +949,18 @@ module Aws::OpenSearchService
     DomainInformationContainer.add_member(:aws_domain_information, Shapes::ShapeRef.new(shape: AWSDomainInformation, location_name: "AWSDomainInformation"))
     DomainInformationContainer.struct_class = Types::DomainInformationContainer
 
+    DomainMaintenanceDetails.add_member(:maintenance_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "MaintenanceId"))
+    DomainMaintenanceDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    DomainMaintenanceDetails.add_member(:action, Shapes::ShapeRef.new(shape: MaintenanceType, location_name: "Action"))
+    DomainMaintenanceDetails.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "NodeId"))
+    DomainMaintenanceDetails.add_member(:status, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "Status"))
+    DomainMaintenanceDetails.add_member(:status_message, Shapes::ShapeRef.new(shape: MaintenanceStatusMessage, location_name: "StatusMessage"))
+    DomainMaintenanceDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "CreatedAt"))
+    DomainMaintenanceDetails.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "UpdatedAt"))
+    DomainMaintenanceDetails.struct_class = Types::DomainMaintenanceDetails
+
+    DomainMaintenanceList.member = Shapes::ShapeRef.new(shape: DomainMaintenanceDetails)
+
     DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
 
     DomainNodesStatus.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "NodeId"))
@@ -914,6 +994,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:created, Shapes::ShapeRef.new(shape: Boolean, location_name: "Created"))
     DomainStatus.add_member(:deleted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Deleted"))
     DomainStatus.add_member(:endpoint, Shapes::ShapeRef.new(shape: ServiceUrl, location_name: "Endpoint"))
+    DomainStatus.add_member(:endpoint_v2, Shapes::ShapeRef.new(shape: ServiceUrl, location_name: "EndpointV2"))
     DomainStatus.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointsMap, location_name: "Endpoints"))
     DomainStatus.add_member(:processing, Shapes::ShapeRef.new(shape: Boolean, location_name: "Processing"))
     DomainStatus.add_member(:upgrade_processing, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpgradeProcessing"))
@@ -921,6 +1002,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfig, required: true, location_name: "ClusterConfig"))
     DomainStatus.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
     DomainStatus.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
+    DomainStatus.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     DomainStatus.add_member(:snapshot_options, Shapes::ShapeRef.new(shape: SnapshotOptions, location_name: "SnapshotOptions"))
     DomainStatus.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCDerivedInfo, location_name: "VPCOptions"))
     DomainStatus.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptions, location_name: "CognitoOptions"))
@@ -997,6 +1079,27 @@ module Aws::OpenSearchService
     GetCompatibleVersionsResponse.add_member(:compatible_versions, Shapes::ShapeRef.new(shape: CompatibleVersionsList, location_name: "CompatibleVersions"))
     GetCompatibleVersionsResponse.struct_class = Types::GetCompatibleVersionsResponse
 
+    GetDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    GetDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
+    GetDataSourceRequest.struct_class = Types::GetDataSourceRequest
+
+    GetDataSourceResponse.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
+    GetDataSourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
+    GetDataSourceResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
+
+    GetDomainMaintenanceStatusRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    GetDomainMaintenanceStatusRequest.add_member(:maintenance_id, Shapes::ShapeRef.new(shape: RequestId, required: true, location: "querystring", location_name: "maintenanceId"))
+    GetDomainMaintenanceStatusRequest.struct_class = Types::GetDomainMaintenanceStatusRequest
+
+    GetDomainMaintenanceStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "Status"))
+    GetDomainMaintenanceStatusResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: MaintenanceStatusMessage, location_name: "StatusMessage"))
+    GetDomainMaintenanceStatusResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "NodeId"))
+    GetDomainMaintenanceStatusResponse.add_member(:action, Shapes::ShapeRef.new(shape: MaintenanceType, location_name: "Action"))
+    GetDomainMaintenanceStatusResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "CreatedAt"))
+    GetDomainMaintenanceStatusResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "UpdatedAt"))
+    GetDomainMaintenanceStatusResponse.struct_class = Types::GetDomainMaintenanceStatusResponse
+
     GetPackageVersionHistoryRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     GetPackageVersionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     GetPackageVersionHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1023,6 +1126,10 @@ module Aws::OpenSearchService
     GetUpgradeStatusResponse.add_member(:step_status, Shapes::ShapeRef.new(shape: UpgradeStatus, location_name: "StepStatus"))
     GetUpgradeStatusResponse.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
     GetUpgradeStatusResponse.struct_class = Types::GetUpgradeStatusResponse
+
+    IPAddressTypeStatus.add_member(:options, Shapes::ShapeRef.new(shape: IPAddressType, required: true, location_name: "Options"))
+    IPAddressTypeStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    IPAddressTypeStatus.struct_class = Types::IPAddressTypeStatus
 
     InboundConnection.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "LocalDomainInfo"))
     InboundConnection.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "RemoteDomainInfo"))
@@ -1077,6 +1184,23 @@ module Aws::OpenSearchService
 
     LimitsByRole.key = Shapes::ShapeRef.new(shape: InstanceRole)
     LimitsByRole.value = Shapes::ShapeRef.new(shape: Limits)
+
+    ListDataSourcesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListDataSourcesRequest.struct_class = Types::ListDataSourcesRequest
+
+    ListDataSourcesResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceList, location_name: "DataSources"))
+    ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
+
+    ListDomainMaintenancesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListDomainMaintenancesRequest.add_member(:action, Shapes::ShapeRef.new(shape: MaintenanceType, location: "querystring", location_name: "action"))
+    ListDomainMaintenancesRequest.add_member(:status, Shapes::ShapeRef.new(shape: MaintenanceStatus, location: "querystring", location_name: "status"))
+    ListDomainMaintenancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDomainMaintenancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDomainMaintenancesRequest.struct_class = Types::ListDomainMaintenancesRequest
+
+    ListDomainMaintenancesResponse.add_member(:domain_maintenances, Shapes::ShapeRef.new(shape: DomainMaintenanceList, location_name: "DomainMaintenances"))
+    ListDomainMaintenancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDomainMaintenancesResponse.struct_class = Types::ListDomainMaintenancesResponse
 
     ListDomainNamesRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location: "querystring", location_name: "engineType"))
     ListDomainNamesRequest.struct_class = Types::ListDomainNamesRequest
@@ -1225,6 +1349,8 @@ module Aws::OpenSearchService
     PackageDetails.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdatedAt"))
     PackageDetails.add_member(:available_package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "AvailablePackageVersion"))
     PackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    PackageDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    PackageDetails.add_member(:available_plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "AvailablePluginProperties"))
     PackageDetails.struct_class = Types::PackageDetails
 
     PackageDetailsList.member = Shapes::ShapeRef.new(shape: PackageDetails)
@@ -1236,9 +1362,17 @@ module Aws::OpenSearchService
     PackageVersionHistory.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
     PackageVersionHistory.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
     PackageVersionHistory.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    PackageVersionHistory.add_member(:plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "PluginProperties"))
     PackageVersionHistory.struct_class = Types::PackageVersionHistory
 
     PackageVersionHistoryList.member = Shapes::ShapeRef.new(shape: PackageVersionHistory)
+
+    PluginProperties.add_member(:name, Shapes::ShapeRef.new(shape: PluginName, location_name: "Name"))
+    PluginProperties.add_member(:description, Shapes::ShapeRef.new(shape: PluginDescription, location_name: "Description"))
+    PluginProperties.add_member(:version, Shapes::ShapeRef.new(shape: PluginVersion, location_name: "Version"))
+    PluginProperties.add_member(:class_name, Shapes::ShapeRef.new(shape: PluginClassName, location_name: "ClassName"))
+    PluginProperties.add_member(:uncompressed_size_in_bytes, Shapes::ShapeRef.new(shape: UncompressedPluginSizeInBytes, location_name: "UncompressedSizeInBytes"))
+    PluginProperties.struct_class = Types::PluginProperties
 
     PurchaseReservedInstanceOfferingRequest.add_member(:reserved_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ReservedInstanceOfferingId"))
     PurchaseReservedInstanceOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, required: true, location_name: "ReservationName"))
@@ -1304,6 +1438,9 @@ module Aws::OpenSearchService
     RevokeVpcEndpointAccessRequest.struct_class = Types::RevokeVpcEndpointAccessRequest
 
     RevokeVpcEndpointAccessResponse.struct_class = Types::RevokeVpcEndpointAccessResponse
+
+    S3GlueDataCatalog.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    S3GlueDataCatalog.struct_class = Types::S3GlueDataCatalog
 
     SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
     SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))
@@ -1373,6 +1510,14 @@ module Aws::OpenSearchService
     SoftwareUpdateOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
     SoftwareUpdateOptionsStatus.struct_class = Types::SoftwareUpdateOptionsStatus
 
+    StartDomainMaintenanceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    StartDomainMaintenanceRequest.add_member(:action, Shapes::ShapeRef.new(shape: MaintenanceType, required: true, location_name: "Action"))
+    StartDomainMaintenanceRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "NodeId"))
+    StartDomainMaintenanceRequest.struct_class = Types::StartDomainMaintenanceRequest
+
+    StartDomainMaintenanceResponse.add_member(:maintenance_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "MaintenanceId"))
+    StartDomainMaintenanceResponse.struct_class = Types::StartDomainMaintenanceResponse
+
     StartServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     StartServiceSoftwareUpdateRequest.add_member(:schedule_at, Shapes::ShapeRef.new(shape: ScheduleAt, location_name: "ScheduleAt"))
     StartServiceSoftwareUpdateRequest.add_member(:desired_start_time, Shapes::ShapeRef.new(shape: Long, location_name: "DesiredStartTime"))
@@ -1402,6 +1547,15 @@ module Aws::OpenSearchService
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    UpdateDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
+    UpdateDataSourceRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "DataSourceType"))
+    UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
+
+    UpdateDataSourceResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
+
     UpdateDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     UpdateDomainConfigRequest.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfig, location_name: "ClusterConfig"))
     UpdateDomainConfigRequest.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
@@ -1410,6 +1564,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:cognito_options, Shapes::ShapeRef.new(shape: CognitoOptions, location_name: "CognitoOptions"))
     UpdateDomainConfigRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     UpdateDomainConfigRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
+    UpdateDomainConfigRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     UpdateDomainConfigRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     UpdateDomainConfigRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     UpdateDomainConfigRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
@@ -1574,6 +1729,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
+      api.add_operation(:add_data_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddDataSource"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dataSource"
+        o.input = Shapes::ShapeRef.new(shape: AddDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddDataSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTags"
         o.http_method = "POST"
@@ -1680,6 +1850,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataSource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
       end)
 
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -1985,6 +2169,33 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:get_data_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataSource"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: GetDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+      end)
+
+      api.add_operation(:get_domain_maintenance_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainMaintenanceStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainMaintenanceStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainMaintenanceStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:get_package_version_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPackageVersionHistory"
         o.http_method = "GET"
@@ -2034,6 +2245,39 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:list_data_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataSources"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dataSource"
+        o.input = Shapes::ShapeRef.new(shape: ListDataSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+      end)
+
+      api.add_operation(:list_domain_maintenances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomainMaintenances"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenances"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainMaintenancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainMaintenancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
@@ -2234,6 +2478,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
       end)
 
+      api.add_operation(:start_domain_maintenance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDomainMaintenance"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance"
+        o.input = Shapes::ShapeRef.new(shape: StartDomainMaintenanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDomainMaintenanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:start_service_software_update, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartServiceSoftwareUpdate"
         o.http_method = "POST"
@@ -2244,6 +2501,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_data_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataSource"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
       end)
 
       api.add_operation(:update_domain_config, Seahorse::Model::Operation.new.tap do |o|

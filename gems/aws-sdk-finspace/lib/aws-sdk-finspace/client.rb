@@ -490,30 +490,51 @@ module Aws::Finspace
     #
     # @option params [required, Array<Types::ChangeRequest>] :change_requests
     #   A list of change request objects that are run in order. A change
-    #   request object consists of changeType , s3Path, and a dbPath. A
+    #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
     #   changeType can has the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
     #   * DELETE – Deletes files in a database.
     #
-    #   All the change requests require a mandatory *dbPath* attribute that
-    #   defines the path within the database directory. The *s3Path* attribute
-    #   defines the s3 source file path and is required for a PUT change type.
+    #   All the change requests require a mandatory `dbPath` attribute that
+    #   defines the path within the database directory. All database paths
+    #   must start with a leading / and end with a trailing /. The `s3Path`
+    #   attribute defines the s3 source file path and is required for a PUT
+    #   change type. The `s3path` must end with a trailing / if it is a
+    #   directory and must end without a trailing / if it is a file.
     #
-    #   Here is an example of how you can use the change request object:
+    #   Here are few examples of how you can use the change request object:
     #
-    #   `[ \{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
-    #   "dbPath":"/2020.01.02/"\}, \{ "changeType": "PUT",
-    #   "s3Path":"s3://bucket/db/sym", "dbPath":"/"\}, \{ "changeType":
-    #   "DELETE", "dbPath": "/2020.01.01/"\} ]`
+    #   1.  This request adds a single sym file at database root location.
     #
-    #   In this example, the first request with *PUT* change type allows you
-    #   to add files in the given s3Path under the *2020.01.02* partition of
-    #   the database. The second request with *PUT* change type allows you to
-    #   add a single sym file at database root location. The last request with
-    #   *DELETE* change type allows you to delete the files under the
-    #   *2020.01.01* partition of the database.
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/sym",
+    #       "dbPath":"/"\}`
+    #
+    #   2.  This request adds files in the given `s3Path` under the 2020.01.02
+    #       partition of the database.
+    #
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+    #       "dbPath":"/2020.01.02/"\}`
+    #
+    #   3.  This request adds files in the given `s3Path` under the *taq*
+    #       table partition of the database.
+    #
+    #       `[ \{ "changeType": "PUT",
+    #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
+    #
+    #   4.  This request deletes the 2020.01.02 partition of the database.
+    #
+    #       `[\{ "changeType": "DELETE", "dbPath": "/2020.01.02/"\} ]`
+    #
+    #   5.  The *DELETE* request allows you to delete the existing files under
+    #       the 2020.01.02 partition of the database, and the *PUT* request
+    #       adds a new taq table under it.
+    #
+    #       `[ \{"changeType": "DELETE", "dbPath":"/2020.01.02/"\},
+    #       \{"changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
     #
     # @option params [required, String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -606,6 +627,25 @@ module Aws::Finspace
     #     logic using the initialization scripts and custom code. This type of
     #     cluster does not require a writable local storage.
     #
+    #   * GP – A general purpose cluster allows you to quickly iterate on code
+    #     during development by granting greater access to system commands and
+    #     enabling a fast reload of custom code. This cluster type can
+    #     optionally mount databases including cache and savedown storage. For
+    #     this cluster type, the node count is fixed at 1. It does not support
+    #     autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to feed
+    #     handlers based on IAM permissions. It can publish to RDBs, other
+    #     Tickerplants, and real-time subscribers (RTS). Tickerplants can
+    #     persist messages to log, which is readable by any RDB environment.
+    #     It supports only single-node that is only one kdb process.
+    #
+    # @option params [Types::TickerplantLogConfiguration] :tickerplant_log_configuration
+    #   A configuration to store Tickerplant logs. It consists of a list of
+    #   volumes that will be mounted to your cluster. For the cluster type
+    #   `Tickerplant`, the location of the TP volume on the cluster will be
+    #   available by using the global variable `.aws.tp_log_path`.
+    #
     # @option params [Array<Types::KxDatabaseConfiguration>] :databases
     #   A list of databases that will be available for querying.
     #
@@ -621,14 +661,14 @@ module Aws::Finspace
     # @option params [String] :cluster_description
     #   A description of the cluster.
     #
-    # @option params [required, Types::CapacityConfiguration] :capacity_configuration
+    # @option params [Types::CapacityConfiguration] :capacity_configuration
     #   A structure for the metadata of a cluster. It includes information
     #   like the CPUs needed, memory of instances, and number of instances.
     #
     # @option params [required, String] :release_label
     #   The version of FinSpace managed kdb to run.
     #
-    # @option params [Types::VpcConfiguration] :vpc_configuration
+    # @option params [required, Types::VpcConfiguration] :vpc_configuration
     #   Configuration details about the network where the Privatelink endpoint
     #   of the cluster resides.
     #
@@ -673,6 +713,10 @@ module Aws::Finspace
     #   A list of key-value pairs to label the cluster. You can add up to 50
     #   tags to a cluster.
     #
+    # @option params [Types::KxScalingGroupConfiguration] :scaling_group_configuration
+    #   The structure that stores the configuration details of a scaling
+    #   group.
+    #
     # @return [Types::CreateKxClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateKxClusterResponse#environment_id #environment_id} => String
@@ -680,6 +724,8 @@ module Aws::Finspace
     #   * {Types::CreateKxClusterResponse#status_reason #status_reason} => String
     #   * {Types::CreateKxClusterResponse#cluster_name #cluster_name} => String
     #   * {Types::CreateKxClusterResponse#cluster_type #cluster_type} => String
+    #   * {Types::CreateKxClusterResponse#tickerplant_log_configuration #tickerplant_log_configuration} => Types::TickerplantLogConfiguration
+    #   * {Types::CreateKxClusterResponse#volumes #volumes} => Array&lt;Types::Volume&gt;
     #   * {Types::CreateKxClusterResponse#databases #databases} => Array&lt;Types::KxDatabaseConfiguration&gt;
     #   * {Types::CreateKxClusterResponse#cache_storage_configurations #cache_storage_configurations} => Array&lt;Types::KxCacheStorageConfiguration&gt;
     #   * {Types::CreateKxClusterResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
@@ -696,6 +742,7 @@ module Aws::Finspace
     #   * {Types::CreateKxClusterResponse#az_mode #az_mode} => String
     #   * {Types::CreateKxClusterResponse#availability_zone_id #availability_zone_id} => String
     #   * {Types::CreateKxClusterResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateKxClusterResponse#scaling_group_configuration #scaling_group_configuration} => Types::KxScalingGroupConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -703,7 +750,10 @@ module Aws::Finspace
     #     client_token: "ClientToken",
     #     environment_id: "KxEnvironmentId", # required
     #     cluster_name: "KxClusterName", # required
-    #     cluster_type: "HDB", # required, accepts HDB, RDB, GATEWAY
+    #     cluster_type: "HDB", # required, accepts HDB, RDB, GATEWAY, GP, TICKERPLANT
+    #     tickerplant_log_configuration: {
+    #       tickerplant_log_volumes: ["VolumeName"],
+    #     },
     #     databases: [
     #       {
     #         database_name: "DatabaseName", # required
@@ -711,9 +761,22 @@ module Aws::Finspace
     #           {
     #             cache_type: "KxCacheStorageType", # required
     #             db_paths: ["DbPath"], # required
+    #             dataview_name: "KxDataviewName",
     #           },
     #         ],
     #         changeset_id: "ChangesetId",
+    #         dataview_name: "KxDataviewName",
+    #         dataview_configuration: {
+    #           dataview_name: "KxDataviewName",
+    #           dataview_version_id: "VersionId",
+    #           changeset_id: "ChangesetId",
+    #           segment_configurations: [
+    #             {
+    #               db_paths: ["DbPath"], # required
+    #               volume_name: "KxVolumeName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     cache_storage_configurations: [
@@ -731,12 +794,12 @@ module Aws::Finspace
     #       scale_out_cooldown_seconds: 1.0,
     #     },
     #     cluster_description: "KxClusterDescription",
-    #     capacity_configuration: { # required
+    #     capacity_configuration: {
     #       node_type: "NodeType",
     #       node_count: 1,
     #     },
     #     release_label: "ReleaseLabel", # required
-    #     vpc_configuration: {
+    #     vpc_configuration: { # required
     #       vpc_id: "VpcIdString",
     #       security_group_ids: ["SecurityGroupIdString"],
     #       subnet_ids: ["SubnetIdString"],
@@ -756,13 +819,21 @@ module Aws::Finspace
     #     },
     #     execution_role: "ExecutionRoleArn",
     #     savedown_storage_configuration: {
-    #       type: "SDS01", # required, accepts SDS01
-    #       size: 1, # required
+    #       type: "SDS01", # accepts SDS01
+    #       size: 1,
+    #       volume_name: "KxVolumeName",
     #     },
     #     az_mode: "SINGLE", # required, accepts SINGLE, MULTI
     #     availability_zone_id: "AvailabilityZoneId",
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     scaling_group_configuration: {
+    #       scaling_group_name: "KxScalingGroupName", # required
+    #       memory_limit: 1,
+    #       memory_reservation: 1, # required
+    #       node_count: 1, # required
+    #       cpu: 1.0,
     #     },
     #   })
     #
@@ -772,14 +843,28 @@ module Aws::Finspace
     #   resp.status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.cluster_name #=> String
-    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY", "GP", "TICKERPLANT"
+    #   resp.tickerplant_log_configuration.tickerplant_log_volumes #=> Array
+    #   resp.tickerplant_log_configuration.tickerplant_log_volumes[0] #=> String
+    #   resp.volumes #=> Array
+    #   resp.volumes[0].volume_name #=> String
+    #   resp.volumes[0].volume_type #=> String, one of "NAS_1"
     #   resp.databases #=> Array
     #   resp.databases[0].database_name #=> String
     #   resp.databases[0].cache_configurations #=> Array
     #   resp.databases[0].cache_configurations[0].cache_type #=> String
     #   resp.databases[0].cache_configurations[0].db_paths #=> Array
     #   resp.databases[0].cache_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].cache_configurations[0].dataview_name #=> String
     #   resp.databases[0].changeset_id #=> String
+    #   resp.databases[0].dataview_name #=> String
+    #   resp.databases[0].dataview_configuration.dataview_name #=> String
+    #   resp.databases[0].dataview_configuration.dataview_version_id #=> String
+    #   resp.databases[0].dataview_configuration.changeset_id #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations #=> Array
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths #=> Array
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].volume_name #=> String
     #   resp.cache_storage_configurations #=> Array
     #   resp.cache_storage_configurations[0].type #=> String
     #   resp.cache_storage_configurations[0].size #=> Integer
@@ -810,9 +895,15 @@ module Aws::Finspace
     #   resp.last_modified_timestamp #=> Time
     #   resp.savedown_storage_configuration.type #=> String, one of "SDS01"
     #   resp.savedown_storage_configuration.size #=> Integer
+    #   resp.savedown_storage_configuration.volume_name #=> String
     #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
     #   resp.availability_zone_id #=> String
     #   resp.created_timestamp #=> Time
+    #   resp.scaling_group_configuration.scaling_group_name #=> String
+    #   resp.scaling_group_configuration.memory_limit #=> Integer
+    #   resp.scaling_group_configuration.memory_reservation #=> Integer
+    #   resp.scaling_group_configuration.node_count #=> Integer
+    #   resp.scaling_group_configuration.cpu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxCluster AWS API Documentation
     #
@@ -883,6 +974,126 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Creates a snapshot of kdb database with tiered storage capabilities
+    # and a pre-warmed cache, ready for mounting on kdb clusters. Dataviews
+    # are only available for clusters running on a scaling group. They are
+    # not supported on dedicated clusters.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, where you want to create
+    #   the dataview.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where you want to create a dataview.
+    #
+    # @option params [required, String] :dataview_name
+    #   A unique identifier for the dataview.
+    #
+    # @option params [required, String] :az_mode
+    #   The number of availability zones you want to assign per cluster. This
+    #   can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #
+    # @option params [String] :availability_zone_id
+    #   The identifier of the availability zones.
+    #
+    # @option params [String] :changeset_id
+    #   A unique identifier of the changeset that you want to use to ingest
+    #   data.
+    #
+    # @option params [Array<Types::KxDataviewSegmentConfiguration>] :segment_configurations
+    #   The configuration that contains the database path of the data that you
+    #   want to place on each selected volume. Each segment must have a unique
+    #   database path for each volume. If you do not explicitly specify any
+    #   database path for a volume, they are accessible from the cluster
+    #   through the default S3/object store segment.
+    #
+    # @option params [Boolean] :auto_update
+    #   The option to specify whether you want to apply all the future
+    #   additions and corrections automatically to the dataview, when you
+    #   ingest new changesets. The default value is false.
+    #
+    # @option params [String] :description
+    #   A description of the dataview.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the dataview. You can add up to 50
+    #   tags to a dataview.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateKxDataviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxDataviewResponse#dataview_name #dataview_name} => String
+    #   * {Types::CreateKxDataviewResponse#database_name #database_name} => String
+    #   * {Types::CreateKxDataviewResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxDataviewResponse#az_mode #az_mode} => String
+    #   * {Types::CreateKxDataviewResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::CreateKxDataviewResponse#changeset_id #changeset_id} => String
+    #   * {Types::CreateKxDataviewResponse#segment_configurations #segment_configurations} => Array&lt;Types::KxDataviewSegmentConfiguration&gt;
+    #   * {Types::CreateKxDataviewResponse#description #description} => String
+    #   * {Types::CreateKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::CreateKxDataviewResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::CreateKxDataviewResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_dataview({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     dataview_name: "KxDataviewName", # required
+    #     az_mode: "SINGLE", # required, accepts SINGLE, MULTI
+    #     availability_zone_id: "AvailabilityZoneId",
+    #     changeset_id: "ChangesetId",
+    #     segment_configurations: [
+    #       {
+    #         db_paths: ["DbPath"], # required
+    #         volume_name: "KxVolumeName", # required
+    #       },
+    #     ],
+    #     auto_update: false,
+    #     description: "Description",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataview_name #=> String
+    #   resp.database_name #=> String
+    #   resp.environment_id #=> String
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_id #=> String
+    #   resp.changeset_id #=> String
+    #   resp.segment_configurations #=> Array
+    #   resp.segment_configurations[0].db_paths #=> Array
+    #   resp.segment_configurations[0].db_paths[0] #=> String
+    #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.description #=> String
+    #   resp.auto_update #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxDataview AWS API Documentation
+    #
+    # @overload create_kx_dataview(params = {})
+    # @param [Hash] params ({})
+    def create_kx_dataview(params = {}, options = {})
+      req = build_request(:create_kx_dataview, params)
+      req.send_request(options)
+    end
+
     # Creates a managed kdb environment for the account.
     #
     # @option params [required, String] :name
@@ -900,6 +1111,9 @@ module Aws::Finspace
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateKxEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -942,6 +1156,74 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Creates a new scaling group.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, where you want to create
+    #   the scaling group.
+    #
+    # @option params [required, String] :scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #
+    # @option params [required, String] :host_type
+    #   The memory and CPU capabilities of the scaling group host on which
+    #   FinSpace Managed kdb clusters will be placed.
+    #
+    # @option params [required, String] :availability_zone_id
+    #   The identifier of the availability zones.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the scaling group. You can add up
+    #   to 50 tags to a scaling group.
+    #
+    # @return [Types::CreateKxScalingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxScalingGroupResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxScalingGroupResponse#scaling_group_name #scaling_group_name} => String
+    #   * {Types::CreateKxScalingGroupResponse#host_type #host_type} => String
+    #   * {Types::CreateKxScalingGroupResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::CreateKxScalingGroupResponse#status #status} => String
+    #   * {Types::CreateKxScalingGroupResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::CreateKxScalingGroupResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_scaling_group({
+    #     client_token: "ClientToken", # required
+    #     environment_id: "KxEnvironmentId", # required
+    #     scaling_group_name: "KxScalingGroupName", # required
+    #     host_type: "KxHostType", # required
+    #     availability_zone_id: "AvailabilityZoneId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.scaling_group_name #=> String
+    #   resp.host_type #=> String
+    #   resp.availability_zone_id #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxScalingGroup AWS API Documentation
+    #
+    # @overload create_kx_scaling_group(params = {})
+    # @param [Hash] params ({})
+    def create_kx_scaling_group(params = {}, options = {})
+      req = build_request(:create_kx_scaling_group, params)
+      req.send_request(options)
+    end
+
     # Creates a user in FinSpace kdb environment with an associated IAM
     # role.
     #
@@ -961,6 +1243,9 @@ module Aws::Finspace
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateKxUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -994,6 +1279,104 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def create_kx_user(params = {}, options = {})
       req = build_request(:create_kx_user, params)
+      req.send_request(options)
+    end
+
+    # Creates a new volume with a specific amount of throughput and storage
+    # capacity.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, whose clusters can attach
+    #   to the volume.
+    #
+    # @option params [required, String] :volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type. When you select `NAS_1` volume type, you must
+    #   also provide `nas1Configuration`.
+    #
+    # @option params [required, String] :volume_name
+    #   A unique identifier for the volume.
+    #
+    # @option params [String] :description
+    #   A description of the volume.
+    #
+    # @option params [Types::KxNAS1Configuration] :nas1_configuration
+    #   Specifies the configuration for the Network attached storage (NAS\_1)
+    #   file system volume. This parameter is required when you choose
+    #   `volumeType` as *NAS\_1*.
+    #
+    # @option params [required, String] :az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #
+    # @option params [required, Array<String>] :availability_zone_ids
+    #   The identifier of the availability zones.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the volume. You can add up to 50
+    #   tags to a volume.
+    #
+    # @return [Types::CreateKxVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxVolumeResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxVolumeResponse#volume_name #volume_name} => String
+    #   * {Types::CreateKxVolumeResponse#volume_type #volume_type} => String
+    #   * {Types::CreateKxVolumeResponse#volume_arn #volume_arn} => String
+    #   * {Types::CreateKxVolumeResponse#nas1_configuration #nas1_configuration} => Types::KxNAS1Configuration
+    #   * {Types::CreateKxVolumeResponse#status #status} => String
+    #   * {Types::CreateKxVolumeResponse#status_reason #status_reason} => String
+    #   * {Types::CreateKxVolumeResponse#az_mode #az_mode} => String
+    #   * {Types::CreateKxVolumeResponse#description #description} => String
+    #   * {Types::CreateKxVolumeResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #   * {Types::CreateKxVolumeResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_volume({
+    #     client_token: "ClientToken",
+    #     environment_id: "KxEnvironmentId", # required
+    #     volume_type: "NAS_1", # required, accepts NAS_1
+    #     volume_name: "KxVolumeName", # required
+    #     description: "Description",
+    #     nas1_configuration: {
+    #       type: "SSD_1000", # accepts SSD_1000, SSD_250, HDD_12
+    #       size: 1,
+    #     },
+    #     az_mode: "SINGLE", # required, accepts SINGLE, MULTI
+    #     availability_zone_ids: ["AvailabilityZoneId"], # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.volume_name #=> String
+    #   resp.volume_type #=> String, one of "NAS_1"
+    #   resp.volume_arn #=> String
+    #   resp.nas1_configuration.type #=> String, one of "SSD_1000", "SSD_250", "HDD_12"
+    #   resp.nas1_configuration.size #=> Integer
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.description #=> String
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxVolume AWS API Documentation
+    #
+    # @overload create_kx_volume(params = {})
+    # @param [Hash] params ({})
+    def create_kx_volume(params = {}, options = {})
+      req = build_request(:create_kx_volume, params)
       req.send_request(options)
     end
 
@@ -1087,6 +1470,45 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Deletes the specified dataview. Before deleting a dataview, make sure
+    # that it is not in use by any cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   delete the dataview.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database whose dataview you want to delete.
+    #
+    # @option params [required, String] :dataview_name
+    #   The name of the dataview that you want to delete.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_dataview({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     dataview_name: "KxDataviewName", # required
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxDataview AWS API Documentation
+    #
+    # @overload delete_kx_dataview(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_dataview(params = {}, options = {})
+      req = build_request(:delete_kx_dataview, params)
+      req.send_request(options)
+    end
+
     # Deletes the kdb environment. This action is irreversible. Deleting a
     # kdb environment will remove all the associated data and any services
     # running in it.
@@ -1094,12 +1516,19 @@ module Aws::Finspace
     # @option params [required, String] :environment_id
     #   A unique identifier for the kdb environment.
     #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_kx_environment({
     #     environment_id: "IdType", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxEnvironment AWS API Documentation
@@ -1111,6 +1540,42 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Deletes the specified scaling group. This action is irreversible. You
+    # cannot delete a scaling group until all the clusters running on it
+    # have been deleted.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   delete the dataview.
+    #
+    # @option params [required, String] :scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_scaling_group({
+    #     environment_id: "KxEnvironmentId", # required
+    #     scaling_group_name: "KxScalingGroupName", # required
+    #     client_token: "ClientTokenString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxScalingGroup AWS API Documentation
+    #
+    # @overload delete_kx_scaling_group(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_scaling_group(params = {}, options = {})
+      req = build_request(:delete_kx_scaling_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a user in the specified kdb environment.
     #
     # @option params [required, String] :user_name
@@ -1119,6 +1584,12 @@ module Aws::Finspace
     # @option params [required, String] :environment_id
     #   A unique identifier for the kdb environment.
     #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1126,6 +1597,7 @@ module Aws::Finspace
     #   resp = client.delete_kx_user({
     #     user_name: "KxUserNameString", # required
     #     environment_id: "IdType", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxUser AWS API Documentation
@@ -1134,6 +1606,42 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def delete_kx_user(params = {}, options = {})
       req = build_request(:delete_kx_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes a volume. You can only delete a volume if it's not attached
+    # to a cluster or a dataview. When a volume is deleted, any data on the
+    # volume is lost. This action is irreversible.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, whose clusters can attach
+    #   to the volume.
+    #
+    # @option params [required, String] :volume_name
+    #   The name of the volume that you want to delete.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_volume({
+    #     environment_id: "KxEnvironmentId", # required
+    #     volume_name: "KxVolumeName", # required
+    #     client_token: "ClientTokenString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxVolume AWS API Documentation
+    #
+    # @overload delete_kx_volume(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_volume(params = {}, options = {})
+      req = build_request(:delete_kx_volume, params)
       req.send_request(options)
     end
 
@@ -1253,6 +1761,8 @@ module Aws::Finspace
     #   * {Types::GetKxClusterResponse#status_reason #status_reason} => String
     #   * {Types::GetKxClusterResponse#cluster_name #cluster_name} => String
     #   * {Types::GetKxClusterResponse#cluster_type #cluster_type} => String
+    #   * {Types::GetKxClusterResponse#tickerplant_log_configuration #tickerplant_log_configuration} => Types::TickerplantLogConfiguration
+    #   * {Types::GetKxClusterResponse#volumes #volumes} => Array&lt;Types::Volume&gt;
     #   * {Types::GetKxClusterResponse#databases #databases} => Array&lt;Types::KxDatabaseConfiguration&gt;
     #   * {Types::GetKxClusterResponse#cache_storage_configurations #cache_storage_configurations} => Array&lt;Types::KxCacheStorageConfiguration&gt;
     #   * {Types::GetKxClusterResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
@@ -1269,6 +1779,7 @@ module Aws::Finspace
     #   * {Types::GetKxClusterResponse#az_mode #az_mode} => String
     #   * {Types::GetKxClusterResponse#availability_zone_id #availability_zone_id} => String
     #   * {Types::GetKxClusterResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetKxClusterResponse#scaling_group_configuration #scaling_group_configuration} => Types::KxScalingGroupConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1282,14 +1793,28 @@ module Aws::Finspace
     #   resp.status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.cluster_name #=> String
-    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY", "GP", "TICKERPLANT"
+    #   resp.tickerplant_log_configuration.tickerplant_log_volumes #=> Array
+    #   resp.tickerplant_log_configuration.tickerplant_log_volumes[0] #=> String
+    #   resp.volumes #=> Array
+    #   resp.volumes[0].volume_name #=> String
+    #   resp.volumes[0].volume_type #=> String, one of "NAS_1"
     #   resp.databases #=> Array
     #   resp.databases[0].database_name #=> String
     #   resp.databases[0].cache_configurations #=> Array
     #   resp.databases[0].cache_configurations[0].cache_type #=> String
     #   resp.databases[0].cache_configurations[0].db_paths #=> Array
     #   resp.databases[0].cache_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].cache_configurations[0].dataview_name #=> String
     #   resp.databases[0].changeset_id #=> String
+    #   resp.databases[0].dataview_name #=> String
+    #   resp.databases[0].dataview_configuration.dataview_name #=> String
+    #   resp.databases[0].dataview_configuration.dataview_version_id #=> String
+    #   resp.databases[0].dataview_configuration.changeset_id #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations #=> Array
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths #=> Array
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].volume_name #=> String
     #   resp.cache_storage_configurations #=> Array
     #   resp.cache_storage_configurations[0].type #=> String
     #   resp.cache_storage_configurations[0].size #=> Integer
@@ -1320,9 +1845,15 @@ module Aws::Finspace
     #   resp.last_modified_timestamp #=> Time
     #   resp.savedown_storage_configuration.type #=> String, one of "SDS01"
     #   resp.savedown_storage_configuration.size #=> Integer
+    #   resp.savedown_storage_configuration.volume_name #=> String
     #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
     #   resp.availability_zone_id #=> String
     #   resp.created_timestamp #=> Time
+    #   resp.scaling_group_configuration.scaling_group_name #=> String
+    #   resp.scaling_group_configuration.memory_limit #=> Integer
+    #   resp.scaling_group_configuration.memory_reservation #=> Integer
+    #   resp.scaling_group_configuration.node_count #=> Integer
+    #   resp.scaling_group_configuration.cpu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxCluster AWS API Documentation
     #
@@ -1427,6 +1958,81 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Retrieves details of the dataview.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   retrieve the dataview details.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where you created the dataview.
+    #
+    # @option params [required, String] :dataview_name
+    #   A unique identifier for the dataview.
+    #
+    # @return [Types::GetKxDataviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxDataviewResponse#database_name #database_name} => String
+    #   * {Types::GetKxDataviewResponse#dataview_name #dataview_name} => String
+    #   * {Types::GetKxDataviewResponse#az_mode #az_mode} => String
+    #   * {Types::GetKxDataviewResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::GetKxDataviewResponse#changeset_id #changeset_id} => String
+    #   * {Types::GetKxDataviewResponse#segment_configurations #segment_configurations} => Array&lt;Types::KxDataviewSegmentConfiguration&gt;
+    #   * {Types::GetKxDataviewResponse#active_versions #active_versions} => Array&lt;Types::KxDataviewActiveVersion&gt;
+    #   * {Types::GetKxDataviewResponse#description #description} => String
+    #   * {Types::GetKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::GetKxDataviewResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxDataviewResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxDataviewResponse#status #status} => String
+    #   * {Types::GetKxDataviewResponse#status_reason #status_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_dataview({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     dataview_name: "KxDataviewName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.dataview_name #=> String
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_id #=> String
+    #   resp.changeset_id #=> String
+    #   resp.segment_configurations #=> Array
+    #   resp.segment_configurations[0].db_paths #=> Array
+    #   resp.segment_configurations[0].db_paths[0] #=> String
+    #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.active_versions #=> Array
+    #   resp.active_versions[0].changeset_id #=> String
+    #   resp.active_versions[0].segment_configurations #=> Array
+    #   resp.active_versions[0].segment_configurations[0].db_paths #=> Array
+    #   resp.active_versions[0].segment_configurations[0].db_paths[0] #=> String
+    #   resp.active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.active_versions[0].attached_clusters #=> Array
+    #   resp.active_versions[0].attached_clusters[0] #=> String
+    #   resp.active_versions[0].created_timestamp #=> Time
+    #   resp.active_versions[0].version_id #=> String
+    #   resp.description #=> String
+    #   resp.auto_update #=> Boolean
+    #   resp.environment_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
+    #   resp.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxDataview AWS API Documentation
+    #
+    # @overload get_kx_dataview(params = {})
+    # @param [Hash] params ({})
+    def get_kx_dataview(params = {}, options = {})
+      req = build_request(:get_kx_dataview, params)
+      req.send_request(options)
+    end
+
     # Retrieves all the information for the specified kdb environment.
     #
     # @option params [required, String] :environment_id
@@ -1500,6 +2106,55 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Retrieves details of a scaling group.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #
+    # @return [Types::GetKxScalingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxScalingGroupResponse#scaling_group_name #scaling_group_name} => String
+    #   * {Types::GetKxScalingGroupResponse#scaling_group_arn #scaling_group_arn} => String
+    #   * {Types::GetKxScalingGroupResponse#host_type #host_type} => String
+    #   * {Types::GetKxScalingGroupResponse#clusters #clusters} => Array&lt;String&gt;
+    #   * {Types::GetKxScalingGroupResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::GetKxScalingGroupResponse#status #status} => String
+    #   * {Types::GetKxScalingGroupResponse#status_reason #status_reason} => String
+    #   * {Types::GetKxScalingGroupResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxScalingGroupResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_scaling_group({
+    #     environment_id: "KxEnvironmentId", # required
+    #     scaling_group_name: "KxScalingGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scaling_group_name #=> String
+    #   resp.scaling_group_arn #=> String
+    #   resp.host_type #=> String
+    #   resp.clusters #=> Array
+    #   resp.clusters[0] #=> String
+    #   resp.availability_zone_id #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxScalingGroup AWS API Documentation
+    #
+    # @overload get_kx_scaling_group(params = {})
+    # @param [Hash] params ({})
+    def get_kx_scaling_group(params = {}, options = {})
+      req = build_request(:get_kx_scaling_group, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified kdb user.
     #
     # @option params [required, String] :user_name
@@ -1535,6 +2190,68 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def get_kx_user(params = {}, options = {})
       req = build_request(:get_kx_user, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the information about the volume.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, whose clusters can attach
+    #   to the volume.
+    #
+    # @option params [required, String] :volume_name
+    #   A unique identifier for the volume.
+    #
+    # @return [Types::GetKxVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxVolumeResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxVolumeResponse#volume_name #volume_name} => String
+    #   * {Types::GetKxVolumeResponse#volume_type #volume_type} => String
+    #   * {Types::GetKxVolumeResponse#volume_arn #volume_arn} => String
+    #   * {Types::GetKxVolumeResponse#nas1_configuration #nas1_configuration} => Types::KxNAS1Configuration
+    #   * {Types::GetKxVolumeResponse#status #status} => String
+    #   * {Types::GetKxVolumeResponse#status_reason #status_reason} => String
+    #   * {Types::GetKxVolumeResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetKxVolumeResponse#description #description} => String
+    #   * {Types::GetKxVolumeResponse#az_mode #az_mode} => String
+    #   * {Types::GetKxVolumeResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #   * {Types::GetKxVolumeResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxVolumeResponse#attached_clusters #attached_clusters} => Array&lt;Types::KxAttachedCluster&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_volume({
+    #     environment_id: "KxEnvironmentId", # required
+    #     volume_name: "KxVolumeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.volume_name #=> String
+    #   resp.volume_type #=> String, one of "NAS_1"
+    #   resp.volume_arn #=> String
+    #   resp.nas1_configuration.type #=> String, one of "SSD_1000", "SSD_250", "HDD_12"
+    #   resp.nas1_configuration.size #=> Integer
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.description #=> String
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.attached_clusters #=> Array
+    #   resp.attached_clusters[0].cluster_name #=> String
+    #   resp.attached_clusters[0].cluster_type #=> String, one of "HDB", "RDB", "GATEWAY", "GP", "TICKERPLANT"
+    #   resp.attached_clusters[0].cluster_status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxVolume AWS API Documentation
+    #
+    # @overload get_kx_volume(params = {})
+    # @param [Hash] params ({})
+    def get_kx_volume(params = {}, options = {})
+      req = build_request(:get_kx_volume, params)
       req.send_request(options)
     end
 
@@ -1715,6 +2432,19 @@ module Aws::Finspace
     #     logic using the initialization scripts and custom code. This type of
     #     cluster does not require a writable local storage.
     #
+    #   * GP – A general purpose cluster allows you to quickly iterate on code
+    #     during development by granting greater access to system commands and
+    #     enabling a fast reload of custom code. This cluster type can
+    #     optionally mount databases including cache and savedown storage. For
+    #     this cluster type, the node count is fixed at 1. It does not support
+    #     autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to feed
+    #     handlers based on IAM permissions. It can publish to RDBs, other
+    #     Tickerplants, and real-time subscribers (RTS). Tickerplants can
+    #     persist messages to log, which is readable by any RDB environment.
+    #     It supports only single-node that is only one kdb process.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
@@ -1730,7 +2460,7 @@ module Aws::Finspace
     #
     #   resp = client.list_kx_clusters({
     #     environment_id: "KxEnvironmentId", # required
-    #     cluster_type: "HDB", # accepts HDB, RDB, GATEWAY
+    #     cluster_type: "HDB", # accepts HDB, RDB, GATEWAY, GP, TICKERPLANT
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1741,9 +2471,12 @@ module Aws::Finspace
     #   resp.kx_cluster_summaries[0].status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.kx_cluster_summaries[0].status_reason #=> String
     #   resp.kx_cluster_summaries[0].cluster_name #=> String
-    #   resp.kx_cluster_summaries[0].cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.kx_cluster_summaries[0].cluster_type #=> String, one of "HDB", "RDB", "GATEWAY", "GP", "TICKERPLANT"
     #   resp.kx_cluster_summaries[0].cluster_description #=> String
     #   resp.kx_cluster_summaries[0].release_label #=> String
+    #   resp.kx_cluster_summaries[0].volumes #=> Array
+    #   resp.kx_cluster_summaries[0].volumes[0].volume_name #=> String
+    #   resp.kx_cluster_summaries[0].volumes[0].volume_type #=> String, one of "NAS_1"
     #   resp.kx_cluster_summaries[0].initialization_script #=> String
     #   resp.kx_cluster_summaries[0].execution_role #=> String
     #   resp.kx_cluster_summaries[0].az_mode #=> String, one of "SINGLE", "MULTI"
@@ -1801,6 +2534,77 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def list_kx_databases(params = {}, options = {})
       req = build_request(:list_kx_databases, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the dataviews in the database.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, for which you want to
+    #   retrieve a list of dataviews.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the dataviews were created.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxDataviewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxDataviewsResponse#kx_dataviews #kx_dataviews} => Array&lt;Types::KxDataviewListEntry&gt;
+    #   * {Types::ListKxDataviewsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_dataviews({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kx_dataviews #=> Array
+    #   resp.kx_dataviews[0].environment_id #=> String
+    #   resp.kx_dataviews[0].database_name #=> String
+    #   resp.kx_dataviews[0].dataview_name #=> String
+    #   resp.kx_dataviews[0].az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.kx_dataviews[0].availability_zone_id #=> String
+    #   resp.kx_dataviews[0].changeset_id #=> String
+    #   resp.kx_dataviews[0].segment_configurations #=> Array
+    #   resp.kx_dataviews[0].segment_configurations[0].db_paths #=> Array
+    #   resp.kx_dataviews[0].segment_configurations[0].db_paths[0] #=> String
+    #   resp.kx_dataviews[0].segment_configurations[0].volume_name #=> String
+    #   resp.kx_dataviews[0].active_versions #=> Array
+    #   resp.kx_dataviews[0].active_versions[0].changeset_id #=> String
+    #   resp.kx_dataviews[0].active_versions[0].segment_configurations #=> Array
+    #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].db_paths #=> Array
+    #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].db_paths[0] #=> String
+    #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.kx_dataviews[0].active_versions[0].attached_clusters #=> Array
+    #   resp.kx_dataviews[0].active_versions[0].attached_clusters[0] #=> String
+    #   resp.kx_dataviews[0].active_versions[0].created_timestamp #=> Time
+    #   resp.kx_dataviews[0].active_versions[0].version_id #=> String
+    #   resp.kx_dataviews[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
+    #   resp.kx_dataviews[0].description #=> String
+    #   resp.kx_dataviews[0].auto_update #=> Boolean
+    #   resp.kx_dataviews[0].created_timestamp #=> Time
+    #   resp.kx_dataviews[0].last_modified_timestamp #=> Time
+    #   resp.kx_dataviews[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxDataviews AWS API Documentation
+    #
+    # @overload list_kx_dataviews(params = {})
+    # @param [Hash] params ({})
+    def list_kx_dataviews(params = {}, options = {})
+      req = build_request(:list_kx_dataviews, params)
       req.send_request(options)
     end
 
@@ -1870,6 +2674,56 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Returns a list of scaling groups in a kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, for which you want to
+    #   retrieve a list of scaling groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @return [Types::ListKxScalingGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxScalingGroupsResponse#scaling_groups #scaling_groups} => Array&lt;Types::KxScalingGroup&gt;
+    #   * {Types::ListKxScalingGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_scaling_groups({
+    #     environment_id: "KxEnvironmentId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scaling_groups #=> Array
+    #   resp.scaling_groups[0].scaling_group_name #=> String
+    #   resp.scaling_groups[0].host_type #=> String
+    #   resp.scaling_groups[0].clusters #=> Array
+    #   resp.scaling_groups[0].clusters[0] #=> String
+    #   resp.scaling_groups[0].availability_zone_id #=> String
+    #   resp.scaling_groups[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.scaling_groups[0].status_reason #=> String
+    #   resp.scaling_groups[0].last_modified_timestamp #=> Time
+    #   resp.scaling_groups[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxScalingGroups AWS API Documentation
+    #
+    # @overload list_kx_scaling_groups(params = {})
+    # @param [Hash] params ({})
+    def list_kx_scaling_groups(params = {}, options = {})
+      req = build_request(:list_kx_scaling_groups, params)
+      req.send_request(options)
+    end
+
     # Lists all the users in a kdb environment.
     #
     # @option params [required, String] :environment_id
@@ -1910,6 +2764,60 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def list_kx_users(params = {}, options = {})
       req = build_request(:list_kx_users, params)
+      req.send_request(options)
+    end
+
+    # Lists all the volumes in a kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, whose clusters can attach
+    #   to the volume.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [String] :volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #
+    # @return [Types::ListKxVolumesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxVolumesResponse#kx_volume_summaries #kx_volume_summaries} => Array&lt;Types::KxVolume&gt;
+    #   * {Types::ListKxVolumesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_volumes({
+    #     environment_id: "KxEnvironmentId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     volume_type: "NAS_1", # accepts NAS_1
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kx_volume_summaries #=> Array
+    #   resp.kx_volume_summaries[0].volume_name #=> String
+    #   resp.kx_volume_summaries[0].volume_type #=> String, one of "NAS_1"
+    #   resp.kx_volume_summaries[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.kx_volume_summaries[0].description #=> String
+    #   resp.kx_volume_summaries[0].status_reason #=> String
+    #   resp.kx_volume_summaries[0].az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.kx_volume_summaries[0].availability_zone_ids #=> Array
+    #   resp.kx_volume_summaries[0].availability_zone_ids[0] #=> String
+    #   resp.kx_volume_summaries[0].created_timestamp #=> Time
+    #   resp.kx_volume_summaries[0].last_modified_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxVolumes AWS API Documentation
+    #
+    # @overload list_kx_volumes(params = {})
+    # @param [Hash] params ({})
+    def list_kx_volumes(params = {}, options = {})
+      req = build_request(:list_kx_volumes, params)
       req.send_request(options)
     end
 
@@ -2073,6 +2981,80 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Allows you to update code configuration on a running cluster. By using
+    # this API you can update the code, the initialization script path, and
+    # the command line arguments for a specific cluster. The configuration
+    # that you want to update will override any existing configurations on
+    # the cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier of the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::CodeConfiguration] :code
+    #   The structure of the customer code available within the running
+    #   cluster.
+    #
+    # @option params [String] :initialization_script
+    #   Specifies a Q program that will be run at launch of a cluster. It is a
+    #   relative path within *.zip* file that contains the custom code, which
+    #   will be loaded on the cluster. It must include the file name itself.
+    #   For example, `somedir/init.q`.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
+    #
+    # @option params [Array<Types::KxCommandLineArgument>] :command_line_arguments
+    #   Specifies the key-value pairs to make them available inside the
+    #   cluster.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
+    #
+    # @option params [Types::KxClusterCodeDeploymentConfiguration] :deployment_configuration
+    #   The configuration that allows you to choose how you want to update the
+    #   code on a cluster.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_cluster_code_configuration({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     client_token: "ClientTokenString",
+    #     code: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key: "S3Key",
+    #       s3_object_version: "S3ObjectVersion",
+    #     },
+    #     initialization_script: "InitializationScriptFilePath",
+    #     command_line_arguments: [
+    #       {
+    #         key: "KxCommandLineArgumentKey",
+    #         value: "KxCommandLineArgumentValue",
+    #       },
+    #     ],
+    #     deployment_configuration: {
+    #       deployment_strategy: "NO_RESTART", # required, accepts NO_RESTART, ROLLING, FORCE
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfiguration AWS API Documentation
+    #
+    # @overload update_kx_cluster_code_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_kx_cluster_code_configuration(params = {}, options = {})
+      req = build_request(:update_kx_cluster_code_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the databases mounted on a kdb cluster, which includes the
     # `changesetId` and all the dbPaths to be cached. This API does not
     # allow you to change a database name or add a database if you created a
@@ -2115,9 +3097,22 @@ module Aws::Finspace
     #           {
     #             cache_type: "KxCacheStorageType", # required
     #             db_paths: ["DbPath"], # required
+    #             dataview_name: "KxDataviewName",
     #           },
     #         ],
     #         changeset_id: "ChangesetId",
+    #         dataview_name: "KxDataviewName",
+    #         dataview_configuration: {
+    #           dataview_name: "KxDataviewName",
+    #           dataview_version_id: "VersionId",
+    #           changeset_id: "ChangesetId",
+    #           segment_configurations: [
+    #             {
+    #               db_paths: ["DbPath"], # required
+    #               volume_name: "KxVolumeName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     deployment_configuration: {
@@ -2183,6 +3178,110 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Updates the specified dataview. The dataviews get automatically
+    # updated when any new changesets are ingested. Each update of the
+    # dataview creates a new version, including changeset details and cache
+    # configurations
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment, where you want to update
+    #   the dataview.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database.
+    #
+    # @option params [required, String] :dataview_name
+    #   The name of the dataview that you want to update.
+    #
+    # @option params [String] :description
+    #   The description for a dataview.
+    #
+    # @option params [String] :changeset_id
+    #   A unique identifier for the changeset.
+    #
+    # @option params [Array<Types::KxDataviewSegmentConfiguration>] :segment_configurations
+    #   The configuration that contains the database path of the data that you
+    #   want to place on each selected volume. Each segment must have a unique
+    #   database path for each volume. If you do not explicitly specify any
+    #   database path for a volume, they are accessible from the cluster
+    #   through the default S3/object store segment.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateKxDataviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxDataviewResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxDataviewResponse#database_name #database_name} => String
+    #   * {Types::UpdateKxDataviewResponse#dataview_name #dataview_name} => String
+    #   * {Types::UpdateKxDataviewResponse#az_mode #az_mode} => String
+    #   * {Types::UpdateKxDataviewResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::UpdateKxDataviewResponse#changeset_id #changeset_id} => String
+    #   * {Types::UpdateKxDataviewResponse#segment_configurations #segment_configurations} => Array&lt;Types::KxDataviewSegmentConfiguration&gt;
+    #   * {Types::UpdateKxDataviewResponse#active_versions #active_versions} => Array&lt;Types::KxDataviewActiveVersion&gt;
+    #   * {Types::UpdateKxDataviewResponse#status #status} => String
+    #   * {Types::UpdateKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::UpdateKxDataviewResponse#description #description} => String
+    #   * {Types::UpdateKxDataviewResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::UpdateKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_dataview({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     dataview_name: "KxDataviewName", # required
+    #     description: "Description",
+    #     changeset_id: "ChangesetId",
+    #     segment_configurations: [
+    #       {
+    #         db_paths: ["DbPath"], # required
+    #         volume_name: "KxVolumeName", # required
+    #       },
+    #     ],
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.database_name #=> String
+    #   resp.dataview_name #=> String
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_id #=> String
+    #   resp.changeset_id #=> String
+    #   resp.segment_configurations #=> Array
+    #   resp.segment_configurations[0].db_paths #=> Array
+    #   resp.segment_configurations[0].db_paths[0] #=> String
+    #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.active_versions #=> Array
+    #   resp.active_versions[0].changeset_id #=> String
+    #   resp.active_versions[0].segment_configurations #=> Array
+    #   resp.active_versions[0].segment_configurations[0].db_paths #=> Array
+    #   resp.active_versions[0].segment_configurations[0].db_paths[0] #=> String
+    #   resp.active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.active_versions[0].attached_clusters #=> Array
+    #   resp.active_versions[0].attached_clusters[0] #=> String
+    #   resp.active_versions[0].created_timestamp #=> Time
+    #   resp.active_versions[0].version_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
+    #   resp.auto_update #=> Boolean
+    #   resp.description #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxDataview AWS API Documentation
+    #
+    # @overload update_kx_dataview(params = {})
+    # @param [Hash] params ({})
+    def update_kx_dataview(params = {}, options = {})
+      req = build_request(:update_kx_dataview, params)
+      req.send_request(options)
+    end
+
     # Updates information for the given kdb environment.
     #
     # @option params [required, String] :environment_id
@@ -2196,6 +3295,9 @@ module Aws::Finspace
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateKxEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2288,6 +3390,9 @@ module Aws::Finspace
     #
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateKxEnvironmentNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2397,6 +3502,9 @@ module Aws::Finspace
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateKxUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateKxUserResponse#user_name #user_name} => String
@@ -2429,6 +3537,89 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Updates the throughput or capacity of a volume. During the update
+    # process, the filesystem might be unavailable for a few minutes. You
+    # can retry any operations after the update is complete.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment where you created the
+    #   storage volume.
+    #
+    # @option params [required, String] :volume_name
+    #   A unique identifier for the volume.
+    #
+    # @option params [String] :description
+    #   A description of the volume.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::KxNAS1Configuration] :nas1_configuration
+    #   Specifies the configuration for the Network attached storage (NAS\_1)
+    #   file system volume.
+    #
+    # @return [Types::UpdateKxVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxVolumeResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxVolumeResponse#volume_name #volume_name} => String
+    #   * {Types::UpdateKxVolumeResponse#volume_type #volume_type} => String
+    #   * {Types::UpdateKxVolumeResponse#volume_arn #volume_arn} => String
+    #   * {Types::UpdateKxVolumeResponse#nas1_configuration #nas1_configuration} => Types::KxNAS1Configuration
+    #   * {Types::UpdateKxVolumeResponse#status #status} => String
+    #   * {Types::UpdateKxVolumeResponse#description #description} => String
+    #   * {Types::UpdateKxVolumeResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateKxVolumeResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::UpdateKxVolumeResponse#az_mode #az_mode} => String
+    #   * {Types::UpdateKxVolumeResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateKxVolumeResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::UpdateKxVolumeResponse#attached_clusters #attached_clusters} => Array&lt;Types::KxAttachedCluster&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_volume({
+    #     environment_id: "KxEnvironmentId", # required
+    #     volume_name: "KxVolumeName", # required
+    #     description: "Description",
+    #     client_token: "ClientTokenString",
+    #     nas1_configuration: {
+    #       type: "SSD_1000", # accepts SSD_1000, SSD_250, HDD_12
+    #       size: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.volume_name #=> String
+    #   resp.volume_type #=> String, one of "NAS_1"
+    #   resp.volume_arn #=> String
+    #   resp.nas1_configuration.type #=> String, one of "SSD_1000", "SSD_250", "HDD_12"
+    #   resp.nas1_configuration.size #=> Integer
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.description #=> String
+    #   resp.status_reason #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.attached_clusters #=> Array
+    #   resp.attached_clusters[0].cluster_name #=> String
+    #   resp.attached_clusters[0].cluster_type #=> String, one of "HDB", "RDB", "GATEWAY", "GP", "TICKERPLANT"
+    #   resp.attached_clusters[0].cluster_status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxVolume AWS API Documentation
+    #
+    # @overload update_kx_volume(params = {})
+    # @param [Hash] params ({})
+    def update_kx_volume(params = {}, options = {})
+      req = build_request(:update_kx_volume, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2442,7 +3633,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-12-12)
+------------------
+
+* Feature - This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.
+
+1.42.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2023-11-17)
+------------------
+
+* Feature - Remove default value and allow nullable for request parameters having minimum value larger than zero.
+
+1.39.0 (2023-10-12)
+------------------
+
+* Feature - This release adds endpoint updates for all AWS Location resource operations.
+
+1.38.0 (2023-10-03)
+------------------
+
+* Feature - Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response.
+
 1.37.0 (2023-09-27)
 ------------------
 

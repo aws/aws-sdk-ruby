@@ -212,6 +212,18 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteResourcePolicyInput AWS API Documentation
+    #
+    class DeleteResourcePolicyInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for DeleteStream.
     #
     # @!attribute [rw] stream_name
@@ -694,6 +706,30 @@ module Aws::Kinesis
       :next_shard_iterator,
       :millis_behind_latest,
       :child_shards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetResourcePolicyInput AWS API Documentation
+    #
+    class GetResourcePolicyInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   Details of the resource policy. This is formatted as a JSON string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetResourcePolicyOutput AWS API Documentation
+    #
+    class GetResourcePolicyOutput < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1606,6 +1642,25 @@ module Aws::Kinesis
       :shard_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   Details of the resource policy. It must include the identity of the
+    #   principal and the actions allowed on this resource. This is
+    #   formatted as a JSON string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutResourcePolicyInput AWS API Documentation
+    #
+    class PutResourcePolicyInput < Struct.new(
+      :resource_arn,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end

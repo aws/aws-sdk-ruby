@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-12-05)
+------------------
+
+* Feature - Adding IdentityCenter enabled request for interactive query
+
+1.78.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2023-11-17)
+------------------
+
+* Feature - Adding SerivicePreProcessing time metric
+
 1.75.0 (2023-09-27)
 ------------------
 

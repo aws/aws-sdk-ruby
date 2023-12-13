@@ -72,10 +72,10 @@ module Aws::RDS
       data[:master_username]
     end
 
-    # Contains the initial database name that you provided (if required)
-    # when you created the DB instance. This name is returned for the life
-    # of your DB instance. For an RDS for Oracle CDB instance, the name
-    # identifies the PDB rather than the CDB.
+    # The initial database name that you provided (if required) when you
+    # created the DB instance. This name is returned for the life of your DB
+    # instance. For an RDS for Oracle CDB instance, the name identifies the
+    # PDB rather than the CDB.
     # @return [String]
     def db_name
       data[:db_name]
@@ -757,6 +757,34 @@ module Aws::RDS
       data[:percent_progress]
     end
 
+    # Indicates whether the DB instance has a dedicated log volume (DLV)
+    # enabled.
+    # @return [Boolean]
+    def dedicated_log_volume
+      data[:dedicated_log_volume]
+    end
+
+    # Indicates whether an upgrade is recommended for the storage file
+    # system configuration on the DB instance. To migrate to the preferred
+    # configuration, you can either create a blue/green deployment, or
+    # create a read replica from the DB instance. For more information, see
+    # [Upgrading the storage file system for a DB instance][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    # @return [Boolean]
+    def is_storage_config_upgrade_available
+      data[:is_storage_config_upgrade_available]
+    end
+
+    # Specifies whether the DB instance is in the multi-tenant configuration
+    # (TRUE) or the single-tenant configuration (FALSE).
+    # @return [Boolean]
+    def multi_tenant
+      data[:multi_tenant]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -967,123 +995,140 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     db_system_id: "String",
+    #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
     #   The meaning of this parameter differs according to the database engine
     #   you use.
     #
-    #   **MySQL**
+    #   Amazon Aurora MySQL
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora MySQL DB cluster is created. If this parameter isn't
+    #     specified for an Aurora MySQL DB cluster, no database is created in
+    #     the DB cluster.
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must contain 1 to 64 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon Aurora PostgreSQL
     #
-    #   **MariaDB**
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora PostgreSQL DB cluster is created. If this parameter
+    #     isn't specified for an Aurora PostgreSQL DB cluster, a database
+    #     named `postgres` is created in the DB cluster.
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0 to 9).
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon RDS Custom for Oracle
     #
-    #   **PostgreSQL**
+    #   : The Oracle System ID (SID) of the created RDS Custom DB instance. If
+    #     you don't specify a value, the default value is `ORCL` for non-CDBs
+    #     and `RDSCDB` for CDBs.
     #
-    #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, a database named `postgres` is
-    #   created in the DB instance.
+    #     Default: `ORCL`
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 63 letters, numbers, or underscores.
+    #     * Must contain 1 to 8 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Must contain a letter.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #     * Can't be a word reserved by the database engine.
     #
-    #   **Oracle**
+    #   Amazon RDS Custom for SQL Server
     #
-    #   The Oracle System ID (SID) of the created DB instance. If you don't
-    #   specify a value, the default value is `ORCL`. You can't specify the
-    #   string `null`, or any other reserved word, for `DBName`.
+    #   : Not applicable. Must be null.
     #
-    #   Default: `ORCL`
+    #   RDS for Db2
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   * Can't be longer than 8 characters
+    #     Constraints:
     #
-    #   ^
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   **Amazon RDS Custom for Oracle**
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
-    #   you don't specify a value, the default value is `ORCL` for non-CDBs
-    #   and `RDSCDB` for CDBs.
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Default: `ORCL`
+    #   RDS for MariaDB
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   * It must contain 1 to 8 alphanumeric characters.
+    #     Constraints:
     #
-    #   * It must contain a letter.
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   * It can't be a word reserved by the database engine.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   **Amazon RDS Custom for SQL Server**
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Not applicable. Must be null.
+    #   RDS for MySQL
     #
-    #   **SQL Server**
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, no database is created in the DB
+    #     instance.
     #
-    #   Not applicable. Must be null.
+    #     Constraints:
     #
-    #   **Amazon Aurora MySQL**
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   The name of the database to create when the primary DB instance of the
-    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
-    #   for an Aurora MySQL DB cluster, no database is created in the DB
-    #   cluster.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   Constraints:
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   * It must contain 1 to 64 alphanumeric characters.
+    #   RDS for Oracle
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The Oracle System ID (SID) of the created DB instance. If you don't
+    #     specify a value, the default value is `ORCL`. You can't specify the
+    #     string `null`, or any other reserved word, for `DBName`.
     #
-    #   **Amazon Aurora PostgreSQL**
+    #     Default: `ORCL`
     #
-    #   The name of the database to create when the primary DB instance of the
-    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
-    #   specified for an Aurora PostgreSQL DB cluster, a database named
-    #   `postgres` is created in the DB cluster.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * Can't be longer than 8 characters.
     #
-    #   * It must contain 1 to 63 alphanumeric characters.
+    #     ^
     #
-    #   * It must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0 to 9).
+    #   RDS for PostgreSQL
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The name of the database to create when the DB instance is created.
+    #     If this parameter isn't specified, a database named `postgres` is
+    #     created in the DB instance.
+    #
+    #     Constraints:
+    #
+    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
+    #     * Can't be a word reserved by the specified database engine.
+    #
+    #   RDS for SQL Server
+    #
+    #   : Not applicable. Must be null.
     # @option options [Integer] :allocated_storage
     #   The amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
@@ -1105,6 +1150,17 @@ module Aws::RDS
     #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
+    #
+    #   RDS for Db2
+    #
+    #   : Constraints to the amount of storage for each storage type are the
+    #     following:
+    #
+    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
+    #       20 to 64000.
+    #
+    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #       64000.
     #
     #   RDS for MariaDB
     #
@@ -1217,6 +1273,10 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
+    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -1264,9 +1324,12 @@ module Aws::RDS
     #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   * Can include any printable ASCII character except "/", """, or
-    #     "@".
+    #     "@". For RDS for Oracle, can't include the "&amp;" (ampersand)
+    #     or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -1419,6 +1482,8 @@ module Aws::RDS
     #
     #   Default:
     #
+    #   * RDS for Db2 - `50000`
+    #
     #   * RDS for MariaDB - `3306`
     #
     #   * RDS for Microsoft SQL Server - `1433`
@@ -1474,40 +1539,46 @@ module Aws::RDS
     #   : See [RDS Custom for SQL Server general requirements][2] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Db2
+    #
+    #   : For information, see [Db2 on Amazon RDS versions][3] in the *Amazon
+    #     RDS User Guide*.
+    #
     #   RDS for MariaDB
     #
-    #   : For information, see [MariaDB on Amazon RDS versions][3] in the
+    #   : For information, see [MariaDB on Amazon RDS versions][4] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Microsoft SQL Server
     #
     #   : For information, see [Microsoft SQL Server versions on Amazon
-    #     RDS][4] in the *Amazon RDS User Guide*.
+    #     RDS][5] in the *Amazon RDS User Guide*.
     #
     #   RDS for MySQL
     #
-    #   : For information, see [MySQL on Amazon RDS versions][5] in the
+    #   : For information, see [MySQL on Amazon RDS versions][6] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Oracle
     #
-    #   : For information, see [Oracle Database Engine release notes][6] in
+    #   : For information, see [Oracle Database Engine release notes][7] in
     #     the *Amazon RDS User Guide*.
     #
     #   RDS for PostgreSQL
     #
     #   : For information, see [Amazon RDS for PostgreSQL versions and
-    #     extensions][7] in the *Amazon RDS User Guide*.
+    #     extensions][8] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Db2.html#Db2.Concepts.VersionMgmt
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
+    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
     #   the DB instance during the maintenance window. By default, minor
@@ -1522,6 +1593,8 @@ module Aws::RDS
     #   instances.
     #
     #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -1543,7 +1616,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * For RDS for MariaDB, MySQL, Oracle, and PostgreSQL - Must be a
+    #   * For RDS for Db2, MariaDB, MySQL, Oracle, and PostgreSQL - Must be a
     #     multiple between .5 and 50 of the storage amount for the DB
     #     instance.
     #
@@ -1677,8 +1750,8 @@ module Aws::RDS
     #   must explicitly specify a key.
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
-    #   Currently, only Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB
-    #   instances can be created in an Active Directory Domain.
+    #   Currently, you can create only Db2, MySQL, Microsoft SQL Server,
+    #   Oracle, and PostgreSQL DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
@@ -1859,9 +1932,9 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS returns an error.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
-    #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs. For more information, see [ Publishing Database Logs
-    #   to Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #   The list of log types to enable for exporting to CloudWatch Logs. For
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to the following DB instances:
     #
@@ -1871,6 +1944,8 @@ module Aws::RDS
     #   * RDS Custom
     #
     #   The following values are valid for each DB engine:
+    #
+    #   * RDS for Db2 - `diag.log | notify.log`
     #
     #   * RDS for MariaDB - `audit | error | general | slowquery`
     #
@@ -1968,7 +2043,7 @@ module Aws::RDS
     # @option options [String] :backup_target
     #   The location for storing automated backups and manual snapshots.
     #
-    #   Valie Values:
+    #   Valid Values:
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #
@@ -2065,6 +2140,24 @@ module Aws::RDS
     #   global area (SGA) and Oracle background processes. If you don't
     #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
     #   the name of your CDB.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    # @option options [Boolean] :multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies to
+    #   RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support it,
+    #     the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2132,6 +2225,8 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
+    #     dedicated_log_volume: false,
+    #     upgrade_storage_config: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2146,7 +2241,7 @@ module Aws::RDS
     #   of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
-    #   Default: Inherits from the source DB instance.
+    #   Default: Inherits the value from the source DB instance.
     #
     #
     #
@@ -2161,12 +2256,11 @@ module Aws::RDS
     # @option options [Integer] :port
     #   The port number that the DB instance uses for connections.
     #
-    #   Default: Inherits from the source DB instance
-    #
     #   Valid Values: `1150-65535`
+    #
+    #   Default: Inherits the value from the source DB instance.
     # @option options [Boolean] :multi_az
-    #   A value that indicates whether the read replica is in a Multi-AZ
-    #   deployment.
+    #   Specifies whether the read replica is in a Multi-AZ deployment.
     #
     #   You can create a read replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
@@ -2174,47 +2268,50 @@ module Aws::RDS
     #   instance is independent of whether the source is a Multi-AZ DB
     #   instance or a Multi-AZ DB cluster.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the read replica during the maintenance window.
+    #   Specifies whether to automatically apply minor engine upgrades to the
+    #   read replica during the maintenance window.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
-    #   Default: Inherits from the source DB instance
+    #   Default: Inherits the value from the source DB instance.
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
-    #   be initially allocated for the DB instance.
+    #   initially allocate for the DB instance.
     # @option options [String] :option_group_name
-    #   The option group the DB instance is associated with. If omitted, the
-    #   option group associated with the source instance or cluster is used.
+    #   The option group to associate the DB instance with. If not specified,
+    #   RDS uses the option group associated with the source DB instance or
+    #   cluster.
     #
     #   <note markdown="1"> For SQL Server, you must use the option group associated with the
     #   source.
     #
     #    </note>
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #
-    #   If you do not specify a value for `DBParameterGroupName`, then Amazon
-    #   RDS uses the `DBParameterGroup` of source DB instance for a same
+    #   If you don't specify a value for `DBParameterGroupName`, then Amazon
+    #   RDS uses the `DBParameterGroup` of the source DB instance for a same
     #   Region read replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross-Region read replica.
     #
     #   Specifying a parameter group for this operation is only supported for
-    #   MySQL and Oracle DB instances. It isn't supported for RDS Custom.
+    #   MySQL DB instances for cross-Region read replicas and for Oracle DB
+    #   instances. It isn't supported for MySQL DB instances for same Region
+    #   read replicas or for RDS Custom.
     #
     #   Constraints:
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     # @option options [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -2236,20 +2333,19 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :db_subnet_group_name
-    #   Specifies a DB subnet group for the DB instance. The new DB instance
-    #   is created in the VPC associated with the DB subnet group. If no DB
-    #   subnet group is specified, then the new DB instance isn't created in
-    #   a VPC.
+    #   A DB subnet group for the DB instance. The new DB instance is created
+    #   in the VPC associated with the DB subnet group. If no DB subnet group
+    #   is specified, then the new DB instance isn't created in a VPC.
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBSubnetGroup.
+    #   * If supplied, must match the name of an existing DB subnet group.
     #
     #   * The specified DB subnet group must be in the same Amazon Web
     #     Services Region in which the operation is running.
     #
     #   * All read replicas in one Amazon Web Services Region that are created
-    #     from the same source DB instance must either:&gt;
+    #     from the same source DB instance must either:
     #
     #     * Specify DB subnet groups from the same VPC. All these read
     #       replicas are created in the same VPC.
@@ -2262,33 +2358,35 @@ module Aws::RDS
     #   A list of Amazon EC2 VPC security groups to associate with the read
     #   replica.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :storage_type
-    #   Specifies the storage type to be associated with the read replica.
-    #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   The storage type to associate with the read replica.
     #
     #   If you specify `io1` or `gp3`, you must also include a value for the
     #   `Iops` parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #
+    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
     # @option options [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the read replica
-    #   to snapshots of the read replica. By default, tags are not copied.
+    #   Specifies whether to copy all tags from the read replica to snapshots
+    #   of the read replica. By default, tags aren't copied.
     # @option options [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
-    #   metrics are collected for the read replica. To disable collecting
-    #   Enhanced Monitoring metrics, specify 0. The default is 0.
+    #   metrics are collected for the read replica. To disable collection of
+    #   Enhanced Monitoring metrics, specify `0`. The default is `0`.
     #
-    #   If `MonitoringRoleArn` is specified, then you must also set
-    #   `MonitoringInterval` to a value other than 0.
+    #   If `MonitoringRoleArn` is specified, then you must set
+    #   `MonitoringInterval` to a value other than `0`.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Valid Values: `0, 1, 5, 10, 15, 30, 60`
+    #
+    #   Default: `0`
     # @option options [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
     #   metrics to Amazon CloudWatch Logs. For example,
@@ -2299,7 +2397,7 @@ module Aws::RDS
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -2401,34 +2499,33 @@ module Aws::RDS
     #
     #    </note>
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
-    #   A value that indicates whether to enable Performance Insights for the
-    #   read replica.
+    #   Specifies whether to enable Performance Insights for the read replica.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -2445,38 +2542,33 @@ module Aws::RDS
     #   your Amazon Web Services account. Your Amazon Web Services account has
     #   a different default KMS key for each Amazon Web Services Region.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Integer] :performance_insights_retention_period
-    #   The number of days to retain Performance Insights data. The default is
-    #   7 days. The following values are valid:
+    #   The number of days to retain Performance Insights data.
     #
-    #   * 7
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
-    #   * *month* * 31, where *month* is a number of months from 1-23
+    #   Valid Values:
     #
-    #   * 731
+    #   * `7`
     #
-    #   For example, the following values are valid:
+    #   * *month* * 31, where *month* is a number of months from 1-23.
+    #     Examples: `93` (3 months * 31), `341` (11 months * 31), `589` (19
+    #     months * 31)
     #
-    #   * 93 (3 months * 31)
+    #   * `731`
     #
-    #   * 341 (11 months * 31)
+    #   Default: `7` days
     #
-    #   * 589 (19 months * 31)
-    #
-    #   * 731
-    #
-    #   If you specify a retention period such as 94, which isn't a valid
-    #   value, RDS issues an error.
-    #
-    #   This setting doesn't apply to RDS Custom.
+    #   If you specify a retention period that isn't valid, such as `94`,
+    #   Amazon RDS returns an error.
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs. The values in the list depend on the DB engine being used. For
     #   more information, see [Publishing Database Logs to Amazon CloudWatch
     #   Logs ][1] in the *Amazon RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
@@ -2485,17 +2577,17 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether to enable deletion protection for the DB instance.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
@@ -2508,16 +2600,16 @@ module Aws::RDS
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
-    #   The name of the IAM role to be used when making API calls to the
-    #   Directory Service.
+    #   The name of the IAM role to use when making API calls to the Directory
+    #   Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [String] :domain_fqdn
     #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
@@ -2611,7 +2703,7 @@ module Aws::RDS
     #   For the list of permissions required for the IAM role, see [ Configure
     #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
-    #   This setting is required for RDS Custom.
+    #   This setting is required for RDS Custom DB instances.
     #
     #
     #
@@ -2619,7 +2711,7 @@ module Aws::RDS
     # @option options [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -2638,10 +2730,11 @@ module Aws::RDS
     # @option options [Integer] :storage_throughput
     #   Specifies the storage throughput value for the read replica.
     #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora DB
+    #   instances.
     # @option options [Boolean] :enable_customer_owned_ip
-    #   A value that indicates whether to enable a customer-owned IP address
-    #   (CoIP) for an RDS on Outposts read replica.
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts read replica.
     #
     #   A *CoIP* provides local or external connectivity to resources in your
     #   Outpost subnets through your on-premises network. For some use cases,
@@ -2685,6 +2778,13 @@ module Aws::RDS
     #
     #   * The source DB cluster must be in the same Amazon Web Services Region
     #     as the read replica. Cross-Region replication isn't supported.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    # @option options [Boolean] :upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2757,12 +2857,11 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :skip_final_snapshot
-    #   A value that indicates whether to skip the creation of a final DB
-    #   snapshot before deleting the instance. If you enable this parameter,
-    #   RDS doesn't create a DB snapshot. If you don't enable this
-    #   parameter, RDS creates a DB snapshot before the DB instance is
-    #   deleted. By default, skip isn't enabled, and the DB snapshot is
-    #   created.
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   deleting the instance. If you enable this parameter, RDS doesn't
+    #   create a DB snapshot. If you don't enable this parameter, RDS creates
+    #   a DB snapshot before the DB instance is deleted. By default, skip
+    #   isn't enabled, and the DB snapshot is created.
     #
     #   <note markdown="1"> If you don't enable this parameter, you must specify the
     #   `FinalDBSnapshotIdentifier` parameter.
@@ -2798,10 +2897,10 @@ module Aws::RDS
     #
     #   * Can't be specified when deleting a read replica.
     # @option options [Boolean] :delete_automated_backups
-    #   A value that indicates whether to remove automated backups immediately
-    #   after the DB instance is deleted. This parameter isn't
-    #   case-sensitive. The default is to remove automated backups immediately
-    #   after the DB instance is deleted.
+    #   Specifies whether to remove automated backups immediately after the DB
+    #   instance is deleted. This parameter isn't case-sensitive. The default
+    #   is to remove automated backups immediately after the DB instance is
+    #   deleted.
     # @return [DBInstance]
     def delete(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2883,13 +2982,15 @@ module Aws::RDS
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
+    #     dedicated_log_volume: false,
+    #     multi_tenant: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
     #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
-    #   For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
+    #   For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
     #   PostgreSQL, the value supplied must be at least 10% greater than the
     #   current value. Values that are not at least 10% greater than the
     #   existing value are rounded up so that they are 10% greater than the
@@ -2919,8 +3020,8 @@ module Aws::RDS
     #     version at the same time, the currently running engine version must
     #     be supported on the specified DB instance class. Otherwise, the
     #     operation returns an error. In this case, first run the operation to
-    #     modify the DB instance class, and then run it again to upgrade the
-    #     engine version.
+    #     upgrade the engine version, and then run it again to modify the DB
+    #     instance class.
     #
     #   ^
     #
@@ -3009,7 +3110,7 @@ module Aws::RDS
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
     #
-    #   <note markdown="1"> Amazon RDS API operations never return the password, so this action
+    #   <note markdown="1"> Amazon RDS API operations never return the password, so this operation
     #   provides a way to regain access to a primary instance user if the
     #   password is lost. This includes restoring privileges that might have
     #   been accidentally revoked.
@@ -3030,9 +3131,12 @@ module Aws::RDS
     #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   * Can include any printable ASCII character except "/", """, or
-    #     "@".
+    #     "@". For RDS for Oracle, can't include the "&amp;" (ampersand)
+    #     or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -3187,8 +3291,8 @@ module Aws::RDS
     #     instance class at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it again
-    #     to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     # @option options [Boolean] :allow_major_version_upgrade
@@ -3228,6 +3332,8 @@ module Aws::RDS
     #   instances.
     #
     #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -3364,7 +3470,7 @@ module Aws::RDS
     # @option options [String] :domain
     #   The Active Directory directory ID to move the DB instance to. Specify
     #   `none` to remove the instance from its current domain. You must create
-    #   the domain before this operation. Currently, you can create only
+    #   the domain before this operation. Currently, you can create only Db2,
     #   MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an
     #   Active Directory Domain.
     #
@@ -3454,6 +3560,8 @@ module Aws::RDS
     #   Default:
     #
     #   * Amazon Aurora - `3306`
+    #
+    #   * RDS for Db2 - `50000`
     #
     #   * RDS for MariaDB - `3306`
     #
@@ -3853,6 +3961,25 @@ module Aws::RDS
     #     parameter group. To avoid reverting to the default, specify a new
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
+    # @option options [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    # @option options [Boolean] :multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and national
+    #   character set metadata with this database. The tags associated with
+    #   the instance also propagate to the initial tenant database. You can
+    #   add more tenant databases to your DB instance by using the
+    #   `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also specify
+    #   `ApplyImmediately`.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3928,8 +4055,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :force_failover
-    #   A value that indicates whether the reboot is conducted through a
-    #   Multi-AZ failover.
+    #   Specifies whether the reboot is conducted through a Multi-AZ failover.
     #
     #   Constraint: You can't enable force failover if the instance isn't
     #   configured for Multi-AZ.
@@ -4001,6 +4127,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     allocated_storage: 1,
+    #     dedicated_log_volume: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -4124,16 +4251,25 @@ module Aws::RDS
     # @option options [String] :db_name
     #   The database name for the restored DB instance.
     #
-    #   <note markdown="1"> This parameter isn't supported for the MySQL or MariaDB engines. It
-    #   also doesn't apply to RDS Custom.
+    #   This parameter doesn't apply to the following DB instances:
     #
-    #    </note>
+    #   * RDS Custom
+    #
+    #   * RDS for Db2
+    #
+    #   * RDS for MariaDB
+    #
+    #   * RDS for MySQL
     # @option options [String] :engine
     #   The database engine to use for the new instance.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -4319,8 +4455,8 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Boolean] :use_default_processor_features
-    #   A value that indicates whether the DB instance class of the DB
-    #   instance uses its default processor features.
+    #   Specifies whether the DB instance class of the DB instance uses its
+    #   default processor features.
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [String] :db_parameter_group_name
@@ -4414,11 +4550,16 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     # @option options [String] :backup_target
-    #   Specifies where automated backups and manual snapshots are stored for
+    #   The location for storing automated backups and manual snapshots for
     #   the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Valid Values:
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #
+    #   Default: `region`
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.
@@ -4458,6 +4599,9 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    # @option options [Boolean] :dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
@@ -4841,10 +4985,10 @@ module Aws::RDS
     #
     #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
-    #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other Amazon Web Services accounts that this Amazon Web
-    #   Services account has been given permission to copy or restore. By
-    #   default, these snapshots are not included.
+    #   Specifies whether to include shared manual DB cluster snapshots from
+    #   other Amazon Web Services accounts that this Amazon Web Services
+    #   account has been given permission to copy or restore. By default,
+    #   these snapshots are not included.
     #
     #   You can give an Amazon Web Services account permission to restore a
     #   manual DB snapshot from another Amazon Web Services account by using
@@ -4852,9 +4996,9 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Boolean] :include_public
-    #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any Amazon Web
-    #   Services account. By default, the public snapshots are not included.
+    #   Specifies whether to include manual DB cluster snapshots that are
+    #   public and can be copied or restored by any Amazon Web Services
+    #   account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.

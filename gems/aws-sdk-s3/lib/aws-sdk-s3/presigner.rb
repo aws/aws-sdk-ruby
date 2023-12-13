@@ -232,8 +232,8 @@ module Aws
                    end
           signer = Aws::Sigv4::Signer.new(
             service: auth_scheme['signingName'] || 's3',
-            region: region || context.config.region,
-            credentials_provider: context.config.credentials,
+            region: context[:sigv4_region] || region || context.config.region,
+            credentials_provider: context[:sigv4_credentials] || context.config.credentials,
             signing_algorithm: scheme_name.to_sym,
             uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
             unsigned_headers: unsigned_headers,

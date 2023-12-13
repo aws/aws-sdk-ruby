@@ -52,6 +52,6 @@ require_relative 'aws-sdk-wellarchitected/customizations'
 # @!group service
 module Aws::WellArchitected
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.32.0'
 
 end

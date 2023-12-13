@@ -124,6 +124,7 @@ module Aws::CodeDeploy
   # * {InvalidTrafficRoutingConfigurationException}
   # * {InvalidTriggerConfigException}
   # * {InvalidUpdateOutdatedInstancesOnlyValueException}
+  # * {InvalidZonalDeploymentConfigurationException}
   # * {LifecycleEventAlreadyCompletedException}
   # * {LifecycleHookLimitExceededException}
   # * {MultipleIamArnsProvidedException}
@@ -1111,6 +1112,16 @@ module Aws::CodeDeploy
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeDeploy::Types::InvalidUpdateOutdatedInstancesOnlyValueException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidZonalDeploymentConfigurationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeDeploy::Types::InvalidZonalDeploymentConfigurationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

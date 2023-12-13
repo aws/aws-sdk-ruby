@@ -21,10 +21,17 @@ module Aws::SSMIncidents
     AttributeValueList = Shapes::UnionShape.new(name: 'AttributeValueList')
     AutomationExecution = Shapes::UnionShape.new(name: 'AutomationExecution')
     AutomationExecutionSet = Shapes::ListShape.new(name: 'AutomationExecutionSet')
+    BatchGetIncidentFindingsError = Shapes::StructureShape.new(name: 'BatchGetIncidentFindingsError')
+    BatchGetIncidentFindingsErrorList = Shapes::ListShape.new(name: 'BatchGetIncidentFindingsErrorList')
+    BatchGetIncidentFindingsInput = Shapes::StructureShape.new(name: 'BatchGetIncidentFindingsInput')
+    BatchGetIncidentFindingsOutput = Shapes::StructureShape.new(name: 'BatchGetIncidentFindingsOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChatChannel = Shapes::UnionShape.new(name: 'ChatChannel')
     ChatbotSnsConfigurationSet = Shapes::ListShape.new(name: 'ChatbotSnsConfigurationSet')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudFormationStackUpdate = Shapes::StructureShape.new(name: 'CloudFormationStackUpdate')
+    CodeDeployDeployment = Shapes::StructureShape.new(name: 'CodeDeployDeployment')
+    CodeDeployDeploymentDeploymentIdString = Shapes::StringShape.new(name: 'CodeDeployDeploymentDeploymentIdString')
     Condition = Shapes::UnionShape.new(name: 'Condition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateReplicationSetInput = Shapes::StructureShape.new(name: 'CreateReplicationSetInput')
@@ -59,6 +66,13 @@ module Aws::SSMIncidents
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterKeyString = Shapes::StringShape.new(name: 'FilterKeyString')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    Finding = Shapes::StructureShape.new(name: 'Finding')
+    FindingDetails = Shapes::UnionShape.new(name: 'FindingDetails')
+    FindingId = Shapes::StringShape.new(name: 'FindingId')
+    FindingIdList = Shapes::ListShape.new(name: 'FindingIdList')
+    FindingList = Shapes::ListShape.new(name: 'FindingList')
+    FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
+    FindingSummaryList = Shapes::ListShape.new(name: 'FindingSummaryList')
     GeneratedId = Shapes::StringShape.new(name: 'GeneratedId')
     GetIncidentRecordInput = Shapes::StructureShape.new(name: 'GetIncidentRecordInput')
     GetIncidentRecordOutput = Shapes::StructureShape.new(name: 'GetIncidentRecordOutput')
@@ -88,6 +102,9 @@ module Aws::SSMIncidents
     ItemIdentifier = Shapes::StructureShape.new(name: 'ItemIdentifier')
     ItemType = Shapes::StringShape.new(name: 'ItemType')
     ItemValue = Shapes::UnionShape.new(name: 'ItemValue')
+    ListIncidentFindingsInput = Shapes::StructureShape.new(name: 'ListIncidentFindingsInput')
+    ListIncidentFindingsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIncidentFindingsInputMaxResultsInteger')
+    ListIncidentFindingsOutput = Shapes::StructureShape.new(name: 'ListIncidentFindingsOutput')
     ListIncidentRecordsInput = Shapes::StructureShape.new(name: 'ListIncidentRecordsInput')
     ListIncidentRecordsOutput = Shapes::StructureShape.new(name: 'ListIncidentRecordsOutput')
     ListRelatedItemsInput = Shapes::StructureShape.new(name: 'ListRelatedItemsInput')
@@ -225,6 +242,21 @@ module Aws::SSMIncidents
 
     AutomationExecutionSet.member = Shapes::ShapeRef.new(shape: AutomationExecution)
 
+    BatchGetIncidentFindingsError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetIncidentFindingsError.add_member(:finding_id, Shapes::ShapeRef.new(shape: FindingId, required: true, location_name: "findingId"))
+    BatchGetIncidentFindingsError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetIncidentFindingsError.struct_class = Types::BatchGetIncidentFindingsError
+
+    BatchGetIncidentFindingsErrorList.member = Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsError)
+
+    BatchGetIncidentFindingsInput.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIdList, required: true, location_name: "findingIds"))
+    BatchGetIncidentFindingsInput.add_member(:incident_record_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "incidentRecordArn"))
+    BatchGetIncidentFindingsInput.struct_class = Types::BatchGetIncidentFindingsInput
+
+    BatchGetIncidentFindingsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsErrorList, required: true, location_name: "errors"))
+    BatchGetIncidentFindingsOutput.add_member(:findings, Shapes::ShapeRef.new(shape: FindingList, required: true, location_name: "findings"))
+    BatchGetIncidentFindingsOutput.struct_class = Types::BatchGetIncidentFindingsOutput
+
     ChatChannel.add_member(:chatbot_sns, Shapes::ShapeRef.new(shape: ChatbotSnsConfigurationSet, location_name: "chatbotSns"))
     ChatChannel.add_member(:empty, Shapes::ShapeRef.new(shape: EmptyChatChannel, location_name: "empty"))
     ChatChannel.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -234,6 +266,17 @@ module Aws::SSMIncidents
     ChatChannel.struct_class = Types::ChatChannel
 
     ChatbotSnsConfigurationSet.member = Shapes::ShapeRef.new(shape: SnsArn)
+
+    CloudFormationStackUpdate.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    CloudFormationStackUpdate.add_member(:stack_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stackArn"))
+    CloudFormationStackUpdate.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    CloudFormationStackUpdate.struct_class = Types::CloudFormationStackUpdate
+
+    CodeDeployDeployment.add_member(:deployment_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "deploymentGroupArn"))
+    CodeDeployDeployment.add_member(:deployment_id, Shapes::ShapeRef.new(shape: CodeDeployDeploymentDeploymentIdString, required: true, location_name: "deploymentId"))
+    CodeDeployDeployment.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    CodeDeployDeployment.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    CodeDeployDeployment.struct_class = Types::CodeDeployDeployment
 
     Condition.add_member(:after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "after"))
     Condition.add_member(:before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "before"))
@@ -354,6 +397,30 @@ module Aws::SSMIncidents
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
+    Finding.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    Finding.add_member(:details, Shapes::ShapeRef.new(shape: FindingDetails, location_name: "details"))
+    Finding.add_member(:id, Shapes::ShapeRef.new(shape: FindingId, required: true, location_name: "id"))
+    Finding.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedTime"))
+    Finding.struct_class = Types::Finding
+
+    FindingDetails.add_member(:cloud_formation_stack_update, Shapes::ShapeRef.new(shape: CloudFormationStackUpdate, location_name: "cloudFormationStackUpdate"))
+    FindingDetails.add_member(:code_deploy_deployment, Shapes::ShapeRef.new(shape: CodeDeployDeployment, location_name: "codeDeployDeployment"))
+    FindingDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FindingDetails.add_member_subclass(:cloud_formation_stack_update, Types::FindingDetails::CloudFormationStackUpdate)
+    FindingDetails.add_member_subclass(:code_deploy_deployment, Types::FindingDetails::CodeDeployDeployment)
+    FindingDetails.add_member_subclass(:unknown, Types::FindingDetails::Unknown)
+    FindingDetails.struct_class = Types::FindingDetails
+
+    FindingIdList.member = Shapes::ShapeRef.new(shape: FindingId)
+
+    FindingList.member = Shapes::ShapeRef.new(shape: Finding)
+
+    FindingSummary.add_member(:id, Shapes::ShapeRef.new(shape: FindingId, required: true, location_name: "id"))
+    FindingSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedTime"))
+    FindingSummary.struct_class = Types::FindingSummary
+
+    FindingSummaryList.member = Shapes::ShapeRef.new(shape: FindingSummary)
+
     GetIncidentRecordInput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
     GetIncidentRecordInput.struct_class = Types::GetIncidentRecordInput
 
@@ -464,6 +531,15 @@ module Aws::SSMIncidents
     ItemValue.add_member_subclass(:url, Types::ItemValue::Url)
     ItemValue.add_member_subclass(:unknown, Types::ItemValue::Unknown)
     ItemValue.struct_class = Types::ItemValue
+
+    ListIncidentFindingsInput.add_member(:incident_record_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "incidentRecordArn"))
+    ListIncidentFindingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIncidentFindingsInputMaxResultsInteger, location_name: "maxResults"))
+    ListIncidentFindingsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIncidentFindingsInput.struct_class = Types::ListIncidentFindingsInput
+
+    ListIncidentFindingsOutput.add_member(:findings, Shapes::ShapeRef.new(shape: FindingSummaryList, required: true, location_name: "findings"))
+    ListIncidentFindingsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIncidentFindingsOutput.struct_class = Types::ListIncidentFindingsOutput
 
     ListIncidentRecordsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListIncidentRecordsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -772,6 +848,19 @@ module Aws::SSMIncidents
         "uid" => "ssm-incidents-2018-05-10",
       }
 
+      api.add_operation(:batch_get_incident_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetIncidentFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/batchGetIncidentFindings"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetIncidentFindingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_replication_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationSet"
         o.http_method = "POST"
@@ -945,6 +1034,25 @@ module Aws::SSMIncidents
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_incident_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIncidentFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/listIncidentFindings"
+        o.input = Shapes::ShapeRef.new(shape: ListIncidentFindingsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIncidentFindingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_incident_records, Seahorse::Model::Operation.new.tap do |o|

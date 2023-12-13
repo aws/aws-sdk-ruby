@@ -25,16 +25,17 @@ module Aws::Glue
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -80,6 +81,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::BatchGetJobs.build(context)
           when :batch_get_partition
             Aws::Glue::Endpoints::BatchGetPartition.build(context)
+          when :batch_get_table_optimizer
+            Aws::Glue::Endpoints::BatchGetTableOptimizer.build(context)
           when :batch_get_triggers
             Aws::Glue::Endpoints::BatchGetTriggers.build(context)
           when :batch_get_workflows
@@ -134,6 +137,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::CreateSession.build(context)
           when :create_table
             Aws::Glue::Endpoints::CreateTable.build(context)
+          when :create_table_optimizer
+            Aws::Glue::Endpoints::CreateTableOptimizer.build(context)
           when :create_trigger
             Aws::Glue::Endpoints::CreateTrigger.build(context)
           when :create_user_defined_function
@@ -182,6 +187,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::DeleteSession.build(context)
           when :delete_table
             Aws::Glue::Endpoints::DeleteTable.build(context)
+          when :delete_table_optimizer
+            Aws::Glue::Endpoints::DeleteTableOptimizer.build(context)
           when :delete_table_version
             Aws::Glue::Endpoints::DeleteTableVersion.build(context)
           when :delete_trigger
@@ -206,6 +213,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetColumnStatisticsForPartition.build(context)
           when :get_column_statistics_for_table
             Aws::Glue::Endpoints::GetColumnStatisticsForTable.build(context)
+          when :get_column_statistics_task_run
+            Aws::Glue::Endpoints::GetColumnStatisticsTaskRun.build(context)
+          when :get_column_statistics_task_runs
+            Aws::Glue::Endpoints::GetColumnStatisticsTaskRuns.build(context)
           when :get_connection
             Aws::Glue::Endpoints::GetConnection.build(context)
           when :get_connections
@@ -290,6 +301,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetStatement.build(context)
           when :get_table
             Aws::Glue::Endpoints::GetTable.build(context)
+          when :get_table_optimizer
+            Aws::Glue::Endpoints::GetTableOptimizer.build(context)
           when :get_table_version
             Aws::Glue::Endpoints::GetTableVersion.build(context)
           when :get_table_versions
@@ -324,6 +337,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ImportCatalogToGlue.build(context)
           when :list_blueprints
             Aws::Glue::Endpoints::ListBlueprints.build(context)
+          when :list_column_statistics_task_runs
+            Aws::Glue::Endpoints::ListColumnStatisticsTaskRuns.build(context)
           when :list_crawlers
             Aws::Glue::Endpoints::ListCrawlers.build(context)
           when :list_crawls
@@ -354,6 +369,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListSessions.build(context)
           when :list_statements
             Aws::Glue::Endpoints::ListStatements.build(context)
+          when :list_table_optimizer_runs
+            Aws::Glue::Endpoints::ListTableOptimizerRuns.build(context)
           when :list_triggers
             Aws::Glue::Endpoints::ListTriggers.build(context)
           when :list_workflows
@@ -382,6 +399,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::SearchTables.build(context)
           when :start_blueprint_run
             Aws::Glue::Endpoints::StartBlueprintRun.build(context)
+          when :start_column_statistics_task_run
+            Aws::Glue::Endpoints::StartColumnStatisticsTaskRun.build(context)
           when :start_crawler
             Aws::Glue::Endpoints::StartCrawler.build(context)
           when :start_crawler_schedule
@@ -404,6 +423,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::StartTrigger.build(context)
           when :start_workflow_run
             Aws::Glue::Endpoints::StartWorkflowRun.build(context)
+          when :stop_column_statistics_task_run
+            Aws::Glue::Endpoints::StopColumnStatisticsTaskRun.build(context)
           when :stop_crawler
             Aws::Glue::Endpoints::StopCrawler.build(context)
           when :stop_crawler_schedule
@@ -454,6 +475,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::UpdateSourceControlFromJob.build(context)
           when :update_table
             Aws::Glue::Endpoints::UpdateTable.build(context)
+          when :update_table_optimizer
+            Aws::Glue::Endpoints::UpdateTableOptimizer.build(context)
           when :update_trigger
             Aws::Glue::Endpoints::UpdateTrigger.build(context)
           when :update_user_defined_function

@@ -287,6 +287,7 @@ module Aws::MediaConvert
     H264CodecLevel = Shapes::StringShape.new(name: 'H264CodecLevel')
     H264CodecProfile = Shapes::StringShape.new(name: 'H264CodecProfile')
     H264DynamicSubGop = Shapes::StringShape.new(name: 'H264DynamicSubGop')
+    H264EndOfStreamMarkers = Shapes::StringShape.new(name: 'H264EndOfStreamMarkers')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
     H264FieldEncoding = Shapes::StringShape.new(name: 'H264FieldEncoding')
     H264FlickerAdaptiveQuantization = Shapes::StringShape.new(name: 'H264FlickerAdaptiveQuantization')
@@ -314,6 +315,7 @@ module Aws::MediaConvert
     H265CodecLevel = Shapes::StringShape.new(name: 'H265CodecLevel')
     H265CodecProfile = Shapes::StringShape.new(name: 'H265CodecProfile')
     H265DynamicSubGop = Shapes::StringShape.new(name: 'H265DynamicSubGop')
+    H265EndOfStreamMarkers = Shapes::StringShape.new(name: 'H265EndOfStreamMarkers')
     H265FlickerAdaptiveQuantization = Shapes::StringShape.new(name: 'H265FlickerAdaptiveQuantization')
     H265FramerateControl = Shapes::StringShape.new(name: 'H265FramerateControl')
     H265FramerateConversionAlgorithm = Shapes::StringShape.new(name: 'H265FramerateConversionAlgorithm')
@@ -613,6 +615,9 @@ module Aws::MediaConvert
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
     VideoDetail = Shapes::StructureShape.new(name: 'VideoDetail')
+    VideoOverlay = Shapes::StructureShape.new(name: 'VideoOverlay')
+    VideoOverlayInput = Shapes::StructureShape.new(name: 'VideoOverlayInput')
+    VideoOverlayInputClipping = Shapes::StructureShape.new(name: 'VideoOverlayInputClipping')
     VideoPreprocessor = Shapes::StructureShape.new(name: 'VideoPreprocessor')
     VideoSelector = Shapes::StructureShape.new(name: 'VideoSelector')
     VideoTimecodeInsertion = Shapes::StringShape.new(name: 'VideoTimecodeInsertion')
@@ -684,7 +689,6 @@ module Aws::MediaConvert
     __integerMin0Max1152000000 = Shapes::IntegerShape.new(name: '__integerMin0Max1152000000')
     __integerMin0Max128 = Shapes::IntegerShape.new(name: '__integerMin0Max128')
     __integerMin0Max1466400000 = Shapes::IntegerShape.new(name: '__integerMin0Max1466400000')
-    __integerMin0Max149 = Shapes::IntegerShape.new(name: '__integerMin0Max149')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max16 = Shapes::IntegerShape.new(name: '__integerMin0Max16')
     __integerMin0Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin0Max2147483647')
@@ -724,6 +728,7 @@ module Aws::MediaConvert
     __integerMin1Max100 = Shapes::IntegerShape.new(name: '__integerMin1Max100')
     __integerMin1Max10000000 = Shapes::IntegerShape.new(name: '__integerMin1Max10000000')
     __integerMin1Max1001 = Shapes::IntegerShape.new(name: '__integerMin1Max1001')
+    __integerMin1Max150 = Shapes::IntegerShape.new(name: '__integerMin1Max150')
     __integerMin1Max17895697 = Shapes::IntegerShape.new(name: '__integerMin1Max17895697')
     __integerMin1Max2 = Shapes::IntegerShape.new(name: '__integerMin1Max2')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
@@ -776,6 +781,7 @@ module Aws::MediaConvert
     __integerMinNegative60Max6 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max6')
     __integerMinNegative70Max0 = Shapes::IntegerShape.new(name: '__integerMinNegative70Max0')
     __listOfAllowedRenditionSize = Shapes::ListShape.new(name: '__listOfAllowedRenditionSize')
+    __listOfAudioChannelTag = Shapes::ListShape.new(name: '__listOfAudioChannelTag')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfAutomatedAbrRule = Shapes::ListShape.new(name: '__listOfAutomatedAbrRule')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
@@ -805,6 +811,8 @@ module Aws::MediaConvert
     __listOfQueue = Shapes::ListShape.new(name: '__listOfQueue')
     __listOfQueueTransition = Shapes::ListShape.new(name: '__listOfQueueTransition')
     __listOfTeletextPageType = Shapes::ListShape.new(name: '__listOfTeletextPageType')
+    __listOfVideoOverlay = Shapes::ListShape.new(name: '__listOfVideoOverlay')
+    __listOfVideoOverlayInputClipping = Shapes::ListShape.new(name: '__listOfVideoOverlayInputClipping')
     __listOfWarningGroup = Shapes::ListShape.new(name: '__listOfWarningGroup')
     __listOf__doubleMinNegative60Max6 = Shapes::ListShape.new(name: '__listOf__doubleMinNegative60Max6')
     __listOf__integerMin1Max2147483647 = Shapes::ListShape.new(name: '__listOf__integerMin1Max2147483647')
@@ -920,6 +928,7 @@ module Aws::MediaConvert
     AssociateCertificateResponse.struct_class = Types::AssociateCertificateResponse
 
     AudioChannelTaggingSettings.add_member(:channel_tag, Shapes::ShapeRef.new(shape: AudioChannelTag, location_name: "channelTag"))
+    AudioChannelTaggingSettings.add_member(:channel_tags, Shapes::ShapeRef.new(shape: __listOfAudioChannelTag, location_name: "channelTags"))
     AudioChannelTaggingSettings.struct_class = Types::AudioChannelTaggingSettings
 
     AudioCodecSettings.add_member(:aac_settings, Shapes::ShapeRef.new(shape: AacSettings, location_name: "aacSettings"))
@@ -1544,6 +1553,7 @@ module Aws::MediaConvert
     H264Settings.add_member(:codec_level, Shapes::ShapeRef.new(shape: H264CodecLevel, location_name: "codecLevel"))
     H264Settings.add_member(:codec_profile, Shapes::ShapeRef.new(shape: H264CodecProfile, location_name: "codecProfile"))
     H264Settings.add_member(:dynamic_sub_gop, Shapes::ShapeRef.new(shape: H264DynamicSubGop, location_name: "dynamicSubGop"))
+    H264Settings.add_member(:end_of_stream_markers, Shapes::ShapeRef.new(shape: H264EndOfStreamMarkers, location_name: "endOfStreamMarkers"))
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
     H264Settings.add_member(:field_encoding, Shapes::ShapeRef.new(shape: H264FieldEncoding, location_name: "fieldEncoding"))
     H264Settings.add_member(:flicker_adaptive_quantization, Shapes::ShapeRef.new(shape: H264FlickerAdaptiveQuantization, location_name: "flickerAdaptiveQuantization"))
@@ -1594,6 +1604,7 @@ module Aws::MediaConvert
     H265Settings.add_member(:codec_level, Shapes::ShapeRef.new(shape: H265CodecLevel, location_name: "codecLevel"))
     H265Settings.add_member(:codec_profile, Shapes::ShapeRef.new(shape: H265CodecProfile, location_name: "codecProfile"))
     H265Settings.add_member(:dynamic_sub_gop, Shapes::ShapeRef.new(shape: H265DynamicSubGop, location_name: "dynamicSubGop"))
+    H265Settings.add_member(:end_of_stream_markers, Shapes::ShapeRef.new(shape: H265EndOfStreamMarkers, location_name: "endOfStreamMarkers"))
     H265Settings.add_member(:flicker_adaptive_quantization, Shapes::ShapeRef.new(shape: H265FlickerAdaptiveQuantization, location_name: "flickerAdaptiveQuantization"))
     H265Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: H265FramerateControl, location_name: "framerateControl"))
     H265Settings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: H265FramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
@@ -1764,6 +1775,7 @@ module Aws::MediaConvert
     Input.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
     Input.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     Input.add_member(:video_generator, Shapes::ShapeRef.new(shape: InputVideoGenerator, location_name: "videoGenerator"))
+    Input.add_member(:video_overlays, Shapes::ShapeRef.new(shape: __listOfVideoOverlay, location_name: "videoOverlays"))
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
@@ -1796,6 +1808,7 @@ module Aws::MediaConvert
     InputTemplate.add_member(:psi_control, Shapes::ShapeRef.new(shape: InputPsiControl, location_name: "psiControl"))
     InputTemplate.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
     InputTemplate.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
+    InputTemplate.add_member(:video_overlays, Shapes::ShapeRef.new(shape: __listOfVideoOverlay, location_name: "videoOverlays"))
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
 
@@ -1855,7 +1868,7 @@ module Aws::MediaConvert
     JobSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
     JobSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
-    JobSettings.add_member(:follow_input_index, Shapes::ShapeRef.new(shape: __integerMin0Max149, location_name: "followInputIndex"))
+    JobSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
     JobSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInput, location_name: "inputs"))
     JobSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))
@@ -1885,7 +1898,7 @@ module Aws::MediaConvert
     JobTemplateSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
     JobTemplateSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobTemplateSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
-    JobTemplateSettings.add_member(:follow_input_index, Shapes::ShapeRef.new(shape: __integerMin0Max149, location_name: "followInputIndex"))
+    JobTemplateSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
     JobTemplateSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInputTemplate, location_name: "inputs"))
     JobTemplateSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobTemplateSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))
@@ -2499,6 +2512,21 @@ module Aws::MediaConvert
     VideoDetail.add_member(:width_in_px, Shapes::ShapeRef.new(shape: __integer, location_name: "widthInPx"))
     VideoDetail.struct_class = Types::VideoDetail
 
+    VideoOverlay.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
+    VideoOverlay.add_member(:input, Shapes::ShapeRef.new(shape: VideoOverlayInput, location_name: "input"))
+    VideoOverlay.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    VideoOverlay.struct_class = Types::VideoOverlay
+
+    VideoOverlayInput.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternS3Https, location_name: "fileInput"))
+    VideoOverlayInput.add_member(:input_clippings, Shapes::ShapeRef.new(shape: __listOfVideoOverlayInputClipping, location_name: "inputClippings"))
+    VideoOverlayInput.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
+    VideoOverlayInput.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
+    VideoOverlayInput.struct_class = Types::VideoOverlayInput
+
+    VideoOverlayInputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
+    VideoOverlayInputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    VideoOverlayInputClipping.struct_class = Types::VideoOverlayInputClipping
+
     VideoPreprocessor.add_member(:color_corrector, Shapes::ShapeRef.new(shape: ColorCorrector, location_name: "colorCorrector"))
     VideoPreprocessor.add_member(:deinterlacer, Shapes::ShapeRef.new(shape: Deinterlacer, location_name: "deinterlacer"))
     VideoPreprocessor.add_member(:dolby_vision, Shapes::ShapeRef.new(shape: DolbyVision, location_name: "dolbyVision"))
@@ -2625,6 +2653,8 @@ module Aws::MediaConvert
 
     __listOfAllowedRenditionSize.member = Shapes::ShapeRef.new(shape: AllowedRenditionSize)
 
+    __listOfAudioChannelTag.member = Shapes::ShapeRef.new(shape: AudioChannelTag)
+
     __listOfAudioDescription.member = Shapes::ShapeRef.new(shape: AudioDescription)
 
     __listOfAutomatedAbrRule.member = Shapes::ShapeRef.new(shape: AutomatedAbrRule)
@@ -2682,6 +2712,10 @@ module Aws::MediaConvert
     __listOfQueueTransition.member = Shapes::ShapeRef.new(shape: QueueTransition)
 
     __listOfTeletextPageType.member = Shapes::ShapeRef.new(shape: TeletextPageType)
+
+    __listOfVideoOverlay.member = Shapes::ShapeRef.new(shape: VideoOverlay)
+
+    __listOfVideoOverlayInputClipping.member = Shapes::ShapeRef.new(shape: VideoOverlayInputClipping)
 
     __listOfWarningGroup.member = Shapes::ShapeRef.new(shape: WarningGroup)
 

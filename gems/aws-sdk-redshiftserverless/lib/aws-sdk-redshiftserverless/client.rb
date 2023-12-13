@@ -447,6 +447,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -474,6 +476,48 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Creates a custom domain association for Amazon Redshift Serverless.
+    #
+    # @option params [required, String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name to associate with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::CreateCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::CreateCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::CreateCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_domain_association({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateCustomDomainAssociation AWS API Documentation
+    #
+    # @overload create_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def create_custom_domain_association(params = {}, options = {})
+      req = build_request(:create_custom_domain_association, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Redshift Serverless managed VPC endpoint.
     #
     # @option params [required, String] :endpoint_name
@@ -481,6 +525,10 @@ module Aws::RedshiftServerless
     #   characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The
     #   first character must be a letter. The name can't contain two
     #   consecutive hyphens or end with a hyphen.
+    #
+    # @option params [String] :owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The unique identifers of subnets from which Amazon Redshift Serverless
@@ -502,6 +550,7 @@ module Aws::RedshiftServerless
     #
     #   resp = client.create_endpoint_access({
     #     endpoint_name: "String", # required
+    #     owner_account: "OwnerAccount",
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_security_group_ids: ["VpcSecurityGroupId"],
     #     workgroup_name: "String", # required
@@ -540,9 +589,16 @@ module Aws::RedshiftServerless
 
     # Creates a namespace in Amazon Redshift Serverless.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -566,8 +622,19 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. Available export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace.
+    #
+    # @option params [String] :redshift_idc_application_arn
+    #   The ARN for the Redshift application that integrates with IAM Identity
+    #   Center.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag instances.
@@ -579,6 +646,7 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     db_name: "String",
@@ -586,7 +654,9 @@ module Aws::RedshiftServerless
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
+    #     redshift_idc_application_arn: "RedshiftIdcApplicationArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -597,6 +667,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -617,6 +689,138 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def create_namespace(params = {}, options = {})
       req = build_request(:create_namespace, params)
+      req.send_request(options)
+    end
+
+    # Creates a scheduled action. A scheduled action contains a schedule and
+    # an Amazon Redshift API action. For example, you can create a schedule
+    # of when to run the `CreateSnapshot` API operation.
+    #
+    # @option params [Boolean] :enabled
+    #   Indicates whether the schedule is enabled. If false, the scheduled
+    #   action does not trigger. For more information about `state` of the
+    #   scheduled action, see [ScheduledAction][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time in UTC when the schedule is no longer active. After this
+    #   time, the scheduled action does not trigger.
+    #
+    # @option params [required, String] :namespace_name
+    #   The name of the namespace for which to create a scheduled action.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role to assume to run the scheduled action. This
+    #   IAM role must have permission to run the Amazon Redshift Serverless
+    #   API operation in the scheduled action. This IAM role must allow the
+    #   Amazon Redshift scheduler to schedule creating snapshots. (Principal
+    #   scheduler.redshift.amazonaws.com) to assume permissions on your
+    #   behalf. For more information about the IAM role to use with the Amazon
+    #   Redshift scheduler, see [Using Identity-Based Policies for Amazon
+    #   Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #
+    # @option params [required, Types::Schedule] :schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month Month
+    #   Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`". For
+    #   more information, see [Cron Expressions][1] in the *Amazon CloudWatch
+    #   Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #
+    # @option params [String] :scheduled_action_description
+    #   The description of the scheduled action.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time in UTC when the schedule is active. Before this time,
+    #   the scheduled action does not trigger.
+    #
+    # @option params [required, Types::TargetAction] :target_action
+    #   A JSON format string of the Amazon Redshift Serverless API operation
+    #   with input parameters. The following is an example of a target action.
+    #
+    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
+    #   "1"\}\}"`
+    #
+    # @return [Types::CreateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScheduledActionResponse#scheduled_action #scheduled_action} => Types::ScheduledActionResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduled_action({
+    #     enabled: false,
+    #     end_time: Time.now,
+    #     namespace_name: "NamespaceName", # required
+    #     role_arn: "IamRoleArn", # required
+    #     schedule: { # required
+    #       at: Time.now,
+    #       cron: "String",
+    #     },
+    #     scheduled_action_description: "String",
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #     start_time: Time.now,
+    #     target_action: { # required
+    #       create_snapshot: {
+    #         namespace_name: "NamespaceName", # required
+    #         retention_period: 1,
+    #         snapshot_name_prefix: "SnapshotNamePrefix", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action.end_time #=> Time
+    #   resp.scheduled_action.namespace_name #=> String
+    #   resp.scheduled_action.next_invocations #=> Array
+    #   resp.scheduled_action.next_invocations[0] #=> Time
+    #   resp.scheduled_action.role_arn #=> String
+    #   resp.scheduled_action.schedule.at #=> Time
+    #   resp.scheduled_action.schedule.cron #=> String
+    #   resp.scheduled_action.scheduled_action_description #=> String
+    #   resp.scheduled_action.scheduled_action_name #=> String
+    #   resp.scheduled_action.scheduled_action_uuid #=> String
+    #   resp.scheduled_action.start_time #=> Time
+    #   resp.scheduled_action.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.scheduled_action.target_action.create_snapshot.namespace_name #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.retention_period #=> Integer
+    #   resp.scheduled_action.target_action.create_snapshot.snapshot_name_prefix #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags #=> Array
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].key #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateScheduledAction AWS API Documentation
+    #
+    # @overload create_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def create_scheduled_action(params = {}, options = {})
+      req = build_request(:create_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -669,6 +873,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -693,6 +899,55 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def create_snapshot(params = {}, options = {})
       req = build_request(:create_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a snapshot copy configuration that lets you copy snapshots to
+    # another Amazon Web Services Region.
+    #
+    # @option params [String] :destination_kms_key_id
+    #   The KMS key to use to encrypt your snapshots in the destination Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, String] :destination_region
+    #   The destination Amazon Web Services Region that you want to copy
+    #   snapshots to.
+    #
+    # @option params [required, String] :namespace_name
+    #   The name of the namespace to copy snapshots from.
+    #
+    # @option params [Integer] :snapshot_retention_period
+    #   The retention period of the snapshots that you copy to the destination
+    #   Amazon Web Services Region.
+    #
+    # @return [Types::CreateSnapshotCopyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotCopyConfigurationResponse#snapshot_copy_configuration #snapshot_copy_configuration} => Types::SnapshotCopyConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot_copy_configuration({
+    #     destination_kms_key_id: "KmsKeyId",
+    #     destination_region: "String", # required
+    #     namespace_name: "NamespaceName", # required
+    #     snapshot_retention_period: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_copy_configuration.destination_kms_key_id #=> String
+    #   resp.snapshot_copy_configuration.destination_region #=> String
+    #   resp.snapshot_copy_configuration.namespace_name #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_arn #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_id #=> String
+    #   resp.snapshot_copy_configuration.snapshot_retention_period #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateSnapshotCopyConfiguration AWS API Documentation
+    #
+    # @overload create_snapshot_copy_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot_copy_configuration(params = {}, options = {})
+      req = build_request(:create_snapshot_copy_configuration, params)
       req.send_request(options)
     end
 
@@ -764,7 +1019,7 @@ module Aws::RedshiftServerless
     # @option params [Array<Types::ConfigParameter>] :config_parameters
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`, `enable_user_activity_logging`,
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, and query monitoring metrics that let
     #   you define performance boundaries. For more information about query
     #   monitoring rules and available metrics, see [ Query monitoring metrics
@@ -778,6 +1033,10 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC instead of over the internet.
+    #
+    # @option params [Integer] :max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
+    #   serve queries. The max capacity is specified in RPUs.
     #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to associate with the workgroup.
@@ -817,6 +1076,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     max_capacity: 1,
     #     namespace_name: "NamespaceName", # required
     #     port: 1,
     #     publicly_accessible: false,
@@ -838,6 +1098,11 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.cross_account_vpcs #=> Array
+    #   resp.workgroup.cross_account_vpcs[0] #=> String
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -849,7 +1114,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -860,6 +1127,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateWorkgroup AWS API Documentation
     #
@@ -867,6 +1135,32 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def create_workgroup(params = {}, options = {})
       req = build_request(:create_workgroup, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom domain association for Amazon Redshift Serverless.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_domain_association({
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteCustomDomainAssociation AWS API Documentation
+    #
+    # @overload delete_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_domain_association(params = {}, options = {})
+      req = build_request(:delete_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -944,6 +1238,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -989,6 +1285,51 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Deletes a scheduled action.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action to delete.
+    #
+    # @return [Types::DeleteScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteScheduledActionResponse#scheduled_action #scheduled_action} => Types::ScheduledActionResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_action({
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action.end_time #=> Time
+    #   resp.scheduled_action.namespace_name #=> String
+    #   resp.scheduled_action.next_invocations #=> Array
+    #   resp.scheduled_action.next_invocations[0] #=> Time
+    #   resp.scheduled_action.role_arn #=> String
+    #   resp.scheduled_action.schedule.at #=> Time
+    #   resp.scheduled_action.schedule.cron #=> String
+    #   resp.scheduled_action.scheduled_action_description #=> String
+    #   resp.scheduled_action.scheduled_action_name #=> String
+    #   resp.scheduled_action.scheduled_action_uuid #=> String
+    #   resp.scheduled_action.start_time #=> Time
+    #   resp.scheduled_action.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.scheduled_action.target_action.create_snapshot.namespace_name #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.retention_period #=> Integer
+    #   resp.scheduled_action.target_action.create_snapshot.snapshot_name_prefix #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags #=> Array
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].key #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteScheduledAction AWS API Documentation
+    #
+    # @overload delete_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_action(params = {}, options = {})
+      req = build_request(:delete_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Deletes a snapshot from Amazon Redshift Serverless.
     #
     # @option params [required, String] :snapshot_name
@@ -1011,6 +1352,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1035,6 +1378,39 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def delete_snapshot(params = {}, options = {})
       req = build_request(:delete_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Deletes a snapshot copy configuration
+    #
+    # @option params [required, String] :snapshot_copy_configuration_id
+    #   The ID of the snapshot copy configuration to delete.
+    #
+    # @return [Types::DeleteSnapshotCopyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapshotCopyConfigurationResponse#snapshot_copy_configuration #snapshot_copy_configuration} => Types::SnapshotCopyConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapshot_copy_configuration({
+    #     snapshot_copy_configuration_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_copy_configuration.destination_kms_key_id #=> String
+    #   resp.snapshot_copy_configuration.destination_region #=> String
+    #   resp.snapshot_copy_configuration.namespace_name #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_arn #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_id #=> String
+    #   resp.snapshot_copy_configuration.snapshot_retention_period #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteSnapshotCopyConfiguration AWS API Documentation
+    #
+    # @overload delete_snapshot_copy_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_snapshot_copy_configuration(params = {}, options = {})
+      req = build_request(:delete_snapshot_copy_configuration, params)
       req.send_request(options)
     end
 
@@ -1094,6 +1470,11 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.cross_account_vpcs #=> Array
+    #   resp.workgroup.cross_account_vpcs[0] #=> String
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -1105,7 +1486,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1116,6 +1499,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteWorkgroup AWS API Documentation
     #
@@ -1134,6 +1518,10 @@ module Aws::RedshiftServerless
     # 3600 seconds (60 minutes).
     #
     #      <p>The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name associated with the workgroup. The custom
+    #   domain name or the workgroup name must be included in the request.
     #
     # @option params [String] :db_name
     #   The name of the database to get temporary authorization to log on to.
@@ -1160,7 +1548,7 @@ module Aws::RedshiftServerless
     #   The number of seconds until the returned temporary password expires.
     #   The minimum is 900 seconds, and the maximum is 3600 seconds.
     #
-    # @option params [required, String] :workgroup_name
+    # @option params [String] :workgroup_name
     #   The name of the workgroup associated with the database.
     #
     # @return [Types::GetCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1173,9 +1561,10 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_credentials({
+    #     custom_domain_name: "CustomDomainName",
     #     db_name: "DbName",
     #     duration_seconds: 1,
-    #     workgroup_name: "WorkgroupName", # required
+    #     workgroup_name: "WorkgroupName",
     #   })
     #
     # @example Response structure
@@ -1191,6 +1580,44 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def get_credentials(params = {}, options = {})
       req = build_request(:get_credentials, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific custom domain association.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::GetCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::GetCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::GetCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_domain_association({
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetCustomDomainAssociation AWS API Documentation
+    #
+    # @overload get_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def get_custom_domain_association(params = {}, options = {})
+      req = build_request(:get_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -1257,6 +1684,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -1342,6 +1771,51 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns information about a scheduled action.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @return [Types::GetScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScheduledActionResponse#scheduled_action #scheduled_action} => Types::ScheduledActionResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scheduled_action({
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action.end_time #=> Time
+    #   resp.scheduled_action.namespace_name #=> String
+    #   resp.scheduled_action.next_invocations #=> Array
+    #   resp.scheduled_action.next_invocations[0] #=> Time
+    #   resp.scheduled_action.role_arn #=> String
+    #   resp.scheduled_action.schedule.at #=> Time
+    #   resp.scheduled_action.schedule.cron #=> String
+    #   resp.scheduled_action.scheduled_action_description #=> String
+    #   resp.scheduled_action.scheduled_action_name #=> String
+    #   resp.scheduled_action.scheduled_action_uuid #=> String
+    #   resp.scheduled_action.start_time #=> Time
+    #   resp.scheduled_action.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.scheduled_action.target_action.create_snapshot.namespace_name #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.retention_period #=> Integer
+    #   resp.scheduled_action.target_action.create_snapshot.snapshot_name_prefix #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags #=> Array
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].key #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetScheduledAction AWS API Documentation
+    #
+    # @overload get_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def get_scheduled_action(params = {}, options = {})
+      req = build_request(:get_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific snapshot.
     #
     # @option params [String] :owner_account
@@ -1373,6 +1847,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1421,6 +1897,7 @@ module Aws::RedshiftServerless
     #   resp.table_restore_status.namespace_name #=> String
     #   resp.table_restore_status.new_table_name #=> String
     #   resp.table_restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.recovery_point_id #=> String
     #   resp.table_restore_status.request_time #=> Time
     #   resp.table_restore_status.snapshot_name #=> String
     #   resp.table_restore_status.source_database_name #=> String
@@ -1498,6 +1975,11 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.cross_account_vpcs #=> Array
+    #   resp.workgroup.cross_account_vpcs[0] #=> String
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -1509,7 +1991,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -1520,6 +2004,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetWorkgroup AWS API Documentation
     #
@@ -1527,6 +2012,57 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def get_workgroup(params = {}, options = {})
       req = build_request(:get_workgroup, params)
+      req.send_request(options)
+    end
+
+    # Lists custom domain associations for Amazon Redshift Serverless.
+    #
+    # @option params [String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN).
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to display the next page of results.
+    #
+    # @option params [String] :next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #
+    # @return [Types::ListCustomDomainAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomDomainAssociationsResponse#associations #associations} => Array&lt;Types::Association&gt;
+    #   * {Types::ListCustomDomainAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_domain_associations({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     custom_domain_name: "CustomDomainName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].custom_domain_certificate_arn #=> String
+    #   resp.associations[0].custom_domain_certificate_expiry_time #=> Time
+    #   resp.associations[0].custom_domain_name #=> String
+    #   resp.associations[0].workgroup_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListCustomDomainAssociations AWS API Documentation
+    #
+    # @overload list_custom_domain_associations(params = {})
+    # @param [Hash] params ({})
+    def list_custom_domain_associations(params = {}, options = {})
+      req = build_request(:list_custom_domain_associations, params)
       req.send_request(options)
     end
 
@@ -1541,6 +2077,10 @@ module Aws::RedshiftServerless
     #   you can include the returned `nextToken` in following
     #   `ListEndpointAccess` operations, which returns results in the next
     #   page.
+    #
+    # @option params [String] :owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
     #
     # @option params [String] :vpc_id
     #   The unique identifier of the virtual private cloud with access to
@@ -1561,6 +2101,7 @@ module Aws::RedshiftServerless
     #   resp = client.list_endpoint_access({
     #     max_results: 1,
     #     next_token: "String",
+    #     owner_account: "OwnerAccount",
     #     vpc_id: "String",
     #     workgroup_name: "String",
     #   })
@@ -1626,6 +2167,8 @@ module Aws::RedshiftServerless
     # @example Response structure
     #
     #   resp.namespaces #=> Array
+    #   resp.namespaces[0].admin_password_secret_arn #=> String
+    #   resp.namespaces[0].admin_password_secret_kms_key_id #=> String
     #   resp.namespaces[0].admin_username #=> String
     #   resp.namespaces[0].creation_date #=> Time
     #   resp.namespaces[0].db_name #=> String
@@ -1713,6 +2256,101 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns a list of scheduled actions. You can use the flags to filter
+    # the list of returned scheduled actions.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. Use `nextToken` to display the next page of results.
+    #
+    # @option params [String] :namespace_name
+    #   The name of namespace associated with the scheduled action to
+    #   retrieve.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #
+    # @return [Types::ListScheduledActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduledActionsResponse#next_token #next_token} => String
+    #   * {Types::ListScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduled_actions({
+    #     max_results: 1,
+    #     namespace_name: "NamespaceName",
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.scheduled_actions #=> Array
+    #   resp.scheduled_actions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListScheduledActions AWS API Documentation
+    #
+    # @overload list_scheduled_actions(params = {})
+    # @param [Hash] params ({})
+    def list_scheduled_actions(params = {}, options = {})
+      req = build_request(:list_scheduled_actions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of snapshot copy configurations.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to display the next page of results.
+    #
+    # @option params [String] :namespace_name
+    #   The namespace from which to list all snapshot copy configurations.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #
+    # @return [Types::ListSnapshotCopyConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSnapshotCopyConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListSnapshotCopyConfigurationsResponse#snapshot_copy_configurations #snapshot_copy_configurations} => Array&lt;Types::SnapshotCopyConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_snapshot_copy_configurations({
+    #     max_results: 1,
+    #     namespace_name: "NamespaceName",
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.snapshot_copy_configurations #=> Array
+    #   resp.snapshot_copy_configurations[0].destination_kms_key_id #=> String
+    #   resp.snapshot_copy_configurations[0].destination_region #=> String
+    #   resp.snapshot_copy_configurations[0].namespace_name #=> String
+    #   resp.snapshot_copy_configurations[0].snapshot_copy_configuration_arn #=> String
+    #   resp.snapshot_copy_configurations[0].snapshot_copy_configuration_id #=> String
+    #   resp.snapshot_copy_configurations[0].snapshot_retention_period #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListSnapshotCopyConfigurations AWS API Documentation
+    #
+    # @overload list_snapshot_copy_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_snapshot_copy_configurations(params = {}, options = {})
+      req = build_request(:list_snapshot_copy_configurations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of snapshots.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
@@ -1768,6 +2406,8 @@ module Aws::RedshiftServerless
     #   resp.snapshots[0].accounts_with_restore_access #=> Array
     #   resp.snapshots[0].accounts_with_restore_access[0] #=> String
     #   resp.snapshots[0].actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshots[0].admin_password_secret_arn #=> String
+    #   resp.snapshots[0].admin_password_secret_kms_key_id #=> String
     #   resp.snapshots[0].admin_username #=> String
     #   resp.snapshots[0].backup_progress_in_mega_bytes #=> Float
     #   resp.snapshots[0].current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -1839,6 +2479,7 @@ module Aws::RedshiftServerless
     #   resp.table_restore_statuses[0].namespace_name #=> String
     #   resp.table_restore_statuses[0].new_table_name #=> String
     #   resp.table_restore_statuses[0].progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_statuses[0].recovery_point_id #=> String
     #   resp.table_restore_statuses[0].request_time #=> Time
     #   resp.table_restore_statuses[0].snapshot_name #=> String
     #   resp.table_restore_statuses[0].source_database_name #=> String
@@ -1957,6 +2598,10 @@ module Aws::RedshiftServerless
     #   can include the returned `nextToken` in following ListNamespaces
     #   operations, which returns results in the next page.
     #
+    # @option params [String] :owner_account
+    #   The owner Amazon Web Services account for the Amazon Redshift
+    #   Serverless workgroup.
+    #
     # @return [Types::ListWorkgroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListWorkgroupsResponse#next_token #next_token} => String
@@ -1969,6 +2614,7 @@ module Aws::RedshiftServerless
     #   resp = client.list_workgroups({
     #     max_results: 1,
     #     next_token: "String",
+    #     owner_account: "OwnerAccount",
     #   })
     #
     # @example Response structure
@@ -1980,6 +2626,11 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].config_parameters[0].parameter_key #=> String
     #   resp.workgroups[0].config_parameters[0].parameter_value #=> String
     #   resp.workgroups[0].creation_date #=> Time
+    #   resp.workgroups[0].cross_account_vpcs #=> Array
+    #   resp.workgroups[0].cross_account_vpcs[0] #=> String
+    #   resp.workgroups[0].custom_domain_certificate_arn #=> String
+    #   resp.workgroups[0].custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroups[0].custom_domain_name #=> String
     #   resp.workgroups[0].endpoint.address #=> String
     #   resp.workgroups[0].endpoint.port #=> Integer
     #   resp.workgroups[0].endpoint.vpc_endpoints #=> Array
@@ -1991,7 +2642,9 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
+    #   resp.workgroups[0].max_capacity #=> Integer
     #   resp.workgroups[0].namespace_name #=> String
+    #   resp.workgroups[0].patch_version #=> String
     #   resp.workgroups[0].port #=> Integer
     #   resp.workgroups[0].publicly_accessible #=> Boolean
     #   resp.workgroups[0].security_group_ids #=> Array
@@ -2002,6 +2655,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].workgroup_arn #=> String
     #   resp.workgroups[0].workgroup_id #=> String
     #   resp.workgroups[0].workgroup_name #=> String
+    #   resp.workgroups[0].workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListWorkgroups AWS API Documentation
     #
@@ -2080,6 +2734,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2105,6 +2761,16 @@ module Aws::RedshiftServerless
     end
 
     # Restores a namespace from a snapshot.
+    #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret.
+    #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
+    #   snapshot's admin credentials. If `MmanageAdminPassword` is false or
+    #   not set, Amazon Redshift uses the admin credentials that the namespace
+    #   or cluster had at the time the snapshot was taken.
     #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to restore the snapshot to.
@@ -2136,6 +2802,8 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_from_snapshot({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     owner_account: "String",
     #     snapshot_arn: "String",
@@ -2145,6 +2813,8 @@ module Aws::RedshiftServerless
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2167,6 +2837,90 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def restore_from_snapshot(params = {}, options = {})
       req = build_request(:restore_from_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Restores a table from a recovery point to your Amazon Redshift
+    # Serverless instance. You can't use this operation to restore tables
+    # with interleaved sort keys.
+    #
+    # @option params [Boolean] :activate_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table are
+    #   case sensitive. If true, the names are case sensitive. If false, the
+    #   names are not case sensitive. The default is false.
+    #
+    # @option params [required, String] :namespace_name
+    #   Namespace of the recovery point to restore from.
+    #
+    # @option params [required, String] :new_table_name
+    #   The name of the table to create from the restore operation.
+    #
+    # @option params [required, String] :recovery_point_id
+    #   The ID of the recovery point to restore the table from.
+    #
+    # @option params [required, String] :source_database_name
+    #   The name of the source database that contains the table being
+    #   restored.
+    #
+    # @option params [String] :source_schema_name
+    #   The name of the source schema that contains the table being restored.
+    #
+    # @option params [required, String] :source_table_name
+    #   The name of the source table being restored.
+    #
+    # @option params [String] :target_database_name
+    #   The name of the database to restore the table to.
+    #
+    # @option params [String] :target_schema_name
+    #   The name of the schema to restore the table to.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The workgroup to restore the table to.
+    #
+    # @return [Types::RestoreTableFromRecoveryPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreTableFromRecoveryPointResponse#table_restore_status #table_restore_status} => Types::TableRestoreStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_table_from_recovery_point({
+    #     activate_case_sensitive_identifier: false,
+    #     namespace_name: "String", # required
+    #     new_table_name: "String", # required
+    #     recovery_point_id: "String", # required
+    #     source_database_name: "String", # required
+    #     source_schema_name: "String",
+    #     source_table_name: "String", # required
+    #     target_database_name: "String",
+    #     target_schema_name: "String",
+    #     workgroup_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_restore_status.message #=> String
+    #   resp.table_restore_status.namespace_name #=> String
+    #   resp.table_restore_status.new_table_name #=> String
+    #   resp.table_restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.recovery_point_id #=> String
+    #   resp.table_restore_status.request_time #=> Time
+    #   resp.table_restore_status.snapshot_name #=> String
+    #   resp.table_restore_status.source_database_name #=> String
+    #   resp.table_restore_status.source_schema_name #=> String
+    #   resp.table_restore_status.source_table_name #=> String
+    #   resp.table_restore_status.status #=> String
+    #   resp.table_restore_status.table_restore_request_id #=> String
+    #   resp.table_restore_status.target_database_name #=> String
+    #   resp.table_restore_status.target_schema_name #=> String
+    #   resp.table_restore_status.total_data_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreTableFromRecoveryPoint AWS API Documentation
+    #
+    # @overload restore_table_from_recovery_point(params = {})
+    # @param [Hash] params ({})
+    def restore_table_from_recovery_point(params = {}, options = {})
+      req = build_request(:restore_table_from_recovery_point, params)
       req.send_request(options)
     end
 
@@ -2236,6 +2990,7 @@ module Aws::RedshiftServerless
     #   resp.table_restore_status.namespace_name #=> String
     #   resp.table_restore_status.new_table_name #=> String
     #   resp.table_restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.table_restore_status.recovery_point_id #=> String
     #   resp.table_restore_status.request_time #=> Time
     #   resp.table_restore_status.snapshot_name #=> String
     #   resp.table_restore_status.source_database_name #=> String
@@ -2314,6 +3069,50 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Updates an Amazon Redshift Serverless certificate associated with a
+    # custom domain.
+    #
+    # @option params [required, String] :custom_domain_certificate_arn
+    #   The custom domain name’s certificate Amazon resource name (ARN). This
+    #   is optional.
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name associated with the workgroup.
+    #
+    # @option params [required, String] :workgroup_name
+    #   The name of the workgroup associated with the database.
+    #
+    # @return [Types::UpdateCustomDomainAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_certificate_expiry_time #custom_domain_certificate_expiry_time} => Time
+    #   * {Types::UpdateCustomDomainAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::UpdateCustomDomainAssociationResponse#workgroup_name #workgroup_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_domain_association({
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
+    #     custom_domain_name: "CustomDomainName", # required
+    #     workgroup_name: "WorkgroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.custom_domain_certificate_expiry_time #=> Time
+    #   resp.custom_domain_name #=> String
+    #   resp.workgroup_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateCustomDomainAssociation AWS API Documentation
+    #
+    # @overload update_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def update_custom_domain_association(params = {}, options = {})
+      req = build_request(:update_custom_domain_association, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon Redshift Serverless managed endpoint.
     #
     # @option params [required, String] :endpoint_name
@@ -2371,10 +3170,17 @@ module Aws::RedshiftServerless
     # either field, but you can't update both `kmsKeyId` and `logExports`
     # in a single request.
     #
+    # @option params [String] :admin_password_secret_kms_key_id
+    #   The ID of the Key Management Service (KMS) key used to encrypt and
+    #   store the namespace's admin credentials secret. You can only use this
+    #   parameter if `manageAdminPassword` is true.
+    #
     # @option params [String] :admin_user_password
     #   The password of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
     #   `adminUsername`.
+    #
+    #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -2398,6 +3204,13 @@ module Aws::RedshiftServerless
     #   The types of logs the namespace can export. The export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
     #
+    # @option params [Boolean] :manage_admin_password
+    #   If `true`, Amazon Redshift uses Secrets Manager to manage the
+    #   namespace's admin credentials. You can't use `adminUserPassword` if
+    #   `manageAdminPassword` is true. If `manageAdminPassword` is false or
+    #   not set, Amazon Redshift uses `adminUserPassword` for the admin user
+    #   account's password.
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
@@ -2409,17 +3222,21 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_namespace({
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
     #     admin_user_password: "DbPassword",
     #     admin_username: "DbUser",
     #     default_iam_role_arn: "String",
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
+    #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.namespace.admin_password_secret_arn #=> String
+    #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
@@ -2440,6 +3257,124 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def update_namespace(params = {}, options = {})
       req = build_request(:update_namespace, params)
+      req.send_request(options)
+    end
+
+    # Updates a scheduled action.
+    #
+    # @option params [Boolean] :enabled
+    #   Specifies whether to enable the scheduled action.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time in UTC of the scheduled action to update.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the IAM role to assume to run the scheduled action. This
+    #   IAM role must have permission to run the Amazon Redshift Serverless
+    #   API operation in the scheduled action. This IAM role must allow the
+    #   Amazon Redshift scheduler to schedule creating snapshots (Principal
+    #   scheduler.redshift.amazonaws.com) to assume permissions on your
+    #   behalf. For more information about the IAM role to use with the Amazon
+    #   Redshift scheduler, see [Using Identity-Based Policies for Amazon
+    #   Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #
+    # @option params [Types::Schedule] :schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month Month
+    #   Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`". For
+    #   more information, see [Cron Expressions][1] in the *Amazon CloudWatch
+    #   Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #
+    # @option params [String] :scheduled_action_description
+    #   The descripion of the scheduled action to update to.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action to update to.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time in UTC of the scheduled action to update to.
+    #
+    # @option params [Types::TargetAction] :target_action
+    #   A JSON format string of the Amazon Redshift Serverless API operation
+    #   with input parameters. The following is an example of a target action.
+    #
+    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
+    #   "1"\}\}"`
+    #
+    # @return [Types::UpdateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScheduledActionResponse#scheduled_action #scheduled_action} => Types::ScheduledActionResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduled_action({
+    #     enabled: false,
+    #     end_time: Time.now,
+    #     role_arn: "IamRoleArn",
+    #     schedule: {
+    #       at: Time.now,
+    #       cron: "String",
+    #     },
+    #     scheduled_action_description: "String",
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #     start_time: Time.now,
+    #     target_action: {
+    #       create_snapshot: {
+    #         namespace_name: "NamespaceName", # required
+    #         retention_period: 1,
+    #         snapshot_name_prefix: "SnapshotNamePrefix", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action.end_time #=> Time
+    #   resp.scheduled_action.namespace_name #=> String
+    #   resp.scheduled_action.next_invocations #=> Array
+    #   resp.scheduled_action.next_invocations[0] #=> Time
+    #   resp.scheduled_action.role_arn #=> String
+    #   resp.scheduled_action.schedule.at #=> Time
+    #   resp.scheduled_action.schedule.cron #=> String
+    #   resp.scheduled_action.scheduled_action_description #=> String
+    #   resp.scheduled_action.scheduled_action_name #=> String
+    #   resp.scheduled_action.scheduled_action_uuid #=> String
+    #   resp.scheduled_action.start_time #=> Time
+    #   resp.scheduled_action.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.scheduled_action.target_action.create_snapshot.namespace_name #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.retention_period #=> Integer
+    #   resp.scheduled_action.target_action.create_snapshot.snapshot_name_prefix #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags #=> Array
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].key #=> String
+    #   resp.scheduled_action.target_action.create_snapshot.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateScheduledAction AWS API Documentation
+    #
+    # @overload update_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def update_scheduled_action(params = {}, options = {})
+      req = build_request(:update_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -2469,6 +3404,8 @@ module Aws::RedshiftServerless
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0] #=> String
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
+    #   resp.snapshot.admin_password_secret_arn #=> String
+    #   resp.snapshot.admin_password_secret_kms_key_id #=> String
     #   resp.snapshot.admin_username #=> String
     #   resp.snapshot.backup_progress_in_mega_bytes #=> Float
     #   resp.snapshot.current_backup_rate_in_mega_bytes_per_second #=> Float
@@ -2493,6 +3430,44 @@ module Aws::RedshiftServerless
     # @param [Hash] params ({})
     def update_snapshot(params = {}, options = {})
       req = build_request(:update_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Updates a snapshot copy configuration.
+    #
+    # @option params [required, String] :snapshot_copy_configuration_id
+    #   The ID of the snapshot copy configuration to update.
+    #
+    # @option params [Integer] :snapshot_retention_period
+    #   The new retention period of how long to keep a snapshot in the
+    #   destination Amazon Web Services Region.
+    #
+    # @return [Types::UpdateSnapshotCopyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSnapshotCopyConfigurationResponse#snapshot_copy_configuration #snapshot_copy_configuration} => Types::SnapshotCopyConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_snapshot_copy_configuration({
+    #     snapshot_copy_configuration_id: "String", # required
+    #     snapshot_retention_period: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_copy_configuration.destination_kms_key_id #=> String
+    #   resp.snapshot_copy_configuration.destination_region #=> String
+    #   resp.snapshot_copy_configuration.namespace_name #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_arn #=> String
+    #   resp.snapshot_copy_configuration.snapshot_copy_configuration_id #=> String
+    #   resp.snapshot_copy_configuration.snapshot_retention_period #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateSnapshotCopyConfiguration AWS API Documentation
+    #
+    # @overload update_snapshot_copy_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_snapshot_copy_configuration(params = {}, options = {})
+      req = build_request(:update_snapshot_copy_configuration, params)
       req.send_request(options)
     end
 
@@ -2555,7 +3530,7 @@ module Aws::RedshiftServerless
     # @option params [Array<Types::ConfigParameter>] :config_parameters
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
-    #   `enable_case_sensitivity_identifier`, `enable_user_activity_logging`,
+    #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, and query monitoring metrics that let
     #   you define performance boundaries. For more information about query
     #   monitoring rules and available metrics, see [ Query monitoring metrics
@@ -2569,6 +3544,10 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC.
+    #
+    # @option params [Integer] :max_capacity
+    #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
+    #   serve queries. The max capacity is specified in RPUs.
     #
     # @option params [Integer] :port
     #   The custom port to use when connecting to a workgroup. Valid port
@@ -2603,6 +3582,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     max_capacity: 1,
     #     port: 1,
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
@@ -2617,6 +3597,11 @@ module Aws::RedshiftServerless
     #   resp.workgroup.config_parameters[0].parameter_key #=> String
     #   resp.workgroup.config_parameters[0].parameter_value #=> String
     #   resp.workgroup.creation_date #=> Time
+    #   resp.workgroup.cross_account_vpcs #=> Array
+    #   resp.workgroup.cross_account_vpcs[0] #=> String
+    #   resp.workgroup.custom_domain_certificate_arn #=> String
+    #   resp.workgroup.custom_domain_certificate_expiry_time #=> Time
+    #   resp.workgroup.custom_domain_name #=> String
     #   resp.workgroup.endpoint.address #=> String
     #   resp.workgroup.endpoint.port #=> Integer
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
@@ -2628,7 +3613,9 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
+    #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
@@ -2639,6 +3626,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
+    #   resp.workgroup.workgroup_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateWorkgroup AWS API Documentation
     #
@@ -2662,7 +3650,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -398,9 +398,10 @@ module Aws::CostandUsageReportService
 
     # @!group API Operations
 
-    # Deletes the specified report.
+    # Deletes the specified report. Any tags associated with the report are
+    # also deleted.
     #
-    # @option params [String] :report_name
+    # @option params [required, String] :report_name
     #   The name of the report that you want to delete. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #
@@ -420,7 +421,7 @@ module Aws::CostandUsageReportService
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_report_definition({
-    #     report_name: "ReportName",
+    #     report_name: "ReportName", # required
     #   })
     #
     # @example Response structure
@@ -436,10 +437,12 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Lists the AWS Cost and Usage reports available to this account.
+    # Lists the Amazon Web Services Cost and Usage Report available to this
+    # account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that AWS returns for the operation.
+    #   The maximum number of results that Amazon Web Services returns for the
+    #   operation.
     #
     # @option params [String] :next_token
     #   A generic string.
@@ -511,7 +514,7 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions[0].format #=> String, one of "textORcsv", "Parquet"
     #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP", "Parquet"
     #   resp.report_definitions[0].additional_schema_elements #=> Array
-    #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES", "SPLIT_COST_ALLOCATION_DATA"
+    #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES", "SPLIT_COST_ALLOCATION_DATA", "MANUAL_DISCOUNT_COMPATIBILITY"
     #   resp.report_definitions[0].s3_bucket #=> String
     #   resp.report_definitions[0].s3_prefix #=> String
     #   resp.report_definitions[0].s3_region #=> String, one of "af-south-1", "ap-east-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "eu-south-1", "eu-south-2", "me-central-1", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1"
@@ -520,6 +523,8 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions[0].refresh_closed_reports #=> Boolean
     #   resp.report_definitions[0].report_versioning #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.report_definitions[0].billing_view_arn #=> String
+    #   resp.report_definitions[0].report_status.last_delivery #=> String
+    #   resp.report_definitions[0].report_status.last_status #=> String, one of "SUCCESS", "ERROR_PERMISSIONS", "ERROR_NO_BUCKET"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions AWS API Documentation
@@ -531,16 +536,48 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Allows you to programatically update your report preferences.
+    # Lists the tags associated with the specified report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be returned
+    #   for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     report_name: "ReportName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Allows you to programmatically update your report preferences.
     #
     # @option params [required, String] :report_name
     #   The name of the report that you want to create. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #
     # @option params [required, Types::ReportDefinition] :report_definition
-    #   The definition of AWS Cost and Usage Report. You can specify the
-    #   report name, time unit, report format, compression format, S3 bucket,
-    #   additional artifacts, and schema elements in the definition.
+    #   The definition of Amazon Web Services Cost and Usage Report. You can
+    #   specify the report name, time unit, report format, compression format,
+    #   S3 bucket, additional artifacts, and schema elements in the
+    #   definition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -553,7 +590,7 @@ module Aws::CostandUsageReportService
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #       format: "textORcsv", # required, accepts textORcsv, Parquet
     #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
-    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
     #       s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, eu-south-2, me-central-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
@@ -561,6 +598,10 @@ module Aws::CostandUsageReportService
     #       refresh_closed_reports: false,
     #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #       billing_view_arn: "BillingViewArn",
+    #       report_status: {
+    #         last_delivery: "LastDelivery",
+    #         last_status: "SUCCESS", # accepts SUCCESS, ERROR_PERMISSIONS, ERROR_NO_BUCKET
+    #       },
     #     },
     #   })
     #
@@ -578,6 +619,9 @@ module Aws::CostandUsageReportService
     # @option params [required, Types::ReportDefinition] :report_definition
     #   Represents the output of the PutReportDefinition operation. The
     #   content consists of the detailed metadata and data file information.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the report definition resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -613,7 +657,7 @@ module Aws::CostandUsageReportService
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #       format: "textORcsv", # required, accepts textORcsv, Parquet
     #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
-    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
     #       s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, eu-south-2, me-central-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
@@ -621,7 +665,17 @@ module Aws::CostandUsageReportService
     #       refresh_closed_reports: false,
     #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #       billing_view_arn: "BillingViewArn",
+    #       report_status: {
+    #         last_delivery: "LastDelivery",
+    #         last_status: "SUCCESS", # accepts SUCCESS, ERROR_PERMISSIONS, ERROR_NO_BUCKET
+    #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition AWS API Documentation
@@ -630,6 +684,65 @@ module Aws::CostandUsageReportService
     # @param [Hash] params ({})
     def put_report_definition(params = {}, options = {})
       req = build_request(:put_report_definition, params)
+      req.send_request(options)
+    end
+
+    # Associates a set of tags with a report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be
+    #   associated with.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to be assigned to the report definition resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     report_name: "ReportName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a set of tags from a report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be
+    #   disassociated from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tags to be disassociated from the report definition resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     report_name: "ReportName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -646,7 +759,7 @@ module Aws::CostandUsageReportService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1887,6 +1887,80 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Retrieves the record of an existing introspection. If the retrieval is
+    # successful, the result of the instrospection will also be returned. If
+    # the retrieval fails the operation, an error message will be returned
+    # instead.
+    #
+    # @option params [required, String] :introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that can
+    #   be used to reference the instrospection record.
+    #
+    # @option params [Boolean] :include_models_sdl
+    #   A boolean flag that determines whether SDL should be generated for
+    #   introspected types or not. If set to `true`, each model will contain
+    #   an `sdl` property that contains the SDL for that type. The SDL only
+    #   contains the type data and no additional metadata or directives.
+    #
+    # @option params [String] :next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of introspected types that will be returned in a
+    #   single response.
+    #
+    # @return [Types::GetDataSourceIntrospectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_id #introspection_id} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_status #introspection_status} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_status_detail #introspection_status_detail} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_result #introspection_result} => Types::DataSourceIntrospectionResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_source_introspection({
+    #     introspection_id: "String", # required
+    #     include_models_sdl: false,
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.introspection_id #=> String
+    #   resp.introspection_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.introspection_status_detail #=> String
+    #   resp.introspection_result.models #=> Array
+    #   resp.introspection_result.models[0].name #=> String
+    #   resp.introspection_result.models[0].fields #=> Array
+    #   resp.introspection_result.models[0].fields[0].name #=> String
+    #   resp.introspection_result.models[0].fields[0].type.kind #=> String
+    #   resp.introspection_result.models[0].fields[0].type.name #=> String
+    #   resp.introspection_result.models[0].fields[0].type.type #=> Types::DataSourceIntrospectionModelFieldType
+    #   resp.introspection_result.models[0].fields[0].type.values #=> Array
+    #   resp.introspection_result.models[0].fields[0].type.values[0] #=> String
+    #   resp.introspection_result.models[0].fields[0].length #=> Integer
+    #   resp.introspection_result.models[0].primary_key.name #=> String
+    #   resp.introspection_result.models[0].primary_key.fields #=> Array
+    #   resp.introspection_result.models[0].primary_key.fields[0] #=> String
+    #   resp.introspection_result.models[0].indexes #=> Array
+    #   resp.introspection_result.models[0].indexes[0].name #=> String
+    #   resp.introspection_result.models[0].indexes[0].fields #=> Array
+    #   resp.introspection_result.models[0].indexes[0].fields[0] #=> String
+    #   resp.introspection_result.models[0].sdl #=> String
+    #   resp.introspection_result.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospection AWS API Documentation
+    #
+    # @overload get_data_source_introspection(params = {})
+    # @param [Hash] params ({})
+    def get_data_source_introspection(params = {}, options = {})
+      req = build_request(:get_data_source_introspection, params)
+      req.send_request(options)
+    end
+
     # Retrieves a custom `DomainName` object.
     #
     # @option params [required, String] :domain_name
@@ -2855,6 +2929,43 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Creates a new introspection. Returns the `introspectionId` of the new
+    # introspection after its creation.
+    #
+    # @option params [Types::RdsDataApiConfig] :rds_data_api_config
+    #   The `rdsDataApiConfig` object data.
+    #
+    # @return [Types::StartDataSourceIntrospectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_id #introspection_id} => String
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_status #introspection_status} => String
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_status_detail #introspection_status_detail} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_source_introspection({
+    #     rds_data_api_config: {
+    #       resource_arn: "RdsDataApiConfigResourceArn", # required
+    #       secret_arn: "RdsDataApiConfigSecretArn", # required
+    #       database_name: "RdsDataApiConfigDatabaseName", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.introspection_id #=> String
+    #   resp.introspection_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.introspection_status_detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospection AWS API Documentation
+    #
+    # @overload start_data_source_introspection(params = {})
+    # @param [Hash] params ({})
+    def start_data_source_introspection(params = {}, options = {})
+      req = build_request(:start_data_source_introspection, params)
+      req.send_request(options)
+    end
+
     # Adds a new schema to your GraphQL API.
     #
     # This operation is asynchronous. Use to determine when it has
@@ -3803,7 +3914,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

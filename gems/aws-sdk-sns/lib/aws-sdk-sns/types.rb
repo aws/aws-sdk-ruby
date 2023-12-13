@@ -384,7 +384,13 @@ module Aws::SNS
     #
     #   The following attributes apply only to [FIFO topics][4]:
     #
-    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #   * `ArchivePolicy` – Adds or updates an inline policy document to
+    #     archive messages stored in the specified Amazon SNS topic.
+    #
+    #   * `BeginningArchiveTime` – The earliest starting point at which a
+    #     message in the topic’s archive can be replayed from. This point in
+    #     time is based on the configured message retention period set by
+    #     the topic’s message archiving policy.
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication
     #     for FIFO topics.
@@ -1042,6 +1048,20 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the specified state is not a valid state for an event
+    # source.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The ciphertext references a key that doesn't exist or that you don't
     # have access to.
     #
@@ -1056,8 +1076,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # The request was rejected because the specified customer master key
-    # (CMK) isn't enabled.
+    # The request was rejected because the specified Amazon Web Services KMS
+    # key isn't enabled.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1071,9 +1091,9 @@ module Aws::SNS
     end
 
     # The request was rejected because the state of the specified resource
-    # isn't valid for this request. For more information, see [How Key
-    # State Affects Use of a Customer Master Key][1] in the *Key Management
-    # Service Developer Guide*.
+    # isn't valid for this request. For more information, see [Key states
+    # of Amazon Web Services KMS keys][1] in the *Key Management Service
+    # Developer Guide*.
     #
     #
     #
@@ -2079,6 +2099,20 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the request parameter has exceeded the maximum number
+    # of concurrent message replays.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ReplayLimitExceededException AWS API Documentation
+    #
+    class ReplayLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Can’t perform the action on the specified resource. Make sure that the
     # resource exists.
     #
@@ -2723,9 +2757,31 @@ module Aws::SNS
     #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
     #     *Amazon SNS Developer Guide*.
     #
+    #   The following attributes apply only to [FIFO topics][2]:
+    #
+    #   * `ReplayPolicy` – Adds or updates an inline policy document for a
+    #     subscription to replay messages stored in the specified Amazon SNS
+    #     topic.
+    #
+    #   * `ReplayStatus` – Retrieves the status of the subscription message
+    #     replay, which can be one of the following:
+    #
+    #     * `Completed` – The replay has successfully redelivered all
+    #       messages, and is now delivering newly published messages. If an
+    #       ending point was specified in the `ReplayPolicy` then the
+    #       subscription will no longer receive newly published messages.
+    #
+    #     * `In progress` – The replay is currently replaying the selected
+    #       messages.
+    #
+    #     * `Failed` – The replay was unable to complete.
+    #
+    #     * `Pending` – The default state while the replay initiates.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] return_subscription_arn

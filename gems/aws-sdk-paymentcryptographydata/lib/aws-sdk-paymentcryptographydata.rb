@@ -52,6 +52,6 @@ require_relative 'aws-sdk-paymentcryptographydata/customizations'
 # @!group service
 module Aws::PaymentCryptographyData
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.8.0'
 
 end

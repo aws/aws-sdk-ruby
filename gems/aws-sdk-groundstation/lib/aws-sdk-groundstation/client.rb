@@ -769,6 +769,7 @@ module Aws::GroundStation
     #     name: "SafeName", # required
     #     streams_kms_key: {
     #       kms_alias_arn: "KeyAliasArn",
+    #       kms_alias_name: "KeyAliasName",
     #       kms_key_arn: "KeyArn",
     #     },
     #     streams_kms_role: "RoleArn",
@@ -1330,6 +1331,7 @@ module Aws::GroundStation
     #   resp.name #=> String
     #   resp.region #=> String
     #   resp.streams_kms_key.kms_alias_arn #=> String
+    #   resp.streams_kms_key.kms_alias_name #=> String
     #   resp.streams_kms_key.kms_key_arn #=> String
     #   resp.streams_kms_role #=> String
     #   resp.tags #=> Hash
@@ -2197,6 +2199,7 @@ module Aws::GroundStation
     #     name: "SafeName",
     #     streams_kms_key: {
     #       kms_alias_arn: "KeyAliasArn",
+    #       kms_alias_name: "KeyAliasName",
     #       kms_key_arn: "KeyArn",
     #     },
     #     streams_kms_role: "RoleArn",
@@ -2229,7 +2232,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

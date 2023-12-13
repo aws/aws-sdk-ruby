@@ -345,7 +345,22 @@ module Aws::ECR
     #
     # @!attribute [rw] upstream_registry_url
     #   The registry URL of the upstream public registry to use as the
-    #   source for the pull through cache rule.
+    #   source for the pull through cache rule. The following is the syntax
+    #   to use for each supported upstream registry.
+    #
+    #   * Amazon ECR Public (`ecr-public`) - `public.ecr.aws`
+    #
+    #   * Docker Hub (`docker-hub`) - `registry-1.docker.io`
+    #
+    #   * Quay (`quay`) - `quay.io`
+    #
+    #   * Kubernetes (`k8s`) - `registry.k8s.io`
+    #
+    #   * GitHub Container Registry (`github-container-registry`) -
+    #     `ghcr.io`
+    #
+    #   * Microsoft Azure Container Registry (`azure-container-registry`) -
+    #     `<custom>.azurecr.io`
     #   @return [String]
     #
     # @!attribute [rw] registry_id
@@ -354,12 +369,24 @@ module Aws::ECR
     #   registry, the default registry is assumed.
     #   @return [String]
     #
+    # @!attribute [rw] upstream_registry
+    #   The name of the upstream registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to
+    #   the upstream registry.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRuleRequest AWS API Documentation
     #
     class CreatePullThroughCacheRuleRequest < Struct.new(
       :ecr_repository_prefix,
       :upstream_registry_url,
-      :registry_id)
+      :registry_id,
+      :upstream_registry,
+      :credential_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -383,13 +410,25 @@ module Aws::ECR
     #   The registry ID associated with the request.
     #   @return [String]
     #
+    # @!attribute [rw] upstream_registry
+    #   The name of the upstream registry associated with the pull through
+    #   cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret associated with the pull through cache rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRuleResponse AWS API Documentation
     #
     class CreatePullThroughCacheRuleResponse < Struct.new(
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
-      :registry_id)
+      :registry_id,
+      :upstream_registry,
+      :credential_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -630,13 +669,19 @@ module Aws::ECR
     #   The registry ID associated with the request.
     #   @return [String]
     #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret associated with the pull through cache rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeletePullThroughCacheRuleResponse AWS API Documentation
     #
     class DeletePullThroughCacheRuleResponse < Struct.new(
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
-      :registry_id)
+      :registry_id,
+      :credential_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -717,7 +762,9 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   If a repository contains images, forces the deletion.
+    #   If true, deleting the repository force deletes the contents of the
+    #   repository. If false, the repository must be empty before attempting
+    #   to delete it.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryRequest AWS API Documentation
@@ -2575,13 +2622,31 @@ module Aws::ECR
     #   pull through cache rule is associated with.
     #   @return [String]
     #
+    # @!attribute [rw] credential_arn
+    #   The ARN of the Secrets Manager secret associated with the pull
+    #   through cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] upstream_registry
+    #   The name of the upstream source registry associated with the pull
+    #   through cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in JavaScript date format, when the pull through
+    #   cache rule was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PullThroughCacheRule AWS API Documentation
     #
     class PullThroughCacheRule < Struct.new(
       :ecr_repository_prefix,
       :upstream_registry_url,
       :created_at,
-      :registry_id)
+      :registry_id,
+      :credential_arn,
+      :upstream_registry,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3388,6 +3453,21 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The ARN of the secret specified in the pull through cache rule was not
+    # found. Update the pull through cache rule with a valid secret ARN and
+    # try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SecretNotFoundException AWS API Documentation
+    #
+    class SecretNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These errors are usually caused by a server-side issue.
     #
     # @!attribute [rw] message
@@ -3632,6 +3712,64 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The secret is unable to be accessed. Verify the resource permissions
+    # for the secret and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToAccessSecretException AWS API Documentation
+    #
+    class UnableToAccessSecretException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The secret is accessible but is unable to be decrypted. Verify the
+    # resource permisisons and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToDecryptSecretValueException AWS API Documentation
+    #
+    class UnableToDecryptSecretValueException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The image or images were unable to be pulled using the pull through
+    # cache rule. This is usually caused because of an issue with the
+    # Secrets Manager secret containing the credentials for the upstream
+    # registry.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToGetUpstreamImageException AWS API Documentation
+    #
+    class UnableToGetUpstreamImageException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was an issue getting the upstream layer matching the pull
+    # through cache rule.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToGetUpstreamLayerException AWS API Documentation
+    #
+    class UnableToGetUpstreamLayerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The image is of a type that cannot be scanned.
     #
     # @!attribute [rw] message
@@ -3680,6 +3818,63 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry
+    #   associated with the pull through cache rule. If you do not specify a
+    #   registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ecr_repository_prefix
+    #   The repository name prefix to use when caching images from the
+    #   source registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to
+    #   the upstream registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdatePullThroughCacheRuleRequest AWS API Documentation
+    #
+    class UpdatePullThroughCacheRuleRequest < Struct.new(
+      :registry_id,
+      :ecr_repository_prefix,
+      :credential_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ecr_repository_prefix
+    #   The Amazon ECR repository prefix associated with the pull through
+    #   cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in JavaScript date format, when the pull through
+    #   cache rule was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret associated with the pull through cache rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdatePullThroughCacheRuleResponse AWS API Documentation
+    #
+    class UpdatePullThroughCacheRuleResponse < Struct.new(
+      :ecr_repository_prefix,
+      :registry_id,
+      :updated_at,
+      :credential_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
@@ -3761,6 +3956,74 @@ module Aws::ECR
     #
     class UploadNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ecr_repository_prefix
+    #   The repository name prefix associated with the pull through cache
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the pull through cache rule. If you
+    #   do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ValidatePullThroughCacheRuleRequest AWS API Documentation
+    #
+    class ValidatePullThroughCacheRuleRequest < Struct.new(
+      :ecr_repository_prefix,
+      :registry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ecr_repository_prefix
+    #   The Amazon ECR repository prefix associated with the pull through
+    #   cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] upstream_registry_url
+    #   The upstream registry URL associated with the pull through cache
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret associated with the pull through cache rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_valid
+    #   Whether or not the pull through cache rule was validated. If `true`,
+    #   Amazon ECR was able to reach the upstream registry and
+    #   authentication was successful. If `false`, there was an issue and
+    #   validation failed. The `failure` reason indicates the cause.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] failure
+    #   The reason the validation failed. For more details about possible
+    #   causes and how to address them, see [Using pull through cache
+    #   rules][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ValidatePullThroughCacheRuleResponse AWS API Documentation
+    #
+    class ValidatePullThroughCacheRuleResponse < Struct.new(
+      :ecr_repository_prefix,
+      :registry_id,
+      :upstream_registry_url,
+      :credential_arn,
+      :is_valid,
+      :failure)
       SENSITIVE = []
       include Aws::Structure
     end

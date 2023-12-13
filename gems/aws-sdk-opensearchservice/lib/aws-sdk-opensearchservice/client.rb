@@ -432,6 +432,50 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Adds the data source on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @option params [required, Types::DataSourceType] :data_source_type
+    #   The type of data source.
+    #
+    # @option params [String] :description
+    #   A description of the data source.
+    #
+    # @return [Types::AddDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #     data_source_type: { # required
+    #       s3_glue_data_catalog: {
+    #         role_arn: "RoleArn",
+    #       },
+    #     },
+    #     description: "DataSourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSource AWS API Documentation
+    #
+    # @overload add_data_source(params = {})
+    # @param [Hash] params ({})
+    def add_data_source(params = {}, options = {})
+      req = build_request(:add_data_source, params)
+      req.send_request(options)
+    end
+
     # Attaches tags to an existing Amazon OpenSearch Service domain. Tags
     # are a set of case-sensitive key-value pairs. A domain can have up to
     # 10 tags. For more information, see [Tagging Amazon OpenSearch Service
@@ -501,7 +545,7 @@ module Aws::OpenSearchService
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -630,6 +674,9 @@ module Aws::OpenSearchService
     #   Identity and Access Management (IAM) policy document specifying the
     #   access policies for the new domain.
     #
+    # @option params [String] :ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
+    #
     # @option params [Types::SnapshotOptions] :snapshot_options
     #   DEPRECATED. Container for the parameters required to configure
     #   automated snapshots of domain indexes.
@@ -754,6 +801,7 @@ module Aws::OpenSearchService
     #       throughput: 1,
     #     },
     #     access_policies: "PolicyDocument",
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     snapshot_options: {
     #       automated_snapshot_start_hour: 1,
     #     },
@@ -854,6 +902,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -877,6 +926,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1053,7 +1103,7 @@ module Aws::OpenSearchService
     #
     #   resp = client.create_package({
     #     package_name: "PackageName", # required
-    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY, ZIP-PLUGIN
     #     package_description: "PackageDescription",
     #     package_source: { # required
     #       s3_bucket_name: "S3BucketName",
@@ -1065,7 +1115,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1073,6 +1123,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreatePackage AWS API Documentation
     #
@@ -1135,6 +1191,38 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Deletes the data source.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSource AWS API Documentation
+    #
+    # @overload delete_data_source(params = {})
+    # @param [Hash] params ({})
+    def delete_data_source(params = {}, options = {})
+      req = build_request(:delete_data_source, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon OpenSearch Service domain and all of its data. You
     # can't recover a domain after you delete it.
     #
@@ -1159,6 +1247,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -1182,6 +1271,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1360,7 +1450,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1368,6 +1458,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeletePackage AWS API Documentation
     #
@@ -1434,6 +1530,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.created #=> Boolean
     #   resp.domain_status.deleted #=> Boolean
     #   resp.domain_status.endpoint #=> String
+    #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
     #   resp.domain_status.processing #=> Boolean
@@ -1457,6 +1554,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.ebs_options.iops #=> Integer
     #   resp.domain_status.ebs_options.throughput #=> Integer
     #   resp.domain_status.access_policies #=> String
+    #   resp.domain_status.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.vpc_options.vpc_id #=> String
     #   resp.domain_status.vpc_options.subnet_ids #=> Array
@@ -1683,6 +1781,12 @@ module Aws::OpenSearchService
     #   resp.domain_config.access_policies.status.update_version #=> Integer
     #   resp.domain_config.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.access_policies.status.pending_deletion #=> Boolean
+    #   resp.domain_config.ip_address_type.options #=> String, one of "ipv4", "dualstack"
+    #   resp.domain_config.ip_address_type.status.creation_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_version #=> Integer
+    #   resp.domain_config.ip_address_type.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.ip_address_type.status.pending_deletion #=> Boolean
     #   resp.domain_config.snapshot_options.options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_config.snapshot_options.status.creation_date #=> Time
     #   resp.domain_config.snapshot_options.status.update_date #=> Time
@@ -1907,8 +2011,7 @@ module Aws::OpenSearchService
     #
     # @option params [required, Array<String>] :domain_names
     #   Array of OpenSearch Service domain names that you want information
-    #   about. If you don't specify any domains, OpenSearch Service returns
-    #   information about all domains owned by the account.
+    #   about. You must specify at least one domain name.
     #
     # @return [Types::DescribeDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1929,6 +2032,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].created #=> Boolean
     #   resp.domain_status_list[0].deleted #=> Boolean
     #   resp.domain_status_list[0].endpoint #=> String
+    #   resp.domain_status_list[0].endpoint_v2 #=> String
     #   resp.domain_status_list[0].endpoints #=> Hash
     #   resp.domain_status_list[0].endpoints["String"] #=> String
     #   resp.domain_status_list[0].processing #=> Boolean
@@ -1952,6 +2056,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].ebs_options.iops #=> Integer
     #   resp.domain_status_list[0].ebs_options.throughput #=> Integer
     #   resp.domain_status_list[0].access_policies #=> String
+    #   resp.domain_status_list[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status_list[0].vpc_options.vpc_id #=> String
     #   resp.domain_status_list[0].vpc_options.subnet_ids #=> Array
@@ -2062,6 +2167,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.created #=> Boolean
     #   resp.dry_run_config.deleted #=> Boolean
     #   resp.dry_run_config.endpoint #=> String
+    #   resp.dry_run_config.endpoint_v2 #=> String
     #   resp.dry_run_config.endpoints #=> Hash
     #   resp.dry_run_config.endpoints["String"] #=> String
     #   resp.dry_run_config.processing #=> Boolean
@@ -2085,6 +2191,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.ebs_options.iops #=> Integer
     #   resp.dry_run_config.ebs_options.throughput #=> Integer
     #   resp.dry_run_config.access_policies #=> String
+    #   resp.dry_run_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.dry_run_config.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.dry_run_config.vpc_options.vpc_id #=> String
     #   resp.dry_run_config.vpc_options.subnet_ids #=> Array
@@ -2371,7 +2478,7 @@ module Aws::OpenSearchService
     #   resp = client.describe_packages({
     #     filters: [
     #       {
-    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus, PackageType, EngineVersion
     #         value: ["DescribePackagesFilterValue"],
     #       },
     #     ],
@@ -2384,7 +2491,7 @@ module Aws::OpenSearchService
     #   resp.package_details_list #=> Array
     #   resp.package_details_list[0].package_id #=> String
     #   resp.package_details_list[0].package_name #=> String
-    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details_list[0].package_description #=> String
     #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details_list[0].created_at #=> Time
@@ -2392,6 +2499,12 @@ module Aws::OpenSearchService
     #   resp.package_details_list[0].available_package_version #=> String
     #   resp.package_details_list[0].error_details.error_type #=> String
     #   resp.package_details_list[0].error_details.error_message #=> String
+    #   resp.package_details_list[0].engine_version #=> String
+    #   resp.package_details_list[0].available_plugin_properties.name #=> String
+    #   resp.package_details_list[0].available_plugin_properties.description #=> String
+    #   resp.package_details_list[0].available_plugin_properties.version #=> String
+    #   resp.package_details_list[0].available_plugin_properties.class_name #=> String
+    #   resp.package_details_list[0].available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackages AWS API Documentation
@@ -2610,7 +2723,7 @@ module Aws::OpenSearchService
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -2661,6 +2774,84 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Describes the data source details.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataSourceResponse#data_source_type #data_source_type} => Types::DataSourceType
+    #   * {Types::GetDataSourceResponse#name #name} => String
+    #   * {Types::GetDataSourceResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_source_type.s3_glue_data_catalog.role_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSource AWS API Documentation
+    #
+    # @overload get_data_source(params = {})
+    # @param [Hash] params ({})
+    def get_data_source(params = {}, options = {})
+      req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # The status of the maintenance action.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :maintenance_id
+    #   The request ID of the maintenance action.
+    #
+    # @return [Types::GetDomainMaintenanceStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainMaintenanceStatusResponse#status #status} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#status_message #status_message} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#node_id #node_id} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#action #action} => String
+    #   * {Types::GetDomainMaintenanceStatusResponse#created_at #created_at} => Time
+    #   * {Types::GetDomainMaintenanceStatusResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_maintenance_status({
+    #     domain_name: "DomainName", # required
+    #     maintenance_id: "RequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "TIMED_OUT"
+    #   resp.status_message #=> String
+    #   resp.node_id #=> String
+    #   resp.action #=> String, one of "REBOOT_NODE", "RESTART_SEARCH_PROCESS", "RESTART_DASHBOARD"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDomainMaintenanceStatus AWS API Documentation
+    #
+    # @overload get_domain_maintenance_status(params = {})
+    # @param [Hash] params ({})
+    def get_domain_maintenance_status(params = {}, options = {})
+      req = build_request(:get_domain_maintenance_status, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Amazon OpenSearch Service package versions, along
     # with their creation time, commit message, and plugin properties (if
     # the package is a zip plugin package). For more information, see
@@ -2706,6 +2897,11 @@ module Aws::OpenSearchService
     #   resp.package_version_history_list[0].package_version #=> String
     #   resp.package_version_history_list[0].commit_message #=> String
     #   resp.package_version_history_list[0].created_at #=> Time
+    #   resp.package_version_history_list[0].plugin_properties.name #=> String
+    #   resp.package_version_history_list[0].plugin_properties.description #=> String
+    #   resp.package_version_history_list[0].plugin_properties.version #=> String
+    #   resp.package_version_history_list[0].plugin_properties.class_name #=> String
+    #   resp.package_version_history_list[0].plugin_properties.uncompressed_size_in_bytes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetPackageVersionHistory AWS API Documentation
@@ -2804,6 +3000,97 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # A list of the data source details of the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataSourcesResponse#data_sources #data_sources} => Array&lt;Types::DataSourceDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_sources({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].data_source_type.s3_glue_data_catalog.role_arn #=> String
+    #   resp.data_sources[0].name #=> String
+    #   resp.data_sources[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSources AWS API Documentation
+    #
+    # @overload list_data_sources(params = {})
+    # @param [Hash] params ({})
+    def list_data_sources(params = {}, options = {})
+      req = build_request(:list_data_sources, params)
+      req.send_request(options)
+    end
+
+    # A list of maintenance actions for the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [String] :action
+    #   The name of the action.
+    #
+    # @option params [String] :status
+    #   The status of the action.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListDomainMaintenances` operation returns a
+    #   `nextToken`, include the returned `nextToken` in subsequent
+    #   `ListDomainMaintenances` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListDomainMaintenancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainMaintenancesResponse#domain_maintenances #domain_maintenances} => Array&lt;Types::DomainMaintenanceDetails&gt;
+    #   * {Types::ListDomainMaintenancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_maintenances({
+    #     domain_name: "DomainName", # required
+    #     action: "REBOOT_NODE", # accepts REBOOT_NODE, RESTART_SEARCH_PROCESS, RESTART_DASHBOARD
+    #     status: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, TIMED_OUT
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_maintenances #=> Array
+    #   resp.domain_maintenances[0].maintenance_id #=> String
+    #   resp.domain_maintenances[0].domain_name #=> String
+    #   resp.domain_maintenances[0].action #=> String, one of "REBOOT_NODE", "RESTART_SEARCH_PROCESS", "RESTART_DASHBOARD"
+    #   resp.domain_maintenances[0].node_id #=> String
+    #   resp.domain_maintenances[0].status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "TIMED_OUT"
+    #   resp.domain_maintenances[0].status_message #=> String
+    #   resp.domain_maintenances[0].created_at #=> Time
+    #   resp.domain_maintenances[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainMaintenances AWS API Documentation
+    #
+    # @overload list_domain_maintenances(params = {})
+    # @param [Hash] params ({})
+    def list_domain_maintenances(params = {}, options = {})
+      req = build_request(:list_domain_maintenances, params)
+      req.send_request(options)
+    end
+
     # Returns the names of all Amazon OpenSearch Service domains owned by
     # the current user in the active Region.
     #
@@ -2877,7 +3164,7 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -3008,7 +3295,7 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
@@ -3420,6 +3707,44 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Starts the node maintenance process on the data node. These processes
+    # can include a node reboot, an Opensearch or Elasticsearch process
+    # restart, or a Dashboard or Kibana restart.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :action
+    #   The name of the action.
+    #
+    # @option params [String] :node_id
+    #   The ID of the data node.
+    #
+    # @return [Types::StartDomainMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDomainMaintenanceResponse#maintenance_id #maintenance_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_domain_maintenance({
+    #     domain_name: "DomainName", # required
+    #     action: "REBOOT_NODE", # required, accepts REBOOT_NODE, RESTART_SEARCH_PROCESS, RESTART_DASHBOARD
+    #     node_id: "NodeId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.maintenance_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartDomainMaintenance AWS API Documentation
+    #
+    # @overload start_domain_maintenance(params = {})
+    # @param [Hash] params ({})
+    def start_domain_maintenance(params = {}, options = {})
+      req = build_request(:start_domain_maintenance, params)
+      req.send_request(options)
+    end
+
     # Schedules a service software update for an Amazon OpenSearch Service
     # domain. For more information, see [Service software updates in Amazon
     # OpenSearch Service][1].
@@ -3487,8 +3812,52 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Updates the data source on the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
+    #
+    # @option params [required, Types::DataSourceType] :data_source_type
+    #   The type of data source.
+    #
+    # @option params [String] :description
+    #   A description of the data source.
+    #
+    # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataSourceResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_source({
+    #     domain_name: "DomainName", # required
+    #     name: "DataSourceName", # required
+    #     data_source_type: { # required
+    #       s3_glue_data_catalog: {
+    #         role_arn: "RoleArn",
+    #       },
+    #     },
+    #     description: "DataSourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSource AWS API Documentation
+    #
+    # @overload update_data_source(params = {})
+    # @param [Hash] params ({})
+    def update_data_source(params = {}, options = {})
+      req = build_request(:update_data_source, params)
+      req.send_request(options)
+    end
+
     # Modifies the cluster configuration of the specified Amazon OpenSearch
-    # Service domain.sl
+    # Service domain.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you're updating.
@@ -3548,6 +3917,9 @@ module Aws::OpenSearchService
     # @option params [String] :access_policies
     #   Identity and Access Management (IAM) access policy as a JSON-formatted
     #   string.
+    #
+    # @option params [String] :ip_address_type
+    #   The type of IP addresses supported by the endpoint for the domain.
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
@@ -3645,6 +4017,7 @@ module Aws::OpenSearchService
     #       "String" => "String",
     #     },
     #     access_policies: "PolicyDocument",
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     log_publishing_options: {
     #       "INDEX_SLOW_LOGS" => {
     #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
@@ -3759,6 +4132,12 @@ module Aws::OpenSearchService
     #   resp.domain_config.access_policies.status.update_version #=> Integer
     #   resp.domain_config.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.access_policies.status.pending_deletion #=> Boolean
+    #   resp.domain_config.ip_address_type.options #=> String, one of "ipv4", "dualstack"
+    #   resp.domain_config.ip_address_type.status.creation_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_date #=> Time
+    #   resp.domain_config.ip_address_type.status.update_version #=> Integer
+    #   resp.domain_config.ip_address_type.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.ip_address_type.status.pending_deletion #=> Boolean
     #   resp.domain_config.snapshot_options.options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_config.snapshot_options.status.creation_date #=> Time
     #   resp.domain_config.snapshot_options.status.update_date #=> Time
@@ -3929,7 +4308,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -3937,6 +4316,12 @@ module Aws::OpenSearchService
     #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
+    #   resp.package_details.engine_version #=> String
+    #   resp.package_details.available_plugin_properties.name #=> String
+    #   resp.package_details.available_plugin_properties.description #=> String
+    #   resp.package_details.available_plugin_properties.version #=> String
+    #   resp.package_details.available_plugin_properties.class_name #=> String
+    #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackage AWS API Documentation
     #
@@ -4152,7 +4537,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

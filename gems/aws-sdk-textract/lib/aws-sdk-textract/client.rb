@@ -463,12 +463,9 @@ module Aws::Textract
     #   return information about the tables that are detected in the input
     #   document. Add FORMS to return detected form data. Add SIGNATURES to
     #   return the locations of detected signatures. Add LAYOUT to the list to
-    #   return information about the layout of the document. To perform both
-    #   forms and table analysis, add TABLES and FORMS to `FeatureTypes`. To
-    #   detect signatures within the document and within form data and table
-    #   data, add SIGNATURES to either TABLES or FORMS. All lines and words
-    #   detected in the document are included in the response (including text
-    #   that isn't related to the value of `FeatureTypes`).
+    #   return information about the layout of the document. All lines and
+    #   words detected in the document are included in the response (including
+    #   text that isn't related to the value of `FeatureTypes`).
     #
     # @option params [Types::HumanLoopConfig] :human_loop_config
     #   Sets the configuration for the human in the loop workflow for
@@ -477,6 +474,9 @@ module Aws::Textract
     # @option params [Types::QueriesConfig] :queries_config
     #   Contains Queries and the alias for those Queries, as determined by the
     #   input.
+    #
+    # @option params [Types::AdaptersConfig] :adapters_config
+    #   Specifies the adapter to be used when analyzing a document.
     #
     # @return [Types::AnalyzeDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -510,6 +510,15 @@ module Aws::Textract
     #           text: "QueryInput", # required
     #           alias: "QueryInput",
     #           pages: ["QueryPage"],
+    #         },
+    #       ],
+    #     },
+    #     adapters_config: {
+    #       adapters: [ # required
+    #         {
+    #           adapter_id: "AdapterId", # required
+    #           pages: ["AdapterPage"],
+    #           version: "AdapterVersion", # required
     #         },
     #       ],
     #     },
@@ -805,6 +814,221 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Creates an adapter, which can be fine-tuned for enhanced performance
+    # on user provided documents. Takes an AdapterName and FeatureType.
+    # Currently the only supported feature type is `QUERIES`. You can also
+    # provide a Description, Tags, and a ClientRequestToken. You can choose
+    # whether or not the adapter should be AutoUpdated with the AutoUpdate
+    # argument. By default, AutoUpdate is set to DISABLED.
+    #
+    # @option params [required, String] :adapter_name
+    #   The name to be assigned to the adapter being created.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token is used to recognize the request. If the same token
+    #   is used with multiple CreateAdapter requests, the same session is
+    #   returned. This token is employed to avoid unintentionally creating the
+    #   same session multiple times.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description to be assigned to the adapter being created.
+    #
+    # @option params [required, Array<String>] :feature_types
+    #   The type of feature that the adapter is being trained on. Currrenly,
+    #   supported feature types are: `QUERIES`
+    #
+    # @option params [String] :auto_update
+    #   Controls whether or not the adapter should automatically update.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags to be added to the adapter.
+    #
+    # @return [Types::CreateAdapterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAdapterResponse#adapter_id #adapter_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_adapter({
+    #     adapter_name: "AdapterName", # required
+    #     client_request_token: "ClientRequestToken",
+    #     description: "AdapterDescription",
+    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES, LAYOUT
+    #     auto_update: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapter AWS API Documentation
+    #
+    # @overload create_adapter(params = {})
+    # @param [Hash] params ({})
+    def create_adapter(params = {}, options = {})
+      req = build_request(:create_adapter, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version of an adapter. Operates on a provided AdapterId
+    # and a specified dataset provided via the DatasetConfig argument.
+    # Requires that you specify an Amazon S3 bucket with the OutputConfig
+    # argument. You can provide an optional KMSKeyId, an optional
+    # ClientRequestToken, and optional tags.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string containing a unique ID for the adapter that will receive a
+    #   new version.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token is used to recognize the request. If the same token
+    #   is used with multiple CreateAdapterVersion requests, the same session
+    #   is returned. This token is employed to avoid unintentionally creating
+    #   the same session multiple times.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::AdapterVersionDatasetConfig] :dataset_config
+    #   Specifies a dataset used to train a new adapter version. Takes a
+    #   ManifestS3Object as the value.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   Used to encrypt your documents.
+    #
+    # @option params [required, Types::OutputConfig] :output_config
+    #   Sets whether or not your output will go to a user created bucket. Used
+    #   to set the name of the bucket, and the prefix on the output file.
+    #
+    #   `OutputConfig` is an optional parameter which lets you adjust where
+    #   your output will be placed. By default, Amazon Textract will store the
+    #   results internally and can only be accessed by the Get API operations.
+    #   With `OutputConfig` enabled, you can set the name of the bucket the
+    #   output will be sent to the file prefix of the results where you can
+    #   download your results. Additionally, you can set the `KMSKeyID`
+    #   parameter to a customer master key (CMK) to encrypt your output.
+    #   Without this parameter set Amazon Textract will encrypt server-side
+    #   using the AWS managed CMK for Amazon S3.
+    #
+    #   Decryption of Customer Content is necessary for processing of the
+    #   documents by Amazon Textract. If your account is opted out under an AI
+    #   services opt out policy then all unencrypted Customer Content is
+    #   immediately and permanently deleted after the Customer Content has
+    #   been processed by the service. No copy of of the output is retained by
+    #   Amazon Textract. For information about how to opt out, see [ Managing
+    #   AI services opt-out policy. ][1]
+    #
+    #   For more information on data privacy, see the [Data Privacy FAQ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://aws.amazon.com/compliance/data-privacy-faq/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the adapter
+    #   version.
+    #
+    # @return [Types::CreateAdapterVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAdapterVersionResponse#adapter_id #adapter_id} => String
+    #   * {Types::CreateAdapterVersionResponse#adapter_version #adapter_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_adapter_version({
+    #     adapter_id: "AdapterId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     dataset_config: { # required
+    #       manifest_s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     kms_key_id: "KMSKeyId",
+    #     output_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_id #=> String
+    #   resp.adapter_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/CreateAdapterVersion AWS API Documentation
+    #
+    # @overload create_adapter_version(params = {})
+    # @param [Hash] params ({})
+    def create_adapter_version(params = {}, options = {})
+      req = build_request(:create_adapter_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the
+    # adapter specified by the ID.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string containing a unique ID for the adapter to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_adapter({
+    #     adapter_id: "AdapterId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapter AWS API Documentation
+    #
+    # @overload delete_adapter(params = {})
+    # @param [Hash] params ({})
+    def delete_adapter(params = {}, options = {})
+      req = build_request(:delete_adapter, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Textract adapter version. Requires that you specify
+    # both an AdapterId and a AdapterVersion. Deletes the adapter version
+    # specified by the AdapterId and the AdapterVersion.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string containing a unique ID for the adapter version that will be
+    #   deleted.
+    #
+    # @option params [required, String] :adapter_version
+    #   Specifies the adapter version to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_adapter_version({
+    #     adapter_id: "AdapterId", # required
+    #     adapter_version: "AdapterVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DeleteAdapterVersion AWS API Documentation
+    #
+    # @overload delete_adapter_version(params = {})
+    # @param [Hash] params ({})
+    def delete_adapter_version(params = {}, options = {})
+      req = build_request(:delete_adapter_version, params)
+      req.send_request(options)
+    end
+
     # Detects text in the input document. Amazon Textract can detect lines
     # of text and the words that make up a line of text. The input document
     # must be in one of the following image formats: JPEG, PNG, PDF, or
@@ -894,6 +1118,119 @@ module Aws::Textract
     # @param [Hash] params ({})
     def detect_document_text(params = {}, options = {})
       req = build_request(:detect_document_text, params)
+      req.send_request(options)
+    end
+
+    # Gets configuration information for an adapter specified by an
+    # AdapterId, returning information on AdapterName, Description,
+    # CreationTime, AutoUpdate status, and FeatureTypes.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string containing a unique ID for the adapter.
+    #
+    # @return [Types::GetAdapterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdapterResponse#adapter_id #adapter_id} => String
+    #   * {Types::GetAdapterResponse#adapter_name #adapter_name} => String
+    #   * {Types::GetAdapterResponse#creation_time #creation_time} => Time
+    #   * {Types::GetAdapterResponse#description #description} => String
+    #   * {Types::GetAdapterResponse#feature_types #feature_types} => Array&lt;String&gt;
+    #   * {Types::GetAdapterResponse#auto_update #auto_update} => String
+    #   * {Types::GetAdapterResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_adapter({
+    #     adapter_id: "AdapterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_id #=> String
+    #   resp.adapter_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.description #=> String
+    #   resp.feature_types #=> Array
+    #   resp.feature_types[0] #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.auto_update #=> String, one of "ENABLED", "DISABLED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapter AWS API Documentation
+    #
+    # @overload get_adapter(params = {})
+    # @param [Hash] params ({})
+    def get_adapter(params = {}, options = {})
+      req = build_request(:get_adapter, params)
+      req.send_request(options)
+    end
+
+    # Gets configuration information for the specified adapter version,
+    # including: AdapterId, AdapterVersion, FeatureTypes, Status,
+    # StatusMessage, DatasetConfig, KMSKeyId, OutputConfig, Tags and
+    # EvaluationMetrics.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string specifying a unique ID for the adapter version you want to
+    #   retrieve information for.
+    #
+    # @option params [required, String] :adapter_version
+    #   A string specifying the adapter version you want to retrieve
+    #   information for.
+    #
+    # @return [Types::GetAdapterVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdapterVersionResponse#adapter_id #adapter_id} => String
+    #   * {Types::GetAdapterVersionResponse#adapter_version #adapter_version} => String
+    #   * {Types::GetAdapterVersionResponse#creation_time #creation_time} => Time
+    #   * {Types::GetAdapterVersionResponse#feature_types #feature_types} => Array&lt;String&gt;
+    #   * {Types::GetAdapterVersionResponse#status #status} => String
+    #   * {Types::GetAdapterVersionResponse#status_message #status_message} => String
+    #   * {Types::GetAdapterVersionResponse#dataset_config #dataset_config} => Types::AdapterVersionDatasetConfig
+    #   * {Types::GetAdapterVersionResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetAdapterVersionResponse#output_config #output_config} => Types::OutputConfig
+    #   * {Types::GetAdapterVersionResponse#evaluation_metrics #evaluation_metrics} => Array&lt;Types::AdapterVersionEvaluationMetric&gt;
+    #   * {Types::GetAdapterVersionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_adapter_version({
+    #     adapter_id: "AdapterId", # required
+    #     adapter_version: "AdapterVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_id #=> String
+    #   resp.adapter_version #=> String
+    #   resp.creation_time #=> Time
+    #   resp.feature_types #=> Array
+    #   resp.feature_types[0] #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.status #=> String, one of "ACTIVE", "AT_RISK", "DEPRECATED", "CREATION_ERROR", "CREATION_IN_PROGRESS"
+    #   resp.status_message #=> String
+    #   resp.dataset_config.manifest_s3_object.bucket #=> String
+    #   resp.dataset_config.manifest_s3_object.name #=> String
+    #   resp.dataset_config.manifest_s3_object.version #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.output_config.s3_bucket #=> String
+    #   resp.output_config.s3_prefix #=> String
+    #   resp.evaluation_metrics #=> Array
+    #   resp.evaluation_metrics[0].baseline.f1_score #=> Float
+    #   resp.evaluation_metrics[0].baseline.precision #=> Float
+    #   resp.evaluation_metrics[0].baseline.recall #=> Float
+    #   resp.evaluation_metrics[0].adapter_version.f1_score #=> Float
+    #   resp.evaluation_metrics[0].adapter_version.precision #=> Float
+    #   resp.evaluation_metrics[0].adapter_version.recall #=> Float
+    #   resp.evaluation_metrics[0].feature_type #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetAdapterVersion AWS API Documentation
+    #
+    # @overload get_adapter_version(params = {})
+    # @param [Hash] params ({})
+    def get_adapter_version(params = {}, options = {})
+      req = build_request(:get_adapter_version, params)
       req.send_request(options)
     end
 
@@ -1654,6 +1991,151 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # List all version of an adapter that meet the specified filtration
+    # criteria.
+    #
+    # @option params [String] :adapter_id
+    #   A string containing a unique ID for the adapter to match for when
+    #   listing adapter versions.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :after_creation_time
+    #   Specifies the lower bound for the ListAdapterVersions operation.
+    #   Ensures ListAdapterVersions returns only adapter versions created
+    #   after the specified creation time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :before_creation_time
+    #   Specifies the upper bound for the ListAdapterVersions operation.
+    #   Ensures ListAdapterVersions returns only adapter versions created
+    #   after the specified creation time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return when listing adapter versions.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return when listing adapter
+    #   versions.
+    #
+    # @return [Types::ListAdapterVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAdapterVersionsResponse#adapter_versions #adapter_versions} => Array&lt;Types::AdapterVersionOverview&gt;
+    #   * {Types::ListAdapterVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_adapter_versions({
+    #     adapter_id: "AdapterId",
+    #     after_creation_time: Time.now,
+    #     before_creation_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_versions #=> Array
+    #   resp.adapter_versions[0].adapter_id #=> String
+    #   resp.adapter_versions[0].adapter_version #=> String
+    #   resp.adapter_versions[0].creation_time #=> Time
+    #   resp.adapter_versions[0].feature_types #=> Array
+    #   resp.adapter_versions[0].feature_types[0] #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.adapter_versions[0].status #=> String, one of "ACTIVE", "AT_RISK", "DEPRECATED", "CREATION_ERROR", "CREATION_IN_PROGRESS"
+    #   resp.adapter_versions[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdapterVersions AWS API Documentation
+    #
+    # @overload list_adapter_versions(params = {})
+    # @param [Hash] params ({})
+    def list_adapter_versions(params = {}, options = {})
+      req = build_request(:list_adapter_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all adapters that match the specified filtration criteria.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :after_creation_time
+    #   Specifies the lower bound for the ListAdapters operation. Ensures
+    #   ListAdapters returns only adapters created after the specified
+    #   creation time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :before_creation_time
+    #   Specifies the upper bound for the ListAdapters operation. Ensures
+    #   ListAdapters returns only adapters created before the specified
+    #   creation time.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return when listing adapters.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return when listing adapters.
+    #
+    # @return [Types::ListAdaptersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAdaptersResponse#adapters #adapters} => Array&lt;Types::AdapterOverview&gt;
+    #   * {Types::ListAdaptersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_adapters({
+    #     after_creation_time: Time.now,
+    #     before_creation_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapters #=> Array
+    #   resp.adapters[0].adapter_id #=> String
+    #   resp.adapters[0].adapter_name #=> String
+    #   resp.adapters[0].creation_time #=> Time
+    #   resp.adapters[0].feature_types #=> Array
+    #   resp.adapters[0].feature_types[0] #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListAdapters AWS API Documentation
+    #
+    # @overload list_adapters(params = {})
+    # @param [Hash] params ({})
+    def list_adapters(params = {}, options = {})
+      req = build_request(:list_adapters, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags for an Amazon Textract resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to list
+    #   tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Starts the asynchronous analysis of an input document for
     # relationships between detected items such as key-value pairs, tables,
     # and selection elements.
@@ -1725,6 +2207,9 @@ module Aws::Textract
     #
     # @option params [Types::QueriesConfig] :queries_config
     #
+    # @option params [Types::AdaptersConfig] :adapters_config
+    #   Specifies the adapter to be used when analyzing a document.
+    #
     # @return [Types::StartDocumentAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentAnalysisResponse#job_id #job_id} => String
@@ -1757,6 +2242,15 @@ module Aws::Textract
     #           text: "QueryInput", # required
     #           alias: "QueryInput",
     #           pages: ["QueryPage"],
+    #         },
+    #       ],
+    #     },
+    #     adapters_config: {
+    #       adapters: [ # required
+    #         {
+    #           adapter_id: "AdapterId", # required
+    #           pages: ["AdapterPage"],
+    #           version: "AdapterVersion", # required
     #         },
     #       ],
     #     },
@@ -2113,6 +2607,117 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Adds one or more tags to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to be
+    #   tagged.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to assign to the
+    #   resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes any tags with the specified keys from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that specifies the resource to be
+    #   untagged.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Specifies the tags to be removed from the resource specified by the
+    #   ResourceARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Update the configuration for an adapter. FeatureTypes configurations
+    # cannot be updated. At least one new parameter must be specified as an
+    # argument.
+    #
+    # @option params [required, String] :adapter_id
+    #   A string containing a unique ID for the adapter that will be updated.
+    #
+    # @option params [String] :description
+    #   The new description to be applied to the adapter.
+    #
+    # @option params [String] :adapter_name
+    #   The new name to be applied to the adapter.
+    #
+    # @option params [String] :auto_update
+    #   The new auto-update status to be applied to the adapter.
+    #
+    # @return [Types::UpdateAdapterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAdapterResponse#adapter_id #adapter_id} => String
+    #   * {Types::UpdateAdapterResponse#adapter_name #adapter_name} => String
+    #   * {Types::UpdateAdapterResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateAdapterResponse#description #description} => String
+    #   * {Types::UpdateAdapterResponse#feature_types #feature_types} => Array&lt;String&gt;
+    #   * {Types::UpdateAdapterResponse#auto_update #auto_update} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_adapter({
+    #     adapter_id: "AdapterId", # required
+    #     description: "AdapterDescription",
+    #     adapter_name: "AdapterName",
+    #     auto_update: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.adapter_id #=> String
+    #   resp.adapter_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.description #=> String
+    #   resp.feature_types #=> Array
+    #   resp.feature_types[0] #=> String, one of "TABLES", "FORMS", "QUERIES", "SIGNATURES", "LAYOUT"
+    #   resp.auto_update #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UpdateAdapter AWS API Documentation
+    #
+    # @overload update_adapter(params = {})
+    # @param [Hash] params ({})
+    def update_adapter(params = {}, options = {})
+      req = build_request(:update_adapter, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2126,7 +2731,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

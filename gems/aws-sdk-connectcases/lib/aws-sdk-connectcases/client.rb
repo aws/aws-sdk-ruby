@@ -488,11 +488,9 @@ module Aws::ConnectCases
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
-    # <note markdown="1"> The following fields are required when creating a case:
+    # The following fields are required when creating a case:
     #
-    #       <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul> </note>
-    #
-    #  </note>
+    #      <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -734,13 +732,23 @@ module Aws::ConnectCases
     # Creates a related item (comments, tasks, and contacts) and associates
     # it with a case.
     #
-    # <note markdown="1"> A Related Item is a resource that is associated with a case. It may or
-    # may not have an external identifier linking it to an external resource
-    # (for example, a `contactArn`). All Related Items have their own
-    # internal identifier, the `relatedItemArn`. Examples of related items
-    # include `comments` and `contacts`.
+    # <note markdown="1"> * A Related Item is a resource that is associated with a case. It may
+    #   or may not have an external identifier linking it to an external
+    #   resource (for example, a `contactArn`). All Related Items have their
+    #   own internal identifier, the `relatedItemArn`. Examples of related
+    #   items include `comments` and `contacts`.
+    #
+    # * If you provide a value for `performedBy.userArn` you must also have
+    #   [DescribeUser][1] permission on the ARN of the user that you
+    #   provide.
+    #
+    #       </note>
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     #
     # @option params [required, String] :case_id
     #   A unique identifier of the case.
@@ -750,6 +758,9 @@ module Aws::ConnectCases
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the creator of the related item.
     #
     # @option params [required, String] :type
     #   The type of a related item.
@@ -773,6 +784,9 @@ module Aws::ConnectCases
     #       },
     #     },
     #     domain_id: "DomainId", # required
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #     },
     #     type: "Contact", # required, accepts Contact, Comment
     #   })
     #
@@ -1419,7 +1433,13 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # API for adding case event publishing configuration
+    # Adds case event publishing configuration. For a complete list of
+    # fields you can add to the event message, see [Create case fields][1]
+    # in the *Amazon Connect Administrator Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1683,6 +1703,7 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.contact.channel #=> String
     #   resp.related_items[0].content.contact.connected_to_system_time #=> Time
     #   resp.related_items[0].content.contact.contact_arn #=> String
+    #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
     #   resp.related_items[0].tags["String"] #=> String
@@ -1848,7 +1869,7 @@ module Aws::ConnectCases
     #
     # @option params [Types::LayoutContent] :content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1981,7 +2002,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

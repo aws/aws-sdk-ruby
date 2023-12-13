@@ -32,6 +32,7 @@ module Aws::GlobalAccelerator
   # * {AccessDeniedException}
   # * {AssociatedEndpointGroupFoundException}
   # * {AssociatedListenerFoundException}
+  # * {AttachmentNotFoundException}
   # * {ByoipCidrNotFoundException}
   # * {ConflictException}
   # * {EndpointAlreadyExistsException}
@@ -118,6 +119,21 @@ module Aws::GlobalAccelerator
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::GlobalAccelerator::Types::AssociatedListenerFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class AttachmentNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::AttachmentNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

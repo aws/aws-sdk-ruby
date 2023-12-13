@@ -123,6 +123,7 @@ module Aws::EMR
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
     HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IdcUserAssignment = Shapes::StringShape.new(name: 'IdcUserAssignment')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceCollectionType = Shapes::StringShape.new(name: 'InstanceCollectionType')
@@ -478,6 +479,8 @@ module Aws::EMR
     Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroups"))
     Cluster.add_member(:os_release_label, Shapes::ShapeRef.new(shape: String, location_name: "OSReleaseLabel"))
+    Cluster.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    Cluster.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -549,6 +552,10 @@ module Aws::EMR
     CreateStudioInput.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
     CreateStudioInput.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     CreateStudioInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateStudioInput.add_member(:trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "TrustedIdentityPropagationEnabled"))
+    CreateStudioInput.add_member(:idc_user_assignment, Shapes::ShapeRef.new(shape: IdcUserAssignment, location_name: "IdcUserAssignment"))
+    CreateStudioInput.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "IdcInstanceArn"))
+    CreateStudioInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     CreateStudioInput.struct_class = Types::CreateStudioInput
 
     CreateStudioOutput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "StudioId"))
@@ -710,7 +717,7 @@ module Aws::EMR
     GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
 
     GetClusterSessionCredentialsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
-    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ExecutionRoleArn"))
+    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
     GetClusterSessionCredentialsInput.struct_class = Types::GetClusterSessionCredentialsInput
 
     GetClusterSessionCredentialsOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
@@ -1324,6 +1331,8 @@ module Aws::EMR
     RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
     RunJobFlowInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
     RunJobFlowInput.add_member(:os_release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "OSReleaseLabel"))
+    RunJobFlowInput.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    RunJobFlowInput.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1510,6 +1519,10 @@ module Aws::EMR
     Studio.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
     Studio.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     Studio.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Studio.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "IdcInstanceArn"))
+    Studio.add_member(:trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "TrustedIdentityPropagationEnabled"))
+    Studio.add_member(:idc_user_assignment, Shapes::ShapeRef.new(shape: IdcUserAssignment, location_name: "IdcUserAssignment"))
+    Studio.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     Studio.struct_class = Types::Studio
 
     StudioSummary.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "StudioId"))
@@ -1560,6 +1573,7 @@ module Aws::EMR
     UpdateStudioInput.add_member(:description, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Description"))
     UpdateStudioInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     UpdateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, location_name: "DefaultS3Location"))
+    UpdateStudioInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     UpdateStudioInput.struct_class = Types::UpdateStudioInput
 
     UpdateStudioSessionMappingInput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "StudioId"))

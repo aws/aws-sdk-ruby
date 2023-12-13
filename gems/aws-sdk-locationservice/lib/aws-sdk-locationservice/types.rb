@@ -888,6 +888,16 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arrival_time
+    #   Specifies the desired time of arrival. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
+    #
+    #   <note markdown="1"> ArrivalTime is not supported Esri.
+    #
+    #    </note>
+    #   @return [Time]
+    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
@@ -937,11 +947,6 @@ module Aws::LocationService
     #   Specifies the desired time of departure. Uses the given time to
     #   calculate the route. Otherwise, the best time of day to travel with
     #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
     #
     #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
     #     `2020–07-2T12:15:20.000Z+01:00`
@@ -995,6 +1000,10 @@ module Aws::LocationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] optimize_for
+    #   Specifies the distance to optimize for when calculating a route.
     #   @return [String]
     #
     # @!attribute [rw] travel_mode
@@ -1069,6 +1078,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
     #
     class CalculateRouteRequest < Struct.new(
+      :arrival_time,
       :calculator_name,
       :car_mode_options,
       :depart_now,
@@ -1078,6 +1088,7 @@ module Aws::LocationService
       :distance_unit,
       :include_leg_geometry,
       :key,
+      :optimize_for,
       :travel_mode,
       :truck_mode_options,
       :waypoint_positions)
@@ -1897,6 +1908,31 @@ module Aws::LocationService
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #   <note markdown="1"> If you wish to encrypt your data using your own KMS customer managed
+    #   key, then the Bounding Polygon Queries feature will be disabled by
+    #   default. This is because by using this feature, a representation of
+    #   your device positions will not be encrypted using the your KMS
+    #   managed key. The exact device position, however; is still encrypted
+    #   using your managed key.
+    #
+    #    You can choose to opt-in to the Bounding Polygon Quseries feature.
+    #   This is done by setting the `KmsKeyEnableGeospatialQueries`
+    #   parameter to true when creating or updating a Tracker.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
@@ -1988,6 +2024,7 @@ module Aws::LocationService
     class CreateTrackerRequest < Struct.new(
       :description,
       :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries,
       :kms_key_id,
       :position_filtering,
       :pricing_plan,
@@ -2209,6 +2246,10 @@ module Aws::LocationService
     #   The optional description for the geofence collection.
     #   @return [String]
     #
+    # @!attribute [rw] geofence_count
+    #   The number of geofences in the geofence collection.
+    #   @return [Integer]
+    #
     # @!attribute [rw] kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1] assigned to the Amazon Location resource
@@ -2246,6 +2287,7 @@ module Aws::LocationService
       :collection_name,
       :create_time,
       :description,
+      :geofence_count,
       :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
@@ -2640,6 +2682,31 @@ module Aws::LocationService
     #   enabled. If set to `true` these events will be sent to EventBridge.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #   <note markdown="1"> If you wish to encrypt your data using your own KMS customer managed
+    #   key, then the Bounding Polygon Queries feature will be disabled by
+    #   default. This is because by using this feature, a representation of
+    #   your device positions will not be encrypted using the your KMS
+    #   managed key. The exact device position, however; is still encrypted
+    #   using your managed key.
+    #
+    #    You can choose to opt-in to the Bounding Polygon Quseries feature.
+    #   This is done by setting the `KmsKeyEnableGeospatialQueries`
+    #   parameter to true when creating or updating a Tracker.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1] assigned to the Amazon Location resource.
@@ -2694,6 +2761,7 @@ module Aws::LocationService
       :create_time,
       :description,
       :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries,
       :kms_key_id,
       :position_filtering,
       :pricing_plan,
@@ -3119,7 +3187,7 @@ module Aws::LocationService
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
     #
-    #   Valid fonts stacks for [Esri][1] styles:
+    #   Valid font stacks for [Esri][1] styles:
     #
     #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu
     #     Medium` \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
@@ -3598,6 +3666,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter_geometry
+    #   The geometry used to filter device positions.
+    #   @return [Types::TrackingFilterGeometry]
+    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of entries returned in a single
     #   call.
@@ -3620,6 +3692,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsRequest AWS API Documentation
     #
     class ListDevicePositionsRequest < Struct.new(
+      :filter_geometry,
       :max_results,
       :next_token,
       :tracker_name)
@@ -3628,10 +3701,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Contains details about each device's last known position. These
-    #   details includes the device ID, the time when the position was
-    #   sampled on the device, the time that the service received the
-    #   update, and the most recent coordinates.
+    #   Contains details about each device's last known position.
     #   @return [Array<Types::ListDevicePositionsResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -4743,6 +4813,16 @@ module Aws::LocationService
     #   `Main Street`.
     #   @return [String]
     #
+    # @!attribute [rw] sub_municipality
+    #   An area that's part of a larger municipality. For example,
+    #   `Blissville ` is a submunicipality in the Queen County in New York.
+    #
+    #   <note markdown="1"> This property supported by Esri and OpenData. The Esri property is
+    #   `district`, and the OpenData property is `borough`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] sub_region
     #   A county, or an area that's part of a larger region. For example,
     #   `Metro Vancouver`.
@@ -4791,6 +4871,7 @@ module Aws::LocationService
       :postal_code,
       :region,
       :street,
+      :sub_municipality,
       :sub_region,
       :supplemental_categories,
       :time_zone,
@@ -5909,6 +5990,21 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # The geomerty used to filter device positions.
+    #
+    # @!attribute [rw] polygon
+    #   The set of arrays which define the polygon. A polygon can have
+    #   between 4 and 1000 vertices.
+    #   @return [Array<Array<Array<Float>>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TrackingFilterGeometry AWS API Documentation
+    #
+    class TrackingFilterGeometry < Struct.new(
+      :polygon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the truck dimensions in the unit of measurement
     # that you specify. Used to filter out roads that can't support or
     # allow the specified dimensions for requests that specify `TravelMode`
@@ -6361,6 +6457,18 @@ module Aws::LocationService
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] position_filtering
     #   Updates the position filtering for the tracker resource.
     #
@@ -6408,6 +6516,7 @@ module Aws::LocationService
     class UpdateTrackerRequest < Struct.new(
       :description,
       :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries,
       :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,

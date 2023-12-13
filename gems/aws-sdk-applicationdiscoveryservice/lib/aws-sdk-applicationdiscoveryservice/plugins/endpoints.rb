@@ -25,16 +25,17 @@ module Aws::ApplicationDiscoveryService
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,6 +59,8 @@ module Aws::ApplicationDiscoveryService
           case context.operation_name
           when :associate_configuration_items_to_application
             Aws::ApplicationDiscoveryService::Endpoints::AssociateConfigurationItemsToApplication.build(context)
+          when :batch_delete_agents
+            Aws::ApplicationDiscoveryService::Endpoints::BatchDeleteAgents.build(context)
           when :batch_delete_import_data
             Aws::ApplicationDiscoveryService::Endpoints::BatchDeleteImportData.build(context)
           when :create_application
@@ -70,6 +73,8 @@ module Aws::ApplicationDiscoveryService
             Aws::ApplicationDiscoveryService::Endpoints::DeleteTags.build(context)
           when :describe_agents
             Aws::ApplicationDiscoveryService::Endpoints::DescribeAgents.build(context)
+          when :describe_batch_delete_configuration_task
+            Aws::ApplicationDiscoveryService::Endpoints::DescribeBatchDeleteConfigurationTask.build(context)
           when :describe_configurations
             Aws::ApplicationDiscoveryService::Endpoints::DescribeConfigurations.build(context)
           when :describe_continuous_exports
@@ -92,6 +97,8 @@ module Aws::ApplicationDiscoveryService
             Aws::ApplicationDiscoveryService::Endpoints::ListConfigurations.build(context)
           when :list_server_neighbors
             Aws::ApplicationDiscoveryService::Endpoints::ListServerNeighbors.build(context)
+          when :start_batch_delete_configuration_task
+            Aws::ApplicationDiscoveryService::Endpoints::StartBatchDeleteConfigurationTask.build(context)
           when :start_continuous_export
             Aws::ApplicationDiscoveryService::Endpoints::StartContinuousExport.build(context)
           when :start_data_collection_by_agent_ids

@@ -72,6 +72,20 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # A representation of an AMP destination.
+    #
+    # @!attribute [rw] workspace_arn
+    #   The ARN of an AMP workspace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AmpConfiguration AWS API Documentation
+    #
+    class AmpConfiguration < Struct.new(
+      :workspace_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting a resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -249,6 +263,80 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a CreateScraper operation.
+    #
+    # @!attribute [rw] alias
+    #   An optional user-assigned alias for this scraper. This alias is for
+    #   user reference and does not need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] scrape_configuration
+    #   The configuration used to create the scraper.
+    #   @return [Types::ScrapeConfiguration]
+    #
+    # @!attribute [rw] source
+    #   The source that the scraper will be discovering and collecting
+    #   metrics from.
+    #   @return [Types::Source]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the scraper will be producing metrics to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional, user-provided tags for this scraper.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraperRequest AWS API Documentation
+    #
+    class CreateScraperRequest < Struct.new(
+      :alias,
+      :scrape_configuration,
+      :source,
+      :destination,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateScraper operation.
+    #
+    # @!attribute [rw] scraper_id
+    #   The generated ID of the scraper that was just created.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the scraper that was just created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the scraper that was just created (usually CREATING).
+    #   @return [Types::ScraperStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this scraper.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraperResponse AWS API Documentation
+    #
+    class CreateScraperResponse < Struct.new(
+      :scraper_id,
+      :arn,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a CreateWorkspace operation.
     #
     # @!attribute [rw] alias
@@ -383,6 +471,48 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a DeleteScraper operation.
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraperRequest AWS API Documentation
+    #
+    class DeleteScraperRequest < Struct.new(
+      :scraper_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a DeleteScraper operation.
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper that was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the scraper that is being deleted.
+    #   @return [Types::ScraperStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraperResponse AWS API Documentation
+    #
+    class DeleteScraperResponse < Struct.new(
+      :scraper_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a DeleteWorkspace operation.
     #
     # @!attribute [rw] workspace_id
@@ -497,6 +627,34 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a DescribeScraper operation.
+    #
+    # @!attribute [rw] scraper_id
+    #   The IDs of the scraper to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraperRequest AWS API Documentation
+    #
+    class DescribeScraperRequest < Struct.new(
+      :scraper_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a DescribeScraper operation.
+    #
+    # @!attribute [rw] scraper
+    #   The properties of the selected scrapers.
+    #   @return [Types::ScraperDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeScraperResponse AWS API Documentation
+    #
+    class DescribeScraperResponse < Struct.new(
+      :scraper)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a DescribeWorkspace operation.
     #
     # @!attribute [rw] workspace_id
@@ -521,6 +679,76 @@ module Aws::PrometheusService
     #
     class DescribeWorkspaceResponse < Struct.new(
       :workspace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A representation of a destination that a scraper can produce metrics
+    # to.
+    #
+    # @note Destination is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Destination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Destination corresponding to the set member.
+    #
+    # @!attribute [rw] amp_configuration
+    #   A representation of an AMP destination.
+    #   @return [Types::AmpConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :amp_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AmpConfiguration < Destination; end
+      class Unknown < Destination; end
+    end
+
+    # A representation of an EKS source.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The ARN of an EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs specified for VPC configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs specified for VPC configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/EksConfiguration AWS API Documentation
+    #
+    class EksConfiguration < Struct.new(
+      :cluster_arn,
+      :security_group_ids,
+      :subnet_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a GetDefaultScraperConfiguration operation.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/GetDefaultScraperConfigurationRequest AWS API Documentation
+    #
+    class GetDefaultScraperConfigurationRequest < Aws::EmptyStructure; end
+
+    # Represents the output of a GetDefaultScraperConfiguration operation.
+    #
+    # @!attribute [rw] configuration
+    #   The default configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/GetDefaultScraperConfigurationResponse AWS API Documentation
+    #
+    class GetDefaultScraperConfigurationResponse < Struct.new(
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -590,6 +818,52 @@ module Aws::PrometheusService
     #
     class ListRuleGroupsNamespacesResponse < Struct.new(
       :rule_groups_namespaces,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a ListScrapers operation.
+    #
+    # @!attribute [rw] filters
+    #   A list of scraper filters.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page in a paginated list. This
+    #   token is obtained from the output of the previous ListScrapers
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum results to return in response (default=100, maximum=1000).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapersRequest AWS API Documentation
+    #
+    class ListScrapersRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListScrapers operation.
+    #
+    # @!attribute [rw] scrapers
+    #   The list of scrapers, filtered down if a set of filters was provided
+    #   in the request.
+    #   @return [Array<Types::ScraperSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to use when requesting the next page in this list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapersResponse AWS API Documentation
+    #
+    class ListScrapersResponse < Struct.new(
+      :scrapers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -951,6 +1225,182 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # A representation of a Prometheus configuration file.
+    #
+    # @note ScrapeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ScrapeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScrapeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] configuration_blob
+    #   Binary data representing a Prometheus configuration file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScrapeConfiguration AWS API Documentation
+    #
+    class ScrapeConfiguration < Struct.new(
+      :configuration_blob,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ConfigurationBlob < ScrapeConfiguration; end
+      class Unknown < ScrapeConfiguration; end
+    end
+
+    # Represents the properties of a scraper.
+    #
+    # @!attribute [rw] alias
+    #   Alias of this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] scraper_id
+    #   Unique string identifying this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that provides
+    #   permissions for the scraper to dsicover, collect, and produce
+    #   metrics on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of this scraper.
+    #   @return [Types::ScraperStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the scraper was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The time when the scraper was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this scraper.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for failure if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] scrape_configuration
+    #   The configuration used to create the scraper.
+    #   @return [Types::ScrapeConfiguration]
+    #
+    # @!attribute [rw] source
+    #   The source that the scraper is discovering and collecting metrics
+    #   from.
+    #   @return [Types::Source]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the scraper is producing metrics to.
+    #   @return [Types::Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperDescription AWS API Documentation
+    #
+    class ScraperDescription < Struct.new(
+      :alias,
+      :scraper_id,
+      :arn,
+      :role_arn,
+      :status,
+      :created_at,
+      :last_modified_at,
+      :tags,
+      :status_reason,
+      :scrape_configuration,
+      :source,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the status of a scraper.
+    #
+    # @!attribute [rw] status_code
+    #   Status code of this scraper.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperStatus AWS API Documentation
+    #
+    class ScraperStatus < Struct.new(
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a summary of the properties of a scraper.
+    #
+    # @!attribute [rw] alias
+    #   Alias of this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] scraper_id
+    #   Unique string identifying this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that provides
+    #   permissions for the scraper to dsicover, collect, and produce
+    #   metrics on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of this scraper.
+    #   @return [Types::ScraperStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the scraper was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The time when the scraper was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this scraper.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for failure if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source that the scraper is discovering and collecting metrics
+    #   from.
+    #   @return [Types::Source]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the scraper is producing metrics to.
+    #   @return [Types::Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperSummary AWS API Documentation
+    #
+    class ScraperSummary < Struct.new(
+      :alias,
+      :scraper_id,
+      :arn,
+      :role_arn,
+      :status,
+      :created_at,
+      :last_modified_at,
+      :tags,
+      :status_reason,
+      :source,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request would cause a service quota to be exceeded.
     #
     # @!attribute [rw] message
@@ -983,6 +1433,30 @@ module Aws::PrometheusService
       :quota_code)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A representation of a source that a scraper can discover and collect
+    # metrics from.
+    #
+    # @note Source is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Source is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Source corresponding to the set member.
+    #
+    # @!attribute [rw] eks_configuration
+    #   A representation of an EKS source.
+    #   @return [Types::EksConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/Source AWS API Documentation
+    #
+    class Source < Struct.new(
+      :eks_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EksConfiguration < Source; end
+      class Unknown < Source; end
     end
 
     # @!attribute [rw] resource_arn

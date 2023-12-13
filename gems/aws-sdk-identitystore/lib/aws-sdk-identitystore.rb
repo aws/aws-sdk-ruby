@@ -52,6 +52,6 @@ require_relative 'aws-sdk-identitystore/customizations'
 # @!group service
 module Aws::IdentityStore
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.33.0'
 
 end

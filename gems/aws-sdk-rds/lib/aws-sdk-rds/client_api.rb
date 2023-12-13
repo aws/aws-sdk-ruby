@@ -28,6 +28,7 @@ module Aws::RDS
     ApplyMethod = Shapes::StringShape.new(name: 'ApplyMethod')
     ApplyPendingMaintenanceActionMessage = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionMessage')
     ApplyPendingMaintenanceActionResult = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionResult')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AuditPolicyState = Shapes::StringShape.new(name: 'AuditPolicyState')
     AuthScheme = Shapes::StringShape.new(name: 'AuthScheme')
@@ -114,8 +115,11 @@ module Aws::RDS
     CreateEventSubscriptionResult = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResult')
     CreateGlobalClusterMessage = Shapes::StructureShape.new(name: 'CreateGlobalClusterMessage')
     CreateGlobalClusterResult = Shapes::StructureShape.new(name: 'CreateGlobalClusterResult')
+    CreateIntegrationMessage = Shapes::StructureShape.new(name: 'CreateIntegrationMessage')
     CreateOptionGroupMessage = Shapes::StructureShape.new(name: 'CreateOptionGroupMessage')
     CreateOptionGroupResult = Shapes::StructureShape.new(name: 'CreateOptionGroupResult')
+    CreateTenantDatabaseMessage = Shapes::StructureShape.new(name: 'CreateTenantDatabaseMessage')
+    CreateTenantDatabaseResult = Shapes::StructureShape.new(name: 'CreateTenantDatabaseResult')
     CustomAvailabilityZoneNotFoundFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneNotFoundFault')
     CustomDBEngineVersionAMI = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAMI')
     CustomDBEngineVersionAlreadyExistsFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAlreadyExistsFault')
@@ -171,6 +175,8 @@ module Aws::RDS
     DBClusterSnapshotList = Shapes::ListShape.new(name: 'DBClusterSnapshotList')
     DBClusterSnapshotMessage = Shapes::StructureShape.new(name: 'DBClusterSnapshotMessage')
     DBClusterSnapshotNotFoundFault = Shapes::StructureShape.new(name: 'DBClusterSnapshotNotFoundFault')
+    DBClusterStatusInfo = Shapes::StructureShape.new(name: 'DBClusterStatusInfo')
+    DBClusterStatusInfoList = Shapes::ListShape.new(name: 'DBClusterStatusInfoList')
     DBEngineVersion = Shapes::StructureShape.new(name: 'DBEngineVersion')
     DBEngineVersionList = Shapes::ListShape.new(name: 'DBEngineVersionList')
     DBEngineVersionMessage = Shapes::StructureShape.new(name: 'DBEngineVersionMessage')
@@ -242,6 +248,10 @@ module Aws::RDS
     DBSnapshotList = Shapes::ListShape.new(name: 'DBSnapshotList')
     DBSnapshotMessage = Shapes::StructureShape.new(name: 'DBSnapshotMessage')
     DBSnapshotNotFoundFault = Shapes::StructureShape.new(name: 'DBSnapshotNotFoundFault')
+    DBSnapshotTenantDatabase = Shapes::StructureShape.new(name: 'DBSnapshotTenantDatabase')
+    DBSnapshotTenantDatabaseNotFoundFault = Shapes::StructureShape.new(name: 'DBSnapshotTenantDatabaseNotFoundFault')
+    DBSnapshotTenantDatabasesList = Shapes::ListShape.new(name: 'DBSnapshotTenantDatabasesList')
+    DBSnapshotTenantDatabasesMessage = Shapes::StructureShape.new(name: 'DBSnapshotTenantDatabasesMessage')
     DBSubnetGroup = Shapes::StructureShape.new(name: 'DBSubnetGroup')
     DBSubnetGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBSubnetGroupAlreadyExistsFault')
     DBSubnetGroupDoesNotCoverEnoughAZs = Shapes::StructureShape.new(name: 'DBSubnetGroupDoesNotCoverEnoughAZs')
@@ -281,7 +291,10 @@ module Aws::RDS
     DeleteEventSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResult')
     DeleteGlobalClusterMessage = Shapes::StructureShape.new(name: 'DeleteGlobalClusterMessage')
     DeleteGlobalClusterResult = Shapes::StructureShape.new(name: 'DeleteGlobalClusterResult')
+    DeleteIntegrationMessage = Shapes::StructureShape.new(name: 'DeleteIntegrationMessage')
     DeleteOptionGroupMessage = Shapes::StructureShape.new(name: 'DeleteOptionGroupMessage')
+    DeleteTenantDatabaseMessage = Shapes::StructureShape.new(name: 'DeleteTenantDatabaseMessage')
+    DeleteTenantDatabaseResult = Shapes::StructureShape.new(name: 'DeleteTenantDatabaseResult')
     DeregisterDBProxyTargetsRequest = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsRequest')
     DeregisterDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsResponse')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
@@ -317,6 +330,7 @@ module Aws::RDS
     DescribeDBSecurityGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBSecurityGroupsMessage')
     DescribeDBSnapshotAttributesMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesMessage')
     DescribeDBSnapshotAttributesResult = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesResult')
+    DescribeDBSnapshotTenantDatabasesMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotTenantDatabasesMessage')
     DescribeDBSnapshotsMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotsMessage')
     DescribeDBSubnetGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBSubnetGroupsMessage')
     DescribeEngineDefaultClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeEngineDefaultClusterParametersMessage')
@@ -328,6 +342,8 @@ module Aws::RDS
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeExportTasksMessage = Shapes::StructureShape.new(name: 'DescribeExportTasksMessage')
     DescribeGlobalClustersMessage = Shapes::StructureShape.new(name: 'DescribeGlobalClustersMessage')
+    DescribeIntegrationsMessage = Shapes::StructureShape.new(name: 'DescribeIntegrationsMessage')
+    DescribeIntegrationsResponse = Shapes::StructureShape.new(name: 'DescribeIntegrationsResponse')
     DescribeOptionGroupOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOptionGroupOptionsMessage')
     DescribeOptionGroupsMessage = Shapes::StructureShape.new(name: 'DescribeOptionGroupsMessage')
     DescribeOrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableDBInstanceOptionsMessage')
@@ -335,6 +351,7 @@ module Aws::RDS
     DescribeReservedDBInstancesMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesMessage')
     DescribeReservedDBInstancesOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesOfferingsMessage')
     DescribeSourceRegionsMessage = Shapes::StructureShape.new(name: 'DescribeSourceRegionsMessage')
+    DescribeTenantDatabasesMessage = Shapes::StructureShape.new(name: 'DescribeTenantDatabasesMessage')
     DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
     DescribeValidDBInstanceModificationsResult = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsResult')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -350,6 +367,7 @@ module Aws::RDS
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
     Ec2ImagePropertiesNotSupportedFault = Shapes::StructureShape.new(name: 'Ec2ImagePropertiesNotSupportedFault')
+    EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
     EngineFamily = Shapes::StringShape.new(name: 'EngineFamily')
@@ -403,6 +421,18 @@ module Aws::RDS
     InsufficientStorageClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientStorageClusterCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    Integration = Shapes::StructureShape.new(name: 'Integration')
+    IntegrationAlreadyExistsFault = Shapes::StructureShape.new(name: 'IntegrationAlreadyExistsFault')
+    IntegrationArn = Shapes::StringShape.new(name: 'IntegrationArn')
+    IntegrationConflictOperationFault = Shapes::StructureShape.new(name: 'IntegrationConflictOperationFault')
+    IntegrationError = Shapes::StructureShape.new(name: 'IntegrationError')
+    IntegrationErrorList = Shapes::ListShape.new(name: 'IntegrationErrorList')
+    IntegrationIdentifier = Shapes::StringShape.new(name: 'IntegrationIdentifier')
+    IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
+    IntegrationName = Shapes::StringShape.new(name: 'IntegrationName')
+    IntegrationNotFoundFault = Shapes::StructureShape.new(name: 'IntegrationNotFoundFault')
+    IntegrationQuotaExceededFault = Shapes::StructureShape.new(name: 'IntegrationQuotaExceededFault')
+    IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
     InvalidBlueGreenDeploymentStateFault = Shapes::StructureShape.new(name: 'InvalidBlueGreenDeploymentStateFault')
     InvalidCustomDBEngineVersionStateFault = Shapes::StructureShape.new(name: 'InvalidCustomDBEngineVersionStateFault')
     InvalidDBClusterAutomatedBackupStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterAutomatedBackupStateFault')
@@ -425,6 +455,7 @@ module Aws::RDS
     InvalidExportSourceStateFault = Shapes::StructureShape.new(name: 'InvalidExportSourceStateFault')
     InvalidExportTaskStateFault = Shapes::StructureShape.new(name: 'InvalidExportTaskStateFault')
     InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault')
+    InvalidIntegrationStateFault = Shapes::StructureShape.new(name: 'InvalidIntegrationStateFault')
     InvalidOptionGroupStateFault = Shapes::StructureShape.new(name: 'InvalidOptionGroupStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidS3BucketFault = Shapes::StructureShape.new(name: 'InvalidS3BucketFault')
@@ -438,6 +469,7 @@ module Aws::RDS
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
+    Marker = Shapes::StringShape.new(name: 'Marker')
     MasterUserSecret = Shapes::StructureShape.new(name: 'MasterUserSecret')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     MinimumEngineVersionPerAllowedValue = Shapes::StructureShape.new(name: 'MinimumEngineVersionPerAllowedValue')
@@ -475,6 +507,8 @@ module Aws::RDS
     ModifyGlobalClusterResult = Shapes::StructureShape.new(name: 'ModifyGlobalClusterResult')
     ModifyOptionGroupMessage = Shapes::StructureShape.new(name: 'ModifyOptionGroupMessage')
     ModifyOptionGroupResult = Shapes::StructureShape.new(name: 'ModifyOptionGroupResult')
+    ModifyTenantDatabaseMessage = Shapes::StructureShape.new(name: 'ModifyTenantDatabaseMessage')
+    ModifyTenantDatabaseResult = Shapes::StructureShape.new(name: 'ModifyTenantDatabaseResult')
     NetworkTypeNotSupported = Shapes::StructureShape.new(name: 'NetworkTypeNotSupported')
     Option = Shapes::StructureShape.new(name: 'Option')
     OptionConfiguration = Shapes::StructureShape.new(name: 'OptionConfiguration')
@@ -525,6 +559,7 @@ module Aws::RDS
     PurchaseReservedDBInstancesOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedDBInstancesOfferingResult')
     Range = Shapes::StructureShape.new(name: 'Range')
     RangeList = Shapes::ListShape.new(name: 'RangeList')
+    RdsCustomClusterConfiguration = Shapes::StructureShape.new(name: 'RdsCustomClusterConfiguration')
     ReadReplicaDBClusterIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBClusterIdentifierList')
     ReadReplicaDBInstanceIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBInstanceIdentifierList')
     ReadReplicaIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaIdentifierList')
@@ -579,10 +614,12 @@ module Aws::RDS
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault')
     ScalingConfiguration = Shapes::StructureShape.new(name: 'ScalingConfiguration')
     ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ScalingConfigurationInfo')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerlessV2ScalingConfiguration = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfiguration')
     ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault')
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault')
+    SourceArn = Shapes::StringShape.new(name: 'SourceArn')
     SourceClusterNotSupportedFault = Shapes::StructureShape.new(name: 'SourceClusterNotSupportedFault')
     SourceDatabaseNotSupportedFault = Shapes::StructureShape.new(name: 'SourceDatabaseNotSupportedFault')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
@@ -638,6 +675,7 @@ module Aws::RDS
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
     TargetDBClusterParameterGroupName = Shapes::StringShape.new(name: 'TargetDBClusterParameterGroupName')
+    TargetDBInstanceClass = Shapes::StringShape.new(name: 'TargetDBInstanceClass')
     TargetDBParameterGroupName = Shapes::StringShape.new(name: 'TargetDBParameterGroupName')
     TargetEngineVersion = Shapes::StringShape.new(name: 'TargetEngineVersion')
     TargetGroupList = Shapes::ListShape.new(name: 'TargetGroupList')
@@ -647,6 +685,13 @@ module Aws::RDS
     TargetRole = Shapes::StringShape.new(name: 'TargetRole')
     TargetState = Shapes::StringShape.new(name: 'TargetState')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
+    TenantDatabase = Shapes::StructureShape.new(name: 'TenantDatabase')
+    TenantDatabaseAlreadyExistsFault = Shapes::StructureShape.new(name: 'TenantDatabaseAlreadyExistsFault')
+    TenantDatabaseNotFoundFault = Shapes::StructureShape.new(name: 'TenantDatabaseNotFoundFault')
+    TenantDatabasePendingModifiedValues = Shapes::StructureShape.new(name: 'TenantDatabasePendingModifiedValues')
+    TenantDatabaseQuotaExceededFault = Shapes::StructureShape.new(name: 'TenantDatabaseQuotaExceededFault')
+    TenantDatabasesList = Shapes::ListShape.new(name: 'TenantDatabasesList')
+    TenantDatabasesMessage = Shapes::StructureShape.new(name: 'TenantDatabasesMessage')
     Timezone = Shapes::StructureShape.new(name: 'Timezone')
     UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
     UserAuthConfig = Shapes::StructureShape.new(name: 'UserAuthConfig')
@@ -811,6 +856,7 @@ module Aws::RDS
     ClusterPendingModifiedValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ClusterPendingModifiedValues.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
     ClusterPendingModifiedValues.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    ClusterPendingModifiedValues.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     ClusterPendingModifiedValues.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
     ClusterPendingModifiedValues.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
@@ -889,6 +935,8 @@ module Aws::RDS
     CreateBlueGreenDeploymentRequest.add_member(:target_db_parameter_group_name, Shapes::ShapeRef.new(shape: TargetDBParameterGroupName, location_name: "TargetDBParameterGroupName"))
     CreateBlueGreenDeploymentRequest.add_member(:target_db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: TargetDBClusterParameterGroupName, location_name: "TargetDBClusterParameterGroupName"))
     CreateBlueGreenDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_db_instance_class, Shapes::ShapeRef.new(shape: TargetDBInstanceClass, location_name: "TargetDBInstanceClass"))
+    CreateBlueGreenDeploymentRequest.add_member(:upgrade_target_storage_config, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UpgradeTargetStorageConfig"))
     CreateBlueGreenDeploymentRequest.struct_class = Types::CreateBlueGreenDeploymentRequest
 
     CreateBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
@@ -943,6 +991,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBClusterMessage.add_member(:engine_mode, Shapes::ShapeRef.new(shape: String, location_name: "EngineMode"))
     CreateDBClusterMessage.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfiguration, location_name: "ScalingConfiguration"))
+    CreateDBClusterMessage.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     CreateDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
     CreateDBClusterMessage.add_member(:enable_http_endpoint, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableHttpEndpoint"))
@@ -1050,6 +1099,8 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     CreateDBInstanceMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBInstanceMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
+    CreateDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    CreateDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1094,6 +1145,8 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceReadReplicaMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBClusterIdentifier"))
+    CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    CreateDBInstanceReadReplicaMessage.add_member(:upgrade_storage_config, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UpgradeStorageConfig"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1187,6 +1240,14 @@ module Aws::RDS
     CreateGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
     CreateGlobalClusterResult.struct_class = Types::CreateGlobalClusterResult
 
+    CreateIntegrationMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: SourceArn, required: true, location_name: "SourceArn"))
+    CreateIntegrationMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TargetArn"))
+    CreateIntegrationMessage.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, required: true, location_name: "IntegrationName"))
+    CreateIntegrationMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
+    CreateIntegrationMessage.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "AdditionalEncryptionContext"))
+    CreateIntegrationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateIntegrationMessage.struct_class = Types::CreateIntegrationMessage
+
     CreateOptionGroupMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptionGroupName"))
     CreateOptionGroupMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
     CreateOptionGroupMessage.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MajorEngineVersion"))
@@ -1196,6 +1257,18 @@ module Aws::RDS
 
     CreateOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     CreateOptionGroupResult.struct_class = Types::CreateOptionGroupResult
+
+    CreateTenantDatabaseMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    CreateTenantDatabaseMessage.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantDBName"))
+    CreateTenantDatabaseMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUsername"))
+    CreateTenantDatabaseMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "MasterUserPassword"))
+    CreateTenantDatabaseMessage.add_member(:character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetName"))
+    CreateTenantDatabaseMessage.add_member(:nchar_character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "NcharCharacterSetName"))
+    CreateTenantDatabaseMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTenantDatabaseMessage.struct_class = Types::CreateTenantDatabaseMessage
+
+    CreateTenantDatabaseResult.add_member(:tenant_database, Shapes::ShapeRef.new(shape: TenantDatabase, location_name: "TenantDatabase"))
+    CreateTenantDatabaseResult.struct_class = Types::CreateTenantDatabaseResult
 
     CustomAvailabilityZoneNotFoundFault.struct_class = Types::CustomAvailabilityZoneNotFoundFault
 
@@ -1235,6 +1308,7 @@ module Aws::RDS
     DBCluster.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
     DBCluster.add_member(:replication_source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSourceIdentifier"))
     DBCluster.add_member(:read_replica_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaIdentifierList, location_name: "ReadReplicaIdentifiers"))
+    DBCluster.add_member(:status_infos, Shapes::ShapeRef.new(shape: DBClusterStatusInfoList, location_name: "StatusInfos"))
     DBCluster.add_member(:db_cluster_members, Shapes::ShapeRef.new(shape: DBClusterMemberList, location_name: "DBClusterMembers"))
     DBCluster.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: VpcSecurityGroupMembershipList, location_name: "VpcSecurityGroups"))
     DBCluster.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "HostedZoneId"))
@@ -1253,6 +1327,7 @@ module Aws::RDS
     DBCluster.add_member(:capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Capacity"))
     DBCluster.add_member(:engine_mode, Shapes::ShapeRef.new(shape: String, location_name: "EngineMode"))
     DBCluster.add_member(:scaling_configuration_info, Shapes::ShapeRef.new(shape: ScalingConfigurationInfo, location_name: "ScalingConfigurationInfo"))
+    DBCluster.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     DBCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     DBCluster.add_member(:http_endpoint_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "HttpEndpointEnabled"))
     DBCluster.add_member(:activity_stream_mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "ActivityStreamMode"))
@@ -1475,6 +1550,14 @@ module Aws::RDS
 
     DBClusterSnapshotNotFoundFault.struct_class = Types::DBClusterSnapshotNotFoundFault
 
+    DBClusterStatusInfo.add_member(:status_type, Shapes::ShapeRef.new(shape: String, location_name: "StatusType"))
+    DBClusterStatusInfo.add_member(:normal, Shapes::ShapeRef.new(shape: Boolean, location_name: "Normal"))
+    DBClusterStatusInfo.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBClusterStatusInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DBClusterStatusInfo.struct_class = Types::DBClusterStatusInfo
+
+    DBClusterStatusInfoList.member = Shapes::ShapeRef.new(shape: DBClusterStatusInfo, location_name: "DBClusterStatusInfo")
+
     DBEngineVersion.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DBEngineVersion.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     DBEngineVersion.add_member(:db_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupFamily"))
@@ -1507,6 +1590,7 @@ module Aws::RDS
     DBEngineVersion.add_member(:supports_certificate_rotation_without_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsCertificateRotationWithoutRestart"))
     DBEngineVersion.add_member(:supported_ca_certificate_identifiers, Shapes::ShapeRef.new(shape: CACertificateIdentifiersList, location_name: "SupportedCACertificateIdentifiers"))
     DBEngineVersion.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
+    DBEngineVersion.add_member(:supports_integrations, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIntegrations"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1597,6 +1681,9 @@ module Aws::RDS
     DBInstance.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBInstance.add_member(:read_replica_source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaSourceDBClusterIdentifier"))
     DBInstance.add_member(:percent_progress, Shapes::ShapeRef.new(shape: String, location_name: "PercentProgress"))
+    DBInstance.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
+    DBInstance.add_member(:is_storage_config_upgrade_available, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsStorageConfigUpgradeAvailable"))
+    DBInstance.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1630,6 +1717,8 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     DBInstanceAutomatedBackup.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
+    DBInstanceAutomatedBackup.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    DBInstanceAutomatedBackup.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -1846,6 +1935,8 @@ module Aws::RDS
     DBSnapshot.add_member(:snapshot_target, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotTarget"))
     DBSnapshot.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBSnapshot.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
+    DBSnapshot.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
+    DBSnapshot.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
@@ -1867,6 +1958,29 @@ module Aws::RDS
     DBSnapshotMessage.struct_class = Types::DBSnapshotMessage
 
     DBSnapshotNotFoundFault.struct_class = Types::DBSnapshotNotFoundFault
+
+    DBSnapshotTenantDatabase.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
+    DBSnapshotTenantDatabase.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
+    DBSnapshotTenantDatabase.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
+    DBSnapshotTenantDatabase.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
+    DBSnapshotTenantDatabase.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
+    DBSnapshotTenantDatabase.add_member(:tenant_database_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "TenantDatabaseCreateTime"))
+    DBSnapshotTenantDatabase.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, location_name: "TenantDBName"))
+    DBSnapshotTenantDatabase.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
+    DBSnapshotTenantDatabase.add_member(:tenant_database_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "TenantDatabaseResourceId"))
+    DBSnapshotTenantDatabase.add_member(:character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetName"))
+    DBSnapshotTenantDatabase.add_member(:db_snapshot_tenant_database_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotTenantDatabaseARN"))
+    DBSnapshotTenantDatabase.add_member(:nchar_character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "NcharCharacterSetName"))
+    DBSnapshotTenantDatabase.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    DBSnapshotTenantDatabase.struct_class = Types::DBSnapshotTenantDatabase
+
+    DBSnapshotTenantDatabaseNotFoundFault.struct_class = Types::DBSnapshotTenantDatabaseNotFoundFault
+
+    DBSnapshotTenantDatabasesList.member = Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabase, location_name: "DBSnapshotTenantDatabase")
+
+    DBSnapshotTenantDatabasesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DBSnapshotTenantDatabasesMessage.add_member(:db_snapshot_tenant_databases, Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabasesList, location_name: "DBSnapshotTenantDatabases"))
+    DBSnapshotTenantDatabasesMessage.struct_class = Types::DBSnapshotTenantDatabasesMessage
 
     DBSubnetGroup.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupName"))
     DBSubnetGroup.add_member(:db_subnet_group_description, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupDescription"))
@@ -1990,8 +2104,20 @@ module Aws::RDS
     DeleteGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
     DeleteGlobalClusterResult.struct_class = Types::DeleteGlobalClusterResult
 
+    DeleteIntegrationMessage.add_member(:integration_identifier, Shapes::ShapeRef.new(shape: IntegrationIdentifier, required: true, location_name: "IntegrationIdentifier"))
+    DeleteIntegrationMessage.struct_class = Types::DeleteIntegrationMessage
+
     DeleteOptionGroupMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptionGroupName"))
     DeleteOptionGroupMessage.struct_class = Types::DeleteOptionGroupMessage
+
+    DeleteTenantDatabaseMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    DeleteTenantDatabaseMessage.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantDBName"))
+    DeleteTenantDatabaseMessage.add_member(:skip_final_snapshot, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipFinalSnapshot"))
+    DeleteTenantDatabaseMessage.add_member(:final_db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "FinalDBSnapshotIdentifier"))
+    DeleteTenantDatabaseMessage.struct_class = Types::DeleteTenantDatabaseMessage
+
+    DeleteTenantDatabaseResult.add_member(:tenant_database, Shapes::ShapeRef.new(shape: TenantDatabase, location_name: "TenantDatabase"))
+    DeleteTenantDatabaseResult.struct_class = Types::DeleteTenantDatabaseResult
 
     DeregisterDBProxyTargetsRequest.add_member(:db_proxy_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBProxyName"))
     DeregisterDBProxyTargetsRequest.add_member(:target_group_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetGroupName"))
@@ -2191,6 +2317,15 @@ module Aws::RDS
     DescribeDBSnapshotAttributesResult.add_member(:db_snapshot_attributes_result, Shapes::ShapeRef.new(shape: DBSnapshotAttributesResult, location_name: "DBSnapshotAttributesResult"))
     DescribeDBSnapshotAttributesResult.struct_class = Types::DescribeDBSnapshotAttributesResult
 
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBSnapshotTenantDatabasesMessage.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
+    DescribeDBSnapshotTenantDatabasesMessage.struct_class = Types::DescribeDBSnapshotTenantDatabasesMessage
+
     DescribeDBSnapshotsMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
     DescribeDBSnapshotsMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
     DescribeDBSnapshotsMessage.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
@@ -2261,6 +2396,16 @@ module Aws::RDS
     DescribeGlobalClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeGlobalClustersMessage.struct_class = Types::DescribeGlobalClustersMessage
 
+    DescribeIntegrationsMessage.add_member(:integration_identifier, Shapes::ShapeRef.new(shape: IntegrationIdentifier, location_name: "IntegrationIdentifier"))
+    DescribeIntegrationsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeIntegrationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeIntegrationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeIntegrationsMessage.struct_class = Types::DescribeIntegrationsMessage
+
+    DescribeIntegrationsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeIntegrationsResponse.add_member(:integrations, Shapes::ShapeRef.new(shape: IntegrationList, location_name: "Integrations"))
+    DescribeIntegrationsResponse.struct_class = Types::DescribeIntegrationsResponse
+
     DescribeOptionGroupOptionsMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
     DescribeOptionGroupOptionsMessage.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
     DescribeOptionGroupOptionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -2323,6 +2468,13 @@ module Aws::RDS
     DescribeSourceRegionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeSourceRegionsMessage.struct_class = Types::DescribeSourceRegionsMessage
 
+    DescribeTenantDatabasesMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
+    DescribeTenantDatabasesMessage.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, location_name: "TenantDBName"))
+    DescribeTenantDatabasesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeTenantDatabasesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeTenantDatabasesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeTenantDatabasesMessage.struct_class = Types::DescribeTenantDatabasesMessage
+
     DescribeValidDBInstanceModificationsMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     DescribeValidDBInstanceModificationsMessage.struct_class = Types::DescribeValidDBInstanceModificationsMessage
 
@@ -2368,6 +2520,9 @@ module Aws::RDS
     EC2SecurityGroupList.member = Shapes::ShapeRef.new(shape: EC2SecurityGroup, location_name: "EC2SecurityGroup")
 
     Ec2ImagePropertiesNotSupportedFault.struct_class = Types::Ec2ImagePropertiesNotSupportedFault
+
+    EncryptionContextMap.key = Shapes::ShapeRef.new(shape: String)
+    EncryptionContextMap.value = Shapes::ShapeRef.new(shape: String)
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
@@ -2540,6 +2695,34 @@ module Aws::RDS
 
     InsufficientStorageClusterCapacityFault.struct_class = Types::InsufficientStorageClusterCapacityFault
 
+    Integration.add_member(:source_arn, Shapes::ShapeRef.new(shape: SourceArn, location_name: "SourceArn"))
+    Integration.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TargetArn"))
+    Integration.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, location_name: "IntegrationName"))
+    Integration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: IntegrationArn, location_name: "IntegrationArn"))
+    Integration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
+    Integration.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "AdditionalEncryptionContext"))
+    Integration.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, location_name: "Status"))
+    Integration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Integration.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    Integration.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
+    Integration.struct_class = Types::Integration
+
+    IntegrationAlreadyExistsFault.struct_class = Types::IntegrationAlreadyExistsFault
+
+    IntegrationConflictOperationFault.struct_class = Types::IntegrationConflictOperationFault
+
+    IntegrationError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    IntegrationError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    IntegrationError.struct_class = Types::IntegrationError
+
+    IntegrationErrorList.member = Shapes::ShapeRef.new(shape: IntegrationError, location_name: "IntegrationError")
+
+    IntegrationList.member = Shapes::ShapeRef.new(shape: Integration, location_name: "Integration")
+
+    IntegrationNotFoundFault.struct_class = Types::IntegrationNotFoundFault
+
+    IntegrationQuotaExceededFault.struct_class = Types::IntegrationQuotaExceededFault
+
     InvalidBlueGreenDeploymentStateFault.struct_class = Types::InvalidBlueGreenDeploymentStateFault
 
     InvalidCustomDBEngineVersionStateFault.struct_class = Types::InvalidCustomDBEngineVersionStateFault
@@ -2583,6 +2766,8 @@ module Aws::RDS
     InvalidExportTaskStateFault.struct_class = Types::InvalidExportTaskStateFault
 
     InvalidGlobalClusterStateFault.struct_class = Types::InvalidGlobalClusterStateFault
+
+    InvalidIntegrationStateFault.struct_class = Types::InvalidIntegrationStateFault
 
     InvalidOptionGroupStateFault.struct_class = Types::InvalidOptionGroupStateFault
 
@@ -2771,6 +2956,8 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:rotate_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RotateMasterUserPassword"))
     ModifyDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    ModifyDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2863,6 +3050,15 @@ module Aws::RDS
 
     ModifyOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     ModifyOptionGroupResult.struct_class = Types::ModifyOptionGroupResult
+
+    ModifyTenantDatabaseMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    ModifyTenantDatabaseMessage.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantDBName"))
+    ModifyTenantDatabaseMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "MasterUserPassword"))
+    ModifyTenantDatabaseMessage.add_member(:new_tenant_db_name, Shapes::ShapeRef.new(shape: String, location_name: "NewTenantDBName"))
+    ModifyTenantDatabaseMessage.struct_class = Types::ModifyTenantDatabaseMessage
+
+    ModifyTenantDatabaseResult.add_member(:tenant_database, Shapes::ShapeRef.new(shape: TenantDatabase, location_name: "TenantDatabase"))
+    ModifyTenantDatabaseResult.struct_class = Types::ModifyTenantDatabaseResult
 
     NetworkTypeNotSupported.struct_class = Types::NetworkTypeNotSupported
 
@@ -3019,6 +3215,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:max_storage_throughput_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageThroughputPerDbInstance"))
     OrderableDBInstanceOption.add_member(:min_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinStorageThroughputPerIops"))
     OrderableDBInstanceOption.add_member(:max_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxStorageThroughputPerIops"))
+    OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")
@@ -3085,6 +3282,8 @@ module Aws::RDS
     PendingModifiedValues.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
     PendingModifiedValues.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     PendingModifiedValues.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    PendingModifiedValues.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    PendingModifiedValues.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -3126,6 +3325,11 @@ module Aws::RDS
     Range.struct_class = Types::Range
 
     RangeList.member = Shapes::ShapeRef.new(shape: Range, location_name: "Range")
+
+    RdsCustomClusterConfiguration.add_member(:interconnect_subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "InterconnectSubnetId"))
+    RdsCustomClusterConfiguration.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayMulticastDomainId"))
+    RdsCustomClusterConfiguration.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
+    RdsCustomClusterConfiguration.struct_class = Types::RdsCustomClusterConfiguration
 
     ReadReplicaDBClusterIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBClusterIdentifier")
 
@@ -3326,6 +3530,7 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     RestoreDBClusterFromSnapshotMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterFromSnapshotMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     RestoreDBClusterFromSnapshotMessage.struct_class = Types::RestoreDBClusterFromSnapshotMessage
 
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -3359,6 +3564,7 @@ module Aws::RDS
     RestoreDBClusterToPointInTimeMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterToPointInTimeMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBClusterToPointInTimeMessage.add_member(:source_db_cluster_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceDbClusterResourceId"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     RestoreDBClusterToPointInTimeMessage.struct_class = Types::RestoreDBClusterToPointInTimeMessage
 
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -3403,6 +3609,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterSnapshotIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3456,6 +3663,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromS3Message.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromS3Message.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3504,6 +3712,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3726,6 +3935,37 @@ module Aws::RDS
 
     TargetList.member = Shapes::ShapeRef.new(shape: DBProxyTarget)
 
+    TenantDatabase.add_member(:tenant_database_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "TenantDatabaseCreateTime"))
+    TenantDatabase.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
+    TenantDatabase.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, location_name: "TenantDBName"))
+    TenantDatabase.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    TenantDatabase.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
+    TenantDatabase.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
+    TenantDatabase.add_member(:tenant_database_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "TenantDatabaseResourceId"))
+    TenantDatabase.add_member(:tenant_database_arn, Shapes::ShapeRef.new(shape: String, location_name: "TenantDatabaseARN"))
+    TenantDatabase.add_member(:character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetName"))
+    TenantDatabase.add_member(:nchar_character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "NcharCharacterSetName"))
+    TenantDatabase.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtection"))
+    TenantDatabase.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: TenantDatabasePendingModifiedValues, location_name: "PendingModifiedValues"))
+    TenantDatabase.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    TenantDatabase.struct_class = Types::TenantDatabase
+
+    TenantDatabaseAlreadyExistsFault.struct_class = Types::TenantDatabaseAlreadyExistsFault
+
+    TenantDatabaseNotFoundFault.struct_class = Types::TenantDatabaseNotFoundFault
+
+    TenantDatabasePendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "MasterUserPassword"))
+    TenantDatabasePendingModifiedValues.add_member(:tenant_db_name, Shapes::ShapeRef.new(shape: String, location_name: "TenantDBName"))
+    TenantDatabasePendingModifiedValues.struct_class = Types::TenantDatabasePendingModifiedValues
+
+    TenantDatabaseQuotaExceededFault.struct_class = Types::TenantDatabaseQuotaExceededFault
+
+    TenantDatabasesList.member = Shapes::ShapeRef.new(shape: TenantDatabase, location_name: "TenantDatabase")
+
+    TenantDatabasesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    TenantDatabasesMessage.add_member(:tenant_databases, Shapes::ShapeRef.new(shape: TenantDatabasesList, location_name: "TenantDatabases"))
+    TenantDatabasesMessage.struct_class = Types::TenantDatabasesMessage
+
     Timezone.add_member(:timezone_name, Shapes::ShapeRef.new(shape: String, location_name: "TimezoneName"))
     Timezone.struct_class = Types::Timezone
 
@@ -3739,6 +3979,7 @@ module Aws::RDS
     UpgradeTarget.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsGlobalDatabases"))
     UpgradeTarget.add_member(:supports_babelfish, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsBabelfish"))
     UpgradeTarget.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
+    UpgradeTarget.add_member(:supports_integrations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsIntegrations"))
     UpgradeTarget.struct_class = Types::UpgradeTarget
 
     UserAuthConfig.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -3763,6 +4004,7 @@ module Aws::RDS
 
     ValidDBInstanceModificationsMessage.add_member(:storage, Shapes::ShapeRef.new(shape: ValidStorageOptionsList, location_name: "Storage"))
     ValidDBInstanceModificationsMessage.add_member(:valid_processor_features, Shapes::ShapeRef.new(shape: AvailableProcessorFeatureList, location_name: "ValidProcessorFeatures"))
+    ValidDBInstanceModificationsMessage.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
     ValidDBInstanceModificationsMessage.struct_class = Types::ValidDBInstanceModificationsMessage
 
     ValidStorageOptions.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
@@ -3850,6 +4092,9 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -4001,6 +4246,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
@@ -4012,6 +4258,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
       end)
 
       api.add_operation(:create_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -4078,6 +4325,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:create_db_instance_read_replica, Seahorse::Model::Operation.new.tap do |o|
@@ -4108,6 +4356,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:create_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4207,6 +4456,20 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
+      api.add_operation(:create_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIntegrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: Integration)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
+      end)
+
       api.add_operation(:create_option_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOptionGroup"
         o.http_method = "POST"
@@ -4215,6 +4478,18 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: CreateOptionGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
+      end)
+
+      api.add_operation(:create_tenant_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTenantDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTenantDatabaseMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateTenantDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:delete_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -4397,6 +4672,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
       end)
 
+      api.add_operation(:delete_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIntegrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: Integration)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIntegrationStateFault)
+      end)
+
       api.add_operation(:delete_option_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteOptionGroup"
         o.http_method = "POST"
@@ -4405,6 +4691,17 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOptionGroupStateFault)
+      end)
+
+      api.add_operation(:delete_tenant_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTenantDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTenantDatabaseMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTenantDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:deregister_db_proxy_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -4751,6 +5048,21 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
       end)
 
+      api.add_operation(:describe_db_snapshot_tenant_databases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDBSnapshotTenantDatabases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDBSnapshotTenantDatabasesMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabasesMessage)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_db_snapshots, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDBSnapshots"
         o.http_method = "POST"
@@ -4870,6 +5182,21 @@ module Aws::RDS
         )
       end)
 
+      api.add_operation(:describe_integrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIntegrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIntegrationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIntegrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_option_group_options, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOptionGroupOptions"
         o.http_method = "POST"
@@ -4972,6 +5299,21 @@ module Aws::RDS
         )
       end)
 
+      api.add_operation(:describe_tenant_databases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTenantDatabases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTenantDatabasesMessage)
+        o.output = Shapes::ShapeRef.new(shape: TenantDatabasesMessage)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_valid_db_instance_modifications, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeValidDBInstanceModifications"
         o.http_method = "POST"
@@ -5034,6 +5376,9 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
       end)
 
       api.add_operation(:modify_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -5097,6 +5442,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -5159,6 +5505,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:modify_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5272,6 +5619,18 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ModifyOptionGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOptionGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+      end)
+
+      api.add_operation(:modify_tenant_database, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTenantDatabase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTenantDatabaseMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTenantDatabaseResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:promote_read_replica, Seahorse::Model::Operation.new.tap do |o|
@@ -5398,6 +5757,9 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
       end)
 
       api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5527,6 +5889,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:restore_db_instance_from_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -5584,6 +5947,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:revoke_db_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

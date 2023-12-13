@@ -431,6 +431,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.cluster_endpoints[0].region #=> String
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.cluster.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateCluster AWS API Documentation
     #
@@ -488,6 +489,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateControlPanel AWS API Documentation
     #
@@ -546,6 +548,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateRoutingControl AWS API Documentation
     #
@@ -647,6 +650,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -659,6 +663,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateSafetyRule AWS API Documentation
     #
@@ -778,6 +783,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.cluster_endpoints[0].region #=> String
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.cluster.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -816,6 +822,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -859,6 +866,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -902,6 +910,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -914,6 +923,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/DescribeSafetyRule AWS API Documentation
     #
@@ -921,6 +931,33 @@ module Aws::Route53RecoveryControlConfig
     # @param [Hash] params ({})
     def describe_safety_rule(params = {}, options = {})
       req = build_request(:describe_safety_rule, params)
+      req.send_request(options)
+    end
+
+    # Get information about the resource policy for a cluster.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -992,6 +1029,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.clusters[0].cluster_endpoints[0].region #=> String
     #   resp.clusters[0].name #=> String
     #   resp.clusters[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.clusters[0].owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListClusters AWS API Documentation
@@ -1035,6 +1073,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panels[0].name #=> String
     #   resp.control_panels[0].routing_control_count #=> Integer
     #   resp.control_panels[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panels[0].owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListControlPanels AWS API Documentation
@@ -1081,6 +1120,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_controls[0].name #=> String
     #   resp.routing_controls[0].routing_control_arn #=> String
     #   resp.routing_controls[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_controls[0].owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListRoutingControls AWS API Documentation
     #
@@ -1129,6 +1169,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.safety_rules[0].assertion.safety_rule_arn #=> String
     #   resp.safety_rules[0].assertion.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.safety_rules[0].assertion.wait_period_ms #=> Integer
+    #   resp.safety_rules[0].assertion.owner #=> String
     #   resp.safety_rules[0].gating.control_panel_arn #=> String
     #   resp.safety_rules[0].gating.gating_controls #=> Array
     #   resp.safety_rules[0].gating.gating_controls[0] #=> String
@@ -1141,6 +1182,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.safety_rules[0].gating.target_controls #=> Array
     #   resp.safety_rules[0].gating.target_controls[0] #=> String
     #   resp.safety_rules[0].gating.wait_period_ms #=> Integer
+    #   resp.safety_rules[0].gating.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListSafetyRules AWS API Documentation
     #
@@ -1258,6 +1300,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateControlPanel AWS API Documentation
     #
@@ -1296,6 +1339,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateRoutingControl AWS API Documentation
     #
@@ -1348,6 +1392,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -1360,6 +1405,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateSafetyRule AWS API Documentation
     #
@@ -1383,7 +1429,7 @@ module Aws::Route53RecoveryControlConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycontrolconfig'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

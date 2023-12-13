@@ -211,8 +211,8 @@ module Aws::Signer
     #   @return [Types::SigningJobRevocationRecord]
     #
     # @!attribute [rw] signed_object
-    #   Name of the S3 bucket where the signed code image is saved by code
-    #   signing.
+    #   Name of the S3 bucket where the signed code image is saved by AWS
+    #   Signer.
     #   @return [Types::SignedObject]
     #
     # @!attribute [rw] job_owner
@@ -264,16 +264,16 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The encryption algorithm options that are available to a code signing
+    # The encryption algorithm options that are available to a code-signing
     # job.
     #
     # @!attribute [rw] allowed_values
-    #   The set of accepted encryption algorithms that are allowed in a code
-    #   signing job.
+    #   The set of accepted encryption algorithms that are allowed in a
+    #   code-signing job.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_value
-    #   The default encryption algorithm that is used by a code signing job.
+    #   The default encryption algorithm that is used by a code-signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/EncryptionAlgorithmOptions AWS API Documentation
@@ -308,6 +308,22 @@ module Aws::Signer
     #   (signed by the parent CA) combined with a parent CA TBS hash (signed
     #   by the parent CA’s CA). Root certificates are defined as their own
     #   CA.
+    #
+    #   The following example shows how to calculate a hash for this
+    #   parameter using OpenSSL commands:
+    #
+    #   `openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs`
+    #
+    #   `openssl sha384 < childCert.tbs -binary > childCertTbsHash`
+    #
+    #   `openssl asn1parse -in parentCert.pem -strparse 4 -out
+    #   parentCert.tbs`
+    #
+    #   `openssl sha384 < parentCert.tbs -binary > parentCertTbsHash xxd -p
+    #   childCertTbsHash > certificateHash.hex xxd -p parentCertTbsHash >>
+    #   certificateHash.hex`
+    #
+    #   `cat certificateHash.hex | tr -d '\n'`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetRevocationStatusRequest AWS API Documentation
@@ -323,9 +339,9 @@ module Aws::Signer
     end
 
     # @!attribute [rw] revoked_entities
-    #   A list of revoked entities (including one or more of the signing
-    #   profile ARN, signing job ID, and certificate hash) supplied as input
-    #   to the API.
+    #   A list of revoked entities (including zero or more of the signing
+    #   profile ARN, signing job ARN, and certificate hashes) supplied as
+    #   input to the API.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetRevocationStatusResponse AWS API Documentation
@@ -500,14 +516,14 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The hash algorithms that are available to a code signing job.
+    # The hash algorithms that are available to a code-signing job.
     #
     # @!attribute [rw] allowed_values
-    #   The set of accepted hash algorithms allowed in a code signing job.
+    #   The set of accepted hash algorithms allowed in a code-signing job.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_value
-    #   The default hash algorithm that is used in a code signing job.
+    #   The default hash algorithm that is used in a code-signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/HashAlgorithmOptions AWS API Documentation
@@ -1016,16 +1032,16 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The name and prefix of the S3 bucket where code signing saves your
-    # signed objects.
+    # The name and prefix of the Amazon S3 bucket where AWS Signer saves
+    # your signed objects.
     #
     # @!attribute [rw] bucket_name
     #   Name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   An Amazon S3 prefix that you can use to limit responses to those
-    #   that begin with the specified prefix.
+    #   An S3 prefix that you can use to limit responses to those that begin
+    #   with the specified prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/S3Destination AWS API Documentation
@@ -1037,7 +1053,7 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The S3 bucket name and key where code signing saved your signed code
+    # The Amazon S3 bucket name and key where Signer saved your signed code
     # image.
     #
     # @!attribute [rw] bucket_name
@@ -1058,7 +1074,8 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # Information about the S3 bucket where you saved your unsigned code.
+    # Information about the Amazon S3 bucket where you saved your unsigned
+    # code.
     #
     # @!attribute [rw] bucket_name
     #   Name of the S3 bucket.
@@ -1112,7 +1129,8 @@ module Aws::Signer
     #   @return [String]
     #
     # @!attribute [rw] payload_format
-    #   Payload content type
+    #   Payload content type. The single valid type is
+    #   `application/vnd.cncf.notary.payload.v1+json`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SignPayloadRequest AWS API Documentation
@@ -1136,8 +1154,7 @@ module Aws::Signer
     #
     # @!attribute [rw] metadata
     #   Information including the signing profile ARN and the signing job
-    #   ID. Clients use metadata to signature records, for example, as
-    #   annotations added to the signature manifest inside an OCI registry.
+    #   ID.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] signature
@@ -1189,15 +1206,15 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The configuration of a code signing operation.
+    # The configuration of a signing operation.
     #
     # @!attribute [rw] encryption_algorithm_options
-    #   The encryption algorithm options that are available for a code
-    #   signing job.
+    #   The encryption algorithm options that are available for a
+    #   code-signing job.
     #   @return [Types::EncryptionAlgorithmOptions]
     #
     # @!attribute [rw] hash_algorithm_options
-    #   The hash algorithm options that are available for a code signing
+    #   The hash algorithm options that are available for a code-signing
     #   job.
     #   @return [Types::HashAlgorithmOptions]
     #
@@ -1215,12 +1232,12 @@ module Aws::Signer
     #
     # @!attribute [rw] encryption_algorithm
     #   A specified override of the default encryption algorithm that is
-    #   used in a code signing job.
+    #   used in a code-signing job.
     #   @return [String]
     #
     # @!attribute [rw] hash_algorithm
     #   A specified override of the default hash algorithm that is used in a
-    #   code signing job.
+    #   code-signing job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningConfigurationOverrides AWS API Documentation
@@ -1232,14 +1249,14 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # The image format of a code signing platform or profile.
+    # The image format of a AWS Signer platform or profile.
     #
     # @!attribute [rw] supported_formats
-    #   The supported formats of a code signing image.
+    #   The supported formats of a signing image.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_format
-    #   The default format of a code signing image.
+    #   The default format of a signing image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningImageFormat AWS API Documentation
@@ -1373,41 +1390,41 @@ module Aws::Signer
     end
 
     # Contains information about the signing configurations and parameters
-    # that are used to perform a code signing job.
+    # that are used to perform a code-signing job.
     #
     # @!attribute [rw] platform_id
-    #   The ID of a code signing platform.
+    #   The ID of a signing platform.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of a code signing platform.
+    #   The display name of a signing platform.
     #   @return [String]
     #
     # @!attribute [rw] partner
-    #   Any partner entities linked to a code signing platform.
+    #   Any partner entities linked to a signing platform.
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The types of targets that can be signed by a code signing platform.
+    #   The types of targets that can be signed by a signing platform.
     #   @return [String]
     #
     # @!attribute [rw] category
-    #   The category of a code signing platform.
+    #   The category of a signing platform.
     #   @return [String]
     #
     # @!attribute [rw] signing_configuration
-    #   The configuration of a code signing platform. This includes the
+    #   The configuration of a signing platform. This includes the
     #   designated hash algorithm and encryption algorithm of a signing
     #   platform.
     #   @return [Types::SigningConfiguration]
     #
     # @!attribute [rw] signing_image_format
-    #   The image format of a code signing platform or profile.
+    #   The image format of a AWS Signer platform or profile.
     #   @return [Types::SigningImageFormat]
     #
     # @!attribute [rw] max_size_in_mb
-    #   The maximum size (in MB) of code that can be signed by a code
-    #   signing platform.
+    #   The maximum size (in MB) of code that can be signed by a signing
+    #   platform.
     #   @return [Integer]
     #
     # @!attribute [rw] revocation_supported
@@ -1430,7 +1447,7 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # Any overrides that are applied to the signing configuration of a code
+    # Any overrides that are applied to the signing configuration of a
     # signing platform.
     #
     # @!attribute [rw] signing_configuration
@@ -1456,7 +1473,7 @@ module Aws::Signer
       include Aws::Structure
     end
 
-    # Contains information about the ACM certificates and code signing
+    # Contains information about the ACM certificates and signing
     # configuration parameters that can be used by a given code signing
     # user.
     #
@@ -1490,11 +1507,11 @@ module Aws::Signer
     #   @return [String]
     #
     # @!attribute [rw] signing_parameters
-    #   The parameters that are available for use by a code signing user.
+    #   The parameters that are available for use by a Signer user.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
-    #   The status of a code signing profile.
+    #   The status of a signing profile.
     #   @return [String]
     #
     # @!attribute [rw] arn

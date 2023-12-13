@@ -29,9 +29,11 @@ module Aws::MainframeModernization
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {ExecutionTimeoutException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ServiceUnavailableException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -78,6 +80,25 @@ module Aws::MainframeModernization
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ExecutionTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MainframeModernization::Types::ExecutionTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 
@@ -162,6 +183,25 @@ module Aws::MainframeModernization
       # @return [String]
       def service_code
         @data[:service_code]
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MainframeModernization::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

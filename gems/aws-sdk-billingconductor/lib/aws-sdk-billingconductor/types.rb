@@ -515,6 +515,11 @@ module Aws::BillingConductor
     #   for a custom line item.
     #   @return [Types::CustomLineItemChargeDetails]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateCustomLineItemInput AWS API Documentation
     #
     class CreateCustomLineItemInput < Struct.new(
@@ -524,7 +529,8 @@ module Aws::BillingConductor
       :billing_group_arn,
       :billing_period_range,
       :tags,
-      :charge_details)
+      :charge_details,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -837,6 +843,11 @@ module Aws::BillingConductor
     #   The number of resources that are associated to the custom line item.
     #   @return [Integer]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemListElement AWS API Documentation
     #
     class CustomLineItemListElement < Struct.new(
@@ -849,7 +860,8 @@ module Aws::BillingConductor
       :billing_group_arn,
       :creation_time,
       :last_modified_time,
-      :association_size)
+      :association_size,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -934,6 +946,11 @@ module Aws::BillingConductor
     #   The inclusive start time.
     #   @return [Integer]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
     #
     class CustomLineItemVersionListElement < Struct.new(
@@ -949,7 +966,8 @@ module Aws::BillingConductor
       :start_billing_period,
       :end_billing_period,
       :arn,
-      :start_time)
+      :start_time,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1621,12 +1639,18 @@ module Aws::BillingConductor
     #   A list of custom line item ARNs to retrieve information.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services accounts in which this custom line item will
+    #   be applied to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemsFilter AWS API Documentation
     #
     class ListCustomLineItemsFilter < Struct.new(
       :names,
       :billing_groups,
-      :arns)
+      :arns,
+      :account_ids)
       SENSITIVE = []
       include Aws::Structure
     end

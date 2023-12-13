@@ -12,12 +12,9 @@ module Seahorse
 
         def self.apply!
           Net::HTTPGenericRequest.prepend(PatchDefaultContentType)
-          return unless RUBY_VERSION < '2.5'
-
-          Net::HTTP::IDEMPOTENT_METHODS_.clear
         end
 
-        # For requests with bodys, Net::HTTP sets a default content type of:
+        # For requests with bodies, Net::HTTP sets a default content type of:
         #   'application/x-www-form-urlencoded'
         # There are cases where we should not send content type at all.
         # Even when no body is supplied, Net::HTTP uses a default empty body

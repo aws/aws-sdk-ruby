@@ -986,6 +986,102 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Represents a table optimizer to retrieve in the
+    # `BatchGetTableOptimizer` operation.
+    #
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizerEntry AWS API Documentation
+    #
+    class BatchGetTableOptimizerEntry < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details on one of the errors in the error list returned by
+    # the `BatchGetTableOptimizer` operation.
+    #
+    # @!attribute [rw] error
+    #   An `ErrorDetail` object containing code and message details about
+    #   the error.
+    #   @return [Types::ErrorDetail]
+    #
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizerError AWS API Documentation
+    #
+    class BatchGetTableOptimizerError < Struct.new(
+      :error,
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entries
+    #   A list of `BatchGetTableOptimizerEntry` objects specifying the table
+    #   optimizers to retrieve.
+    #   @return [Array<Types::BatchGetTableOptimizerEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizerRequest AWS API Documentation
+    #
+    class BatchGetTableOptimizerRequest < Struct.new(
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_optimizers
+    #   A list of `BatchTableOptimizer` objects.
+    #   @return [Array<Types::BatchTableOptimizer>]
+    #
+    # @!attribute [rw] failures
+    #   A list of errors from the operation.
+    #   @return [Array<Types::BatchGetTableOptimizerError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizerResponse AWS API Documentation
+    #
+    class BatchGetTableOptimizerResponse < Struct.new(
+      :table_optimizers,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] trigger_names
     #   A list of trigger names, which may be the names returned from the
     #   `ListTriggers` operation.
@@ -1130,6 +1226,37 @@ module Aws::Glue
     class BatchStopJobRunSuccessfulSubmission < Struct.new(
       :job_name,
       :job_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for one of the table optimizers returned by the
+    # `BatchGetTableOptimizer` operation.
+    #
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_optimizer
+    #   A `TableOptimizer` object that contains details on the configuration
+    #   and last run of a table optimzer.
+    #   @return [Types::TableOptimizer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchTableOptimizer AWS API Documentation
+    #
+    class BatchTableOptimizer < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :table_optimizer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2231,6 +2358,14 @@ module Aws::Glue
     #   Specifies a target that writes to a Snowflake data source.
     #   @return [Types::SnowflakeTarget]
     #
+    # @!attribute [rw] connector_data_source
+    #   Specifies a source generated with standard connection options.
+    #   @return [Types::ConnectorDataSource]
+    #
+    # @!attribute [rw] connector_data_target
+    #   Specifies a target generated with standard connection options.
+    #   @return [Types::ConnectorDataTarget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2302,7 +2437,9 @@ module Aws::Glue
       :evaluate_data_quality_multi_frame,
       :recipe,
       :snowflake_source,
-      :snowflake_target)
+      :snowflake_target,
+      :connector_data_source,
+      :connector_data_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2574,6 +2711,155 @@ module Aws::Glue
     class ColumnStatisticsError < Struct.new(
       :column_statistics,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception thrown when you try to stop a task run when there is no
+    # task running.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskNotRunningException AWS API Documentation
+    #
+    class ColumnStatisticsTaskNotRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that shows the details of the column stats run.
+    #
+    # @!attribute [rw] customer_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which column statistics is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of the column names. If none is supplied, all column names
+    #   for the table will be used by default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that the service assumes to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #   @return [Float]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs for the column stats task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers used to generate column statistics. The job is
+    #   preconfigured to autoscale up to 25 instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of workers being used for generating stats. The default is
+    #   `g.1x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that this task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   The last point in time when this task was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dpu_seconds
+    #   The calculated DPU usage in seconds for all autoscaled workers.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskRun AWS API Documentation
+    #
+    class ColumnStatisticsTaskRun < Struct.new(
+      :customer_id,
+      :column_statistics_task_run_id,
+      :database_name,
+      :table_name,
+      :column_name_list,
+      :catalog_id,
+      :role,
+      :sample_size,
+      :security_configuration,
+      :number_of_workers,
+      :worker_type,
+      :status,
+      :creation_time,
+      :last_updated,
+      :start_time,
+      :end_time,
+      :error_message,
+      :dpu_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception thrown when you try to start another job while running a
+    # column stats generation job.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskRunningException AWS API Documentation
+    #
+    class ColumnStatisticsTaskRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception thrown when you try to stop a task run.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskStoppingException AWS API Documentation
+    #
+    class ColumnStatisticsTaskStoppingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3107,6 +3393,106 @@ module Aws::Glue
     #
     class ConnectionsList < Struct.new(
       :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a source generated with standard connection options.
+    #
+    # @!attribute [rw] name
+    #   The name of this source node.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The `connectionType`, as provided to the underlying Glue library.
+    #   This node type supports the following connection types:
+    #
+    #   * `opensearch`
+    #
+    #   * `azuresql`
+    #
+    #   * `azurecosmos`
+    #
+    #   * `bigquery`
+    #
+    #   * `saphana`
+    #
+    #   * `teradata`
+    #
+    #   * `vertica`
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   A map specifying connection options for the node. You can find
+    #   standard connection options for the corresponding connection type in
+    #   the [ Connection parameters][1] section of the Glue documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for this source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorDataSource AWS API Documentation
+    #
+    class ConnectorDataSource < Struct.new(
+      :name,
+      :connection_type,
+      :data,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target generated with standard connection options.
+    #
+    # @!attribute [rw] name
+    #   The name of this target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The `connectionType`, as provided to the underlying Glue library.
+    #   This node type supports the following connection types:
+    #
+    #   * `opensearch`
+    #
+    #   * `azuresql`
+    #
+    #   * `azurecosmos`
+    #
+    #   * `bigquery`
+    #
+    #   * `saphana`
+    #
+    #   * `teradata`
+    #
+    #   * `vertica`
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   A map specifying connection options for the node. You can find
+    #   standard connection options for the corresponding connection type in
+    #   the [ Connection parameters][1] section of the Glue documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorDataTarget AWS API Documentation
+    #
+    class ConnectorDataTarget < Struct.new(
+      :name,
+      :connection_type,
+      :data,
+      :inputs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5263,6 +5649,44 @@ module Aws::Glue
     end
 
     # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the
+    #   configuration of a table optimizer.
+    #   @return [Types::TableOptimizerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableOptimizerRequest AWS API Documentation
+    #
+    class CreateTableOptimizerRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type,
+      :table_optimizer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableOptimizerResponse AWS API Documentation
+    #
+    class CreateTableOptimizerResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the `Table`. If none
     #   is supplied, the Amazon Web Services account ID is used by default.
     #   @return [String]
@@ -5736,6 +6160,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Describes the result of the evaluation of a data quality analyzer.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_message
+    #   An evaluation message.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluated_metrics
+    #   A map of metrics associated with the evaluation of the analyzer.
+    #   @return [Hash<String,Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityAnalyzerResult AWS API Documentation
+    #
+    class DataQualityAnalyzerResult < Struct.new(
+      :name,
+      :description,
+      :evaluation_message,
+      :evaluated_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional run options you can specify for an evaluation run.
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
@@ -5751,6 +6204,60 @@ module Aws::Glue
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       :cloud_watch_metrics_enabled,
       :results_s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data quality metric value according to the analysis of
+    # historical data.
+    #
+    # @!attribute [rw] actual_value
+    #   The actual value of the data quality metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] expected_value
+    #   The expected value of the data quality metric according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lower_limit
+    #   The lower limit of the data quality metric value according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_limit
+    #   The upper limit of the data quality metric value according to the
+    #   analysis of historical data.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityMetricValues AWS API Documentation
+    #
+    class DataQualityMetricValues < Struct.new(
+      :actual_value,
+      :expected_value,
+      :lower_limit,
+      :upper_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the observation generated after evaluating the rules and
+    # analyzers.
+    #
+    # @!attribute [rw] description
+    #   A description of the data quality observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_based_observation
+    #   An object of type `MetricBasedObservation` representing the
+    #   observation that is based on evaluated data quality metrics.
+    #   @return [Types::MetricBasedObservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityObservation AWS API Documentation
+    #
+    class DataQualityObservation < Struct.new(
+      :description,
+      :metric_based_observation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5807,6 +6314,16 @@ module Aws::Glue
     #   for each rule.
     #   @return [Array<Types::DataQualityRuleResult>]
     #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the
+    #   observations generated after evaluating the rules and analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResult AWS API Documentation
     #
     class DataQualityResult < Struct.new(
@@ -5820,7 +6337,9 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :ruleset_evaluation_run_id,
-      :rule_results)
+      :rule_results,
+      :analyzer_results,
+      :observations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6912,6 +7431,37 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableOptimizerRequest AWS API Documentation
+    #
+    class DeleteTableOptimizerRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableOptimizerResponse AWS API Documentation
+    #
+    class DeleteTableOptimizerResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
@@ -8661,6 +9211,75 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunRequest < Struct.new(
+      :column_statistics_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run
+    #   A `ColumnStatisticsTaskRun` object representing the details of the
+    #   column stats run.
+    #   @return [Types::ColumnStatisticsTaskRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunResponse < Struct.new(
+      :column_statistics_task_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsRequest AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunsRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_runs
+    #   A list of column statistics task runs.
+    #   @return [Array<Types::ColumnStatisticsTaskRun>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all task runs have yet been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsResponse AWS API Documentation
+    #
+    class GetColumnStatisticsTaskRunsResponse < Struct.new(
+      :column_statistics_task_runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -9003,6 +9622,16 @@ module Aws::Glue
     #   for each rule.
     #   @return [Array<Types::DataQualityRuleResult>]
     #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the
+    #   observations generated after evaluating the rules and analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultResponse AWS API Documentation
     #
     class GetDataQualityResultResponse < Struct.new(
@@ -9016,7 +9645,9 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :ruleset_evaluation_run_id,
-      :rule_results)
+      :rule_results,
+      :analyzer_results,
+      :observations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10819,6 +11450,60 @@ module Aws::Glue
     #
     class GetStatementResponse < Struct.new(
       :statement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableOptimizerRequest AWS API Documentation
+    #
+    class GetTableOptimizerRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_optimizer
+    #   The optimizer associated with the specified table.
+    #   @return [Types::TableOptimizer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableOptimizerResponse AWS API Documentation
+    #
+    class GetTableOptimizerResponse < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :table_optimizer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13872,6 +14557,41 @@ module Aws::Glue
     end
 
     # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRunsRequest AWS API Documentation
+    #
+    class ListColumnStatisticsTaskRunsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run_ids
+    #   A list of column statistics task run IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all task run IDs have yet been
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRunsResponse AWS API Documentation
+    #
+    class ListColumnStatisticsTaskRunsResponse < Struct.new(
+      :column_statistics_task_run_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
     #   The maximum size of a list to return.
     #   @return [Integer]
     #
@@ -14516,6 +15236,77 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of optimizer runs to return on each call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTableOptimizerRunsRequest AWS API Documentation
+    #
+    class ListTableOptimizerRunsRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of optimizer
+    #   runs, returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_optimizer_runs
+    #   A list of the optimizer runs associated with a table.
+    #   @return [Array<Types::TableOptimizerRun>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTableOptimizerRunsResponse AWS API Documentation
+    #
+    class ListTableOptimizerRunsResponse < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :next_token,
+      :table_optimizer_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation request.
     #   @return [String]
@@ -15056,6 +15847,34 @@ module Aws::Glue
     class MetadataKeyValuePair < Struct.new(
       :metadata_key,
       :metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the metric based observation generated based on evaluated
+    # data quality metrics.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the data quality metric used for generating the
+    #   observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_values
+    #   An object of type `DataQualityMetricValues` representing the
+    #   analysis of the data quality metric value.
+    #   @return [Types::DataQualityMetricValues]
+    #
+    # @!attribute [rw] new_rules
+    #   A list of new data quality rules generated as part of the
+    #   observation based on the data quality metric value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MetricBasedObservation AWS API Documentation
+    #
+    class MetricBasedObservation < Struct.new(
+      :metric_name,
+      :metric_values,
+      :new_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16645,6 +17464,35 @@ module Aws::Glue
     class ResumeWorkflowRunResponse < Struct.new(
       :run_id,
       :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metrics for the optimizer run.
+    #
+    # @!attribute [rw] number_of_bytes_compacted
+    #   The number of bytes removed by the compaction job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_files_compacted
+    #   The number of files removed by the compaction job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_dpus
+    #   The number of DPU hours consumed by the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_duration_in_hour
+    #   The duration of the job in hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunMetrics AWS API Documentation
+    #
+    class RunMetrics < Struct.new(
+      :number_of_bytes_compacted,
+      :number_of_files_compacted,
+      :number_of_dpus,
+      :job_duration_in_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18767,6 +19615,64 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of the column names to generate statistics. If none is
+    #   supplied, all column names for the table will be used by default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that the service assumes to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #   @return [Float]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs for the column stats task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :column_name_list,
+      :role,
+      :sample_size,
+      :catalog_id,
+      :security_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_run_id
+    #   The identifier for the column statistics task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunResponse < Struct.new(
+      :column_statistics_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   Name of the crawler to start.
     #   @return [String]
@@ -19411,6 +20317,27 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunRequest AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunResponse AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   Name of the crawler to stop.
     #   @return [String]
@@ -19947,6 +20874,90 @@ module Aws::Glue
       :table_type,
       :parameters,
       :target_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an optimizer associated with a table.
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   A `TableOptimizerConfiguration` object that was specified when
+    #   creating or updating a table optimizer.
+    #   @return [Types::TableOptimizerConfiguration]
+    #
+    # @!attribute [rw] last_run
+    #   A `TableOptimizerRun` object representing the last run of the table
+    #   optimizer.
+    #   @return [Types::TableOptimizerRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableOptimizer AWS API Documentation
+    #
+    class TableOptimizer < Struct.new(
+      :type,
+      :configuration,
+      :last_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details on the configuration of a table optimizer. You pass
+    # this configuration when creating or updating a table optimizer.
+    #
+    # @!attribute [rw] role_arn
+    #   A role passed by the caller which gives the service permission to
+    #   update the resources associated with the optimizer on the caller's
+    #   behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether table optimization is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableOptimizerConfiguration AWS API Documentation
+    #
+    class TableOptimizerConfiguration < Struct.new(
+      :role_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for a table optimizer run.
+    #
+    # @!attribute [rw] event_type
+    #   An event type representing the status of the table optimizer run.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   Represents the epoch timestamp at which the compaction job was
+    #   started within Lake Formation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   Represents the epoch timestamp at which the compaction job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A `RunMetrics` object containing metrics for the optimizer run.
+    #   @return [Types::RunMetrics]
+    #
+    # @!attribute [rw] error
+    #   An error that occured during the optimizer run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableOptimizerRun AWS API Documentation
+    #
+    class TableOptimizerRun < Struct.new(
+      :event_type,
+      :start_timestamp,
+      :end_timestamp,
+      :metrics,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21126,11 +22137,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner
@@ -21496,11 +22510,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name of the remote repository that contains the job artifacts.
+    #   For BitBucket providers, `RepositoryName` should include
+    #   `WorkspaceName`. Use the format `<WorkspaceName>/<RepositoryName>`.
     #   @return [String]
     #
     # @!attribute [rw] repository_owner
@@ -21556,6 +22573,44 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the
+    #   configuration of a table optimizer.
+    #   @return [Types::TableOptimizerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableOptimizerRequest AWS API Documentation
+    #
+    class UpdateTableOptimizerRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :type,
+      :table_optimizer_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableOptimizerResponse AWS API Documentation
+    #
+    class UpdateTableOptimizerResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is

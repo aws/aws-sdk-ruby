@@ -1336,6 +1336,160 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Contains the introspected data that was retrieved from the data
+    # source.
+    #
+    # @!attribute [rw] name
+    #   The name of the model. For example, this could be the name of a
+    #   single table in a database.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The `DataSourceIntrospectionModelField` object data.
+    #   @return [Array<Types::DataSourceIntrospectionModelField>]
+    #
+    # @!attribute [rw] primary_key
+    #   The primary key stored as a `DataSourceIntrospectionModelIndex`
+    #   object.
+    #   @return [Types::DataSourceIntrospectionModelIndex]
+    #
+    # @!attribute [rw] indexes
+    #   The array of `DataSourceIntrospectionModelIndex` objects.
+    #   @return [Array<Types::DataSourceIntrospectionModelIndex>]
+    #
+    # @!attribute [rw] sdl
+    #   Contains the output of the SDL that was generated from the
+    #   introspected types. This is controlled by the `includeModelsSDL`
+    #   parameter of the `GetDataSourceIntrospection` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModel AWS API Documentation
+    #
+    class DataSourceIntrospectionModel < Struct.new(
+      :name,
+      :fields,
+      :primary_key,
+      :indexes,
+      :sdl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the fields that were retrieved from the introspected data.
+    #
+    # @!attribute [rw] name
+    #   The name of the field that was retrieved from the introspected data.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The `DataSourceIntrospectionModelFieldType` object data.
+    #   @return [Types::DataSourceIntrospectionModelFieldType]
+    #
+    # @!attribute [rw] length
+    #   The length value of the introspected field.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelField AWS API Documentation
+    #
+    class DataSourceIntrospectionModelField < Struct.new(
+      :name,
+      :type,
+      :length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the type data for each field retrieved from the
+    # introspection.
+    #
+    # @!attribute [rw] kind
+    #   Specifies the classification of data. For example, this could be set
+    #   to values like `Scalar` or `NonNull` to indicate a fundamental
+    #   property of the field.
+    #
+    #   Valid values include:
+    #
+    #   * `Scalar`: Indicates the value is a primitive type (scalar).
+    #
+    #   * `NonNull`: Indicates the field cannot be `null`.
+    #
+    #   * `List`: Indicates the field contains a list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data type that represents the field. For example,
+    #   `String` is a valid `name` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The `DataSourceIntrospectionModelFieldType` object data. The `type`
+    #   is only present if `DataSourceIntrospectionModelFieldType.kind` is
+    #   set to `NonNull` or `List`.
+    #
+    #   The `type` typically contains its own `kind` and `name` fields to
+    #   represent the actual type data. For instance, `type` could contain a
+    #   `kind` value of `Scalar` with a `name` value of `String`. The values
+    #   `Scalar` and `String` will be collectively stored in the `values`
+    #   field.
+    #   @return [Types::DataSourceIntrospectionModelFieldType]
+    #
+    # @!attribute [rw] values
+    #   The values of the `type` field. This field represents the AppSync
+    #   data type equivalent of the introspected field.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelFieldType AWS API Documentation
+    #
+    class DataSourceIntrospectionModelFieldType < Struct.new(
+      :kind,
+      :name,
+      :type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The index that was retrieved from the introspected data.
+    #
+    # @!attribute [rw] name
+    #   The name of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The fields of the index.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelIndex AWS API Documentation
+    #
+    class DataSourceIntrospectionModelIndex < Struct.new(
+      :name,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a `DataSourceIntrospectionResult`. This is
+    # the populated result of a `GetDataSourceIntrospection` operation.
+    #
+    # @!attribute [rw] models
+    #   The array of `DataSourceIntrospectionModel` objects.
+    #   @return [Array<Types::DataSourceIntrospectionModel>]
+    #
+    # @!attribute [rw] next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionResult AWS API Documentation
+    #
+    class DataSourceIntrospectionResult < Struct.new(
+      :models,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DeleteApiCache` operation.
     #
     # @!attribute [rw] api_id
@@ -2000,6 +2154,75 @@ module Aws::AppSync
     #
     class GetApiCacheResponse < Struct.new(
       :api_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_models_sdl
+    #   A boolean flag that determines whether SDL should be generated for
+    #   introspected types or not. If set to `true`, each model will contain
+    #   an `sdl` property that contains the SDL for that type. The SDL only
+    #   contains the type data and no additional metadata or directives.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of introspected types that will be returned in a
+    #   single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospectionRequest AWS API Documentation
+    #
+    class GetDataSourceIntrospectionRequest < Struct.new(
+      :introspection_id,
+      :include_models_sdl,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status
+    #   The status of the introspection during retrieval. By default, when a
+    #   new instrospection is being retrieved, the status will be set to
+    #   `PROCESSING`. Once the operation has been completed, the status will
+    #   change to `SUCCESS` or `FAILED` depending on how the data was
+    #   parsed. A `FAILED` operation will return an error and its details as
+    #   an `introspectionStatusDetail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status_detail
+    #   The error detail field. When a `FAILED` `introspectionStatus` is
+    #   returned, the `introspectionStatusDetail` will also return the exact
+    #   error that was generated during the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_result
+    #   The `DataSourceIntrospectionResult` object data.
+    #   @return [Types::DataSourceIntrospectionResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospectionResponse AWS API Documentation
+    #
+    class GetDataSourceIntrospectionResponse < Struct.new(
+      :introspection_id,
+      :introspection_status,
+      :introspection_status_detail,
+      :introspection_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3147,6 +3370,35 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Contains the metadata required to introspect the RDS cluster.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the RDS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The secret's ARN that was obtained from Secrets Manager. A secret
+    #   consists of secret information, the secret value, plus metadata
+    #   about the secret. A secret value can be a string or binary. It
+    #   typically includes the ARN, secret name and description, policies,
+    #   tags, encryption key from the Key Management Service, and key
+    #   rotation data.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsDataApiConfig AWS API Documentation
+    #
+    class RdsDataApiConfig < Struct.new(
+      :resource_arn,
+      :secret_arn,
+      :database_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Relational Database Service (Amazon RDS) HTTP endpoint
     # configuration.
     #
@@ -3443,6 +3695,48 @@ module Aws::AppSync
       :merged_api_id,
       :merged_api_arn,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rds_data_api_config
+    #   The `rdsDataApiConfig` object data.
+    #   @return [Types::RdsDataApiConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospectionRequest AWS API Documentation
+    #
+    class StartDataSourceIntrospectionRequest < Struct.new(
+      :rds_data_api_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status
+    #   The status of the introspection during creation. By default, when a
+    #   new instrospection has been created, the status will be set to
+    #   `PROCESSING`. Once the operation has been completed, the status will
+    #   change to `SUCCESS` or `FAILED` depending on how the data was
+    #   parsed. A `FAILED` operation will return an error and its details as
+    #   an `introspectionStatusDetail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status_detail
+    #   The error detail field. When a `FAILED` `introspectionStatus` is
+    #   returned, the `introspectionStatusDetail` will also return the exact
+    #   error that was generated during the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospectionResponse AWS API Documentation
+    #
+    class StartDataSourceIntrospectionResponse < Struct.new(
+      :introspection_id,
+      :introspection_status,
+      :introspection_status_detail)
       SENSITIVE = []
       include Aws::Structure
     end

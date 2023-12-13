@@ -25,16 +25,17 @@ module Aws::Detective
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -78,12 +79,18 @@ module Aws::Detective
             Aws::Detective::Endpoints::DisassociateMembership.build(context)
           when :enable_organization_admin_account
             Aws::Detective::Endpoints::EnableOrganizationAdminAccount.build(context)
+          when :get_investigation
+            Aws::Detective::Endpoints::GetInvestigation.build(context)
           when :get_members
             Aws::Detective::Endpoints::GetMembers.build(context)
           when :list_datasource_packages
             Aws::Detective::Endpoints::ListDatasourcePackages.build(context)
           when :list_graphs
             Aws::Detective::Endpoints::ListGraphs.build(context)
+          when :list_indicators
+            Aws::Detective::Endpoints::ListIndicators.build(context)
+          when :list_investigations
+            Aws::Detective::Endpoints::ListInvestigations.build(context)
           when :list_invitations
             Aws::Detective::Endpoints::ListInvitations.build(context)
           when :list_members
@@ -94,6 +101,8 @@ module Aws::Detective
             Aws::Detective::Endpoints::ListTagsForResource.build(context)
           when :reject_invitation
             Aws::Detective::Endpoints::RejectInvitation.build(context)
+          when :start_investigation
+            Aws::Detective::Endpoints::StartInvestigation.build(context)
           when :start_monitoring_member
             Aws::Detective::Endpoints::StartMonitoringMember.build(context)
           when :tag_resource
@@ -102,6 +111,8 @@ module Aws::Detective
             Aws::Detective::Endpoints::UntagResource.build(context)
           when :update_datasource_packages
             Aws::Detective::Endpoints::UpdateDatasourcePackages.build(context)
+          when :update_investigation_state
+            Aws::Detective::Endpoints::UpdateInvestigationState.build(context)
           when :update_organization_configuration
             Aws::Detective::Endpoints::UpdateOrganizationConfiguration.build(context)
           end

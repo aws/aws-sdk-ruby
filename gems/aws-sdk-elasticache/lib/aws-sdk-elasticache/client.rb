@@ -770,6 +770,66 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Creates a copy of an existing serverless cache’s snapshot. Available
+    # for Redis only.
+    #
+    # @option params [required, String] :source_serverless_cache_snapshot_name
+    #   The identifier of the existing serverless cache’s snapshot to be
+    #   copied. Available for Redis only.
+    #
+    # @option params [required, String] :target_serverless_cache_snapshot_name
+    #   The identifier for the snapshot to be created. Available for Redis
+    #   only.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier of the KMS key used to encrypt the target snapshot.
+    #   Available for Redis only.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to the target snapshot resource. A tag is a
+    #   key-value pair. Available for Redis only. Default: NULL
+    #
+    # @return [Types::CopyServerlessCacheSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyServerlessCacheSnapshotResponse#serverless_cache_snapshot #serverless_cache_snapshot} => Types::ServerlessCacheSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_serverless_cache_snapshot({
+    #     source_serverless_cache_snapshot_name: "String", # required
+    #     target_serverless_cache_snapshot_name: "String", # required
+    #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache_snapshot.serverless_cache_snapshot_name #=> String
+    #   resp.serverless_cache_snapshot.arn #=> String
+    #   resp.serverless_cache_snapshot.kms_key_id #=> String
+    #   resp.serverless_cache_snapshot.snapshot_type #=> String
+    #   resp.serverless_cache_snapshot.status #=> String
+    #   resp.serverless_cache_snapshot.create_time #=> Time
+    #   resp.serverless_cache_snapshot.expiry_time #=> Time
+    #   resp.serverless_cache_snapshot.bytes_used_for_cache #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.serverless_cache_name #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.engine #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.major_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopyServerlessCacheSnapshot AWS API Documentation
+    #
+    # @overload copy_serverless_cache_snapshot(params = {})
+    # @param [Hash] params ({})
+    def copy_serverless_cache_snapshot(params = {}, options = {})
+      req = build_request(:copy_serverless_cache_snapshot, params)
+      req.send_request(options)
+    end
+
     # Makes a copy of an existing snapshot.
     #
     # <note markdown="1"> This operation is valid for Redis only.
@@ -1098,15 +1158,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -1149,16 +1213,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2139,15 +2206,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -2190,16 +2261,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2504,6 +2578,10 @@ module Aws::ElastiCache
     #   cluster mode enabled, you can then complete cluster mode configuration
     #   and set the cluster mode to Enabled.
     #
+    # @option params [String] :serverless_cache_snapshot_name
+    #   The name of the snapshot used to create a replication group. Available
+    #   for Redis only.
+    #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -2670,6 +2748,7 @@ module Aws::ElastiCache
     #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #     transit_encryption_mode: "preferred", # accepts preferred, required
     #     cluster_mode: "enabled", # accepts enabled, disabled, compatible
+    #     serverless_cache_snapshot_name: "String",
     #   })
     #
     # @example Response structure
@@ -2755,6 +2834,199 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def create_replication_group(params = {}, options = {})
       req = build_request(:create_replication_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a serverless cache.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   User-provided identifier for the serverless cache. This parameter is
+    #   stored as a lowercase string.
+    #
+    # @option params [String] :description
+    #   User-provided description for the serverless cache. The default is
+    #   NULL, i.e. if no description is provided then an empty string will be
+    #   returned. The maximum length is 255 characters.
+    #
+    # @option params [required, String] :engine
+    #   The name of the cache engine to be used for creating the serverless
+    #   cache.
+    #
+    # @option params [String] :major_engine_version
+    #   The version of the cache engine that will be used to create the
+    #   serverless cache.
+    #
+    # @option params [Types::CacheUsageLimits] :cache_usage_limits
+    #   Sets the cache usage limits for storage and ElastiCache Processing
+    #   Units for the cache.
+    #
+    # @option params [String] :kms_key_id
+    #   ARN of the customer managed key for encrypting the data at rest. If no
+    #   KMS key is provided, a default service key is used.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   A list of the one or more VPC security groups to be associated with
+    #   the serverless cache. The security group will authorize traffic access
+    #   for the VPC end-point (private-link). If no other information is given
+    #   this will be the VPC’s Default Security Group that is associated with
+    #   the cluster VPC end-point.
+    #
+    # @option params [Array<String>] :snapshot_arns_to_restore
+    #   The ARN(s) of the snapshot that the new serverless cache will be
+    #   created from. Available for Redis only.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags (key, value) pairs to be added to the serverless
+    #   cache resource. Default is NULL.
+    #
+    # @option params [String] :user_group_id
+    #   The identifier of the UserGroup to be associated with the serverless
+    #   cache. Available for Redis only. Default is NULL.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   A list of the identifiers of the subnets where the VPC endpoint for
+    #   the serverless cache will be deployed. All the subnetIds must belong
+    #   to the same VPC.
+    #
+    # @option params [Integer] :snapshot_retention_limit
+    #   The number of snapshots that will be retained for the serverless cache
+    #   that is being created. As new snapshots beyond this limit are added,
+    #   the oldest snapshots will be deleted on a rolling basis. Available for
+    #   Redis only.
+    #
+    # @option params [String] :daily_snapshot_time
+    #   The daily time that snapshots will be created from the new serverless
+    #   cache. By default this number is populated with 0, i.e. no snapshots
+    #   will be created on an automatic daily basis. Available for Redis only.
+    #
+    # @return [Types::CreateServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_serverless_cache({
+    #     serverless_cache_name: "String", # required
+    #     description: "String",
+    #     engine: "String", # required
+    #     major_engine_version: "String",
+    #     cache_usage_limits: {
+    #       data_storage: {
+    #         maximum: 1, # required
+    #         unit: "GB", # required, accepts GB
+    #       },
+    #       ecpu_per_second: {
+    #         maximum: 1, # required
+    #       },
+    #     },
+    #     kms_key_id: "String",
+    #     security_group_ids: ["String"],
+    #     snapshot_arns_to_restore: ["String"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     user_group_id: "String",
+    #     subnet_ids: ["String"],
+    #     snapshot_retention_limit: 1,
+    #     daily_snapshot_time: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCache AWS API Documentation
+    #
+    # @overload create_serverless_cache(params = {})
+    # @param [Hash] params ({})
+    def create_serverless_cache(params = {}, options = {})
+      req = build_request(:create_serverless_cache, params)
+      req.send_request(options)
+    end
+
+    # This API creates a copy of an entire ServerlessCache at a specific
+    # moment in time. Available for Redis only.
+    #
+    # @option params [required, String] :serverless_cache_snapshot_name
+    #   The name for the snapshot being created. Must be unique for the
+    #   customer account. Available for Redis only. Must be between 1 and 255
+    #   characters.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   The name of an existing serverless cache. The snapshot is created from
+    #   this cache. Available for Redis only.
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot. Available for
+    #   Redis only. Default: NULL
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to the snapshot resource. A tag is a
+    #   key-value pair. Available for Redis only.
+    #
+    # @return [Types::CreateServerlessCacheSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServerlessCacheSnapshotResponse#serverless_cache_snapshot #serverless_cache_snapshot} => Types::ServerlessCacheSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_serverless_cache_snapshot({
+    #     serverless_cache_snapshot_name: "String", # required
+    #     serverless_cache_name: "String", # required
+    #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache_snapshot.serverless_cache_snapshot_name #=> String
+    #   resp.serverless_cache_snapshot.arn #=> String
+    #   resp.serverless_cache_snapshot.kms_key_id #=> String
+    #   resp.serverless_cache_snapshot.snapshot_type #=> String
+    #   resp.serverless_cache_snapshot.status #=> String
+    #   resp.serverless_cache_snapshot.create_time #=> Time
+    #   resp.serverless_cache_snapshot.expiry_time #=> Time
+    #   resp.serverless_cache_snapshot.bytes_used_for_cache #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.serverless_cache_name #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.engine #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.major_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheSnapshot AWS API Documentation
+    #
+    # @overload create_serverless_cache_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_serverless_cache_snapshot(params = {}, options = {})
+      req = build_request(:create_serverless_cache_snapshot, params)
       req.send_request(options)
     end
 
@@ -3092,7 +3364,7 @@ module Aws::ElastiCache
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to be added to this resource. A tag is a key-value
     #   pair. A tag key must be accompanied by a tag value, although null is
-    #   accepted.
+    #   accepted. Available for Redis only.
     #
     # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3103,6 +3375,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#serverless_caches #serverless_caches} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
     #
     # @example Request syntax with placeholder values
@@ -3133,6 +3406,8 @@ module Aws::ElastiCache
     #   resp.pending_changes.user_ids_to_add[0] #=> String
     #   resp.replication_groups #=> Array
     #   resp.replication_groups[0] #=> String
+    #   resp.serverless_caches #=> Array
+    #   resp.serverless_caches[0] #=> String
     #   resp.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserGroup AWS API Documentation
@@ -3868,6 +4143,101 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Deletes a specified existing serverless cache.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   The identifier of the serverless cache to be deleted.
+    #
+    # @option params [String] :final_snapshot_name
+    #   Name of the final snapshot to be taken before the serverless cache is
+    #   deleted. Available for Redis only. Default: NULL, i.e. a final
+    #   snapshot is not taken.
+    #
+    # @return [Types::DeleteServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_serverless_cache({
+    #     serverless_cache_name: "String", # required
+    #     final_snapshot_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCache AWS API Documentation
+    #
+    # @overload delete_serverless_cache(params = {})
+    # @param [Hash] params ({})
+    def delete_serverless_cache(params = {}, options = {})
+      req = build_request(:delete_serverless_cache, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing serverless cache snapshot. Available for Redis
+    # only.
+    #
+    # @option params [required, String] :serverless_cache_snapshot_name
+    #   Idenfitier of the snapshot to be deleted. Available for Redis only.
+    #
+    # @return [Types::DeleteServerlessCacheSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteServerlessCacheSnapshotResponse#serverless_cache_snapshot #serverless_cache_snapshot} => Types::ServerlessCacheSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_serverless_cache_snapshot({
+    #     serverless_cache_snapshot_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache_snapshot.serverless_cache_snapshot_name #=> String
+    #   resp.serverless_cache_snapshot.arn #=> String
+    #   resp.serverless_cache_snapshot.kms_key_id #=> String
+    #   resp.serverless_cache_snapshot.snapshot_type #=> String
+    #   resp.serverless_cache_snapshot.status #=> String
+    #   resp.serverless_cache_snapshot.create_time #=> Time
+    #   resp.serverless_cache_snapshot.expiry_time #=> Time
+    #   resp.serverless_cache_snapshot.bytes_used_for_cache #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.serverless_cache_name #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.engine #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.major_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCacheSnapshot AWS API Documentation
+    #
+    # @overload delete_serverless_cache_snapshot(params = {})
+    # @param [Hash] params ({})
+    def delete_serverless_cache_snapshot(params = {}, options = {})
+      req = build_request(:delete_serverless_cache_snapshot, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing snapshot. When you receive a successful response
     # from this operation, ElastiCache immediately begins deleting the
     # snapshot; you cannot cancel or revert this operation.
@@ -4059,6 +4429,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#serverless_caches #serverless_caches} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
     #
     # @example Request syntax with placeholder values
@@ -4081,6 +4452,8 @@ module Aws::ElastiCache
     #   resp.pending_changes.user_ids_to_add[0] #=> String
     #   resp.replication_groups #=> Array
     #   resp.replication_groups[0] #=> String
+    #   resp.serverless_caches #=> Array
+    #   resp.serverless_caches[0] #=> String
     #   resp.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteUserGroup AWS API Documentation
@@ -6205,7 +6578,7 @@ module Aws::ElastiCache
     #
     #   resp = client.describe_events({
     #     source_identifier: "String",
-    #     source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group, user, user-group
+    #     source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group, serverless-cache, serverless-cache-snapshot, user, user-group
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -6218,7 +6591,7 @@ module Aws::ElastiCache
     #   resp.marker #=> String
     #   resp.events #=> Array
     #   resp.events[0].source_identifier #=> String
-    #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group", "user", "user-group"
+    #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group", "serverless-cache", "serverless-cache-snapshot", "user", "user-group"
     #   resp.events[0].message #=> String
     #   resp.events[0].date #=> Time
     #
@@ -6530,15 +6903,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -6581,16 +6958,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -6742,15 +7122,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -6793,16 +7177,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7236,6 +7623,154 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Returns information about serverless cache snapshots. By default, this
+    # API lists all of the customer’s serverless cache snapshots. It can
+    # also describe a single serverless cache snapshot, or the snapshots
+    # associated with a particular serverless cache. Available for Redis
+    # only.
+    #
+    # @option params [String] :serverless_cache_name
+    #   The identifier of serverless cache. If this parameter is specified,
+    #   only snapshots associated with that specific serverless cache are
+    #   described. Available for Redis only.
+    #
+    # @option params [String] :serverless_cache_snapshot_name
+    #   The identifier of the serverless cache’s snapshot. If this parameter
+    #   is specified, only this snapshot is described. Available for Redis
+    #   only.
+    #
+    # @option params [String] :snapshot_type
+    #   The type of snapshot that is being described. Available for Redis
+    #   only.
+    #
+    # @option params [String] :next_token
+    #   An optional marker returned from a prior request to support pagination
+    #   of results from this operation. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by max-results. Available for Redis only.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified max-results value, a market is
+    #   included in the response so that remaining results can be retrieved.
+    #   Available for Redis only.The default is 50. The Validation Constraints
+    #   are a maximum of 50.
+    #
+    # @return [Types::DescribeServerlessCacheSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServerlessCacheSnapshotsResponse#next_token #next_token} => String
+    #   * {Types::DescribeServerlessCacheSnapshotsResponse#serverless_cache_snapshots #serverless_cache_snapshots} => Array&lt;Types::ServerlessCacheSnapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_serverless_cache_snapshots({
+    #     serverless_cache_name: "String",
+    #     serverless_cache_snapshot_name: "String",
+    #     snapshot_type: "String",
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.serverless_cache_snapshots #=> Array
+    #   resp.serverless_cache_snapshots[0].serverless_cache_snapshot_name #=> String
+    #   resp.serverless_cache_snapshots[0].arn #=> String
+    #   resp.serverless_cache_snapshots[0].kms_key_id #=> String
+    #   resp.serverless_cache_snapshots[0].snapshot_type #=> String
+    #   resp.serverless_cache_snapshots[0].status #=> String
+    #   resp.serverless_cache_snapshots[0].create_time #=> Time
+    #   resp.serverless_cache_snapshots[0].expiry_time #=> Time
+    #   resp.serverless_cache_snapshots[0].bytes_used_for_cache #=> String
+    #   resp.serverless_cache_snapshots[0].serverless_cache_configuration.serverless_cache_name #=> String
+    #   resp.serverless_cache_snapshots[0].serverless_cache_configuration.engine #=> String
+    #   resp.serverless_cache_snapshots[0].serverless_cache_configuration.major_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCacheSnapshots AWS API Documentation
+    #
+    # @overload describe_serverless_cache_snapshots(params = {})
+    # @param [Hash] params ({})
+    def describe_serverless_cache_snapshots(params = {}, options = {})
+      req = build_request(:describe_serverless_cache_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific serverless cache. If no
+    # identifier is specified, then the API returns information on all the
+    # serverless caches belonging to this Amazon Web Services account.
+    #
+    # @option params [String] :serverless_cache_name
+    #   The identifier for the serverless cache. If this parameter is
+    #   specified, only information about that specific serverless cache is
+    #   returned. Default: NULL
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records in the response. If more records exist
+    #   than the specified max-records value, the next token is included in
+    #   the response so that remaining results can be retrieved. The default
+    #   is 50.
+    #
+    # @option params [String] :next_token
+    #   An optional marker returned from a prior request to support pagination
+    #   of results from this operation. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by MaxResults.
+    #
+    # @return [Types::DescribeServerlessCachesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServerlessCachesResponse#next_token #next_token} => String
+    #   * {Types::DescribeServerlessCachesResponse#serverless_caches #serverless_caches} => Array&lt;Types::ServerlessCache&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_serverless_caches({
+    #     serverless_cache_name: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.serverless_caches #=> Array
+    #   resp.serverless_caches[0].serverless_cache_name #=> String
+    #   resp.serverless_caches[0].description #=> String
+    #   resp.serverless_caches[0].create_time #=> Time
+    #   resp.serverless_caches[0].status #=> String
+    #   resp.serverless_caches[0].engine #=> String
+    #   resp.serverless_caches[0].major_engine_version #=> String
+    #   resp.serverless_caches[0].full_engine_version #=> String
+    #   resp.serverless_caches[0].cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_caches[0].cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_caches[0].cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_caches[0].kms_key_id #=> String
+    #   resp.serverless_caches[0].security_group_ids #=> Array
+    #   resp.serverless_caches[0].security_group_ids[0] #=> String
+    #   resp.serverless_caches[0].endpoint.address #=> String
+    #   resp.serverless_caches[0].endpoint.port #=> Integer
+    #   resp.serverless_caches[0].reader_endpoint.address #=> String
+    #   resp.serverless_caches[0].reader_endpoint.port #=> Integer
+    #   resp.serverless_caches[0].arn #=> String
+    #   resp.serverless_caches[0].user_group_id #=> String
+    #   resp.serverless_caches[0].subnet_ids #=> Array
+    #   resp.serverless_caches[0].subnet_ids[0] #=> String
+    #   resp.serverless_caches[0].snapshot_retention_limit #=> Integer
+    #   resp.serverless_caches[0].daily_snapshot_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCaches AWS API Documentation
+    #
+    # @overload describe_serverless_caches(params = {})
+    # @param [Hash] params ({})
+    def describe_serverless_caches(params = {}, options = {})
+      req = build_request(:describe_serverless_caches, params)
+      req.send_request(options)
+    end
+
     # Returns details of the service updates
     #
     # @option params [String] :service_update_name
@@ -7622,6 +8157,8 @@ module Aws::ElastiCache
     #   resp.user_groups[0].pending_changes.user_ids_to_add[0] #=> String
     #   resp.user_groups[0].replication_groups #=> Array
     #   resp.user_groups[0].replication_groups[0] #=> String
+    #   resp.user_groups[0].serverless_caches #=> Array
+    #   resp.user_groups[0].serverless_caches[0] #=> String
     #   resp.user_groups[0].arn #=> String
     #   resp.marker #=> String
     #
@@ -7761,6 +8298,52 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def disassociate_global_replication_group(params = {}, options = {})
       req = build_request(:disassociate_global_replication_group, params)
+      req.send_request(options)
+    end
+
+    # Provides the functionality to export the serverless cache snapshot
+    # data to Amazon S3. Available for Redis only.
+    #
+    # @option params [required, String] :serverless_cache_snapshot_name
+    #   The identifier of the serverless cache snapshot to be exported to S3.
+    #   Available for Redis only.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   Name of the Amazon S3 bucket to export the snapshot to. The Amazon S3
+    #   bucket must also be in same region as the snapshot. Available for
+    #   Redis only.
+    #
+    # @return [Types::ExportServerlessCacheSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportServerlessCacheSnapshotResponse#serverless_cache_snapshot #serverless_cache_snapshot} => Types::ServerlessCacheSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_serverless_cache_snapshot({
+    #     serverless_cache_snapshot_name: "String", # required
+    #     s3_bucket_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache_snapshot.serverless_cache_snapshot_name #=> String
+    #   resp.serverless_cache_snapshot.arn #=> String
+    #   resp.serverless_cache_snapshot.kms_key_id #=> String
+    #   resp.serverless_cache_snapshot.snapshot_type #=> String
+    #   resp.serverless_cache_snapshot.status #=> String
+    #   resp.serverless_cache_snapshot.create_time #=> Time
+    #   resp.serverless_cache_snapshot.expiry_time #=> Time
+    #   resp.serverless_cache_snapshot.bytes_used_for_cache #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.serverless_cache_name #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.engine #=> String
+    #   resp.serverless_cache_snapshot.serverless_cache_configuration.major_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ExportServerlessCacheSnapshot AWS API Documentation
+    #
+    # @overload export_serverless_cache_snapshot(params = {})
+    # @param [Hash] params ({})
+    def export_serverless_cache_snapshot(params = {}, options = {})
+      req = build_request(:export_serverless_cache_snapshot, params)
       req.send_request(options)
     end
 
@@ -8936,7 +9519,8 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Modifies the settings for a replication group.
+    # Modifies the settings for a replication group. This is limited to
+    # Redis 7 and newer.
     #
     # * [Scaling for Amazon ElastiCache for Redis (cluster mode enabled)][1]
     #   in the ElastiCache User Guide
@@ -9552,6 +10136,107 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # This API modifies the attributes of a serverless cache.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   User-provided identifier for the serverless cache to be modified.
+    #
+    # @option params [String] :description
+    #   User provided description for the serverless cache. Default = NULL,
+    #   i.e. the existing description is not removed/modified. The description
+    #   has a maximum length of 255 characters.
+    #
+    # @option params [Types::CacheUsageLimits] :cache_usage_limits
+    #   Modify the cache usage limit for the serverless cache.
+    #
+    # @option params [Boolean] :remove_user_group
+    #   The identifier of the UserGroup to be removed from association with
+    #   the Redis serverless cache. Available for Redis only. Default is NULL.
+    #
+    # @option params [String] :user_group_id
+    #   The identifier of the UserGroup to be associated with the serverless
+    #   cache. Available for Redis only. Default is NULL - the existing
+    #   UserGroup is not removed.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   The new list of VPC security groups to be associated with the
+    #   serverless cache. Populating this list means the current VPC security
+    #   groups will be removed. This security group is used to authorize
+    #   traffic access for the VPC end-point (private-link). Default = NULL -
+    #   the existing list of VPC security groups is not removed.
+    #
+    # @option params [Integer] :snapshot_retention_limit
+    #   The number of days for which Elasticache retains automatic snapshots
+    #   before deleting them. Available for Redis only. Default = NULL, i.e.
+    #   the existing snapshot-retention-limit will not be removed or modified.
+    #   The maximum value allowed is 35 days.
+    #
+    # @option params [String] :daily_snapshot_time
+    #   The daily time during which Elasticache begins taking a daily snapshot
+    #   of the serverless cache. Available for Redis only. The default is
+    #   NULL, i.e. the existing snapshot time configured for the cluster is
+    #   not removed.
+    #
+    # @return [Types::ModifyServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_serverless_cache({
+    #     serverless_cache_name: "String", # required
+    #     description: "String",
+    #     cache_usage_limits: {
+    #       data_storage: {
+    #         maximum: 1, # required
+    #         unit: "GB", # required, accepts GB
+    #       },
+    #       ecpu_per_second: {
+    #         maximum: 1, # required
+    #       },
+    #     },
+    #     remove_user_group: false,
+    #     user_group_id: "String",
+    #     security_group_ids: ["String"],
+    #     snapshot_retention_limit: 1,
+    #     daily_snapshot_time: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCache AWS API Documentation
+    #
+    # @overload modify_serverless_cache(params = {})
+    # @param [Hash] params ({})
+    def modify_serverless_cache(params = {}, options = {})
+      req = build_request(:modify_serverless_cache, params)
+      req.send_request(options)
+    end
+
     # Changes user password(s) and/or access string.
     #
     # @option params [required, String] :user_id
@@ -9641,6 +10326,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#serverless_caches #serverless_caches} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
     #
     # @example Request syntax with placeholder values
@@ -9665,6 +10351,8 @@ module Aws::ElastiCache
     #   resp.pending_changes.user_ids_to_add[0] #=> String
     #   resp.replication_groups #=> Array
     #   resp.replication_groups[0] #=> String
+    #   resp.serverless_caches #=> Array
+    #   resp.serverless_caches[0] #=> String
     #   resp.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserGroup AWS API Documentation
@@ -10612,7 +11300,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

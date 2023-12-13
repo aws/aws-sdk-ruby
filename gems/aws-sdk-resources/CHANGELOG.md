@@ -1,6 +1,83 @@
 Unreleased Changes
 ------------------
 
+3.182.0 (2023-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacedeployment` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-marketplaceagreement` gem.
+
+3.181.0 (2023-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cleanroomsml` gem.
+
+3.180.0 (2023-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-qconnect` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-qbusiness` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagentruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagent` gem.
+
+3.179.0 (2023-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-b2bi` gem.
+
+3.178.0 (2023-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workspacesthinclient` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-repostspace` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-freetier` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-eksauth` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-costoptimizationhub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bcmdataexports` gem.
+
+3.177.0 (2023-11-22)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.3 and 2.4.
+
+3.176.0 (2023-11-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-inspectorscan` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudfrontkeyvaluestore` gem.
+
+3.175.0 (2023-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-trustedadvisor` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-macie` gem.
+
+3.174.0 (2023-11-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-launchwizard` gem.
+
+3.173.0 (2023-10-19)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-gamesparks` gem.
+
+3.172.0 (2023-10-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-datazone` gem.
+
 3.171.0 (2023-09-28)
 ------------------
 

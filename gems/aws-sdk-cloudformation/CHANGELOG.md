@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-12-05)
+------------------
+
+* Feature - Documentation update, December 2023
+
+1.96.0 (2023-12-04)
+------------------
+
+* Feature - Including UPDATE_* states as a success status for CreateStack waiter.
+
+1.95.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-11-17)
+------------------
+
+* Feature - This release adds a new flag ImportExistingResources to CreateChangeSet. Specify this parameter on a CREATE- or UPDATE-type change set to import existing resources with custom names instead of recreating them.
+
+1.92.0 (2023-11-09)
+------------------
+
+* Feature - Added new ConcurrencyMode feature for AWS CloudFormation StackSets for faster deployments to target accounts.
+
+1.91.0 (2023-10-16)
+------------------
+
+* Feature - SDK and documentation updates for UpdateReplacePolicy
+
 1.90.0 (2023-09-27)
 ------------------
 

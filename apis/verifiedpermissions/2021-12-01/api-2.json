@@ -13,6 +13,22 @@
     "uid":"verifiedpermissions-2021-12-01"
   },
   "operations":{
+    "BatchIsAuthorized":{
+      "name":"BatchIsAuthorized",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchIsAuthorizedInput"},
+      "output":{"shape":"BatchIsAuthorizedOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "CreateIdentitySource":{
       "name":"CreateIdentitySource",
       "http":{
@@ -24,6 +40,7 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
@@ -42,6 +59,7 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
@@ -60,6 +78,7 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"}
@@ -77,6 +96,7 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
@@ -468,6 +488,58 @@
       },
       "union":true
     },
+    "BatchIsAuthorizedInput":{
+      "type":"structure",
+      "required":[
+        "policyStoreId",
+        "requests"
+      ],
+      "members":{
+        "policyStoreId":{"shape":"PolicyStoreId"},
+        "entities":{"shape":"EntitiesDefinition"},
+        "requests":{"shape":"BatchIsAuthorizedInputList"}
+      }
+    },
+    "BatchIsAuthorizedInputItem":{
+      "type":"structure",
+      "members":{
+        "principal":{"shape":"EntityIdentifier"},
+        "action":{"shape":"ActionIdentifier"},
+        "resource":{"shape":"EntityIdentifier"},
+        "context":{"shape":"ContextDefinition"}
+      }
+    },
+    "BatchIsAuthorizedInputList":{
+      "type":"list",
+      "member":{"shape":"BatchIsAuthorizedInputItem"},
+      "min":1
+    },
+    "BatchIsAuthorizedOutput":{
+      "type":"structure",
+      "required":["results"],
+      "members":{
+        "results":{"shape":"BatchIsAuthorizedOutputList"}
+      }
+    },
+    "BatchIsAuthorizedOutputItem":{
+      "type":"structure",
+      "required":[
+        "request",
+        "decision",
+        "determiningPolicies",
+        "errors"
+      ],
+      "members":{
+        "request":{"shape":"BatchIsAuthorizedInputItem"},
+        "decision":{"shape":"Decision"},
+        "determiningPolicies":{"shape":"DeterminingPolicyList"},
+        "errors":{"shape":"EvaluationErrorList"}
+      }
+    },
+    "BatchIsAuthorizedOutputList":{
+      "type":"list",
+      "member":{"shape":"BatchIsAuthorizedOutputItem"}
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -602,7 +674,8 @@
           "shape":"IdempotencyToken",
           "idempotencyToken":true
         },
-        "validationSettings":{"shape":"ValidationSettings"}
+        "validationSettings":{"shape":"ValidationSettings"},
+        "description":{"shape":"PolicyStoreDescription"}
       }
     },
     "CreatePolicyStoreOutput":{
@@ -888,7 +961,8 @@
         "arn":{"shape":"ResourceArn"},
         "validationSettings":{"shape":"ValidationSettings"},
         "createdDate":{"shape":"TimestampFormat"},
-        "lastUpdatedDate":{"shape":"TimestampFormat"}
+        "lastUpdatedDate":{"shape":"TimestampFormat"},
+        "description":{"shape":"PolicyStoreDescription"}
       }
     },
     "GetPolicyTemplateInput":{
@@ -939,7 +1013,8 @@
         "policyStoreId":{"shape":"PolicyStoreId"},
         "schema":{"shape":"SchemaJson"},
         "createdDate":{"shape":"TimestampFormat"},
-        "lastUpdatedDate":{"shape":"TimestampFormat"}
+        "lastUpdatedDate":{"shape":"TimestampFormat"},
+        "namespaces":{"shape":"NamespaceList"}
       }
     },
     "IdempotencyToken":{
@@ -1250,6 +1325,12 @@
       "min":1,
       "sensitive":true
     },
+    "PolicyStoreDescription":{
+      "type":"string",
+      "max":150,
+      "min":0,
+      "sensitive":true
+    },
     "PolicyStoreId":{
       "type":"string",
       "max":200,
@@ -1266,7 +1347,9 @@
       "members":{
         "policyStoreId":{"shape":"PolicyStoreId"},
         "arn":{"shape":"ResourceArn"},
-        "createdDate":{"shape":"TimestampFormat"}
+        "createdDate":{"shape":"TimestampFormat"},
+        "lastUpdatedDate":{"shape":"TimestampFormat"},
+        "description":{"shape":"PolicyStoreDescription"}
       }
     },
     "PolicyStoreList":{
@@ -1404,7 +1487,7 @@
     },
     "SchemaJson":{
       "type":"string",
-      "max":10000,
+      "max":100000,
       "min":1,
       "sensitive":true
     },
@@ -1600,7 +1683,8 @@
       ],
       "members":{
         "policyStoreId":{"shape":"PolicyStoreId"},
-        "validationSettings":{"shape":"ValidationSettings"}
+        "validationSettings":{"shape":"ValidationSettings"},
+        "description":{"shape":"PolicyStoreDescription"}
       }
     },
     "UpdatePolicyStoreOutput":{

@@ -217,7 +217,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -908,6 +908,16 @@ module Aws::Transfer
     #   --structured-log-destinations`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] s3_storage_options
+    #   Specifies whether or not performance for your Amazon S3 directories
+    #   is optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to
+    #   have a file target.
+    #   @return [Types::S3StorageOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -926,7 +936,8 @@ module Aws::Transfer
       :security_policy_name,
       :tags,
       :workflow_details,
-      :structured_log_destinations)
+      :structured_log_destinations,
+      :s3_storage_options)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -950,7 +961,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -1842,7 +1853,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -2656,6 +2667,16 @@ module Aws::Transfer
     #   --structured-log-destinations`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] s3_storage_options
+    #   Specifies whether or not performance for your Amazon S3 directories
+    #   is optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to
+    #   have a file target.
+    #   @return [Types::S3StorageOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
@@ -2678,7 +2699,8 @@ module Aws::Transfer
       :tags,
       :user_count,
       :workflow_details,
-      :structured_log_destinations)
+      :structured_log_destinations,
+      :s3_storage_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2697,7 +2719,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -3099,14 +3121,28 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   Represents the map target that is used in a `HomeDirectorymapEntry`.
+    #   Represents the map target that is used in a `HomeDirectoryMapEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of mapping. Set the type to `FILE` if you want
+    #   the mapping to point to a file, or `DIRECTORY` for the directory to
+    #   point to a directory.
+    #
+    #   <note markdown="1"> By default, home directory mappings have a `Type` of `DIRECTORY`
+    #   when you create a Transfer Family server. You would need to
+    #   explicitly set `Type` to `FILE` if you want a mapping to have a file
+    #   target.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/HomeDirectoryMapEntry AWS API Documentation
     #
     class HomeDirectoryMapEntry < Struct.new(
       :entry,
-      :target)
+      :target,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3974,7 +4010,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -4393,7 +4429,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -4770,6 +4806,26 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # The Amazon S3 storage options that are configured for your server.
+    #
+    # @!attribute [rw] directory_listing_optimization
+    #   Specifies whether or not performance for your Amazon S3 directories
+    #   is optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to
+    #   have a file target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/S3StorageOptions AWS API Documentation
+    #
+    class S3StorageOptions < Struct.new(
+      :directory_listing_optimization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the key-value pair that are assigned to a file during the
     # execution of a Tagging step.
     #
@@ -4859,15 +4915,15 @@ module Aws::Transfer
     # @!attribute [rw] user_secret_id
     #   The identifier for the secret (in Amazon Web Services Secrets
     #   Manager) that contains the SFTP user's private key, password, or
-    #   both. The identifier can be either the Amazon Resource Name (ARN) or
-    #   the name of the secret.
+    #   both. The identifier must be the Amazon Resource Name (ARN) of the
+    #   secret.
     #   @return [String]
     #
     # @!attribute [rw] trusted_host_keys
     #   The public portion of the host key, or keys, that are used to
-    #   authenticate the user to the external server to which you are
-    #   connecting. You can use the `ssh-keyscan` command against the SFTP
-    #   server to retrieve the necessary key.
+    #   identify the external server to which you are connecting. You can
+    #   use the `ssh-keyscan` command against the SFTP server to retrieve
+    #   the necessary key.
     #
     #   The three standard SSH public key format elements are `<key type>`,
     #   `<body base64>`, and an optional `<comment>`, with spaces between
@@ -4877,11 +4933,12 @@ module Aws::Transfer
     #   For the trusted host key, Transfer Family accepts RSA and ECDSA
     #   keys.
     #
-    #   * For RSA keys, the key type is `ssh-rsa`.
+    #   * For RSA keys, the `<key type>` string is `ssh-rsa`.
     #
-    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
-    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
-    #     size of the key you generated.
+    #   * For ECDSA keys, the `<key type>` string is either
+    #     `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`, or
+    #     `ecdsa-sha2-nistp521`, depending on the size of the key you
+    #     generated.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpConnectorConfig AWS API Documentation
@@ -5256,7 +5313,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]
@@ -5975,6 +6032,16 @@ module Aws::Transfer
     #   --structured-log-destinations`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] s3_storage_options
+    #   Specifies whether or not performance for your Amazon S3 directories
+    #   is optimized. This is disabled by default.
+    #
+    #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
+    #   you enable this option, you would then need to explicitly set the
+    #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to
+    #   have a file target.
+    #   @return [Types::S3StorageOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
@@ -5991,7 +6058,8 @@ module Aws::Transfer
       :security_policy_name,
       :server_id,
       :workflow_details,
-      :structured_log_destinations)
+      :structured_log_destinations,
+      :s3_storage_options)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -6016,7 +6084,7 @@ module Aws::Transfer
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
     #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `LOGICAL`.
+    #   set to `PATH`.
     #
     #    </note>
     #   @return [String]

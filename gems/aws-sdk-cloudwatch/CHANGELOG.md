@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-12-08)
+------------------
+
+* Feature - Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.
+
+1.83.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.81.0 (2023-09-27)
 ------------------
 

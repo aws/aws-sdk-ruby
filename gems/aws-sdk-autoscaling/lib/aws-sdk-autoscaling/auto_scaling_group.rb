@@ -233,6 +233,12 @@ module Aws::AutoScaling
       data[:traffic_sources]
     end
 
+    # An instance maintenance policy.
+    # @return [Types::InstanceMaintenancePolicy]
+    def instance_maintenance_policy
+      data[:instance_maintenance_policy]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1258,6 +1264,10 @@ module Aws::AutoScaling
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
     #     default_instance_warmup: 1,
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1444,6 +1454,14 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
+    # @option options [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1576,34 +1594,27 @@ module Aws::AutoScaling
 
     # @example Request syntax with placeholder values
     #
-    #   load_balancers = auto_scaling_group.load_balancers({
-    #     next_token: "XmlString",
-    #     max_records: 1,
-    #   })
+    #   auto_scaling_group.load_balancers()
     # @param [Hash] options ({})
-    # @option options [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a previous call.)
-    # @option options [Integer] :max_records
-    #   The maximum number of items to return with this call. The default
-    #   value is `100` and the maximum value is `100`.
     # @return [LoadBalancer::Collection]
     def load_balancers(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = options.merge(auto_scaling_group_name: @name)
         resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_load_balancers(options)
         end
-        resp.data.load_balancers.each do |l|
-          batch << LoadBalancer.new(
-            group_name: @name,
-            name: l.load_balancer_name,
-            data: l,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.load_balancers.each do |l|
+            batch << LoadBalancer.new(
+              group_name: @name,
+              name: l.load_balancer_name,
+              data: l,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       LoadBalancer::Collection.new(batches)
     end

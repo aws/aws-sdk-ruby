@@ -2252,6 +2252,7 @@ module Aws::SESV2
     #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetEmailIdentityResponse#configuration_set_name #configuration_set_name} => String
     #   * {Types::GetEmailIdentityResponse#verification_status #verification_status} => String
+    #   * {Types::GetEmailIdentityResponse#verification_info #verification_info} => Types::VerificationInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -2282,6 +2283,12 @@ module Aws::SESV2
     #   resp.tags[0].value #=> String
     #   resp.configuration_set_name #=> String
     #   resp.verification_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
+    #   resp.verification_info.last_checked_timestamp #=> Time
+    #   resp.verification_info.last_success_timestamp #=> Time
+    #   resp.verification_info.error_type #=> String, one of "SERVICE_ERROR", "DNS_SERVER_ERROR", "HOST_NOT_FOUND", "TYPE_NOT_FOUND", "INVALID_VALUE"
+    #   resp.verification_info.soa_record.primary_name_server #=> String
+    #   resp.verification_info.soa_record.admin_email #=> String
+    #   resp.verification_info.soa_record.serial_number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentity AWS API Documentation
     #
@@ -3157,7 +3164,7 @@ module Aws::SESV2
     #   `NextToken` element, which you can use to obtain additional results.
     #
     #   The value you specify has to be at least 1, and can be no more than
-    #   10.
+    #   100.
     #
     # @return [Types::ListEmailTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5054,7 +5061,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

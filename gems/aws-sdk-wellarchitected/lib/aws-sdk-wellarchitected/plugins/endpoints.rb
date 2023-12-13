@@ -25,16 +25,17 @@ module Aws::WellArchitected
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -70,6 +71,10 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::CreateProfile.build(context)
           when :create_profile_share
             Aws::WellArchitected::Endpoints::CreateProfileShare.build(context)
+          when :create_review_template
+            Aws::WellArchitected::Endpoints::CreateReviewTemplate.build(context)
+          when :create_template_share
+            Aws::WellArchitected::Endpoints::CreateTemplateShare.build(context)
           when :create_workload
             Aws::WellArchitected::Endpoints::CreateWorkload.build(context)
           when :create_workload_share
@@ -82,6 +87,10 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::DeleteProfile.build(context)
           when :delete_profile_share
             Aws::WellArchitected::Endpoints::DeleteProfileShare.build(context)
+          when :delete_review_template
+            Aws::WellArchitected::Endpoints::DeleteReviewTemplate.build(context)
+          when :delete_template_share
+            Aws::WellArchitected::Endpoints::DeleteTemplateShare.build(context)
           when :delete_workload
             Aws::WellArchitected::Endpoints::DeleteWorkload.build(context)
           when :delete_workload_share
@@ -110,6 +119,12 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::GetProfile.build(context)
           when :get_profile_template
             Aws::WellArchitected::Endpoints::GetProfileTemplate.build(context)
+          when :get_review_template
+            Aws::WellArchitected::Endpoints::GetReviewTemplate.build(context)
+          when :get_review_template_answer
+            Aws::WellArchitected::Endpoints::GetReviewTemplateAnswer.build(context)
+          when :get_review_template_lens_review
+            Aws::WellArchitected::Endpoints::GetReviewTemplateLensReview.build(context)
           when :get_workload
             Aws::WellArchitected::Endpoints::GetWorkload.build(context)
           when :import_lens
@@ -138,10 +153,16 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::ListProfileShares.build(context)
           when :list_profiles
             Aws::WellArchitected::Endpoints::ListProfiles.build(context)
+          when :list_review_template_answers
+            Aws::WellArchitected::Endpoints::ListReviewTemplateAnswers.build(context)
+          when :list_review_templates
+            Aws::WellArchitected::Endpoints::ListReviewTemplates.build(context)
           when :list_share_invitations
             Aws::WellArchitected::Endpoints::ListShareInvitations.build(context)
           when :list_tags_for_resource
             Aws::WellArchitected::Endpoints::ListTagsForResource.build(context)
+          when :list_template_shares
+            Aws::WellArchitected::Endpoints::ListTemplateShares.build(context)
           when :list_workload_shares
             Aws::WellArchitected::Endpoints::ListWorkloadShares.build(context)
           when :list_workloads
@@ -158,6 +179,12 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::UpdateLensReview.build(context)
           when :update_profile
             Aws::WellArchitected::Endpoints::UpdateProfile.build(context)
+          when :update_review_template
+            Aws::WellArchitected::Endpoints::UpdateReviewTemplate.build(context)
+          when :update_review_template_answer
+            Aws::WellArchitected::Endpoints::UpdateReviewTemplateAnswer.build(context)
+          when :update_review_template_lens_review
+            Aws::WellArchitected::Endpoints::UpdateReviewTemplateLensReview.build(context)
           when :update_share_invitation
             Aws::WellArchitected::Endpoints::UpdateShareInvitation.build(context)
           when :update_workload
@@ -168,6 +195,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::UpgradeLensReview.build(context)
           when :upgrade_profile_version
             Aws::WellArchitected::Endpoints::UpgradeProfileVersion.build(context)
+          when :upgrade_review_template_lens_review
+            Aws::WellArchitected::Endpoints::UpgradeReviewTemplateLensReview.build(context)
           end
         end
       end

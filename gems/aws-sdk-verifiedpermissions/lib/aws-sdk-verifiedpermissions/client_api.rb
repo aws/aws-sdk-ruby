@@ -18,6 +18,12 @@ module Aws::VerifiedPermissions
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
+    BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
+    BatchIsAuthorizedInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInputItem')
+    BatchIsAuthorizedInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedInputList')
+    BatchIsAuthorizedOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutput')
+    BatchIsAuthorizedOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutputItem')
+    BatchIsAuthorizedOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -104,6 +110,7 @@ module Aws::VerifiedPermissions
     PolicyItem = Shapes::StructureShape.new(name: 'PolicyItem')
     PolicyList = Shapes::ListShape.new(name: 'PolicyList')
     PolicyStatement = Shapes::StringShape.new(name: 'PolicyStatement')
+    PolicyStoreDescription = Shapes::StringShape.new(name: 'PolicyStoreDescription')
     PolicyStoreId = Shapes::StringShape.new(name: 'PolicyStoreId')
     PolicyStoreItem = Shapes::StructureShape.new(name: 'PolicyStoreItem')
     PolicyStoreList = Shapes::ListShape.new(name: 'PolicyStoreList')
@@ -179,6 +186,30 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
 
+    BatchIsAuthorizedInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedInput.struct_class = Types::BatchIsAuthorizedInput
+
+    BatchIsAuthorizedInputItem.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedInputItem.struct_class = Types::BatchIsAuthorizedInputItem
+
+    BatchIsAuthorizedInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem)
+
+    BatchIsAuthorizedOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedOutput.struct_class = Types::BatchIsAuthorizedOutput
+
+    BatchIsAuthorizedOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedOutputItem.struct_class = Types::BatchIsAuthorizedOutputItem
+
+    BatchIsAuthorizedOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputItem)
+
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
 
     CognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
@@ -232,6 +263,7 @@ module Aws::VerifiedPermissions
 
     CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    CreatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     CreatePolicyStoreInput.struct_class = Types::CreatePolicyStoreInput
 
     CreatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -347,6 +379,7 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
     GetPolicyStoreOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyStoreOutput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     GetPolicyStoreOutput.struct_class = Types::GetPolicyStoreOutput
 
     GetPolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -368,6 +401,7 @@ module Aws::VerifiedPermissions
     GetSchemaOutput.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaJson, required: true, location_name: "schema"))
     GetSchemaOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetSchemaOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetSchemaOutput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespaceList, location_name: "namespaces"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
     IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
@@ -513,6 +547,8 @@ module Aws::VerifiedPermissions
     PolicyStoreItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     PolicyStoreItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
     PolicyStoreItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
+    PolicyStoreItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "lastUpdatedDate"))
+    PolicyStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     PolicyStoreItem.struct_class = Types::PolicyStoreItem
 
     PolicyStoreList.member = Shapes::ShapeRef.new(shape: PolicyStoreItem)
@@ -640,6 +676,7 @@ module Aws::VerifiedPermissions
 
     UpdatePolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    UpdatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     UpdatePolicyStoreInput.struct_class = Types::UpdatePolicyStoreInput
 
     UpdatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -696,6 +733,19 @@ module Aws::VerifiedPermissions
         "uid" => "verifiedpermissions-2021-12-01",
       }
 
+      api.add_operation(:batch_is_authorized, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorized"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_identity_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIdentitySource"
         o.http_method = "POST"
@@ -704,6 +754,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreateIdentitySourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -718,6 +769,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -732,6 +784,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyStoreOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -745,6 +798,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

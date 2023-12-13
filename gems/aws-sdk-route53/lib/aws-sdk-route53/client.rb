@@ -669,8 +669,9 @@ module Aws::Route53
     # * `DELETE`: Deletes an existing resource record set that has the
     #   specified values.
     #
-    # * `UPSERT`: If a resource set exists Route 53 updates it with the
-    #   values in the request.
+    # * `UPSERT`: If a resource set doesn't exist, Route 53 creates it. If
+    #   a resource set exists Route 53 updates it with the values in the
+    #   request.
     #
     # **Syntaxes for Creating, Updating, and Deleting Resource Record Sets**
     #
@@ -1552,6 +1553,10 @@ module Aws::Route53
     #     `CallerReference` but settings identical to an existing health
     #     check, Route 53 creates the health check.
     #
+    #   Route 53 does not store the `CallerReference` for a deleted health
+    #   check indefinitely. The `CallerReference` for a deleted health check
+    #   will be deleted after a number of days.
+    #
     # @option params [required, Types::HealthCheckConfig] :health_check_config
     #   A complex type that contains settings for a new health check.
     #
@@ -2288,6 +2293,16 @@ module Aws::Route53
     # as www.example.com). Amazon Route 53 responds to DNS queries for the
     # domain or subdomain name by using the resource record sets that
     # `CreateTrafficPolicyInstance` created.
+    #
+    # <note markdown="1"> After you submit an `CreateTrafficPolicyInstance` request, there's a
+    # brief delay while Amazon Route 53 creates the resource record sets
+    # that are specified in the traffic policy definition. Use
+    # `GetTrafficPolicyInstance` with the `id` of new traffic policy
+    # instance to confirm that the `CreateTrafficPolicyInstance` request
+    # completed successfully. For more information, see the `State` response
+    # element.
+    #
+    #  </note>
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to create
@@ -3269,6 +3284,8 @@ module Aws::Route53
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
     #
+    #   Route 53 also supports the contry code **UA** forr Ukraine.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -3799,11 +3816,10 @@ module Aws::Route53
 
     # Gets information about a specified traffic policy instance.
     #
-    # <note markdown="1"> After you submit a `CreateTrafficPolicyInstance` or an
-    # `UpdateTrafficPolicyInstance` request, there's a brief delay while
-    # Amazon Route 53 creates the resource record sets that are specified in
-    # the traffic policy definition. For more information, see the `State`
-    # response element.
+    # <note markdown="1"> Use `GetTrafficPolicyInstance` with the `id` of new traffic policy
+    # instance to confirm that the `CreateTrafficPolicyInstance` or an
+    # `UpdateTrafficPolicyInstance` request completed successfully. For more
+    # information, see the `State` response element.
     #
     #  </note>
     #
@@ -4120,8 +4136,8 @@ module Aws::Route53
     # @option params [Integer] :max_items
     #   The maximum number of health checks that you want `ListHealthChecks`
     #   to return in response to the current request. Amazon Route 53 returns
-    #   a maximum of 100 items. If you set `MaxItems` to a value greater than
-    #   100, Route 53 returns only the first 100 health checks.
+    #   a maximum of 1000 items. If you set `MaxItems` to a value greater than
+    #   1000, Route 53 returns only the first 1000 health checks.
     #
     # @return [Types::ListHealthChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4225,6 +4241,9 @@ module Aws::Route53
     #   the hosted zones that are associated with a reusable delegation set,
     #   specify the ID of that reusable delegation set.
     #
+    # @option params [String] :hosted_zone_type
+    #   (Optional) Specifies if the hosted zone is private.
+    #
     # @return [Types::ListHostedZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListHostedZonesResponse#hosted_zones #hosted_zones} => Array&lt;Types::HostedZone&gt;
@@ -4241,6 +4260,7 @@ module Aws::Route53
     #     marker: "PageMarker",
     #     max_items: 1,
     #     delegation_set_id: "ResourceId",
+    #     hosted_zone_type: "PrivateHostedZone", # accepts PrivateHostedZone
     #   })
     #
     # @example Response structure
@@ -6010,6 +6030,16 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # <note markdown="1"> After you submit a `UpdateTrafficPolicyInstance` request, there's a
+    # brief delay while Route 53 creates the resource record sets that are
+    # specified in the traffic policy definition. Use
+    # `GetTrafficPolicyInstance` with the `id` of updated traffic policy
+    # instance confirm that the `UpdateTrafficPolicyInstance` request
+    # completed successfully. For more information, see the `State` response
+    # element.
+    #
+    #  </note>
+    #
     # Updates the resource record sets in a specified hosted zone that were
     # created based on the settings in a specified traffic policy version.
     #
@@ -6094,7 +6124,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

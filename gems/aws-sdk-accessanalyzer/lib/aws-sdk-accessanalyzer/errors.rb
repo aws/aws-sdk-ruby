@@ -30,9 +30,11 @@ module Aws::AccessAnalyzer
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {InvalidParameterException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
+  # * {UnprocessableEntityException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -102,6 +104,21 @@ module Aws::AccessAnalyzer
 
       def retryable?
         true
+      end
+    end
+
+    class InvalidParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AccessAnalyzer::Types::InvalidParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -179,6 +196,25 @@ module Aws::AccessAnalyzer
       end
 
       def throttling?
+        true
+      end
+    end
+
+    class UnprocessableEntityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AccessAnalyzer::Types::UnprocessableEntityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
         true
       end
     end

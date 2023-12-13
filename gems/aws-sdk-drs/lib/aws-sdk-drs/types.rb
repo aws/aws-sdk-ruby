@@ -198,6 +198,12 @@ module Aws::Drs
     #   Launch disposition.
     #   @return [String]
     #
+    # @!attribute [rw] launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server
+    #   when performing a drill, recovery or failback to the previous region
+    #   or availability zone, using the instance ID of the source instance.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] licensing
     #   Licensing.
     #   @return [Types::Licensing]
@@ -222,6 +228,7 @@ module Aws::Drs
       :copy_tags,
       :export_bucket_arn,
       :launch_disposition,
+      :launch_into_source_instance,
       :licensing,
       :post_launch_enabled,
       :tags,
@@ -1573,6 +1580,10 @@ module Aws::Drs
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #   @return [Types::LaunchIntoInstanceProperties]
+    #
     # @!attribute [rw] licensing
     #   The licensing configuration to be used for this launch
     #   configuration.
@@ -1604,6 +1615,7 @@ module Aws::Drs
       :copy_tags,
       :ec2_launch_template_id,
       :launch_disposition,
+      :launch_into_instance_properties,
       :licensing,
       :name,
       :post_launch_enabled,
@@ -1639,6 +1651,12 @@ module Aws::Drs
     #   Launch disposition.
     #   @return [String]
     #
+    # @!attribute [rw] launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server
+    #   when performing a drill, recovery or failback to the previous region
+    #   or availability zone, using the instance ID of the source instance.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] licensing
     #   Licensing.
     #   @return [Types::Licensing]
@@ -1664,11 +1682,28 @@ module Aws::Drs
       :export_bucket_arn,
       :launch_configuration_template_id,
       :launch_disposition,
+      :launch_into_source_instance,
       :licensing,
       :post_launch_enabled,
       :tags,
       :target_instance_type_right_sizing_method)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Launch into existing instance.
+    #
+    # @!attribute [rw] launch_into_ec2_instance_id
+    #   Optionally holds EC2 instance ID of an instance to launch into,
+    #   instead of launching a new instance during drill, recovery or
+    #   failback.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchIntoInstanceProperties AWS API Documentation
+    #
+    class LaunchIntoInstanceProperties < Struct.new(
+      :launch_into_ec2_instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2187,6 +2222,10 @@ module Aws::Drs
 
     # A Recovery Instance is a replica of a Source Server running on EC2.
     #
+    # @!attribute [rw] agent_version
+    #   The version of the DRS agent installed on the recovery instance
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The ARN of the Recovery Instance.
     #   @return [String]
@@ -2250,6 +2289,7 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstance AWS API Documentation
     #
     class RecoveryInstance < Struct.new(
+      :agent_version,
       :arn,
       :data_replication_info,
       :ec2_instance_id,
@@ -3125,6 +3165,10 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] agent_version
+    #   The version of the DRS agent installed on the source server
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The ARN of the Source Server.
     #   @return [String]
@@ -3183,6 +3227,7 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceServer AWS API Documentation
     #
     class SourceServer < Struct.new(
+      :agent_version,
       :arn,
       :data_replication_info,
       :last_launch_result,
@@ -3660,6 +3705,10 @@ module Aws::Drs
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #   @return [Types::LaunchIntoInstanceProperties]
+    #
     # @!attribute [rw] licensing
     #   The licensing configuration to be used for this launch
     #   configuration.
@@ -3690,6 +3739,7 @@ module Aws::Drs
       :copy_private_ip,
       :copy_tags,
       :launch_disposition,
+      :launch_into_instance_properties,
       :licensing,
       :name,
       :post_launch_enabled,
@@ -3719,6 +3769,12 @@ module Aws::Drs
     #   Launch disposition.
     #   @return [String]
     #
+    # @!attribute [rw] launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server
+    #   when performing a drill, recovery or failback to the previous region
+    #   or availability zone, using the instance ID of the source instance.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] licensing
     #   Licensing.
     #   @return [Types::Licensing]
@@ -3739,6 +3795,7 @@ module Aws::Drs
       :export_bucket_arn,
       :launch_configuration_template_id,
       :launch_disposition,
+      :launch_into_source_instance,
       :licensing,
       :post_launch_enabled,
       :target_instance_type_right_sizing_method)

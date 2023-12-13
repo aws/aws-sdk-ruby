@@ -658,6 +658,10 @@ module Aws::BillingConductor
     #   A `CustomLineItemChargeDetails` that describes the charge details for
     #   a custom line item.
     #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account in which this custom line item will be
+    #   applied to.
+    #
     # @return [Types::CreateCustomLineItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomLineItemOutput#arn #arn} => String
@@ -693,6 +697,7 @@ module Aws::BillingConductor
     #         },
     #       ],
     #     },
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1297,6 +1302,7 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].end_billing_period #=> String
     #   resp.custom_line_item_versions[0].arn #=> String
     #   resp.custom_line_item_versions[0].start_time #=> Integer
+    #   resp.custom_line_item_versions[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
@@ -1344,6 +1350,7 @@ module Aws::BillingConductor
     #       names: ["CustomLineItemName"],
     #       billing_groups: ["BillingGroupArn"],
     #       arns: ["CustomLineItemArn"],
+    #       account_ids: ["AccountId"],
     #     },
     #   })
     #
@@ -1367,6 +1374,7 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].creation_time #=> Integer
     #   resp.custom_line_items[0].last_modified_time #=> Integer
     #   resp.custom_line_items[0].association_size #=> Integer
+    #   resp.custom_line_items[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItems AWS API Documentation
@@ -2041,7 +2049,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -25,16 +25,17 @@ module Aws::WorkSpaces
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,6 +61,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::AssociateConnectionAlias.build(context)
           when :associate_ip_groups
             Aws::WorkSpaces::Endpoints::AssociateIpGroups.build(context)
+          when :associate_workspace_application
+            Aws::WorkSpaces::Endpoints::AssociateWorkspaceApplication.build(context)
           when :authorize_ip_rules
             Aws::WorkSpaces::Endpoints::AuthorizeIpRules.build(context)
           when :copy_workspace_image
@@ -96,12 +99,20 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::DeleteWorkspaceBundle.build(context)
           when :delete_workspace_image
             Aws::WorkSpaces::Endpoints::DeleteWorkspaceImage.build(context)
+          when :deploy_workspace_applications
+            Aws::WorkSpaces::Endpoints::DeployWorkspaceApplications.build(context)
           when :deregister_workspace_directory
             Aws::WorkSpaces::Endpoints::DeregisterWorkspaceDirectory.build(context)
           when :describe_account
             Aws::WorkSpaces::Endpoints::DescribeAccount.build(context)
           when :describe_account_modifications
             Aws::WorkSpaces::Endpoints::DescribeAccountModifications.build(context)
+          when :describe_application_associations
+            Aws::WorkSpaces::Endpoints::DescribeApplicationAssociations.build(context)
+          when :describe_applications
+            Aws::WorkSpaces::Endpoints::DescribeApplications.build(context)
+          when :describe_bundle_associations
+            Aws::WorkSpaces::Endpoints::DescribeBundleAssociations.build(context)
           when :describe_client_branding
             Aws::WorkSpaces::Endpoints::DescribeClientBranding.build(context)
           when :describe_client_properties
@@ -112,10 +123,14 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::DescribeConnectionAliasPermissions.build(context)
           when :describe_connection_aliases
             Aws::WorkSpaces::Endpoints::DescribeConnectionAliases.build(context)
+          when :describe_image_associations
+            Aws::WorkSpaces::Endpoints::DescribeImageAssociations.build(context)
           when :describe_ip_groups
             Aws::WorkSpaces::Endpoints::DescribeIpGroups.build(context)
           when :describe_tags
             Aws::WorkSpaces::Endpoints::DescribeTags.build(context)
+          when :describe_workspace_associations
+            Aws::WorkSpaces::Endpoints::DescribeWorkspaceAssociations.build(context)
           when :describe_workspace_bundles
             Aws::WorkSpaces::Endpoints::DescribeWorkspaceBundles.build(context)
           when :describe_workspace_directories
@@ -134,6 +149,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::DisassociateConnectionAlias.build(context)
           when :disassociate_ip_groups
             Aws::WorkSpaces::Endpoints::DisassociateIpGroups.build(context)
+          when :disassociate_workspace_application
+            Aws::WorkSpaces::Endpoints::DisassociateWorkspaceApplication.build(context)
           when :import_client_branding
             Aws::WorkSpaces::Endpoints::ImportClientBranding.build(context)
           when :import_workspace_image

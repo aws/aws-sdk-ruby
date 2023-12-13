@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.430.0 (2023-12-08)
+------------------
+
+* Feature - M2 Mac instances are built on Apple M2 Mac mini computers. I4i instances are powered by 3rd generation Intel Xeon Scalable processors. C7i compute optimized, M7i general purpose and R7i memory optimized instances are powered by custom 4th Generation Intel Xeon Scalable processors.
+
+1.429.0 (2023-12-06)
+------------------
+
+* Feature - Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.
+
+1.428.0 (2023-12-05)
+------------------
+
+* Feature - Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection
+
+1.427.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.426.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.425.0 (2023-11-21)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.424.0 (2023-11-20)
+------------------
+
+* Feature - This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.
+
+1.423.0 (2023-11-17)
+------------------
+
+* Feature - This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM.
+
+1.422.0 (2023-11-16)
+------------------
+
+* Feature - Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider.
+
+1.421.0 (2023-11-15)
+------------------
+
+* Feature - AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.
+
+1.420.0 (2023-11-13)
+------------------
+
+* Feature - Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
+
+1.419.0 (2023-11-10)
+------------------
+
+* Feature - EC2 adds API updates to enable ENA Express at instance launch time.
+
+1.418.0 (2023-11-09)
+------------------
+
+* Feature - AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.
+
+1.417.0 (2023-10-31)
+------------------
+
+* Feature - Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking.
+
+1.416.0 (2023-10-26)
+------------------
+
+* Feature - Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC.
+
+1.415.0 (2023-10-24)
+------------------
+
+* Feature - This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.
+
+1.414.0 (2023-10-19)
+------------------
+
+* Feature - Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.
+
+1.413.0 (2023-10-12)
+------------------
+
+* Feature - This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it.
+
+1.412.0 (2023-10-06)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
 1.411.0 (2023-10-02)
 ------------------
 

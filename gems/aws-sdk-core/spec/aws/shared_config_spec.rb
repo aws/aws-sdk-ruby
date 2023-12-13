@@ -229,6 +229,24 @@ module Aws
       end
     end
 
+    context 's3_disable_express_session_auth selection' do
+      it 'can resolve s3_disable_express_session_auth from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_disable_express_session_auth'
+        )
+        expect(config.s3_disable_express_session_auth).to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_do_not_use_express_zonal_auth'
+        )
+        expect(config.s3_disable_express_session_auth).to eq('false')
+      end
+    end
+
     context 'retry_mode selection' do
       it 'can resolve retry_mode from config file' do
         config = SharedConfig.new(
@@ -325,6 +343,17 @@ module Aws
           profile_name: 'ec2_metadata_service_endpoint_mode'
         )
         expect(config.ec2_metadata_service_endpoint_mode).to eq('IPv6')
+      end
+    end
+
+    context 'ec2_metadata_v1_disabled selection' do
+      it 'can resolve ec2_metadata_v1_disabled from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'ec2_metadata_v1_disabled'
+        )
+        expect(config.ec2_metadata_v1_disabled).to eq('true')
       end
     end
 

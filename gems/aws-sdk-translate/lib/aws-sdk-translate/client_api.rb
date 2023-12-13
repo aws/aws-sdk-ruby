@@ -16,6 +16,7 @@ module Aws::Translate
     AppliedTerminology = Shapes::StructureShape.new(name: 'AppliedTerminology')
     AppliedTerminologyList = Shapes::ListShape.new(name: 'AppliedTerminologyList')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
+    Brevity = Shapes::StringShape.new(name: 'Brevity')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -293,8 +294,8 @@ module Aws::Translate
     OutputDataConfig.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
-    ParallelDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
-    ParallelDataConfig.add_member(:format, Shapes::ShapeRef.new(shape: ParallelDataFormat, required: true, location_name: "Format"))
+    ParallelDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    ParallelDataConfig.add_member(:format, Shapes::ShapeRef.new(shape: ParallelDataFormat, location_name: "Format"))
     ParallelDataConfig.struct_class = Types::ParallelDataConfig
 
     ParallelDataDataLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryType"))
@@ -470,6 +471,7 @@ module Aws::Translate
 
     TranslationSettings.add_member(:formality, Shapes::ShapeRef.new(shape: Formality, location_name: "Formality"))
     TranslationSettings.add_member(:profanity, Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
+    TranslationSettings.add_member(:brevity, Shapes::ShapeRef.new(shape: Brevity, location_name: "Brevity"))
     TranslationSettings.struct_class = Types::TranslationSettings
 
     UnsupportedDisplayLanguageCodeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

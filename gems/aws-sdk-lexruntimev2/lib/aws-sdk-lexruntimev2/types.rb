@@ -411,22 +411,22 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] type
     #   The next action that the bot should take in its interaction with the
-    #   user. The possible values are:
+    #   user. The following values are possible:
     #
-    #   * `Close` - Indicates that there will not be a response from the
+    #   * `Close` – Indicates that there will not be a response from the
     #     user. For example, the statement "Your order has been placed"
     #     does not require a response.
     #
-    #   * `ConfirmIntent` - The next action is asking the user if the intent
+    #   * `ConfirmIntent` – The next action is asking the user if the intent
     #     is complete and ready to be fulfilled. This is a yes/no question
     #     such as "Place the order?"
     #
-    #   * `Delegate` - The next action is determined by Amazon Lex V2.
+    #   * `Delegate` – The next action is determined by Amazon Lex V2.
     #
-    #   * `ElicitIntent` - The next action is to elicit an intent from the
+    #   * `ElicitIntent` – The next action is to elicit an intent from the
     #     user.
     #
-    #   * `ElicitSlot` - The next action is to elicit a slot value from the
+    #   * `ElicitSlot` – The next action is to elicit a slot value from the
     #     user.
     #   @return [String]
     #
@@ -448,7 +448,7 @@ module Aws::LexRuntimeV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html
     #   @return [String]
     #
     # @!attribute [rw] sub_slot_to_elicit
@@ -649,12 +649,29 @@ module Aws::LexRuntimeV2
     #   @return [Hash<String,Types::Slot>]
     #
     # @!attribute [rw] state
-    #   Contains fulfillment information for the intent.
+    #   Indicates the fulfillment state for the intent. The meanings of each
+    #   value are as follows:
+    #
+    #   * `Failed` – The bot failed to fulfill the intent.
+    #
+    #   * `Fulfilled` – The bot has completed fulfillment of the intent.
+    #
+    #   * `FulfillmentInProgress` – The bot is in the middle of fulfilling
+    #     the intent.
+    #
+    #   * `InProgress` – The bot is in the middle of eliciting the slot
+    #     values that are necessary to fulfill the intent.
+    #
+    #   * `ReadyForFulfillment` – The bot has elicited all the slot values
+    #     for the intent and is ready to fulfill the intent.
+    #
+    #   * `Waiting` – The bot is waiting for a response from the user
+    #     (limited to streaming conversations).
     #   @return [String]
     #
     # @!attribute [rw] confirmation_state
-    #   Contains information about whether fulfillment of the intent has
-    #   been confirmed.
+    #   Indicates whether the intent has been `Confirmed`, `Denied`, or
+    #   `None` if the confirmation stage has not yet been reached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Intent AWS API Documentation
@@ -672,7 +689,8 @@ module Aws::LexRuntimeV2
     # application and Amazon Lex V2.
     #
     # @!attribute [rw] input_mode
-    #   Indicates whether the input to the operation was text or speech.
+    #   Indicates whether the input to the operation was text, speech, or
+    #   from a touch-tone keypad.
     #   @return [String]
     #
     # @!attribute [rw] interpretations
@@ -735,8 +753,9 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # An intent that Amazon Lex V2 determined might satisfy the user's
-    # utterance. The intents are ordered by the confidence score.
+    # An object containing information about an intent that Amazon Lex V2
+    # determined might satisfy the user's utterance. The intents are
+    # ordered by the confidence score.
     #
     # @!attribute [rw] nlu_confidence
     #   Determines the threshold where Amazon Lex V2 will insert the
@@ -759,12 +778,17 @@ module Aws::LexRuntimeV2
     #   intents are ordered by the confidence score.
     #   @return [Types::Intent]
     #
+    # @!attribute [rw] interpretation_source
+    #   Specifies the service that interpreted the input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Interpretation AWS API Documentation
     #
     class Interpretation < Struct.new(
       :nlu_confidence,
       :sentiment_response,
-      :intent)
+      :intent,
+      :interpretation_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,17 +952,16 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] session_state
-    #   Represents the current state of the dialog between the user and the
-    #   bot.
-    #
-    #   Use this to determine the progress of the conversation and what the
-    #   next action may be.
+    #   A base-64-encoded gzipped field that represents the current state of
+    #   the dialog between the user and the bot. Use this to determine the
+    #   progress of the conversation and what the next action may be.
     #   @return [String]
     #
     # @!attribute [rw] request_attributes
-    #   Request-specific information passed between the client application
-    #   and Amazon Lex V2. These are the same as the `requestAttribute`
-    #   parameter in the call to the `PutSession` operation.
+    #   A base-64-encoded gzipped field that provides request-specific
+    #   information passed between the client application and Amazon Lex V2.
+    #   These are the same as the `requestAttribute` parameter in the call
+    #   to the `PutSession` operation.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -1174,8 +1197,8 @@ module Aws::LexRuntimeV2
     end
 
     # @!attribute [rw] input_mode
-    #   Indicates whether the input mode to the operation was text or
-    #   speech.
+    #   Indicates whether the input mode to the operation was text, speech,
+    #   or from a touch-tone keypad.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -1695,23 +1718,26 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The value of a slot.
+    # Information about the value provided for a slot and Amazon Lex V2's
+    # interpretation.
     #
     # @!attribute [rw] original_value
-    #   The text of the utterance from the user that was entered for the
-    #   slot.
+    #   The part of the user's response to the slot elicitation that Amazon
+    #   Lex V2 determines is relevant to the slot value.
     #   @return [String]
     #
     # @!attribute [rw] interpreted_value
-    #   The value that Amazon Lex V2 determines for the slot. The actual
-    #   value depends on the setting of the value selection strategy for the
-    #   bot. You can choose to use the value entered by the user, or you can
-    #   have Amazon Lex V2 choose the first value in the `resolvedValues`
-    #   list.
+    #   The value that Amazon Lex V2 determines for the slot, given the user
+    #   input. The actual value depends on the setting of the value
+    #   selection strategy for the bot. You can choose to use the value
+    #   entered by the user, or you can have Amazon Lex V2 choose the first
+    #   value in the `resolvedValues` list.
     #   @return [String]
     #
     # @!attribute [rw] resolved_values
-    #   A list of additional values that have been recognized for the slot.
+    #   A list of values that Amazon Lex V2 determines are possible
+    #   resolutions for the user input. The first value matches the
+    #   `interpretedValue`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Value AWS API Documentation

@@ -466,7 +466,7 @@ module Aws::OAM
     #
     #   resp = client.create_link({
     #     label_template: "LabelTemplate", # required
-    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace
+    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application
     #     sink_identifier: "ResourceIdentifier", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -942,6 +942,9 @@ module Aws::OAM
     #
     # * **Traces** - Specify with `AWS::XRay::Trace`
     #
+    # * **Application Insights - Applications** - Specify with
+    #   `AWS::ApplicationInsights::Application`
+    #
     # See the examples in this section to see how to specify permitted
     # source accounts and data types.
     #
@@ -1127,7 +1130,7 @@ module Aws::OAM
     #
     #   resp = client.update_link({
     #     identifier: "ResourceIdentifier", # required
-    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace
+    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application
     #   })
     #
     # @example Response structure
@@ -1164,7 +1167,7 @@ module Aws::OAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-oam'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

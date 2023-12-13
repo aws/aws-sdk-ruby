@@ -108,6 +108,7 @@ module Aws::AppRunner
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     Latest = Shapes::BooleanShape.new(name: 'Latest')
@@ -582,6 +583,7 @@ module Aws::AppRunner
 
     NetworkConfiguration.add_member(:egress_configuration, Shapes::ShapeRef.new(shape: EgressConfiguration, location_name: "EgressConfiguration"))
     NetworkConfiguration.add_member(:ingress_configuration, Shapes::ShapeRef.new(shape: IngressConfiguration, location_name: "IngressConfiguration"))
+    NetworkConfiguration.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     ObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))

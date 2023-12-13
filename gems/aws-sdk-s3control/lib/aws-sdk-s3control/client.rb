@@ -400,6 +400,367 @@ module Aws::S3Control
 
     # @!group API Operations
 
+    # Associate your S3 Access Grants instance with an Amazon Web Services
+    # IAM Identity Center instance. Use this action if you want to create
+    # access grants for users or groups from your corporate identity
+    # directory. First, you must add your corporate identity directory to
+    # Amazon Web Services IAM Identity Center. Then, you can associate this
+    # IAM Identity Center instance with your S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:AssociateAccessGrantsIdentityCenter`
+    #   permission to use this operation.
+    #
+    # Additional Permissions
+    #
+    # : You must also have the following permissions:
+    #   `sso:CreateApplication`, `sso:PutApplicationGrant`, and
+    #   `sso:PutApplicationAuthenticationMethod`.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :identity_center_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity
+    #   Center instance that you are associating with your S3 Access Grants
+    #   instance. An IAM Identity Center instance is your corporate identity
+    #   directory that you added to the IAM Identity Center. You can use the
+    #   [ListInstances][1] API operation to retrieve a list of your Identity
+    #   Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_access_grants_identity_center({
+    #     account_id: "AccountId",
+    #     identity_center_arn: "IdentityCenterArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AssociateAccessGrantsIdentityCenter AWS API Documentation
+    #
+    # @overload associate_access_grants_identity_center(params = {})
+    # @param [Hash] params ({})
+    def associate_access_grants_identity_center(params = {}, options = {})
+      req = build_request(:associate_access_grants_identity_center, params)
+      req.send_request(options)
+    end
+
+    # Creates an access grant that gives a grantee access to your S3 data.
+    # The grantee can be an IAM user or role or a directory user, or group.
+    # Before you can create a grant, you must have an S3 Access Grants
+    # instance in the same Region as the S3 data. You can create an S3
+    # Access Grants instance using the [CreateAccessGrantsInstance][1]. You
+    # must also have registered at least one S3 data location in your S3
+    # Access Grants instance using [CreateAccessGrantsLocation][2].
+    #
+    # Permissions
+    #
+    # : You must have the `s3:CreateAccessGrant` permission to use this
+    #   operation.
+    #
+    # Additional Permissions
+    #
+    # : For any directory identity - `sso:DescribeInstance` and
+    #   `sso:DescribeApplication`
+    #
+    #   For directory users - `identitystore:DescribeUser`
+    #
+    #   For directory groups - `identitystore:DescribeGroup`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grants_location_id
+    #   The ID of the registered location to which you are granting access. S3
+    #   Access Grants assigns this ID when you register the location. S3
+    #   Access Grants assigns the ID `default` to the default location `s3://`
+    #   and assigns an auto-generated ID to other locations that you register.
+    #
+    #   If you are passing the `default` location, you cannot create an access
+    #   grant for the entire default location. You must also specify a bucket
+    #   or a bucket and prefix in the `Subprefix` field.
+    #
+    # @option params [Types::AccessGrantsLocationConfiguration] :access_grants_location_configuration
+    #   The configuration options of the grant location. The grant location is
+    #   the S3 path to the data to which you are granting access. It contains
+    #   the `S3SubPrefix` field. The grant scope is the result of appending
+    #   the subprefix to the location scope of the registered location.
+    #
+    # @option params [required, Types::Grantee] :grantee
+    #   The user, group, or role to which you are granting access. You can
+    #   grant access to an IAM user or role. If you have added your corporate
+    #   directory to Amazon Web Services IAM Identity Center and associated
+    #   your Identity Center instance with your S3 Access Grants instance, the
+    #   grantee can also be a corporate directory user or group.
+    #
+    # @option params [required, String] :permission
+    #   The type of access that you are granting to your S3 data, which can be
+    #   set to one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #
+    # @option params [String] :application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity
+    #   Center application associated with your Identity Center instance. If
+    #   an application ARN is included in the request to create an access
+    #   grant, the grantee can only access the S3 data through this
+    #   application.
+    #
+    # @option params [String] :s3_prefix_type
+    #   The type of `S3SubPrefix`. The only possible value is `Object`. Pass
+    #   this value if the access grant scope is an object. Do not pass this
+    #   value if the access grant scope is a bucket or a bucket and a prefix.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you are adding to the
+    #   access grant. Each tag is a label consisting of a user-defined key and
+    #   value. Tags can help you manage, identify, organize, search for, and
+    #   filter resources.
+    #
+    # @return [Types::CreateAccessGrantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessGrantResult#created_at #created_at} => Time
+    #   * {Types::CreateAccessGrantResult#access_grant_id #access_grant_id} => String
+    #   * {Types::CreateAccessGrantResult#access_grant_arn #access_grant_arn} => String
+    #   * {Types::CreateAccessGrantResult#grantee #grantee} => Types::Grantee
+    #   * {Types::CreateAccessGrantResult#access_grants_location_id #access_grants_location_id} => String
+    #   * {Types::CreateAccessGrantResult#access_grants_location_configuration #access_grants_location_configuration} => Types::AccessGrantsLocationConfiguration
+    #   * {Types::CreateAccessGrantResult#permission #permission} => String
+    #   * {Types::CreateAccessGrantResult#application_arn #application_arn} => String
+    #   * {Types::CreateAccessGrantResult#grant_scope #grant_scope} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_grant({
+    #     account_id: "AccountId",
+    #     access_grants_location_id: "AccessGrantsLocationId", # required
+    #     access_grants_location_configuration: {
+    #       s3_sub_prefix: "S3Prefix",
+    #     },
+    #     grantee: { # required
+    #       grantee_type: "DIRECTORY_USER", # accepts DIRECTORY_USER, DIRECTORY_GROUP, IAM
+    #       grantee_identifier: "GranteeIdentifier",
+    #     },
+    #     permission: "READ", # required, accepts READ, WRITE, READWRITE
+    #     application_arn: "IdentityCenterApplicationArn",
+    #     s3_prefix_type: "Object", # accepts Object
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grant_id #=> String
+    #   resp.access_grant_arn #=> String
+    #   resp.grantee.grantee_type #=> String, one of "DIRECTORY_USER", "DIRECTORY_GROUP", "IAM"
+    #   resp.grantee.grantee_identifier #=> String
+    #   resp.access_grants_location_id #=> String
+    #   resp.access_grants_location_configuration.s3_sub_prefix #=> String
+    #   resp.permission #=> String, one of "READ", "WRITE", "READWRITE"
+    #   resp.application_arn #=> String
+    #   resp.grant_scope #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrant AWS API Documentation
+    #
+    # @overload create_access_grant(params = {})
+    # @param [Hash] params ({})
+    def create_access_grant(params = {}, options = {})
+      req = build_request(:create_access_grant, params)
+      req.send_request(options)
+    end
+
+    # Creates an S3 Access Grants instance, which serves as a logical
+    # grouping for access grants. You can create one S3 Access Grants
+    # instance per Region per account.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:CreateAccessGrantsInstance` permission to use
+    #   this operation.
+    #
+    # Additional Permissions
+    #
+    # : To associate an IAM Identity Center instance with your S3 Access
+    #   Grants instance, you must also have the `sso:DescribeInstance`,
+    #   `sso:CreateApplication`, `sso:PutApplicationGrant`, and
+    #   `sso:PutApplicationAuthenticationMethod` permissions.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [String] :identity_center_arn
+    #   If you would like to associate your S3 Access Grants instance with an
+    #   Amazon Web Services IAM Identity Center instance, use this field to
+    #   pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3 Access
+    #   Grants instance. An IAM Identity Center instance is your corporate
+    #   identity directory that you added to the IAM Identity Center. You can
+    #   use the [ListInstances][1] API operation to retrieve a list of your
+    #   Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you are adding to the S3
+    #   Access Grants instance. Each tag is a label consisting of a
+    #   user-defined key and value. Tags can help you manage, identify,
+    #   organize, search for, and filter resources.
+    #
+    # @return [Types::CreateAccessGrantsInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessGrantsInstanceResult#created_at #created_at} => Time
+    #   * {Types::CreateAccessGrantsInstanceResult#access_grants_instance_id #access_grants_instance_id} => String
+    #   * {Types::CreateAccessGrantsInstanceResult#access_grants_instance_arn #access_grants_instance_arn} => String
+    #   * {Types::CreateAccessGrantsInstanceResult#identity_center_arn #identity_center_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_grants_instance({
+    #     account_id: "AccountId",
+    #     identity_center_arn: "IdentityCenterArn",
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grants_instance_id #=> String
+    #   resp.access_grants_instance_arn #=> String
+    #   resp.identity_center_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsInstance AWS API Documentation
+    #
+    # @overload create_access_grants_instance(params = {})
+    # @param [Hash] params ({})
+    def create_access_grants_instance(params = {}, options = {})
+      req = build_request(:create_access_grants_instance, params)
+      req.send_request(options)
+    end
+
+    # The S3 data location that you would like to register in your S3 Access
+    # Grants instance. Your S3 data must be in the same Region as your S3
+    # Access Grants instance. The location can be one of the following:
+    #
+    # * The default S3 location `s3://`
+    #
+    # * A bucket - `S3://<bucket-name>`
+    #
+    # * A bucket and prefix - `S3://<bucket-name>/<prefix>`
+    #
+    # When you register a location, you must include the IAM role that has
+    # permission to manage the S3 location that you are registering. Give S3
+    # Access Grants permission to assume this role [using a policy][1]. S3
+    # Access Grants assumes this role to manage access to the location and
+    # to vend temporary credentials to grantees or client applications.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:CreateAccessGrantsLocation` permission to use
+    #   this operation.
+    #
+    # Additional Permissions
+    #
+    # : You must also have the following permission for the specified IAM
+    #   role: `iam:PassRole`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :location_scope
+    #   The S3 path to the location that you are registering. The location
+    #   scope can be the default S3 location `s3://`, the S3 path to a bucket
+    #   `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`. A prefix in S3 is a string of characters at
+    #   the beginning of an object key name used to organize the objects that
+    #   you store in your S3 buckets. For example, object key names that start
+    #   with the `engineering/` prefix or object key names that start with the
+    #   `marketing/campaigns/` prefix.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you are adding to the S3
+    #   Access Grants location. Each tag is a label consisting of a
+    #   user-defined key and value. Tags can help you manage, identify,
+    #   organize, search for, and filter resources.
+    #
+    # @return [Types::CreateAccessGrantsLocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessGrantsLocationResult#created_at #created_at} => Time
+    #   * {Types::CreateAccessGrantsLocationResult#access_grants_location_id #access_grants_location_id} => String
+    #   * {Types::CreateAccessGrantsLocationResult#access_grants_location_arn #access_grants_location_arn} => String
+    #   * {Types::CreateAccessGrantsLocationResult#location_scope #location_scope} => String
+    #   * {Types::CreateAccessGrantsLocationResult#iam_role_arn #iam_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_grants_location({
+    #     account_id: "AccountId",
+    #     location_scope: "S3Prefix", # required
+    #     iam_role_arn: "IAMRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grants_location_id #=> String
+    #   resp.access_grants_location_arn #=> String
+    #   resp.location_scope #=> String
+    #   resp.iam_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsLocation AWS API Documentation
+    #
+    # @overload create_access_grants_location(params = {})
+    # @param [Hash] params ({})
+    def create_access_grants_location(params = {}, options = {})
+      req = build_request(:create_access_grants_location, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Creates an access point and associates it with the specified bucket.
     # For more information, see [Managing Data Access with Amazon S3 Access
     # Points][1] in the *Amazon S3 User Guide*.
@@ -519,6 +880,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Creates an Object Lambda Access Point. For more information, see
     # [Transforming objects with Object Lambda Access Points][1] in the
     # *Amazon S3 User Guide*.
@@ -750,35 +1115,42 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # This operation creates an S3 Batch Operations job.
+    #
     # You can use S3 Batch Operations to perform large-scale batch actions
     # on Amazon S3 objects. Batch Operations can run a single action on
     # lists of Amazon S3 objects that you specify. For more information, see
     # [S3 Batch Operations][1] in the *Amazon S3 User Guide*.
     #
-    # This action creates a S3 Batch Operations job.
+    # Permissions
+    #
+    # : For information about permissions required to use the Batch
+    #   Operations, see [Granting permissions for S3 Batch Operations][2] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * [DescribeJob][2]
+    # * [DescribeJob][3]
     #
-    # * [ListJobs][3]
+    # * [ListJobs][4]
     #
-    # * [UpdateJobPriority][4]
+    # * [UpdateJobPriority][5]
     #
-    # * [UpdateJobStatus][5]
+    # * [UpdateJobStatus][6]
     #
-    # * [JobOperation][6]
+    # * [JobOperation][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID that creates the job.
@@ -845,9 +1217,13 @@ module Aws::S3Control
     #     operation: { # required
     #       lambda_invoke: {
     #         function_arn: "FunctionArnString",
+    #         invocation_schema_version: "NonEmptyMaxLength64String",
+    #         user_arguments: {
+    #           "NonEmptyMaxLength64String" => "MaxLength1024String",
+    #         },
     #       },
     #       s3_put_object_copy: {
-    #         target_resource: "S3BucketArnString",
+    #         target_resource: "S3RegionalOrS3ExpressBucketArnString",
     #         canned_access_control_list: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
     #         access_control_grants: [
     #           {
@@ -994,6 +1370,14 @@ module Aws::S3Control
     #           created_after: Time.now,
     #           created_before: Time.now,
     #           object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #           key_name_constraint: {
+    #             match_any_prefix: ["NonEmptyMaxLength1024String"],
+    #             match_any_suffix: ["NonEmptyMaxLength1024String"],
+    #             match_any_substring: ["NonEmptyMaxLength1024String"],
+    #           },
+    #           object_size_greater_than_bytes: 1,
+    #           object_size_less_than_bytes: 1,
+    #           match_any_storage_class: ["STANDARD"], # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         },
     #         enable_manifest_output: false, # required
     #       },
@@ -1013,6 +1397,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Creates a Multi-Region Access Point and associates it with the
     # specified buckets. For more information about creating Multi-Region
     # Access Points, see [Creating Multi-Region Access Points][1] in the
@@ -1102,6 +1490,276 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates a new S3 Storage Lens group and associates it with the
+    # specified Amazon Web Services account ID. An S3 Storage Lens group is
+    # a custom grouping of objects based on prefix, suffix, object tags,
+    # object size, object age, or a combination of these filters. For each
+    # Storage Lens group that you’ve created, you can also optionally add
+    # Amazon Web Services resource tags. For more information about S3
+    # Storage Lens groups, see [Working with S3 Storage Lens groups][1].
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:CreateStorageLensGroup` action. If you’re trying to create a
+    # Storage Lens group with Amazon Web Services resource tags, you must
+    # also have permission to perform the `s3:TagResource` action. For more
+    # information about the required Storage Lens Groups permissions, see
+    # [Setting account permissions to use S3 Storage Lens groups][2].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that the Storage Lens group is
+    #   created from and associated with.
+    #
+    # @option params [required, Types::StorageLensGroup] :storage_lens_group
+    #   The Storage Lens group configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you're adding to your
+    #   Storage Lens group. This parameter is optional.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_storage_lens_group({
+    #     account_id: "AccountId",
+    #     storage_lens_group: { # required
+    #       name: "StorageLensGroupName", # required
+    #       filter: { # required
+    #         match_any_prefix: ["Prefix"],
+    #         match_any_suffix: ["Suffix"],
+    #         match_any_tag: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #         match_object_age: {
+    #           days_greater_than: 1,
+    #           days_less_than: 1,
+    #         },
+    #         match_object_size: {
+    #           bytes_greater_than: 1,
+    #           bytes_less_than: 1,
+    #         },
+    #         and: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #         or: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #       },
+    #       storage_lens_group_arn: "StorageLensGroupArn",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateStorageLensGroup AWS API Documentation
+    #
+    # @overload create_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def create_storage_lens_group(params = {}, options = {})
+      req = build_request(:create_storage_lens_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the access grant from the S3 Access Grants instance. You
+    # cannot undo an access grant deletion and the grantee will no longer
+    # have access to the S3 data.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:DeleteAccessGrant` permission to use this
+    #   operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_grant({
+    #     account_id: "AccountId",
+    #     access_grant_id: "AccessGrantId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrant AWS API Documentation
+    #
+    # @overload delete_access_grant(params = {})
+    # @param [Hash] params ({})
+    def delete_access_grant(params = {}, options = {})
+      req = build_request(:delete_access_grant, params)
+      req.send_request(options)
+    end
+
+    # Deletes your S3 Access Grants instance. You must first delete the
+    # access grants and locations before S3 Access Grants can delete the
+    # instance. See [DeleteAccessGrant][1] and
+    # [DeleteAccessGrantsLocation][2]. If you have associated an IAM
+    # Identity Center instance with your S3 Access Grants instance, you must
+    # first dissassociate the Identity Center instance from the S3 Access
+    # Grants instance before you can delete the S3 Access Grants instance.
+    # See [AssociateAccessGrantsIdentityCenter][3] and
+    # [DissociateAccessGrantsIdentityCenter][4].
+    #
+    # Permissions
+    #
+    # : You must have the `s3:DeleteAccessGrantsInstance` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_grants_instance({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstance AWS API Documentation
+    #
+    # @overload delete_access_grants_instance(params = {})
+    # @param [Hash] params ({})
+    def delete_access_grants_instance(params = {}, options = {})
+      req = build_request(:delete_access_grants_instance, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource policy of the S3 Access Grants instance. The
+    # resource policy is used to manage cross-account access to your S3
+    # Access Grants instance. By deleting the resource policy, you delete
+    # any cross-account permissions to your S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:DeleteAccessGrantsInstanceResourcePolicy`
+    #   permission to use this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_grants_instance_resource_policy({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstanceResourcePolicy AWS API Documentation
+    #
+    # @overload delete_access_grants_instance_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_access_grants_instance_resource_policy(params = {}, options = {})
+      req = build_request(:delete_access_grants_instance_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deregisters a location from your S3 Access Grants instance. You can
+    # only delete a location registration from an S3 Access Grants instance
+    # if there are no grants associated with this location. See [Delete a
+    # grant][1] for information on how to delete grants. You need to have at
+    # least one registered location in your S3 Access Grants instance in
+    # order to create access grants.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:DeleteAccessGrantsLocation` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grants_location_id
+    #   The ID of the registered location that you are deregistering from your
+    #   S3 Access Grants instance. S3 Access Grants assigned this ID when you
+    #   registered the location. S3 Access Grants assigns the ID `default` to
+    #   the default location `s3://` and assigns an auto-generated ID to other
+    #   locations that you register.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_grants_location({
+    #     account_id: "AccountId",
+    #     access_grants_location_id: "AccessGrantsLocationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsLocation AWS API Documentation
+    #
+    # @overload delete_access_grants_location(params = {})
+    # @param [Hash] params ({})
+    def delete_access_grants_location(params = {}, options = {})
+      req = build_request(:delete_access_grants_location, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes the specified access point.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
@@ -1165,6 +1823,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes the specified Object Lambda Access Point.
     #
     # The following actions are related to
@@ -1207,6 +1869,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes the access point policy for the specified access point.
     #
     #
@@ -1268,6 +1934,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Removes the resource policy for an Object Lambda Access Point.
     #
     # The following actions are related to
@@ -1394,10 +2064,10 @@ module Aws::S3Control
     # the deleted lifecycle configuration. For more information, see [Using
     # Amazon S3 on Outposts][2] in *Amazon S3 User Guide*.
     #
-    # To use this action, you must have permission to perform the
-    # `s3-outposts:DeleteLifecycleConfiguration` action. By default, the
-    # bucket owner has this permission and the Outposts bucket owner can
-    # grant this permission to others.
+    # To use this operation, you must have permission to perform the
+    # `s3-outposts:PutLifecycleConfiguration` action. By default, the bucket
+    # owner has this permission and the Outposts bucket owner can grant this
+    # permission to others.
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
     # additional parameter of `x-amz-outpost-id` to be passed with the
@@ -1717,12 +2387,13 @@ module Aws::S3Control
     end
 
     # Removes the entire tag set from the specified S3 Batch Operations job.
-    # To use the `DeleteJobTagging` operation, you must have permission to
-    # perform the `s3:DeleteJobTagging` action. For more information, see
-    # [Controlling access and labeling jobs using tags][1] in the *Amazon S3
-    # User Guide*.
     #
+    # Permissions
     #
+    # : To use the `DeleteJobTagging` operation, you must have permission to
+    #   perform the `s3:DeleteJobTagging` action. For more information, see
+    #   [Controlling access and labeling jobs using tags][1] in the *Amazon
+    #   S3 User Guide*.
     #
     # Related actions include:
     #
@@ -1764,6 +2435,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes a Multi-Region Access Point. This action does not delete the
     # buckets associated with the Multi-Region Access Point, only the
     # Multi-Region Access Point itself.
@@ -1838,6 +2513,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Removes the `PublicAccessBlock` configuration for an Amazon Web
     # Services account. For more information, see [ Using Amazon S3 block
     # public access][1].
@@ -1875,6 +2554,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes the Amazon S3 Storage Lens configuration. For more information
     # about S3 Storage Lens, see [Assessing your storage activity and usage
     # with Amazon S3 Storage Lens ][1] in the *Amazon S3 User Guide*.
@@ -1915,6 +2598,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Deletes the Amazon S3 Storage Lens configuration tags. For more
     # information about S3 Storage Lens, see [Assessing your storage
     # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon S3
@@ -1956,11 +2643,54 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Deletes an existing S3 Storage Lens group.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:DeleteStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you're trying to delete.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID used to create the Storage Lens
+    #   group that you're trying to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensGroup AWS API Documentation
+    #
+    # @overload delete_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_group(params = {}, options = {})
+      req = build_request(:delete_storage_lens_group, params)
+      req.send_request(options)
+    end
+
     # Retrieves the configuration parameters and status for a Batch
     # Operations job. For more information, see [S3 Batch Operations][1] in
     # the *Amazon S3 User Guide*.
     #
+    # Permissions
     #
+    # : To use the `DescribeJob` operation, you must have permission to
+    #   perform the `s3:DescribeJob` action.
     #
     # Related actions include:
     #
@@ -2012,6 +2742,9 @@ module Aws::S3Control
     #   resp.job.manifest.location.object_version_id #=> String
     #   resp.job.manifest.location.etag #=> String
     #   resp.job.operation.lambda_invoke.function_arn #=> String
+    #   resp.job.operation.lambda_invoke.invocation_schema_version #=> String
+    #   resp.job.operation.lambda_invoke.user_arguments #=> Hash
+    #   resp.job.operation.lambda_invoke.user_arguments["NonEmptyMaxLength64String"] #=> String
     #   resp.job.operation.s3_put_object_copy.target_resource #=> String
     #   resp.job.operation.s3_put_object_copy.canned_access_control_list #=> String, one of "private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control"
     #   resp.job.operation.s3_put_object_copy.access_control_grants #=> Array
@@ -2095,6 +2828,16 @@ module Aws::S3Control
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.created_before #=> Time
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses #=> Array
     #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses[0] #=> String, one of "COMPLETED", "FAILED", "REPLICA", "NONE"
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_prefix #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_prefix[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_suffix #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_suffix[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_substring #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.key_name_constraint.match_any_substring[0] #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_size_greater_than_bytes #=> Integer
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_size_less_than_bytes #=> Integer
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.match_any_storage_class[0] #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.job.manifest_generator.s3_job_manifest_generator.enable_manifest_output #=> Boolean
     #   resp.job.generated_manifest_descriptor.format #=> String, one of "S3InventoryReport_CSV_20211130"
     #   resp.job.generated_manifest_descriptor.location.object_arn #=> String
@@ -2110,6 +2853,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Retrieves the status of an asynchronous request to manage a
     # Multi-Region Access Point. For more information about managing
     # Multi-Region Access Points and how asynchronous requests work, see
@@ -2189,6 +2936,270 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Dissociates the Amazon Web Services IAM Identity Center instance from
+    # the S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:DissociateAccessGrantsIdentityCenter`
+    #   permission to use this operation.
+    #
+    # Additional Permissions
+    #
+    # : You must have the `sso:DeleteApplication` permission to use this
+    #   operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dissociate_access_grants_identity_center({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DissociateAccessGrantsIdentityCenter AWS API Documentation
+    #
+    # @overload dissociate_access_grants_identity_center(params = {})
+    # @param [Hash] params ({})
+    def dissociate_access_grants_identity_center(params = {}, options = {})
+      req = build_request(:dissociate_access_grants_identity_center, params)
+      req.send_request(options)
+    end
+
+    # Get the details of an access grant from your S3 Access Grants
+    # instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetAccessGrant` permission to use this
+    #   operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grant_id
+    #   The ID of the access grant. S3 Access Grants auto-generates this ID
+    #   when you create the access grant.
+    #
+    # @return [Types::GetAccessGrantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessGrantResult#created_at #created_at} => Time
+    #   * {Types::GetAccessGrantResult#access_grant_id #access_grant_id} => String
+    #   * {Types::GetAccessGrantResult#access_grant_arn #access_grant_arn} => String
+    #   * {Types::GetAccessGrantResult#grantee #grantee} => Types::Grantee
+    #   * {Types::GetAccessGrantResult#permission #permission} => String
+    #   * {Types::GetAccessGrantResult#access_grants_location_id #access_grants_location_id} => String
+    #   * {Types::GetAccessGrantResult#access_grants_location_configuration #access_grants_location_configuration} => Types::AccessGrantsLocationConfiguration
+    #   * {Types::GetAccessGrantResult#grant_scope #grant_scope} => String
+    #   * {Types::GetAccessGrantResult#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_grant({
+    #     account_id: "AccountId",
+    #     access_grant_id: "AccessGrantId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grant_id #=> String
+    #   resp.access_grant_arn #=> String
+    #   resp.grantee.grantee_type #=> String, one of "DIRECTORY_USER", "DIRECTORY_GROUP", "IAM"
+    #   resp.grantee.grantee_identifier #=> String
+    #   resp.permission #=> String, one of "READ", "WRITE", "READWRITE"
+    #   resp.access_grants_location_id #=> String
+    #   resp.access_grants_location_configuration.s3_sub_prefix #=> String
+    #   resp.grant_scope #=> String
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrant AWS API Documentation
+    #
+    # @overload get_access_grant(params = {})
+    # @param [Hash] params ({})
+    def get_access_grant(params = {}, options = {})
+      req = build_request(:get_access_grant, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the S3 Access Grants instance for a Region in your account.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetAccessGrantsInstance` permission to use
+    #   this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @return [Types::GetAccessGrantsInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessGrantsInstanceResult#access_grants_instance_arn #access_grants_instance_arn} => String
+    #   * {Types::GetAccessGrantsInstanceResult#access_grants_instance_id #access_grants_instance_id} => String
+    #   * {Types::GetAccessGrantsInstanceResult#identity_center_arn #identity_center_arn} => String
+    #   * {Types::GetAccessGrantsInstanceResult#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_grants_instance({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_grants_instance_arn #=> String
+    #   resp.access_grants_instance_id #=> String
+    #   resp.identity_center_arn #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstance AWS API Documentation
+    #
+    # @overload get_access_grants_instance(params = {})
+    # @param [Hash] params ({})
+    def get_access_grants_instance(params = {}, options = {})
+      req = build_request(:get_access_grants_instance, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the S3 Access Grants instance that contains a particular
+    # prefix.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetAccessGrantsInstanceForPrefix` permission
+    #   for the caller account to use this operation.
+    #
+    # Additional Permissions
+    #
+    # : The prefix owner account must grant you the following permissions to
+    #   their S3 Access Grants instance:
+    #   `s3:GetAccessGrantsInstanceForPrefix`.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :s3_prefix
+    #   The S3 prefix of the access grants that you would like to retrieve.
+    #
+    # @return [Types::GetAccessGrantsInstanceForPrefixResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessGrantsInstanceForPrefixResult#access_grants_instance_arn #access_grants_instance_arn} => String
+    #   * {Types::GetAccessGrantsInstanceForPrefixResult#access_grants_instance_id #access_grants_instance_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_grants_instance_for_prefix({
+    #     account_id: "AccountId",
+    #     s3_prefix: "S3Prefix", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_grants_instance_arn #=> String
+    #   resp.access_grants_instance_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceForPrefix AWS API Documentation
+    #
+    # @overload get_access_grants_instance_for_prefix(params = {})
+    # @param [Hash] params ({})
+    def get_access_grants_instance_for_prefix(params = {}, options = {})
+      req = build_request(:get_access_grants_instance_for_prefix, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource policy of the S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetAccessGrantsInstanceResourcePolicy`
+    #   permission to use this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @return [Types::GetAccessGrantsInstanceResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessGrantsInstanceResourcePolicyResult#policy #policy} => String
+    #   * {Types::GetAccessGrantsInstanceResourcePolicyResult#organization #organization} => String
+    #   * {Types::GetAccessGrantsInstanceResourcePolicyResult#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_grants_instance_resource_policy({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.organization #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceResourcePolicy AWS API Documentation
+    #
+    # @overload get_access_grants_instance_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_access_grants_instance_resource_policy(params = {}, options = {})
+      req = build_request(:get_access_grants_instance_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a particular location registered in your S3
+    # Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetAccessGrantsLocation` permission to use
+    #   this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grants_location_id
+    #   The ID of the registered location that you are retrieving. S3 Access
+    #   Grants assigns this ID when you register the location. S3 Access
+    #   Grants assigns the ID `default` to the default location `s3://` and
+    #   assigns an auto-generated ID to other locations that you register.
+    #
+    # @return [Types::GetAccessGrantsLocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessGrantsLocationResult#created_at #created_at} => Time
+    #   * {Types::GetAccessGrantsLocationResult#access_grants_location_id #access_grants_location_id} => String
+    #   * {Types::GetAccessGrantsLocationResult#access_grants_location_arn #access_grants_location_arn} => String
+    #   * {Types::GetAccessGrantsLocationResult#location_scope #location_scope} => String
+    #   * {Types::GetAccessGrantsLocationResult#iam_role_arn #iam_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_grants_location({
+    #     account_id: "AccountId",
+    #     access_grants_location_id: "AccessGrantsLocationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grants_location_id #=> String
+    #   resp.access_grants_location_arn #=> String
+    #   resp.location_scope #=> String
+    #   resp.iam_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsLocation AWS API Documentation
+    #
+    # @overload get_access_grants_location(params = {})
+    # @param [Hash] params ({})
+    def get_access_grants_location(params = {}, options = {})
+      req = build_request(:get_access_grants_location, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns configuration information about the specified access point.
     #
     #
@@ -2283,6 +3294,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns configuration for an Object Lambda Access Point.
     #
     # The following actions are related to
@@ -2336,6 +3351,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns configuration information about the specified Object Lambda
     # Access Point
     #
@@ -2394,6 +3413,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns the access point policy associated with the specified access
     # point.
     #
@@ -2451,6 +3474,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns the resource policy for an Object Lambda Access Point.
     #
     # The following actions are related to
@@ -2496,6 +3523,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Indicates whether the specified access point currently has a policy
     # that allows public access. For more information about public access
     # through access points, see [Managing Data Access with Amazon S3 access
@@ -2535,6 +3566,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns the status of the resource policy associated with an Object
     # Lambda Access Point.
     #
@@ -2569,8 +3604,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Gets an Amazon S3 on Outposts bucket. For more information, see [
+    # <note markdown="1"> Gets an Amazon S3 on Outposts bucket. For more information, see [
     # Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
+    #
+    #  </note>
     #
     # If you are using an identity other than the root user of the Amazon
     # Web Services account that owns the Outposts bucket, the calling
@@ -3172,12 +4209,110 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns the tags on an S3 Batch Operations job. To use the
-    # `GetJobTagging` operation, you must have permission to perform the
-    # `s3:GetJobTagging` action. For more information, see [Controlling
-    # access and labeling jobs using tags][1] in the *Amazon S3 User Guide*.
+    # Returns a temporary access credential from S3 Access Grants to the
+    # grantee or client application. The [temporary credential][1] is an
+    # Amazon Web Services STS token that grants them access to the S3 data.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:GetDataAccess` permission to use this
+    #   operation.
+    #
+    # Additional Permissions
+    #
+    # : The IAM role that S3 Access Grants assumes must have the following
+    #   permissions specified in the trust policy when registering the
+    #   location: `sts:AssumeRole`, for directory users or groups
+    #   `sts:SetContext`, and for IAM users or roles `sts:SourceIdentity`.
     #
     #
+    #
+    # [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :target
+    #   The S3 URI path of the data to which you are requesting temporary
+    #   access credentials. If the requesting account has an access grant for
+    #   this data, S3 Access Grants vends temporary access credentials in the
+    #   response.
+    #
+    # @option params [required, String] :permission
+    #   The type of permission granted to your S3 data, which can be set to
+    #   one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The session duration, in seconds, of the temporary access credential
+    #   that S3 Access Grants vends to the grantee or client application. The
+    #   default value is 1 hour, but the grantee can specify a range from 900
+    #   seconds (15 minutes) up to 43200 seconds (12 hours). If the grantee
+    #   requests a value higher than this maximum, the operation fails.
+    #
+    # @option params [String] :privilege
+    #   The scope of the temporary access credential that S3 Access Grants
+    #   vends to the grantee or client application.
+    #
+    #   * `Default` – The scope of the returned temporary access token is the
+    #     scope of the grant that is closest to the target scope.
+    #
+    #   * `Minimal` – The scope of the returned temporary access token is the
+    #     same as the requested target scope as long as the requested scope is
+    #     the same as or a subset of the grant scope.
+    #
+    # @option params [String] :target_type
+    #   The type of `Target`. The only possible value is `Object`. Pass this
+    #   value if the target data that you would like to access is a path to an
+    #   object. Do not pass this value if the target data is a bucket or a
+    #   bucket and a prefix.
+    #
+    # @return [Types::GetDataAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataAccessResult#credentials #credentials} => Types::Credentials
+    #   * {Types::GetDataAccessResult#matched_grant_target #matched_grant_target} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_access({
+    #     account_id: "AccountId",
+    #     target: "S3Prefix", # required
+    #     permission: "READ", # required, accepts READ, WRITE, READWRITE
+    #     duration_seconds: 1,
+    #     privilege: "Minimal", # accepts Minimal, Default
+    #     target_type: "Object", # accepts Object
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Time
+    #   resp.matched_grant_target #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccess AWS API Documentation
+    #
+    # @overload get_data_access(params = {})
+    # @param [Hash] params ({})
+    def get_data_access(params = {}, options = {})
+      req = build_request(:get_data_access, params)
+      req.send_request(options)
+    end
+
+    # Returns the tags on an S3 Batch Operations job.
+    #
+    # Permissions
+    #
+    # : To use the `GetJobTagging` operation, you must have permission to
+    #   perform the `s3:GetJobTagging` action. For more information, see
+    #   [Controlling access and labeling jobs using tags][1] in the *Amazon
+    #   S3 User Guide*.
     #
     # Related actions include:
     #
@@ -3228,6 +4363,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns configuration information about the specified Multi-Region
     # Access Point.
     #
@@ -3305,6 +4444,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns the access control policy of the specified Multi-Region Access
     # Point.
     #
@@ -3366,6 +4509,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Indicates whether the specified Multi-Region Access Point has an
     # access control policy that allows public access.
     #
@@ -3426,6 +4573,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns the routing configuration for a Multi-Region Access Point,
     # indicating which Regions are active or passive.
     #
@@ -3483,6 +4634,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
     # Services account. For more information, see [ Using Amazon S3 block
     # public access][1].
@@ -3529,6 +4684,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Gets the Amazon S3 Storage Lens configuration. For more information,
     # see [Assessing your storage activity and usage with Amazon S3 Storage
     # Lens ][1] in the *Amazon S3 User Guide*. For a complete list of S3
@@ -3580,6 +4739,10 @@ module Aws::S3Control
     #   resp.storage_lens_configuration.account_level.advanced_cost_optimization_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.account_level.advanced_data_protection_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.account_level.detailed_status_codes_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.include #=> Array
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.include[0] #=> String
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.exclude #=> Array
+    #   resp.storage_lens_configuration.account_level.storage_lens_group_level.selection_criteria.exclude[0] #=> String
     #   resp.storage_lens_configuration.include.buckets #=> Array
     #   resp.storage_lens_configuration.include.buckets[0] #=> String
     #   resp.storage_lens_configuration.include.regions #=> Array
@@ -3608,6 +4771,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Gets the tags of Amazon S3 Storage Lens configuration. For more
     # information about S3 Storage Lens, see [Assessing your storage
     # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon S3
@@ -3657,6 +4824,324 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Retrieves the Storage Lens group configuration details.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:GetStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you're trying to retrieve the
+    #   configuration details for.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID associated with the Storage Lens
+    #   group that you're trying to retrieve the details for.
+    #
+    # @return [Types::GetStorageLensGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensGroupResult#storage_lens_group #storage_lens_group} => Types::StorageLensGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_lens_group.name #=> String
+    #   resp.storage_lens_group.filter.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.and.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.and.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.and.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.and.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.and.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.and.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_any_prefix #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_prefix[0] #=> String
+    #   resp.storage_lens_group.filter.or.match_any_suffix #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_suffix[0] #=> String
+    #   resp.storage_lens_group.filter.or.match_any_tag #=> Array
+    #   resp.storage_lens_group.filter.or.match_any_tag[0].key #=> String
+    #   resp.storage_lens_group.filter.or.match_any_tag[0].value #=> String
+    #   resp.storage_lens_group.filter.or.match_object_age.days_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_age.days_less_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_size.bytes_greater_than #=> Integer
+    #   resp.storage_lens_group.filter.or.match_object_size.bytes_less_than #=> Integer
+    #   resp.storage_lens_group.storage_lens_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensGroup AWS API Documentation
+    #
+    # @overload get_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_group(params = {}, options = {})
+      req = build_request(:get_storage_lens_group, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of access grants in your S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:ListAccessGrants` permission to use this
+    #   operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants` request in order to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the `NextToken`
+    #   to determine if there are more results.
+    #
+    # @option params [String] :grantee_type
+    #   The type of the grantee to which access has been granted. It can be
+    #   one of the following values:
+    #
+    #   * `IAM` - An IAM user or role.
+    #
+    #   * `DIRECTORY_USER` - Your corporate directory user. You can use this
+    #     option if you have added your corporate identity directory to IAM
+    #     Identity Center and associated the IAM Identity Center instance with
+    #     your S3 Access Grants instance.
+    #
+    #   * `DIRECTORY_GROUP` - Your corporate directory group. You can use this
+    #     option if you have added your corporate identity directory to IAM
+    #     Identity Center and associated the IAM Identity Center instance with
+    #     your S3 Access Grants instance.
+    #
+    # @option params [String] :grantee_identifier
+    #   The unique identifer of the `Grantee`. If the grantee type is `IAM`,
+    #   the identifier is the IAM Amazon Resource Name (ARN) of the user or
+    #   role. If the grantee type is a directory user or group, the identifier
+    #   is 128-bit universally unique identifier (UUID) in the format
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`. You can obtain this UUID from
+    #   your Amazon Web Services IAM Identity Center instance.
+    #
+    # @option params [String] :permission
+    #   The type of permission granted to your S3 data, which can be set to
+    #   one of the following values:
+    #
+    #   * `READ` – Grant read-only access to the S3 data.
+    #
+    #   * `WRITE` – Grant write-only access to the S3 data.
+    #
+    #   * `READWRITE` – Grant both read and write access to the S3 data.
+    #
+    # @option params [String] :grant_scope
+    #   The S3 path of the data to which you are granting access. It is the
+    #   result of appending the `Subprefix` to the location scope.
+    #
+    # @option params [String] :application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity
+    #   Center application associated with your Identity Center instance. If
+    #   the grant includes an application ARN, the grantee can only access the
+    #   S3 data through this application.
+    #
+    # @return [Types::ListAccessGrantsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessGrantsResult#next_token #next_token} => String
+    #   * {Types::ListAccessGrantsResult#access_grants_list #access_grants_list} => Array&lt;Types::ListAccessGrantEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_grants({
+    #     account_id: "AccountId",
+    #     next_token: "ContinuationToken",
+    #     max_results: 1,
+    #     grantee_type: "DIRECTORY_USER", # accepts DIRECTORY_USER, DIRECTORY_GROUP, IAM
+    #     grantee_identifier: "GranteeIdentifier",
+    #     permission: "READ", # accepts READ, WRITE, READWRITE
+    #     grant_scope: "S3Prefix",
+    #     application_arn: "IdentityCenterApplicationArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.access_grants_list #=> Array
+    #   resp.access_grants_list[0].created_at #=> Time
+    #   resp.access_grants_list[0].access_grant_id #=> String
+    #   resp.access_grants_list[0].access_grant_arn #=> String
+    #   resp.access_grants_list[0].grantee.grantee_type #=> String, one of "DIRECTORY_USER", "DIRECTORY_GROUP", "IAM"
+    #   resp.access_grants_list[0].grantee.grantee_identifier #=> String
+    #   resp.access_grants_list[0].permission #=> String, one of "READ", "WRITE", "READWRITE"
+    #   resp.access_grants_list[0].access_grants_location_id #=> String
+    #   resp.access_grants_list[0].access_grants_location_configuration.s3_sub_prefix #=> String
+    #   resp.access_grants_list[0].grant_scope #=> String
+    #   resp.access_grants_list[0].application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrants AWS API Documentation
+    #
+    # @overload list_access_grants(params = {})
+    # @param [Hash] params ({})
+    def list_access_grants(params = {}, options = {})
+      req = build_request(:list_access_grants, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of S3 Access Grants instances. An S3 Access Grants
+    # instance serves as a logical grouping for your individual access
+    # grants. You can only have one S3 Access Grants instance per Region per
+    # account.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:ListAccessGrantsInstances` permission to use
+    #   this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Instances` request in
+    #   order to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the `NextToken`
+    #   to determine if there are more results.
+    #
+    # @return [Types::ListAccessGrantsInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessGrantsInstancesResult#next_token #next_token} => String
+    #   * {Types::ListAccessGrantsInstancesResult#access_grants_instances_list #access_grants_instances_list} => Array&lt;Types::ListAccessGrantsInstanceEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_grants_instances({
+    #     account_id: "AccountId",
+    #     next_token: "ContinuationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.access_grants_instances_list #=> Array
+    #   resp.access_grants_instances_list[0].access_grants_instance_id #=> String
+    #   resp.access_grants_instances_list[0].access_grants_instance_arn #=> String
+    #   resp.access_grants_instances_list[0].created_at #=> Time
+    #   resp.access_grants_instances_list[0].identity_center_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstances AWS API Documentation
+    #
+    # @overload list_access_grants_instances(params = {})
+    # @param [Hash] params ({})
+    def list_access_grants_instances(params = {}, options = {})
+      req = build_request(:list_access_grants_instances, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the locations registered in your S3 Access Grants
+    # instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:ListAccessGrantsLocations` permission to use
+    #   this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Access Grants Locations` request in
+    #   order to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the `NextToken`
+    #   to determine if there are more results.
+    #
+    # @option params [String] :location_scope
+    #   The S3 path to the location that you are registering. The location
+    #   scope can be the default S3 location `s3://`, the S3 path to a bucket
+    #   `s3://<bucket>`, or the S3 path to a bucket and prefix
+    #   `s3://<bucket>/<prefix>`. A prefix in S3 is a string of characters at
+    #   the beginning of an object key name used to organize the objects that
+    #   you store in your S3 buckets. For example, object key names that start
+    #   with the `engineering/` prefix or object key names that start with the
+    #   `marketing/campaigns/` prefix.
+    #
+    # @return [Types::ListAccessGrantsLocationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessGrantsLocationsResult#next_token #next_token} => String
+    #   * {Types::ListAccessGrantsLocationsResult#access_grants_locations_list #access_grants_locations_list} => Array&lt;Types::ListAccessGrantsLocationsEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_grants_locations({
+    #     account_id: "AccountId",
+    #     next_token: "ContinuationToken",
+    #     max_results: 1,
+    #     location_scope: "S3Prefix",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.access_grants_locations_list #=> Array
+    #   resp.access_grants_locations_list[0].created_at #=> Time
+    #   resp.access_grants_locations_list[0].access_grants_location_id #=> String
+    #   resp.access_grants_locations_list[0].access_grants_location_arn #=> String
+    #   resp.access_grants_locations_list[0].location_scope #=> String
+    #   resp.access_grants_locations_list[0].iam_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsLocations AWS API Documentation
+    #
+    # @overload list_access_grants_locations(params = {})
+    # @param [Hash] params ({})
+    def list_access_grants_locations(params = {}, options = {})
+      req = build_request(:list_access_grants_locations, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns a list of the access points that are owned by the current
     # account that's associated with the specified bucket. You can retrieve
     # up to 1000 access points per call. If the specified bucket has more
@@ -3759,6 +5244,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns some or all (up to 1,000) access points associated with the
     # Object Lambda Access Point per call. If there are more access points
     # than what can be returned in one call, the response will include a
@@ -3830,10 +5319,15 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Lists current S3 Batch Operations jobs and jobs that have ended within
-    # the last 30 days for the Amazon Web Services account making the
-    # request. For more information, see [S3 Batch Operations][1] in the
-    # *Amazon S3 User Guide*.
+    # Lists current S3 Batch Operations jobs as well as the jobs that have
+    # ended within the last 30 days for the Amazon Web Services account
+    # making the request. For more information, see [S3 Batch Operations][1]
+    # in the *Amazon S3 User Guide*.
+    #
+    # Permissions
+    #
+    # : To use the `ListJobs` operation, you must have permission to perform
+    #   the `s3:ListJobs` action.
     #
     # Related actions include:
     #
@@ -3915,6 +5409,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns a list of the Multi-Region Access Points currently associated
     # with the specified Amazon Web Services account. Each call can return
     # up to 100 Multi-Region Access Points, the maximum number of
@@ -3995,6 +5493,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Returns a list of all Outposts buckets in an Outpost that are owned by
     # the authenticated sender of the request. For more information, see
     # [Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
@@ -4057,6 +5559,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Gets a list of Amazon S3 Storage Lens configurations. For more
     # information about S3 Storage Lens, see [Assessing your storage
     # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon S3
@@ -4112,6 +5618,175 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Lists all the Storage Lens groups in the specified home Region.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:ListStorageLensGroups` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that owns the Storage Lens groups.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` if there are no more
+    #   results.
+    #
+    # @return [Types::ListStorageLensGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageLensGroupsResult#next_token #next_token} => String
+    #   * {Types::ListStorageLensGroupsResult#storage_lens_group_list #storage_lens_group_list} => Array&lt;Types::ListStorageLensGroupEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_lens_groups({
+    #     account_id: "AccountId",
+    #     next_token: "ContinuationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.storage_lens_group_list #=> Array
+    #   resp.storage_lens_group_list[0].name #=> String
+    #   resp.storage_lens_group_list[0].storage_lens_group_arn #=> String
+    #   resp.storage_lens_group_list[0].home_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensGroups AWS API Documentation
+    #
+    # @overload list_storage_lens_groups(params = {})
+    # @param [Hash] params ({})
+    def list_storage_lens_groups(params = {}, options = {})
+      req = build_request(:list_storage_lens_groups, params)
+      req.send_request(options)
+    end
+
+    # This operation allows you to list all the Amazon Web Services resource
+    # tags for a specified resource. Each tag is a label consisting of a
+    # user-defined key and value. Tags can help you manage, identify,
+    # organize, search for, and filter resources.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:ListTagsForResource` permission to use this
+    #   operation.
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
+    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
+    # Lens group or S3 Access Grants instance, registered location, or
+    # grant.
+    #
+    #  </note>
+    #
+    # For more information about the required Storage Lens Groups
+    # permissions, see [Setting account permissions to use S3 Storage Lens
+    # groups][3].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the resource owner.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to
+    #   list the tags for. The tagged resource can be an S3 Storage Lens group
+    #   or S3 Access Grants instance, registered location, or grant.
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the resource policy of the S3 Access Grants instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:PutAccessGrantsInstanceResourcePolicy`
+    #   permission to use this operation.
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :policy
+    #   The resource policy of the S3 Access Grants instance that you are
+    #   updating.
+    #
+    # @option params [String] :organization
+    #   The Organization of the resource policy of the S3 Access Grants
+    #   instance.
+    #
+    # @return [Types::PutAccessGrantsInstanceResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccessGrantsInstanceResourcePolicyResult#policy #policy} => String
+    #   * {Types::PutAccessGrantsInstanceResourcePolicyResult#organization #organization} => String
+    #   * {Types::PutAccessGrantsInstanceResourcePolicyResult#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_access_grants_instance_resource_policy({
+    #     account_id: "AccountId",
+    #     policy: "PolicyDocument", # required
+    #     organization: "Organization",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.organization #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessGrantsInstanceResourcePolicy AWS API Documentation
+    #
+    # @overload put_access_grants_instance_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_access_grants_instance_resource_policy(params = {}, options = {})
+      req = build_request(:put_access_grants_instance_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Replaces configuration for an Object Lambda Access Point.
     #
     # The following actions are related to
@@ -4169,6 +5844,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Associates an access policy with the specified access point. Each
     # access point can have only one policy, so a request made to this API
     # replaces any existing policy associated with the specified access
@@ -4245,6 +5924,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Creates or replaces resource policy for an Object Lambda Access Point.
     # For an example policy, see [Creating Object Lambda Access Points][1]
     # in the *Amazon S3 User Guide*.
@@ -4961,12 +6644,10 @@ module Aws::S3Control
     # that is associated with the job. To modify the existing tag set, you
     # can either replace the existing tag set entirely, or make changes
     # within the existing tag set by retrieving the existing tag set using
-    # [GetJobTagging][1], modify that tag set, and use this action to
+    # [GetJobTagging][1], modify that tag set, and use this operation to
     # replace the tag set with the one you modified. For more information,
     # see [Controlling access and labeling jobs using tags][2] in the
     # *Amazon S3 User Guide*.
-    #
-    #
     #
     # <note markdown="1"> * If you send this request with an empty tag set, Amazon S3 deletes
     #   the existing tag set on the Batch Operations job. If you use this
@@ -4995,10 +6676,10 @@ module Aws::S3Control
     #
     #  </note>
     #
+    # Permissions
     #
-    #
-    # To use the `PutJobTagging` operation, you must have permission to
-    # perform the `s3:PutJobTagging` action.
+    # : To use the `PutJobTagging` operation, you must have permission to
+    #   perform the `s3:PutJobTagging` action.
     #
     # Related actions include:
     #
@@ -5051,6 +6732,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Associates an access control policy with the specified Multi-Region
     # Access Point. Each Multi-Region Access Point can have only one policy,
     # so a request made to this action replaces any existing policy that is
@@ -5117,6 +6802,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Creates or modifies the `PublicAccessBlock` configuration for an
     # Amazon Web Services account. For this operation, users must have the
     # `s3:PutAccountPublicAccessBlock` permission. For more information, see
@@ -5165,6 +6854,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Puts an Amazon S3 Storage Lens configuration. For more information
     # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
     # the *Amazon S3 User Guide*. For a complete list of S3 Storage Lens
@@ -5246,6 +6939,12 @@ module Aws::S3Control
     #         detailed_status_codes_metrics: {
     #           is_enabled: false,
     #         },
+    #         storage_lens_group_level: {
+    #           selection_criteria: {
+    #             include: ["StorageLensGroupArn"],
+    #             exclude: ["StorageLensGroupArn"],
+    #           },
+    #         },
     #       },
     #       include: {
     #         buckets: ["S3BucketArnString"],
@@ -5297,6 +6996,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Put or replace tags on an existing Amazon S3 Storage Lens
     # configuration. For more information about S3 Storage Lens, see
     # [Assessing your storage activity and usage with Amazon S3 Storage Lens
@@ -5351,6 +7054,10 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported by directory buckets.
+    #
+    #  </note>
+    #
     # Submits an updated route configuration for a Multi-Region Access
     # Point. This API operation updates the routing status for the specified
     # Regions from active to passive, or from passive to active. A value of
@@ -5425,11 +7132,212 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates a new Amazon Web Services resource tag or updates an existing
+    # resource tag. Each tag is a label consisting of a user-defined key and
+    # value. Tags can help you manage, identify, organize, search for, and
+    # filter resources. You can add up to 50 Amazon Web Services resource
+    # tags for each S3 resource.
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
+    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
+    # Lens group or S3 Access Grants instance, registered location, or
+    # grant.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : You must have the `s3:TagResource` permission to use this operation.
+    #
+    # For more information about the required Storage Lens Groups
+    # permissions, see [Setting account permissions to use S3 Storage Lens
+    # groups][3].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that created the S3 resource that
+    #   you're trying to add tags to or the requester's account ID.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
+    #   to add tags to. The tagged resource can be an S3 Storage Lens group or
+    #   S3 Access Grants instance, registered location, or grant.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The Amazon Web Services resource tags that you want to add to the
+    #   specified S3 resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # This operation removes the specified Amazon Web Services resource tags
+    # from an S3 resource. Each tag is a label consisting of a user-defined
+    # key and value. Tags can help you manage, identify, organize, search
+    # for, and filter resources.
+    #
+    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
+    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
+    # Lens group or S3 Access Grants instance, registered location, or
+    # grant.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : You must have the `s3:UntagResource` permission to use this
+    #   operation.
+    #
+    # For more information about the required Storage Lens Groups
+    # permissions, see [Setting account permissions to use S3 Storage Lens
+    # groups][3].
+    #
+    # For information about S3 Tagging errors, see [List of Amazon S3
+    # Tagging error codes][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID that owns the resource that you're
+    #   trying to remove the tags from.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
+    #   to remove the tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The array of tag key-value pairs that you're trying to remove from of
+    #   the S3 resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     account_id: "AccountId",
+    #     resource_arn: "S3ResourceArn", # required
+    #     tag_keys: ["TagKeyString"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the IAM role of a registered location in your S3 Access Grants
+    # instance.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:UpdateAccessGrantsLocation` permission to use
+    #   this operation.
+    #
+    # Additional Permissions
+    #
+    # : You must also have the following permission: `iam:PassRole`
+    #
+    # @option params [String] :account_id
+    #   The ID of the Amazon Web Services account that is making this request.
+    #
+    # @option params [required, String] :access_grants_location_id
+    #   The ID of the registered location that you are updating. S3 Access
+    #   Grants assigns this ID when you register the location. S3 Access
+    #   Grants assigns the ID `default` to the default location `s3://` and
+    #   assigns an auto-generated ID to other locations that you register.
+    #
+    #   The ID of the registered location to which you are granting access. S3
+    #   Access Grants assigned this ID when you registered the location. S3
+    #   Access Grants assigns the ID `default` to the default location `s3://`
+    #   and assigns an auto-generated ID to other locations that you register.
+    #
+    #   If you are passing the `default` location, you cannot create an access
+    #   grant for the entire default location. You must also specify a bucket
+    #   or a bucket and prefix in the `Subprefix` field.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for the registered
+    #   location. S3 Access Grants assumes this role to manage access to the
+    #   registered location.
+    #
+    # @return [Types::UpdateAccessGrantsLocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccessGrantsLocationResult#created_at #created_at} => Time
+    #   * {Types::UpdateAccessGrantsLocationResult#access_grants_location_id #access_grants_location_id} => String
+    #   * {Types::UpdateAccessGrantsLocationResult#access_grants_location_arn #access_grants_location_arn} => String
+    #   * {Types::UpdateAccessGrantsLocationResult#location_scope #location_scope} => String
+    #   * {Types::UpdateAccessGrantsLocationResult#iam_role_arn #iam_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_grants_location({
+    #     account_id: "AccountId",
+    #     access_grants_location_id: "AccessGrantsLocationId", # required
+    #     iam_role_arn: "IAMRoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.access_grants_location_id #=> String
+    #   resp.access_grants_location_arn #=> String
+    #   resp.location_scope #=> String
+    #   resp.iam_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateAccessGrantsLocation AWS API Documentation
+    #
+    # @overload update_access_grants_location(params = {})
+    # @param [Hash] params ({})
+    def update_access_grants_location(params = {}, options = {})
+      req = build_request(:update_access_grants_location, params)
+      req.send_request(options)
+    end
+
     # Updates an existing S3 Batch Operations job's priority. For more
     # information, see [S3 Batch Operations][1] in the *Amazon S3 User
     # Guide*.
     #
+    # Permissions
     #
+    # : To use the `UpdateJobPriority` operation, you must have permission
+    #   to perform the `s3:UpdateJobPriority` action.
     #
     # Related actions include:
     #
@@ -5486,12 +7394,15 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Updates the status for the specified job. Use this action to confirm
-    # that you want to run a job or to cancel an existing job. For more
-    # information, see [S3 Batch Operations][1] in the *Amazon S3 User
+    # Updates the status for the specified job. Use this operation to
+    # confirm that you want to run a job or to cancel an existing job. For
+    # more information, see [S3 Batch Operations][1] in the *Amazon S3 User
     # Guide*.
     #
+    # Permissions
     #
+    # : To use the `UpdateJobStatus` operation, you must have permission to
+    #   perform the `s3:UpdateJobStatus` action.
     #
     # Related actions include:
     #
@@ -5555,6 +7466,106 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Updates the existing Storage Lens group.
+    #
+    # To use this operation, you must have the permission to perform the
+    # `s3:UpdateStorageLensGroup` action. For more information about the
+    # required Storage Lens Groups permissions, see [Setting account
+    # permissions to use S3 Storage Lens groups][1].
+    #
+    # For information about Storage Lens groups errors, see [List of Amazon
+    # S3 Storage Lens error codes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+    #
+    # @option params [required, String] :name
+    #   The name of the Storage Lens group that you want to update.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the Storage Lens group owner.
+    #
+    # @option params [required, Types::StorageLensGroup] :storage_lens_group
+    #   The JSON file that contains the Storage Lens group configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage_lens_group({
+    #     name: "StorageLensGroupName", # required
+    #     account_id: "AccountId",
+    #     storage_lens_group: { # required
+    #       name: "StorageLensGroupName", # required
+    #       filter: { # required
+    #         match_any_prefix: ["Prefix"],
+    #         match_any_suffix: ["Suffix"],
+    #         match_any_tag: [
+    #           {
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
+    #           },
+    #         ],
+    #         match_object_age: {
+    #           days_greater_than: 1,
+    #           days_less_than: 1,
+    #         },
+    #         match_object_size: {
+    #           bytes_greater_than: 1,
+    #           bytes_less_than: 1,
+    #         },
+    #         and: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #         or: {
+    #           match_any_prefix: ["Prefix"],
+    #           match_any_suffix: ["Suffix"],
+    #           match_any_tag: [
+    #             {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #           ],
+    #           match_object_age: {
+    #             days_greater_than: 1,
+    #             days_less_than: 1,
+    #           },
+    #           match_object_size: {
+    #             bytes_greater_than: 1,
+    #             bytes_less_than: 1,
+    #           },
+    #         },
+    #       },
+    #       storage_lens_group_arn: "StorageLensGroupArn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateStorageLensGroup AWS API Documentation
+    #
+    # @overload update_storage_lens_group(params = {})
+    # @param [Hash] params ({})
+    def update_storage_lens_group(params = {}, options = {})
+      req = build_request(:update_storage_lens_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5568,7 +7579,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

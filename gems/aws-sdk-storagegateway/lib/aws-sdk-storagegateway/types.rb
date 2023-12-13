@@ -632,6 +632,13 @@ module Aws::StorageGateway
     #   The average upload rate limit component of the bandwidth rate limit
     #   interval, in bits per second. This field does not appear in the
     #   response if the upload rate limit is not set.
+    #
+    #   <note markdown="1"> For Tape Gateway and Volume Gateway, the minimum value is `51200`.
+    #
+    #    For S3 File Gateway and FSx File Gateway, the minimum value is
+    #   `104857600`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] average_download_rate_limit_in_bits_per_sec
@@ -2880,6 +2887,10 @@ module Aws::StorageGateway
     #   environments, and its format depends on the host environment type.
     #   @return [String]
     #
+    # @!attribute [rw] software_version
+    #   The version number of the software running on the gateway appliance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -2903,7 +2914,8 @@ module Aws::StorageGateway
       :deprecation_date,
       :gateway_capacity,
       :supported_gateway_capacities,
-      :host_environment_id)
+      :host_environment_id,
+      :software_version)
       SENSITIVE = []
       include Aws::Structure
     end

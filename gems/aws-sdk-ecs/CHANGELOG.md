@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2023-11-27)
+------------------
+
+* Feature - Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.
+
+1.133.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.132.0 (2023-11-13)
+------------------
+
+* Feature - Adds a Client Token parameter to the ECS RunTask API. The Client Token parameter allows for idempotent RunTask requests.
+
+1.131.0 (2023-10-17)
+------------------
+
+* Feature - Documentation only updates to address Amazon ECS tickets.
+
 1.130.0 (2023-09-27)
 ------------------
 

@@ -1799,6 +1799,7 @@ module Aws::IoTWireless
 
     OtaaV1_0_x.add_member(:app_key, Shapes::ShapeRef.new(shape: AppKey, location_name: "AppKey"))
     OtaaV1_0_x.add_member(:app_eui, Shapes::ShapeRef.new(shape: AppEui, location_name: "AppEui"))
+    OtaaV1_0_x.add_member(:join_eui, Shapes::ShapeRef.new(shape: JoinEui, location_name: "JoinEui"))
     OtaaV1_0_x.add_member(:gen_app_key, Shapes::ShapeRef.new(shape: GenAppKey, location_name: "GenAppKey"))
     OtaaV1_0_x.struct_class = Types::OtaaV1_0_x
 

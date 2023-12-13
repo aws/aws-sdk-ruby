@@ -2063,7 +2063,10 @@ module Aws::SESV2
     #   * If you include attachments, they must be in a file format that the
     #     Amazon SES API v2 supports.
     #
-    #   * The entire message must be Base64 encoded.
+    #   * The raw data of the message needs to base64-encoded if you are
+    #     accessing Amazon SES directly through the HTTPS interface. If you
+    #     are accessing Amazon SES using an Amazon Web Services SDK, the SDK
+    #     takes care of the base 64-encoding for you.
     #
     #   * If any of the MIME parts in your message contain content that is
     #     outside of the 7-bit ASCII character range, you should encode that
@@ -3400,6 +3403,11 @@ module Aws::SESV2
     #     for the identity.
     #   @return [String]
     #
+    # @!attribute [rw] verification_info
+    #   An object that contains additional information about the
+    #   verification status for the identity.
+    #   @return [Types::VerificationInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentityResponse AWS API Documentation
     #
     class GetEmailIdentityResponse < Struct.new(
@@ -3411,7 +3419,8 @@ module Aws::SESV2
       :policies,
       :tags,
       :configuration_set_name,
-      :verification_status)
+      :verification_status,
+      :verification_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4464,7 +4473,7 @@ module Aws::SESV2
     #   `NextToken` element, which you can use to obtain additional results.
     #
     #   The value you specify has to be at least 1, and can be no more than
-    #   10.
+    #   100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailTemplatesRequest AWS API Documentation
@@ -5976,7 +5985,10 @@ module Aws::SESV2
     #
     #   * Attachments must be in a file format that the Amazon SES supports.
     #
-    #   * The entire message must be Base64 encoded.
+    #   * The raw data of the message needs to base64-encoded if you are
+    #     accessing Amazon SES directly through the HTTPS interface. If you
+    #     are accessing Amazon SES using an Amazon Web Services SDK, the SDK
+    #     takes care of the base 64-encoding for you.
     #
     #   * If any of the MIME parts in your message contain content that is
     #     outside of the 7-bit ASCII character range, you should encode that
@@ -6135,6 +6147,31 @@ module Aws::SESV2
     class ReviewDetails < Struct.new(
       :status,
       :case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the start of authority (SOA)
+    # record associated with the identity.
+    #
+    # @!attribute [rw] primary_name_server
+    #   Primary name server specified in the SOA record.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_email
+    #   Administrative contact email from the SOA record.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   Serial number from the SOA record.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SOARecord AWS API Documentation
+    #
+    class SOARecord < Struct.new(
+      :primary_name_server,
+      :admin_email,
+      :serial_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7229,6 +7266,57 @@ module Aws::SESV2
     class VdmOptions < Struct.new(
       :dashboard_options,
       :guardian_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains additional information about the verification
+    # status for the identity.
+    #
+    # @!attribute [rw] last_checked_timestamp
+    #   The last time a verification attempt was made for this identity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_success_timestamp
+    #   The last time a successful verification was made for this identity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_type
+    #   Provides the reason for the failure describing why Amazon SES was
+    #   not able to successfully verify the identity. Below are the possible
+    #   values:
+    #
+    #   * `INVALID_VALUE` – Amazon SES was able to find the record, but the
+    #     value contained within the record was invalid. Ensure you have
+    #     published the correct values for the record.
+    #
+    #   * `TYPE_NOT_FOUND` – The queried hostname exists but does not have
+    #     the requested type of DNS record. Ensure that you have published
+    #     the correct type of DNS record.
+    #
+    #   * `HOST_NOT_FOUND` – The queried hostname does not exist or was not
+    #     reachable at the time of the request. Ensure that you have
+    #     published the required DNS record(s).
+    #
+    #   * `SERVICE_ERROR` – A temporary issue is preventing Amazon SES from
+    #     determining the verification status of the domain.
+    #
+    #   * `DNS_SERVER_ERROR` – The DNS server encountered an issue and was
+    #     unable to complete the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] soa_record
+    #   An object that contains information about the start of authority
+    #   (SOA) record associated with the identity.
+    #   @return [Types::SOARecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/VerificationInfo AWS API Documentation
+    #
+    class VerificationInfo < Struct.new(
+      :last_checked_timestamp,
+      :last_success_timestamp,
+      :error_type,
+      :soa_record)
       SENSITIVE = []
       include Aws::Structure
     end

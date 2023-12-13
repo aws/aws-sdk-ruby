@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.224.0 (2023-11-30)
+------------------
+
+* Feature - This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
+
+1.223.0 (2023-11-29)
+------------------
+
+* Feature - This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot
+
+1.222.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.221.0 (2023-11-22)
+------------------
+
+* Feature - This feature adds the end user license agreement status as a model access configuration parameter.
+
+1.220.0 (2023-11-16)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.
+
+1.219.0 (2023-11-14)
+------------------
+
+* Feature - This release makes Model Registry Inference Specification fields as not required.
+
+1.218.0 (2023-11-01)
+------------------
+
+* Feature - Support for batch transform input in Model dashboard
+
+1.217.0 (2023-10-26)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot now supports Text Generation jobs.
+
+1.216.0 (2023-10-12)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings
+
+1.215.0 (2023-10-04)
+------------------
+
+* Feature - Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
+
+1.214.0 (2023-10-03)
+------------------
+
+* Feature - This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+
 1.213.0 (2023-09-28)
 ------------------
 

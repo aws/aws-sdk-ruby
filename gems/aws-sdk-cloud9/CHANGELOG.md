@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-12-04)
+------------------
+
+* Feature - This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+
+1.63.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2023-11-17)
+------------------
+
+* Feature - A minor doc only update related to changing the date of an API change.
+
+1.60.0 (2023-10-18)
+------------------
+
+* Feature - Update to imageId parameter behavior and dates updated.
+
 1.59.0 (2023-09-27)
 ------------------
 

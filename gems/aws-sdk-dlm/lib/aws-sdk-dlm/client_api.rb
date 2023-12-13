@@ -25,6 +25,7 @@ module Aws::DLM
     CopyTags = Shapes::BooleanShape.new(name: 'CopyTags')
     CopyTagsNullable = Shapes::BooleanShape.new(name: 'CopyTagsNullable')
     Count = Shapes::IntegerShape.new(name: 'Count')
+    CreateInterval = Shapes::IntegerShape.new(name: 'CreateInterval')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CreateRule = Shapes::StructureShape.new(name: 'CreateRule')
@@ -35,6 +36,11 @@ module Aws::DLM
     CrossRegionCopyRetainRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRetainRule')
     CrossRegionCopyRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRule')
     CrossRegionCopyRules = Shapes::ListShape.new(name: 'CrossRegionCopyRules')
+    CrossRegionCopyTarget = Shapes::StructureShape.new(name: 'CrossRegionCopyTarget')
+    CrossRegionCopyTargetList = Shapes::ListShape.new(name: 'CrossRegionCopyTargetList')
+    DefaultPoliciesTypeValues = Shapes::StringShape.new(name: 'DefaultPoliciesTypeValues')
+    DefaultPolicy = Shapes::BooleanShape.new(name: 'DefaultPolicy')
+    DefaultPolicyTypeValues = Shapes::StringShape.new(name: 'DefaultPolicyTypeValues')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
     DeprecateRule = Shapes::StructureShape.new(name: 'DeprecateRule')
@@ -48,8 +54,16 @@ module Aws::DLM
     EventSourceValues = Shapes::StringShape.new(name: 'EventSourceValues')
     EventTypeValues = Shapes::StringShape.new(name: 'EventTypeValues')
     ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
+    ExcludeBootVolumes = Shapes::BooleanShape.new(name: 'ExcludeBootVolumes')
     ExcludeDataVolumeTagList = Shapes::ListShape.new(name: 'ExcludeDataVolumeTagList')
+    ExcludeTagsList = Shapes::ListShape.new(name: 'ExcludeTagsList')
+    ExcludeVolumeTypesList = Shapes::ListShape.new(name: 'ExcludeVolumeTypesList')
+    Exclusions = Shapes::StructureShape.new(name: 'Exclusions')
+    ExecuteOperationOnScriptFailure = Shapes::BooleanShape.new(name: 'ExecuteOperationOnScriptFailure')
+    ExecutionHandler = Shapes::StringShape.new(name: 'ExecutionHandler')
+    ExecutionHandlerServiceValues = Shapes::StringShape.new(name: 'ExecutionHandlerServiceValues')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
+    ExtendDeletion = Shapes::BooleanShape.new(name: 'ExtendDeletion')
     FastRestoreRule = Shapes::StructureShape.new(name: 'FastRestoreRule')
     GetLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesRequest')
     GetLifecyclePoliciesResponse = Shapes::StructureShape.new(name: 'GetLifecyclePoliciesResponse')
@@ -76,23 +90,31 @@ module Aws::DLM
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyIdList = Shapes::ListShape.new(name: 'PolicyIdList')
+    PolicyLanguageValues = Shapes::StringShape.new(name: 'PolicyLanguageValues')
     PolicyTypeValues = Shapes::StringShape.new(name: 'PolicyTypeValues')
     ResourceLocationList = Shapes::ListShape.new(name: 'ResourceLocationList')
     ResourceLocationValues = Shapes::StringShape.new(name: 'ResourceLocationValues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTypeValues = Shapes::StringShape.new(name: 'ResourceTypeValues')
     ResourceTypeValuesList = Shapes::ListShape.new(name: 'ResourceTypeValuesList')
+    RetainInterval = Shapes::IntegerShape.new(name: 'RetainInterval')
     RetainRule = Shapes::StructureShape.new(name: 'RetainRule')
     RetentionArchiveTier = Shapes::StructureShape.new(name: 'RetentionArchiveTier')
     RetentionIntervalUnitValues = Shapes::StringShape.new(name: 'RetentionIntervalUnitValues')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleList = Shapes::ListShape.new(name: 'ScheduleList')
     ScheduleName = Shapes::StringShape.new(name: 'ScheduleName')
+    Script = Shapes::StructureShape.new(name: 'Script')
+    ScriptExecutionTimeout = Shapes::IntegerShape.new(name: 'ScriptExecutionTimeout')
+    ScriptMaximumRetryCount = Shapes::IntegerShape.new(name: 'ScriptMaximumRetryCount')
+    ScriptsList = Shapes::ListShape.new(name: 'ScriptsList')
     SettablePolicyStateValues = Shapes::StringShape.new(name: 'SettablePolicyStateValues')
     ShareRule = Shapes::StructureShape.new(name: 'ShareRule')
     ShareRules = Shapes::ListShape.new(name: 'ShareRules')
     ShareTargetAccountList = Shapes::ListShape.new(name: 'ShareTargetAccountList')
     SnapshotOwnerList = Shapes::ListShape.new(name: 'SnapshotOwnerList')
+    StageValues = Shapes::StringShape.new(name: 'StageValues')
+    StagesList = Shapes::ListShape.new(name: 'StagesList')
     StandardTierRetainRuleCount = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleCount')
     StandardTierRetainRuleInterval = Shapes::IntegerShape.new(name: 'StandardTierRetainRuleInterval')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
@@ -119,6 +141,7 @@ module Aws::DLM
     UpdateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyRequest')
     UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
     VariableTagsList = Shapes::ListShape.new(name: 'VariableTagsList')
+    VolumeTypeValues = Shapes::StringShape.new(name: 'VolumeTypeValues')
 
     Action.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "Name"))
     Action.add_member(:cross_region_copy, Shapes::ShapeRef.new(shape: CrossRegionCopyActionList, required: true, location_name: "CrossRegionCopy"))
@@ -137,8 +160,15 @@ module Aws::DLM
     CreateLifecyclePolicyRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, required: true, location_name: "Description"))
     CreateLifecyclePolicyRequest.add_member(:state, Shapes::ShapeRef.new(shape: SettablePolicyStateValues, required: true, location_name: "State"))
-    CreateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: PolicyDetails, required: true, location_name: "PolicyDetails"))
+    CreateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
     CreateLifecyclePolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateLifecyclePolicyRequest.add_member(:default_policy, Shapes::ShapeRef.new(shape: DefaultPolicyTypeValues, location_name: "DefaultPolicy"))
+    CreateLifecyclePolicyRequest.add_member(:create_interval, Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
+    CreateLifecyclePolicyRequest.add_member(:retain_interval, Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
+    CreateLifecyclePolicyRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
+    CreateLifecyclePolicyRequest.add_member(:extend_deletion, Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
+    CreateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    CreateLifecyclePolicyRequest.add_member(:exclusions, Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
     CreateLifecyclePolicyRequest.struct_class = Types::CreateLifecyclePolicyRequest
 
     CreateLifecyclePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
@@ -149,6 +179,7 @@ module Aws::DLM
     CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, location_name: "IntervalUnit"))
     CreateRule.add_member(:times, Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
     CreateRule.add_member(:cron_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "CronExpression"))
+    CreateRule.add_member(:scripts, Shapes::ShapeRef.new(shape: ScriptsList, location_name: "Scripts"))
     CreateRule.struct_class = Types::CreateRule
 
     CrossRegionCopyAction.add_member(:target, Shapes::ShapeRef.new(shape: Target, required: true, location_name: "Target"))
@@ -177,6 +208,11 @@ module Aws::DLM
 
     CrossRegionCopyRules.member = Shapes::ShapeRef.new(shape: CrossRegionCopyRule)
 
+    CrossRegionCopyTarget.add_member(:target_region, Shapes::ShapeRef.new(shape: TargetRegion, location_name: "TargetRegion"))
+    CrossRegionCopyTarget.struct_class = Types::CrossRegionCopyTarget
+
+    CrossRegionCopyTargetList.member = Shapes::ShapeRef.new(shape: CrossRegionCopyTarget)
+
     DeleteLifecyclePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location: "uri", location_name: "policyId"))
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
 
@@ -202,6 +238,15 @@ module Aws::DLM
 
     ExcludeDataVolumeTagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    ExcludeTagsList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    ExcludeVolumeTypesList.member = Shapes::ShapeRef.new(shape: VolumeTypeValues)
+
+    Exclusions.add_member(:exclude_boot_volumes, Shapes::ShapeRef.new(shape: ExcludeBootVolumes, location_name: "ExcludeBootVolumes"))
+    Exclusions.add_member(:exclude_volume_types, Shapes::ShapeRef.new(shape: ExcludeVolumeTypesList, location_name: "ExcludeVolumeTypes"))
+    Exclusions.add_member(:exclude_tags, Shapes::ShapeRef.new(shape: ExcludeTagsList, location_name: "ExcludeTags"))
+    Exclusions.struct_class = Types::Exclusions
+
     FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
     FastRestoreRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
     FastRestoreRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
@@ -213,6 +258,7 @@ module Aws::DLM
     GetLifecyclePoliciesRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location: "querystring", location_name: "resourceTypes"))
     GetLifecyclePoliciesRequest.add_member(:target_tags, Shapes::ShapeRef.new(shape: TargetTagsFilterList, location: "querystring", location_name: "targetTags"))
     GetLifecyclePoliciesRequest.add_member(:tags_to_add, Shapes::ShapeRef.new(shape: TagsToAddFilterList, location: "querystring", location_name: "tagsToAdd"))
+    GetLifecyclePoliciesRequest.add_member(:default_policy_type, Shapes::ShapeRef.new(shape: DefaultPoliciesTypeValues, location: "querystring", location_name: "defaultPolicyType"))
     GetLifecyclePoliciesRequest.struct_class = Types::GetLifecyclePoliciesRequest
 
     GetLifecyclePoliciesResponse.add_member(:policies, Shapes::ShapeRef.new(shape: LifecyclePolicySummaryList, location_name: "Policies"))
@@ -244,6 +290,7 @@ module Aws::DLM
     LifecyclePolicy.add_member(:policy_details, Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
     LifecyclePolicy.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     LifecyclePolicy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "PolicyArn"))
+    LifecyclePolicy.add_member(:default_policy, Shapes::ShapeRef.new(shape: DefaultPolicy, location_name: "DefaultPolicy"))
     LifecyclePolicy.struct_class = Types::LifecyclePolicy
 
     LifecyclePolicySummary.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
@@ -251,6 +298,7 @@ module Aws::DLM
     LifecyclePolicySummary.add_member(:state, Shapes::ShapeRef.new(shape: GettablePolicyStateValues, location_name: "State"))
     LifecyclePolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     LifecyclePolicySummary.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
+    LifecyclePolicySummary.add_member(:default_policy, Shapes::ShapeRef.new(shape: DefaultPolicy, location_name: "DefaultPolicy"))
     LifecyclePolicySummary.struct_class = Types::LifecyclePolicySummary
 
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
@@ -281,6 +329,14 @@ module Aws::DLM
     PolicyDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     PolicyDetails.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
     PolicyDetails.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
+    PolicyDetails.add_member(:policy_language, Shapes::ShapeRef.new(shape: PolicyLanguageValues, location_name: "PolicyLanguage"))
+    PolicyDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeValues, location_name: "ResourceType"))
+    PolicyDetails.add_member(:create_interval, Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
+    PolicyDetails.add_member(:retain_interval, Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
+    PolicyDetails.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
+    PolicyDetails.add_member(:cross_region_copy_targets, Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    PolicyDetails.add_member(:extend_deletion, Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
+    PolicyDetails.add_member(:exclusions, Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
     PolicyDetails.struct_class = Types::PolicyDetails
 
     PolicyIdList.member = Shapes::ShapeRef.new(shape: PolicyId)
@@ -320,6 +376,16 @@ module Aws::DLM
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)
 
+    Script.add_member(:stages, Shapes::ShapeRef.new(shape: StagesList, location_name: "Stages"))
+    Script.add_member(:execution_handler_service, Shapes::ShapeRef.new(shape: ExecutionHandlerServiceValues, location_name: "ExecutionHandlerService"))
+    Script.add_member(:execution_handler, Shapes::ShapeRef.new(shape: ExecutionHandler, required: true, location_name: "ExecutionHandler"))
+    Script.add_member(:execute_operation_on_script_failure, Shapes::ShapeRef.new(shape: ExecuteOperationOnScriptFailure, location_name: "ExecuteOperationOnScriptFailure"))
+    Script.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: ScriptExecutionTimeout, location_name: "ExecutionTimeout"))
+    Script.add_member(:maximum_retry_count, Shapes::ShapeRef.new(shape: ScriptMaximumRetryCount, location_name: "MaximumRetryCount"))
+    Script.struct_class = Types::Script
+
+    ScriptsList.member = Shapes::ShapeRef.new(shape: Script)
+
     ShareRule.add_member(:target_accounts, Shapes::ShapeRef.new(shape: ShareTargetAccountList, required: true, location_name: "TargetAccounts"))
     ShareRule.add_member(:unshare_interval, Shapes::ShapeRef.new(shape: Interval, location_name: "UnshareInterval"))
     ShareRule.add_member(:unshare_interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "UnshareIntervalUnit"))
@@ -330,6 +396,8 @@ module Aws::DLM
     ShareTargetAccountList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     SnapshotOwnerList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
+    StagesList.member = Shapes::ShapeRef.new(shape: StageValues)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -367,6 +435,12 @@ module Aws::DLM
     UpdateLifecyclePolicyRequest.add_member(:state, Shapes::ShapeRef.new(shape: SettablePolicyStateValues, location_name: "State"))
     UpdateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
     UpdateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: PolicyDetails, location_name: "PolicyDetails"))
+    UpdateLifecyclePolicyRequest.add_member(:create_interval, Shapes::ShapeRef.new(shape: CreateInterval, location_name: "CreateInterval"))
+    UpdateLifecyclePolicyRequest.add_member(:retain_interval, Shapes::ShapeRef.new(shape: RetainInterval, location_name: "RetainInterval"))
+    UpdateLifecyclePolicyRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
+    UpdateLifecyclePolicyRequest.add_member(:extend_deletion, Shapes::ShapeRef.new(shape: ExtendDeletion, location_name: "ExtendDeletion"))
+    UpdateLifecyclePolicyRequest.add_member(:cross_region_copy_targets, Shapes::ShapeRef.new(shape: CrossRegionCopyTargetList, location_name: "CrossRegionCopyTargets"))
+    UpdateLifecyclePolicyRequest.add_member(:exclusions, Shapes::ShapeRef.new(shape: Exclusions, location_name: "Exclusions"))
     UpdateLifecyclePolicyRequest.struct_class = Types::UpdateLifecyclePolicyRequest
 
     UpdateLifecyclePolicyResponse.struct_class = Types::UpdateLifecyclePolicyResponse
@@ -406,7 +480,7 @@ module Aws::DLM
       api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteLifecyclePolicy"
         o.http_method = "DELETE"
-        o.http_request_uri = "/policies/{policyId}/"
+        o.http_request_uri = "/policies/{policyId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -429,7 +503,7 @@ module Aws::DLM
       api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLifecyclePolicy"
         o.http_method = "GET"
-        o.http_request_uri = "/policies/{policyId}/"
+        o.http_request_uri = "/policies/{policyId}"
         o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

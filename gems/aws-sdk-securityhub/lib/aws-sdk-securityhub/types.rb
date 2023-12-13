@@ -329,6 +329,36 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Options for filtering the `ListConfigurationPolicyAssociations`
+    # response. You can filter by the Amazon Resource Name (ARN) or
+    # universally unique identifier (UUID) of a configuration policy,
+    # `AssociationType`, or `AssociationStatus`.
+    #
+    # @!attribute [rw] configuration_policy_id
+    #   The ARN or UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between a target and a
+    #   configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between a target and a
+    #   configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationFilters AWS API Documentation
+    #
+    class AssociationFilters < Struct.new(
+      :configuration_policy_id,
+      :association_type,
+      :association_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The associations between a route table and one or more subnets or a
     # gateway.
     #
@@ -886,6 +916,26 @@ module Aws::SecurityHub
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::MapFilter>]
     #
+    # @!attribute [rw] resource_application_arn
+    #   The Amazon Resource Name (ARN) of the application that is related to
+    #   a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_name
+    #   The name of the application that is related to a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account in which a finding was
+    #   generated.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation
     #
     class AutomationRulesFindingFilters < Struct.new(
@@ -923,7 +973,10 @@ module Aws::SecurityHub
       :note_text,
       :note_updated_at,
       :note_updated_by,
-      :user_defined_fields)
+      :user_defined_fields,
+      :resource_application_arn,
+      :resource_application_name,
+      :aws_account_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4232,7 +4285,7 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), AWS Elemental MediaStore, or other server from
+    # example, a web server), Elemental MediaStore, or other server from
     # which CloudFront gets your files.
     #
     # @!attribute [rw] domain_name
@@ -5104,6 +5157,297 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Database Migration Service (DMS) endpoint.
+    # An endpoint provides connection, data store type, and location
+    # information about your data store.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the SSL certificate that encrypts
+    #   connections between the DMS endpoint and the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the endpoint database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_identifier
+    #   The database endpoint identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint. Valid values are source and target.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The type of engine for the endpoint, depending on the `EndpointType`
+    #   value.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   A value that can be used for cross-account validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] extra_connection_attributes
+    #   Additional attributes associated with the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An DMS key identifier that is used to encrypt the connection
+    #   parameters for the endpoint. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then DMS uses your default encryption key. KMS
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port used to access the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server where the endpoint database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the endpoint. The default is none.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The user name to be used to log in to the endpoint database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsEndpointDetails AWS API Documentation
+    #
+    class AwsDmsEndpointDetails < Struct.new(
+      :certificate_arn,
+      :database_name,
+      :endpoint_arn,
+      :endpoint_identifier,
+      :endpoint_type,
+      :engine_name,
+      :external_id,
+      :extra_connection_attributes,
+      :kms_key_id,
+      :port,
+      :server_name,
+      :ssl_mode,
+      :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Database Migration Service (DMS) replication
+    # instance. DMS uses a replication instance to connect to your source
+    # data store, read the source data, and format the data for consumption
+    # by the target data store.
+    #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gigabytes) that is allocated for the
+    #   replication instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Indicates whether minor engine upgrades are applied automatically to
+    #   the replication instance during the maintenance window.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone that the replication instance is created in.
+    #   The default value is a random, system-chosen Availability Zone in
+    #   the endpoint's Amazon Web Services Region, such as `us-east-1d`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version number of the replication instance. If an engine
+    #   version number is not specified when a replication instance is
+    #   created, the default is the latest engine version available.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the data on the
+    #   replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, DMS uses your default encryption key. KMS
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_az
+    #   Specifies whether the replication instance is deployed across
+    #   multiple Availability Zones (AZs). You can't set the
+    #   `AvailabilityZone` parameter if the `MultiAZ` parameter is set to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The maintenance window times for the replication instance. Upgrades
+    #   to the replication instance are performed during this time.
+    #   @return [String]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Specifies the accessibility options for the replication instance. A
+    #   value of `true` represents an instance with a public IP address. A
+    #   value of `false` represents an instance with a private IP address.
+    #   The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] replication_instance_class
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_identifier
+    #   The replication instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_subnet_group
+    #   The subnet group for the replication instance.
+    #   @return [Types::AwsDmsReplicationInstanceReplicationSubnetGroupDetails]
+    #
+    # @!attribute [rw] vpc_security_groups
+    #   The virtual private cloud (VPC) security group for the replication
+    #   instance.
+    #   @return [Array<Types::AwsDmsReplicationInstanceVpcSecurityGroupsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceDetails < Struct.new(
+      :allocated_storage,
+      :auto_minor_version_upgrade,
+      :availability_zone,
+      :engine_version,
+      :kms_key_id,
+      :multi_az,
+      :preferred_maintenance_window,
+      :publicly_accessible,
+      :replication_instance_class,
+      :replication_instance_identifier,
+      :replication_subnet_group,
+      :vpc_security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the replication subnet group.
+    #
+    # @!attribute [rw] replication_subnet_group_identifier
+    #   The identifier of the replication subnet group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceReplicationSubnetGroupDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceReplicationSubnetGroupDetails < Struct.new(
+      :replication_subnet_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the virtual private cloud (VPC) security group
+    # that’s associated with the replication instance.
+    #
+    # @!attribute [rw] vpc_security_group_id
+    #   The identifier of the VPC security group that’s associated with the
+    #   replication instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationInstanceVpcSecurityGroupsDetails AWS API Documentation
+    #
+    class AwsDmsReplicationInstanceVpcSecurityGroupsDetails < Struct.new(
+      :vpc_security_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Database Migration Service (DMS) replication
+    # task. A replication task moves a set of data from the source endpoint
+    # to the target endpoint.
+    #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. `CCdcStartPosition` or `CCdcStartTime` specifies when you
+    #   want a CDC operation to start. Only a value for one of these fields
+    #   is included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_start_time
+    #   Indicates the start time for a CDC operation. `CdcStartPosition` or
+    #   `CCdcStartTime` specifies when you want a CDC operation to start.
+    #   Only a value for one of these fields is included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a CDC operation to stop. The value can be
+    #   either server time or commit time.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_type
+    #   The migration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A display name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter. If you don't specify a
+    #   `ResourceIdentifier` value, DMS generates a default identifier value
+    #   for the end of `EndpointArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of a replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_identifier
+    #   The user-defined replication task identifier or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_settings
+    #   The settings for the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The ARN of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_mappings
+    #   The table mappings for the replication task, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_endpoint_arn
+    #   The ARN of the target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDmsReplicationTaskDetails AWS API Documentation
+    #
+    class AwsDmsReplicationTaskDetails < Struct.new(
+      :cdc_start_position,
+      :cdc_start_time,
+      :cdc_stop_position,
+      :migration_type,
+      :id,
+      :resource_identifier,
+      :replication_instance_arn,
+      :replication_task_identifier,
+      :replication_task_settings,
+      :source_endpoint_arn,
+      :table_mappings,
+      :target_endpoint_arn,
+      :task_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a definition of an attribute for the table.
     #
     # @!attribute [rw] attribute_name
@@ -5256,6 +5600,11 @@ module Aws::SecurityHub
     #   * `UPDATING`
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableDetails AWS API Documentation
     #
     class AwsDynamoDbTableDetails < Struct.new(
@@ -5277,7 +5626,8 @@ module Aws::SecurityHub
       :table_id,
       :table_name,
       :table_size_bytes,
-      :table_status)
+      :table_status,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5658,6 +6008,281 @@ module Aws::SecurityHub
     class AwsDynamoDbTableStreamSpecification < Struct.new(
       :stream_enabled,
       :stream_view_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Active Directory that’s used to authenticate
+    # an Client VPN endpoint.
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the authentication method used by the Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] type
+    #   The authentication type used.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory
+    #   Information about the Active Directory, if applicable. With Active
+    #   Directory authentication, clients are authenticated against existing
+    #   Active Directory groups.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails]
+    #
+    # @!attribute [rw] mutual_authentication
+    #   Information about the authentication certificates, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails]
+    #
+    # @!attribute [rw] federated_authentication
+    #   Information about the IAM SAML identity provider, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsDetails < Struct.new(
+      :type,
+      :active_directory,
+      :mutual_authentication,
+      :federated_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the IAM SAML identity providers used for federated
+    # authentication.
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider for
+    #   the self-service portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails < Struct.new(
+      :saml_provider_arn,
+      :self_service_saml_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client certificate used for authentication.
+    #
+    # @!attribute [rw] client_root_certificate_chain
+    #   The Amazon Resource Name (ARN) of the client certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
+      :client_root_certificate_chain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of any updates to the client connect options.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsDetails < Struct.new(
+      :enabled,
+      :lambda_function_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of the Client VPN endpoint attribute.
+    #
+    # @!attribute [rw] code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for enabling a customizable text banner that will be displayed
+    # on Amazon Web Services provided clients when a VPN session is
+    # established.
+    #
+    # @!attribute [rw] enabled
+    #   Current state of text banner feature.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] banner_text
+    #   Customizable text that will be displayed in a banner on Amazon Web
+    #   Services provided clients when a VPN session is established.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails < Struct.new(
+      :enabled,
+      :banner_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client connection logging options for the Client
+    # VPN endpoint.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connection logging is enabled for the
+    #   Client VPN endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloudwatch_log_group
+    #   The name of the Amazon CloudWatch Logs log group to which connection
+    #   logging data is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloudwatch_log_stream
+    #   The name of the Amazon CloudWatch Logs log stream to which
+    #   connection logging data is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointConnectionLogOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointConnectionLogOptionsDetails < Struct.new(
+      :enabled,
+      :cloudwatch_log_group,
+      :cloudwatch_log_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Client VPN endpoint. A Client VPN endpoint is the
+    # resource that you create and configure to enable and manage client VPN
+    # sessions. It's the termination point for all client VPN sessions.
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which client IP
+    #   addresses are assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_server
+    #   Information about the DNS servers to be used for DNS resolution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether split-tunnel is enabled in the Client VPN
+    #   endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transport_protocol
+    #   The transport protocol used by the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_port
+    #   The port number for the Client VPN endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The Amazon Resource Name (ARN) of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_options
+    #   Information about the authentication method used by the Client VPN
+    #   endpoint.
+    #   @return [Array<Types::AwsEc2ClientVpnEndpointAuthenticationOptionsDetails>]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options for the
+    #   Client VPN endpoint.
+    #   @return [Types::AwsEc2ClientVpnEndpointConnectionLogOptionsDetails]
+    #
+    # @!attribute [rw] security_group_id_set
+    #   The IDs of the security groups for the target network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_portal_url
+    #   The URL of the self-service portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsDetails]
+    #
+    # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointDetails < Struct.new(
+      :client_vpn_endpoint_id,
+      :description,
+      :client_cidr_block,
+      :dns_server,
+      :split_tunnel,
+      :transport_protocol,
+      :vpn_port,
+      :server_certificate_arn,
+      :authentication_options,
+      :connection_log_options,
+      :security_group_id_set,
+      :vpc_id,
+      :self_service_portal_url,
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10222,6 +10847,10 @@ module Aws::SecurityHub
     #   The data volume definitions for the task.
     #   @return [Array<Types::AwsEcsTaskDefinitionVolumesDetails>]
     #
+    # @!attribute [rw] status
+    #   The status of the task definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionDetails AWS API Documentation
     #
     class AwsEcsTaskDefinitionDetails < Struct.new(
@@ -10238,7 +10867,8 @@ module Aws::SecurityHub
       :proxy_configuration,
       :requires_compatibilities,
       :task_role_arn,
-      :volumes)
+      :volumes,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12027,6 +12657,207 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon EventBridge global endpoint. The
+    # endpoint can improve your application’s availability by making it
+    # Regional-fault tolerant.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The URL subdomain of the endpoint. For example, if `EndpointUrl` is
+    #   `https://abcde.veo.endpoints.event.amazonaws.com`, then the
+    #   `EndpointId` is `abcde.veo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_buses
+    #   The event buses being used by the endpoint.
+    #   @return [Array<Types::AwsEventsEndpointEventBusesDetails>]
+    #
+    # @!attribute [rw] name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_config
+    #   Whether event replication was enabled or disabled for this endpoint.
+    #   The default state is `ENABLED`, which means you must supply a
+    #   `RoleArn`. If you don't have a `RoleArn` or you don't want event
+    #   replication enabled, set the state to `DISABLED`.
+    #   @return [Types::AwsEventsEndpointReplicationConfigDetails]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used by event replication for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_config
+    #   The routing configuration of the endpoint.
+    #   @return [Types::AwsEventsEndpointRoutingConfigDetails]
+    #
+    # @!attribute [rw] state
+    #   The current state of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason the endpoint is in its current state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointDetails AWS API Documentation
+    #
+    class AwsEventsEndpointDetails < Struct.new(
+      :arn,
+      :description,
+      :endpoint_id,
+      :endpoint_url,
+      :event_buses,
+      :name,
+      :replication_config,
+      :role_arn,
+      :routing_config,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the Amazon EventBridge event buses that the
+    # endpoint is associated with.
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The Amazon Resource Name (ARN) of the event bus that the endpoint is
+    #   associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointEventBusesDetails AWS API Documentation
+    #
+    class AwsEventsEndpointEventBusesDetails < Struct.new(
+      :event_bus_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether replication is enabled or disabled for the endpoint.
+    # If enabled, the endpoint can replicate all events to a secondary
+    # Amazon Web Services Region.
+    #
+    # @!attribute [rw] state
+    #   The state of event replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointReplicationConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointReplicationConfigDetails < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the routing configuration of the endpoint.
+    #
+    # @!attribute [rw] failover_config
+    #   The failover configuration for an endpoint. This includes what
+    #   triggers failover and what happens when it's triggered.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigDetails < Struct.new(
+      :failover_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failover configuration for an endpoint. This includes what
+    # triggers failover and what happens when it's triggered.
+    #
+    # @!attribute [rw] primary
+    #   The main Region of the endpoint.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails]
+    #
+    # @!attribute [rw] secondary
+    #   The Region that events are routed to when failover is triggered or
+    #   event replication is enabled.
+    #   @return [Types::AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigDetails < Struct.new(
+      :primary,
+      :secondary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the primary Amazon Web Services Region of the
+    # endpoint.
+    #
+    # @!attribute [rw] health_check
+    #   The Amazon Resource Name (ARN) of the health check used by the
+    #   endpoint to determine whether failover is triggered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails < Struct.new(
+      :health_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Region that events are routed to when failover
+    # is triggered or event replication is enabled.
+    #
+    # @!attribute [rw] route
+    #   Defines the secondary Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails AWS API Documentation
+    #
+    class AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails < Struct.new(
+      :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about Amazon EventBridge event bus. An event bus is a
+    # router that receives events and delivers them to zero or more
+    # destinations, or targets. This can be a custom event bus which you can
+    # use to receive events from your custom applications and services, or
+    # it can be a partner event bus which can be matched to a partner event
+    # source.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account permitted to write
+    #   events to the current account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy that enables the external account to send events to your
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventsEventbusDetails AWS API Documentation
+    #
+    class AwsEventsEventbusDetails < Struct.new(
+      :arn,
+      :name,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains information on the status of CloudTrail as a
     # data source for the detector.
     #
@@ -13373,6 +14204,232 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about different modes of client authentication.
+    #
+    # @!attribute [rw] sasl
+    #   Provides details for client authentication using SASL.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslDetails]
+    #
+    # @!attribute [rw] unauthenticated
+    #   Provides details for allowing no client authentication.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails]
+    #
+    # @!attribute [rw] tls
+    #   Provides details for client authentication using TLS.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationTlsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationDetails < Struct.new(
+      :sasl,
+      :unauthenticated,
+      :tls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for client authentication using SASL.
+    #
+    # @!attribute [rw] iam
+    #   Provides details for SASL client authentication using IAM.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails]
+    #
+    # @!attribute [rw] scram
+    #   Details for SASL client authentication using SCRAM.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslDetails < Struct.new(
+      :iam,
+      :scram)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/IAM client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether SASL/IAM authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/SCRAM client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether SASL/SCRAM authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for client authentication using TLS.
+    #
+    # @!attribute [rw] certificate_authority_arn_list
+    #   List of Amazon Web Services Private CA Amazon Resource Names (ARNs).
+    #   Amazon Web Services Private CA enables creation of private
+    #   certificate authority (CA) hierarchies, including root and
+    #   subordinate CAs, without the investment and maintenance costs of
+    #   operating an on-premises CA.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether TLS authentication is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationTlsDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationTlsDetails < Struct.new(
+      :certificate_authority_arn_list,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details for allowing no client authentication.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether unauthenticated is allowed or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provide details about an Amazon Managed Streaming for Apache Kafka
+    # (Amazon MSK) cluster.
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes encryption-related information, such as the KMS key used
+    #   for encrypting data at rest and whether you want Amazon MSK to
+    #   encrypt your data in transit.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoDetails]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_broker_nodes
+    #   The number of broker nodes in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_authentication
+    #   Provides information for different modes of client authentication.
+    #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationDetails]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies the level of monitoring for the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoDetails < Struct.new(
+      :encryption_info,
+      :current_version,
+      :number_of_broker_nodes,
+      :cluster_name,
+      :client_authentication,
+      :enhanced_monitoring)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Includes encryption-related information, such as the KMS key used for
+    # encrypting data at rest and whether you want MSK to encrypt your data
+    # in transit.
+    #
+    # @!attribute [rw] encryption_in_transit
+    #   The settings for encrypting data in transit.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails]
+    #
+    # @!attribute [rw] encryption_at_rest
+    #   The data-volume encryption details. You can't update encryption at
+    #   rest settings for existing clusters.
+    #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoDetails < Struct.new(
+      :encryption_in_transit,
+      :encryption_at_rest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data-volume encryption details. You can't update encryption at
+    # rest settings for existing clusters.
+    #
+    # @!attribute [rw] data_volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of the KMS key for encrypting data at
+    #   rest. If you don't specify a KMS key, MSK creates one for you and
+    #   uses it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails < Struct.new(
+      :data_volume_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for encrypting data in transit.
+    #
+    # @!attribute [rw] in_cluster
+    #   When set to `true`, it indicates that data communication among the
+    #   broker nodes of the cluster is encrypted. When set to `false`, the
+    #   communication happens in plain text. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_broker
+    #   Indicates the encryption setting for data in transit between clients
+    #   and brokers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails AWS API Documentation
+    #
+    class AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails < Struct.new(
+      :in_cluster,
+      :client_broker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Amazon Managed Streaming for Apache Kafka
+    # (Amazon MSK) cluster.
+    #
+    # @!attribute [rw] cluster_info
+    #   Provides information about a cluster.
+    #   @return [Types::AwsMskClusterClusterInfoDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterDetails AWS API Documentation
+    #
+    class AwsMskClusterDetails < Struct.new(
+      :cluster_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an Network Firewall firewall.
     #
     # @!attribute [rw] delete_protection
@@ -14208,6 +15265,11 @@ module Aws::SecurityHub
     #   Whether the mapping of IAM accounts to database accounts is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Indicates if minor version upgrades are automatically applied to the
+    #   cluster.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterDetails AWS API Documentation
     #
     class AwsRdsDbClusterDetails < Struct.new(
@@ -14247,7 +15309,8 @@ module Aws::SecurityHub
       :db_cluster_option_group_memberships,
       :db_cluster_identifier,
       :db_cluster_members,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :auto_minor_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16417,6 +17480,192 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An object that contains an optional comment about your Amazon Route 53
+    # hosted zone.
+    #
+    # @!attribute [rw] comment
+    #   Any comments that you include about the hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneConfigDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneConfigDetails < Struct.new(
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a specified Amazon Route 53 hosted zone,
+    # including the four name servers assigned to the hosted zone. A hosted
+    # zone represents a collection of records that can be managed together,
+    # belonging to a single parent domain name.
+    #
+    # @!attribute [rw] hosted_zone
+    #   An object that contains information about the specified hosted zone.
+    #   @return [Types::AwsRoute53HostedZoneObjectDetails]
+    #
+    # @!attribute [rw] vpcs
+    #   An object that contains information about the Amazon Virtual Private
+    #   Clouds (Amazon VPCs) that are associated with the specified hosted
+    #   zone.
+    #   @return [Array<Types::AwsRoute53HostedZoneVpcDetails>]
+    #
+    # @!attribute [rw] name_servers
+    #   An object that contains a list of the authoritative name servers for
+    #   a hosted zone or for a reusable delegation set.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_logging_config
+    #   An array that contains one `QueryLoggingConfig` element for each DNS
+    #   query logging configuration that is associated with the current
+    #   Amazon Web Services account.
+    #   @return [Types::AwsRoute53QueryLoggingConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneDetails < Struct.new(
+      :hosted_zone,
+      :vpcs,
+      :name_servers,
+      :query_logging_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about an Amazon Route 53 hosted
+    # zone.
+    #
+    # @!attribute [rw] id
+    #   The ID that Route 53 assigns to the hosted zone when you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain. For public hosted zones, this is the name
+    #   that you have registered with your DNS registrar.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   An object that includes the `Comment` element.
+    #   @return [Types::AwsRoute53HostedZoneConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneObjectDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneObjectDetails < Struct.new(
+      :id,
+      :name,
+      :config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For private hosted zones, this is a complex type that contains
+    # information about an Amazon VPC.
+    #
+    # @!attribute [rw] id
+    #   The identifier of an Amazon VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that an Amazon VPC was created in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53HostedZoneVpcDetails AWS API Documentation
+    #
+    class AwsRoute53HostedZoneVpcDetails < Struct.new(
+      :id,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a specified Amazon Route 53 configuration for
+    # DNS query logging.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log
+    #   group that Route 53 is publishing logs to.
+    #   @return [Types::CloudWatchLogsLogGroupArnConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRoute53QueryLoggingConfigDetails AWS API Documentation
+    #
+    class AwsRoute53QueryLoggingConfigDetails < Struct.new(
+      :cloud_watch_logs_log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns configuration information about the specified Amazon S3 access
+    # point. S3 access points are named network endpoints that are attached
+    # to buckets that you can use to perform S3 object operations.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket associated with the specified access
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_origin
+    #   Indicates whether this access point allows access from the public
+    #   internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   provides information about the Amazon S3 Public Access Block
+    #   configuration for accounts.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Contains the virtual private cloud (VPC) configuration for the
+    #   specified access point.
+    #   @return [Types::AwsS3AccessPointVpcConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointDetails AWS API Documentation
+    #
+    class AwsS3AccessPointDetails < Struct.new(
+      :access_point_arn,
+      :alias,
+      :bucket,
+      :bucket_account_id,
+      :name,
+      :network_origin,
+      :public_access_block_configuration,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The virtual private cloud (VPC) configuration for an Amazon S3 access
+    # point.
+    #
+    # @!attribute [rw] vpc_id
+    #   If this field is specified, this access point will only allow
+    #   connections from the specified VPC ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointVpcConfigurationDetails AWS API Documentation
+    #
+    class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # provides information about the Amazon S3 Public Access Block
     # configuration for accounts.
     #
@@ -16767,7 +18016,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an Amazon S3 bucket.
+    # The details of an Amazon Simple Storage Service (Amazon S3) bucket.
     #
     # @!attribute [rw] owner_id
     #   The canonical user ID of the owner of the S3 bucket.
@@ -16800,7 +18049,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] bucket_lifecycle_configuration
-    #   The lifecycle configuration for objects in the S3 bucket.
+    #   The lifecycle configuration for objects in the specified bucket.
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationDetails]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -16830,8 +18079,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] object_lock_configuration
     #   Specifies which rule Amazon S3 applies by default to every new
-    #   object placed in the specified bucket.
+    #   object placed in the bucket.
     #   @return [Types::AwsS3BucketObjectLockConfiguration]
+    #
+    # @!attribute [rw] name
+    #   The name of the bucket.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
@@ -16848,7 +18101,8 @@ module Aws::SecurityHub
       :bucket_website_configuration,
       :bucket_notification_configuration,
       :bucket_versioning_configuration,
-      :object_lock_configuration)
+      :object_lock_configuration,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17804,6 +19058,25 @@ module Aws::SecurityHub
     #   receives those findings.
     #   @return [Types::GeneratorDetails]
     #
+    # @!attribute [rw] processed_at
+    #   An ISO8601-formatted timestamp that indicates when Security Hub
+    #   received a finding and begins to process it.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account from which a finding was
+    #   generated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -17848,17 +19121,18 @@ module Aws::SecurityHub
       :action,
       :finding_provider_fields,
       :sample,
-      :generator_details)
+      :generator_details,
+      :processed_at,
+      :aws_account_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A collection of attributes that are applied to all active Security
-    # Hub-aggregated findings and that result in a subset of findings that
-    # are included in this insight.
+    # A collection of filters that are applied to all active findings
+    # aggregated by Security Hub.
     #
-    # You can filter by up to 10 finding attributes. For each attribute, you
-    # can provide up to 20 filter values.
+    # You can filter by up to ten finding attributes. For each attribute,
+    # you can provide up to 20 filter values.
     #
     # @!attribute [rw] product_arn
     #   The ARN generated by Security Hub that uniquely identifies a
@@ -17868,7 +19142,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account ID that a finding is generated in.
+    #   The Amazon Web Services account ID in which a finding is generated.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] id
@@ -18436,6 +19710,39 @@ module Aws::SecurityHub
     #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] vulnerabilities_exploit_available
+    #   Indicates whether a software vulnerability in your environment has a
+    #   known exploit. You can filter findings by this field only if you use
+    #   Security Hub and Amazon Inspector.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] vulnerabilities_fix_available
+    #   Indicates whether a vulnerability is fixed in a newer version of the
+    #   affected software packages. You can filter findings by this field
+    #   only if you use Security Hub and Amazon Inspector.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_parameters_name
+    #   The name of a security control parameter.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_parameters_value
+    #   The current value of a security control parameter.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account in which a finding is
+    #   generated.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_name
+    #   The name of the application that is related to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_arn
+    #   The ARN of the application that is related to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -18535,7 +19842,14 @@ module Aws::SecurityHub
       :finding_provider_fields_types,
       :sample,
       :compliance_security_control_id,
-      :compliance_associated_standards_id)
+      :compliance_associated_standards_id,
+      :vulnerabilities_exploit_available,
+      :vulnerabilities_fix_available,
+      :compliance_security_control_parameters_name,
+      :compliance_security_control_parameters_value,
+      :aws_account_name,
+      :resource_application_name,
+      :resource_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20239,6 +21553,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_policy_association_identifiers
+    #   Specifies one or more target account IDs, organizational unit (OU)
+    #   IDs, or the root ID to retrieve associations for.
+    #   @return [Array<Types::ConfigurationPolicyAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetConfigurationPolicyAssociationsRequest AWS API Documentation
+    #
+    class BatchGetConfigurationPolicyAssociationsRequest < Struct.new(
+      :configuration_policy_association_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_associations
+    #   Describes associations for the target accounts, OUs, or the root.
+    #   @return [Array<Types::ConfigurationPolicyAssociationSummary>]
+    #
+    # @!attribute [rw] unprocessed_configuration_policy_associations
+    #   An array of configuration policy associations, one for each
+    #   configuration policy association identifier, that was specified in
+    #   the request but couldn’t be processed due to an error.
+    #   @return [Array<Types::UnprocessedConfigurationPolicyAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetConfigurationPolicyAssociationsResponse AWS API Documentation
+    #
+    class BatchGetConfigurationPolicyAssociationsResponse < Struct.new(
+      :configuration_policy_associations,
+      :unprocessed_configuration_policy_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_control_ids
     #   A list of security controls (identified with `SecurityControlId`,
     #   `SecurityControlArn`, or a mix of both parameters). The security
@@ -20594,6 +21940,21 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The options for customizing a security control parameter with a
+    # boolean. For a boolean parameter, the options are `true` and `false`.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a boolean parameter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BooleanConfigurationOptions AWS API Documentation
+    #
+    class BooleanConfigurationOptions < Struct.new(
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Boolean filter for querying findings.
     #
     # @!attribute [rw] value
@@ -20746,6 +22107,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The Amazon Resource Name (ARN) and other details of the Amazon
+    # CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The ARN of the CloudWatch Logs log group that Route 53 is publishing
+    #   logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that CloudWatch Logs is logging queries
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID for a DNS query logging configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CloudWatchLogsLogGroupArnConfigDetails AWS API Documentation
+    #
+    class CloudWatchLogsLogGroupArnConfigDetails < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :hosted_zone_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about where a code vulnerability is located in your
     # Lambda function.
     #
@@ -20829,6 +22217,10 @@ module Aws::SecurityHub
     #   currently enabled.
     #   @return [Array<Types::AssociatedStandard>]
     #
+    # @!attribute [rw] security_control_parameters
+    #   An object that includes security control parameter names and values.
+    #   @return [Array<Types::SecurityControlParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
     #
     class Compliance < Struct.new(
@@ -20836,7 +22228,194 @@ module Aws::SecurityHub
       :related_requirements,
       :status_reasons,
       :security_control_id,
-      :associated_standards)
+      :associated_standards,
+      :security_control_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter.
+    #
+    # @note ConfigurationOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationOptions corresponding to the set member.
+    #
+    # @!attribute [rw] integer
+    #   The options for customizing a security control parameter that is an
+    #   integer.
+    #   @return [Types::IntegerConfigurationOptions]
+    #
+    # @!attribute [rw] integer_list
+    #   The options for customizing a security control parameter that is a
+    #   list of integers.
+    #   @return [Types::IntegerListConfigurationOptions]
+    #
+    # @!attribute [rw] double
+    #   The options for customizing a security control parameter that is a
+    #   double.
+    #   @return [Types::DoubleConfigurationOptions]
+    #
+    # @!attribute [rw] string
+    #   The options for customizing a security control parameter that is a
+    #   string data type.
+    #   @return [Types::StringConfigurationOptions]
+    #
+    # @!attribute [rw] string_list
+    #   The options for customizing a security control parameter that is a
+    #   list of strings.
+    #   @return [Types::StringListConfigurationOptions]
+    #
+    # @!attribute [rw] boolean
+    #   The options for customizing a security control parameter that is a
+    #   boolean. For a boolean parameter, the options are `true` and
+    #   `false`.
+    #   @return [Types::BooleanConfigurationOptions]
+    #
+    # @!attribute [rw] enum
+    #   The options for customizing a security control parameter that is an
+    #   enum.
+    #   @return [Types::EnumConfigurationOptions]
+    #
+    # @!attribute [rw] enum_list
+    #   The options for customizing a security control parameter that is a
+    #   list of enums.
+    #   @return [Types::EnumListConfigurationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationOptions AWS API Documentation
+    #
+    class ConfigurationOptions < Struct.new(
+      :integer,
+      :integer_list,
+      :double,
+      :string,
+      :string_list,
+      :boolean,
+      :enum,
+      :enum_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Integer < ConfigurationOptions; end
+      class IntegerList < ConfigurationOptions; end
+      class Double < ConfigurationOptions; end
+      class String < ConfigurationOptions; end
+      class StringList < ConfigurationOptions; end
+      class Boolean < ConfigurationOptions; end
+      class Enum < ConfigurationOptions; end
+      class EnumList < ConfigurationOptions; end
+      class Unknown < ConfigurationOptions; end
+    end
+
+    # Provides details about the association between an Security Hub
+    # configuration and a target account, organizational unit, or the root.
+    # An association can exist between a target and a configuration policy,
+    # or between a target and self-managed behavior.
+    #
+    # @!attribute [rw] target
+    #   The target account, organizational unit, or the root.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicyAssociation AWS API Documentation
+    #
+    class ConfigurationPolicyAssociation < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the details of a configuration policy
+    # association that’s returned in a `ListConfigurationPolicyAssociations`
+    # request.
+    #
+    # @!attribute [rw] configuration_policy_id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the target account, organizational unit, or the
+    #   root.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specifies whether the target is an Amazon Web Services account,
+    #   organizational unit, or the root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   The explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicyAssociationSummary AWS API Documentation
+    #
+    class ConfigurationPolicyAssociationSummary < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the details of an Security Hub configuration
+    # policy that’s returned in a `ListConfigurationPolicies` request.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_enabled
+    #   Indicates whether the service that the configuration policy applies
+    #   to is enabled in the policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicySummary AWS API Documentation
+    #
+    class ConfigurationPolicySummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :service_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20952,7 +22531,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] tags
-    #   User-defined tags that help you label the purpose of a rule.
+    #   User-defined tags associated with an automation rule.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] rule_status
@@ -21027,6 +22606,103 @@ module Aws::SecurityHub
     #
     class CreateAutomationRuleResponse < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @!attribute [rw] tags
+    #   User-defined tags associated with a configuration policy. For more
+    #   information, see [Tagging Security Hub resources][1] in the
+    #   *Security Hub user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConfigurationPolicyRequest AWS API Documentation
+    #
+    class CreateConfigurationPolicyRequest < Struct.new(
+      :name,
+      :description,
+      :configuration_policy,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   request included a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If the request included a list
+    #   of security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConfigurationPolicyResponse AWS API Documentation
+    #
+    class CreateConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21393,6 +23069,23 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicyRequest AWS API Documentation
+    #
+    class DeleteConfigurationPolicyRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicyResponse AWS API Documentation
+    #
+    class DeleteConfigurationPolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
     #   `ListFindingAggregators`.
@@ -21599,11 +23292,19 @@ module Aws::SecurityHub
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable
-    #   Whether to automatically enable Security Hub for new accounts in the
-    #   organization.
+    #   Whether to automatically enable Security Hub in new member accounts
+    #   when they join the organization.
     #
-    #   If set to `true`, then Security Hub is enabled for new accounts. If
-    #   set to false, then new accounts are not added automatically.
+    #   If set to `true`, then Security Hub is automatically enabled in new
+    #   accounts. If set to `false`, then Security Hub isn't enabled in new
+    #   accounts automatically. The default value is `false`.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `false` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which Security
+    #   Hub is enabled and associate the policy with new organization
+    #   accounts.
     #   @return [Boolean]
     #
     # @!attribute [rw] member_account_limit_reached
@@ -21613,26 +23314,37 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] auto_enable_standards
     #   Whether to automatically enable Security Hub [default standards][1]
-    #   for new member accounts in the organization.
-    #
-    #   The default value of this parameter is equal to `DEFAULT`.
+    #   in new member accounts when they join the organization.
     #
     #   If equal to `DEFAULT`, then Security Hub default standards are
     #   automatically enabled for new member accounts. If equal to `NONE`,
     #   then default standards are not automatically enabled for new member
-    #   accounts.
+    #   accounts. The default value of this parameter is equal to `DEFAULT`.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `NONE` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which specific
+    #   security standards are enabled and associate the policy with new
+    #   organization accounts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
     #   @return [String]
     #
+    # @!attribute [rw] organization_configuration
+    #   Provides information about the way an organization is configured in
+    #   Security Hub.
+    #   @return [Types::OrganizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :member_account_limit_reached,
-      :auto_enable_standards)
+      :auto_enable_standards,
+      :organization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21874,6 +23586,32 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The options for customizing a security control parameter that is a
+    # double.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is a double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is a double.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DoubleConfigurationOptions AWS API Documentation
+    #
+    class DoubleConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] product_arn
     #   The ARN of the product to enable the integration for.
     #   @return [String]
@@ -21958,6 +23696,54 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubResponse AWS API Documentation
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # The options for customizing a security control parameter that is an
+    # enum.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is an
+    #   enum.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid values for a control parameter that is an enum.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnumConfigurationOptions AWS API Documentation
+    #
+    class EnumConfigurationOptions < Struct.new(
+      :default_value,
+      :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # list of enums.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of enums.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that an enum list control parameter
+    #   can accept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid values for a control parameter that is a list of enums.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnumListConfigurationOptions AWS API Documentation
+    #
+    class EnumListConfigurationOptions < Struct.new(
+      :default_value,
+      :max_items,
+      :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides information about the file paths that were affected by the
     # threat.
@@ -22377,6 +24163,133 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] target
+    #   The target account ID, organizational unit ID, or the root ID to
+    #   retrieve the association for.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociationRequest AWS API Documentation
+    #
+    class GetConfigurationPolicyAssociationRequest < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_id
+    #   The universally unique identifier (UUID) of a configuration policy.
+    #   For self-managed behavior, the value is `SELF_MANAGED_SECURITY_HUB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The target account ID, organizational unit ID, or the root ID for
+    #   which the association is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specifies whether the target is an Amazon Web Services account,
+    #   organizational unit, or the organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   The explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociationResponse AWS API Documentation
+    #
+    class GetConfigurationPolicyAssociationResponse < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyRequest AWS API Documentation
+    #
+    class GetConfigurationPolicyRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   policy includes a list of security controls that are enabled,
+    #   Security Hub disables all other controls (including newly released
+    #   controls). If the policy includes a list of security controls that
+    #   are disabled, Security Hub enables all other controls (including
+    #   newly released controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyResponse AWS API Documentation
+    #
+    class GetConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] standards_subscription_arns
     #   The list of the standards subscription ARNs for the standards to
     #   retrieve.
@@ -22764,6 +24677,34 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] security_control_id
+    #   The ID of the security control to retrieve the definition for. This
+    #   field doesn’t accept an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinitionRequest AWS API Documentation
+    #
+    class GetSecurityControlDefinitionRequest < Struct.new(
+      :security_control_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_control_definition
+    #   Provides metadata for a security control, including its unique
+    #   standard-agnostic identifier, title, description, severity,
+    #   availability in Amazon Web Services Regions, and a link to
+    #   remediation steps.
+    #   @return [Types::SecurityControlDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinitionResponse AWS API Documentation
+    #
+    class GetSecurityControlDefinitionResponse < Struct.new(
+      :security_control_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Internet Control Message Protocol (ICMP) type and code.
     #
     # @!attribute [rw] code
@@ -22892,6 +24833,66 @@ module Aws::SecurityHub
       :insight_arn,
       :group_by_attribute,
       :result_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is an
+    # integer.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is an
+    #   integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IntegerConfigurationOptions AWS API Documentation
+    #
+    class IntegerConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # list of integers.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of integers.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is a list of
+    #   integers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is a list of
+    #   integers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that an interger list control
+    #   parameter can accept.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IntegerListConfigurationOptions AWS API Documentation
+    #
+    class IntegerListConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max,
+      :max_items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23153,6 +25154,117 @@ module Aws::SecurityHub
     #
     class ListAutomationRulesResponse < Struct.new(
       :automation_rules_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The NextToken value that's returned from a previous paginated
+    #   `ListConfigurationPolicies` request where `MaxResults` was used but
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the `MaxResults` was used but the results exceeded
+    #   the value of that parameter. Pagination continues from the end of
+    #   the previous response that returned the `NextToken` value. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicies` returns the specified
+    #   number of results in a single page and a `NextToken` response
+    #   element. You can see the remaining results of the initial request by
+    #   sending another `ListConfigurationPolicies` request with the
+    #   returned `NextToken` value. A valid range for `MaxResults` is
+    #   between 1 and 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPoliciesRequest AWS API Documentation
+    #
+    class ListConfigurationPoliciesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_summaries
+    #   Provides metadata for each of your configuration policies.
+    #   @return [Array<Types::ConfigurationPolicySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in the next
+    #   `ListConfigurationPolicies` request. When the results of a
+    #   `ListConfigurationPolicies` request exceed `MaxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPoliciesResponse AWS API Documentation
+    #
+    class ListConfigurationPoliciesResponse < Struct.new(
+      :configuration_policy_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `NextToken` value that's returned from a previous paginated
+    #   `ListConfigurationPolicyAssociations` request where `MaxResults` was
+    #   used but the results exceeded the value of that parameter.
+    #   Pagination continues from the end of the previous response that
+    #   returned the `NextToken` value. This value is `null` when there are
+    #   no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicyAssociations` returns the
+    #   specified number of results in a single page and a `NextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListConfigurationPolicyAssociations`
+    #   request with the returned `NextToken` value. A valid range for
+    #   `MaxResults` is between 1 and 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Options for filtering the `ListConfigurationPolicyAssociations`
+    #   response. You can filter by the Amazon Resource Name (ARN) or
+    #   universally unique identifier (UUID) of a configuration,
+    #   `AssociationType`, or `AssociationStatus`.
+    #   @return [Types::AssociationFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicyAssociationsRequest AWS API Documentation
+    #
+    class ListConfigurationPolicyAssociationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_association_summaries
+    #   An object that contains the details of each configuration policy
+    #   association that’s returned in a
+    #   `ListConfigurationPolicyAssociations` request.
+    #   @return [Array<Types::ConfigurationPolicyAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in the next
+    #   `ListConfigurationPolicyAssociations` request. When the results of a
+    #   `ListConfigurationPolicyAssociations` request exceed `MaxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicyAssociationsResponse AWS API Documentation
+    #
+    class ListConfigurationPolicyAssociationsResponse < Struct.new(
+      :configuration_policy_association_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -23974,12 +26086,24 @@ module Aws::SecurityHub
     #   for findings.
     #   @return [Float]
     #
+    # @!attribute [rw] gt
+    #   The greater-than condition to be applied to a single field when
+    #   querying for findings.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lt
+    #   The less-than condition to be applied to a single field when
+    #   querying for findings.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NumberFilter AWS API Documentation
     #
     class NumberFilter < Struct.new(
       :gte,
       :lte,
-      :eq)
+      :eq,
+      :gt,
+      :lt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24024,6 +26148,53 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about the way an organization is configured in
+    # Security Hub.
+    #
+    # @!attribute [rw] configuration_type
+    #   Indicates whether the organization uses local or central
+    #   configuration.
+    #
+    #   If you use local configuration, the Security Hub delegated
+    #   administrator can set `AutoEnable` to `true` and
+    #   `AutoEnableStandards` to `DEFAULT`. This automatically enables
+    #   Security Hub and default security standards in new organization
+    #   accounts. These new account settings must be set separately in each
+    #   Amazon Web Services Region, and settings may be different in each
+    #   Region.
+    #
+    #   If you use central configuration, the delegated administrator can
+    #   create configuration policies. Configuration policies can be used to
+    #   configure Security Hub, security standards, and security controls in
+    #   multiple accounts and Regions. If you want new organization accounts
+    #   to use a specific configuration, you can create a configuration
+    #   policy and associate it with the root or specific organizational
+    #   units (OUs). New accounts will inherit the policy from the root or
+    #   their assigned OU.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether central configuration could be enabled as the
+    #   `ConfigurationType` for the organization. If your
+    #   `ConfigurationType` is local configuration, then the value of
+    #   `Status` is always `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Provides an explanation if the value of `Status` is equal to
+    #   `FAILED` when `ConfigurationType` is equal to `CENTRAL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OrganizationConfiguration AWS API Documentation
+    #
+    class OrganizationConfiguration < Struct.new(
+      :configuration_type,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An occurrence of sensitive data in an Adobe Portable Document Format
     # (PDF) file.
     #
@@ -24049,6 +26220,123 @@ module Aws::SecurityHub
       :offset_range)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An object that provides the current value of a security control
+    # parameter and identifies whether it has been customized.
+    #
+    # @!attribute [rw] value_type
+    #   Identifies whether a control parameter uses a custom user-defined
+    #   value or subscribes to the default Security Hub behavior.
+    #
+    #   When `ValueType` is set equal to `DEFAULT`, the default behavior can
+    #   be a specific Security Hub default value, or the default behavior
+    #   can be to ignore a specific parameter. When `ValueType` is set equal
+    #   to `DEFAULT`, Security Hub ignores user-provided input for the
+    #   `Value` field.
+    #
+    #   When `ValueType` is set equal to `CUSTOM`, the `Value` field can't
+    #   be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of a control parameter.
+    #   @return [Types::ParameterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterConfiguration AWS API Documentation
+    #
+    class ParameterConfiguration < Struct.new(
+      :value_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes a security control parameter and the options
+    # for customizing it.
+    #
+    # @!attribute [rw] description
+    #   Description of a control parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_options
+    #   The options for customizing a control parameter. Customization
+    #   options vary based on the data type of the parameter.
+    #   @return [Types::ConfigurationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterDefinition AWS API Documentation
+    #
+    class ParameterDefinition < Struct.new(
+      :description,
+      :configuration_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that includes the data type of a security control parameter
+    # and its current value.
+    #
+    # @note ParameterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ParameterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ParameterValue corresponding to the set member.
+    #
+    # @!attribute [rw] integer
+    #   A control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] integer_list
+    #   A control parameter that is a list of integers.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] double
+    #   A control parameter that is a double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] string
+    #   A control parameter that is a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_list
+    #   A control parameter that is a list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] boolean
+    #   A control parameter that is a boolean.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enum
+    #   A control parameter that is an enum.
+    #   @return [String]
+    #
+    # @!attribute [rw] enum_list
+    #   A control parameter that is a list of enums.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterValue AWS API Documentation
+    #
+    class ParameterValue < Struct.new(
+      :integer,
+      :integer_list,
+      :double,
+      :string,
+      :string_list,
+      :boolean,
+      :enum,
+      :enum_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Integer < ParameterValue; end
+      class IntegerList < ParameterValue; end
+      class Double < ParameterValue; end
+      class String < ParameterValue; end
+      class StringList < ParameterValue; end
+      class Boolean < ParameterValue; end
+      class Enum < ParameterValue; end
+      class EnumList < ParameterValue; end
+      class Unknown < ParameterValue; end
     end
 
     # Provides an overview of the patch compliance status for an instance
@@ -24141,6 +26429,37 @@ module Aws::SecurityHub
       :operation)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An object that defines how Security Hub is configured. It includes
+    # whether Security Hub is enabled or disabled, a list of enabled
+    # security standards, a list of enabled or disabled security controls,
+    # and a list of custom parameter values for specified controls. If you
+    # provide a list of security controls that are enabled in the
+    # configuration policy, Security Hub disables all other controls
+    # (including newly released controls). If you provide a list of security
+    # controls that are disabled in the configuration policy, Security Hub
+    # enables all other controls (including newly released controls).
+    #
+    # @note Policy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Policy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Policy corresponding to the set member.
+    #
+    # @!attribute [rw] security_hub
+    #   The Amazon Web Service that the configuration policy applies to.
+    #   @return [Types::SecurityHubPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :security_hub,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SecurityHub < Policy; end
+      class Unknown < Policy; end
     end
 
     # Provided if `ActionType` is `PORT_PROBE`. It provides details about
@@ -24527,6 +26846,15 @@ module Aws::SecurityHub
     #   Additional details about the resource related to a finding.
     #   @return [Types::ResourceDetails]
     #
+    # @!attribute [rw] application_name
+    #   The name of the application that is related to a finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application that is related to
+    #   a finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -24537,7 +26865,9 @@ module Aws::SecurityHub
       :resource_role,
       :tags,
       :data_classification,
-      :details)
+      :details,
+      :application_name,
+      :application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24975,6 +27305,62 @@ module Aws::SecurityHub
     #   helps you set limits on data processing and track costs.
     #   @return [Types::AwsAthenaWorkGroupDetails]
     #
+    # @!attribute [rw] aws_events_eventbus
+    #   Provides details about Amazon EventBridge event bus for an endpoint.
+    #   An event bus is a router that receives events and delivers them to
+    #   zero or more destinations, or targets.
+    #   @return [Types::AwsEventsEventbusDetails]
+    #
+    # @!attribute [rw] aws_dms_endpoint
+    #   Provides details about an Database Migration Service (DMS) endpoint.
+    #   An endpoint provides connection, data store type, and location
+    #   information about your data store.
+    #   @return [Types::AwsDmsEndpointDetails]
+    #
+    # @!attribute [rw] aws_events_endpoint
+    #   Provides details about an Amazon EventBridge global endpoint. The
+    #   endpoint can improve your application’s availability by making it
+    #   Regional-fault tolerant.
+    #   @return [Types::AwsEventsEndpointDetails]
+    #
+    # @!attribute [rw] aws_dms_replication_task
+    #   Provides details about an DMS replication task. A replication task
+    #   moves a set of data from the source endpoint to the target endpoint.
+    #   @return [Types::AwsDmsReplicationTaskDetails]
+    #
+    # @!attribute [rw] aws_dms_replication_instance
+    #   Provides details about an DMS replication instance. DMS uses a
+    #   replication instance to connect to your source data store, read the
+    #   source data, and format the data for consumption by the target data
+    #   store.
+    #   @return [Types::AwsDmsReplicationInstanceDetails]
+    #
+    # @!attribute [rw] aws_route_53_hosted_zone
+    #   Provides details about an Amazon Route 53 hosted zone, including the
+    #   four name servers assigned to the hosted zone. A hosted zone
+    #   represents a collection of records that can be managed together,
+    #   belonging to a single parent domain name.
+    #   @return [Types::AwsRoute53HostedZoneDetails]
+    #
+    # @!attribute [rw] aws_msk_cluster
+    #   Provides details about an Amazon Managed Streaming for Apache Kafka
+    #   (Amazon MSK) cluster.
+    #   @return [Types::AwsMskClusterDetails]
+    #
+    # @!attribute [rw] aws_s3_access_point
+    #   Provides details about an Amazon Simple Storage Service (Amazon S3)
+    #   access point. S3 access points are named network endpoints that are
+    #   attached to S3 buckets that you can use to perform S3 object
+    #   operations.
+    #   @return [Types::AwsS3AccessPointDetails]
+    #
+    # @!attribute [rw] aws_ec2_client_vpn_endpoint
+    #   Provides details about an Client VPN endpoint. A Client VPN endpoint
+    #   is the resource that you create and configure to enable and manage
+    #   client VPN sessions. It's the termination point for all client VPN
+    #   sessions.
+    #   @return [Types::AwsEc2ClientVpnEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -25067,7 +27453,35 @@ module Aws::SecurityHub
       :aws_event_schemas_registry,
       :aws_guard_duty_detector,
       :aws_step_function_state_machine,
-      :aws_athena_work_group)
+      :aws_athena_work_group,
+      :aws_events_eventbus,
+      :aws_dms_endpoint,
+      :aws_events_endpoint,
+      :aws_dms_replication_task,
+      :aws_dms_replication_instance,
+      :aws_route_53_hosted_zone,
+      :aws_msk_cluster,
+      :aws_s3_access_point,
+      :aws_ec2_client_vpn_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because it conflicts with the resource's
+    # availability. For example, you tried to update a security control
+    # that's currently in the `UPDATING` state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25685,6 +28099,32 @@ module Aws::SecurityHub
     #   The enablement status of a security control in a specific standard.
     #   @return [String]
     #
+    # @!attribute [rw] update_status
+    #   Identifies whether customizable properties of a security control are
+    #   reflected in Security Hub findings. A status of `READY` indicates
+    #   findings include the current parameter values. A status of
+    #   `UPDATING` indicates that all findings may not include the current
+    #   parameter values.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that identifies the name of a control parameter, its
+    #   current value, and whether it has been customized.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @!attribute [rw] last_update_reason
+    #   The most recent reason for updating the customizable properties of a
+    #   security control. This differs from the `UpdateReason` field of the
+    #   [ `BatchUpdateStandardsControlAssociations` ][1] API, which tracks
+    #   the reason for updating the enablement status of a control. This
+    #   field accepts alphanumeric characters in addition to white spaces,
+    #   dashes, and underscores.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
     #
     class SecurityControl < Struct.new(
@@ -25694,7 +28134,31 @@ module Aws::SecurityHub
       :description,
       :remediation_url,
       :severity_rating,
-      :security_control_status)
+      :security_control_status,
+      :update_status,
+      :parameters,
+      :last_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of security controls and control parameter values that are
+    # included in a configuration policy.
+    #
+    # @!attribute [rw] security_control_id
+    #   The ID of the security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that specifies parameter values for a control in a
+    #   configuration policy.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlCustomParameter AWS API Documentation
+    #
+    class SecurityControlCustomParameter < Struct.new(
+      :security_control_id,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25745,6 +28209,18 @@ module Aws::SecurityHub
     #   Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] customizable_properties
+    #   Security control properties that you can customize. Currently, only
+    #   parameter customization is supported for select controls. An empty
+    #   array is returned for controls that don’t support custom properties.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] parameter_definitions
+    #   An object that provides a security control parameter name,
+    #   description, and the options for customizing it. This object is
+    #   excluded for a control that doesn't support custom parameters.
+    #   @return [Hash<String,Types::ParameterDefinition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
     #
     class SecurityControlDefinition < Struct.new(
@@ -25753,7 +28229,95 @@ module Aws::SecurityHub
       :description,
       :remediation_url,
       :severity_rating,
-      :current_region_availability)
+      :current_region_availability,
+      :customizable_properties,
+      :parameter_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter that a security control accepts.
+    #
+    # @!attribute [rw] name
+    #   The name of a
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of a control parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlParameter AWS API Documentation
+    #
+    class SecurityControlParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines which security controls are enabled in an
+    # Security Hub configuration policy. The enablement status of a control
+    # is aligned across all of the enabled standards in an account.
+    #
+    # @!attribute [rw] enabled_security_control_identifiers
+    #   A list of security controls that are enabled in the configuration
+    #   policy. Security Hub disables all other controls (including newly
+    #   released controls) other than the listed controls.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disabled_security_control_identifiers
+    #   A list of security controls that are disabled in the configuration
+    #   policy. Security Hub enables all other controls (including newly
+    #   released controls) other than the listed controls.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_control_custom_parameters
+    #   A list of security controls and control parameter values that are
+    #   included in a configuration policy.
+    #   @return [Array<Types::SecurityControlCustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlsConfiguration AWS API Documentation
+    #
+    class SecurityControlsConfiguration < Struct.new(
+      :enabled_security_control_identifiers,
+      :disabled_security_control_identifiers,
+      :security_control_custom_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines how Security Hub is configured. The
+    # configuration policy includes whether Security Hub is enabled or
+    # disabled, a list of enabled security standards, a list of enabled or
+    # disabled security controls, and a list of custom parameter values for
+    # specified controls. If you provide a list of security controls that
+    # are enabled in the configuration policy, Security Hub disables all
+    # other controls (including newly released controls). If you provide a
+    # list of security controls that are disabled in the configuration
+    # policy, Security Hub enables all other controls (including newly
+    # released controls).
+    #
+    # @!attribute [rw] service_enabled
+    #   Indicates whether Security Hub is enabled in the policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enabled_standard_identifiers
+    #   A list that defines which security standards are enabled in the
+    #   configuration policy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_controls_configuration
+    #   An object that defines which security controls are enabled in the
+    #   configuration policy. The enablement status of a control is aligned
+    #   across all of the enabled standards in an account.
+    #   @return [Types::SecurityControlsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityHubPolicy AWS API Documentation
+    #
+    class SecurityHubPolicy < Struct.new(
+      :service_enabled,
+      :enabled_standard_identifiers,
+      :security_controls_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25824,8 +28388,8 @@ module Aws::SecurityHub
     # attribute.
     #
     # @!attribute [rw] product
-    #   Deprecated. This attribute is being deprecated. Instead of providing
-    #   `Product`, provide `Original`.
+    #   Deprecated. This attribute isn't included in findings. Instead of
+    #   providing `Product`, provide `Original`.
     #
     #   The native severity as defined by the Amazon Web Services service or
     #   integrated partner product that generated the finding.
@@ -25861,9 +28425,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] normalized
-    #   Deprecated. The normalized severity of a finding. This attribute is
-    #   being deprecated. Instead of providing `Normalized`, provide
-    #   `Label`.
+    #   Deprecated. The normalized severity of a finding. Instead of
+    #   providing `Normalized`, provide `Label`.
     #
     #   If you provide `Label` and do not provide `Normalized`, then
     #   `Normalized` is set automatically as follows.
@@ -26276,7 +28839,7 @@ module Aws::SecurityHub
     #   @return [Time]
     #
     # @!attribute [rw] updated_reason
-    #   The reason for updating the control's enablement status in a
+    #   The reason for updating a control's enablement status in a
     #   specified standard.
     #   @return [String]
     #
@@ -26449,6 +29012,96 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The identifier of the target account, organizational unit, or the
+    #   root to associate with the specified configuration.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociationRequest AWS API Documentation
+    #
+    class StartConfigurationPolicyAssociationRequest < Struct.new(
+      :configuration_policy_identifier,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the target account, organizational unit, or the
+    #   organization root with which the configuration is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Indicates whether the target is an Amazon Web Services account,
+    #   organizational unit, or the organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   An explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociationResponse AWS API Documentation
+    #
+    class StartConfigurationPolicyAssociationResponse < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The identifier of the target account, organizational unit, or the
+    #   root to disassociate from the specified configuration.
+    #   @return [Types::Target]
+    #
+    # @!attribute [rw] configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationRequest AWS API Documentation
+    #
+    class StartConfigurationPolicyDisassociationRequest < Struct.new(
+      :target,
+      :configuration_policy_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationResponse AWS API Documentation
+    #
+    class StartConfigurationPolicyDisassociationResponse < Aws::EmptyStructure; end
+
     # The definition of a custom action that can be used for stateless
     # packet handling.
     #
@@ -26513,6 +29166,33 @@ module Aws::SecurityHub
     class StatusReason < Struct.new(
       :reason_code,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # string.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] re_2_expression
+    #   An RE2 regular expression that Security Hub uses to validate a
+    #   user-provided control parameter string.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_description
+    #   The description of the RE2 regular expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringConfigurationOptions AWS API Documentation
+    #
+    class StringConfigurationOptions < Struct.new(
+      :default_value,
+      :re_2_expression,
+      :expression_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26624,6 +29304,39 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The options for customizing a security control parameter that is a
+    # list of strings.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] re_2_expression
+    #   An RE2 regular expression that Security Hub uses to validate a
+    #   user-provided list of strings for a control parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that a string list control
+    #   parameter can accept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expression_description
+    #   The description of the RE2 regular expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringListConfigurationOptions AWS API Documentation
+    #
+    class StringListConfigurationOptions < Struct.new(
+      :default_value,
+      :re_2_expression,
+      :max_items,
+      :expression_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to apply the tags to.
     #   @return [String]
@@ -26646,6 +29359,43 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The target account, organizational unit, or the root that is
+    # associated with an Security Hub configuration. The configuration can
+    # be a configuration policy or self-managed behavior.
+    #
+    # @note Target is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Target is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Target corresponding to the set member.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The organizational unit ID of the target organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_id
+    #   The ID of the organization root.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Target AWS API Documentation
+    #
+    class Target < Struct.new(
+      :account_id,
+      :organizational_unit_id,
+      :root_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccountId < Target; end
+      class OrganizationalUnitId < Target; end
+      class RootId < Target; end
+      class Unknown < Target; end
+    end
 
     # Provides information about the threat detected in a security finding
     # and the file paths that were affected by the threat.
@@ -26751,6 +29501,37 @@ module Aws::SecurityHub
       :rule_arn,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of configuration policy associations, one for each
+    # configuration policy association identifier, that was specified in a
+    # `BatchGetConfigurationPolicyAssociations` request but couldn’t be
+    # processed due to an error.
+    #
+    # @!attribute [rw] configuration_policy_association_identifiers
+    #   Configuration policy association identifiers that were specified in
+    #   a `BatchGetConfigurationPolicyAssociations` request but couldn’t be
+    #   processed due to an error.
+    #   @return [Types::ConfigurationPolicyAssociation]
+    #
+    # @!attribute [rw] error_code
+    #   An HTTP status code that identifies why the configuration policy
+    #   association failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   A string that identifies why the configuration policy association
+    #   failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedConfigurationPolicyAssociation AWS API Documentation
+    #
+    class UnprocessedConfigurationPolicyAssociation < Struct.new(
+      :configuration_policy_association_identifiers,
+      :error_code,
+      :error_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26977,6 +29758,107 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_reason
+    #   The reason for updating the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #
+    #   When updating a configuration policy, provide a complete list of
+    #   standards that you want to enable and a complete list of controls
+    #   that you want to enable or disable. The updated configuration
+    #   replaces the current configuration.
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConfigurationPolicyRequest AWS API Documentation
+    #
+    class UpdateConfigurationPolicyRequest < Struct.new(
+      :identifier,
+      :name,
+      :description,
+      :updated_reason,
+      :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   request included a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If the request included a list
+    #   of security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConfigurationPolicyResponse AWS API Documentation
+    #
+    class UpdateConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
     #   `ListFindingAggregators`.
@@ -27117,37 +29999,55 @@ module Aws::SecurityHub
     class UpdateInsightResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable
-    #   Whether to automatically enable Security Hub for new accounts in the
-    #   organization.
+    #   Whether to automatically enable Security Hub in new member accounts
+    #   when they join the organization.
     #
-    #   By default, this is `false`, and new accounts are not added
-    #   automatically.
+    #   If set to `true`, then Security Hub is automatically enabled in new
+    #   accounts. If set to `false`, then Security Hub isn't enabled in new
+    #   accounts automatically. The default value is `false`.
     #
-    #   To automatically enable Security Hub for new accounts, set this to
-    #   `true`.
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `false` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which Security
+    #   Hub is enabled and associate the policy with new organization
+    #   accounts.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_enable_standards
     #   Whether to automatically enable Security Hub [default standards][1]
-    #   for new member accounts in the organization.
+    #   in new member accounts when they join the organization.
     #
-    #   By default, this parameter is equal to `DEFAULT`, and new member
-    #   accounts are automatically enabled with default Security Hub
-    #   standards.
+    #   The default value of this parameter is equal to `DEFAULT`.
     #
-    #   To opt out of enabling default standards for new member accounts,
-    #   set this parameter equal to `NONE`.
+    #   If equal to `DEFAULT`, then Security Hub default standards are
+    #   automatically enabled for new member accounts. If equal to `NONE`,
+    #   then default standards are not automatically enabled for new member
+    #   accounts.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `NONE` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which specific
+    #   security standards are enabled and associate the policy with new
+    #   organization accounts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
     #   @return [String]
     #
+    # @!attribute [rw] organization_configuration
+    #   Provides information about the way an organization is configured in
+    #   Security Hub.
+    #   @return [Types::OrganizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable,
-      :auto_enable_standards)
+      :auto_enable_standards,
+      :organization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27155,6 +30055,35 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationResponse AWS API Documentation
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] security_control_id
+    #   The Amazon Resource Name (ARN) or ID of the control to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that specifies which security control parameters to
+    #   update.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @!attribute [rw] last_update_reason
+    #   The most recent reason for updating the properties of the security
+    #   control. This field accepts alphanumeric characters in addition to
+    #   white spaces, dashes, and underscores.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControlRequest AWS API Documentation
+    #
+    class UpdateSecurityControlRequest < Struct.new(
+      :security_control_id,
+      :parameters,
+      :last_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControlResponse AWS API Documentation
+    #
+    class UpdateSecurityControlResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable_controls
     #   Whether to automatically enable new controls when they are added to

@@ -480,6 +480,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -565,6 +566,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -589,6 +595,7 @@ module Aws::Drs
     #     copy_tags: false,
     #     export_bucket_arn: "ARN",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -607,6 +614,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -1149,6 +1157,7 @@ module Aws::Drs
     #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].launch_configuration_template_id #=> String
     #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].launch_into_source_instance #=> Boolean
     #   resp.items[0].licensing.os_byol #=> Boolean
     #   resp.items[0].post_launch_enabled #=> Boolean
     #   resp.items[0].tags #=> Hash
@@ -1197,6 +1206,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].agent_version #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "FAILBACK_CLIENT_NOT_SEEN", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE", "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION", "FAILED_GETTING_REPLICATION_STATE", "SNAPSHOTS_FAILURE", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
@@ -1480,6 +1490,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].agent_version #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
@@ -1606,6 +1617,7 @@ module Aws::Drs
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#agent_version #agent_version} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
@@ -1628,6 +1640,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.agent_version #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1776,6 +1789,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -1794,6 +1808,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -2087,7 +2102,7 @@ module Aws::Drs
     # @option params [required, String] :category
     #   Launch action category.
     #
-    # @option params [String] :description
+    # @option params [required, String] :description
     #   Launch action description.
     #
     # @option params [required, String] :name
@@ -2128,7 +2143,7 @@ module Aws::Drs
     #     action_version: "LaunchActionVersion", # required
     #     active: false, # required
     #     category: "MONITORING", # required, accepts MONITORING, VALIDATION, CONFIGURATION, SECURITY, OTHER
-    #     description: "LaunchActionDescription",
+    #     description: "LaunchActionDescription", # required
     #     name: "LaunchActionName", # required
     #     optional: false, # required
     #     order: 1, # required
@@ -2178,6 +2193,7 @@ module Aws::Drs
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#agent_version #agent_version} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
@@ -2200,6 +2216,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.agent_version #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -2471,6 +2488,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -2706,6 +2724,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -2992,6 +3011,9 @@ module Aws::Drs
     #   The state of the Recovery Instance in EC2 after the recovery
     #   operation.
     #
+    # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #
     # @option params [Types::Licensing] :licensing
     #   The licensing configuration to be used for this launch configuration.
     #
@@ -3016,6 +3038,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -3028,6 +3051,9 @@ module Aws::Drs
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_instance_properties: {
+    #       launch_into_ec2_instance_id: "EC2InstanceID",
+    #     },
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3043,6 +3069,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -3075,6 +3102,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -3096,6 +3128,7 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3111,6 +3144,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -3447,7 +3481,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

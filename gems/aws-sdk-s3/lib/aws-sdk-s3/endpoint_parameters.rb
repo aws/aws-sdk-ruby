@@ -55,6 +55,16 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
+  # @!attribute key
+  #   The S3 Key used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Key.
+  #
+  #   @return [String]
+  #
+  # @!attribute prefix
+  #   The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.
+  #
+  #   @return [String]
+  #
   # @!attribute disable_access_points
   #   Internal parameter to disable Access Point Buckets
   #
@@ -70,6 +80,16 @@ module Aws::S3
   #
   #   @return [Boolean]
   #
+  # @!attribute use_s3_express_control_endpoint
+  #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. CreateBucket)
+  #
+  #   @return [Boolean]
+  #
+  # @!attribute disable_s3_express_session_auth
+  #   Parameter to indicate whether S3Express session auth should be disabled
+  #
+  #   @return [Boolean]
+  #
   EndpointParameters = Struct.new(
     :bucket,
     :region,
@@ -80,9 +100,13 @@ module Aws::S3
     :accelerate,
     :use_global_endpoint,
     :use_object_lambda_endpoint,
+    :key,
+    :prefix,
     :disable_access_points,
     :disable_multi_region_access_points,
     :use_arn_region,
+    :use_s3_express_control_endpoint,
+    :disable_s3_express_session_auth,
   ) do
     include Aws::Structure
 
@@ -98,9 +122,13 @@ module Aws::S3
         'Accelerate' => :accelerate,
         'UseGlobalEndpoint' => :use_global_endpoint,
         'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
+        'Key' => :key,
+        'Prefix' => :prefix,
         'DisableAccessPoints' => :disable_access_points,
         'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
         'UseArnRegion' => :use_arn_region,
+        'UseS3ExpressControlEndpoint' => :use_s3_express_control_endpoint,
+        'DisableS3ExpressSessionAuth' => :disable_s3_express_session_auth,
       }.freeze
     end
 
@@ -134,6 +162,8 @@ module Aws::S3
         raise ArgumentError, "Missing required EndpointParameter: :use_global_endpoint"
       end
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
+      self[:key] = options[:key]
+      self[:prefix] = options[:prefix]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]
       self[:disable_multi_region_access_points] = false if self[:disable_multi_region_access_points].nil?
@@ -141,6 +171,8 @@ module Aws::S3
         raise ArgumentError, "Missing required EndpointParameter: :disable_multi_region_access_points"
       end
       self[:use_arn_region] = options[:use_arn_region]
+      self[:use_s3_express_control_endpoint] = options[:use_s3_express_control_endpoint]
+      self[:disable_s3_express_session_auth] = options[:disable_s3_express_session_auth]
     end
   end
 end

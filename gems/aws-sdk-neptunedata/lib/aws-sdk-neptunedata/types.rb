@@ -1403,9 +1403,12 @@ module Aws::Neptunedata
 
     # @!attribute [rw] status
     #   The HTTP return code of the request. If the request succeeded, the
-    #   code is 200. See [Common error codes for DFE statistics
-    #   request](docs.aws.amazon.comneptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors)
+    #   code is 200. See [Common error codes for DFE statistics request][1]
     #   for a list of common errors.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -1582,9 +1585,18 @@ module Aws::Neptunedata
 
     # @!attribute [rw] status
     #   The HTTP return code of the request. If the request succeeded, the
-    #   code is 200. See [Common error codes for DFE statistics
-    #   request](docs.aws.amazon.comneptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors)
+    #   code is 200. See [Common error codes for DFE statistics request][1]
     #   for a list of common errors.
+    #
+    #   When invoking this operation in a Neptune cluster that has IAM
+    #   authentication enabled, the IAM user or role making the request must
+    #   have a policy attached that allows the
+    #   [neptune-db:GetStatisticsStatus][2] IAM action in that cluster.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors
+    #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -2852,7 +2864,7 @@ module Aws::Neptunedata
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/neptune-graph-summary.html#neptune-graph-summary-rdf-response
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response
     #   @return [Types::RDFGraphSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/RDFGraphSummaryValueMap AWS API Documentation
@@ -3236,7 +3248,8 @@ module Aws::Neptunedata
     #   You don't have to wait for one load job to complete before issuing
     #   the next one, because Neptune can queue up as many as 64 jobs at a
     #   time, provided that their `queueRequest` parameters are all set to
-    #   `"TRUE"`.
+    #   `"TRUE"`. The queue order of the jobs will be first-in-first-out
+    #   (FIFO).
     #
     #   If the `queueRequest` parameter is omitted or set to `"FALSE"`, the
     #   load request will fail if another load job is already running.

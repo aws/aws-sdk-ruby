@@ -124,6 +124,9 @@ module Aws::MediaLive
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
     ClaimDeviceResponse = Shapes::StructureShape.new(name: 'ClaimDeviceResponse')
+    ColorCorrection = Shapes::StructureShape.new(name: 'ColorCorrection')
+    ColorCorrectionSettings = Shapes::StructureShape.new(name: 'ColorCorrectionSettings')
+    ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
     ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
@@ -244,6 +247,7 @@ module Aws::MediaLive
     FailoverConditionSettings = Shapes::StructureShape.new(name: 'FailoverConditionSettings')
     FeatureActivations = Shapes::StructureShape.new(name: 'FeatureActivations')
     FeatureActivationsInputPrepareScheduleActions = Shapes::StringShape.new(name: 'FeatureActivationsInputPrepareScheduleActions')
+    FeatureActivationsOutputStaticImageOverlayScheduleActions = Shapes::StringShape.new(name: 'FeatureActivationsOutputStaticImageOverlayScheduleActions')
     FecOutputIncludeFec = Shapes::StringShape.new(name: 'FecOutputIncludeFec')
     FecOutputSettings = Shapes::StructureShape.new(name: 'FecOutputSettings')
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
@@ -644,6 +648,8 @@ module Aws::MediaLive
     StartTimecode = Shapes::StructureShape.new(name: 'StartTimecode')
     StaticImageActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageActivateScheduleActionSettings')
     StaticImageDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageDeactivateScheduleActionSettings')
+    StaticImageOutputActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageOutputActivateScheduleActionSettings')
+    StaticImageOutputDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageOutputDeactivateScheduleActionSettings')
     StaticKeySettings = Shapes::StructureShape.new(name: 'StaticKeySettings')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
@@ -743,6 +749,9 @@ module Aws::MediaLive
     __doubleMin0Max5000 = Shapes::FloatShape.new(name: '__doubleMin0Max5000')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
     __doubleMin1Max65535 = Shapes::FloatShape.new(name: '__doubleMin1Max65535')
+    __doubleMin250Max5000 = Shapes::FloatShape.new(name: '__doubleMin250Max5000')
+    __doubleMin32Max46 = Shapes::FloatShape.new(name: '__doubleMin32Max46')
+    __doubleMinNegative1Max5 = Shapes::FloatShape.new(name: '__doubleMinNegative1Max5')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0 = Shapes::IntegerShape.new(name: '__integerMin0')
@@ -754,6 +763,7 @@ module Aws::MediaLive
     __integerMin0Max100000000 = Shapes::IntegerShape.new(name: '__integerMin0Max100000000')
     __integerMin0Max128 = Shapes::IntegerShape.new(name: '__integerMin0Max128')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
+    __integerMin0Max2000 = Shapes::IntegerShape.new(name: '__integerMin0Max2000')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
     __integerMin0Max30 = Shapes::IntegerShape.new(name: '__integerMin0Max30')
     __integerMin0Max32768 = Shapes::IntegerShape.new(name: '__integerMin0Max32768')
@@ -807,6 +817,7 @@ module Aws::MediaLive
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
+    __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
@@ -1250,6 +1261,14 @@ module Aws::MediaLive
     ClaimDeviceRequest.struct_class = Types::ClaimDeviceRequest
 
     ClaimDeviceResponse.struct_class = Types::ClaimDeviceResponse
+
+    ColorCorrection.add_member(:input_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "inputColorSpace"))
+    ColorCorrection.add_member(:output_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "outputColorSpace"))
+    ColorCorrection.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
+    ColorCorrection.struct_class = Types::ColorCorrection
+
+    ColorCorrectionSettings.add_member(:global_color_corrections, Shapes::ShapeRef.new(shape: __listOfColorCorrection, required: true, location_name: "globalColorCorrections"))
+    ColorCorrectionSettings.struct_class = Types::ColorCorrectionSettings
 
     ColorSpacePassthroughSettings.struct_class = Types::ColorSpacePassthroughSettings
 
@@ -1768,6 +1787,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
     EncoderSettings.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    EncoderSettings.add_member(:color_correction_settings, Shapes::ShapeRef.new(shape: ColorCorrectionSettings, location_name: "colorCorrectionSettings"))
     EncoderSettings.struct_class = Types::EncoderSettings
 
     EpochLockingSettings.add_member(:custom_epoch, Shapes::ShapeRef.new(shape: __string, location_name: "customEpoch"))
@@ -1791,6 +1811,7 @@ module Aws::MediaLive
     FailoverConditionSettings.struct_class = Types::FailoverConditionSettings
 
     FeatureActivations.add_member(:input_prepare_schedule_actions, Shapes::ShapeRef.new(shape: FeatureActivationsInputPrepareScheduleActions, location_name: "inputPrepareScheduleActions"))
+    FeatureActivations.add_member(:output_static_image_overlay_schedule_actions, Shapes::ShapeRef.new(shape: FeatureActivationsOutputStaticImageOverlayScheduleActions, location_name: "outputStaticImageOverlayScheduleActions"))
     FeatureActivations.struct_class = Types::FeatureActivations
 
     FecOutputSettings.add_member(:column_depth, Shapes::ShapeRef.new(shape: __integerMin4Max20, location_name: "columnDepth"))
@@ -2922,6 +2943,8 @@ module Aws::MediaLive
     ScheduleActionSettings.add_member(:scte_35_time_signal_settings, Shapes::ShapeRef.new(shape: Scte35TimeSignalScheduleActionSettings, location_name: "scte35TimeSignalSettings"))
     ScheduleActionSettings.add_member(:static_image_activate_settings, Shapes::ShapeRef.new(shape: StaticImageActivateScheduleActionSettings, location_name: "staticImageActivateSettings"))
     ScheduleActionSettings.add_member(:static_image_deactivate_settings, Shapes::ShapeRef.new(shape: StaticImageDeactivateScheduleActionSettings, location_name: "staticImageDeactivateSettings"))
+    ScheduleActionSettings.add_member(:static_image_output_activate_settings, Shapes::ShapeRef.new(shape: StaticImageOutputActivateScheduleActionSettings, location_name: "staticImageOutputActivateSettings"))
+    ScheduleActionSettings.add_member(:static_image_output_deactivate_settings, Shapes::ShapeRef.new(shape: StaticImageOutputDeactivateScheduleActionSettings, location_name: "staticImageOutputDeactivateSettings"))
     ScheduleActionSettings.struct_class = Types::ScheduleActionSettings
 
     ScheduleActionStartSettings.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
@@ -3068,6 +3091,24 @@ module Aws::MediaLive
     StaticImageDeactivateScheduleActionSettings.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeOut"))
     StaticImageDeactivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
     StaticImageDeactivateScheduleActionSettings.struct_class = Types::StaticImageDeactivateScheduleActionSettings
+
+    StaticImageOutputActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "duration"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeIn"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeOut"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "height"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:image, Shapes::ShapeRef.new(shape: InputLocation, required: true, location_name: "image"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:image_x, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "imageX"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:image_y, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "imageY"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:opacity, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "opacity"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:output_names, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "outputNames"))
+    StaticImageOutputActivateScheduleActionSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "width"))
+    StaticImageOutputActivateScheduleActionSettings.struct_class = Types::StaticImageOutputActivateScheduleActionSettings
+
+    StaticImageOutputDeactivateScheduleActionSettings.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeOut"))
+    StaticImageOutputDeactivateScheduleActionSettings.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "layer"))
+    StaticImageOutputDeactivateScheduleActionSettings.add_member(:output_names, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "outputNames"))
+    StaticImageOutputDeactivateScheduleActionSettings.struct_class = Types::StaticImageOutputDeactivateScheduleActionSettings
 
     StaticKeySettings.add_member(:key_provider_server, Shapes::ShapeRef.new(shape: InputLocation, location_name: "keyProviderServer"))
     StaticKeySettings.add_member(:static_key_value, Shapes::ShapeRef.new(shape: __stringMin32Max32, required: true, location_name: "staticKeyValue"))
@@ -3452,6 +3493,8 @@ module Aws::MediaLive
     __listOfChannelEgressEndpoint.member = Shapes::ShapeRef.new(shape: ChannelEgressEndpoint)
 
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
+
+    __listOfColorCorrection.member = Shapes::ShapeRef.new(shape: ColorCorrection)
 
     __listOfFailoverCondition.member = Shapes::ShapeRef.new(shape: FailoverCondition)
 
@@ -3890,6 +3933,20 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:describe_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/accountConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeChannel"
         o.http_method = "GET"
@@ -4044,20 +4101,6 @@ module Aws::MediaLive
             "next_token" => "next_token"
           }
         )
-      end)
-
-      api.add_operation(:describe_account_configuration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeAccountConfiguration"
-        o.http_method = "GET"
-        o.http_request_uri = "/prod/accountConfiguration"
-        o.input = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
-        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:describe_thumbnails, Seahorse::Model::Operation.new.tap do |o|
@@ -4319,21 +4362,6 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
-      api.add_operation(:update_account_configuration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateAccountConfiguration"
-        o.http_method = "PUT"
-        o.http_request_uri = "/prod/accountConfiguration"
-        o.input = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
-        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-      end)
-
       api.add_operation(:start_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChannel"
         o.http_method = "POST"
@@ -4461,6 +4489,21 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/accountConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|

@@ -900,6 +900,23 @@ module Aws::EMR
     #   with a maximum of 128 characters, and an optional value string with a
     #   maximum of 256 characters.
     #
+    # @option params [Boolean] :trusted_identity_propagation_enabled
+    #   A Boolean indicating whether to enable Trusted identity propagation
+    #   for the Studio. The default value is `false`.
+    #
+    # @option params [String] :idc_user_assignment
+    #   Specifies whether IAM Identity Center user assignment is `REQUIRED` or
+    #   `OPTIONAL`. If the value is set to `REQUIRED`, users must be
+    #   explicitly assigned to the Studio application to access the Studio.
+    #
+    # @option params [String] :idc_instance_arn
+    #   The ARN of the IAM Identity Center instance to create the Studio
+    #   application.
+    #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Types::CreateStudioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStudioOutput#studio_id #studio_id} => String
@@ -926,6 +943,10 @@ module Aws::EMR
     #         value: "String",
     #       },
     #     ],
+    #     trusted_identity_propagation_enabled: false,
+    #     idc_user_assignment: "REQUIRED", # accepts REQUIRED, OPTIONAL
+    #     idc_instance_arn: "ArnType",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @example Response structure
@@ -1203,6 +1224,8 @@ module Aws::EMR
     #   resp.cluster.placement_groups[0].instance_role #=> String, one of "MASTER", "CORE", "TASK"
     #   resp.cluster.placement_groups[0].placement_strategy #=> String, one of "SPREAD", "PARTITION", "CLUSTER", "NONE"
     #   resp.cluster.os_release_label #=> String
+    #   resp.cluster.ebs_root_volume_iops #=> Integer
+    #   resp.cluster.ebs_root_volume_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1573,6 +1596,10 @@ module Aws::EMR
     #   resp.studio.tags #=> Array
     #   resp.studio.tags[0].key #=> String
     #   resp.studio.tags[0].value #=> String
+    #   resp.studio.idc_instance_arn #=> String
+    #   resp.studio.trusted_identity_propagation_enabled #=> Boolean
+    #   resp.studio.idc_user_assignment #=> String, one of "REQUIRED", "OPTIONAL"
+    #   resp.studio.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStudio AWS API Documentation
     #
@@ -1652,7 +1679,7 @@ module Aws::EMR
     # @option params [required, String] :cluster_id
     #   The unique identifier of the cluster.
     #
-    # @option params [required, String] :execution_role_arn
+    # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the runtime role for interactive
     #   workload submission on the cluster. The runtime role can be a
     #   cross-account IAM role. The runtime role ARN is a combination of
@@ -1668,7 +1695,7 @@ module Aws::EMR
     #
     #   resp = client.get_cluster_session_credentials({
     #     cluster_id: "XmlStringMaxLen256", # required
-    #     execution_role_arn: "ArnType", # required
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -3340,6 +3367,16 @@ module Aws::EMR
     #   launch RunJobFlow request. If a release is not specified, Amazon EMR
     #   uses the latest validated Amazon Linux release for cluster launch.
     #
+    # @option params [Integer] :ebs_root_volume_iops
+    #   The IOPS, of the Amazon EBS root device volume of the Linux AMI that
+    #   is used for each Amazon EC2 instance. Available in Amazon EMR releases
+    #   6.15.0 and later.
+    #
+    # @option params [Integer] :ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume of the
+    #   Linux AMI that is used for each Amazon EC2 instance. Available in
+    #   Amazon EMR releases 6.15.0 and later.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3610,6 +3647,8 @@ module Aws::EMR
     #       idle_timeout: 1,
     #     },
     #     os_release_label: "XmlStringMaxLen256",
+    #     ebs_root_volume_iops: 1,
+    #     ebs_root_volume_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -3915,6 +3954,10 @@ module Aws::EMR
     #   The Amazon S3 location to back up Workspaces and notebook files for
     #   the Amazon EMR Studio.
     #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3925,6 +3968,7 @@ module Aws::EMR
     #     description: "XmlStringMaxLen256",
     #     subnet_ids: ["String"],
     #     default_s3_location: "XmlString",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudio AWS API Documentation
@@ -4005,7 +4049,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

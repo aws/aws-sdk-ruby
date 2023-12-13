@@ -74,6 +74,10 @@ module Aws::Route53RecoveryControlConfig
     #   you can choose a custom value.
     #   @return [Integer]
     #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the assertion rule owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/AssertionRule AWS API Documentation
     #
     class AssertionRule < Struct.new(
@@ -83,7 +87,8 @@ module Aws::Route53RecoveryControlConfig
       :rule_config,
       :safety_rule_arn,
       :status,
-      :wait_period_ms)
+      :wait_period_ms,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -143,13 +148,18 @@ module Aws::Route53RecoveryControlConfig
     #   PENDING, DEPLOYED, PENDING\_DELETION.
     #   @return [String]
     #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the cluster owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
       :cluster_arn,
       :cluster_endpoints,
       :name,
-      :status)
+      :status,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -227,6 +237,10 @@ module Aws::Route53RecoveryControlConfig
     #   following: PENDING, DEPLOYED, PENDING\_DELETION.
     #   @return [String]
     #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the control panel owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ControlPanel AWS API Documentation
     #
     class ControlPanel < Struct.new(
@@ -235,7 +249,8 @@ module Aws::Route53RecoveryControlConfig
       :default_control_panel,
       :name,
       :routing_control_count,
-      :status)
+      :status,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -672,6 +687,10 @@ module Aws::Route53RecoveryControlConfig
     #   you can choose a custom value.
     #   @return [Integer]
     #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the gating rule owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/GatingRule AWS API Documentation
     #
     class GatingRule < Struct.new(
@@ -682,7 +701,8 @@ module Aws::Route53RecoveryControlConfig
       :safety_rule_arn,
       :status,
       :target_controls,
-      :wait_period_ms)
+      :wait_period_ms,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -713,6 +733,32 @@ module Aws::Route53RecoveryControlConfig
       :name,
       :safety_rule_arn,
       :wait_period_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the current Amazon Resource Access Manager resource policy for
+    # a cluster.
+    #
+    # @!attribute [rw] policy
+    #   The resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1081,13 +1127,18 @@ module Aws::Route53RecoveryControlConfig
     #   following: PENDING, DEPLOYED, PENDING\_DELETION.
     #   @return [String]
     #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account ID of the routing control owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/RoutingControl AWS API Documentation
     #
     class RoutingControl < Struct.new(
       :control_panel_arn,
       :name,
       :routing_control_arn,
-      :status)
+      :status,
+      :owner)
       SENSITIVE = []
       include Aws::Structure
     end

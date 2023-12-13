@@ -210,6 +210,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
     #
     class AgentStatus < Struct.new(
@@ -220,7 +229,9 @@ module Aws::Connect
       :type,
       :display_order,
       :state,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -267,13 +278,77 @@ module Aws::Connect
     #   The type of the agent status.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusSummary AWS API Documentation
     #
     class AgentStatusSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :type)
+      :type,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the capabilities enabled for participants of the
+    # contact.
+    #
+    # @!attribute [rw] customer
+    #   Information about the customer's video sharing capabilities.
+    #   @return [Types::ParticipantCapabilities]
+    #
+    # @!attribute [rw] agent
+    #   Information about the agent's video sharing capabilities.
+    #   @return [Types::ParticipantCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AllowedCapabilities AWS API Documentation
+    #
+    class AllowedCapabilities < Struct.new(
+      :customer,
+      :agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Information about associations that are successfully created:
+    # `DataSetId`, `TargetAccountId`, `ResourceShareId`, `ResourceShareArn`.
+    #
+    # @!attribute [rw] data_set_id
+    #   The identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_id
+    #   The Resource Access Manager share ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_arn
+    #   The Amazon Resource Name (ARN) of the Resource Access Manager share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AnalyticsDataAssociationResult AWS API Documentation
+    #
+    class AnalyticsDataAssociationResult < Struct.new(
+      :data_set_id,
+      :target_account_id,
+      :resource_share_id,
+      :resource_share_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -302,7 +377,7 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # A third party application's metadata.
+    # A third-party application's metadata.
     #
     # @!attribute [rw] namespace
     #   Namespace of the application that you want to give access to.
@@ -324,8 +399,9 @@ module Aws::Connect
 
     # This action must be set if `TriggerEventSource` is one of the
     # following values: `OnPostCallAnalysisAvailable` \|
-    # `OnRealTimeCallAnalysisAvailable` \| `OnPostChatAnalysisAvailable`.
-    # Contact is categorized using the rule name.
+    # `OnRealTimeCallAnalysisAvailable` \| `OnRealTimeChatAnalysisAvailable`
+    # \| `OnPostChatAnalysisAvailable`. Contact is categorized using the
+    # rule name.
     #
     # `RuleName` is used as `ContactCategory`.
     #
@@ -334,6 +410,63 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssignContactCategoryActionDefinition AWS API Documentation
     #
     class AssignContactCategoryActionDefinition < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The identifier of the dataset to associate with the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account. Use to associate a dataset to
+    #   a different account than the one containing the Amazon Connect
+    #   instance. If not specified, by default this value is the Amazon Web
+    #   Services account that has the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateAnalyticsDataSetRequest AWS API Documentation
+    #
+    class AssociateAnalyticsDataSetRequest < Struct.new(
+      :instance_id,
+      :data_set_id,
+      :target_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_set_id
+    #   The identifier of the dataset that was associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_id
+    #   The Resource Access Manager share ID that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_arn
+    #   The Amazon Resource Name (ARN) of the Resource Access Manager share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateAnalyticsDataSetResponse AWS API Documentation
+    #
+    class AssociateAnalyticsDataSetResponse < Struct.new(
+      :data_set_id,
+      :target_account_id,
+      :resource_share_id,
+      :resource_share_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -421,6 +554,42 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateDefaultVocabularyResponse AWS API Documentation
     #
     class AssociateDefaultVocabularyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateFlowRequest AWS API Documentation
+    #
+    class AssociateFlowRequest < Struct.new(
+      :instance_id,
+      :resource_id,
+      :flow_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateFlowResponse AWS API Documentation
+    #
+    class AssociateFlowResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -683,6 +852,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The attendee information, including attendee ID and join token.
+    #
+    # @!attribute [rw] attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] join_token
+    #   The join token used by the Amazon Chime SDK attendee.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Attendee AWS API Documentation
+    #
+    class Attendee < Struct.new(
+      :attendee_id,
+      :join_token)
+      SENSITIVE = [:join_token]
+      include Aws::Structure
+    end
+
     # A toggle for an individual feature at the instance level.
     #
     # @!attribute [rw] attribute_type
@@ -698,6 +886,22 @@ module Aws::Connect
     class Attribute < Struct.new(
       :attribute_type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Has audio-specific configurations as the operating parameter for Echo
+    # Reduction.
+    #
+    # @!attribute [rw] echo_reduction
+    #   Makes echo reduction available to clients who connect to the
+    #   meeting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AudioFeatures AWS API Documentation
+    #
+    class AudioFeatures < Struct.new(
+      :echo_reduction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -723,6 +927,269 @@ module Aws::Connect
       :phone_number,
       :phone_number_country_code,
       :phone_number_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_ids
+    #   An array of dataset identifiers to associate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account. Use to associate a dataset to
+    #   a different account than the one containing the Amazon Connect
+    #   instance. If not specified, by default this value is the Amazon Web
+    #   Services account that has the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchAssociateAnalyticsDataSetRequest AWS API Documentation
+    #
+    class BatchAssociateAnalyticsDataSetRequest < Struct.new(
+      :instance_id,
+      :data_set_ids,
+      :target_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created
+    #   Information about associations that are successfully created:
+    #   `DataSetId`, `TargetAccountId`, `ResourceShareId`,
+    #   `ResourceShareArn`.
+    #   @return [Array<Types::AnalyticsDataAssociationResult>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors for datasets that aren't successfully associated
+    #   with the target account.
+    #   @return [Array<Types::ErrorResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchAssociateAnalyticsDataSetResponse AWS API Documentation
+    #
+    class BatchAssociateAnalyticsDataSetResponse < Struct.new(
+      :created,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_ids
+    #   An array of associated dataset identifiers to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account. Use to disassociate a dataset
+    #   from a different account than the one containing the Amazon Connect
+    #   instance. If not specified, by default this value is the Amazon Web
+    #   Services account that has the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDisassociateAnalyticsDataSetRequest AWS API Documentation
+    #
+    class BatchDisassociateAnalyticsDataSetRequest < Struct.new(
+      :instance_id,
+      :data_set_ids,
+      :target_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deleted
+    #   An array of successfully disassociated dataset identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors for any datasets not successfully removed.
+    #   @return [Array<Types::ErrorResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDisassociateAnalyticsDataSetResponse AWS API Documentation
+    #
+    class BatchDisassociateAnalyticsDataSetResponse < Struct.new(
+      :deleted,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   A list of resource identifiers to retrieve flow associations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociationRequest AWS API Documentation
+    #
+    class BatchGetFlowAssociationRequest < Struct.new(
+      :instance_id,
+      :resource_ids,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flow_association_summary_list
+    #   Information about flow associations.
+    #   @return [Array<Types::FlowAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociationResponse AWS API Documentation
+    #
+    class BatchGetFlowAssociationResponse < Struct.new(
+      :flow_association_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_data_request_list
+    #   List of individual contact requests.
+    #   @return [Array<Types::ContactDataRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContactRequest AWS API Documentation
+    #
+    class BatchPutContactRequest < Struct.new(
+      :client_token,
+      :instance_id,
+      :contact_data_request_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_request_list
+    #   List of requests for which contact was successfully created.
+    #   @return [Array<Types::SuccessfulRequest>]
+    #
+    # @!attribute [rw] failed_request_list
+    #   List of requests for which contact creation failed.
+    #   @return [Array<Types::FailedRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContactResponse AWS API Documentation
+    #
+    class BatchPutContactResponse < Struct.new(
+      :successful_request_list,
+      :failed_request_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information associated with a campaign.
+    #
+    # @!attribute [rw] campaign_id
+    #   A unique identifier for a campaign.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Campaign AWS API Documentation
+    #
+    class Campaign < Struct.new(
+      :campaign_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Chat integration event containing payload to perform different chat
+    # actions such as:
+    #
+    # * Sending a chat message
+    #
+    # * Sending a chat event, such as typing
+    #
+    # * Disconnecting from a chat
+    #
+    # @!attribute [rw] type
+    #   Type of chat integration event.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Type of content. This is required when `Type` is `MESSAGE` or
+    #   `EVENT`.
+    #
+    #   * For allowed message content types, see the `ContentType` parameter
+    #     in the [SendMessage][1] topic in the *Amazon Connect Participant
+    #     Service API Reference*.
+    #
+    #   * For allowed event content types, see the `ContentType` parameter
+    #     in the [SendEvent][2] topic in the *Amazon Connect Participant
+    #     Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   Content of the message or event. This is required when `Type` is
+    #   `MESSAGE` and for certain `ContentTypes` when `Type` is `EVENT`.
+    #
+    #   * For allowed message content, see the `Content` parameter in the
+    #     [SendMessage][1] topic in the *Amazon Connect Participant Service
+    #     API Reference*.
+    #
+    #   * For allowed event content, see the `Content` parameter in the
+    #     [SendEvent][2] topic in the *Amazon Connect Participant Service
+    #     API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatEvent AWS API Documentation
+    #
+    class ChatEvent < Struct.new(
+      :type,
+      :content_type,
+      :content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -793,7 +1260,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number
@@ -832,6 +1311,7 @@ module Aws::Connect
     #
     class ClaimPhoneNumberRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number,
       :phone_number_description,
       :tags,
@@ -887,7 +1367,18 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -899,15 +1390,16 @@ module Aws::Connect
     # @!attribute [rw] phone_number_status
     #   The status of the phone number.
     #
-    #   * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    #   * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation succeeded.
     #
-    #   * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #     [UpdatePhoneNumber][2] operation is still in progress and has not
-    #     yet completed. You can call [DescribePhoneNumber][3] at a later
-    #     time to verify if the previous operation has completed.
+    #   * `IN_PROGRESS` means a [ClaimPhoneNumber][1],
+    #     [UpdatePhoneNumber][2], or [UpdatePhoneNumberMetadata][3]
+    #     operation is still in progress and has not yet completed. You can
+    #     call [DescribePhoneNumber][4] at a later time to verify if the
+    #     previous operation has completed.
     #
-    #   * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    #   * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #     [UpdatePhoneNumber][2] operation has failed. It will include a
     #     message indicating the failure reason. A common reason for a
     #     failure may be that the `TargetArn` value you are claiming or
@@ -924,10 +1416,18 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    #   [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #   @return [Types::PhoneNumberStatus]
+    #
+    # @!attribute [rw] source_phone_number_arn
+    #   The claimed phone number ARN that was previously imported from the
+    #   external service, such as Amazon Pinpoint. If it is from Amazon
+    #   Pinpoint, it looks like the ARN of the phone number that was
+    #   imported from Amazon Pinpoint.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimedPhoneNumberSummary AWS API Documentation
     #
@@ -939,8 +1439,29 @@ module Aws::Connect
       :phone_number_type,
       :phone_number_description,
       :target_arn,
+      :instance_id,
       :tags,
-      :phone_number_status)
+      :phone_number_status,
+      :source_phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information required to join the call.
+    #
+    # @!attribute [rw] attendee
+    #   The attendee information, including attendee ID and join token.
+    #   @return [Types::Attendee]
+    #
+    # @!attribute [rw] meeting
+    #   A meeting created using the Amazon Chime SDK.
+    #   @return [Types::Meeting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConnectionData AWS API Documentation
+    #
+    class ConnectionData < Struct.new(
+      :attendee,
+      :meeting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1050,6 +1571,47 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Request object with information to create a contact.
+    #
+    # @!attribute [rw] system_endpoint
+    #   Endpoint associated with the Amazon Connect instance from which
+    #   outbound contact will be initiated for the campaign.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] customer_endpoint
+    #   Endpoint of the customer for which contact will be initiated.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] request_identifier
+    #   Identifier to uniquely identify individual requests in the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue associated with the Amazon Connect
+    #   instance in which contacts that are created will be queued.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   List of attributes to be stored in a contact.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] campaign
+    #   Structure to store information associated with a campaign.
+    #   @return [Types::Campaign]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactDataRequest AWS API Documentation
+    #
+    class ContactDataRequest < Struct.new(
+      :system_endpoint,
+      :customer_endpoint,
+      :request_identifier,
+      :queue_id,
+      :attributes,
+      :campaign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters user data based on the contact information that is associated
     # to the users. It contains a list of [contact states][1].
     #
@@ -1105,7 +1667,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1144,7 +1713,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1391,7 +1965,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1466,7 +2045,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1662,6 +2248,12 @@ module Aws::Connect
     #   Your contact center allows outbound calls.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `\{ "tags": \{"key1":"value1",
+    #   "key2":"value2"\} \}`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceRequest AWS API Documentation
     #
     class CreateInstanceRequest < Struct.new(
@@ -1670,7 +2262,8 @@ module Aws::Connect
       :instance_alias,
       :directory_id,
       :inbound_calls_enabled,
-      :outbound_calls_enabled)
+      :outbound_calls_enabled,
+      :tags)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end
@@ -1842,6 +2435,129 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] initial_contact_id
+    #   This is the contactId of the current contact that the
+    #   `CreatePersistentContactAssociation` API is being called from.
+    #   @return [String]
+    #
+    # @!attribute [rw] rehydration_type
+    #   The contactId chosen for rehydration depends on the type chosen.
+    #
+    #   * `ENTIRE_PAST_SESSION`: Rehydrates a chat from the most recently
+    #     terminated past chat contact of the specified past ended chat
+    #     session. To use this type, provide the `initialContactId` of the
+    #     past ended chat session in the `sourceContactId` field. In this
+    #     type, Amazon Connect determines what the most recent chat contact
+    #     on the past ended chat session and uses it to start a persistent
+    #     chat.
+    #
+    #   * `FROM_SEGMENT`: Rehydrates a chat from the specified past chat
+    #     contact provided in the `sourceContactId` field.
+    #
+    #   The actual contactId used for rehydration is provided in the
+    #   response of this API.
+    #
+    #   To illustrate how to use rehydration type, consider the following
+    #   example: A customer starts a chat session. Agent a1 accepts the chat
+    #   and a conversation starts between the customer and Agent a1. This
+    #   first contact creates a contact ID **C1**. Agent a1 then transfers
+    #   the chat to Agent a2. This creates another contact ID **C2**. At
+    #   this point Agent a2 ends the chat. The customer is forwarded to the
+    #   disconnect flow for a post chat survey that creates another contact
+    #   ID **C3**. After the chat survey, the chat session ends. Later, the
+    #   customer returns and wants to resume their past chat session. At
+    #   this point, the customer can have following use cases:
+    #
+    #   * **Use Case 1**: The customer wants to continue the past chat
+    #     session but they want to hide the post chat survey. For this they
+    #     will use the following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C2"
+    #
+    #       * RehydrationType = "FROM\_SEGMENT"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the specified past
+    #         ended contact (C2). Transcripts of past chat sessions C2 and
+    #         C1 are accessible in the current persistent chat session. Note
+    #         that chat segment C3 is dropped from the persistent chat
+    #         session.
+    #
+    #       ^
+    #
+    #   * **Use Case 2**: The customer wants to continue the past chat
+    #     session and see the transcript of the entire past engagement,
+    #     including the post chat survey. For this they will use the
+    #     following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C1"
+    #
+    #       * RehydrationType = "ENTIRE\_PAST\_SESSION"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the most recently
+    #         ended chat contact (C3). Transcripts of past chat sessions C3,
+    #         C2 and C1 are accessible in the current persistent chat
+    #         session.
+    #
+    #       ^
+    #   @return [String]
+    #
+    # @!attribute [rw] source_contact_id
+    #   The contactId from which a persistent chat session must be started.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociationRequest AWS API Documentation
+    #
+    class CreatePersistentContactAssociationRequest < Struct.new(
+      :instance_id,
+      :initial_contact_id,
+      :rehydration_type,
+      :source_contact_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continued_from_contact_id
+    #   The contactId from which a persistent chat session is started. This
+    #   field is populated only for persistent chat.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociationResponse AWS API Documentation
+    #
+    class CreatePersistentContactAssociationResponse < Struct.new(
+      :continued_from_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the prompt.
     #   @return [String]
@@ -1851,7 +2567,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can
+    #   provide S3 pre-signed URLs returned by the [GetPromptFile][1] API
+    #   instead of providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2226,7 +2948,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of third party applications that the security profile will
+    #   A list of third-party applications that the security profile will
     #   give access to.
     #   @return [Array<Types::Application>]
     #
@@ -4380,6 +5102,36 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] data_set_id
+    #   The identifier of the dataset to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account. Use to associate a dataset to
+    #   a different account than the one containing the Amazon Connect
+    #   instance. If not specified, by default this value is the Amazon Web
+    #   Services account that has the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateAnalyticsDataSetRequest AWS API Documentation
+    #
+    class DisassociateAnalyticsDataSetRequest < Struct.new(
+      :instance_id,
+      :data_set_id,
+      :target_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] origin
     #   The domain URL of the integrated application.
     #   @return [String]
@@ -4419,6 +5171,37 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateFlowRequest AWS API Documentation
+    #
+    class DisassociateFlowRequest < Struct.new(
+      :instance_id,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateFlowResponse AWS API Documentation
+    #
+    class DisassociateFlowResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -4633,6 +5416,21 @@ module Aws::Connect
     #
     class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
+    # Contains details about why a contact was disconnected. Only Amazon
+    # Connect outbound campaigns can provide this field.
+    #
+    # @!attribute [rw] code
+    #   A code that indicates how the contact was terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisconnectReason AWS API Documentation
+    #
+    class DisconnectReason < Struct.new(
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_id
     #   The identifier of the user account.
     #   @return [String]
@@ -4740,6 +5538,47 @@ module Aws::Connect
     class EncryptionConfig < Struct.new(
       :encryption_type,
       :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the endpoint.
+    #
+    # @!attribute [rw] type
+    #   Type of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   Address of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Endpoint AWS API Documentation
+    #
+    class Endpoint < Struct.new(
+      :type,
+      :address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # List of errors for dataset association failures.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The corresponding error message for the error code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ErrorResult AWS API Documentation
+    #
+    class ErrorResult < Struct.new(
+      :error_code,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5619,6 +6458,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Request for which contact failed to be generated.
+    #
+    # @!attribute [rw] request_identifier
+    #   Request identifier provided in the API call in the
+    #   ContactDataRequest to create a contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason_code
+    #   Reason code for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason_message
+    #   Why the request to create a contact failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FailedRequest AWS API Documentation
+    #
+    class FailedRequest < Struct.new(
+      :request_identifier,
+      :failure_reason_code,
+      :failure_reason_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the filter to apply when retrieving metrics with the
     # [GetMetricDataV2][1] API.
     #
@@ -5672,6 +6536,30 @@ module Aws::Connect
       :queues,
       :channels,
       :routing_profiles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about flow associations.
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FlowAssociationSummary AWS API Documentation
+    #
+    class FlowAssociationSummary < Struct.new(
+      :resource_id,
+      :flow_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6066,6 +6954,55 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFlowAssociationRequest AWS API Documentation
+    #
+    class GetFlowAssociationRequest < Struct.new(
+      :instance_id,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFlowAssociationResponse AWS API Documentation
+    #
+    class GetFlowAssociationResponse < Struct.new(
+      :resource_id,
+      :flow_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
     #   reporting interval for the retrieval of historical metrics data. The
@@ -6339,10 +7276,10 @@ module Aws::Connect
     # @!attribute [rw] start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be before the end time timestamp. The time range between
-    #   the start and end time must be less than 24 hours. The start time
-    #   cannot be earlier than 35 days before the time of the request.
-    #   Historical metrics are available for 35 days.
+    #   time must be before the end time timestamp. The start and end time
+    #   depends on the `IntervalPeriod` selected. By default the time range
+    #   between start and end time is 35 days. Historical metrics are
+    #   available for 3 months.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -6350,10 +7287,44 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be later than the start time timestamp. It cannot be later
     #   than the current timestamp.
-    #
-    #   The time range between the start and end time must be less than 24
-    #   hours.
     #   @return [Time]
+    #
+    # @!attribute [rw] interval
+    #   The interval period and timezone to apply to returned metrics.
+    #
+    #   * `IntervalPeriod`: An aggregated grouping applied to request
+    #     metrics. Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \|
+    #     `THIRTY_MIN` \| `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #     For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #     `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #     returns 48 results in the response. Each result is aggregated by
+    #     the THIRTY\_MIN period. By default Amazon Connect aggregates
+    #     results based on the `TOTAL` interval period.
+    #
+    #     The following list describes restrictions on `StartTime` and
+    #     `EndTime` based on which `IntervalPeriod` is requested.
+    #
+    #     * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #       less than 3 days.
+    #
+    #     * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `TOTAL`: The difference between `StartTime` and `EndTime` must
+    #       be less than 35 days.
+    #
+    #   * `TimeZone`: The timezone applied to requested metrics.
+    #   @return [Types::IntervalDetails]
     #
     # @!attribute [rw] filters
     #   The filters to apply to returned metrics. You can filter on the
@@ -6384,7 +7355,7 @@ module Aws::Connect
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
-    #     `FEATURE`
+    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in
     #     a single request. VOICE, CHAT, and TASK are valid `filterValue`
@@ -6396,6 +7367,10 @@ module Aws::Connect
     #     `contact_lens_conversational_analytics` is a valid filterValue for
     #     the `FEATURE` filter key. It is available only to contacts
     #     analyzed by Contact Lens conversational analytics.
+    #
+    #     `connect:Chat`, `connect:SMS`, `connect:Telephony`, and
+    #     `connect:WebRTC` are valid `filterValue` examples (not exhaustive)
+    #     for the `contact/segmentAttributes/connect:Subtype filter` key.
     #
     #
     #
@@ -6413,7 +7388,8 @@ module Aws::Connect
     #   Valid grouping keys: `QUEUE` \| `ROUTING_PROFILE` \| `AGENT` \|
     #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
-    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`,
+    #   `contact/segmentAttributes/connect:Subtype`
     #   @return [Array<String>]
     #
     # @!attribute [rw] metrics
@@ -6421,6 +7397,14 @@ module Aws::Connect
     #   for each metric. The following historical metrics are available. For
     #   a description of each metric, see [Historical metrics
     #   definitions][1] in the *Amazon Connect Administrator's Guide*.
+    #
+    #   ABANDONMENT\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   AGENT\_ADHERENT\_TIME
     #
@@ -6432,12 +7416,36 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
+    #   AGENT\_ANSWER\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AGENT\_NON\_ADHERENT\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
     #   AGENT\_NON\_RESPONSE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
+    #
+    #   AGENT\_NON\_RESPONSE\_WITHOUT\_CUSTOMER\_ABANDONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #     Data for this metric is available starting from October 1, 2023
+    #     0:00:00 GMT.
     #
     #   AGENT\_OCCUPANCY
     #
@@ -6471,14 +7479,18 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
     #   : Unit: Seconds
     #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6495,23 +7507,18 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #   AVG\_AGENT\_CONNECTING\_TIME
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for
+    #     this metric.
     #
-    #   : Unit: Seconds
-    #
-    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
-    #     `OUTBOUND` \| `CALLBACK` \| `API`
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #      </note>
     #
     #   AVG\_CONTACT\_DURATION
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6522,7 +7529,8 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_GREETING\_TIME\_AGENT
     #
@@ -6532,14 +7540,15 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_HANDLE\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6550,18 +7559,27 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_HOLD\_TIME\_ALL\_CONTACTS
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_HOLDS
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6572,14 +7590,16 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_INTERACTION\_TIME
     #
     #   : Unit: Seconds
     #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6593,7 +7613,7 @@ module Aws::Connect
     #     Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -6603,7 +7623,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -6613,18 +7633,25 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_RESOLUTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME
     #
@@ -6634,7 +7661,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME\_AGENT
     #
@@ -6644,7 +7671,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -6654,14 +7681,14 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_ABANDONED
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_CREATED
     #
@@ -6670,7 +7697,7 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6683,7 +7710,8 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6694,6 +7722,41 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   CONTACTS\_PUT\_ON\_HOLD
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
     #   CONTACTS\_QUEUED
@@ -6701,14 +7764,26 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   CONTACTS\_RESOLVED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
+    #
+    #     Threshold: For `ThresholdValue` enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, Feature
+    #     Agent, Agent Hierarchy, Feature,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6719,21 +7794,61 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   MAX\_QUEUED\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_NON\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME\_CUSTOMER
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   SERVICE\_LEVEL
     #
@@ -6747,11 +7862,49 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #   SUM\_AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_CONNECTING\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`. This metric only
+    #     supports the following filter keys as `INITIATION_METHOD`:
+    #     `INBOUND` \| `OUTBOUND` \| `CALLBACK` \| `API`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for
+    #     this metric.
+    #
+    #      </note>
+    #
+    #   SUM\_CONTACT\_FLOW\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_CONTACT\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -6761,7 +7914,8 @@ module Aws::Connect
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -6773,13 +7927,71 @@ module Aws::Connect
     #
     #     Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   SUM\_ERROR\_STATUS\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_HANDLE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_HOLD\_TIME
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_IDLE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent
+    #     Hierarchy
+    #
+    #   SUM\_INTERACTION\_AND\_HOLD\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_INTERACTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent
+    #     Hierarchy
+    #
+    #   SUM\_ONLINE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent
+    #     Hierarchy
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #
     #
@@ -6803,6 +8015,7 @@ module Aws::Connect
       :resource_arn,
       :start_time,
       :end_time,
+      :interval,
       :filters,
       :groupings,
       :metrics,
@@ -6858,10 +8071,21 @@ module Aws::Connect
     #   user so they can access the prompt in S3.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFileResponse AWS API Documentation
     #
     class GetPromptFileResponse < Struct.new(
-      :prompt_presigned_url)
+      :prompt_presigned_url,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7006,7 +8230,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
@@ -7054,6 +8279,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup AWS API Documentation
     #
     class HierarchyGroup < Struct.new(
@@ -7062,7 +8296,9 @@ module Aws::Connect
       :name,
       :level_id,
       :hierarchy_path,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7101,12 +8337,23 @@ module Aws::Connect
     #   The name of the hierarchy group.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupSummary AWS API Documentation
     #
     class HierarchyGroupSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7144,12 +8391,23 @@ module Aws::Connect
     #   The name of the hierarchy level.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevel AWS API Documentation
     #
     class HierarchyLevel < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7410,6 +8668,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
     #
     class HoursOfOperation < Struct.new(
@@ -7419,7 +8686,9 @@ module Aws::Connect
       :description,
       :time_zone,
       :config,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7517,12 +8786,23 @@ module Aws::Connect
     #   The name of the hours of operation.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationSummary AWS API Documentation
     #
     class HoursOfOperationSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7555,6 +8835,75 @@ module Aws::Connect
     #
     class IdempotencyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_phone_number_arn
+    #   The claimed phone number ARN being imported from the external
+    #   service, such as Amazon Pinpoint. If it is from Amazon Pinpoint, it
+    #   looks like the ARN of the phone number to import from Amazon
+    #   Pinpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ImportPhoneNumberRequest AWS API Documentation
+    #
+    class ImportPhoneNumberRequest < Struct.new(
+      :instance_id,
+      :source_phone_number_arn,
+      :phone_number_description,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
+    #   A unique identifier for the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_arn
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ImportPhoneNumberResponse AWS API Documentation
+    #
+    class ImportPhoneNumberResponse < Struct.new(
+      :phone_number_id,
+      :phone_number_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7611,6 +8960,10 @@ module Aws::Connect
     #   admin website.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags of an instance.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -7624,7 +8977,8 @@ module Aws::Connect
       :status_reason,
       :inbound_calls_enabled,
       :outbound_calls_enabled,
-      :instance_access_url)
+      :instance_access_url,
+      :tags)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end
@@ -7808,6 +9162,54 @@ module Aws::Connect
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the interval period to use for returning results.
+    #
+    # @!attribute [rw] time_zone
+    #   The timezone applied to requested metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval_period
+    #   `IntervalPeriod`: An aggregated grouping applied to request metrics.
+    #   Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \| `THIRTY_MIN` \|
+    #   `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #   For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #   `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #   returns 48 results in the response. Each result is aggregated by the
+    #   THIRTY\_MIN period. By default Amazon Connect aggregates results
+    #   based on the `TOTAL` interval period.
+    #
+    #   The following list describes restrictions on `StartTime` and
+    #   `EndTime` based on what `IntervalPeriod` is requested.
+    #
+    #   * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #     must be less than 3 days.
+    #
+    #   * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #     must be less than 3 days.
+    #
+    #   * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #     less than 3 days.
+    #
+    #   * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #
+    #   * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #
+    #   * `TOTAL`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntervalDetails AWS API Documentation
+    #
+    class IntervalDetails < Struct.new(
+      :time_zone,
+      :interval_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8052,6 +9454,60 @@ module Aws::Connect
     class ListAgentStatusResponse < Struct.new(
       :next_token,
       :agent_status_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The identifier of the dataset to get the association status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAnalyticsDataAssociationsRequest AWS API Documentation
+    #
+    class ListAnalyticsDataAssociationsRequest < Struct.new(
+      :instance_id,
+      :data_set_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   An array of successful results: `DataSetId`, `TargetAccountId`,
+    #   `ResourceShareId`, `ResourceShareArn`. This is a paginated API, so
+    #   `nextToken` is given if there are more results to be returned.
+    #   @return [Array<Types::AnalyticsDataAssociationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAnalyticsDataAssociationsResponse AWS API Documentation
+    #
+    class ListAnalyticsDataAssociationsResponse < Struct.new(
+      :results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8539,6 +9995,58 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListFlowAssociationsRequest AWS API Documentation
+    #
+    class ListFlowAssociationsRequest < Struct.new(
+      :instance_id,
+      :resource_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flow_association_summary_list
+    #   Summary of flow associations.
+    #   @return [Array<Types::FlowAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListFlowAssociationsResponse AWS API Documentation
+    #
+    class ListFlowAssociationsResponse < Struct.new(
+      :flow_association_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -8737,13 +10245,18 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsRequest AWS API Documentation
     #
     class ListIntegrationAssociationsRequest < Struct.new(
       :instance_id,
       :integration_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8957,7 +10470,29 @@ module Aws::Connect
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_phone_number_arn
+    #   The claimed phone number ARN that was previously imported from the
+    #   external service, such as Amazon Pinpoint. If it is from Amazon
+    #   Pinpoint, it looks like the ARN of the phone number that was
+    #   imported from Amazon Pinpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersSummary AWS API Documentation
@@ -8968,17 +10503,34 @@ module Aws::Connect
       :phone_number,
       :phone_number_country_code,
       :phone_number_type,
-      :target_arn)
+      :target_arn,
+      :instance_id,
+      :phone_number_description,
+      :source_phone_number_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to. If
-    #   `TargetArn` input is not provided, this API lists numbers claimed to
-    #   all the Amazon Connect instances belonging to your account in the
-    #   same Amazon Web Services Region as the request.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. If both `TargetArn` and `InstanceId` input are not
+    #   provided, this API lists numbers claimed to all the Amazon Connect
+    #   instances belonging to your account in the same Amazon Web Services
+    #   Region as the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
+    #   not provided, this API lists numbers claimed to all the Amazon
+    #   Connect instances belonging to your account in the same AWS Region
+    #   as the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9008,6 +10560,7 @@ module Aws::Connect
     #
     class ListPhoneNumbersV2Request < Struct.new(
       :target_arn,
+      :instance_id,
       :max_results,
       :next_token,
       :phone_number_country_codes,
@@ -9123,11 +10676,22 @@ module Aws::Connect
     #   Information about the quick connects.
     #   @return [Array<Types::QuickConnectSummary>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnectsResponse AWS API Documentation
     #
     class ListQueueQuickConnectsResponse < Struct.new(
       :next_token,
-      :quick_connect_summary_list)
+      :quick_connect_summary_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9206,8 +10770,8 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] quick_connect_types
-    #   The type of quick connect. In the Amazon Connect console, when you
-    #   create a quick connect, you are prompted to assign one of the
+    #   The type of quick connect. In the Amazon Connect admin website, when
+    #   you create a quick connect, you are prompted to assign one of the
     #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
     #   (QUEUE).
     #   @return [Array<String>]
@@ -9236,6 +10800,81 @@ module Aws::Connect
     #
     class ListQuickConnectsResponse < Struct.new(
       :quick_connect_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_type
+    #   The Contact Lens output type to be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_types
+    #   Enum with segment types . Each value corresponds to a segment type
+    #   returned in the segments list of the API. Each segment type has its
+    #   own structure. Different channels may have different sets of
+    #   supported segment types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRealtimeContactAnalysisSegmentsV2Request AWS API Documentation
+    #
+    class ListRealtimeContactAnalysisSegmentsV2Request < Struct.new(
+      :instance_id,
+      :contact_id,
+      :max_results,
+      :next_token,
+      :output_type,
+      :segment_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel
+    #   The channel of the contact. `Voice` will not be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of real-time contact analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] segments
+    #   An analyzed transcript or category.
+    #   @return [Array<Types::RealtimeContactAnalysisSegment>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRealtimeContactAnalysisSegmentsV2Response AWS API Documentation
+    #
+    class ListRealtimeContactAnalysisSegmentsV2Response < Struct.new(
+      :channel,
+      :status,
+      :segments,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9285,11 +10924,22 @@ module Aws::Connect
     #   Information about the routing profiles.
     #   @return [Array<Types::RoutingProfileQueueConfigSummary>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesResponse AWS API Documentation
     #
     class ListRoutingProfileQueuesResponse < Struct.new(
       :next_token,
-      :routing_profile_queue_config_summary_list)
+      :routing_profile_queue_config_summary_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9447,17 +11097,22 @@ module Aws::Connect
     end
 
     # @!attribute [rw] security_profile_id
-    #   The security profile identifier.
+    #   The identifier for the security profle.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The instance identifier.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9476,20 +11131,33 @@ module Aws::Connect
     end
 
     # @!attribute [rw] applications
-    #   A list of the third party application's metadata.
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. The next set of results can
-    #   be retrieved by using the token value returned in the previous
-    #   response when making the next request.
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsResponse AWS API Documentation
     #
     class ListSecurityProfileApplicationsResponse < Struct.new(
       :applications,
-      :next_token)
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9542,11 +11210,22 @@ module Aws::Connect
     #   of results.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissionsResponse AWS API Documentation
     #
     class ListSecurityProfilePermissionsResponse < Struct.new(
       :permissions,
-      :next_token)
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10091,6 +11770,85 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A set of endpoints used by clients to connect to the media service
+    # group for an Amazon Chime SDK meeting.
+    #
+    # @!attribute [rw] audio_host_url
+    #   The audio host URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_fallback_url
+    #   The audio fallback URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] signaling_url
+    #   The signaling URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] turn_control_url
+    #   The turn control URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_ingestion_url
+    #   The event ingestion URL to which you send client meeting events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaPlacement AWS API Documentation
+    #
+    class MediaPlacement < Struct.new(
+      :audio_host_url,
+      :audio_fallback_url,
+      :signaling_url,
+      :turn_control_url,
+      :event_ingestion_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A meeting created using the Amazon Chime SDK.
+    #
+    # @!attribute [rw] media_region
+    #   The Amazon Web Services Region in which you create the meeting.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_placement
+    #   The media placement for the meeting.
+    #   @return [Types::MediaPlacement]
+    #
+    # @!attribute [rw] meeting_features
+    #   The configuration settings of the features available to a meeting.
+    #   @return [Types::MeetingFeaturesConfiguration]
+    #
+    # @!attribute [rw] meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Meeting AWS API Documentation
+    #
+    class Meeting < Struct.new(
+      :media_region,
+      :media_placement,
+      :meeting_features,
+      :meeting_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings of the features available to a meeting.
+    #
+    # @!attribute [rw] audio
+    #   The configuration settings for the audio features available to a
+    #   meeting.
+    #   @return [Types::AudioFeatures]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MeetingFeaturesConfiguration AWS API Documentation
+    #
+    class MeetingFeaturesConfiguration < Struct.new(
+      :audio)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the name, thresholds, and metric filters.
     #
     # @!attribute [rw] metric
@@ -10142,11 +11900,49 @@ module Aws::Connect
     #   `CONTACT_FLOW_DISCONNECT` \| `OTHER` \| `EXPIRED` \| `API`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] negate
+    #   The flag to use to filter on requested metric filter values or to
+    #   not filter on requested metric filter values. By default the negate
+    #   is `false`, which indicates to filter on the requested metric
+    #   filter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MetricFilterV2 AWS API Documentation
     #
     class MetricFilterV2 < Struct.new(
       :metric_filter_key,
-      :metric_filter_values)
+      :metric_filter_values,
+      :negate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The interval period with the start and end time for the metrics.
+    #
+    # @!attribute [rw] interval
+    #   The interval period provided in the API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp, in UNIX Epoch time format. Start time is based on the
+    #   interval period selected.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp, in UNIX Epoch time format. End time is based on the
+    #   interval period selected. For example, If `IntervalPeriod` is
+    #   selected `THIRTY_MIN`, `StartTime` and `EndTime` in the API request
+    #   differs by 1 day, then 48 results are returned in the response. Each
+    #   result is aggregated by the 30 minutes period, with each `StartTime`
+    #   and `EndTime` differing by 30 minutes.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MetricInterval AWS API Documentation
+    #
+    class MetricInterval < Struct.new(
+      :interval,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10157,6 +11953,10 @@ module Aws::Connect
     #   The dimension for the metrics.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] metric_interval
+    #   The interval period with the start and end time for the metrics.
+    #   @return [Types::MetricInterval]
+    #
     # @!attribute [rw] collections
     #   The set of metrics.
     #   @return [Array<Types::MetricDataV2>]
@@ -10165,6 +11965,7 @@ module Aws::Connect
     #
     class MetricResultV2 < Struct.new(
       :dimensions,
+      :metric_interval,
       :collections)
       SENSITIVE = []
       include Aws::Structure
@@ -10255,6 +12056,52 @@ module Aws::Connect
     class MonitorContactResponse < Struct.new(
       :contact_id,
       :contact_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payload of chat properties to apply when starting a new contact.
+    #
+    # @!attribute [rw] supported_messaging_content_types
+    #   The supported chat message content types. Supported types are
+    #   `text/plain`, `text/markdown`, `application/json`,
+    #   `application/vnd.amazonaws.connect.message.interactive`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
+    #
+    #   Content types must always contain ` text/plain`. You can then put
+    #   any other supported type in the list. For example, all the following
+    #   lists are valid because they contain `text/plain`: `[text/plain,
+    #   text/markdown, application/json]`, ` [text/markdown, text/plain]`,
+    #   `[text/plain, application/json,
+    #   application/vnd.amazonaws.connect.message.interactive.response]`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] participant_details
+    #   The customer's details.
+    #   @return [Types::ParticipantDetails]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes. They can be accessed in flows
+    #   just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint.
+    #   @return [Types::ChatStreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NewSessionDetails AWS API Documentation
+    #
+    class NewSessionDetails < Struct.new(
+      :supported_messaging_content_types,
+      :participant_details,
+      :attributes,
+      :streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10362,6 +12209,38 @@ module Aws::Connect
     #
     class OutboundContactNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thrown for analyzed content when requested OutputType was not enabled
+    # for a given contact. For example, if an OutputType.Raw was requested
+    # for a contact that had `RedactedOnly` Redaction policy set in
+    # Contact flow.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutputTypeNotFoundException AWS API Documentation
+    #
+    class OutputTypeNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the allowed capabilities for participants
+    # present over the call.
+    #
+    # @!attribute [rw] video
+    #   The configuration having the video sharing capabilities for
+    #   participants over the call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantCapabilities AWS API Documentation
+    #
+    class ParticipantCapabilities < Struct.new(
+      :video)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10556,15 +12435,15 @@ module Aws::Connect
 
     # The status of the phone number.
     #
-    # * `CLAIMED` means the previous [ClaimedPhoneNumber][1] or
+    # * `CLAIMED` means the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation succeeded.
     #
-    # * `IN_PROGRESS` means a [ClaimedPhoneNumber][1] or
-    #   [UpdatePhoneNumber][2] operation is still in progress and has not
-    #   yet completed. You can call [DescribePhoneNumber][3] at a later time
-    #   to verify if the previous operation has completed.
+    # * `IN_PROGRESS` means a [ClaimPhoneNumber][1], [UpdatePhoneNumber][2],
+    #   or [UpdatePhoneNumberMetadata][3] operation is still in progress and
+    #   has not yet completed. You can call [DescribePhoneNumber][4] at a
+    #   later time to verify if the previous operation has completed.
     #
-    # * `FAILED` indicates that the previous [ClaimedPhoneNumber][1] or
+    # * `FAILED` indicates that the previous [ClaimPhoneNumber][1] or
     #   [UpdatePhoneNumber][2] operation has failed. It will include a
     #   message indicating the failure reason. A common reason for a failure
     #   may be that the `TargetArn` value you are claiming or updating a
@@ -10576,9 +12455,10 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
-    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #
     # @!attribute [rw] status
     #   The status.
@@ -10670,6 +12550,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Prompt AWS API Documentation
     #
     class Prompt < Struct.new(
@@ -10677,7 +12566,9 @@ module Aws::Connect
       :prompt_id,
       :name,
       :description,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10750,12 +12641,23 @@ module Aws::Connect
     #   The name of the prompt.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSummary AWS API Documentation
     #
     class PromptSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10873,6 +12775,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
     #
     class Queue < Struct.new(
@@ -10884,7 +12795,9 @@ module Aws::Connect
       :hours_of_operation_id,
       :max_contacts,
       :status,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11032,13 +12945,24 @@ module Aws::Connect
     #   The type of queue.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueSummary AWS API Documentation
     #
     class QueueSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :queue_type)
+      :queue_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11071,6 +12995,15 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
     #
     class QuickConnect < Struct.new(
@@ -11079,7 +13012,9 @@ module Aws::Connect
       :name,
       :description,
       :quick_connect_config,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11087,8 +13022,8 @@ module Aws::Connect
     # Contains configuration settings for a quick connect.
     #
     # @!attribute [rw] quick_connect_type
-    #   The type of quick connect. In the Amazon Connect console, when you
-    #   create a quick connect, you are prompted to assign one of the
+    #   The type of quick connect. In the Amazon Connect admin website, when
+    #   you create a quick connect, you are prompted to assign one of the
     #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
     #   (QUEUE).
     #   @return [String]
@@ -11188,10 +13123,19 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_type
-    #   The type of quick connect. In the Amazon Connect console, when you
-    #   create a quick connect, you are prompted to assign one of the
+    #   The type of quick connect. In the Amazon Connect admin website, when
+    #   you create a quick connect, you are prompted to assign one of the
     #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
     #   (QUEUE).
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectSummary AWS API Documentation
@@ -11200,7 +13144,9 @@ module Aws::Connect
       :id,
       :arn,
       :name,
-      :quick_connect_type)
+      :quick_connect_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11217,6 +13163,418 @@ module Aws::Connect
       :id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Object that describes attached file.
+    #
+    # @!attribute [rw] attachment_name
+    #   A case-sensitive name of the attachment being uploaded. Can be
+    #   redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Describes the MIME file type of the attachment. For a list of
+    #   supported file types, see [Feature specifications][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   A unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisAttachment AWS API Documentation
+    #
+    class RealTimeContactAnalysisAttachment < Struct.new(
+      :attachment_name,
+      :content_type,
+      :attachment_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the category rule that was matched.
+    #
+    # @!attribute [rw] points_of_interest
+    #   List of PointOfInterest - objects describing a single match of a
+    #   rule.
+    #   @return [Array<Types::RealTimeContactAnalysisPointOfInterest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisCategoryDetails AWS API Documentation
+    #
+    class RealTimeContactAnalysisCategoryDetails < Struct.new(
+      :points_of_interest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Begin and end offsets for a part of text.
+    #
+    # @!attribute [rw] begin_offset_char
+    #   The beginning of the character interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset_char
+    #   The end of the character interval.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisCharacterInterval AWS API Documentation
+    #
+    class RealTimeContactAnalysisCharacterInterval < Struct.new(
+      :begin_offset_char,
+      :end_offset_char)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Potential issues that are detected based on an artificial intelligence
+    # analysis of each turn in the conversation.
+    #
+    # @!attribute [rw] transcript_items
+    #   List of the transcript items (segments) that are associated with a
+    #   given issue.
+    #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisIssueDetected AWS API Documentation
+    #
+    class RealTimeContactAnalysisIssueDetected < Struct.new(
+      :transcript_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The section of the contact transcript segment that category rule was
+    # detected.
+    #
+    # @!attribute [rw] transcript_items
+    #   List of the transcript items (segments) that are associated with a
+    #   given point of interest.
+    #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisPointOfInterest AWS API Documentation
+    #
+    class RealTimeContactAnalysisPointOfInterest < Struct.new(
+      :transcript_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Segment containing list of attachments.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier of the participant.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_role
+    #   The role of the participant. For example, is it a customer, agent,
+    #   or system.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the participant. Can be redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   List of objects describing an individual attachment.
+    #   @return [Array<Types::RealTimeContactAnalysisAttachment>]
+    #
+    # @!attribute [rw] time
+    #   Field describing the time of the event. It can have different
+    #   representations of time.
+    #   @return [Types::RealTimeContactAnalysisTimeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentAttachments AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentAttachments < Struct.new(
+      :id,
+      :participant_id,
+      :participant_role,
+      :display_name,
+      :attachments,
+      :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The matched category rules.
+    #
+    # @!attribute [rw] matched_details
+    #   Map between the name of the matched rule and
+    #   RealTimeContactAnalysisCategoryDetails.
+    #   @return [Hash<String,Types::RealTimeContactAnalysisCategoryDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentCategories AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentCategories < Struct.new(
+      :matched_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Segment type describing a contact event.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact event.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier of the participant.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_role
+    #   The role of the participant. For example, is it a customer, agent,
+    #   or system.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the participant. Can be redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   Type of the event. For example,
+    #   `application/vnd.amazonaws.connect.event.participant.left`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   Field describing the time of the event. It can have different
+    #   representations of time.
+    #   @return [Types::RealTimeContactAnalysisTimeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentEvent AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentEvent < Struct.new(
+      :id,
+      :participant_id,
+      :participant_role,
+      :display_name,
+      :event_type,
+      :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Segment type containing a list of detected issues.
+    #
+    # @!attribute [rw] issues_detected
+    #   List of the issues detected.
+    #   @return [Array<Types::RealTimeContactAnalysisIssueDetected>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentIssues AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentIssues < Struct.new(
+      :issues_detected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The analyzed transcript segment.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the transcript.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier of the participant.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_role
+    #   The role of the participant. For example, is it a customer, agent,
+    #   or system.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the participant.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the transcript. Can be redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The type of content of the item. For example, `text/plain`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   Field describing the time of the event. It can have different
+    #   representations of time.
+    #   @return [Types::RealTimeContactAnalysisTimeData]
+    #
+    # @!attribute [rw] redaction
+    #   Object describing redaction that was applied to the transcript. If
+    #   transcript has the field it means part of the transcript was
+    #   redacted.
+    #   @return [Types::RealTimeContactAnalysisTranscriptItemRedaction]
+    #
+    # @!attribute [rw] sentiment
+    #   The sentiment detected for this piece of transcript.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentTranscript AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentTranscript < Struct.new(
+      :id,
+      :participant_id,
+      :participant_role,
+      :display_name,
+      :content,
+      :content_type,
+      :time,
+      :redaction,
+      :sentiment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object describing time with which the segment is associated. It can
+    # have different representations of time. Currently supported:
+    # absoluteTime
+    #
+    # @note RealTimeContactAnalysisTimeData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RealTimeContactAnalysisTimeData corresponding to the set member.
+    #
+    # @!attribute [rw] absolute_time
+    #   Time represented in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For
+    #   example, 2019-11-08T02:41:28.172Z.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisTimeData AWS API Documentation
+    #
+    class RealTimeContactAnalysisTimeData < Struct.new(
+      :absolute_time,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AbsoluteTime < RealTimeContactAnalysisTimeData; end
+      class Unknown < RealTimeContactAnalysisTimeData; end
+    end
+
+    # Object describing redaction applied to the segment.
+    #
+    # @!attribute [rw] character_offsets
+    #   List of character intervals each describing a part of the text that
+    #   was redacted. For `OutputType.Raw`, part of the original text that
+    #   contains data that can be redacted. For ` OutputType.Redacted`, part
+    #   of the string with redaction tag.
+    #   @return [Array<Types::RealTimeContactAnalysisCharacterInterval>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisTranscriptItemRedaction AWS API Documentation
+    #
+    class RealTimeContactAnalysisTranscriptItemRedaction < Struct.new(
+      :character_offsets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Transcript representation containing Id and list of character
+    # intervals that are associated with analysis data. For example, this
+    # object within a `RealTimeContactAnalysisPointOfInterest` in
+    # `Category.MatchedDetails` would have character interval describing
+    # part of the text that matched category.
+    #
+    # @!attribute [rw] id
+    #   Transcript identifier. Matches the identifier from one of the
+    #   TranscriptSegments.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_offsets
+    #   List of character intervals within transcript content/text.
+    #   @return [Types::RealTimeContactAnalysisCharacterInterval]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisTranscriptItemWithCharacterOffsets AWS API Documentation
+    #
+    class RealTimeContactAnalysisTranscriptItemWithCharacterOffsets < Struct.new(
+      :id,
+      :character_offsets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Transcript representation containing Id, Content and list of character
+    # intervals that are associated with analysis data. For example, this
+    # object within an issue detected would describe both content that
+    # contains identified issue and intervals where that content is taken
+    # from.
+    #
+    # @!attribute [rw] content
+    #   Part of the transcript content that contains identified issue. Can
+    #   be redacted
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Transcript identifier. Matches the identifier from one of the
+    #   TranscriptSegments.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_offsets
+    #   Begin and end offsets for a part of text.
+    #   @return [Types::RealTimeContactAnalysisCharacterInterval]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisTranscriptItemWithContent AWS API Documentation
+    #
+    class RealTimeContactAnalysisTranscriptItemWithContent < Struct.new(
+      :content,
+      :id,
+      :character_offsets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An analyzed segment for a real-time analysis session.
+    #
+    # @note RealtimeContactAnalysisSegment is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RealtimeContactAnalysisSegment corresponding to the set member.
+    #
+    # @!attribute [rw] transcript
+    #   The analyzed transcript segment.
+    #   @return [Types::RealTimeContactAnalysisSegmentTranscript]
+    #
+    # @!attribute [rw] categories
+    #   The matched category rules.
+    #   @return [Types::RealTimeContactAnalysisSegmentCategories]
+    #
+    # @!attribute [rw] issues
+    #   Segment type containing a list of detected issues.
+    #   @return [Types::RealTimeContactAnalysisSegmentIssues]
+    #
+    # @!attribute [rw] event
+    #   Segment type describing a contact event.
+    #   @return [Types::RealTimeContactAnalysisSegmentEvent]
+    #
+    # @!attribute [rw] attachments
+    #   The analyzed attachments.
+    #   @return [Types::RealTimeContactAnalysisSegmentAttachments]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealtimeContactAnalysisSegment AWS API Documentation
+    #
+    class RealtimeContactAnalysisSegment < Struct.new(
+      :transcript,
+      :categories,
+      :issues,
+      :event,
+      :attachments,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Transcript < RealtimeContactAnalysisSegment; end
+      class Categories < RealtimeContactAnalysisSegment; end
+      class Issues < RealtimeContactAnalysisSegment; end
+      class Event < RealtimeContactAnalysisSegment; end
+      class Attachments < RealtimeContactAnalysisSegment; end
+      class Unknown < RealtimeContactAnalysisSegment; end
     end
 
     # Well-formed data on a contact, used by agents to complete a contact
@@ -11572,6 +13930,19 @@ module Aws::Connect
     #   *longest idle time*.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Whether this a default routing profile.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -11585,7 +13956,10 @@ module Aws::Connect
       :tags,
       :number_of_associated_queues,
       :number_of_associated_users,
-      :agent_availability_timer)
+      :agent_availability_timer,
+      :last_modified_time,
+      :last_modified_region,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11791,12 +14165,23 @@ module Aws::Connect
     #   The name of the routing profile.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSummary AWS API Documentation
     #
     class RoutingProfileSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11886,7 +14271,8 @@ module Aws::Connect
     #
     #   Supported only for `TriggerEventSource` values:
     #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
-    #   \| `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
+    #   \| `OnRealTimeChatAnalysisAvailable` \|
+    #   `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
     #   `OnMetricDataUpdate`
     #   @return [Types::EventBridgeActionDefinition]
     #
@@ -11895,7 +14281,8 @@ module Aws::Connect
     #
     #   Supported only for `TriggerEventSource` values:
     #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
-    #   \| `OnPostChatAnalysisAvailable` \| `OnZendeskTicketCreate` \|
+    #   \| `OnRealTimeChatAnalysisAvailable` \|
+    #   `OnPostChatAnalysisAvailable` \| `OnZendeskTicketCreate` \|
     #   `OnZendeskTicketStatusUpdate` \| `OnSalesforceCaseCreate`
     #   @return [Types::AssignContactCategoryActionDefinition]
     #
@@ -11904,7 +14291,8 @@ module Aws::Connect
     #
     #   Supported only for `TriggerEventSource` values:
     #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
-    #   \| `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
+    #   \| `OnRealTimeChatAnalysisAvailable` \|
+    #   `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
     #   `OnMetricDataUpdate`
     #   @return [Types::SendNotificationActionDefinition]
     #
@@ -12019,7 +14407,19 @@ module Aws::Connect
 
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] phone_number_country_code
@@ -12049,6 +14449,7 @@ module Aws::Connect
     #
     class SearchAvailablePhoneNumbersRequest < Struct.new(
       :target_arn,
+      :instance_id,
       :phone_number_country_code,
       :phone_number_type,
       :phone_number_prefix,
@@ -12535,6 +14936,11 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
+    #   <note markdown="1"> InstanceID is a required field. The "Required: No" below is
+    #   incorrect.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -12731,6 +15137,15 @@ module Aws::Connect
     #   restrictions to in Amazon Connect.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
@@ -12741,7 +15156,9 @@ module Aws::Connect
       :description,
       :tags,
       :allowed_access_control_tags,
-      :tag_restricted_resources)
+      :tag_restricted_resources,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12834,12 +15251,23 @@ module Aws::Connect
     #   The name of the security profile.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSummary AWS API Documentation
     #
     class SecurityProfileSummary < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12862,6 +15290,83 @@ module Aws::Connect
     #
     class SecurityProfilesSearchFilter < Struct.new(
       :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A value for a segment attribute. This is structured as a map where the
+    # key is `valueString` and the value is a string.
+    #
+    # @!attribute [rw] value_string
+    #   The value of a segment attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SegmentAttributeValue AWS API Documentation
+    #
+    class SegmentAttributeValue < Struct.new(
+      :value_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_id
+    #   External identifier of chat customer participant, used in part to
+    #   uniquely identify a chat. For SMS, this is the E164 phone number of
+    #   the chat customer participant.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_id
+    #   Chat system identifier, used in part to uniquely identify chat. This
+    #   is associated with the Amazon Connect instance and flow to be used
+    #   to start chats. For SMS, this is the phone number destination of
+    #   inbound SMS messages represented by an Amazon Pinpoint phone number
+    #   ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] subtype
+    #   Classification of a channel. This is used in part to uniquely
+    #   identify chat.
+    #
+    #   Valid value: `["connect:sms"]`
+    #   @return [String]
+    #
+    # @!attribute [rw] event
+    #   Chat integration event payload
+    #   @return [Types::ChatEvent]
+    #
+    # @!attribute [rw] new_session_details
+    #   Contact properties to apply when starting a new chat. If the
+    #   integration event is handled with an existing chat, this is ignored.
+    #   @return [Types::NewSessionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendChatIntegrationEventRequest AWS API Documentation
+    #
+    class SendChatIntegrationEventRequest < Struct.new(
+      :source_id,
+      :destination_id,
+      :subtype,
+      :event,
+      :new_session_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] initial_contact_id
+    #   Identifier of chat contact used to handle integration event. This
+    #   may be null if the integration event is not valid without an already
+    #   existing chat contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_chat_created
+    #   Whether handling the integration event resulted in creating a new
+    #   chat or acting on existing chat.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendChatIntegrationEventResponse AWS API Documentation
+    #
+    class SendChatIntegrationEventResponse < Struct.new(
+      :initial_contact_id,
+      :new_chat_created)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12925,7 +15430,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The distribution of allowing signing in to the instance and its
+    # The distribution that determines which Amazon Web Services Regions
+    # should be used to sign in agents in to both the instance and its
     # replica(s).
     #
     # @!attribute [rw] distributions
@@ -13000,11 +15506,11 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for initiating the chat. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   flow. On the flow page, under the name of the flow, choose **Show
-    #   additional flow information**. The ContactFlowId is the last part of
-    #   the ARN, shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -13091,6 +15597,25 @@ module Aws::Connect
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   Attribute keys can include only alphanumeric, -, and \_.
+    #
+    #   This field can be used to show channel subtype, such as
+    #   `connect:Guide`.
+    #
+    #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive`
+    #   and `application/vnd.amazonaws.connect.message.interactive.response`
+    #   must be present in the SupportedMessagingContentTypes field of this
+    #   API in order to set `SegmentAttributes` as \\\{` "connect:Subtype":
+    #   \{"valueString" : "connect:Guide" \}\}`.
+    #
+    #    </note>
+    #   @return [Hash<String,Types::SegmentAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -13103,7 +15628,8 @@ module Aws::Connect
       :chat_duration_in_minutes,
       :supported_messaging_content_types,
       :persistent_chat,
-      :related_contact_id)
+      :related_contact_id,
+      :segment_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13301,11 +15827,11 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for the outbound call. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   flow. On the flow page, under the name of the flow, choose **Show
-    #   additional flow information**. The ContactFlowId is the last part of
-    #   the ARN, shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -13413,16 +15939,19 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] previous_contact_id
-    #   The identifier of the previous chat, voice, or task contact.
+    #   The identifier of the previous chat, voice, or task contact. Any
+    #   updates to user-defined attributes to task contacts linked using the
+    #   same `PreviousContactID` will affect every contact in the chain.
+    #   There can be a maximum of 12 linked task contacts in a chain.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for initiating the tasks. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   flow. On the flow page, under the name of the flow, choose **Show
-    #   additional flow information**. The ContactFlowId is the last part of
-    #   the ARN, shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -13444,7 +15973,10 @@ module Aws::Connect
     #
     # @!attribute [rw] references
     #   A formatted URL that is shown to an agent in the Contact Control
-    #   Panel (CCP).
+    #   Panel (CCP). Tasks can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during task
+    #   creation.
     #   @return [Hash<String,Types::Reference>]
     #
     # @!attribute [rw] description
@@ -13473,15 +16005,34 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] task_template_id
-    #   A unique identifier for the task template.
+    #   A unique identifier for the task template. For more information
+    #   about task templates, see [Create task templates][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
-    #   The identifier for the quick connect.
+    #   The identifier for the quick connect. Tasks that are created by
+    #   using `QuickConnectId` will use the flow that is defined on agent or
+    #   queue quick connect. For more information about quick connects, see
+    #   [Create quick connects][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html
     #   @return [String]
     #
     # @!attribute [rw] related_contact_id
-    #   The contactId that is [related][1] to this contact.
+    #   The contactId that is [related][1] to this contact. Linking tasks
+    #   together by using `RelatedContactID` copies over contact attributes
+    #   from the related task contact to the new task contact. All updates
+    #   to user-defined attributes in the new task contact are limited to
+    #   the individual contact ID, unlike what happens when tasks are linked
+    #   by using `PreviousContactID`. There are no limits to the number of
+    #   contacts that can be linked by using `RelatedContactId`.
     #
     #
     #
@@ -13515,6 +16066,131 @@ module Aws::Connect
     #
     class StartTaskContactResponse < Struct.new(
       :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, -, and \_
+    #   characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   The token is valid for 7 days after creation. If a contact is
+    #   already started, the contact ID is returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow for the call. To see the ContactFlowId in
+    #   the Amazon Connect admin website, on the navigation menu go to
+    #   **Routing**, **Contact Flows**. Choose the flow. On the flow page,
+    #   under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_capabilities
+    #   Information about the video sharing capabilities of the participants
+    #   (customer, agent).
+    #   @return [Types::AllowedCapabilities]
+    #
+    # @!attribute [rw] participant_details
+    #   The customer's details.
+    #   @return [Types::ParticipantDetails]
+    #
+    # @!attribute [rw] related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the contact starting.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP). Tasks can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during task
+    #   creation.
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @!attribute [rw] description
+    #   A description of the task that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartWebRTCContactRequest AWS API Documentation
+    #
+    class StartWebRTCContactRequest < Struct.new(
+      :attributes,
+      :client_token,
+      :contact_flow_id,
+      :instance_id,
+      :allowed_capabilities,
+      :participant_details,
+      :related_contact_id,
+      :references,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_data
+    #   Information required for the client application (mobile application
+    #   or website) to connect to the call.
+    #   @return [Types::ConnectionData]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier for a contact participant. The `ParticipantId` for a
+    #   contact participant is the same throughout the contact lifecycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_token
+    #   The token used by the contact participant to call the
+    #   [CreateParticipantConnection][1] API. The participant token is valid
+    #   for the lifetime of a contact participant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartWebRTCContactResponse AWS API Documentation
+    #
+    class StartWebRTCContactResponse < Struct.new(
+      :connection_data,
+      :contact_id,
+      :participant_id,
+      :participant_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13564,11 +16240,17 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_reason
+    #   The reason a contact can be disconnected. Only Amazon Connect
+    #   outbound campaigns can provide this field.
+    #   @return [Types::DisconnectReason]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest AWS API Documentation
     #
     class StopContactRequest < Struct.new(
       :contact_id,
-      :instance_id)
+      :instance_id,
+      :disconnect_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13700,6 +16382,26 @@ module Aws::Connect
     class SubmitContactEvaluationResponse < Struct.new(
       :evaluation_id,
       :evaluation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request for which contact was successfully created.
+    #
+    # @!attribute [rw] request_identifier
+    #   Request identifier provided in the API call in the
+    #   ContactDataRequest to create a contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The contactId of the contact that was created successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SuccessfulRequest AWS API Documentation
+    #
+    class SuccessfulRequest < Struct.new(
+      :request_identifier,
+      :contact_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14140,14 +16842,14 @@ module Aws::Connect
     #     [DeleteTrafficDistributionGroup][2] operation has failed.
     #
     #   * `UPDATE_IN_PROGRESS` means the previous
-    #     [UpdateTrafficDistributionGroup][3] operation is still in progress
-    #     and has not yet completed.
+    #     [UpdateTrafficDistribution][3] operation is still in progress and
+    #     has not yet completed.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html
-    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
+    #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -14163,7 +16865,7 @@ module Aws::Connect
     #   default traffic distribution group is deleted as part of the process
     #   for deleting a replica.
     #
-    #   <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    #   <note markdown="1"> The `SignInConfig` distribution is available only on a default
     #   `TrafficDistributionGroup` (see the `IsDefault` parameter in the
     #   [TrafficDistributionGroup][1] data type). If you call
     #   `UpdateTrafficDistribution` with a modified `SignInConfig` and a
@@ -14509,8 +17211,10 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1].
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -14586,7 +17290,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContentRequest AWS API Documentation
@@ -15003,12 +17712,56 @@ module Aws::Connect
     class UpdateParticipantRoleConfigResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] phone_number_id
+    #   The Amazon Resource Name (ARN) or resource ID of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberMetadataRequest AWS API Documentation
+    #
+    class UpdatePhoneNumberMetadataRequest < Struct.new(
+      :phone_number_id,
+      :phone_number_description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
-    #   traffic distribution groups that phone numbers are claimed to.
+    #   traffic distribution groups that phone number inbound traffic is
+    #   routed through. You must enter `InstanceId` or `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -15030,6 +17783,7 @@ module Aws::Connect
     class UpdatePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :target_arn,
+      :instance_id,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -15074,7 +17828,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can
+    #   provide S3 pre-signed URLs returned by the [GetPromptFile][1] API
+    #   instead of providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePromptRequest AWS API Documentation
@@ -15538,7 +18298,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
@@ -15706,7 +18466,8 @@ module Aws::Connect
     #   @return [Types::TelephonyConfig]
     #
     # @!attribute [rw] sign_in_config
-    #   The distribution of allowing signing in to the instance and its
+    #   The distribution that determines which Amazon Web Services Regions
+    #   should be used to sign in agents in to both the instance and its
     #   replica(s).
     #   @return [Types::SignInConfig]
     #
@@ -16081,6 +18842,15 @@ module Aws::Connect
     #   The tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User AWS API Documentation
     #
     class User < Struct.new(
@@ -16093,7 +18863,9 @@ module Aws::Connect
       :security_profile_ids,
       :routing_profile_id,
       :hierarchy_group_id,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16493,12 +19265,23 @@ module Aws::Connect
     #   The Amazon Connect user name of the user account.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSummary AWS API Documentation
     #
     class UserSummary < Struct.new(
       :id,
       :arn,
-      :username)
+      :username,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end

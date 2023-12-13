@@ -162,18 +162,6 @@ module Aws
           end.to raise_error(ArgumentError)
         end
 
-        it 'raises when use_dualstack_endpoint is set' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'us-west-2',
-            use_dualstack_endpoint: true
-          )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect do
-            client.get_access_point(name: arn)
-          end.to raise_error(ArgumentError)
-        end
-
         it 'raises when use_accelerate_endpoint is set' do
           # use_accelerate_endpoint is not supported in the S3Control client
           expect do
@@ -336,18 +324,6 @@ module Aws
             region: 'us-gov-east-1'
           )
           arn = 'arn:aws:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'raises when use_dualstack_endpoint is set' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'us-west-2',
-            use_dualstack_endpoint: true
-          )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
           expect do
             client.get_bucket(bucket: arn)
           end.to raise_error(ArgumentError)

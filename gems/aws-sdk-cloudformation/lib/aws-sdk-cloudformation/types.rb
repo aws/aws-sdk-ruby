@@ -580,6 +580,10 @@ module Aws::CloudFormation
     #   The root change set ID.
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
     #
     class ChangeSetSummary < Struct.new(
@@ -594,7 +598,8 @@ module Aws::CloudFormation
       :description,
       :include_nested_stacks,
       :parent_change_set_id,
-      :root_change_set_id)
+      :root_change_set_id,
+      :import_existing_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -811,6 +816,11 @@ module Aws::CloudFormation
     #     For more information about macros, see [Using CloudFormation
     #     macros to perform custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -836,8 +846,13 @@ module Aws::CloudFormation
     #   grants permissions to all resource types. Identity and Access
     #   Management (IAM) uses this parameter for condition keys in IAM
     #   policies for CloudFormation. For more information, see [Controlling
-    #   access with Identity and Access Management][1] in the CloudFormation
-    #   User Guide.
+    #   access with Identity and Access Management][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -958,6 +973,24 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #
+    #   <note markdown="1"> This parameter can only import resources that have custom names in
+    #   templates. For more information, see [name type][1] in the
+    #   *CloudFormation User Guide*. To import resources that do not accept
+    #   custom names, such as EC2 instances, use the resource import feature
+    #   instead. For more information, see [Bringing existing resources into
+    #   CloudFormation management][2] in the *CloudFormation User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -978,7 +1011,8 @@ module Aws::CloudFormation
       :change_set_type,
       :resources_to_import,
       :include_nested_stacks,
-      :on_stack_failure)
+      :on_stack_failure,
+      :import_existing_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1018,7 +1052,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information, go
-    #   to [Template anatomy][1] in the CloudFormation User Guide.
+    #   to [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1032,7 +1066,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   the [Template anatomy][1] in the CloudFormation User Guide.
+    #   the [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1153,6 +1187,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -1186,6 +1225,11 @@ module Aws::CloudFormation
     #   CloudFormation-specific condition keys in IAM policies. For more
     #   information, see [Controlling Access with Identity and Access
     #   Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -2401,6 +2445,21 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #
+    #   <note markdown="1"> This parameter can only import resources that have [custom names][1]
+    #   in templates. To import resources that do not accept custom names,
+    #   such as EC2 instances, use the [resource import][2] feature instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2423,7 +2482,8 @@ module Aws::CloudFormation
       :include_nested_stacks,
       :parent_change_set_id,
       :root_change_set_id,
-      :on_stack_failure)
+      :on_stack_failure,
+      :import_existing_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3665,7 +3725,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. (For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3679,7 +3739,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template that's located in an Amazon S3 bucket or a Systems
     #   Manager document. For more information, go to [Template Anatomy][1]
-    #   in the CloudFormation User Guide.
+    #   in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3835,8 +3895,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_policy_body
     #   Structure containing the stack policy body. (For more information,
-    #   go to [ Prevent Updates to Stack Resources][1] in the CloudFormation
-    #   User Guide.)
+    #   go to [ Prevent Updates to Stack Resources][1] in the
+    #   *CloudFormation User Guide*.)
     #
     #
     #
@@ -3896,7 +3956,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] template_body
     #   Structure containing the template body. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   CloudFormation returns the same template that was used when the
     #   stack was created.
@@ -3928,8 +3988,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information
-    #   about templates, see [Template anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   about templates, see [Template anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -3943,8 +4003,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information about
-    #   templates, see [Template anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   templates, see [Template anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -5779,7 +5839,7 @@ module Aws::CloudFormation
     #
     #   For CloudFormation to assume the specified execution role, the role
     #   must contain a trust relationship with the CloudFormation service
-    #   principle (`resources.cloudformation.amazonaws.com`). For more
+    #   principal (`resources.cloudformation.amazonaws.com`). For more
     #   information about adding trust relationships, see [Modifying a role
     #   trust policy][1] in the *Identity and Access Management User Guide*.
     #
@@ -6309,8 +6369,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_policy_body
     #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent updates to stack resources][1] in the CloudFormation
-    #   User Guide. You can specify either the `StackPolicyBody` or the
+    #   to [ Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -8177,9 +8237,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] max_concurrent_count
     #   The maximum number of accounts in which to perform this operation at
-    #   one time. This is dependent on the value of
-    #   `FailureToleranceCount`.`MaxConcurrentCount` is at most one more
-    #   than the `FailureToleranceCount`.
+    #   one time. This can depend on the value of `FailureToleranceCount`
+    #   depending on your `ConcurrencyMode`. `MaxConcurrentCount` is at most
+    #   one more than the `FailureToleranceCount` if you're using
+    #   `STRICT_FAILURE_TOLERANCE`.
     #
     #   Note that this setting lets you specify the *maximum* for
     #   operations. For large deployments, under certain circumstances the
@@ -8212,6 +8273,28 @@ module Aws::CloudFormation
     #   By default, `1` is specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] concurrency_mode
+    #   Specifies how the concurrency level behaves during the operation
+    #   execution.
+    #
+    #   * `STRICT_FAILURE_TOLERANCE`: This option dynamically lowers the
+    #     concurrency level to ensure the number of failed accounts never
+    #     exceeds the value of `FailureToleranceCount` +1. The initial
+    #     actual concurrency is set to the lower of either the value of the
+    #     `MaxConcurrentCount`, or the value of `MaxConcurrentCount` +1. The
+    #     actual concurrency is then reduced proportionally by the number of
+    #     failures. This is the default behavior.
+    #
+    #     If failure tolerance or Maximum concurrent accounts are set to
+    #     percentages, the behavior is similar.
+    #
+    #   * `SOFT_FAILURE_TOLERANCE`: This option decouples
+    #     `FailureToleranceCount` from the actual concurrency. This allows
+    #     stack set operations to run at the concurrency level set by the
+    #     `MaxConcurrentCount` value, or `MaxConcurrentPercentage`,
+    #     regardless of the number of failures.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences AWS API Documentation
     #
     class StackSetOperationPreferences < Struct.new(
@@ -8220,7 +8303,8 @@ module Aws::CloudFormation
       :failure_tolerance_count,
       :failure_tolerance_percentage,
       :max_concurrent_count,
-      :max_concurrent_percentage)
+      :max_concurrent_percentage,
+      :concurrency_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9220,7 +9304,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. (For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -9235,7 +9319,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template that's located in an Amazon S3 bucket or a Systems
     #   Manager document. For more information, go to [Template Anatomy][1]
-    #   in the CloudFormation User Guide.
+    #   in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -9363,6 +9447,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -9389,6 +9478,11 @@ module Aws::CloudFormation
     #   Management (IAM) uses this parameter for CloudFormation-specific
     #   condition keys in IAM policies. For more information, see
     #   [Controlling Access with Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -10092,7 +10186,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -10106,7 +10200,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.

@@ -301,6 +301,7 @@ module Aws::StorageGateway
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     SoftwareUpdatesEndDate = Shapes::StringShape.new(name: 'SoftwareUpdatesEndDate')
+    SoftwareVersion = Shapes::StringShape.new(name: 'SoftwareVersion')
     Squash = Shapes::StringShape.new(name: 'Squash')
     StartAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestInput')
     StartAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestOutput')
@@ -831,6 +832,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:gateway_capacity, Shapes::ShapeRef.new(shape: GatewayCapacity, location_name: "GatewayCapacity"))
     DescribeGatewayInformationOutput.add_member(:supported_gateway_capacities, Shapes::ShapeRef.new(shape: SupportedGatewayCapacities, location_name: "SupportedGatewayCapacities"))
     DescribeGatewayInformationOutput.add_member(:host_environment_id, Shapes::ShapeRef.new(shape: HostEnvironmentId, location_name: "HostEnvironmentId"))
+    DescribeGatewayInformationOutput.add_member(:software_version, Shapes::ShapeRef.new(shape: SoftwareVersion, location_name: "SoftwareVersion"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))

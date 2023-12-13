@@ -570,23 +570,12 @@ module Aws::MarketplaceCommerceAnalytics
       req.send_request(options)
     end
 
-    # Given a data set type and a from date, asynchronously publishes the
-    # requested customer support data to the specified S3 bucket and
-    # notifies the specified SNS topic once the data is available. Returns a
-    # unique request identifier that can be used to correlate requests with
-    # notifications from the SNS topic. Data sets will be published in
-    # comma-separated values (CSV) format with the file name
-    # \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file
-    # with the same name already exists (e.g. if the same data set is
-    # requested twice), the original file will be overwritten by the new
-    # file. Requires a Role with an attached permissions policy providing
-    # Allow permissions for the following actions: s3:PutObject,
-    # s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
-    # iam:GetRolePolicy.
+    # *This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
     #
     # @option params [required, String] :data_set_type
-    #   Specifies the data set type to be written to the output csv file. The
-    #   data set types customer\_support\_contacts\_data and
+    #   *This target has been deprecated.* Specifies the data set type to be
+    #   written to the output csv file. The data set types
+    #   customer\_support\_contacts\_data and
     #   test\_customer\_support\_contacts\_data both result in a csv file
     #   containing the following fields: Product Id, Product Code, Customer
     #   Guid, Subscription Guid, Subscription Start Date, Organization, AWS
@@ -602,33 +591,22 @@ module Aws::MarketplaceCommerceAnalytics
     #     customer\_support\_contacts\_data
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :from_date
-    #   The start date from which to retrieve the data set in UTC. This
-    #   parameter only affects the customer\_support\_contacts\_data data set
-    #   type.
+    #   *This target has been deprecated.* The start date from which to retrieve the data set in UTC. This parameter only affects the customer\_support\_contacts\_data data set type.
     #
     # @option params [required, String] :role_name_arn
-    #   The Amazon Resource Name (ARN) of the Role with an attached
-    #   permissions policy to interact with the provided AWS services.
+    #   *This target has been deprecated.* The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided AWS services.
     #
     # @option params [required, String] :destination_s3_bucket_name
-    #   The name (friendly name, not ARN) of the destination S3 bucket.
+    #   *This target has been deprecated.* The name (friendly name, not ARN) of the destination S3 bucket.
     #
     # @option params [String] :destination_s3_prefix
-    #   (Optional) The desired S3 prefix for the published data set, similar
-    #   to a directory path in standard file systems. For example, if given
-    #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
-    #   the output file "outputfile" would be published to
-    #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
-    #   directory structure does not exist, it will be created. If no prefix
-    #   is provided, the data set will be published to the S3 bucket root.
+    #   *This target has been deprecated.* (Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems. For example, if given the bucket name "mybucket" and the prefix "myprefix/mydatasets", the output file "outputfile" would be published to "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix directory structure does not exist, it will be created. If no prefix is provided, the data set will be published to the S3 bucket root.
     #
     # @option params [required, String] :sns_topic_arn
-    #   Amazon Resource Name (ARN) for the SNS Topic that will be notified
-    #   when the data set has been published or if an error has occurred.
+    #   *This target has been deprecated.* Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.
     #
     # @option params [Hash<String,String>] :customer_defined_values
-    #   (Optional) Key-value pairs which will be returned, unmodified, in the
-    #   Amazon SNS notification message and the data set metadata file.
+    #   *This target has been deprecated.* (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.
     #
     # @return [Types::StartSupportDataExportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -674,7 +652,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

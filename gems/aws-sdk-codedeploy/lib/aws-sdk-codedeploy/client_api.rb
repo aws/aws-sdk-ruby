@@ -268,6 +268,7 @@ module Aws::CodeDeploy
     InvalidTrafficRoutingConfigurationException = Shapes::StructureShape.new(name: 'InvalidTrafficRoutingConfigurationException')
     InvalidTriggerConfigException = Shapes::StructureShape.new(name: 'InvalidTriggerConfigException')
     InvalidUpdateOutdatedInstancesOnlyValueException = Shapes::StructureShape.new(name: 'InvalidUpdateOutdatedInstancesOnlyValueException')
+    InvalidZonalDeploymentConfigurationException = Shapes::StructureShape.new(name: 'InvalidZonalDeploymentConfigurationException')
     Key = Shapes::StringShape.new(name: 'Key')
     LambdaFunctionAlias = Shapes::StringShape.new(name: 'LambdaFunctionAlias')
     LambdaFunctionInfo = Shapes::StructureShape.new(name: 'LambdaFunctionInfo')
@@ -310,6 +311,9 @@ module Aws::CodeDeploy
     LogTail = Shapes::StringShape.new(name: 'LogTail')
     Message = Shapes::StringShape.new(name: 'Message')
     MinimumHealthyHosts = Shapes::StructureShape.new(name: 'MinimumHealthyHosts')
+    MinimumHealthyHostsPerZone = Shapes::StructureShape.new(name: 'MinimumHealthyHostsPerZone')
+    MinimumHealthyHostsPerZoneType = Shapes::StringShape.new(name: 'MinimumHealthyHostsPerZoneType')
+    MinimumHealthyHostsPerZoneValue = Shapes::IntegerShape.new(name: 'MinimumHealthyHostsPerZoneValue')
     MinimumHealthyHostsType = Shapes::StringShape.new(name: 'MinimumHealthyHostsType')
     MinimumHealthyHostsValue = Shapes::IntegerShape.new(name: 'MinimumHealthyHostsValue')
     MultipleIamArnsProvidedException = Shapes::StructureShape.new(name: 'MultipleIamArnsProvidedException')
@@ -403,6 +407,8 @@ module Aws::CodeDeploy
     Version = Shapes::StringShape.new(name: 'Version')
     VersionId = Shapes::StringShape.new(name: 'VersionId')
     WaitTimeInMins = Shapes::IntegerShape.new(name: 'WaitTimeInMins')
+    WaitTimeInSeconds = Shapes::IntegerShape.new(name: 'WaitTimeInSeconds')
+    ZonalConfig = Shapes::StructureShape.new(name: 'ZonalConfig')
 
     AddTagsToOnPremisesInstancesInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     AddTagsToOnPremisesInstancesInput.add_member(:instance_names, Shapes::ShapeRef.new(shape: InstanceNameList, required: true, location_name: "instanceNames"))
@@ -454,6 +460,7 @@ module Aws::CodeDeploy
 
     AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: AutoScalingGroupName, location_name: "name"))
     AutoScalingGroup.add_member(:hook, Shapes::ShapeRef.new(shape: AutoScalingGroupHook, location_name: "hook"))
+    AutoScalingGroup.add_member(:termination_hook, Shapes::ShapeRef.new(shape: AutoScalingGroupHook, location_name: "terminationHook"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupList.member = Shapes::ShapeRef.new(shape: AutoScalingGroup)
@@ -491,8 +498,8 @@ module Aws::CodeDeploy
     BatchGetDeploymentInstancesOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     BatchGetDeploymentInstancesOutput.struct_class = Types::BatchGetDeploymentInstancesOutput
 
-    BatchGetDeploymentTargetsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
-    BatchGetDeploymentTargetsInput.add_member(:target_ids, Shapes::ShapeRef.new(shape: TargetIdList, location_name: "targetIds"))
+    BatchGetDeploymentTargetsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
+    BatchGetDeploymentTargetsInput.add_member(:target_ids, Shapes::ShapeRef.new(shape: TargetIdList, required: true, location_name: "targetIds"))
     BatchGetDeploymentTargetsInput.struct_class = Types::BatchGetDeploymentTargetsInput
 
     BatchGetDeploymentTargetsOutput.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargetList, location_name: "deploymentTargets"))
@@ -548,6 +555,7 @@ module Aws::CodeDeploy
     CreateDeploymentConfigInput.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, location_name: "minimumHealthyHosts"))
     CreateDeploymentConfigInput.add_member(:traffic_routing_config, Shapes::ShapeRef.new(shape: TrafficRoutingConfig, location_name: "trafficRoutingConfig"))
     CreateDeploymentConfigInput.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
+    CreateDeploymentConfigInput.add_member(:zonal_config, Shapes::ShapeRef.new(shape: ZonalConfig, location_name: "zonalConfig"))
     CreateDeploymentConfigInput.struct_class = Types::CreateDeploymentConfigInput
 
     CreateDeploymentConfigOutput.add_member(:deployment_config_id, Shapes::ShapeRef.new(shape: DeploymentConfigId, location_name: "deploymentConfigId"))
@@ -571,6 +579,7 @@ module Aws::CodeDeploy
     CreateDeploymentGroupInput.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
     CreateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     CreateDeploymentGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDeploymentGroupInput.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminationHookEnabled"))
     CreateDeploymentGroupInput.struct_class = Types::CreateDeploymentGroupInput
 
     CreateDeploymentGroupOutput.add_member(:deployment_group_id, Shapes::ShapeRef.new(shape: DeploymentGroupId, location_name: "deploymentGroupId"))
@@ -632,6 +641,7 @@ module Aws::CodeDeploy
     DeploymentConfigInfo.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
     DeploymentConfigInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentConfigInfo.add_member(:traffic_routing_config, Shapes::ShapeRef.new(shape: TrafficRoutingConfig, location_name: "trafficRoutingConfig"))
+    DeploymentConfigInfo.add_member(:zonal_config, Shapes::ShapeRef.new(shape: ZonalConfig, location_name: "zonalConfig"))
     DeploymentConfigInfo.struct_class = Types::DeploymentConfigInfo
 
     DeploymentConfigLimitExceededException.struct_class = Types::DeploymentConfigLimitExceededException
@@ -668,6 +678,7 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     DeploymentGroupInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentGroupInfo.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
+    DeploymentGroupInfo.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminationHookEnabled"))
     DeploymentGroupInfo.struct_class = Types::DeploymentGroupInfo
 
     DeploymentGroupInfoList.member = Shapes::ShapeRef.new(shape: DeploymentGroupInfo)
@@ -868,8 +879,8 @@ module Aws::CodeDeploy
     GetDeploymentOutput.add_member(:deployment_info, Shapes::ShapeRef.new(shape: DeploymentInfo, location_name: "deploymentInfo"))
     GetDeploymentOutput.struct_class = Types::GetDeploymentOutput
 
-    GetDeploymentTargetInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
-    GetDeploymentTargetInput.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
+    GetDeploymentTargetInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
+    GetDeploymentTargetInput.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "targetId"))
     GetDeploymentTargetInput.struct_class = Types::GetDeploymentTargetInput
 
     GetDeploymentTargetOutput.add_member(:deployment_target, Shapes::ShapeRef.new(shape: DeploymentTarget, location_name: "deploymentTarget"))
@@ -1064,6 +1075,8 @@ module Aws::CodeDeploy
 
     InvalidUpdateOutdatedInstancesOnlyValueException.struct_class = Types::InvalidUpdateOutdatedInstancesOnlyValueException
 
+    InvalidZonalDeploymentConfigurationException.struct_class = Types::InvalidZonalDeploymentConfigurationException
+
     LambdaFunctionInfo.add_member(:function_name, Shapes::ShapeRef.new(shape: LambdaFunctionName, location_name: "functionName"))
     LambdaFunctionInfo.add_member(:function_alias, Shapes::ShapeRef.new(shape: LambdaFunctionAlias, location_name: "functionAlias"))
     LambdaFunctionInfo.add_member(:current_version, Shapes::ShapeRef.new(shape: Version, location_name: "currentVersion"))
@@ -1145,7 +1158,7 @@ module Aws::CodeDeploy
     ListDeploymentInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDeploymentInstancesOutput.struct_class = Types::ListDeploymentInstancesOutput
 
-    ListDeploymentTargetsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    ListDeploymentTargetsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
     ListDeploymentTargetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDeploymentTargetsInput.add_member(:target_filters, Shapes::ShapeRef.new(shape: TargetFilters, location_name: "targetFilters"))
     ListDeploymentTargetsInput.struct_class = Types::ListDeploymentTargetsInput
@@ -1200,6 +1213,10 @@ module Aws::CodeDeploy
     MinimumHealthyHosts.add_member(:type, Shapes::ShapeRef.new(shape: MinimumHealthyHostsType, location_name: "type"))
     MinimumHealthyHosts.add_member(:value, Shapes::ShapeRef.new(shape: MinimumHealthyHostsValue, location_name: "value"))
     MinimumHealthyHosts.struct_class = Types::MinimumHealthyHosts
+
+    MinimumHealthyHostsPerZone.add_member(:type, Shapes::ShapeRef.new(shape: MinimumHealthyHostsPerZoneType, location_name: "type"))
+    MinimumHealthyHostsPerZone.add_member(:value, Shapes::ShapeRef.new(shape: MinimumHealthyHostsPerZoneValue, location_name: "value"))
+    MinimumHealthyHostsPerZone.struct_class = Types::MinimumHealthyHostsPerZone
 
     MultipleIamArnsProvidedException.struct_class = Types::MultipleIamArnsProvidedException
 
@@ -1400,10 +1417,16 @@ module Aws::CodeDeploy
     UpdateDeploymentGroupInput.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
     UpdateDeploymentGroupInput.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
     UpdateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
+    UpdateDeploymentGroupInput.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminationHookEnabled"))
     UpdateDeploymentGroupInput.struct_class = Types::UpdateDeploymentGroupInput
 
     UpdateDeploymentGroupOutput.add_member(:hooks_not_cleaned_up, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "hooksNotCleanedUp"))
     UpdateDeploymentGroupOutput.struct_class = Types::UpdateDeploymentGroupOutput
+
+    ZonalConfig.add_member(:first_zone_monitor_duration_in_seconds, Shapes::ShapeRef.new(shape: WaitTimeInSeconds, location_name: "firstZoneMonitorDurationInSeconds"))
+    ZonalConfig.add_member(:monitor_duration_in_seconds, Shapes::ShapeRef.new(shape: WaitTimeInSeconds, location_name: "monitorDurationInSeconds"))
+    ZonalConfig.add_member(:minimum_healthy_hosts_per_zone, Shapes::ShapeRef.new(shape: MinimumHealthyHostsPerZone, location_name: "minimumHealthyHostsPerZone"))
+    ZonalConfig.struct_class = Types::ZonalConfig
 
 
     # @api private
@@ -1612,6 +1635,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: DeploymentConfigLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidComputePlatformException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidZonalDeploymentConfigurationException)
       end)
 
       api.add_operation(:create_deployment_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1934,6 +1958,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceTypeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentInstanceTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTargetFilterNameException)
       end)
 
       api.add_operation(:list_deployments, Seahorse::Model::Operation.new.tap do |o|

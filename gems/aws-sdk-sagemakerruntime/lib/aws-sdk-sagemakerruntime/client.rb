@@ -524,6 +524,10 @@ module Aws::SageMakerRuntime
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable
     #
+    # @option params [String] :inference_component_name
+    #   If the endpoint hosts one or more inference components, this parameter
+    #   specifies the name of inference component to invoke.
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
@@ -544,6 +548,7 @@ module Aws::SageMakerRuntime
     #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
     #     enable_explanations: "EnableExplanationsHeader",
+    #     inference_component_name: "InferenceComponentHeader",
     #   })
     #
     # @example Response structure
@@ -690,6 +695,12 @@ module Aws::SageMakerRuntime
     # * For information about how to process the streaming response, see
     #   [Invoke real-time endpoints][2].
     #
+    # Before you can use this operation, your IAM permissions must allow the
+    # `sagemaker:InvokeEndpoint` action. For more information about Amazon
+    # SageMaker actions for IAM policies, see [Actions, resources, and
+    # condition keys for Amazon SageMaker][3] in the *IAM Service
+    # Authorization Reference*.
+    #
     # Amazon SageMaker strips all POST headers except those supported by the
     # API. Amazon SageMaker might add additional headers. You should not
     # rely on the behavior of headers outside those enumerated in the
@@ -697,14 +708,15 @@ module Aws::SageMakerRuntime
     #
     # Calls to `InvokeEndpointWithResponseStream` are authenticated by using
     # Amazon Web Services Signature Version 4. For information, see
-    # [Authenticating Requests (Amazon Web Services Signature Version 4)][3]
+    # [Authenticating Requests (Amazon Web Services Signature Version 4)][4]
     # in the *Amazon S3 API Reference*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -776,6 +788,11 @@ module Aws::SageMakerRuntime
     #
     # @option params [String] :inference_id
     #   An identifier that you assign to your request.
+    #
+    # @option params [String] :inference_component_name
+    #   If the endpoint hosts one or more inference components, this parameter
+    #   specifies the name of inference component to invoke for a streaming
+    #   response.
     #
     # @return [Types::InvokeEndpointWithResponseStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -897,6 +914,7 @@ module Aws::SageMakerRuntime
     #     target_variant: "TargetVariantHeader",
     #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
+    #     inference_component_name: "InferenceComponentHeader",
     #   })
     #
     # @example Response structure
@@ -959,7 +977,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

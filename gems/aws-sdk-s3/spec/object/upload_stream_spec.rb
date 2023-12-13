@@ -8,7 +8,7 @@ module Aws
     describe Object do
       let(:client) { S3::Client.new(stub_responses: true) }
 
-      describe '#upload_stream' do
+      describe '#upload_stream', :jruby_flaky do
         let(:object) do
           S3::Object.new(
             bucket_name: 'bucket',

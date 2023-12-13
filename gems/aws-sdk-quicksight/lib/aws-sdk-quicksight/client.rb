@@ -584,11 +584,13 @@ module Aws::QuickSight
     #
     # @option params [required, String] :authentication_method
     #   The method that you want to use to authenticate your Amazon QuickSight
-    #   account. Currently, the valid values for this parameter are
-    #   `IAM_AND_QUICKSIGHT`, `IAM_ONLY`, and `ACTIVE_DIRECTORY`.
+    #   account.
     #
     #   If you choose `ACTIVE_DIRECTORY`, provide an `ActiveDirectoryName` and
     #   an `AdminGroup` associated with your Active Directory.
+    #
+    #   If you choose `IAM_IDENTITY_CENTER`, provide an `AdminGroup`
+    #   associated with your IAM Identity Center account.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID of the account that you're using
@@ -621,36 +623,54 @@ module Aws::QuickSight
     #   QuickSight account.
     #
     # @option params [Array<String>] :admin_group
-    #   The admin group associated with your Active Directory. This field is
-    #   required if `ACTIVE_DIRECTORY` is the selected authentication method
-    #   of the new Amazon QuickSight account. For more information about using
-    #   Active Directory in Amazon QuickSight, see [Using Active Directory
-    #   with Amazon QuickSight Enterprise Edition][1] in the Amazon QuickSight
-    #   User Guide.
+    #   The admin group associated with your Active Directory or IAM Identity
+    #   Center account. This field is required if `ACTIVE_DIRECTORY` or
+    #   `IAM_IDENTITY_CENTER` is the selected authentication method of the new
+    #   Amazon QuickSight account.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
-    #
-    # @option params [Array<String>] :author_group
-    #   The author group associated with your Active Directory. For more
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
     #   information about using Active Directory in Amazon QuickSight, see
-    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][1]
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
     #   in the Amazon QuickSight User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #
+    # @option params [Array<String>] :author_group
+    #   The author group associated with your Active Directory or IAM Identity
+    #   Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
+    #   in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
     #
     # @option params [Array<String>] :reader_group
-    #   The reader group associated with your Active Direcrtory. For more
+    #   The reader group associated with your Active Directory or IAM Identity
+    #   Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
     #   information about using Active Directory in Amazon QuickSight, see
-    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][1]
-    #   in the *Amazon QuickSight User Guide*.
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
+    #   in the Amazon QuickSight User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
     #
     # @option params [String] :first_name
     #   The first name of the author of the Amazon QuickSight account to use
@@ -775,6 +795,15 @@ module Aws::QuickSight
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the analysis, Amazon QuickSight adds the analysis to
+    #   these folders.
+    #
     # @return [Types::CreateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisResponse#arn #arn} => String
@@ -891,6 +920,19 @@ module Aws::QuickSight
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to create a dashboard with
+    #   definition objects. This option skips the validation step for specific
+    #   errors.
+    #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dashboard, Amazon QuickSight adds the dashboard to
+    #   these folders.
+    #
+    # @option params [Types::LinkSharingConfiguration] :link_sharing_configuration
+    #   A structure that contains the permissions of a shareable link to the
+    #   dashboard.
+    #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDashboardResponse#arn #arn} => String
@@ -976,6 +1018,10 @@ module Aws::QuickSight
     # @option params [Array<Types::DatasetParameter>] :dataset_parameters
     #   The parameter declarations of the dataset.
     #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the dataset, Amazon QuickSight adds the dataset to
+    #   these folders.
+    #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSetResponse#arn #arn} => String
@@ -1002,6 +1048,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1013,6 +1060,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1029,6 +1077,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -1061,6 +1110,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -1204,6 +1254,7 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1266,6 +1317,10 @@ module Aws::QuickSight
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the data source.
     #
+    # @option params [Array<String>] :folder_arns
+    #   When you create the data source, Amazon QuickSight adds the data
+    #   source to these folders.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#arn #arn} => String
@@ -1280,7 +1335,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL, DATABRICKS
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL, DATABRICKS, STARBURST, TRINO, BIGQUERY
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
@@ -1339,6 +1394,15 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -1384,6 +1448,21 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #       },
+    #       big_query_parameters: {
+    #         project_id: "ProjectId", # required
+    #         data_set_region: "DataSetRegion",
     #       },
     #     },
     #     credentials: {
@@ -1449,6 +1528,15 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -1495,6 +1583,21 @@ module Aws::QuickSight
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
+    #             big_query_parameters: {
+    #               project_id: "ProjectId", # required
+    #               data_set_region: "DataSetRegion",
+    #             },
     #           },
     #         ],
     #       },
@@ -1519,6 +1622,7 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     folder_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1585,7 +1689,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     name: "FolderName",
-    #     folder_type: "SHARED", # accepts SHARED
+    #     folder_type: "SHARED", # accepts SHARED, RESTRICTED
     #     parent_folder_arn: "Arn",
     #     permissions: [
     #       {
@@ -1645,14 +1749,14 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
     #
     #   resp.status #=> Integer
     #   resp.folder_member.member_id #=> String
-    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "TOPIC"
+    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "DATASOURCE", "TOPIC"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembership AWS API Documentation
@@ -2040,6 +2144,52 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Use `CreateRoleMembership` to add an existing Amazon QuickSight group
+    # to an existing role.
+    #
+    # @option params [required, String] :member_name
+    #   The name of the group that you want to add to the role.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must be
+    #   the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that the role belongs to.
+    #
+    # @option params [required, String] :role
+    #   The role that you want to add a group to.
+    #
+    # @return [Types::CreateRoleMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoleMembershipResponse#request_id #request_id} => String
+    #   * {Types::CreateRoleMembershipResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_role_membership({
+    #     member_name: "GroupName", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRoleMembership AWS API Documentation
+    #
+    # @overload create_role_membership(params = {})
+    # @param [Hash] params ({})
+    def create_role_membership(params = {}, options = {})
+      req = build_request(:create_role_membership, params)
+      req.send_request(options)
+    end
+
     # Creates a template either from a `TemplateDefinition` or from an
     # existing Amazon QuickSight analysis or template. You can use the
     # resulting template to create additional dashboards, templates, or
@@ -2106,6 +2256,11 @@ module Aws::QuickSight
     #
     #   Either a `SourceEntity` or a `Definition` must be provided in order
     #   for the request to be valid.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   TThe option to relax the validation needed to create a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3150,7 +3305,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, DATASOURCE, TOPIC
     #   })
     #
     # @example Response structure
@@ -3294,6 +3449,47 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes all access scopes and authorized targets that are associated
+    # with a service from the Amazon QuickSight IAM Identity Center
+    # application.
+    #
+    # This operation is only supported for Amazon QuickSight accounts that
+    # use IAM Identity Center.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete an
+    #   identity propagation configuration from.
+    #
+    # @option params [required, String] :service
+    #   The name of the Amazon Web Services service that you want to delete
+    #   the associated access scopes and authorized targets from.
+    #
+    # @return [Types::DeleteIdentityPropagationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIdentityPropagationConfigResponse#request_id #request_id} => String
+    #   * {Types::DeleteIdentityPropagationConfigResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_identity_propagation_config({
+    #     aws_account_id: "AwsAccountId", # required
+    #     service: "REDSHIFT", # required, accepts REDSHIFT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfig AWS API Documentation
+    #
+    # @overload delete_identity_propagation_config(params = {})
+    # @param [Hash] params ({})
+    def delete_identity_propagation_config(params = {}, options = {})
+      req = build_request(:delete_identity_propagation_config, params)
+      req.send_request(options)
+    end
+
     # Deletes a namespace and the users and groups that are associated with
     # the namespace. This is an asynchronous process. Assets including
     # dashboards, analyses, datasets and data sources are not deleted. To
@@ -3372,6 +3568,91 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_refresh_schedule(params = {}, options = {})
       req = build_request(:delete_refresh_schedule, params)
+      req.send_request(options)
+    end
+
+    # Removes custom permissions from the role.
+    #
+    # @option params [required, String] :role
+    #   The role that you want to remove permissions from.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that includes the role.
+    #
+    # @return [Types::DeleteRoleCustomPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRoleCustomPermissionResponse#request_id #request_id} => String
+    #   * {Types::DeleteRoleCustomPermissionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_role_custom_permission({
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleCustomPermission AWS API Documentation
+    #
+    # @overload delete_role_custom_permission(params = {})
+    # @param [Hash] params ({})
+    def delete_role_custom_permission(params = {}, options = {})
+      req = build_request(:delete_role_custom_permission, params)
+      req.send_request(options)
+    end
+
+    # Removes a group from a role.
+    #
+    # @option params [required, String] :member_name
+    #   The name of the group.
+    #
+    # @option params [required, String] :role
+    #   The role that you want to remove permissions from.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must be
+    #   the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that contains the role.
+    #
+    # @return [Types::DeleteRoleMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRoleMembershipResponse#request_id #request_id} => String
+    #   * {Types::DeleteRoleMembershipResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_role_membership({
+    #     member_name: "GroupName", # required
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleMembership AWS API Documentation
+    #
+    # @overload delete_role_membership(params = {})
+    # @param [Hash] params ({})
+    def delete_role_membership(params = {}, options = {})
+      req = build_request(:delete_role_membership, params)
       req.send_request(options)
     end
 
@@ -4151,6 +4432,10 @@ module Aws::QuickSight
     #   * {Types::DescribeAssetBundleExportJobResponse#cloud_formation_override_property_configuration #cloud_formation_override_property_configuration} => Types::AssetBundleCloudFormationOverridePropertyConfiguration
     #   * {Types::DescribeAssetBundleExportJobResponse#request_id #request_id} => String
     #   * {Types::DescribeAssetBundleExportJobResponse#status #status} => Integer
+    #   * {Types::DescribeAssetBundleExportJobResponse#include_permissions #include_permissions} => Boolean
+    #   * {Types::DescribeAssetBundleExportJobResponse#include_tags #include_tags} => Boolean
+    #   * {Types::DescribeAssetBundleExportJobResponse#validation_strategy #validation_strategy} => Types::AssetBundleExportJobValidationStrategy
+    #   * {Types::DescribeAssetBundleExportJobResponse#warnings #warnings} => Array&lt;Types::AssetBundleExportJobWarning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4206,6 +4491,12 @@ module Aws::QuickSight
     #   resp.cloud_formation_override_property_configuration.dashboards[0].properties[0] #=> String, one of "Name"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
+    #   resp.include_permissions #=> Boolean
+    #   resp.include_tags #=> Boolean
+    #   resp.validation_strategy.strict_mode_for_all_resources #=> Boolean
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].arn #=> String
+    #   resp.warnings[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJob AWS API Documentation
     #
@@ -4244,6 +4535,9 @@ module Aws::QuickSight
     #   * {Types::DescribeAssetBundleImportJobResponse#failure_action #failure_action} => String
     #   * {Types::DescribeAssetBundleImportJobResponse#request_id #request_id} => String
     #   * {Types::DescribeAssetBundleImportJobResponse#status #status} => Integer
+    #   * {Types::DescribeAssetBundleImportJobResponse#override_permissions #override_permissions} => Types::AssetBundleImportJobOverridePermissions
+    #   * {Types::DescribeAssetBundleImportJobResponse#override_tags #override_tags} => Types::AssetBundleImportJobOverrideTags
+    #   * {Types::DescribeAssetBundleImportJobResponse#override_validation_strategy #override_validation_strategy} => Types::AssetBundleImportJobOverrideValidationStrategy
     #
     # @example Request syntax with placeholder values
     #
@@ -4319,6 +4613,12 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -4342,6 +4642,15 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.big_query_parameters.project_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.big_query_parameters.data_set_region #=> String
     #   resp.override_parameters.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.override_parameters.data_sources[0].credentials.credential_pair.username #=> String
@@ -4362,6 +4671,82 @@ module Aws::QuickSight
     #   resp.failure_action #=> String, one of "DO_NOTHING", "ROLLBACK"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
+    #   resp.override_permissions.data_sources #=> Array
+    #   resp.override_permissions.data_sources[0].data_source_ids #=> Array
+    #   resp.override_permissions.data_sources[0].data_source_ids[0] #=> String
+    #   resp.override_permissions.data_sources[0].permissions.principals #=> Array
+    #   resp.override_permissions.data_sources[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.data_sources[0].permissions.actions #=> Array
+    #   resp.override_permissions.data_sources[0].permissions.actions[0] #=> String
+    #   resp.override_permissions.data_sets #=> Array
+    #   resp.override_permissions.data_sets[0].data_set_ids #=> Array
+    #   resp.override_permissions.data_sets[0].data_set_ids[0] #=> String
+    #   resp.override_permissions.data_sets[0].permissions.principals #=> Array
+    #   resp.override_permissions.data_sets[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.data_sets[0].permissions.actions #=> Array
+    #   resp.override_permissions.data_sets[0].permissions.actions[0] #=> String
+    #   resp.override_permissions.themes #=> Array
+    #   resp.override_permissions.themes[0].theme_ids #=> Array
+    #   resp.override_permissions.themes[0].theme_ids[0] #=> String
+    #   resp.override_permissions.themes[0].permissions.principals #=> Array
+    #   resp.override_permissions.themes[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.themes[0].permissions.actions #=> Array
+    #   resp.override_permissions.themes[0].permissions.actions[0] #=> String
+    #   resp.override_permissions.analyses #=> Array
+    #   resp.override_permissions.analyses[0].analysis_ids #=> Array
+    #   resp.override_permissions.analyses[0].analysis_ids[0] #=> String
+    #   resp.override_permissions.analyses[0].permissions.principals #=> Array
+    #   resp.override_permissions.analyses[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.analyses[0].permissions.actions #=> Array
+    #   resp.override_permissions.analyses[0].permissions.actions[0] #=> String
+    #   resp.override_permissions.dashboards #=> Array
+    #   resp.override_permissions.dashboards[0].dashboard_ids #=> Array
+    #   resp.override_permissions.dashboards[0].dashboard_ids[0] #=> String
+    #   resp.override_permissions.dashboards[0].permissions.principals #=> Array
+    #   resp.override_permissions.dashboards[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.dashboards[0].permissions.actions #=> Array
+    #   resp.override_permissions.dashboards[0].permissions.actions[0] #=> String
+    #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.principals #=> Array
+    #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.principals[0] #=> String
+    #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.actions #=> Array
+    #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.actions[0] #=> String
+    #   resp.override_tags.vpc_connections #=> Array
+    #   resp.override_tags.vpc_connections[0].vpc_connection_ids #=> Array
+    #   resp.override_tags.vpc_connections[0].vpc_connection_ids[0] #=> String
+    #   resp.override_tags.vpc_connections[0].tags #=> Array
+    #   resp.override_tags.vpc_connections[0].tags[0].key #=> String
+    #   resp.override_tags.vpc_connections[0].tags[0].value #=> String
+    #   resp.override_tags.data_sources #=> Array
+    #   resp.override_tags.data_sources[0].data_source_ids #=> Array
+    #   resp.override_tags.data_sources[0].data_source_ids[0] #=> String
+    #   resp.override_tags.data_sources[0].tags #=> Array
+    #   resp.override_tags.data_sources[0].tags[0].key #=> String
+    #   resp.override_tags.data_sources[0].tags[0].value #=> String
+    #   resp.override_tags.data_sets #=> Array
+    #   resp.override_tags.data_sets[0].data_set_ids #=> Array
+    #   resp.override_tags.data_sets[0].data_set_ids[0] #=> String
+    #   resp.override_tags.data_sets[0].tags #=> Array
+    #   resp.override_tags.data_sets[0].tags[0].key #=> String
+    #   resp.override_tags.data_sets[0].tags[0].value #=> String
+    #   resp.override_tags.themes #=> Array
+    #   resp.override_tags.themes[0].theme_ids #=> Array
+    #   resp.override_tags.themes[0].theme_ids[0] #=> String
+    #   resp.override_tags.themes[0].tags #=> Array
+    #   resp.override_tags.themes[0].tags[0].key #=> String
+    #   resp.override_tags.themes[0].tags[0].value #=> String
+    #   resp.override_tags.analyses #=> Array
+    #   resp.override_tags.analyses[0].analysis_ids #=> Array
+    #   resp.override_tags.analyses[0].analysis_ids[0] #=> String
+    #   resp.override_tags.analyses[0].tags #=> Array
+    #   resp.override_tags.analyses[0].tags[0].key #=> String
+    #   resp.override_tags.analyses[0].tags[0].value #=> String
+    #   resp.override_tags.dashboards #=> Array
+    #   resp.override_tags.dashboards[0].dashboard_ids #=> Array
+    #   resp.override_tags.dashboards[0].dashboard_ids[0] #=> String
+    #   resp.override_tags.dashboards[0].tags #=> Array
+    #   resp.override_tags.dashboards[0].tags[0].key #=> String
+    #   resp.override_tags.dashboards[0].tags[0].value #=> String
+    #   resp.override_validation_strategy.strict_mode_for_all_resources #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJob AWS API Documentation
     #
@@ -4751,12 +5136,14 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.sql_query #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.format #=> String, one of "CSV", "TSV", "CLF", "ELF", "XLSX", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.start_from_row #=> Integer
@@ -4766,6 +5153,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map #=> Hash
     #   resp.data_set.logical_table_map["LogicalTableId"].alias #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms #=> Array
@@ -4780,6 +5168,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].rename_column_operation.new_column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.new_column_type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].cast_column_type_operation.format #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
@@ -4810,6 +5199,7 @@ module Aws::QuickSight
     #   resp.data_set.output_columns[0].name #=> String
     #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.output_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
     #   resp.data_set.consumed_spice_capacity_in_bytes #=> Integer
     #   resp.data_set.column_groups #=> Array
@@ -4988,7 +5378,7 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS", "STARBURST", "TRINO", "BIGQUERY"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
@@ -5024,6 +5414,12 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_source.data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.data_source_parameters.s3_parameters.role_arn #=> String
@@ -5047,6 +5443,15 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_source.data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
+    #   resp.data_source.data_source_parameters.big_query_parameters.project_id #=> String
+    #   resp.data_source.data_source_parameters.big_query_parameters.data_set_region #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -5080,6 +5485,12 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_source.alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -5103,6 +5514,15 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].big_query_parameters.project_id #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].big_query_parameters.data_set_region #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -5191,7 +5611,7 @@ module Aws::QuickSight
     #   resp.folder.folder_id #=> String
     #   resp.folder.arn #=> String
     #   resp.folder.name #=> String
-    #   resp.folder.folder_type #=> String, one of "SHARED"
+    #   resp.folder.folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder.folder_path #=> Array
     #   resp.folder.folder_path[0] #=> String
     #   resp.folder.created_time #=> Time
@@ -5653,6 +6073,49 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_refresh_schedule(params = {}, options = {})
       req = build_request(:describe_refresh_schedule, params)
+      req.send_request(options)
+    end
+
+    # Describes all custom permissions that are mapped to a role.
+    #
+    # @option params [required, String] :role
+    #   The name of the role whose permissions you want described.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must be
+    #   the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that contains the role.
+    #
+    # @return [Types::DescribeRoleCustomPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRoleCustomPermissionResponse#custom_permissions_name #custom_permissions_name} => String
+    #   * {Types::DescribeRoleCustomPermissionResponse#request_id #request_id} => String
+    #   * {Types::DescribeRoleCustomPermissionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_role_custom_permission({
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_permissions_name #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRoleCustomPermission AWS API Documentation
+    #
+    # @overload describe_role_custom_permission(params = {})
+    # @param [Hash] params ({})
+    def describe_role_custom_permission(params = {}, options = {})
+      req = build_request(:describe_role_custom_permission, params)
       req.send_request(options)
     end
 
@@ -7091,6 +7554,8 @@ module Aws::QuickSight
     #   resp.asset_bundle_export_job_summary_list[0].asset_bundle_export_job_id #=> String
     #   resp.asset_bundle_export_job_summary_list[0].include_all_dependencies #=> Boolean
     #   resp.asset_bundle_export_job_summary_list[0].export_format #=> String, one of "CLOUDFORMATION_JSON", "QUICKSIGHT_JSON"
+    #   resp.asset_bundle_export_job_summary_list[0].include_permissions #=> Boolean
+    #   resp.asset_bundle_export_job_summary_list[0].include_tags #=> Boolean
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -7367,7 +7832,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS", "STARBURST", "TRINO", "BIGQUERY"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
@@ -7403,6 +7868,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
@@ -7426,6 +7897,15 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
+    #   resp.data_sources[0].data_source_parameters.big_query_parameters.project_id #=> String
+    #   resp.data_sources[0].data_source_parameters.big_query_parameters.data_set_region #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -7459,6 +7939,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups #=> Array
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_groups[0] #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.auto_create_database_user #=> Boolean
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.bucket #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.manifest_file_location.key #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].s3_parameters.role_arn #=> String
@@ -7482,6 +7968,15 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].big_query_parameters.project_id #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].big_query_parameters.data_set_region #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -7587,7 +8082,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -7828,6 +8323,57 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists all services and authorized targets that the Amazon QuickSight
+    # IAM Identity Center application can access.
+    #
+    # This operation is only supported for Amazon QuickSight accounts that
+    # use IAM Identity Center.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contain the identity
+    #   propagation configurations of.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListIdentityPropagationConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdentityPropagationConfigsResponse#services #services} => Array&lt;Types::AuthorizedTargetsByService&gt;
+    #   * {Types::ListIdentityPropagationConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListIdentityPropagationConfigsResponse#status #status} => Integer
+    #   * {Types::ListIdentityPropagationConfigsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_identity_propagation_configs({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.services #=> Array
+    #   resp.services[0].service #=> String, one of "REDSHIFT"
+    #   resp.services[0].authorized_targets #=> Array
+    #   resp.services[0].authorized_targets[0] #=> String
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigs AWS API Documentation
+    #
+    # @overload list_identity_propagation_configs(params = {})
+    # @param [Hash] params ({})
+    def list_identity_propagation_configs(params = {}, options = {})
+      req = build_request(:list_identity_propagation_configs, params)
+      req.send_request(options)
+    end
+
     # Lists the history of SPICE ingestions for a dataset.
     #
     # @option params [required, String] :data_set_id
@@ -7995,6 +8541,62 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_refresh_schedules(params = {}, options = {})
       req = build_request(:list_refresh_schedules, params)
+      req.send_request(options)
+    end
+
+    # Lists all groups that are associated with a role.
+    #
+    # @option params [required, String] :role
+    #   The name of the role.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must be
+    #   the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that includes the role.
+    #
+    # @return [Types::ListRoleMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoleMembershipsResponse#members_list #members_list} => Array&lt;String&gt;
+    #   * {Types::ListRoleMembershipsResponse#next_token #next_token} => String
+    #   * {Types::ListRoleMembershipsResponse#request_id #request_id} => String
+    #   * {Types::ListRoleMembershipsResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_role_memberships({
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     next_token: "String",
+    #     max_results: 1,
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.members_list #=> Array
+    #   resp.members_list[0] #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRoleMemberships AWS API Documentation
+    #
+    # @overload list_role_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_role_memberships(params = {}, options = {})
+      req = build_request(:list_role_memberships, params)
       req.send_request(options)
     end
 
@@ -9179,7 +9781,7 @@ module Aws::QuickSight
     #   resp.data_source_summaries[0].arn #=> String
     #   resp.data_source_summaries[0].data_source_id #=> String
     #   resp.data_source_summaries[0].name #=> String
-    #   resp.data_source_summaries[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
+    #   resp.data_source_summaries[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS", "STARBURST", "TRINO", "BIGQUERY"
     #   resp.data_source_summaries[0].created_time #=> Time
     #   resp.data_source_summaries[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -9244,7 +9846,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].arn #=> String
     #   resp.folder_summary_list[0].folder_id #=> String
     #   resp.folder_summary_list[0].name #=> String
-    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
+    #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED", "RESTRICTED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
     #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
@@ -9388,6 +9990,24 @@ module Aws::QuickSight
     #   `StartAssetBundleExportJobRequest` API call is set to
     #   `CLOUDFORMATION_JSON`.
     #
+    # @option params [Boolean] :include_permissions
+    #   A Boolean that determines whether all permissions for each resource
+    #   ARN are exported with the job. If you set `IncludePermissions` to
+    #   `TRUE`, any permissions associated with each resource are exported.
+    #
+    # @option params [Boolean] :include_tags
+    #   A Boolean that determines whether all tags for each resource ARN are
+    #   exported with the job. If you set `IncludeTags` to `TRUE`, any tags
+    #   associated with each resource are exported.
+    #
+    # @option params [Types::AssetBundleExportJobValidationStrategy] :validation_strategy
+    #   An optional parameter that determines which validation strategy to use
+    #   for the export job. If `StrictModeForAllResources` is set to `TRUE`,
+    #   strict validation for every error is enforced. If it is set to
+    #   `FALSE`, validation is skipped for specific UI errors that are shown
+    #   as warnings. The default value for `StrictModeForAllResources` is
+    #   `FALSE`.
+    #
     # @return [Types::StartAssetBundleExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAssetBundleExportJobResponse#arn #arn} => String
@@ -9409,46 +10029,51 @@ module Aws::QuickSight
     #       },
     #       vpc_connections: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name, DnsResolvers, RoleArn
     #         },
     #       ],
     #       refresh_schedules: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["StartAfterDateTime"], # required, accepts StartAfterDateTime
     #         },
     #       ],
     #       data_sources: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name, DisableSsl, SecretArn, Username, Password, Domain, WorkGroup, Host, Port, Database, DataSetName, Catalog, InstanceId, ClusterId, ManifestFileLocation, Warehouse, RoleArn
     #         },
     #       ],
     #       data_sets: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name
     #         },
     #       ],
     #       themes: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name
     #         },
     #       ],
     #       analyses: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name
     #         },
     #       ],
     #       dashboards: [
     #         {
-    #           arn: "Arn",
+    #           arn: "Arn", # required
     #           properties: ["Name"], # required, accepts Name
     #         },
     #       ],
+    #     },
+    #     include_permissions: false,
+    #     include_tags: false,
+    #     validation_strategy: {
+    #       strict_mode_for_all_resources: false,
     #     },
     #   })
     #
@@ -9495,8 +10120,8 @@ module Aws::QuickSight
     #   you want to import. The file must be in `QUICKSIGHT_JSON` format.
     #
     # @option params [Types::AssetBundleImportJobOverrideParameters] :override_parameters
-    #   Optional overrides to be applied to the resource configuration before
-    #   import.
+    #   Optional overrides that are applied to the resource configuration
+    #   before import.
     #
     # @option params [String] :failure_action
     #   The failure action for the import job.
@@ -9507,6 +10132,19 @@ module Aws::QuickSight
     #   If you choose `DO_NOTHING`, failed import jobs will not attempt to
     #   roll back any asset changes caused by the failed job, possibly keeping
     #   the Amazon QuickSight account in an inconsistent state.
+    #
+    # @option params [Types::AssetBundleImportJobOverridePermissions] :override_permissions
+    #   Optional permission overrides that are applied to the resource
+    #   configuration before import.
+    #
+    # @option params [Types::AssetBundleImportJobOverrideTags] :override_tags
+    #   Optional tag overrides that are applied to the resource configuration
+    #   before import.
+    #
+    # @option params [Types::AssetBundleImportJobOverrideValidationStrategy] :override_validation_strategy
+    #   An optional validation strategy override for all analyses and
+    #   dashboards that is applied to the resource configuration before
+    #   import.
     #
     # @return [Types::StartAssetBundleImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9607,6 +10245,15 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -9653,6 +10300,21 @@ module Aws::QuickSight
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
+    #             big_query_parameters: {
+    #               project_id: "ProjectId", # required
+    #               data_set_region: "DataSetRegion",
+    #             },
     #           },
     #           vpc_connection_properties: {
     #             vpc_connection_arn: "Arn", # required
@@ -9695,6 +10357,130 @@ module Aws::QuickSight
     #       ],
     #     },
     #     failure_action: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK
+    #     override_permissions: {
+    #       data_sources: [
+    #         {
+    #           data_source_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: { # required
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
+    #           },
+    #         },
+    #       ],
+    #       data_sets: [
+    #         {
+    #           data_set_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: { # required
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
+    #           },
+    #         },
+    #       ],
+    #       themes: [
+    #         {
+    #           theme_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: { # required
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
+    #           },
+    #         },
+    #       ],
+    #       analyses: [
+    #         {
+    #           analysis_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: { # required
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
+    #           },
+    #         },
+    #       ],
+    #       dashboards: [
+    #         {
+    #           dashboard_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: {
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
+    #           },
+    #           link_sharing_configuration: {
+    #             permissions: {
+    #               principals: ["Principal"], # required
+    #               actions: ["String"], # required
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     override_tags: {
+    #       vpc_connections: [
+    #         {
+    #           vpc_connection_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       data_sources: [
+    #         {
+    #           data_source_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       data_sets: [
+    #         {
+    #           data_set_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       themes: [
+    #         {
+    #           theme_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       analyses: [
+    #         {
+    #           analysis_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       dashboards: [
+    #         {
+    #           dashboard_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     override_validation_strategy: {
+    #       strict_mode_for_all_resources: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -10097,6 +10883,11 @@ module Aws::QuickSight
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
     #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #
     # @return [Types::UpdateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAnalysisResponse#arn #arn} => String
@@ -10260,6 +11051,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a dashboard with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10493,6 +11289,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10504,6 +11301,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10520,6 +11318,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
     #         },
@@ -10552,6 +11351,7 @@ module Aws::QuickSight
     #             cast_column_type_operation: {
     #               column_name: "ColumnName", # required
     #               new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               format: "TypeCastFormat",
     #             },
     #             tag_column_operation: {
@@ -10865,6 +11665,15 @@ module Aws::QuickSight
     #         port: 1,
     #         database: "Database", # required
     #         cluster_id: "ClusterId",
+    #         iam_parameters: {
+    #           role_arn: "RoleArn", # required
+    #           database_user: "DatabaseUser", # required
+    #           database_groups: ["DatabaseGroup"],
+    #           auto_create_database_user: false,
+    #         },
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       s3_parameters: {
     #         manifest_file_location: { # required
@@ -10910,6 +11719,21 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
+    #       starburst_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #       },
+    #       trino_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         catalog: "Catalog", # required
+    #       },
+    #       big_query_parameters: {
+    #         project_id: "ProjectId", # required
+    #         data_set_region: "DataSetRegion",
     #       },
     #     },
     #     credentials: {
@@ -10975,6 +11799,15 @@ module Aws::QuickSight
     #               port: 1,
     #               database: "Database", # required
     #               cluster_id: "ClusterId",
+    #               iam_parameters: {
+    #                 role_arn: "RoleArn", # required
+    #                 database_user: "DatabaseUser", # required
+    #                 database_groups: ["DatabaseGroup"],
+    #                 auto_create_database_user: false,
+    #               },
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             s3_parameters: {
     #               manifest_file_location: { # required
@@ -11020,6 +11853,21 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #             starburst_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #             },
+    #             trino_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
+    #             big_query_parameters: {
+    #               project_id: "ProjectId", # required
+    #               data_set_region: "DataSetRegion",
     #             },
     #           },
     #         ],
@@ -11344,6 +12192,51 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Adds or updates services and authorized targets to configure what the
+    # Amazon QuickSight IAM Identity Center application can access.
+    #
+    # This operation is only supported for Amazon QuickSight accounts using
+    # IAM Identity Center
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the identity
+    #   propagation configuration that you want to update.
+    #
+    # @option params [required, String] :service
+    #   The name of the Amazon Web Services service that contains the
+    #   authorized targets that you want to add or update.
+    #
+    # @option params [Array<String>] :authorized_targets
+    #   Specifies a list of application ARNs that represent the authorized
+    #   targets for a service.
+    #
+    # @return [Types::UpdateIdentityPropagationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdentityPropagationConfigResponse#request_id #request_id} => String
+    #   * {Types::UpdateIdentityPropagationConfigResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_identity_propagation_config({
+    #     aws_account_id: "AwsAccountId", # required
+    #     service: "REDSHIFT", # required, accepts REDSHIFT
+    #     authorized_targets: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfig AWS API Documentation
+    #
+    # @overload update_identity_propagation_config(params = {})
+    # @param [Hash] params ({})
+    def update_identity_propagation_config(params = {}, options = {})
+      req = build_request(:update_identity_propagation_config, params)
+      req.send_request(options)
+    end
+
     # Updates the content and status of IP rules. To use this operation, you
     # must provide the entire map of rules. You can use the
     # `DescribeIpRestriction` operation to get the current rule map.
@@ -11495,6 +12388,52 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates the custom permissions that are associated with a role.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permission that you want to update the role
+    #   with.
+    #
+    # @option params [required, String] :role
+    #   The name of role tht you want to update.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must be
+    #   the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that contains the role that you want to update.
+    #
+    # @return [Types::UpdateRoleCustomPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRoleCustomPermissionResponse#request_id #request_id} => String
+    #   * {Types::UpdateRoleCustomPermissionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_role_custom_permission({
+    #     custom_permissions_name: "RoleName", # required
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRoleCustomPermission AWS API Documentation
+    #
+    # @overload update_role_custom_permission(params = {})
+    # @param [Hash] params ({})
+    def update_role_custom_permission(params = {}, options = {})
+      req = build_request(:update_role_custom_permission, params)
+      req.send_request(options)
+    end
+
     # Updates a template from an existing Amazon QuickSight analysis or
     # another template.
     #
@@ -11534,6 +12473,11 @@ module Aws::QuickSight
     #
     #   A definition is the data model of all features in a Dashboard,
     #   Template, or Analysis.
+    #
+    # @option params [Types::ValidationStrategy] :validation_strategy
+    #   The option to relax the validation needed to update a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
     #
     # @return [Types::UpdateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12538,7 +13482,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
