@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListVaultsSuccess",
-            "operationName": "ListVaults",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "ListVaultsFailure",
-            "operationName": "ListVaults",
-            "input": {
-                "accountId": "abcmnoxyz"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListVaultsSuccess",
+      "operationName": "ListVaults",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "ListVaultsFailure",
+      "operationName": "ListVaults",
+      "input": {
+        "accountId": "abcmnoxyz"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

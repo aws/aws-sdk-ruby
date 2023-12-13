@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListUsersSuccess",
-            "operationName": "ListUsers",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-east-1"
-            }
-        },
-        {
-            "id": "GetUserFailure",
-            "operationName": "GetUser",
-            "input": {
-                "UserName": "fake_user"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-east-1"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListUsersSuccess",
+      "operationName": "ListUsers",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-east-1" }
+    },
+    {
+      "id": "GetUserFailure",
+      "operationName": "GetUser",
+      "input": {
+        "UserName": "fake_user"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-east-1" }
+    }
+  ]
 }

@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListAvailableSolutionStacksSuccess",
-            "operationName": "ListAvailableSolutionStacks",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DescribeEnvironmentResourcesFailure",
-            "operationName": "DescribeEnvironmentResources",
-            "input": {
-                "EnvironmentId": "fake_environment"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListAvailableSolutionStacksSuccess",
+      "operationName": "ListAvailableSolutionStacks",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DescribeEnvironmentResourcesFailure",
+      "operationName": "DescribeEnvironmentResources",
+      "input": {
+        "EnvironmentId": "fake_environment"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

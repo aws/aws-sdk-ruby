@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListDocumentsSuccess",
-            "operationName": "ListDocuments",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "GetDocumentFailure",
-            "operationName": "GetDocument",
-            "input": {
-                "Name": "'fake-name'"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListDocumentsSuccess",
+      "operationName": "ListDocuments",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "GetDocumentFailure",
+      "operationName": "GetDocument",
+      "input": {
+        "Name": "'fake-name'"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

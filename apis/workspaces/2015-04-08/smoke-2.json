@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "DescribeWorkspacesSuccess",
-            "operationName": "DescribeWorkspaces",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DescribeWorkspacesFailure",
-            "operationName": "DescribeWorkspaces",
-            "input": {
-                "DirectoryId": "fake-id"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "DescribeWorkspacesSuccess",
+      "operationName": "DescribeWorkspaces",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DescribeWorkspacesFailure",
+      "operationName": "DescribeWorkspaces",
+      "input": {
+        "DirectoryId": "fake-id"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

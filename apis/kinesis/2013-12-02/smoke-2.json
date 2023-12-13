@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListStreamsSuccess",
-            "operationName": "ListStreams",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DescribeStreamFailure",
-            "operationName": "DescribeStream",
-            "input": {
-                "StreamName": "bogus-stream-name"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListStreamsSuccess",
+      "operationName": "ListStreams",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DescribeStreamFailure",
+      "operationName": "DescribeStream",
+      "input": {
+        "StreamName": "bogus-stream-name"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

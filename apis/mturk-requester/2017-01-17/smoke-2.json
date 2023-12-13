@@ -1,16 +1,14 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "GetAccountBalanceSuccess",
-            "operationName": "GetAccountBalance",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-east-1"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "GetAccountBalanceSuccess",
+      "operationName": "GetAccountBalance",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-east-1" }
+    }
+  ]
 }

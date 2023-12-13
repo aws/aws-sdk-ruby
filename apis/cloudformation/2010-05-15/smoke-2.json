@@ -1,30 +1,26 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListStacksSuccess",
-            "operationName": "ListStacks",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "CreateStackFailure",
-            "operationName": "CreateStack",
-            "input": {
-                "StackName": "fakestack",
-                "TemplateURL": "http:\/\/s3.amazonaws.com\/foo\/bar"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListStacksSuccess",
+      "operationName": "ListStacks",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "CreateStackFailure",
+      "operationName": "CreateStack",
+      "input": {
+        "StackName": "fakestack",
+        "TemplateURL": "http://s3.amazonaws.com/foo/bar"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

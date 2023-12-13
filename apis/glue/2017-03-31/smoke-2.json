@@ -1,16 +1,14 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "GetCatalogImportStatusSuccess",
-            "operationName": "GetCatalogImportStatus",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "GetCatalogImportStatusSuccess",
+      "operationName": "GetCatalogImportStatus",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

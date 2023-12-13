@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "DescribeDomainsSuccess",
-            "operationName": "DescribeDomains",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DescribeIndexFieldsFailure",
-            "operationName": "DescribeIndexFields",
-            "input": {
-                "DomainName": "fakedomain"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "DescribeDomainsSuccess",
+      "operationName": "DescribeDomains",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DescribeIndexFieldsFailure",
+      "operationName": "DescribeIndexFields",
+      "input": {
+        "DomainName": "fakedomain"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

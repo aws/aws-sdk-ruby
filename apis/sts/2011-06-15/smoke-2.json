@@ -1,30 +1,26 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "GetSessionTokenSuccess",
-            "operationName": "GetSessionToken",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "GetFederationTokenFailure",
-            "operationName": "GetFederationToken",
-            "input": {
-                "Name": "temp",
-                "Policy": "{\\\"temp\\\":true}"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "GetSessionTokenSuccess",
+      "operationName": "GetSessionToken",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "GetFederationTokenFailure",
+      "operationName": "GetFederationToken",
+      "input": {
+        "Name": "temp",
+        "Policy": "{\\\"temp\\\":true}"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

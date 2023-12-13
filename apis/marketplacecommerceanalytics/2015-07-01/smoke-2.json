@@ -1,22 +1,20 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "GenerateDataSetFailure",
-            "operationName": "GenerateDataSet",
-            "input": {
-                "dataSetType": "fake-type",
-                "dataSetPublicationDate": 0,
-                "roleNameArn": "fake-arn",
-                "destinationS3BucketName": "fake-bucket",
-                "snsTopicArn": "fake-arn"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-east-1"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "GenerateDataSetFailure",
+      "operationName": "GenerateDataSet",
+      "input": {
+        "dataSetType": "fake-type",
+        "dataSetPublicationDate": 0,
+        "roleNameArn": "fake-arn",
+        "destinationS3BucketName": "fake-bucket",
+        "snsTopicArn": "fake-arn"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-east-1" }
+    }
+  ]
 }

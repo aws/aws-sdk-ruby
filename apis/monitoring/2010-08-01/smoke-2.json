@@ -1,33 +1,29 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "ListMetricsSuccess",
-            "operationName": "ListMetrics",
-            "input": {
-                "Namespace": "AWS\/EC2"
-            },
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "SetAlarmStateFailure",
-            "operationName": "SetAlarmState",
-            "input": {
-                "AlarmName": "abc",
-                "StateValue": "mno",
-                "StateReason": "xyz"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "ListMetricsSuccess",
+      "operationName": "ListMetrics",
+      "input": {
+        "Namespace": "AWS/EC2"
+      },
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "SetAlarmStateFailure",
+      "operationName": "SetAlarmState",
+      "input": {
+        "AlarmName": "abc",
+        "StateValue": "mno",
+        "StateReason": "xyz"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

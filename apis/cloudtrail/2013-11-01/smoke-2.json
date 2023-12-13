@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "DescribeTrailsSuccess",
-            "operationName": "DescribeTrails",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DeleteTrailFailure",
-            "operationName": "DeleteTrail",
-            "input": {
-                "Name": "faketrail"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "DescribeTrailsSuccess",
+      "operationName": "DescribeTrails",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DeleteTrailFailure",
+      "operationName": "DeleteTrail",
+      "input": {
+        "Name": "faketrail"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }

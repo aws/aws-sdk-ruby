@@ -1,29 +1,25 @@
 {
-    "version": 2,
-    "testCases": [
-        {
-            "id": "DescribeClusterVersionsSuccess",
-            "operationName": "DescribeClusterVersions",
-            "input": {},
-            "expectation": {
-                "success": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        },
-        {
-            "id": "DescribeClustersFailure",
-            "operationName": "DescribeClusters",
-            "input": {
-                "ClusterIdentifier": "fake-cluster"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
-        }
-    ]
+  "version": 2,
+  "testCases": [
+    {
+      "id": "DescribeClusterVersionsSuccess",
+      "operationName": "DescribeClusterVersions",
+      "input": {},
+      "expectation": {
+        "success": {}
+      },
+      "config": { "region": "us-west-2" }
+    },
+    {
+      "id": "DescribeClustersFailure",
+      "operationName": "DescribeClusters",
+      "input": {
+        "ClusterIdentifier": "fake-cluster"
+      },
+      "expectation": {
+        "failure": {}
+      },
+      "config": { "region": "us-west-2" }
+    }
+  ]
 }
