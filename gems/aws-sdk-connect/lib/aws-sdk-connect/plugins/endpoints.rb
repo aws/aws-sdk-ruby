@@ -419,10 +419,14 @@ module Aws::Connect
             Aws::Connect::Endpoints::SubmitContactEvaluation.build(context)
           when :suspend_contact_recording
             Aws::Connect::Endpoints::SuspendContactRecording.build(context)
+          when :tag_contact
+            Aws::Connect::Endpoints::TagContact.build(context)
           when :tag_resource
             Aws::Connect::Endpoints::TagResource.build(context)
           when :transfer_contact
             Aws::Connect::Endpoints::TransferContact.build(context)
+          when :untag_contact
+            Aws::Connect::Endpoints::UntagContact.build(context)
           when :untag_resource
             Aws::Connect::Endpoints::UntagResource.build(context)
           when :update_agent_status

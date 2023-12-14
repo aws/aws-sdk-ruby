@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-12-14)
+------------------
+
+* Feature - Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+
 1.99.0 (2023-11-28)
 ------------------
 

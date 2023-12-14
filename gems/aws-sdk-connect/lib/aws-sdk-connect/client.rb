@@ -1324,7 +1324,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
@@ -1402,7 +1402,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1475,7 +1475,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1536,7 +1536,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
@@ -1747,7 +1747,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1900,7 +1900,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2166,7 +2166,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2261,7 +2261,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2323,7 +2323,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2410,7 +2410,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :agent_availability_timer
@@ -2605,7 +2605,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [Hash<String,String>] :allowed_access_control_tags
@@ -2833,7 +2833,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateTrafficDistributionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2886,7 +2886,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2984,7 +2984,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3054,7 +3054,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3296,7 +3296,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4178,6 +4178,8 @@ module Aws::Connect
     #   resp.contact.scheduled_timestamp #=> Time
     #   resp.contact.related_contact_id #=> String
     #   resp.contact.wisdom_info.session_arn #=> String
+    #   resp.contact.tags #=> Hash
+    #   resp.contact.tags["ContactTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -7692,7 +7694,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
@@ -12800,6 +12802,54 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Adds the specified tags to the contact resource. For more information
+    # about this API is used, see [Set up granular billing for a detailed
+    # view of your Amazon Connect usage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to be assigned to the contact resource. For example, \\\{
+    #   "Tags": \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #
+    #   <note markdown="1"> Authorization is not supported by this tag.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     tags: { # required
+    #       "ContactTagKey" => "ContactTagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagContact AWS API Documentation
+    #
+    # @overload tag_contact(params = {})
+    # @param [Hash] params ({})
+    def tag_contact(params = {}, options = {})
+      req = build_request(:tag_contact, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource.
     #
     # Some of the supported resource types are agents, routing profiles,
@@ -12820,7 +12870,7 @@ module Aws::Connect
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -12924,6 +12974,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def transfer_contact(params = {}, options = {})
       req = build_request(:transfer_contact, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the contact resource. For more
+    # information about this API is used, see [Set up granular billing for a
+    # detailed view of your Amazon Connect usage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys. Existing tags on the contact whose keys are
+    #   members of this list will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     tag_keys: ["ContactTagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagContact AWS API Documentation
+    #
+    # @overload untag_contact(params = {})
+    # @param [Hash] params ({})
+    def untag_contact(params = {}, options = {})
+      req = build_request(:untag_contact, params)
       req.send_request(options)
     end
 
@@ -15323,7 +15415,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-12-14)
+------------------
+
+* Feature - Documentation updates for AWS Control Tower.
+
 1.15.0 (2023-11-28)
 ------------------
 

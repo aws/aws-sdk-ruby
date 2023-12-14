@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2023-12-14)
+------------------
+
+* Feature - This release includes support for images of Windows Server 2022 platform.
+
 1.82.0 (2023-11-28)
 ------------------
 

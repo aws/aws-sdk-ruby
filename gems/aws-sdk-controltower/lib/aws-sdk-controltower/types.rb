@@ -72,12 +72,13 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] tags
@@ -562,8 +563,8 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The landing zone `manifest.yaml` text file that specifies the
-    #   landing zone configurations.
+    #   The landing zone manifest JSON text file that specifies the landing
+    #   zone configurations.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] status
@@ -968,12 +969,13 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The `manifest.yaml` file is a text file that describes your Amazon
-    #   Web Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] version

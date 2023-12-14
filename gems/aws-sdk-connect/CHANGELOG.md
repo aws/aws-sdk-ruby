@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2023-12-14)
+------------------
+
+* Feature - This release adds support for more granular billing using tags (key:value pairs)
+
 1.142.0 (2023-12-06)
 ------------------
 

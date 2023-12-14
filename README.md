@@ -601,6 +601,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Mechanical Turk                                | Aws::MTurk                               | aws-sdk-mturk                               | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                            | aws-sdk-memorydb                            | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                             | aws-sdk-neptune                             | 2014-10-31  |
+| Amazon Neptune Graph                                  | Aws::NeptuneGraph                        | aws-sdk-neptunegraph                        | 2023-11-29  |
 | Amazon NeptuneData                                    | Aws::Neptunedata                         | aws-sdk-neptunedata                         | 2023-08-01  |
 | Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
 | Amazon OpenSearch Ingestion                           | Aws::OSIS                                | aws-sdk-osis                                | 2022-01-01  |

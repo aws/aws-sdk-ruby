@@ -2506,6 +2506,24 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Only requests from CloudWatch Logs are supported when CloudWatch Logs
+    # decompression is enabled.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidSourceException AWS API Documentation
+    #
+    class InvalidSourceException < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an encryption key for a destination in Amazon S3.
     #
     # @!attribute [rw] awskms_key_arn
@@ -3830,6 +3848,29 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The buffering options. If no value is specified, the default values
+    # for Splunk are used.
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   Buffer incoming data for the specified period of time, in seconds,
+    #   before delivering it to the destination. The default value is 60 (1
+    #   minute).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_in_m_bs
+    #   Buffer incoming data to the specified size, in MBs, before
+    #   delivering it to the destination. The default value is 5.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkBufferingHints AWS API Documentation
+    #
+    class SplunkBufferingHints < Struct.new(
+      :interval_in_seconds,
+      :size_in_m_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration of a destination in Splunk.
     #
     # @!attribute [rw] hec_endpoint
@@ -3884,6 +3925,11 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified, the default values
+    #   for Splunk are used.
+    #   @return [Types::SplunkBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration AWS API Documentation
     #
     class SplunkDestinationConfiguration < Struct.new(
@@ -3895,7 +3941,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_configuration,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :buffering_hints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3950,6 +3997,11 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified, the default values
+    #   for Splunk are used.
+    #   @return [Types::SplunkBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription AWS API Documentation
     #
     class SplunkDestinationDescription < Struct.new(
@@ -3961,7 +4013,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_destination_description,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :buffering_hints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4020,6 +4073,11 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified, the default values
+    #   for Splunk are used.
+    #   @return [Types::SplunkBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate AWS API Documentation
     #
     class SplunkDestinationUpdate < Struct.new(
@@ -4031,7 +4089,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_update,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :buffering_hints)
       SENSITIVE = []
       include Aws::Structure
     end

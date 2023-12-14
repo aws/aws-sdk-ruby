@@ -531,9 +531,7 @@ module Aws::QuickSight
     # QuickSight Q.
     #
     # The Amazon Web Services Region for the account is derived from what is
-    # configured in the CLI or SDK. This operation isn't supported in the
-    # US East (Ohio) Region, South America (Sao Paulo) Region, or Asia
-    # Pacific (Singapore) Region.
+    # configured in the CLI or SDK.
     #
     # Before you use this operation, make sure that you can connect to an
     # existing Amazon Web Services account. If you don't have an Amazon Web
@@ -931,6 +929,10 @@ module Aws::QuickSight
     #
     # @option params [Types::LinkSharingConfiguration] :link_sharing_configuration
     #   A structure that contains the permissions of a shareable link to the
+    #   dashboard.
+    #
+    # @option params [Array<String>] :link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
     #   dashboard.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4813,6 +4815,8 @@ module Aws::QuickSight
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
     #   resp.dashboard.last_updated_time #=> Time
+    #   resp.dashboard.link_entities #=> Array
+    #   resp.dashboard.link_entities[0] #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -10580,7 +10584,7 @@ module Aws::QuickSight
     #       destination_configuration: {
     #         s3_destinations: [
     #           {
-    #             bucket_configuration: {
+    #             bucket_configuration: { # required
     #               bucket_name: "NonEmptyString", # required
     #               bucket_prefix: "NonEmptyString", # required
     #               bucket_region: "NonEmptyString", # required
@@ -11081,6 +11085,51 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_dashboard(params = {}, options = {})
       req = build_request(:update_dashboard, params)
+      req.send_request(options)
+    end
+
+    # Updates the linked analyses on a dashboard.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the dashboard
+    #   whose links you want to update.
+    #
+    # @option params [required, String] :dashboard_id
+    #   The ID for the dashboard.
+    #
+    # @option params [required, Array<String>] :link_entities
+    #   list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #
+    # @return [Types::UpdateDashboardLinksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDashboardLinksResponse#request_id #request_id} => String
+    #   * {Types::UpdateDashboardLinksResponse#status #status} => Integer
+    #   * {Types::UpdateDashboardLinksResponse#dashboard_arn #dashboard_arn} => String
+    #   * {Types::UpdateDashboardLinksResponse#link_entities #link_entities} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dashboard_links({
+    #     aws_account_id: "AwsAccountId", # required
+    #     dashboard_id: "ShortRestrictiveResourceId", # required
+    #     link_entities: ["LinkEntityArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #   resp.dashboard_arn #=> String
+    #   resp.link_entities #=> Array
+    #   resp.link_entities[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardLinks AWS API Documentation
+    #
+    # @overload update_dashboard_links(params = {})
+    # @param [Hash] params ({})
+    def update_dashboard_links(params = {}, options = {})
+      req = build_request(:update_dashboard_links, params)
       req.send_request(options)
     end
 
@@ -13482,7 +13531,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

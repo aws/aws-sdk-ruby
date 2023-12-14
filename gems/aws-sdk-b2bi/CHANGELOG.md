@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-12-14)
+------------------
+
+* Feature - Documentation updates for AWS B2B Data Interchange
+
 1.1.0 (2023-11-28)
 ------------------
 

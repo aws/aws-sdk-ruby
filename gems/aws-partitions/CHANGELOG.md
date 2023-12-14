@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.867.0 (2023-12-14)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NeptuneGraph`.
+
 1.866.0 (2023-12-13)
 ------------------
 

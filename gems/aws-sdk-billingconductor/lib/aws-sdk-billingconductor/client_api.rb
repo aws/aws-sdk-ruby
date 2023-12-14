@@ -33,6 +33,8 @@ module Aws::BillingConductor
     AssociateResourceResponseElement = Shapes::StructureShape.new(name: 'AssociateResourceResponseElement')
     AssociateResourcesResponseList = Shapes::ListShape.new(name: 'AssociateResourcesResponseList')
     Association = Shapes::StringShape.new(name: 'Association')
+    Attribute = Shapes::StructureShape.new(name: 'Attribute')
+    AttributesList = Shapes::ListShape.new(name: 'AttributesList')
     BatchAssociateResourcesToCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemInput')
     BatchAssociateResourcesToCustomLineItemOutput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemOutput')
     BatchDisassociateResourcesFromCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchDisassociateResourcesFromCustomLineItemInput')
@@ -42,6 +44,8 @@ module Aws::BillingConductor
     BillingGroupArnList = Shapes::ListShape.new(name: 'BillingGroupArnList')
     BillingGroupCostReportElement = Shapes::StructureShape.new(name: 'BillingGroupCostReportElement')
     BillingGroupCostReportList = Shapes::ListShape.new(name: 'BillingGroupCostReportList')
+    BillingGroupCostReportResultElement = Shapes::StructureShape.new(name: 'BillingGroupCostReportResultElement')
+    BillingGroupCostReportResultsList = Shapes::ListShape.new(name: 'BillingGroupCostReportResultsList')
     BillingGroupDescription = Shapes::StringShape.new(name: 'BillingGroupDescription')
     BillingGroupFullArn = Shapes::StringShape.new(name: 'BillingGroupFullArn')
     BillingGroupList = Shapes::ListShape.new(name: 'BillingGroupList')
@@ -51,6 +55,7 @@ module Aws::BillingConductor
     BillingGroupStatusList = Shapes::ListShape.new(name: 'BillingGroupStatusList')
     BillingGroupStatusReason = Shapes::StringShape.new(name: 'BillingGroupStatusReason')
     BillingPeriod = Shapes::StringShape.new(name: 'BillingPeriod')
+    BillingPeriodRange = Shapes::StructureShape.new(name: 'BillingPeriodRange')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ComputationPreference = Shapes::StructureShape.new(name: 'ComputationPreference')
@@ -105,6 +110,10 @@ module Aws::BillingConductor
     DisassociateResourceResponseElement = Shapes::StructureShape.new(name: 'DisassociateResourceResponseElement')
     DisassociateResourcesResponseList = Shapes::ListShape.new(name: 'DisassociateResourcesResponseList')
     FreeTierConfig = Shapes::StructureShape.new(name: 'FreeTierConfig')
+    GetBillingGroupCostReportInput = Shapes::StructureShape.new(name: 'GetBillingGroupCostReportInput')
+    GetBillingGroupCostReportOutput = Shapes::StructureShape.new(name: 'GetBillingGroupCostReportOutput')
+    GroupByAttributeName = Shapes::StringShape.new(name: 'GroupByAttributeName')
+    GroupByAttributesList = Shapes::ListShape.new(name: 'GroupByAttributesList')
     Instant = Shapes::IntegerShape.new(name: 'Instant')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LineItemFilter = Shapes::StructureShape.new(name: 'LineItemFilter')
@@ -152,6 +161,7 @@ module Aws::BillingConductor
     Margin = Shapes::StringShape.new(name: 'Margin')
     MarginPercentage = Shapes::StringShape.new(name: 'MarginPercentage')
     MatchOption = Shapes::StringShape.new(name: 'MatchOption')
+    MaxBillingGroupCostReportResults = Shapes::IntegerShape.new(name: 'MaxBillingGroupCostReportResults')
     MaxBillingGroupResults = Shapes::IntegerShape.new(name: 'MaxBillingGroupResults')
     MaxCustomLineItemResults = Shapes::IntegerShape.new(name: 'MaxCustomLineItemResults')
     MaxPricingPlanResults = Shapes::IntegerShape.new(name: 'MaxPricingPlanResults')
@@ -260,6 +270,12 @@ module Aws::BillingConductor
 
     AssociateResourcesResponseList.member = Shapes::ShapeRef.new(shape: AssociateResourceResponseElement)
 
+    Attribute.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+    Attribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    Attribute.struct_class = Types::Attribute
+
+    AttributesList.member = Shapes::ShapeRef.new(shape: Attribute)
+
     BatchAssociateResourcesToCustomLineItemInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, required: true, location_name: "TargetArn"))
     BatchAssociateResourcesToCustomLineItemInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: CustomLineItemBatchAssociationsList, required: true, location_name: "ResourceArns"))
     BatchAssociateResourcesToCustomLineItemInput.add_member(:billing_period_range, Shapes::ShapeRef.new(shape: CustomLineItemBillingPeriodRange, location_name: "BillingPeriodRange"))
@@ -290,6 +306,17 @@ module Aws::BillingConductor
 
     BillingGroupCostReportList.member = Shapes::ShapeRef.new(shape: BillingGroupCostReportElement)
 
+    BillingGroupCostReportResultElement.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, location_name: "Arn"))
+    BillingGroupCostReportResultElement.add_member(:aws_cost, Shapes::ShapeRef.new(shape: AWSCost, location_name: "AWSCost"))
+    BillingGroupCostReportResultElement.add_member(:proforma_cost, Shapes::ShapeRef.new(shape: ProformaCost, location_name: "ProformaCost"))
+    BillingGroupCostReportResultElement.add_member(:margin, Shapes::ShapeRef.new(shape: Margin, location_name: "Margin"))
+    BillingGroupCostReportResultElement.add_member(:margin_percentage, Shapes::ShapeRef.new(shape: MarginPercentage, location_name: "MarginPercentage"))
+    BillingGroupCostReportResultElement.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "Currency"))
+    BillingGroupCostReportResultElement.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributesList, location_name: "Attributes"))
+    BillingGroupCostReportResultElement.struct_class = Types::BillingGroupCostReportResultElement
+
+    BillingGroupCostReportResultsList.member = Shapes::ShapeRef.new(shape: BillingGroupCostReportResultElement)
+
     BillingGroupList.member = Shapes::ShapeRef.new(shape: BillingGroupListElement)
 
     BillingGroupListElement.add_member(:name, Shapes::ShapeRef.new(shape: BillingGroupName, location_name: "Name"))
@@ -306,6 +333,10 @@ module Aws::BillingConductor
     BillingGroupListElement.struct_class = Types::BillingGroupListElement
 
     BillingGroupStatusList.member = Shapes::ShapeRef.new(shape: BillingGroupStatus)
+
+    BillingPeriodRange.add_member(:inclusive_start_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, required: true, location_name: "InclusiveStartBillingPeriod"))
+    BillingPeriodRange.add_member(:exclusive_end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, required: true, location_name: "ExclusiveEndBillingPeriod"))
+    BillingPeriodRange.struct_class = Types::BillingPeriodRange
 
     ComputationPreference.add_member(:pricing_plan_arn, Shapes::ShapeRef.new(shape: PricingPlanFullArn, required: true, location_name: "PricingPlanArn"))
     ComputationPreference.struct_class = Types::ComputationPreference
@@ -481,6 +512,19 @@ module Aws::BillingConductor
 
     FreeTierConfig.add_member(:activated, Shapes::ShapeRef.new(shape: TieringActivated, required: true, location_name: "Activated"))
     FreeTierConfig.struct_class = Types::FreeTierConfig
+
+    GetBillingGroupCostReportInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
+    GetBillingGroupCostReportInput.add_member(:billing_period_range, Shapes::ShapeRef.new(shape: BillingPeriodRange, location_name: "BillingPeriodRange"))
+    GetBillingGroupCostReportInput.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupByAttributesList, location_name: "GroupBy"))
+    GetBillingGroupCostReportInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxBillingGroupCostReportResults, location_name: "MaxResults"))
+    GetBillingGroupCostReportInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetBillingGroupCostReportInput.struct_class = Types::GetBillingGroupCostReportInput
+
+    GetBillingGroupCostReportOutput.add_member(:billing_group_cost_report_results, Shapes::ShapeRef.new(shape: BillingGroupCostReportResultsList, location_name: "BillingGroupCostReportResults"))
+    GetBillingGroupCostReportOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetBillingGroupCostReportOutput.struct_class = Types::GetBillingGroupCostReportOutput
+
+    GroupByAttributesList.member = Shapes::ShapeRef.new(shape: GroupByAttributeName)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
@@ -1047,6 +1091,19 @@ module Aws::BillingConductor
         o.output = Shapes::ShapeRef.new(shape: DisassociatePricingRulesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_billing_group_cost_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBillingGroupCostReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-billing-group-cost-report"
+        o.input = Shapes::ShapeRef.new(shape: GetBillingGroupCostReportInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBillingGroupCostReportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

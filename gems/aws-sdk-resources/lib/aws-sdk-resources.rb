@@ -256,6 +256,7 @@ module Aws
   autoload :MigrationHubStrategyRecommendations, 'aws-sdk-migrationhubstrategyrecommendations'
   autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
+  autoload :NeptuneGraph, 'aws-sdk-neptunegraph'
   autoload :Neptunedata, 'aws-sdk-neptunedata'
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'

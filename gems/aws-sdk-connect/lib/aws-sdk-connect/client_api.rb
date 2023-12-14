@@ -156,6 +156,10 @@ module Aws::Connect
     ContactReferences = Shapes::MapShape.new(name: 'ContactReferences')
     ContactState = Shapes::StringShape.new(name: 'ContactState')
     ContactStates = Shapes::ListShape.new(name: 'ContactStates')
+    ContactTagKey = Shapes::StringShape.new(name: 'ContactTagKey')
+    ContactTagKeys = Shapes::ListShape.new(name: 'ContactTagKeys')
+    ContactTagMap = Shapes::MapShape.new(name: 'ContactTagMap')
+    ContactTagValue = Shapes::StringShape.new(name: 'ContactTagValue')
     Content = Shapes::StringShape.new(name: 'Content')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
@@ -944,6 +948,8 @@ module Aws::Connect
     SuspendContactRecordingResponse = Shapes::StructureShape.new(name: 'SuspendContactRecordingResponse')
     TagAndConditionList = Shapes::ListShape.new(name: 'TagAndConditionList')
     TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
+    TagContactRequest = Shapes::StructureShape.new(name: 'TagContactRequest')
+    TagContactResponse = Shapes::StructureShape.new(name: 'TagContactResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
@@ -1003,6 +1009,8 @@ module Aws::Connect
     TransferContactResponse = Shapes::StructureShape.new(name: 'TransferContactResponse')
     URI = Shapes::StringShape.new(name: 'URI')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UntagContactRequest = Shapes::StructureShape.new(name: 'UntagContactRequest')
+    UntagContactResponse = Shapes::StructureShape.new(name: 'UntagContactResponse')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAgentStatusDescription = Shapes::StringShape.new(name: 'UpdateAgentStatusDescription')
     UpdateAgentStatusRequest = Shapes::StructureShape.new(name: 'UpdateAgentStatusRequest')
@@ -1445,6 +1453,7 @@ module Aws::Connect
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
     Contact.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     Contact.add_member(:wisdom_info, Shapes::ShapeRef.new(shape: WisdomInfo, location_name: "WisdomInfo"))
+    Contact.add_member(:tags, Shapes::ShapeRef.new(shape: ContactTagMap, location_name: "Tags"))
     Contact.struct_class = Types::Contact
 
     ContactDataRequest.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "SystemEndpoint"))
@@ -1509,6 +1518,11 @@ module Aws::Connect
     ContactReferences.value = Shapes::ShapeRef.new(shape: Reference)
 
     ContactStates.member = Shapes::ShapeRef.new(shape: ContactState)
+
+    ContactTagKeys.member = Shapes::ShapeRef.new(shape: ContactTagKey)
+
+    ContactTagMap.key = Shapes::ShapeRef.new(shape: ContactTagKey)
+    ContactTagMap.value = Shapes::ShapeRef.new(shape: ContactTagValue)
 
     ControlPlaneTagFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: TagOrConditionList, location_name: "OrConditions"))
     ControlPlaneTagFilter.add_member(:and_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "AndConditions"))
@@ -4218,6 +4232,13 @@ module Aws::Connect
     TagCondition.add_member(:tag_value, Shapes::ShapeRef.new(shape: String, location_name: "TagValue"))
     TagCondition.struct_class = Types::TagCondition
 
+    TagContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    TagContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    TagContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: ContactTagMap, required: true, location_name: "Tags"))
+    TagContactRequest.struct_class = Types::TagContactRequest
+
+    TagContactResponse.struct_class = Types::TagContactResponse
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -4340,6 +4361,13 @@ module Aws::Connect
     TransferContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     TransferContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactArn"))
     TransferContactResponse.struct_class = Types::TransferContactResponse
+
+    UntagContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UntagContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UntagContactRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ContactTagKeys, required: true, location: "querystring", location_name: "TagKeys"))
+    UntagContactRequest.struct_class = Types::UntagContactRequest
+
+    UntagContactResponse.struct_class = Types::UntagContactResponse
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -7616,6 +7644,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:tag_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/tags"
+        o.input = Shapes::ShapeRef.new(shape: TagContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -7642,6 +7683,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:untag_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagContact"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/contact/tags/{InstanceId}/{ContactId}"
+        o.input = Shapes::ShapeRef.new(shape: UntagContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|

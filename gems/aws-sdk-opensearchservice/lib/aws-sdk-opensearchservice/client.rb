@@ -432,13 +432,19 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Adds the data source on the domain.
+    # Creates a new direct-query data source to the specified domain. For
+    # more information, see [Creating Amazon OpenSearch Service data source
+    # integrations with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain.
+    #   The name of the domain to add the data source to.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   A name for the data source.
     #
     # @option params [required, Types::DataSourceType] :data_source_type
     #   The type of data source.
@@ -1191,13 +1197,18 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Deletes the data source.
+    # Deletes a direct-query data source. For more information, see
+    # [Deleting an Amazon OpenSearch Service data source with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to delete.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2774,13 +2785,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Describes the data source details.
+    # Retrieves information about a direct query data source.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to get information about.
     #
     # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3000,7 +3011,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # A list of the data source details of the domain.
+    # Lists direct-query data sources for a specific domain. For more
+    # information, see For more information, see [Working with Amazon
+    # OpenSearch Service direct queries with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
@@ -3812,19 +3829,25 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Updates the data source on the domain.
+    # Updates a direct-query data source. For more information, see [Working
+    # with Amazon OpenSearch Service data source integrations with Amazon
+    # S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to modify.
     #
     # @option params [required, Types::DataSourceType] :data_source_type
     #   The type of data source.
     #
     # @option params [String] :description
-    #   A description of the data source.
+    #   A new description of the data source.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4537,7 +4560,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1604,13 +1604,13 @@ module Aws::GameLift
     #   names do not need to be unique.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   A set of custom properties for a game session, formatted as key:value
-    #   pairs. These properties are passed to a game server process with a
-    #   request to start a new game session (see [Start a Game Session][1]).
+    #   A set of key-value pairs that can store custom data in a game session.
+    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. For an
+    #   example, see [Create a game session with custom properties][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
     #
     # @option params [String] :creator_id
     #   A unique identifier for a player or entity creating the game session.
@@ -2052,16 +2052,11 @@ module Aws::GameLift
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   A set of custom properties for a game session, formatted as key:value
-    #   pairs. These properties are passed to a game server process with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #   This information is added to the new `GameSession` object that is
-    #   created for a successful match. This parameter is not used if
-    #   `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game session.
+    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. This
+    #   information is added to the new `GameSession` object that is created
+    #   for a successful match. This parameter is not used if `FlexMatchMode`
+    #   is set to `STANDALONE`.
     #
     # @option params [String] :game_session_data
     #   A set of custom game session properties, formatted as a single string
@@ -7108,13 +7103,11 @@ module Aws::GameLift
     # Retrieves all active game sessions that match a set of search criteria
     # and sorts them into a specified order.
     #
-    # This operation is not designed to be continually called to track game
-    # session status. This practice can cause you to exceed your API limit,
-    # which results in errors. Instead, you must configure configure an
-    # Amazon Simple Notification Service (SNS) topic to receive
-    # notifications from FlexMatch or queues. Continuously polling game
-    # session status with `DescribeGameSessions` should only be used for
-    # games in development with low game session usage.
+    # This operation is not designed to continually track game session
+    # status because that practice can cause you to exceed your API limit
+    # and generate errors. Instead, configure an Amazon Simple Notification
+    # Service (Amazon SNS) topic to receive notifications from a matchmaker
+    # or game session placement queue.
     #
     # When searching for game sessions, you specify exactly where you want
     # to search and provide a search filter expression, a sort expression,
@@ -7141,7 +7134,9 @@ module Aws::GameLift
     # in `ACTIVE` status only. To retrieve information on game sessions in
     # other statuses, use [DescribeGameSessions][1] .
     #
-    # You can search or sort by the following game session attributes:
+    # To set search and sort criteria, create a filter expression using the
+    # following game session attributes. For game session search examples,
+    # see the Examples section of this topic.
     #
     # * **gameSessionId** -- A unique identifier for the game session. You
     #   can use either a `GameSessionId` or `GameSessionArn` value.
@@ -7149,14 +7144,18 @@ module Aws::GameLift
     # * **gameSessionName** -- Name assigned to a game session. Game session
     #   names do not need to be unique to a game session.
     #
-    # * **gameSessionProperties** -- Custom data defined in a game
-    #   session's `GameProperty` parameter. `GameProperty` values are
-    #   stored as key:value pairs; the filter expression must indicate the
-    #   key and a string to search the data values for. For example, to
-    #   search for game sessions with custom data containing the key:value
-    #   pair "gameMode:brawl", specify the following:
-    #   `gameSessionProperties.gameMode = "brawl"`. All custom data values
-    #   are searched as strings.
+    # * **gameSessionProperties** -- A set of key-value pairs that can store
+    #   custom data in a game session. For example: `\{"Key": "difficulty",
+    #   "Value": "novice"\}`. The filter expression must specify the
+    #   GameProperty -- a `Key` and a string `Value` to search for the game
+    #   sessions.
+    #
+    #   For example, to search for the above key-value pair, specify the
+    #   following search filter: `gameSessionProperties.difficulty =
+    #   "novice"`. All game property values are searched as strings.
+    #
+    #   For examples of searching game sessions, see the ones below, and
+    #   also see [Search game sessions by game property][2].
     #
     # * **maximumSessions** -- Maximum number of player sessions allowed for
     #   a game session.
@@ -7182,12 +7181,13 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # [All APIs by task][2]
+    # [All APIs by task][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-search
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [String] :fleet_id
     #   A unique identifier for the fleet to search for active game sessions.
@@ -7459,13 +7459,8 @@ module Aws::GameLift
     #   either the queue name or ARN value.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   A set of custom properties for a game session, formatted as key:value
-    #   pairs. These properties are passed to a game server process with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game session.
+    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #
     # @option params [required, Integer] :maximum_player_session_count
     #   The maximum number of players that can be connected simultaneously to
@@ -8871,6 +8866,18 @@ module Aws::GameLift
     #   * **FullProtection** -- If the game session is in an `ACTIVE` status,
     #     it cannot be terminated during a scale-down event.
     #
+    # @option params [Array<Types::GameProperty>] :game_properties
+    #   A set of key-value pairs that can store custom data in a game session.
+    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. You can use
+    #   this parameter to modify game properties in an active game session.
+    #   This action adds new properties and modifies existing properties.
+    #   There is no way to delete properties. For an example, see [Update the
+    #   value of a game property][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update
+    #
     # @return [Types::UpdateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGameSessionOutput#game_session #game_session} => Types::GameSession
@@ -8883,6 +8890,12 @@ module Aws::GameLift
     #     name: "NonZeroAndMaxString",
     #     player_session_creation_policy: "ACCEPT_ALL", # accepts ACCEPT_ALL, DENY_ALL
     #     protection_policy: "NoProtection", # accepts NoProtection, FullProtection
+    #     game_properties: [
+    #       {
+    #         key: "GamePropertyKey", # required
+    #         value: "GamePropertyValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9124,16 +9137,11 @@ module Aws::GameLift
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   A set of custom properties for a game session, formatted as key:value
-    #   pairs. These properties are passed to a game server process with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #   This information is added to the new `GameSession` object that is
-    #   created for a successful match. This parameter is not used if
-    #   `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game session.
+    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. This
+    #   information is added to the new `GameSession` object that is created
+    #   for a successful match. This parameter is not used if `FlexMatchMode`
+    #   is set to `STANDALONE`.
     #
     # @option params [String] :game_session_data
     #   A set of custom game session properties, formatted as a single string
@@ -9467,7 +9475,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

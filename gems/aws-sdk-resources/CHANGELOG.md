@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.183.0 (2023-12-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-neptunegraph` gem.
+
 3.182.0 (2023-11-30)
 ------------------
 

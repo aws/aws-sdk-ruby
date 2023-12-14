@@ -493,6 +493,7 @@ module Aws
             'MigrationHubStrategyRecommendations' => 'migrationhub-strategy',
             'Mobile' => 'mobile',
             'Neptune' => 'rds',
+            'NeptuneGraph' => 'neptune-graph',
             'Neptunedata' => 'neptune-db',
             'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',

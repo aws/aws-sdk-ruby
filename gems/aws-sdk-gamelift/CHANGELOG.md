@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-12-14)
+------------------
+
+* Feature - Amazon GameLift adds the ability to add and update the game properties of active game sessions.
+
 1.74.0 (2023-11-28)
 ------------------
 
