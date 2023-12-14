@@ -59,6 +59,8 @@ desc 'Executes all smoke tests'
 rule 'test:smoke' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
+    next unless File.exist?(File.join(dir, 'smoke.feature'))
+
     gem_name = dir.match(%r{gems/(.*)/features})[1]
     sh("bundle exec rake test:smoke:#{gem_name}") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
@@ -78,6 +80,8 @@ desc 'Executes all integration tests'
 task 'test:integration' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
+    next unless Dir.glob(File.join(dir, '**', '*.feature')).any?
+
     gem_name = dir.match(%r{gems/(.*)/features})[1]
     sh("bundle exec rake test:integration:#{gem_name}") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
@@ -100,6 +104,8 @@ desc 'Executes all feature tests'
 task 'test:features' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
+    next unless Dir.glob(File.join(dir, '**', '*.feature')).any?
+
     gem_name = dir.match(%r{gems/(.*)/features})[1]
     sh("bundle exec rake test:features:#{gem_name}") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
