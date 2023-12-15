@@ -4268,8 +4268,8 @@ module Aws::RDS
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
     #
-    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
-    #       20 to 64000.
+    #     * General Purpose (SSD) storage (gp3): Must be an integer from 20 to
+    #       64000.
     #
     #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #       64000.
@@ -29538,7 +29538,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.208.0'
+      context[:gem_version] = '1.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

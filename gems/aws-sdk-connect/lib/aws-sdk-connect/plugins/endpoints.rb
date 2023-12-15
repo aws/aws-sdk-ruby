@@ -365,12 +365,16 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListViews.build(context)
           when :monitor_contact
             Aws::Connect::Endpoints::MonitorContact.build(context)
+          when :pause_contact
+            Aws::Connect::Endpoints::PauseContact.build(context)
           when :put_user_status
             Aws::Connect::Endpoints::PutUserStatus.build(context)
           when :release_phone_number
             Aws::Connect::Endpoints::ReleasePhoneNumber.build(context)
           when :replicate_instance
             Aws::Connect::Endpoints::ReplicateInstance.build(context)
+          when :resume_contact
+            Aws::Connect::Endpoints::ResumeContact.build(context)
           when :resume_contact_recording
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
           when :search_available_phone_numbers

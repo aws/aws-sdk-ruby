@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.225.0 (2023-12-15)
+------------------
+
+* Feature - This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
+
 1.224.0 (2023-11-30)
 ------------------
 

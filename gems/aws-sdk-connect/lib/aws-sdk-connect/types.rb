@@ -165,11 +165,16 @@ module Aws::Connect
     #   The timestamp when the contact was connected to the agent.
     #   @return [Time]
     #
+    # @!attribute [rw] agent_pause_duration_in_seconds
+    #   Agent pause duration for a contact in seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentInfo AWS API Documentation
     #
     class AgentInfo < Struct.new(
       :id,
-      :connected_to_agent_timestamp)
+      :connected_to_agent_timestamp,
+      :agent_pause_duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1447,6 +1452,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Operation cannot be performed at this time as there is a conflict with
+    # another operation or contact state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information required to join the call.
     #
     # @!attribute [rw] attendee
@@ -1531,6 +1550,22 @@ module Aws::Connect
     #   The timestamp when contact was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] last_paused_timestamp
+    #   The timestamp when the contact was last paused.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_resumed_timestamp
+    #   The timestamp when the contact was last resumed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_pause_count
+    #   Total pause count for a contact.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_pause_duration_in_seconds
+    #   Total pause duration for a contact in seconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] scheduled_timestamp
     #   The timestamp, in Unix epoch time format, at which to start running
     #   the inbound flow.
@@ -1569,6 +1604,10 @@ module Aws::Connect
       :initiation_timestamp,
       :disconnect_timestamp,
       :last_update_timestamp,
+      :last_paused_timestamp,
+      :last_resumed_timestamp,
+      :total_pause_count,
+      :total_pause_duration_in_seconds,
       :scheduled_timestamp,
       :related_contact_id,
       :wisdom_info,
@@ -1949,6 +1988,25 @@ module Aws::Connect
     class CreateAgentStatusResponse < Struct.new(
       :agent_status_arn,
       :agent_status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `CreateCase` action definition.
+    #
+    # @!attribute [rw] fields
+    #   An array of objects with `Field ID` and `Value` data.
+    #   @return [Array<Types::FieldValue>]
+    #
+    # @!attribute [rw] template_id
+    #   A unique identifier of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateCaseActionDefinition AWS API Documentation
+    #
+    class CreateCaseActionDefinition < Struct.new(
+      :fields,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5517,6 +5575,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # An empty value.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EmptyFieldValue AWS API Documentation
+    #
+    class EmptyFieldValue < Aws::EmptyStructure; end
+
     # The encryption configuration.
     #
     # @!attribute [rw] encryption_type
@@ -5547,6 +5613,14 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # End associated tasks related to a case.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EndAssociatedTasksActionDefinition AWS API Documentation
+    #
+    class EndAssociatedTasksActionDefinition < Aws::EmptyStructure; end
 
     # Information about the endpoint.
     #
@@ -6485,6 +6559,54 @@ module Aws::Connect
       :request_identifier,
       :failure_reason_code,
       :failure_reason_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object for case field values.
+    #
+    # @!attribute [rw] id
+    #   Unique identifier of a field.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Union of potential field value types.
+    #   @return [Types::FieldValueUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FieldValue AWS API Documentation
+    #
+    class FieldValue < Struct.new(
+      :id,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object to store union of Field values.
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean number value type.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] double_value
+    #   a Double number value type.
+    #   @return [Float]
+    #
+    # @!attribute [rw] empty_value
+    #   An empty value.
+    #   @return [Types::EmptyFieldValue]
+    #
+    # @!attribute [rw] string_value
+    #   String value type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FieldValueUnion AWS API Documentation
+    #
+    class FieldValueUnion < Struct.new(
+      :boolean_value,
+      :double_value,
+      :empty_value,
+      :string_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7488,6 +7610,13 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype
     #
+    #   AVG\_ACTIVE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
     #   : Unit: Seconds
@@ -7517,6 +7646,13 @@ module Aws::Connect
     #     this metric.
     #
     #      </note>
+    #
+    #   AVG\_AGENT\_PAUSE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -12385,6 +12521,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContactRequest AWS API Documentation
+    #
+    class PauseContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContactResponse AWS API Documentation
+    #
+    class PauseContactResponse < Aws::EmptyStructure; end
+
     # Enable persistent chats. For more information about enabling
     # persistent chat, and for example use cases and how to configure for
     # them, see [Enable persistent chat][1].
@@ -13879,6 +14042,33 @@ module Aws::Connect
     #
     class ResumeContactRecordingResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactRequest AWS API Documentation
+    #
+    class ResumeContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactResponse AWS API Documentation
+    #
+    class ResumeContactResponse < Aws::EmptyStructure; end
+
     # Contains information about a routing profile.
     #
     # @!attribute [rw] instance_id
@@ -14302,6 +14492,26 @@ module Aws::Connect
     #   `OnMetricDataUpdate`
     #   @return [Types::SendNotificationActionDefinition]
     #
+    # @!attribute [rw] create_case_action
+    #   Information about the create case action.
+    #
+    #   Supported only for `TriggerEventSource` values:
+    #   `OnPostCallAnalysisAvailable` \| `OnPostChatAnalysisAvailable`.
+    #   @return [Types::CreateCaseActionDefinition]
+    #
+    # @!attribute [rw] update_case_action
+    #   Information about the update case action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseCreate` \|
+    #   `OnCaseUpdate`.
+    #   @return [Types::UpdateCaseActionDefinition]
+    #
+    # @!attribute [rw] end_associated_tasks_action
+    #   Information about the end associated tasks action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
+    #   @return [Types::EndAssociatedTasksActionDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
@@ -14309,7 +14519,10 @@ module Aws::Connect
       :task_action,
       :event_bridge_action,
       :assign_contact_category_action,
-      :send_notification_action)
+      :send_notification_action,
+      :create_case_action,
+      :update_case_action,
+      :end_associated_tasks_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15827,6 +16040,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of a voice contact that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the voice contact that is shown to an agent in the
+    #   Contact Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP). Contacts can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during voice
+    #   contact creation.
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @!attribute [rw] related_contact_id
+    #   The `contactId` that is related to this contact. Linking voice,
+    #   task, or chat by using `RelatedContactID` copies over contact
+    #   attributes from the related contact to the new contact. All updates
+    #   to user-defined attributes in the new contact are limited to the
+    #   individual contact ID. There are no limits to the number of contacts
+    #   that can be linked by using `RelatedContactId`.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #   @return [String]
@@ -15909,6 +16149,10 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest AWS API Documentation
     #
     class StartOutboundVoiceContactRequest < Struct.new(
+      :name,
+      :description,
+      :references,
+      :related_contact_id,
       :destination_phone_number,
       :contact_flow_id,
       :instance_id,
@@ -17186,6 +17430,20 @@ module Aws::Connect
       :state,
       :display_order,
       :reset_order_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `UpdateCase` action definition.
+    #
+    # @!attribute [rw] fields
+    #   An array of objects with `Field ID` and Value data.
+    #   @return [Array<Types::FieldValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateCaseActionDefinition AWS API Documentation
+    #
+    class UpdateCaseActionDefinition < Struct.new(
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end

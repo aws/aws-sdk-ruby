@@ -1916,7 +1916,7 @@ module Aws::Connect
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
-    #     source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK
+    #     source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK, CASES
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -2524,13 +2524,13 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     name: "RuleName", # required
     #     trigger_event_source: { # required
-    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
+    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate, OnCaseCreate, OnCaseUpdate
     #       integration_association_id: "IntegrationAssociationId",
     #     },
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -2558,6 +2558,37 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #         },
+    #         create_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #           template_id: "TemplateId", # required
+    #         },
+    #         update_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         end_associated_tasks_action: {
     #         },
     #       },
     #     ],
@@ -4172,9 +4203,14 @@ module Aws::Connect
     #   resp.contact.queue_info.enqueue_timestamp #=> Time
     #   resp.contact.agent_info.id #=> String
     #   resp.contact.agent_info.connected_to_agent_timestamp #=> Time
+    #   resp.contact.agent_info.agent_pause_duration_in_seconds #=> Integer
     #   resp.contact.initiation_timestamp #=> Time
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
+    #   resp.contact.last_paused_timestamp #=> Time
+    #   resp.contact.last_resumed_timestamp #=> Time
+    #   resp.contact.total_pause_count #=> Integer
+    #   resp.contact.total_pause_duration_in_seconds #=> Integer
     #   resp.contact.scheduled_timestamp #=> Time
     #   resp.contact.related_contact_id #=> String
     #   resp.contact.wisdom_info.session_arn #=> String
@@ -4960,11 +4996,11 @@ module Aws::Connect
     #   resp.rule.name #=> String
     #   resp.rule.rule_id #=> String
     #   resp.rule.rule_arn #=> String
-    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
+    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
@@ -4980,6 +5016,17 @@ module Aws::Connect
     #   resp.rule.actions[0].send_notification_action.recipient.user_tags["String"] #=> String
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids #=> Array
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids[0] #=> String
+    #   resp.rule.actions[0].create_case_action.fields #=> Array
+    #   resp.rule.actions[0].create_case_action.fields[0].id #=> String
+    #   resp.rule.actions[0].create_case_action.fields[0].value.boolean_value #=> Boolean
+    #   resp.rule.actions[0].create_case_action.fields[0].value.double_value #=> Float
+    #   resp.rule.actions[0].create_case_action.fields[0].value.string_value #=> String
+    #   resp.rule.actions[0].create_case_action.template_id #=> String
+    #   resp.rule.actions[0].update_case_action.fields #=> Array
+    #   resp.rule.actions[0].update_case_action.fields[0].id #=> String
+    #   resp.rule.actions[0].update_case_action.fields[0].value.boolean_value #=> Boolean
+    #   resp.rule.actions[0].update_case_action.fields[0].value.double_value #=> Float
+    #   resp.rule.actions[0].update_case_action.fields[0].value.string_value #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
@@ -6918,6 +6965,13 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
+    #   AVG\_ACTIVE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
     #   : Unit: Seconds
@@ -6946,6 +7000,13 @@ module Aws::Connect
     #     metric.
     #
     #      </note>
+    #
+    #   AVG\_AGENT\_PAUSE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -8748,7 +8809,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
-    #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK"
+    #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK", "CASES"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociations AWS API Documentation
@@ -9581,7 +9642,7 @@ module Aws::Connect
     #   resp = client.list_rules({
     #     instance_id: "InstanceId", # required
     #     publish_status: "DRAFT", # accepts DRAFT, PUBLISHED
-    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
+    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate, OnCaseCreate, OnCaseUpdate
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -9592,10 +9653,10 @@ module Aws::Connect
     #   resp.rule_summary_list[0].name #=> String
     #   resp.rule_summary_list[0].rule_id #=> String
     #   resp.rule_summary_list[0].rule_arn #=> String
-    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
+    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -10395,6 +10456,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Allows pausing an ongoing task contact.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContact AWS API Documentation
+    #
+    # @overload pause_contact(params = {})
+    # @param [Hash] params ({})
+    def pause_contact(params = {}, options = {})
+      req = build_request(:pause_contact, params)
+      req.send_request(options)
+    end
+
     # Changes the current status of a user or agent in Amazon Connect. If
     # the agent is currently handling a contact, this sets the agent's next
     # status.
@@ -10571,6 +10663,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def replicate_instance(params = {}, options = {})
       req = build_request(:replicate_instance, params)
+      req.send_request(options)
+    end
+
+    # Allows resuming a task contact in a paused state.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContact AWS API Documentation
+    #
+    # @overload resume_contact(params = {})
+    # @param [Hash] params ({})
+    def resume_contact(params = {}, options = {})
+      req = build_request(:resume_contact, params)
       req.send_request(options)
     end
 
@@ -12134,6 +12257,29 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
     #
+    # @option params [String] :name
+    #   The name of a voice contact that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #
+    # @option params [String] :description
+    #   A description of the voice contact that is shown to an agent in the
+    #   Contact Control Panel (CCP).
+    #
+    # @option params [Hash<String,Types::Reference>] :references
+    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   (CCP). Contacts can have the following reference types at the time of
+    #   creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \| `EMAIL`.
+    #   `ATTACHMENT` is not a supported reference type during voice contact
+    #   creation.
+    #
+    # @option params [String] :related_contact_id
+    #   The `contactId` that is related to this contact. Linking voice, task,
+    #   or chat by using `RelatedContactID` copies over contact attributes
+    #   from the related contact to the new contact. All updates to
+    #   user-defined attributes in the new contact are limited to the
+    #   individual contact ID. There are no limits to the number of contacts
+    #   that can be linked by using `RelatedContactId`.
+    #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #
@@ -12210,6 +12356,15 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_outbound_voice_contact({
+    #     name: "Name",
+    #     description: "Description",
+    #     references: {
+    #       "ReferenceKey" => {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #       },
+    #     },
+    #     related_contact_id: "ContactId",
     #     destination_phone_number: "PhoneNumber", # required
     #     contact_flow_id: "ContactFlowId", # required
     #     instance_id: "InstanceId", # required
@@ -14678,7 +14833,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -14706,6 +14861,37 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #         },
+    #         create_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #           template_id: "TemplateId", # required
+    #         },
+    #         update_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         end_associated_tasks_action: {
     #         },
     #       },
     #     ],
@@ -15415,7 +15601,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
