@@ -11,11 +11,11 @@ module AwsSdkCodeGenerator
       :waiter_overload_positional_argument,
     )
       class << self
-        def build_list(shape_dictionary:)
-          operations = shape_dictionary.service.api.fetch("operations")
+        def build_list(api:, waiters:)
+          operations = api.fetch("operations")
           waiters =
-            if shape_dictionary.service.waiters&.first
-              shape_dictionary.service.waiters["waiters"]
+            if waiters&.first
+              waiters["waiters"]
             else
               {}
             end
@@ -23,16 +23,23 @@ module AwsSdkCodeGenerator
             operation = waiter.fetch("operation")
             operation_ref = operations[operation]
             input_shape = operation_ref.dig("input", "shape")
-            include_required = shape_dictionary.service.api["shapes"][input_shape]&.[]("required")&.empty?&.!
+            include_required = api["shapes"][input_shape]&.[]("required")&.empty?&.!
 
             name = ":#{Underscore.underscore(waiter_name)}"
-            params = shape_dictionary[input_shape].find(&:input?).as_keyword_arguments(from: :waiters)
+            shapes = api.fetch("shapes")
+            input_shape_ref = shapes[input_shape]
+            params = AwsSdkCodeGenerator::RBS::KeywordArgumentBuilder.new(
+              api: api,
+              shape: input_shape_ref,
+              newline: false,
+            ).format
             returns = operation_ref.dig("output", "shape")&.then { "Types::#{_1}" } || "Aws::EmptyStructure"
             prefix = include_required ? "" : "?"
+
             new.tap do |w|
               w.name = name
               w.class_name = waiter_name
-              w.client_overload_keyword_argument = "(#{name} waiter_name, #{params}) -> #{returns}"
+              w.client_overload_keyword_argument = "(#{name} waiter_name,#{params}) -> #{returns}"
               w.client_overload_positional_argument = "(#{name} waiter_name, #{prefix}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> #{returns}"
               w.waiter_overload_keyword_argument = "(#{params}) -> #{returns}"
               w.waiter_overload_positional_argument = "(#{prefix}Hash[Symbol, untyped]) -> #{returns}"

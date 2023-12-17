@@ -10,9 +10,6 @@ $:.unshift("#{$GEMS_DIR}/aws-sdk-core/lib")
 $:.unshift("#{$GEMS_DIR}/aws-partitions/lib")
 $:.unshift("#{$GEMS_DIR}/aws-eventstream/lib")
 $:.unshift("#{$GEMS_DIR}/aws-sigv4/lib")
-Dir.glob("#{$GEMS_DIR}/aws-sdk-*/lib").each do |lib|
-  $:.unshift(lib)
-end
 
 require 'build_tools'
 require 'aws-sdk-code-generator'

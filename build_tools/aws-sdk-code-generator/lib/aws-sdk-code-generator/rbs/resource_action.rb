@@ -4,16 +4,16 @@ module AwsSdkCodeGenerator
   module RBS
     class ResourceAction
       class << self
-        def build_method_signature_list(resource:, shape_dictionary:)
+        def build_method_signature_list(resource:, api:)
           (resource["actions"] || []).map do |action_name, action|
-            new(action_name:, action:, shape_dictionary:).build_method_signature
+            new(action_name:, action:, api:).build_method_signature
           end
         end
       end
 
-      def initialize(action_name:, action:, shape_dictionary:)
+      def initialize(action_name:, action:, api:)
         request = action["request"]
-        operation = shape_dictionary.service.api["operations"][request["operation"]]
+        operation = api["operations"][request["operation"]]
         returns = if action["resource"]
           resource = action["resource"]
           AwsSdkCodeGenerator::Api.plural?(resource) ? "#{resource["type"]}::Collection" : resource["type"]
@@ -25,9 +25,9 @@ module AwsSdkCodeGenerator
 
         @client_request = ResourceClientRequest.new(
           method_name: Underscore.underscore(action_name),
-          shape_dictionary:,
-          request:,
-          returns:,
+          api: api,
+          request: request,
+          returns: returns,
         )
       end
 

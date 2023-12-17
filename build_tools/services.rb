@@ -80,7 +80,7 @@ module BuildTools
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || [],
         deprecated: config['deprecated'],
-        support_rbs: support_rbs?(svc_name.downcase),
+        support_rbs: RUBY_PLATFORM == 'ruby' && RUBY_VERSION >= '3.2',
       )
     end
 
@@ -177,11 +177,6 @@ module BuildTools
       end
       false
     end
-
-    def support_rbs?(identifier)
-      %w[ lambda ].include?(identifier)
-    end
-
   end
 
   Services = ServiceEnumerator.new

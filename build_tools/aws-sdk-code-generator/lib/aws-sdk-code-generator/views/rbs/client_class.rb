@@ -4,16 +4,14 @@ module AwsSdkCodeGenerator
   module Views
     module RBS
       class ClientClass < View
-        attr_reader :shape_dictionary
-
         def initialize(options)
           @options = options
-          @shape_dictionary = options.fetch(:shape_dictionary)
-          @service = @shape_dictionary.service
-          @codegenerated_plugins = options.fetch(:codegenerated_plugins)
+          @service_name = options.fetch(:service_name)
+          @api = options.fetch(:api)
           @aws_sdk_core_lib_path = options.fetch(:aws_sdk_core_lib_path)
           @plugins = PluginList.new(options)
-          @waiters = AwsSdkCodeGenerator::RBS::Waiter.build_list(shape_dictionary: @shape_dictionary)
+          @codegenerated_plugins = options.fetch(:codegenerated_plugins)
+          @waiters = AwsSdkCodeGenerator::RBS::Waiter.build_list(api: @api, waiters:options.fetch(:waiters))
         end
 
         # @return [String|nil]
@@ -22,7 +20,7 @@ module AwsSdkCodeGenerator
         end
 
         def service_name
-          @shape_dictionary.service_id
+          @service_name
         end
 
         def client_option
@@ -31,22 +29,33 @@ module AwsSdkCodeGenerator
         end
 
         def operations
-          @shape_dictionary.service.api["operations"].map do |key, body|
-            arguments = body.dig("input", "shape")&.then {
-              @shape_dictionary[_1].find(&:input?).as_keyword_arguments(from: :operations)
-            }
-            include_required = @shape_dictionary.service.api["shapes"][body.dig("input", "shape")]&.[]("required")&.empty?&.!
-            if AwsSdkCodeGenerator::Helper.operation_streaming?(body, @shape_dictionary.service.api)
+          shapes = @api["shapes"]
+          @api["operations"].map do |name, body|
+            method_name = Underscore.underscore(body.fetch("name"))
+            indent = " " * (12 + method_name.length)
+            input_shape_name = body.dig("input", "shape")
+            arguments = nil
+            include_required = false
+            if input_shape_name
+              input_shape = shapes[input_shape_name]
+              builder = AwsSdkCodeGenerator::RBS::KeywordArgumentBuilder.new(
+                api: @api,
+                shape: input_shape,
+                newline: true,
+              )
+              arguments = builder.format(indent: indent)
+              include_required = input_shape["required"]&.empty?&.!
+            end
+            if AwsSdkCodeGenerator::Helper.operation_streaming?(body, @api)
               block = " ?{ (*untyped) -> void }"
             end
             returns = body.dig("output", "shape")&.then { "Types::#{_1}" } || "::Aws::EmptyStructure"
 
-            method_name = Underscore.underscore(body.fetch("name"))
             AwsSdkCodeGenerator::RBS::MethodSignature.new(
               method_name: method_name,
               overloads: [
                 "(#{arguments})#{block} -> #{returns}",
-                "(#{include_required ? "" : "?"}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options)#{block} -> #{returns}",
+                "(\n#{indent}  #{include_required ? "" : "?"}Hash[Symbol, untyped] params,\n#{indent}  ?Hash[Symbol, untyped] options\n#{indent})#{block} -> #{returns}",
               ],
             )
           end
@@ -88,7 +97,7 @@ module AwsSdkCodeGenerator
                 when "Boolean"
                   "bool"
                 when nil
-                  raise opt.inspect
+                  "untyped"
                 else
                   opt.doc_type
                 end

@@ -15,20 +15,17 @@ module AwsSdkCodeGenerator
         attr_reader :associations
         attr_reader :batch_actions
 
-        def initialize(shape_dictionary:, class_name:, resource:)
-          @shape_dictionary = shape_dictionary
+        def initialize(service_name:, class_name:, resource:, api:, paginators:)
           @class_name = class_name
           @resource = resource
-          @service_name = shape_dictionary.service.name
+          @service_name = service_name
           @identifiers = ResourceIdentifier.build_list(resource)
           @data_attributes = if @resource["shape"]
-            data_attribute_names = AwsSdkCodeGenerator::ResourceAttribute.send(:data_attribute_names, @resource, shape_dictionary.service.api)
+            data_attribute_names = AwsSdkCodeGenerator::ResourceAttribute.send(:data_attribute_names, @resource, api)
             data_attribute_names.map do |member_name, member_ref|
-              returns = "Types::#{shape_dictionary[member_ref["shape"]].find(&:output?).rbs_output_name}"
-
               AwsSdkCodeGenerator::RBS::MethodSignature.new(
                 method_name: Underscore.underscore(member_name),
-                overloads: ["() -> #{returns}"]
+                overloads: ["() -> #{AwsSdkCodeGenerator::RBS.to_type(member_ref, api)}"]
               )
             end
           else
@@ -45,9 +42,9 @@ module AwsSdkCodeGenerator
               ],
             )
           end
-          @actions = AwsSdkCodeGenerator::RBS::ResourceAction.build_method_signature_list(resource: @resource, shape_dictionary:)
-          @associations = AwsSdkCodeGenerator::RBS::ResourceAssociation.build_method_signature_list(resource: @resource, shape_dictionary:)
-          @batch_actions = AwsSdkCodeGenerator::RBS::ResourceBatchAction.build_method_signature_list(resource: @resource, shape_dictionary:)
+          @actions = AwsSdkCodeGenerator::RBS::ResourceAction.build_method_signature_list(resource: @resource, api: api)
+          @associations = AwsSdkCodeGenerator::RBS::ResourceAssociation.build_method_signature_list(resource: @resource, api: api, paginators: paginators)
+          @batch_actions = AwsSdkCodeGenerator::RBS::ResourceBatchAction.build_method_signature_list(resource: @resource, api: api)
         end
 
         # @return [String|nil]

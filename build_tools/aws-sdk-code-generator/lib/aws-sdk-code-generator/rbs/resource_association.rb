@@ -4,10 +4,10 @@ module AwsSdkCodeGenerator
   module RBS
     class ResourceAssociation
       class << self
-        def build_method_signature_list(resource:, shape_dictionary:)
+        def build_method_signature_list(resource:, api:, paginators:)
           associations = []
           associations += has_associations(resource:)
-          associations += has_many_associations(resource:, shape_dictionary:)
+          associations += has_many_associations(resource:, api:, paginators:)
           associations.sort_by(&:method_name)
         end
 
@@ -27,14 +27,20 @@ module AwsSdkCodeGenerator
           end
         end
 
-        def has_many_associations(resource:, shape_dictionary:)
+        def has_many_associations(resource:, api:, paginators:)
           resource.fetch("hasMany", {}).map do |name, assoc|
             ResourceClientRequest.new(
               method_name: Underscore.underscore(name),
-              shape_dictionary:,
+              api:,
               request: assoc["request"],
               returns: "#{assoc["resource"]["type"]}::Collection",
-              skip: AwsSdkCodeGenerator::ResourceHasManyAssociation.send(:paging_options, { assoc:, paginators: shape_dictionary.service.paginators }),
+              skip: AwsSdkCodeGenerator::ResourceHasManyAssociation.send(
+                :paging_options,
+                {
+                  assoc:,
+                  paginators: paginators
+                }
+              ),
             ).build_method_signature
           end
         end

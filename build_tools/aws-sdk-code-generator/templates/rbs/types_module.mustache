@@ -1,27 +1,37 @@
+{{#generated_src_warning}}
 {{generated_src_warning}}
-module Aws
-  module {{service_name}}
-    module Types
-      {{#shape_map}}
-      {{#class?}}
-      {{#output_structure_members_empty?}}
-      class {{name}} < ::Aws::EmptyStructure
-      end
-      {{/output_structure_members_empty?}}
-      {{^output_structure_members_empty?}}
-      class {{name}}
-        include Seahorse::Client::DelegatorMethodsForResponse[{{name}}]
-        {{#output_structure_members}}
+{{/generated_src_warning}}
+module {{module_name}}
+  module Types
+    {{#structures}}
 
-        attr_accessor {{method_name}}: {{returns}}
-        {{/output_structure_members}}
-      end
-      {{/output_structure_members_empty?}}
-      {{/class?}}
-      {{#alias?}}
-      {{{rbs_as_alias}}}
-      {{/alias?}}
-      {{/shape_map}}
+    {{> documentation}}
+    {{#empty?}}
+    class {{class_name}} < Aws::EmptyStructure
     end
+    {{/empty?}}
+    {{^empty?}}
+    class {{class_name}}
+      {{#members}}
+      attr_accessor {{member_name}}: {{{returns}}}
+      {{/members}}
+      SENSITIVE: {{sensitive_params}}
+      {{#union?}}
+
+      {{#members}}
+      class {{member_class_name}} < {{class_name}}
+      end
+      {{/members}}
+      {{/union?}}
+    end
+    {{/empty?}}
+    {{/structures}}
+    {{#eventstreams}}
+
+    {{> documentation}}
+    class {{class_name}} < Enumerator[untyped, untyped]
+      def event_types: () -> {{#empty?}}[]{{/empty?}}{{^empty?}}[{{#types}}:{{member_name}}{{^last}}, {{/last}}{{/types}}]{{/empty?}}
+    end
+    {{/eventstreams}}
   end
 end

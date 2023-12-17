@@ -4,26 +4,26 @@ module AwsSdkCodeGenerator
   module RBS
     class ResourceBatchAction
       class << self
-        def build_method_signature_list(resource:, shape_dictionary:)
+        def build_method_signature_list(resource:, api:)
           resource.fetch("batchActions", {}).map do |name, action|
-            new(shape_dictionary:, name:, action:).build_method_signature
+            new(api:, name:, action:).build_method_signature
           end
         end
       end
 
-      def initialize(shape_dictionary:, name:, action:)
-        @shape_dictionary = shape_dictionary
+      def initialize(api:, name:, action:)
+        @api = api
         @name = name
         @action = action
         @batch_action_documentation = AwsSdkCodeGenerator::ResourceBatchActionDocumentation.new(
           var_name: nil,
           method_name:,
           action:,
-          api: shape_dictionary.service.api,
+          api: api,
         )
         @skip_params = @batch_action_documentation.send(:skip_params)
         @input_ref = @batch_action_documentation.send(:input_ref)
-        @input_shape = AwsSdkCodeGenerator::Api.shape(@input_ref, shape_dictionary.service.api)
+        @input_shape = AwsSdkCodeGenerator::Api.shape(@input_ref, api)
       end
 
       def build_method_signature
@@ -35,8 +35,8 @@ module AwsSdkCodeGenerator
             next if @skip_params.include?(member_name)
             required = @input_shape.fetch("required", []).include?(member_name)
             include_required = true if required
-            type = @shape_dictionary[member_ref.fetch("shape")].find(&:input?).rbs_input_name
-            "#{required ? "" : "?"}#{Underscore.underscore(member_name)}: Types::#{type}"
+            type = RBS.to_type(member_ref, @api)
+            "#{required ? "" : "?"}#{Underscore.underscore(member_name)}: #{type}"
           }.join(", ")
         end
 
